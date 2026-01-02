@@ -106,36 +106,59 @@ def extract_text_from_pdf(content: bytes, filename: str) -> str:
 # BACKGROUND TASK
 # ============================================
 
-async def process_cvs(job_id: str, files: List[UploadFile], mode: Mode):
-    """Background task to process uploaded CVs."""
-    chunking_service = ChunkingService()
-    rag_service = RAGService(mode)
+import logging
+logger = logging.getLogger(__name__)
+
+async def process_cvs(job_id: str, file_data: List[tuple], mode: Mode):
+    """Background task to process uploaded CVs.
     
-    for file in files:
+    Args:
+        job_id: The job ID for tracking
+        file_data: List of tuples (filename, content_bytes)
+        mode: Processing mode (local/cloud)
+    """
+    logger.info(f"[{job_id}] Starting processing of {len(file_data)} files")
+    
+    try:
+        chunking_service = ChunkingService()
+        logger.info(f"[{job_id}] ChunkingService created")
+        
+        rag_service = RAGService(mode)
+        logger.info(f"[{job_id}] RAGService created for mode {mode}")
+    except Exception as e:
+        logger.error(f"[{job_id}] Failed to initialize services: {e}")
+        jobs[job_id]["errors"].append(f"Service init failed: {str(e)}")
+        jobs[job_id]["status"] = "failed"
+        return
+    
+    for filename, content in file_data:
+        logger.info(f"[{job_id}] Processing file: {filename} ({len(content)} bytes)")
         try:
-            # Read PDF content
-            content = await file.read()
-            
             # Extract text
-            text = extract_text_from_pdf(content, file.filename)
+            text = extract_text_from_pdf(content, filename)
+            logger.info(f"[{job_id}] Extracted {len(text)} chars from {filename}")
             
             # Create chunks
             cv_id = f"cv_{uuid.uuid4().hex[:8]}"
             chunks = chunking_service.chunk_cv(
                 text=text,
                 cv_id=cv_id,
-                filename=file.filename
+                filename=filename
             )
+            logger.info(f"[{job_id}] Created {len(chunks)} chunks for {filename}")
             
             # Index chunks
             await rag_service.index_documents(chunks)
+            logger.info(f"[{job_id}] Indexed chunks for {filename}")
             
             jobs[job_id]["processed_files"] += 1
             
         except Exception as e:
-            jobs[job_id]["errors"].append(f"{file.filename}: {str(e)}")
+            logger.error(f"[{job_id}] Error processing {filename}: {e}")
+            jobs[job_id]["errors"].append(f"{filename}: {str(e)}")
     
     jobs[job_id]["status"] = "completed" if not jobs[job_id]["errors"] else "completed_with_errors"
+    logger.info(f"[{job_id}] Processing complete. Status: {jobs[job_id]['status']}")
 
 
 # ============================================
@@ -152,13 +175,17 @@ async def upload_cvs(
     if not files:
         raise HTTPException(status_code=400, detail="No files provided")
     
-    # Validate files
+    # Validate files and read content BEFORE sending response
+    file_data = []
     for file in files:
         if not file.filename.lower().endswith(".pdf"):
             raise HTTPException(
                 status_code=400,
                 detail=f"Invalid file type: {file.filename}. Only PDF files are accepted."
             )
+        # Read file content now (before background task)
+        content = await file.read()
+        file_data.append((file.filename, content))
     
     job_id = str(uuid.uuid4())
     jobs[job_id] = {
@@ -168,8 +195,8 @@ async def upload_cvs(
         "errors": []
     }
     
-    # Process in background
-    background_tasks.add_task(process_cvs, job_id, files, mode)
+    # Process in background with pre-read file data
+    background_tasks.add_task(process_cvs, job_id, file_data, mode)
     
     return UploadResponse(
         job_id=job_id,
