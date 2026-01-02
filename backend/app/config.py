@@ -45,8 +45,8 @@ class Settings(BaseSettings):
     # ============================================
     # Server
     api_host: str = "0.0.0.0"
-    api_port: int = 8000
-    cors_origins: str = "http://localhost:5173,http://localhost:5174,http://localhost:5175,http://localhost:5176"
+    api_port: int = 6000
+    cors_origins: str = "http://localhost:6001,http://localhost:5173,http://localhost:5174,http://localhost:5175,http://localhost:5176"
     
     # File limits
     max_file_size_mb: int = 10
