@@ -90,6 +90,18 @@ export const deleteAllCVs = async (mode = 'local') => {
   return response.data;
 };
 
+// Clear all CVs from a session
+export const clearSessionCVs = async (sessionId, mode = 'local') => {
+  const response = await api.delete(`/sessions/${sessionId}/cvs?mode=${mode}`);
+  return response.data;
+};
+
+// Delete ALL CVs from the entire database
+export const deleteAllCVsFromDatabase = async (mode = 'local') => {
+  const response = await api.delete(`/sessions/database/all-cvs?mode=${mode}`);
+  return response.data;
+};
+
 // ============================================
 // SESSION API FUNCTIONS
 // ============================================

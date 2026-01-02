@@ -7,7 +7,7 @@ import useTheme from './hooks/useTheme';
 import { useLanguage } from './contexts/LanguageContext';
 import SourceBadge from './components/SourceBadge';
 import ModelSelector from './components/ModelSelector';
-import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList } from './services/api';
+import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList, clearSessionCVs, deleteAllCVsFromDatabase } from './services/api';
 
 function App() {
   const [sessions, setSessions] = useState([]);
@@ -108,15 +108,50 @@ function App() {
 
   const handleSend = async (text = message) => {
     if (!text.trim() || !currentSessionId || isChatLoading || !currentSession?.cvs?.length) return;
+    const userMessage = text.trim();
     setMessage('');
+    
+    // Optimistically add user message to UI
+    setCurrentSession(prev => ({
+      ...prev,
+      messages: [...(prev.messages || []), { role: 'user', content: userMessage }]
+    }));
+    
     setIsChatLoading(true);
-    try { await sendSessionMessage(currentSessionId, text.trim(), mode); await loadSession(currentSessionId); } catch (e) { console.error(e); }
+    try { 
+      await sendSessionMessage(currentSessionId, userMessage, mode); 
+      await loadSession(currentSessionId); 
+    } catch (e) { 
+      console.error(e); 
+      // Revert optimistic update on error
+      await loadSession(currentSessionId);
+    }
     setIsChatLoading(false);
   };
 
   const handleRemoveCV = async (cvId) => {
     await removeCVFromSession(currentSessionId, cvId, mode);
     await loadSession(currentSessionId);
+    showToast(language === 'es' ? 'CV eliminado' : 'CV removed', 'success');
+  };
+
+  const handleClearSessionCVs = async () => {
+    if (!currentSessionId) return;
+    try {
+      await clearSessionCVs(currentSessionId, mode);
+      await loadSession(currentSessionId);
+      showToast(language === 'es' ? 'Todos los CVs eliminados del chat' : 'All CVs removed from chat', 'success');
+    } catch (e) { console.error(e); showToast('Error', 'error'); }
+  };
+
+  const handleDeleteAllCVsFromDB = async () => {
+    if (!window.confirm(language === 'es' ? '¿Eliminar TODOS los CVs de la base de datos?' : 'Delete ALL CVs from database?')) return;
+    try {
+      await deleteAllCVsFromDatabase(mode);
+      await loadSessions();
+      if (currentSessionId) await loadSession(currentSessionId);
+      showToast(language === 'es' ? 'Base de datos limpiada' : 'Database cleared', 'success');
+    } catch (e) { console.error(e); showToast('Error', 'error'); }
   };
 
   return (
@@ -306,35 +341,57 @@ function App() {
             <div className="flex-1 overflow-y-auto p-4">
               {currentSession && (
                 <div className="mb-6">
-                  <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">{language === 'es' ? `CVs en "${currentSession.name}"` : `CVs in "${currentSession.name}"`}</h3>
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">{language === 'es' ? `CVs en "${currentSession.name}"` : `CVs in "${currentSession.name}"`} ({currentSession.cvs?.length || 0})</h3>
+                    {currentSession.cvs?.length > 0 && (
+                      <button onClick={handleClearSessionCVs} className="text-xs px-2 py-1 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded">
+                        {language === 'es' ? 'Eliminar todos' : 'Delete all'}
+                      </button>
+                    )}
+                  </div>
                   {currentSession.cvs?.length > 0 ? (
-                    <div className="space-y-2">
+                    <div className="space-y-2 max-h-48 overflow-y-auto">
                       {currentSession.cvs.map(cv => (
-                        <div key={cv.id} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <FileText className="w-5 h-5 text-red-500" />
-                          <span className="flex-1 text-sm text-gray-700 dark:text-gray-300">{cv.filename}</span>
-                          <span className="text-xs text-gray-500">{cv.chunk_count} chunks</span>
-                          <button onClick={() => handleRemoveCV(cv.id)} className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded"><Trash2 className="w-4 h-4" /></button>
+                        <div key={cv.id} className="flex items-center gap-3 p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                          <FileText className="w-4 h-4 text-red-500 flex-shrink-0" />
+                          <span className="flex-1 text-sm text-gray-700 dark:text-gray-300 truncate">{cv.filename}</span>
+                          <span className="text-xs text-gray-500">{cv.chunk_count}</span>
+                          <button onClick={() => handleRemoveCV(cv.id)} className="p-1 text-gray-400 hover:text-red-500 rounded"><Trash2 className="w-3.5 h-3.5" /></button>
                         </div>
                       ))}
                     </div>
                   ) : <p className="text-sm text-gray-500">{language === 'es' ? 'Sin CVs en este chat' : 'No CVs in this chat'}</p>}
                 </div>
               )}
-              <div>
-                <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">{language === 'es' ? 'Todos los CVs en la base de datos' : 'All CVs in database'}</h3>
-                <button onClick={async () => { const data = await getCVList(mode); setAllCVs(data.cvs || []); }} className="mb-3 text-sm text-blue-500 hover:text-blue-600">{language === 'es' ? 'Cargar CVs' : 'Load CVs'}</button>
+              
+              <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    {language === 'es' ? 'Base de datos' : 'Database'} 
+                    <span className={`ml-2 px-2 py-0.5 rounded text-xs ${mode === 'cloud' ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-600' : 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600'}`}>
+                      {mode === 'cloud' ? 'Supabase' : 'Local'}
+                    </span>
+                  </h3>
+                  <div className="flex gap-2">
+                    <button onClick={async () => { const data = await getCVList(mode); setAllCVs(data.cvs || []); }} className="text-xs px-2 py-1 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded">
+                      {language === 'es' ? 'Recargar' : 'Reload'}
+                    </button>
+                    <button onClick={handleDeleteAllCVsFromDB} className="text-xs px-2 py-1 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded">
+                      {language === 'es' ? 'Vaciar DB' : 'Clear DB'}
+                    </button>
+                  </div>
+                </div>
                 {allCVs.length > 0 ? (
-                  <div className="space-y-2">
+                  <div className="space-y-2 max-h-48 overflow-y-auto">
                     {allCVs.map(cv => (
-                      <div key={cv.id} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                        <FileText className="w-5 h-5 text-red-500" />
-                        <span className="flex-1 text-sm text-gray-700 dark:text-gray-300">{cv.filename}</span>
+                      <div key={cv.id} className="flex items-center gap-3 p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <FileText className="w-4 h-4 text-red-500 flex-shrink-0" />
+                        <span className="flex-1 text-sm text-gray-700 dark:text-gray-300 truncate">{cv.filename}</span>
                         <span className="text-xs text-gray-500">{cv.chunk_count} chunks</span>
                       </div>
                     ))}
                   </div>
-                ) : <p className="text-sm text-gray-500">{language === 'es' ? 'Haz clic en "Cargar CVs"' : 'Click "Load CVs"'}</p>}
+                ) : <p className="text-sm text-gray-500">{language === 'es' ? 'Haz clic en "Recargar"' : 'Click "Reload"'}</p>}
               </div>
             </div>
           </div>

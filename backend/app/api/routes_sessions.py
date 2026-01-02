@@ -463,3 +463,59 @@ async def get_suggested_questions(
         ]
     
     return {"suggestions": suggestions[:4]}
+
+
+# ============================================
+# DATABASE MANAGEMENT ENDPOINTS
+# ============================================
+
+@router.delete("/{session_id}/cvs")
+async def clear_session_cvs(
+    session_id: str,
+    mode: Mode = Query(default=settings.default_mode)
+):
+    """Delete all CVs from a session and their embeddings."""
+    mgr = get_session_manager(mode)
+    session = mgr.get_session(session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    cvs = session.get("cvs", []) if isinstance(session, dict) else session.cvs
+    if not cvs:
+        return {"success": True, "deleted": 0, "message": "No CVs to delete"}
+    
+    # Delete from vector store
+    rag_service = RAGService(mode)
+    deleted = 0
+    for cv in cvs:
+        cv_id = cv.get("id") if isinstance(cv, dict) else cv.id
+        await rag_service.vector_store.delete_cv(cv_id)
+        mgr.remove_cv_from_session(session_id, cv_id)
+        deleted += 1
+    
+    return {"success": True, "deleted": deleted, "message": f"Deleted {deleted} CVs from session"}
+
+
+@router.delete("/database/all-cvs")
+async def delete_all_cvs_from_database(
+    mode: Mode = Query(default=settings.default_mode)
+):
+    """Delete ALL CVs from the entire database (use with caution)."""
+    rag_service = RAGService(mode)
+    
+    # Delete all embeddings
+    success = await rag_service.vector_store.delete_all_cvs()
+    
+    # Clear all session CVs
+    mgr = get_session_manager(mode)
+    sessions = mgr.list_sessions()
+    for s in sessions:
+        session_id = s.get("id") if isinstance(s, dict) else s.id
+        session = mgr.get_session(session_id)
+        if session:
+            cvs = session.get("cvs", []) if isinstance(session, dict) else session.cvs
+            for cv in cvs:
+                cv_id = cv.get("id") if isinstance(cv, dict) else cv.id
+                mgr.remove_cv_from_session(session_id, cv_id)
+    
+    return {"success": success, "message": "All CVs deleted from database"}

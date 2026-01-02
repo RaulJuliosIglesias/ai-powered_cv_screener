@@ -128,6 +128,16 @@ class SimpleVectorStore(VectorStoreProvider):
         except Exception:
             return False
     
+    async def delete_all_cvs(self) -> bool:
+        """Delete all CVs and embeddings."""
+        try:
+            self.documents = []
+            self.embeddings = []
+            self._save()
+            return True
+        except Exception:
+            return False
+    
     async def list_cvs(self) -> List[Dict[str, Any]]:
         cvs = {}
         for doc in self.documents:

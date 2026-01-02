@@ -1,17 +1,30 @@
-from typing import List, Dict, Any
-from supabase import create_client, Client
+from typing import List, Dict, Any, Optional
+import logging
 from app.providers.base import VectorStoreProvider, SearchResult
 from app.config import settings
+
+logger = logging.getLogger(__name__)
+
+# Lazy client initialization
+_supabase_client = None
+
+def get_supabase_client():
+    global _supabase_client
+    if _supabase_client is None:
+        from supabase import create_client
+        if not settings.supabase_url or not settings.supabase_service_key:
+            raise RuntimeError("Supabase credentials not configured")
+        _supabase_client = create_client(settings.supabase_url, settings.supabase_service_key)
+        logger.info("Supabase vector store client initialized")
+    return _supabase_client
 
 
 class SupabaseVectorStore(VectorStoreProvider):
     """Cloud vector store using Supabase pgvector."""
     
-    def __init__(self):
-        self.client: Client = create_client(
-            settings.supabase_url,
-            settings.supabase_service_key
-        )
+    @property
+    def client(self):
+        return get_supabase_client()
     
     async def add_documents(
         self,
@@ -21,24 +34,9 @@ class SupabaseVectorStore(VectorStoreProvider):
         if not documents:
             return
         
-        records = []
-        for doc, embedding in zip(documents, embeddings):
-            records.append({
-                "cv_id": doc["cv_id"],
-                "filename": doc["filename"],
-                "chunk_index": doc["chunk_index"],
-                "content": doc["content"],
-                "embedding": embedding,
-                "metadata": doc.get("metadata", {})
-            })
+        logger.info(f"Adding {len(documents)} documents to Supabase")
         
-        # Upsert to handle duplicates
-        self.client.table("cv_embeddings").upsert(
-            records,
-            on_conflict="cv_id,chunk_index"
-        ).execute()
-        
-        # Update CVs table
+        # First, ensure CVs exist in cvs table
         unique_cvs = {}
         for doc in documents:
             cv_id = doc["cv_id"]
@@ -51,25 +49,56 @@ class SupabaseVectorStore(VectorStoreProvider):
             unique_cvs[cv_id]["chunk_count"] += 1
         
         for cv_data in unique_cvs.values():
-            self.client.table("cvs").upsert(cv_data).execute()
+            try:
+                self.client.table("cvs").upsert(cv_data).execute()
+                logger.info(f"Upserted CV: {cv_data['id']} - {cv_data['filename']}")
+            except Exception as e:
+                logger.error(f"Failed to upsert CV {cv_data['id']}: {e}")
+        
+        # Now add embeddings
+        for doc, embedding in zip(documents, embeddings):
+            try:
+                record = {
+                    "cv_id": doc["cv_id"],
+                    "filename": doc["filename"],
+                    "chunk_index": doc["chunk_index"],
+                    "content": doc["content"],
+                    "embedding": embedding,
+                    "metadata": doc.get("metadata", {})
+                }
+                self.client.table("cv_embeddings").upsert(
+                    record,
+                    on_conflict="cv_id,chunk_index"
+                ).execute()
+            except Exception as e:
+                logger.error(f"Failed to add embedding for {doc['cv_id']} chunk {doc['chunk_index']}: {e}")
+        
+        logger.info(f"Successfully added {len(documents)} embeddings to Supabase")
     
     async def search(
         self,
         embedding: List[float],
         k: int = 5,
-        threshold: float = 0.3
+        threshold: float = 0.3,
+        cv_ids: Optional[List[str]] = None
     ) -> List[SearchResult]:
+        logger.info(f"Searching Supabase with k={k}, threshold={threshold}, cv_ids={cv_ids}")
+        
+        # Use RPC function for vector search
         response = self.client.rpc(
             "match_cv_embeddings",
             {
                 "query_embedding": embedding,
-                "match_count": k,
+                "match_count": k * 2 if cv_ids else k,  # Fetch more if filtering
                 "match_threshold": threshold
             }
         ).execute()
         
         results = []
         for row in response.data:
+            # Filter by cv_ids if provided
+            if cv_ids and row["cv_id"] not in cv_ids:
+                continue
             results.append(SearchResult(
                 id=str(row["id"]),
                 cv_id=row["cv_id"],
@@ -78,14 +107,33 @@ class SupabaseVectorStore(VectorStoreProvider):
                 similarity=row["similarity"],
                 metadata=row.get("metadata", {})
             ))
+            if len(results) >= k:
+                break
         
+        logger.info(f"Found {len(results)} results")
         return results
     
     async def delete_cv(self, cv_id: str) -> bool:
         try:
-            self.client.rpc("delete_cv", {"target_cv_id": cv_id}).execute()
+            # Delete embeddings first
+            self.client.table("cv_embeddings").delete().eq("cv_id", cv_id).execute()
+            # Then delete from cvs table
+            self.client.table("cvs").delete().eq("id", cv_id).execute()
+            logger.info(f"Deleted CV {cv_id} from Supabase")
             return True
-        except Exception:
+        except Exception as e:
+            logger.error(f"Failed to delete CV {cv_id}: {e}")
+            return False
+    
+    async def delete_all_cvs(self) -> bool:
+        """Delete all CVs and embeddings from Supabase."""
+        try:
+            self.client.table("cv_embeddings").delete().neq("cv_id", "").execute()
+            self.client.table("cvs").delete().neq("id", "").execute()
+            logger.info("Deleted all CVs from Supabase")
+            return True
+        except Exception as e:
+            logger.error(f"Failed to delete all CVs: {e}")
             return False
     
     async def list_cvs(self) -> List[Dict[str, Any]]:
