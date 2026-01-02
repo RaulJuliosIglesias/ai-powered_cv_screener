@@ -310,10 +310,17 @@
             }
           ],
           "timestamp": "2026-01-02T17:36:14.271984"
+        },
+        {
+          "id": "a24aba60-19d2-4006-9fc0-228bce196e54",
+          "role": "user",
+          "content": "dame una tabla con la edadesde de los perfiles",
+          "sources": [],
+          "timestamp": "2026-01-02T17:52:03.469506"
         }
       ],
       "created_at": "2026-01-02T17:24:10.759202",
-      "updated_at": "2026-01-02T17:36:14.271984"
+      "updated_at": "2026-01-02T17:52:03.469506"
     }
   ]
 }
