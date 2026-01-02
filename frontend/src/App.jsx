@@ -187,8 +187,8 @@ function App() {
                   <div className={`flex gap-4 ${msg.role === 'user' ? 'flex-row-reverse max-w-[70%]' : 'w-full'}`}>
                     <div className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ${msg.role === 'user' ? 'bg-blue-500' : 'bg-gradient-to-br from-emerald-400 to-cyan-500'}`}>{msg.role === 'user' ? <User className="w-5 h-5 text-white" /> : <Sparkles className="w-5 h-5 text-white" />}</div>
                     <div className={`flex-1 ${msg.role === 'user' ? '' : 'min-w-0'}`}>
-                      <div className={`p-4 rounded-2xl ${msg.role === 'user' ? 'bg-blue-500 text-white' : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm'}`}>
-                        <div className={`prose prose-sm max-w-none ${msg.role === 'user' ? 'prose-invert' : 'prose-gray dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-200 prose-strong:text-gray-900 dark:prose-strong:text-white prose-li:text-gray-700 dark:prose-li:text-gray-200'}`}>
+                      <div className={`p-4 rounded-2xl ${msg.role === 'user' ? 'bg-blue-500 text-white' : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm text-gray-800 dark:text-gray-100'}`}>
+                        <div className={`max-w-none ${msg.role === 'user' ? '' : '[&_p]:text-gray-700 dark:[&_p]:text-gray-200 [&_h1]:text-gray-900 dark:[&_h1]:text-white [&_h2]:text-gray-900 dark:[&_h2]:text-white [&_h3]:text-gray-900 dark:[&_h3]:text-white [&_li]:text-gray-700 dark:[&_li]:text-gray-200 [&_strong]:text-gray-900 dark:[&_strong]:text-white'}`}>
                           <ReactMarkdown 
                             remarkPlugins={[remarkGfm]}
                             components={{
@@ -253,7 +253,7 @@ function App() {
                   </div>
                 </div>
               ))}
-              {isChatLoading && <div className="flex gap-4"><div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center"><Sparkles className="w-5 h-5 text-white" /></div><div className="flex-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-4 shadow-sm"><div className="flex items-center gap-2"><Loader className="w-5 h-5 animate-spin text-emerald-500" /><span className="text-sm text-gray-500">{language === 'es' ? 'Analizando CVs...' : 'Analyzing CVs...'}</span></div></div></div>}
+              {isChatLoading && <div className="flex gap-4"><div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center"><Sparkles className="w-5 h-5 text-white" /></div><div className="flex-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-4 shadow-sm"><div className="flex items-center gap-2"><Loader className="w-5 h-5 animate-spin text-emerald-500" /><span className="text-sm text-gray-500 dark:text-gray-300">{language === 'es' ? 'Analizando CVs...' : 'Analyzing CVs...'}</span></div></div></div>}
               <div ref={messagesEndRef} />
             </div>
           )}
