@@ -1,15 +1,17 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { uploadFiles, getProcessingStatus } from '../services/api';
 
 const POLL_INTERVAL = 1000;
 
-export const useUpload = (onComplete) => {
+export const useUpload = (onComplete, mode = 'local') => {
   const [files, setFiles] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [processingStatus, setProcessingStatus] = useState(null);
   const [error, setError] = useState(null);
+  const modeRef = useRef(mode);
+  modeRef.current = mode;
 
   const addFiles = useCallback((newFiles) => {
     const pdfFiles = newFiles.filter((file) => file.type === 'application/pdf');
@@ -28,12 +30,12 @@ export const useUpload = (onComplete) => {
 
   const pollStatus = useCallback(async (jobId) => {
     try {
-      const status = await getProcessingStatus(jobId);
+      const status = await getProcessingStatus(jobId, modeRef.current);
       setProcessingStatus(status);
 
-      if (status.status === 'completed' || status.status === 'failed') {
+      if (status.status === 'completed' || status.status === 'completed_with_errors' || status.status === 'failed') {
         setIsProcessing(false);
-        if (status.status === 'completed') {
+        if (status.status === 'completed' || status.status === 'completed_with_errors') {
           if (onComplete) onComplete();
         } else {
           setError(status.error_message || 'Processing failed');
@@ -58,7 +60,7 @@ export const useUpload = (onComplete) => {
     setError(null);
 
     try {
-      const response = await uploadFiles(files, (progress) => {
+      const response = await uploadFiles(files, modeRef.current, (progress) => {
         setUploadProgress(progress);
       });
 

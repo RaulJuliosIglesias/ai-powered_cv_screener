@@ -1,57 +1,69 @@
 import { useState, useCallback } from 'react';
 import { sendMessage } from '../services/api';
 
-export const useChat = () => {
+export function useChat(mode = 'local') {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [conversationId, setConversationId] = useState(null);
+  const [lastMetrics, setLastMetrics] = useState(null);
 
-  const addMessage = useCallback((role, content, sources = []) => {
-    const message = {
+  const send = useCallback(async (message) => {
+    if (!message.trim() || isLoading) return;
+
+    const userMessage = {
       id: Date.now(),
-      role,
-      content,
-      sources,
-      timestamp: new Date(),
+      role: 'user',
+      content: message,
+      timestamp: new Date().toISOString(),
     };
-    setMessages((prev) => [...prev, message]);
-    return message;
-  }, []);
 
-  const send = useCallback(async (content) => {
-    if (!content.trim()) return;
-
-    setError(null);
-    addMessage('user', content);
+    setMessages(prev => [...prev, userMessage]);
     setIsLoading(true);
+    setError(null);
 
     try {
-      const response = await sendMessage(content, conversationId);
+      const response = await sendMessage(message, mode, conversationId);
       
+      const assistantMessage = {
+        id: Date.now() + 1,
+        role: 'assistant',
+        content: response.response,
+        sources: response.sources || [],
+        timestamp: new Date().toISOString(),
+      };
+
+      setMessages(prev => [...prev, assistantMessage]);
       setConversationId(response.conversation_id);
-      addMessage('assistant', response.response, response.sources);
-      
-      return response;
+      setLastMetrics(response.metrics);
     } catch (err) {
-      const errorMessage = err.response?.data?.detail || 'Failed to send message';
-      setError(errorMessage);
-      addMessage('assistant', `Error: ${errorMessage}`, []);
+      setError(err.response?.data?.detail || 'Failed to send message');
+      // Remove the user message on error
+      setMessages(prev => prev.filter(m => m.id !== userMessage.id));
     } finally {
       setIsLoading(false);
     }
-  }, [conversationId, addMessage]);
+  }, [mode, conversationId, isLoading]);
+
+  const addMessage = useCallback((message) => {
+    setMessages(prev => [...prev, {
+      id: Date.now(),
+      timestamp: new Date().toISOString(),
+      ...message,
+    }]);
+  }, []);
 
   const clearMessages = useCallback(() => {
     setMessages([]);
     setConversationId(null);
     setError(null);
+    setLastMetrics(null);
   }, []);
 
-  const retryLast = useCallback(async () => {
-    const lastUserMessage = [...messages].reverse().find((m) => m.role === 'user');
+  const retry = useCallback(async () => {
+    const lastUserMessage = [...messages].reverse().find(m => m.role === 'user');
     if (lastUserMessage) {
-      setMessages((prev) => prev.slice(0, -1));
+      setMessages(prev => prev.filter(m => m.id !== lastUserMessage.id));
       await send(lastUserMessage.content);
     }
   }, [messages, send]);
@@ -61,9 +73,10 @@ export const useChat = () => {
     isLoading,
     error,
     conversationId,
+    lastMetrics,
     send,
-    clearMessages,
-    retryLast,
     addMessage,
+    clearMessages,
+    retry,
   };
-};
+}

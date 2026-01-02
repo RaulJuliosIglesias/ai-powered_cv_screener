@@ -1,35 +1,69 @@
 # CV Screener - AI-Powered Resume Analysis
 
-An AI-powered CV screening application that allows users to upload PDF resumes and query them using natural language. The system uses Retrieval-Augmented Generation (RAG) to provide accurate, grounded answers based exclusively on the uploaded CV content.
+An AI-powered CV screening application with **switchable backend modes** (Local/Cloud). Upload PDF resumes and query them using natural language with RAG (Retrieval-Augmented Generation).
 
 **Core Principle:** Zero hallucinations. Every response is traceable to source documents.
 
-![CV Screener Demo](docs/demo.png)
-
 ## Features
 
+- **Dual Mode Architecture**: Switch between Local and Cloud backends
 - **PDF Upload**: Drag & drop multiple CV files for processing
 - **Smart Extraction**: Automatic text extraction and semantic chunking
 - **Natural Language Queries**: Ask questions about candidates in plain English
 - **Source Citations**: Every answer includes references to the source CVs
-- **Real-time Processing**: Progress tracking for file uploads and indexing
-- **Anti-Hallucination**: Guardrails ensure responses are grounded in actual CV content
-- **Cost Tracking**: Monitor API usage and estimated costs
+- **Performance Metrics**: Real-time display of embedding, search, and LLM latencies
+- **Mode Comparison**: Compare performance between Local and Cloud modes
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    FRONTEND (React)                         │
+│  ┌─────────────┐  ┌──────────────────────────────────────┐  │
+│  │ MODE SWITCH │  │           METRICS BAR                │  │
+│  │ ○ Local     │  │ Embed: 52ms | Search: 8ms | LLM: 823ms│  │
+│  │ ● Cloud     │  │ Total: 883ms | Mode: cloud           │  │
+│  └─────────────┘  └──────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    BACKEND (FastAPI)                        │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │              PROVIDER FACTORY                        │    │
+│  │   mode = "local" | "cloud"                           │    │
+│  │         │                    │                       │    │
+│  │   ┌─────┴─────┐        ┌─────┴─────┐                 │    │
+│  │   │   LOCAL   │        │   CLOUD   │                 │    │
+│  │   │ SentenceT │        │ OpenRouter│                 │    │
+│  │   │ ChromaDB  │        │ Supabase  │                 │    │
+│  │   │ Gemini    │        │ OpenRouter│                 │    │
+│  │   └───────────┘        └───────────┘                 │    │
+│  └─────────────────────────────────────────────────────┘    │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ## Tech Stack
 
-### Backend
-- **Python 3.11+** with FastAPI
-- **ChromaDB** for vector storage
-- **OpenAI** for embeddings (text-embedding-3-small)
-- **Google Gemini** for response generation (gemini-1.5-flash)
-- **pdfplumber** for PDF extraction
+### Local Mode
+| Component | Technology | Purpose |
+|-----------|------------|---------|
+| Embeddings | sentence-transformers (all-MiniLM-L6-v2) | Local embedding generation |
+| Vector Store | ChromaDB | Local vector database |
+| LLM | Google Gemini (gemini-1.5-flash) | Response generation |
 
-### Frontend
+### Cloud Mode
+| Component | Technology | Purpose |
+|-----------|------------|---------|
+| Embeddings | OpenRouter (nomic-embed-text-v1.5) | API-based embeddings |
+| Vector Store | Supabase pgvector | Cloud PostgreSQL with vectors |
+| LLM | OpenRouter (gemini-2.0-flash-exp:free) | API-based LLM |
+
+### Shared
+- **Python 3.11+** with FastAPI
 - **React 18** with Vite
 - **TailwindCSS** for styling
-- **Lucide React** for icons
-- **Axios** for API communication
+- **pdfplumber** for PDF extraction
 
 ## Quick Start
 
@@ -37,8 +71,8 @@ An AI-powered CV screening application that allows users to upload PDF resumes a
 
 - Python 3.11+
 - Node.js 18+
-- OpenAI API key
-- Google API key (for Gemini)
+- **Local Mode**: Google API key (for Gemini)
+- **Cloud Mode**: OpenRouter API key + Supabase project
 
 ### 1. Clone the repository
 
@@ -65,11 +99,9 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Create environment file
-cp ../.env.example .env
+cp .env.example .env
 
-# Edit .env with your API keys
-# OPENAI_API_KEY=your_openai_key
-# GOOGLE_API_KEY=your_google_key
+# Edit .env with your API keys (see Environment Variables section)
 
 # Start the server
 uvicorn app.main:app --reload
@@ -91,16 +123,26 @@ npm run dev
 
 The frontend will be available at `http://localhost:5173`
 
+### 4. Cloud Mode Setup (Optional)
+
+If using Cloud mode with Supabase:
+
+1. Create a Supabase project at https://supabase.com
+2. Run the migration SQL in `supabase/migrations/001_create_cv_embeddings.sql`
+3. Add your Supabase credentials to `.env`
+
 ## API Endpoints
+
+All endpoints accept a `mode` query parameter: `?mode=local` or `?mode=cloud`
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | `/api/upload` | Upload PDF files |
+| POST | `/api/upload?mode=local` | Upload PDF files |
 | GET | `/api/status/{job_id}` | Check processing status |
-| GET | `/api/cvs` | List indexed CVs |
-| DELETE | `/api/cvs/{cv_id}` | Remove a CV |
-| POST | `/api/chat` | Send a query |
-| GET | `/api/stats` | Get usage statistics |
+| GET | `/api/cvs?mode=local` | List indexed CVs |
+| DELETE | `/api/cvs/{cv_id}?mode=local` | Remove a CV |
+| POST | `/api/chat?mode=local` | Send a query |
+| GET | `/api/stats?mode=local` | Get system statistics |
 | GET | `/api/health` | Health check |
 
 ## Example Queries

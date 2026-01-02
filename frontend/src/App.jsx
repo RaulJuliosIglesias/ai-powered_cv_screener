@@ -4,9 +4,12 @@ import UploadZone from './components/UploadZone';
 import ProcessingStatus from './components/ProcessingStatus';
 import CVList from './components/CVList';
 import ChatWindow from './components/ChatWindow';
+import ModeSwitch from './components/ModeSwitch';
+import MetricsBar from './components/MetricsBar';
 import { useUpload } from './hooks/useUpload';
 import { useChat } from './hooks/useChat';
-import { getCVList, getWelcomeMessage } from './services/api';
+import useMode from './hooks/useMode';
+import { getCVList } from './services/api';
 
 const APP_STATES = {
   EMPTY: 'empty',
@@ -19,13 +22,15 @@ function App() {
   const [appState, setAppState] = useState(APP_STATES.EMPTY);
   const [cvs, setCvs] = useState([]);
   const [isLoadingCvs, setIsLoadingCvs] = useState(true);
-  const [welcomeMessage, setWelcomeMessage] = useState('');
   const [showUploadModal, setShowUploadModal] = useState(false);
+  
+  // Mode management
+  const { mode, setMode } = useMode();
 
   const loadCVs = useCallback(async () => {
     try {
       setIsLoadingCvs(true);
-      const response = await getCVList();
+      const response = await getCVList(mode);
       setCvs(response.cvs || []);
       
       if (response.cvs && response.cvs.length > 0) {
@@ -35,24 +40,17 @@ function App() {
       }
     } catch (error) {
       console.error('Failed to load CVs:', error);
+      setCvs([]);
+      setAppState(APP_STATES.EMPTY);
     } finally {
       setIsLoadingCvs(false);
     }
-  }, []);
+  }, [mode]);
 
-  const loadWelcomeMessage = useCallback(async () => {
-    try {
-      const response = await getWelcomeMessage();
-      setWelcomeMessage(response.message);
-    } catch (error) {
-      console.error('Failed to load welcome message:', error);
-    }
-  }, []);
-
+  // Reload CVs when mode changes
   useEffect(() => {
     loadCVs();
-    loadWelcomeMessage();
-  }, [loadCVs, loadWelcomeMessage]);
+  }, [loadCVs]);
 
   const handleProcessingComplete = useCallback(() => {
     loadCVs();
@@ -70,13 +68,20 @@ function App() {
     removeFile,
     upload,
     reset: resetUpload,
-  } = useUpload(handleProcessingComplete);
+  } = useUpload(handleProcessingComplete, mode);
 
   const {
     messages,
     isLoading: isChatLoading,
+    lastMetrics,
     send: sendMessage,
-  } = useChat();
+    clearMessages,
+  } = useChat(mode);
+
+  // Clear chat when mode changes
+  useEffect(() => {
+    clearMessages();
+  }, [mode, clearMessages]);
 
   useEffect(() => {
     if (isUploading) {
@@ -93,6 +98,12 @@ function App() {
   const handleAddClick = () => {
     setShowUploadModal(true);
     resetUpload();
+  };
+
+  const handleModeChange = (newMode) => {
+    if (!isUploading && !isProcessing && !isChatLoading) {
+      setMode(newMode);
+    }
   };
 
   const renderContent = () => {
@@ -125,7 +136,6 @@ function App() {
             messages={messages}
             isLoading={isChatLoading}
             onSend={sendMessage}
-            welcomeMessage={welcomeMessage}
           />
         </div>
       );
@@ -139,8 +149,23 @@ function App() {
       showAddButton={appState === APP_STATES.READY && !showUploadModal}
       onAddClick={handleAddClick}
     >
-      <div className="h-[calc(100vh-73px)]">
-        {renderContent()}
+      <div className="flex flex-col h-[calc(100vh-73px)]">
+        {/* Mode Switch and Metrics Bar */}
+        <div className="flex-shrink-0 border-b border-gray-200">
+          <div className="px-4 py-2">
+            <ModeSwitch
+              mode={mode}
+              onModeChange={handleModeChange}
+              disabled={isUploading || isProcessing || isChatLoading}
+            />
+          </div>
+          {lastMetrics && <MetricsBar metrics={lastMetrics} mode={mode} />}
+        </div>
+        
+        {/* Main Content */}
+        <div className="flex-1 overflow-hidden">
+          {renderContent()}
+        </div>
       </div>
     </Layout>
   );

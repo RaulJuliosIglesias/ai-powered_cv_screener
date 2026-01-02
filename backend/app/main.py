@@ -5,7 +5,7 @@ import logging
 import sys
 
 from app.config import get_settings
-from app.api.routes import router
+from app.api.routes_v2 import router
 from app.utils.exceptions import CVScreenerException
 
 
@@ -83,8 +83,8 @@ async def root():
 async def startup_event():
     """Initialize services on startup."""
     logger.info("Starting CV Screener API...")
+    logger.info(f"Default mode: {settings.default_mode}")
     logger.info(f"CORS origins: {settings.cors_origins_list}")
-    logger.info(f"ChromaDB path: {settings.chroma_persist_dir}")
     logger.info("API ready to receive requests")
 
 
