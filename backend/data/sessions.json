@@ -375,10 +375,269 @@
             }
           ],
           "timestamp": "2026-01-02T17:52:18.762168"
+        },
+        {
+          "id": "ed6d5899-51ea-4e6e-813f-bbc572821813",
+          "role": "user",
+          "content": "dame una receta para tarta de queso",
+          "sources": [],
+          "timestamp": "2026-01-02T17:55:22.801252"
+        },
+        {
+          "id": "3ed389cb-4739-4dc6-ad9b-a3490b641ae0",
+          "role": "assistant",
+          "content": "",
+          "sources": [
+            {
+              "cv_id": "cv_ae3ba1eb",
+              "filename": "CV_Jessica_Davis_122c0c7d_20260102_141822.pdf",
+              "relevance": 0.506
+            },
+            {
+              "cv_id": "cv_7f1f7503",
+              "filename": "CV_David_Wilson_553eb84a_20260102_142306.pdf",
+              "relevance": 0.494
+            },
+            {
+              "cv_id": "cv_9e0b4aa2",
+              "filename": "CV_Emily_Johnson_6ca477b5_20260102_141821.pdf",
+              "relevance": 0.494
+            },
+            {
+              "cv_id": "cv_d8b1f275",
+              "filename": "CV_John_Smith_7ba9bd53_20260102_141822.pdf",
+              "relevance": 0.487
+            },
+            {
+              "cv_id": "cv_16ff4c85",
+              "filename": "CV_Michael_Brown_91c72a4e_20260102_142306.pdf",
+              "relevance": 0.487
+            },
+            {
+              "cv_id": "cv_76fd444c",
+              "filename": "CV_Michael_Brown_f110849f_20260102_142306.pdf",
+              "relevance": 0.487
+            },
+            {
+              "cv_id": "cv_f1e04d47",
+              "filename": "CV_Olivia_Davis_a4476fe5_20260102_141057.pdf",
+              "relevance": 0.48
+            },
+            {
+              "cv_id": "cv_f17e7779",
+              "filename": "CV_James_Wilson_f65a824a_20260102_141056.pdf",
+              "relevance": 0.477
+            },
+            {
+              "cv_id": "cv_29c0d60d",
+              "filename": "CV_James_Wilson_3db222f6_20260102_141055.pdf",
+              "relevance": 0.475
+            },
+            {
+              "cv_id": "cv_f7d00515",
+              "filename": "CV_Charlotte_Brown_d2aa1975_20260102_141057.pdf",
+              "relevance": 0.46
+            },
+            {
+              "cv_id": "cv_4ab0844a",
+              "filename": "CV_John_Smith_a3ace876_20260102_144805.pdf",
+              "relevance": 0.46
+            },
+            {
+              "cv_id": "cv_7464f640",
+              "filename": "CV_Emily_Johnson_19bf56e4_20260102_144805.pdf",
+              "relevance": 0.453
+            }
+          ],
+          "timestamp": "2026-01-02T17:55:41.592872"
         }
       ],
       "created_at": "2026-01-02T17:24:10.759202",
-      "updated_at": "2026-01-02T17:52:18.762168"
+      "updated_at": "2026-01-02T17:55:41.592872"
+    },
+    {
+      "id": "f637e95b-f7fa-414e-8ee6-808436df0359",
+      "name": "New chat",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_e288a4e8",
+          "filename": "CV_Charlotte_Brown_d2aa1975_20260102_141057.pdf",
+          "chunk_count": 8,
+          "uploaded_at": "2026-01-02T17:55:55.422876"
+        },
+        {
+          "id": "cv_b9a1a3a1",
+          "filename": "CV_David_Wilson_553eb84a_20260102_142306.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-02T17:55:55.466169"
+        },
+        {
+          "id": "cv_9e20dbf2",
+          "filename": "CV_Emily_Johnson_6ca477b5_20260102_141821.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-02T17:55:55.507654"
+        },
+        {
+          "id": "cv_fb65662f",
+          "filename": "CV_Emily_Johnson_19bf56e4_20260102_144805.pdf",
+          "chunk_count": 7,
+          "uploaded_at": "2026-01-02T17:55:55.549570"
+        },
+        {
+          "id": "cv_e299a00d",
+          "filename": "CV_James_Wilson_3db222f6_20260102_141055.pdf",
+          "chunk_count": 8,
+          "uploaded_at": "2026-01-02T17:55:55.595448"
+        },
+        {
+          "id": "cv_4e650870",
+          "filename": "CV_James_Wilson_51587388_20260102_141055.pdf",
+          "chunk_count": 8,
+          "uploaded_at": "2026-01-02T17:55:55.642739"
+        },
+        {
+          "id": "cv_b2a13c2b",
+          "filename": "CV_James_Wilson_f65a824a_20260102_141056.pdf",
+          "chunk_count": 8,
+          "uploaded_at": "2026-01-02T17:55:55.690672"
+        },
+        {
+          "id": "cv_e64a2d4b",
+          "filename": "CV_Jessica_Davis_122c0c7d_20260102_141822.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-02T17:55:55.739315"
+        },
+        {
+          "id": "cv_9320ac4c",
+          "filename": "CV_John_Smith_7ba9bd53_20260102_141822.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-02T17:55:55.838822"
+        },
+        {
+          "id": "cv_40717fa6",
+          "filename": "CV_John_Smith_a3ace876_20260102_144805.pdf",
+          "chunk_count": 7,
+          "uploaded_at": "2026-01-02T17:55:55.888666"
+        },
+        {
+          "id": "cv_8b181240",
+          "filename": "CV_Michael_Brown_91c72a4e_20260102_142306.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-02T17:55:55.941280"
+        },
+        {
+          "id": "cv_546e06c1",
+          "filename": "CV_Michael_Brown_f110849f_20260102_142306.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-02T17:55:55.994826"
+        },
+        {
+          "id": "cv_f64e80de",
+          "filename": "CV_Olivia_Davis_a4476fe5_20260102_141057.pdf",
+          "chunk_count": 8,
+          "uploaded_at": "2026-01-02T17:55:56.052161"
+        },
+        {
+          "id": "cv_fa1892b3",
+          "filename": "CV_Sarah_Williams_5022c7fb_20260102_144806.pdf",
+          "chunk_count": 7,
+          "uploaded_at": "2026-01-02T17:55:56.107074"
+        }
+      ],
+      "messages": [
+        {
+          "id": "e9e08692-9524-4f18-917a-45281e75b049",
+          "role": "user",
+          "content": "Compare the experience levels of all 14 candidates",
+          "sources": [],
+          "timestamp": "2026-01-02T18:11:15.831037"
+        },
+        {
+          "id": "476e33f8-072a-4f7b-b408-fcdbf799ae78",
+          "role": "assistant",
+          "content": "## Candidate Experience Analysis\n\n### Unique Candidates Identified\nThe following candidates have been identified from the provided CV data:\n\n1. **John Smith**\n2. **James Wilson** (two entries)\n3. **Olivia Davis**\n4. **Jessica Davis**\n5. **Emily Johnson** (two entries)\n6. **Sarah Williams**\n7. **Michael Brown** (two entries)\n8. **David Wilson** (two entries)\n\n### Experience Overview\nThe experience levels of the candidates are summarized in the table below:\n\n| Candidate Name     | Current Position                     | Current Company         | Years of Experience (Current Role) | Previous Position          | Previous Company         | Years of Experience (Previous Role) |\n|--------------------|-------------------------------------|-------------------------|-------------------------------------|----------------------------|--------------------------|--------------------------------------|\n| **John Smith**     | Senior Software Developer            | Innovation Labs         | 2 (2021 - Present)                 | Software Developer          | Enterprise Tech          | 3 (2018 - 2021)                      |\n| **James Wilson**   | Senior Full Stack Developer          | Innovation Labs         | 2 (2021 - Present)                 | Full Stack Developer        | StartUp Co              | 3 (2018 - 2021)                      |\n| **James Wilson**   | Senior Full Stack Developer          | Innovation Labs         | 2 (2021 - Present)                 | Full Stack Developer        | Cloud Services Ltd       | 3 (2018 - 2021)                      |\n| **Olivia Davis**   | Senior Full Stack Developer          | Tech Solutions Inc      | 2 (2021 - Present)                 | Full Stack Developer        | StartUp Co              | 3 (2018 - 2021)                      |\n| **Jessica Davis**  | Senior Software Developer            | Global Systems Corp     | 2 (2021 - Present)                 | Software Developer          | Cloud Services Ltd       | 3 (2018 - 2021)                      |\n| **Emily Johnson**  | Senior Software Developer            | Innovation Labs         | 2 (2021 - Present)                 | Software Developer          | StartUp Co              | 3 (2018 - 2021)                      |\n| **Emily Johnson**  | Senior Software Developer            | Tech Solutions Inc      | 2 (2021 - Present)                 | Software Developer          | StartUp Co              | 3 (2018 - 2021)                      |\n| **Sarah Williams** | Senior Any                           | Innovation Labs         | 2 (2021 - Present)                 | Any                        | StartUp Co              | 3 (2018 - 2021)                      |\n| **Michael Brown**  | Senior Software Developer            | Innovation Labs         | 2 (2021 - Present)                 | Software Developer          | Enterprise Tech          | 3 (2018 - 2021)                      |\n| **Michael Brown**  | Senior Software Developer            | Innovation Labs         | 2 (2021 - Present)                 | Software Developer          | Enterprise Tech          | 3 (2018 - 2021)                      |\n| **David Wilson**   | Senior Software Developer            | Tech Solutions Inc      | 2 (2021 - Present)                 | Software Developer          | Cloud Services Ltd       | 3 (2018 - 2021)                      |\n| **David Wilson**   | Not specified                        | Not specified           | Not specified                       | Not specified              | Not specified            | Not specified                        |\n\n### Key Findings\n- **All candidates** listed have a current role with **2 years of experience** (2021 - Present).\n- **Previous roles** for all candidates range from **3 years** (2018 - 2021).\n- **James Wilson** appears twice with identical experience, indicating he may have submitted multiple CVs.\n- **Emily Johnson** and **Michael Brown** also appear twice with the same experience details.\n- **Sarah Williams** and **John Smith** have unspecified roles in their previous positions, labeled as \"Any\".\n\n### Conclusion\nAll candidates have a similar level of experience, with 2 years in their current roles and 3 years in their previous roles. The candidates are primarily in software development roles, with a focus on full stack and software development positions. \n\n### Sources\n- CV #1, CV #2, CV #3, CV #4, CV #5, CV #6, CV #7, CV #8, CV #9, CV #10, CV #11, CV #12, CV #13, CV #14, CV #15, CV #16, CV #17, CV #18, CV #19, CV #20.",
+          "sources": [
+            {
+              "cv_id": "cv_40717fa6",
+              "filename": "CV_John_Smith_a3ace876_20260102_144805.pdf",
+              "relevance": 0.502
+            },
+            {
+              "cv_id": "cv_b2a13c2b",
+              "filename": "CV_James_Wilson_f65a824a_20260102_141056.pdf",
+              "relevance": 0.463
+            },
+            {
+              "cv_id": "cv_e299a00d",
+              "filename": "CV_James_Wilson_3db222f6_20260102_141055.pdf",
+              "relevance": 0.461
+            },
+            {
+              "cv_id": "cv_f64e80de",
+              "filename": "CV_Olivia_Davis_a4476fe5_20260102_141057.pdf",
+              "relevance": 0.459
+            },
+            {
+              "cv_id": "cv_e64a2d4b",
+              "filename": "CV_Jessica_Davis_122c0c7d_20260102_141822.pdf",
+              "relevance": 0.452
+            },
+            {
+              "cv_id": "cv_fb65662f",
+              "filename": "CV_Emily_Johnson_19bf56e4_20260102_144805.pdf",
+              "relevance": 0.452
+            },
+            {
+              "cv_id": "cv_fa1892b3",
+              "filename": "CV_Sarah_Williams_5022c7fb_20260102_144806.pdf",
+              "relevance": 0.452
+            },
+            {
+              "cv_id": "cv_4e650870",
+              "filename": "CV_James_Wilson_51587388_20260102_141055.pdf",
+              "relevance": 0.427
+            },
+            {
+              "cv_id": "cv_9320ac4c",
+              "filename": "CV_John_Smith_7ba9bd53_20260102_141822.pdf",
+              "relevance": 0.409
+            },
+            {
+              "cv_id": "cv_8b181240",
+              "filename": "CV_Michael_Brown_91c72a4e_20260102_142306.pdf",
+              "relevance": 0.409
+            },
+            {
+              "cv_id": "cv_546e06c1",
+              "filename": "CV_Michael_Brown_f110849f_20260102_142306.pdf",
+              "relevance": 0.409
+            },
+            {
+              "cv_id": "cv_b9a1a3a1",
+              "filename": "CV_David_Wilson_553eb84a_20260102_142306.pdf",
+              "relevance": 0.405
+            },
+            {
+              "cv_id": "cv_9e20dbf2",
+              "filename": "CV_Emily_Johnson_6ca477b5_20260102_141821.pdf",
+              "relevance": 0.405
+            }
+          ],
+          "timestamp": "2026-01-02T18:11:40.419045"
+        }
+      ],
+      "created_at": "2026-01-02T17:55:49.826684",
+      "updated_at": "2026-01-02T18:11:40.419045"
+    },
+    {
+      "id": "eaa98a7e-069b-438d-ab99-dfd1acd1da37",
+      "name": "New chat",
+      "description": "",
+      "cvs": [],
+      "messages": [],
+      "created_at": "2026-01-02T18:12:27.450925",
+      "updated_at": "2026-01-02T18:12:27.450925"
     }
   ]
 }

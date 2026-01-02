@@ -30,18 +30,41 @@ async def fetch_openrouter_models() -> List[Dict]:
                 prompt_price = float(pricing.get("prompt", 0)) * 1000000  # per 1M tokens
                 completion_price = float(pricing.get("completion", 0)) * 1000000
                 
+                # Extract architecture info
+                arch = m.get("architecture", {})
+                
+                # Check for reasoning/thinking capability from description or name
+                model_id = m["id"].lower()
+                model_name = m.get("name", "").lower()
+                description = m.get("description", "").lower()
+                
+                is_reasoning = any(kw in model_id or kw in model_name or kw in description 
+                    for kw in ["reasoning", "thinking", "o1", "o3", "deepseek-r1", "qwq", "think"])
+                
+                is_free = prompt_price == 0 and completion_price == 0
+                
                 models.append({
                     "id": m["id"],
                     "name": m.get("name", m["id"]),
+                    "description": m.get("description", ""),
                     "context_length": m.get("context_length", 0),
                     "pricing": {
                         "prompt": f"${prompt_price:.2f}/1M",
                         "completion": f"${completion_price:.2f}/1M"
                     },
-                    "pricing_raw": {"prompt": prompt_price, "completion": completion_price}
+                    "pricing_raw": {"prompt": prompt_price, "completion": completion_price},
+                    "created": m.get("created"),  # Unix timestamp
+                    "architecture": {
+                        "tokenizer": arch.get("tokenizer", ""),
+                        "modality": arch.get("modality", "text"),
+                        "instruct_type": arch.get("instruct_type", "")
+                    },
+                    "top_provider": m.get("top_provider", {}),
+                    "is_reasoning": is_reasoning,
+                    "is_free": is_free
                 })
             
-            # Sort by name
+            # Sort by name by default
             models.sort(key=lambda x: x["name"].lower())
             _cached_models = models
             logger.info(f"Fetched {len(models)} models from OpenRouter")
