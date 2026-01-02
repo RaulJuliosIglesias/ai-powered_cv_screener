@@ -1,21 +1,35 @@
 from typing import List, Dict, Any
-import chromadb
-from chromadb.config import Settings as ChromaSettings
 from app.providers.base import VectorStoreProvider, SearchResult
 from app.config import settings
+
+# Lazy import chromadb to avoid onnxruntime dependency issues
+_chromadb = None
+
+def _get_chromadb():
+    """Lazy load chromadb."""
+    global _chromadb
+    if _chromadb is None:
+        import chromadb
+        _chromadb = chromadb
+    return _chromadb
 
 
 class ChromaVectorStore(VectorStoreProvider):
     """Local vector store using ChromaDB."""
     
     def __init__(self):
+        chromadb = _get_chromadb()
+        from chromadb.config import Settings as ChromaSettings
+        
         self.client = chromadb.PersistentClient(
             path=settings.chroma_persist_dir,
             settings=ChromaSettings(anonymized_telemetry=False)
         )
+        # Pass embedding_function=None to disable default embeddings (we provide our own)
         self.collection = self.client.get_or_create_collection(
             name=settings.chroma_collection_name,
-            metadata={"hnsw:space": "cosine"}
+            metadata={"hnsw:space": "cosine"},
+            embedding_function=None
         )
     
     async def add_documents(

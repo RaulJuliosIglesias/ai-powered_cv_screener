@@ -1,8 +1,28 @@
 import time
+import logging
 from typing import List
-from sentence_transformers import SentenceTransformer
 from app.providers.base import EmbeddingProvider, EmbeddingResult
 from app.config import settings
+
+logger = logging.getLogger(__name__)
+
+# Lazy import to avoid DLL errors on Windows
+SentenceTransformer = None
+
+def _get_sentence_transformer():
+    """Lazy load SentenceTransformer to handle import errors gracefully."""
+    global SentenceTransformer
+    if SentenceTransformer is None:
+        try:
+            from sentence_transformers import SentenceTransformer as ST
+            SentenceTransformer = ST
+        except OSError as e:
+            logger.error(f"Failed to load sentence_transformers (PyTorch DLL error): {e}")
+            raise RuntimeError(
+                "PyTorch failed to load. This is a Windows DLL issue. "
+                "Try running: pip uninstall torch -y && pip install torch --index-url https://download.pytorch.org/whl/cpu"
+            ) from e
+    return SentenceTransformer
 
 
 class LocalEmbeddingProvider(EmbeddingProvider):
@@ -13,10 +33,11 @@ class LocalEmbeddingProvider(EmbeddingProvider):
         self._model_name = settings.local_embedding_model
     
     @property
-    def model(self) -> SentenceTransformer:
+    def model(self):
         """Lazy load the model."""
         if self._model is None:
-            self._model = SentenceTransformer(self._model_name)
+            ST = _get_sentence_transformer()
+            self._model = ST(self._model_name)
         return self._model
     
     @property
