@@ -181,46 +181,89 @@ function App() {
               {suggestions.length > 0 && <div className="grid grid-cols-2 gap-3 max-w-2xl">{suggestions.map((s, i) => (<button key={i} onClick={() => handleSend(s)} className="p-4 text-left text-sm bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-xl text-gray-700 dark:text-gray-200">{s}</button>))}</div>}
             </div>
           ) : (
-            <div className="max-w-3xl mx-auto space-y-4">
+            <div className="max-w-5xl mx-auto space-y-6">
               {currentSession.messages.map((msg, idx) => (
                 <div key={idx} className={msg.role === 'user' ? 'flex justify-end' : ''}>
-                  <div className={`flex gap-3 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${msg.role === 'user' ? 'bg-blue-500' : 'bg-gradient-to-br from-blue-500 to-purple-600'}`}>{msg.role === 'user' ? <User className="w-4 h-4 text-white" /> : <Sparkles className="w-4 h-4 text-white" />}</div>
-                    <div className={`p-3 rounded-xl ${msg.role === 'user' ? 'bg-blue-500 text-white rounded-tr-sm' : 'bg-gray-100 dark:bg-gray-700 rounded-tl-sm'}`}>
-                      <div className={`prose prose-sm max-w-none ${msg.role === 'user' ? 'prose-invert' : 'dark:prose-invert'}`}>
-                        <ReactMarkdown 
-                          remarkPlugins={[remarkGfm]}
-                          components={{
-                            table: ({node, ...props}) => (
-                              <div className="overflow-x-auto my-4">
-                                <table className="min-w-full border-collapse border border-gray-300 dark:border-gray-600 text-sm" {...props} />
-                              </div>
-                            ),
-                            thead: ({node, ...props}) => <thead className="bg-gray-200 dark:bg-gray-600" {...props} />,
-                            th: ({node, ...props}) => <th className="border border-gray-300 dark:border-gray-600 px-3 py-2 text-left font-semibold" {...props} />,
-                            td: ({node, ...props}) => <td className="border border-gray-300 dark:border-gray-600 px-3 py-2" {...props} />,
-                            tr: ({node, ...props}) => <tr className="even:bg-gray-50 dark:even:bg-gray-700/50" {...props} />,
-                          }}
-                        >
-                          {msg.content}
-                        </ReactMarkdown>
+                  <div className={`flex gap-4 ${msg.role === 'user' ? 'flex-row-reverse max-w-[70%]' : 'w-full'}`}>
+                    <div className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ${msg.role === 'user' ? 'bg-blue-500' : 'bg-gradient-to-br from-emerald-400 to-cyan-500'}`}>{msg.role === 'user' ? <User className="w-5 h-5 text-white" /> : <Sparkles className="w-5 h-5 text-white" />}</div>
+                    <div className={`flex-1 ${msg.role === 'user' ? '' : 'min-w-0'}`}>
+                      <div className={`p-4 rounded-2xl ${msg.role === 'user' ? 'bg-blue-500 text-white' : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm'}`}>
+                        <div className={`prose prose-sm max-w-none ${msg.role === 'user' ? 'prose-invert' : 'prose-gray dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-200 prose-strong:text-gray-900 dark:prose-strong:text-white prose-li:text-gray-700 dark:prose-li:text-gray-200'}`}>
+                          <ReactMarkdown 
+                            remarkPlugins={[remarkGfm]}
+                            components={{
+                              table: ({node, ...props}) => {
+                                const tableRef = useRef(null);
+                                const [copied, setCopied] = useState(false);
+                                const copyTable = () => {
+                                  if (tableRef.current) {
+                                    const rows = tableRef.current.querySelectorAll('tr');
+                                    let text = '';
+                                    rows.forEach(row => {
+                                      const cells = row.querySelectorAll('th, td');
+                                      text += Array.from(cells).map(c => c.textContent).join('\t') + '\n';
+                                    });
+                                    navigator.clipboard.writeText(text);
+                                    setCopied(true);
+                                    setTimeout(() => setCopied(false), 2000);
+                                  }
+                                };
+                                return (
+                                  <div className="my-4 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-900">
+                                    <div className="flex items-center justify-between px-3 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-600">
+                                      <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Table</span>
+                                      <button onClick={copyTable} className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                        {copied ? <><Check className="w-3.5 h-3.5" /> Copied!</> : <><Copy className="w-3.5 h-3.5" /> Copy table</>}
+                                      </button>
+                                    </div>
+                                    <div className="overflow-x-auto">
+                                      <table ref={tableRef} className="w-full text-sm" {...props} />
+                                    </div>
+                                  </div>
+                                );
+                              },
+                              thead: ({node, ...props}) => <thead className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white" {...props} />,
+                              th: ({node, ...props}) => <th className="px-4 py-3 text-left font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700" {...props} />,
+                              td: ({node, ...props}) => <td className="px-4 py-3 text-gray-700 dark:text-gray-200 border-b border-gray-100 dark:border-gray-700/50" {...props} />,
+                              tr: ({node, ...props}) => <tr className="hover:bg-gray-50 dark:hover:bg-gray-800/50" {...props} />,
+                              code: ({node, inline, className, children, ...props}) => {
+                                const [copied, setCopied] = useState(false);
+                                const codeText = String(children).replace(/\n$/, '');
+                                if (inline) return <code className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-pink-600 dark:text-pink-400 text-sm" {...props}>{children}</code>;
+                                return (
+                                  <div className="my-3 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-600 bg-gray-900">
+                                    <div className="flex items-center justify-between px-3 py-2 bg-gray-800 border-b border-gray-700">
+                                      <span className="text-xs text-gray-400">{className?.replace('language-', '') || 'code'}</span>
+                                      <button onClick={() => { navigator.clipboard.writeText(codeText); setCopied(true); setTimeout(() => setCopied(false), 2000); }} className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-white">
+                                        {copied ? <><Check className="w-3.5 h-3.5" /> Copied!</> : <><Copy className="w-3.5 h-3.5" /> Copy code</>}
+                                      </button>
+                                    </div>
+                                    <pre className="p-4 overflow-x-auto text-sm text-gray-100"><code {...props}>{children}</code></pre>
+                                  </div>
+                                );
+                              },
+                            }}
+                          >
+                            {msg.content}
+                          </ReactMarkdown>
+                        </div>
+                        {msg.sources?.length > 0 && <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-600 flex flex-wrap gap-1.5">{msg.sources.map((src, i) => <SourceBadge key={i} filename={src.filename} score={src.relevance} />)}</div>}
                       </div>
-                      {msg.sources?.length > 0 && <div className="mt-2 pt-2 border-t border-gray-200 dark:border-gray-600 flex flex-wrap gap-1">{msg.sources.map((src, i) => <SourceBadge key={i} filename={src.filename} score={src.relevance} />)}</div>}
                     </div>
                   </div>
                 </div>
               ))}
-              {isChatLoading && <div className="flex gap-3"><div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center"><Sparkles className="w-4 h-4 text-white" /></div><div className="bg-gray-100 dark:bg-gray-700 rounded-xl p-3"><Loader className="w-5 h-5 animate-spin text-blue-500" /></div></div>}
+              {isChatLoading && <div className="flex gap-4"><div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center"><Sparkles className="w-5 h-5 text-white" /></div><div className="flex-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-4 shadow-sm"><div className="flex items-center gap-2"><Loader className="w-5 h-5 animate-spin text-emerald-500" /><span className="text-sm text-gray-500">{language === 'es' ? 'Analizando CVs...' : 'Analyzing CVs...'}</span></div></div></div>}
               <div ref={messagesEndRef} />
             </div>
           )}
         </div>
 
         {currentSession && (
-          <div className="border-t border-gray-200 dark:border-gray-700 p-4">
-            <div className="max-w-3xl mx-auto flex gap-3">
-              <textarea value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }}} placeholder={currentSession.cvs?.length ? (language === 'es' ? 'Pregunta sobre los CVs...' : 'Ask about the CVs...') : (language === 'es' ? 'Sube CVs primero' : 'Upload CVs first')} disabled={isChatLoading || !currentSession.cvs?.length} rows={1} className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50" />
-              <button onClick={() => handleSend()} disabled={!message.trim() || isChatLoading || !currentSession.cvs?.length} className="p-3 bg-blue-500 hover:bg-blue-600 text-white rounded-xl disabled:opacity-50">{isChatLoading ? <Loader className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}</button>
+          <div className="border-t border-gray-200 dark:border-gray-700 p-4 bg-gray-50 dark:bg-gray-900">
+            <div className="max-w-5xl mx-auto flex gap-3">
+              <textarea value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }}} placeholder={currentSession.cvs?.length ? (language === 'es' ? 'Pregunta sobre los CVs...' : 'Ask about the CVs...') : (language === 'es' ? 'Sube CVs primero' : 'Upload CVs first')} disabled={isChatLoading || !currentSession.cvs?.length} rows={1} className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 shadow-sm" />
+              <button onClick={() => handleSend()} disabled={!message.trim() || isChatLoading || !currentSession.cvs?.length} className="p-3 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white rounded-xl disabled:opacity-50 shadow-sm">{isChatLoading ? <Loader className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}</button>
             </div>
           </div>
         )}
