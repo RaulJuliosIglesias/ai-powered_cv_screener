@@ -67,6 +67,13 @@ function App() {
   }, [mode]); // eslint-disable-line
   
   useEffect(() => { if (currentSessionId) loadSession(currentSessionId); else { setCurrentSession(null); setSuggestions([]); } }, [currentSessionId, loadSession]);
+  
+  // Auto-load CVs when panel opens
+  useEffect(() => { 
+    if (showCVPanel) { 
+      getCVList(mode).then(data => setAllCVs(data.cvs || [])).catch(() => {}); 
+    } 
+  }, [showCVPanel, mode]);
 
   const handleNewChat = async () => {
     const name = language === 'es' ? 'Nuevo chat' : 'New chat';
@@ -330,73 +337,143 @@ function App() {
         )}
       </div>
 
-      {/* CV Panel Modal */}
+      {/* CV Panel Modal - Improved Card UI */}
       {showCVPanel && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-2xl max-h-[80vh] flex flex-col shadow-2xl">
-            <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{language === 'es' ? 'Gestión de CVs' : 'CV Management'}</h2>
-              <button onClick={() => setShowCVPanel(false)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"><X className="w-5 h-5" /></button>
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setShowCVPanel(false)}>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-3xl max-h-[85vh] flex flex-col shadow-2xl" onClick={e => e.stopPropagation()}>
+            {/* Header */}
+            <div className="p-5 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+              <div>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white">{language === 'es' ? 'Gestión de CVs' : 'CV Management'}</h2>
+                <p className="text-sm text-gray-500 mt-1">
+                  {mode === 'cloud' ? '☁️ Supabase' : '💾 Local'} · {allCVs.length} CVs {language === 'es' ? 'en base de datos' : 'in database'}
+                </p>
+              </div>
+              <button onClick={() => setShowCVPanel(false)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-colors"><X className="w-6 h-6" /></button>
             </div>
-            <div className="flex-1 overflow-y-auto p-4">
+            
+            <div className="flex-1 overflow-y-auto p-5 space-y-6">
+              {/* Session CVs Section */}
               {currentSession && (
-                <div className="mb-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">{language === 'es' ? `CVs en "${currentSession.name}"` : `CVs in "${currentSession.name}"`} ({currentSession.cvs?.length || 0})</h3>
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+                        <MessageSquare className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900 dark:text-white">{currentSession.name}</h3>
+                        <p className="text-xs text-gray-500">{currentSession.cvs?.length || 0} CVs {language === 'es' ? 'en este chat' : 'in this chat'}</p>
+                      </div>
+                    </div>
                     {currentSession.cvs?.length > 0 && (
-                      <button onClick={handleClearSessionCVs} className="text-xs px-2 py-1 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded">
-                        {language === 'es' ? 'Eliminar todos' : 'Delete all'}
+                      <button onClick={handleClearSessionCVs} className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-lg transition-colors">
+                        <Trash2 className="w-4 h-4" />
+                        {language === 'es' ? 'Vaciar chat' : 'Clear chat'}
                       </button>
                     )}
                   </div>
+                  
                   {currentSession.cvs?.length > 0 ? (
-                    <div className="space-y-2 max-h-48 overflow-y-auto">
+                    <div className="grid grid-cols-2 gap-3">
                       {currentSession.cvs.map(cv => (
-                        <div key={cv.id} className="flex items-center gap-3 p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <FileText className="w-4 h-4 text-red-500 flex-shrink-0" />
-                          <span className="flex-1 text-sm text-gray-700 dark:text-gray-300 truncate">{cv.filename}</span>
-                          <span className="text-xs text-gray-500">{cv.chunk_count}</span>
-                          <button onClick={() => handleRemoveCV(cv.id)} className="p-1 text-gray-400 hover:text-red-500 rounded"><Trash2 className="w-3.5 h-3.5" /></button>
+                        <div key={cv.id} className="group relative bg-white dark:bg-gray-800 rounded-xl p-3 shadow-sm hover:shadow-md transition-all border border-gray-200 dark:border-gray-700">
+                          <button 
+                            onClick={() => handleRemoveCV(cv.id)} 
+                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                          >
+                            <X className="w-3.5 h-3.5" />
+                          </button>
+                          <div className="flex items-start gap-3">
+                            <div className="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                              <FileText className="w-5 h-5 text-red-500" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium text-gray-900 dark:text-white truncate" title={cv.filename}>{cv.filename}</p>
+                              <p className="text-xs text-gray-500 mt-0.5">{cv.chunk_count} chunks</p>
+                            </div>
+                          </div>
                         </div>
                       ))}
                     </div>
-                  ) : <p className="text-sm text-gray-500">{language === 'es' ? 'Sin CVs en este chat' : 'No CVs in this chat'}</p>}
+                  ) : (
+                    <div className="text-center py-6">
+                      <Upload className="w-10 h-10 text-gray-300 mx-auto mb-2" />
+                      <p className="text-sm text-gray-500">{language === 'es' ? 'Sube CVs a este chat' : 'Upload CVs to this chat'}</p>
+                    </div>
+                  )}
                 </div>
               )}
               
-              <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {language === 'es' ? 'Base de datos' : 'Database'} 
-                    <span className={`ml-2 px-2 py-0.5 rounded text-xs ${mode === 'cloud' ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-600' : 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600'}`}>
-                      {mode === 'cloud' ? 'Supabase' : 'Local'}
-                    </span>
-                  </h3>
+              {/* Database Section */}
+              <div className="bg-gradient-to-br from-gray-50 to-slate-50 dark:from-gray-900/50 dark:to-slate-900/50 rounded-xl p-4">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${mode === 'cloud' ? 'bg-purple-500' : 'bg-emerald-500'}`}>
+                      {mode === 'cloud' ? <Cloud className="w-4 h-4 text-white" /> : <Database className="w-4 h-4 text-white" />}
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">{mode === 'cloud' ? 'Supabase' : 'Local'} Database</h3>
+                      <p className="text-xs text-gray-500">{allCVs.length} CVs {language === 'es' ? 'totales' : 'total'}</p>
+                    </div>
+                  </div>
                   <div className="flex gap-2">
-                    <button onClick={async () => { const data = await getCVList(mode); setAllCVs(data.cvs || []); }} className="text-xs px-2 py-1 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded">
+                    <button onClick={async () => { const data = await getCVList(mode); setAllCVs(data.cvs || []); }} className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-colors">
+                      <Loader className="w-4 h-4" />
                       {language === 'es' ? 'Recargar' : 'Reload'}
                     </button>
-                    <button onClick={handleDeleteAllCVsFromDB} className="text-xs px-2 py-1 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded">
-                      {language === 'es' ? 'Vaciar DB' : 'Clear DB'}
-                    </button>
+                    {allCVs.length > 0 && (
+                      <button onClick={handleDeleteAllCVsFromDB} className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-lg transition-colors">
+                        <Trash2 className="w-4 h-4" />
+                        {language === 'es' ? 'Vaciar DB' : 'Clear DB'}
+                      </button>
+                    )}
                   </div>
                 </div>
+                
                 {allCVs.length > 0 ? (
-                  <div className="space-y-2 max-h-48 overflow-y-auto">
+                  <div className="grid grid-cols-2 gap-3 max-h-64 overflow-y-auto">
                     {allCVs.map(cv => (
-                      <div key={cv.id} className="flex items-center gap-3 p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                        <FileText className="w-4 h-4 text-red-500 flex-shrink-0" />
-                        <span className="flex-1 text-sm text-gray-700 dark:text-gray-300 truncate">{cv.filename}</span>
-                        <span className="text-xs text-gray-500">{cv.chunk_count} chunks</span>
+                      <div key={cv.id} className="bg-white dark:bg-gray-800 rounded-xl p-3 shadow-sm border border-gray-200 dark:border-gray-700">
+                        <div className="flex items-start gap-3">
+                          <div className="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <FileText className="w-5 h-5 text-red-500" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-gray-900 dark:text-white truncate" title={cv.filename}>{cv.filename}</p>
+                            <p className="text-xs text-gray-500 mt-0.5">{cv.chunk_count} chunks</p>
+                          </div>
+                        </div>
                       </div>
                     ))}
                   </div>
-                ) : <p className="text-sm text-gray-500">{language === 'es' ? 'Haz clic en "Recargar"' : 'Click "Reload"'}</p>}
+                ) : (
+                  <div className="text-center py-8">
+                    <Database className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                    <p className="text-gray-500">{language === 'es' ? 'Base de datos vacía' : 'Database is empty'}</p>
+                    <p className="text-sm text-gray-400 mt-1">{language === 'es' ? 'Los CVs que subas aparecerán aquí' : 'CVs you upload will appear here'}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            {/* Footer with quick actions */}
+            <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 rounded-b-2xl">
+              <div className="flex items-center justify-between">
+                <p className="text-xs text-gray-500">
+                  {language === 'es' ? 'Pasa el ratón sobre un CV para eliminarlo' : 'Hover over a CV to delete it'}
+                </p>
+                <label className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-xl cursor-pointer transition-colors">
+                  <Upload className="w-4 h-4" />
+                  <span className="text-sm font-medium">{language === 'es' ? 'Subir CVs' : 'Upload CVs'}</span>
+                  <input type="file" multiple accept=".pdf" onChange={handleUpload} className="hidden" />
+                </label>
               </div>
             </div>
           </div>
         </div>
       )}
+
 
       {/* Loading Overlay for Mode Switch */}
       {isLoadingMode && (
