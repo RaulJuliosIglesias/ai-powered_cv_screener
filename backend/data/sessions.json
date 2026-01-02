@@ -317,10 +317,68 @@
           "content": "dame una tabla con la edadesde de los perfiles",
           "sources": [],
           "timestamp": "2026-01-02T17:52:03.469506"
+        },
+        {
+          "id": "7b492637-e0ba-490c-a51b-836cbf179b75",
+          "role": "assistant",
+          "content": "## Candidate Analysis\n\n### Unique Candidates Identified\nThe following unique candidates were identified from the provided CV excerpts:\n\n1. **James Wilson**\n2. **Olivia Davis**\n3. **Jessica Davis**\n4. **John Smith**\n5. **Michael Brown**\n6. **Charlotte Brown**\n7. **David Wilson**\n8. **Emily Johnson**\n\n### Age Information\nUnfortunately, the provided CV excerpts do not contain any information regarding the ages of the candidates. Therefore, we cannot provide a table with the ages of the profiles.\n\n### Summary of Candidates\nHere is a summary of the candidates based on their experience:\n\n| Candidate Name      | Current Position                     | Previous Position               | Years of Experience |\n|---------------------|-------------------------------------|---------------------------------|---------------------|\n| **James Wilson**    | Senior Full Stack Developer         | Full Stack Developer            | 5 years             |\n| **Olivia Davis**    | Senior Full Stack Developer         | Full Stack Developer            | 5 years             |\n| **Jessica Davis**   | Senior Software Developer           | Software Developer              | 5 years             |\n| **John Smith**      | Senior Software Developer           | Software Developer              | 5 years             |\n| **Michael Brown**   | Senior Software Developer           | Software Developer              | 5 years             |\n| **Charlotte Brown** | Senior Software Developer           | Software Developer              | 5 years             |\n| **David Wilson**    | Senior Software Developer           | Software Developer              | 5 years             |\n| **Emily Johnson**   | Senior Software Developer           | Software Developer              | 5 years             |\n\n### Key Findings\n- All candidates have a **current position** as a Senior Software Developer or Senior Full Stack Developer.\n- Each candidate has **5 years of experience** in their respective roles, indicating a strong background in software development.\n- **Age information** is not available for any candidate.\n\n### Conclusion\nWhile we have a comprehensive overview of the candidates' professional experience, the lack of age data prevents us from fulfilling the user's request for a table with ages. \n\n**Sources:**\n- CV #1, CV #2, CV #3, CV #4, CV #5, CV #6, CV #7, CV #8, CV #9, CV #10, CV #11, CV #12, CV #13, CV #14, CV #15, CV #16, CV #17, CV #18, CV #19, CV #20.",
+          "sources": [
+            {
+              "cv_id": "cv_f17e7779",
+              "filename": "CV_James_Wilson_f65a824a_20260102_141056.pdf",
+              "relevance": 0.501
+            },
+            {
+              "cv_id": "cv_29c0d60d",
+              "filename": "CV_James_Wilson_3db222f6_20260102_141055.pdf",
+              "relevance": 0.493
+            },
+            {
+              "cv_id": "cv_f1e04d47",
+              "filename": "CV_Olivia_Davis_a4476fe5_20260102_141057.pdf",
+              "relevance": 0.488
+            },
+            {
+              "cv_id": "cv_ae3ba1eb",
+              "filename": "CV_Jessica_Davis_122c0c7d_20260102_141822.pdf",
+              "relevance": 0.486
+            },
+            {
+              "cv_id": "cv_d8b1f275",
+              "filename": "CV_John_Smith_7ba9bd53_20260102_141822.pdf",
+              "relevance": 0.46
+            },
+            {
+              "cv_id": "cv_16ff4c85",
+              "filename": "CV_Michael_Brown_91c72a4e_20260102_142306.pdf",
+              "relevance": 0.46
+            },
+            {
+              "cv_id": "cv_76fd444c",
+              "filename": "CV_Michael_Brown_f110849f_20260102_142306.pdf",
+              "relevance": 0.46
+            },
+            {
+              "cv_id": "cv_f7d00515",
+              "filename": "CV_Charlotte_Brown_d2aa1975_20260102_141057.pdf",
+              "relevance": 0.456
+            },
+            {
+              "cv_id": "cv_7f1f7503",
+              "filename": "CV_David_Wilson_553eb84a_20260102_142306.pdf",
+              "relevance": 0.456
+            },
+            {
+              "cv_id": "cv_9e0b4aa2",
+              "filename": "CV_Emily_Johnson_6ca477b5_20260102_141821.pdf",
+              "relevance": 0.456
+            }
+          ],
+          "timestamp": "2026-01-02T17:52:18.762168"
         }
       ],
       "created_at": "2026-01-02T17:24:10.759202",
-      "updated_at": "2026-01-02T17:52:03.469506"
+      "updated_at": "2026-01-02T17:52:18.762168"
     }
   ]
 }
