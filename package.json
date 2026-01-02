@@ -14,5 +14,8 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "remark-gfm": "^4.0.1"
   }
 }

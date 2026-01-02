@@ -230,10 +230,90 @@
             }
           ],
           "timestamp": "2026-01-02T17:28:59.720124"
+        },
+        {
+          "id": "b6b83904-b444-4cd5-a680-41dea7d098f6",
+          "role": "user",
+          "content": "dame una tabla con todos los eprfiels para experiencia de IA",
+          "sources": [],
+          "timestamp": "2026-01-02T17:35:54.657514"
+        },
+        {
+          "id": "2f3dd29d-65a6-4ee1-8ca9-19c657580c11",
+          "role": "assistant",
+          "content": "## Candidate Analysis for AI Experience\n\nBased on the provided CV data, here is a comprehensive analysis of the candidates, focusing on their experience in software development, particularly in relation to AI. The candidates are listed along with their relevant experience.\n\n### Unique Candidates Identified\n\n| Candidate Name         | Role/Position                     | Company                | Years Active         | AI Experience          |\n|------------------------|-----------------------------------|-----------------------|----------------------|------------------------|\n| **Emily Johnson**      | Senior Software Developer         | Tech Solutions Inc    | 2021 - Present       | Not specified          |\n| **John Smith**         | Senior Software Developer         | Innovation Labs       | 2021 - Present       | Not specified          |\n| **Michael Brown**      | Senior Software Developer         | Innovation Labs       | 2021 - Present       | Not specified          |\n| **James Wilson**       | Senior Full Stack Developer       | Innovation Labs       | 2021 - Present       | Not specified          |\n| **Olivia Davis**       | Senior Full Stack Developer       | Tech Solutions Inc    | 2021 - Present       | Not specified          |\n| **Jessica Davis**      | Senior Software Developer         | Global Systems Corp   | 2021 - Present       | Not specified          |\n| **David Wilson**       | Senior Software Developer         | Tech Solutions Inc    | 2021 - Present       | Not specified          |\n| **Charlotte Brown**    | Senior Software Developer         | Innovation Labs       | 2021 - Present       | Not specified          |\n| **Sarah Williams**     | Senior Any                       | Innovation Labs       | 2021 - Present       | Not specified          |\n| **John Smith**         | Senior Any                       | Global Systems Corp   | 2021 - Present       | Not specified          |\n\n### Detailed Breakdown of Candidates\n\n- **Emily Johnson**\n  - **Role**: Senior Software Developer\n  - **Company**: Tech Solutions Inc\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **John Smith**\n  - **Role**: Senior Software Developer\n  - **Company**: Innovation Labs\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **Michael Brown**\n  - **Role**: Senior Software Developer\n  - **Company**: Innovation Labs\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **James Wilson**\n  - **Role**: Senior Full Stack Developer\n  - **Company**: Innovation Labs\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **Olivia Davis**\n  - **Role**: Senior Full Stack Developer\n  - **Company**: Tech Solutions Inc\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **Jessica Davis**\n  - **Role**: Senior Software Developer\n  - **Company**: Global Systems Corp\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **David Wilson**\n  - **Role**: Senior Software Developer\n  - **Company**: Tech Solutions Inc\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **Charlotte Brown**\n  - **Role**: Senior Software Developer\n  - **Company**: Innovation Labs\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **Sarah Williams**\n  - **Role**: Senior Any\n  - **Company**: Innovation Labs\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **John Smith** (duplicate entry)\n  - **Role**: Senior Any\n  - **Company**: Global Systems Corp\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n### Summary of Findings\n\n- **All candidates** have experience as software developers or in related roles, primarily in senior positions.\n- **AI Experience** is **not specified** for any candidate, indicating a potential gap in relevant AI expertise.\n- The candidates have a consistent tenure of **2021 - Present** in their respective roles, suggesting they are currently active in the industry.\n\n### Conclusion\n\nThe analysis reveals that while all candidates have significant experience in software development, there is a notable absence of specific information regarding their experience in AI. This could be a critical factor for roles requiring AI expertise.\n\n### Sources\n- CV excerpts from candidates: Emily Johnson, John Smith, Michael Brown, James Wilson, Olivia Davis, Jessica Davis, David Wilson, Charlotte Brown, Sarah Williams.",
+          "sources": [
+            {
+              "cv_id": "cv_9e0b4aa2",
+              "filename": "CV_Emily_Johnson_6ca477b5_20260102_141821.pdf",
+              "relevance": 0.529
+            },
+            {
+              "cv_id": "cv_d8b1f275",
+              "filename": "CV_John_Smith_7ba9bd53_20260102_141822.pdf",
+              "relevance": 0.528
+            },
+            {
+              "cv_id": "cv_16ff4c85",
+              "filename": "CV_Michael_Brown_91c72a4e_20260102_142306.pdf",
+              "relevance": 0.528
+            },
+            {
+              "cv_id": "cv_76fd444c",
+              "filename": "CV_Michael_Brown_f110849f_20260102_142306.pdf",
+              "relevance": 0.528
+            },
+            {
+              "cv_id": "cv_29c0d60d",
+              "filename": "CV_James_Wilson_3db222f6_20260102_141055.pdf",
+              "relevance": 0.528
+            },
+            {
+              "cv_id": "cv_f17e7779",
+              "filename": "CV_James_Wilson_f65a824a_20260102_141056.pdf",
+              "relevance": 0.527
+            },
+            {
+              "cv_id": "cv_f1e04d47",
+              "filename": "CV_Olivia_Davis_a4476fe5_20260102_141057.pdf",
+              "relevance": 0.525
+            },
+            {
+              "cv_id": "cv_ae3ba1eb",
+              "filename": "CV_Jessica_Davis_122c0c7d_20260102_141822.pdf",
+              "relevance": 0.523
+            },
+            {
+              "cv_id": "cv_7f1f7503",
+              "filename": "CV_David_Wilson_553eb84a_20260102_142306.pdf",
+              "relevance": 0.518
+            },
+            {
+              "cv_id": "cv_7464f640",
+              "filename": "CV_Emily_Johnson_19bf56e4_20260102_144805.pdf",
+              "relevance": 0.518
+            },
+            {
+              "cv_id": "cv_ff5f58b0",
+              "filename": "CV_Sarah_Williams_5022c7fb_20260102_144806.pdf",
+              "relevance": 0.514
+            },
+            {
+              "cv_id": "cv_4ab0844a",
+              "filename": "CV_John_Smith_a3ace876_20260102_144805.pdf",
+              "relevance": 0.511
+            },
+            {
+              "cv_id": "cv_f7d00515",
+              "filename": "CV_Charlotte_Brown_d2aa1975_20260102_141057.pdf",
+              "relevance": 0.509
+            }
+          ],
+          "timestamp": "2026-01-02T17:36:14.271984"
         }
       ],
       "created_at": "2026-01-02T17:24:10.759202",
-      "updated_at": "2026-01-02T17:28:59.720124"
+      "updated_at": "2026-01-02T17:36:14.271984"
     }
   ]
 }

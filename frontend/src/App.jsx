@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight } from 'lucide-react';
+import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import useMode from './hooks/useMode';
 import useTheme from './hooks/useTheme';
 import { useLanguage } from './contexts/LanguageContext';
@@ -186,7 +187,24 @@ function App() {
                   <div className={`flex gap-3 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${msg.role === 'user' ? 'bg-blue-500' : 'bg-gradient-to-br from-blue-500 to-purple-600'}`}>{msg.role === 'user' ? <User className="w-4 h-4 text-white" /> : <Sparkles className="w-4 h-4 text-white" />}</div>
                     <div className={`p-3 rounded-xl ${msg.role === 'user' ? 'bg-blue-500 text-white rounded-tr-sm' : 'bg-gray-100 dark:bg-gray-700 rounded-tl-sm'}`}>
-                      <div className={`prose prose-sm max-w-none ${msg.role === 'user' ? 'prose-invert' : 'dark:prose-invert'}`}><ReactMarkdown>{msg.content}</ReactMarkdown></div>
+                      <div className={`prose prose-sm max-w-none ${msg.role === 'user' ? 'prose-invert' : 'dark:prose-invert'}`}>
+                        <ReactMarkdown 
+                          remarkPlugins={[remarkGfm]}
+                          components={{
+                            table: ({node, ...props}) => (
+                              <div className="overflow-x-auto my-4">
+                                <table className="min-w-full border-collapse border border-gray-300 dark:border-gray-600 text-sm" {...props} />
+                              </div>
+                            ),
+                            thead: ({node, ...props}) => <thead className="bg-gray-200 dark:bg-gray-600" {...props} />,
+                            th: ({node, ...props}) => <th className="border border-gray-300 dark:border-gray-600 px-3 py-2 text-left font-semibold" {...props} />,
+                            td: ({node, ...props}) => <td className="border border-gray-300 dark:border-gray-600 px-3 py-2" {...props} />,
+                            tr: ({node, ...props}) => <tr className="even:bg-gray-50 dark:even:bg-gray-700/50" {...props} />,
+                          }}
+                        >
+                          {msg.content}
+                        </ReactMarkdown>
+                      </div>
                       {msg.sources?.length > 0 && <div className="mt-2 pt-2 border-t border-gray-200 dark:border-gray-600 flex flex-wrap gap-1">{msg.sources.map((src, i) => <SourceBadge key={i} filename={src.filename} score={src.relevance} />)}</div>}
                     </div>
                   </div>
