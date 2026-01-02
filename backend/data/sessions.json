@@ -1,124 +1,8 @@
 {
   "sessions": [
     {
-      "id": "2f42ce16-5064-48da-bad2-d82c742e8812",
-      "name": "TEST 20 CVS",
-      "description": "",
-      "cvs": [
-        {
-          "id": "cv_418963f5",
-          "filename": "CV_Charlotte_Brown_d2aa1975_20260102_141057.pdf",
-          "chunk_count": 8,
-          "uploaded_at": "2026-01-02T17:07:48.885206"
-        },
-        {
-          "id": "cv_ad46bede",
-          "filename": "CV_David_Wilson_553eb84a_20260102_142306.pdf",
-          "chunk_count": 6,
-          "uploaded_at": "2026-01-02T17:07:48.932654"
-        },
-        {
-          "id": "cv_2d425a9f",
-          "filename": "CV_Emily_Johnson_6ca477b5_20260102_141821.pdf",
-          "chunk_count": 6,
-          "uploaded_at": "2026-01-02T17:07:48.979401"
-        },
-        {
-          "id": "cv_89539dde",
-          "filename": "CV_Emily_Johnson_19bf56e4_20260102_144805.pdf",
-          "chunk_count": 7,
-          "uploaded_at": "2026-01-02T17:07:49.026241"
-        },
-        {
-          "id": "cv_6d41da0c",
-          "filename": "CV_James_Wilson_3db222f6_20260102_141055.pdf",
-          "chunk_count": 8,
-          "uploaded_at": "2026-01-02T17:07:49.078383"
-        },
-        {
-          "id": "cv_6dba819d",
-          "filename": "CV_James_Wilson_51587388_20260102_141055.pdf",
-          "chunk_count": 8,
-          "uploaded_at": "2026-01-02T17:07:49.131555"
-        },
-        {
-          "id": "cv_b974c7ee",
-          "filename": "CV_James_Wilson_f65a824a_20260102_141056.pdf",
-          "chunk_count": 8,
-          "uploaded_at": "2026-01-02T17:07:49.186594"
-        },
-        {
-          "id": "cv_b9983788",
-          "filename": "CV_Jessica_Davis_122c0c7d_20260102_141822.pdf",
-          "chunk_count": 6,
-          "uploaded_at": "2026-01-02T17:07:49.241175"
-        },
-        {
-          "id": "cv_c544b79d",
-          "filename": "CV_John_Smith_7ba9bd53_20260102_141822.pdf",
-          "chunk_count": 6,
-          "uploaded_at": "2026-01-02T17:07:49.298175"
-        },
-        {
-          "id": "cv_80f97719",
-          "filename": "CV_John_Smith_a3ace876_20260102_144805.pdf",
-          "chunk_count": 7,
-          "uploaded_at": "2026-01-02T17:07:49.354683"
-        },
-        {
-          "id": "cv_6842e5a7",
-          "filename": "CV_Michael_Brown_91c72a4e_20260102_142306.pdf",
-          "chunk_count": 6,
-          "uploaded_at": "2026-01-02T17:07:49.416744"
-        },
-        {
-          "id": "cv_4497a51a",
-          "filename": "CV_Michael_Brown_f110849f_20260102_142306.pdf",
-          "chunk_count": 6,
-          "uploaded_at": "2026-01-02T17:07:49.477938"
-        },
-        {
-          "id": "cv_eb47675c",
-          "filename": "CV_Olivia_Davis_a4476fe5_20260102_141057.pdf",
-          "chunk_count": 8,
-          "uploaded_at": "2026-01-02T17:07:49.541115"
-        },
-        {
-          "id": "cv_e820ea58",
-          "filename": "CV_Sarah_Williams_5022c7fb_20260102_144806.pdf",
-          "chunk_count": 7,
-          "uploaded_at": "2026-01-02T17:07:49.603254"
-        }
-      ],
-      "messages": [
-        {
-          "id": "834fb9f7-1c00-4b10-b4d9-edaf48343c9c",
-          "role": "user",
-          "content": "dame resumen",
-          "sources": [],
-          "timestamp": "2026-01-02T17:07:59.505656"
-        },
-        {
-          "id": "76b12ea1-c446-44bf-8043-5f5e590d38cd",
-          "role": "user",
-          "content": "dime el mas experto",
-          "sources": [],
-          "timestamp": "2026-01-02T17:15:57.296859"
-        },
-        {
-          "id": "e0aa7d50-e7c1-4789-90ac-3622d922e66a",
-          "role": "user",
-          "content": "dame el mas experot en ia",
-          "sources": [],
-          "timestamp": "2026-01-02T17:22:19.953042"
-        }
-      ],
-      "created_at": "2026-01-02T17:04:27.138979",
-      "updated_at": "2026-01-02T17:22:19.953042"
-    },
-    {
       "id": "71fb9f05-5436-4ce4-a09f-aa9fed938e6d",
-      "name": "New chat",
+      "name": "test1",
       "description": "",
       "cvs": [
         {
@@ -206,9 +90,90 @@
           "uploaded_at": "2026-01-02T17:24:18.507725"
         }
       ],
-      "messages": [],
+      "messages": [
+        {
+          "id": "734bc228-6117-48ce-abaf-f0cd08963157",
+          "role": "user",
+          "content": "Compare the experience levels of all 14 candidates",
+          "sources": [],
+          "timestamp": "2026-01-02T17:24:50.797649"
+        },
+        {
+          "id": "a67754a8-52e7-40a2-9913-daf166d12b0c",
+          "role": "assistant",
+          "content": "I don't have information about that in the uploaded CVs. The excerpts provided only include details for five candidates: John Smith, James Wilson, Olivia Davis, and Jessica Davis. \n\nHere is a comparison of their experience levels based on the available information:\n\n1. **John Smith**\n   - **Position**: Senior Any\n   - **Company**: Global Systems Corp\n   - **Years of Experience**: 2021 - Present (2 years)\n   - **Previous Position**: Any at Enterprise Tech (2018 - 2021, 3 years)\n   - **Total Experience**: 5 years\n\n2. **James Wilson**\n   - **Position**: Senior Full Stack Developer\n   - **Company**: Innovation Labs\n   - **Years of Experience**: 2021 - Present (2 years)\n   - **Previous Position**: Full Stack Developer at Cloud Services Ltd (2018 - 2021, 3 years)\n   - **Total Experience**: 5 years\n\n3. **James Wilson (Alternate CV)**\n   - **Position**: Senior Full Stack Developer\n   - **Company**: Innovation Labs\n   - **Years of Experience**: 2021 - Present (2 years)\n   - **Previous Position**: Full Stack Developer at StartUp Co (2018 - 2021, 3 years)\n   - **Total Experience**: 5 years\n\n4. **Olivia Davis**\n   - **Position**: Senior Full Stack Developer\n   - **Company**: Tech Solutions Inc\n   - **Years of Experience**: 2021 - Present (2 years)\n   - **Previous Position**: Full Stack Developer at StartUp Co (2018 - 2021, 3 years)\n   - **Total Experience**: 5 years\n\n5. **Jessica Davis**\n   - **Position**: Senior Software Developer\n   - **Company**: Global Systems Corp\n   - **Years of Experience**: 2021 - Present (2 years)\n   - **Previous Position**: Software Developer at Cloud Services Ltd (2018 - 2021, 3 years)\n   - **Total Experience**: 5 years\n\nAll candidates have a total of 5 years of experience, with 2 years in their current senior roles and 3 years in their previous positions. \n\nCited sources: CV_John_Smith_a3ace876_20260102_144805.pdf, CV_James_Wilson_f65a824a_20260102_141056.pdf, CV_James_Wilson_3db222f6_20260102_141055.pdf, CV_Olivia_Davis_a4476fe5_20260102_141057.pdf, CV_Jessica_Davis_122c0c7d_20260102_141822.pdf.",
+          "sources": [
+            {
+              "cv_id": "cv_4ab0844a",
+              "filename": "CV_John_Smith_a3ace876_20260102_144805.pdf",
+              "relevance": 0.502
+            },
+            {
+              "cv_id": "cv_f17e7779",
+              "filename": "CV_James_Wilson_f65a824a_20260102_141056.pdf",
+              "relevance": 0.463
+            },
+            {
+              "cv_id": "cv_29c0d60d",
+              "filename": "CV_James_Wilson_3db222f6_20260102_141055.pdf",
+              "relevance": 0.461
+            },
+            {
+              "cv_id": "cv_f1e04d47",
+              "filename": "CV_Olivia_Davis_a4476fe5_20260102_141057.pdf",
+              "relevance": 0.459
+            },
+            {
+              "cv_id": "cv_ae3ba1eb",
+              "filename": "CV_Jessica_Davis_122c0c7d_20260102_141822.pdf",
+              "relevance": 0.452
+            }
+          ],
+          "timestamp": "2026-01-02T17:25:03.558856"
+        },
+        {
+          "id": "c547ba92-360c-4587-b1b4-acb34fe1895b",
+          "role": "user",
+          "content": "dame una tabla con los mejroes eprfiels apra lead tech AI developer",
+          "sources": [],
+          "timestamp": "2026-01-02T17:25:55.989890"
+        },
+        {
+          "id": "a778cb52-e45a-457b-a0f3-a3cac057e1f9",
+          "role": "assistant",
+          "content": "I don't have information about specific **AI development** skills or experience in the uploaded CVs. All provided excerpts list the candidates as \"Senior Software Developers\" with general experience, but none mention \"AI,\" \"Artificial Intelligence,\" or \"Machine Learning.\"\n\nHowever, based on their current roles as **Senior Software Developers** (which involves \"leading initiatives\"), here are the candidates who currently hold senior leadership-level positions:\n\n| Candidate Name | Current Role (2021 - Present) | Previous Role (2018 - 2021) | Company (Current) |\n| :--- | :--- | :--- | :--- |\n| **David Wilson** | Senior Software Developer | Software Developer | Tech Solutions Inc |\n| **Emily Johnson** | Senior Software Developer | Software Developer | Tech Solutions Inc |\n| **John Smith** | Senior Software Developer | Software Developer | Innovation Labs |\n| **Michael Brown** | Senior Software Developer | Software Developer | Innovation Labs |\n\n### Detailed Candidate Information:\n\n*   **David Wilson**: Senior Software Developer at Tech Solutions Inc (2021-Present). Previously a Software Developer at Cloud Services Ltd (2018-2021).\n*   **Emily Johnson**: Senior Software Developer at Tech Solutions Inc (2021-Present). Previously a Software Developer at StartUp Co (2018-2021).\n*   **John Smith**: Senior Software Developer at Innovation Labs (2021-Present). Previously a Software Developer at Enterprise Tech (2018-2021).\n*   **Michael Brown**: Senior Software Developer at Innovation Labs (2021-Present). Previously a Software Developer at Enterprise Tech (2018-2021).\n\n**Sources:**\n*   CV_David_Wilson_553eb84a_20260102_142306.pdf\n*   CV_Emily_Johnson_6ca477b5_20260102_141821.pdf\n*   CV_John_Smith_7ba9bd53_20260102_141822.pdf\n*   CV_Michael_Brown_91c72a4e_20260102_142306.pdf\n*   CV_Michael_Brown_f110849f_20260102_142306.pdf",
+          "sources": [
+            {
+              "cv_id": "cv_7f1f7503",
+              "filename": "CV_David_Wilson_553eb84a_20260102_142306.pdf",
+              "relevance": 0.587
+            },
+            {
+              "cv_id": "cv_9e0b4aa2",
+              "filename": "CV_Emily_Johnson_6ca477b5_20260102_141821.pdf",
+              "relevance": 0.586
+            },
+            {
+              "cv_id": "cv_d8b1f275",
+              "filename": "CV_John_Smith_7ba9bd53_20260102_141822.pdf",
+              "relevance": 0.572
+            },
+            {
+              "cv_id": "cv_16ff4c85",
+              "filename": "CV_Michael_Brown_91c72a4e_20260102_142306.pdf",
+              "relevance": 0.572
+            },
+            {
+              "cv_id": "cv_76fd444c",
+              "filename": "CV_Michael_Brown_f110849f_20260102_142306.pdf",
+              "relevance": 0.572
+            }
+          ],
+          "timestamp": "2026-01-02T17:26:00.188749"
+        }
+      ],
       "created_at": "2026-01-02T17:24:10.759202",
-      "updated_at": "2026-01-02T17:24:18.507725"
+      "updated_at": "2026-01-02T17:26:00.188749"
     }
   ]
 }
