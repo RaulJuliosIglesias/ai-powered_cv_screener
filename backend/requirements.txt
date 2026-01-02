@@ -20,10 +20,8 @@ chromadb==0.4.22
 # Local Mode - LLM (Google Gemini)
 google-generativeai==0.3.2
 
-# Cloud Mode - API Client
-httpx==0.26.0
-
-# Cloud Mode - Supabase
+# Cloud Mode - API Client & Supabase
+httpx>=0.24,<0.26
 supabase==2.3.4
 
 # Utilities

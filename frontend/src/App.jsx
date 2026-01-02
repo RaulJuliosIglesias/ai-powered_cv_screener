@@ -9,6 +9,7 @@ import MetricsBar from './components/MetricsBar';
 import { useUpload } from './hooks/useUpload';
 import { useChat } from './hooks/useChat';
 import useMode from './hooks/useMode';
+import useTheme from './hooks/useTheme';
 import { getCVList } from './services/api';
 
 const APP_STATES = {
@@ -24,8 +25,9 @@ function App() {
   const [isLoadingCvs, setIsLoadingCvs] = useState(true);
   const [showUploadModal, setShowUploadModal] = useState(false);
   
-  // Mode management
+  // Mode and theme management
   const { mode, setMode } = useMode();
+  const { theme, toggleTheme } = useTheme();
 
   const loadCVs = useCallback(async () => {
     try {
@@ -148,11 +150,13 @@ function App() {
     <Layout
       showAddButton={appState === APP_STATES.READY && !showUploadModal}
       onAddClick={handleAddClick}
+      theme={theme}
+      onThemeToggle={toggleTheme}
     >
-      <div className="flex flex-col h-[calc(100vh-73px)]">
+      <div className="flex flex-col h-[calc(100vh-81px)]">
         {/* Mode Switch and Metrics Bar */}
-        <div className="flex-shrink-0 border-b border-gray-200">
-          <div className="px-4 py-2">
+        <div className="flex-shrink-0 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+          <div className="px-4 py-3">
             <ModeSwitch
               mode={mode}
               onModeChange={handleModeChange}

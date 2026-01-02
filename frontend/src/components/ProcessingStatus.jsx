@@ -1,74 +1,157 @@
-import { CheckCircle, Loader2, Circle, AlertCircle } from 'lucide-react';
+import React from 'react';
+import { CheckCircle, XCircle, Loader, FileText, Cpu, Database, Sparkles } from 'lucide-react';
 
-const ProcessingStatus = ({ status, onCancel }) => {
-  if (!status) return null;
+const PROCESSING_STEPS = [
+  { id: 'upload', label: 'Uploading files', icon: FileText },
+  { id: 'extract', label: 'Extracting text from PDFs', icon: FileText },
+  { id: 'chunk', label: 'Chunking content', icon: Cpu },
+  { id: 'embed', label: 'Generating embeddings', icon: Sparkles },
+  { id: 'store', label: 'Storing in vector database', icon: Database },
+];
 
-  const { total_files, processed_files, progress_percent, files, status: jobStatus } = status;
+export default function ProcessingStatus({ status }) {
+  if (!status) {
+    return (
+      <div className="flex items-center justify-center h-full bg-gray-50 dark:bg-gray-900">
+        <div className="text-center p-8">
+          <div className="relative">
+            <div className="w-16 h-16 border-4 border-blue-200 dark:border-blue-800 rounded-full animate-pulse mx-auto" />
+            <Loader className="w-8 h-8 animate-spin text-blue-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 mt-4 text-lg">Iniciando procesamiento...</p>
+          <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">Preparando archivos para análisis</p>
+        </div>
+      </div>
+    );
+  }
 
-  const getStatusIcon = (fileStatus) => {
-    switch (fileStatus) {
-      case 'completed':
-        return <CheckCircle className="w-4 h-4 text-green-500" />;
-      case 'processing':
-        return <Loader2 className="w-4 h-4 text-primary-500 animate-spin" />;
-      case 'failed':
-        return <AlertCircle className="w-4 h-4 text-red-500" />;
-      default:
-        return <Circle className="w-4 h-4 text-gray-300" />;
-    }
-  };
+  const { total_files, processed_files, errors, status: jobStatus } = status;
+  const progress = total_files > 0 ? (processed_files / total_files) * 100 : 0;
+  const isComplete = jobStatus === 'completed' || jobStatus === 'completed_with_errors';
+  const currentStep = Math.min(Math.floor((progress / 100) * PROCESSING_STEPS.length), PROCESSING_STEPS.length - 1);
 
   return (
-    <div className="max-w-2xl mx-auto p-8">
-      <div className="bg-white rounded-xl border border-gray-200 p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">
-          {jobStatus === 'completed' ? 'Processing Complete' : 'Processing CVs...'}
-        </h2>
-
-        <div className="mb-6">
-          <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
-            <span>{processed_files}/{total_files} CVs indexed</span>
-            <span>{Math.round(progress_percent)}%</span>
-          </div>
-          <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
-            <div
-              className={`h-full transition-all duration-300 ${
-                jobStatus === 'failed' ? 'bg-red-500' : 'bg-primary-600'
-              }`}
-              style={{ width: `${progress_percent}%` }}
-            />
-          </div>
-        </div>
-
-        <div className="space-y-2 max-h-64 overflow-y-auto">
-          {files?.map((file, index) => (
-            <div
-              key={index}
-              className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50"
-            >
-              {getStatusIcon(file.status)}
-              <span className="text-sm text-gray-700 truncate flex-1">{file.filename}</span>
-              {file.error && (
-                <span className="text-xs text-red-500 truncate max-w-xs">{file.error}</span>
+    <div className="flex items-center justify-center h-full bg-gray-50 dark:bg-gray-900 p-4">
+      <div className="w-full max-w-lg">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
+          {/* Header */}
+          <div className="text-center mb-6">
+            <div className={`w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center ${
+              isComplete 
+                ? 'bg-green-100 dark:bg-green-900/30' 
+                : 'bg-blue-100 dark:bg-blue-900/30'
+            }`}>
+              {isComplete ? (
+                <CheckCircle className="w-8 h-8 text-green-500" />
+              ) : (
+                <Loader className="w-8 h-8 animate-spin text-blue-500" />
               )}
             </div>
-          ))}
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+              {isComplete ? '¡Procesamiento Completado!' : 'Procesando CVs...'}
+            </h3>
+            <p className="text-gray-500 dark:text-gray-400 mt-1">
+              {isComplete 
+                ? `${processed_files} archivo(s) procesado(s) correctamente`
+                : `Procesando ${processed_files} de ${total_files} archivos`
+              }
+            </p>
+          </div>
+
+          {/* Progress bar */}
+          <div className="mb-6">
+            <div className="flex justify-between text-sm mb-2">
+              <span className="text-gray-600 dark:text-gray-400">Progreso</span>
+              <span className="font-medium text-gray-900 dark:text-white">{Math.round(progress)}%</span>
+            </div>
+            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+              <div
+                className={`h-3 rounded-full transition-all duration-500 ${
+                  isComplete ? 'bg-green-500' : 'bg-blue-500'
+                }`}
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Processing steps */}
+          {!isComplete && (
+            <div className="space-y-3 mb-6">
+              {PROCESSING_STEPS.map((step, index) => {
+                const Icon = step.icon;
+                const isActive = index === currentStep;
+                const isCompleted = index < currentStep;
+                
+                return (
+                  <div 
+                    key={step.id}
+                    className={`flex items-center gap-3 p-3 rounded-lg transition-all ${
+                      isActive 
+                        ? 'bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800' 
+                        : isCompleted
+                          ? 'bg-green-50 dark:bg-green-900/20'
+                          : 'bg-gray-50 dark:bg-gray-800/50'
+                    }`}
+                  >
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                      isActive 
+                        ? 'bg-blue-500 text-white' 
+                        : isCompleted
+                          ? 'bg-green-500 text-white'
+                          : 'bg-gray-200 dark:bg-gray-700 text-gray-400'
+                    }`}>
+                      {isCompleted ? (
+                        <CheckCircle className="w-4 h-4" />
+                      ) : isActive ? (
+                        <Loader className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Icon className="w-4 h-4" />
+                      )}
+                    </div>
+                    <span className={`text-sm font-medium ${
+                      isActive 
+                        ? 'text-blue-700 dark:text-blue-300' 
+                        : isCompleted
+                          ? 'text-green-700 dark:text-green-300'
+                          : 'text-gray-400 dark:text-gray-500'
+                    }`}>
+                      {step.label}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* File count badge */}
+          <div className="flex items-center justify-center gap-4 text-sm">
+            <div className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full">
+              <FileText className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+              <span className="text-gray-700 dark:text-gray-300">
+                <span className="font-bold text-blue-600 dark:text-blue-400">{processed_files}</span>
+                <span className="mx-1">/</span>
+                <span>{total_files}</span>
+                <span className="ml-1">archivos</span>
+              </span>
+            </div>
+          </div>
+
+          {/* Errors */}
+          {errors && errors.length > 0 && (
+            <div className="mt-6 p-4 bg-red-50 dark:bg-red-900/20 rounded-xl border border-red-200 dark:border-red-800">
+              <div className="flex items-center gap-2 mb-2">
+                <XCircle className="w-5 h-5 text-red-500" />
+                <p className="font-medium text-red-800 dark:text-red-300">Errores encontrados:</p>
+              </div>
+              <ul className="text-sm text-red-700 dark:text-red-400 space-y-1 ml-7">
+                {errors.map((error, index) => (
+                  <li key={index}>• {error}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
-
-        {jobStatus === 'processing' && (
-          <p className="mt-4 text-sm text-gray-500 text-center">
-            Extracting text and creating embeddings...
-          </p>
-        )}
-
-        {jobStatus === 'completed' && (
-          <p className="mt-4 text-sm text-green-600 text-center font-medium">
-            All CVs have been processed successfully!
-          </p>
-        )}
       </div>
     </div>
   );
 };
-
-export default ProcessingStatus;

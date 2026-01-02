@@ -1,41 +1,44 @@
 import React from 'react';
-import { Monitor, Cloud } from 'lucide-react';
+import { Monitor, Cloud, Zap, Globe } from 'lucide-react';
 
 export default function ModeSwitch({ mode, onModeChange, disabled }) {
   return (
-    <div className="flex items-center gap-4 p-3 bg-gray-100 rounded-lg">
-      <span className="text-sm font-medium text-gray-700">Mode:</span>
-      
-      <div className="flex rounded-md shadow-sm">
+    <div className="flex items-center gap-4">
+      <div className="flex rounded-xl bg-gray-100 dark:bg-gray-800 p-1">
         <button
           onClick={() => onModeChange('local')}
           disabled={disabled}
-          className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-l-md border transition-colors ${
+          className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-all ${
             mode === 'local'
-              ? 'bg-blue-600 text-white border-blue-600'
-              : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+              ? 'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm'
+              : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
           } ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
         >
           <Monitor className="w-4 h-4" />
-          Local
+          <span>Local</span>
+          <Zap className="w-3 h-3 text-yellow-500" />
         </button>
         <button
           onClick={() => onModeChange('cloud')}
           disabled={disabled}
-          className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-r-md border-t border-b border-r transition-colors ${
+          className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-all ${
             mode === 'cloud'
-              ? 'bg-blue-600 text-white border-blue-600'
-              : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+              ? 'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm'
+              : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
           } ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
         >
           <Cloud className="w-4 h-4" />
-          Cloud
+          <span>Cloud</span>
+          <Globe className="w-3 h-3 text-green-500" />
         </button>
       </div>
       
-      <span className="text-xs text-gray-500">
-        {mode === 'local' ? 'ChromaDB + Gemini' : 'Supabase + OpenRouter'}
-      </span>
+      <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+        <span className="text-xs text-gray-400">Stack:</span>
+        <span className="text-xs font-medium text-gray-600 dark:text-gray-300">
+          {mode === 'local' ? 'ChromaDB + Gemini' : 'Supabase + OpenRouter'}
+        </span>
+      </div>
     </div>
   );
 }

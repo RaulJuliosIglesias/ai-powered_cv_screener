@@ -1,8 +1,8 @@
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { Upload, FileText, X, Loader2 } from 'lucide-react';
+import { Upload, X, FileText, AlertCircle, Cloud, Loader } from 'lucide-react';
 
-const UploadZone = ({
+export default function UploadZone({
   files,
   onFilesAdded,
   onFileRemove,
@@ -10,7 +10,7 @@ const UploadZone = ({
   isUploading,
   uploadProgress,
   error,
-}) => {
+}) {
   const onDrop = useCallback(
     (acceptedFiles) => {
       onFilesAdded(acceptedFiles);
@@ -23,107 +23,153 @@ const UploadZone = ({
     accept: {
       'application/pdf': ['.pdf'],
     },
-    maxSize: 10 * 1024 * 1024,
     disabled: isUploading,
   });
 
   return (
-    <div className="max-w-2xl mx-auto p-8">
-      <div
-        {...getRootProps()}
-        className={`
-          border-2 border-dashed rounded-xl p-12 text-center cursor-pointer transition-all
-          ${isDragActive ? 'border-primary-500 bg-primary-50' : 'border-gray-300 hover:border-primary-400 hover:bg-gray-50'}
-          ${isUploading ? 'opacity-50 cursor-not-allowed' : ''}
-        `}
-      >
-        <input {...getInputProps()} />
-        <div className="flex flex-col items-center gap-4">
-          <div className={`p-4 rounded-full ${isDragActive ? 'bg-primary-100' : 'bg-gray-100'}`}>
-            <Upload className={`w-8 h-8 ${isDragActive ? 'text-primary-600' : 'text-gray-500'}`} />
+    <div className="flex items-center justify-center h-full p-8 bg-gray-50 dark:bg-gray-900">
+      <div className="w-full max-w-2xl">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <Cloud className="w-8 h-8 text-blue-500" />
           </div>
-          <div>
-            <p className="text-lg font-medium text-gray-700">
-              {isDragActive ? 'Drop PDF files here' : 'Drop PDF files here or click to browse'}
-            </p>
-            <p className="text-sm text-gray-500 mt-1">Supports: .pdf (max 10MB per file)</p>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            Subir CVs
+          </h2>
+          <p className="text-gray-500 dark:text-gray-400">
+            Arrastra y suelta archivos PDF para comenzar el análisis
+          </p>
+        </div>
+
+        {/* Dropzone */}
+        <div
+          {...getRootProps()}
+          className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all
+            ${isDragActive
+              ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 scale-[1.02]'
+              : 'border-gray-300 dark:border-gray-600 hover:border-blue-400 dark:hover:border-blue-500 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }
+            ${isUploading ? 'opacity-50 cursor-not-allowed' : ''}
+          `}
+        >
+          <input {...getInputProps()} />
+          <div className={`w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center transition-colors ${
+            isDragActive
+              ? 'bg-blue-500 text-white'
+              : 'bg-gray-100 dark:bg-gray-800 text-gray-400'
+          }`}>
+            <Upload className="w-8 h-8" />
           </div>
+          {isDragActive ? (
+            <p className="text-blue-500 text-lg font-medium">¡Suelta los archivos aquí!</p>
+          ) : (
+            <>
+              <p className="text-gray-700 dark:text-gray-300 text-lg mb-2 font-medium">
+                Arrastra archivos PDF aquí
+              </p>
+              <p className="text-gray-400 dark:text-gray-500 text-sm">
+                o <span className="text-blue-500 hover:underline">haz clic para seleccionar</span>
+              </p>
+            </>
+          )}
         </div>
-      </div>
 
-      {error && (
-        <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
-          {error}
-        </div>
-      )}
+        {/* Error message */}
+        {error && (
+          <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl flex items-center gap-3 text-red-700 dark:text-red-400">
+            <AlertCircle className="w-5 h-5 flex-shrink-0" />
+            <span>{error}</span>
+          </div>
+        )}
 
-      {files.length > 0 && (
-        <div className="mt-6">
-          <h3 className="text-sm font-medium text-gray-700 mb-3">
-            Selected Files ({files.length})
-          </h3>
-          <div className="space-y-2 max-h-48 overflow-y-auto">
-            {files.map((file, index) => (
-              <div
-                key={`${file.name}-${index}`}
-                className="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg"
-              >
-                <div className="flex items-center gap-3">
-                  <FileText className="w-5 h-5 text-red-500" />
-                  <span className="text-sm text-gray-700 truncate max-w-xs">{file.name}</span>
-                  <span className="text-xs text-gray-400">
-                    {(file.size / 1024 / 1024).toFixed(2)} MB
-                  </span>
+        {/* File list */}
+        {files.length > 0 && (
+          <div className="mt-6">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                Archivos seleccionados
+              </h3>
+              <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium rounded-full">
+                {files.length} archivo{files.length > 1 ? 's' : ''}
+              </span>
+            </div>
+            <div className="space-y-2 max-h-48 overflow-y-auto">
+              {files.map((file, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center">
+                      <FileText className="w-5 h-5 text-red-500" />
+                    </div>
+                    <div>
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300 truncate max-w-xs block">
+                        {file.name}
+                      </span>
+                      <span className="text-xs text-gray-400">
+                        {(file.size / 1024).toFixed(1)} KB
+                      </span>
+                    </div>
+                  </div>
+                  {!isUploading && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onFileRemove(index);
+                      }}
+                      className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                    >
+                      <X className="w-4 h-4 text-gray-400 hover:text-red-500" />
+                    </button>
+                  )}
                 </div>
-                {!isUploading && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onFileRemove(index);
-                    }}
-                    className="p-1 hover:bg-gray-100 rounded"
-                  >
-                    <X className="w-4 h-4 text-gray-500" />
-                  </button>
-                )}
+              ))}
+            </div>
+
+            {/* Upload button */}
+            <button
+              onClick={onUpload}
+              disabled={isUploading || files.length === 0}
+              className={`mt-6 w-full py-4 px-4 rounded-xl font-semibold text-lg transition-all flex items-center justify-center gap-3
+                ${isUploading || files.length === 0
+                  ? 'bg-gray-200 dark:bg-gray-700 text-gray-400 cursor-not-allowed'
+                  : 'bg-blue-500 hover:bg-blue-600 text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40'
+                }
+              `}
+            >
+              {isUploading ? (
+                <>
+                  <Loader className="w-5 h-5 animate-spin" />
+                  <span>Subiendo... {uploadProgress}%</span>
+                </>
+              ) : (
+                <>
+                  <Upload className="w-5 h-5" />
+                  <span>Subir {files.length} archivo{files.length > 1 ? 's' : ''}</span>
+                </>
+              )}
+            </button>
+          </div>
+        )}
+
+        {/* Tips */}
+        {files.length === 0 && (
+          <div className="mt-8 grid grid-cols-3 gap-4">
+            {[
+              { icon: '📄', text: 'Solo PDF' },
+              { icon: '📦', text: 'Múltiples archivos' },
+              { icon: '⚡', text: 'Proceso rápido' },
+            ].map((tip, i) => (
+              <div key={i} className="text-center p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+                <span className="text-2xl mb-1 block">{tip.icon}</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">{tip.text}</span>
               </div>
             ))}
           </div>
-
-          {isUploading && (
-            <div className="mt-4">
-              <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
-                <span>Uploading...</span>
-                <span>{uploadProgress}%</span>
-              </div>
-              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-primary-600 transition-all duration-300"
-                  style={{ width: `${uploadProgress}%` }}
-                />
-              </div>
-            </div>
-          )}
-
-          {!isUploading && (
-            <button
-              onClick={onUpload}
-              className="mt-4 w-full py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium flex items-center justify-center gap-2"
-            >
-              <Upload className="w-5 h-5" />
-              Upload & Process {files.length} {files.length === 1 ? 'File' : 'Files'}
-            </button>
-          )}
-        </div>
-      )}
-
-      {files.length === 0 && !error && (
-        <p className="mt-6 text-center text-gray-500">
-          No CVs indexed yet. Upload CVs to start asking questions.
-        </p>
-      )}
+        )}
+      </div>
     </div>
   );
-};
-
-export default UploadZone;
+}

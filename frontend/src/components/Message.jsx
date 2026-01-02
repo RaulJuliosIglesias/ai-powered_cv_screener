@@ -1,6 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import SourceBadge from './SourceBadge';
-import { User, Bot } from 'lucide-react';
+import { User, Sparkles } from 'lucide-react';
 
 const Message = ({ message }) => {
   const { role, content, sources = [] } = message;
@@ -10,44 +10,46 @@ const Message = ({ message }) => {
     <div className={`message-fade-in ${isUser ? 'flex justify-end' : ''}`}>
       <div className={`flex gap-3 max-w-3xl ${isUser ? 'flex-row-reverse' : ''}`}>
         <div
-          className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-            isUser ? 'bg-primary-600' : 'bg-gray-200'
+          className={`flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center shadow-lg ${
+            isUser 
+              ? 'bg-blue-500' 
+              : 'bg-gradient-to-br from-blue-500 to-purple-600'
           }`}
         >
           {isUser ? (
-            <User className="w-4 h-4 text-white" />
+            <User className="w-5 h-5 text-white" />
           ) : (
-            <Bot className="w-4 h-4 text-gray-600" />
+            <Sparkles className="w-5 h-5 text-white" />
           )}
         </div>
 
         <div className={`flex-1 ${isUser ? 'text-right' : ''}`}>
-          <span className="text-xs font-medium text-gray-500 uppercase">
-            {isUser ? 'You' : 'Assistant'}
+          <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+            {isUser ? 'Tú' : 'Asistente'}
           </span>
 
           <div
             className={`mt-1 p-4 rounded-2xl ${
               isUser
-                ? 'bg-primary-600 text-white rounded-tr-sm'
-                : 'bg-white border border-gray-200 rounded-tl-sm'
+                ? 'bg-blue-500 text-white rounded-tr-sm'
+                : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-tl-sm'
             }`}
           >
-            <div className={`prose prose-sm max-w-none ${isUser ? 'prose-invert' : ''}`}>
+            <div className={`prose prose-sm max-w-none dark:prose-invert ${isUser ? 'prose-invert' : ''}`}>
               <ReactMarkdown>{content}</ReactMarkdown>
             </div>
 
             {!isUser && sources.length > 0 && (
-              <div className="mt-4 pt-3 border-t border-gray-100">
-                <p className="text-xs text-gray-500 mb-2 flex items-center gap-1">
-                  📎 Sources:
+              <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700">
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2 flex items-center gap-1">
+                  📎 Fuentes:
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {sources.map((source, index) => (
                     <SourceBadge
                       key={index}
                       filename={source.filename}
-                      score={source.relevance_score}
+                      score={source.relevance || source.relevance_score}
                     />
                   ))}
                 </div>
