@@ -57,12 +57,12 @@ class Settings(BaseSettings):
     log_file: str = "app.log"
     
     # RAG
-    retrieval_k: int = 5
-    retrieval_score_threshold: float = 0.3
+    retrieval_k: int = 20  # Increased to get more candidates
+    retrieval_score_threshold: float = 0.2  # Lower threshold to include more results
     
     # LLM
     llm_temperature: float = 0.1
-    llm_max_tokens: int = 2048
+    llm_max_tokens: int = 4096  # Increased for longer structured responses
     
     @property
     def cors_origins_list(self) -> list[str]:

@@ -170,10 +170,70 @@
             }
           ],
           "timestamp": "2026-01-02T17:26:00.188749"
+        },
+        {
+          "id": "4e9ee13f-8e77-45f3-b510-1c22aaced39f",
+          "role": "user",
+          "content": "dame una tabla con los mejroes eprfiels apra lead tech AI developer",
+          "sources": [],
+          "timestamp": "2026-01-02T17:28:44.337143"
+        },
+        {
+          "id": "a936c6c8-1fe9-4b70-9811-1d939fd9a20c",
+          "role": "assistant",
+          "content": "## Candidate Analysis for Lead Tech AI Developer Profiles\n\n### Unique Candidates Identified\nThe following candidates were identified from the provided CV data:\n\n1. **David Wilson**\n2. **Emily Johnson**\n3. **John Smith**\n4. **Michael Brown** (two entries)\n5. **Charlotte Brown** (two entries)\n6. **Jessica Davis**\n7. **Olivia Davis**\n8. **James Wilson**\n\n### Relevant Information Extracted\n\n| Candidate Name      | Current Position                  | Previous Position            | Key Skills/Certifications                     |\n|---------------------|-----------------------------------|------------------------------|-----------------------------------------------|\n| **David Wilson**    | Senior Software Developer          | Software Developer            | Not specified                                 |\n| **Emily Johnson**   | Senior Software Developer          | Software Developer            | AWS Solutions Architect Professional (2023)  |\n| **John Smith**      | Senior Software Developer          | Software Developer            | AWS Solutions Architect Professional (2023)  |\n| **Michael Brown**   | Senior Software Developer          | Software Developer            | AWS Solutions Architect Professional (2023)  |\n| **Charlotte Brown** | Senior Software Developer          | Software Developer            | Not specified                                 |\n| **Jessica Davis**   | Senior Software Developer          | Software Developer            | Not specified                                 |\n| **Olivia Davis**    | Senior Full Stack Developer        | Full Stack Developer          | Not specified                                 |\n| **James Wilson**    | Experienced Full Stack Developer   | Not specified                 | Not specified                                 |\n\n### Key Findings\n\n- **Leadership Experience**: \n  - All candidates listed as **Senior Software Developers** have experience leading initiatives and collaborating with cross-functional teams, which is crucial for a Lead Tech AI Developer role.\n  \n- **Certifications**:\n  - **Emily Johnson**, **John Smith**, and **Michael Brown** have the **AWS Solutions Architect Professional** certification, which is valuable for cloud-based AI solutions.\n  \n- **Diversity of Roles**:\n  - **Olivia Davis** has experience as a **Senior Full Stack Developer**, indicating a broader skill set that may be beneficial for AI development, especially in full-stack applications.\n\n- **Experience Level**:\n  - All candidates have significant experience (3+ years) in software development, which is essential for a lead role.\n\n### Standout Candidates\n- **Emily Johnson**, **John Smith**, and **Michael Brown** stand out due to their **AWS Solutions Architect** certification, which is highly relevant for AI development in cloud environments.\n- **Olivia Davis** offers a unique perspective with her full-stack development experience, which can be advantageous in AI projects that require integration across various platforms.\n\n### Gaps in Information\n- **Charlotte Brown**, **Jessica Davis**, and **James Wilson** lack specific certifications or detailed project experience, which could be a disadvantage when competing for a lead role in AI development.\n\n### Conclusion\nFor a Lead Tech AI Developer position, candidates with both leadership experience and relevant certifications, such as **Emily Johnson**, **John Smith**, and **Michael Brown**, are the most qualified. Additionally, **Olivia Davis**'s full-stack experience adds a valuable dimension to her candidacy. \n\n### Sources\n- CV data excerpts from candidates listed above.",
+          "sources": [
+            {
+              "cv_id": "cv_7f1f7503",
+              "filename": "CV_David_Wilson_553eb84a_20260102_142306.pdf",
+              "relevance": 0.587
+            },
+            {
+              "cv_id": "cv_9e0b4aa2",
+              "filename": "CV_Emily_Johnson_6ca477b5_20260102_141821.pdf",
+              "relevance": 0.586
+            },
+            {
+              "cv_id": "cv_d8b1f275",
+              "filename": "CV_John_Smith_7ba9bd53_20260102_141822.pdf",
+              "relevance": 0.572
+            },
+            {
+              "cv_id": "cv_16ff4c85",
+              "filename": "CV_Michael_Brown_91c72a4e_20260102_142306.pdf",
+              "relevance": 0.572
+            },
+            {
+              "cv_id": "cv_76fd444c",
+              "filename": "CV_Michael_Brown_f110849f_20260102_142306.pdf",
+              "relevance": 0.572
+            },
+            {
+              "cv_id": "cv_f7d00515",
+              "filename": "CV_Charlotte_Brown_d2aa1975_20260102_141057.pdf",
+              "relevance": 0.568
+            },
+            {
+              "cv_id": "cv_ae3ba1eb",
+              "filename": "CV_Jessica_Davis_122c0c7d_20260102_141822.pdf",
+              "relevance": 0.558
+            },
+            {
+              "cv_id": "cv_f1e04d47",
+              "filename": "CV_Olivia_Davis_a4476fe5_20260102_141057.pdf",
+              "relevance": 0.54
+            },
+            {
+              "cv_id": "cv_29c0d60d",
+              "filename": "CV_James_Wilson_3db222f6_20260102_141055.pdf",
+              "relevance": 0.518
+            }
+          ],
+          "timestamp": "2026-01-02T17:28:59.720124"
         }
       ],
       "created_at": "2026-01-02T17:24:10.759202",
-      "updated_at": "2026-01-02T17:26:00.188749"
+      "updated_at": "2026-01-02T17:28:59.720124"
     }
   ]
 }
