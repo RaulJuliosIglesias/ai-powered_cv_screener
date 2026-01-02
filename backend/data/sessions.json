@@ -1,96 +1,6 @@
 {
   "sessions": [
     {
-      "id": "876e1430-c72f-4181-b756-bcb2e6d67f71",
-      "name": "TEST1",
-      "description": "",
-      "cvs": [
-        {
-          "id": "cv_44da561d",
-          "filename": "3D MODELER WEB.pdf",
-          "chunk_count": 8,
-          "uploaded_at": "2026-01-02T17:03:37.100329"
-        },
-        {
-          "id": "cv_1e7ffa0f",
-          "filename": "AI ENGINEER - FULL STACK - REACT DEVELOPER.pdf",
-          "chunk_count": 10,
-          "uploaded_at": "2026-01-02T17:03:37.467287"
-        },
-        {
-          "id": "cv_32e6d294",
-          "filename": "AI ENGINEER.pdf",
-          "chunk_count": 12,
-          "uploaded_at": "2026-01-02T17:03:37.736186"
-        },
-        {
-          "id": "cv_76950c4b",
-          "filename": "FRONTEND DEVELOPER.pdf",
-          "chunk_count": 18,
-          "uploaded_at": "2026-01-02T17:03:38.006318"
-        },
-        {
-          "id": "cv_0fc71e5e",
-          "filename": "FULL STACK ENGINEER - AI DEVELOPER - EN.pdf",
-          "chunk_count": 9,
-          "uploaded_at": "2026-01-02T17:03:38.186124"
-        },
-        {
-          "id": "cv_48f7164b",
-          "filename": "FULL STACK ENGINEER - AI DEVELOPER.pdf",
-          "chunk_count": 10,
-          "uploaded_at": "2026-01-02T17:03:38.414980"
-        },
-        {
-          "id": "cv_c61578e1",
-          "filename": "GAME DEVELOPER.pdf",
-          "chunk_count": 14,
-          "uploaded_at": "2026-01-02T17:03:38.708805"
-        },
-        {
-          "id": "cv_38078c9d",
-          "filename": "Match Report - Jobscan.pdf",
-          "chunk_count": 1,
-          "uploaded_at": "2026-01-02T17:03:40.133599"
-        },
-        {
-          "id": "cv_072ad836",
-          "filename": "Mechanical Engineer 2025.pdf",
-          "chunk_count": 1,
-          "uploaded_at": "2026-01-02T17:03:40.156159"
-        },
-        {
-          "id": "cv_a248e095",
-          "filename": "MVP DEVELOPER - FAST PROTOTYPE WEB - APP.pdf",
-          "chunk_count": 14,
-          "uploaded_at": "2026-01-02T17:03:40.473409"
-        },
-        {
-          "id": "cv_916e8f30",
-          "filename": "PROGRAMADOR WEB - ENG.pdf",
-          "chunk_count": 20,
-          "uploaded_at": "2026-01-02T17:03:40.810957"
-        },
-        {
-          "id": "cv_aa77d6e2",
-          "filename": "PROGRAMADOR WEB - ESP.pdf",
-          "chunk_count": 1,
-          "uploaded_at": "2026-01-02T17:03:41.206289"
-        }
-      ],
-      "messages": [
-        {
-          "id": "8f6bea6f-febc-4dca-aa87-0226688794de",
-          "role": "user",
-          "content": "give me the most expert in AI",
-          "sources": [],
-          "timestamp": "2026-01-02T17:04:00.652414"
-        }
-      ],
-      "created_at": "2026-01-02T17:03:21.644349",
-      "updated_at": "2026-01-02T17:04:00.652414"
-    },
-    {
       "id": "2f42ce16-5064-48da-bad2-d82c742e8812",
       "name": "TEST 20 CVS",
       "description": "",
@@ -187,19 +97,118 @@
           "content": "dame resumen",
           "sources": [],
           "timestamp": "2026-01-02T17:07:59.505656"
+        },
+        {
+          "id": "76b12ea1-c446-44bf-8043-5f5e590d38cd",
+          "role": "user",
+          "content": "dime el mas experto",
+          "sources": [],
+          "timestamp": "2026-01-02T17:15:57.296859"
+        },
+        {
+          "id": "e0aa7d50-e7c1-4789-90ac-3622d922e66a",
+          "role": "user",
+          "content": "dame el mas experot en ia",
+          "sources": [],
+          "timestamp": "2026-01-02T17:22:19.953042"
         }
       ],
       "created_at": "2026-01-02T17:04:27.138979",
-      "updated_at": "2026-01-02T17:07:59.505656"
+      "updated_at": "2026-01-02T17:22:19.953042"
     },
     {
-      "id": "87190b2b-df32-4132-8708-7e5654777a3f",
+      "id": "71fb9f05-5436-4ce4-a09f-aa9fed938e6d",
       "name": "New chat",
       "description": "",
-      "cvs": [],
+      "cvs": [
+        {
+          "id": "cv_f7d00515",
+          "filename": "CV_Charlotte_Brown_d2aa1975_20260102_141057.pdf",
+          "chunk_count": 8,
+          "uploaded_at": "2026-01-02T17:24:17.889335"
+        },
+        {
+          "id": "cv_7f1f7503",
+          "filename": "CV_David_Wilson_553eb84a_20260102_142306.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-02T17:24:17.927369"
+        },
+        {
+          "id": "cv_9e0b4aa2",
+          "filename": "CV_Emily_Johnson_6ca477b5_20260102_141821.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-02T17:24:17.969437"
+        },
+        {
+          "id": "cv_7464f640",
+          "filename": "CV_Emily_Johnson_19bf56e4_20260102_144805.pdf",
+          "chunk_count": 7,
+          "uploaded_at": "2026-01-02T17:24:18.010438"
+        },
+        {
+          "id": "cv_29c0d60d",
+          "filename": "CV_James_Wilson_3db222f6_20260102_141055.pdf",
+          "chunk_count": 8,
+          "uploaded_at": "2026-01-02T17:24:18.055145"
+        },
+        {
+          "id": "cv_4bc29d57",
+          "filename": "CV_James_Wilson_51587388_20260102_141055.pdf",
+          "chunk_count": 8,
+          "uploaded_at": "2026-01-02T17:24:18.100143"
+        },
+        {
+          "id": "cv_f17e7779",
+          "filename": "CV_James_Wilson_f65a824a_20260102_141056.pdf",
+          "chunk_count": 8,
+          "uploaded_at": "2026-01-02T17:24:18.149203"
+        },
+        {
+          "id": "cv_ae3ba1eb",
+          "filename": "CV_Jessica_Davis_122c0c7d_20260102_141822.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-02T17:24:18.197294"
+        },
+        {
+          "id": "cv_d8b1f275",
+          "filename": "CV_John_Smith_7ba9bd53_20260102_141822.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-02T17:24:18.246295"
+        },
+        {
+          "id": "cv_4ab0844a",
+          "filename": "CV_John_Smith_a3ace876_20260102_144805.pdf",
+          "chunk_count": 7,
+          "uploaded_at": "2026-01-02T17:24:18.295918"
+        },
+        {
+          "id": "cv_16ff4c85",
+          "filename": "CV_Michael_Brown_91c72a4e_20260102_142306.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-02T17:24:18.346026"
+        },
+        {
+          "id": "cv_76fd444c",
+          "filename": "CV_Michael_Brown_f110849f_20260102_142306.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-02T17:24:18.399512"
+        },
+        {
+          "id": "cv_f1e04d47",
+          "filename": "CV_Olivia_Davis_a4476fe5_20260102_141057.pdf",
+          "chunk_count": 8,
+          "uploaded_at": "2026-01-02T17:24:18.453469"
+        },
+        {
+          "id": "cv_ff5f58b0",
+          "filename": "CV_Sarah_Williams_5022c7fb_20260102_144806.pdf",
+          "chunk_count": 7,
+          "uploaded_at": "2026-01-02T17:24:18.507725"
+        }
+      ],
       "messages": [],
-      "created_at": "2026-01-02T17:15:39.747313",
-      "updated_at": "2026-01-02T17:15:39.747313"
+      "created_at": "2026-01-02T17:24:10.759202",
+      "updated_at": "2026-01-02T17:24:18.507725"
     }
   ]
 }

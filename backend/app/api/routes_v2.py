@@ -300,10 +300,11 @@ async def health_check():
 
 @router.get("/models")
 async def get_models():
-    """Get available LLM models."""
-    from app.providers.cloud.llm import get_available_models, get_current_model
+    """Get available LLM models from OpenRouter."""
+    from app.providers.cloud.llm import fetch_openrouter_models, get_current_model
+    models = await fetch_openrouter_models()
     return {
-        "models": get_available_models(),
+        "models": models,
         "current": get_current_model()
     }
 

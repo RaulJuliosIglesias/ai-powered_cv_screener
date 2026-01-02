@@ -7,25 +7,53 @@ from app.config import settings
 
 logger = logging.getLogger(__name__)
 
-# Available models via OpenRouter
-AVAILABLE_MODELS = [
-    {"id": "google/gemini-2.0-flash-exp:free", "name": "Gemini 2.0 Flash (Free)", "provider": "Google"},
-    {"id": "google/gemini-pro", "name": "Gemini Pro", "provider": "Google"},
-    {"id": "openai/gpt-4o-mini", "name": "GPT-4o Mini", "provider": "OpenAI"},
-    {"id": "openai/gpt-4o", "name": "GPT-4o", "provider": "OpenAI"},
-    {"id": "anthropic/claude-3.5-sonnet", "name": "Claude 3.5 Sonnet", "provider": "Anthropic"},
-    {"id": "anthropic/claude-3-haiku", "name": "Claude 3 Haiku", "provider": "Anthropic"},
-    {"id": "meta-llama/llama-3.1-70b-instruct", "name": "Llama 3.1 70B", "provider": "Meta"},
-    {"id": "mistralai/mistral-7b-instruct", "name": "Mistral 7B", "provider": "Mistral"},
-]
+# Cache for models fetched from OpenRouter
+_cached_models: List[Dict] = []
+_current_model = "openai/gpt-4o-mini"  # Safe default
 
-# Singleton for current model selection
-_current_model = "google/gemini-2.0-flash-exp:free"
+
+async def fetch_openrouter_models() -> List[Dict]:
+    """Fetch all available models from OpenRouter API."""
+    global _cached_models
+    try:
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.get(
+                "https://openrouter.ai/api/v1/models",
+                headers={"Authorization": f"Bearer {settings.openrouter_api_key}"}
+            )
+            response.raise_for_status()
+            data = response.json()
+            
+            models = []
+            for m in data.get("data", []):
+                pricing = m.get("pricing", {})
+                prompt_price = float(pricing.get("prompt", 0)) * 1000000  # per 1M tokens
+                completion_price = float(pricing.get("completion", 0)) * 1000000
+                
+                models.append({
+                    "id": m["id"],
+                    "name": m.get("name", m["id"]),
+                    "context_length": m.get("context_length", 0),
+                    "pricing": {
+                        "prompt": f"${prompt_price:.2f}/1M",
+                        "completion": f"${completion_price:.2f}/1M"
+                    },
+                    "pricing_raw": {"prompt": prompt_price, "completion": completion_price}
+                })
+            
+            # Sort by name
+            models.sort(key=lambda x: x["name"].lower())
+            _cached_models = models
+            logger.info(f"Fetched {len(models)} models from OpenRouter")
+            return models
+    except Exception as e:
+        logger.error(f"Failed to fetch OpenRouter models: {e}")
+        return _cached_models if _cached_models else []
 
 
 def get_available_models() -> List[Dict]:
-    """Get list of available models."""
-    return AVAILABLE_MODELS
+    """Get cached models (use fetch_openrouter_models for fresh data)."""
+    return _cached_models
 
 
 def get_current_model() -> str:
@@ -34,14 +62,11 @@ def get_current_model() -> str:
 
 
 def set_current_model(model_id: str) -> bool:
-    """Set the current model. Returns True if valid."""
+    """Set the current model."""
     global _current_model
-    valid_ids = [m["id"] for m in AVAILABLE_MODELS]
-    if model_id in valid_ids:
-        _current_model = model_id
-        logger.info(f"Model changed to: {model_id}")
-        return True
-    return False
+    _current_model = model_id
+    logger.info(f"Model changed to: {model_id}")
+    return True
 
 
 class OpenRouterLLMProvider(LLMProvider):
@@ -104,11 +129,16 @@ class OpenRouterLLMProvider(LLMProvider):
                     data = response.json()
                     break
                 except httpx.HTTPStatusError as e:
+                    logger.error(f"OpenRouter error {e.response.status_code}: {e.response.text}")
                     if e.response.status_code == 429 and attempt < max_retries - 1:
                         wait_time = retry_delay * (attempt + 1)
                         logger.warning(f"Rate limited, waiting {wait_time}s")
                         await asyncio.sleep(wait_time)
                         continue
+                    if e.response.status_code == 400:
+                        # Bad request - likely invalid model, try fallback
+                        error_detail = e.response.text
+                        raise Exception(f"OpenRouter API error: {error_detail}")
                     raise
             else:
                 raise Exception("Max retries exceeded for OpenRouter API")

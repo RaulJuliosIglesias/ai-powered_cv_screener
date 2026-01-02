@@ -1,12 +1,12 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, Edit2, Moon, Sun, Sparkles, User } from 'lucide-react';
+import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import useMode from './hooks/useMode';
 import useTheme from './hooks/useTheme';
 import { useLanguage } from './contexts/LanguageContext';
 import SourceBadge from './components/SourceBadge';
 import ModelSelector from './components/ModelSelector';
-import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions } from './services/api';
+import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList } from './services/api';
 
 function App() {
   const [sessions, setSessions] = useState([]);
@@ -19,12 +19,15 @@ function App() {
   const [editingId, setEditingId] = useState(null);
   const [editName, setEditName] = useState('');
   const [deleteConfirm, setDeleteConfirm] = useState(null);
+  const [showSettings, setShowSettings] = useState(false);
+  const [allCVs, setAllCVs] = useState([]);
+  const [showCVPanel, setShowCVPanel] = useState(false);
   
   const messagesEndRef = useRef(null);
   const fileInputRef = useRef(null);
-  const { mode } = useMode();
+  const { mode, setMode } = useMode();
   const { theme, toggleTheme } = useTheme();
-  const { language } = useLanguage();
+  const { language, setLanguage } = useLanguage();
 
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [currentSession?.messages]);
 
@@ -106,25 +109,55 @@ function App() {
         </div>
         <div className="flex-1 overflow-y-auto px-2">
           {sessions.map((s) => (
-            <div key={s.id} onClick={() => setCurrentSessionId(s.id)} className={`group flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer mb-0.5 ${currentSessionId === s.id ? 'bg-gray-800 text-white' : 'text-gray-300 hover:bg-gray-800/50'}`}>
-              <MessageSquare className="w-4 h-4 flex-shrink-0" />
-              {editingId === s.id ? (
-                <input value={editName} onChange={(e) => setEditName(e.target.value)} onBlur={() => handleRename(s.id)} onKeyDown={(e) => e.key === 'Enter' && handleRename(s.id)} className="flex-1 bg-gray-700 text-white text-sm px-2 py-0.5 rounded outline-none" autoFocus onClick={(e) => e.stopPropagation()} />
-              ) : <span className="flex-1 text-sm truncate">{s.name}</span>}
-              <div className="hidden group-hover:flex items-center gap-1">
-                {deleteConfirm === s.id ? (
-                  <><button onClick={(e) => { e.stopPropagation(); handleDelete(s.id); }} className="p-1 hover:bg-red-500/20 rounded"><Check className="w-3.5 h-3.5 text-red-400" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(null); }} className="p-1"><X className="w-3.5 h-3.5" /></button></>
+            <div key={s.id} className="mb-1">
+              <div onClick={() => setCurrentSessionId(s.id)} className={`group flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer ${currentSessionId === s.id ? 'bg-gray-800 text-white' : 'text-gray-300 hover:bg-gray-800/50'}`}>
+                <MessageSquare className="w-4 h-4 flex-shrink-0" />
+                {editingId === s.id ? (
+                  <input value={editName} onChange={(e) => setEditName(e.target.value)} onBlur={() => handleRename(s.id)} onKeyDown={(e) => e.key === 'Enter' && handleRename(s.id)} className="flex-1 bg-gray-700 text-white text-sm px-2 py-0.5 rounded outline-none" autoFocus onClick={(e) => e.stopPropagation()} />
                 ) : (
-                  <><button onClick={(e) => { e.stopPropagation(); setEditingId(s.id); setEditName(s.name); }} className="p-1 hover:bg-gray-700 rounded"><Edit2 className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(s.id); }} className="p-1 hover:bg-gray-700 rounded"><Trash2 className="w-3.5 h-3.5" /></button></>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-sm truncate block">{s.name}</span>
+                    <span className="text-xs text-gray-500">{s.cv_count || 0} CVs</span>
+                  </div>
                 )}
+                <div className="hidden group-hover:flex items-center gap-1">
+                  {deleteConfirm === s.id ? (
+                    <><button onClick={(e) => { e.stopPropagation(); handleDelete(s.id); }} className="p-1 hover:bg-red-500/20 rounded"><Check className="w-3.5 h-3.5 text-red-400" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(null); }} className="p-1"><X className="w-3.5 h-3.5" /></button></>
+                  ) : (
+                    <><button onClick={(e) => { e.stopPropagation(); setEditingId(s.id); setEditName(s.name); }} className="p-1 hover:bg-gray-700 rounded"><Edit2 className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(s.id); }} className="p-1 hover:bg-gray-700 rounded"><Trash2 className="w-3.5 h-3.5" /></button></>
+                  )}
+                </div>
               </div>
             </div>
           ))}
         </div>
-        <div className="p-3 border-t border-gray-800">
+        <div className="p-3 border-t border-gray-800 space-y-1">
+          {/* Mode Selector */}
+          <div className="flex items-center gap-2 px-3 py-2">
+            <span className="text-xs text-gray-500 w-12">Mode:</span>
+            <button onClick={() => setMode('local')} className={`flex-1 flex items-center justify-center gap-1 px-2 py-1.5 rounded text-xs ${mode === 'local' ? 'bg-blue-600 text-white' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'}`}>
+              <Database className="w-3 h-3" /> Local
+            </button>
+            <button onClick={() => setMode('cloud')} className={`flex-1 flex items-center justify-center gap-1 px-2 py-1.5 rounded text-xs ${mode === 'cloud' ? 'bg-blue-600 text-white' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'}`}>
+              <Cloud className="w-3 h-3" /> Supabase
+            </button>
+          </div>
+          {/* Language Selector */}
+          <div className="flex items-center gap-2 px-3 py-2">
+            <span className="text-xs text-gray-500 w-12">Lang:</span>
+            <button onClick={() => setLanguage('en')} className={`flex-1 px-2 py-1.5 rounded text-xs ${language === 'en' ? 'bg-blue-600 text-white' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'}`}>EN</button>
+            <button onClick={() => setLanguage('es')} className={`flex-1 px-2 py-1.5 rounded text-xs ${language === 'es' ? 'bg-blue-600 text-white' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'}`}>ES</button>
+          </div>
+          {/* Theme Toggle */}
           <button onClick={toggleTheme} className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 text-sm">
             {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             <span>{theme === 'dark' ? 'Light' : 'Dark'}</span>
+          </button>
+          {/* All CVs Button */}
+          <button onClick={() => setShowCVPanel(true)} className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 text-sm">
+            <FileText className="w-4 h-4" />
+            <span>{language === 'es' ? 'Todos los CVs' : 'All CVs'}</span>
+            <ChevronRight className="w-4 h-4 ml-auto" />
           </button>
         </div>
       </div>
@@ -174,6 +207,52 @@ function App() {
           </div>
         )}
       </div>
+
+      {/* CV Panel Modal */}
+      {showCVPanel && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-2xl max-h-[80vh] flex flex-col shadow-2xl">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{language === 'es' ? 'Gestión de CVs' : 'CV Management'}</h2>
+              <button onClick={() => setShowCVPanel(false)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"><X className="w-5 h-5" /></button>
+            </div>
+            <div className="flex-1 overflow-y-auto p-4">
+              {currentSession && (
+                <div className="mb-6">
+                  <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">{language === 'es' ? `CVs en "${currentSession.name}"` : `CVs in "${currentSession.name}"`}</h3>
+                  {currentSession.cvs?.length > 0 ? (
+                    <div className="space-y-2">
+                      {currentSession.cvs.map(cv => (
+                        <div key={cv.id} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                          <FileText className="w-5 h-5 text-red-500" />
+                          <span className="flex-1 text-sm text-gray-700 dark:text-gray-300">{cv.filename}</span>
+                          <span className="text-xs text-gray-500">{cv.chunk_count} chunks</span>
+                          <button onClick={() => handleRemoveCV(cv.id)} className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded"><Trash2 className="w-4 h-4" /></button>
+                        </div>
+                      ))}
+                    </div>
+                  ) : <p className="text-sm text-gray-500">{language === 'es' ? 'Sin CVs en este chat' : 'No CVs in this chat'}</p>}
+                </div>
+              )}
+              <div>
+                <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">{language === 'es' ? 'Todos los CVs en la base de datos' : 'All CVs in database'}</h3>
+                <button onClick={async () => { const data = await getCVList(mode); setAllCVs(data.cvs || []); }} className="mb-3 text-sm text-blue-500 hover:text-blue-600">{language === 'es' ? 'Cargar CVs' : 'Load CVs'}</button>
+                {allCVs.length > 0 ? (
+                  <div className="space-y-2">
+                    {allCVs.map(cv => (
+                      <div key={cv.id} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <FileText className="w-5 h-5 text-red-500" />
+                        <span className="flex-1 text-sm text-gray-700 dark:text-gray-300">{cv.filename}</span>
+                        <span className="text-xs text-gray-500">{cv.chunk_count} chunks</span>
+                      </div>
+                    ))}
+                  </div>
+                ) : <p className="text-sm text-gray-500">{language === 'es' ? 'Haz clic en "Cargar CVs"' : 'Click "Load CVs"'}</p>}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
