@@ -23,6 +23,13 @@ function App() {
   const [showSettings, setShowSettings] = useState(false);
   const [allCVs, setAllCVs] = useState([]);
   const [showCVPanel, setShowCVPanel] = useState(false);
+  const [isLoadingMode, setIsLoadingMode] = useState(false);
+  const [toast, setToast] = useState(null);
+
+  const showToast = (message, type = 'info') => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000);
+  };
   
   const messagesEndRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -33,24 +40,37 @@ function App() {
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [currentSession?.messages]);
 
   const loadSessions = useCallback(async () => {
-    try { const data = await getSessions(); setSessions(data.sessions || []); } catch (e) { console.error(e); }
-  }, []);
+    try { const data = await getSessions(mode); setSessions(data.sessions || []); } catch (e) { console.error(e); }
+  }, [mode]);
 
   const loadSession = useCallback(async (id) => {
     try {
-      const data = await getSession(id);
+      const data = await getSession(id, mode);
       setCurrentSession(data);
       const sugg = await getSessionSuggestions(id, mode);
       setSuggestions(sugg.suggestions || []);
     } catch (e) { console.error(e); setCurrentSessionId(null); }
   }, [mode]);
 
-  useEffect(() => { loadSessions(); }, [loadSessions]);
+  // Reload sessions when mode changes
+  useEffect(() => { 
+    const switchMode = async () => {
+      setIsLoadingMode(true);
+      setCurrentSessionId(null);
+      setCurrentSession(null);
+      setSuggestions([]);
+      await loadSessions();
+      setIsLoadingMode(false);
+      showToast(mode === 'cloud' ? (language === 'es' ? 'Modo Supabase activado' : 'Supabase mode activated') : (language === 'es' ? 'Modo Local activado' : 'Local mode activated'));
+    };
+    switchMode();
+  }, [mode]); // eslint-disable-line
+  
   useEffect(() => { if (currentSessionId) loadSession(currentSessionId); else { setCurrentSession(null); setSuggestions([]); } }, [currentSessionId, loadSession]);
 
   const handleNewChat = async () => {
     const name = language === 'es' ? 'Nuevo chat' : 'New chat';
-    const session = await createSession(name);
+    const session = await createSession(name, '', mode);
     await loadSessions();
     setCurrentSessionId(session.id);
   };
@@ -64,7 +84,7 @@ function App() {
 
   const handleRename = async (id) => {
     if (!editName.trim()) return;
-    await updateSession(id, { name: editName.trim() });
+    await updateSession(id, { name: editName.trim() }, mode);
     await loadSessions();
     if (currentSessionId === id) await loadSession(id);
     setEditingId(null);
@@ -165,8 +185,14 @@ function App() {
 
       {/* Main */}
       <div className="flex-1 flex flex-col bg-white dark:bg-gray-800 min-w-0">
-        <div className="h-12 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-4">
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{currentSession ? `${currentSession.name} · ${currentSession.cvs?.length || 0} CVs` : 'CV Screener'}</span>
+        <div className="h-14 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-4">
+          <div className="flex items-center gap-3">
+            <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${mode === 'cloud' ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300' : 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300'}`}>
+              {mode === 'cloud' ? <Cloud className="w-3.5 h-3.5" /> : <Database className="w-3.5 h-3.5" />}
+              {mode === 'cloud' ? 'Supabase' : 'Local'}
+            </div>
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{currentSession ? `${currentSession.name} · ${currentSession.cvs?.length || 0} CVs` : 'CV Screener'}</span>
+          </div>
           <div className="flex items-center gap-2">
             <ModelSelector />
             {currentSession && (<><input ref={fileInputRef} type="file" accept=".pdf" multiple onChange={handleUpload} className="hidden" /><button onClick={() => fileInputRef.current?.click()} disabled={isUploading} className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-blue-500 hover:bg-blue-600 text-white rounded-lg disabled:opacity-50">{isUploading ? <Loader className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}<span>{language === 'es' ? 'Añadir CVs' : 'Add CVs'}</span></button></>)}
@@ -311,6 +337,32 @@ function App() {
                 ) : <p className="text-sm text-gray-500">{language === 'es' ? 'Haz clic en "Cargar CVs"' : 'Click "Load CVs"'}</p>}
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Loading Overlay for Mode Switch */}
+      {isLoadingMode && (
+        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-2xl flex items-center gap-4">
+            <Loader className="w-6 h-6 animate-spin text-blue-500" />
+            <span className="text-gray-700 dark:text-gray-300">{language === 'es' ? 'Cambiando modo...' : 'Switching mode...'}</span>
+          </div>
+        </div>
+      )}
+
+      {/* Toast Notification */}
+      {toast && (
+        <div className="fixed bottom-4 right-4 z-50 animate-in slide-in-from-bottom-2">
+          <div className={`flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg ${
+            toast.type === 'error' ? 'bg-red-500 text-white' : 
+            toast.type === 'success' ? 'bg-emerald-500 text-white' : 
+            'bg-gray-800 text-white'
+          }`}>
+            {toast.type === 'success' ? <Check className="w-5 h-5" /> : 
+             toast.type === 'error' ? <X className="w-5 h-5" /> : 
+             <Sparkles className="w-5 h-5" />}
+            <span className="text-sm font-medium">{toast.message}</span>
           </div>
         </div>
       )}

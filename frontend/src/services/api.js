@@ -94,25 +94,24 @@ export const deleteAllCVs = async (mode = 'local') => {
 // SESSION API FUNCTIONS
 // ============================================
 
-export const getSessions = async () => {
-  const response = await api.get('/sessions');
+export const getSessions = async (mode = 'local') => {
+  const response = await api.get(`/sessions?mode=${mode}`);
   return response.data;
 };
 
-export const createSession = async (name, description = '') => {
-  const response = await api.post('/sessions', { name, description });
+export const createSession = async (name, description = '', mode = 'local') => {
+  const response = await api.post(`/sessions?mode=${mode}`, { name, description });
   return response.data;
 };
 
-export const getSession = async (sessionId) => {
-  const response = await api.get(`/sessions/${sessionId}`);
+export const getSession = async (sessionId, mode = 'local') => {
+  const response = await api.get(`/sessions/${sessionId}?mode=${mode}`);
   return response.data;
 };
 
-export const updateSession = async (sessionId, data) => {
-  const response = await api.put(`/sessions/${sessionId}`, data);
-  return response.data;
-};
+export const updateSession = async (sessionId, data, mode = 'local') => {
+  const response = await api.put(`/sessions/${sessionId}?mode=${mode}`, data);
+  return response.data;};
 
 export const deleteSession = async (sessionId, mode = 'local') => {
   const response = await api.delete(`/sessions/${sessionId}?mode=${mode}`);

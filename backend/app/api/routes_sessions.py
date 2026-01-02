@@ -9,8 +9,16 @@ import pdfplumber
 
 from app.config import settings, Mode
 from app.models.sessions import session_manager, Session, ChatMessage, CVInfo
+from app.providers.cloud.sessions import supabase_session_manager
 from app.services.rag_service_v2 import RAGService
 from app.services.chunking_service import ChunkingService
+
+
+def get_session_manager(mode: Mode):
+    """Get the appropriate session manager based on mode."""
+    if mode == Mode.CLOUD:
+        return supabase_session_manager
+    return session_manager
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/sessions", tags=["sessions"])
@@ -95,12 +103,26 @@ jobs = {}
 # ============================================
 
 @router.get("", response_model=SessionListResponse)
-async def list_sessions():
+async def list_sessions(mode: Mode = Query(default=settings.default_mode)):
     """List all sessions."""
-    sessions = session_manager.list_sessions()
-    return SessionListResponse(
-        sessions=[
-            SessionResponse(
+    mgr = get_session_manager(mode)
+    sessions = mgr.list_sessions()
+    
+    # Handle both local (Session objects) and cloud (dicts) formats
+    result = []
+    for s in sessions:
+        if isinstance(s, dict):
+            result.append(SessionResponse(
+                id=s["id"],
+                name=s["name"],
+                description=s.get("description", ""),
+                cv_count=s.get("cv_count", len(s.get("cvs", []))),
+                message_count=s.get("message_count", len(s.get("messages", []))),
+                created_at=s["created_at"],
+                updated_at=s["updated_at"]
+            ))
+        else:
+            result.append(SessionResponse(
                 id=s.id,
                 name=s.name,
                 description=s.description,
@@ -108,17 +130,27 @@ async def list_sessions():
                 message_count=len(s.messages),
                 created_at=s.created_at,
                 updated_at=s.updated_at
-            )
-            for s in sessions
-        ],
-        total=len(sessions)
-    )
+            ))
+    
+    return SessionListResponse(sessions=result, total=len(result))
 
 
 @router.post("", response_model=SessionDetailResponse)
-async def create_session(request: CreateSessionRequest):
+async def create_session(request: CreateSessionRequest, mode: Mode = Query(default=settings.default_mode)):
     """Create a new session."""
-    session = session_manager.create_session(request.name, request.description)
+    mgr = get_session_manager(mode)
+    session = mgr.create_session(request.name, request.description)
+    
+    if isinstance(session, dict):
+        return SessionDetailResponse(
+            id=session["id"],
+            name=session["name"],
+            description=session.get("description", ""),
+            cvs=session.get("cvs", []),
+            messages=session.get("messages", []),
+            created_at=session["created_at"],
+            updated_at=session["updated_at"]
+        )
     return SessionDetailResponse(
         id=session.id,
         name=session.name,
@@ -131,11 +163,23 @@ async def create_session(request: CreateSessionRequest):
 
 
 @router.get("/{session_id}", response_model=SessionDetailResponse)
-async def get_session(session_id: str):
+async def get_session(session_id: str, mode: Mode = Query(default=settings.default_mode)):
     """Get a session by ID."""
-    session = session_manager.get_session(session_id)
+    mgr = get_session_manager(mode)
+    session = mgr.get_session(session_id)
     if not session:
         raise HTTPException(status_code=404, detail="Session not found")
+    
+    if isinstance(session, dict):
+        return SessionDetailResponse(
+            id=session["id"],
+            name=session["name"],
+            description=session.get("description", ""),
+            cvs=session.get("cvs", []),
+            messages=session.get("messages", []),
+            created_at=session["created_at"],
+            updated_at=session["updated_at"]
+        )
     return SessionDetailResponse(
         id=session.id,
         name=session.name,
@@ -148,11 +192,23 @@ async def get_session(session_id: str):
 
 
 @router.put("/{session_id}", response_model=SessionDetailResponse)
-async def update_session(session_id: str, request: UpdateSessionRequest):
+async def update_session(session_id: str, request: UpdateSessionRequest, mode: Mode = Query(default=settings.default_mode)):
     """Update a session."""
-    session = session_manager.update_session(session_id, request.name, request.description)
+    mgr = get_session_manager(mode)
+    session = mgr.update_session(session_id, request.name, request.description)
     if not session:
         raise HTTPException(status_code=404, detail="Session not found")
+    
+    if isinstance(session, dict):
+        return SessionDetailResponse(
+            id=session["id"],
+            name=session["name"],
+            description=session.get("description", ""),
+            cvs=session.get("cvs", []),
+            messages=session.get("messages", []),
+            created_at=session["created_at"],
+            updated_at=session["updated_at"]
+        )
     return SessionDetailResponse(
         id=session.id,
         name=session.name,
@@ -167,17 +223,20 @@ async def update_session(session_id: str, request: UpdateSessionRequest):
 @router.delete("/{session_id}")
 async def delete_session(session_id: str, mode: Mode = Query(default=settings.default_mode)):
     """Delete a session and optionally its CVs from vector store."""
-    session = session_manager.get_session(session_id)
+    mgr = get_session_manager(mode)
+    session = mgr.get_session(session_id)
     if not session:
         raise HTTPException(status_code=404, detail="Session not found")
     
     # Delete CVs from vector store
     rag_service = RAGService(mode)
-    for cv in session.cvs:
-        await rag_service.vector_store.delete_cv(cv.id)
+    cvs = session.get("cvs", []) if isinstance(session, dict) else session.cvs
+    for cv in cvs:
+        cv_id = cv.get("id") if isinstance(cv, dict) else cv.id
+        await rag_service.vector_store.delete_cv(cv_id)
     
     # Delete session
-    session_manager.delete_session(session_id)
+    mgr.delete_session(session_id)
     return {"success": True, "message": f"Session {session_id} deleted"}
 
 
@@ -219,8 +278,9 @@ async def process_cvs_for_session(
             # Index chunks
             await rag_service.index_documents(chunks)
             
-            # Add CV to session
-            session_manager.add_cv_to_session(session_id, cv_id, filename, len(chunks))
+            # Add CV to session (use mode-based manager)
+            mgr = get_session_manager(mode)
+            mgr.add_cv_to_session(session_id, cv_id, filename, len(chunks))
             
             jobs[job_id]["processed_files"] += 1
             logger.info(f"[{job_id}] Added {filename} to session {session_id}")
@@ -241,7 +301,8 @@ async def upload_cvs_to_session(
     mode: Mode = Query(default=settings.default_mode)
 ):
     """Upload CVs to a session."""
-    session = session_manager.get_session(session_id)
+    mgr = get_session_manager(mode)
+    session = mgr.get_session(session_id)
     if not session:
         raise HTTPException(status_code=404, detail="Session not found")
     
@@ -291,12 +352,14 @@ async def remove_cv_from_session(
     mode: Mode = Query(default=settings.default_mode)
 ):
     """Remove a CV from a session and delete from vector store."""
-    session = session_manager.get_session(session_id)
+    mgr = get_session_manager(mode)
+    session = mgr.get_session(session_id)
     if not session:
         raise HTTPException(status_code=404, detail="Session not found")
     
     # Check if CV exists in session
-    cv_exists = any(cv.id == cv_id for cv in session.cvs)
+    cvs = session.get("cvs", []) if isinstance(session, dict) else session.cvs
+    cv_exists = any((cv.get("id") if isinstance(cv, dict) else cv.id) == cv_id for cv in cvs)
     if not cv_exists:
         raise HTTPException(status_code=404, detail="CV not found in session")
     
@@ -305,7 +368,7 @@ async def remove_cv_from_session(
     await rag_service.vector_store.delete_cv(cv_id)
     
     # Remove from session
-    session_manager.remove_cv_from_session(session_id, cv_id)
+    mgr.remove_cv_from_session(session_id, cv_id)
     
     return {"success": True, "message": f"CV {cv_id} removed from session"}
 
@@ -321,25 +384,27 @@ async def chat_in_session(
     mode: Mode = Query(default=settings.default_mode)
 ):
     """Send a chat message in a session context (queries only session's CVs)."""
-    session = session_manager.get_session(session_id)
+    mgr = get_session_manager(mode)
+    session = mgr.get_session(session_id)
     if not session:
         raise HTTPException(status_code=404, detail="Session not found")
     
-    if not session.cvs:
+    cvs = session.get("cvs", []) if isinstance(session, dict) else session.cvs
+    if not cvs:
         raise HTTPException(status_code=400, detail="No CVs in this session. Please upload CVs first.")
     
     # Get CV IDs for this session
-    cv_ids = session_manager.get_cv_ids_for_session(session_id)
+    cv_ids = mgr.get_cv_ids_for_session(session_id)
     
     # Save user message
-    session_manager.add_message(session_id, "user", request.message)
+    mgr.add_message(session_id, "user", request.message)
     
     # Query RAG with session's CVs only
     rag_service = RAGService(mode)
     result = await rag_service.query(request.message, cv_ids=cv_ids)
     
     # Save assistant message
-    session_manager.add_message(session_id, "assistant", result.answer, result.sources)
+    mgr.add_message(session_id, "assistant", result.answer, result.sources)
     
     return ChatResponse(
         response=result.answer,
@@ -349,9 +414,10 @@ async def chat_in_session(
 
 
 @router.delete("/{session_id}/chat")
-async def clear_chat_history(session_id: str):
+async def clear_chat_history(session_id: str, mode: Mode = Query(default=settings.default_mode)):
     """Clear chat history for a session."""
-    if not session_manager.clear_messages(session_id):
+    mgr = get_session_manager(mode)
+    if not mgr.clear_messages(session_id):
         raise HTTPException(status_code=404, detail="Session not found")
     return {"success": True, "message": "Chat history cleared"}
 
@@ -362,16 +428,18 @@ async def get_suggested_questions(
     mode: Mode = Query(default=settings.default_mode)
 ):
     """Generate suggested questions based on session's CVs."""
-    session = session_manager.get_session(session_id)
+    mgr = get_session_manager(mode)
+    session = mgr.get_session(session_id)
     if not session:
         raise HTTPException(status_code=404, detail="Session not found")
     
-    if not session.cvs:
+    cvs = session.get("cvs", []) if isinstance(session, dict) else session.cvs
+    if not cvs:
         return {"suggestions": []}
     
     # Get CV info to generate relevant suggestions
-    cv_names = [cv.filename.replace('.pdf', '') for cv in session.cvs]
-    num_cvs = len(session.cvs)
+    cv_names = [(cv.get("filename", "") if isinstance(cv, dict) else cv.filename).replace('.pdf', '') for cv in cvs]
+    num_cvs = len(cvs)
     
     # Generate contextual suggestions based on CVs
     suggestions = []
