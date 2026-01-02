@@ -1,6 +1,9 @@
-import { FileText, Plus, Sun, Moon, Sparkles } from 'lucide-react';
+import { FileText, Plus, Sun, Moon, Sparkles, Globe } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Layout = ({ children, onAddClick, showAddButton = false, theme, onThemeToggle }) => {
+  const { language, setLanguage, t } = useLanguage();
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col transition-colors">
       <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4">
@@ -10,12 +13,36 @@ const Layout = ({ children, onAddClick, showAddButton = false, theme, onThemeTog
               <Sparkles className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white">CV Screener</h1>
-              <p className="text-xs text-gray-500 dark:text-gray-400">RAG-Powered Analysis</p>
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white">{t('appName')}</h1>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{t('appTagline')}</p>
             </div>
           </div>
           
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            {/* Language Selector */}
+            <div className="flex items-center bg-gray-100 dark:bg-gray-700 rounded-xl p-1">
+              <button
+                onClick={() => setLanguage('en')}
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                  language === 'en'
+                    ? 'bg-white dark:bg-gray-600 text-blue-600 dark:text-blue-400 shadow-sm'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                }`}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setLanguage('es')}
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                  language === 'es'
+                    ? 'bg-white dark:bg-gray-600 text-blue-600 dark:text-blue-400 shadow-sm'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                }`}
+              >
+                ES
+              </button>
+            </div>
+
             {/* Theme Toggle */}
             <button
               onClick={onThemeToggle}
@@ -36,7 +63,7 @@ const Layout = ({ children, onAddClick, showAddButton = false, theme, onThemeTog
                 className="flex items-center gap-2 px-4 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-medium transition-colors shadow-lg shadow-blue-500/25"
               >
                 <Plus className="w-4 h-4" />
-                <span>Añadir CVs</span>
+                <span>{t('addCvs')}</span>
               </button>
             )}
           </div>

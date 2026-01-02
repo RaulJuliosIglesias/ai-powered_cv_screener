@@ -1,10 +1,12 @@
 import ReactMarkdown from 'react-markdown';
 import SourceBadge from './SourceBadge';
 import { User, Sparkles } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Message = ({ message }) => {
   const { role, content, sources = [] } = message;
   const isUser = role === 'user';
+  const { t } = useLanguage();
 
   return (
     <div className={`message-fade-in ${isUser ? 'flex justify-end' : ''}`}>
@@ -25,7 +27,7 @@ const Message = ({ message }) => {
 
         <div className={`flex-1 ${isUser ? 'text-right' : ''}`}>
           <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
-            {isUser ? 'Tú' : 'Asistente'}
+            {isUser ? t('you') : t('assistant')}
           </span>
 
           <div
@@ -42,7 +44,7 @@ const Message = ({ message }) => {
             {!isUser && sources.length > 0 && (
               <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700">
                 <p className="text-xs text-gray-500 dark:text-gray-400 mb-2 flex items-center gap-1">
-                  📎 Fuentes:
+                  📎 {t('sources')}:
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {sources.map((source, index) => (

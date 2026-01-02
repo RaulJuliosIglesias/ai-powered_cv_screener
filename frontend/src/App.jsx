@@ -10,6 +10,7 @@ import { useUpload } from './hooks/useUpload';
 import { useChat } from './hooks/useChat';
 import useMode from './hooks/useMode';
 import useTheme from './hooks/useTheme';
+import { useLanguage } from './contexts/LanguageContext';
 import { getCVList } from './services/api';
 
 const APP_STATES = {
@@ -25,9 +26,10 @@ function App() {
   const [isLoadingCvs, setIsLoadingCvs] = useState(true);
   const [showUploadModal, setShowUploadModal] = useState(false);
   
-  // Mode and theme management
+  // Mode, theme, and language management
   const { mode, setMode } = useMode();
   const { theme, toggleTheme } = useTheme();
+  const { language } = useLanguage();
 
   const loadCVs = useCallback(async () => {
     try {
@@ -76,9 +78,16 @@ function App() {
     messages,
     isLoading: isChatLoading,
     lastMetrics,
-    send: sendMessage,
+    reasoningSteps,
+    showReasoning,
+    send: sendMessageBase,
     clearMessages,
   } = useChat(mode);
+
+  // Wrap sendMessage to pass language
+  const sendMessage = useCallback((message) => {
+    sendMessageBase(message, language);
+  }, [sendMessageBase, language]);
 
   // Clear chat when mode changes
   useEffect(() => {
@@ -138,6 +147,8 @@ function App() {
             messages={messages}
             isLoading={isChatLoading}
             onSend={sendMessage}
+            reasoningSteps={reasoningSteps}
+            showReasoning={showReasoning}
           />
         </div>
       );

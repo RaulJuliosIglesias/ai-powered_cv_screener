@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Send, Loader } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const ChatInput = ({ onSend, isLoading }) => {
   const [message, setMessage] = useState('');
+  const { t } = useLanguage();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +30,7 @@ const ChatInput = ({ onSend, isLoading }) => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Haz una pregunta sobre los CVs..."
+              placeholder={t('typeMessage')}
               disabled={isLoading}
               rows={1}
               className="w-full px-4 py-3 pr-12 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed placeholder-gray-400 dark:placeholder-gray-500"
@@ -48,7 +50,7 @@ const ChatInput = ({ onSend, isLoading }) => {
           </button>
         </div>
         <p className="mt-2 text-xs text-gray-400 dark:text-gray-500 text-center">
-          Enter para enviar, Shift+Enter para nueva línea
+          {t('pressEnter')}
         </p>
       </form>
     </div>
