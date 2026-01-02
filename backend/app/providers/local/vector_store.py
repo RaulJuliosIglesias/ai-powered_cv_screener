@@ -79,7 +79,8 @@ class SimpleVectorStore(VectorStoreProvider):
         self,
         embedding: List[float],
         k: int = 5,
-        threshold: float = 0.3
+        threshold: float = 0.3,
+        cv_ids: List[str] = None
     ) -> List[SearchResult]:
         if not self.documents:
             return []
@@ -87,6 +88,10 @@ class SimpleVectorStore(VectorStoreProvider):
         # Calculate similarities
         similarities = []
         for i, emb in enumerate(self.embeddings):
+            doc = self.documents[i]
+            # Filter by cv_ids if provided
+            if cv_ids is not None and doc["cv_id"] not in cv_ids:
+                continue
             sim = self._cosine_similarity(embedding, emb)
             if sim >= threshold:
                 similarities.append((i, sim))

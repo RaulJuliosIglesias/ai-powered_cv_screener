@@ -70,4 +70,96 @@ export const healthCheck = async () => {
   return response.data;
 };
 
+export const getModels = async () => {
+  const response = await api.get('/models');
+  return response.data;
+};
+
+export const setModel = async (modelId) => {
+  const response = await api.post(`/models/${encodeURIComponent(modelId)}`);
+  return response.data;
+};
+
+export const deleteCVById = async (cvId, mode = 'local') => {
+  const response = await api.delete(`/cvs/${cvId}?mode=${mode}`);
+  return response.data;
+};
+
+export const deleteAllCVs = async (mode = 'local') => {
+  const response = await api.delete(`/cvs?mode=${mode}`);
+  return response.data;
+};
+
+// ============================================
+// SESSION API FUNCTIONS
+// ============================================
+
+export const getSessions = async () => {
+  const response = await api.get('/sessions');
+  return response.data;
+};
+
+export const createSession = async (name, description = '') => {
+  const response = await api.post('/sessions', { name, description });
+  return response.data;
+};
+
+export const getSession = async (sessionId) => {
+  const response = await api.get(`/sessions/${sessionId}`);
+  return response.data;
+};
+
+export const updateSession = async (sessionId, data) => {
+  const response = await api.put(`/sessions/${sessionId}`, data);
+  return response.data;
+};
+
+export const deleteSession = async (sessionId, mode = 'local') => {
+  const response = await api.delete(`/sessions/${sessionId}?mode=${mode}`);
+  return response.data;
+};
+
+export const uploadCVsToSession = async (sessionId, files, mode = 'local', onProgress) => {
+  const formData = new FormData();
+  files.forEach((file) => {
+    formData.append('files', file);
+  });
+
+  const response = await api.post(`/sessions/${sessionId}/cvs?mode=${mode}`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+    onUploadProgress: (progressEvent) => {
+      if (onProgress) {
+        const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+        onProgress(progress);
+      }
+    },
+  });
+  return response.data;
+};
+
+export const getSessionUploadStatus = async (sessionId, jobId) => {
+  const response = await api.get(`/sessions/${sessionId}/cvs/status/${jobId}`);
+  return response.data;
+};
+
+export const removeCVFromSession = async (sessionId, cvId, mode = 'local') => {
+  const response = await api.delete(`/sessions/${sessionId}/cvs/${cvId}?mode=${mode}`);
+  return response.data;
+};
+
+export const sendSessionMessage = async (sessionId, message, mode = 'local') => {
+  const response = await api.post(`/sessions/${sessionId}/chat?mode=${mode}`, { message });
+  return response.data;
+};
+
+export const clearSessionChat = async (sessionId) => {
+  const response = await api.delete(`/sessions/${sessionId}/chat`);
+  return response.data;
+};
+
+export const getSessionSuggestions = async (sessionId, mode = 'local') => {
+  const response = await api.get(`/sessions/${sessionId}/suggestions?mode=${mode}`);
+  return response.data;
+};
+
 export default api;

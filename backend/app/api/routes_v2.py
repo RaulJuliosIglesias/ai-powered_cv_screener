@@ -292,3 +292,44 @@ async def health_check():
         "status": "healthy",
         "default_mode": settings.default_mode.value
     }
+
+
+# ============================================
+# MODEL SELECTION ENDPOINTS
+# ============================================
+
+@router.get("/models")
+async def get_models():
+    """Get available LLM models."""
+    from app.providers.cloud.llm import get_available_models, get_current_model
+    return {
+        "models": get_available_models(),
+        "current": get_current_model()
+    }
+
+
+@router.post("/models/{model_id:path}")
+async def set_model(model_id: str):
+    """Set the current LLM model."""
+    from app.providers.cloud.llm import set_current_model, get_current_model
+    
+    success = set_current_model(model_id)
+    if not success:
+        raise HTTPException(status_code=400, detail=f"Invalid model: {model_id}")
+    
+    return {"success": True, "current": get_current_model()}
+
+
+@router.delete("/cvs")
+async def delete_all_cvs(mode: Mode = Query(default=settings.default_mode)):
+    """Delete all CVs from the index."""
+    rag_service = RAGService(mode)
+    
+    # Get all CVs and delete them
+    cvs = await rag_service.vector_store.list_cvs()
+    deleted = 0
+    for cv in cvs:
+        if await rag_service.vector_store.delete_cv(cv["id"]):
+            deleted += 1
+    
+    return {"success": True, "deleted": deleted}

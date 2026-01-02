@@ -12,12 +12,9 @@ class ProviderFactory:
         key = f"embedding_{mode}"
         
         if key not in cls._instances:
-            if mode == Mode.LOCAL:
-                from app.providers.local.embeddings import LocalEmbeddingProvider
-                cls._instances[key] = LocalEmbeddingProvider()
-            else:
-                from app.providers.cloud.embeddings import OpenRouterEmbeddingProvider
-                cls._instances[key] = OpenRouterEmbeddingProvider()
+            # Always use local embeddings (hash-based fallback works without external deps)
+            from app.providers.local.embeddings import LocalEmbeddingProvider
+            cls._instances[key] = LocalEmbeddingProvider()
         
         return cls._instances[key]
     
@@ -26,26 +23,20 @@ class ProviderFactory:
         key = f"vector_{mode}"
         
         if key not in cls._instances:
-            if mode == Mode.LOCAL:
-                from app.providers.local.vector_store import ChromaVectorStore
-                cls._instances[key] = ChromaVectorStore()
-            else:
-                from app.providers.cloud.vector_store import SupabaseVectorStore
-                cls._instances[key] = SupabaseVectorStore()
+            # Always use local vector store (SimpleVectorStore with JSON persistence)
+            from app.providers.local.vector_store import SimpleVectorStore
+            cls._instances[key] = SimpleVectorStore()
         
         return cls._instances[key]
     
     @classmethod
-    def get_llm_provider(cls, mode: Mode) -> LLMProvider:
-        key = f"llm_{mode}"
+    def get_llm_provider(cls, mode: Mode = None) -> LLMProvider:
+        # Always use OpenRouter (supports multiple models)
+        key = "llm_openrouter"
         
         if key not in cls._instances:
-            if mode == Mode.LOCAL:
-                from app.providers.local.llm import GeminiLLMProvider
-                cls._instances[key] = GeminiLLMProvider()
-            else:
-                from app.providers.cloud.llm import OpenRouterLLMProvider
-                cls._instances[key] = OpenRouterLLMProvider()
+            from app.providers.cloud.llm import OpenRouterLLMProvider
+            cls._instances[key] = OpenRouterLLMProvider()
         
         return cls._instances[key]
     

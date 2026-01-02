@@ -1,0 +1,397 @@
+"""Session management API routes."""
+import uuid
+import io
+import logging
+from typing import List, Optional
+from fastapi import APIRouter, HTTPException, Query, File, UploadFile, BackgroundTasks
+from pydantic import BaseModel, Field
+import pdfplumber
+
+from app.config import settings, Mode
+from app.models.sessions import session_manager, Session, ChatMessage, CVInfo
+from app.services.rag_service_v2 import RAGService
+from app.services.chunking_service import ChunkingService
+
+logger = logging.getLogger(__name__)
+router = APIRouter(prefix="/api/sessions", tags=["sessions"])
+
+
+def extract_text_from_pdf(content: bytes, filename: str) -> str:
+    """Extract text from PDF bytes."""
+    try:
+        with pdfplumber.open(io.BytesIO(content)) as pdf:
+            text_parts = []
+            for page in pdf.pages:
+                page_text = page.extract_text()
+                if page_text:
+                    text_parts.append(page_text)
+            return "\n".join(text_parts)
+    except Exception as e:
+        logger.error(f"Failed to extract text from {filename}: {e}")
+        raise ValueError(f"Could not extract text from {filename}")
+
+
+# ============================================
+# REQUEST/RESPONSE MODELS
+# ============================================
+
+class CreateSessionRequest(BaseModel):
+    name: str
+    description: str = ""
+
+
+class UpdateSessionRequest(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
+
+
+class SessionResponse(BaseModel):
+    id: str
+    name: str
+    description: str
+    cv_count: int
+    message_count: int
+    created_at: str
+    updated_at: str
+
+
+class SessionDetailResponse(BaseModel):
+    id: str
+    name: str
+    description: str
+    cvs: List[CVInfo]
+    messages: List[ChatMessage]
+    created_at: str
+    updated_at: str
+
+
+class SessionListResponse(BaseModel):
+    sessions: List[SessionResponse]
+    total: int
+
+
+class ChatRequest(BaseModel):
+    message: str
+
+
+class ChatResponse(BaseModel):
+    response: str
+    sources: List[dict] = Field(default_factory=list)
+    metrics: dict = Field(default_factory=dict)
+
+
+class UploadResponse(BaseModel):
+    job_id: str
+    files_received: int
+    status: str
+
+
+# Job tracking
+jobs = {}
+
+
+# ============================================
+# SESSION CRUD ENDPOINTS
+# ============================================
+
+@router.get("", response_model=SessionListResponse)
+async def list_sessions():
+    """List all sessions."""
+    sessions = session_manager.list_sessions()
+    return SessionListResponse(
+        sessions=[
+            SessionResponse(
+                id=s.id,
+                name=s.name,
+                description=s.description,
+                cv_count=len(s.cvs),
+                message_count=len(s.messages),
+                created_at=s.created_at,
+                updated_at=s.updated_at
+            )
+            for s in sessions
+        ],
+        total=len(sessions)
+    )
+
+
+@router.post("", response_model=SessionDetailResponse)
+async def create_session(request: CreateSessionRequest):
+    """Create a new session."""
+    session = session_manager.create_session(request.name, request.description)
+    return SessionDetailResponse(
+        id=session.id,
+        name=session.name,
+        description=session.description,
+        cvs=session.cvs,
+        messages=session.messages,
+        created_at=session.created_at,
+        updated_at=session.updated_at
+    )
+
+
+@router.get("/{session_id}", response_model=SessionDetailResponse)
+async def get_session(session_id: str):
+    """Get a session by ID."""
+    session = session_manager.get_session(session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found")
+    return SessionDetailResponse(
+        id=session.id,
+        name=session.name,
+        description=session.description,
+        cvs=session.cvs,
+        messages=session.messages,
+        created_at=session.created_at,
+        updated_at=session.updated_at
+    )
+
+
+@router.put("/{session_id}", response_model=SessionDetailResponse)
+async def update_session(session_id: str, request: UpdateSessionRequest):
+    """Update a session."""
+    session = session_manager.update_session(session_id, request.name, request.description)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found")
+    return SessionDetailResponse(
+        id=session.id,
+        name=session.name,
+        description=session.description,
+        cvs=session.cvs,
+        messages=session.messages,
+        created_at=session.created_at,
+        updated_at=session.updated_at
+    )
+
+
+@router.delete("/{session_id}")
+async def delete_session(session_id: str, mode: Mode = Query(default=settings.default_mode)):
+    """Delete a session and optionally its CVs from vector store."""
+    session = session_manager.get_session(session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    # Delete CVs from vector store
+    rag_service = RAGService(mode)
+    for cv in session.cvs:
+        await rag_service.vector_store.delete_cv(cv.id)
+    
+    # Delete session
+    session_manager.delete_session(session_id)
+    return {"success": True, "message": f"Session {session_id} deleted"}
+
+
+# ============================================
+# CV MANAGEMENT ENDPOINTS
+# ============================================
+
+async def process_cvs_for_session(
+    job_id: str,
+    session_id: str,
+    file_data: List[tuple],
+    mode: Mode
+):
+    """Background task to process CVs and add them to a session."""
+    logger.info(f"[{job_id}] Processing {len(file_data)} CVs for session {session_id}")
+    
+    try:
+        chunking_service = ChunkingService()
+        rag_service = RAGService(mode)
+    except Exception as e:
+        logger.error(f"[{job_id}] Service init failed: {e}")
+        jobs[job_id]["status"] = "failed"
+        jobs[job_id]["errors"].append(str(e))
+        return
+    
+    for filename, content in file_data:
+        try:
+            # Extract text
+            text = extract_text_from_pdf(content, filename)
+            logger.info(f"[{job_id}] Extracted {len(text)} chars from {filename}")
+            
+            # Create CV ID
+            cv_id = f"cv_{uuid.uuid4().hex[:8]}"
+            
+            # Chunk the document
+            chunks = chunking_service.chunk_cv(text=text, cv_id=cv_id, filename=filename)
+            logger.info(f"[{job_id}] Created {len(chunks)} chunks for {filename}")
+            
+            # Index chunks
+            await rag_service.index_documents(chunks)
+            
+            # Add CV to session
+            session_manager.add_cv_to_session(session_id, cv_id, filename, len(chunks))
+            
+            jobs[job_id]["processed_files"] += 1
+            logger.info(f"[{job_id}] Added {filename} to session {session_id}")
+            
+        except Exception as e:
+            logger.error(f"[{job_id}] Error processing {filename}: {e}")
+            jobs[job_id]["errors"].append(f"{filename}: {str(e)}")
+    
+    jobs[job_id]["status"] = "completed" if not jobs[job_id]["errors"] else "completed_with_errors"
+    logger.info(f"[{job_id}] Processing complete. Status: {jobs[job_id]['status']}")
+
+
+@router.post("/{session_id}/cvs", response_model=UploadResponse)
+async def upload_cvs_to_session(
+    session_id: str,
+    background_tasks: BackgroundTasks,
+    files: List[UploadFile] = File(...),
+    mode: Mode = Query(default=settings.default_mode)
+):
+    """Upload CVs to a session."""
+    session = session_manager.get_session(session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    if not files:
+        raise HTTPException(status_code=400, detail="No files provided")
+    
+    # Read file data before background task
+    file_data = []
+    for file in files:
+        if not file.filename.lower().endswith(".pdf"):
+            raise HTTPException(status_code=400, detail=f"Invalid file type: {file.filename}")
+        content = await file.read()
+        file_data.append((file.filename, content))
+    
+    # Create job
+    job_id = str(uuid.uuid4())
+    jobs[job_id] = {
+        "status": "processing",
+        "session_id": session_id,
+        "total_files": len(files),
+        "processed_files": 0,
+        "errors": []
+    }
+    
+    # Process in background
+    background_tasks.add_task(process_cvs_for_session, job_id, session_id, file_data, mode)
+    
+    return UploadResponse(
+        job_id=job_id,
+        files_received=len(files),
+        status="processing"
+    )
+
+
+@router.get("/{session_id}/cvs/status/{job_id}")
+async def get_upload_status(session_id: str, job_id: str):
+    """Get upload job status."""
+    if job_id not in jobs:
+        raise HTTPException(status_code=404, detail="Job not found")
+    return jobs[job_id]
+
+
+@router.delete("/{session_id}/cvs/{cv_id}")
+async def remove_cv_from_session(
+    session_id: str,
+    cv_id: str,
+    mode: Mode = Query(default=settings.default_mode)
+):
+    """Remove a CV from a session and delete from vector store."""
+    session = session_manager.get_session(session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    # Check if CV exists in session
+    cv_exists = any(cv.id == cv_id for cv in session.cvs)
+    if not cv_exists:
+        raise HTTPException(status_code=404, detail="CV not found in session")
+    
+    # Delete from vector store
+    rag_service = RAGService(mode)
+    await rag_service.vector_store.delete_cv(cv_id)
+    
+    # Remove from session
+    session_manager.remove_cv_from_session(session_id, cv_id)
+    
+    return {"success": True, "message": f"CV {cv_id} removed from session"}
+
+
+# ============================================
+# CHAT ENDPOINTS
+# ============================================
+
+@router.post("/{session_id}/chat", response_model=ChatResponse)
+async def chat_in_session(
+    session_id: str,
+    request: ChatRequest,
+    mode: Mode = Query(default=settings.default_mode)
+):
+    """Send a chat message in a session context (queries only session's CVs)."""
+    session = session_manager.get_session(session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    if not session.cvs:
+        raise HTTPException(status_code=400, detail="No CVs in this session. Please upload CVs first.")
+    
+    # Get CV IDs for this session
+    cv_ids = session_manager.get_cv_ids_for_session(session_id)
+    
+    # Save user message
+    session_manager.add_message(session_id, "user", request.message)
+    
+    # Query RAG with session's CVs only
+    rag_service = RAGService(mode)
+    result = await rag_service.query(request.message, cv_ids=cv_ids)
+    
+    # Save assistant message
+    session_manager.add_message(session_id, "assistant", result.answer, result.sources)
+    
+    return ChatResponse(
+        response=result.answer,
+        sources=result.sources,
+        metrics=result.metrics
+    )
+
+
+@router.delete("/{session_id}/chat")
+async def clear_chat_history(session_id: str):
+    """Clear chat history for a session."""
+    if not session_manager.clear_messages(session_id):
+        raise HTTPException(status_code=404, detail="Session not found")
+    return {"success": True, "message": "Chat history cleared"}
+
+
+@router.get("/{session_id}/suggestions")
+async def get_suggested_questions(
+    session_id: str,
+    mode: Mode = Query(default=settings.default_mode)
+):
+    """Generate suggested questions based on session's CVs."""
+    session = session_manager.get_session(session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    if not session.cvs:
+        return {"suggestions": []}
+    
+    # Get CV info to generate relevant suggestions
+    cv_names = [cv.filename.replace('.pdf', '') for cv in session.cvs]
+    num_cvs = len(session.cvs)
+    
+    # Generate contextual suggestions based on CVs
+    suggestions = []
+    
+    if num_cvs == 1:
+        name = cv_names[0]
+        suggestions = [
+            f"What are the main skills of {name}?",
+            f"Summarize {name}'s work experience",
+            f"What technologies does {name} know?",
+            f"Is {name} suitable for a senior role?"
+        ]
+    else:
+        suggestions = [
+            f"Compare the experience levels of all {num_cvs} candidates",
+            "Who has the most experience with Python?",
+            "Which candidate is best for a leadership role?",
+            "Summarize each candidate's main strengths",
+            "Who has the strongest technical background?",
+            f"Rank the {num_cvs} candidates by years of experience"
+        ]
+    
+    return {"suggestions": suggestions[:4]}

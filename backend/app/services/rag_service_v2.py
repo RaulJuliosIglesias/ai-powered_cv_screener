@@ -58,9 +58,10 @@ class RAGService:
         self,
         question: str,
         k: int = None,
-        threshold: float = None
+        threshold: float = None,
+        cv_ids: List[str] = None
     ) -> RAGResponse:
-        """Query the RAG system."""
+        """Query the RAG system. Optionally filter by cv_ids for session-based queries."""
         k = k or settings.retrieval_k
         threshold = threshold or settings.retrieval_score_threshold
         metrics = {}
@@ -70,10 +71,10 @@ class RAGService:
         metrics["embedding_ms"] = embed_result.latency_ms
         query_embedding = embed_result.embeddings[0]
         
-        # 2. Search for relevant chunks
+        # 2. Search for relevant chunks (filtered by cv_ids if provided)
         t0 = time.perf_counter()
         search_results = await self.vector_store.search(
-            query_embedding, k=k, threshold=threshold
+            query_embedding, k=k, threshold=threshold, cv_ids=cv_ids
         )
         metrics["search_ms"] = (time.perf_counter() - t0) * 1000
         
