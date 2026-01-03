@@ -9,6 +9,7 @@ import SourceBadge from './components/SourceBadge';
 import ModelSelector from './components/ModelSelector';
 import RAGPipelineSettings, { getRAGPipelineSettings } from './components/RAGPipelineSettings';
 import MetricsPanel, { saveMetricEntry } from './components/MetricsPanel';
+import PipelineProgressPanel from './components/PipelineProgressPanel';
 import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList, clearSessionCVs, deleteAllCVsFromDatabase, deleteCV, deleteMessage, deleteMessagesFrom } from './services/api';
 
 function App() {
@@ -43,6 +44,13 @@ function App() {
   const [showRAGSettings, setShowRAGSettings] = useState(false);
   const [ragPipelineSettings, setRagPipelineSettings] = useState(getRAGPipelineSettings());
   const [showMetricsPanel, setShowMetricsPanel] = useState(false);
+  const [showPipelinePanel, setShowPipelinePanel] = useState(false);
+  const [isPipelineExpanded, setIsPipelineExpanded] = useState(true);
+  const [autoExpandPipeline, setAutoExpandPipeline] = useState(() => {
+    const saved = localStorage.getItem('autoExpandPipeline');
+    return saved !== null ? JSON.parse(saved) : true;
+  });
+  const [pipelineProgress, setPipelineProgress] = useState({});
   
   // Upload progress modal state
   const [uploadProgress, setUploadProgress] = useState(null);
@@ -365,20 +373,31 @@ function App() {
     
     setChatLoadingStates(prev => ({ ...prev, [targetSessionId]: true }));
     
-    // Track real-time progress steps
-    const progressSteps = {
-      query_understanding: { status: 'pending', label: 'Understanding query...' },
-      retrieval: { status: 'pending', label: 'Searching CVs...' },
-      reasoning: { status: 'pending', label: 'Analyzing candidates...' },
-      generation: { status: 'pending', label: 'Generating recommendation...' }
-    };
+    // Open pipeline panel if auto-expand is enabled
+    if (autoExpandPipeline) {
+      setShowPipelinePanel(true);
+      setIsPipelineExpanded(true);
+    }
+    
+    // Initialize pipeline progress
+    setPipelineProgress({
+      query_understanding: { status: 'pending' },
+      multi_query: { status: 'pending' },
+      guardrail: { status: 'pending' },
+      embedding: { status: 'pending' },
+      retrieval: { status: 'pending' },
+      reranking: { status: 'pending' },
+      reasoning: { status: 'pending' },
+      generation: { status: 'pending' },
+      verification: { status: 'pending' },
+      refinement: { status: 'pending' }
+    });
     
     setPendingMessages(prev => ({
       ...prev,
       [targetSessionId]: { 
         userMsg: userMessage, 
-        status: 'analyzing',
-        progress: progressSteps
+        status: 'analyzing'
       }
     }));
     
@@ -416,37 +435,17 @@ function App() {
           if (line.startsWith('data:')) {
             const data = JSON.parse(line.substring(5).trim());
             
-            // Handle step events - UPDATE REAL PROGRESS
+            // Handle step events - UPDATE PIPELINE PANEL
             if (data.step) {
               const stepName = data.step;
               const stepStatus = data.status;
               
               console.log(`🔄 REAL Step: ${stepName} - ${stepStatus}`);
               
-              setPendingMessages(prev => {
-                const current = prev[targetSessionId];
-                if (!current) return prev;
-                
-                const updatedProgress = { ...current.progress };
-                
-                if (stepName === 'query_understanding') {
-                  updatedProgress.query_understanding.status = stepStatus;
-                } else if (stepName === 'retrieval' || stepName === 'embedding') {
-                  updatedProgress.retrieval.status = stepStatus;
-                  if (data.details) {
-                    updatedProgress.retrieval.label = data.details;
-                  }
-                } else if (stepName === 'reasoning' || stepName === 'reranking') {
-                  updatedProgress.reasoning.status = stepStatus;
-                } else if (stepName === 'generation') {
-                  updatedProgress.generation.status = stepStatus;
-                }
-                
-                return {
-                  ...prev,
-                  [targetSessionId]: { ...current, progress: updatedProgress }
-                };
-              });
+              setPipelineProgress(prev => ({
+                ...prev,
+                [stepName]: { status: stepStatus, details: data.details }
+              }));
             }
             
             // Handle complete event
@@ -773,8 +772,10 @@ function App() {
         </div>
       </div>
 
-      {/* Main */}
-      <div className="flex-1 flex flex-col bg-white dark:bg-gray-800 min-w-0">
+      {/* Main Content */}
+      <div className={`flex-1 flex flex-col overflow-hidden bg-gray-50 dark:bg-gray-900 transition-all duration-300 ${
+        showPipelinePanel && isPipelineExpanded ? 'mr-80' : showPipelinePanel ? 'mr-12' : ''
+      }`}>
         <div className="h-14 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-4">
           <div className="flex items-center gap-3">
             <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${mode === 'cloud' ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300' : 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300'}`}>
@@ -1014,47 +1015,11 @@ function App() {
                     <Sparkles className="w-5 h-5 text-white" />
                   </div>
                   <div className="flex-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-4 shadow-sm">
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-2">
-                        <Loader className="w-5 h-5 animate-spin text-emerald-500" />
-                        <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
-                          {language === 'es' ? 'Analizando CVs...' : 'Analyzing CVs...'}
-                        </span>
-                      </div>
-                      <div className="space-y-2 text-xs text-gray-500 dark:text-gray-400 border-l-2 border-emerald-300 pl-3 ml-2">
-                        {/* REAL-TIME PROGRESS from SSE events */}
-                        {(() => {
-                          const pendingMsg = pendingMessages[currentSessionId];
-                          const progress = pendingMsg?.progress;
-                          if (!progress) return null;
-                          
-                          return Object.entries(progress).map(([key, step]) => {
-                            const isRunning = step.status === 'running';
-                            const isCompleted = step.status === 'completed';
-                            const isPending = step.status === 'pending';
-                            
-                            return (
-                              <div 
-                                key={key}
-                                className={`flex items-center gap-2 transition-opacity ${
-                                  isRunning ? 'animate-pulse' : 
-                                  isCompleted ? 'opacity-100' : 
-                                  'opacity-40'
-                                }`}
-                              >
-                                {isCompleted ? (
-                                  <CheckCircle className="w-3 h-3 text-emerald-500" />
-                                ) : isRunning ? (
-                                  <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
-                                ) : (
-                                  <span className="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
-                                )}
-                                <span>{step.label}</span>
-                              </div>
-                            );
-                          });
-                        })()}
-                      </div>
+                    <div className="flex items-center gap-2">
+                      <Loader className="w-5 h-5 animate-spin text-emerald-500" />
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
+                        {language === 'es' ? 'Analizando CVs...' : 'Analyzing CVs...'}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -1427,6 +1392,29 @@ function App() {
         sessionId={currentSessionId}
         sessionName={currentSession?.name}
       />
+
+      {/* Pipeline Progress Panel */}
+      {showPipelinePanel && (
+        <PipelineProgressPanel
+          isExpanded={isPipelineExpanded}
+          onToggleExpand={() => {
+            const newExpanded = !isPipelineExpanded;
+            setIsPipelineExpanded(newExpanded);
+            // If user collapses manually, disable auto-expand
+            if (!newExpanded && autoExpandPipeline) {
+              setAutoExpandPipeline(false);
+              localStorage.setItem('autoExpandPipeline', 'false');
+            }
+          }}
+          progress={pipelineProgress}
+          autoExpand={autoExpandPipeline}
+          onToggleAutoExpand={() => {
+            const newValue = !autoExpandPipeline;
+            setAutoExpandPipeline(newValue);
+            localStorage.setItem('autoExpandPipeline', JSON.stringify(newValue));
+          }}
+        />
+      )}
     </div>
   );
 }

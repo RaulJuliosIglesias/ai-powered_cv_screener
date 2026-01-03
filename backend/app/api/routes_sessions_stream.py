@@ -17,8 +17,10 @@ class ChatStreamRequest(BaseModel):
     message: str
 
 
-async def event_generator(rag_service, question: str, session_id: str, cv_ids: list, total_cvs: int):
+async def event_generator(rag_service, question: str, session_id: str, cv_ids: list, total_cvs: int, mgr):
     """Generate SSE events from RAG pipeline execution."""
+    final_response = None
+    
     try:
         async for event in rag_service.query_stream(
             question=question,
@@ -29,9 +31,32 @@ async def event_generator(rag_service, question: str, session_id: str, cv_ids: l
             event_type = event.get("event", "message")
             event_data = event.get("data", {})
             
+            # Capture final response to save
+            if event_type == "complete":
+                final_response = event_data
+            
             # Format as SSE
             yield f"event: {event_type}\n"
             yield f"data: {json.dumps(event_data)}\n\n"
+        
+        # Save assistant message to session with structured_output
+        if final_response and final_response.get("response"):
+            structured_output_dict = None
+            if final_response.get("structured_output"):
+                structured_output_dict = final_response["structured_output"]
+            
+            pipeline_steps = final_response.get("pipeline_steps", [])
+            sources = final_response.get("sources", [])
+            
+            mgr.add_message(
+                session_id=session_id,
+                role="assistant",
+                content=final_response["response"],
+                sources=sources,
+                pipeline_steps=pipeline_steps,
+                structured_output=structured_output_dict
+            )
+            logger.info(f"[STREAM] Saved assistant message with {len(sources)} sources to session {session_id}")
             
     except Exception as e:
         logger.exception(f"Stream error: {e}")
@@ -74,7 +99,7 @@ async def chat_stream(
     rag_service = RAGServiceV5.from_factory(mode)
     
     return StreamingResponse(
-        event_generator(rag_service, request.message, session_id, cv_ids, total_cvs),
+        event_generator(rag_service, request.message, session_id, cv_ids, total_cvs, mgr),
         media_type="text/event-stream",
         headers={
             "Cache-Control": "no-cache",

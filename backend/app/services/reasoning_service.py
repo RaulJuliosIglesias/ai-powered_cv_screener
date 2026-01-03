@@ -50,41 +50,51 @@ TOTAL CANDIDATES: {total_cvs}
 
 :::thinking
 **Understanding Query**
-[What is being asked? What criteria to use?]
+[Detailed explanation: What specific criteria is the user asking for? Break down the requirements. If no explicit criteria given, state which default criteria you'll use: seniority, skills breadth, years of experience, etc.]
 
 **Inventory**
-[How many candidates found? Which ones are most relevant?]
+[List ALL candidates found with their CV IDs. Note which ones seem most relevant at first glance based on job titles or obvious qualifications.]
 
-**Analysis**
-[Compare candidates on key dimensions]
+**Detailed Analysis**
+[For EACH relevant candidate, examine:
+- Key skills matching the query
+- Years of experience in relevant areas
+- Notable achievements or projects
+- Strengths and potential weaknesses
+Compare candidates directly on the most important dimensions.]
 
-**Decision**
-[Final ranking and rationale]
+**Final Decision**
+[Provide clear ranking with explicit rationale. Explain WHY candidate A is better than candidate B based on the analysis above.]
 :::
 
 **Direct Answer**
-[1-2 sentences. Use format: **[Name](cv:cv_xxx)**]
+[1-2 sentences summarizing the best candidates. ALWAYS use exact format: **[Full Name](cv:cv_xxx)** with NO spaces after opening **]
 
 **Analysis**
 
 | Candidate | Key Skills | Experience | Score |
 |-----------|------------|------------|-------|
-| **[Name](cv:cv_xxx)** | skill1, skill2 | X years | ⭐⭐⭐⭐ |
-| **[Name](cv:cv_xxx)** | skill3, skill4 | Y years | ⭐⭐⭐ |
+| **[Full Name](cv:cv_xxx)** | skill1, skill2, skill3 | X years in area | ⭐⭐⭐⭐ |
+| **[Full Name](cv:cv_xxx)** | skill4, skill5 | Y years in area | ⭐⭐⭐ |
 
 :::conclusion
-[Clear recommendation with names as **[Name](cv:cv_xxx)**]
+[Final recommendation. ALWAYS use format: **[Full Name](cv:cv_xxx)** - NO spaces between ** and [. Every candidate mention must include both name in bold brackets AND the cv link.]
 :::
 
 ---
 
-## CRITICAL RULES
+## CRITICAL FORMATTING RULES
 
-1. **ALWAYS include :::thinking block** - This shows your reasoning process
-2. **TABLE must be valid markdown** - One row per candidate, pipes aligned
-3. **CANDIDATE FORMAT**: `**[Full Name](cv:cv_xxx)**` - NO spaces after **
-4. **NO standalone cv_xxx** anywhere except inside (cv:cv_xxx)
-5. **IF NO CRITERIA**: State in thinking: "No criteria given. Using: seniority, skills, experience"
+1. **ALWAYS include :::thinking block** with detailed reasoning
+2. **THINKING must be thorough** - Explain your reasoning process step-by-step
+3. **TABLE must be valid markdown** - Pipes aligned, one row per candidate
+4. **CANDIDATE NAME FORMAT** (CRITICAL):
+   - CORRECT: `**[Patrik Hübner](cv:cv_dd668ac0)**`
+   - WRONG: `**Patrik Hübner** cv_dd668ac0` ❌
+   - WRONG: `** Patrik Hübner** (cv:cv_dd668ac0)` ❌ (space after **)
+   - WRONG: `**Patrik Hübner**(cv:cv_dd668ac0)` ❌ (no space before link)
+5. **EVERY candidate mention** in Direct Answer, Table, and Conclusion must use: `**[Name](cv:cv_xxx)**`
+6. **NO standalone cv_xxx** anywhere - always inside link format
 
 Answer now:"""
 
