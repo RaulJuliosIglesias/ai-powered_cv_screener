@@ -269,8 +269,12 @@ async def process_cvs_for_session(
         jobs[job_id]["errors"].append(str(e))
         return
     
-    for filename, content in file_data:
+    for idx, (filename, content) in enumerate(file_data):
         try:
+            # Update current file being processed
+            jobs[job_id]["current_file"] = filename
+            jobs[job_id]["current_phase"] = "extracting"
+            
             # Extract text
             text = extract_text_from_pdf(content, filename)
             logger.info(f"[{job_id}] Extracted {len(text)} chars from {filename}")
@@ -279,30 +283,39 @@ async def process_cvs_for_session(
             cv_id = f"cv_{uuid.uuid4().hex[:8]}"
             
             # Save PDF to disk for later viewing
+            jobs[job_id]["current_phase"] = "saving"
             pdf_path = PDF_STORAGE_DIR / f"{cv_id}.pdf"
             with open(pdf_path, "wb") as f:
                 f.write(content)
             logger.info(f"[{job_id}] Saved PDF to {pdf_path}")
             
             # Chunk the document
+            jobs[job_id]["current_phase"] = "chunking"
             chunks = chunking_service.chunk_cv(text=text, cv_id=cv_id, filename=filename)
             logger.info(f"[{job_id}] Created {len(chunks)} chunks for {filename}")
             
-            # Index chunks
+            # Index chunks (create embeddings)
+            jobs[job_id]["current_phase"] = "embedding"
             await rag_service.index_documents(chunks)
             
             # Add CV to session (use mode-based manager)
+            jobs[job_id]["current_phase"] = "indexing"
             mgr = get_session_manager(mode)
             mgr.add_cv_to_session(session_id, cv_id, filename, len(chunks))
             
+            # Mark file as completed
             jobs[job_id]["processed_files"] += 1
-            logger.info(f"[{job_id}] Added {filename} to session {session_id}")
+            jobs[job_id]["current_phase"] = "done"
+            logger.info(f"[{job_id}] Completed {idx + 1}/{len(file_data)}: {filename}")
             
         except Exception as e:
             logger.error(f"[{job_id}] Error processing {filename}: {e}")
             jobs[job_id]["errors"].append(f"{filename}: {str(e)}")
+            jobs[job_id]["processed_files"] += 1  # Count as processed even if failed
     
     jobs[job_id]["status"] = "completed" if not jobs[job_id]["errors"] else "completed_with_errors"
+    jobs[job_id]["current_file"] = None
+    jobs[job_id]["current_phase"] = None
     logger.info(f"[{job_id}] Processing complete. Status: {jobs[job_id]['status']}")
 
 
@@ -330,13 +343,15 @@ async def upload_cvs_to_session(
         content = await file.read()
         file_data.append((file.filename, content))
     
-    # Create job
+    # Create job with detailed progress tracking
     job_id = str(uuid.uuid4())
     jobs[job_id] = {
         "status": "processing",
         "session_id": session_id,
         "total_files": len(files),
         "processed_files": 0,
+        "current_file": None,
+        "current_phase": None,  # extracting, saving, chunking, embedding, indexing, done
         "errors": []
     }
     
@@ -443,6 +458,25 @@ async def get_suggested_questions(
 ):
     """Generate suggested questions based on session's CVs."""
     import random
+    import re
+    
+    def extract_name(filename: str) -> str:
+        """Extract readable name from filename like '8b292e4e_Ethan_James_Carter_...'"""
+        # Remove .pdf extension
+        name = filename.replace('.pdf', '')
+        # Remove leading hash/ID (8 hex chars followed by underscore)
+        name = re.sub(r'^[a-f0-9]{8}_', '', name)
+        # Replace underscores with spaces
+        name = name.replace('_', ' ')
+        # Take only first 2-3 words (the person's name, not the job title)
+        parts = name.split()
+        if len(parts) >= 3:
+            # Check if 3rd word looks like a name (capitalized, not a job word)
+            job_words = {'Senior', 'Junior', 'Lead', 'Head', 'Chief', 'Manager', 'Director', 'Specialist', 'Engineer', 'Developer', 'Designer', 'Analyst'}
+            if parts[2] not in job_words and parts[2][0].isupper():
+                return ' '.join(parts[:3])
+            return ' '.join(parts[:2])
+        return ' '.join(parts[:2]) if len(parts) >= 2 else name[:20]
     
     mgr = get_session_manager(mode)
     session = mgr.get_session(session_id)
@@ -453,45 +487,37 @@ async def get_suggested_questions(
     if not cvs:
         return {"suggestions": []}
     
-    cv_names = [(cv.get("filename", "") if isinstance(cv, dict) else cv.filename).replace('.pdf', '').replace('_', ' ') for cv in cvs]
+    # Extract clean names from filenames
+    cv_names = [extract_name(cv.get("filename", "") if isinstance(cv, dict) else cv.filename) for cv in cvs]
     num_cvs = len(cvs)
     
     if num_cvs == 1:
         name = cv_names[0]
         suggestions = [
-            f"What are {name}'s main technical skills?",
-            f"Summarize {name}'s work experience",
-            f"Is {name} suitable for a senior position?",
-            f"What are {name}'s strongest qualifications?"
+            f"What are {name}'s main skills?",
+            f"Summarize {name}'s experience",
+            f"Is {name} suitable for a senior role?",
+            f"What are {name}'s qualifications?"
         ]
     else:
-        # Generic strategic questions (always include 2-3)
+        # Generic strategic questions only
         generic_questions = [
-            f"Rank all {num_cvs} candidates by years of experience",
-            "Who would be the best fit for a leadership/management role?",
-            "Which candidates have the strongest technical background?",
-            "Compare the education levels of all candidates",
-            "Who has experience working in startups vs large companies?",
-            "Which candidates show the most career progression?",
-            "Who has the best combination of technical and soft skills?",
-            f"Create a shortlist of top 3 candidates from the {num_cvs} CVs",
-            "Which candidates have remote work experience?",
+            f"Rank all {num_cvs} candidates by experience",
+            "Who is best for a leadership role?",
+            "Who has the strongest technical skills?",
+            "Compare education levels",
+            "Who shows the most career growth?",
+            "Who has startup experience?",
+            f"Create a top 3 shortlist from {num_cvs} candidates",
             "Who has the most diverse skill set?",
+            "Compare years of experience",
+            "Who would fit a senior position?",
         ]
         
-        # Pick 2-3 random candidates for specific questions
-        sample_names = random.sample(cv_names, min(3, len(cv_names)))
-        specific_questions = [
-            f"Compare {sample_names[0]} vs {sample_names[1] if len(sample_names) > 1 else sample_names[0]}: who is more experienced?",
-        ]
-        if len(sample_names) >= 2:
-            specific_questions.append(f"Would {sample_names[0]} or {sample_names[1]} be better for a senior role?")
-        
-        # Combine: 3 generic + 1 specific
         random.shuffle(generic_questions)
-        suggestions = generic_questions[:3] + specific_questions[:1]
+        suggestions = generic_questions[:4]
     
-    return {"suggestions": suggestions[:4]}
+    return {"suggestions": suggestions}
 
 
 # ============================================
