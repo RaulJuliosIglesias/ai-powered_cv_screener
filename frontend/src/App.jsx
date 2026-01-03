@@ -36,7 +36,7 @@ function App() {
   // { files: ['file1.pdf', 'file2.pdf'], current: 1, total: 3, status: 'uploading' | 'processing' | 'completed', logs: ['Processing file1.pdf...'] }
 
   const openPdfViewer = (cvId, filename) => {
-    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:6000';
+    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
     const url = `${baseUrl}/api/cvs/${cvId}/pdf`;
     // Open directly in new tab
     window.open(url, '_blank');
@@ -57,23 +57,35 @@ function App() {
     if (!content) return { mainContent: content || '', conclusionContent: null, thinkingContent: null };
     
     let text = content;
+    let thinkingContent = null;
+    let conclusionContent = null;
     
-    // Extract thinking block (for collapsible reasoning)
-    const thinkingMatch = text.match(/:::thinking\s*\n?([\s\S]*?)\n?:::/);
-    const thinkingContent = thinkingMatch ? thinkingMatch[1].trim() : null;
+    // Extract thinking block - try with closing ::: first, then without
+    const thinkingMatch = text.match(/:::thinking\s*\n?([\s\S]*?):::/);
     if (thinkingMatch) {
+      thinkingContent = thinkingMatch[1].trim();
       text = text.replace(thinkingMatch[0], '');
     }
     
-    // Extract conclusion block
-    const conclusionMatch = text.match(/:::conclusion\s*\n?([\s\S]*?)\n?:::/);
-    const conclusionContent = conclusionMatch ? conclusionMatch[1].trim() : null;
+    // Extract conclusion block - multiple patterns
+    // Pattern 1: :::conclusion ... ::: (with closing)
+    let conclusionMatch = text.match(/:::conclusion\s*\n?([\s\S]*?):::/);
     if (conclusionMatch) {
+      conclusionContent = conclusionMatch[1].trim();
       text = text.replace(conclusionMatch[0], '');
+    } else {
+      // Pattern 2: :::conclusion at start of line followed by content (no closing)
+      conclusionMatch = text.match(/:::conclusion\s+(.+)$/m);
+      if (conclusionMatch) {
+        conclusionContent = conclusionMatch[1].trim();
+        text = text.replace(conclusionMatch[0], '');
+      }
     }
     
+    // Also remove any remaining :::conclusion text that wasn't matched
+    text = text.replace(/:::conclusion\s*/g, '');
+    
     // Convert [CV:cv_id] format to clickable button
-    // Multiple patterns to catch different LLM outputs
     text = text.replace(/\[CV:(cv_[a-z0-9]+)\]/gi, '[📄]($1)');
     text = text.replace(/\(cv:(cv_[a-z0-9]+)\)/gi, ' [📄]($1)');
     
@@ -570,11 +582,11 @@ function App() {
                                         ul: ({children}) => <ul className="list-disc list-inside space-y-1 mt-2">{children}</ul>,
                                         li: ({children}) => <li className="text-gray-700 dark:text-gray-200">{children}</li>,
                                         a: ({href, children}) => {
-                                          if (href?.startsWith('cvlink:') || href?.startsWith('cv:')) {
-                                            const cvId = href.replace('cvlink:', '').replace('cv:', '');
+                                          // Handle cv_id format
+                                          if (href?.startsWith('cv_')) {
                                             return (
-                                              <button onClick={() => openPdfViewer(cvId, String(children))} className="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-200 dark:bg-emerald-800 text-emerald-800 dark:text-emerald-200 rounded text-sm font-medium border border-emerald-300 dark:border-emerald-700">
-                                                <FileText className="w-3 h-3" />{children}
+                                              <button onClick={() => openPdfViewer(href, href)} className="inline-flex items-center justify-center w-5 h-5 bg-emerald-200 dark:bg-emerald-700 text-emerald-700 dark:text-emerald-200 hover:bg-emerald-300 dark:hover:bg-emerald-600 rounded transition-colors border border-emerald-300 dark:border-emerald-600">
+                                                <FileText className="w-3 h-3" />
                                               </button>
                                             );
                                           }
@@ -582,7 +594,8 @@ function App() {
                                         },
                                       }}
                                     >
-                                      {conclusionContent}
+                                      {/* Process conclusion content to convert [CV:cv_id] to clickable links */}
+                                      {conclusionContent.replace(/\[CV:(cv_[a-z0-9]+)\]/gi, '[📄]($1)')}
                                     </ReactMarkdown>
                                   </div>
                                 </div>

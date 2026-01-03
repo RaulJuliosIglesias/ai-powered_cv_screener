@@ -4,7 +4,7 @@
   "description": "AI-powered CV screening application with dual mode (Local/Cloud)",
   "scripts": {
     "dev": "concurrently -k -s first -n \"API,WEB\" -c \"cyan,magenta\" \"npm run api\" \"npm run web\"",
-    "api": "cd backend && python -m uvicorn app.main:app --host 127.0.0.1 --port 6000",
+    "api": "cd backend && python -m uvicorn app.main:app --host 127.0.0.1 --port 8000",
     "web": "cd frontend && npx vite --port 6001",
     "install:all": "npm install && cd frontend && npm install",
     "build": "cd frontend && npm run build"

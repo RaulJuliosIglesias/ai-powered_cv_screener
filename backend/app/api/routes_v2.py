@@ -9,8 +9,9 @@ import pdfplumber
 
 from app.config import Mode, settings
 
-# Directory to store uploaded PDFs - use absolute path relative to backend
-PDF_STORAGE_DIR = Path(__file__).parent.parent.parent / "pdf_storage"
+# Directory to store uploaded PDFs - absolute path
+_BACKEND_DIR = Path(__file__).resolve().parent.parent.parent
+PDF_STORAGE_DIR = _BACKEND_DIR / "pdf_storage"
 PDF_STORAGE_DIR.mkdir(exist_ok=True)
 
 # Mapping of cv_id to PDF file path (in production, use database)
@@ -392,6 +393,9 @@ async def delete_all_cvs(mode: Mode = Query(default=settings.default_mode)):
 @router.get("/cvs/{cv_id}/pdf")
 async def get_cv_pdf(cv_id: str):
     """Get the PDF file for a CV."""
+    import logging
+    logger = logging.getLogger(__name__)
+    
     # First check mapping
     if cv_id in cv_pdf_mapping:
         pdf_path = Path(cv_pdf_mapping[cv_id])
@@ -404,12 +408,20 @@ async def get_cv_pdf(cv_id: str):
     
     # Try to find by cv_id in storage directory
     pdf_path = PDF_STORAGE_DIR / f"{cv_id}.pdf"
+    logger.info(f"Looking for PDF at: {pdf_path.absolute()}")
+    
     if pdf_path.exists():
         cv_pdf_mapping[cv_id] = str(pdf_path)
         return FileResponse(
-            path=str(pdf_path),
+            path=str(pdf_path.absolute()),
             media_type="application/pdf",
             filename=pdf_path.name
         )
     
-    raise HTTPException(status_code=404, detail=f"PDF not found for CV {cv_id}")
+    # Log all files in directory for debugging
+    logger.error(f"PDF not found. PDF_STORAGE_DIR={PDF_STORAGE_DIR.absolute()}, exists={PDF_STORAGE_DIR.exists()}")
+    if PDF_STORAGE_DIR.exists():
+        files = list(PDF_STORAGE_DIR.glob("*.pdf"))[:5]
+        logger.error(f"Sample files in dir: {[f.name for f in files]}")
+    
+    raise HTTPException(status_code=404, detail=f"PDF not found for CV {cv_id}. Looking in {PDF_STORAGE_DIR.absolute()}")
