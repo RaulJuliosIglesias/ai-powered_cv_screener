@@ -48,6 +48,13 @@ class GuardrailService:
         "salary", "remote", "work", "company", "position",
         "interview", "shortlist", "recommendation", "select", "choose",
         "list", "from", "create", "make", "find", "show", "get",
+        # Technical skills
+        "programming", "programacion", "programación", "technical", "técnica", "técnico",
+        "frontend", "front-end", "backend", "back-end", "fullstack", "full-stack",
+        "stack", "framework", "library", "code", "coding", "software",
+        # Conversation continuations
+        "sentido", "sense", "coherente", "coherent", "porque", "why", "porque",
+        "analizar", "analyze", "criterio", "criteria", "mejor", "best",
         # Spanish
         "candidato", "candidatos", "currículum", "experiencia",
         "habilidad", "habilidades", "educación", "trabajo",
@@ -158,11 +165,14 @@ class GuardrailService:
                 reason="cv_keywords"
             )
         
-        # Check 4: Question words that suggest analysis
+        # Check 4: Question words that suggest analysis or conversation continuation
         analysis_patterns = [
             r"\b(who|quién|cuál|cual|which|what|qué|compare|comparar)\b",
             r"\b(best|mejor|top|rank|ranking|suitable|adecuado)\b",
             r"\b(experience|experiencia|skill|habilidad|background)\b",
+            r"\b(why|porque|porqué|reason|razón|sentido|sense)\b",
+            r"\b(technical|técnico|técnica|programming|programación|programacion)\b",
+            r"\b(frontend|front-end|backend|fullstack|full-stack|stack)\b",
         ]
         for pattern in analysis_patterns:
             if re.search(pattern, question_lower):

@@ -234,14 +234,24 @@ class RAGServiceV3:
         is_ranking_query = query_type in {"ranking", "comparison"}
         
         # Decision matrix:
-        # - Ranking/Comparison with ANY size → Diversified (need all CVs)
+        # - Ranking/Comparison with <100 CVs → Diversified (need all CVs)
+        # - Ranking/Comparison with ≥100 CVs → Diversified but capped at 100 (LLM context limit)
         # - Search/Filter with <100 CVs → Diversified (can afford full coverage)
         # - Search/Filter with ≥100 CVs → Top-K Global (precision over coverage)
         
+        # Cap ranking queries based on session size to balance coverage vs speed
+        # Reduced to 30 for large sessions to avoid exceeding model context limits (65K tokens)
+        MAX_RANKING_K = 30 if num_cvs_in_session > 100 else 100
+        
+        # Adjust threshold for large sessions to ensure we get enough results
+        effective_threshold = threshold
+        if num_cvs_in_session > 100:
+            effective_threshold = max(0.05, threshold - 0.1)  # Lower threshold for large sessions
+        
         if is_ranking_query:
             diversify = True
-            effective_k = num_cvs_in_session
-            strategy_reason = "ranking/comparison query"
+            effective_k = min(num_cvs_in_session, MAX_RANKING_K)
+            strategy_reason = f"ranking/comparison query (capped at {MAX_RANKING_K} for speed)" if num_cvs_in_session > MAX_RANKING_K else "ranking/comparison query"
         elif num_cvs_in_session < 100:
             diversify = True
             effective_k = num_cvs_in_session
@@ -251,12 +261,12 @@ class RAGServiceV3:
             effective_k = min(k, num_cvs_in_session)
             strategy_reason = f"large session ({num_cvs_in_session} CVs), using top-k for precision"
         
-        logger.info(f"Search strategy: {'diversified' if diversify else 'top-k global'} ({strategy_reason}, k={effective_k})")
+        logger.info(f"Search strategy: {'diversified' if diversify else 'top-k global'} ({strategy_reason}, k={effective_k}, threshold={effective_threshold})")
         
         search_results = await self.vector_store.search(
             embedding=query_embedding,
             k=effective_k,
-            threshold=threshold,
+            threshold=effective_threshold,
             cv_ids=cv_ids,
             diversify_by_cv=diversify
         )
