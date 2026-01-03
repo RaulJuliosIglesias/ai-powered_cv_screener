@@ -53,18 +53,20 @@ TOTAL CANDIDATES: {total_cvs}
 [Detailed explanation: What specific criteria is the user asking for? Break down the requirements. If no explicit criteria given, state which default criteria you'll use: seniority, skills breadth, years of experience, etc.]
 
 **Inventory**
-[List ALL candidates found with their CV IDs. Note which ones seem most relevant at first glance based on job titles or obvious qualifications.]
+[List ALL candidates found with their CV IDs using EXACT format: **[Full Name](cv:cv_xxx)**
+Example: **[Luca Müller](cv:cv_fe6338e6)**, **[Layla Hassan](cv:cv_71736e47)**
+NO spaces after opening **, NO standalone cv_xxx]
 
 **Detailed Analysis**
-[For EACH relevant candidate, examine:
+[For EACH relevant candidate using **[Name](cv:cv_xxx)** format:
 - Key skills matching the query
 - Years of experience in relevant areas
 - Notable achievements or projects
 - Strengths and potential weaknesses
-Compare candidates directly on the most important dimensions.]
+Compare candidates directly using **[Name](cv:cv_xxx)** consistently.]
 
 **Final Decision**
-[Provide clear ranking with explicit rationale. Explain WHY candidate A is better than candidate B based on the analysis above.]
+[Provide clear ranking with explicit rationale using **[Name](cv:cv_xxx)** format. Explain WHY **[Candidate A](cv:cv_xxx)** is better than **[Candidate B](cv:cv_yyy)** based on the analysis above.]
 :::
 
 **Direct Answer**
@@ -83,25 +85,32 @@ Compare candidates directly on the most important dimensions.]
 
 ---
 
-## CRITICAL FORMATTING RULES (DO NOT VIOLATE)
+## CRITICAL FORMATTING RULES (MANDATORY - NO EXCEPTIONS)
 
 1. **:::thinking block** - MANDATORY with detailed reasoning
 2. **TABLE** - Valid markdown with pipes | aligned properly
-3. **CANDIDATE FORMAT** - THIS IS THE ONLY ACCEPTABLE FORMAT:
-   
-   ✅ CORRECT EXAMPLES:
-   - `**[Patrik Hübner](cv:cv_dd668ac0)**`
-   - `**[Luca Müller](cv:cv_fe6338e6)**`
-   
-   ❌ WRONG (DO NOT USE):
-   - `**Patrik Hübner** cv_dd668ac0` ← NO standalone cv_xxx
-   - `**Patrik** cv_dd668ac0 [cv_dd668ac0](cv_dd668ac0)` ← NO duplicates
-   - `** Patrik Hübner**(cv:cv_dd668ac0)` ← NO space after **
-   - `[Patrik Hübner](cv_dd668ac0)` ← MISSING cv: prefix
+3. **CANDIDATE NAME FORMAT** - THIS IS THE **ONLY** ACCEPTABLE FORMAT:
 
-4. **EVERY SINGLE candidate mention** in Direct Answer, Table, AND Conclusion MUST use: `**[Name](cv:cv_xxx)**`
-5. **NEVER write cv_xxx alone** - It MUST be inside `(cv:cv_xxx)` link format
-6. **NEVER duplicate the cv reference** - Write it ONCE per candidate: `**[Name](cv:cv_xxx)**`
+   ✅ CORRECT FORMAT (USE EXACTLY THIS):
+   ```
+   **[Patrik Hübner](cv:cv_dd668ac0)**
+   **[Luca Müller](cv:cv_fe6338e6)**
+   **[Layla Hassan](cv:cv_71736e47)**
+   ```
+   
+   ❌ WRONG FORMATS (NEVER USE THESE):
+   ```
+   **[ Luca Müller](cv:cv_fe6338e6)**        ← SPACE after **
+   ** Layla Hassan** cv_71736e47            ← SPACE after ** + standalone cv_xxx
+   **Luca Müller** cv_fe6338e6              ← Missing link, standalone cv_xxx
+   **Luca** [cv_fe6338e6](cv_fe6338e6)      ← Incomplete name + wrong link
+   [Luca Müller](cv_fe6338e6)               ← Missing cv: prefix
+   ```
+
+4. **NO SPACES AFTER OPENING `**`** - The bracket `[` must come IMMEDIATELY after `**`
+5. **EVERY candidate mention** in Thinking, Inventory, Analysis, Direct Answer, Table, AND Conclusion MUST use: `**[Full Name](cv:cv_xxx)**`
+6. **NEVER write cv_xxx alone** - It MUST ALWAYS be inside the link: `(cv:cv_xxx)`
+7. **NEVER duplicate references** - Write `**[Name](cv:cv_xxx)**` ONCE per mention
 
 Answer now:"""
 
