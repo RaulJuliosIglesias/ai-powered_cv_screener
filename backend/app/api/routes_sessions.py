@@ -2,12 +2,18 @@
 import uuid
 import io
 import logging
+from pathlib import Path
 from typing import List, Optional
 from fastapi import APIRouter, HTTPException, Query, File, UploadFile, BackgroundTasks
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 import pdfplumber
 
 from app.config import settings, Mode
+
+# Directory to store uploaded PDFs
+PDF_STORAGE_DIR = Path("pdf_storage")
+PDF_STORAGE_DIR.mkdir(exist_ok=True)
 from app.models.sessions import session_manager, Session, ChatMessage, CVInfo
 from app.providers.cloud.sessions import supabase_session_manager
 from app.services.rag_service_v2 import RAGService
@@ -270,6 +276,12 @@ async def process_cvs_for_session(
             
             # Create CV ID
             cv_id = f"cv_{uuid.uuid4().hex[:8]}"
+            
+            # Save PDF to disk for later viewing
+            pdf_path = PDF_STORAGE_DIR / f"{cv_id}.pdf"
+            with open(pdf_path, "wb") as f:
+                f.write(content)
+            logger.info(f"[{job_id}] Saved PDF to {pdf_path}")
             
             # Chunk the document
             chunks = chunking_service.chunk_cv(text=text, cv_id=cv_id, filename=filename)

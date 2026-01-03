@@ -244,10 +244,17 @@
             }
           ],
           "timestamp": "2026-01-03T11:36:44.014070"
+        },
+        {
+          "id": "f61a4636-92a4-4352-a752-b5b40417b75b",
+          "role": "user",
+          "content": "cuale s el candidato mas experto en leading teams",
+          "sources": [],
+          "timestamp": "2026-01-03T11:49:30.406671"
         }
       ],
       "created_at": "2026-01-03T11:36:03.414378",
-      "updated_at": "2026-01-03T11:36:44.014070"
+      "updated_at": "2026-01-03T11:49:30.406671"
     }
   ]
 }

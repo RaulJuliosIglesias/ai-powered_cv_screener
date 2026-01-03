@@ -17,14 +17,14 @@ PDF_STORAGE_DIR.mkdir(exist_ok=True)
 cv_pdf_mapping = {}
 from app.services.rag_service_v2 import RAGService
 from app.services.chunking_service import ChunkingService
-from app.models.sessions import LocalSessionManager
-from app.providers.cloud.sessions import SupabaseSessionManager
+from app.models.sessions import session_manager
+from app.providers.cloud.sessions import supabase_session_manager
 
 def get_session_manager(mode: Mode):
     """Get session manager based on mode."""
-    if mode == Mode.cloud:
-        return SupabaseSessionManager()
-    return LocalSessionManager()
+    if mode == Mode.CLOUD:
+        return supabase_session_manager
+    return session_manager
 
 
 router = APIRouter(prefix="/api", tags=["CV Screener"])

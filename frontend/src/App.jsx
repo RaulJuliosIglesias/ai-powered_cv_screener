@@ -46,6 +46,13 @@ function App() {
     setToast({ message, type });
     setTimeout(() => setToast(null), 3000);
   };
+
+  // Preprocess message content to handle :::conclusion blocks
+  const preprocessContent = (content) => {
+    if (!content) return content;
+    // Convert :::conclusion blocks to a special format that we can detect
+    return content.replace(/:::conclusion\n([\s\S]*?):::/g, '\n\n<CONCLUSION_BLOCK>\n$1\n</CONCLUSION_BLOCK>\n\n');
+  };
   
   const messagesEndRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -394,7 +401,8 @@ function App() {
                                   return (
                                     <button
                                       onClick={() => openPdfViewer(cvId, String(children))}
-                                      className="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline decoration-dotted underline-offset-2 font-medium"
+                                      className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800/50 rounded-md text-sm font-medium transition-colors"
+                                      title={language === 'es' ? 'Ver CV' : 'View CV'}
                                     >
                                       <FileText className="w-3.5 h-3.5" />
                                       {children}
@@ -403,19 +411,71 @@ function App() {
                                 }
                                 return <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline" {...props}>{children}</a>;
                               },
-                              blockquote: ({node, children, ...props}) => (
-                                <div className="my-4 p-4 bg-gradient-to-r from-emerald-50 to-cyan-50 dark:from-emerald-900/20 dark:to-cyan-900/20 border-l-4 border-emerald-500 rounded-r-xl" {...props}>
-                                  <div className="text-emerald-800 dark:text-emerald-200 font-medium">
-                                    {children}
-                                  </div>
-                                </div>
-                              ),
+                              p: ({node, children, ...props}) => {
+                                // Check if this paragraph contains conclusion block markers
+                                const text = String(children);
+                                if (text.includes('<CONCLUSION_BLOCK>') || text.includes('</CONCLUSION_BLOCK>')) {
+                                  return null; // Skip the marker paragraphs
+                                }
+                                return <p {...props}>{children}</p>;
+                              },
                             }}
                           >
-                            {msg.content}
+                            {(() => {
+                              const processed = preprocessContent(msg.content);
+                              // Check if there's a conclusion block
+                              const conclusionMatch = processed.match(/<CONCLUSION_BLOCK>\n([\s\S]*?)\n<\/CONCLUSION_BLOCK>/);
+                              const mainContent = processed.replace(/<CONCLUSION_BLOCK>[\s\S]*?<\/CONCLUSION_BLOCK>/, '');
+                              
+                              return mainContent;
+                            })()}
                           </ReactMarkdown>
+                          
+                          {/* Render Conclusion Block Separately */}
+                          {(() => {
+                            const conclusionMatch = msg.content?.match(/:::conclusion\n([\s\S]*?):::/);
+                            if (conclusionMatch) {
+                              return (
+                                <div className="mt-6 p-4 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-900/30 dark:via-teal-900/30 dark:to-cyan-900/30 rounded-xl border-2 border-emerald-200 dark:border-emerald-700 shadow-sm">
+                                  <div className="flex items-center gap-2 mb-3 pb-2 border-b border-emerald-200 dark:border-emerald-700">
+                                    <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center">
+                                      <Check className="w-5 h-5 text-white" />
+                                    </div>
+                                    <span className="font-bold text-emerald-800 dark:text-emerald-200 text-lg">
+                                      {language === 'es' ? 'Conclusión' : 'Conclusion'}
+                                    </span>
+                                  </div>
+                                  <div className="text-gray-800 dark:text-gray-100">
+                                    <ReactMarkdown 
+                                      remarkPlugins={[remarkGfm]}
+                                      components={{
+                                        p: ({children}) => <p className="mb-2 last:mb-0">{children}</p>,
+                                        strong: ({children}) => <strong className="text-emerald-800 dark:text-emerald-200">{children}</strong>,
+                                        ul: ({children}) => <ul className="list-disc list-inside space-y-1 mt-2">{children}</ul>,
+                                        li: ({children}) => <li className="text-gray-700 dark:text-gray-200">{children}</li>,
+                                        a: ({href, children}) => {
+                                          if (href?.startsWith('cv:')) {
+                                            const cvId = href.replace('cv:', '');
+                                            return (
+                                              <button onClick={() => openPdfViewer(cvId, String(children))} className="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-200 dark:bg-emerald-800 text-emerald-800 dark:text-emerald-200 rounded text-sm font-medium">
+                                                <FileText className="w-3 h-3" />{children}
+                                              </button>
+                                            );
+                                          }
+                                          return <a href={href} className="text-emerald-600 underline">{children}</a>;
+                                        },
+                                      }}
+                                    >
+                                      {conclusionMatch[1].trim()}
+                                    </ReactMarkdown>
+                                  </div>
+                                </div>
+                              );
+                            }
+                            return null;
+                          })()}
                         </div>
-                        {msg.sources?.length > 0 && <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-600 flex flex-wrap gap-1.5">{msg.sources.map((src, i) => <SourceBadge key={i} filename={src.filename} score={src.relevance} />)}</div>}
+                        {msg.sources?.length > 0 && <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-600 flex flex-wrap gap-1.5">{msg.sources.map((src, i) => <SourceBadge key={i} filename={src.filename} score={src.relevance} cvId={src.cv_id} onViewCV={() => openPdfViewer(src.cv_id, src.filename)} />)}</div>}
                       </div>
                     </div>
                   </div>
