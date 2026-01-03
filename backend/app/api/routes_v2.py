@@ -403,7 +403,7 @@ async def get_cv_pdf(cv_id: str):
             return FileResponse(
                 path=str(pdf_path),
                 media_type="application/pdf",
-                filename=pdf_path.name
+                headers={"Content-Disposition": "inline"}
             )
     
     # Try to find by cv_id in storage directory
@@ -415,7 +415,7 @@ async def get_cv_pdf(cv_id: str):
         return FileResponse(
             path=str(pdf_path.absolute()),
             media_type="application/pdf",
-            filename=pdf_path.name
+            headers={"Content-Disposition": "inline"}
         )
     
     # Log all files in directory for debugging
