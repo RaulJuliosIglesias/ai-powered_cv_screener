@@ -255,6 +255,23 @@ class VerificationResultV5:
 
 
 @dataclass
+class PipelineStep:
+    """Single step in the pipeline for UI display."""
+    name: str
+    status: str  # "pending" | "running" | "completed" | "error"
+    duration_ms: float = 0
+    details: str = ""
+    
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "name": self.name,
+            "status": self.status,
+            "duration_ms": round(self.duration_ms, 2),
+            "details": self.details
+        }
+
+
+@dataclass
 class RAGResponseV5:
     """Complete response from RAG v5 query."""
     answer: str
@@ -267,6 +284,9 @@ class RAGResponseV5:
     query_understanding: QueryUnderstandingV5 | None = None
     verification: VerificationResultV5 | None = None
     reasoning_trace: str | None = None
+    
+    # Pipeline steps for UI
+    pipeline_steps: list[PipelineStep] = field(default_factory=list)
     
     # Metadata
     mode: str = "local"
@@ -287,7 +307,8 @@ class RAGResponseV5:
             "request_id": self.request_id,
             "timestamp": self.timestamp.isoformat(),
             "version": self.version,
-            "reasoning_trace": self.reasoning_trace[:500] if self.reasoning_trace else None
+            "reasoning_trace": self.reasoning_trace[:500] if self.reasoning_trace else None,
+            "pipeline_steps": [s.to_dict() for s in self.pipeline_steps]
         }
 
 
@@ -681,7 +702,7 @@ class RAGServiceV5:
         logger.info("RAGServiceV5 providers initialized")
     
     @classmethod
-    def from_factory(cls, mode: Mode = Mode.LOCAL) -> "RAGServiceV5":
+    def from_factory(cls, mode: Mode | str = Mode.LOCAL) -> "RAGServiceV5":
         """Create service with default providers."""
         from app.config import settings
         from app.providers.factory import ProviderFactory
@@ -694,6 +715,10 @@ class RAGServiceV5:
         from app.services.reasoning_service import ReasoningService
         from app.services.claim_verifier_service import ClaimVerifierService
         from app.prompts.templates import PromptBuilder
+        
+        # Convert string to Mode enum if needed
+        if isinstance(mode, str):
+            mode = Mode(mode.lower())
         
         config = RAGConfigV5(
             mode=mode,
@@ -764,44 +789,62 @@ class RAGServiceV5:
     async def _execute_pipeline(self, ctx: PipelineContextV5) -> RAGResponseV5:
         """Execute the full RAG v5 pipeline."""
         
+        logger.info(f"[PIPELINE] Starting pipeline for session={ctx.session_id}")
+        
         # Stage 1: Query Understanding
+        logger.info("[PIPELINE] Stage 1: Query Understanding")
         await self._step_query_understanding(ctx)
+        logger.info(f"[PIPELINE] Query Understanding complete: type={ctx.query_understanding.query_type if ctx.query_understanding else 'None'}")
         
         # Stage 2: Multi-Query Generation (V5)
         if self.config.multi_query_enabled:
+            logger.info("[PIPELINE] Stage 2: Multi-Query")
             await self._step_multi_query(ctx)
         
         # Stage 3: Guardrail Check
+        logger.info("[PIPELINE] Stage 3: Guardrail")
         passed = await self._step_guardrail(ctx)
         if not passed:
+            logger.warning("[PIPELINE] Guardrail check failed")
             return self._build_guardrail_response(ctx, ctx.guardrail_message)
         
         # Stage 4: Multi-Embedding (V5)
+        logger.info("[PIPELINE] Stage 4: Multi-Embedding")
         await self._step_multi_embedding(ctx)
         
         # Stage 5: Fusion Retrieval (V5)
+        logger.info("[PIPELINE] Stage 5: Fusion Retrieval")
         await self._step_fusion_retrieval(ctx)
         
         if not ctx.retrieval_result or not ctx.retrieval_result.chunks:
+            logger.warning("[PIPELINE] No retrieval results found")
             return self._build_no_results_response(ctx)
+        
+        logger.info(f"[PIPELINE] Retrieved {len(ctx.retrieval_result.chunks)} chunks")
         
         # Stage 6: Reranking
         if self.config.reranking_enabled:
+            logger.info("[PIPELINE] Stage 6: Reranking")
             await self._step_reranking(ctx)
         
         # Stage 7: Reasoning (V5)
         if self.config.reasoning_enabled:
+            logger.info("[PIPELINE] Stage 7: Reasoning")
             await self._step_reasoning(ctx)
         
         # Stage 8: Generation
+        logger.info("[PIPELINE] Stage 8: Generation")
         await self._step_generation(ctx)
+        logger.info(f"[PIPELINE] Generation complete: answer length={len(ctx.generated_response or '')}")
         
         # Stage 9: Claim Verification (V5)
         if self.config.claim_verification_enabled:
+            logger.info("[PIPELINE] Stage 9: Claim Verification")
             await self._step_claim_verification(ctx)
         
         # Stage 10: Iterative Refinement (V5)
         if self.config.iterative_refinement_enabled:
+            logger.info("[PIPELINE] Stage 10: Refinement")
             await self._step_refinement(ctx)
         
         # Finalize
@@ -810,6 +853,7 @@ class RAGServiceV5:
         
         self._log_query(ctx)
         
+        logger.info("[PIPELINE] Building success response")
         return self._build_success_response(ctx)
     
     # =========================================================================
@@ -1372,6 +1416,9 @@ Provide a corrected response:"""
         # Format the final answer with reasoning blocks
         formatted_answer = self._format_answer_with_blocks(ctx)
         
+        # Build pipeline steps from metrics for UI
+        pipeline_steps = self._build_pipeline_steps(ctx)
+        
         return RAGResponseV5(
             answer=formatted_answer,
             sources=sources,
@@ -1381,10 +1428,69 @@ Provide a corrected response:"""
             query_understanding=ctx.query_understanding,
             verification=ctx.verification_result,
             reasoning_trace=ctx.reasoning_trace,
+            pipeline_steps=pipeline_steps,
             mode=self.config.mode.value,
             cached=ctx.response_cached,
             request_id=ctx.request_id
         )
+    
+    def _build_pipeline_steps(self, ctx: PipelineContextV5) -> list[PipelineStep]:
+        """Build pipeline steps from metrics for UI display."""
+        logger.info("[BUILD_STEPS] Starting to build pipeline steps")
+        steps = []
+        
+        try:
+            # Step 1: Query Understanding
+            qu_stage = ctx.metrics.get_stage(PipelineStage.QUERY_UNDERSTANDING)
+            qu_details = ""
+            if ctx.query_understanding:
+                qu_details = f"Query type: {ctx.query_understanding.query_type}"
+            steps.append(PipelineStep(
+                name="query_understanding",
+                status="completed" if qu_stage and qu_stage.success else "error",
+                duration_ms=qu_stage.duration_ms if qu_stage else 0,
+                details=qu_details
+            ))
+            logger.info(f"[BUILD_STEPS] Added query_understanding step")
+            
+            # Step 2: Retrieval
+            ret_stage = ctx.metrics.get_stage(PipelineStage.SEARCH)
+            ret_details = f"Found {len(ctx.effective_chunks)} relevant chunks"
+            steps.append(PipelineStep(
+                name="retrieval",
+                status="completed" if ret_stage and ret_stage.success else "error",
+                duration_ms=ret_stage.duration_ms if ret_stage else 0,
+                details=ret_details
+            ))
+            logger.info(f"[BUILD_STEPS] Added retrieval step")
+            
+            # Step 3: Analysis/Reasoning
+            reason_stage = ctx.metrics.get_stage(PipelineStage.REASONING)
+            steps.append(PipelineStep(
+                name="analysis",
+                status="completed" if reason_stage and reason_stage.success else "error",
+                duration_ms=reason_stage.duration_ms if reason_stage else 0,
+                details="Analyzed candidates and generated ranking"
+            ))
+            logger.info(f"[BUILD_STEPS] Added analysis step")
+            
+            # Step 4: Response Generation
+            gen_stage = ctx.metrics.get_stage(PipelineStage.GENERATION)
+            steps.append(PipelineStep(
+                name="generation",
+                status="completed" if gen_stage and gen_stage.success else "error",
+                duration_ms=gen_stage.duration_ms if gen_stage else 0,
+                details="Generated structured response"
+            ))
+            logger.info(f"[BUILD_STEPS] Added generation step")
+            
+            logger.info(f"[BUILD_STEPS] Successfully built {len(steps)} steps")
+            return steps
+        except Exception as e:
+            logger.error(f"[BUILD_STEPS] Error building pipeline steps: {type(e).__name__}: {e}")
+            logger.exception("Full traceback:")
+            # Return empty list if fails
+            return []
     
     def _format_answer_with_blocks(self, ctx: PipelineContextV5) -> str:
         """Post-process answer to add CV links and proper formatting."""
@@ -1440,43 +1546,62 @@ Provide a corrected response:"""
         """Clean up broken CV reference formats that LLM sometimes generates."""
         import re
         
-        # Pattern 1: cv_xxx [cv_xxx](cv_xxx) -> remove completely (broken format)
-        text = re.sub(r'cv_[a-f0-9]+\s*\[cv_[a-f0-9]+\]\(cv_[a-f0-9]+\)', '', text)
+        # PRIORITY 1: Clean the most common broken patterns first
         
-        # Pattern 2: **word** cv_xxx [cv_xxx](cv_xxx) -> **word**
-        text = re.sub(r'(\*\*\w+\*\*)\s*cv_[a-f0-9]+\s*\[cv_[a-f0-9]+\]\(cv_[a-f0-9]+\)', r'\1', text)
+        # Pattern: "Name Role** cv_xxx [cv_xxx](cv_xxx)" - full broken reference
+        # Example: "**Aisha Nkosi Staff** cv_a3a1761e [cv_a3a1761e](cv_a3a1761e)"
+        text = re.sub(
+            r'\*\*([^*]+)\*\*\s*cv_([a-f0-9]+)\s*\[cv_[a-f0-9]+\]\(cv_[a-f0-9]+\)',
+            r'**[\1](cv:cv_\2)**',
+            text
+        )
         
-        # Pattern 3: [cv_xxx](cv_xxx) -> remove (malformed link)
+        # Pattern: "**Word** cv_xxx [cv_xxx](cv_xxx)" in middle of text
+        # Example: "AWS Certified **Solutions** cv_5c64ca1d [cv_5c64ca1d](cv_5c64ca1d) Architect"
+        # This is NOT a candidate reference, just remove the broken part
+        text = re.sub(
+            r'\*\*(Solutions|Staff|Cloud|Senior|Junior|Lead|Manager|Director|Engineer|Developer|Architect)\*\*\s*cv_[a-f0-9]+\s*\[cv_[a-f0-9]+\]\(cv_[a-f0-9]+\)',
+            r'\1',
+            text,
+            flags=re.IGNORECASE
+        )
+        
+        # Pattern: standalone "cv_xxx [cv_xxx](cv_xxx)" without name
+        text = re.sub(r'\bcv_[a-f0-9]+\s*\[cv_[a-f0-9]+\]\(cv_[a-f0-9]+\)', '', text)
+        
+        # Pattern: "[cv_xxx](cv_xxx)" malformed link
         text = re.sub(r'\[cv_[a-f0-9]+\]\(cv_[a-f0-9]+\)', '', text)
         
-        # Pattern 4: Standalone cv_xxx references not in proper link format
-        # Convert "Name cv_xxx" patterns where cv_xxx follows a name
-        # This helps clean up: "Rajiv Patel cv_5c64ca1d" 
+        # Pattern: "Name cv_xxx" at end of sentence (conclusion style)
+        # Example: "interviewing Aisha Nkosi Staff cv_a3a1761e ,"
+        # Convert to proper link format
+        text = re.sub(
+            r'([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\s+cv_([a-f0-9]+)\s*([,\.\)])',
+            r'**[\1](cv:cv_\2)**\3',
+            text
+        )
         
-        # Pattern 5: ** Name ** cv_xxx [cv_xxx](cv:cv_xxx) - partial broken format
-        text = re.sub(r'\*\*\s*([^*]+)\s*\*\*\s*cv_[a-f0-9]+\s*\[cv_[a-f0-9]+\]\(cv:cv_[a-f0-9]+\)', r'**\1**', text)
+        # Pattern: standalone cv_xxx not in proper (cv:cv_xxx) format
+        # Remove orphaned cv_xxx that appear randomly in text
+        # But preserve if inside proper link format
+        def remove_orphan_cv_ids(match):
+            # Check if this is inside a proper link - if so, keep it
+            return ''
         
-        # Pattern 6: Multiple cv_xxx in a row
-        text = re.sub(r'(cv_[a-f0-9]+)\s+\1', r'\1', text)
+        # Remove cv_xxx that are NOT inside (cv:...) or [...](...) 
+        text = re.sub(r'(?<!\(cv:)(?<!\[)\bcv_[a-f0-9]+\b(?!\]|\))', '', text)
         
-        # Pattern 7: cv_xxx followed by [cv_xxx]
-        text = re.sub(r'cv_([a-f0-9]+)\s*\[cv_\1\]', r'cv_\1', text)
-        
-        # Pattern 8: Clean orphaned cv_xxx that appear inline (not in links)
-        # But keep them if they're in proper (cv:cv_xxx) format
-        # Remove: "blah cv_abc123 blah" but keep "blah (cv:cv_abc123) blah"
-        
-        # Pattern 9: Fix double markdown bold
-        text = re.sub(r'\*\*\*\*+', '**', text)
-        
-        # Pattern 10: Remove empty or malformed links
-        text = re.sub(r'\[\]\([^)]*\)', '', text)
+        # Clean up artifacts
+        text = re.sub(r'\*\*\*\*+', '**', text)  # Fix multiple asterisks
+        text = re.sub(r'\*\*\s*\*\*', '', text)  # Remove empty bold
+        text = re.sub(r'\[\]\([^)]*\)', '', text)  # Remove empty links
         text = re.sub(r'\*\*\[\]\([^)]*\)\*\*', '', text)
+        text = re.sub(r'\(\s*\)', '', text)  # Remove empty parentheses
+        text = re.sub(r'  +', ' ', text)  # Multiple spaces
+        text = re.sub(r' ([,\.\)])', r'\1', text)  # Space before punctuation
+        text = re.sub(r'\n\s*\n\s*\n', '\n\n', text)  # Multiple newlines
         
-        # Clean up multiple spaces
-        text = re.sub(r'  +', ' ', text)
-        
-        return text
+        return text.strip()
     
     def _remove_developer_sections(self, text: str) -> str:
         """Remove sections meant for developers, not end users."""

@@ -2,7 +2,8 @@ import { useState, useMemo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import SourceBadge from './SourceBadge';
-import { User, Sparkles, ChevronDown, ChevronRight, Brain, Lightbulb, FileText, ExternalLink, CheckCircle, Search, BarChart3, Zap } from 'lucide-react';
+import PipelineStepsPanel from './PipelineStepsPanel';
+import { User, Sparkles, ChevronDown, ChevronRight, Brain, Lightbulb, FileText, ExternalLink, CheckCircle, Search, BarChart3, Zap, Copy } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 /**
@@ -276,10 +277,11 @@ const ConclusionPanel = ({ content }) => {
  * Main Message Component with Enhanced Markdown Rendering
  */
 const Message = ({ message, onViewCV }) => {
-  const { role, content, sources = [] } = message;
+  const { role, content, sources = [], pipeline_steps = [] } = message;
   const isUser = role === 'user';
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [isReasoningExpanded, setIsReasoningExpanded] = useState(false);
+  const [isPipelineExpanded, setIsPipelineExpanded] = useState(false);
 
   // Parse message content to extract special blocks
   const { thinking, conclusion, mainContent } = useMemo(() => 
@@ -371,6 +373,15 @@ const Message = ({ message, onViewCV }) => {
                 : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-tl-sm'
             }`}
           >
+            {/* Pipeline Steps Panel (expandable) - Shows real backend execution steps */}
+            {!isUser && pipeline_steps && pipeline_steps.length > 0 && (
+              <PipelineStepsPanel 
+                steps={pipeline_steps}
+                isExpanded={isPipelineExpanded}
+                onToggle={() => setIsPipelineExpanded(!isPipelineExpanded)}
+              />
+            )}
+
             {/* Reasoning Panel (expandable) - Only for assistant messages */}
             {!isUser && thinking && (
               <ReasoningPanel 

@@ -6441,10 +6441,251 @@
           "content": "Create a top 3 shortlist from 70 candidates",
           "sources": [],
           "timestamp": "2026-01-03T22:02:09.501460"
+        },
+        {
+          "id": "be4916ab-eeff-4b93-86ef-017887644938",
+          "role": "assistant",
+          "content": "```\n:::thinking\n- What is being asked? A top 3 shortlist from the provided candidates based on their qualifications and experience.\n- What CVs/sections are relevant? All candidates' experience and skills sections.\n- Do any candidates actually match? I need to evaluate each candidate's qualifications against the requirements for the role.\n- What's my confidence level? I will ensure that all claims are supported by the CV data provided.\n:::\n\nThe top 3 candidates based on their qualifications and experience are:\n\n1. **[Aisha Nkosi Staff](cv:cv_a3a1761e)** \n - **Experience**: **[Staff](cv:cv_a3a1761e)** Engineer with a proven track record in scalable systems and cloud infrastructure. Led migration to cloud-native architecture, implemented CI/CD pipelines, and contributed to high-quality **[solutions](cv:cv_5c64ca1d)**.\n - **Skills**: Cloud Computing, Distributed Systems, Microservices Architecture, Kubernetes, Python.\n - **Certifications**: AWS Certified **[Solutions](cv:cv_5c64ca1d)** Architect - Professional, Certified Kubernetes Administrator.\n\n2. **[Rajiv Patel Solutions](cv:cv_5c64ca1d)**\n - **Experience**: **[Solutions](cv:cv_5c64ca1d)** Architect with experience in designing scalable enterprise architectures and delivering cloud-native **[solutions](cv:cv_5c64ca1d)**. Led a team to build real-time analytics platforms and introduced CI/CD pipelines.\n - **Skills**: Cloud Architecture, Microservices, AWS Platforms, Kubernetes, Data Engineering.\n - **Certifications**: AWS Certified **[Solutions](cv:cv_5c64ca1d)** Architect – Professional, TOGAF 9 Certified.\n\n3. **[Carla Mendoza](cv:cv_4aa336c4)**\n - **Experience**: Director of Architecture with a focus on high-profile mixed-use developments. Implemented AI-driven generative design tools and mentored a team of architects.\n - **Skills**: Architecture, AI-driven design tools, project management.\n - **Achievements**: Secured significant contracts and reduced design iteration time.\n\n:::conclusion\nThese candidates demonstrate strong technical skills and relevant experience in cloud architecture and engineering, making them suitable for advanced roles in technology and architecture. Consider interviewing **[Aisha Nkosi Staff](cv:cv_a3a1761e)**, **[Rajiv Patel Solutions](cv:cv_5c64ca1d)**, and **[Carla Mendoza](cv:cv_4aa336c4)** for further evaluation.\n:::\n```",
+          "sources": [
+            {
+              "cv_id": "cv_a3a1761e",
+              "filename": "0dded4c5__Aisha_Nkosi__Staff_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_a4cfb75d",
+              "filename": "bf3a5fa7_Carmen_López_Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d396de81",
+              "filename": "4a8103c9__Shaziya_Ramji__Interaction_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_01e649f9",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_5c64ca1d",
+              "filename": "2bb4cb36_Rajiv_Patel_Solutions_Architect.pdf"
+            },
+            {
+              "cv_id": "cv_4aa336c4",
+              "filename": "37a5388e_Carla_Mendoza_Architect.pdf"
+            },
+            {
+              "cv_id": "cv_11213762",
+              "filename": "1774687d_Layla_Al-Mansoori_Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_38ef7ac8",
+              "filename": "ab71577d_Ana_Silva_Junior_Interaction_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_51dca86b",
+              "filename": "477ae7a5_Liam_Nguyen_Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_de6175cf",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_46e62a00",
+              "filename": "940dd522__Lina_Tan__Brand_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_28cf6718",
+              "filename": "16d1e8af__Anika_Patel__Unity_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_e4579fab",
+              "filename": "06659811_Lucas_Moreau_CFO.pdf"
+            },
+            {
+              "cv_id": "cv_bebe1be4",
+              "filename": "f180c979_Khalid_Al-Mansur_Mobile_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_81c55155",
+              "filename": "d6243621_Luca_Chen_VP_of_Talent.pdf"
+            },
+            {
+              "cv_id": "cv_22bd7c82",
+              "filename": "b1075598__Ji-hoon_Kim__Engine_Programmer.pdf"
+            },
+            {
+              "cv_id": "cv_3b75944d",
+              "filename": "23621408_Kamal_Patel_Head_of_Audio.pdf"
+            },
+            {
+              "cv_id": "cv_3c231228",
+              "filename": "a2971b00_Carlos_Mendoza_Research_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_64591295",
+              "filename": "b4b377d4_Layla_Kim_Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_1df06377",
+              "filename": "0762284b_Aïssa_Diallo_Composer.pdf"
+            },
+            {
+              "cv_id": "cv_678ef7e0",
+              "filename": "0762284b_Aïssa_Diallo_Composer.pdf"
+            },
+            {
+              "cv_id": "cv_5e93b2e6",
+              "filename": "c8fe4e7c__Rajiv_Patel__Assistant_Professor.pdf"
+            },
+            {
+              "cv_id": "cv_c5cf0a65",
+              "filename": "45d8cbc0_Carlos_Mendoza_Accessories_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_521c1b28",
+              "filename": "71866d1c_Benjamin_Obi_Pharmacist.pdf"
+            },
+            {
+              "cv_id": "cv_c2072c0b",
+              "filename": "d422b68f_Layla_Kim_Podcast_Assistant.pdf"
+            }
+          ],
+          "timestamp": "2026-01-03T22:03:28.544493"
         }
       ],
       "created_at": "2026-01-03T21:52:20.125408",
-      "updated_at": "2026-01-03T22:02:09.501460"
+      "updated_at": "2026-01-03T22:03:28.544493"
+    },
+    {
+      "id": "141914be-fff7-4a6c-bad4-a6546bb67202",
+      "name": "New chat",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_bbc748f9",
+          "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T22:15:15.503728"
+        },
+        {
+          "id": "cv_943da331",
+          "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T22:15:15.976715"
+        },
+        {
+          "id": "cv_916fd244",
+          "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T22:15:16.500940"
+        },
+        {
+          "id": "cv_fe6338e6",
+          "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T22:15:17.075838"
+        },
+        {
+          "id": "cv_f01ac22c",
+          "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T22:15:17.580609"
+        },
+        {
+          "id": "cv_653fbf59",
+          "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T22:15:18.044900"
+        },
+        {
+          "id": "cv_ffc6d564",
+          "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T22:15:18.569431"
+        },
+        {
+          "id": "cv_7b0f7ab3",
+          "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf",
+          "chunk_count": 7,
+          "uploaded_at": "2026-01-03T22:15:19.113695"
+        },
+        {
+          "id": "cv_71736e47",
+          "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T22:15:19.633513"
+        },
+        {
+          "id": "cv_dd668ac0",
+          "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T22:15:20.157657"
+        }
+      ],
+      "messages": [
+        {
+          "id": "b3290781-9472-4d22-9c9f-33f0b793240a",
+          "role": "user",
+          "content": "Who has startup experience?",
+          "sources": [],
+          "timestamp": "2026-01-03T22:29:52.293610"
+        },
+        {
+          "id": "1997b6ec-ef86-4be8-bf62-bd2555015a79",
+          "role": "assistant",
+          "content": "**Direct Answer**\n[ Layla Hassan NFT](cv:cv_71736e47), [ Luca Müller Cloud](cv:cv_fe6338e6), and [Mei-Ling Chen Human Resources](cv:cv_ffc6d564) have experience working in or with startups. [ Patrik Hübner Brand](cv:cv_dd668ac0) supported the development of a **[brand](cv:cv_dd668ac0)** identity for a startup.\n\n**Analysis**\n| Candidate | Key Skills | Experience | Score |\n|---|---|---|---|\n| **[ Layla Hassan NFT](cv:cv_71736e47)** | Solidity, Ethereum, IPFS | 3 years at TechStart Pty Ltd | ⭐⭐⭐⭐ |\n| **[ Luca Müller Cloud](cv:cv_fe6338e6)** | AWS **[Cloud](cv:cv_fe6338e6)**, Kubernetes, Terraform | 2 years at TechStart GmbH | ⭐⭐⭐⭐ |\n| **[Mei-Ling Chen Human Resources](cv:cv_ffc6d564)** | Talent Acquisition, Employee Relations, HRIS Platforms | 3 years at Start‑Up Logística | ⭐⭐⭐⭐ |\n| **[ Patrik Hübner Brand](cv:cv_dd668ac0)** | **[Brand](cv:cv_dd668ac0)** Design, Market Research | Supported a startup at DesignLab GmbH | ⭐⭐⭐ |\n\n:::conclusion\n[Based on the CV data, [ Layla Hassan NFT](cv:cv_71736e47), [ Luca Müller Cloud](cv:cv_fe6338e6), and [Mei-Ling Chen Human Resources](cv:cv_ffc6d564) have direct startup experience and would be good candidates to interview. [ Patrik Hübner Brand](cv:cv_dd668ac0) has some experience with startups, but it is less direct.]\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_71736e47",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_bbc748f9",
+              "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_dd668ac0",
+              "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_fe6338e6",
+              "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_653fbf59",
+              "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf"
+            },
+            {
+              "cv_id": "cv_943da331",
+              "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_f01ac22c",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_916fd244",
+              "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf"
+            },
+            {
+              "cv_id": "cv_ffc6d564",
+              "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf"
+            },
+            {
+              "cv_id": "cv_7b0f7ab3",
+              "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
+            }
+          ],
+          "timestamp": "2026-01-03T22:31:29.428093"
+        },
+        {
+          "id": "af8cf397-cb85-47c8-827a-14932c9f73b3",
+          "role": "user",
+          "content": "quein sabe mas de python?",
+          "sources": [],
+          "timestamp": "2026-01-03T22:33:12.995853"
+        }
+      ],
+      "created_at": "2026-01-03T22:15:07.573740",
+      "updated_at": "2026-01-03T22:33:12.995853"
     }
   ]
 }

@@ -104,6 +104,7 @@ class ChatResponse(BaseModel):
     query_understanding: Optional[dict] = None  # Info about how query was understood
     reranking_info: Optional[dict] = None       # Re-ranking step info
     verification_info: Optional[dict] = None    # Verification step info
+    pipeline_steps: List[dict] = Field(default_factory=list)  # Pipeline execution steps for UI
 
 
 class UploadResponse(BaseModel):
@@ -444,13 +445,22 @@ async def chat_in_session(
     # Import RAGServiceV3 directly to pass all pipeline parameters
     from app.services.rag_service_v5 import RAGServiceV5
     
+    logger.info(f"[CHAT] Creating RAG service with mode={mode}")
     rag_service = RAGServiceV5.from_factory(mode)
-    result = await rag_service.query(
-        question=request.message, 
-        cv_ids=cv_ids,
-        session_id=session_id,
-        total_cvs_in_session=total_cvs
-    )
+    
+    logger.info(f"[CHAT] Starting query for session={session_id}, cv_ids={cv_ids[:3] if cv_ids else []}, total_cvs={total_cvs}")
+    try:
+        result = await rag_service.query(
+            question=request.message, 
+            cv_ids=cv_ids,
+            session_id=session_id,
+            total_cvs_in_session=total_cvs
+        )
+        logger.info(f"[CHAT] Query completed successfully, answer length={len(result.answer)}")
+    except Exception as e:
+        logger.error(f"[CHAT] Query failed with error: {type(e).__name__}: {e}")
+        logger.exception("Full traceback:")
+        raise
     
     # Save assistant message
     mgr.add_message(session_id, "assistant", result.answer, result.sources)
@@ -458,10 +468,11 @@ async def chat_in_session(
     # Include query understanding info in response
     query_understanding_info = None
     if hasattr(result, 'query_understanding') and result.query_understanding:
+        qu = result.query_understanding
         query_understanding_info = {
-            "understood_query": result.query_understanding.get("understood_query"),
-            "query_type": result.query_understanding.get("query_type"),
-            "requirements": result.query_understanding.get("requirements", [])
+            "understood_query": getattr(qu, 'understood_query', None),
+            "query_type": getattr(qu, 'query_type', None),
+            "requirements": getattr(qu, 'requirements', [])
         }
     
     # Include reranking info
@@ -474,15 +485,24 @@ async def chat_in_session(
     if hasattr(result, 'verification_info') and result.verification_info:
         verification_info = result.verification_info
     
+    # Convert metrics to dict if it has to_dict method
+    metrics_dict = result.metrics.to_dict() if hasattr(result.metrics, 'to_dict') else result.metrics
+    
+    # Include pipeline_steps in response
+    pipeline_steps = []
+    if hasattr(result, 'pipeline_steps') and result.pipeline_steps:
+        pipeline_steps = [s.to_dict() for s in result.pipeline_steps]
+    
     return ChatResponse(
         response=result.answer,
         sources=result.sources,
-        metrics=result.metrics,
+        metrics=metrics_dict,
         confidence_score=result.confidence_score,
         guardrail_passed=result.guardrail_passed,
         query_understanding=query_understanding_info,
         reranking_info=reranking_info,
-        verification_info=verification_info
+        verification_info=verification_info,
+        pipeline_steps=pipeline_steps
     )
 
 

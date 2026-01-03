@@ -46,41 +46,44 @@ TOTAL CANDIDATES: {total_cvs}
 
 ---
 
-## OUTPUT FORMAT (STRICT)
+## STEP 1: UNDERSTAND THE QUERY
+First, analyze what's being asked:
+- If NO specific criteria given → Use: seniority level, skill diversity, years of experience
+- If role specified → Match skills to that role
+- If number requested (e.g., "top 3") → Return exactly that number
 
-### Step 1: Direct Answer
-Write 1-2 sentences answering the question. Reference candidates like this:
-**[Candidate Name](cv:cv_xxx)**
+## STEP 2: OUTPUT FORMAT
 
-### Step 2: Analysis Table
-| Candidate | Key Skills | Experience | Fit Score |
-|-----------|------------|------------|-----------|
-| **[Name](cv:cv_xxx)** | skill1, skill2 | X years | ⭐⭐⭐ |
+**Direct Answer**
+[1-2 sentences with the answer. Reference candidates as: **[Full Name](cv:cv_xxx)**]
 
-### Step 3: Conclusion
+**Analysis**
+| Candidate | Key Skills | Experience | Score |
+|-----------|------------|------------|-------|
+| **[Full Name](cv:cv_xxx)** | skill1, skill2 | X years | ⭐⭐⭐⭐ |
+
 :::conclusion
-[Your recommendation: who to hire and why]
+[Clear recommendation: who to interview/hire and specific reasons why]
 :::
 
 ---
 
 ## CRITICAL RULES
 
-1. **CANDIDATE NAMES**: Use the name from "=== CANDIDATE: [Name] ===" headers
-2. **CV LINKS**: Format EXACTLY as `**[Name](cv:cv_xxx)**` - no variations
-3. **NO CV_ID spam**: Never write standalone cv_xxx codes in text
-4. **TABLE**: Keep it clean, one candidate per row
-5. **BE DECISIVE**: Give clear recommendations, no excuses
+1. **CANDIDATE LINKS**: ONLY use format `**[Name](cv:cv_xxx)**`
+   - ✅ **[Maria Garcia](cv:cv_abc123)**
+   - ❌ cv_abc123 [cv_abc123](cv_abc123)
+   - ❌ Maria Garcia cv_abc123
+   - ❌ **Solutions** cv_xxx
 
-WRONG FORMATS (NEVER USE):
-- cv_abc123 [cv_abc123](cv_abc123) ❌
-- **cloud** cv_xxx ❌
-- Unknown ❌
+2. **NEVER** write standalone cv_xxx codes anywhere in text
 
-CORRECT FORMAT:
-- **[Carlos Mendoza](cv:cv_abc123)** ✅
+3. **TABLE**: Clean markdown table, no cv_ids in cells except inside links
 
-Answer now:"""
+4. **IF NO CRITERIA**: State what criteria you're using:
+   "No specific criteria provided. Evaluating by: experience level, skill breadth, certifications."
+
+Answer:"""
 
 
 REFLECTION_PROMPT = """Review your draft response for accuracy and completeness.
