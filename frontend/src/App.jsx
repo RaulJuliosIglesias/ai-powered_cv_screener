@@ -319,7 +319,16 @@ function App() {
     
     setIsChatLoading(true);
     try { 
-      await sendSessionMessage(currentSessionId, userMessage, mode, ragPipelineSettings); 
+      const response = await sendSessionMessage(currentSessionId, userMessage, mode, ragPipelineSettings);
+      
+      // Log pipeline info for debugging
+      if (response.query_understanding) {
+        console.log('🔍 RAG Pipeline - Query Understanding:', response.query_understanding);
+      }
+      if (response.metrics) {
+        console.log('📊 RAG Pipeline - Metrics:', response.metrics);
+      }
+      
       await loadSession(currentSessionId); 
     } catch (e) { 
       console.error(e); 
@@ -584,13 +593,13 @@ function App() {
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{currentSession ? `${currentSession.name} · ${currentSession.cvs?.length || 0} CVs` : 'CV Screener'}</span>
           </div>
           <div className="flex items-center gap-2">
-            <ModelSelector />
             <button 
               onClick={() => setShowRAGSettings(true)}
               className="flex items-center gap-1.5 px-3 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-purple-300 dark:hover:border-purple-600 transition-colors text-sm"
               title={language === 'es' ? 'Configurar Pipeline RAG' : 'Configure RAG Pipeline'}
             >
               <Sliders className="w-4 h-4 text-purple-500" />
+              <span className="text-gray-600 dark:text-gray-300 text-xs hidden sm:inline">{language === 'es' ? 'Pipeline' : 'Pipeline'}</span>
             </button>
             {currentSession && (<><input ref={fileInputRef} type="file" accept=".pdf" multiple onChange={handleUpload} className="hidden" /><button onClick={() => fileInputRef.current?.click()} disabled={isUploading} className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-blue-500 hover:bg-blue-600 text-white rounded-lg disabled:opacity-50">{isUploading ? <Loader className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}<span>{language === 'es' ? 'Añadir CVs' : 'Add CVs'}</span></button></>)}
           </div>

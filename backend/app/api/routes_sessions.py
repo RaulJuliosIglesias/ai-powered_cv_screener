@@ -17,7 +17,7 @@ PDF_STORAGE_DIR = _PROJECT_ROOT / "storage"
 PDF_STORAGE_DIR.mkdir(exist_ok=True)
 from app.models.sessions import session_manager, Session, ChatMessage, CVInfo
 from app.providers.cloud.sessions import supabase_session_manager
-from app.services.rag_service_v3 import RAGServiceV3 as RAGService
+from app.providers.factory import ProviderFactory
 from app.services.chunking_service import ChunkingService
 
 
@@ -241,7 +241,7 @@ async def delete_session(session_id: str, mode: Mode = Query(default=settings.de
         raise HTTPException(status_code=404, detail="Session not found")
     
     # Delete CVs from vector store
-    rag_service = RAGService(mode)
+    rag_service = ProviderFactory.get_rag_service(mode=mode)
     cvs = session.get("cvs", []) if isinstance(session, dict) else session.cvs
     for cv in cvs:
         cv_id = cv.get("id") if isinstance(cv, dict) else cv.id
@@ -267,7 +267,7 @@ async def process_cvs_for_session(
     
     try:
         chunking_service = ChunkingService()
-        rag_service = RAGService(mode)
+        rag_service = ProviderFactory.get_rag_service(mode=mode)
     except Exception as e:
         logger.error(f"[{job_id}] Service init failed: {e}")
         jobs[job_id]["status"] = "failed"
@@ -397,7 +397,7 @@ async def remove_cv_from_session(
         raise HTTPException(status_code=404, detail="CV not found in session")
     
     # Delete from vector store
-    rag_service = RAGService(mode)
+    rag_service = ProviderFactory.get_rag_service(mode=mode)
     await rag_service.vector_store.delete_cv(cv_id)
     
     # Remove from session
@@ -435,16 +435,15 @@ async def chat_in_session(
     
     # Query RAG with session's CVs only - pass session_id for logging
     # Use custom models if provided, otherwise use defaults
-    rag_service = RAGService(
+    # ProviderFactory decides between RAGServiceV3 and LangChainRAGService
+    rag_service = ProviderFactory.get_rag_service(
         mode=mode,
         understanding_model=request.understanding_model,
         generation_model=request.generation_model
     )
     result = await rag_service.query(
         question=request.message, 
-        session_id=session_id,
-        cv_ids=cv_ids, 
-        total_cvs_in_session=total_cvs
+        cv_ids=cv_ids
     )
     
     # Save assistant message
@@ -567,7 +566,7 @@ async def clear_session_cvs(
         return {"success": True, "deleted": 0, "message": "No CVs to delete"}
     
     # Delete from vector store
-    rag_service = RAGService(mode)
+    rag_service = ProviderFactory.get_rag_service(mode=mode)
     deleted = 0
     for cv in cvs:
         cv_id = cv.get("id") if isinstance(cv, dict) else cv.id
@@ -583,7 +582,7 @@ async def delete_all_cvs_from_database(
     mode: Mode = Query(default=settings.default_mode)
 ):
     """Delete ALL CVs from the entire database (use with caution)."""
-    rag_service = RAGService(mode)
+    rag_service = ProviderFactory.get_rag_service(mode=mode)
     
     # Delete all embeddings
     success = await rag_service.vector_store.delete_all_cvs()

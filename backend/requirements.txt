@@ -18,11 +18,18 @@ sentence-transformers==2.2.2
 chromadb==0.4.22
 
 # Local Mode - LLM (Google Gemini)
-google-generativeai==0.3.2
+google-generativeai>=0.5.2,<0.6.0
 
 # Cloud Mode - API Client & Supabase
-httpx>=0.24,<0.26
+httpx>=0.24,<0.28
 supabase==2.3.4
+
+# LangChain Integration
+langchain>=0.1.20,<0.2.0
+langchain-core>=0.1.52,<0.2.0
+langchain-community>=0.0.38,<0.1.0
+langchain-google-genai>=1.0.3,<2.0.0
+langchain-openai>=0.1.3,<0.2.0
 
 # Utilities
 tenacity==8.2.3

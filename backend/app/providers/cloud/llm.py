@@ -110,8 +110,8 @@ class OpenRouterLLMProvider(LLMProvider):
         import asyncio
         start = time.perf_counter()
         
-        # Always use current model
-        model = _current_model
+        # Use instance model if set, otherwise use global current model
+        model = self.model or _current_model
         
         messages = []
         if system_prompt:

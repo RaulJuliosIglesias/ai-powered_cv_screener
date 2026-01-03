@@ -8,7 +8,8 @@ import logging
 from typing import Optional, Dict, Any
 from dataclasses import dataclass
 import httpx
-import os
+
+from app.config import settings
 
 logger = logging.getLogger(__name__)
 
@@ -99,9 +100,10 @@ class QueryUnderstandingService:
     
     def __init__(self, model: Optional[str] = None):
         self.model = model or self.DEFAULT_MODEL
-        self.api_key = os.getenv("OPENROUTER_API_KEY", "")
+        self.api_key = settings.openrouter_api_key or ""
         self.client = httpx.AsyncClient(timeout=30.0)
         logger.info(f"QueryUnderstandingService initialized with model: {self.model}")
+        logger.info(f"  API key available: {bool(self.api_key)}")
     
     async def understand(self, query: str) -> QueryUnderstanding:
         """

@@ -1,3 +1,4 @@
+from typing import Optional
 from app.config import settings, Mode
 from app.providers.base import EmbeddingProvider, VectorStoreProvider, LLMProvider
 
@@ -12,9 +13,12 @@ class ProviderFactory:
         key = f"embedding_{mode}"
         
         if key not in cls._instances:
-            # Always use local embeddings (hash-based fallback works without external deps)
-            from app.providers.local.embeddings import LocalEmbeddingProvider
-            cls._instances[key] = LocalEmbeddingProvider()
+            if mode == Mode.CLOUD:
+                from app.providers.cloud.embeddings import OpenRouterEmbeddingProvider
+                cls._instances[key] = OpenRouterEmbeddingProvider()
+            else:
+                from app.providers.local.embeddings import LocalEmbeddingProvider
+                cls._instances[key] = LocalEmbeddingProvider()
         
         return cls._instances[key]
     
@@ -23,9 +27,12 @@ class ProviderFactory:
         key = f"vector_{mode}"
         
         if key not in cls._instances:
-            # Always use local vector store (SimpleVectorStore with JSON persistence)
-            from app.providers.local.vector_store import SimpleVectorStore
-            cls._instances[key] = SimpleVectorStore()
+            if mode == Mode.CLOUD:
+                from app.providers.cloud.vector_store import SupabaseVectorStore
+                cls._instances[key] = SupabaseVectorStore()
+            else:
+                from app.providers.local.vector_store import SimpleVectorStore
+                cls._instances[key] = SimpleVectorStore()
         
         return cls._instances[key]
     
@@ -39,6 +46,43 @@ class ProviderFactory:
             cls._instances[key] = OpenRouterLLMProvider()
         
         return cls._instances[key]
+    
+    @classmethod
+    def get_rag_service(
+        cls,
+        mode: Mode,
+        use_langchain: Optional[bool] = None,
+        understanding_model: Optional[str] = None,
+        generation_model: Optional[str] = None
+    ):
+        """
+        Get RAG service based on configuration.
+        
+        Args:
+            mode: LOCAL or CLOUD mode
+            use_langchain: Override settings.use_langchain if provided
+            understanding_model: Model for query understanding step
+            generation_model: Model for response generation step
+        
+        Returns:
+            RAGServiceV3 or LangChainRAGService
+        """
+        should_use_langchain = use_langchain if use_langchain is not None else settings.use_langchain
+        
+        if should_use_langchain:
+            from app.services.rag_service_langchain import LangChainRAGService
+            return LangChainRAGService(
+                mode=mode,
+                understanding_model=understanding_model,
+                generation_model=generation_model
+            )
+        else:
+            from app.services.rag_service_v3 import RAGServiceV3
+            return RAGServiceV3(
+                mode=mode,
+                understanding_model=understanding_model,
+                generation_model=generation_model
+            )
     
     @classmethod
     def clear_instances(cls):

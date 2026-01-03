@@ -41,6 +41,11 @@ class Settings(BaseSettings):
     supabase_service_key: Optional[str] = None
     
     # ============================================
+    # LANGCHAIN CONFIGURATION
+    # ============================================
+    use_langchain: bool = False  # Set to True to use LangChain RAG service
+    
+    # ============================================
     # SHARED CONFIGURATION
     # ============================================
     # Server
