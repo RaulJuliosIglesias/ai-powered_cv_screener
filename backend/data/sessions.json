@@ -1227,22 +1227,36 @@
           "timestamp": "2026-01-03T19:12:43.515307"
         },
         {
-          "id": "0fbb9dd5-bbde-422e-87d1-fa39d387aafe",
+          "id": "0609e059-4233-4dfb-9bac-e1928a3ae135",
           "role": "user",
           "content": "ersto noe s front end sia caso es ui ux por photoshop pero no front end de proigramacion\n\nLiam Nguyen 📄 \tPhotoshop, Illustrator, Blender, ZBrush\tConcept art for animated films/series\tJunior Concept Artist. Skills are more focused on visual assets than front-end development.",
           "sources": [],
-          "timestamp": "2026-01-03T19:38:41.376336"
+          "timestamp": "2026-01-03T19:45:37.034415"
         },
         {
-          "id": "593bb07e-027d-4428-acfb-dce8e461413c",
+          "id": "08e73596-2eca-484c-a4cf-efc7c49f89c3",
           "role": "assistant",
           "content": "I can only help with CV screening and candidate analysis. Please ask a question about the uploaded CVs.",
           "sources": [],
-          "timestamp": "2026-01-03T19:38:45.742728"
+          "timestamp": "2026-01-03T19:45:41.522637"
+        },
+        {
+          "id": "ca29a39a-7bc3-473f-b6d4-d92ff880a7d3",
+          "role": "user",
+          "content": "dame el mejro game developer full stack webgl",
+          "sources": [],
+          "timestamp": "2026-01-03T19:45:58.651469"
+        },
+        {
+          "id": "d19bdcf6-d5e9-4b01-8438-2e2cbbc410bf",
+          "role": "assistant",
+          "content": "I can only help with CV screening and candidate analysis. Please ask a question about the uploaded CVs.",
+          "sources": [],
+          "timestamp": "2026-01-03T19:46:03.704735"
         }
       ],
       "created_at": "2026-01-03T15:41:18.352784",
-      "updated_at": "2026-01-03T19:38:45.742728"
+      "updated_at": "2026-01-03T19:46:03.704735"
     },
     {
       "id": "2503f62f-8b3e-4c9d-9918-a4d4c602b038",
@@ -2511,16 +2525,16 @@
           "timestamp": "2026-01-03T19:15:03.463860"
         },
         {
-          "id": "24457a08-1cc9-49af-929a-5d35e966ad61",
+          "id": "0c04b95d-461e-4a54-8f37-e50241c57f9f",
           "role": "user",
           "content": "no tiene sentido este candidato sabe 0 de program,acion ni reflja skills tecncias proque este e smejor que por ejemplo alguien que sit enga mas habnidlaiddes tecncias proque no ash analziado esto asi cone ste criterio?",
           "sources": [],
-          "timestamp": "2026-01-03T19:38:38.458500"
+          "timestamp": "2026-01-03T19:45:14.212959"
         },
         {
-          "id": "85a95a4b-cf7a-4e8e-abba-c03dce3c01b3",
+          "id": "525e483d-f963-43a2-b043-145c6c217725",
           "role": "assistant",
-          "content": ":::thinking\nThe two candidates being compared are **[Layla Al-Mansoori](cv:cv_2f622639)** and **[Li Wei](cv:cv_65f9aeab)**. Based on their CVs, **[Layla Al-Mansoori](cv:cv_2f622639)** has a background in sales, while **[Li Wei](cv:cv_65f9aeab)** has experience as a research intern focused on data analysis and machine learning.\n\nThe ranking criteria do not seem to have appropriately considered the candidates' technical skills, as **[Li Wei](cv:cv_65f9aeab)** appears to have stronger technical abilities relevant to the role.\n:::\n\nNone of the candidates match this requirement. The CVs provided do not contain any information about software engineering or programming skills. **[Layla Al-Mansoori](cv:cv_2f622639)** has a background in sales, while **[Li Wei](cv:cv_65f9aeab)** has experience as a research intern focused on data analysis and machine learning, but neither candidate demonstrates the technical skills necessary for a software engineering role.\n\n:::conclusion\nBased on the information provided in the CVs, there are no suitable candidates for a software engineering position. The candidates' backgrounds do not indicate the required programming and technical skills needed for this role.\n:::\n\n⚠️ *Some information could not be fully verified against the CVs.*",
+          "content": ":::thinking\nThe query is asking why this candidate is considered better than someone with more technical skills, since the current candidate does not seem to have any programming or technical abilities reflected in their CV.\n\nThe key issue is that the current candidate's CV does not demonstrate any relevant technical skills or experience for a software engineering role. Without evidence of coding proficiency, familiarity with development tools/frameworks, or past technical projects, this candidate would not be a strong match for the position.\n:::\n\nBased on the information provided, **none of the analyzed candidates have the required technical skills and experience for a software engineering role.** The CVs do not reflect the necessary programming, software development, or computer science background typically expected for such positions.\n\n:::conclusion\nNo suitable candidates found. To find qualified software engineering candidates, I recommend:\n\n- Focusing the search on CVs that clearly demonstrate technical skills, such as proficiency in programming languages, familiarity with development frameworks/tools, and experience with software projects or internships.\n- Considering candidates with computer science, software engineering, or related technical degrees, as they are more likely to possess the core competencies needed.\n- Evaluating candidates based on their ability to showcase tangible technical achievements, such as building applications, contributing to open-source projects, or participating in coding competitions.\n\nWithout the necessary technical background and skills, the current candidates would not be a good fit for a software engineering role.\n:::\n\n⚠️ *Some information could not be fully verified against the CVs.*",
           "sources": [
             {
               "cv_id": "cv_c3d70890",
@@ -2533,9 +2547,9 @@
               "relevance": 0.715
             },
             {
-              "cv_id": "cv_5129e7fb",
-              "filename": "4662a9ee_Patricia_Williams_Medical_Intern.pdf",
-              "relevance": 0.683
+              "cv_id": "cv_65f9aeab",
+              "filename": "06b109ef_Li_Wei_Research_Intern.pdf",
+              "relevance": 0.68
             },
             {
               "cv_id": "cv_ada4d211",
@@ -2653,9 +2667,9 @@
               "relevance": 0.693
             },
             {
-              "cv_id": "cv_65f9aeab",
-              "filename": "06b109ef_Li_Wei_Research_Intern.pdf",
-              "relevance": 0.68
+              "cv_id": "cv_5129e7fb",
+              "filename": "4662a9ee_Patricia_Williams_Medical_Intern.pdf",
+              "relevance": 0.683
             },
             {
               "cv_id": "cv_da8d5709",
@@ -2663,11 +2677,11 @@
               "relevance": 0.678
             }
           ],
-          "timestamp": "2026-01-03T19:39:07.357253"
+          "timestamp": "2026-01-03T19:45:46.200320"
         }
       ],
       "created_at": "2026-01-03T17:22:15.568352",
-      "updated_at": "2026-01-03T19:39:07.357253"
+      "updated_at": "2026-01-03T19:45:46.200320"
     },
     {
       "id": "bd03435f-2a1c-4e33-8412-33a823fea667",
@@ -4123,180 +4137,248 @@
           "timestamp": "2026-01-03T18:54:58.574271"
         },
         {
-          "id": "f2f3db08-42b6-4b37-8568-bbfb0a165360",
+          "id": "b4d7a7e3-feb3-4630-bc6c-6968ba5b6baa",
           "role": "user",
           "content": "create top short list of 3 candidates for full stack expertise con IA",
           "sources": [],
-          "timestamp": "2026-01-03T19:20:27.715558"
+          "timestamp": "2026-01-03T19:45:25.214720"
         },
         {
-          "id": "452e09af-b42f-4d11-b29c-c1ef7c284cb5",
-          "role": "user",
-          "content": "que candidatos son los mejroes apra tech lead?",
-          "sources": [],
-          "timestamp": "2026-01-03T19:37:45.129608"
-        },
-        {
-          "id": "ce2d41ae-dba0-4935-aba7-3c01d240bfd8",
+          "id": "f060579c-0b96-490e-ae53-62f1dc3ef87c",
           "role": "assistant",
-          "content": ":::thinking\nTo determine the best candidates for a Tech Lead position, I will evaluate the CVs based on the following key factors:\n\n1. Technical skills relevant to leading a technical team (e.g., programming languages, frameworks, cloud platforms)\n2. Prior leadership experience (e.g., team lead, project manager)\n3. Experience with relevant technologies and methodologies (e.g., Agile, DevOps)\n4. Years of experience in software development\n\nBased on these criteria, I have identified the top candidates for the Tech Lead role.\n:::\n\nThe most suitable candidate is **[Aiko Tanaka](cv:cv_efaf302e)**. They have extensive experience designing and deploying Ethereum-based decentralized applications, leading cross-functional teams, and driving scalable smart contract solutions. Their technical expertise, strategic vision, and proven track record of delivering complex projects make them an excellent fit for a Tech Lead role.\n\n| Candidate | Technical Skills | Leadership Experience | Relevant Experience |\n|-----------|------------------|------------------------|---------------------|\n| **[Aiko Tanaka](cv:cv_efaf302e)** | Ethereum, Solidity, React, Node.js | Led cross-functional teams to deliver scalable smart contract solutions | 7+ years of experience designing and deploying Ethereum-based DApps |\n| **[Ana Silva](cv:cv_0dc747d7)** | AWS, Kubernetes, Terraform, CI/CD | Managed cloud infrastructure for high-growth companies, led migration projects | 6+ years of experience designing and implementing cloud solutions |\n| **[Lukas Schneider](cv:cv_0d84cdc1)** | Unity, C#, VR/AR, Multiplayer Networking | Introduced automated testing and deployment pipelines, created reusable frameworks | 3+ years of experience developing VR/AR experiences and optimizing game performance |\n| **[Rajiv Mehta](cv:cv_084cca6f)** | Unity, C#, Mobile Game Optimization | Delivered high-performance mobile games with 4.8+ ratings | 2+ years of experience optimizing mobile games for performance and scalability |\n\n:::conclusion\nBased on the evaluation, **[Aiko Tanaka](cv:cv_efaf302e)** is the most suitable candidate for the Tech Lead position. They possess the necessary technical skills, leadership experience, and relevant project experience to effectively lead a technical team and drive complex software initiatives.\n:::\n\n⚠️ *Some information could not be fully verified against the CVs.*",
+          "content": ":::thinking\nThe query is asking for a shortlist of 3 candidates with full stack development expertise, with a focus on AI. From the 202 CVs provided, I will analyze the relevant skills and experience to identify the top 3 matching candidates.\n:::\n\nThe top 3 candidates for full stack development with AI expertise are:\n\n| Candidate | Full Stack Skills | AI/ML Skills | Match Score |\n|-----------|-------------------|--------------|-------------|\n| **[Lucien Moreau](cv:cv_7a9a5290)** | Node.js, Python, React, AWS, Docker, Kubernetes | Machine Learning, Deep Learning, Predictive Analytics | ⭐⭐⭐⭐⭐ |\n| **[Rajesh Kumar](cv:cv_75abaaab)** | JavaScript/TypeScript, Node.js, React, Java, Python, AWS, Docker/Kubernetes | Machine Learning, Deep Learning, Financial Risk Analytics | ⭐⭐⭐⭐ |\n| **[Aisha Okafor](cv:cv_9ccd02bc)** | Python, TensorFlow, PyTorch, Speech Recognition, NLP | Transformer Models, Speech Processing, Bias Mitigation | ⭐⭐⭐⭐ |\n\n:::conclusion\nThese 3 candidates have the strongest combination of full stack development skills and AI/ML expertise to meet the requirements of the role. **[Lucien Moreau](cv:cv_7a9a5290)** stands out with his exceptional background in building high-performance, scalable backend systems and applying advanced analytics. **[Rajesh Kumar](cv:cv_75abaaab)** and **[Aisha Okafor](cv:cv_9ccd02bc)** also demonstrate deep technical skills across the full stack and specialized AI/ML capabilities.\n:::\n\n⚠️ *Some information could not be fully verified against the CVs.*",
           "sources": [
-            {
-              "cv_id": "cv_5fe50503",
-              "filename": "60ee5205_Layla_Al-Mansoori_Chief_Information_Officer_CIO_with_a_focus_on_Digital_Transformation.pdf",
-              "relevance": 0.57
-            },
-            {
-              "cv_id": "cv_30d9ecab",
-              "filename": "407e9314_Aïssa_Diallo_Senior_Mobile_App_Developer_with_a_Focus_on_Cross-Platform_Solutions.pdf",
-              "relevance": 0.577
-            },
-            {
-              "cv_id": "cv_c1a5ca43",
-              "filename": "f34cbc6e_Lucien_Moreau_Senior_Mobile_App_Developer_specializing_in_Cross-Platform_Solutions.pdf",
-              "relevance": 0.563
-            },
-            {
-              "cv_id": "cv_9c41955f",
-              "filename": "9deb7ec4_Margaret_Whitmore_SVP_of_Innovation.pdf",
-              "relevance": 0.556
-            },
-            {
-              "cv_id": "cv_2d6cca6e",
-              "filename": "3847227c_Lukas_Weber_Full_Stack_Developer_with_a_focus_on_JavaScript_and_Python.pdf",
-              "relevance": 0.608
-            },
-            {
-              "cv_id": "cv_85e79ed6",
-              "filename": "db4b3547_Lina_Tan_Lead_Character_Designer_specializing_in_Southeast_Asian_Folklore.pdf",
-              "relevance": 0.563
-            },
-            {
-              "cv_id": "cv_efaf302e",
-              "filename": "6430158c_Aiko_Tanaka_Senior_Web3_Developer_specializing_in_Ethereum-based_DApps.pdf",
-              "relevance": 0.562
-            },
-            {
-              "cv_id": "cv_0dc747d7",
-              "filename": "fc28f7b3_Ana_Silva_Senior_DevOps_Engineer_with_a_focus_on_Cloud_Migration.pdf",
-              "relevance": 0.561
-            },
             {
               "cv_id": "cv_18f26cae",
               "filename": "0d9c2ed3_Isabella_Rodriguez_Cloud_Infrastructure_Engineer.pdf",
-              "relevance": 0.597
+              "relevance": 0.644
             },
             {
-              "cv_id": "cv_8829fc27",
-              "filename": "34f280de_Linh_Dao_VP_of_Design_Specializing_in_User-Centric_Digital_Transformation.pdf",
-              "relevance": 0.588
+              "cv_id": "cv_5e7ec729",
+              "filename": "164935a6_Carmen_Rodriguez_Senior_DevOps_Engineer_with_a_focus_on_Cloud_Migration.pdf",
+              "relevance": 0.642
             },
             {
-              "cv_id": "cv_154b29bc",
-              "filename": "f30afa27_Rajesh_Kumar_AI_Research_Director_specializing_in_Natural_Language_Processing.pdf",
-              "relevance": 0.564
+              "cv_id": "cv_4397025f",
+              "filename": "b7e6af78_Layla_Nguyen_Cloud_Solutions_Architect_focused_on_Scalability.pdf",
+              "relevance": 0.641
             },
             {
-              "cv_id": "cv_084cca6f",
-              "filename": "c8b5a9c4_Rajiv_Mehta_Unity_Developer_specializing_in_Mobile_Game_Optimization.pdf",
-              "relevance": 0.574
-            },
-            {
-              "cv_id": "cv_0d84cdc1",
-              "filename": "5f931ae5_Lukas_Schneider_Unity_Developer_with_a_focus_on_VR-AR_experiences.pdf",
-              "relevance": 0.568
-            },
-            {
-              "cv_id": "cv_7867a473",
-              "filename": "c71c69ae_Margaret_Whitmore_CFO.pdf",
-              "relevance": 0.565
-            },
-            {
-              "cv_id": "cv_f639e412",
-              "filename": "8148b375_Lars_Andersson_Senior_UX-UI_Designer_with_a_focus_on_Accessibility.pdf",
-              "relevance": 0.558
-            },
-            {
-              "cv_id": "cv_a82268de",
-              "filename": "8fde35dc_Javier_Morales_Junior_System_Architect_focused_on_Cloud_Integration.pdf",
-              "relevance": 0.558
-            },
-            {
-              "cv_id": "cv_4d8eeb80",
-              "filename": "293c41c2_Nigel_Whitmore_Senior_Product_Manager_specializing_in_Legacy_System_Modernization.pdf",
-              "relevance": 0.557
-            },
-            {
-              "cv_id": "cv_ebd8c2a1",
-              "filename": "d5289c50_Carlos_Mendoza_Junior_Cloud_Engineer.pdf",
-              "relevance": 0.555
-            },
-            {
-              "cv_id": "cv_9f7108c0",
-              "filename": "e3dc0bd1_Adaeze_Nwosu_Senior_Product_Manager_specializing_in_Fintech_and_Digital_Payments.pdf",
-              "relevance": 0.567
-            },
-            {
-              "cv_id": "cv_bddf9ad1",
-              "filename": "2efbcd33_Aisha_Al-Mansoori_Lead_2D_Game_Artist_specializing_in_Mobile_RPG_UI-UX.pdf",
-              "relevance": 0.558
-            },
-            {
-              "cv_id": "cv_c4c1ffc7",
-              "filename": "eb22b926_Ling_Mei_Chen_Senior_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
-              "relevance": 0.556
-            },
-            {
-              "cv_id": "cv_3b659ce3",
-              "filename": "e4987b25_Mei-Ling_Chen_Senior_UI_Designer_specializing_in_Accessible_Digital_Interfaces.pdf",
-              "relevance": 0.555
-            },
-            {
-              "cv_id": "cv_b772ad58",
-              "filename": "37717b7b_Rajiv_Mehta_Senior_Structural_Engineer_specializing_in_Seismic_Retrofitting.pdf",
-              "relevance": 0.566
-            },
-            {
-              "cv_id": "cv_71a7c9ae",
-              "filename": "78d7f19b_Layla_Al-Mansoor_Creative_Director_specializing_in_Cross-Cultural_Branding.pdf",
-              "relevance": 0.563
-            },
-            {
-              "cv_id": "cv_c08d89f2",
-              "filename": "dc85bc48_Priya_Sharma_Fernández_CHRO.pdf",
-              "relevance": 0.559
+              "cv_id": "cv_75abaaab",
+              "filename": "bbabeb82_Rajesh_Kumar_Full-Stack_Developer_with_a_Focus_on_Financial_Systems.pdf",
+              "relevance": 0.639
             },
             {
               "cv_id": "cv_5c04dc41",
               "filename": "73c0a5b8_Rafael_Al-Mansour_Brand_Ambassador_specializing_in_Tech_and_Lifestyle.pdf",
-              "relevance": 0.589
+              "relevance": 0.637
+            },
+            {
+              "cv_id": "cv_9ccd02bc",
+              "filename": "ffe9def4_Aisha_Okafor_AI_Engineer_specializing_in_Natural_Language_Processing.pdf",
+              "relevance": 0.637
+            },
+            {
+              "cv_id": "cv_a1e58b33",
+              "filename": "8f745b31_Aisha_Oluwaseun_Lead_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
+              "relevance": 0.634
+            },
+            {
+              "cv_id": "cv_73a37061",
+              "filename": "490b8a4d_Carlos_Mendoza_Chief_Learning_Officer_Specializing_in_Digital_Transformation_and_Leadership_Development.pdf",
+              "relevance": 0.631
+            },
+            {
+              "cv_id": "cv_be80a79e",
+              "filename": "69ed5706_Aisha_Nkrumah_Associate_Designer.pdf",
+              "relevance": 0.631
             },
             {
               "cv_id": "cv_22b6ddf2",
               "filename": "0df49086_Carlos_Mendoza_Senior_Lifestyle_and_Wellness_Influencer.pdf",
-              "relevance": 0.572
+              "relevance": 0.629
             },
             {
-              "cv_id": "cv_08609b3e",
-              "filename": "44eb074e_Liam_Ndlovu_Sales_Manager.pdf",
-              "relevance": 0.565
+              "cv_id": "cv_c4c1ffc7",
+              "filename": "eb22b926_Ling_Mei_Chen_Senior_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
+              "relevance": 0.629
+            },
+            {
+              "cv_id": "cv_0b96f4ce",
+              "filename": "fad6bfe1_Ling_Mei_Tan_Senior_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
+              "relevance": 0.629
+            },
+            {
+              "cv_id": "cv_636f7b9c",
+              "filename": "3f141f7e_Carlos_Eduardo_Silva_Senior_Delivery_Manager_specializing_in_Agile_Transformation_for_Financial_Services.pdf",
+              "relevance": 0.629
+            },
+            {
+              "cv_id": "cv_8985e6a9",
+              "filename": "a8cd1092_Min-jun_Kim_Performance_Marketing_Specialist_with_a_Focus_on_E-commerce_Growth.pdf",
+              "relevance": 0.629
+            },
+            {
+              "cv_id": "cv_d78b716b",
+              "filename": "33634977_Aarohi_Mehta_Junior_Data_Analyst_with_a_focus_on_Healthcare_Analytics.pdf",
+              "relevance": 0.627
+            },
+            {
+              "cv_id": "cv_d943cfd2",
+              "filename": "1774687d_Layla_Al-Mansoori_Postdoctoral_Researcher.pdf",
+              "relevance": 0.627
+            },
+            {
+              "cv_id": "cv_ccbcec49",
+              "filename": "c912ab66_Chinua_Okoro_Lead_2D_Game_Artist_Specializing_in_Mobile_RPGs.pdf",
+              "relevance": 0.627
+            },
+            {
+              "cv_id": "cv_82763e2c",
+              "filename": "43e3ac6b_Ravi_Chandrasekhar_Design_System_Architect_with_a_focus_on_Scalability.pdf",
+              "relevance": 0.625
+            },
+            {
+              "cv_id": "cv_db1fb0d8",
+              "filename": "068d5d0a_Isabel_Mendoza_Senior_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
+              "relevance": 0.625
+            },
+            {
+              "cv_id": "cv_18fd7041",
+              "filename": "0530309b_Kwame_Adjei_Full_Stack_Developer_with_a_focus_on_Legacy_System_Modernization.pdf",
+              "relevance": 0.625
+            },
+            {
+              "cv_id": "cv_7a9a5290",
+              "filename": "d1ce196d_Lucien_Moreau_Full_Stack_Developer_with_a_Focus_on_Scalable_Backend_Solutions.pdf",
+              "relevance": 0.623
+            },
+            {
+              "cv_id": "cv_43e6d880",
+              "filename": "0fafcbe9_Amitai_Ben-David_Systems_Designer_specializing_in_IoT_and_Smart_Cities.pdf",
+              "relevance": 0.623
+            },
+            {
+              "cv_id": "cv_b2773636",
+              "filename": "c2533d2e_Adewale_Patel_3D_Artist.pdf",
+              "relevance": 0.622
+            },
+            {
+              "cv_id": "cv_94b2ac3f",
+              "filename": "057cb342_Kwame_Nkrumah_Product_Manager_specializing_in_Fintech_Solutions.pdf",
+              "relevance": 0.62
+            },
+            {
+              "cv_id": "cv_06493ad1",
+              "filename": "91854e63_Aisha_Thompson_Head_of_Social_Media_Strategy__Community_Engagement.pdf",
+              "relevance": 0.619
+            },
+            {
+              "cv_id": "cv_abf55a0f",
+              "filename": "7d65dc1d_Lucas_Oliveira_Talent_Acquisition_Specialist_focused_on_Tech_Startups.pdf",
+              "relevance": 0.618
+            },
+            {
+              "cv_id": "cv_f9db5aa6",
+              "filename": "66e58a31_Rajiv_Kapoor_Clinical_Psychologist_specializing_in_Cross-Cultural_Mental_Health.pdf",
+              "relevance": 0.617
+            },
+            {
+              "cv_id": "cv_5171ca52",
+              "filename": "f9c94d11_Ling_Chen_UX-UI_Designer_with_a_focus_on_Mobile_App_Experiences.pdf",
+              "relevance": 0.617
+            },
+            {
+              "cv_id": "cv_91222deb",
+              "filename": "e82e411b_Karim_Al-Mansouri_Legacy_Systems_Modernization_Architect.pdf",
+              "relevance": 0.616
+            },
+            {
+              "cv_id": "cv_c220b065",
+              "filename": "2a3d825f_Carlos_Mendoza_Senior_Embedded_Systems_Engineer.pdf",
+              "relevance": 0.615
+            },
+            {
+              "cv_id": "cv_98fbfea4",
+              "filename": "db4bf998_Layla_Al-Mansoor_Junior_Research_Coordinator_Public_Health_Studies.pdf",
+              "relevance": 0.615
+            },
+            {
+              "cv_id": "cv_87505b45",
+              "filename": "9f9a38b4_Aisha_Johnson_Blockchain_Developer_specializing_in_Smart_Contracts.pdf",
+              "relevance": 0.614
+            },
+            {
+              "cv_id": "cv_2d6cca6e",
+              "filename": "3847227c_Lukas_Weber_Full_Stack_Developer_with_a_focus_on_JavaScript_and_Python.pdf",
+              "relevance": 0.614
+            },
+            {
+              "cv_id": "cv_b49cde79",
+              "filename": "f4e3566c_Amaia_Nkrumah_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
+              "relevance": 0.614
+            },
+            {
+              "cv_id": "cv_739d2a89",
+              "filename": "35098a53_Isabel_Kim_Documentary_Videographer_with_a_focus_on_Cultural_Storytelling.pdf",
+              "relevance": 0.614
+            },
+            {
+              "cv_id": "cv_65101087",
+              "filename": "a2971b00_Carlos_Mendoza_Research_Assistant.pdf",
+              "relevance": 0.613
+            },
+            {
+              "cv_id": "cv_a48a7e9e",
+              "filename": "7eebf9b9_Oliver_Whitmore_Product_Manager_specializing_in_Fintech_Solutions.pdf",
+              "relevance": 0.612
+            },
+            {
+              "cv_id": "cv_b006c0c6",
+              "filename": "136dd3ca_Kenji_Nakamura_Post-Production_Supervisor.pdf",
+              "relevance": 0.612
+            },
+            {
+              "cv_id": "cv_6a264b38",
+              "filename": "6991eb2a_Kenji_Tanaka_Medical_Intern_specializing_in_Geriatric_Care.pdf",
+              "relevance": 0.612
+            },
+            {
+              "cv_id": "cv_0dc747d7",
+              "filename": "fc28f7b3_Ana_Silva_Senior_DevOps_Engineer_with_a_focus_on_Cloud_Migration.pdf",
+              "relevance": 0.611
             },
             {
               "cv_id": "cv_d0577abf",
               "filename": "8b292e4e_Ethan_James_Carter_Residential_Interior_Designer_with_a_Focus_on_Sustainable_Materials.pdf",
-              "relevance": 0.555
+              "relevance": 0.611
             },
             {
-              "cv_id": "cv_06a32099",
-              "filename": "c042a902_Priya_Kapoor_Culinary_Officer.pdf",
-              "relevance": 0.568
+              "cv_id": "cv_c8cc2c7f",
+              "filename": "8e59e4b2_Luc_Moreau_Senior_Backend_Engineer_specializing_in_Scalable_Systems.pdf",
+              "relevance": 0.611
+            },
+            {
+              "cv_id": "cv_e6749539",
+              "filename": "9db944e1_Rafael_Kimura_Wine_Director_specializing_in_New_World_and_Natural_Wines.pdf",
+              "relevance": 0.61
+            },
+            {
+              "cv_id": "cv_25a74a99",
+              "filename": "c67a5185_Karim_Al-Mansoor_Senior_Law_Clerk_specializing_in_Immigration_and_Refugee_Law.pdf",
+              "relevance": 0.61
+            },
+            {
+              "cv_id": "cv_cedc2631",
+              "filename": "d0331170_Meera_Kapoor_Chief_Marketing_Officer_CMO_specializing_in_Digital_Transformation_and_Brand_Strategy.pdf",
+              "relevance": 0.608
             }
           ],
-          "timestamp": "2026-01-03T19:38:18.365964"
+          "timestamp": "2026-01-03T19:46:00.631626"
         }
       ],
       "created_at": "2026-01-03T17:50:31.848359",
-      "updated_at": "2026-01-03T19:38:18.365964"
+      "updated_at": "2026-01-03T19:46:00.631626"
     }
   ]
 }

@@ -334,7 +334,8 @@ class RAGServiceV3:
             requirements_text = "\n\nIMPORTANT REQUIREMENTS TO ADDRESS:\n" + "\n".join(
                 f"- {req}" for req in query_understanding.requirements
             )
-            prompt = prompt.replace("Your response:", requirements_text + "\n\nYour response:")
+            # Note: New templates.py uses "Respond now:" instead of "Your response:"
+            prompt = prompt.replace("Respond now:", requirements_text + "\n\nRespond now:")
         
         llm_start = time.perf_counter()
         llm_result = await self.llm.generate(prompt, system_prompt=SYSTEM_PROMPT)

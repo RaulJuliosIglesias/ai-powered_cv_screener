@@ -118,15 +118,20 @@ class TestPromptTemplates:
         
         result = format_context(chunks)
         
-        assert "john_smith.pdf" in result
-        assert "John Smith" in result
-        assert "Python developer" in result
+        # New format_context returns FormattedContext object
+        assert "john_smith.pdf" in result.text
+        assert "John Smith" in result.text
+        assert "Python developer" in result.text
+        assert result.num_chunks == 1
+        assert result.num_unique_cvs == 1
     
     def test_format_context_empty(self):
         from app.prompts.templates import format_context
         
         result = format_context([])
-        assert "No relevant" in result
+        # New format_context returns FormattedContext object
+        assert "No relevant" in result.text
+        assert result.num_chunks == 0
     
     def test_build_query_prompt(self):
         from app.prompts.templates import build_query_prompt
@@ -142,4 +147,5 @@ class TestPromptTemplates:
         
         assert "Who has Python?" in result
         assert "Test content" in result
-        assert "CV EXCERPTS" in result
+        # New template uses "CV DATA" instead of "CV EXCERPTS"
+        assert "CV DATA" in result or "CV EXCERPTS" in result
