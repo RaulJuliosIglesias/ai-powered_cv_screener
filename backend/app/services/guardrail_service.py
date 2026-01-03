@@ -46,13 +46,15 @@ class GuardrailService:
         "python", "java", "javascript", "react", "angular", "sql",
         "leadership", "team", "project", "management",
         "salary", "remote", "work", "company", "position",
-        "interview", "shortlist", "recommendation",
+        "interview", "shortlist", "recommendation", "select", "choose",
+        "list", "from", "create", "make", "find", "show", "get",
         # Spanish
         "candidato", "candidatos", "currículum", "experiencia",
         "habilidad", "habilidades", "educación", "trabajo",
         "contratar", "reclutamiento", "calificado", "perfil",
         "comparar", "ranking", "mejor", "adecuado",
-        "entrevista", "recomendación"
+        "entrevista", "recomendación", "seleccionar", "elegir",
+        "lista", "crear", "mostrar"
     }
     
     # Patterns that indicate off-topic questions
