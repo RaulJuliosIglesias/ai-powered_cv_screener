@@ -1,593 +1,471 @@
 {
   "sessions": [
     {
-      "id": "6b508523-f6dd-489e-b9f4-3361774a2195",
+      "id": "0d049ed6-13aa-4686-a6fc-caf3f3aa12bd",
       "name": "New chat",
       "description": "",
       "cvs": [
         {
-          "id": "cv_261c049a",
+          "id": "cv_619d6727",
+          "filename": "1ef4e451_Dirk_van_der_Meer_Therapist.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T15:41:23.151088"
+        },
+        {
+          "id": "cv_445299db",
+          "filename": "06659811_Lucas_Moreau_CFO.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T15:41:23.355118"
+        },
+        {
+          "id": "cv_5e98c0b9",
+          "filename": "69ed5706_Aisha_Nkrumah_Associate_Designer.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T15:41:23.530388"
+        },
+        {
+          "id": "cv_09eb1245",
+          "filename": "4662a9ee_Patricia_Williams_Medical_Intern.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T15:41:23.663467"
+        },
+        {
+          "id": "cv_61f1d281",
+          "filename": "45d8cbc0_Carlos_Mendoza_Accessories_Designer.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T15:41:23.785689"
+        },
+        {
+          "id": "cv_daea7380",
+          "filename": "6202baf5_Erik_Johansson_FB_Director.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T15:41:23.954001"
+        },
+        {
+          "id": "cv_1ef415b9",
+          "filename": "23621408_Kamal_Patel_Head_of_Audio.pdf",
+          "chunk_count": 13,
+          "uploaded_at": "2026-01-03T15:41:24.142550"
+        },
+        {
+          "id": "cv_f6df01f9",
+          "filename": "bf3a5fa7_Carmen_López_Lighting_Artist.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T15:41:24.285015"
+        },
+        {
+          "id": "cv_b33c6394",
+          "filename": "9450f274_Rajiv_Patel_Content_Creator.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T15:41:24.406316"
+        },
+        {
+          "id": "cv_20e0817b",
+          "filename": "68835e12_Ethan_Park_Physical_Therapist.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T15:41:24.529041"
+        },
+        {
+          "id": "cv_77d4a967",
+          "filename": "477ae7a5_Liam_Nguyen_Concept_Artist.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T15:41:24.639831"
+        },
+        {
+          "id": "cv_1cdbc06a",
+          "filename": "b4b377d4_Layla_Kim_Concept_Artist.pdf",
+          "chunk_count": 10,
+          "uploaded_at": "2026-01-03T15:41:24.822677"
+        },
+        {
+          "id": "cv_3285b64b",
+          "filename": "263a613b_Rajiv_Patel_Publishing_Director.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-03T15:41:24.954844"
+        },
+        {
+          "id": "cv_41b5ec14",
+          "filename": "ab71577d_Ana_Silva_Junior_Interaction_Designer.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-03T15:41:25.071910"
+        },
+        {
+          "id": "cv_cff0e051",
+          "filename": "c042a902_Priya_Kapoor_Culinary_Officer.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T15:41:25.245896"
+        },
+        {
+          "id": "cv_8c30cd67",
+          "filename": "c71c69ae_Margaret_Whitmore_CFO.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T15:41:25.472870"
+        },
+        {
+          "id": "cv_035f3bb0",
+          "filename": "a2971b00_Carlos_Mendoza_Research_Assistant.pdf",
+          "chunk_count": 8,
+          "uploaded_at": "2026-01-03T15:41:25.631945"
+        },
+        {
+          "id": "cv_a41ed349",
+          "filename": "f180c979_Khalid_Al-Mansur_Mobile_Engineer.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T15:41:25.793393"
+        },
+        {
+          "id": "cv_4ef3f804",
+          "filename": "1774687d_Layla_Al-Mansoori_Postdoctoral_Researcher.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T15:41:25.944538"
+        },
+        {
+          "id": "cv_067fdb46",
+          "filename": "0762284b_Aïssa_Diallo_Composer.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-03T15:41:26.152133"
+        },
+        {
+          "id": "cv_9a615f58",
+          "filename": "a32dd7e1_Isabela_Costa_Model.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T15:41:26.299543"
+        },
+        {
+          "id": "cv_6412f75e",
+          "filename": "d78a62ae_Jamie_Patel_General_Manager.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T15:41:26.466947"
+        },
+        {
+          "id": "cv_900c7bc8",
+          "filename": "d5289c50_Carlos_Mendoza_Junior_Cloud_Engineer.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T15:41:26.608007"
+        },
+        {
+          "id": "cv_12d4ce24",
+          "filename": "c2533d2e_Adewale_Patel_3D_Artist.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T15:41:26.766518"
+        },
+        {
+          "id": "cv_17d6ba07",
+          "filename": "84ea127f_Li_Wei_Content_Officer.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T15:41:26.980182"
+        },
+        {
+          "id": "cv_a2656618",
+          "filename": "a45e5735_Layla_Al-Mansoori_Sales_Executive.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T15:41:27.118999"
+        },
+        {
+          "id": "cv_87de9667",
+          "filename": "06b109ef_Li_Wei_Research_Intern.pdf",
+          "chunk_count": 8,
+          "uploaded_at": "2026-01-03T15:41:27.249327"
+        },
+        {
+          "id": "cv_ede9f382",
+          "filename": "8117dbda_Aya_Cohen_Hard_Surface_Modeler.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T15:41:27.441989"
+        },
+        {
+          "id": "cv_a8277dac",
           "filename": "bc252667_Carlos_Mendoza_Manager.pdf",
           "chunk_count": 13,
-          "uploaded_at": "2026-01-03T15:13:09.646814"
+          "uploaded_at": "2026-01-03T15:41:27.657714"
         },
         {
-          "id": "cv_7009118c",
+          "id": "cv_33b900b1",
           "filename": "2a4fe182_Thierry_Nguyen_EVP.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T15:13:09.798563"
+          "uploaded_at": "2026-01-03T15:41:27.839757"
         },
         {
-          "id": "cv_8fb3b807",
+          "id": "cv_8c8f46d8",
           "filename": "dc85bc48_Priya_Sharma_Fernández_CHRO.pdf",
           "chunk_count": 7,
-          "uploaded_at": "2026-01-03T15:13:10.139148"
+          "uploaded_at": "2026-01-03T15:41:28.175435"
         },
         {
-          "id": "cv_108c8251",
+          "id": "cv_962470ff",
           "filename": "5a519af7_Li_Wei_Content_Strategist.pdf",
           "chunk_count": 3,
-          "uploaded_at": "2026-01-03T15:13:10.256125"
+          "uploaded_at": "2026-01-03T15:41:28.370372"
         },
         {
-          "id": "cv_88c273f0",
+          "id": "cv_853527de",
           "filename": "44eb074e_Liam_Ndlovu_Sales_Manager.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T15:13:10.357632"
+          "uploaded_at": "2026-01-03T15:41:28.503689"
         },
         {
-          "id": "cv_174339b6",
+          "id": "cv_c6a1c351",
           "filename": "7f6337b7_Thierry_NDiaye_Lead_UX_Designer.pdf",
           "chunk_count": 5,
-          "uploaded_at": "2026-01-03T15:13:10.529151"
+          "uploaded_at": "2026-01-03T15:41:28.703715"
         },
         {
-          "id": "cv_4fc86bc3",
+          "id": "cv_10a6a5b1",
           "filename": "52deb5e4_Li_Wei_Chen_Managing_Principal.pdf",
           "chunk_count": 16,
-          "uploaded_at": "2026-01-03T15:13:10.831957"
+          "uploaded_at": "2026-01-03T15:41:29.038518"
         },
         {
-          "id": "cv_d61181b2",
+          "id": "cv_4a4e87c4",
           "filename": "50e1f4e5_Priya_Patel_Junior_Software_Developer.pdf",
           "chunk_count": 6,
-          "uploaded_at": "2026-01-03T15:13:11.037731"
+          "uploaded_at": "2026-01-03T15:41:29.281645"
         },
         {
-          "id": "cv_4b158ef7",
+          "id": "cv_1796971b",
           "filename": "366a6a8e_Patricia_Okafor_Senior_Accountant.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T15:13:11.194968"
+          "uploaded_at": "2026-01-03T15:41:29.477144"
         },
         {
-          "id": "cv_e571f532",
+          "id": "cv_d2dfa555",
           "filename": "a44c7258_Isabel_Mendoza_Total_Rewards_Manager.pdf",
           "chunk_count": 3,
-          "uploaded_at": "2026-01-03T15:13:11.393231"
+          "uploaded_at": "2026-01-03T15:41:29.660743"
         },
         {
-          "id": "cv_7275183d",
+          "id": "cv_b77cfa5f",
           "filename": "c9727c1b_Priya_Patel_Senior_Counsel.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T15:13:11.549322"
+          "uploaded_at": "2026-01-03T15:41:29.901474"
         },
         {
-          "id": "cv_3a0f8a76",
+          "id": "cv_c9025ebf",
           "filename": "44080c0a_Elisabeth_van_der_Berg_Senior_Management_Consultant.pdf",
           "chunk_count": 4,
-          "uploaded_at": "2026-01-03T15:13:11.696460"
+          "uploaded_at": "2026-01-03T15:41:30.079653"
         },
         {
-          "id": "cv_c6f341b5",
+          "id": "cv_38a9b38c",
           "filename": "27948e8c_Isabel_Rodrigues_Principal_Software_Engineer.pdf",
           "chunk_count": 3,
-          "uploaded_at": "2026-01-03T15:13:11.837335"
-        },
-        {
-          "id": "cv_eeb0b641",
-          "filename": "8a11f680_Rajiv_Patel_Fashion_Stylist.pdf",
-          "chunk_count": 3,
-          "uploaded_at": "2026-01-03T15:13:12.030179"
-        },
-        {
-          "id": "cv_575ebf4d",
-          "filename": "c8798b5e_Miguel_Chen_Lead_Composer.pdf",
-          "chunk_count": 4,
-          "uploaded_at": "2026-01-03T15:13:12.167177"
-        },
-        {
-          "id": "cv_eeec6cd3",
-          "filename": "c104e914_Aisha_Patel_Supervisor.pdf",
-          "chunk_count": 9,
-          "uploaded_at": "2026-01-03T15:13:12.295799"
-        },
-        {
-          "id": "cv_4fb329a2",
-          "filename": "48b87a6b_Mateo_Alvarez_Head_of_Training.pdf",
-          "chunk_count": 4,
-          "uploaded_at": "2026-01-03T15:13:12.439706"
-        },
-        {
-          "id": "cv_6dd064a2",
-          "filename": "5c8fba4e_Li_Wei_Doctoral_Candidate_in_Artificial_Intelligence.pdf",
-          "chunk_count": 5,
-          "uploaded_at": "2026-01-03T15:13:12.620814"
-        },
-        {
-          "id": "cv_cf313d4d",
-          "filename": "9deb7ec4_Margaret_Whitmore_SVP_of_Innovation.pdf",
-          "chunk_count": 4,
-          "uploaded_at": "2026-01-03T15:13:12.803222"
-        },
-        {
-          "id": "cv_4a11f436",
-          "filename": "53e9ca5f_Mei_Lin_Chen_PhD_Student_in_Environmental_Science.pdf",
-          "chunk_count": 5,
-          "uploaded_at": "2026-01-03T15:13:12.934680"
-        },
-        {
-          "id": "cv_ce2e7f4f",
-          "filename": "6bcf1bf2_Aisha_Müller_Packaging_Designer.pdf",
-          "chunk_count": 4,
-          "uploaded_at": "2026-01-03T15:13:13.077887"
-        },
-        {
-          "id": "cv_393915c7",
-          "filename": "8f10b171_Priya_Mehta_Junior_Audio_Engineer.pdf",
-          "chunk_count": 5,
-          "uploaded_at": "2026-01-03T15:13:13.211659"
-        },
-        {
-          "id": "cv_942bc7e7",
-          "filename": "351c2982_Claudia_Schmidt_Chief_Growth_Officer.pdf",
-          "chunk_count": 2,
-          "uploaded_at": "2026-01-03T15:13:13.379672"
-        },
-        {
-          "id": "cv_94973ba3",
-          "filename": "136dd3ca_Kenji_Nakamura_Post-Production_Supervisor.pdf",
-          "chunk_count": 3,
-          "uploaded_at": "2026-01-03T15:13:13.609612"
-        },
-        {
-          "id": "cv_d11c9ccd",
-          "filename": "b1a38d04_Layla_Al-Mansoor_Senior_Clinical_Psychologist_specializing_in_Cross-Cultural_Trauma_Therapy.pdf",
-          "chunk_count": 4,
-          "uploaded_at": "2026-01-03T15:13:13.786837"
-        },
-        {
-          "id": "cv_2413ae1b",
-          "filename": "0d250c41_Clara_Mendoza_Lead_Artist_specializing_in_Traditional_and_Digital_Mixed_Media.pdf",
-          "chunk_count": 5,
-          "uploaded_at": "2026-01-03T15:13:13.957013"
-        },
-        {
-          "id": "cv_81212d49",
-          "filename": "a444319a_Anjali_Mehta_Lead_Artist_specializing_in_Traditional_Indian_Miniature_Painting.pdf",
-          "chunk_count": 2,
-          "uploaded_at": "2026-01-03T15:13:14.168450"
-        },
-        {
-          "id": "cv_88afe156",
-          "filename": "747e2648_Carmen_Rodriguez_Lead_Artist_specializing_in_Digital_Illustration_and_Concept_Art.pdf",
-          "chunk_count": 4,
-          "uploaded_at": "2026-01-03T15:13:14.365985"
-        },
-        {
-          "id": "cv_fd677984",
-          "filename": "665acb0f_Carmen_Delgado_Senior_Concept_Artist_specializing_in_Hand-Painted_Textures.pdf",
-          "chunk_count": 4,
-          "uploaded_at": "2026-01-03T15:13:14.536408"
-        },
-        {
-          "id": "cv_fee37e24",
-          "filename": "234b68e0_Isabel_Mendoza_Lead_Environment_Artist_specializing_in_Stylized_Worlds.pdf",
-          "chunk_count": 3,
-          "uploaded_at": "2026-01-03T15:13:14.713105"
-        },
-        {
-          "id": "cv_69d4632d",
-          "filename": "86f73716_Ji-hoon_Kim_Senior_Character_Artist_specializing_in_Stylized_3D_Modeling.pdf",
-          "chunk_count": 2,
-          "uploaded_at": "2026-01-03T15:13:14.881834"
-        },
-        {
-          "id": "cv_30fa88bd",
-          "filename": "6cc5f52e_Mira_Patel_Lead_2D_Game_Artist_specializing_in_Hand-Drawn_Animation.pdf",
-          "chunk_count": 2,
-          "uploaded_at": "2026-01-03T15:13:15.099718"
-        },
-        {
-          "id": "cv_d3a788f2",
-          "filename": "ee46e385_Julian_Carter_Lead_Concept_Artist_specializing_in_Character_Design_for_Video_Games.pdf",
-          "chunk_count": 3,
-          "uploaded_at": "2026-01-03T15:13:15.277422"
+          "uploaded_at": "2026-01-03T15:41:30.254692"
         }
       ],
       "messages": [
         {
-          "id": "43d00fe4-eebd-4ef5-b028-a4c5d14e5efb",
+          "id": "1c8d313c-a82f-4bc9-8472-c18211950989",
           "role": "user",
-          "content": "Rank all 33 candidates by experience",
+          "content": "rank all candidates by experiecne role and company",
           "sources": [],
-          "timestamp": "2026-01-03T15:13:21.615869"
+          "timestamp": "2026-01-03T15:42:04.465247"
         },
         {
-          "id": "28b9a9f1-51a6-45f3-9d33-32f2f90bd7c5",
+          "id": "dc2a2b23-c75e-4438-a9d7-3aaee0137c26",
           "role": "assistant",
-          "content": ":::thinking\nThe user wants to rank all 33 candidates by their experience. I will analyze the provided CV excerpts to extract relevant experience details and rank the candidates accordingly.\n:::\n\nBased on the CV excerpts, I have identified the following candidates and their respective years of experience:\n\n| Candidate | Experience |\n|-----------|------------|\n| **[Margaret Whitmore](cv:cv_cf313d4d)** | 14 years |\n| **[Claudia Schmidt](cv:cv_942bc7e7)** | 12 years |\n| **[Isabel Rodrigues](cv:cv_c6f341b5)** | 5 years |\n| **[Patricia Okafor](cv:cv_4b158ef7)** | 8 years |\n| **[Julian Carter](cv:cv_d3a788f2)** | 5 years |\n| **[Li Wei](cv:cv_6dd064a2)** | 6 years |\n| **[Aisha Müller](cv:cv_ce2e7f4f)** | 5 years |\n| **[Priya Patel](cv:cv_d61181b2)** | 3 years |\n| **[Thierry NDiaye](cv:cv_174339b6)** | 5 years |\n| **[Carlos Mendoza](cv:cv_261c049a)** | 6 years |\n| **[Mateo Alvarez](cv:cv_4fb329a2)** | 4 years |\n| **[Isabel Mendoza](cv:e571f532)** | 7 years |\n| **[Rajiv Patel](cv:eeb0b641)** | 5 years |\n| **[Clara Mendoza](cv:cv_2413ae1b)** | 7 years |\n| **[Liam Ndlovu](cv:cv_88c273f0)** | 5 years |\n| **[Elisabeth van der Berg](cv:cv_3a0f8a76)** | 6 years |\n| **[Julian Carter](cv:d3a788f2)** | 5 years |\n| **[Patricia Okafor](cv:4b158ef7)** | 8 years |\n| **[Aisha Müller](cv:ce2e7f4f)** | 5 years |\n| **[Clara Mendoza](cv:2413ae1b)** | 7 years |\n| **[Mateo Alvarez](cv:4fb329a2)** | 4 years |\n| **[Isabel Mendoza](cv:e571f532)** | 7 years |\n\nNote: The experience years are based on the information provided in the excerpts. Some candidates have overlapping roles or positions that may not be fully detailed.\n\n:::conclusion\nThe candidate with the most experience is **[Margaret Whitmore](cv:cv_cf313d4d)** with 14 years. For further details, please refer to the respective CVs.",
+          "content": ":::thinking\nThe user wants to rank all candidates by their experience, specifically by role and company. I will extract the relevant experience details from the provided CV excerpts to create a ranking.\n:::\n\nBased on the CV excerpts, here is the ranking of candidates by their experience roles and companies.\n\n| Candidate | Role | Company | Experience Duration |\n|-----------|------|---------|---------------------|\n| **[Patricia Okafor](cv:cv_1796971b)** | Senior Accountant | KPMG | 8 years (2005 - 2013) |\n| **[Thierry Nguyen](cv:cv_33b900b1)** | EVP, Business Development | Innovatech Solutions | 5 years (2010 - 2015) |\n| **[Jamie Patel](cv:cv_6412f75e)** | General Manager | Innovate Corp. | 4 years (2008 - 2012) |\n| **[Isabel Mendoza](cv:cv_d2dfa555)** | Compensation Analyst | L’Oréal | 7 years (2008 - 2015) |\n| **[Aisha Nkrumah](cv:cv_5e98c0b9)** | Associate Designer | Not specified | Not specified |\n| **[Lucas Moreau](cv:cv_445299db)** | CFO | Not specified | Not specified |\n| **[Priya Sharma Fernández](cv:cv_8c8f46d8)** | CHRO | Aurora Digital Labs S.L. | 1 year (2024 - 2025) |\n| **[Layla Al-Mansoori](cv:cv_4ef3f804)** | Postdoctoral Researcher | Not specified | Not specified |\n| **[Aïssa Diallo](cv:cv_067fdb46)** | Composer | Gaumont | 3 years (2012 - 2015) |\n| **[Priya Patel](cv:cv_4a4e87c4)** | Junior Software Developer | Global Logistics Inc. | 3 years (2019 - 2022) |\n| **[Li Wei](cv:cv_17d6ba07)** | Content Specialist | Tech Solutions | 5 years (2005 - 2010) |\n| **[Thierry NDiaye](cv:cv_c6a1c351)** | Lead UX Designer | Not specified | Not specified |\n| **[Ethan Park](cv:cv_20e0817b)** | Junior Physical Therapist | Active Rehab Solutions | 2 years (2019 - 2021) |\n| **[Aya Cohen](cv:cv_ede9f382)** | Hard Surface Modeler | Not specified | Not specified |\n| **[Rajiv Patel](cv:cv_b33c6394)** | Content Creator | Not specified | Not specified |\n| **[Isabela Costa](cv:cv_9a615f58)** | Model | Mega Models | 8 years (1982 - 1990) |\n| **[Lucas Moreau](cv:cv_445299db)** | CFO | Not specified | Not specified |\n| **[Layla Kim](cv:cv_1cdbc06a)** | Concept Artist | Not specified | Not specified |\n\n:::conclusion\nThe most experienced candidate is **[Patricia Okafor](cv:cv_1796971b)** with 8 years as a Senior Accountant at KPMG. For further details, you can review the CVs of the candidates listed above.",
           "sources": [
             {
-              "cv_id": "cv_6dd064a2",
-              "filename": "5c8fba4e_Li_Wei_Doctoral_Candidate_in_Artificial_Intelligence.pdf",
+              "cv_id": "cv_4ef3f804",
+              "filename": "1774687d_Layla_Al-Mansoori_Postdoctoral_Researcher.pdf",
+              "relevance": 0.617
+            },
+            {
+              "cv_id": "cv_067fdb46",
+              "filename": "0762284b_Aïssa_Diallo_Composer.pdf",
+              "relevance": 0.612
+            },
+            {
+              "cv_id": "cv_4a4e87c4",
+              "filename": "50e1f4e5_Priya_Patel_Junior_Software_Developer.pdf",
+              "relevance": 0.606
+            },
+            {
+              "cv_id": "cv_9a615f58",
+              "filename": "a32dd7e1_Isabela_Costa_Model.pdf",
+              "relevance": 0.598
+            },
+            {
+              "cv_id": "cv_8c8f46d8",
+              "filename": "dc85bc48_Priya_Sharma_Fernández_CHRO.pdf",
+              "relevance": 0.595
+            },
+            {
+              "cv_id": "cv_17d6ba07",
+              "filename": "84ea127f_Li_Wei_Content_Officer.pdf",
+              "relevance": 0.59
+            },
+            {
+              "cv_id": "cv_445299db",
+              "filename": "06659811_Lucas_Moreau_CFO.pdf",
+              "relevance": 0.585
+            },
+            {
+              "cv_id": "cv_6412f75e",
+              "filename": "d78a62ae_Jamie_Patel_General_Manager.pdf",
+              "relevance": 0.583
+            },
+            {
+              "cv_id": "cv_ede9f382",
+              "filename": "8117dbda_Aya_Cohen_Hard_Surface_Modeler.pdf",
+              "relevance": 0.582
+            },
+            {
+              "cv_id": "cv_5e98c0b9",
+              "filename": "69ed5706_Aisha_Nkrumah_Associate_Designer.pdf",
+              "relevance": 0.579
+            },
+            {
+              "cv_id": "cv_1796971b",
+              "filename": "366a6a8e_Patricia_Okafor_Senior_Accountant.pdf",
+              "relevance": 0.579
+            },
+            {
+              "cv_id": "cv_b33c6394",
+              "filename": "9450f274_Rajiv_Patel_Content_Creator.pdf",
+              "relevance": 0.578
+            },
+            {
+              "cv_id": "cv_c6a1c351",
+              "filename": "7f6337b7_Thierry_NDiaye_Lead_UX_Designer.pdf",
+              "relevance": 0.572
+            },
+            {
+              "cv_id": "cv_1cdbc06a",
+              "filename": "b4b377d4_Layla_Kim_Concept_Artist.pdf",
+              "relevance": 0.569
+            },
+            {
+              "cv_id": "cv_d2dfa555",
+              "filename": "a44c7258_Isabel_Mendoza_Total_Rewards_Manager.pdf",
+              "relevance": 0.567
+            },
+            {
+              "cv_id": "cv_20e0817b",
+              "filename": "68835e12_Ethan_Park_Physical_Therapist.pdf",
+              "relevance": 0.567
+            },
+            {
+              "cv_id": "cv_33b900b1",
+              "filename": "2a4fe182_Thierry_Nguyen_EVP.pdf",
               "relevance": 0.566
-            },
-            {
-              "cv_id": "cv_174339b6",
-              "filename": "7f6337b7_Thierry_NDiaye_Lead_UX_Designer.pdf",
-              "relevance": 0.54
-            },
-            {
-              "cv_id": "cv_cf313d4d",
-              "filename": "9deb7ec4_Margaret_Whitmore_SVP_of_Innovation.pdf",
-              "relevance": 0.526
-            },
-            {
-              "cv_id": "cv_4b158ef7",
-              "filename": "366a6a8e_Patricia_Okafor_Senior_Accountant.pdf",
-              "relevance": 0.525
-            },
-            {
-              "cv_id": "cv_d61181b2",
-              "filename": "50e1f4e5_Priya_Patel_Junior_Software_Developer.pdf",
-              "relevance": 0.523
-            },
-            {
-              "cv_id": "cv_d3a788f2",
-              "filename": "ee46e385_Julian_Carter_Lead_Concept_Artist_specializing_in_Character_Design_for_Video_Games.pdf",
-              "relevance": 0.512
-            },
-            {
-              "cv_id": "cv_942bc7e7",
-              "filename": "351c2982_Claudia_Schmidt_Chief_Growth_Officer.pdf",
-              "relevance": 0.512
-            },
-            {
-              "cv_id": "cv_3a0f8a76",
-              "filename": "44080c0a_Elisabeth_van_der_Berg_Senior_Management_Consultant.pdf",
-              "relevance": 0.507
-            },
-            {
-              "cv_id": "cv_c6f341b5",
-              "filename": "27948e8c_Isabel_Rodrigues_Principal_Software_Engineer.pdf",
-              "relevance": 0.506
-            },
-            {
-              "cv_id": "cv_261c049a",
-              "filename": "bc252667_Carlos_Mendoza_Manager.pdf",
-              "relevance": 0.505
-            },
-            {
-              "cv_id": "cv_ce2e7f4f",
-              "filename": "6bcf1bf2_Aisha_Müller_Packaging_Designer.pdf",
-              "relevance": 0.504
-            },
-            {
-              "cv_id": "cv_eeb0b641",
-              "filename": "8a11f680_Rajiv_Patel_Fashion_Stylist.pdf",
-              "relevance": 0.504
-            },
-            {
-              "cv_id": "cv_2413ae1b",
-              "filename": "0d250c41_Clara_Mendoza_Lead_Artist_specializing_in_Traditional_and_Digital_Mixed_Media.pdf",
-              "relevance": 0.496
-            },
-            {
-              "cv_id": "cv_88c273f0",
-              "filename": "44eb074e_Liam_Ndlovu_Sales_Manager.pdf",
-              "relevance": 0.493
-            },
-            {
-              "cv_id": "cv_4fb329a2",
-              "filename": "48b87a6b_Mateo_Alvarez_Head_of_Training.pdf",
-              "relevance": 0.493
-            },
-            {
-              "cv_id": "cv_e571f532",
-              "filename": "a44c7258_Isabel_Mendoza_Total_Rewards_Manager.pdf",
-              "relevance": 0.491
             }
           ],
-          "timestamp": "2026-01-03T15:13:39.811960"
+          "timestamp": "2026-01-03T15:42:19.357681"
         },
         {
-          "id": "5c9ef6a8-4720-430c-9f2c-1ddfd17b8e80",
+          "id": "72c06d2b-76c2-4e94-b8c1-9e1782db3c70",
           "role": "user",
-          "content": "Rank all 33 candidates by experience\n\ny el rol y la emrpesa mas improtante en la que han trabajado solo sie s una emrpesa como google microsoft o similar",
+          "content": "cual es el mejro candidato para \nWe are seeking a proactive and skilled developer who is passionate about building modern, data-driven applications.\n\nExperience: 5+ years of professional experience in a Senior full-stack development role\nExtensive experience with the Python framework\nTypeScript Proficiency: You are highly proficient in TypeScript and its application in both frontend (React) and backend (Node.js) environments\nFrontend Expertise: Strong experience with React and modern state management, including Hooks and the Context API\nBackend Expertise: Solid experience building and consuming REST APIs with Node.js and Express\nDatabase Skills: Experience with like PostgreSQL, and working with an ORM or query builder\nexperience in BigQuery\nKnowledge of n8n.io, LangGraph, LangChain\nProblem-Solving Mindset: You are a collaborative problem-solver, eager to take on new challenges and contribute to a fast-paced development cycle\nPassion for AI: A genuine passion and awareness for artificial intelligence and a strong desire to build products that leverage its capabilities to solve real-world problems\nCreativity and Proactivity: You have a passion for building great products, are eager to propose new features, and enjoy finding creative solutions to improve the user experience. \n\nNice to Have:\n\nAI Project Experience: Previous experience working on projects involving AI, machine learning, or interacting with large language models (LLMs)\nFamiliarity with UI component libraries like Shadcn UI\nKnowledge of cloud platforms like Google Cloud Platform (GCP)\n\nWhy You'll Love Working With Us\n\nHigh-Impact Role: Be a key player in a small, agile team building a greenfield project with the potential to transform an industry\nModern Technology: Work with a cutting-edge, carefully selected tech stack with a focus on best practices\nGrowth & Learning: Gain deep experience in AI-driven applications, cloud-native architecture, and real-time systems\nStability & Vision: Enjoy the energy of a startup environment backed by the resources and stability of a large, successful company\nCollaborative Culture: We value open communication, teamwork, and a shared passion for building exceptional products\n\nIf you are ready to take on a challenging and rewarding role at the intersection of AI and product strategy, we encourage you to apply.",
           "sources": [],
-          "timestamp": "2026-01-03T15:15:21.362550"
+          "timestamp": "2026-01-03T15:48:46.798404"
         },
         {
-          "id": "faf6df4c-20b0-4b77-aae4-a23b9a72ccd7",
+          "id": "4396e6cb-431b-4e0e-901b-909e6d618046",
           "role": "assistant",
-          "content": ":::thinking\nThe user wants to rank candidates by their experience and identify the most significant company they have worked for, specifically looking for candidates with experience at major companies like Google or Microsoft. I will analyze the provided CV excerpts for relevant information.\n:::\n\nBased on the CV excerpts, none of the candidates have listed experience at major companies like Google or Microsoft. \n\n**None of the candidates match this requirement.** After reviewing all CVs, no candidate mentions working for Google, Microsoft, or similar major companies.\n\n:::conclusion\nNo suitable candidates found with experience at major companies like Google or Microsoft.",
+          "content": ":::thinking\nThe user is looking for a candidate with extensive experience in full-stack development, particularly with Python and TypeScript, as well as specific skills in React, Node.js, and database management. I will analyze the provided CV excerpts to find a suitable match.\n:::\n\nNone of the candidates match this requirement. After reviewing all CVs, there are no candidates with the specified experience in full-stack development, Python framework, TypeScript proficiency, and the other outlined skills.\n\n:::conclusion\nNo suitable candidates found for the full-stack developer role.",
           "sources": [
             {
-              "cv_id": "cv_3a0f8a76",
-              "filename": "44080c0a_Elisabeth_van_der_Berg_Senior_Management_Consultant.pdf",
-              "relevance": 0.72
-            },
-            {
-              "cv_id": "cv_174339b6",
-              "filename": "7f6337b7_Thierry_NDiaye_Lead_UX_Designer.pdf",
-              "relevance": 0.715
-            },
-            {
-              "cv_id": "cv_d3a788f2",
-              "filename": "ee46e385_Julian_Carter_Lead_Concept_Artist_specializing_in_Character_Design_for_Video_Games.pdf",
-              "relevance": 0.714
-            },
-            {
-              "cv_id": "cv_cf313d4d",
-              "filename": "9deb7ec4_Margaret_Whitmore_SVP_of_Innovation.pdf",
-              "relevance": 0.7
-            },
-            {
-              "cv_id": "cv_4b158ef7",
+              "cv_id": "cv_1796971b",
               "filename": "366a6a8e_Patricia_Okafor_Senior_Accountant.pdf",
-              "relevance": 0.694
+              "relevance": 0.904
             },
             {
-              "cv_id": "cv_6dd064a2",
-              "filename": "5c8fba4e_Li_Wei_Doctoral_Candidate_in_Artificial_Intelligence.pdf",
-              "relevance": 0.693
+              "cv_id": "cv_17d6ba07",
+              "filename": "84ea127f_Li_Wei_Content_Officer.pdf",
+              "relevance": 0.897
             },
             {
-              "cv_id": "cv_942bc7e7",
-              "filename": "351c2982_Claudia_Schmidt_Chief_Growth_Officer.pdf",
-              "relevance": 0.693
+              "cv_id": "cv_b77cfa5f",
+              "filename": "c9727c1b_Priya_Patel_Senior_Counsel.pdf",
+              "relevance": 0.894
             },
             {
-              "cv_id": "cv_c6f341b5",
-              "filename": "27948e8c_Isabel_Rodrigues_Principal_Software_Engineer.pdf",
-              "relevance": 0.691
+              "cv_id": "cv_445299db",
+              "filename": "06659811_Lucas_Moreau_CFO.pdf",
+              "relevance": 0.893
             },
             {
-              "cv_id": "cv_2413ae1b",
-              "filename": "0d250c41_Clara_Mendoza_Lead_Artist_specializing_in_Traditional_and_Digital_Mixed_Media.pdf",
-              "relevance": 0.688
+              "cv_id": "cv_6412f75e",
+              "filename": "d78a62ae_Jamie_Patel_General_Manager.pdf",
+              "relevance": 0.891
             },
             {
-              "cv_id": "cv_e571f532",
+              "cv_id": "cv_4ef3f804",
+              "filename": "1774687d_Layla_Al-Mansoori_Postdoctoral_Researcher.pdf",
+              "relevance": 0.889
+            },
+            {
+              "cv_id": "cv_33b900b1",
+              "filename": "2a4fe182_Thierry_Nguyen_EVP.pdf",
+              "relevance": 0.888
+            },
+            {
+              "cv_id": "cv_f6df01f9",
+              "filename": "bf3a5fa7_Carmen_López_Lighting_Artist.pdf",
+              "relevance": 0.881
+            },
+            {
+              "cv_id": "cv_ede9f382",
+              "filename": "8117dbda_Aya_Cohen_Hard_Surface_Modeler.pdf",
+              "relevance": 0.881
+            },
+            {
+              "cv_id": "cv_d2dfa555",
               "filename": "a44c7258_Isabel_Mendoza_Total_Rewards_Manager.pdf",
-              "relevance": 0.685
+              "relevance": 0.88
             },
             {
-              "cv_id": "cv_d61181b2",
+              "cv_id": "cv_77d4a967",
+              "filename": "477ae7a5_Liam_Nguyen_Concept_Artist.pdf",
+              "relevance": 0.878
+            },
+            {
+              "cv_id": "cv_900c7bc8",
+              "filename": "d5289c50_Carlos_Mendoza_Junior_Cloud_Engineer.pdf",
+              "relevance": 0.877
+            },
+            {
+              "cv_id": "cv_8c8f46d8",
+              "filename": "dc85bc48_Priya_Sharma_Fernández_CHRO.pdf",
+              "relevance": 0.877
+            },
+            {
+              "cv_id": "cv_619d6727",
+              "filename": "1ef4e451_Dirk_van_der_Meer_Therapist.pdf",
+              "relevance": 0.874
+            },
+            {
+              "cv_id": "cv_38a9b38c",
+              "filename": "27948e8c_Isabel_Rodrigues_Principal_Software_Engineer.pdf",
+              "relevance": 0.873
+            },
+            {
+              "cv_id": "cv_4a4e87c4",
               "filename": "50e1f4e5_Priya_Patel_Junior_Software_Developer.pdf",
-              "relevance": 0.681
+              "relevance": 0.872
             },
             {
-              "cv_id": "cv_575ebf4d",
-              "filename": "c8798b5e_Miguel_Chen_Lead_Composer.pdf",
-              "relevance": 0.68
+              "cv_id": "cv_b33c6394",
+              "filename": "9450f274_Rajiv_Patel_Content_Creator.pdf",
+              "relevance": 0.872
             },
             {
-              "cv_id": "cv_eeb0b641",
-              "filename": "8a11f680_Rajiv_Patel_Fashion_Stylist.pdf",
-              "relevance": 0.679
+              "cv_id": "cv_8c30cd67",
+              "filename": "c71c69ae_Margaret_Whitmore_CFO.pdf",
+              "relevance": 0.869
             },
             {
-              "cv_id": "cv_4fb329a2",
-              "filename": "48b87a6b_Mateo_Alvarez_Head_of_Training.pdf",
-              "relevance": 0.678
-            },
-            {
-              "cv_id": "cv_88afe156",
-              "filename": "747e2648_Carmen_Rodriguez_Lead_Artist_specializing_in_Digital_Illustration_and_Concept_Art.pdf",
-              "relevance": 0.677
-            },
-            {
-              "cv_id": "cv_393915c7",
-              "filename": "8f10b171_Priya_Mehta_Junior_Audio_Engineer.pdf",
-              "relevance": 0.671
+              "cv_id": "cv_c6a1c351",
+              "filename": "7f6337b7_Thierry_NDiaye_Lead_UX_Designer.pdf",
+              "relevance": 0.863
             }
           ],
-          "timestamp": "2026-01-03T15:15:24.751890"
-        },
-        {
-          "id": "e905a5ea-6a57-4732-84ef-07730d35f199",
-          "role": "user",
-          "content": "Rank all 33 candidates by experience\n\ny el rol y la emrpesa mas improtante en la que han trabajado solo sie s una emrpesa como google microsoft o similar",
-          "sources": [],
-          "timestamp": "2026-01-03T15:17:16.513883"
-        },
-        {
-          "id": "4995f1c3-b939-480c-8a77-c01626acb59a",
-          "role": "assistant",
-          "content": ":::thinking\nThe user is asking for a ranking of candidates based on their experience, specifically highlighting their most significant role at a major company like Google or Microsoft. I will review the provided CV excerpts to identify any candidates who have worked at such companies.\n:::\n\nAfter reviewing the CV excerpts, **none of the candidates have listed experience at major companies like Google or Microsoft.** \n\n:::conclusion\nNo candidates match the requirement of having worked at Google, Microsoft, or similar major companies.",
-          "sources": [
-            {
-              "cv_id": "cv_3a0f8a76",
-              "filename": "44080c0a_Elisabeth_van_der_Berg_Senior_Management_Consultant.pdf",
-              "relevance": 0.72
-            },
-            {
-              "cv_id": "cv_174339b6",
-              "filename": "7f6337b7_Thierry_NDiaye_Lead_UX_Designer.pdf",
-              "relevance": 0.715
-            },
-            {
-              "cv_id": "cv_d3a788f2",
-              "filename": "ee46e385_Julian_Carter_Lead_Concept_Artist_specializing_in_Character_Design_for_Video_Games.pdf",
-              "relevance": 0.714
-            },
-            {
-              "cv_id": "cv_cf313d4d",
-              "filename": "9deb7ec4_Margaret_Whitmore_SVP_of_Innovation.pdf",
-              "relevance": 0.7
-            },
-            {
-              "cv_id": "cv_4b158ef7",
-              "filename": "366a6a8e_Patricia_Okafor_Senior_Accountant.pdf",
-              "relevance": 0.694
-            },
-            {
-              "cv_id": "cv_6dd064a2",
-              "filename": "5c8fba4e_Li_Wei_Doctoral_Candidate_in_Artificial_Intelligence.pdf",
-              "relevance": 0.693
-            },
-            {
-              "cv_id": "cv_942bc7e7",
-              "filename": "351c2982_Claudia_Schmidt_Chief_Growth_Officer.pdf",
-              "relevance": 0.693
-            },
-            {
-              "cv_id": "cv_c6f341b5",
-              "filename": "27948e8c_Isabel_Rodrigues_Principal_Software_Engineer.pdf",
-              "relevance": 0.691
-            },
-            {
-              "cv_id": "cv_2413ae1b",
-              "filename": "0d250c41_Clara_Mendoza_Lead_Artist_specializing_in_Traditional_and_Digital_Mixed_Media.pdf",
-              "relevance": 0.688
-            },
-            {
-              "cv_id": "cv_e571f532",
-              "filename": "a44c7258_Isabel_Mendoza_Total_Rewards_Manager.pdf",
-              "relevance": 0.685
-            },
-            {
-              "cv_id": "cv_d61181b2",
-              "filename": "50e1f4e5_Priya_Patel_Junior_Software_Developer.pdf",
-              "relevance": 0.681
-            },
-            {
-              "cv_id": "cv_575ebf4d",
-              "filename": "c8798b5e_Miguel_Chen_Lead_Composer.pdf",
-              "relevance": 0.68
-            },
-            {
-              "cv_id": "cv_eeb0b641",
-              "filename": "8a11f680_Rajiv_Patel_Fashion_Stylist.pdf",
-              "relevance": 0.679
-            },
-            {
-              "cv_id": "cv_4fb329a2",
-              "filename": "48b87a6b_Mateo_Alvarez_Head_of_Training.pdf",
-              "relevance": 0.678
-            },
-            {
-              "cv_id": "cv_88afe156",
-              "filename": "747e2648_Carmen_Rodriguez_Lead_Artist_specializing_in_Digital_Illustration_and_Concept_Art.pdf",
-              "relevance": 0.677
-            },
-            {
-              "cv_id": "cv_393915c7",
-              "filename": "8f10b171_Priya_Mehta_Junior_Audio_Engineer.pdf",
-              "relevance": 0.671
-            }
-          ],
-          "timestamp": "2026-01-03T15:17:20.401550"
-        },
-        {
-          "id": "33352b34-6551-4c4a-b6a8-cd32aaa3e249",
-          "role": "user",
-          "content": "Rank all 33 candidates by experience\n\ny el rol y la emrpesa mas improtante en la que han trabajado solo sie s una emrpesa como google microsoft o similar",
-          "sources": [],
-          "timestamp": "2026-01-03T15:30:21.286539"
-        },
-        {
-          "id": "364d5fe6-9e68-4a27-b8b5-39e45e154418",
-          "role": "assistant",
-          "content": ":::thinking\nThe user wants to rank candidates by their experience and highlight their most significant role at a major company like Google or Microsoft. I will analyze the provided CV excerpts for relevant information.\n:::\n\nNone of the candidates explicitly mention experience at major companies like Google or Microsoft. Therefore, I cannot provide a ranking based on that specific criterion.\n\n:::conclusion\n**None of the candidates match this requirement.**",
-          "sources": [
-            {
-              "cv_id": "cv_3a0f8a76",
-              "filename": "44080c0a_Elisabeth_van_der_Berg_Senior_Management_Consultant.pdf",
-              "relevance": 0.72
-            },
-            {
-              "cv_id": "cv_174339b6",
-              "filename": "7f6337b7_Thierry_NDiaye_Lead_UX_Designer.pdf",
-              "relevance": 0.715
-            },
-            {
-              "cv_id": "cv_d3a788f2",
-              "filename": "ee46e385_Julian_Carter_Lead_Concept_Artist_specializing_in_Character_Design_for_Video_Games.pdf",
-              "relevance": 0.714
-            },
-            {
-              "cv_id": "cv_cf313d4d",
-              "filename": "9deb7ec4_Margaret_Whitmore_SVP_of_Innovation.pdf",
-              "relevance": 0.7
-            },
-            {
-              "cv_id": "cv_4b158ef7",
-              "filename": "366a6a8e_Patricia_Okafor_Senior_Accountant.pdf",
-              "relevance": 0.694
-            },
-            {
-              "cv_id": "cv_6dd064a2",
-              "filename": "5c8fba4e_Li_Wei_Doctoral_Candidate_in_Artificial_Intelligence.pdf",
-              "relevance": 0.693
-            },
-            {
-              "cv_id": "cv_942bc7e7",
-              "filename": "351c2982_Claudia_Schmidt_Chief_Growth_Officer.pdf",
-              "relevance": 0.693
-            },
-            {
-              "cv_id": "cv_c6f341b5",
-              "filename": "27948e8c_Isabel_Rodrigues_Principal_Software_Engineer.pdf",
-              "relevance": 0.691
-            },
-            {
-              "cv_id": "cv_2413ae1b",
-              "filename": "0d250c41_Clara_Mendoza_Lead_Artist_specializing_in_Traditional_and_Digital_Mixed_Media.pdf",
-              "relevance": 0.688
-            },
-            {
-              "cv_id": "cv_e571f532",
-              "filename": "a44c7258_Isabel_Mendoza_Total_Rewards_Manager.pdf",
-              "relevance": 0.685
-            },
-            {
-              "cv_id": "cv_d61181b2",
-              "filename": "50e1f4e5_Priya_Patel_Junior_Software_Developer.pdf",
-              "relevance": 0.681
-            },
-            {
-              "cv_id": "cv_575ebf4d",
-              "filename": "c8798b5e_Miguel_Chen_Lead_Composer.pdf",
-              "relevance": 0.68
-            },
-            {
-              "cv_id": "cv_eeb0b641",
-              "filename": "8a11f680_Rajiv_Patel_Fashion_Stylist.pdf",
-              "relevance": 0.679
-            },
-            {
-              "cv_id": "cv_4fb329a2",
-              "filename": "48b87a6b_Mateo_Alvarez_Head_of_Training.pdf",
-              "relevance": 0.678
-            },
-            {
-              "cv_id": "cv_88afe156",
-              "filename": "747e2648_Carmen_Rodriguez_Lead_Artist_specializing_in_Digital_Illustration_and_Concept_Art.pdf",
-              "relevance": 0.677
-            },
-            {
-              "cv_id": "cv_393915c7",
-              "filename": "8f10b171_Priya_Mehta_Junior_Audio_Engineer.pdf",
-              "relevance": 0.671
-            }
-          ],
-          "timestamp": "2026-01-03T15:30:24.418610"
+          "timestamp": "2026-01-03T15:48:55.419413"
         }
       ],
-      "created_at": "2026-01-03T15:13:03.815910",
-      "updated_at": "2026-01-03T15:30:24.418610"
+      "created_at": "2026-01-03T15:41:18.352784",
+      "updated_at": "2026-01-03T15:48:55.419413"
     }
   ]
 }

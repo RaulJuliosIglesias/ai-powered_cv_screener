@@ -158,8 +158,13 @@ export const removeCVFromSession = async (sessionId, cvId, mode = 'local') => {
   return response.data;
 };
 
-export const sendSessionMessage = async (sessionId, message, mode = 'local') => {
-  const response = await api.post(`/sessions/${sessionId}/chat?mode=${mode}`, { message });
+export const sendSessionMessage = async (sessionId, message, mode = 'local', pipelineSettings = null) => {
+  const payload = { message };
+  if (pipelineSettings) {
+    payload.understanding_model = pipelineSettings.understanding;
+    payload.generation_model = pipelineSettings.generation;
+  }
+  const response = await api.post(`/sessions/${sessionId}/chat?mode=${mode}`, payload);
   return response.data;
 };
 

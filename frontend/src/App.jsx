@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy, Eye, ExternalLink } from 'lucide-react';
+import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy, Eye, ExternalLink, Sliders } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import useMode from './hooks/useMode';
@@ -7,6 +7,7 @@ import useTheme from './hooks/useTheme';
 import { useLanguage } from './contexts/LanguageContext';
 import SourceBadge from './components/SourceBadge';
 import ModelSelector from './components/ModelSelector';
+import RAGPipelineSettings, { getRAGPipelineSettings } from './components/RAGPipelineSettings';
 import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList, clearSessionCVs, deleteAllCVsFromDatabase, deleteCV } from './services/api';
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
   const [toast, setToast] = useState(null);
   const [pdfViewerUrl, setPdfViewerUrl] = useState(null);
   const [pdfViewerTitle, setPdfViewerTitle] = useState('');
+  const [showRAGSettings, setShowRAGSettings] = useState(false);
+  const [ragPipelineSettings, setRagPipelineSettings] = useState(getRAGPipelineSettings());
   
   // Upload progress modal state
   const [uploadProgress, setUploadProgress] = useState(null);
@@ -316,7 +319,7 @@ function App() {
     
     setIsChatLoading(true);
     try { 
-      await sendSessionMessage(currentSessionId, userMessage, mode); 
+      await sendSessionMessage(currentSessionId, userMessage, mode, ragPipelineSettings); 
       await loadSession(currentSessionId); 
     } catch (e) { 
       console.error(e); 
@@ -582,6 +585,13 @@ function App() {
           </div>
           <div className="flex items-center gap-2">
             <ModelSelector />
+            <button 
+              onClick={() => setShowRAGSettings(true)}
+              className="flex items-center gap-1.5 px-3 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-purple-300 dark:hover:border-purple-600 transition-colors text-sm"
+              title={language === 'es' ? 'Configurar Pipeline RAG' : 'Configure RAG Pipeline'}
+            >
+              <Sliders className="w-4 h-4 text-purple-500" />
+            </button>
             {currentSession && (<><input ref={fileInputRef} type="file" accept=".pdf" multiple onChange={handleUpload} className="hidden" /><button onClick={() => fileInputRef.current?.click()} disabled={isUploading} className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-blue-500 hover:bg-blue-600 text-white rounded-lg disabled:opacity-50">{isUploading ? <Loader className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}<span>{language === 'es' ? 'Añadir CVs' : 'Add CVs'}</span></button></>)}
           </div>
         </div>
@@ -1131,6 +1141,16 @@ function App() {
           </div>
         </div>
       )}
+
+      {/* RAG Pipeline Settings Modal */}
+      <RAGPipelineSettings 
+        isOpen={showRAGSettings}
+        onClose={() => setShowRAGSettings(false)}
+        onSave={(settings) => {
+          setRagPipelineSettings(settings);
+          showToast(language === 'es' ? 'Configuración guardada' : 'Settings saved', 'success');
+        }}
+      />
     </div>
   );
 }
