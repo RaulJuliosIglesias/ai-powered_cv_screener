@@ -571,10 +571,112 @@
             }
           ],
           "timestamp": "2026-01-03T17:21:57.955678"
+        },
+        {
+          "id": "dcc35a00-d16e-4b2d-8d9d-84911745a1bb",
+          "role": "user",
+          "content": "dame el perfil asm experto en three.js",
+          "sources": [],
+          "timestamp": "2026-01-03T17:36:05.610774"
+        },
+        {
+          "id": "711bb0c3-5a1b-4cd6-b6be-28fc1a9e7b6b",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for candidates with experience in both Three.js and Assembly language (ASM). I need to check each CV for these skills and their proficiency levels. If no candidate matches, I will respond accordingly.\n:::\n\nNo candidates match the specified criteria of having experience in both Three.js and Assembly language (ASM). After reviewing all CVs, no candidate lists both skills.\n\n:::conclusion\nNo suitable candidates found with expertise in both Three.js and Assembly language (ASM).\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_77d4a967",
+              "filename": "477ae7a5_Liam_Nguyen_Concept_Artist.pdf",
+              "relevance": 0.592
+            },
+            {
+              "cv_id": "cv_12d4ce24",
+              "filename": "c2533d2e_Adewale_Patel_3D_Artist.pdf",
+              "relevance": 0.567
+            },
+            {
+              "cv_id": "cv_035f3bb0",
+              "filename": "a2971b00_Carlos_Mendoza_Research_Assistant.pdf",
+              "relevance": 0.56
+            },
+            {
+              "cv_id": "cv_4ef3f804",
+              "filename": "1774687d_Layla_Al-Mansoori_Postdoctoral_Researcher.pdf",
+              "relevance": 0.557
+            },
+            {
+              "cv_id": "cv_10a6a5b1",
+              "filename": "52deb5e4_Li_Wei_Chen_Managing_Principal.pdf",
+              "relevance": 0.556
+            },
+            {
+              "cv_id": "cv_d2dfa555",
+              "filename": "a44c7258_Isabel_Mendoza_Total_Rewards_Manager.pdf",
+              "relevance": 0.553
+            },
+            {
+              "cv_id": "cv_1796971b",
+              "filename": "366a6a8e_Patricia_Okafor_Senior_Accountant.pdf",
+              "relevance": 0.55
+            },
+            {
+              "cv_id": "cv_619d6727",
+              "filename": "1ef4e451_Dirk_van_der_Meer_Therapist.pdf",
+              "relevance": 0.548
+            },
+            {
+              "cv_id": "cv_445299db",
+              "filename": "06659811_Lucas_Moreau_CFO.pdf",
+              "relevance": 0.547
+            },
+            {
+              "cv_id": "cv_8c8f46d8",
+              "filename": "dc85bc48_Priya_Sharma_Fernández_CHRO.pdf",
+              "relevance": 0.539
+            },
+            {
+              "cv_id": "cv_a41ed349",
+              "filename": "f180c979_Khalid_Al-Mansur_Mobile_Engineer.pdf",
+              "relevance": 0.538
+            },
+            {
+              "cv_id": "cv_c6a1c351",
+              "filename": "7f6337b7_Thierry_NDiaye_Lead_UX_Designer.pdf",
+              "relevance": 0.536
+            },
+            {
+              "cv_id": "cv_33b900b1",
+              "filename": "2a4fe182_Thierry_Nguyen_EVP.pdf",
+              "relevance": 0.536
+            },
+            {
+              "cv_id": "cv_20e0817b",
+              "filename": "68835e12_Ethan_Park_Physical_Therapist.pdf",
+              "relevance": 0.535
+            },
+            {
+              "cv_id": "cv_09eb1245",
+              "filename": "4662a9ee_Patricia_Williams_Medical_Intern.pdf",
+              "relevance": 0.534
+            },
+            {
+              "cv_id": "cv_b77cfa5f",
+              "filename": "c9727c1b_Priya_Patel_Senior_Counsel.pdf",
+              "relevance": 0.532
+            }
+          ],
+          "timestamp": "2026-01-03T17:37:38.014621"
+        },
+        {
+          "id": "75345798-b961-4a53-a15e-ec5e75904220",
+          "role": "user",
+          "content": "y para front end quien seria el mejroi candidato?",
+          "sources": [],
+          "timestamp": "2026-01-03T17:39:00.738352"
         }
       ],
       "created_at": "2026-01-03T15:41:18.352784",
-      "updated_at": "2026-01-03T17:21:57.955678"
+      "updated_at": "2026-01-03T17:39:00.738352"
     },
     {
       "id": "2503f62f-8b3e-4c9d-9918-a4d4c602b038",
@@ -847,10 +949,24 @@
             }
           ],
           "timestamp": "2026-01-03T17:30:47.342102"
+        },
+        {
+          "id": "341f295a-6701-4cca-bd2d-ee6b43a22c72",
+          "role": "user",
+          "content": "Create a top 3 shortlist from 28 candidates",
+          "sources": [],
+          "timestamp": "2026-01-03T17:31:36.372236"
+        },
+        {
+          "id": "40f46be4-2c33-4c8d-a707-f8daf4bdfc5d",
+          "role": "user",
+          "content": "Create a top 3 shortlist from 28 candidates",
+          "sources": [],
+          "timestamp": "2026-01-03T17:38:44.023220"
         }
       ],
       "created_at": "2026-01-03T17:22:15.568352",
-      "updated_at": "2026-01-03T17:30:47.342102"
+      "updated_at": "2026-01-03T17:38:44.023220"
     }
   ]
 }

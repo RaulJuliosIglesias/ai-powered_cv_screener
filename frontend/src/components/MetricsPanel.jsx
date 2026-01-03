@@ -172,25 +172,37 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
   );
 }
 
-export default function MetricsPanel({ isOpen, onClose }) {
+export default function MetricsPanel({ isOpen, onClose, sessionId = null, sessionName = null }) {
   const [history, setHistory] = useState([]);
   const [expandedId, setExpandedId] = useState(null);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const [showAllSessions, setShowAllSessions] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
-      setHistory(getMetricsHistory());
+      const allHistory = getMetricsHistory();
+      // Filter by session if sessionId provided and not showing all
+      if (sessionId && !showAllSessions) {
+        setHistory(allHistory.filter(h => h.session_id === sessionId));
+      } else {
+        setHistory(allHistory);
+      }
     }
-  }, [isOpen]);
+  }, [isOpen, sessionId, showAllSessions]);
 
   // Listen for new metrics
   useEffect(() => {
     const handleMetricsUpdate = () => {
-      setHistory(getMetricsHistory());
+      const allHistory = getMetricsHistory();
+      if (sessionId && !showAllSessions) {
+        setHistory(allHistory.filter(h => h.session_id === sessionId));
+      } else {
+        setHistory(allHistory);
+      }
     };
     window.addEventListener('metrics-updated', handleMetricsUpdate);
     return () => window.removeEventListener('metrics-updated', handleMetricsUpdate);
-  }, []);
+  }, [sessionId, showAllSessions]);
 
   const handleClear = () => {
     clearMetricsHistory();
@@ -217,12 +229,29 @@ export default function MetricsPanel({ isOpen, onClose }) {
         <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700">
           <div className="flex items-center gap-2">
             <BarChart3 size={18} className="text-cyan-400" />
-            <span className="font-medium text-white">RAG Pipeline Metrics</span>
+            <span className="font-medium text-white">RAG Metrics</span>
+            {sessionId && (
+              <span className="text-xs text-cyan-400 bg-cyan-900/30 px-2 py-0.5 rounded-full truncate max-w-[120px]" title={sessionName}>
+                {sessionName || 'This chat'}
+              </span>
+            )}
             <span className="text-xs text-gray-500 bg-gray-800 px-2 py-0.5 rounded-full">
               {history.length} queries
             </span>
           </div>
           <div className="flex items-center gap-2">
+            {sessionId && (
+              <button
+                onClick={() => setShowAllSessions(!showAllSessions)}
+                className={`text-[10px] px-2 py-1 rounded transition-colors ${
+                  showAllSessions 
+                    ? 'bg-cyan-600 text-white' 
+                    : 'bg-gray-800 text-gray-400 hover:text-white'
+                }`}
+              >
+                {showAllSessions ? 'All sessions' : 'This chat only'}
+              </button>
+            )}
             {history.length > 0 && (
               showClearConfirm ? (
                 <div className="flex items-center gap-1">

@@ -17,7 +17,8 @@ function App() {
   const [currentSession, setCurrentSession] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [message, setMessage] = useState('');
-  const [isChatLoading, setIsChatLoading] = useState(false);
+  const [chatLoadingStates, setChatLoadingStates] = useState({});
+  const isChatLoading = currentSessionId ? chatLoadingStates[currentSessionId] : false;
   const [isUploading, setIsUploading] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editName, setEditName] = useState('');
@@ -311,6 +312,7 @@ function App() {
   const handleSend = async (text = message) => {
     if (!text.trim() || !currentSessionId || isChatLoading || !currentSession?.cvs?.length) return;
     const userMessage = text.trim();
+    const targetSessionId = currentSessionId; // Capture current session
     setMessage('');
     
     // Optimistically add user message to UI
@@ -319,7 +321,7 @@ function App() {
       messages: [...(prev.messages || []), { role: 'user', content: userMessage }]
     }));
     
-    setIsChatLoading(true);
+    setChatLoadingStates(prev => ({ ...prev, [targetSessionId]: true }));
     try { 
       const response = await sendSessionMessage(currentSessionId, userMessage, mode, ragPipelineSettings);
       
@@ -339,17 +341,22 @@ function App() {
         confidence_score: response.confidence_score,
         guardrail_passed: response.guardrail_passed,
         query_understanding: response.query_understanding,
-        session_id: currentSessionId,
+        session_id: targetSessionId,
       });
       window.dispatchEvent(new Event('metrics-updated'));
       
-      await loadSession(currentSessionId); 
+      // Only update UI if still on the same session
+      if (currentSessionId === targetSessionId) {
+        await loadSession(targetSessionId);
+      }
     } catch (e) { 
       console.error(e); 
       // Revert optimistic update on error
-      await loadSession(currentSessionId);
+      if (currentSessionId === targetSessionId) {
+        await loadSession(targetSessionId);
+      }
     }
-    setIsChatLoading(false);
+    setChatLoadingStates(prev => ({ ...prev, [targetSessionId]: false }));
   };
 
   const handleRemoveCV = async (cvId) => {
@@ -545,7 +552,11 @@ function App() {
           {sessions.map((s) => (
             <div key={s.id} className="mb-1">
               <div onClick={() => setCurrentSessionId(s.id)} className={`group flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer ${currentSessionId === s.id ? 'bg-gray-800 text-white' : 'text-gray-300 hover:bg-gray-800/50'}`}>
-                <MessageSquare className="w-4 h-4 flex-shrink-0" />
+                {chatLoadingStates[s.id] ? (
+                  <Loader className="w-4 h-4 flex-shrink-0 animate-spin text-cyan-400" />
+                ) : (
+                  <MessageSquare className="w-4 h-4 flex-shrink-0" />
+                )}
                 {editingId === s.id ? (
                   <input value={editName} onChange={(e) => setEditName(e.target.value)} onBlur={() => handleRename(s.id)} onKeyDown={(e) => e.key === 'Enter' && handleRename(s.id)} className="flex-1 bg-gray-700 text-white text-sm px-2 py-0.5 rounded outline-none" autoFocus onClick={(e) => e.stopPropagation()} />
                 ) : (
@@ -1186,6 +1197,8 @@ function App() {
       <MetricsPanel 
         isOpen={showMetricsPanel}
         onClose={() => setShowMetricsPanel(false)}
+        sessionId={currentSessionId}
+        sessionName={currentSession?.name}
       />
     </div>
   );
