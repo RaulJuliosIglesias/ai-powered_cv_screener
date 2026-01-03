@@ -402,11 +402,19 @@ function App() {
     }));
     
     try {
-      // Use SSE endpoint for real-time progress
+      // Use SSE endpoint for real-time progress with pipeline settings
+      const payload = { 
+        message: userMessage,
+        reranking_enabled: ragPipelineSettings.reranking_enabled,
+        verification_enabled: ragPipelineSettings.verification_enabled
+      };
+      
+      console.log('🚀 Sending query with settings:', payload);
+      
       const response = await fetch(`/api/sessions/${targetSessionId}/chat-stream?mode=${mode}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage })
+        body: JSON.stringify(payload)
       });
       
       if (!response.ok) throw new Error('Stream request failed');

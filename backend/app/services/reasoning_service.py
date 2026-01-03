@@ -68,7 +68,7 @@ Compare candidates directly on the most important dimensions.]
 :::
 
 **Direct Answer**
-[1-2 sentences summarizing the best candidates. ALWAYS use exact format: **[Full Name](cv:cv_xxx)** with NO spaces after opening **]
+[1-2 sentences. Candidate names MUST use this EXACT format: **[Full Name](cv:cv_xxx)** — Nothing else.]
 
 **Analysis**
 
@@ -78,23 +78,30 @@ Compare candidates directly on the most important dimensions.]
 | **[Full Name](cv:cv_xxx)** | skill4, skill5 | Y years in area | ⭐⭐⭐ |
 
 :::conclusion
-[Final recommendation. ALWAYS use format: **[Full Name](cv:cv_xxx)** - NO spaces between ** and [. Every candidate mention must include both name in bold brackets AND the cv link.]
+[Final recommendation. Use ONLY format: **[Full Name](cv:cv_xxx)** for each candidate.]
 :::
 
 ---
 
-## CRITICAL FORMATTING RULES
+## CRITICAL FORMATTING RULES (DO NOT VIOLATE)
 
-1. **ALWAYS include :::thinking block** with detailed reasoning
-2. **THINKING must be thorough** - Explain your reasoning process step-by-step
-3. **TABLE must be valid markdown** - Pipes aligned, one row per candidate
-4. **CANDIDATE NAME FORMAT** (CRITICAL):
-   - CORRECT: `**[Patrik Hübner](cv:cv_dd668ac0)**`
-   - WRONG: `**Patrik Hübner** cv_dd668ac0` ❌
-   - WRONG: `** Patrik Hübner** (cv:cv_dd668ac0)` ❌ (space after **)
-   - WRONG: `**Patrik Hübner**(cv:cv_dd668ac0)` ❌ (no space before link)
-5. **EVERY candidate mention** in Direct Answer, Table, and Conclusion must use: `**[Name](cv:cv_xxx)**`
-6. **NO standalone cv_xxx** anywhere - always inside link format
+1. **:::thinking block** - MANDATORY with detailed reasoning
+2. **TABLE** - Valid markdown with pipes | aligned properly
+3. **CANDIDATE FORMAT** - THIS IS THE ONLY ACCEPTABLE FORMAT:
+   
+   ✅ CORRECT EXAMPLES:
+   - `**[Patrik Hübner](cv:cv_dd668ac0)**`
+   - `**[Luca Müller](cv:cv_fe6338e6)**`
+   
+   ❌ WRONG (DO NOT USE):
+   - `**Patrik Hübner** cv_dd668ac0` ← NO standalone cv_xxx
+   - `**Patrik** cv_dd668ac0 [cv_dd668ac0](cv_dd668ac0)` ← NO duplicates
+   - `** Patrik Hübner**(cv:cv_dd668ac0)` ← NO space after **
+   - `[Patrik Hübner](cv_dd668ac0)` ← MISSING cv: prefix
+
+4. **EVERY SINGLE candidate mention** in Direct Answer, Table, AND Conclusion MUST use: `**[Name](cv:cv_xxx)**`
+5. **NEVER write cv_xxx alone** - It MUST be inside `(cv:cv_xxx)` link format
+6. **NEVER duplicate the cv reference** - Write it ONCE per candidate: `**[Name](cv:cv_xxx)**`
 
 Answer now:"""
 

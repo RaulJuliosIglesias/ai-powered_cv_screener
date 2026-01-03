@@ -15,6 +15,8 @@ router = APIRouter(prefix="/api/sessions", tags=["sessions-stream"])
 
 class ChatStreamRequest(BaseModel):
     message: str
+    reranking_enabled: bool = True
+    verification_enabled: bool = True
 
 
 async def event_generator(rag_service, question: str, session_id: str, cv_ids: list, total_cvs: int, mgr):
@@ -94,9 +96,13 @@ async def chat_stream(
     if not cv_ids:
         raise HTTPException(status_code=400, detail="No CVs in session")
     
-    # Create RAG service
-    logger.info(f"[STREAM] Creating RAG service with mode={mode}")
+    # Create RAG service with custom configuration
+    logger.info(f"[STREAM] Creating RAG service with mode={mode}, reranking={request.reranking_enabled}, verification={request.verification_enabled}")
     rag_service = RAGServiceV5.from_factory(mode)
+    
+    # Override pipeline settings if provided
+    rag_service.config.reranking_enabled = request.reranking_enabled
+    rag_service.config.claim_verification_enabled = request.verification_enabled
     
     return StreamingResponse(
         event_generator(rag_service, request.message, session_id, cv_ids, total_cvs, mgr),
