@@ -56,7 +56,7 @@ class SupabaseVectorStore(VectorStoreProvider):
                 logger.error(f"Failed to upsert CV {cv_data['id']}: {e}")
         
         # Now add embeddings
-        for doc, embedding in zip(documents, embeddings):
+        for i, (doc, embedding) in enumerate(zip(documents, embeddings)):
             try:
                 record = {
                     "cv_id": doc["cv_id"],
@@ -66,12 +66,16 @@ class SupabaseVectorStore(VectorStoreProvider):
                     "embedding": embedding,
                     "metadata": doc.get("metadata", {})
                 }
-                self.client.table("cv_embeddings").upsert(
+                logger.info(f"Inserting embedding {i+1}/{len(documents)} for {doc['cv_id']} chunk {doc['chunk_index']}")
+                result = self.client.table("cv_embeddings").upsert(
                     record,
                     on_conflict="cv_id,chunk_index"
                 ).execute()
+                logger.info(f"Upsert result: {len(result.data) if result.data else 0} rows affected")
             except Exception as e:
                 logger.error(f"Failed to add embedding for {doc['cv_id']} chunk {doc['chunk_index']}: {e}")
+                import traceback
+                logger.error(traceback.format_exc())
         
         logger.info(f"Successfully added {len(documents)} embeddings to Supabase")
     

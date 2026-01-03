@@ -34,6 +34,10 @@ function App() {
   // Upload progress modal state
   const [uploadProgress, setUploadProgress] = useState(null);
   // { files: ['file1.pdf', 'file2.pdf'], current: 1, total: 3, status: 'uploading' | 'processing' | 'completed', logs: ['Processing file1.pdf...'] }
+  
+  // Delete progress modal state (for bulk deletion)
+  const [deleteProgress, setDeleteProgress] = useState(null);
+  // { current: 0, total: 5, status: 'deleting' | 'completed', logs: ['Deleting CV 1/5...'] }
 
   const openPdfViewer = (cvId, filename) => {
     const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
@@ -179,48 +183,72 @@ function App() {
     if (!files.length || !currentSessionId) return;
     setIsUploading(true);
     
-    // Initialize progress modal
+    // Initialize progress modal with animated progress
     const fileNames = files.map(f => f.name);
+    let fakeProgress = 0;
     setUploadProgress({
       files: fileNames,
       current: 0,
       total: files.length,
+      percent: 0,
       status: 'uploading',
       logs: [language === 'es' ? `Subiendo ${files.length} archivo(s)...` : `Uploading ${files.length} file(s)...`]
     });
     
+    // Animate progress bar during upload (fake progress until real data arrives)
+    const progressInterval = setInterval(() => {
+      fakeProgress = Math.min(fakeProgress + Math.random() * 5, 30);
+      setUploadProgress(prev => prev ? { ...prev, percent: fakeProgress } : null);
+    }, 200);
+    
     try {
       const res = await uploadCVsToSession(currentSessionId, files, mode);
+      clearInterval(progressInterval);
+      
       setUploadProgress(prev => ({
         ...prev,
+        percent: 35,
         status: 'processing',
-        logs: [...prev.logs, language === 'es' ? 'Procesando y extrayendo texto...' : 'Processing and extracting text...']
+        logs: [...prev.logs, language === 'es' ? 'Extrayendo texto de PDFs...' : 'Extracting text from PDFs...']
       }));
       
+      let lastProcessed = 0;
       const poll = async () => {
         const status = await getSessionUploadStatus(currentSessionId, res.job_id);
+        const processed = status.processed_files || 0;
+        const progressPercent = 35 + ((processed / files.length) * 60);
+        
         if (status.status === 'processing') {
-          setUploadProgress(prev => ({
-            ...prev,
-            current: status.processed_files || 0,
-            logs: prev.logs.length < 5 ? [...prev.logs, language === 'es' ? `Procesado ${status.processed_files || 0}/${files.length}` : `Processed ${status.processed_files || 0}/${files.length}`] : prev.logs
-          }));
-          setTimeout(poll, 1000);
+          setUploadProgress(prev => {
+            const newLogs = processed > lastProcessed 
+              ? [...prev.logs, language === 'es' ? `✓ ${files.length > 1 ? `Procesado ${processed}/${files.length}` : 'Procesando...'}` : `✓ ${files.length > 1 ? `Processed ${processed}/${files.length}` : 'Processing...'}`]
+              : prev.logs;
+            lastProcessed = processed;
+            return {
+              ...prev,
+              current: processed,
+              percent: progressPercent,
+              logs: newLogs.slice(-6)
+            };
+          });
+          setTimeout(poll, 500);
         } else {
           setUploadProgress(prev => ({
             ...prev,
             status: 'completed',
             current: files.length,
-            logs: [...prev.logs, language === 'es' ? '✓ Completado' : '✓ Completed']
+            percent: 100,
+            logs: [...prev.logs.slice(-5), language === 'es' ? '✓ ¡Completado!' : '✓ Completed!']
           }));
-          setTimeout(() => setUploadProgress(null), 2000);
+          setTimeout(() => setUploadProgress(null), 1500);
           setIsUploading(false);
           await loadSession(currentSessionId);
           await loadSessions();
         }
       };
       poll();
-    } catch (e) { 
+    } catch (e) {
+      clearInterval(progressInterval); 
       console.error(e); 
       setIsUploading(false); 
       setUploadProgress(prev => prev ? {...prev, status: 'error', logs: [...prev.logs, `Error: ${e.message}`]} : null);
@@ -275,39 +303,57 @@ function App() {
     if (!files.length || !targetSessionId) return;
     setIsUploading(true);
     
-    // Initialize progress modal
+    // Initialize progress modal with animated progress
+    let fakeProgress = 0;
     setUploadProgress({
       files: files.map(f => f.name),
       current: 0,
       total: files.length,
+      percent: 0,
       status: 'uploading',
       logs: [language === 'es' ? `Subiendo ${files.length} archivo(s)...` : `Uploading ${files.length} file(s)...`]
     });
     
+    const progressInterval = setInterval(() => {
+      fakeProgress = Math.min(fakeProgress + Math.random() * 5, 30);
+      setUploadProgress(prev => prev ? { ...prev, percent: fakeProgress } : null);
+    }, 200);
+    
     try {
       const res = await uploadCVsToSession(targetSessionId, files, mode);
+      clearInterval(progressInterval);
+      
       setUploadProgress(prev => ({
         ...prev,
+        percent: 35,
         status: 'processing',
-        logs: [...prev.logs, language === 'es' ? 'Procesando CVs...' : 'Processing CVs...']
+        logs: [...prev.logs, language === 'es' ? 'Extrayendo texto...' : 'Extracting text...']
       }));
       
+      let lastProcessed = 0;
       const poll = async () => {
         const status = await getSessionUploadStatus(targetSessionId, res.job_id);
+        const processed = status.processed_files || 0;
+        const progressPercent = 35 + ((processed / files.length) * 60);
+        
         if (status.status === 'processing') {
-          setUploadProgress(prev => ({
-            ...prev,
-            current: status.processed_files || 0
-          }));
-          setTimeout(poll, 1000);
+          setUploadProgress(prev => {
+            const newLogs = processed > lastProcessed 
+              ? [...prev.logs, language === 'es' ? `✓ Procesado ${processed}/${files.length}` : `✓ Processed ${processed}/${files.length}`]
+              : prev.logs;
+            lastProcessed = processed;
+            return { ...prev, current: processed, percent: progressPercent, logs: newLogs.slice(-6) };
+          });
+          setTimeout(poll, 500);
         } else {
           setUploadProgress(prev => ({
             ...prev,
             status: 'completed',
             current: files.length,
-            logs: [...prev.logs, language === 'es' ? '✓ Completado' : '✓ Completed']
+            percent: 100,
+            logs: [...prev.logs.slice(-5), language === 'es' ? '✓ ¡Completado!' : '✓ Completed!']
           }));
-          setTimeout(() => setUploadProgress(null), 2000);
+          setTimeout(() => setUploadProgress(null), 1500);
           setIsUploading(false);
           const sessionData = await getSession(targetSessionId, mode);
           setCvPanelSession(sessionData);
@@ -330,15 +376,49 @@ function App() {
   };
 
   const handleDeleteAllCVsFromDB = async () => {
-    if (!window.confirm(language === 'es' ? '¿Eliminar TODOS los CVs de la base de datos?' : 'Delete ALL CVs from database?')) return;
+    const cvCount = allCVs.length;
+    if (!cvCount) return;
+    if (!window.confirm(language === 'es' ? `¿Eliminar ${cvCount} CVs de la base de datos?` : `Delete ${cvCount} CVs from database?`)) return;
+    
+    // Show delete progress modal
+    setDeleteProgress({
+      current: 0,
+      total: cvCount,
+      percent: 0,
+      status: 'deleting',
+      logs: [language === 'es' ? `Eliminando ${cvCount} CVs...` : `Deleting ${cvCount} CVs...`]
+    });
+    
+    // Animate progress
+    let fakeProgress = 0;
+    const progressInterval = setInterval(() => {
+      fakeProgress = Math.min(fakeProgress + Math.random() * 8, 85);
+      setDeleteProgress(prev => prev ? { ...prev, percent: fakeProgress } : null);
+    }, 150);
+    
     try {
       await deleteAllCVsFromDatabase(mode);
+      clearInterval(progressInterval);
+      
+      setDeleteProgress(prev => ({
+        ...prev,
+        percent: 100,
+        status: 'completed',
+        logs: [...prev.logs, language === 'es' ? '✓ ¡Eliminación completada!' : '✓ Deletion completed!']
+      }));
+      
       await loadSessions();
       if (currentSessionId) await loadSession(currentSessionId);
       const data = await getCVList(mode);
       setAllCVs(data.cvs || []);
-      showToast(language === 'es' ? 'Base de datos limpiada' : 'Database cleared', 'success');
-    } catch (e) { console.error(e); showToast('Error', 'error'); }
+      
+      setTimeout(() => setDeleteProgress(null), 1500);
+    } catch (e) { 
+      clearInterval(progressInterval);
+      console.error(e); 
+      setDeleteProgress(prev => prev ? { ...prev, status: 'error', logs: [...prev.logs, `Error: ${e.message}`] } : null);
+      setTimeout(() => setDeleteProgress(null), 3000);
+    }
   };
 
   const handleDeleteCVFromDB = async (cvId) => {
@@ -893,7 +973,7 @@ function App() {
                   uploadProgress.status === 'error' ? 'bg-red-500' :
                   'bg-blue-500'
                 }`}
-                style={{ width: `${(uploadProgress.current / uploadProgress.total) * 100}%` }}
+                style={{ width: `${uploadProgress.percent || (uploadProgress.current / uploadProgress.total) * 100}%` }}
               />
             </div>
             
@@ -918,6 +998,60 @@ function App() {
                   +{uploadProgress.files.length - 5} more
                 </span>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Progress Modal */}
+      {deleteProgress && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[70]">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md p-6 shadow-2xl mx-4">
+            <div className="flex items-center gap-3 mb-4">
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                deleteProgress.status === 'completed' ? 'bg-emerald-100 dark:bg-emerald-900/30' :
+                deleteProgress.status === 'error' ? 'bg-red-100 dark:bg-red-900/30' :
+                'bg-red-100 dark:bg-red-900/30'
+              }`}>
+                {deleteProgress.status === 'completed' ? (
+                  <Check className="w-6 h-6 text-emerald-500" />
+                ) : deleteProgress.status === 'error' ? (
+                  <X className="w-6 h-6 text-red-500" />
+                ) : (
+                  <Trash2 className="w-6 h-6 text-red-500 animate-pulse" />
+                )}
+              </div>
+              <div>
+                <h3 className="font-semibold text-gray-900 dark:text-white">
+                  {deleteProgress.status === 'deleting' ? (language === 'es' ? 'Eliminando CVs' : 'Deleting CVs') :
+                   deleteProgress.status === 'completed' ? (language === 'es' ? 'Completado' : 'Completed') :
+                   'Error'}
+                </h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  {deleteProgress.total} {language === 'es' ? 'CVs' : 'CVs'}
+                </p>
+              </div>
+            </div>
+            
+            {/* Progress bar */}
+            <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mb-4">
+              <div 
+                className={`h-full transition-all duration-150 ${
+                  deleteProgress.status === 'completed' ? 'bg-emerald-500' :
+                  deleteProgress.status === 'error' ? 'bg-red-500' :
+                  'bg-red-500'
+                }`}
+                style={{ width: `${deleteProgress.percent || 0}%` }}
+              />
+            </div>
+            
+            {/* Log messages */}
+            <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3">
+              {deleteProgress.logs.map((log, i) => (
+                <p key={i} className="text-xs text-gray-600 dark:text-gray-400 font-mono">
+                  {log}
+                </p>
+              ))}
             </div>
           </div>
         </div>
