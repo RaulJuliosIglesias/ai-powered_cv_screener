@@ -167,6 +167,27 @@ class SessionManager:
             self._save()
             return True
         return False
+    
+    def delete_message(self, session_id: str, message_index: int) -> bool:
+        """Delete a specific message by index from a session."""
+        session = self.sessions.get(session_id)
+        if session and 0 <= message_index < len(session.messages):
+            del session.messages[message_index]
+            session.updated_at = datetime.now().isoformat()
+            self._save()
+            return True
+        return False
+    
+    def delete_messages_from(self, session_id: str, from_index: int) -> int:
+        """Delete all messages from a specific index onwards (inclusive)."""
+        session = self.sessions.get(session_id)
+        if session and 0 <= from_index < len(session.messages):
+            count = len(session.messages) - from_index
+            session.messages = session.messages[:from_index]
+            session.updated_at = datetime.now().isoformat()
+            self._save()
+            return count
+        return 0
 
 
 # Global session manager instance

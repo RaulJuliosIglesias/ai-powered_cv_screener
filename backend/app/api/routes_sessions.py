@@ -547,6 +547,48 @@ async def get_suggested_questions(
 
 
 # ============================================
+# MESSAGE MANAGEMENT ENDPOINTS
+# ============================================
+
+@router.delete("/{session_id}/messages/{message_index}")
+async def delete_message(
+    session_id: str,
+    message_index: int,
+    mode: Mode = Query(default=settings.default_mode)
+):
+    """Delete a specific message from a session by index."""
+    mgr = get_session_manager(mode)
+    session = mgr.get_session(session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    messages = session.get("messages", []) if isinstance(session, dict) else session.messages
+    if message_index < 0 or message_index >= len(messages):
+        raise HTTPException(status_code=404, detail="Message not found")
+    
+    success = mgr.delete_message(session_id, message_index)
+    if success:
+        return {"success": True, "message": f"Message {message_index} deleted"}
+    raise HTTPException(status_code=500, detail="Failed to delete message")
+
+
+@router.delete("/{session_id}/messages")
+async def delete_messages_from(
+    session_id: str,
+    from_index: int = Query(..., description="Delete all messages from this index onwards"),
+    mode: Mode = Query(default=settings.default_mode)
+):
+    """Delete all messages from a specific index onwards (useful for regenerating responses)."""
+    mgr = get_session_manager(mode)
+    session = mgr.get_session(session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    count = mgr.delete_messages_from(session_id, from_index)
+    return {"success": True, "deleted": count, "message": f"Deleted {count} messages"}
+
+
+# ============================================
 # DATABASE MANAGEMENT ENDPOINTS
 # ============================================
 

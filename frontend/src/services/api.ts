@@ -325,6 +325,28 @@ export const clearSessionChat = async (
   return response.data;
 };
 
+export const deleteMessage = async (
+  sessionId: string,
+  messageIndex: number,
+  mode: string = 'local'
+): Promise<DeleteResponse> => {
+  const response = await api.delete<DeleteResponse>(
+    `/sessions/${sessionId}/messages/${messageIndex}?mode=${mode}`
+  );
+  return response.data;
+};
+
+export const deleteMessagesFrom = async (
+  sessionId: string,
+  fromIndex: number,
+  mode: string = 'local'
+): Promise<DeleteResponse> => {
+  const response = await api.delete<DeleteResponse>(
+    `/sessions/${sessionId}/messages?from_index=${fromIndex}&mode=${mode}`
+  );
+  return response.data;
+};
+
 export const getSessionSuggestions = async (
   sessionId: string,
   mode: string = 'local'

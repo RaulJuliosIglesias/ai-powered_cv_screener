@@ -801,22 +801,22 @@
           "timestamp": "2026-01-03T17:42:15.137905"
         },
         {
-          "id": "6e69f446-748a-46c9-8c12-2f75c1c9f82a",
+          "id": "5a38e09c-e59e-46c2-ad7a-20668467780b",
           "role": "user",
           "content": "how can i know who ahs less problematic background? like politic radical views?",
           "sources": [],
-          "timestamp": "2026-01-03T17:43:35.922844"
+          "timestamp": "2026-01-03T17:49:41.439836"
         },
         {
-          "id": "03da1f30-e648-4992-a082-53f6e728ec7e",
+          "id": "1b545ef3-dd0c-4932-967a-8dbe4229017a",
           "role": "assistant",
           "content": "I can only help with CV screening and candidate analysis. Please ask a question about the uploaded CVs.",
           "sources": [],
-          "timestamp": "2026-01-03T17:43:51.670847"
+          "timestamp": "2026-01-03T17:49:59.824640"
         }
       ],
       "created_at": "2026-01-03T15:41:18.352784",
-      "updated_at": "2026-01-03T17:43:51.670855"
+      "updated_at": "2026-01-03T17:49:59.824640"
     },
     {
       "id": "2503f62f-8b3e-4c9d-9918-a4d4c602b038",
@@ -1204,6 +1204,220 @@
       ],
       "created_at": "2026-01-03T17:22:15.568352",
       "updated_at": "2026-01-03T17:40:45.239115"
+    },
+    {
+      "id": "bd03435f-2a1c-4e33-8412-33a823fea667",
+      "name": "New chat",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_849fffb8",
+          "filename": "1ef4e451_Dirk_van_der_Meer_Therapist.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T17:50:39.314482"
+        },
+        {
+          "id": "cv_b0ed9d61",
+          "filename": "06659811_Lucas_Moreau_CFO.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T17:50:39.601679"
+        },
+        {
+          "id": "cv_be80a79e",
+          "filename": "69ed5706_Aisha_Nkrumah_Associate_Designer.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T17:50:39.808094"
+        },
+        {
+          "id": "cv_1df83ee6",
+          "filename": "4662a9ee_Patricia_Williams_Medical_Intern.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T17:50:40.071280"
+        },
+        {
+          "id": "cv_9fff3bf5",
+          "filename": "45d8cbc0_Carlos_Mendoza_Accessories_Designer.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T17:50:40.277341"
+        },
+        {
+          "id": "cv_ebe75098",
+          "filename": "6202baf5_Erik_Johansson_FB_Director.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T17:50:40.524544"
+        },
+        {
+          "id": "cv_31266a7f",
+          "filename": "23621408_Kamal_Patel_Head_of_Audio.pdf",
+          "chunk_count": 13,
+          "uploaded_at": "2026-01-03T17:50:40.754556"
+        },
+        {
+          "id": "cv_efcf794f",
+          "filename": "bf3a5fa7_Carmen_López_Lighting_Artist.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T17:50:41.041191"
+        },
+        {
+          "id": "cv_3525d302",
+          "filename": "9450f274_Rajiv_Patel_Content_Creator.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T17:50:41.243727"
+        },
+        {
+          "id": "cv_9475a5e6",
+          "filename": "68835e12_Ethan_Park_Physical_Therapist.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T17:50:41.446526"
+        },
+        {
+          "id": "cv_fd620f1b",
+          "filename": "477ae7a5_Liam_Nguyen_Concept_Artist.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T17:50:41.636906"
+        },
+        {
+          "id": "cv_efd371e9",
+          "filename": "b4b377d4_Layla_Kim_Concept_Artist.pdf",
+          "chunk_count": 10,
+          "uploaded_at": "2026-01-03T17:50:41.901701"
+        },
+        {
+          "id": "cv_256b5e59",
+          "filename": "263a613b_Rajiv_Patel_Publishing_Director.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-03T17:50:42.110406"
+        },
+        {
+          "id": "cv_e26e3ee2",
+          "filename": "ab71577d_Ana_Silva_Junior_Interaction_Designer.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-03T17:50:42.307451"
+        },
+        {
+          "id": "cv_06a32099",
+          "filename": "c042a902_Priya_Kapoor_Culinary_Officer.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T17:50:42.560830"
+        },
+        {
+          "id": "cv_7867a473",
+          "filename": "c71c69ae_Margaret_Whitmore_CFO.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T17:50:42.828897"
+        },
+        {
+          "id": "cv_65101087",
+          "filename": "a2971b00_Carlos_Mendoza_Research_Assistant.pdf",
+          "chunk_count": 8,
+          "uploaded_at": "2026-01-03T17:50:43.120694"
+        },
+        {
+          "id": "cv_7d599b9e",
+          "filename": "f180c979_Khalid_Al-Mansur_Mobile_Engineer.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T17:50:43.363607"
+        },
+        {
+          "id": "cv_d943cfd2",
+          "filename": "1774687d_Layla_Al-Mansoori_Postdoctoral_Researcher.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T17:50:43.594868"
+        },
+        {
+          "id": "cv_ad9882b7",
+          "filename": "0762284b_Aïssa_Diallo_Composer.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-03T17:50:43.839513"
+        },
+        {
+          "id": "cv_09c2c5b8",
+          "filename": "a32dd7e1_Isabela_Costa_Model.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T17:50:44.113564"
+        },
+        {
+          "id": "cv_d9d25e9b",
+          "filename": "d78a62ae_Jamie_Patel_General_Manager.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T17:50:44.359967"
+        },
+        {
+          "id": "cv_ebd8c2a1",
+          "filename": "d5289c50_Carlos_Mendoza_Junior_Cloud_Engineer.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T17:50:44.580535"
+        },
+        {
+          "id": "cv_b2773636",
+          "filename": "c2533d2e_Adewale_Patel_3D_Artist.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T17:50:44.817286"
+        },
+        {
+          "id": "cv_07249fa6",
+          "filename": "84ea127f_Li_Wei_Content_Officer.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T17:50:45.105701"
+        },
+        {
+          "id": "cv_fe58db6c",
+          "filename": "a45e5735_Layla_Al-Mansoori_Sales_Executive.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T17:50:45.323558"
+        },
+        {
+          "id": "cv_0e0596be",
+          "filename": "06b109ef_Li_Wei_Research_Intern.pdf",
+          "chunk_count": 8,
+          "uploaded_at": "2026-01-03T17:50:45.537471"
+        },
+        {
+          "id": "cv_2cf0c88e",
+          "filename": "8117dbda_Aya_Cohen_Hard_Surface_Modeler.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T17:50:45.812855"
+        },
+        {
+          "id": "cv_83cfee76",
+          "filename": "bc252667_Carlos_Mendoza_Manager.pdf",
+          "chunk_count": 13,
+          "uploaded_at": "2026-01-03T17:50:46.110967"
+        },
+        {
+          "id": "cv_a80420ef",
+          "filename": "2a4fe182_Thierry_Nguyen_EVP.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T17:50:46.377179"
+        },
+        {
+          "id": "cv_c08d89f2",
+          "filename": "dc85bc48_Priya_Sharma_Fernández_CHRO.pdf",
+          "chunk_count": 7,
+          "uploaded_at": "2026-01-03T17:50:46.799321"
+        },
+        {
+          "id": "cv_afaa5f80",
+          "filename": "5a519af7_Li_Wei_Content_Strategist.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T17:50:47.081158"
+        },
+        {
+          "id": "cv_08609b3e",
+          "filename": "44eb074e_Liam_Ndlovu_Sales_Manager.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T17:50:47.296609"
+        },
+        {
+          "id": "cv_475dee8e",
+          "filename": "7f6337b7_Thierry_NDiaye_Lead_UX_Designer.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T17:50:47.578250"
+        }
+      ],
+      "messages": [],
+      "created_at": "2026-01-03T17:50:31.848359",
+      "updated_at": "2026-01-03T17:50:47.578250"
     }
   ]
 }

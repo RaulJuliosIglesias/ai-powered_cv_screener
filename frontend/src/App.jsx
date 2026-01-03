@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy, Eye, ExternalLink, Sliders, BarChart3 } from 'lucide-react';
+import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy, Eye, ExternalLink, Sliders, BarChart3, RotateCcw } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import useMode from './hooks/useMode';
@@ -9,7 +9,7 @@ import SourceBadge from './components/SourceBadge';
 import ModelSelector from './components/ModelSelector';
 import RAGPipelineSettings, { getRAGPipelineSettings } from './components/RAGPipelineSettings';
 import MetricsPanel, { saveMetricEntry } from './components/MetricsPanel';
-import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList, clearSessionCVs, deleteAllCVsFromDatabase, deleteCV } from './services/api';
+import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList, clearSessionCVs, deleteAllCVsFromDatabase, deleteCV, deleteMessage, deleteMessagesFrom } from './services/api';
 
 function App() {
   const [sessions, setSessions] = useState([]);
@@ -384,6 +384,32 @@ function App() {
     await loadSession(currentSessionId);
     await loadSessions();
     showToast(language === 'es' ? 'CV eliminado' : 'CV removed', 'success');
+  };
+
+  const handleDeleteMessage = async (messageIndex) => {
+    if (!currentSessionId) return;
+    try {
+      await deleteMessage(currentSessionId, messageIndex, mode);
+      await loadSession(currentSessionId);
+      showToast(language === 'es' ? 'Mensaje eliminado' : 'Message deleted', 'success');
+    } catch (e) {
+      console.error(e);
+      showToast(language === 'es' ? 'Error al eliminar mensaje' : 'Error deleting message', 'error');
+    }
+  };
+
+  const handleRetryMessage = async (messageContent, messageIndex) => {
+    if (!currentSessionId || isChatLoading) return;
+    try {
+      // Delete this message and all after it, then resend
+      await deleteMessagesFrom(currentSessionId, messageIndex, mode);
+      await loadSession(currentSessionId);
+      // Resend the message
+      handleSend(messageContent);
+    } catch (e) {
+      console.error(e);
+      showToast(language === 'es' ? 'Error al reintentar' : 'Error retrying', 'error');
+    }
   };
 
   const handleRemoveCVFromPanel = async (sessionId, cvId) => {
@@ -836,6 +862,28 @@ function App() {
                         </div>
                         {/* Referencias eliminadas - solo se muestran junto al nombre del candidato */}
                       </div>
+                      {/* Message action buttons - only for non-pending messages */}
+                      {!msg.isPending && (
+                        <div className={`flex items-center gap-1 mt-2 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                          {msg.role === 'user' && (
+                            <button
+                              onClick={() => handleRetryMessage(msg.content, idx)}
+                              disabled={isChatLoading}
+                              className="p-1.5 text-gray-400 hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors disabled:opacity-50"
+                              title={language === 'es' ? 'Repetir pregunta' : 'Retry question'}
+                            >
+                              <RotateCcw className="w-3.5 h-3.5" />
+                            </button>
+                          )}
+                          <button
+                            onClick={() => handleDeleteMessage(idx)}
+                            className="p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+                            title={language === 'es' ? 'Eliminar mensaje' : 'Delete message'}
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

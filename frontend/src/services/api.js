@@ -173,6 +173,16 @@ export const clearSessionChat = async (sessionId) => {
   return response.data;
 };
 
+export const deleteMessage = async (sessionId, messageIndex, mode = 'local') => {
+  const response = await api.delete(`/sessions/${sessionId}/messages/${messageIndex}?mode=${mode}`);
+  return response.data;
+};
+
+export const deleteMessagesFrom = async (sessionId, fromIndex, mode = 'local') => {
+  const response = await api.delete(`/sessions/${sessionId}/messages?from_index=${fromIndex}&mode=${mode}`);
+  return response.data;
+};
+
 export const getSessionSuggestions = async (sessionId, mode = 'local') => {
   const response = await api.get(`/sessions/${sessionId}/suggestions?mode=${mode}`);
   return response.data;
