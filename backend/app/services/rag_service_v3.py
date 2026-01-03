@@ -1,0 +1,367 @@
+"""
+RAG Service v3 - Complete RAG Pipeline with Guardrails, Anti-Hallucination, and Evaluation.
+
+This module provides the main RAG orchestration service that integrates:
+- Semantic embeddings (sentence-transformers)
+- Vector search (ChromaDB)
+- Pre-LLM guardrails
+- Post-LLM hallucination detection
+- Query logging and evaluation
+"""
+import time
+import logging
+from typing import List, Dict, Any, Optional
+from dataclasses import dataclass, field
+
+from app.config import Mode, settings
+from app.providers.factory import ProviderFactory
+from app.providers.base import SearchResult
+from app.prompts.templates import SYSTEM_PROMPT, build_query_prompt
+from app.services.guardrail_service import GuardrailService, GuardrailResult
+from app.services.hallucination_service import HallucinationService, HallucinationCheckResult
+from app.services.eval_service import EvalService
+
+logger = logging.getLogger(__name__)
+
+
+@dataclass
+class RAGResponse:
+    """Complete response from RAG query."""
+    answer: str
+    sources: List[Dict[str, Any]]
+    metrics: Dict[str, float]
+    confidence_score: float
+    guardrail_passed: bool
+    hallucination_check: Dict[str, Any] = field(default_factory=dict)
+    mode: str = "local"
+
+
+class RAGServiceV3:
+    """
+    RAG Service v3 with complete pipeline.
+    
+    Pipeline:
+    1. Guardrail Check → Reject off-topic questions
+    2. Embed Query → Generate query embedding
+    3. Vector Search → Find relevant CV chunks
+    4. LLM Generation → Generate response
+    5. Hallucination Check → Verify response against CVs
+    6. Logging → Record for evaluation
+    """
+    
+    def __init__(self, mode: Mode = Mode.LOCAL):
+        """
+        Initialize RAG Service v3.
+        
+        Args:
+            mode: Operating mode (local or cloud)
+        """
+        self.mode = mode
+        
+        # Core providers
+        self.embedder = ProviderFactory.get_embedding_provider(mode)
+        self.vector_store = ProviderFactory.get_vector_store(mode)
+        self.llm = ProviderFactory.get_llm_provider(mode)
+        
+        # Additional services
+        self.guardrail = GuardrailService()
+        self.hallucination = HallucinationService()
+        self.eval = EvalService()
+        
+        logger.info(f"RAGServiceV3 initialized in {mode.value} mode")
+    
+    async def query(
+        self,
+        question: str,
+        session_id: Optional[str] = None,
+        cv_ids: Optional[List[str]] = None,
+        k: int = None,
+        threshold: float = None,
+        total_cvs_in_session: int = None
+    ) -> RAGResponse:
+        """
+        Execute complete RAG query pipeline.
+        
+        Args:
+            question: User's question
+            session_id: Optional session ID for logging
+            cv_ids: Optional list of CV IDs to filter by
+            k: Number of results to retrieve
+            threshold: Minimum similarity threshold
+            total_cvs_in_session: Total CVs in session (for context)
+            
+        Returns:
+            RAGResponse with answer, sources, metrics, and verification results
+        """
+        k = k or settings.retrieval_k
+        threshold = threshold or settings.retrieval_score_threshold
+        metrics = {}
+        total_start = time.perf_counter()
+        
+        # ═══════════════════════════════════════════════════════════════
+        # STEP 1: GUARDRAIL CHECK
+        # ═══════════════════════════════════════════════════════════════
+        guardrail_result = self.guardrail.check(question)
+        
+        if not guardrail_result.is_allowed:
+            logger.info(f"Query rejected by guardrail: {guardrail_result.reason}")
+            
+            # Log the rejection
+            self.eval.log_query(
+                query=question,
+                response=guardrail_result.rejection_message,
+                sources=[],
+                metrics={"guardrail_ms": 0},
+                hallucination_check={"confidence_score": 0},
+                guardrail_passed=False,
+                session_id=session_id,
+                mode=self.mode.value
+            )
+            
+            return RAGResponse(
+                answer=guardrail_result.rejection_message,
+                sources=[],
+                metrics={"guardrail_ms": 0},
+                confidence_score=0,
+                guardrail_passed=False,
+                mode=self.mode.value
+            )
+        
+        # ═══════════════════════════════════════════════════════════════
+        # STEP 2: EMBED QUERY
+        # ═══════════════════════════════════════════════════════════════
+        embed_start = time.perf_counter()
+        embed_result = await self.embedder.embed_query(question)
+        metrics["embedding_ms"] = (time.perf_counter() - embed_start) * 1000
+        query_embedding = embed_result.embeddings[0]
+        
+        logger.debug(f"Query embedded in {metrics['embedding_ms']:.1f}ms")
+        
+        # ═══════════════════════════════════════════════════════════════
+        # STEP 3: VECTOR SEARCH
+        # ═══════════════════════════════════════════════════════════════
+        search_start = time.perf_counter()
+        search_results = await self.vector_store.search(
+            embedding=query_embedding,
+            k=k,
+            threshold=threshold,
+            cv_ids=cv_ids
+        )
+        metrics["search_ms"] = (time.perf_counter() - search_start) * 1000
+        metrics["results_count"] = len(search_results)
+        
+        logger.debug(f"Search returned {len(search_results)} results in {metrics['search_ms']:.1f}ms")
+        
+        # Handle no results
+        if not search_results:
+            no_results_msg = self._build_no_results_message(question, cv_ids)
+            
+            self.eval.log_query(
+                query=question,
+                response=no_results_msg,
+                sources=[],
+                metrics=metrics,
+                hallucination_check={"confidence_score": 0.8, "is_valid": True},
+                guardrail_passed=True,
+                session_id=session_id,
+                mode=self.mode.value
+            )
+            
+            return RAGResponse(
+                answer=no_results_msg,
+                sources=[],
+                metrics=metrics,
+                confidence_score=0.8,  # High confidence in "no results" answer
+                guardrail_passed=True,
+                mode=self.mode.value
+            )
+        
+        # ═══════════════════════════════════════════════════════════════
+        # STEP 4: BUILD CONTEXT AND GENERATE RESPONSE
+        # ═══════════════════════════════════════════════════════════════
+        chunks = self._results_to_chunks(search_results)
+        
+        # Calculate total CVs for context
+        unique_cv_ids = set(r.cv_id for r in search_results)
+        total_cvs = total_cvs_in_session or len(cv_ids) if cv_ids else len(unique_cv_ids)
+        
+        prompt = build_query_prompt(question, chunks, total_cvs=total_cvs)
+        
+        llm_start = time.perf_counter()
+        llm_result = await self.llm.generate(prompt, system_prompt=SYSTEM_PROMPT)
+        metrics["llm_ms"] = (time.perf_counter() - llm_start) * 1000
+        metrics["prompt_tokens"] = llm_result.prompt_tokens
+        metrics["completion_tokens"] = llm_result.completion_tokens
+        
+        logger.debug(f"LLM generated response in {metrics['llm_ms']:.1f}ms")
+        
+        # ═══════════════════════════════════════════════════════════════
+        # STEP 5: HALLUCINATION CHECK
+        # ═══════════════════════════════════════════════════════════════
+        cv_metadata = [
+            {"cv_id": r.cv_id, "filename": r.filename}
+            for r in search_results
+        ]
+        
+        hallucination_start = time.perf_counter()
+        hallucination_result = self.hallucination.verify_response(
+            llm_response=llm_result.text,
+            context_chunks=chunks,
+            cv_metadata=cv_metadata
+        )
+        metrics["hallucination_check_ms"] = (time.perf_counter() - hallucination_start) * 1000
+        
+        # Prepare answer with optional warning
+        answer = llm_result.text
+        if hallucination_result.warnings and not hallucination_result.is_valid:
+            answer += "\n\n⚠️ *Some information could not be fully verified against the CVs.*"
+        
+        # ═══════════════════════════════════════════════════════════════
+        # STEP 6: EXTRACT SOURCES AND FINALIZE
+        # ═══════════════════════════════════════════════════════════════
+        sources = self._extract_unique_sources(search_results)
+        
+        metrics["total_ms"] = (time.perf_counter() - total_start) * 1000
+        
+        # Convert hallucination result to dict for logging
+        hallucination_dict = {
+            "is_valid": hallucination_result.is_valid,
+            "confidence_score": hallucination_result.confidence_score,
+            "verified_cv_ids": hallucination_result.verified_cv_ids,
+            "unverified_cv_ids": hallucination_result.unverified_cv_ids,
+            "warnings": hallucination_result.warnings
+        }
+        
+        # ═══════════════════════════════════════════════════════════════
+        # STEP 7: LOG FOR EVALUATION
+        # ═══════════════════════════════════════════════════════════════
+        self.eval.log_query(
+            query=question,
+            response=answer,
+            sources=sources,
+            metrics=metrics,
+            hallucination_check=hallucination_dict,
+            guardrail_passed=True,
+            session_id=session_id,
+            mode=self.mode.value
+        )
+        
+        logger.info(
+            f"RAG query completed in {metrics['total_ms']:.0f}ms "
+            f"(embed={metrics['embedding_ms']:.0f}, search={metrics['search_ms']:.0f}, "
+            f"llm={metrics['llm_ms']:.0f}) confidence={hallucination_result.confidence_score:.2f}"
+        )
+        
+        return RAGResponse(
+            answer=answer,
+            sources=sources,
+            metrics=metrics,
+            confidence_score=hallucination_result.confidence_score,
+            guardrail_passed=True,
+            hallucination_check=hallucination_dict,
+            mode=self.mode.value
+        )
+    
+    async def index_documents(
+        self,
+        documents: List[Dict[str, Any]]
+    ) -> Dict[str, Any]:
+        """
+        Index documents into the vector store.
+        
+        Args:
+            documents: List of document dicts with content and metadata
+            
+        Returns:
+            Dict with indexing results and metrics
+        """
+        if not documents:
+            return {"indexed": 0, "errors": []}
+        
+        metrics = {}
+        start = time.perf_counter()
+        
+        # Generate embeddings
+        texts = [doc["content"] for doc in documents]
+        embed_result = await self.embedder.embed_texts(texts)
+        metrics["embedding_ms"] = embed_result.latency_ms
+        
+        # Store in vector store
+        storage_start = time.perf_counter()
+        await self.vector_store.add_documents(documents, embed_result.embeddings)
+        metrics["storage_ms"] = (time.perf_counter() - storage_start) * 1000
+        
+        metrics["total_ms"] = (time.perf_counter() - start) * 1000
+        
+        logger.info(f"Indexed {len(documents)} documents in {metrics['total_ms']:.0f}ms")
+        
+        return {
+            "indexed": len(documents),
+            "tokens_used": embed_result.tokens_used,
+            "metrics": metrics
+        }
+    
+    async def get_stats(self) -> Dict[str, Any]:
+        """Get system statistics."""
+        store_stats = await self.vector_store.get_stats()
+        eval_stats = self.eval.get_daily_stats()
+        
+        return {
+            "mode": self.mode.value,
+            "vector_store": store_stats,
+            "today": {
+                "total_queries": eval_stats.total_queries,
+                "avg_confidence": round(eval_stats.avg_confidence, 3),
+                "guardrail_rejections": eval_stats.guardrail_rejections,
+                "avg_latency_ms": round(eval_stats.avg_latency_ms, 1)
+            }
+        }
+    
+    def _results_to_chunks(self, results: List[SearchResult]) -> List[Dict[str, Any]]:
+        """Convert search results to chunk format for prompt building."""
+        return [
+            {
+                "content": r.content,
+                "metadata": {
+                    "filename": r.filename,
+                    "candidate_name": r.metadata.get("candidate_name", "Unknown"),
+                    "section_type": r.metadata.get("section_type", "general"),
+                    "cv_id": r.cv_id
+                }
+            }
+            for r in results
+        ]
+    
+    def _extract_unique_sources(self, results: List[SearchResult]) -> List[Dict[str, Any]]:
+        """Extract unique sources from search results."""
+        seen = set()
+        sources = []
+        for result in results:
+            if result.cv_id not in seen:
+                seen.add(result.cv_id)
+                sources.append({
+                    "cv_id": result.cv_id,
+                    "filename": result.filename,
+                    "relevance": round(result.similarity, 3)
+                })
+        return sources
+    
+    def _build_no_results_message(self, question: str, cv_ids: Optional[List[str]]) -> str:
+        """Build appropriate message when no results found."""
+        if cv_ids:
+            return (
+                "I couldn't find any relevant information in the session's CVs to answer your question. "
+                "The uploaded CVs may not contain information related to your query. "
+                "Try asking about different skills or experiences, or upload more CVs."
+            )
+        else:
+            return (
+                "No CVs have been indexed yet. Please upload some CVs first, "
+                "then I can help you analyze them."
+            )
+
+
+# Factory function for backward compatibility
+def create_rag_service(mode: Mode = Mode.LOCAL) -> RAGServiceV3:
+    """Create a RAG service instance."""
+    return RAGServiceV3(mode)

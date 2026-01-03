@@ -1,111 +1,196 @@
+"""
+Local Embedding Provider with multiple backends.
+
+This module provides semantic embeddings with fallback options:
+1. sentence-transformers (all-MiniLM-L6-v2) - 384 dims
+2. OpenRouter API (nomic-embed-text) - 768 dims  
+3. Hash-based fallback (for development only)
+"""
 import time
 import logging
 import hashlib
 import math
-from typing import List
+import os
+from typing import List, Optional
+import httpx
 from app.providers.base import EmbeddingProvider, EmbeddingResult
-from app.config import settings
 
 logger = logging.getLogger(__name__)
 
-EMBEDDING_DIM = 384
 
-
-class SimpleHashEmbedding:
-    """Simple hash-based embedding as fallback when PyTorch/ONNX unavailable."""
+class OpenRouterEmbeddings:
+    """Embeddings via OpenRouter API using nomic-embed-text model."""
     
-    def __call__(self, texts: List[str]) -> List[List[float]]:
-        return [self._embed_single(text) for text in texts]
+    MODEL = "nomic-ai/nomic-embed-text-v1.5"
+    DIMENSIONS = 768
+    
+    def __init__(self):
+        self.api_key = os.getenv("OPENROUTER_API_KEY", "")
+        if not self.api_key:
+            raise ValueError("OPENROUTER_API_KEY not set")
+        self.client = httpx.Client(timeout=30.0)
+    
+    def encode(self, texts: List[str], **kwargs) -> List[List[float]]:
+        """Generate embeddings via API."""
+        if isinstance(texts, str):
+            texts = [texts]
+        
+        response = self.client.post(
+            "https://openrouter.ai/api/v1/embeddings",
+            headers={
+                "Authorization": f"Bearer {self.api_key}",
+                "Content-Type": "application/json"
+            },
+            json={
+                "model": self.MODEL,
+                "input": texts
+            }
+        )
+        response.raise_for_status()
+        data = response.json()
+        
+        # Sort by index to ensure correct order
+        embeddings = sorted(data["data"], key=lambda x: x["index"])
+        return [e["embedding"] for e in embeddings]
+
+
+class HashEmbeddings:
+    """Simple hash-based embeddings for development/fallback."""
+    
+    DIMENSIONS = 384
+    
+    def encode(self, texts: List[str], **kwargs) -> List[List[float]]:
+        if isinstance(texts, str):
+            texts = [texts]
+        return [self._embed_single(t) for t in texts]
     
     def _embed_single(self, text: str) -> List[float]:
-        """Create a simple hash-based embedding vector."""
         words = text.lower().split()
-        embedding = [0.0] * EMBEDDING_DIM
+        embedding = [0.0] * self.DIMENSIONS
         
         for i, word in enumerate(words):
-            # Hash each word to get indices and values
             h = hashlib.md5(word.encode()).hexdigest()
             for j in range(0, min(32, len(h)), 2):
-                idx = int(h[j:j+2], 16) % EMBEDDING_DIM
+                idx = int(h[j:j+2], 16) % self.DIMENSIONS
                 val = (int(h[j:j+2], 16) - 128) / 128.0
-                embedding[idx] += val * (1.0 / (1 + i * 0.1))  # Position decay
+                embedding[idx] += val * (1.0 / (1 + i * 0.1))
         
-        # Normalize
         norm = math.sqrt(sum(x*x for x in embedding)) or 1.0
         return [x / norm for x in embedding]
 
 
-def _get_embedding_function():
-    """Get embedding function, trying ONNX first, then sentence-transformers, then fallback."""
-    # Try ChromaDB's ONNX embeddings first
-    try:
-        from chromadb.utils.embedding_functions import ONNXMiniLM_L6_V2
-        fn = ONNXMiniLM_L6_V2()
-        logger.info("Using ONNX embeddings")
-        return fn
-    except Exception as e:
-        logger.warning(f"ONNX embeddings not available: {e}")
+def _load_embedding_model():
+    """Load the best available embedding model."""
     
-    # Try sentence-transformers
+    # Option 1: Try sentence-transformers
     try:
         from sentence_transformers import SentenceTransformer
-        fn = SentenceTransformer(settings.local_embedding_model)
-        logger.info("Using sentence-transformers embeddings")
-        return fn
+        model = SentenceTransformer("all-MiniLM-L6-v2")
+        logger.info("✅ Using sentence-transformers (all-MiniLM-L6-v2)")
+        return model, 384, "sentence-transformers"
     except Exception as e:
-        logger.warning(f"sentence-transformers not available: {e}")
+        logger.warning(f"sentence-transformers unavailable: {e}")
     
-    # Fallback to simple hash embeddings
-    logger.warning("Using fallback hash-based embeddings (less accurate but functional)")
-    return SimpleHashEmbedding()
+    # Option 2: Try OpenRouter API
+    try:
+        api_key = os.getenv("OPENROUTER_API_KEY", "")
+        if api_key:
+            model = OpenRouterEmbeddings()
+            # Test it works
+            test = model.encode(["test"])
+            if len(test[0]) == 768:
+                logger.info("✅ Using OpenRouter API (nomic-embed-text)")
+                return model, 768, "openrouter"
+    except Exception as e:
+        logger.warning(f"OpenRouter embeddings unavailable: {e}")
+    
+    # Option 3: Hash fallback
+    logger.warning("⚠️ Using hash-based embeddings (limited accuracy)")
+    return HashEmbeddings(), 384, "hash-fallback"
 
 
 class LocalEmbeddingProvider(EmbeddingProvider):
-    """Local embeddings with multiple fallback options."""
+    """
+    Local embeddings with multiple backend options.
+    
+    Automatically selects the best available backend:
+    1. sentence-transformers (preferred, fully local)
+    2. OpenRouter API (cloud fallback, requires API key)
+    3. Hash-based (development fallback, limited accuracy)
+    """
     
     def __init__(self):
         self._model = None
-        self._model_type = None
+        self._dimensions = 384
+        self._backend = None
+        logger.info("LocalEmbeddingProvider initializing...")
+    
+    def _ensure_model(self):
+        """Lazy load the embedding model."""
+        if self._model is None:
+            self._model, self._dimensions, self._backend = _load_embedding_model()
     
     @property
     def model(self):
-        """Lazy load the model."""
-        if self._model is None:
-            self._model = _get_embedding_function()
-            self._model_type = type(self._model).__name__
+        self._ensure_model()
         return self._model
     
     @property
     def dimensions(self) -> int:
-        return EMBEDDING_DIM
+        self._ensure_model()
+        return self._dimensions
+    
+    @property
+    def backend_name(self) -> str:
+        self._ensure_model()
+        return self._backend
     
     async def embed_texts(self, texts: List[str]) -> EmbeddingResult:
-        start = time.perf_counter()
+        """Generate embeddings for a list of texts."""
+        if not texts:
+            return EmbeddingResult(embeddings=[], tokens_used=0, latency_ms=0)
         
-        model = self.model
-        if hasattr(model, 'encode'):
-            # SentenceTransformer
-            embeddings = model.encode(texts, show_progress_bar=False, convert_to_numpy=True).tolist()
+        start = time.perf_counter()
+        self._ensure_model()
+        
+        if hasattr(self._model, 'encode'):
+            # sentence-transformers style
+            result = self._model.encode(
+                texts,
+                show_progress_bar=False,
+                convert_to_numpy=True,
+                normalize_embeddings=True
+            )
+            embeddings = result.tolist() if hasattr(result, 'tolist') else result
         else:
-            # ONNX or SimpleHashEmbedding (both are callable)
-            embeddings = model(texts)
+            embeddings = self._model(texts)
         
         latency = (time.perf_counter() - start) * 1000
+        tokens_used = sum(len(t.split()) for t in texts)
+        
+        logger.debug(f"Embedded {len(texts)} texts in {latency:.1f}ms via {self._backend}")
         
         return EmbeddingResult(
             embeddings=embeddings,
-            tokens_used=sum(len(t.split()) for t in texts),
+            tokens_used=tokens_used,
             latency_ms=latency
         )
     
     async def embed_query(self, query: str) -> EmbeddingResult:
+        """Generate embedding for a single query."""
         start = time.perf_counter()
+        self._ensure_model()
         
-        model = self.model
-        if hasattr(model, 'encode'):
-            embedding = model.encode(query, show_progress_bar=False, convert_to_numpy=True).tolist()
+        if hasattr(self._model, 'encode'):
+            result = self._model.encode(
+                query,
+                show_progress_bar=False,
+                convert_to_numpy=True,
+                normalize_embeddings=True
+            )
+            embedding = result.tolist() if hasattr(result, 'tolist') else result
         else:
-            embeddings = model([query])
+            embeddings = self._model.encode([query])
             embedding = embeddings[0]
         
         latency = (time.perf_counter() - start) * 1000

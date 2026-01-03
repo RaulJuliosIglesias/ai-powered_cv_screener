@@ -1,1070 +1,510 @@
 {
   "sessions": [
     {
-      "id": "ab8fd0be-298d-4253-851d-c3560a61fc41",
+      "id": "9b61c306-d616-42c7-9175-34b13a950943",
       "name": "New chat",
       "description": "",
       "cvs": [
         {
-          "id": "cv_6f2fd6a1",
+          "id": "cv_965df739",
+          "filename": "2a4fe182_Thierry_Nguyen_EVP.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T14:59:01.110888"
+        },
+        {
+          "id": "cv_605c94e3",
+          "filename": "dc85bc48_Priya_Sharma_Fernández_CHRO.pdf",
+          "chunk_count": 7,
+          "uploaded_at": "2026-01-03T14:59:01.411723"
+        },
+        {
+          "id": "cv_0751b29c",
+          "filename": "5a519af7_Li_Wei_Content_Strategist.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T14:59:01.566884"
+        },
+        {
+          "id": "cv_ef794c67",
+          "filename": "44eb074e_Liam_Ndlovu_Sales_Manager.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T14:59:01.665738"
+        },
+        {
+          "id": "cv_2c692903",
+          "filename": "7f6337b7_Thierry_NDiaye_Lead_UX_Designer.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T14:59:01.836876"
+        },
+        {
+          "id": "cv_e9c194dc",
+          "filename": "52deb5e4_Li_Wei_Chen_Managing_Principal.pdf",
+          "chunk_count": 16,
+          "uploaded_at": "2026-01-03T14:59:02.147042"
+        },
+        {
+          "id": "cv_3fc702bc",
+          "filename": "50e1f4e5_Priya_Patel_Junior_Software_Developer.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-03T14:59:02.355025"
+        },
+        {
+          "id": "cv_e90bc61b",
+          "filename": "366a6a8e_Patricia_Okafor_Senior_Accountant.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T14:59:02.511928"
+        },
+        {
+          "id": "cv_c548d25c",
+          "filename": "a44c7258_Isabel_Mendoza_Total_Rewards_Manager.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T14:59:02.658614"
+        },
+        {
+          "id": "cv_d33b7ba1",
+          "filename": "c9727c1b_Priya_Patel_Senior_Counsel.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T14:59:02.865257"
+        },
+        {
+          "id": "cv_38b3a760",
+          "filename": "44080c0a_Elisabeth_van_der_Berg_Senior_Management_Consultant.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T14:59:03.013286"
+        },
+        {
+          "id": "cv_080fb33a",
+          "filename": "27948e8c_Isabel_Rodrigues_Principal_Software_Engineer.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T14:59:03.152818"
+        },
+        {
+          "id": "cv_b2e49c60",
+          "filename": "8a11f680_Rajiv_Patel_Fashion_Stylist.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T14:59:03.296182"
+        },
+        {
+          "id": "cv_a9f2929c",
+          "filename": "c8798b5e_Miguel_Chen_Lead_Composer.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T14:59:03.490114"
+        },
+        {
+          "id": "cv_098994b4",
+          "filename": "c104e914_Aisha_Patel_Supervisor.pdf",
+          "chunk_count": 9,
+          "uploaded_at": "2026-01-03T14:59:03.618376"
+        },
+        {
+          "id": "cv_d6ed3b4c",
+          "filename": "48b87a6b_Mateo_Alvarez_Head_of_Training.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T14:59:03.763811"
+        },
+        {
+          "id": "cv_c03dc4b6",
+          "filename": "5c8fba4e_Li_Wei_Doctoral_Candidate_in_Artificial_Intelligence.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T14:59:03.945545"
+        },
+        {
+          "id": "cv_ae84b647",
+          "filename": "9deb7ec4_Margaret_Whitmore_SVP_of_Innovation.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T14:59:04.081880"
+        },
+        {
+          "id": "cv_cbf31cea",
+          "filename": "53e9ca5f_Mei_Lin_Chen_PhD_Student_in_Environmental_Science.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T14:59:04.258984"
+        },
+        {
+          "id": "cv_110657fe",
+          "filename": "6bcf1bf2_Aisha_Müller_Packaging_Designer.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T14:59:04.401941"
+        },
+        {
+          "id": "cv_e02b78ea",
+          "filename": "8f10b171_Priya_Mehta_Junior_Audio_Engineer.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T14:59:04.534678"
+        },
+        {
+          "id": "cv_4666c049",
           "filename": "351c2982_Claudia_Schmidt_Chief_Growth_Officer.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T13:37:07.627349"
+          "uploaded_at": "2026-01-03T14:59:04.696937"
         },
         {
-          "id": "cv_3c10713e",
+          "id": "cv_7ac0d07a",
           "filename": "136dd3ca_Kenji_Nakamura_Post-Production_Supervisor.pdf",
           "chunk_count": 3,
-          "uploaded_at": "2026-01-03T13:37:07.877480"
+          "uploaded_at": "2026-01-03T14:59:04.926857"
         },
         {
-          "id": "cv_b920f8dd",
+          "id": "cv_2871ef29",
           "filename": "b1a38d04_Layla_Al-Mansoor_Senior_Clinical_Psychologist_specializing_in_Cross-Cultural_Trauma_Therapy.pdf",
           "chunk_count": 4,
-          "uploaded_at": "2026-01-03T13:37:08.064010"
+          "uploaded_at": "2026-01-03T14:59:05.101953"
         },
         {
-          "id": "cv_66a9846f",
+          "id": "cv_87c12b8e",
           "filename": "0d250c41_Clara_Mendoza_Lead_Artist_specializing_in_Traditional_and_Digital_Mixed_Media.pdf",
           "chunk_count": 5,
-          "uploaded_at": "2026-01-03T13:37:08.243405"
+          "uploaded_at": "2026-01-03T14:59:05.270737"
         },
         {
-          "id": "cv_27981fbb",
+          "id": "cv_6d990649",
           "filename": "a444319a_Anjali_Mehta_Lead_Artist_specializing_in_Traditional_Indian_Miniature_Painting.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T13:37:08.418916"
+          "uploaded_at": "2026-01-03T14:59:05.433947"
         },
         {
-          "id": "cv_af447c0b",
+          "id": "cv_3aea02bf",
           "filename": "747e2648_Carmen_Rodriguez_Lead_Artist_specializing_in_Digital_Illustration_and_Concept_Art.pdf",
           "chunk_count": 4,
-          "uploaded_at": "2026-01-03T13:37:08.670977"
+          "uploaded_at": "2026-01-03T14:59:05.668446"
         },
         {
-          "id": "cv_7de86b71",
+          "id": "cv_46af5595",
           "filename": "665acb0f_Carmen_Delgado_Senior_Concept_Artist_specializing_in_Hand-Painted_Textures.pdf",
           "chunk_count": 4,
-          "uploaded_at": "2026-01-03T13:37:08.836252"
+          "uploaded_at": "2026-01-03T14:59:05.823244"
         },
         {
-          "id": "cv_bde8d58c",
+          "id": "cv_dca2b6e2",
           "filename": "234b68e0_Isabel_Mendoza_Lead_Environment_Artist_specializing_in_Stylized_Worlds.pdf",
           "chunk_count": 3,
-          "uploaded_at": "2026-01-03T13:37:09.024005"
+          "uploaded_at": "2026-01-03T14:59:05.998995"
         },
         {
-          "id": "cv_6d552dd2",
+          "id": "cv_b3670e02",
           "filename": "86f73716_Ji-hoon_Kim_Senior_Character_Artist_specializing_in_Stylized_3D_Modeling.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T13:37:09.203263"
+          "uploaded_at": "2026-01-03T14:59:06.182822"
         },
         {
-          "id": "cv_2a5c34fb",
+          "id": "cv_14849c2f",
           "filename": "6cc5f52e_Mira_Patel_Lead_2D_Game_Artist_specializing_in_Hand-Drawn_Animation.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T13:37:09.379835"
+          "uploaded_at": "2026-01-03T14:59:06.349684"
         },
         {
-          "id": "cv_96710c64",
+          "id": "cv_ecb7a617",
           "filename": "ee46e385_Julian_Carter_Lead_Concept_Artist_specializing_in_Character_Design_for_Video_Games.pdf",
           "chunk_count": 3,
-          "uploaded_at": "2026-01-03T13:37:09.614071"
+          "uploaded_at": "2026-01-03T14:59:06.576732"
         },
         {
-          "id": "cv_67f793c8",
+          "id": "cv_3ec5e449",
           "filename": "3b0f9c4f_Anjali_Kapoor_Lead_Concept_Artist_specializing_in_Fantasy_and_Sci-Fi_Environments.pdf",
           "chunk_count": 3,
-          "uploaded_at": "2026-01-03T13:37:09.804326"
+          "uploaded_at": "2026-01-03T14:59:06.756060"
         },
         {
-          "id": "cv_16057cce",
+          "id": "cv_2d1be912",
           "filename": "bafa8388_Lotte_van_Dijk_Cross-Platform_Developer_with_a_focus_on_Mobile_UI-UX.pdf",
           "chunk_count": 4,
-          "uploaded_at": "2026-01-03T13:37:09.968315"
+          "uploaded_at": "2026-01-03T14:59:06.906679"
         },
         {
-          "id": "cv_d47fdd48",
+          "id": "cv_16ee6fd2",
           "filename": "f4e788e1_Aisha_Chen_Analytics_Engineer_specializing_in_Data_Pipeline_Optimization.pdf",
           "chunk_count": 3,
-          "uploaded_at": "2026-01-03T13:37:10.151330"
+          "uploaded_at": "2026-01-03T14:59:07.082645"
         },
         {
-          "id": "cv_59dd13b2",
+          "id": "cv_c1cee874",
           "filename": "7d65dc1d_Lucas_Oliveira_Talent_Acquisition_Specialist_focused_on_Tech_Startups.pdf",
           "chunk_count": 4,
-          "uploaded_at": "2026-01-03T13:37:10.355253"
+          "uploaded_at": "2026-01-03T14:59:07.271171"
         },
         {
-          "id": "cv_992f2244",
+          "id": "cv_9ee61279",
           "filename": "e7d51d54_Kwame_Osei-Mensah_Film_Score_Assistant__Music_Preparation_Specialist.pdf",
           "chunk_count": 6,
-          "uploaded_at": "2026-01-03T13:37:10.727253"
+          "uploaded_at": "2026-01-03T14:59:07.626279"
         },
         {
-          "id": "cv_e92719b5",
+          "id": "cv_a5bf72d4",
           "filename": "a8cd1092_Min-jun_Kim_Performance_Marketing_Specialist_with_a_Focus_on_E-commerce_Growth.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T13:37:10.914928"
+          "uploaded_at": "2026-01-03T14:59:07.792900"
         },
         {
-          "id": "cv_0a195b60",
+          "id": "cv_43902e4a",
           "filename": "37717b7b_Rajiv_Mehta_Senior_Structural_Engineer_specializing_in_Seismic_Retrofitting.pdf",
           "chunk_count": 10,
-          "uploaded_at": "2026-01-03T13:37:11.197946"
+          "uploaded_at": "2026-01-03T14:59:08.067885"
         },
         {
-          "id": "cv_71db99c9",
+          "id": "cv_0bc6b4fd",
           "filename": "8afa4252_Farid_Al-Mansoor_Senior_Photographer_specializing_in_Cultural_Documentary_and_Portraiture.pdf",
           "chunk_count": 3,
-          "uploaded_at": "2026-01-03T13:37:11.377316"
+          "uploaded_at": "2026-01-03T14:59:08.236639"
         },
         {
-          "id": "cv_a3bda6a1",
+          "id": "cv_6c17e7e5",
           "filename": "f7447ff7_Aisha_Al_Mansoori_Research_Director_specializing_in_Renewable_Energy_Innovations.pdf",
           "chunk_count": 4,
-          "uploaded_at": "2026-01-03T13:37:11.629986"
+          "uploaded_at": "2026-01-03T14:59:08.473700"
         },
         {
-          "id": "cv_d24fa58d",
+          "id": "cv_6cb73c13",
           "filename": "65449d93_Li_Wei_Chief_Product_Officer.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T13:37:11.861014"
+          "uploaded_at": "2026-01-03T14:59:08.689018"
         },
         {
-          "id": "cv_aff55235",
+          "id": "cv_3b9a8fa2",
           "filename": "82f5a765_Layla_Al-Farsi_Head_of_Digital_Marketing_with_a_focus_on_Brand_Storytelling.pdf",
           "chunk_count": 4,
-          "uploaded_at": "2026-01-03T13:37:12.027085"
+          "uploaded_at": "2026-01-03T14:59:08.842313"
         },
         {
-          "id": "cv_8b7f9241",
+          "id": "cv_5ff1b7d2",
           "filename": "d9092df0_Rajiv_Mehta_Junior_UX_Designer.pdf",
           "chunk_count": 4,
-          "uploaded_at": "2026-01-03T13:37:12.206724"
+          "uploaded_at": "2026-01-03T14:59:09.009092"
         },
         {
-          "id": "cv_f65e10f1",
+          "id": "cv_871b10a0",
           "filename": "19206e71_Rajesh_Pillay_Senior_Sales_Executive_specializing_in_Industrial_Equipment.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T13:37:12.392770"
+          "uploaded_at": "2026-01-03T14:59:09.178403"
         },
         {
-          "id": "cv_6867d02d",
+          "id": "cv_ddfe5e60",
           "filename": "a49c7ba7_Aisha_Moretti_Fine_Dining_Server_with_Wine_Pairing_Expertise.pdf",
           "chunk_count": 5,
-          "uploaded_at": "2026-01-03T13:37:12.561271"
+          "uploaded_at": "2026-01-03T14:59:09.331862"
         },
         {
-          "id": "cv_bfda4394",
+          "id": "cv_79a954e1",
           "filename": "91854e63_Aisha_Thompson_Head_of_Social_Media_Strategy__Community_Engagement.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T13:37:12.813364"
+          "uploaded_at": "2026-01-03T14:59:09.564367"
         },
         {
-          "id": "cv_dab3539a",
+          "id": "cv_445515c0",
           "filename": "c79e7b31_Javier_Morales_Lead_Game_Designer_specializing_in_Narrative_and_Player_Experience.pdf",
           "chunk_count": 5,
-          "uploaded_at": "2026-01-03T13:37:13.009759"
+          "uploaded_at": "2026-01-03T14:59:09.745878"
         },
         {
-          "id": "cv_ba5fb173",
+          "id": "cv_262e9b9a",
           "filename": "6eaefc1a_Layla_Al-Mansoor_Visual_Effects_Director_specializing_in_Historical_and_Fantasy_Genres.pdf",
           "chunk_count": 4,
-          "uploaded_at": "2026-01-03T13:37:13.223877"
+          "uploaded_at": "2026-01-03T14:59:09.941718"
         },
         {
-          "id": "cv_914fe0a2",
+          "id": "cv_50ff22e1",
           "filename": "8b292e4e_Ethan_James_Carter_Residential_Interior_Designer_with_a_Focus_on_Sustainable_Materials.pdf",
           "chunk_count": 7,
-          "uploaded_at": "2026-01-03T13:37:13.433958"
+          "uploaded_at": "2026-01-03T14:59:10.138783"
         },
         {
-          "id": "cv_96802192",
+          "id": "cv_faa49fa3",
           "filename": "0cd7c623_Rajiv_Kumar_Junior_Test_Engineer.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T13:37:13.603694"
+          "uploaded_at": "2026-01-03T14:59:10.291759"
         },
         {
-          "id": "cv_371c2ff3",
+          "id": "cv_9e5b3de8",
           "filename": "728f4922_Ji-Yeon_Kim_Senior_Product_Manager_E-Commerce_Platforms.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T13:37:13.847627"
+          "uploaded_at": "2026-01-03T14:59:10.512713"
         },
         {
-          "id": "cv_904077e8",
+          "id": "cv_f6a13c5e",
           "filename": "0df49086_Carlos_Mendoza_Senior_Lifestyle_and_Wellness_Influencer.pdf",
           "chunk_count": 3,
-          "uploaded_at": "2026-01-03T13:37:14.048827"
+          "uploaded_at": "2026-01-03T14:59:10.704032"
         },
         {
-          "id": "cv_30b2c329",
+          "id": "cv_9ef385bf",
           "filename": "db4bf998_Layla_Al-Mansoor_Junior_Research_Coordinator_Public_Health_Studies.pdf",
           "chunk_count": 5,
-          "uploaded_at": "2026-01-03T13:37:14.254914"
+          "uploaded_at": "2026-01-03T14:59:10.896635"
         },
         {
-          "id": "cv_3c64920c",
+          "id": "cv_8d6aa09b",
           "filename": "c67a5185_Karim_Al-Mansoor_Senior_Law_Clerk_specializing_in_Immigration_and_Refugee_Law.pdf",
           "chunk_count": 3,
-          "uploaded_at": "2026-01-03T13:37:14.445735"
+          "uploaded_at": "2026-01-03T14:59:11.075011"
         },
         {
-          "id": "cv_8ed9ba70",
+          "id": "cv_7eae5888",
           "filename": "9db944e1_Rafael_Kimura_Wine_Director_specializing_in_New_World_and_Natural_Wines.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T13:37:14.683896"
+          "uploaded_at": "2026-01-03T14:59:11.297433"
+        },
+        {
+          "id": "cv_b1222e61",
+          "filename": "ed9895bf_Javier_Martínez_López_AI_Engineer_specializing_in_Natural_Language_Processing.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-03T14:59:11.484683"
+        },
+        {
+          "id": "cv_26f7d45f",
+          "filename": "108761fb_Yuki_Tanaka_Senior_DI_Colorist_specializing_in_Feature_Films.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T14:59:11.687321"
+        },
+        {
+          "id": "cv_39a8e437",
+          "filename": "745b28b9_Avi_Cohen_Senior_Account_Manager_specializing_in_SaaS_Client_Relations.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T14:59:11.872423"
+        },
+        {
+          "id": "cv_12b73678",
+          "filename": "6430158c_Aiko_Tanaka_Senior_Web3_Developer_specializing_in_Ethereum-based_DApps.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T14:59:12.052575"
+        },
+        {
+          "id": "cv_5b3cba1c",
+          "filename": "6016b2a4_Lucas_Oliveira_Help_Desk_Technician_with_a_focus_on_Customer_Support.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T14:59:12.255634"
+        },
+        {
+          "id": "cv_652fd174",
+          "filename": "50d84650_Carmen_López_Head_Bartender_and_Mixology_Specialist.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T14:59:12.418803"
+        },
+        {
+          "id": "cv_875739fa",
+          "filename": "7e1b20b9_Rivka_Cohen_Senior_Editor_specializing_in_Literary_Fiction_and_Memoirs.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T14:59:12.588418"
         }
       ],
       "messages": [
         {
-          "id": "cc70205b-e1d0-46b6-b8ee-ac0479db8ae5",
+          "id": "b13674ad-47d4-4700-9c50-b623af0c151d",
           "role": "user",
-          "content": "Supabase sigue sin crear ni la tabla de los CV ni la tabla de CV embeddings. Entonces, ¿cuál es el propósito de haber utilizado Supabase? Si no estás creando embeddings, no estás utilizando pgvector, ni estás utilizando todas esas cosas que daban ventaja sobre el uso local. Este modo de Supabase debería de poder realmente funcionar, no simplemente subir a Supabase, pero realmente después hacer un razonamiento con los modelos locales, con los PDFs locales. No entiendes, no tiene sentido lo que estás haciendo. El modo Supabase tiene que realmente crear embeddings en Supabase, utilizar pgvector y utilizar todas las features y formas de hacer RAG utilizando Supabase. ¿Qué no entiendes?",
+          "content": "Who is best for a leadership role?",
           "sources": [],
-          "timestamp": "2026-01-03T13:37:48.111089"
+          "timestamp": "2026-01-03T15:00:39.917271"
         },
         {
-          "id": "202b3641-4a81-43a5-b793-ea934dee906e",
+          "id": "14b1403e-646c-4a77-bbf5-2853a4792033",
+          "role": "user",
+          "content": "Who is best for a leadership role?",
+          "sources": [],
+          "timestamp": "2026-01-03T15:02:13.264604"
+        },
+        {
+          "id": "d4f042aa-b357-488a-96e5-02ba108bdf77",
           "role": "assistant",
-          "content": ":::thinking\nThe user is expressing frustration about the lack of functionality in Supabase regarding the creation of CV tables and embeddings, which are essential for leveraging its features effectively. They are seeking clarity on how to utilize Supabase's capabilities, particularly with pgvector and RAG (Retrieval-Augmented Generation) methods. I will summarize the key points regarding the expected functionalities and the importance of implementing them correctly. \n:::\n\nThe purpose of using Supabase is to leverage its database capabilities, including the creation of tables for storing CVs and embeddings, which can enhance data retrieval and processing. By utilizing pgvector, you can efficiently manage vector embeddings for advanced querying and machine learning applications. If these functionalities are not being implemented, it undermines the advantages of using Supabase over local solutions. \n\nTo effectively utilize Supabase, ensure that:\n- You create a dedicated table for CVs to store relevant candidate information.\n- Implement a table for embeddings using pgvector to facilitate efficient similarity searches and retrieval.\n- Integrate your local models with Supabase to perform reasoning and analysis on the stored data.\n\nThis approach will allow you to fully exploit Supabase's features and improve your workflow significantly.\n\n:::conclusion\nTo maximize the benefits of Supabase, it is crucial to implement the creation of CV tables and embeddings, utilizing pgvector for enhanced data management and retrieval capabilities. This will ensure that you are leveraging Supabase effectively for your needs. \n:::",
+          "content": ":::thinking\nThe user is asking for candidates suitable for a leadership role. I need to identify candidates with relevant leadership experience from the provided CV excerpts. \n:::\n\n| Candidate | Leadership Experience | Relevant Skills |\n|-----------|----------------------|-----------------|\n| Thierry Nguyen [CV:cv_965df739] | VP, Business Development with a proven track record of leading high-performing teams and driving strategic initiatives. | Strategic Planning, Operations Management, Business Development |\n| Aisha Al Mansoori [CV:cv_6c17e7e5] | Managed a $2M laboratory upgrade and co-organized a major symposium, demonstrating leadership in project management and collaboration. | Project Management, Policy Analysis, Grant Writing |\n| Rajiv Mehta [CV:cv_43902e4a] | Senior Structural Engineer with experience in project management and implementing innovative strategies. | Project Management, Engineering Innovation |\n| Claudia Schmidt [CV:cv_4666c049] | Chief Growth Officer with experience in driving revenue expansion and managing client relationships. | Business Development, Data Analytics, Growth Hacking |\n\nBased on the analysis, Thierry Nguyen [CV:cv_965df739] stands out as the strongest candidate for a leadership role due to his extensive experience in business development and leading teams.\n\n:::conclusion\nThierry Nguyen [CV:cv_965df739] is the best candidate for a leadership role.",
           "sources": [
             {
-              "cv_id": "cv_8ed9ba70",
-              "filename": "9db944e1_Rafael_Kimura_Wine_Director_specializing_in_New_World_and_Natural_Wines.pdf",
-              "relevance": 0.769
-            },
-            {
-              "cv_id": "cv_96710c64",
-              "filename": "ee46e385_Julian_Carter_Lead_Concept_Artist_specializing_in_Character_Design_for_Video_Games.pdf",
-              "relevance": 0.768
-            },
-            {
-              "cv_id": "cv_bfda4394",
-              "filename": "91854e63_Aisha_Thompson_Head_of_Social_Media_Strategy__Community_Engagement.pdf",
-              "relevance": 0.767
-            },
-            {
-              "cv_id": "cv_3c64920c",
-              "filename": "c67a5185_Karim_Al-Mansoor_Senior_Law_Clerk_specializing_in_Immigration_and_Refugee_Law.pdf",
-              "relevance": 0.761
-            },
-            {
-              "cv_id": "cv_6f2fd6a1",
-              "filename": "351c2982_Claudia_Schmidt_Chief_Growth_Officer.pdf",
-              "relevance": 0.751
-            },
-            {
-              "cv_id": "cv_6d552dd2",
-              "filename": "86f73716_Ji-hoon_Kim_Senior_Character_Artist_specializing_in_Stylized_3D_Modeling.pdf",
-              "relevance": 0.75
-            },
-            {
-              "cv_id": "cv_e92719b5",
-              "filename": "a8cd1092_Min-jun_Kim_Performance_Marketing_Specialist_with_a_Focus_on_E-commerce_Growth.pdf",
-              "relevance": 0.749
-            },
-            {
-              "cv_id": "cv_904077e8",
-              "filename": "0df49086_Carlos_Mendoza_Senior_Lifestyle_and_Wellness_Influencer.pdf",
-              "relevance": 0.746
-            },
-            {
-              "cv_id": "cv_f65e10f1",
-              "filename": "19206e71_Rajesh_Pillay_Senior_Sales_Executive_specializing_in_Industrial_Equipment.pdf",
-              "relevance": 0.744
-            },
-            {
-              "cv_id": "cv_66a9846f",
-              "filename": "0d250c41_Clara_Mendoza_Lead_Artist_specializing_in_Traditional_and_Digital_Mixed_Media.pdf",
-              "relevance": 0.74
-            },
-            {
-              "cv_id": "cv_992f2244",
-              "filename": "e7d51d54_Kwame_Osei-Mensah_Film_Score_Assistant__Music_Preparation_Specialist.pdf",
-              "relevance": 0.737
-            },
-            {
-              "cv_id": "cv_b920f8dd",
-              "filename": "b1a38d04_Layla_Al-Mansoor_Senior_Clinical_Psychologist_specializing_in_Cross-Cultural_Trauma_Therapy.pdf",
-              "relevance": 0.736
-            },
-            {
-              "cv_id": "cv_67f793c8",
-              "filename": "3b0f9c4f_Anjali_Kapoor_Lead_Concept_Artist_specializing_in_Fantasy_and_Sci-Fi_Environments.pdf",
-              "relevance": 0.736
-            },
-            {
-              "cv_id": "cv_71db99c9",
-              "filename": "8afa4252_Farid_Al-Mansoor_Senior_Photographer_specializing_in_Cultural_Documentary_and_Portraiture.pdf",
-              "relevance": 0.734
-            },
-            {
-              "cv_id": "cv_d24fa58d",
-              "filename": "65449d93_Li_Wei_Chief_Product_Officer.pdf",
-              "relevance": 0.733
-            },
-            {
-              "cv_id": "cv_af447c0b",
-              "filename": "747e2648_Carmen_Rodriguez_Lead_Artist_specializing_in_Digital_Illustration_and_Concept_Art.pdf",
-              "relevance": 0.732
-            },
-            {
-              "cv_id": "cv_bde8d58c",
-              "filename": "234b68e0_Isabel_Mendoza_Lead_Environment_Artist_specializing_in_Stylized_Worlds.pdf",
-              "relevance": 0.732
-            },
-            {
-              "cv_id": "cv_27981fbb",
-              "filename": "a444319a_Anjali_Mehta_Lead_Artist_specializing_in_Traditional_Indian_Miniature_Painting.pdf",
-              "relevance": 0.731
-            },
-            {
-              "cv_id": "cv_914fe0a2",
-              "filename": "8b292e4e_Ethan_James_Carter_Residential_Interior_Designer_with_a_Focus_on_Sustainable_Materials.pdf",
-              "relevance": 0.73
-            },
-            {
-              "cv_id": "cv_30b2c329",
-              "filename": "db4bf998_Layla_Al-Mansoor_Junior_Research_Coordinator_Public_Health_Studies.pdf",
-              "relevance": 0.728
-            }
-          ],
-          "timestamp": "2026-01-03T13:37:54.333861"
-        },
-        {
-          "id": "456bd3a6-a0c1-4bc5-988e-0235e2d7e408",
-          "role": "user",
-          "content": "dame una tarta de queso receta",
-          "sources": [],
-          "timestamp": "2026-01-03T13:38:30.027035"
-        },
-        {
-          "id": "d9f5f360-9f09-49fc-9e4c-5f792ca78ded",
-          "role": "assistant",
-          "content": ":::thinking\nThe user is asking for a cheesecake recipe, which is unrelated to the CV data provided. I will not analyze the CVs as they do not pertain to the user's request for a recipe. Instead, I will provide a simple cheesecake recipe. \n:::\n\n### Cheesecake Recipe\n\n**Ingredients:**\n- 1 ½ cups graham cracker crumbs\n- ½ cup sugar\n- ½ cup unsalted butter, melted\n- 4 (8-ounce) packages cream cheese, softened\n- 1 cup sugar\n- 1 teaspoon vanilla extract\n- 4 large eggs\n- 1 cup sour cream\n\n**Instructions:**\n1. Preheat your oven to 325°F (160°C).\n2. In a medium bowl, mix graham cracker crumbs, ½ cup sugar, and melted butter until well combined. Press the mixture into the bottom of a 9-inch springform pan.\n3. In a large bowl, beat the cream cheese until smooth. Gradually add 1 cup sugar and vanilla extract, mixing until well combined.\n4. Add the eggs one at a time, mixing well after each addition. Finally, mix in the sour cream until smooth.\n5. Pour the cream cheese mixture over the crust in the springform pan.\n6. Bake for 55-60 minutes, or until the center is set and the edges are lightly browned.\n7. Allow the cheesecake to cool, then refrigerate for at least 4 hours before serving.\n\nEnjoy your cheesecake!\n\n:::conclusion\nThis recipe provides a straightforward method to make a delicious cheesecake.",
-          "sources": [
-            {
-              "cv_id": "cv_b920f8dd",
-              "filename": "b1a38d04_Layla_Al-Mansoor_Senior_Clinical_Psychologist_specializing_in_Cross-Cultural_Trauma_Therapy.pdf",
-              "relevance": 0.574
-            },
-            {
-              "cv_id": "cv_a3bda6a1",
-              "filename": "f7447ff7_Aisha_Al_Mansoori_Research_Director_specializing_in_Renewable_Energy_Innovations.pdf",
-              "relevance": 0.573
-            },
-            {
-              "cv_id": "cv_71db99c9",
-              "filename": "8afa4252_Farid_Al-Mansoor_Senior_Photographer_specializing_in_Cultural_Documentary_and_Portraiture.pdf",
-              "relevance": 0.572
-            },
-            {
-              "cv_id": "cv_992f2244",
-              "filename": "e7d51d54_Kwame_Osei-Mensah_Film_Score_Assistant__Music_Preparation_Specialist.pdf",
-              "relevance": 0.564
-            },
-            {
-              "cv_id": "cv_ba5fb173",
-              "filename": "6eaefc1a_Layla_Al-Mansoor_Visual_Effects_Director_specializing_in_Historical_and_Fantasy_Genres.pdf",
-              "relevance": 0.553
-            },
-            {
-              "cv_id": "cv_bfda4394",
-              "filename": "91854e63_Aisha_Thompson_Head_of_Social_Media_Strategy__Community_Engagement.pdf",
-              "relevance": 0.55
-            },
-            {
-              "cv_id": "cv_aff55235",
-              "filename": "82f5a765_Layla_Al-Farsi_Head_of_Digital_Marketing_with_a_focus_on_Brand_Storytelling.pdf",
-              "relevance": 0.548
-            },
-            {
-              "cv_id": "cv_30b2c329",
-              "filename": "db4bf998_Layla_Al-Mansoor_Junior_Research_Coordinator_Public_Health_Studies.pdf",
-              "relevance": 0.546
-            },
-            {
-              "cv_id": "cv_3c64920c",
-              "filename": "c67a5185_Karim_Al-Mansoor_Senior_Law_Clerk_specializing_in_Immigration_and_Refugee_Law.pdf",
-              "relevance": 0.546
-            },
-            {
-              "cv_id": "cv_0a195b60",
-              "filename": "37717b7b_Rajiv_Mehta_Senior_Structural_Engineer_specializing_in_Seismic_Retrofitting.pdf",
-              "relevance": 0.543
-            },
-            {
-              "cv_id": "cv_3c10713e",
-              "filename": "136dd3ca_Kenji_Nakamura_Post-Production_Supervisor.pdf",
-              "relevance": 0.541
-            },
-            {
-              "cv_id": "cv_f65e10f1",
-              "filename": "19206e71_Rajesh_Pillay_Senior_Sales_Executive_specializing_in_Industrial_Equipment.pdf",
-              "relevance": 0.539
-            },
-            {
-              "cv_id": "cv_bde8d58c",
-              "filename": "234b68e0_Isabel_Mendoza_Lead_Environment_Artist_specializing_in_Stylized_Worlds.pdf",
-              "relevance": 0.538
-            },
-            {
-              "cv_id": "cv_914fe0a2",
-              "filename": "8b292e4e_Ethan_James_Carter_Residential_Interior_Designer_with_a_Focus_on_Sustainable_Materials.pdf",
-              "relevance": 0.537
-            },
-            {
-              "cv_id": "cv_67f793c8",
-              "filename": "3b0f9c4f_Anjali_Kapoor_Lead_Concept_Artist_specializing_in_Fantasy_and_Sci-Fi_Environments.pdf",
-              "relevance": 0.534
-            },
-            {
-              "cv_id": "cv_66a9846f",
-              "filename": "0d250c41_Clara_Mendoza_Lead_Artist_specializing_in_Traditional_and_Digital_Mixed_Media.pdf",
-              "relevance": 0.534
-            },
-            {
-              "cv_id": "cv_8ed9ba70",
-              "filename": "9db944e1_Rafael_Kimura_Wine_Director_specializing_in_New_World_and_Natural_Wines.pdf",
-              "relevance": 0.531
-            },
-            {
-              "cv_id": "cv_27981fbb",
-              "filename": "a444319a_Anjali_Mehta_Lead_Artist_specializing_in_Traditional_Indian_Miniature_Painting.pdf",
-              "relevance": 0.531
-            }
-          ],
-          "timestamp": "2026-01-03T13:38:36.752164"
-        },
-        {
-          "id": "71da73bf-2c4d-4843-a634-1aa643693826",
-          "role": "user",
-          "content": "quien sabe python como apra ser elad tech",
-          "sources": [],
-          "timestamp": "2026-01-03T13:43:27.771876"
-        },
-        {
-          "id": "cb157fdf-8c92-4733-a456-af8b239acc8c",
-          "role": "assistant",
-          "content": ":::thinking\nThe user is looking for candidates with Python skills suitable for a lead tech position. I will analyze the provided CV excerpts for any mention of Python experience or related technical skills that indicate proficiency in programming and leadership capabilities.\n:::\n\nBased on the CV excerpts, none of the candidates explicitly mention Python experience. However, I can highlight candidates with strong technical backgrounds that may imply programming skills:\n\n| Candidate | Experience | Key Skills |\n|-----------|------------|------------|\n| Aisha Chen [CV:cv_d47fdd48] | Experience in data pipeline optimization | SQL, Data Analytics |\n| Rajiv Mehta [CV:cv_0a195b60] | Senior Structural Engineer | Advanced analysis tools, Structural Analysis |\n| Aisha Al Mansoori [CV:cv_a3bda6a1] | Research Director | Data-driven strategies, Analytical support |\n\nWhile Aisha Chen [CV:cv_d47fdd48] has relevant experience in data analytics and optimization, there is no direct mention of Python. The other candidates have strong technical skills but do not specifically indicate Python knowledge.\n\n:::conclusion\nNone of the candidates explicitly demonstrate Python skills, but Aisha Chen [CV:cv_d47fdd48] has a strong technical background that may be relevant for a lead tech role. Further investigation into their programming capabilities would be necessary.",
-          "sources": [
-            {
-              "cv_id": "cv_af447c0b",
-              "filename": "747e2648_Carmen_Rodriguez_Lead_Artist_specializing_in_Digital_Illustration_and_Concept_Art.pdf",
-              "relevance": 0.593
-            },
-            {
-              "cv_id": "cv_0a195b60",
-              "filename": "37717b7b_Rajiv_Mehta_Senior_Structural_Engineer_specializing_in_Seismic_Retrofitting.pdf",
-              "relevance": 0.584
-            },
-            {
-              "cv_id": "cv_992f2244",
-              "filename": "e7d51d54_Kwame_Osei-Mensah_Film_Score_Assistant__Music_Preparation_Specialist.pdf",
-              "relevance": 0.583
-            },
-            {
-              "cv_id": "cv_6d552dd2",
-              "filename": "86f73716_Ji-hoon_Kim_Senior_Character_Artist_specializing_in_Stylized_3D_Modeling.pdf",
+              "cv_id": "cv_b1222e61",
+              "filename": "ed9895bf_Javier_Martínez_López_AI_Engineer_specializing_in_Natural_Language_Processing.pdf",
               "relevance": 0.582
             },
             {
-              "cv_id": "cv_66a9846f",
-              "filename": "0d250c41_Clara_Mendoza_Lead_Artist_specializing_in_Traditional_and_Digital_Mixed_Media.pdf",
+              "cv_id": "cv_6c17e7e5",
+              "filename": "f7447ff7_Aisha_Al_Mansoori_Research_Director_specializing_in_Renewable_Energy_Innovations.pdf",
               "relevance": 0.576
             },
             {
-              "cv_id": "cv_bde8d58c",
-              "filename": "234b68e0_Isabel_Mendoza_Lead_Environment_Artist_specializing_in_Stylized_Worlds.pdf",
-              "relevance": 0.575
+              "cv_id": "cv_46af5595",
+              "filename": "665acb0f_Carmen_Delgado_Senior_Concept_Artist_specializing_in_Hand-Painted_Textures.pdf",
+              "relevance": 0.574
             },
             {
-              "cv_id": "cv_a3bda6a1",
-              "filename": "f7447ff7_Aisha_Al_Mansoori_Research_Director_specializing_in_Renewable_Energy_Innovations.pdf",
-              "relevance": 0.572
+              "cv_id": "cv_43902e4a",
+              "filename": "37717b7b_Rajiv_Mehta_Senior_Structural_Engineer_specializing_in_Seismic_Retrofitting.pdf",
+              "relevance": 0.564
             },
             {
-              "cv_id": "cv_914fe0a2",
-              "filename": "8b292e4e_Ethan_James_Carter_Residential_Interior_Designer_with_a_Focus_on_Sustainable_Materials.pdf",
-              "relevance": 0.568
-            },
-            {
-              "cv_id": "cv_6f2fd6a1",
-              "filename": "351c2982_Claudia_Schmidt_Chief_Growth_Officer.pdf",
-              "relevance": 0.566
-            },
-            {
-              "cv_id": "cv_904077e8",
-              "filename": "0df49086_Carlos_Mendoza_Senior_Lifestyle_and_Wellness_Influencer.pdf",
-              "relevance": 0.566
-            },
-            {
-              "cv_id": "cv_67f793c8",
-              "filename": "3b0f9c4f_Anjali_Kapoor_Lead_Concept_Artist_specializing_in_Fantasy_and_Sci-Fi_Environments.pdf",
-              "relevance": 0.565
-            },
-            {
-              "cv_id": "cv_d47fdd48",
-              "filename": "f4e788e1_Aisha_Chen_Analytics_Engineer_specializing_in_Data_Pipeline_Optimization.pdf",
+              "cv_id": "cv_3fc702bc",
+              "filename": "50e1f4e5_Priya_Patel_Junior_Software_Developer.pdf",
               "relevance": 0.56
             },
             {
-              "cv_id": "cv_ba5fb173",
-              "filename": "6eaefc1a_Layla_Al-Mansoor_Visual_Effects_Director_specializing_in_Historical_and_Fantasy_Genres.pdf",
-              "relevance": 0.558
+              "cv_id": "cv_c548d25c",
+              "filename": "a44c7258_Isabel_Mendoza_Total_Rewards_Manager.pdf",
+              "relevance": 0.56
             },
             {
-              "cv_id": "cv_71db99c9",
-              "filename": "8afa4252_Farid_Al-Mansoor_Senior_Photographer_specializing_in_Cultural_Documentary_and_Portraiture.pdf",
-              "relevance": 0.556
+              "cv_id": "cv_87c12b8e",
+              "filename": "0d250c41_Clara_Mendoza_Lead_Artist_specializing_in_Traditional_and_Digital_Mixed_Media.pdf",
+              "relevance": 0.557
             },
             {
-              "cv_id": "cv_6867d02d",
-              "filename": "a49c7ba7_Aisha_Moretti_Fine_Dining_Server_with_Wine_Pairing_Expertise.pdf",
-              "relevance": 0.554
-            },
-            {
-              "cv_id": "cv_e92719b5",
-              "filename": "a8cd1092_Min-jun_Kim_Performance_Marketing_Specialist_with_a_Focus_on_E-commerce_Growth.pdf",
-              "relevance": 0.554
-            },
-            {
-              "cv_id": "cv_f65e10f1",
-              "filename": "19206e71_Rajesh_Pillay_Senior_Sales_Executive_specializing_in_Industrial_Equipment.pdf",
+              "cv_id": "cv_cbf31cea",
+              "filename": "53e9ca5f_Mei_Lin_Chen_PhD_Student_in_Environmental_Science.pdf",
               "relevance": 0.553
             },
             {
-              "cv_id": "cv_96710c64",
-              "filename": "ee46e385_Julian_Carter_Lead_Concept_Artist_specializing_in_Character_Design_for_Video_Games.pdf",
-              "relevance": 0.548
-            }
-          ],
-          "timestamp": "2026-01-03T13:43:34.252362"
-        },
-        {
-          "id": "4e0832e5-0310-493c-b462-886911258af5",
-          "role": "user",
-          "content": "dame tarta de queso receta",
-          "sources": [],
-          "timestamp": "2026-01-03T13:47:40.439664"
-        },
-        {
-          "id": "0e745454-c1c5-49bf-b940-6530fbb32868",
-          "role": "assistant",
-          "content": ":::thinking\nThe user is asking for a cheesecake recipe, which is unrelated to the CV data provided. I will not analyze the CVs as they do not pertain to the user's request for a recipe. Instead, I will provide a simple cheesecake recipe. \n:::\n\n### Cheesecake Recipe\n\n**Ingredients:**\n- 1 ½ cups graham cracker crumbs\n- ½ cup unsalted butter, melted\n- 1 cup granulated sugar\n- 4 (8 oz) packages cream cheese, softened\n- 1 teaspoon vanilla extract\n- 4 large eggs\n- 1 cup sour cream\n\n**Instructions:**\n1. Preheat your oven to 325°F (160°C).\n2. In a bowl, mix graham cracker crumbs and melted butter until combined. Press the mixture into the bottom of a 9-inch springform pan to form the crust.\n3. In a large mixing bowl, beat the cream cheese until smooth. Gradually add sugar and vanilla, mixing until well combined.\n4. Add eggs one at a time, mixing well after each addition. Finally, mix in the sour cream until smooth.\n5. Pour the cream cheese mixture over the crust in the springform pan.\n6. Bake for 55-60 minutes, or until the center is set and slightly jiggly.\n7. Turn off the oven and let the cheesecake cool in the oven with the door ajar for 1 hour.\n8. Refrigerate for at least 4 hours or overnight before serving.\n\nEnjoy your cheesecake!\n\n:::conclusion\nThis cheesecake recipe is straightforward and should yield a delicious dessert.",
-          "sources": [
-            {
-              "cv_id": "cv_71db99c9",
-              "filename": "8afa4252_Farid_Al-Mansoor_Senior_Photographer_specializing_in_Cultural_Documentary_and_Portraiture.pdf",
-              "relevance": 0.561
-            },
-            {
-              "cv_id": "cv_b920f8dd",
-              "filename": "b1a38d04_Layla_Al-Mansoor_Senior_Clinical_Psychologist_specializing_in_Cross-Cultural_Trauma_Therapy.pdf",
-              "relevance": 0.556
-            },
-            {
-              "cv_id": "cv_3c64920c",
-              "filename": "c67a5185_Karim_Al-Mansoor_Senior_Law_Clerk_specializing_in_Immigration_and_Refugee_Law.pdf",
-              "relevance": 0.55
-            },
-            {
-              "cv_id": "cv_bfda4394",
-              "filename": "91854e63_Aisha_Thompson_Head_of_Social_Media_Strategy__Community_Engagement.pdf",
-              "relevance": 0.548
-            },
-            {
-              "cv_id": "cv_f65e10f1",
-              "filename": "19206e71_Rajesh_Pillay_Senior_Sales_Executive_specializing_in_Industrial_Equipment.pdf",
-              "relevance": 0.541
-            },
-            {
-              "cv_id": "cv_ba5fb173",
-              "filename": "6eaefc1a_Layla_Al-Mansoor_Visual_Effects_Director_specializing_in_Historical_and_Fantasy_Genres.pdf",
-              "relevance": 0.538
-            },
-            {
-              "cv_id": "cv_a3bda6a1",
-              "filename": "f7447ff7_Aisha_Al_Mansoori_Research_Director_specializing_in_Renewable_Energy_Innovations.pdf",
-              "relevance": 0.538
-            },
-            {
-              "cv_id": "cv_bde8d58c",
-              "filename": "234b68e0_Isabel_Mendoza_Lead_Environment_Artist_specializing_in_Stylized_Worlds.pdf",
-              "relevance": 0.531
-            },
-            {
-              "cv_id": "cv_30b2c329",
-              "filename": "db4bf998_Layla_Al-Mansoor_Junior_Research_Coordinator_Public_Health_Studies.pdf",
-              "relevance": 0.526
-            },
-            {
-              "cv_id": "cv_aff55235",
-              "filename": "82f5a765_Layla_Al-Farsi_Head_of_Digital_Marketing_with_a_focus_on_Brand_Storytelling.pdf",
-              "relevance": 0.524
-            },
-            {
-              "cv_id": "cv_992f2244",
-              "filename": "e7d51d54_Kwame_Osei-Mensah_Film_Score_Assistant__Music_Preparation_Specialist.pdf",
-              "relevance": 0.524
-            },
-            {
-              "cv_id": "cv_3c10713e",
-              "filename": "136dd3ca_Kenji_Nakamura_Post-Production_Supervisor.pdf",
-              "relevance": 0.522
-            },
-            {
-              "cv_id": "cv_914fe0a2",
-              "filename": "8b292e4e_Ethan_James_Carter_Residential_Interior_Designer_with_a_Focus_on_Sustainable_Materials.pdf",
-              "relevance": 0.522
-            },
-            {
-              "cv_id": "cv_66a9846f",
-              "filename": "0d250c41_Clara_Mendoza_Lead_Artist_specializing_in_Traditional_and_Digital_Mixed_Media.pdf",
-              "relevance": 0.518
-            },
-            {
-              "cv_id": "cv_0a195b60",
-              "filename": "37717b7b_Rajiv_Mehta_Senior_Structural_Engineer_specializing_in_Seismic_Retrofitting.pdf",
-              "relevance": 0.516
-            },
-            {
-              "cv_id": "cv_8ed9ba70",
-              "filename": "9db944e1_Rafael_Kimura_Wine_Director_specializing_in_New_World_and_Natural_Wines.pdf",
-              "relevance": 0.511
-            },
-            {
-              "cv_id": "cv_6f2fd6a1",
+              "cv_id": "cv_4666c049",
               "filename": "351c2982_Claudia_Schmidt_Chief_Growth_Officer.pdf",
-              "relevance": 0.5
-            }
-          ],
-          "timestamp": "2026-01-03T13:47:47.951207"
-        },
-        {
-          "id": "24f53221-9638-4936-82fc-881826712d87",
-          "role": "user",
-          "content": "dame tarta de queso receta",
-          "sources": [],
-          "timestamp": "2026-01-03T13:48:01.047209"
-        },
-        {
-          "id": "50ca6553-7ca6-43db-8ed7-6c76d7d03c40",
-          "role": "assistant",
-          "content": "I can only help with CV screening and candidate analysis. Please ask a question about the uploaded CVs.",
-          "sources": [
-            {
-              "cv_id": "cv_71db99c9",
-              "filename": "8afa4252_Farid_Al-Mansoor_Senior_Photographer_specializing_in_Cultural_Documentary_and_Portraiture.pdf",
-              "relevance": 0.561
-            },
-            {
-              "cv_id": "cv_b920f8dd",
-              "filename": "b1a38d04_Layla_Al-Mansoor_Senior_Clinical_Psychologist_specializing_in_Cross-Cultural_Trauma_Therapy.pdf",
-              "relevance": 0.556
-            },
-            {
-              "cv_id": "cv_3c64920c",
-              "filename": "c67a5185_Karim_Al-Mansoor_Senior_Law_Clerk_specializing_in_Immigration_and_Refugee_Law.pdf",
-              "relevance": 0.55
-            },
-            {
-              "cv_id": "cv_bfda4394",
-              "filename": "91854e63_Aisha_Thompson_Head_of_Social_Media_Strategy__Community_Engagement.pdf",
               "relevance": 0.548
             },
             {
-              "cv_id": "cv_f65e10f1",
-              "filename": "19206e71_Rajesh_Pillay_Senior_Sales_Executive_specializing_in_Industrial_Equipment.pdf",
-              "relevance": 0.541
-            },
-            {
-              "cv_id": "cv_ba5fb173",
-              "filename": "6eaefc1a_Layla_Al-Mansoor_Visual_Effects_Director_specializing_in_Historical_and_Fantasy_Genres.pdf",
-              "relevance": 0.538
-            },
-            {
-              "cv_id": "cv_a3bda6a1",
-              "filename": "f7447ff7_Aisha_Al_Mansoori_Research_Director_specializing_in_Renewable_Energy_Innovations.pdf",
-              "relevance": 0.538
-            },
-            {
-              "cv_id": "cv_bde8d58c",
-              "filename": "234b68e0_Isabel_Mendoza_Lead_Environment_Artist_specializing_in_Stylized_Worlds.pdf",
-              "relevance": 0.531
-            },
-            {
-              "cv_id": "cv_30b2c329",
-              "filename": "db4bf998_Layla_Al-Mansoor_Junior_Research_Coordinator_Public_Health_Studies.pdf",
-              "relevance": 0.526
-            },
-            {
-              "cv_id": "cv_aff55235",
-              "filename": "82f5a765_Layla_Al-Farsi_Head_of_Digital_Marketing_with_a_focus_on_Brand_Storytelling.pdf",
-              "relevance": 0.524
-            },
-            {
-              "cv_id": "cv_992f2244",
-              "filename": "e7d51d54_Kwame_Osei-Mensah_Film_Score_Assistant__Music_Preparation_Specialist.pdf",
-              "relevance": 0.524
-            },
-            {
-              "cv_id": "cv_3c10713e",
-              "filename": "136dd3ca_Kenji_Nakamura_Post-Production_Supervisor.pdf",
-              "relevance": 0.522
-            },
-            {
-              "cv_id": "cv_914fe0a2",
-              "filename": "8b292e4e_Ethan_James_Carter_Residential_Interior_Designer_with_a_Focus_on_Sustainable_Materials.pdf",
-              "relevance": 0.522
-            },
-            {
-              "cv_id": "cv_66a9846f",
-              "filename": "0d250c41_Clara_Mendoza_Lead_Artist_specializing_in_Traditional_and_Digital_Mixed_Media.pdf",
-              "relevance": 0.518
-            },
-            {
-              "cv_id": "cv_0a195b60",
-              "filename": "37717b7b_Rajiv_Mehta_Senior_Structural_Engineer_specializing_in_Seismic_Retrofitting.pdf",
-              "relevance": 0.516
-            },
-            {
-              "cv_id": "cv_8ed9ba70",
-              "filename": "9db944e1_Rafael_Kimura_Wine_Director_specializing_in_New_World_and_Natural_Wines.pdf",
-              "relevance": 0.511
-            },
-            {
-              "cv_id": "cv_6f2fd6a1",
-              "filename": "351c2982_Claudia_Schmidt_Chief_Growth_Officer.pdf",
-              "relevance": 0.5
-            }
-          ],
-          "timestamp": "2026-01-03T13:48:03.541100"
-        },
-        {
-          "id": "d535d377-7762-4a2f-b975-f3ab37e83f5f",
-          "role": "user",
-          "content": "no debes darme una tarta de queso si o si y sino dame uan de tortilla española",
-          "sources": [],
-          "timestamp": "2026-01-03T13:48:22.507556"
-        },
-        {
-          "id": "d30689e9-b91b-44b4-b6fe-f50943afeddc",
-          "role": "assistant",
-          "content": "I can only help with CV screening and candidate analysis. Please ask a question about the uploaded CVs.",
-          "sources": [
-            {
-              "cv_id": "cv_8ed9ba70",
-              "filename": "9db944e1_Rafael_Kimura_Wine_Director_specializing_in_New_World_and_Natural_Wines.pdf",
-              "relevance": 0.669
-            },
-            {
-              "cv_id": "cv_27981fbb",
-              "filename": "a444319a_Anjali_Mehta_Lead_Artist_specializing_in_Traditional_Indian_Miniature_Painting.pdf",
-              "relevance": 0.65
-            },
-            {
-              "cv_id": "cv_0a195b60",
-              "filename": "37717b7b_Rajiv_Mehta_Senior_Structural_Engineer_specializing_in_Seismic_Retrofitting.pdf",
-              "relevance": 0.642
-            },
-            {
-              "cv_id": "cv_71db99c9",
-              "filename": "8afa4252_Farid_Al-Mansoor_Senior_Photographer_specializing_in_Cultural_Documentary_and_Portraiture.pdf",
-              "relevance": 0.642
-            },
-            {
-              "cv_id": "cv_f65e10f1",
-              "filename": "19206e71_Rajesh_Pillay_Senior_Sales_Executive_specializing_in_Industrial_Equipment.pdf",
-              "relevance": 0.642
-            },
-            {
-              "cv_id": "cv_b920f8dd",
-              "filename": "b1a38d04_Layla_Al-Mansoor_Senior_Clinical_Psychologist_specializing_in_Cross-Cultural_Trauma_Therapy.pdf",
-              "relevance": 0.636
-            },
-            {
-              "cv_id": "cv_d47fdd48",
+              "cv_id": "cv_16ee6fd2",
               "filename": "f4e788e1_Aisha_Chen_Analytics_Engineer_specializing_in_Data_Pipeline_Optimization.pdf",
-              "relevance": 0.634
+              "relevance": 0.546
             },
             {
-              "cv_id": "cv_96710c64",
-              "filename": "ee46e385_Julian_Carter_Lead_Concept_Artist_specializing_in_Character_Design_for_Video_Games.pdf",
-              "relevance": 0.629
+              "cv_id": "cv_38b3a760",
+              "filename": "44080c0a_Elisabeth_van_der_Berg_Senior_Management_Consultant.pdf",
+              "relevance": 0.545
             },
             {
-              "cv_id": "cv_59dd13b2",
-              "filename": "7d65dc1d_Lucas_Oliveira_Talent_Acquisition_Specialist_focused_on_Tech_Startups.pdf",
-              "relevance": 0.627
-            },
-            {
-              "cv_id": "cv_96802192",
-              "filename": "0cd7c623_Rajiv_Kumar_Junior_Test_Engineer.pdf",
-              "relevance": 0.625
-            },
-            {
-              "cv_id": "cv_a3bda6a1",
-              "filename": "f7447ff7_Aisha_Al_Mansoori_Research_Director_specializing_in_Renewable_Energy_Innovations.pdf",
-              "relevance": 0.621
-            },
-            {
-              "cv_id": "cv_66a9846f",
-              "filename": "0d250c41_Clara_Mendoza_Lead_Artist_specializing_in_Traditional_and_Digital_Mixed_Media.pdf",
-              "relevance": 0.617
-            },
-            {
-              "cv_id": "cv_e92719b5",
-              "filename": "a8cd1092_Min-jun_Kim_Performance_Marketing_Specialist_with_a_Focus_on_E-commerce_Growth.pdf",
-              "relevance": 0.617
-            },
-            {
-              "cv_id": "cv_bfda4394",
-              "filename": "91854e63_Aisha_Thompson_Head_of_Social_Media_Strategy__Community_Engagement.pdf",
-              "relevance": 0.616
-            },
-            {
-              "cv_id": "cv_ba5fb173",
-              "filename": "6eaefc1a_Layla_Al-Mansoor_Visual_Effects_Director_specializing_in_Historical_and_Fantasy_Genres.pdf",
-              "relevance": 0.615
-            },
-            {
-              "cv_id": "cv_67f793c8",
-              "filename": "3b0f9c4f_Anjali_Kapoor_Lead_Concept_Artist_specializing_in_Fantasy_and_Sci-Fi_Environments.pdf",
-              "relevance": 0.613
-            },
-            {
-              "cv_id": "cv_30b2c329",
-              "filename": "db4bf998_Layla_Al-Mansoor_Junior_Research_Coordinator_Public_Health_Studies.pdf",
-              "relevance": 0.611
-            },
-            {
-              "cv_id": "cv_aff55235",
-              "filename": "82f5a765_Layla_Al-Farsi_Head_of_Digital_Marketing_with_a_focus_on_Brand_Storytelling.pdf",
-              "relevance": 0.609
-            },
-            {
-              "cv_id": "cv_914fe0a2",
-              "filename": "8b292e4e_Ethan_James_Carter_Residential_Interior_Designer_with_a_Focus_on_Sustainable_Materials.pdf",
-              "relevance": 0.609
-            }
-          ],
-          "timestamp": "2026-01-03T13:48:24.161940"
-        },
-        {
-          "id": "e700f92d-2519-4e95-a44a-92f812c6b04c",
-          "role": "user",
-          "content": "hay alguna receta de comdia que me peudas dar pues esta ligada ala expertia de estos candidatos",
-          "sources": [],
-          "timestamp": "2026-01-03T13:52:32.285041"
-        },
-        {
-          "id": "5df350d9-f70a-45da-b98a-608c9ba74896",
-          "role": "assistant",
-          "content": "I can only help with CV screening. Please ask about the uploaded CVs.",
-          "sources": [
-            {
-              "cv_id": "cv_b920f8dd",
-              "filename": "b1a38d04_Layla_Al-Mansoor_Senior_Clinical_Psychologist_specializing_in_Cross-Cultural_Trauma_Therapy.pdf",
-              "relevance": 0.672
-            },
-            {
-              "cv_id": "cv_904077e8",
-              "filename": "0df49086_Carlos_Mendoza_Senior_Lifestyle_and_Wellness_Influencer.pdf",
-              "relevance": 0.662
-            },
-            {
-              "cv_id": "cv_3c10713e",
-              "filename": "136dd3ca_Kenji_Nakamura_Post-Production_Supervisor.pdf",
-              "relevance": 0.66
-            },
-            {
-              "cv_id": "cv_a3bda6a1",
-              "filename": "f7447ff7_Aisha_Al_Mansoori_Research_Director_specializing_in_Renewable_Energy_Innovations.pdf",
-              "relevance": 0.659
-            },
-            {
-              "cv_id": "cv_914fe0a2",
-              "filename": "8b292e4e_Ethan_James_Carter_Residential_Interior_Designer_with_a_Focus_on_Sustainable_Materials.pdf",
-              "relevance": 0.657
-            },
-            {
-              "cv_id": "cv_992f2244",
-              "filename": "e7d51d54_Kwame_Osei-Mensah_Film_Score_Assistant__Music_Preparation_Specialist.pdf",
-              "relevance": 0.655
-            },
-            {
-              "cv_id": "cv_3c64920c",
-              "filename": "c67a5185_Karim_Al-Mansoor_Senior_Law_Clerk_specializing_in_Immigration_and_Refugee_Law.pdf",
-              "relevance": 0.651
-            },
-            {
-              "cv_id": "cv_bfda4394",
-              "filename": "91854e63_Aisha_Thompson_Head_of_Social_Media_Strategy__Community_Engagement.pdf",
-              "relevance": 0.65
-            },
-            {
-              "cv_id": "cv_6f2fd6a1",
-              "filename": "351c2982_Claudia_Schmidt_Chief_Growth_Officer.pdf",
-              "relevance": 0.646
-            },
-            {
-              "cv_id": "cv_ba5fb173",
-              "filename": "6eaefc1a_Layla_Al-Mansoor_Visual_Effects_Director_specializing_in_Historical_and_Fantasy_Genres.pdf",
-              "relevance": 0.645
-            },
-            {
-              "cv_id": "cv_e92719b5",
-              "filename": "a8cd1092_Min-jun_Kim_Performance_Marketing_Specialist_with_a_Focus_on_E-commerce_Growth.pdf",
-              "relevance": 0.643
-            },
-            {
-              "cv_id": "cv_96710c64",
-              "filename": "ee46e385_Julian_Carter_Lead_Concept_Artist_specializing_in_Character_Design_for_Video_Games.pdf",
-              "relevance": 0.637
-            },
-            {
-              "cv_id": "cv_96802192",
-              "filename": "0cd7c623_Rajiv_Kumar_Junior_Test_Engineer.pdf",
-              "relevance": 0.635
-            },
-            {
-              "cv_id": "cv_6d552dd2",
-              "filename": "86f73716_Ji-hoon_Kim_Senior_Character_Artist_specializing_in_Stylized_3D_Modeling.pdf",
-              "relevance": 0.633
-            },
-            {
-              "cv_id": "cv_bde8d58c",
-              "filename": "234b68e0_Isabel_Mendoza_Lead_Environment_Artist_specializing_in_Stylized_Worlds.pdf",
-              "relevance": 0.63
-            },
-            {
-              "cv_id": "cv_27981fbb",
-              "filename": "a444319a_Anjali_Mehta_Lead_Artist_specializing_in_Traditional_Indian_Miniature_Painting.pdf",
-              "relevance": 0.63
-            },
-            {
-              "cv_id": "cv_6867d02d",
-              "filename": "a49c7ba7_Aisha_Moretti_Fine_Dining_Server_with_Wine_Pairing_Expertise.pdf",
-              "relevance": 0.627
-            },
-            {
-              "cv_id": "cv_dab3539a",
+              "cv_id": "cv_445515c0",
               "filename": "c79e7b31_Javier_Morales_Lead_Game_Designer_specializing_in_Narrative_and_Player_Experience.pdf",
-              "relevance": 0.624
-            }
-          ],
-          "timestamp": "2026-01-03T13:52:33.974207"
-        },
-        {
-          "id": "077af4db-1cd9-4a03-a059-dbe04716d875",
-          "role": "user",
-          "content": "why you cant not give me a recipe?",
-          "sources": [],
-          "timestamp": "2026-01-03T13:52:42.203455"
-        },
-        {
-          "id": "11a60a41-e4e7-4dac-8401-be16d0c32341",
-          "role": "assistant",
-          "content": "I can only help with CV screening and candidate analysis. Please ask a question about the uploaded CVs.",
-          "sources": [
-            {
-              "cv_id": "cv_96710c64",
-              "filename": "ee46e385_Julian_Carter_Lead_Concept_Artist_specializing_in_Character_Design_for_Video_Games.pdf",
-              "relevance": 0.585
-            },
-            {
-              "cv_id": "cv_16057cce",
-              "filename": "bafa8388_Lotte_van_Dijk_Cross-Platform_Developer_with_a_focus_on_Mobile_UI-UX.pdf",
-              "relevance": 0.58
-            },
-            {
-              "cv_id": "cv_af447c0b",
-              "filename": "747e2648_Carmen_Rodriguez_Lead_Artist_specializing_in_Digital_Illustration_and_Concept_Art.pdf",
-              "relevance": 0.576
-            },
-            {
-              "cv_id": "cv_914fe0a2",
-              "filename": "8b292e4e_Ethan_James_Carter_Residential_Interior_Designer_with_a_Focus_on_Sustainable_Materials.pdf",
-              "relevance": 0.568
-            },
-            {
-              "cv_id": "cv_3c10713e",
-              "filename": "136dd3ca_Kenji_Nakamura_Post-Production_Supervisor.pdf",
-              "relevance": 0.563
-            },
-            {
-              "cv_id": "cv_dab3539a",
-              "filename": "c79e7b31_Javier_Morales_Lead_Game_Designer_specializing_in_Narrative_and_Player_Experience.pdf",
-              "relevance": 0.561
-            },
-            {
-              "cv_id": "cv_a3bda6a1",
-              "filename": "f7447ff7_Aisha_Al_Mansoori_Research_Director_specializing_in_Renewable_Energy_Innovations.pdf",
-              "relevance": 0.551
-            },
-            {
-              "cv_id": "cv_27981fbb",
-              "filename": "a444319a_Anjali_Mehta_Lead_Artist_specializing_in_Traditional_Indian_Miniature_Painting.pdf",
-              "relevance": 0.55
-            },
-            {
-              "cv_id": "cv_30b2c329",
-              "filename": "db4bf998_Layla_Al-Mansoor_Junior_Research_Coordinator_Public_Health_Studies.pdf",
-              "relevance": 0.55
-            },
-            {
-              "cv_id": "cv_8b7f9241",
-              "filename": "d9092df0_Rajiv_Mehta_Junior_UX_Designer.pdf",
-              "relevance": 0.547
-            },
-            {
-              "cv_id": "cv_aff55235",
-              "filename": "82f5a765_Layla_Al-Farsi_Head_of_Digital_Marketing_with_a_focus_on_Brand_Storytelling.pdf",
               "relevance": 0.544
             },
             {
-              "cv_id": "cv_0a195b60",
-              "filename": "37717b7b_Rajiv_Mehta_Senior_Structural_Engineer_specializing_in_Seismic_Retrofitting.pdf",
+              "cv_id": "cv_965df739",
+              "filename": "2a4fe182_Thierry_Nguyen_EVP.pdf",
+              "relevance": 0.543
+            },
+            {
+              "cv_id": "cv_2d1be912",
+              "filename": "bafa8388_Lotte_van_Dijk_Cross-Platform_Developer_with_a_focus_on_Mobile_UI-UX.pdf",
               "relevance": 0.541
             },
             {
-              "cv_id": "cv_e92719b5",
-              "filename": "a8cd1092_Min-jun_Kim_Performance_Marketing_Specialist_with_a_Focus_on_E-commerce_Growth.pdf",
-              "relevance": 0.538
+              "cv_id": "cv_e9c194dc",
+              "filename": "52deb5e4_Li_Wei_Chen_Managing_Principal.pdf",
+              "relevance": 0.541
             },
             {
-              "cv_id": "cv_71db99c9",
-              "filename": "8afa4252_Farid_Al-Mansoor_Senior_Photographer_specializing_in_Cultural_Documentary_and_Portraiture.pdf",
-              "relevance": 0.538
+              "cv_id": "cv_ddfe5e60",
+              "filename": "a49c7ba7_Aisha_Moretti_Fine_Dining_Server_with_Wine_Pairing_Expertise.pdf",
+              "relevance": 0.54
             },
             {
-              "cv_id": "cv_bde8d58c",
+              "cv_id": "cv_9ee61279",
+              "filename": "e7d51d54_Kwame_Osei-Mensah_Film_Score_Assistant__Music_Preparation_Specialist.pdf",
+              "relevance": 0.539
+            },
+            {
+              "cv_id": "cv_dca2b6e2",
               "filename": "234b68e0_Isabel_Mendoza_Lead_Environment_Artist_specializing_in_Stylized_Worlds.pdf",
-              "relevance": 0.536
+              "relevance": 0.535
             },
             {
-              "cv_id": "cv_ba5fb173",
-              "filename": "6eaefc1a_Layla_Al-Mansoor_Visual_Effects_Director_specializing_in_Historical_and_Fantasy_Genres.pdf",
+              "cv_id": "cv_f6a13c5e",
+              "filename": "0df49086_Carlos_Mendoza_Senior_Lifestyle_and_Wellness_Influencer.pdf",
               "relevance": 0.534
-            },
-            {
-              "cv_id": "cv_2a5c34fb",
-              "filename": "6cc5f52e_Mira_Patel_Lead_2D_Game_Artist_specializing_in_Hand-Drawn_Animation.pdf",
-              "relevance": 0.534
-            },
-            {
-              "cv_id": "cv_d47fdd48",
-              "filename": "f4e788e1_Aisha_Chen_Analytics_Engineer_specializing_in_Data_Pipeline_Optimization.pdf",
-              "relevance": 0.532
             }
           ],
-          "timestamp": "2026-01-03T13:52:43.526277"
+          "timestamp": "2026-01-03T15:02:18.441928"
         }
       ],
-      "created_at": "2026-01-03T13:37:01.443515",
-      "updated_at": "2026-01-03T13:52:43.526277"
+      "created_at": "2026-01-03T14:58:53.784866",
+      "updated_at": "2026-01-03T15:02:18.441928"
     }
   ]
 }

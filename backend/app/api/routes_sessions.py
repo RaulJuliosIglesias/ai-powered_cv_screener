@@ -17,7 +17,7 @@ PDF_STORAGE_DIR = _PROJECT_ROOT / "storage"
 PDF_STORAGE_DIR.mkdir(exist_ok=True)
 from app.models.sessions import session_manager, Session, ChatMessage, CVInfo
 from app.providers.cloud.sessions import supabase_session_manager
-from app.services.rag_service_v2 import RAGService
+from app.services.rag_service_v3 import RAGServiceV3 as RAGService
 from app.services.chunking_service import ChunkingService
 
 
@@ -93,6 +93,8 @@ class ChatResponse(BaseModel):
     response: str
     sources: List[dict] = Field(default_factory=list)
     metrics: dict = Field(default_factory=dict)
+    confidence_score: Optional[float] = None
+    guardrail_passed: Optional[bool] = None
 
 
 class UploadResponse(BaseModel):
@@ -428,9 +430,14 @@ async def chat_in_session(
     # Save user message
     mgr.add_message(session_id, "user", request.message)
     
-    # Query RAG with session's CVs only - pass total CVs for accurate context
+    # Query RAG with session's CVs only - pass session_id for logging
     rag_service = RAGService(mode)
-    result = await rag_service.query(request.message, cv_ids=cv_ids, total_cvs_in_session=total_cvs)
+    result = await rag_service.query(
+        question=request.message, 
+        session_id=session_id,
+        cv_ids=cv_ids, 
+        total_cvs_in_session=total_cvs
+    )
     
     # Save assistant message
     mgr.add_message(session_id, "assistant", result.answer, result.sources)
@@ -438,7 +445,9 @@ async def chat_in_session(
     return ChatResponse(
         response=result.answer,
         sources=result.sources,
-        metrics=result.metrics
+        metrics=result.metrics,
+        confidence_score=result.confidence_score,
+        guardrail_passed=result.guardrail_passed
     )
 
 

@@ -1,8 +1,15 @@
+"""
+Local Vector Store with JSON persistence.
+
+This module provides persistent vector storage using JSON files with
+cosine similarity search. Works without external dependencies.
+"""
 import json
 import os
 import math
 import logging
-from typing import List, Dict, Any
+from pathlib import Path
+from typing import List, Dict, Any, Optional
 from app.providers.base import VectorStoreProvider, SearchResult
 from app.config import settings
 
@@ -10,99 +17,144 @@ logger = logging.getLogger(__name__)
 
 
 class SimpleVectorStore(VectorStoreProvider):
-    """Simple in-memory vector store with JSON persistence. No external dependencies."""
+    """
+    Simple vector store with JSON persistence.
+    
+    Features:
+    - No external dependencies (pure Python)
+    - JSON persistence to disk
+    - Cosine similarity search
+    - Metadata filtering support
+    """
     
     def __init__(self):
-        self.storage_path = os.path.join(settings.chroma_persist_dir, "vectors.json")
-        os.makedirs(settings.chroma_persist_dir, exist_ok=True)
-        self.documents: List[Dict[str, Any]] = []
-        self.embeddings: List[List[float]] = []
+        self._persist_dir = Path(settings.chroma_persist_dir)
+        self._persist_dir.mkdir(parents=True, exist_ok=True)
+        self._storage_file = self._persist_dir / "vectors.json"
+        self._documents: List[Dict[str, Any]] = []
+        self._embeddings: List[List[float]] = []
         self._load()
-        logger.info(f"SimpleVectorStore initialized with {len(self.documents)} documents")
+        logger.info(f"SimpleVectorStore initialized. Documents: {len(self._documents)}")
     
     def _load(self):
-        """Load from disk."""
-        if os.path.exists(self.storage_path):
+        """Load data from disk."""
+        if self._storage_file.exists():
             try:
-                with open(self.storage_path, 'r', encoding='utf-8') as f:
+                with open(self._storage_file, 'r', encoding='utf-8') as f:
                     data = json.load(f)
-                    self.documents = data.get("documents", [])
-                    self.embeddings = data.get("embeddings", [])
+                    self._documents = data.get("documents", [])
+                    self._embeddings = data.get("embeddings", [])
+                logger.debug(f"Loaded {len(self._documents)} documents from disk")
             except Exception as e:
                 logger.warning(f"Failed to load vector store: {e}")
-                self.documents = []
-                self.embeddings = []
+                self._documents = []
+                self._embeddings = []
     
     def _save(self):
-        """Save to disk."""
+        """Save data to disk."""
         try:
-            with open(self.storage_path, 'w', encoding='utf-8') as f:
+            with open(self._storage_file, 'w', encoding='utf-8') as f:
                 json.dump({
-                    "documents": self.documents,
-                    "embeddings": self.embeddings
-                }, f)
+                    "documents": self._documents,
+                    "embeddings": self._embeddings
+                }, f, ensure_ascii=False)
+            logger.debug(f"Saved {len(self._documents)} documents to disk")
         except Exception as e:
             logger.error(f"Failed to save vector store: {e}")
     
     def _cosine_similarity(self, a: List[float], b: List[float]) -> float:
         """Calculate cosine similarity between two vectors."""
-        dot = sum(x * y for x, y in zip(a, b))
-        norm_a = math.sqrt(sum(x * x for x in a))
-        norm_b = math.sqrt(sum(x * x for x in b))
-        if norm_a == 0 or norm_b == 0:
+        # Ensure both are flat lists of floats
+        if isinstance(a[0], list):
+            a = a[0]  # Flatten if nested
+        if isinstance(b[0], list):
+            b = b[0]  # Flatten if nested
+        
+        if len(a) != len(b):
+            # Handle dimension mismatch by padding/truncating
+            min_len = min(len(a), len(b))
+            a = a[:min_len]
+            b = b[:min_len]
+        
+        try:
+            dot = sum(float(x) * float(y) for x, y in zip(a, b))
+            norm_a = math.sqrt(sum(float(x) * float(x) for x in a))
+            norm_b = math.sqrt(sum(float(x) * float(x) for x in b))
+            
+            if norm_a == 0 or norm_b == 0:
+                return 0.0
+            return dot / (norm_a * norm_b)
+        except (TypeError, ValueError) as e:
+            logger.error(f"Error calculating similarity: {e}. Types: a[0]={type(a[0])}, b[0]={type(b[0])}")
             return 0.0
-        return dot / (norm_a * norm_b)
     
     async def add_documents(
         self,
         documents: List[Dict[str, Any]],
         embeddings: List[List[float]]
     ) -> None:
+        """Add documents with embeddings."""
         if not documents:
             return
         
+        # Build index of existing docs by ID for upsert
+        existing_ids = {doc["id"]: i for i, doc in enumerate(self._documents)}
+        
         for doc, emb in zip(documents, embeddings):
-            self.documents.append({
+            doc_data = {
                 "id": doc["id"],
                 "cv_id": doc["cv_id"],
                 "filename": doc["filename"],
                 "content": doc["content"],
                 "chunk_index": doc["chunk_index"],
                 "metadata": doc.get("metadata", {})
-            })
-            self.embeddings.append(emb)
+            }
+            
+            if doc["id"] in existing_ids:
+                # Update existing
+                idx = existing_ids[doc["id"]]
+                self._documents[idx] = doc_data
+                self._embeddings[idx] = emb
+            else:
+                # Add new
+                self._documents.append(doc_data)
+                self._embeddings.append(emb)
         
         self._save()
-        logger.info(f"Added {len(documents)} documents. Total: {len(self.documents)}")
+        logger.info(f"Added/updated {len(documents)} documents. Total: {len(self._documents)}")
     
     async def search(
         self,
         embedding: List[float],
-        k: int = 5,
+        k: int = 10,
         threshold: float = 0.3,
-        cv_ids: List[str] = None
+        cv_ids: Optional[List[str]] = None
     ) -> List[SearchResult]:
-        if not self.documents:
+        """Search for similar documents."""
+        if not self._documents:
+            logger.warning("Search on empty store")
             return []
         
         # Calculate similarities
         similarities = []
-        for i, emb in enumerate(self.embeddings):
-            doc = self.documents[i]
+        for i, emb in enumerate(self._embeddings):
+            doc = self._documents[i]
+            
             # Filter by cv_ids if provided
-            if cv_ids is not None and doc["cv_id"] not in cv_ids:
+            if cv_ids and doc["cv_id"] not in cv_ids:
                 continue
+            
             sim = self._cosine_similarity(embedding, emb)
             if sim >= threshold:
                 similarities.append((i, sim))
         
-        # Sort by similarity
+        # Sort by similarity descending
         similarities.sort(key=lambda x: x[1], reverse=True)
         
-        # Return top k
+        # Build results
         results = []
         for idx, sim in similarities[:k]:
-            doc = self.documents[idx]
+            doc = self._documents[idx]
             results.append(SearchResult(
                 id=doc["id"],
                 cv_id=doc["cv_id"],
@@ -112,35 +164,46 @@ class SimpleVectorStore(VectorStoreProvider):
                 metadata=doc.get("metadata", {})
             ))
         
+        logger.debug(f"Search returned {len(results)} results (threshold={threshold})")
         return results
     
     async def delete_cv(self, cv_id: str) -> bool:
+        """Delete all chunks for a CV."""
         try:
             indices_to_remove = [
-                i for i, doc in enumerate(self.documents)
+                i for i, doc in enumerate(self._documents)
                 if doc["cv_id"] == cv_id
             ]
+            
+            # Remove in reverse order to maintain indices
             for idx in reversed(indices_to_remove):
-                del self.documents[idx]
-                del self.embeddings[idx]
+                del self._documents[idx]
+                del self._embeddings[idx]
+            
             self._save()
+            logger.info(f"Deleted {len(indices_to_remove)} chunks for CV {cv_id}")
             return True
-        except Exception:
+        except Exception as e:
+            logger.error(f"Failed to delete CV {cv_id}: {e}")
             return False
     
     async def delete_all_cvs(self) -> bool:
-        """Delete all CVs and embeddings."""
+        """Delete all documents."""
         try:
-            self.documents = []
-            self.embeddings = []
+            count = len(self._documents)
+            self._documents = []
+            self._embeddings = []
             self._save()
+            logger.info(f"Deleted all {count} documents")
             return True
-        except Exception:
+        except Exception as e:
+            logger.error(f"Failed to delete all CVs: {e}")
             return False
     
     async def list_cvs(self) -> List[Dict[str, Any]]:
+        """List all unique CVs with their chunk counts."""
         cvs = {}
-        for doc in self.documents:
+        for doc in self._documents:
             cv_id = doc["cv_id"]
             if cv_id not in cvs:
                 cvs[cv_id] = {
@@ -152,11 +215,13 @@ class SimpleVectorStore(VectorStoreProvider):
         return list(cvs.values())
     
     async def get_stats(self) -> Dict[str, Any]:
+        """Get vector store statistics."""
         cvs = await self.list_cvs()
         return {
-            "total_chunks": len(self.documents),
+            "total_chunks": len(self._documents),
             "total_cvs": len(cvs),
-            "storage_type": "simple_json"
+            "storage_type": "json",
+            "persist_dir": str(self._persist_dir)
         }
 
 
