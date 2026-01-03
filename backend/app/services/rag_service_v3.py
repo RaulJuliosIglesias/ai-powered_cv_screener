@@ -21,6 +21,8 @@ from app.services.guardrail_service import GuardrailService, GuardrailResult
 from app.services.hallucination_service import HallucinationService, HallucinationCheckResult
 from app.services.eval_service import EvalService
 from app.services.query_understanding_service import QueryUnderstandingService, QueryUnderstanding
+from app.services.reranking_service import RerankingService, RerankResult
+from app.services.verification_service import LLMVerificationService, VerificationResult
 
 logger = logging.getLogger(__name__)
 
@@ -35,28 +37,36 @@ class RAGResponse:
     guardrail_passed: bool
     hallucination_check: Dict[str, Any] = field(default_factory=dict)
     query_understanding: Dict[str, Any] = field(default_factory=dict)
+    reranking_info: Dict[str, Any] = field(default_factory=dict)
+    verification_info: Dict[str, Any] = field(default_factory=dict)
     mode: str = "local"
 
 
 class RAGServiceV3:
     """
-    RAG Service v3 with complete 2-step pipeline.
+    RAG Service v3 with complete multi-step pipeline.
     
     Pipeline:
     1. Query Understanding → Understand and reformulate query (fast model)
     2. Guardrail Check → Reject off-topic questions
     3. Embed Query → Generate query embedding
     4. Vector Search → Find relevant CV chunks
-    5. LLM Generation → Generate response (main model)
-    6. Hallucination Check → Verify response against CVs
-    7. Logging → Record for evaluation
+    5. Re-ranking → Reorder results by LLM relevance scoring (NEW)
+    6. LLM Generation → Generate response (main model)
+    7. LLM Verification → Verify response is grounded (NEW)
+    8. Hallucination Check → Heuristic verification
+    9. Logging → Record for evaluation
     """
     
     def __init__(
         self, 
         mode: Mode = Mode.LOCAL,
         understanding_model: Optional[str] = None,
-        generation_model: Optional[str] = None
+        reranking_model: Optional[str] = None,
+        generation_model: Optional[str] = None,
+        verification_model: Optional[str] = None,
+        reranking_enabled: bool = True,
+        verification_enabled: bool = True
     ):
         """
         Initialize RAG Service v3.
@@ -64,7 +74,11 @@ class RAGServiceV3:
         Args:
             mode: Operating mode (local or cloud)
             understanding_model: Model for query understanding (Step 1)
-            generation_model: Model for response generation (Step 2)
+            reranking_model: Model for re-ranking results (Step 2)
+            generation_model: Model for response generation (Step 3)
+            verification_model: Model for response verification (Step 4)
+            reranking_enabled: Whether to enable re-ranking step
+            verification_enabled: Whether to enable LLM verification step
         """
         self.mode = mode
         
@@ -79,13 +93,17 @@ class RAGServiceV3:
         
         # Additional services
         self.query_understanding = QueryUnderstandingService(model=understanding_model)
+        self.reranking = RerankingService(model=reranking_model, enabled=reranking_enabled)
+        self.verification = LLMVerificationService(model=verification_model, enabled=verification_enabled)
         self.guardrail = GuardrailService()
         self.hallucination = HallucinationService()
         self.eval = EvalService()
         
         logger.info(f"RAGServiceV3 initialized in {mode.value} mode")
         logger.info(f"  Understanding model: {self.query_understanding.model}")
+        logger.info(f"  Reranking model: {self.reranking.model} (enabled: {reranking_enabled})")
         logger.info(f"  Generation model: {self.llm.model}")
+        logger.info(f"  Verification model: {self.verification.model} (enabled: {verification_enabled})")
     
     async def query(
         self,
@@ -235,12 +253,30 @@ class RAGServiceV3:
             )
         
         # ═══════════════════════════════════════════════════════════════
-        # STEP 4: BUILD CONTEXT AND GENERATE RESPONSE
+        # STEP 4: RE-RANKING (NEW)
         # ═══════════════════════════════════════════════════════════════
-        chunks = self._results_to_chunks(search_results)
+        # Re-rank ALL results (don't truncate with top_k) to preserve context
+        rerank_result = await self.reranking.rerank(
+            query=effective_question,
+            results=search_results,
+            top_k=None  # Return all results, just reordered
+        )
+        metrics["reranking_ms"] = rerank_result.latency_ms
+        metrics["reranking_enabled"] = rerank_result.enabled
+        metrics["reranking_model"] = rerank_result.model_used
+        
+        # Use reranked results if available
+        final_results = rerank_result.reranked_results if rerank_result.enabled else search_results
+        
+        logger.debug(f"Reranking completed in {metrics['reranking_ms']:.1f}ms (enabled: {rerank_result.enabled})")
+        
+        # ═══════════════════════════════════════════════════════════════
+        # STEP 5: BUILD CONTEXT AND GENERATE RESPONSE
+        # ═══════════════════════════════════════════════════════════════
+        chunks = self._results_to_chunks(final_results)
         
         # Calculate total CVs for context
-        unique_cv_ids = set(r.cv_id for r in search_results)
+        unique_cv_ids = set(r.cv_id for r in final_results)
         total_cvs = total_cvs_in_session or len(cv_ids) if cv_ids else len(unique_cv_ids)
         
         # Use the reformulated question for better LLM understanding
@@ -262,11 +298,25 @@ class RAGServiceV3:
         logger.debug(f"LLM generated response in {metrics['llm_ms']:.1f}ms")
         
         # ═══════════════════════════════════════════════════════════════
-        # STEP 5: HALLUCINATION CHECK
+        # STEP 6: LLM VERIFICATION (NEW)
+        # ═══════════════════════════════════════════════════════════════
+        verification_result = await self.verification.verify(
+            response=llm_result.text,
+            context_chunks=chunks,
+            query=effective_question
+        )
+        metrics["verification_ms"] = verification_result.latency_ms
+        metrics["verification_enabled"] = verification_result.enabled
+        metrics["verification_model"] = verification_result.model_used
+        
+        logger.debug(f"Verification completed in {metrics['verification_ms']:.1f}ms (enabled: {verification_result.enabled})")
+        
+        # ═══════════════════════════════════════════════════════════════
+        # STEP 7: HALLUCINATION CHECK (Heuristic)
         # ═══════════════════════════════════════════════════════════════
         cv_metadata = [
             {"cv_id": r.cv_id, "filename": r.filename}
-            for r in search_results
+            for r in final_results
         ]
         
         hallucination_start = time.perf_counter()
@@ -277,15 +327,22 @@ class RAGServiceV3:
         )
         metrics["hallucination_check_ms"] = (time.perf_counter() - hallucination_start) * 1000
         
+        # Combine LLM verification with heuristic hallucination check
+        combined_confidence = (
+            verification_result.groundedness_score * 0.6 + 
+            hallucination_result.confidence_score * 0.4
+        ) if verification_result.enabled else hallucination_result.confidence_score
+        
         # Prepare answer with optional warning
         answer = llm_result.text
-        if hallucination_result.warnings and not hallucination_result.is_valid:
+        if (not verification_result.is_grounded and verification_result.enabled) or \
+           (hallucination_result.warnings and not hallucination_result.is_valid):
             answer += "\n\n⚠️ *Some information could not be fully verified against the CVs.*"
         
         # ═══════════════════════════════════════════════════════════════
-        # STEP 6: EXTRACT SOURCES AND FINALIZE
+        # STEP 8: EXTRACT SOURCES AND FINALIZE
         # ═══════════════════════════════════════════════════════════════
-        sources = self._extract_unique_sources(search_results)
+        sources = self._extract_unique_sources(final_results)
         
         metrics["total_ms"] = (time.perf_counter() - total_start) * 1000
         
@@ -299,7 +356,7 @@ class RAGServiceV3:
         }
         
         # ═══════════════════════════════════════════════════════════════
-        # STEP 7: LOG FOR EVALUATION
+        # STEP 9: LOG FOR EVALUATION
         # ═══════════════════════════════════════════════════════════════
         self.eval.log_query(
             query=question,
@@ -327,14 +384,35 @@ class RAGServiceV3:
             "reformulated_prompt": query_understanding.reformulated_prompt
         }
         
+        # Convert reranking result to dict
+        reranking_dict = {
+            "enabled": rerank_result.enabled,
+            "model": rerank_result.model_used,
+            "latency_ms": rerank_result.latency_ms,
+            "scores": rerank_result.scores
+        }
+        
+        # Convert verification result to dict
+        verification_dict = {
+            "enabled": verification_result.enabled,
+            "model": verification_result.model_used,
+            "is_grounded": verification_result.is_grounded,
+            "groundedness_score": verification_result.groundedness_score,
+            "verified_claims": verification_result.verified_claims,
+            "ungrounded_claims": verification_result.ungrounded_claims,
+            "latency_ms": verification_result.latency_ms
+        }
+        
         return RAGResponse(
             answer=answer,
             sources=sources,
             metrics=metrics,
-            confidence_score=hallucination_result.confidence_score,
+            confidence_score=combined_confidence,
             guardrail_passed=True,
             hallucination_check=hallucination_dict,
             query_understanding=query_understanding_dict,
+            reranking_info=reranking_dict,
+            verification_info=verification_dict,
             mode=self.mode.value
         )
     

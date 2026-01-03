@@ -340,7 +340,7 @@ function App() {
         console.log('📊 RAG Pipeline - Metrics:', response.metrics);
       }
       
-      // Save metrics to history
+      // Save metrics to history (including new reranking and verification info)
       saveMetricEntry({
         query: userMessage,
         mode: mode,
@@ -348,6 +348,8 @@ function App() {
         confidence_score: response.confidence_score,
         guardrail_passed: response.guardrail_passed,
         query_understanding: response.query_understanding,
+        reranking_info: response.reranking_info,
+        verification_info: response.verification_info,
         session_id: targetSessionId,
       });
       window.dispatchEvent(new Event('metrics-updated'));

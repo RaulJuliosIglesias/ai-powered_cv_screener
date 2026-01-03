@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BarChart3, X, Clock, Zap, Search, Brain, Shield, AlertTriangle, DollarSign, Trash2, ChevronDown, ChevronUp, Database, Cloud } from 'lucide-react';
+import { BarChart3, X, Clock, Zap, Search, Brain, Shield, AlertTriangle, DollarSign, Trash2, ChevronDown, ChevronUp, Database, Cloud, Shuffle, ShieldCheck, MessageSquare } from 'lucide-react';
 
 const STORAGE_KEY = 'cv-screener-metrics-history';
 const MAX_HISTORY = 50;
@@ -117,9 +117,21 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
           <div className="grid grid-cols-2 gap-x-4">
             <div>
               <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Latencies</div>
-              <MetricRow icon={Zap} label="Embed" value={formatMs(metrics.embed_ms)} color="text-purple-400" />
+              <MetricRow icon={Zap} label="Understand" value={formatMs(metrics.understanding_ms)} color="text-amber-400" />
               <MetricRow icon={Search} label="Search" value={formatMs(metrics.search_ms)} color="text-blue-400" />
-              <MetricRow icon={Brain} label="LLM" value={formatMs(metrics.llm_ms)} color="text-amber-400" />
+              <MetricRow 
+                icon={Shuffle} 
+                label="Rerank" 
+                value={metrics.reranking_enabled === false ? 'OFF' : formatMs(metrics.reranking_ms)} 
+                color={metrics.reranking_enabled === false ? 'text-gray-500' : 'text-purple-400'} 
+              />
+              <MetricRow icon={MessageSquare} label="LLM" value={formatMs(metrics.llm_ms)} color="text-cyan-400" />
+              <MetricRow 
+                icon={ShieldCheck} 
+                label="Verify" 
+                value={metrics.verification_enabled === false ? 'OFF' : formatMs(metrics.verification_ms)} 
+                color={metrics.verification_enabled === false ? 'text-gray-500' : 'text-green-400'} 
+              />
               <MetricRow icon={Clock} label="Total" value={formatMs(metrics.total_ms)} color="text-white" />
             </div>
             <div>
@@ -157,6 +169,62 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
                   <div className="flex gap-2">
                     <span className="text-gray-500">Understood:</span>
                     <span className="text-gray-300 truncate">{entry.query_understanding.understood_query}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+          
+          {/* Pipeline Models Used */}
+          {(metrics.reranking_model || metrics.verification_model) && (
+            <div className="mt-2 pt-2 border-t border-gray-700/50">
+              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Pipeline Models</div>
+              <div className="text-xs text-gray-300 bg-gray-900/50 rounded p-2 space-y-1">
+                {metrics.reranking_model && (
+                  <div className="flex items-center gap-2">
+                    <Shuffle size={10} className={metrics.reranking_enabled === false ? 'text-gray-500' : 'text-purple-400'} />
+                    <span className="text-gray-500">Rerank:</span>
+                    <span className={metrics.reranking_enabled === false ? 'text-gray-500' : 'text-purple-300'}>
+                      {metrics.reranking_enabled === false ? 'Disabled' : metrics.reranking_model.split('/').pop()}
+                    </span>
+                  </div>
+                )}
+                {metrics.verification_model && (
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck size={10} className={metrics.verification_enabled === false ? 'text-gray-500' : 'text-green-400'} />
+                    <span className="text-gray-500">Verify:</span>
+                    <span className={metrics.verification_enabled === false ? 'text-gray-500' : 'text-green-300'}>
+                      {metrics.verification_enabled === false ? 'Disabled' : metrics.verification_model.split('/').pop()}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+          
+          {/* Verification Results */}
+          {entry.verification_info && entry.verification_info.enabled && (
+            <div className="mt-2 pt-2 border-t border-gray-700/50">
+              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">LLM Verification</div>
+              <div className="text-xs text-gray-300 bg-gray-900/50 rounded p-2">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-gray-500">Grounded:</span>
+                  <span className={entry.verification_info.is_grounded ? 'text-green-400' : 'text-red-400'}>
+                    {entry.verification_info.is_grounded ? '✓ Yes' : '✗ No'}
+                  </span>
+                  <span className="text-gray-500 ml-2">Score:</span>
+                  <span className="text-cyan-400">
+                    {Math.round((entry.verification_info.groundedness_score || 0) * 100)}%
+                  </span>
+                </div>
+                {entry.verification_info.ungrounded_claims?.length > 0 && (
+                  <div className="mt-1">
+                    <span className="text-red-400 text-[10px]">Ungrounded claims:</span>
+                    <ul className="text-[10px] text-red-300 ml-2">
+                      {entry.verification_info.ungrounded_claims.slice(0, 2).map((claim, i) => (
+                        <li key={i} className="truncate">• {claim}</li>
+                      ))}
+                    </ul>
                   </div>
                 )}
               </div>

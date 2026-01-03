@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { X, Settings, Search, Check, Brain, Sparkles, DollarSign, ArrowUpDown, Filter, Zap, MessageSquare, Save, RotateCcw } from 'lucide-react';
+import { X, Settings, Search, Check, Brain, Sparkles, DollarSign, ArrowUpDown, Filter, Zap, MessageSquare, Save, RotateCcw, ShieldCheck, Shuffle, ToggleLeft, ToggleRight } from 'lucide-react';
 import { getModels } from '../services/api';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -29,19 +29,47 @@ const PIPELINE_STEPS = [
       en: 'Fast model that analyzes and reformulates your question for better understanding' 
     },
     defaultModel: 'google/gemini-2.0-flash-001',
-    recommended: { es: 'Recomendado: Modelo rápido y económico', en: 'Recommended: Fast and cheap model' }
+    recommended: { es: 'Recomendado: Modelo rápido y económico', en: 'Recommended: Fast and cheap model' },
+    optional: false
+  },
+  {
+    id: 'reranking',
+    icon: Shuffle,
+    color: 'purple',
+    title: { es: 'Paso 2: Re-ranking', en: 'Step 2: Re-ranking' },
+    description: { 
+      es: 'Reordena resultados de búsqueda por relevancia semántica usando LLM', 
+      en: 'Reorders search results by semantic relevance using LLM' 
+    },
+    defaultModel: 'google/gemini-2.0-flash-001',
+    recommended: { es: 'Opcional: Mejora relevancia de resultados', en: 'Optional: Improves result relevance' },
+    optional: true
   },
   {
     id: 'generation',
     icon: MessageSquare,
     color: 'blue',
-    title: { es: 'Paso 2: Generación de Respuesta', en: 'Step 2: Response Generation' },
+    title: { es: 'Paso 3: Generación de Respuesta', en: 'Step 3: Response Generation' },
     description: { 
       es: 'Modelo principal que genera la respuesta final basada en los CVs', 
       en: 'Main model that generates the final response based on CVs' 
     },
     defaultModel: 'google/gemini-2.0-flash-001',
-    recommended: { es: 'Recomendado: Modelo potente para análisis', en: 'Recommended: Powerful model for analysis' }
+    recommended: { es: 'Recomendado: Modelo potente para análisis', en: 'Recommended: Powerful model for analysis' },
+    optional: false
+  },
+  {
+    id: 'verification',
+    icon: ShieldCheck,
+    color: 'green',
+    title: { es: 'Paso 4: Verificación LLM', en: 'Step 4: LLM Verification' },
+    description: { 
+      es: 'Verifica que la respuesta esté fundamentada en el contexto de los CVs', 
+      en: 'Verifies the response is grounded in the CV context' 
+    },
+    defaultModel: 'google/gemini-2.0-flash-001',
+    recommended: { es: 'Opcional: Detecta información no verificable', en: 'Optional: Detects unverifiable information' },
+    optional: true
   }
 ];
 
@@ -49,14 +77,27 @@ export const getRAGPipelineSettings = () => {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
-      return JSON.parse(saved);
+      const parsed = JSON.parse(saved);
+      // Ensure all fields exist with defaults
+      return {
+        understanding: parsed.understanding || PIPELINE_STEPS[0].defaultModel,
+        reranking: parsed.reranking || PIPELINE_STEPS[1].defaultModel,
+        reranking_enabled: parsed.reranking_enabled !== undefined ? parsed.reranking_enabled : true,
+        generation: parsed.generation || PIPELINE_STEPS[2].defaultModel,
+        verification: parsed.verification || PIPELINE_STEPS[3].defaultModel,
+        verification_enabled: parsed.verification_enabled !== undefined ? parsed.verification_enabled : true
+      };
     }
   } catch (e) {
     console.error('Error loading RAG pipeline settings:', e);
   }
   return {
     understanding: PIPELINE_STEPS[0].defaultModel,
-    generation: PIPELINE_STEPS[1].defaultModel
+    reranking: PIPELINE_STEPS[1].defaultModel,
+    reranking_enabled: true,
+    generation: PIPELINE_STEPS[2].defaultModel,
+    verification: PIPELINE_STEPS[3].defaultModel,
+    verification_enabled: true
   };
 };
 
@@ -142,9 +183,24 @@ const RAGPipelineSettings = ({ isOpen, onClose, onSave }) => {
   const handleReset = () => {
     const defaults = {
       understanding: PIPELINE_STEPS[0].defaultModel,
-      generation: PIPELINE_STEPS[1].defaultModel
+      reranking: PIPELINE_STEPS[1].defaultModel,
+      reranking_enabled: true,
+      generation: PIPELINE_STEPS[2].defaultModel,
+      verification: PIPELINE_STEPS[3].defaultModel,
+      verification_enabled: true
     };
     setSettings(defaults);
+  };
+
+  const handleToggleStep = (stepId) => {
+    const enabledKey = `${stepId}_enabled`;
+    setSettings(prev => ({ ...prev, [enabledKey]: !prev[enabledKey] }));
+  };
+
+  const isStepEnabled = (stepId) => {
+    const step = PIPELINE_STEPS.find(s => s.id === stepId);
+    if (!step?.optional) return true;
+    return settings[`${stepId}_enabled`] !== false;
   };
 
   const getModelInfo = (modelId) => models.find(m => m.id === modelId);
@@ -164,6 +220,18 @@ const RAGPipelineSettings = ({ isOpen, onClose, onSave }) => {
       border: 'border-blue-300 dark:border-blue-600',
       text: 'text-blue-700 dark:text-blue-300',
       icon: 'text-blue-500'
+    },
+    purple: {
+      bg: 'bg-purple-100 dark:bg-purple-900/30',
+      border: 'border-purple-300 dark:border-purple-600',
+      text: 'text-purple-700 dark:text-purple-300',
+      icon: 'text-purple-500'
+    },
+    green: {
+      bg: 'bg-green-100 dark:bg-green-900/30',
+      border: 'border-green-300 dark:border-green-600',
+      text: 'text-green-700 dark:text-green-300',
+      icon: 'text-green-500'
     }
   };
 
@@ -209,39 +277,65 @@ const RAGPipelineSettings = ({ isOpen, onClose, onSave }) => {
               const colors = colorClasses[step.color];
               const selectedModel = getModelInfo(settings[step.id]);
               const isActive = activeStep === step.id;
+              const stepEnabled = isStepEnabled(step.id);
               
               return (
-                <button
-                  key={step.id}
-                  onClick={() => setActiveStep(step.id)}
-                  className={`w-full text-left p-4 rounded-xl border-2 transition-all ${
-                    isActive 
-                      ? `${colors.bg} ${colors.border}` 
-                      : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
-                  }`}
-                >
-                  <div className="flex items-start gap-3">
-                    <div className={`w-8 h-8 rounded-lg ${colors.bg} flex items-center justify-center flex-shrink-0`}>
-                      <StepIcon className={`w-4 h-4 ${colors.icon}`} />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className={`text-sm font-medium ${isActive ? colors.text : 'text-gray-700 dark:text-gray-300'}`}>
-                        {step.title[language] || step.title.en}
-                      </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">
-                        {step.description[language] || step.description.en}
-                      </p>
-                      {selectedModel && (
-                        <div className="mt-2 flex items-center gap-1.5">
-                          <Check className="w-3 h-3 text-green-500" />
-                          <span className="text-xs font-medium text-gray-600 dark:text-gray-300 truncate">
-                            {selectedModel.name}
-                          </span>
+                <div key={step.id} className="relative">
+                  <button
+                    onClick={() => setActiveStep(step.id)}
+                    className={`w-full text-left p-4 rounded-xl border-2 transition-all ${
+                      !stepEnabled ? 'opacity-50' : ''
+                    } ${
+                      isActive 
+                        ? `${colors.bg} ${colors.border}` 
+                        : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                    }`}
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className={`w-8 h-8 rounded-lg ${colors.bg} flex items-center justify-center flex-shrink-0`}>
+                        <StepIcon className={`w-4 h-4 ${colors.icon}`} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between">
+                          <p className={`text-sm font-medium ${isActive ? colors.text : 'text-gray-700 dark:text-gray-300'}`}>
+                            {step.title[language] || step.title.en}
+                          </p>
+                          {step.optional && (
+                            <button
+                              onClick={(e) => { e.stopPropagation(); handleToggleStep(step.id); }}
+                              className="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded transition-colors"
+                              title={stepEnabled ? 'Disable' : 'Enable'}
+                            >
+                              {stepEnabled ? (
+                                <ToggleRight className="w-5 h-5 text-green-500" />
+                              ) : (
+                                <ToggleLeft className="w-5 h-5 text-gray-400" />
+                              )}
+                            </button>
+                          )}
                         </div>
-                      )}
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">
+                          {step.description[language] || step.description.en}
+                        </p>
+                        {selectedModel && stepEnabled && (
+                          <div className="mt-2 flex items-center gap-1.5">
+                            <Check className="w-3 h-3 text-green-500" />
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-300 truncate">
+                              {selectedModel.name}
+                            </span>
+                          </div>
+                        )}
+                        {!stepEnabled && (
+                          <div className="mt-2 flex items-center gap-1.5">
+                            <span className="text-xs text-gray-400">
+                              {language === 'es' ? 'Desactivado' : 'Disabled'}
+                            </span>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </button>
+                  </button>
+                </div>
               );
             })}
 

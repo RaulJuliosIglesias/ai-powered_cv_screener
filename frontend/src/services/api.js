@@ -161,8 +161,16 @@ export const removeCVFromSession = async (sessionId, cvId, mode = 'local') => {
 export const sendSessionMessage = async (sessionId, message, mode = 'local', pipelineSettings = null) => {
   const payload = { message };
   if (pipelineSettings) {
+    // Step 1: Query Understanding
     payload.understanding_model = pipelineSettings.understanding;
+    // Step 2: Re-ranking
+    payload.reranking_model = pipelineSettings.reranking;
+    payload.reranking_enabled = pipelineSettings.reranking_enabled !== false;
+    // Step 3: Generation
     payload.generation_model = pipelineSettings.generation;
+    // Step 4: Verification
+    payload.verification_model = pipelineSettings.verification;
+    payload.verification_enabled = pipelineSettings.verification_enabled !== false;
   }
   const response = await api.post(`/sessions/${sessionId}/chat?mode=${mode}`, payload);
   return response.data;

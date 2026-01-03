@@ -88,7 +88,11 @@ class SessionListResponse(BaseModel):
 class ChatRequest(BaseModel):
     message: str
     understanding_model: Optional[str] = None  # Model for query understanding (Step 1)
-    generation_model: Optional[str] = None     # Model for response generation (Step 2)
+    reranking_model: Optional[str] = None      # Model for re-ranking (Step 2)
+    reranking_enabled: Optional[bool] = True   # Enable/disable re-ranking
+    generation_model: Optional[str] = None     # Model for response generation (Step 3)
+    verification_model: Optional[str] = None   # Model for verification (Step 4)
+    verification_enabled: Optional[bool] = True  # Enable/disable verification
 
 
 class ChatResponse(BaseModel):
@@ -98,6 +102,8 @@ class ChatResponse(BaseModel):
     confidence_score: Optional[float] = None
     guardrail_passed: Optional[bool] = None
     query_understanding: Optional[dict] = None  # Info about how query was understood
+    reranking_info: Optional[dict] = None       # Re-ranking step info
+    verification_info: Optional[dict] = None    # Verification step info
 
 
 class UploadResponse(BaseModel):
@@ -435,15 +441,23 @@ async def chat_in_session(
     
     # Query RAG with session's CVs only - pass session_id for logging
     # Use custom models if provided, otherwise use defaults
-    # ProviderFactory decides between RAGServiceV3 and LangChainRAGService
-    rag_service = ProviderFactory.get_rag_service(
+    # Import RAGServiceV3 directly to pass all pipeline parameters
+    from app.services.rag_service_v3 import RAGServiceV3
+    
+    rag_service = RAGServiceV3(
         mode=mode,
         understanding_model=request.understanding_model,
-        generation_model=request.generation_model
+        reranking_model=request.reranking_model,
+        generation_model=request.generation_model,
+        verification_model=request.verification_model,
+        reranking_enabled=request.reranking_enabled if request.reranking_enabled is not None else True,
+        verification_enabled=request.verification_enabled if request.verification_enabled is not None else True
     )
     result = await rag_service.query(
         question=request.message, 
-        cv_ids=cv_ids
+        cv_ids=cv_ids,
+        session_id=session_id,
+        total_cvs_in_session=total_cvs
     )
     
     # Save assistant message
@@ -458,13 +472,25 @@ async def chat_in_session(
             "requirements": result.query_understanding.get("requirements", [])
         }
     
+    # Include reranking info
+    reranking_info = None
+    if hasattr(result, 'reranking_info') and result.reranking_info:
+        reranking_info = result.reranking_info
+    
+    # Include verification info
+    verification_info = None
+    if hasattr(result, 'verification_info') and result.verification_info:
+        verification_info = result.verification_info
+    
     return ChatResponse(
         response=result.answer,
         sources=result.sources,
         metrics=result.metrics,
         confidence_score=result.confidence_score,
         guardrail_passed=result.guardrail_passed,
-        query_understanding=query_understanding_info
+        query_understanding=query_understanding_info,
+        reranking_info=reranking_info,
+        verification_info=verification_info
     )
 
 
