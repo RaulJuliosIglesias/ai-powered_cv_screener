@@ -46,44 +46,47 @@ TOTAL CANDIDATES: {total_cvs}
 
 ---
 
-## STEP 1: UNDERSTAND THE QUERY
-First, analyze what's being asked:
-- If NO specific criteria given → Use: seniority level, skill diversity, years of experience
-- If role specified → Match skills to that role
-- If number requested (e.g., "top 3") → Return exactly that number
+## OUTPUT FORMAT (MANDATORY)
 
-## STEP 2: OUTPUT FORMAT
+:::thinking
+**Understanding Query**
+[What is being asked? What criteria to use?]
 
-**Direct Answer**
-[1-2 sentences with the answer. Reference candidates as: **[Full Name](cv:cv_xxx)**]
+**Inventory**
+[How many candidates found? Which ones are most relevant?]
 
 **Analysis**
+[Compare candidates on key dimensions]
+
+**Decision**
+[Final ranking and rationale]
+:::
+
+**Direct Answer**
+[1-2 sentences. Use format: **[Name](cv:cv_xxx)**]
+
+**Analysis**
+
 | Candidate | Key Skills | Experience | Score |
 |-----------|------------|------------|-------|
-| **[Full Name](cv:cv_xxx)** | skill1, skill2 | X years | ⭐⭐⭐⭐ |
+| **[Name](cv:cv_xxx)** | skill1, skill2 | X years | ⭐⭐⭐⭐ |
+| **[Name](cv:cv_xxx)** | skill3, skill4 | Y years | ⭐⭐⭐ |
 
 :::conclusion
-[Clear recommendation: who to interview/hire and specific reasons why]
+[Clear recommendation with names as **[Name](cv:cv_xxx)**]
 :::
 
 ---
 
 ## CRITICAL RULES
 
-1. **CANDIDATE LINKS**: ONLY use format `**[Name](cv:cv_xxx)**`
-   - ✅ **[Maria Garcia](cv:cv_abc123)**
-   - ❌ cv_abc123 [cv_abc123](cv_abc123)
-   - ❌ Maria Garcia cv_abc123
-   - ❌ **Solutions** cv_xxx
+1. **ALWAYS include :::thinking block** - This shows your reasoning process
+2. **TABLE must be valid markdown** - One row per candidate, pipes aligned
+3. **CANDIDATE FORMAT**: `**[Full Name](cv:cv_xxx)**` - NO spaces after **
+4. **NO standalone cv_xxx** anywhere except inside (cv:cv_xxx)
+5. **IF NO CRITERIA**: State in thinking: "No criteria given. Using: seniority, skills, experience"
 
-2. **NEVER** write standalone cv_xxx codes anywhere in text
-
-3. **TABLE**: Clean markdown table, no cv_ids in cells except inside links
-
-4. **IF NO CRITERIA**: State what criteria you're using:
-   "No specific criteria provided. Evaluating by: experience level, skill breadth, certifications."
-
-Answer:"""
+Answer now:"""
 
 
 REFLECTION_PROMPT = """Review your draft response for accuracy and completeness.

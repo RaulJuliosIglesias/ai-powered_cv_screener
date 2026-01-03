@@ -18,6 +18,8 @@ class ChatMessage(BaseModel):
     role: str  # 'user' or 'assistant'
     content: str
     sources: List[Dict] = Field(default_factory=list)
+    pipeline_steps: List[Dict] = Field(default_factory=list)  # Pipeline execution steps for UI
+    structured_output: Optional[Dict] = None  # Structured output from OutputProcessor
     timestamp: str = Field(default_factory=lambda: datetime.now().isoformat())
 
 
@@ -140,11 +142,17 @@ class SessionManager:
             logger.info(f"Removed CV {cv_id} from session {session_id}")
         return session
     
-    def add_message(self, session_id: str, role: str, content: str, sources: List[Dict] = None) -> Optional[ChatMessage]:
+    def add_message(self, session_id: str, role: str, content: str, sources: List[Dict] = None, pipeline_steps: List[Dict] = None, structured_output: Optional[Dict] = None) -> Optional[ChatMessage]:
         """Add a chat message to a session."""
         session = self.sessions.get(session_id)
         if session:
-            message = ChatMessage(role=role, content=content, sources=sources or [])
+            message = ChatMessage(
+                role=role, 
+                content=content, 
+                sources=sources or [],
+                pipeline_steps=pipeline_steps or [],
+                structured_output=structured_output
+            )
             session.messages.append(message)
             session.updated_at = datetime.now().isoformat()
             self._save()

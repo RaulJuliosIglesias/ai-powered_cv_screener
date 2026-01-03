@@ -368,11 +368,17 @@ function App() {
       const response = await sendSessionMessage(targetSessionId, userMessage, mode, ragPipelineSettings);
       
       // Log pipeline info for debugging
+      console.log('📦 Full Response:', response);
       if (response.query_understanding) {
         console.log('🔍 RAG Pipeline - Query Understanding:', response.query_understanding);
       }
       if (response.metrics) {
         console.log('📊 RAG Pipeline - Metrics:', response.metrics);
+      }
+      if (response.pipeline_steps) {
+        console.log('⚙️ RAG Pipeline - Steps:', response.pipeline_steps);
+      } else {
+        console.warn('⚠️ No pipeline_steps in response!');
       }
       
       // Save metrics to history (including new reranking and verification info)

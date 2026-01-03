@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import SourceBadge from './SourceBadge';
 import PipelineStepsPanel from './PipelineStepsPanel';
+import { DirectAnswerSection, TableComponent } from './output';
 import { User, Sparkles, ChevronDown, ChevronRight, Brain, Lightbulb, FileText, ExternalLink, CheckCircle, Search, BarChart3, Zap, Copy } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -277,13 +278,16 @@ const ConclusionPanel = ({ content }) => {
  * Main Message Component with Enhanced Markdown Rendering
  */
 const Message = ({ message, onViewCV }) => {
-  const { role, content, sources = [], pipeline_steps = [] } = message;
+  const { role, content, sources = [], pipeline_steps = [], structured_output } = message;
   const isUser = role === 'user';
   const { t, language } = useLanguage();
   const [isReasoningExpanded, setIsReasoningExpanded] = useState(false);
   const [isPipelineExpanded, setIsPipelineExpanded] = useState(false);
 
-  // Parse message content to extract special blocks
+  // Check if we have structured output (new modular format)
+  const hasStructuredOutput = !isUser && structured_output;
+
+  // Parse message content for legacy messages (fallback)
   const { thinking, conclusion, mainContent } = useMemo(() => 
     parseMessageContent(content), [content]
   );
@@ -382,28 +386,61 @@ const Message = ({ message, onViewCV }) => {
               />
             )}
 
-            {/* Reasoning Panel (expandable) - Only for assistant messages */}
-            {!isUser && thinking && (
-              <ReasoningPanel 
-                content={thinking}
-                isExpanded={isReasoningExpanded}
-                onToggle={() => setIsReasoningExpanded(!isReasoningExpanded)}
-              />
-            )}
+            {/* STRUCTURED OUTPUT (New modular system) */}
+            {hasStructuredOutput ? (
+              <>
+                {/* Thinking from structured output */}
+                {structured_output.thinking && (
+                  <ReasoningPanel 
+                    content={structured_output.thinking}
+                    isExpanded={isReasoningExpanded}
+                    onToggle={() => setIsReasoningExpanded(!isReasoningExpanded)}
+                  />
+                )}
 
-            {/* Main Content */}
-            <div className={`prose prose-sm max-w-none dark:prose-invert ${isUser ? 'prose-invert' : ''}`}>
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                components={isUser ? {} : markdownComponents}
-              >
-                {mainContent || content}
-              </ReactMarkdown>
-            </div>
+                {/* Direct Answer - Always exists */}
+                <DirectAnswerSection 
+                  content={structured_output.direct_answer}
+                  cvLinkRenderer={CVLink}
+                />
 
-            {/* Conclusion Panel - Only for assistant messages */}
-            {!isUser && conclusion && (
-              <ConclusionPanel content={conclusion} />
+                {/* Table - Only if exists */}
+                {structured_output.table_data && (
+                  <TableComponent 
+                    tableData={structured_output.table_data}
+                    cvLinkRenderer={CVLink}
+                  />
+                )}
+
+                {/* Conclusion from structured output */}
+                {structured_output.conclusion && (
+                  <ConclusionPanel content={structured_output.conclusion} />
+                )}
+              </>
+            ) : (
+              <>
+                {/* LEGACY RENDERING (Old messages) */}
+                {!isUser && thinking && (
+                  <ReasoningPanel 
+                    content={thinking}
+                    isExpanded={isReasoningExpanded}
+                    onToggle={() => setIsReasoningExpanded(!isReasoningExpanded)}
+                  />
+                )}
+
+                <div className={`prose prose-sm max-w-none dark:prose-invert ${isUser ? 'prose-invert' : ''}`}>
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={isUser ? {} : markdownComponents}
+                  >
+                    {mainContent || content}
+                  </ReactMarkdown>
+                </div>
+
+                {!isUser && conclusion && (
+                  <ConclusionPanel content={conclusion} />
+                )}
+              </>
             )}
 
             {/* Sources */}

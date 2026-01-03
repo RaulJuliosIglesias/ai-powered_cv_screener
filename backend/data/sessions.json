@@ -258,6 +258,8 @@
           "role": "user",
           "content": "rank all candidates by experiecne role and company",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T15:42:04.465247"
         },
         {
@@ -351,6 +353,8 @@
               "relevance": 0.566
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T15:42:19.357681"
         },
         {
@@ -358,6 +362,8 @@
           "role": "user",
           "content": "cual es el mejro candidato para \nWe are seeking a proactive and skilled developer who is passionate about building modern, data-driven applications.\n\nExperience: 5+ years of professional experience in a Senior full-stack development role\nExtensive experience with the Python framework\nTypeScript Proficiency: You are highly proficient in TypeScript and its application in both frontend (React) and backend (Node.js) environments\nFrontend Expertise: Strong experience with React and modern state management, including Hooks and the Context API\nBackend Expertise: Solid experience building and consuming REST APIs with Node.js and Express\nDatabase Skills: Experience with like PostgreSQL, and working with an ORM or query builder\nexperience in BigQuery\nKnowledge of n8n.io, LangGraph, LangChain\nProblem-Solving Mindset: You are a collaborative problem-solver, eager to take on new challenges and contribute to a fast-paced development cycle\nPassion for AI: A genuine passion and awareness for artificial intelligence and a strong desire to build products that leverage its capabilities to solve real-world problems\nCreativity and Proactivity: You have a passion for building great products, are eager to propose new features, and enjoy finding creative solutions to improve the user experience. \n\nNice to Have:\n\nAI Project Experience: Previous experience working on projects involving AI, machine learning, or interacting with large language models (LLMs)\nFamiliarity with UI component libraries like Shadcn UI\nKnowledge of cloud platforms like Google Cloud Platform (GCP)\n\nWhy You'll Love Working With Us\n\nHigh-Impact Role: Be a key player in a small, agile team building a greenfield project with the potential to transform an industry\nModern Technology: Work with a cutting-edge, carefully selected tech stack with a focus on best practices\nGrowth & Learning: Gain deep experience in AI-driven applications, cloud-native architecture, and real-time systems\nStability & Vision: Enjoy the energy of a startup environment backed by the resources and stability of a large, successful company\nCollaborative Culture: We value open communication, teamwork, and a shared passion for building exceptional products\n\nIf you are ready to take on a challenging and rewarding role at the intersection of AI and product strategy, we encourage you to apply.",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T15:48:46.798404"
         },
         {
@@ -461,6 +467,8 @@
               "relevance": 0.863
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T15:48:55.419413"
         },
         {
@@ -468,6 +476,8 @@
           "role": "user",
           "content": "dame el perfil asm experto en three.js",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:13:24.854756"
         },
         {
@@ -475,6 +485,8 @@
           "role": "user",
           "content": "dame el perfil asm experto en three.js",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:20:12.259040"
         },
         {
@@ -482,6 +494,8 @@
           "role": "user",
           "content": "dame el perfil asm experto en three.js",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:21:13.582009"
         },
         {
@@ -570,6 +584,8 @@
               "relevance": 0.532
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:21:57.955678"
         },
         {
@@ -577,6 +593,8 @@
           "role": "user",
           "content": "dame el perfil asm experto en three.js",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:36:05.610774"
         },
         {
@@ -665,6 +683,8 @@
               "relevance": 0.532
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:37:38.014621"
         },
         {
@@ -672,6 +692,8 @@
           "role": "user",
           "content": "y para front end quien seria el mejroi candidato?",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:39:00.738352"
         },
         {
@@ -770,6 +792,8 @@
               "relevance": 0.564
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:39:43.825612"
         },
         {
@@ -777,6 +801,8 @@
           "role": "user",
           "content": "how can i know who ahs less problematic background? like politic radical views?",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:40:51.013141"
         },
         {
@@ -784,6 +810,8 @@
           "role": "assistant",
           "content": "I can only help with CV screening and candidate analysis. Please ask a question about the uploaded CVs.",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:41:14.577925"
         },
         {
@@ -791,6 +819,8 @@
           "role": "user",
           "content": "y para front end quien seria el mejroi candidato?",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T18:55:08.235024"
         },
         {
@@ -1004,6 +1034,8 @@
               "relevance": 0.49
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T18:56:18.170206"
         },
         {
@@ -1011,6 +1043,8 @@
           "role": "user",
           "content": "y para front end quien seria el mejroi candidato con gamificacion?",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T19:09:22.497042"
         },
         {
@@ -1224,6 +1258,8 @@
               "relevance": 0.509
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T19:12:43.515307"
         },
         {
@@ -1231,6 +1267,8 @@
           "role": "user",
           "content": "ersto noe s front end sia caso es ui ux por photoshop pero no front end de proigramacion\n\nLiam Nguyen 📄 \tPhotoshop, Illustrator, Blender, ZBrush\tConcept art for animated films/series\tJunior Concept Artist. Skills are more focused on visual assets than front-end development.",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T19:45:37.034415"
         },
         {
@@ -1238,6 +1276,8 @@
           "role": "assistant",
           "content": "I can only help with CV screening and candidate analysis. Please ask a question about the uploaded CVs.",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T19:45:41.522637"
         },
         {
@@ -1245,6 +1285,8 @@
           "role": "user",
           "content": "dame el mejro game developer full stack webgl",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T20:04:27.567298"
         },
         {
@@ -1252,6 +1294,8 @@
           "role": "assistant",
           "content": "I encountered an issue processing your request. An unexpected error occurred. Please try again.",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T20:04:31.417305"
         },
         {
@@ -1259,6 +1303,8 @@
           "role": "user",
           "content": "dame el mejor game developer",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T20:07:28.774311"
         },
         {
@@ -1266,6 +1312,8 @@
           "role": "assistant",
           "content": "I encountered an issue processing your request. An unexpected error occurred. Please try again.",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T20:07:33.220862"
         },
         {
@@ -1273,6 +1321,8 @@
           "role": "user",
           "content": "dame el mejor game developer",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T20:09:48.525237"
         },
         {
@@ -1445,6 +1495,8 @@
               "filename": "5a519af7_Li_Wei_Content_Strategist.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T20:10:13.402749"
         },
         {
@@ -1452,6 +1504,8 @@
           "role": "user",
           "content": "dame el mejor game developer",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:15:32.997356"
         },
         {
@@ -1572,6 +1626,8 @@
               "filename": "68835e12_Ethan_Park_Physical_Therapist.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:16:11.157424"
         },
         {
@@ -1579,6 +1635,8 @@
           "role": "user",
           "content": "dame el mejor game developer",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:17:46.376657"
         },
         {
@@ -1699,6 +1757,8 @@
               "filename": "44eb074e_Liam_Ndlovu_Sales_Manager.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:18:42.570501"
         },
         {
@@ -1706,6 +1766,8 @@
           "role": "user",
           "content": "dame el mejor game developer",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:25:27.643091"
         },
         {
@@ -1818,6 +1880,8 @@
               "filename": "44eb074e_Liam_Ndlovu_Sales_Manager.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:26:27.631792"
         }
       ],
@@ -2004,6 +2068,8 @@
           "role": "user",
           "content": "Create a top 3 shortlist from 28 candidates",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:26:39.652839"
         },
         {
@@ -2011,6 +2077,8 @@
           "role": "user",
           "content": "Create a top 3 shortlist from 28 candidates",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:29:54.893040"
         },
         {
@@ -2094,6 +2162,8 @@
               "relevance": 0.539
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:30:47.342102"
         },
         {
@@ -2101,6 +2171,8 @@
           "role": "user",
           "content": "Create a top 3 shortlist from 28 candidates",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:31:36.372236"
         },
         {
@@ -2108,6 +2180,8 @@
           "role": "user",
           "content": "Create a top 3 shortlist from 28 candidates",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:38:44.023220"
         },
         {
@@ -2191,6 +2265,8 @@
               "relevance": 0.539
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:39:41.075367"
         },
         {
@@ -2198,6 +2274,8 @@
           "role": "user",
           "content": "dame receta de tarta de queso",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:40:26.203699"
         },
         {
@@ -2205,6 +2283,8 @@
           "role": "user",
           "content": "Create a top 3 shortlist from 28 candidates",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T18:14:47.888499"
         },
         {
@@ -2288,6 +2368,8 @@
               "relevance": 0.539
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T18:15:31.715288"
         },
         {
@@ -2295,6 +2377,8 @@
           "role": "user",
           "content": "Create a top 3 shortlist from 28 candidates",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T18:16:32.961897"
         },
         {
@@ -2378,6 +2462,8 @@
               "relevance": 0.539
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T18:17:41.588318"
         },
         {
@@ -2385,6 +2471,8 @@
           "role": "user",
           "content": "Create a top 3 shortlist from 28 candidates",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T18:31:15.355700"
         },
         {
@@ -2468,6 +2556,8 @@
               "relevance": 0.543
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T18:32:01.660022"
         },
         {
@@ -2475,6 +2565,8 @@
           "role": "user",
           "content": "Create a top 3 shortlist from 28 candidates",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T18:44:55.725644"
         },
         {
@@ -2623,6 +2715,8 @@
               "relevance": 0.504
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T18:45:28.090874"
         },
         {
@@ -2630,6 +2724,8 @@
           "role": "user",
           "content": "create top short list of 3 candidates for full stack expertise",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T18:54:54.996948"
         },
         {
@@ -2778,6 +2874,8 @@
               "relevance": 0.538
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T18:56:44.464607"
         },
         {
@@ -2785,6 +2883,8 @@
           "role": "user",
           "content": "create top short list of 3 candidates for full stack expertise",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T19:09:02.859399"
         },
         {
@@ -2933,6 +3033,8 @@
               "relevance": 0.538
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T19:12:59.030675"
         },
         {
@@ -2940,6 +3042,8 @@
           "role": "user",
           "content": "pero de enbtre todos cual se acercaria ams sino tuviera mas candidatos que elegir?",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T19:13:56.377385"
         },
         {
@@ -3088,6 +3192,8 @@
               "relevance": 0.561
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T19:15:03.463860"
         },
         {
@@ -3095,6 +3201,8 @@
           "role": "user",
           "content": "no tiene sentido este candidato sabe 0 de program,acion ni reflja skills tecncias proque este e smejor que por ejemplo alguien que sit enga mas habnidlaiddes tecncias proque no ash analziado esto asi cone ste criterio?",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:08:43.416589"
         },
         {
@@ -3187,6 +3295,8 @@
               "filename": "c042a902_Priya_Kapoor_Culinary_Officer.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:09:31.094155"
         },
         {
@@ -3194,6 +3304,8 @@
           "role": "user",
           "content": "no tiene sentido este candidato sabe 0 de program,acion ni reflja skills tecncias proque este e smejor que por ejemplo alguien que sit enga mas habnidlaiddes tecncias proque no ash analziado esto asi cone ste criterio?",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:18:02.706543"
         },
         {
@@ -3290,6 +3402,8 @@
               "filename": "c042a902_Priya_Kapoor_Culinary_Officer.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:18:38.613012"
         },
         {
@@ -3297,6 +3411,8 @@
           "role": "user",
           "content": "no tiene sentido este candidato sabe 0 de program,acion ni reflja skills tecncias proque este e smejor que por ejemplo alguien que sit enga mas habnidlaiddes tecncias proque no ash analziado esto asi cone ste criterio?",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:25:37.520545"
         },
         {
@@ -3377,6 +3493,8 @@
               "filename": "c042a902_Priya_Kapoor_Culinary_Officer.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:26:46.101235"
         },
         {
@@ -3384,6 +3502,8 @@
           "role": "user",
           "content": "create top short list of 3 candidates for full stack expertise",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:31:48.507542"
         },
         {
@@ -3492,6 +3612,8 @@
               "filename": "c042a902_Priya_Kapoor_Culinary_Officer.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:32:25.518229"
         },
         {
@@ -3499,6 +3621,8 @@
           "role": "user",
           "content": "create top short list of 3 candidates for full stack expertise",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:36:14.306580"
         },
         {
@@ -3595,6 +3719,8 @@
               "filename": "a32dd7e1_Isabela_Costa_Model.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:37:14.490923"
         },
         {
@@ -3602,6 +3728,8 @@
           "role": "user",
           "content": "create top short list of 3 candidates for full stack expertise",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:45:41.406280"
         },
         {
@@ -3702,6 +3830,8 @@
               "filename": "23621408_Kamal_Patel_Head_of_Audio.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:46:17.501624"
         },
         {
@@ -3709,6 +3839,8 @@
           "role": "user",
           "content": "create top short list of 3 candidates for full stack expertise",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:51:59.768717"
         },
         {
@@ -3801,6 +3933,8 @@
               "filename": "06b109ef_Li_Wei_Research_Intern.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:53:26.456855"
         }
       ],
@@ -5031,6 +5165,8 @@
           "role": "user",
           "content": "Who has the strongest technical skills?",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:54:54.371567"
         },
         {
@@ -5129,6 +5265,8 @@
               "relevance": 0.535
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T17:55:45.647036"
         },
         {
@@ -5136,6 +5274,8 @@
           "role": "user",
           "content": "dame el candidato ams adecuado apra lead tech mentoring managment of a team full tack",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T18:31:19.839427"
         },
         {
@@ -5244,6 +5384,8 @@
               "relevance": 0.707
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T18:32:58.331000"
         },
         {
@@ -5251,6 +5393,8 @@
           "role": "user",
           "content": "Create a top 3 shortlist from all candidates",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T18:45:07.862550"
         },
         {
@@ -5258,6 +5402,8 @@
           "role": "user",
           "content": "create top short list of 3 candidates for full stack expertise",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T18:54:58.574271"
         },
         {
@@ -5265,6 +5411,8 @@
           "role": "user",
           "content": "create top short list of 3 candidates for full stack expertise con IA",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:14:26.550557"
         },
         {
@@ -5421,6 +5569,8 @@
               "filename": "5c8fba4e_Li_Wei_Doctoral_Candidate_in_Artificial_Intelligence.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:15:46.625148"
         },
         {
@@ -5573,6 +5723,8 @@
               "filename": "0df49086_Carlos_Mendoza_Senior_Lifestyle_and_Wellness_Influencer.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:15:48.034288"
         },
         {
@@ -5580,6 +5732,8 @@
           "role": "user",
           "content": "create top short list of 3 candidates for full stack expertise con IA",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:17:53.955937"
         },
         {
@@ -5724,6 +5878,8 @@
               "filename": "ee46e385_Julian_Carter_Lead_Concept_Artist_specializing_in_Character_Design_for_Video_Games.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:20:49.249735"
         },
         {
@@ -5731,6 +5887,8 @@
           "role": "user",
           "content": "create top short list of 3 candidates for full stack expertise con IA",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:22:37.707225"
         },
         {
@@ -5871,6 +6029,8 @@
               "filename": "36d5f5a7_Malik_Johnson_Digital_Colorist_Specializing_in_Film_and_Commercial_Projects.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:24:12.993832"
         }
       ],
@@ -6309,6 +6469,8 @@
           "role": "user",
           "content": "Create a top 3 shortlist from 69 candidates",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:53:06.290057"
         },
         {
@@ -6433,6 +6595,8 @@
               "filename": "71866d1c_Benjamin_Obi_Pharmacist.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T21:54:53.031760"
         },
         {
@@ -6440,6 +6604,8 @@
           "role": "user",
           "content": "Create a top 3 shortlist from 70 candidates",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T22:02:09.501460"
         },
         {
@@ -6548,6 +6714,8 @@
               "filename": "d422b68f_Layla_Kim_Podcast_Assistant.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T22:03:28.544493"
         }
       ],
@@ -6626,6 +6794,8 @@
           "role": "user",
           "content": "Who has startup experience?",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T22:29:52.293610"
         },
         {
@@ -6674,6 +6844,8 @@
               "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
             }
           ],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T22:31:29.428093"
         },
         {
@@ -6681,11 +6853,299 @@
           "role": "user",
           "content": "quein sabe mas de python?",
           "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
           "timestamp": "2026-01-03T22:33:12.995853"
+        },
+        {
+          "id": "41592131-573d-4dbf-a6b5-dd69d07274e9",
+          "role": "assistant",
+          "content": "**Direct Answer**\nBased on the provided CV **[data](cv:cv_bbc748f9)**, **[ Sofía López VP of Data](cv:cv_bbc748f9)** demonstrates the strongest Python skills, indicated by her experience in developing predictive models and integrating NLP insights.\n\n**Analysis**\n| Candidate | Key Skills | Experience | Score |\n|-----------|------------|------------|-------|\n| **[ Sofía López VP of Data](cv:cv_bbc748f9)** | Machine **[Learning](cv:cv_7b0f7ab3)**, Deep **[Learning](cv:cv_7b0f7ab3)**, SQL | 2+ years as **[Data](cv:cv_bbc748f9)** Scientist | ⭐⭐⭐⭐ |\n\n:::conclusion\n**[ Sofía López VP of Data](cv:cv_bbc748f9)** is the most suitable candidate based on her experience and skills in machine **[learning](cv:cv_7b0f7ab3)** and **[data](cv:cv_bbc748f9)** science.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_bbc748f9",
+              "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_916fd244",
+              "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf"
+            },
+            {
+              "cv_id": "cv_fe6338e6",
+              "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_71736e47",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_943da331",
+              "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_ffc6d564",
+              "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf"
+            },
+            {
+              "cv_id": "cv_653fbf59",
+              "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf"
+            },
+            {
+              "cv_id": "cv_f01ac22c",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_dd668ac0",
+              "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_7b0f7ab3",
+              "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
+            }
+          ],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-03T22:34:00.671491"
+        },
+        {
+          "id": "d7435867-b825-48e6-9fc9-c58009077b58",
+          "role": "user",
+          "content": "Who has startup experience?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-03T22:36:23.537816"
+        },
+        {
+          "id": "a9979a89-3221-4c70-a1f8-9b1c77154303",
+          "role": "assistant",
+          "content": "**Direct Answer**Based on the provided CV **[data](cv:cv_bbc748f9)**,**[Patrik Hübner Brand](cv:cv_dd668ac0)**, **[Mei-Ling Chen Human Resources](cv:cv_ffc6d564)**, and **[Luca Müller Cloud](cv:cv_fe6338e6)**have experience related to startups.**[Patrik Hübner Brand](cv:cv_dd668ac0)**supported the development of a **[brand](cv:cv_dd668ac0)** identity for a startup that secured Series A funding, and**[Mei-Ling Chen Human Resources](cv:cv_ffc6d564)**worked as an HR Coordinator for a logistics startup.**[Luca Müller Cloud](cv:cv_fe6338e6)**built and operated **[cloud](cv:cv_fe6338e6)** environments for a fast-growing startup.**[Layla Hassan NFT](cv:cv_71736e47)**also worked as a Smart Contract Developer at TechStart Pty Ltd, building full-stack web applications and contributing to early blockchain experiments.**Analysis**| Candidate | Key Skills | Experience | Score |\n|-----------|------------|------------|-------|\n|**[Luca Müller Cloud](cv:cv_fe6338e6)**| **[Cloud](cv:cv_fe6338e6)** Services, Kubernetes, Terraform | Built **[cloud](cv:cv_fe6338e6)** environments for a fast-growing startup | ⭐⭐⭐⭐ |\n|**[Layla Hassan NFT](cv:cv_71736e47)**| Solidity, Ethereum, IPFS | Smart Contract Developer at TechStart Pty Ltd | ⭐⭐⭐⭐ |\n|**[Patrik Hübner Brand](cv:cv_dd668ac0)**| **[Brand](cv:cv_dd668ac0)** Design, Market Research | Assisted startup **[brand](cv:cv_dd668ac0)** identity | ⭐⭐⭐ |\n|**[Mei-Ling Chen Human Resources](cv:cv_ffc6d564)**| Recruitment, Onboarding, Training | HR Coordinator at logistics startup | ⭐⭐⭐ |\n\n:::conclusion\nBased on the CV **[data](cv:cv_bbc748f9)**,**[Luca Müller Cloud](cv:cv_fe6338e6)**, **[Layla Hassan NFT](cv:cv_71736e47)**, **[Patrik Hübner Brand](cv:cv_dd668ac0)**, and **[Mei-Ling Chen Human Resources](cv:cv_ffc6d564)** have experience related to startups.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_bbc748f9",
+              "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_dd668ac0",
+              "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_71736e47",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_943da331",
+              "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_fe6338e6",
+              "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_653fbf59",
+              "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf"
+            },
+            {
+              "cv_id": "cv_f01ac22c",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_ffc6d564",
+              "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf"
+            },
+            {
+              "cv_id": "cv_916fd244",
+              "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf"
+            },
+            {
+              "cv_id": "cv_7b0f7ab3",
+              "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
+            }
+          ],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-03T22:37:47.486504"
+        },
+        {
+          "id": "1d0fab7b-9027-4219-b9b0-50f28da7a9ae",
+          "role": "user",
+          "content": "Who has startup experience?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-03T22:42:42.271560"
+        },
+        {
+          "id": "d4bca283-7397-4038-86d4-85c0475ae937",
+          "role": "assistant",
+          "content": "```\n:::thinking\n- What is being asked? The question is about identifying candidates with startup experience.\n- What CVs/sections are relevant? The experience sections of each candidate's CV are relevant.\n- Do any candidates actually match? I need to check if any candidates explicitly mention working in a startup environment.\n- What's my confidence level? I will extract information directly from the CVs to ensure accuracy.\n:::\n\nThe candidate with startup experience is **[Patrik Hübner](cv:cv_dd668ac0)**. He assisted in the development of a **[brand](cv:cv_dd668ac0)** identity for a startup that secured Series A funding during his time as a Junior **[Brand](cv:cv_dd668ac0)** Designer at DesignLab GmbH.\n\n| Candidate | Startup Experience | Details |\n|-----------|--------------------|---------|\n| **[Patrik Hübner](cv:cv_dd668ac0)**| Yes | Assisted in developing a **[brand](cv:cv_dd668ac0)** identity for a startup that secured Series A funding. |\n\n:::conclusion\nThe only candidate with confirmed startup experience is**[Patrik Hübner](cv:cv_dd668ac0)**. If you need further details or additional candidates, please let me know.\n:::\n```",
+          "sources": [
+            {
+              "cv_id": "cv_dd668ac0",
+              "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_71736e47",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_fe6338e6",
+              "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_653fbf59",
+              "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf"
+            },
+            {
+              "cv_id": "cv_943da331",
+              "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_916fd244",
+              "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf"
+            },
+            {
+              "cv_id": "cv_ffc6d564",
+              "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf"
+            },
+            {
+              "cv_id": "cv_bbc748f9",
+              "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_7b0f7ab3",
+              "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_f01ac22c",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 3903.83,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 9.79,
+              "details": "Found 18 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "completed",
+              "duration_ms": 10027.56,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 0,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": null,
+          "timestamp": "2026-01-03T22:44:07.433370"
+        },
+        {
+          "id": "f6c2287e-1acd-4652-81ce-28b9068e9795",
+          "role": "user",
+          "content": "Who has startup experience?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-03T22:44:38.381408"
+        },
+        {
+          "id": "6491aded-e27a-4a6d-ae98-3fa20745a658",
+          "role": "assistant",
+          "content": ":::thinking\n**Understanding Query**The query asks to identify candidates with startup experience. The criteria to use is direct experience working at a startup company.**Inventory**I have CV **[data](cv:cv_bbc748f9)** for 10 candidates. I will look for keywords like \"startup\", \"founded\", or company names that suggest a startup environment.**Analysis**I will analyze each CV to identify relevant experience and rank them based on the depth and relevance of their startup involvement.**Decision**I will provide a list of candidates with startup experience, ranked by the strength of that experience.\n:::**Direct Answer**Based on the provided CV **[data](cv:cv_bbc748f9)**, the candidates with startup experience are**[ Patrik Hübner Brand](cv:cv_dd668ac0)**, **[ Layla Hassan NFT](cv:cv_71736e47)**, **[ Luca Müller Cloud](cv:cv_fe6338e6)**, and **[ Mei-Ling Chen Human Resources](cv:cv_ffc6d564)**.\n\n**Analysis**| Candidate | Key Skills | Experience | Score |\n|-----------|------------|------------|-------|\n|**[ Layla Hassan NFT](cv:cv_71736e47)**| Solidity, Ethereum, Smart Contracts | Built full-stack web applications and contributed to early blockchain experiments at TechStart Pty Ltd; Launched an ERC-20 token with a $5M market cap at BlockSync Technologies | ⭐⭐⭐⭐ |\n|**[ Luca Müller Cloud](cv:cv_fe6338e6)**| AWS **[Cloud](cv:cv_fe6338e6)**, Kubernetes, Terraform | Built and operated **[cloud](cv:cv_fe6338e6)** environments for a fast-growing startup at TechStart GmbH | ⭐⭐⭐⭐ |\n|**[ Mei-Ling Chen Human Resources](cv:cv_ffc6d564)**| Talent Acquisition, Employee Relations, HRIS Platforms | HR Coordinator at Start‑Up Logística | ⭐⭐⭐ |\n|**[ Patrik Hübner Brand](cv:cv_dd668ac0)**| **[Brand](cv:cv_dd668ac0)** Materials, Market Research, User Testing | Supported the development of a **[brand](cv:cv_dd668ac0)** identity for a start-up that secured Series A funding at DesignLab GmbH | ⭐⭐⭐ |\n\n:::conclusion\nThe candidates with startup experience, ranked by the strength of that experience, are**[ Layla Hassan NFT](cv:cv_71736e47)**, **[ Luca Müller Cloud](cv:cv_fe6338e6)**, **[ Mei-Ling Chen Human Resources](cv:cv_ffc6d564)**, and **[ Patrik Hübner Brand](cv:cv_dd668ac0)**.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_dd668ac0",
+              "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_bbc748f9",
+              "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_71736e47",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_fe6338e6",
+              "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_653fbf59",
+              "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf"
+            },
+            {
+              "cv_id": "cv_943da331",
+              "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_916fd244",
+              "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf"
+            },
+            {
+              "cv_id": "cv_ffc6d564",
+              "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf"
+            },
+            {
+              "cv_id": "cv_f01ac22c",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_7b0f7ab3",
+              "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 3083.1,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 9.39,
+              "details": "Found 19 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "completed",
+              "duration_ms": 10960.06,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 0,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": null,
+          "timestamp": "2026-01-03T22:45:41.734723"
+        },
+        {
+          "id": "3244a384-4aea-4e41-a413-3dea51929535",
+          "role": "user",
+          "content": "Who has startup experience?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-03T22:59:16.916764"
         }
       ],
       "created_at": "2026-01-03T22:15:07.573740",
-      "updated_at": "2026-01-03T22:33:12.995853"
+      "updated_at": "2026-01-03T22:59:16.916764"
     }
   ]
 }

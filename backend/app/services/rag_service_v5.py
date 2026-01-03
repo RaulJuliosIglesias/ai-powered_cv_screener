@@ -285,6 +285,9 @@ class RAGResponseV5:
     verification: VerificationResultV5 | None = None
     reasoning_trace: str | None = None
     
+    # NEW: Structured output from OutputProcessor
+    structured_output: Any = None  # StructuredOutput object
+    
     # Pipeline steps for UI
     pipeline_steps: list[PipelineStep] = field(default_factory=list)
     
@@ -308,7 +311,8 @@ class RAGResponseV5:
             "timestamp": self.timestamp.isoformat(),
             "version": self.version,
             "reasoning_trace": self.reasoning_trace[:500] if self.reasoning_trace else None,
-            "pipeline_steps": [s.to_dict() for s in self.pipeline_steps]
+            "pipeline_steps": [s.to_dict() for s in self.pipeline_steps],
+            "structured_output": self.structured_output.to_dict() if self.structured_output else None
         }
 
 
@@ -1396,7 +1400,9 @@ Provide a corrected response:"""
             return name
     
     def _build_success_response(self, ctx: PipelineContextV5) -> RAGResponseV5:
-        """Build successful response with formatted reasoning blocks."""
+        """Build successful response with structured output processing."""
+        from app.services.output_processor import OutputProcessor
+        
         sources = []
         seen_ids = set()
         
@@ -1413,14 +1419,23 @@ Provide a corrected response:"""
         if ctx.verification_result:
             confidence = ctx.verification_result.groundedness_score
         
-        # Format the final answer with reasoning blocks
-        formatted_answer = self._format_answer_with_blocks(ctx)
+        # NEW: Process output with modular OutputProcessor
+        logger.info("[RAG] Processing LLM output with OutputProcessor")
+        processor = OutputProcessor()
+        structured_output = processor.process(
+            raw_llm_output=ctx.generated_response or "",
+            chunks=ctx.effective_chunks
+        )
+        
+        # Use raw content for backward compatibility, structured_output for new features
+        formatted_answer = structured_output.raw_content
         
         # Build pipeline steps from metrics for UI
         pipeline_steps = self._build_pipeline_steps(ctx)
         
         return RAGResponseV5(
             answer=formatted_answer,
+            structured_output=structured_output,
             sources=sources,
             metrics=ctx.metrics,
             confidence_score=confidence,
@@ -1555,6 +1570,10 @@ Provide a corrected response:"""
             r'**[\1](cv:cv_\2)**',
             text
         )
+        
+        # Fix broken bold format: "** Name**" or "** Name **" -> "**Name**"
+        # This happens when LLM adds space after opening **
+        text = re.sub(r'\*\*\s+([^*]+?)\s*\*\*', r'**\1**', text)
         
         # Pattern: "**Word** cv_xxx [cv_xxx](cv_xxx)" in middle of text
         # Example: "AWS Certified **Solutions** cv_5c64ca1d [cv_5c64ca1d](cv_5c64ca1d) Architect"

@@ -462,8 +462,23 @@ async def chat_in_session(
         logger.exception("Full traceback:")
         raise
     
-    # Save assistant message
-    mgr.add_message(session_id, "assistant", result.answer, result.sources)
+    # Convert metrics to dict if it has to_dict method
+    metrics_dict = result.metrics.to_dict() if hasattr(result.metrics, 'to_dict') else result.metrics
+    
+    # Extract pipeline_steps FIRST before saving
+    pipeline_steps = []
+    if hasattr(result, 'pipeline_steps') and result.pipeline_steps:
+        pipeline_steps = [s.to_dict() for s in result.pipeline_steps]
+    logger.info(f"[CHAT] Extracted {len(pipeline_steps)} pipeline steps from result")
+    
+    # Extract structured_output
+    structured_output = None
+    if hasattr(result, 'structured_output') and result.structured_output:
+        structured_output = result.structured_output.to_dict()
+        logger.info(f"[CHAT] Extracted structured_output: thinking={'✓' if structured_output.get('thinking') else '✗'}, table={'✓' if structured_output.get('table_data') else '✗'}")
+    
+    # Save assistant message with pipeline_steps and structured_output
+    mgr.add_message(session_id, "assistant", result.answer, result.sources, pipeline_steps, structured_output)
     
     # Include query understanding info in response
     query_understanding_info = None
@@ -484,14 +499,6 @@ async def chat_in_session(
     verification_info = None
     if hasattr(result, 'verification_info') and result.verification_info:
         verification_info = result.verification_info
-    
-    # Convert metrics to dict if it has to_dict method
-    metrics_dict = result.metrics.to_dict() if hasattr(result.metrics, 'to_dict') else result.metrics
-    
-    # Include pipeline_steps in response
-    pipeline_steps = []
-    if hasattr(result, 'pipeline_steps') and result.pipeline_steps:
-        pipeline_steps = [s.to_dict() for s in result.pipeline_steps]
     
     return ChatResponse(
         response=result.answer,
