@@ -1241,22 +1241,22 @@
           "timestamp": "2026-01-03T19:45:41.522637"
         },
         {
-          "id": "ca29a39a-7bc3-473f-b6d4-d92ff880a7d3",
+          "id": "4a598139-a0d2-451b-b0b8-a84044ac4399",
           "role": "user",
           "content": "dame el mejro game developer full stack webgl",
           "sources": [],
-          "timestamp": "2026-01-03T19:45:58.651469"
+          "timestamp": "2026-01-03T19:50:49.121538"
         },
         {
-          "id": "d19bdcf6-d5e9-4b01-8438-2e2cbbc410bf",
+          "id": "51a257cd-a68c-47c5-865a-7dc2ec6b15d9",
           "role": "assistant",
           "content": "I can only help with CV screening and candidate analysis. Please ask a question about the uploaded CVs.",
           "sources": [],
-          "timestamp": "2026-01-03T19:46:03.704735"
+          "timestamp": "2026-01-03T19:50:53.004688"
         }
       ],
       "created_at": "2026-01-03T15:41:18.352784",
-      "updated_at": "2026-01-03T19:46:03.704735"
+      "updated_at": "2026-01-03T19:50:53.004688"
     },
     {
       "id": "2503f62f-8b3e-4c9d-9918-a4d4c602b038",

@@ -53,8 +53,8 @@ function App() {
   // { current: 0, total: 5, status: 'deleting' | 'completed', logs: ['Deleting CV 1/5...'] }
 
   const openPdfViewer = (cvId, filename) => {
-    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-    const url = `${baseUrl}/api/cvs/${cvId}/pdf`;
+    // Use port 8002 to match backend, or use proxy via /api
+    const url = `/api/cvs/${cvId}/pdf`;
     // Open directly in new tab
     window.open(url, '_blank');
   };
@@ -102,24 +102,24 @@ function App() {
     // Also remove any remaining :::conclusion text that wasn't matched
     text = text.replace(/:::conclusion\s*/g, '');
     
-    // Convert various CV reference formats to: Name + 📄 icon (NEVER name as link)
-    // Format 1: [CV:cv_id] -> 📄 icon only
-    text = text.replace(/\[CV:(cv_[a-z0-9_-]+)\]/gi, '[📄]($1)');
+    // Convert various CV reference formats to: Name + icon link (no emoji, just link that renders as button)
+    // Format 1: [CV:cv_id] -> link only (renders as FileText icon button)
+    text = text.replace(/\[CV:(cv_[a-z0-9_-]+)\]/gi, '[$1]($1)');
     
-    // Format 2: **[Name](cv:cv_id)** -> **Name** + 📄 icon
-    text = text.replace(/\*\*\[([^\]]+)\]\(cv:(cv_[a-z0-9_-]+)\)\*\*/gi, '**$1** [📄]($2)');
+    // Format 2: **[Name](cv:cv_id)** -> **Name** + icon link
+    text = text.replace(/\*\*\[([^\]]+)\]\(cv:(cv_[a-z0-9_-]+)\)\*\*/gi, '**$1** [$2]($2)');
     
-    // Format 3: [Name](cv:cv_id) -> Name + 📄 icon
-    text = text.replace(/\[([^\]]+)\]\(cv:(cv_[a-z0-9_-]+)\)/gi, '$1 [📄]($2)');
+    // Format 3: [Name](cv:cv_id) -> Name + icon link
+    text = text.replace(/\[([^\]]+)\]\(cv:(cv_[a-z0-9_-]+)\)/gi, '$1 [$2]($2)');
     
-    // Format 4: **[Name](cv_id)** direct link -> **Name** + 📄 icon
-    text = text.replace(/\*\*\[([^\]]+)\]\((cv_[a-z0-9_-]+)\)\*\*/gi, '**$1** [📄]($2)');
+    // Format 4: **[Name](cv_id)** direct link -> **Name** + icon link
+    text = text.replace(/\*\*\[([^\]]+)\]\((cv_[a-z0-9_-]+)\)\*\*/gi, '**$1** [$2]($2)');
     
-    // Format 5: [Name](cv_id) direct link -> Name + 📄 icon (CRITICAL - prevents name as link)
-    text = text.replace(/\[([^\]]+)\]\((cv_[a-z0-9_-]+)\)/gi, '$1 [📄]($2)');
+    // Format 5: [Name](cv_id) direct link -> Name + icon link (CRITICAL - prevents name as link)
+    text = text.replace(/\[([^\]]+)\]\((cv_[a-z0-9_-]+)\)/gi, '$1 [$2]($2)');
     
-    // Format 6: (cv:cv_id) standalone -> 📄 icon
-    text = text.replace(/\(cv:(cv_[a-z0-9_-]+)\)/gi, ' [📄]($1)');
+    // Format 6: (cv:cv_id) standalone -> icon link
+    text = text.replace(/\(cv:(cv_[a-z0-9_-]+)\)/gi, ' [$1]($1)');
     
     // Clean up multiple newlines
     text = text.replace(/\n{3,}/g, '\n\n').trim();
@@ -846,14 +846,14 @@ function App() {
                                         },
                                       }}
                                     >
-                                      {/* Process conclusion content to convert CV references to clickable links */}
+                                      {/* Process conclusion content to convert CV references to clickable links (no emoji, just link) */}
                                       {conclusionContent
-                                        .replace(/\*\*\[([^\]]+)\]\(cv:(cv_[a-z0-9_-]+)\)\*\*/gi, '**$1** [📄]($2)')
-                                        .replace(/\[([^\]]+)\]\(cv:(cv_[a-z0-9_-]+)\)/gi, '$1 [📄]($2)')
-                                        .replace(/\*\*\[([^\]]+)\]\((cv_[a-z0-9_-]+)\)\*\*/gi, '**$1** [📄]($2)')
-                                        .replace(/\[([^\]]+)\]\((cv_[a-z0-9_-]+)\)/gi, '$1 [📄]($2)')
-                                        .replace(/\[CV:(cv_[a-z0-9_-]+)\]/gi, '[📄]($1)')
-                                        .replace(/\(cv:(cv_[a-z0-9_-]+)\)/gi, ' [📄]($1)')}
+                                        .replace(/\*\*\[([^\]]+)\]\(cv:(cv_[a-z0-9_-]+)\)\*\*/gi, '**$1** [$2]($2)')
+                                        .replace(/\[([^\]]+)\]\(cv:(cv_[a-z0-9_-]+)\)/gi, '$1 [$2]($2)')
+                                        .replace(/\*\*\[([^\]]+)\]\((cv_[a-z0-9_-]+)\)\*\*/gi, '**$1** [$2]($2)')
+                                        .replace(/\[([^\]]+)\]\((cv_[a-z0-9_-]+)\)/gi, '$1 [$2]($2)')
+                                        .replace(/\[CV:(cv_[a-z0-9_-]+)\]/gi, '[$1]($1)')
+                                        .replace(/\(cv:(cv_[a-z0-9_-]+)\)/gi, ' [$1]($1)')}
                                     </ReactMarkdown>
                                   </div>
                                 </div>
