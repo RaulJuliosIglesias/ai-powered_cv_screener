@@ -1,544 +1,300 @@
 {
   "sessions": [
     {
-      "id": "71fb9f05-5436-4ce4-a09f-aa9fed938e6d",
-      "name": "test1",
+      "id": "a4a5af29-e82b-411d-958b-29d716137f32",
+      "name": "CV-TEST1",
       "description": "",
       "cvs": [
         {
-          "id": "cv_f7d00515",
-          "filename": "CV_Charlotte_Brown_d2aa1975_20260102_141057.pdf",
-          "chunk_count": 8,
-          "uploaded_at": "2026-01-02T17:24:17.889335"
+          "id": "cv_a4d5200b",
+          "filename": "0d9c2ed3_Isabella_Rodriguez_Cloud_Infrastructure_Engineer.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T11:10:30.289293"
         },
         {
-          "id": "cv_7f1f7503",
-          "filename": "CV_David_Wilson_553eb84a_20260102_142306.pdf",
-          "chunk_count": 6,
-          "uploaded_at": "2026-01-02T17:24:17.927369"
+          "id": "cv_42f2e850",
+          "filename": "0f8a3160_Kwame_Nkrumah_Android_Developer_with_a_Focus_on_UI-UX_Optimization.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T11:10:30.406344"
         },
         {
-          "id": "cv_9e0b4aa2",
-          "filename": "CV_Emily_Johnson_6ca477b5_20260102_141821.pdf",
-          "chunk_count": 6,
-          "uploaded_at": "2026-01-02T17:24:17.969437"
+          "id": "cv_d8a90c94",
+          "filename": "1c6800d5_Gabriela_Mendoza_AI_Engineer_specializing_in_Natural_Language_Processing.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T11:10:30.529109"
         },
         {
-          "id": "cv_7464f640",
-          "filename": "CV_Emily_Johnson_19bf56e4_20260102_144805.pdf",
+          "id": "cv_92e50968",
+          "filename": "1d7db204_Layla_Al-Mansoor_iOS_Specialist_focused_on_Accessibility.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T11:10:30.674262"
+        },
+        {
+          "id": "cv_3ccf7e3e",
+          "filename": "2ae5b253_Anika_Mehta_Senior_Product_Manager_specializing_in_AI-driven_SaaS_solutions.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T11:10:30.858121"
+        },
+        {
+          "id": "cv_d685100f",
+          "filename": "2b5ee074_Lucas_Almeida_Junior_DevOps_Engineer.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-03T11:10:30.960257"
+        },
+        {
+          "id": "cv_10a13ace",
+          "filename": "3b1d2ca8_Aisha_Nkrumah_Senior_UX-UI_Designer_with_a_focus_on_Inclusive_Digital_Experiences.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T11:10:31.087338"
+        },
+        {
+          "id": "cv_ca8ccf01",
+          "filename": "4c6fd16c_Rahul_Mehta_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T11:10:31.196989"
+        },
+        {
+          "id": "cv_aed81281",
+          "filename": "6d995c33_Meera_Khan_Full_Stack_Developer_with_a_focus_on_JavaScript_Frameworks.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T11:10:31.760331"
+        },
+        {
+          "id": "cv_93575faf",
+          "filename": "8f745b31_Aisha_Oluwaseun_Lead_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T11:10:31.900068"
+        },
+        {
+          "id": "cv_10175007",
+          "filename": "8fde35dc_Javier_Morales_Junior_System_Architect_focused_on_Cloud_Integration.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T11:10:32.161031"
+        },
+        {
+          "id": "cv_19100add",
+          "filename": "9f9a38b4_Aisha_Johnson_Blockchain_Developer_specializing_in_Smart_Contracts.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T11:10:32.402622"
+        },
+        {
+          "id": "cv_e0dabcca",
+          "filename": "37df0382_Rahul_Kapoor_Full_Stack_Developer_with_a_focus_on_E-commerce_Solutions.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T11:10:32.514097"
+        },
+        {
+          "id": "cv_b7a3235d",
+          "filename": "057cb342_Kwame_Nkrumah_Product_Manager_specializing_in_Fintech_Solutions.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T11:10:32.649822"
+        },
+        {
+          "id": "cv_eac6212e",
+          "filename": "542b1562_Idriss_Diop_AI_Engineer_specializing_in_Natural_Language_Processing.pdf",
           "chunk_count": 7,
-          "uploaded_at": "2026-01-02T17:24:18.010438"
+          "uploaded_at": "2026-01-03T11:10:32.840877"
         },
         {
-          "id": "cv_29c0d60d",
-          "filename": "CV_James_Wilson_3db222f6_20260102_141055.pdf",
-          "chunk_count": 8,
-          "uploaded_at": "2026-01-02T17:24:18.055145"
+          "id": "cv_071163d6",
+          "filename": "1228af19_Gregory_Michael_Thompson_Full_Stack_Developer_with_a_focus_on_Legacy_System_Modernization.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T11:10:33.005184"
         },
         {
-          "id": "cv_4bc29d57",
-          "filename": "CV_James_Wilson_51587388_20260102_141055.pdf",
-          "chunk_count": 8,
-          "uploaded_at": "2026-01-02T17:24:18.100143"
+          "id": "cv_72730ef9",
+          "filename": "0530309b_Kwame_Adjei_Full_Stack_Developer_with_a_focus_on_Legacy_System_Modernization.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T11:10:33.175977"
         },
         {
-          "id": "cv_f17e7779",
-          "filename": "CV_James_Wilson_f65a824a_20260102_141056.pdf",
-          "chunk_count": 8,
-          "uploaded_at": "2026-01-02T17:24:18.149203"
+          "id": "cv_6f08a5a9",
+          "filename": "3847227c_Lukas_Weber_Full_Stack_Developer_with_a_focus_on_JavaScript_and_Python.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T11:10:33.448114"
         },
         {
-          "id": "cv_ae3ba1eb",
-          "filename": "CV_Jessica_Davis_122c0c7d_20260102_141822.pdf",
-          "chunk_count": 6,
-          "uploaded_at": "2026-01-02T17:24:18.197294"
+          "id": "cv_8c49a52b",
+          "filename": "7776618a_Kenji_Tanaka_Cybersecurity_Analyst_specializing_in_Threat_Intelligence.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T11:10:33.581580"
         },
         {
-          "id": "cv_d8b1f275",
-          "filename": "CV_John_Smith_7ba9bd53_20260102_141822.pdf",
-          "chunk_count": 6,
-          "uploaded_at": "2026-01-02T17:24:18.246295"
+          "id": "cv_293f36eb",
+          "filename": "62893701_Aisha_Okafor_Full_Stack_Developer_with_a_focus_on_JavaScript_Frameworks.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-03T11:10:33.681119"
         },
         {
-          "id": "cv_4ab0844a",
-          "filename": "CV_John_Smith_a3ace876_20260102_144805.pdf",
+          "id": "cv_c099c91d",
+          "filename": "a6d5e5f0_Aiko_Tanaka_iOS_Developer_with_a_Focus_on_User_Experience.pdf",
+          "chunk_count": 9,
+          "uploaded_at": "2026-01-03T11:10:33.956466"
+        },
+        {
+          "id": "cv_9cdcd4f3",
+          "filename": "b684a994_Isabel_Mendoza_Narrative_Designer_for_Indie_Games.pdf",
+          "chunk_count": 12,
+          "uploaded_at": "2026-01-03T11:10:34.403707"
+        },
+        {
+          "id": "cv_f28cc08a",
+          "filename": "c8b5a9c4_Rajiv_Mehta_Unity_Developer_specializing_in_Mobile_Game_Optimization.pdf",
           "chunk_count": 7,
-          "uploaded_at": "2026-01-02T17:24:18.295918"
+          "uploaded_at": "2026-01-03T11:10:34.739987"
         },
         {
-          "id": "cv_16ff4c85",
-          "filename": "CV_Michael_Brown_91c72a4e_20260102_142306.pdf",
-          "chunk_count": 6,
-          "uploaded_at": "2026-01-02T17:24:18.346026"
+          "id": "cv_436ccd7e",
+          "filename": "c15227b5_Lucía_Martínez_Full_Stack_Developer_with_a_focus_on_JavaScript_frameworks.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T11:10:34.907636"
         },
         {
-          "id": "cv_76fd444c",
-          "filename": "CV_Michael_Brown_f110849f_20260102_142306.pdf",
-          "chunk_count": 6,
-          "uploaded_at": "2026-01-02T17:24:18.399512"
+          "id": "cv_158f97ea",
+          "filename": "d1ce196d_Lucien_Moreau_Full_Stack_Developer_with_a_Focus_on_Scalable_Backend_Solutions.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T11:10:35.277340"
         },
         {
-          "id": "cv_f1e04d47",
-          "filename": "CV_Olivia_Davis_a4476fe5_20260102_141057.pdf",
+          "id": "cv_4bef867f",
+          "filename": "d5d2fe01_Ling_Zhang_Full_Stack_Developer_with_a_focus_on_Legacy_System_Modernization.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T11:10:35.495878"
+        },
+        {
+          "id": "cv_04709a7c",
+          "filename": "d027f235_Amélie_Moreau_Blockchain_Developer_specializing_in_Smart_Contracts.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-03T11:10:35.756658"
+        },
+        {
+          "id": "cv_cd5740f6",
+          "filename": "e64adbb5_Arjun_Mehta_Senior_Gameplay_Programmer_with_a_focus_on_Multiplayer_Systems.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T11:10:35.933205"
+        },
+        {
+          "id": "cv_a587fafb",
+          "filename": "f5c89f3b_Ling_Chen_Cybersecurity_Analyst_with_a_focus_on_Threat_Intelligence.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-03T11:10:36.227364"
+        },
+        {
+          "id": "cv_63357135",
+          "filename": "ffe9def4_Aisha_Okafor_AI_Engineer_specializing_in_Natural_Language_Processing.pdf",
           "chunk_count": 8,
-          "uploaded_at": "2026-01-02T17:24:18.453469"
-        },
-        {
-          "id": "cv_ff5f58b0",
-          "filename": "CV_Sarah_Williams_5022c7fb_20260102_144806.pdf",
-          "chunk_count": 7,
-          "uploaded_at": "2026-01-02T17:24:18.507725"
+          "uploaded_at": "2026-01-03T11:10:36.392833"
         }
       ],
       "messages": [
         {
-          "id": "734bc228-6117-48ce-abaf-f0cd08963157",
+          "id": "fb4e32b9-d9d8-491c-8f77-bb58617ae63a",
           "role": "user",
-          "content": "Compare the experience levels of all 14 candidates",
+          "content": "Compare the experience levels of all 32 candidates",
           "sources": [],
-          "timestamp": "2026-01-02T17:24:50.797649"
+          "timestamp": "2026-01-03T11:10:39.795702"
         },
         {
-          "id": "a67754a8-52e7-40a2-9913-daf166d12b0c",
+          "id": "0c68ea94-56a7-4824-9c10-363392f6d764",
           "role": "assistant",
-          "content": "I don't have information about that in the uploaded CVs. The excerpts provided only include details for five candidates: John Smith, James Wilson, Olivia Davis, and Jessica Davis. \n\nHere is a comparison of their experience levels based on the available information:\n\n1. **John Smith**\n   - **Position**: Senior Any\n   - **Company**: Global Systems Corp\n   - **Years of Experience**: 2021 - Present (2 years)\n   - **Previous Position**: Any at Enterprise Tech (2018 - 2021, 3 years)\n   - **Total Experience**: 5 years\n\n2. **James Wilson**\n   - **Position**: Senior Full Stack Developer\n   - **Company**: Innovation Labs\n   - **Years of Experience**: 2021 - Present (2 years)\n   - **Previous Position**: Full Stack Developer at Cloud Services Ltd (2018 - 2021, 3 years)\n   - **Total Experience**: 5 years\n\n3. **James Wilson (Alternate CV)**\n   - **Position**: Senior Full Stack Developer\n   - **Company**: Innovation Labs\n   - **Years of Experience**: 2021 - Present (2 years)\n   - **Previous Position**: Full Stack Developer at StartUp Co (2018 - 2021, 3 years)\n   - **Total Experience**: 5 years\n\n4. **Olivia Davis**\n   - **Position**: Senior Full Stack Developer\n   - **Company**: Tech Solutions Inc\n   - **Years of Experience**: 2021 - Present (2 years)\n   - **Previous Position**: Full Stack Developer at StartUp Co (2018 - 2021, 3 years)\n   - **Total Experience**: 5 years\n\n5. **Jessica Davis**\n   - **Position**: Senior Software Developer\n   - **Company**: Global Systems Corp\n   - **Years of Experience**: 2021 - Present (2 years)\n   - **Previous Position**: Software Developer at Cloud Services Ltd (2018 - 2021, 3 years)\n   - **Total Experience**: 5 years\n\nAll candidates have a total of 5 years of experience, with 2 years in their current senior roles and 3 years in their previous positions. \n\nCited sources: CV_John_Smith_a3ace876_20260102_144805.pdf, CV_James_Wilson_f65a824a_20260102_141056.pdf, CV_James_Wilson_3db222f6_20260102_141055.pdf, CV_Olivia_Davis_a4476fe5_20260102_141057.pdf, CV_Jessica_Davis_122c0c7d_20260102_141822.pdf.",
+          "content": "## Candidate Experience Comparison\n\n### Unique Candidates Identified\nThe CV data provided includes 18 unique candidates. Below is a structured comparison of their experience levels based on the information available.\n\n### Experience Overview Table\n\n| **Candidate Name**          | **Role**                               | **Experience Duration** | **Key Achievements**                                                                                     |\n|-----------------------------|----------------------------------------|-------------------------|----------------------------------------------------------------------------------------------------------|\n| **Kwame Adjei**             | Full Stack Developer                   | 1995 - 2005             | - Led modernization of legacy systems<br>- Mentored junior developers                                     |\n| **Ling Zhang**              | Full Stack Developer                   | 2023                    | - Led large-scale migrations to microservices<br>- Reduced maintenance costs by 45%                       |\n| **Kwame Nkrumah**           | Product Manager                        | 2017 - 2019             | - Launched scalable payment platforms<br>- Increased transaction volume by 150%                           |\n| **Lukas Schneider**         | Senior Unity Developer                 | 2019 - 2021             | - Developed VR projects reaching 2.5 million users<br>- Reduced rendering times by 75%                   |\n| **Aiko Tanaka**             | iOS Developer                          | 2019 - 2020             | - Designed onboarding flow boosting retention by 18%                                                      |\n| **Isabel Mendoza**          | Narrative Designer                     | Not specified           | - Contributed to experimental games showcased at festivals<br>- Co-authored research paper                |\n| **Rahul Kapoor**            | Full Stack Developer                   | Not specified           | - Built scalable e-commerce platforms<br>- Led cross-functional teams                                     |\n| **Meera Khan**              | Full Stack Developer                   | Not specified           | - Delivered high-quality user-centric solutions<br>- Passionate about collaborative problem-solving       |\n| **Aisha Oluwaseun**         | Lead Data Scientist                    | 2010 - 2015             | - Designed predictive models improving patient outcomes<br>- Authored 15 peer-reviewed publications        |\n| **Anika Mehta**             | Senior Product Manager                 | 2010 - 2014             | - Scaled products to $50M ARR<br>- Optimized workflow saving $1.2M annually                              |\n| **Kenji Tanaka**            | Cybersecurity Analyst                  | Not specified           | - Delivered actionable intelligence for risk mitigation<br>- Passionate about mentoring junior analysts    |\n| **Isabella Rodriguez**      | Cloud Infrastructure Engineer          | Not specified           | - Transitioned 15 clients to cloud infrastructure<br>- Improved team efficiency by 30%                   |\n| **Javier Morales**          | Junior System Architect                | 2020 - 2021             | - Designed monitoring solutions for microservices<br>- Automated infrastructure provisioning              |\n| **Rahul Mehta**             | Data Scientist                         | Not specified           | - Expert in predictive modeling and machine learning pipelines                                            |\n| **Rajiv Mehta**            | Unity Developer                        | 2019 - 2021             | - Delivered AAA-quality mobile games<br>- Implemented advanced optimization techniques                    |\n| **Lucía Martínez**          | Full Stack Developer                   | Not specified           | - Experience in web technologies and distributed systems                                                  |\n| **Gregory Michael Thompson** | Full Stack Developer                   | Not specified           | - Led migrations to microservices<br>- Optimized cloud infrastructure                                      |\n| **Aiko Tanaka**             | iOS Developer                          | Not specified           | - Developed internal tools reducing ticket resolution time by 50%                                         |\n| **Kwame Nkrumah**           | Android Developer                      | Not specified           | - Specialized in UI/UX optimization<br>- Proven track record of enhancing user engagement                 |\n\n### Key Findings\n\n- **Most Experienced Candidates**:\n  - **Kwame Adjei**: 10 years of experience in full stack development with a focus on legacy systems.\n  - **Aisha Oluwaseun**: 5 years of experience in healthcare analytics with significant contributions to predictive modeling.\n  - **Anika Mehta**: 4 years of experience in product management with a strong record of scaling products.\n\n- **Recent Graduates**:\n  - **Ling Zhang**: Recently graduated and has already led significant projects in cloud-native solutions.\n  - **Javier Morales**: Has a brief experience as a junior system architect but has contributed to impactful projects.\n\n- **Candidates with Not Specified Experience**:\n  - Several candidates, including **Rahul Kapoor**, **Meera Khan**, **Kenji Tanaka**, and others, have not specified their experience duration, making it difficult to assess their overall experience level.\n\n### Conclusion\nThe candidates exhibit a diverse range of experiences across various domains, from full stack development to data science and product management. While some candidates have extensive experience, others are newer to the field or lack detailed experience information. This analysis highlights the strengths and gaps in experience among the candidates.\n\n### Sources\n- CV #1: Kwame Adjei\n- CV #2: Ling Zhang\n- CV #3: Kwame Nkrumah\n- CV #4: Lukas Schneider\n- CV #5: Aiko Tanaka\n- CV #6: Isabel Mendoza\n- CV #7: Rahul Kapoor\n- CV #8: Meera Khan\n- CV #9: Aisha Oluwaseun\n- CV #10: Anika Mehta\n- CV #11: Kenji Tanaka\n- CV #12: Isabella Rodriguez\n- CV #13: Javier Morales\n- CV #14: Rahul Mehta\n- CV #15: Rajiv Mehta\n- CV #16: Lucía Martínez\n- CV #17: Aiko Tanaka\n- CV #18: Kwame Nkrumah\n- CV #20: Gregory Michael Thompson",
           "sources": [
             {
-              "cv_id": "cv_4ab0844a",
-              "filename": "CV_John_Smith_a3ace876_20260102_144805.pdf",
-              "relevance": 0.502
+              "cv_id": "cv_72730ef9",
+              "filename": "0530309b_Kwame_Adjei_Full_Stack_Developer_with_a_focus_on_Legacy_System_Modernization.pdf",
+              "relevance": 0.652
             },
             {
-              "cv_id": "cv_f17e7779",
-              "filename": "CV_James_Wilson_f65a824a_20260102_141056.pdf",
-              "relevance": 0.463
+              "cv_id": "cv_4bef867f",
+              "filename": "d5d2fe01_Ling_Zhang_Full_Stack_Developer_with_a_focus_on_Legacy_System_Modernization.pdf",
+              "relevance": 0.651
             },
             {
-              "cv_id": "cv_29c0d60d",
-              "filename": "CV_James_Wilson_3db222f6_20260102_141055.pdf",
-              "relevance": 0.461
+              "cv_id": "cv_b7a3235d",
+              "filename": "057cb342_Kwame_Nkrumah_Product_Manager_specializing_in_Fintech_Solutions.pdf",
+              "relevance": 0.64
             },
             {
-              "cv_id": "cv_f1e04d47",
-              "filename": "CV_Olivia_Davis_a4476fe5_20260102_141057.pdf",
-              "relevance": 0.459
+              "cv_id": "cv_247143bd",
+              "filename": "5f931ae5_Lukas_Schneider_Unity_Developer_with_a_focus_on_VR-AR_experiences.pdf",
+              "relevance": 0.632
             },
             {
-              "cv_id": "cv_ae3ba1eb",
-              "filename": "CV_Jessica_Davis_122c0c7d_20260102_141822.pdf",
-              "relevance": 0.452
-            }
-          ],
-          "timestamp": "2026-01-02T17:25:03.558856"
-        },
-        {
-          "id": "c547ba92-360c-4587-b1b4-acb34fe1895b",
-          "role": "user",
-          "content": "dame una tabla con los mejroes eprfiels apra lead tech AI developer",
-          "sources": [],
-          "timestamp": "2026-01-02T17:25:55.989890"
-        },
-        {
-          "id": "a778cb52-e45a-457b-a0f3-a3cac057e1f9",
-          "role": "assistant",
-          "content": "I don't have information about specific **AI development** skills or experience in the uploaded CVs. All provided excerpts list the candidates as \"Senior Software Developers\" with general experience, but none mention \"AI,\" \"Artificial Intelligence,\" or \"Machine Learning.\"\n\nHowever, based on their current roles as **Senior Software Developers** (which involves \"leading initiatives\"), here are the candidates who currently hold senior leadership-level positions:\n\n| Candidate Name | Current Role (2021 - Present) | Previous Role (2018 - 2021) | Company (Current) |\n| :--- | :--- | :--- | :--- |\n| **David Wilson** | Senior Software Developer | Software Developer | Tech Solutions Inc |\n| **Emily Johnson** | Senior Software Developer | Software Developer | Tech Solutions Inc |\n| **John Smith** | Senior Software Developer | Software Developer | Innovation Labs |\n| **Michael Brown** | Senior Software Developer | Software Developer | Innovation Labs |\n\n### Detailed Candidate Information:\n\n*   **David Wilson**: Senior Software Developer at Tech Solutions Inc (2021-Present). Previously a Software Developer at Cloud Services Ltd (2018-2021).\n*   **Emily Johnson**: Senior Software Developer at Tech Solutions Inc (2021-Present). Previously a Software Developer at StartUp Co (2018-2021).\n*   **John Smith**: Senior Software Developer at Innovation Labs (2021-Present). Previously a Software Developer at Enterprise Tech (2018-2021).\n*   **Michael Brown**: Senior Software Developer at Innovation Labs (2021-Present). Previously a Software Developer at Enterprise Tech (2018-2021).\n\n**Sources:**\n*   CV_David_Wilson_553eb84a_20260102_142306.pdf\n*   CV_Emily_Johnson_6ca477b5_20260102_141821.pdf\n*   CV_John_Smith_7ba9bd53_20260102_141822.pdf\n*   CV_Michael_Brown_91c72a4e_20260102_142306.pdf\n*   CV_Michael_Brown_f110849f_20260102_142306.pdf",
-          "sources": [
-            {
-              "cv_id": "cv_7f1f7503",
-              "filename": "CV_David_Wilson_553eb84a_20260102_142306.pdf",
-              "relevance": 0.587
+              "cv_id": "cv_c099c91d",
+              "filename": "a6d5e5f0_Aiko_Tanaka_iOS_Developer_with_a_Focus_on_User_Experience.pdf",
+              "relevance": 0.62
             },
             {
-              "cv_id": "cv_9e0b4aa2",
-              "filename": "CV_Emily_Johnson_6ca477b5_20260102_141821.pdf",
-              "relevance": 0.586
+              "cv_id": "cv_9cdcd4f3",
+              "filename": "b684a994_Isabel_Mendoza_Narrative_Designer_for_Indie_Games.pdf",
+              "relevance": 0.619
             },
             {
-              "cv_id": "cv_d8b1f275",
-              "filename": "CV_John_Smith_7ba9bd53_20260102_141822.pdf",
-              "relevance": 0.572
+              "cv_id": "cv_e0dabcca",
+              "filename": "37df0382_Rahul_Kapoor_Full_Stack_Developer_with_a_focus_on_E-commerce_Solutions.pdf",
+              "relevance": 0.618
             },
             {
-              "cv_id": "cv_16ff4c85",
-              "filename": "CV_Michael_Brown_91c72a4e_20260102_142306.pdf",
-              "relevance": 0.572
+              "cv_id": "cv_aed81281",
+              "filename": "6d995c33_Meera_Khan_Full_Stack_Developer_with_a_focus_on_JavaScript_Frameworks.pdf",
+              "relevance": 0.616
             },
             {
-              "cv_id": "cv_76fd444c",
-              "filename": "CV_Michael_Brown_f110849f_20260102_142306.pdf",
-              "relevance": 0.572
-            }
-          ],
-          "timestamp": "2026-01-02T17:26:00.188749"
-        },
-        {
-          "id": "4e9ee13f-8e77-45f3-b510-1c22aaced39f",
-          "role": "user",
-          "content": "dame una tabla con los mejroes eprfiels apra lead tech AI developer",
-          "sources": [],
-          "timestamp": "2026-01-02T17:28:44.337143"
-        },
-        {
-          "id": "a936c6c8-1fe9-4b70-9811-1d939fd9a20c",
-          "role": "assistant",
-          "content": "## Candidate Analysis for Lead Tech AI Developer Profiles\n\n### Unique Candidates Identified\nThe following candidates were identified from the provided CV data:\n\n1. **David Wilson**\n2. **Emily Johnson**\n3. **John Smith**\n4. **Michael Brown** (two entries)\n5. **Charlotte Brown** (two entries)\n6. **Jessica Davis**\n7. **Olivia Davis**\n8. **James Wilson**\n\n### Relevant Information Extracted\n\n| Candidate Name      | Current Position                  | Previous Position            | Key Skills/Certifications                     |\n|---------------------|-----------------------------------|------------------------------|-----------------------------------------------|\n| **David Wilson**    | Senior Software Developer          | Software Developer            | Not specified                                 |\n| **Emily Johnson**   | Senior Software Developer          | Software Developer            | AWS Solutions Architect Professional (2023)  |\n| **John Smith**      | Senior Software Developer          | Software Developer            | AWS Solutions Architect Professional (2023)  |\n| **Michael Brown**   | Senior Software Developer          | Software Developer            | AWS Solutions Architect Professional (2023)  |\n| **Charlotte Brown** | Senior Software Developer          | Software Developer            | Not specified                                 |\n| **Jessica Davis**   | Senior Software Developer          | Software Developer            | Not specified                                 |\n| **Olivia Davis**    | Senior Full Stack Developer        | Full Stack Developer          | Not specified                                 |\n| **James Wilson**    | Experienced Full Stack Developer   | Not specified                 | Not specified                                 |\n\n### Key Findings\n\n- **Leadership Experience**: \n  - All candidates listed as **Senior Software Developers** have experience leading initiatives and collaborating with cross-functional teams, which is crucial for a Lead Tech AI Developer role.\n  \n- **Certifications**:\n  - **Emily Johnson**, **John Smith**, and **Michael Brown** have the **AWS Solutions Architect Professional** certification, which is valuable for cloud-based AI solutions.\n  \n- **Diversity of Roles**:\n  - **Olivia Davis** has experience as a **Senior Full Stack Developer**, indicating a broader skill set that may be beneficial for AI development, especially in full-stack applications.\n\n- **Experience Level**:\n  - All candidates have significant experience (3+ years) in software development, which is essential for a lead role.\n\n### Standout Candidates\n- **Emily Johnson**, **John Smith**, and **Michael Brown** stand out due to their **AWS Solutions Architect** certification, which is highly relevant for AI development in cloud environments.\n- **Olivia Davis** offers a unique perspective with her full-stack development experience, which can be advantageous in AI projects that require integration across various platforms.\n\n### Gaps in Information\n- **Charlotte Brown**, **Jessica Davis**, and **James Wilson** lack specific certifications or detailed project experience, which could be a disadvantage when competing for a lead role in AI development.\n\n### Conclusion\nFor a Lead Tech AI Developer position, candidates with both leadership experience and relevant certifications, such as **Emily Johnson**, **John Smith**, and **Michael Brown**, are the most qualified. Additionally, **Olivia Davis**'s full-stack experience adds a valuable dimension to her candidacy. \n\n### Sources\n- CV data excerpts from candidates listed above.",
-          "sources": [
-            {
-              "cv_id": "cv_7f1f7503",
-              "filename": "CV_David_Wilson_553eb84a_20260102_142306.pdf",
-              "relevance": 0.587
+              "cv_id": "cv_93575faf",
+              "filename": "8f745b31_Aisha_Oluwaseun_Lead_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
+              "relevance": 0.612
             },
             {
-              "cv_id": "cv_9e0b4aa2",
-              "filename": "CV_Emily_Johnson_6ca477b5_20260102_141821.pdf",
-              "relevance": 0.586
+              "cv_id": "cv_3ccf7e3e",
+              "filename": "2ae5b253_Anika_Mehta_Senior_Product_Manager_specializing_in_AI-driven_SaaS_solutions.pdf",
+              "relevance": 0.607
             },
             {
-              "cv_id": "cv_d8b1f275",
-              "filename": "CV_John_Smith_7ba9bd53_20260102_141822.pdf",
-              "relevance": 0.572
+              "cv_id": "cv_8c49a52b",
+              "filename": "7776618a_Kenji_Tanaka_Cybersecurity_Analyst_specializing_in_Threat_Intelligence.pdf",
+              "relevance": 0.607
             },
             {
-              "cv_id": "cv_16ff4c85",
-              "filename": "CV_Michael_Brown_91c72a4e_20260102_142306.pdf",
-              "relevance": 0.572
+              "cv_id": "cv_a4d5200b",
+              "filename": "0d9c2ed3_Isabella_Rodriguez_Cloud_Infrastructure_Engineer.pdf",
+              "relevance": 0.606
             },
             {
-              "cv_id": "cv_76fd444c",
-              "filename": "CV_Michael_Brown_f110849f_20260102_142306.pdf",
-              "relevance": 0.572
+              "cv_id": "cv_10175007",
+              "filename": "8fde35dc_Javier_Morales_Junior_System_Architect_focused_on_Cloud_Integration.pdf",
+              "relevance": 0.606
             },
             {
-              "cv_id": "cv_f7d00515",
-              "filename": "CV_Charlotte_Brown_d2aa1975_20260102_141057.pdf",
-              "relevance": 0.568
+              "cv_id": "cv_ca8ccf01",
+              "filename": "4c6fd16c_Rahul_Mehta_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
+              "relevance": 0.604
             },
             {
-              "cv_id": "cv_ae3ba1eb",
-              "filename": "CV_Jessica_Davis_122c0c7d_20260102_141822.pdf",
-              "relevance": 0.558
+              "cv_id": "cv_f28cc08a",
+              "filename": "c8b5a9c4_Rajiv_Mehta_Unity_Developer_specializing_in_Mobile_Game_Optimization.pdf",
+              "relevance": 0.602
             },
             {
-              "cv_id": "cv_f1e04d47",
-              "filename": "CV_Olivia_Davis_a4476fe5_20260102_141057.pdf",
-              "relevance": 0.54
+              "cv_id": "cv_436ccd7e",
+              "filename": "c15227b5_Lucía_Martínez_Full_Stack_Developer_with_a_focus_on_JavaScript_frameworks.pdf",
+              "relevance": 0.597
             },
             {
-              "cv_id": "cv_29c0d60d",
-              "filename": "CV_James_Wilson_3db222f6_20260102_141055.pdf",
-              "relevance": 0.518
-            }
-          ],
-          "timestamp": "2026-01-02T17:28:59.720124"
-        },
-        {
-          "id": "b6b83904-b444-4cd5-a680-41dea7d098f6",
-          "role": "user",
-          "content": "dame una tabla con todos los eprfiels para experiencia de IA",
-          "sources": [],
-          "timestamp": "2026-01-02T17:35:54.657514"
-        },
-        {
-          "id": "2f3dd29d-65a6-4ee1-8ca9-19c657580c11",
-          "role": "assistant",
-          "content": "## Candidate Analysis for AI Experience\n\nBased on the provided CV data, here is a comprehensive analysis of the candidates, focusing on their experience in software development, particularly in relation to AI. The candidates are listed along with their relevant experience.\n\n### Unique Candidates Identified\n\n| Candidate Name         | Role/Position                     | Company                | Years Active         | AI Experience          |\n|------------------------|-----------------------------------|-----------------------|----------------------|------------------------|\n| **Emily Johnson**      | Senior Software Developer         | Tech Solutions Inc    | 2021 - Present       | Not specified          |\n| **John Smith**         | Senior Software Developer         | Innovation Labs       | 2021 - Present       | Not specified          |\n| **Michael Brown**      | Senior Software Developer         | Innovation Labs       | 2021 - Present       | Not specified          |\n| **James Wilson**       | Senior Full Stack Developer       | Innovation Labs       | 2021 - Present       | Not specified          |\n| **Olivia Davis**       | Senior Full Stack Developer       | Tech Solutions Inc    | 2021 - Present       | Not specified          |\n| **Jessica Davis**      | Senior Software Developer         | Global Systems Corp   | 2021 - Present       | Not specified          |\n| **David Wilson**       | Senior Software Developer         | Tech Solutions Inc    | 2021 - Present       | Not specified          |\n| **Charlotte Brown**    | Senior Software Developer         | Innovation Labs       | 2021 - Present       | Not specified          |\n| **Sarah Williams**     | Senior Any                       | Innovation Labs       | 2021 - Present       | Not specified          |\n| **John Smith**         | Senior Any                       | Global Systems Corp   | 2021 - Present       | Not specified          |\n\n### Detailed Breakdown of Candidates\n\n- **Emily Johnson**\n  - **Role**: Senior Software Developer\n  - **Company**: Tech Solutions Inc\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **John Smith**\n  - **Role**: Senior Software Developer\n  - **Company**: Innovation Labs\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **Michael Brown**\n  - **Role**: Senior Software Developer\n  - **Company**: Innovation Labs\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **James Wilson**\n  - **Role**: Senior Full Stack Developer\n  - **Company**: Innovation Labs\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **Olivia Davis**\n  - **Role**: Senior Full Stack Developer\n  - **Company**: Tech Solutions Inc\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **Jessica Davis**\n  - **Role**: Senior Software Developer\n  - **Company**: Global Systems Corp\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **David Wilson**\n  - **Role**: Senior Software Developer\n  - **Company**: Tech Solutions Inc\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **Charlotte Brown**\n  - **Role**: Senior Software Developer\n  - **Company**: Innovation Labs\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **Sarah Williams**\n  - **Role**: Senior Any\n  - **Company**: Innovation Labs\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n- **John Smith** (duplicate entry)\n  - **Role**: Senior Any\n  - **Company**: Global Systems Corp\n  - **Years Active**: 2021 - Present\n  - **AI Experience**: Not specified\n\n### Summary of Findings\n\n- **All candidates** have experience as software developers or in related roles, primarily in senior positions.\n- **AI Experience** is **not specified** for any candidate, indicating a potential gap in relevant AI expertise.\n- The candidates have a consistent tenure of **2021 - Present** in their respective roles, suggesting they are currently active in the industry.\n\n### Conclusion\n\nThe analysis reveals that while all candidates have significant experience in software development, there is a notable absence of specific information regarding their experience in AI. This could be a critical factor for roles requiring AI expertise.\n\n### Sources\n- CV excerpts from candidates: Emily Johnson, John Smith, Michael Brown, James Wilson, Olivia Davis, Jessica Davis, David Wilson, Charlotte Brown, Sarah Williams.",
-          "sources": [
-            {
-              "cv_id": "cv_9e0b4aa2",
-              "filename": "CV_Emily_Johnson_6ca477b5_20260102_141821.pdf",
-              "relevance": 0.529
-            },
-            {
-              "cv_id": "cv_d8b1f275",
-              "filename": "CV_John_Smith_7ba9bd53_20260102_141822.pdf",
-              "relevance": 0.528
-            },
-            {
-              "cv_id": "cv_16ff4c85",
-              "filename": "CV_Michael_Brown_91c72a4e_20260102_142306.pdf",
-              "relevance": 0.528
-            },
-            {
-              "cv_id": "cv_76fd444c",
-              "filename": "CV_Michael_Brown_f110849f_20260102_142306.pdf",
-              "relevance": 0.528
-            },
-            {
-              "cv_id": "cv_29c0d60d",
-              "filename": "CV_James_Wilson_3db222f6_20260102_141055.pdf",
-              "relevance": 0.528
-            },
-            {
-              "cv_id": "cv_f17e7779",
-              "filename": "CV_James_Wilson_f65a824a_20260102_141056.pdf",
-              "relevance": 0.527
-            },
-            {
-              "cv_id": "cv_f1e04d47",
-              "filename": "CV_Olivia_Davis_a4476fe5_20260102_141057.pdf",
-              "relevance": 0.525
-            },
-            {
-              "cv_id": "cv_ae3ba1eb",
-              "filename": "CV_Jessica_Davis_122c0c7d_20260102_141822.pdf",
-              "relevance": 0.523
-            },
-            {
-              "cv_id": "cv_7f1f7503",
-              "filename": "CV_David_Wilson_553eb84a_20260102_142306.pdf",
-              "relevance": 0.518
-            },
-            {
-              "cv_id": "cv_7464f640",
-              "filename": "CV_Emily_Johnson_19bf56e4_20260102_144805.pdf",
-              "relevance": 0.518
-            },
-            {
-              "cv_id": "cv_ff5f58b0",
-              "filename": "CV_Sarah_Williams_5022c7fb_20260102_144806.pdf",
-              "relevance": 0.514
-            },
-            {
-              "cv_id": "cv_4ab0844a",
-              "filename": "CV_John_Smith_a3ace876_20260102_144805.pdf",
-              "relevance": 0.511
-            },
-            {
-              "cv_id": "cv_f7d00515",
-              "filename": "CV_Charlotte_Brown_d2aa1975_20260102_141057.pdf",
-              "relevance": 0.509
-            }
-          ],
-          "timestamp": "2026-01-02T17:36:14.271984"
-        },
-        {
-          "id": "a24aba60-19d2-4006-9fc0-228bce196e54",
-          "role": "user",
-          "content": "dame una tabla con la edadesde de los perfiles",
-          "sources": [],
-          "timestamp": "2026-01-02T17:52:03.469506"
-        },
-        {
-          "id": "7b492637-e0ba-490c-a51b-836cbf179b75",
-          "role": "assistant",
-          "content": "## Candidate Analysis\n\n### Unique Candidates Identified\nThe following unique candidates were identified from the provided CV excerpts:\n\n1. **James Wilson**\n2. **Olivia Davis**\n3. **Jessica Davis**\n4. **John Smith**\n5. **Michael Brown**\n6. **Charlotte Brown**\n7. **David Wilson**\n8. **Emily Johnson**\n\n### Age Information\nUnfortunately, the provided CV excerpts do not contain any information regarding the ages of the candidates. Therefore, we cannot provide a table with the ages of the profiles.\n\n### Summary of Candidates\nHere is a summary of the candidates based on their experience:\n\n| Candidate Name      | Current Position                     | Previous Position               | Years of Experience |\n|---------------------|-------------------------------------|---------------------------------|---------------------|\n| **James Wilson**    | Senior Full Stack Developer         | Full Stack Developer            | 5 years             |\n| **Olivia Davis**    | Senior Full Stack Developer         | Full Stack Developer            | 5 years             |\n| **Jessica Davis**   | Senior Software Developer           | Software Developer              | 5 years             |\n| **John Smith**      | Senior Software Developer           | Software Developer              | 5 years             |\n| **Michael Brown**   | Senior Software Developer           | Software Developer              | 5 years             |\n| **Charlotte Brown** | Senior Software Developer           | Software Developer              | 5 years             |\n| **David Wilson**    | Senior Software Developer           | Software Developer              | 5 years             |\n| **Emily Johnson**   | Senior Software Developer           | Software Developer              | 5 years             |\n\n### Key Findings\n- All candidates have a **current position** as a Senior Software Developer or Senior Full Stack Developer.\n- Each candidate has **5 years of experience** in their respective roles, indicating a strong background in software development.\n- **Age information** is not available for any candidate.\n\n### Conclusion\nWhile we have a comprehensive overview of the candidates' professional experience, the lack of age data prevents us from fulfilling the user's request for a table with ages. \n\n**Sources:**\n- CV #1, CV #2, CV #3, CV #4, CV #5, CV #6, CV #7, CV #8, CV #9, CV #10, CV #11, CV #12, CV #13, CV #14, CV #15, CV #16, CV #17, CV #18, CV #19, CV #20.",
-          "sources": [
-            {
-              "cv_id": "cv_f17e7779",
-              "filename": "CV_James_Wilson_f65a824a_20260102_141056.pdf",
-              "relevance": 0.501
-            },
-            {
-              "cv_id": "cv_29c0d60d",
-              "filename": "CV_James_Wilson_3db222f6_20260102_141055.pdf",
-              "relevance": 0.493
-            },
-            {
-              "cv_id": "cv_f1e04d47",
-              "filename": "CV_Olivia_Davis_a4476fe5_20260102_141057.pdf",
-              "relevance": 0.488
-            },
-            {
-              "cv_id": "cv_ae3ba1eb",
-              "filename": "CV_Jessica_Davis_122c0c7d_20260102_141822.pdf",
-              "relevance": 0.486
-            },
-            {
-              "cv_id": "cv_d8b1f275",
-              "filename": "CV_John_Smith_7ba9bd53_20260102_141822.pdf",
-              "relevance": 0.46
-            },
-            {
-              "cv_id": "cv_16ff4c85",
-              "filename": "CV_Michael_Brown_91c72a4e_20260102_142306.pdf",
-              "relevance": 0.46
-            },
-            {
-              "cv_id": "cv_76fd444c",
-              "filename": "CV_Michael_Brown_f110849f_20260102_142306.pdf",
-              "relevance": 0.46
-            },
-            {
-              "cv_id": "cv_f7d00515",
-              "filename": "CV_Charlotte_Brown_d2aa1975_20260102_141057.pdf",
-              "relevance": 0.456
-            },
-            {
-              "cv_id": "cv_7f1f7503",
-              "filename": "CV_David_Wilson_553eb84a_20260102_142306.pdf",
-              "relevance": 0.456
-            },
-            {
-              "cv_id": "cv_9e0b4aa2",
-              "filename": "CV_Emily_Johnson_6ca477b5_20260102_141821.pdf",
-              "relevance": 0.456
-            }
-          ],
-          "timestamp": "2026-01-02T17:52:18.762168"
-        },
-        {
-          "id": "ed6d5899-51ea-4e6e-813f-bbc572821813",
-          "role": "user",
-          "content": "dame una receta para tarta de queso",
-          "sources": [],
-          "timestamp": "2026-01-02T17:55:22.801252"
-        },
-        {
-          "id": "3ed389cb-4739-4dc6-ad9b-a3490b641ae0",
-          "role": "assistant",
-          "content": "",
-          "sources": [
-            {
-              "cv_id": "cv_ae3ba1eb",
-              "filename": "CV_Jessica_Davis_122c0c7d_20260102_141822.pdf",
-              "relevance": 0.506
-            },
-            {
-              "cv_id": "cv_7f1f7503",
-              "filename": "CV_David_Wilson_553eb84a_20260102_142306.pdf",
-              "relevance": 0.494
-            },
-            {
-              "cv_id": "cv_9e0b4aa2",
-              "filename": "CV_Emily_Johnson_6ca477b5_20260102_141821.pdf",
-              "relevance": 0.494
-            },
-            {
-              "cv_id": "cv_d8b1f275",
-              "filename": "CV_John_Smith_7ba9bd53_20260102_141822.pdf",
-              "relevance": 0.487
-            },
-            {
-              "cv_id": "cv_16ff4c85",
-              "filename": "CV_Michael_Brown_91c72a4e_20260102_142306.pdf",
-              "relevance": 0.487
-            },
-            {
-              "cv_id": "cv_76fd444c",
-              "filename": "CV_Michael_Brown_f110849f_20260102_142306.pdf",
-              "relevance": 0.487
-            },
-            {
-              "cv_id": "cv_f1e04d47",
-              "filename": "CV_Olivia_Davis_a4476fe5_20260102_141057.pdf",
-              "relevance": 0.48
-            },
-            {
-              "cv_id": "cv_f17e7779",
-              "filename": "CV_James_Wilson_f65a824a_20260102_141056.pdf",
-              "relevance": 0.477
-            },
-            {
-              "cv_id": "cv_29c0d60d",
-              "filename": "CV_James_Wilson_3db222f6_20260102_141055.pdf",
-              "relevance": 0.475
-            },
-            {
-              "cv_id": "cv_f7d00515",
-              "filename": "CV_Charlotte_Brown_d2aa1975_20260102_141057.pdf",
-              "relevance": 0.46
-            },
-            {
-              "cv_id": "cv_4ab0844a",
-              "filename": "CV_John_Smith_a3ace876_20260102_144805.pdf",
-              "relevance": 0.46
-            },
-            {
-              "cv_id": "cv_7464f640",
-              "filename": "CV_Emily_Johnson_19bf56e4_20260102_144805.pdf",
-              "relevance": 0.453
-            }
-          ],
-          "timestamp": "2026-01-02T17:55:41.592872"
-        },
-        {
-          "id": "9204adfd-9672-4f48-9d97-d5ac017432b9",
-          "role": "user",
-          "content": "dame a el mejor ignenerio de backend",
-          "sources": [],
-          "timestamp": "2026-01-02T18:36:37.651910"
-        },
-        {
-          "id": "9bf9e6c6-8d19-46ad-ab26-32960fb36cd2",
-          "role": "assistant",
-          "content": "## Candidate Analysis for Backend Engineering\n\n### Unique Candidates Identified\nThe following candidates were identified from the provided CV excerpts:\n\n1. **James Wilson**\n2. **Olivia Davis**\n3. **Charlotte Brown**\n4. **David Wilson**\n5. **Emily Johnson**\n6. **Jessica Davis**\n7. **John Smith**\n8. **Michael Brown**\n9. **Sarah Williams**\n\n### Relevant Information Extraction\n\n| Candidate Name      | Role                     | Experience Level | Notable Companies         | Additional Information                      |\n|---------------------|--------------------------|------------------|---------------------------|--------------------------------------------|\n| **James Wilson**    | Backend Developer         | Senior           | Innovation Labs           | Leading initiatives, collaborating with teams (CV #15) |\n| **Olivia Davis**    | Full Stack Developer      | Not specified     | Not specified             | Passion for delivering high-quality work (CV #4) |\n| **Charlotte Brown** | Software Developer        | Not specified     | Not specified             | Passion for delivering high-quality work (CV #5) |\n| **David Wilson**    | Software Developer        | Not specified     | Not specified             | Passion for delivering high-quality work (CV #6) |\n| **Emily Johnson**   | Software Developer        | Senior            | Tech Solutions Inc        | Leading initiatives, collaborating with teams (CV #20) |\n| **Jessica Davis**   | Software Developer        | Senior            | Global Systems Corp       | Leading initiatives, collaborating with teams (CV #16) |\n| **John Smith**      | Software Developer        | Senior            | Innovation Labs           | Leading initiatives, collaborating with teams (CV #17) |\n| **Michael Brown**   | Software Developer        | Senior            | Innovation Labs           | Leading initiatives, collaborating with teams (CV #18) |\n| **Sarah Williams**  | Not specified            | Not specified     | Not specified             | Passion for delivering high-quality work (CV #14) |\n\n### Analysis of Backend Engineering Candidates\n\n#### Standout Candidates\n- **James Wilson**\n  - **Role**: Senior Backend Developer\n  - **Experience**: Leading initiatives and collaborating with cross-functional teams.\n  - **Notable Companies**: Innovation Labs, Enterprise Tech.\n  \n- **Emily Johnson**\n  - **Role**: Senior Software Developer\n  - **Experience**: Leading initiatives and collaborating with cross-functional teams.\n  - **Notable Companies**: Tech Solutions Inc, StartUp Co.\n\n- **John Smith**\n  - **Role**: Senior Software Developer\n  - **Experience**: Leading initiatives and collaborating with cross-functional teams.\n  - **Notable Companies**: Innovation Labs, Enterprise Tech.\n\n- **Michael Brown**\n  - **Role**: Senior Software Developer\n  - **Experience**: Leading initiatives and collaborating with cross-functional teams.\n  - **Notable Companies**: Innovation Labs, Enterprise Tech.\n\n#### Candidates Lacking Specific Backend Experience\n- **Olivia Davis**, **Charlotte Brown**, **David Wilson**, **Jessica Davis**, and **Sarah Williams** do not have specified roles as Backend Developers or relevant experience in backend engineering.\n\n### Conclusion\nBased on the analysis, **James Wilson** stands out as the best candidate for a backend engineering role due to his specific experience as a **Senior Backend Developer** and his leadership in relevant projects. Other candidates like **Emily Johnson**, **John Smith**, and **Michael Brown** also have strong qualifications but are primarily positioned as Software Developers rather than specifically in backend roles.\n\n### Sources\n- CV #1, CV #15 (James Wilson)\n- CV #4 (Olivia Davis)\n- CV #5 (Charlotte Brown)\n- CV #6 (David Wilson)\n- CV #20 (Emily Johnson)\n- CV #16 (Jessica Davis)\n- CV #17 (John Smith)\n- CV #18, CV #19 (Michael Brown)\n- CV #14 (Sarah Williams)",
-          "sources": [
-            {
-              "cv_id": "cv_4bc29d57",
-              "filename": "CV_James_Wilson_51587388_20260102_141055.pdf",
+              "cv_id": "cv_42f2e850",
+              "filename": "0f8a3160_Kwame_Nkrumah_Android_Developer_with_a_Focus_on_UI-UX_Optimization.pdf",
               "relevance": 0.592
             },
             {
-              "cv_id": "cv_29c0d60d",
-              "filename": "CV_James_Wilson_3db222f6_20260102_141055.pdf",
-              "relevance": 0.548
-            },
-            {
-              "cv_id": "cv_f17e7779",
-              "filename": "CV_James_Wilson_f65a824a_20260102_141056.pdf",
-              "relevance": 0.548
-            },
-            {
-              "cv_id": "cv_f1e04d47",
-              "filename": "CV_Olivia_Davis_a4476fe5_20260102_141057.pdf",
-              "relevance": 0.548
-            },
-            {
-              "cv_id": "cv_f7d00515",
-              "filename": "CV_Charlotte_Brown_d2aa1975_20260102_141057.pdf",
-              "relevance": 0.546
-            },
-            {
-              "cv_id": "cv_7f1f7503",
-              "filename": "CV_David_Wilson_553eb84a_20260102_142306.pdf",
-              "relevance": 0.546
-            },
-            {
-              "cv_id": "cv_9e0b4aa2",
-              "filename": "CV_Emily_Johnson_6ca477b5_20260102_141821.pdf",
-              "relevance": 0.546
-            },
-            {
-              "cv_id": "cv_ae3ba1eb",
-              "filename": "CV_Jessica_Davis_122c0c7d_20260102_141822.pdf",
-              "relevance": 0.546
-            },
-            {
-              "cv_id": "cv_d8b1f275",
-              "filename": "CV_John_Smith_7ba9bd53_20260102_141822.pdf",
-              "relevance": 0.546
-            },
-            {
-              "cv_id": "cv_16ff4c85",
-              "filename": "CV_Michael_Brown_91c72a4e_20260102_142306.pdf",
-              "relevance": 0.546
-            },
-            {
-              "cv_id": "cv_76fd444c",
-              "filename": "CV_Michael_Brown_f110849f_20260102_142306.pdf",
-              "relevance": 0.546
-            },
-            {
-              "cv_id": "cv_7464f640",
-              "filename": "CV_Emily_Johnson_19bf56e4_20260102_144805.pdf",
-              "relevance": 0.537
-            },
-            {
-              "cv_id": "cv_4ab0844a",
-              "filename": "CV_John_Smith_a3ace876_20260102_144805.pdf",
-              "relevance": 0.537
-            },
-            {
-              "cv_id": "cv_ff5f58b0",
-              "filename": "CV_Sarah_Williams_5022c7fb_20260102_144806.pdf",
-              "relevance": 0.537
+              "cv_id": "cv_071163d6",
+              "filename": "1228af19_Gregory_Michael_Thompson_Full_Stack_Developer_with_a_focus_on_Legacy_System_Modernization.pdf",
+              "relevance": 0.583
             }
           ],
-          "timestamp": "2026-01-02T18:36:55.302369"
+          "timestamp": "2026-01-03T11:11:12.572146"
         }
       ],
-      "created_at": "2026-01-02T17:24:10.759202",
-      "updated_at": "2026-01-02T18:36:55.302369"
+      "created_at": "2026-01-03T11:10:22.276034",
+      "updated_at": "2026-01-03T11:18:17.248603"
     }
   ]
 }

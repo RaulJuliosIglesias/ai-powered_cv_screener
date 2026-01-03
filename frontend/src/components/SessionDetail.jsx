@@ -52,7 +52,10 @@ const SessionDetail = ({
 
   const handleFilesSelected = (e) => {
     const files = Array.from(e.target.files).filter(f => f.name.toLowerCase().endsWith('.pdf'));
-    setSelectedFiles(prev => [...prev, ...files]);
+    if (files.length > 0) {
+      setSelectedFiles(prev => [...prev, ...files]);
+    }
+    e.target.value = '';
   };
 
   const handleUpload = async () => {

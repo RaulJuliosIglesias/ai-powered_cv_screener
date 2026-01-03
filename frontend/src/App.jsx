@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy } from 'lucide-react';
+import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy, Eye } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import useMode from './hooks/useMode';
@@ -23,6 +23,9 @@ function App() {
   const [showSettings, setShowSettings] = useState(false);
   const [allCVs, setAllCVs] = useState([]);
   const [showCVPanel, setShowCVPanel] = useState(false);
+  const [cvPanelSessionId, setCvPanelSessionId] = useState(null);
+  const [cvPanelSession, setCvPanelSession] = useState(null);
+  const cvPanelFileInputRef = useRef(null);
   const [isLoadingMode, setIsLoadingMode] = useState(false);
   const [toast, setToast] = useState(null);
 
@@ -72,8 +75,17 @@ function App() {
   useEffect(() => { 
     if (showCVPanel) { 
       getCVList(mode).then(data => setAllCVs(data.cvs || [])).catch(() => {}); 
-    } 
-  }, [showCVPanel, mode]);
+      // Load specific session if cvPanelSessionId is set
+      if (cvPanelSessionId) {
+        getSession(cvPanelSessionId, mode).then(data => setCvPanelSession(data)).catch(() => {});
+      } else {
+        setCvPanelSession(null);
+      }
+    } else {
+      setCvPanelSessionId(null);
+      setCvPanelSession(null);
+    }
+  }, [showCVPanel, cvPanelSessionId, mode]);
 
   const handleNewChat = async () => {
     const name = language === 'es' ? 'Nuevo chat' : 'New chat';
@@ -106,7 +118,7 @@ function App() {
       const poll = async () => {
         const status = await getSessionUploadStatus(currentSessionId, res.job_id);
         if (status.status === 'processing') setTimeout(poll, 1000);
-        else { setIsUploading(false); await loadSession(currentSessionId); }
+        else { setIsUploading(false); await loadSession(currentSessionId); await loadSessions(); }
       };
       poll();
     } catch (e) { console.error(e); setIsUploading(false); }
@@ -139,7 +151,42 @@ function App() {
   const handleRemoveCV = async (cvId) => {
     await removeCVFromSession(currentSessionId, cvId, mode);
     await loadSession(currentSessionId);
+    await loadSessions();
     showToast(language === 'es' ? 'CV eliminado' : 'CV removed', 'success');
+  };
+
+  const handleRemoveCVFromPanel = async (sessionId, cvId) => {
+    await removeCVFromSession(sessionId, cvId, mode);
+    // Refresh panel session data
+    const data = await getSession(sessionId, mode);
+    setCvPanelSession(data);
+    await loadSessions();
+    if (currentSessionId === sessionId) await loadSession(sessionId);
+    showToast(language === 'es' ? 'CV eliminado' : 'CV removed', 'success');
+  };
+
+  const handleUploadToPanel = async (e) => {
+    const files = Array.from(e.target.files).filter(f => f.name.endsWith('.pdf'));
+    const targetSessionId = cvPanelSessionId || currentSessionId;
+    if (!files.length || !targetSessionId) return;
+    setIsUploading(true);
+    try {
+      const res = await uploadCVsToSession(targetSessionId, files, mode);
+      const poll = async () => {
+        const status = await getSessionUploadStatus(targetSessionId, res.job_id);
+        if (status.status === 'processing') setTimeout(poll, 1000);
+        else {
+          setIsUploading(false);
+          // Refresh panel data
+          const sessionData = await getSession(targetSessionId, mode);
+          setCvPanelSession(sessionData);
+          await loadSessions();
+          if (currentSessionId === targetSessionId) await loadSession(targetSessionId);
+        }
+      };
+      poll();
+    } catch (e) { console.error(e); setIsUploading(false); }
+    e.target.value = '';
   };
 
   const handleClearSessionCVs = async () => {
@@ -187,7 +234,7 @@ function App() {
                   {deleteConfirm === s.id ? (
                     <><button onClick={(e) => { e.stopPropagation(); handleDelete(s.id); }} className="p-1 hover:bg-red-500/20 rounded"><Check className="w-3.5 h-3.5 text-red-400" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(null); }} className="p-1"><X className="w-3.5 h-3.5" /></button></>
                   ) : (
-                    <><button onClick={(e) => { e.stopPropagation(); setEditingId(s.id); setEditName(s.name); }} className="p-1 hover:bg-gray-700 rounded"><Edit2 className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(s.id); }} className="p-1 hover:bg-gray-700 rounded"><Trash2 className="w-3.5 h-3.5" /></button></>
+                    <><button onClick={(e) => { e.stopPropagation(); setCvPanelSessionId(s.id); setShowCVPanel(true); }} className="p-1 hover:bg-gray-700 rounded" title={language === 'es' ? 'Ver CVs' : 'View CVs'}><Eye className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setEditingId(s.id); setEditName(s.name); }} className="p-1 hover:bg-gray-700 rounded"><Edit2 className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(s.id); }} className="p-1 hover:bg-gray-700 rounded"><Trash2 className="w-3.5 h-3.5" /></button></>
                   )}
                 </div>
               </div>
@@ -217,7 +264,7 @@ function App() {
             <span>{theme === 'dark' ? 'Light' : 'Dark'}</span>
           </button>
           {/* All CVs Button */}
-          <button onClick={() => setShowCVPanel(true)} className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 text-sm">
+          <button onClick={() => { setCvPanelSessionId(null); setShowCVPanel(true); }} className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 text-sm">
             <FileText className="w-4 h-4" />
             <span>{language === 'es' ? 'Todos los CVs' : 'All CVs'}</span>
             <ChevronRight className="w-4 h-4 ml-auto" />
@@ -344,17 +391,25 @@ function App() {
             {/* Header */}
             <div className="p-5 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
               <div>
-                <h2 className="text-xl font-bold text-gray-900 dark:text-white">{language === 'es' ? 'Gestión de CVs' : 'CV Management'}</h2>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+                  {cvPanelSessionId 
+                    ? (language === 'es' ? `CVs de: ${cvPanelSession?.name || '...'}` : `CVs for: ${cvPanelSession?.name || '...'}`)
+                    : (language === 'es' ? 'Gestión de CVs' : 'CV Management')
+                  }
+                </h2>
                 <p className="text-sm text-gray-500 mt-1">
-                  {mode === 'cloud' ? '☁️ Supabase' : '💾 Local'} · {allCVs.length} CVs {language === 'es' ? 'en base de datos' : 'in database'}
+                  {cvPanelSessionId 
+                    ? `${cvPanelSession?.cvs?.length || 0} CVs ${language === 'es' ? 'en este chat' : 'in this chat'}`
+                    : `${mode === 'cloud' ? '☁️ Supabase' : '💾 Local'} · ${allCVs.length} CVs ${language === 'es' ? 'en base de datos' : 'in database'}`
+                  }
                 </p>
               </div>
               <button onClick={() => setShowCVPanel(false)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-colors"><X className="w-6 h-6" /></button>
             </div>
             
             <div className="flex-1 overflow-y-auto p-5 space-y-6">
-              {/* Session CVs Section */}
-              {currentSession && (
+              {/* Session CVs Section - Show specific session or current session */}
+              {(cvPanelSession || (!cvPanelSessionId && currentSession)) && (
                 <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-4">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
@@ -362,24 +417,18 @@ function App() {
                         <MessageSquare className="w-4 h-4 text-white" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-900 dark:text-white">{currentSession.name}</h3>
-                        <p className="text-xs text-gray-500">{currentSession.cvs?.length || 0} CVs {language === 'es' ? 'en este chat' : 'in this chat'}</p>
+                        <h3 className="font-semibold text-gray-900 dark:text-white">{(cvPanelSession || currentSession).name}</h3>
+                        <p className="text-xs text-gray-500">{(cvPanelSession || currentSession).cvs?.length || 0} CVs {language === 'es' ? 'en este chat' : 'in this chat'}</p>
                       </div>
                     </div>
-                    {currentSession.cvs?.length > 0 && (
-                      <button onClick={handleClearSessionCVs} className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-lg transition-colors">
-                        <Trash2 className="w-4 h-4" />
-                        {language === 'es' ? 'Vaciar chat' : 'Clear chat'}
-                      </button>
-                    )}
                   </div>
                   
-                  {currentSession.cvs?.length > 0 ? (
+                  {(cvPanelSession || currentSession).cvs?.length > 0 ? (
                     <div className="grid grid-cols-2 gap-3">
-                      {currentSession.cvs.map(cv => (
+                      {(cvPanelSession || currentSession).cvs.map(cv => (
                         <div key={cv.id} className="group relative bg-white dark:bg-gray-800 rounded-xl p-3 shadow-sm hover:shadow-md transition-all border border-gray-200 dark:border-gray-700">
                           <button 
-                            onClick={() => handleRemoveCV(cv.id)} 
+                            onClick={() => cvPanelSessionId ? handleRemoveCVFromPanel(cvPanelSessionId, cv.id) : handleRemoveCV(cv.id)} 
                             className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
                           >
                             <X className="w-3.5 h-3.5" />
@@ -405,7 +454,8 @@ function App() {
                 </div>
               )}
               
-              {/* Database Section */}
+              {/* Database Section - Only show when not viewing specific session */}
+              {!cvPanelSessionId && (
               <div className="bg-gradient-to-br from-gray-50 to-slate-50 dark:from-gray-900/50 dark:to-slate-900/50 rounded-xl p-4">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
@@ -455,6 +505,7 @@ function App() {
                   </div>
                 )}
               </div>
+              )}
             </div>
             
             {/* Footer with quick actions */}
@@ -464,9 +515,9 @@ function App() {
                   {language === 'es' ? 'Pasa el ratón sobre un CV para eliminarlo' : 'Hover over a CV to delete it'}
                 </p>
                 <label className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-xl cursor-pointer transition-colors">
-                  <Upload className="w-4 h-4" />
-                  <span className="text-sm font-medium">{language === 'es' ? 'Subir CVs' : 'Upload CVs'}</span>
-                  <input type="file" multiple accept=".pdf" onChange={handleUpload} className="hidden" />
+                  {isUploading ? <Loader className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
+                  <span className="text-sm font-medium">{isUploading ? (language === 'es' ? 'Subiendo...' : 'Uploading...') : (language === 'es' ? 'Subir CVs' : 'Upload CVs')}</span>
+                  <input ref={cvPanelFileInputRef} type="file" multiple accept=".pdf" onChange={handleUploadToPanel} className="hidden" disabled={isUploading} />
                 </label>
               </div>
             </div>
