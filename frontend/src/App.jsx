@@ -51,6 +51,41 @@ function App() {
   // Delete progress modal state (for bulk deletion)
   const [deleteProgress, setDeleteProgress] = useState(null);
   // { current: 0, total: 5, status: 'deleting' | 'completed', logs: ['Deleting CV 1/5...'] }
+  
+  // State for collapsible sessions in CV panel
+  const [expandedSessions, setExpandedSessions] = useState({});
+  const [loadedSessionCVs, setLoadedSessionCVs] = useState({}); // Cache loaded CVs per session
+  
+  // Helper to parse CV filename into components
+  const parseCVFilename = (filename) => {
+    const name = filename.replace('.pdf', '').replace('.PDF', '');
+    const parts = name.split('_');
+    
+    if (parts.length >= 3) {
+      const fileId = parts[0];
+      const role = parts[parts.length - 1].replace(/-/g, ' ');
+      const candidateName = parts.slice(1, -1).join(' ');
+      return { fileId, candidateName, role };
+    } else if (parts.length === 2) {
+      return { fileId: parts[0], candidateName: parts[1], role: '' };
+    }
+    return { fileId: '', candidateName: name, role: '' };
+  };
+  
+  const toggleSessionExpand = async (sessionId) => {
+    const willExpand = !expandedSessions[sessionId];
+    setExpandedSessions(prev => ({ ...prev, [sessionId]: willExpand }));
+    
+    // Load CVs when expanding if not already loaded
+    if (willExpand && !loadedSessionCVs[sessionId]) {
+      try {
+        const sessionData = await getSession(sessionId, mode);
+        setLoadedSessionCVs(prev => ({ ...prev, [sessionId]: sessionData.cvs || [] }));
+      } catch (err) {
+        console.error('Failed to load session CVs:', err);
+      }
+    }
+  };
 
   const openPdfViewer = (cvId, filename) => {
     // Use port 8002 to match backend, or use proxy via /api
@@ -890,7 +925,41 @@ function App() {
                   </div>
                 </div>
               ))}
-              {isChatLoading && <div className="flex gap-4"><div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center"><Sparkles className="w-5 h-5 text-white" /></div><div className="flex-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-4 shadow-sm"><div className="flex items-center gap-2"><Loader className="w-5 h-5 animate-spin text-emerald-500" /><span className="text-sm text-gray-500 dark:text-gray-300">{language === 'es' ? 'Analizando CVs...' : 'Analyzing CVs...'}</span></div></div></div>}
+              {isChatLoading && (
+                <div className="flex gap-4">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center">
+                    <Sparkles className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="flex-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-4 shadow-sm">
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2">
+                        <Loader className="w-5 h-5 animate-spin text-emerald-500" />
+                        <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
+                          {language === 'es' ? 'Analizando CVs...' : 'Analyzing CVs...'}
+                        </span>
+                      </div>
+                      <div className="space-y-2 text-xs text-gray-500 dark:text-gray-400 border-l-2 border-emerald-300 pl-3 ml-2">
+                        <div className="flex items-center gap-2 animate-pulse">
+                          <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+                          <span>{language === 'es' ? 'Entendiendo la consulta...' : 'Understanding query...'}</span>
+                        </div>
+                        <div className="flex items-center gap-2 opacity-60">
+                          <span className="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
+                          <span>{language === 'es' ? `Buscando en ${currentSession?.cvs?.length || 0} CVs...` : `Searching ${currentSession?.cvs?.length || 0} CVs...`}</span>
+                        </div>
+                        <div className="flex items-center gap-2 opacity-40">
+                          <span className="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
+                          <span>{language === 'es' ? 'Analizando candidatos relevantes...' : 'Analyzing relevant candidates...'}</span>
+                        </div>
+                        <div className="flex items-center gap-2 opacity-30">
+                          <span className="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
+                          <span>{language === 'es' ? 'Generando recomendación...' : 'Generating recommendation...'}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
               <div ref={messagesEndRef} />
             </div>
           )}
@@ -906,144 +975,129 @@ function App() {
         )}
       </div>
 
-      {/* CV Panel Modal - Improved Card UI */}
+      {/* CV Panel Modal - Collapsible Sessions & Compact Cards */}
       {showCVPanel && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setShowCVPanel(false)}>
-          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-5xl max-h-[90vh] flex flex-col shadow-2xl" onClick={e => e.stopPropagation()}>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-6xl max-h-[90vh] flex flex-col shadow-2xl" onClick={e => e.stopPropagation()}>
             {/* Header */}
-            <div className="p-5 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
               <div>
-                <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-                  {cvPanelSessionId 
-                    ? (language === 'es' ? `CVs de: ${cvPanelSession?.name || '...'}` : `CVs for: ${cvPanelSession?.name || '...'}`)
-                    : (language === 'es' ? 'Gestión de CVs' : 'CV Management')
-                  }
+                <h2 className="text-lg font-bold text-gray-900 dark:text-white">
+                  {language === 'es' ? 'Gestión de CVs' : 'CV Management'}
                 </h2>
-                <p className="text-sm text-gray-500 mt-1">
-                  {cvPanelSessionId 
-                    ? `${cvPanelSession?.cvs?.length || 0} CVs ${language === 'es' ? 'en este chat' : 'in this chat'}`
-                    : `${mode === 'cloud' ? '☁️ Supabase' : '💾 Local'} · ${allCVs.length} CVs ${language === 'es' ? 'en base de datos' : 'in database'}`
-                  }
+                <p className="text-xs text-gray-500">
+                  {mode === 'cloud' ? '☁️ Supabase' : '💾 Local'} · {sessions.length} {language === 'es' ? 'chats' : 'chats'} · {allCVs.length} CVs
                 </p>
               </div>
-              <button onClick={() => setShowCVPanel(false)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-colors"><X className="w-6 h-6" /></button>
+              <div className="flex items-center gap-2">
+                <button onClick={async () => { const data = await getCVList(mode); setAllCVs(data.cvs || []); }} className="p-2 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg" title="Reload">
+                  <RotateCcw className="w-4 h-4" />
+                </button>
+                <button onClick={() => setShowCVPanel(false)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"><X className="w-5 h-5" /></button>
+              </div>
             </div>
             
-            <div className="flex-1 overflow-y-auto p-5 space-y-6">
-              {/* Session CVs Section - Show specific session or current session */}
-              {(cvPanelSession || (!cvPanelSessionId && currentSession)) && (
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
-                        <MessageSquare className="w-4 h-4 text-white" />
+            <div className="flex-1 overflow-y-auto p-4 space-y-2">
+              {/* All Sessions - Collapsible */}
+              {sessions.map(session => {
+                const isExpanded = expandedSessions[session.id] || false;
+                const sessionCVs = loadedSessionCVs[session.id] || session.cvs || [];
+                
+                return (
+                  <div key={session.id} className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    {/* Session Header - Clickable to expand/collapse */}
+                    <button
+                      onClick={() => toggleSessionExpand(session.id)}
+                      className="w-full flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900/50 hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
+                    >
+                      <div className="flex items-center gap-2">
+                        <ChevronRight className={`w-4 h-4 text-gray-400 transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
+                        <MessageSquare className="w-4 h-4 text-blue-500" />
+                        <span className="font-medium text-sm text-gray-900 dark:text-white">{session.name}</span>
+                        <span className="text-xs px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full">
+                          {session.cv_count || sessionCVs.length} CVs
+                        </span>
                       </div>
-                      <div>
-                        <h3 className="font-semibold text-gray-900 dark:text-white">{(cvPanelSession || currentSession).name}</h3>
-                        <p className="text-xs text-gray-500">{(cvPanelSession || currentSession).cvs?.length || 0} CVs {language === 'es' ? 'en este chat' : 'in this chat'}</p>
+                      <div className="flex items-center gap-2">
+                        <label className="flex items-center gap-1 px-2 py-1 text-xs bg-blue-500 hover:bg-blue-600 text-white rounded cursor-pointer" onClick={e => e.stopPropagation()}>
+                          <Upload className="w-3 h-3" />
+                          <span>{language === 'es' ? 'Subir' : 'Upload'}</span>
+                          <input type="file" multiple accept=".pdf" onChange={(e) => { setCvPanelSessionId(session.id); handleUploadToPanel(e); }} className="hidden" />
+                        </label>
                       </div>
-                    </div>
-                  </div>
-                  
-                  {(cvPanelSession || currentSession).cvs?.length > 0 ? (
-                    <div className="grid grid-cols-3 gap-3">
-                      {(cvPanelSession || currentSession).cvs.map(cv => (
-                        <div key={cv.id} className="group relative bg-white dark:bg-gray-800 rounded-xl p-3 shadow-sm hover:shadow-md transition-all border border-gray-200 dark:border-gray-700 cursor-pointer" onClick={() => openPdfViewer(cv.id, cv.filename)}>
-                          <button 
-                            onClick={(e) => { e.stopPropagation(); cvPanelSessionId ? handleRemoveCVFromPanel(cvPanelSessionId, cv.id) : handleRemoveCV(cv.id); }} 
-                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg z-10"
-                          >
-                            <X className="w-3.5 h-3.5" />
-                          </button>
-                          <div className="flex items-start gap-3">
-                            <div className="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                              <FileText className="w-5 h-5 text-red-500" />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium text-gray-900 dark:text-white truncate" title={cv.filename}>{cv.filename}</p>
-                              <p className="text-xs text-gray-500 mt-0.5">{cv.chunk_count} chunks</p>
-                            </div>
-                            <Eye className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center py-6">
-                      <Upload className="w-10 h-10 text-gray-300 mx-auto mb-2" />
-                      <p className="text-sm text-gray-500">{language === 'es' ? 'Sube CVs a este chat' : 'Upload CVs to this chat'}</p>
-                    </div>
-                  )}
-                </div>
-              )}
-              
-              {/* Database Section - Only show when not viewing specific session */}
-              {!cvPanelSessionId && (
-              <div className="bg-gradient-to-br from-gray-50 to-slate-50 dark:from-gray-900/50 dark:to-slate-900/50 rounded-xl p-4">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${mode === 'cloud' ? 'bg-purple-500' : 'bg-emerald-500'}`}>
-                      {mode === 'cloud' ? <Cloud className="w-4 h-4 text-white" /> : <Database className="w-4 h-4 text-white" />}
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white">{mode === 'cloud' ? 'Supabase' : 'Local'} Database</h3>
-                      <p className="text-xs text-gray-500">{allCVs.length} CVs {language === 'es' ? 'totales' : 'total'}</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-2">
-                    <button onClick={async () => { const data = await getCVList(mode); setAllCVs(data.cvs || []); }} className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-colors">
-                      <Loader className="w-4 h-4" />
-                      {language === 'es' ? 'Recargar' : 'Reload'}
                     </button>
-                    {allCVs.length > 0 && (
-                      <button onClick={handleDeleteAllCVsFromDB} className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-lg transition-colors">
-                        <Trash2 className="w-4 h-4" />
-                        {language === 'es' ? 'Vaciar DB' : 'Clear DB'}
-                      </button>
+                    
+                    {/* Session CVs - Collapsible Content */}
+                    {isExpanded && (
+                      <div className="p-3 bg-white dark:bg-gray-800">
+                        {sessionCVs.length > 0 ? (
+                          <div className="grid grid-cols-5 gap-2">
+                            {sessionCVs.map(cv => {
+                              const { fileId, candidateName, role } = parseCVFilename(cv.filename);
+                              return (
+                                <div 
+                                  key={cv.id} 
+                                  className="group relative bg-gray-50 dark:bg-gray-900 rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all cursor-pointer border border-transparent hover:border-blue-300 dark:hover:border-blue-600"
+                                  onClick={() => openPdfViewer(cv.id, cv.filename)}
+                                >
+                                  <button 
+                                    onClick={(e) => { e.stopPropagation(); handleRemoveCVFromPanel(session.id, cv.id); }} 
+                                    className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow z-10"
+                                  >
+                                    <X className="w-3 h-3" />
+                                  </button>
+                                  <div className="text-center">
+                                    <p className="text-[10px] text-gray-400 font-mono truncate">{cv.id}</p>
+                                    <p className="text-xs font-semibold text-gray-900 dark:text-white truncate mt-0.5" title={candidateName}>{candidateName}</p>
+                                    {role && <p className="text-[10px] text-blue-500 truncate" title={role}>{role}</p>}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <p className="text-xs text-gray-400 text-center py-2">{language === 'es' ? 'Sin CVs' : 'No CVs'}</p>
+                        )}
+                      </div>
                     )}
                   </div>
+                );
+              })}
+              
+              {sessions.length === 0 && (
+                <div className="text-center py-8">
+                  <MessageSquare className="w-10 h-10 text-gray-300 mx-auto mb-2" />
+                  <p className="text-sm text-gray-500">{language === 'es' ? 'No hay chats' : 'No chats'}</p>
                 </div>
-                
-                {allCVs.length > 0 ? (
-                  <div className="grid grid-cols-3 gap-3">
-                    {allCVs.map(cv => (
-                      <div key={cv.id} className="group relative bg-white dark:bg-gray-800 rounded-xl p-3 shadow-sm hover:shadow-md transition-all border border-gray-200 dark:border-gray-700 cursor-pointer" onClick={() => openPdfViewer(cv.id, cv.filename)}>
-                        <button 
-                          onClick={(e) => { e.stopPropagation(); handleDeleteCVFromDB(cv.id); }} 
-                          className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg z-10"
-                        >
-                          <X className="w-3.5 h-3.5" />
-                        </button>
-                        <div className="flex items-start gap-3">
-                          <div className="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <FileText className="w-5 h-5 text-red-500" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-gray-900 dark:text-white truncate" title={cv.filename}>{cv.filename}</p>
-                            <p className="text-xs text-gray-500 mt-0.5">{cv.chunk_count} chunks</p>
-                          </div>
-                          <Eye className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-8">
-                    <Database className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                    <p className="text-gray-500">{language === 'es' ? 'Base de datos vacía' : 'Database is empty'}</p>
-                    <p className="text-sm text-gray-400 mt-1">{language === 'es' ? 'Los CVs que subas aparecerán aquí' : 'CVs you upload will appear here'}</p>
-                  </div>
-                )}
-              </div>
               )}
             </div>
             
-            {/* Footer with quick actions */}
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 rounded-b-2xl">
+            {/* Footer */}
+            <div className="p-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 rounded-b-2xl">
               <div className="flex items-center justify-between">
                 <p className="text-xs text-gray-500">
-                  {language === 'es' ? 'Pasa el ratón sobre un CV para eliminarlo' : 'Hover over a CV to delete it'}
+                  {language === 'es' ? 'Clic en chat para expandir · Hover en CV para eliminar' : 'Click chat to expand · Hover CV to delete'}
                 </p>
+                {allCVs.length > 0 && (
+                  <button onClick={handleDeleteAllCVsFromDB} className="flex items-center gap-1 px-3 py-1.5 text-xs text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-lg">
+                    <Trash2 className="w-3 h-3" />
+                    {language === 'es' ? 'Vaciar DB' : 'Clear DB'}
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+
+      {/* Legacy CV Panel for specific session view - kept for backward compatibility */}
+      {false && showCVPanel && cvPanelSessionId && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setShowCVPanel(false)}>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-5xl max-h-[90vh] flex flex-col shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 rounded-b-2xl">
+              <div className="flex items-center justify-between">
+                <p className="text-xs text-gray-500">Legacy panel</p>
                 {(cvPanelSessionId || currentSessionId) ? (
                   <div className="flex items-center gap-3">
                     <span className="text-xs text-gray-500">

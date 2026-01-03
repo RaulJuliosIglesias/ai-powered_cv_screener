@@ -1314,22 +1314,42 @@ Provide a corrected response:"""
             cv_id = metadata.get("cv_id", f"cv_{i}")
             filename = metadata.get("filename", "Unknown")
             candidate = metadata.get("candidate_name", "")
+            role = metadata.get("role", "")
             section = metadata.get("section_type", "")
             
-            # Format header with CV ID prominently for LLM to use in references
-            header = f"[CV {cv_id}: {filename}"
-            if candidate:
-                header += f" | Candidate: {candidate}"
+            # Parse candidate name from filename if not in metadata
+            if not candidate and filename:
+                candidate = self._extract_name_from_filename(filename)
+            
+            # Format header with candidate name prominently
+            header = f"=== CANDIDATE: {candidate} ==="
+            header += f"\nCV_ID: {cv_id}"
+            if role:
+                header += f" | Role: {role}"
+            header += f" | File: {filename}"
             if section:
                 header += f" | Section: {section}"
-            header += "]"
             
-            # Add reminder about reference format
-            reference_hint = f"(Use **[{candidate or filename}](cv:{cv_id})** to reference this candidate)"
+            # Clear instruction for LLM
+            reference_hint = f"➡️ Reference this candidate as: **[{candidate}](cv:{cv_id})**"
             
-            parts.append(f"{header}\n{reference_hint}\n{content}")
+            parts.append(f"{header}\n{reference_hint}\n\n{content}")
         
-        return "\n\n---\n\n".join(parts)
+        return "\n\n" + "="*50 + "\n\n".join(parts)
+    
+    def _extract_name_from_filename(self, filename: str) -> str:
+        """Extract candidate name from filename format: ID_Name_Parts_Role.pdf"""
+        name = filename.replace('.pdf', '').replace('.PDF', '')
+        parts = name.split('_')
+        
+        if len(parts) >= 3:
+            # Middle parts are the name (skip first ID and last role)
+            name_parts = parts[1:-1]
+            return ' '.join(name_parts)
+        elif len(parts) == 2:
+            return parts[1]
+        else:
+            return name
     
     def _build_success_response(self, ctx: PipelineContextV5) -> RAGResponseV5:
         """Build successful response with formatted reasoning blocks."""
@@ -1368,15 +1388,25 @@ Provide a corrected response:"""
     
     def _format_answer_with_blocks(self, ctx: PipelineContextV5) -> str:
         """Post-process answer to add CV links and proper formatting."""
+        import re
+        
         answer = ctx.generated_response or ""
         
-        # Build candidate name -> cv_id mapping from chunks
+        # FIRST: Clean up broken CV reference formats that LLM sometimes generates
+        answer = self._clean_broken_cv_references(answer)
+        
+        # Build candidate name -> cv_id mapping from chunks (ONLY real IDs)
         candidate_map = {}
+        valid_cv_ids = set()
+        
         for chunk in ctx.effective_chunks:
             metadata = chunk.get("metadata", {})
             cv_id = metadata.get("cv_id")
             candidate_name = metadata.get("candidate_name", "")
             filename = metadata.get("filename", "")
+            
+            if cv_id:
+                valid_cv_ids.add(cv_id)
             
             if cv_id and candidate_name:
                 # Store multiple variations of the name
@@ -1392,6 +1422,12 @@ Provide a corrected response:"""
                 clean_name = filename.replace('.pdf', '').replace('_', ' ')
                 candidate_map[clean_name] = cv_id
         
+        # Remove developer-only sections (CHANGES, Notes, etc.)
+        answer = self._remove_developer_sections(answer)
+        
+        # Remove fake/invented CV IDs (like cv_000000)
+        answer = self._remove_fake_cv_ids(answer, valid_cv_ids)
+        
         # Post-process: Add CV links to candidate names
         answer = self._add_cv_links_to_text(answer, candidate_map)
         
@@ -1399,6 +1435,91 @@ Provide a corrected response:"""
         answer = self._format_conclusion_section(answer)
         
         return answer
+    
+    def _clean_broken_cv_references(self, text: str) -> str:
+        """Clean up broken CV reference formats that LLM sometimes generates."""
+        import re
+        
+        # Pattern 1: cv_xxx [cv_xxx](cv_xxx) -> remove completely (broken format)
+        text = re.sub(r'cv_[a-f0-9]+\s*\[cv_[a-f0-9]+\]\(cv_[a-f0-9]+\)', '', text)
+        
+        # Pattern 2: **word** cv_xxx [cv_xxx](cv_xxx) -> **word**
+        text = re.sub(r'(\*\*\w+\*\*)\s*cv_[a-f0-9]+\s*\[cv_[a-f0-9]+\]\(cv_[a-f0-9]+\)', r'\1', text)
+        
+        # Pattern 3: [cv_xxx](cv_xxx) -> remove (malformed link)
+        text = re.sub(r'\[cv_[a-f0-9]+\]\(cv_[a-f0-9]+\)', '', text)
+        
+        # Pattern 4: Standalone cv_xxx references not in proper link format
+        # Convert "Name cv_xxx" patterns where cv_xxx follows a name
+        # This helps clean up: "Rajiv Patel cv_5c64ca1d" 
+        
+        # Pattern 5: ** Name ** cv_xxx [cv_xxx](cv:cv_xxx) - partial broken format
+        text = re.sub(r'\*\*\s*([^*]+)\s*\*\*\s*cv_[a-f0-9]+\s*\[cv_[a-f0-9]+\]\(cv:cv_[a-f0-9]+\)', r'**\1**', text)
+        
+        # Pattern 6: Multiple cv_xxx in a row
+        text = re.sub(r'(cv_[a-f0-9]+)\s+\1', r'\1', text)
+        
+        # Pattern 7: cv_xxx followed by [cv_xxx]
+        text = re.sub(r'cv_([a-f0-9]+)\s*\[cv_\1\]', r'cv_\1', text)
+        
+        # Pattern 8: Clean orphaned cv_xxx that appear inline (not in links)
+        # But keep them if they're in proper (cv:cv_xxx) format
+        # Remove: "blah cv_abc123 blah" but keep "blah (cv:cv_abc123) blah"
+        
+        # Pattern 9: Fix double markdown bold
+        text = re.sub(r'\*\*\*\*+', '**', text)
+        
+        # Pattern 10: Remove empty or malformed links
+        text = re.sub(r'\[\]\([^)]*\)', '', text)
+        text = re.sub(r'\*\*\[\]\([^)]*\)\*\*', '', text)
+        
+        # Clean up multiple spaces
+        text = re.sub(r'  +', ' ', text)
+        
+        return text
+    
+    def _remove_developer_sections(self, text: str) -> str:
+        """Remove sections meant for developers, not end users."""
+        import re
+        
+        # Remove CHANGES section and similar
+        patterns = [
+            r'\n*CHANGES:?\s*\n[\s\S]*?(?=\n\n[A-Z]|\n##|\Z)',
+            r'\n*\*\*CHANGES:?\*\*\s*\n[\s\S]*?(?=\n\n[A-Z]|\n##|\Z)',
+            r'\n*Notes for developer[s]?:?\s*\n[\s\S]*?(?=\n\n[A-Z]|\n##|\Z)',
+            r'\n*Developer notes:?\s*\n[\s\S]*?(?=\n\n[A-Z]|\n##|\Z)',
+            r'\n*Internal notes:?\s*\n[\s\S]*?(?=\n\n[A-Z]|\n##|\Z)',
+        ]
+        
+        for pattern in patterns:
+            text = re.sub(pattern, '', text, flags=re.IGNORECASE)
+        
+        return text.strip()
+    
+    def _remove_fake_cv_ids(self, text: str, valid_cv_ids: set) -> str:
+        """Remove or clean up fake CV IDs that don't exist in our data."""
+        import re
+        
+        # Find all cv_xxx patterns in the text
+        cv_pattern = r'\(cv:(cv_[a-f0-9]+)\)'
+        
+        def replace_fake_id(match):
+            cv_id = match.group(1)
+            # Check if this is a valid ID or looks fake (all zeros, sequential, etc.)
+            if cv_id in valid_cv_ids:
+                return match.group(0)  # Keep valid IDs
+            # Check for obviously fake patterns
+            if cv_id == 'cv_000000' or cv_id.startswith('cv_0000'):
+                return ''  # Remove fake ID completely
+            # For other unknown IDs, keep them but they won't link
+            return match.group(0)
+        
+        text = re.sub(cv_pattern, replace_fake_id, text)
+        
+        # Clean up empty links left behind: **[Name]()** -> **Name**
+        text = re.sub(r'\*\*\[([^\]]+)\]\(\)\*\*', r'**\1**', text)
+        
+        return text
     
     def _add_cv_links_to_text(self, text: str, candidate_map: dict[str, str]) -> str:
         """Add CV links to ALL candidate name mentions that don't already have them."""

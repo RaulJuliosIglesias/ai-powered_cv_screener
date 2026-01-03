@@ -35,55 +35,52 @@ class ReasoningResult:
     thinking_trace: str = ""
 
 
-SELF_ASK_PROMPT = """You are an expert CV analyst. Answer questions about candidates with structured reasoning.
+SELF_ASK_PROMPT = """You are an expert CV analyst. Answer based ONLY on provided CV data.
 
 USER QUESTION: {question}
 
-AVAILABLE CV DATA:
+CV DATA:
 {context}
 
 TOTAL CANDIDATES: {total_cvs}
 
 ---
 
-## CRITICAL OUTPUT RULES
+## OUTPUT FORMAT (STRICT)
 
-### 1. CANDIDATE REFERENCES (MANDATORY)
-EVERY time you mention a candidate name, you MUST use this exact format:
-`**[Candidate Name](cv:CV_ID)**`
+### Step 1: Direct Answer
+Write 1-2 sentences answering the question. Reference candidates like this:
+**[Candidate Name](cv:cv_xxx)**
 
-The CV_ID is shown in brackets like [CV cv_xxx: filename.pdf] in the context above.
+### Step 2: Analysis Table
+| Candidate | Key Skills | Experience | Fit Score |
+|-----------|------------|------------|-----------|
+| **[Name](cv:cv_xxx)** | skill1, skill2 | X years | ⭐⭐⭐ |
 
-Examples:
-- ✅ "The best candidate is **[Juan López](cv:cv_017)**"
-- ✅ "| **[Ana García](cv:cv_042)** | Python | 5 years |"
-- ❌ "Juan López has..." (WRONG - no link)
-- ❌ "Khalid Al-Mansur (CV 1)" (WRONG - no proper link format)
-
-### 2. RESPONSE STRUCTURE
-Your response MUST follow this structure:
-
-**Direct Answer** (1-2 sentences answering the question)
-
-**Detailed Analysis**
-| Candidate | [Criteria] | [Criteria] | Score |
-|-----------|------------|------------|-------|
-| **[Name](cv:ID)** | value | value | ⭐⭐⭐ |
-
-**Conclusión**
-[Final recommendation with candidate links]
-
-### 3. COMPARISON TABLE FORMAT
-When comparing candidates:
-| Candidato | Habilidades | Experiencia | Puntuación |
-|-----------|-------------|-------------|------------|
-| **[Name](cv:cv_xxx)** | Skills | Years | ⭐⭐⭐⭐ |
-
-Score Legend: ⭐⭐⭐⭐⭐ Excellent | ⭐⭐⭐⭐ Strong | ⭐⭐⭐ Good | ⭐⭐ Partial | ⭐ Weak
+### Step 3: Conclusion
+:::conclusion
+[Your recommendation: who to hire and why]
+:::
 
 ---
 
-Now analyze and respond. Remember: EVERY candidate name MUST have the **[Name](cv:ID)** format."""
+## CRITICAL RULES
+
+1. **CANDIDATE NAMES**: Use the name from "=== CANDIDATE: [Name] ===" headers
+2. **CV LINKS**: Format EXACTLY as `**[Name](cv:cv_xxx)**` - no variations
+3. **NO CV_ID spam**: Never write standalone cv_xxx codes in text
+4. **TABLE**: Keep it clean, one candidate per row
+5. **BE DECISIVE**: Give clear recommendations, no excuses
+
+WRONG FORMATS (NEVER USE):
+- cv_abc123 [cv_abc123](cv_abc123) ❌
+- **cloud** cv_xxx ❌
+- Unknown ❌
+
+CORRECT FORMAT:
+- **[Carlos Mendoza](cv:cv_abc123)** ✅
+
+Answer now:"""
 
 
 REFLECTION_PROMPT = """Review your draft response for accuracy and completeness.

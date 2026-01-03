@@ -17,6 +17,45 @@ class ChunkingService:
         (r"(?i)contact(\s+info(rmation)?)?", "contact"),
     ]
     
+    def _parse_filename(self, filename: str) -> Dict[str, str]:
+        """Parse filename to extract candidate info.
+        
+        Expected format: ID_FirstName_LastName_Role.pdf
+        Example: 1ef4e451_Dirk_van_der_Meer_Therapist.pdf
+        """
+        # Remove .pdf extension
+        name = filename.replace('.pdf', '').replace('.PDF', '')
+        
+        # Split by underscore
+        parts = name.split('_')
+        
+        if len(parts) >= 3:
+            # First part is ID
+            file_id = parts[0]
+            # Last part is role
+            role = parts[-1].replace('-', ' ').replace('_', ' ')
+            # Middle parts are the name
+            name_parts = parts[1:-1]
+            candidate_name = ' '.join(name_parts)
+            
+            return {
+                "file_id": file_id,
+                "candidate_name": candidate_name,
+                "role": role
+            }
+        elif len(parts) == 2:
+            return {
+                "file_id": parts[0],
+                "candidate_name": parts[1],
+                "role": ""
+            }
+        else:
+            return {
+                "file_id": "",
+                "candidate_name": name,
+                "role": ""
+            }
+    
     def chunk_cv(
         self,
         text: str,
@@ -24,6 +63,11 @@ class ChunkingService:
         filename: str
     ) -> List[Dict[str, Any]]:
         """Chunk CV text into meaningful sections."""
+        # Parse filename to extract candidate info
+        parsed = self._parse_filename(filename)
+        candidate_name = parsed["candidate_name"]
+        role = parsed["role"]
+        
         # Try section-based chunking first
         sections = self._extract_sections(text)
         
@@ -38,7 +82,9 @@ class ChunkingService:
                         "chunk_index": i,
                         "content": content.strip(),
                         "metadata": {
-                            "section_type": section_type
+                            "section_type": section_type,
+                            "candidate_name": candidate_name,
+                            "role": role
                         }
                     })
             return chunks
@@ -52,7 +98,9 @@ class ChunkingService:
             "chunk_index": 0,
             "content": text.strip(),
             "metadata": {
-                "section_type": "full_cv"
+                "section_type": "full_cv",
+                "candidate_name": candidate_name,
+                "role": role
             }
         }]
     

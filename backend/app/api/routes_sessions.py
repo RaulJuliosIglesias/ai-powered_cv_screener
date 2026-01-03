@@ -637,6 +637,45 @@ async def clear_session_cvs(
     return {"success": True, "deleted": deleted, "message": f"Deleted {deleted} CVs from session"}
 
 
+@router.get("/debug/status")
+async def get_debug_status(mode: Mode = Query(default=settings.default_mode)):
+    """Debug endpoint to check CV and session status."""
+    mgr = get_session_manager(mode)
+    rag_service = ProviderFactory.get_rag_service(mode=mode)
+    
+    sessions = mgr.list_sessions()
+    session_info = []
+    
+    for s in sessions:
+        if isinstance(s, dict):
+            session_info.append({
+                "id": s["id"],
+                "name": s["name"],
+                "cv_count": len(s.get("cvs", [])),
+                "cvs": [{"id": cv.get("id"), "filename": cv.get("filename")} for cv in s.get("cvs", [])]
+            })
+        else:
+            session_info.append({
+                "id": s.id,
+                "name": s.name,
+                "cv_count": len(s.cvs),
+                "cvs": [{"id": cv.id, "filename": cv.filename} for cv in s.cvs]
+            })
+    
+    # Get vector store stats
+    vs_stats = await rag_service.vector_store.get_stats()
+    vs_cvs = await rag_service.vector_store.list_cvs()
+    
+    return {
+        "mode": mode.value,
+        "sessions": session_info,
+        "vector_store": {
+            "stats": vs_stats,
+            "cvs": vs_cvs
+        }
+    }
+
+
 @router.delete("/database/all-cvs")
 async def delete_all_cvs_from_database(
     mode: Mode = Query(default=settings.default_mode)
