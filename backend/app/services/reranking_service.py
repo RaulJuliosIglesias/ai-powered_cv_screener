@@ -16,6 +16,21 @@ from app.providers.base import SearchResult
 logger = logging.getLogger(__name__)
 
 
+def _get_attr(obj, key, default=None):
+    """Get attribute from object or dict."""
+    if isinstance(obj, dict):
+        if key == 'cv_id':
+            return obj.get('metadata', {}).get('cv_id', obj.get('cv_id', default))
+        elif key == 'content':
+            return obj.get('content', obj.get('text', default))
+        elif key == 'filename':
+            return obj.get('metadata', {}).get('filename', obj.get('filename', default))
+        elif key == 'similarity':
+            return obj.get('similarity', obj.get('score', default or 0.5))
+        return obj.get(key, default)
+    return getattr(obj, key, default)
+
+
 @dataclass
 class RerankResult:
     """Result of re-ranking operation."""
@@ -110,7 +125,7 @@ class RerankingService:
             return RerankResult(
                 original_results=results,
                 reranked_results=results,  # Return ALL results
-                scores={r.cv_id: r.similarity for r in results},
+                scores={_get_attr(r, 'cv_id'): _get_attr(r, 'similarity', 0.5) for r in results},
                 latency_ms=(time.perf_counter() - start_time) * 1000,
                 model_used=self.model,
                 enabled=True
@@ -150,9 +165,12 @@ class RerankingService:
             for i, result in enumerate(results):
                 score = scores[i] if i < len(scores) else 0
                 # Combine LLM score with original similarity
-                combined_score = (score / 10.0) * 0.7 + result.similarity * 0.3
+                similarity = _get_attr(result, 'similarity', 0.5)
+                combined_score = (score / 10.0) * 0.7 + similarity * 0.3
                 scored_results.append((result, combined_score, score))
-                score_dict[result.cv_id] = score
+                cv_id = _get_attr(result, 'cv_id')
+                if cv_id:
+                    score_dict[cv_id] = score
             
             # Sort by combined score
             scored_results.sort(key=lambda x: x[1], reverse=True)
@@ -182,7 +200,7 @@ class RerankingService:
             return RerankResult(
                 original_results=results,
                 reranked_results=results,  # Return ALL results
-                scores={r.cv_id: r.similarity for r in results},
+                scores={_get_attr(r, 'cv_id'): _get_attr(r, 'similarity', 0.5) for r in results},
                 latency_ms=latency,
                 model_used=self.model,
                 enabled=True
@@ -192,10 +210,12 @@ class RerankingService:
         """Format chunks for the scoring prompt."""
         lines = []
         for i, result in enumerate(results):
-            content = result.content[:max_chars]
-            if len(result.content) > max_chars:
+            content = _get_attr(result, 'content', '')[:max_chars]
+            full_content = _get_attr(result, 'content', '')
+            if len(full_content) > max_chars:
                 content += "..."
-            lines.append(f"[{i+1}] {result.filename}: {content}")
+            filename = _get_attr(result, 'filename', 'Unknown')
+            lines.append(f"[{i+1}] {filename}: {content}")
         return "\n\n".join(lines)
     
     def _parse_scores(self, content: str, expected_count: int) -> List[float]:

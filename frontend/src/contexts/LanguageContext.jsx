@@ -34,7 +34,10 @@ const translations = {
     
     // Reasoning
     thinking: 'Thinking',
-    reasoning: 'Reasoning',
+    reasoning: 'Reasoning Process',
+    conclusion: 'Conclusion',
+    expand: 'Expand',
+    collapse: 'Collapse',
     embeddingQuery: 'Embedding query...',
     searchingDocs: 'Searching relevant documents...',
     foundChunks: 'Found {n} relevant chunks',
@@ -103,7 +106,10 @@ const translations = {
     
     // Reasoning
     thinking: 'Pensando',
-    reasoning: 'Razonamiento',
+    reasoning: 'Proceso de Razonamiento',
+    conclusion: 'Conclusión',
+    expand: 'Expandir',
+    collapse: 'Contraer',
     embeddingQuery: 'Procesando consulta...',
     searchingDocs: 'Buscando documentos relevantes...',
     foundChunks: 'Encontrados {n} fragmentos relevantes',

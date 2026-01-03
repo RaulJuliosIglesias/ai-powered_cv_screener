@@ -69,20 +69,9 @@ class ProviderFactory:
         """
         should_use_langchain = use_langchain if use_langchain is not None else settings.use_langchain
         
-        if should_use_langchain:
-            from app.services.rag_service_langchain import LangChainRAGService
-            return LangChainRAGService(
-                mode=mode,
-                understanding_model=understanding_model,
-                generation_model=generation_model
-            )
-        else:
-            from app.services.rag_service_v3 import RAGServiceV3
-            return RAGServiceV3(
-                mode=mode,
-                understanding_model=understanding_model,
-                generation_model=generation_model
-            )
+        # V5 is the new default - LangChain version is deprecated
+        from app.services.rag_service_v5 import RAGServiceV5
+        return RAGServiceV5.from_factory(mode)
     
     @classmethod
     def clear_instances(cls):

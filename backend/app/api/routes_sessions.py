@@ -442,17 +442,9 @@ async def chat_in_session(
     # Query RAG with session's CVs only - pass session_id for logging
     # Use custom models if provided, otherwise use defaults
     # Import RAGServiceV3 directly to pass all pipeline parameters
-    from app.services.rag_service_v3 import RAGServiceV3
+    from app.services.rag_service_v5 import RAGServiceV5
     
-    rag_service = RAGServiceV3(
-        mode=mode,
-        understanding_model=request.understanding_model,
-        reranking_model=request.reranking_model,
-        generation_model=request.generation_model,
-        verification_model=request.verification_model,
-        reranking_enabled=request.reranking_enabled if request.reranking_enabled is not None else True,
-        verification_enabled=request.verification_enabled if request.verification_enabled is not None else True
-    )
+    rag_service = RAGServiceV5.from_factory(mode)
     result = await rag_service.query(
         question=request.message, 
         cv_ids=cv_ids,

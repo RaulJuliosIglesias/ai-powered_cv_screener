@@ -65,33 +65,36 @@ class GuardrailService:
     }
     
     # Patterns that indicate off-topic questions
+    # IMPORTANT: These patterns should NOT match valid CV-related queries
+    # like "game developer", "game designer", "game artist", etc.
     OFF_TOPIC_PATTERNS = [
         # Food/Cooking
-        r"\b(receta|recipe|cocina|cook|ingrediente|ingredient|comida|food|plato|dish)\b",
+        r"\b(receta|recipe|cocina(?! developer| engineer| artist))\b",
+        r"\b(ingrediente|ingredient|comida|plato|dish)\b",
         r"\b(tarta|cake|pastel|pizza|sopa|soup|ensalada|salad)\b",
         # Weather
-        r"\b(clima|weather|temperatura|temperature|lluvia|rain|sol|sun|nieve|snow)\b",
-        # Entertainment
-        r"\b(película|movie|film|serie|series|actor|actress|actriz)\b",
+        r"\b(clima|weather|temperatura|temperature|lluvia|rain|nieve|snow)\b",
+        # Entertainment (exclude job roles like "film director", "game developer")
+        r"\b(película|movie)(?! director| producer| editor)\b",
         r"\b(música|music|canción|song|cantante|singer|banda|band|concierto|concert)\b",
-        r"\b(libro|book|novela|novel|autor|author)\b",
-        r"\b(juego|game|videojuego|videogame|gaming)\b",
-        # Sports
-        r"\b(deporte|sport|fútbol|football|soccer|baloncesto|basketball)\b",
+        r"\b(libro|book|novela|novel)(?! editor| publisher)\b",
+        # NOTE: Removed "game" pattern - "game developer", "game designer", "game artist" are valid job roles
+        # Sports (as entertainment, not profession)
+        r"\b(deporte|fútbol|soccer|baloncesto|basketball)\b",
         r"\b(tenis|tennis|golf|natación|swimming|maratón|marathon)\b",
         # Politics/Religion
-        r"\b(política|politic|elección|election|voto|vote|partido|party)\b",
-        r"\b(religión|religion|iglesia|church|dios|god|fe|faith)\b",
-        # Travel/Geography
-        r"\b(viaje|travel|vacaciones|vacation|turismo|tourism|hotel)\b",
+        r"\b(política|politic|elección|election|voto|vote)\b",
+        r"\b(religión|religion|iglesia|church|dios|god)\b",
+        # Travel/Geography (as tourism, not business)
+        r"\b(vacaciones|vacation|turismo|tourism)\b",
         # Health (non-work related)
-        r"\b(dieta|diet|ejercicio|exercise|gimnasio|gym|médico|doctor)\b",
+        r"\b(dieta|diet|gimnasio|gym)\b",
         # Humor
-        r"\b(chiste|joke|gracioso|funny|humor|meme)\b",
-        # General knowledge
-        r"\b(capital de|capital of|cuántos|how many|qué es|what is)\b",
-        # Math/Science (non-CV)
-        r"\b(calcular|calculate|ecuación|equation|fórmula|formula)\b",
+        r"\b(chiste|joke|gracioso|funny|meme)\b",
+        # General knowledge questions (not about CVs)
+        r"\b(capital de|capital of|cuántos habitantes|how many people)\b",
+        # Math/Science homework (not CV analysis)
+        r"\b(ecuación|equation|fórmula matemática)\b",
     ]
     
     # Minimum question length to be meaningful
@@ -134,9 +137,8 @@ class GuardrailService:
         question_lower = question.lower().strip()
         words = set(re.findall(r'\w+', question_lower))
         
-        # Check 1: Too short
+        # Check 1: Too short (but only if no CV keywords)
         if len(question.split()) < self.MIN_QUESTION_LENGTH:
-            # Very short questions without CV keywords are suspicious
             if not (words & self.CV_KEYWORDS):
                 return GuardrailResult(
                     is_allowed=False,
@@ -145,7 +147,37 @@ class GuardrailService:
                     reason="too_short"
                 )
         
-        # Check 2: Off-topic patterns
+        # Check 2: Contains CV keywords → ALLOW IMMEDIATELY (before off-topic check)
+        # This ensures "game developer", "full stack", etc. are always allowed
+        if words & self.CV_KEYWORDS:
+            logger.debug(f"Guardrail: Allowed (CV keywords found: {words & self.CV_KEYWORDS})")
+            return GuardrailResult(
+                is_allowed=True,
+                confidence=0.95,
+                reason="cv_keywords"
+            )
+        
+        # Check 3: Question words that suggest CV analysis
+        analysis_patterns = [
+            r"\b(who|quién|cuál|cual|which|what|qué|compare|comparar)\b",
+            r"\b(best|mejor|top|rank|ranking|suitable|adecuado)\b",
+            r"\b(experience|experiencia|skill|habilidad|background)\b",
+            r"\b(why|porque|porqué|reason|razón|sentido|sense)\b",
+            r"\b(technical|técnico|técnica|programming|programación|programacion)\b",
+            r"\b(frontend|front-end|backend|fullstack|full-stack|stack|webgl)\b",
+            r"\b(developer|engineer|designer|artist|manager|director)\b",
+            r"\b(game|mobile|web|cloud|data|ai|ml)\b",
+        ]
+        for pattern in analysis_patterns:
+            if re.search(pattern, question_lower):
+                logger.debug(f"Guardrail: Allowed (analysis pattern: {pattern})")
+                return GuardrailResult(
+                    is_allowed=True,
+                    confidence=0.8,
+                    reason="analysis_pattern"
+                )
+        
+        # Check 4: Off-topic patterns - ONLY if no CV-related content found
         for pattern in self._compiled_patterns:
             if pattern.search(question_lower):
                 logger.info(f"Guardrail: Rejected off-topic question (pattern match)")
@@ -154,33 +186,6 @@ class GuardrailService:
                     rejection_message="I can only help with CV screening and candidate analysis. Please ask a question about the uploaded CVs.",
                     confidence=0.95,
                     reason="off_topic_pattern"
-                )
-        
-        # Check 3: Contains CV keywords → definitely allowed
-        if words & self.CV_KEYWORDS:
-            logger.debug(f"Guardrail: Allowed (CV keywords found)")
-            return GuardrailResult(
-                is_allowed=True,
-                confidence=0.95,
-                reason="cv_keywords"
-            )
-        
-        # Check 4: Question words that suggest analysis or conversation continuation
-        analysis_patterns = [
-            r"\b(who|quién|cuál|cual|which|what|qué|compare|comparar)\b",
-            r"\b(best|mejor|top|rank|ranking|suitable|adecuado)\b",
-            r"\b(experience|experiencia|skill|habilidad|background)\b",
-            r"\b(why|porque|porqué|reason|razón|sentido|sense)\b",
-            r"\b(technical|técnico|técnica|programming|programación|programacion)\b",
-            r"\b(frontend|front-end|backend|fullstack|full-stack|stack)\b",
-        ]
-        for pattern in analysis_patterns:
-            if re.search(pattern, question_lower):
-                logger.debug(f"Guardrail: Allowed (analysis pattern)")
-                return GuardrailResult(
-                    is_allowed=True,
-                    confidence=0.8,
-                    reason="analysis_pattern"
                 )
         
         # Default: Allow but with lower confidence

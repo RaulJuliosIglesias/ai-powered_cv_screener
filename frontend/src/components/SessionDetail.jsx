@@ -3,8 +3,8 @@ import {
   ArrowLeft, FileText, Trash2, Plus, Send, Loader, 
   Sparkles, User, X, Check, Upload, ChevronDown, ChevronUp
 } from 'lucide-react';
-import ReactMarkdown from 'react-markdown';
 import { useLanguage } from '../contexts/LanguageContext';
+import Message from './Message';
 import SourceBadge from './SourceBadge';
 
 const SessionDetail = ({
@@ -227,43 +227,16 @@ const SessionDetail = ({
                 </div>
               </div>
             ) : (
-              <div className="max-w-3xl mx-auto space-y-4">
+              <div className="max-w-4xl mx-auto space-y-4">
                 {session.messages.map((msg, idx) => (
-                  <div key={msg.id || idx} className={msg.role === 'user' ? 'flex justify-end' : ''}>
-                    <div className={`flex gap-3 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                      <div className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center ${
-                        msg.role === 'user' 
-                          ? 'bg-blue-500' 
-                          : 'bg-gradient-to-br from-blue-500 to-purple-600'
-                      }`}>
-                        {msg.role === 'user' 
-                          ? <User className="w-4 h-4 text-white" />
-                          : <Sparkles className="w-4 h-4 text-white" />
-                        }
-                      </div>
-                      <div className={`flex-1 ${msg.role === 'user' ? 'text-right' : ''}`}>
-                        <div className={`p-3 rounded-xl ${
-                          msg.role === 'user'
-                            ? 'bg-blue-500 text-white rounded-tr-sm'
-                            : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-tl-sm'
-                        }`}>
-                          <div className={`prose prose-sm max-w-none ${msg.role === 'user' ? 'prose-invert' : 'dark:prose-invert'}`}>
-                            <ReactMarkdown>{msg.content}</ReactMarkdown>
-                          </div>
-                          {msg.role !== 'user' && msg.sources?.length > 0 && (
-                            <div className="mt-3 pt-2 border-t border-gray-100 dark:border-gray-700">
-                              <p className="text-xs text-gray-500 mb-1.5">📎 {language === 'es' ? 'Fuentes' : 'Sources'}:</p>
-                              <div className="flex flex-wrap gap-1.5">
-                                {msg.sources.map((src, i) => (
-                                  <SourceBadge key={i} filename={src.filename} score={src.relevance} />
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <Message 
+                    key={msg.id || idx} 
+                    message={{
+                      ...msg,
+                      id: msg.id || idx,
+                      sources: msg.sources || []
+                    }}
+                  />
                 ))}
                 {isChatLoading && (
                   <div className="flex gap-3">

@@ -16,7 +16,7 @@ PDF_STORAGE_DIR.mkdir(exist_ok=True)
 
 # Mapping of cv_id to PDF file path (in production, use database)
 cv_pdf_mapping = {}
-from app.services.rag_service_v2 import RAGService
+from app.services.rag_service_v5 import RAGServiceV5
 from app.services.chunking_service import ChunkingService
 from app.models.sessions import session_manager
 from app.providers.cloud.sessions import supabase_session_manager
@@ -141,7 +141,7 @@ async def process_cvs(job_id: str, file_data: List[tuple], mode: Mode):
         chunking_service = ChunkingService()
         logger.info(f"[{job_id}] ChunkingService created")
         
-        rag_service = RAGService(mode)
+        rag_service = RAGServiceV5.from_factory(mode)
         logger.info(f"[{job_id}] RAGService created for mode {mode}")
     except Exception as e:
         logger.error(f"[{job_id}] Failed to initialize services: {e}")
@@ -255,7 +255,7 @@ async def chat(
     if not request.message.strip():
         raise HTTPException(status_code=400, detail="Message cannot be empty")
     
-    rag_service = RAGService(mode)
+    rag_service = RAGServiceV5.from_factory(mode)
     
     # Check if there are any CVs indexed
     stats = await rag_service.get_stats()
@@ -279,7 +279,7 @@ async def chat(
 @router.get("/cvs", response_model=CVListResponse)
 async def list_cvs(mode: Mode = Query(default=settings.default_mode)):
     """List all indexed CVs."""
-    rag_service = RAGService(mode)
+    rag_service = RAGServiceV5.from_factory(mode)
     cvs = await rag_service.vector_store.list_cvs()
     return CVListResponse(
         total=len(cvs),
@@ -293,7 +293,7 @@ async def delete_cv(
     mode: Mode = Query(default=settings.default_mode)
 ):
     """Delete a CV from the index and remove from all sessions."""
-    rag_service = RAGService(mode)
+    rag_service = RAGServiceV5.from_factory(mode)
     success = await rag_service.vector_store.delete_cv(cv_id)
     
     if not success:
@@ -326,7 +326,7 @@ async def delete_cv(
 @router.get("/stats", response_model=StatsResponse)
 async def get_stats(mode: Mode = Query(default=settings.default_mode)):
     """Get system statistics."""
-    rag_service = RAGService(mode)
+    rag_service = RAGServiceV5.from_factory(mode)
     stats = await rag_service.get_stats()
     return StatsResponse(**stats)
 
@@ -370,7 +370,7 @@ async def set_model(model_id: str):
 @router.delete("/cvs")
 async def delete_all_cvs(mode: Mode = Query(default=settings.default_mode)):
     """Delete all CVs from the index."""
-    rag_service = RAGService(mode)
+    rag_service = RAGServiceV5.from_factory(mode)
     
     # Get all CVs and delete them
     cvs = await rag_service.vector_store.list_cvs()

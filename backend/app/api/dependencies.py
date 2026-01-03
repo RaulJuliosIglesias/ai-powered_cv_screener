@@ -5,7 +5,7 @@ from app.config import get_settings, Settings
 from app.services.pdf_service import PDFService
 from app.services.embedding_service import EmbeddingService
 from app.services.vector_store import VectorStoreService
-from app.services.rag_service import RAGService
+from app.services.rag_service_v5 import RAGServiceV5
 from app.services.guardrails_service import GuardrailsService
 from app.utils.monitoring import UsageTracker, QueryLogger, RateLimiter
 
@@ -45,11 +45,12 @@ def get_vector_store() -> VectorStoreService:
     return _vector_store
 
 
-def get_rag_service() -> RAGService:
+def get_rag_service() -> RAGServiceV5:
     """Get RAG service singleton."""
     global _rag_service
     if _rag_service is None:
-        _rag_service = RAGService()
+        from app.config import settings
+        _rag_service = RAGServiceV5.from_factory(settings.default_mode)
     return _rag_service
 
 
