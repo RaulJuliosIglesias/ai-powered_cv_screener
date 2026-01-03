@@ -87,6 +87,8 @@ class SessionListResponse(BaseModel):
 
 class ChatRequest(BaseModel):
     message: str
+    understanding_model: Optional[str] = None  # Model for query understanding (Step 1)
+    generation_model: Optional[str] = None     # Model for response generation (Step 2)
 
 
 class ChatResponse(BaseModel):
@@ -95,6 +97,7 @@ class ChatResponse(BaseModel):
     metrics: dict = Field(default_factory=dict)
     confidence_score: Optional[float] = None
     guardrail_passed: Optional[bool] = None
+    query_understanding: Optional[dict] = None  # Info about how query was understood
 
 
 class UploadResponse(BaseModel):
@@ -431,7 +434,12 @@ async def chat_in_session(
     mgr.add_message(session_id, "user", request.message)
     
     # Query RAG with session's CVs only - pass session_id for logging
-    rag_service = RAGService(mode)
+    # Use custom models if provided, otherwise use defaults
+    rag_service = RAGService(
+        mode=mode,
+        understanding_model=request.understanding_model,
+        generation_model=request.generation_model
+    )
     result = await rag_service.query(
         question=request.message, 
         session_id=session_id,
@@ -442,12 +450,22 @@ async def chat_in_session(
     # Save assistant message
     mgr.add_message(session_id, "assistant", result.answer, result.sources)
     
+    # Include query understanding info in response
+    query_understanding_info = None
+    if hasattr(result, 'query_understanding') and result.query_understanding:
+        query_understanding_info = {
+            "understood_query": result.query_understanding.get("understood_query"),
+            "query_type": result.query_understanding.get("query_type"),
+            "requirements": result.query_understanding.get("requirements", [])
+        }
+    
     return ChatResponse(
         response=result.answer,
         sources=result.sources,
         metrics=result.metrics,
         confidence_score=result.confidence_score,
-        guardrail_passed=result.guardrail_passed
+        guardrail_passed=result.guardrail_passed,
+        query_understanding=query_understanding_info
     )
 
 

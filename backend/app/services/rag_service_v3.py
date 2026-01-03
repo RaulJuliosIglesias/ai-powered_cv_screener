@@ -20,6 +20,7 @@ from app.prompts.templates import SYSTEM_PROMPT, build_query_prompt
 from app.services.guardrail_service import GuardrailService, GuardrailResult
 from app.services.hallucination_service import HallucinationService, HallucinationCheckResult
 from app.services.eval_service import EvalService
+from app.services.query_understanding_service import QueryUnderstandingService, QueryUnderstanding
 
 logger = logging.getLogger(__name__)
 
@@ -33,28 +34,37 @@ class RAGResponse:
     confidence_score: float
     guardrail_passed: bool
     hallucination_check: Dict[str, Any] = field(default_factory=dict)
+    query_understanding: Dict[str, Any] = field(default_factory=dict)
     mode: str = "local"
 
 
 class RAGServiceV3:
     """
-    RAG Service v3 with complete pipeline.
+    RAG Service v3 with complete 2-step pipeline.
     
     Pipeline:
-    1. Guardrail Check → Reject off-topic questions
-    2. Embed Query → Generate query embedding
-    3. Vector Search → Find relevant CV chunks
-    4. LLM Generation → Generate response
-    5. Hallucination Check → Verify response against CVs
-    6. Logging → Record for evaluation
+    1. Query Understanding → Understand and reformulate query (fast model)
+    2. Guardrail Check → Reject off-topic questions
+    3. Embed Query → Generate query embedding
+    4. Vector Search → Find relevant CV chunks
+    5. LLM Generation → Generate response (main model)
+    6. Hallucination Check → Verify response against CVs
+    7. Logging → Record for evaluation
     """
     
-    def __init__(self, mode: Mode = Mode.LOCAL):
+    def __init__(
+        self, 
+        mode: Mode = Mode.LOCAL,
+        understanding_model: Optional[str] = None,
+        generation_model: Optional[str] = None
+    ):
         """
         Initialize RAG Service v3.
         
         Args:
             mode: Operating mode (local or cloud)
+            understanding_model: Model for query understanding (Step 1)
+            generation_model: Model for response generation (Step 2)
         """
         self.mode = mode
         
@@ -63,12 +73,19 @@ class RAGServiceV3:
         self.vector_store = ProviderFactory.get_vector_store(mode)
         self.llm = ProviderFactory.get_llm_provider(mode)
         
+        # Override generation model if specified
+        if generation_model:
+            self.llm.model = generation_model
+        
         # Additional services
+        self.query_understanding = QueryUnderstandingService(model=understanding_model)
         self.guardrail = GuardrailService()
         self.hallucination = HallucinationService()
         self.eval = EvalService()
         
         logger.info(f"RAGServiceV3 initialized in {mode.value} mode")
+        logger.info(f"  Understanding model: {self.query_understanding.model}")
+        logger.info(f"  Generation model: {self.llm.model}")
     
     async def query(
         self,
@@ -99,8 +116,49 @@ class RAGServiceV3:
         total_start = time.perf_counter()
         
         # ═══════════════════════════════════════════════════════════════
-        # STEP 1: GUARDRAIL CHECK
+        # STEP 1: QUERY UNDERSTANDING (Fast Model)
         # ═══════════════════════════════════════════════════════════════
+        understanding_start = time.perf_counter()
+        query_understanding = await self.query_understanding.understand(question)
+        metrics["understanding_ms"] = (time.perf_counter() - understanding_start) * 1000
+        
+        logger.info(f"Query understood in {metrics['understanding_ms']:.1f}ms")
+        logger.info(f"  Original: {query_understanding.original_query}")
+        logger.info(f"  Understood: {query_understanding.understood_query}")
+        logger.info(f"  Type: {query_understanding.query_type}")
+        logger.info(f"  CV-related: {query_understanding.is_cv_related}")
+        
+        # Use the reformulated prompt for better results
+        effective_question = query_understanding.reformulated_prompt or question
+        
+        # ═══════════════════════════════════════════════════════════════
+        # STEP 2: GUARDRAIL CHECK (using understanding result)
+        # ═══════════════════════════════════════════════════════════════
+        # If query understanding says it's not CV-related, reject early
+        if not query_understanding.is_cv_related:
+            rejection_msg = "I can only help with CV screening and candidate analysis. Please ask a question about the uploaded CVs."
+            
+            self.eval.log_query(
+                query=question,
+                response=rejection_msg,
+                sources=[],
+                metrics=metrics,
+                hallucination_check={"confidence_score": 0},
+                guardrail_passed=False,
+                session_id=session_id,
+                mode=self.mode.value
+            )
+            
+            return RAGResponse(
+                answer=rejection_msg,
+                sources=[],
+                metrics=metrics,
+                confidence_score=0,
+                guardrail_passed=False,
+                mode=self.mode.value
+            )
+        
+        # Traditional guardrail check as backup
         guardrail_result = self.guardrail.check(question)
         
         if not guardrail_result.is_allowed:
@@ -185,7 +243,15 @@ class RAGServiceV3:
         unique_cv_ids = set(r.cv_id for r in search_results)
         total_cvs = total_cvs_in_session or len(cv_ids) if cv_ids else len(unique_cv_ids)
         
-        prompt = build_query_prompt(question, chunks, total_cvs=total_cvs)
+        # Use the reformulated question for better LLM understanding
+        prompt = build_query_prompt(effective_question, chunks, total_cvs=total_cvs)
+        
+        # Add requirements from query understanding to help LLM
+        if query_understanding.requirements:
+            requirements_text = "\n\nIMPORTANT REQUIREMENTS TO ADDRESS:\n" + "\n".join(
+                f"- {req}" for req in query_understanding.requirements
+            )
+            prompt = prompt.replace("Your response:", requirements_text + "\n\nYour response:")
         
         llm_start = time.perf_counter()
         llm_result = await self.llm.generate(prompt, system_prompt=SYSTEM_PROMPT)
@@ -252,6 +318,15 @@ class RAGServiceV3:
             f"llm={metrics['llm_ms']:.0f}) confidence={hallucination_result.confidence_score:.2f}"
         )
         
+        # Convert query understanding to dict
+        query_understanding_dict = {
+            "original_query": query_understanding.original_query,
+            "understood_query": query_understanding.understood_query,
+            "query_type": query_understanding.query_type,
+            "requirements": query_understanding.requirements,
+            "reformulated_prompt": query_understanding.reformulated_prompt
+        }
+        
         return RAGResponse(
             answer=answer,
             sources=sources,
@@ -259,6 +334,7 @@ class RAGServiceV3:
             confidence_score=hallucination_result.confidence_score,
             guardrail_passed=True,
             hallucination_check=hallucination_dict,
+            query_understanding=query_understanding_dict,
             mode=self.mode.value
         )
     
