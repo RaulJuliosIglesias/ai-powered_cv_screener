@@ -790,6 +790,142 @@ class RAGServiceV5:
             logger.exception(f"Unexpected error: {e}")
             return self._build_error_response(ctx, "An unexpected error occurred")
     
+    async def query_stream(
+        self,
+        question: str,
+        session_id: str | None = None,
+        cv_ids: list[str] | None = None,
+        k: int | None = None,
+        threshold: float | None = None,
+        total_cvs_in_session: int | None = None
+    ):
+        """
+        Execute RAG pipeline with streaming progress events.
+        
+        Yields SSE events as the pipeline executes.
+        """
+        if not self._providers_initialized:
+            yield {"event": "error", "data": {"message": "Providers not initialized"}}
+            return
+        
+        ctx = PipelineContextV5(
+            question=question,
+            session_id=session_id,
+            cv_ids=cv_ids,
+            k=k or self.config.default_k,
+            threshold=threshold or self.config.default_threshold,
+            total_cvs_in_session=total_cvs_in_session
+        )
+        
+        try:
+            # Execute pipeline with events
+            async for event in self._execute_pipeline_stream(ctx):
+                yield event
+                
+        except asyncio.TimeoutError:
+            logger.error(f"Pipeline timeout after {self.config.total_timeout}s")
+            yield {"event": "error", "data": {"message": "Request timed out"}}
+        except Exception as e:
+            logger.exception(f"Stream error: {e}")
+            yield {"event": "error", "data": {"message": str(e)}}
+    
+    async def _execute_pipeline_stream(self, ctx: PipelineContextV5):
+        """Execute pipeline with streaming progress events."""
+        import time
+        
+        # Stage 1: Query Understanding
+        yield {"event": "step", "data": {"step": "query_understanding", "status": "running"}}
+        start = time.perf_counter()
+        await self._step_query_understanding(ctx)
+        duration = (time.perf_counter() - start) * 1000
+        yield {"event": "step", "data": {"step": "query_understanding", "status": "completed", "duration_ms": duration}}
+        
+        # Stage 2: Multi-Query (if enabled)
+        if self.config.multi_query_enabled:
+            yield {"event": "step", "data": {"step": "multi_query", "status": "running"}}
+            start = time.perf_counter()
+            await self._step_multi_query(ctx)
+            duration = (time.perf_counter() - start) * 1000
+            yield {"event": "step", "data": {"step": "multi_query", "status": "completed", "duration_ms": duration}}
+        
+        # Stage 3: Guardrail
+        yield {"event": "step", "data": {"step": "guardrail", "status": "running"}}
+        start = time.perf_counter()
+        passed = await self._step_guardrail(ctx)
+        duration = (time.perf_counter() - start) * 1000
+        if not passed:
+            yield {"event": "step", "data": {"step": "guardrail", "status": "failed", "duration_ms": duration}}
+            yield {"event": "complete", "data": self._build_guardrail_response(ctx, ctx.guardrail_message).to_dict()}
+            return
+        yield {"event": "step", "data": {"step": "guardrail", "status": "completed", "duration_ms": duration}}
+        
+        # Stage 4: Multi-Embedding
+        yield {"event": "step", "data": {"step": "embedding", "status": "running"}}
+        start = time.perf_counter()
+        await self._step_multi_embedding(ctx)
+        duration = (time.perf_counter() - start) * 1000
+        yield {"event": "step", "data": {"step": "embedding", "status": "completed", "duration_ms": duration}}
+        
+        # Stage 5: Retrieval
+        yield {"event": "step", "data": {"step": "retrieval", "status": "running", "details": f"Searching {ctx.total_cvs_in_session or len(ctx.cv_ids or [])} CVs"}}
+        start = time.perf_counter()
+        await self._step_fusion_retrieval(ctx)
+        duration = (time.perf_counter() - start) * 1000
+        
+        if not ctx.retrieval_result or not ctx.retrieval_result.chunks:
+            yield {"event": "step", "data": {"step": "retrieval", "status": "completed", "duration_ms": duration, "details": "No results found"}}
+            yield {"event": "complete", "data": self._build_no_results_response(ctx).to_dict()}
+            return
+        
+        yield {"event": "step", "data": {"step": "retrieval", "status": "completed", "duration_ms": duration, "details": f"Found {len(ctx.retrieval_result.chunks)} chunks"}}
+        
+        # Stage 6: Reranking
+        if self.config.reranking_enabled:
+            yield {"event": "step", "data": {"step": "reranking", "status": "running"}}
+            start = time.perf_counter()
+            await self._step_reranking(ctx)
+            duration = (time.perf_counter() - start) * 1000
+            yield {"event": "step", "data": {"step": "reranking", "status": "completed", "duration_ms": duration}}
+        
+        # Stage 7: Reasoning
+        if self.config.reasoning_enabled:
+            yield {"event": "step", "data": {"step": "reasoning", "status": "running", "details": "Analyzing candidates"}}
+            start = time.perf_counter()
+            await self._step_reasoning(ctx)
+            duration = (time.perf_counter() - start) * 1000
+            yield {"event": "step", "data": {"step": "reasoning", "status": "completed", "duration_ms": duration}}
+        
+        # Stage 8: Generation
+        yield {"event": "step", "data": {"step": "generation", "status": "running", "details": "Generating recommendation"}}
+        start = time.perf_counter()
+        await self._step_generation(ctx)
+        duration = (time.perf_counter() - start) * 1000
+        yield {"event": "step", "data": {"step": "generation", "status": "completed", "duration_ms": duration}}
+        
+        # Stage 9: Verification
+        if self.config.claim_verification_enabled:
+            yield {"event": "step", "data": {"step": "verification", "status": "running"}}
+            start = time.perf_counter()
+            await self._step_claim_verification(ctx)
+            duration = (time.perf_counter() - start) * 1000
+            yield {"event": "step", "data": {"step": "verification", "status": "completed", "duration_ms": duration}}
+        
+        # Stage 10: Refinement
+        if self.config.iterative_refinement_enabled:
+            yield {"event": "step", "data": {"step": "refinement", "status": "running"}}
+            start = time.perf_counter()
+            await self._step_refinement(ctx)
+            duration = (time.perf_counter() - start) * 1000
+            yield {"event": "step", "data": {"step": "refinement", "status": "completed", "duration_ms": duration}}
+        
+        # Finalize
+        ctx.metrics.total_ms = ctx.elapsed_ms
+        ctx.metrics.cache_hit = ctx.embedding_cached or ctx.response_cached
+        self._log_query(ctx)
+        
+        response = self._build_success_response(ctx)
+        yield {"event": "complete", "data": response.to_dict()}
+    
     async def _execute_pipeline(self, ctx: PipelineContextV5) -> RAGResponseV5:
         """Execute the full RAG v5 pipeline."""
         

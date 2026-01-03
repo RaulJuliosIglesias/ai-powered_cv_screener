@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy, Eye, ExternalLink, Sliders, BarChart3, RotateCcw } from 'lucide-react';
+import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, CheckCircle, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy, Eye, ExternalLink, Sliders, BarChart3, RotateCcw } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import useMode from './hooks/useMode';
@@ -354,71 +354,148 @@ function App() {
   const handleSend = async (text = message) => {
     if (!text.trim() || !currentSessionId || isChatLoading || !currentSession?.cvs?.length) return;
     const userMessage = text.trim();
-    const targetSessionId = currentSessionId; // Capture current session
+    const targetSessionId = currentSessionId;
     setMessage('');
     
-    // Add pending message for this specific session (not currentSession directly)
+    // Add pending message for this specific session
     setPendingMessages(prev => ({
       ...prev,
       [targetSessionId]: { userMsg: userMessage, status: 'sending' }
     }));
     
     setChatLoadingStates(prev => ({ ...prev, [targetSessionId]: true }));
-    try { 
-      const response = await sendSessionMessage(targetSessionId, userMessage, mode, ragPipelineSettings);
-      
-      // Log pipeline info for debugging
-      console.log('📦 Full Response:', response);
-      if (response.query_understanding) {
-        console.log('🔍 RAG Pipeline - Query Understanding:', response.query_understanding);
+    
+    // Track real-time progress steps
+    const progressSteps = {
+      query_understanding: { status: 'pending', label: 'Understanding query...' },
+      retrieval: { status: 'pending', label: 'Searching CVs...' },
+      reasoning: { status: 'pending', label: 'Analyzing candidates...' },
+      generation: { status: 'pending', label: 'Generating recommendation...' }
+    };
+    
+    setPendingMessages(prev => ({
+      ...prev,
+      [targetSessionId]: { 
+        userMsg: userMessage, 
+        status: 'analyzing',
+        progress: progressSteps
       }
-      if (response.metrics) {
-        console.log('📊 RAG Pipeline - Metrics:', response.metrics);
-      }
-      if (response.pipeline_steps) {
-        console.log('⚙️ RAG Pipeline - Steps:', response.pipeline_steps);
-      } else {
-        console.warn('⚠️ No pipeline_steps in response!');
-      }
-      
-      // Save metrics to history (including new reranking and verification info)
-      saveMetricEntry({
-        query: userMessage,
-        mode: mode,
-        metrics: response.metrics || {},
-        confidence_score: response.confidence_score,
-        guardrail_passed: response.guardrail_passed,
-        query_understanding: response.query_understanding,
-        reranking_info: response.reranking_info,
-        verification_info: response.verification_info,
-        session_id: targetSessionId,
+    }));
+    
+    try {
+      // Use SSE endpoint for real-time progress
+      const response = await fetch(`/api/sessions/${targetSessionId}/chat-stream?mode=${mode}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMessage })
       });
-      window.dispatchEvent(new Event('metrics-updated'));
       
-      // Clear pending message for this session
+      if (!response.ok) throw new Error('Stream request failed');
+      
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+      let finalResult = null;
+      
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+        
+        for (const line of lines) {
+          if (!line.trim() || line.startsWith(':')) continue;
+          
+          if (line.startsWith('event:')) {
+            const eventType = line.substring(6).trim();
+            continue;
+          }
+          
+          if (line.startsWith('data:')) {
+            const data = JSON.parse(line.substring(5).trim());
+            
+            // Handle step events - UPDATE REAL PROGRESS
+            if (data.step) {
+              const stepName = data.step;
+              const stepStatus = data.status;
+              
+              console.log(`🔄 REAL Step: ${stepName} - ${stepStatus}`);
+              
+              setPendingMessages(prev => {
+                const current = prev[targetSessionId];
+                if (!current) return prev;
+                
+                const updatedProgress = { ...current.progress };
+                
+                if (stepName === 'query_understanding') {
+                  updatedProgress.query_understanding.status = stepStatus;
+                } else if (stepName === 'retrieval' || stepName === 'embedding') {
+                  updatedProgress.retrieval.status = stepStatus;
+                  if (data.details) {
+                    updatedProgress.retrieval.label = data.details;
+                  }
+                } else if (stepName === 'reasoning' || stepName === 'reranking') {
+                  updatedProgress.reasoning.status = stepStatus;
+                } else if (stepName === 'generation') {
+                  updatedProgress.generation.status = stepStatus;
+                }
+                
+                return {
+                  ...prev,
+                  [targetSessionId]: { ...current, progress: updatedProgress }
+                };
+              });
+            }
+            
+            // Handle complete event
+            if (data.response || data.answer) {
+              finalResult = data;
+              console.log('✅ Stream complete, received final result');
+            }
+          }
+        }
+      }
+      
+      if (finalResult) {
+        // Save metrics
+        saveMetricEntry({
+          query: userMessage,
+          mode: mode,
+          metrics: finalResult.metrics || {},
+          confidence_score: finalResult.confidence_score,
+          guardrail_passed: finalResult.guardrail_passed,
+          query_understanding: finalResult.query_understanding,
+          session_id: targetSessionId,
+        });
+        window.dispatchEvent(new Event('metrics-updated'));
+      }
+      
+      // Clear pending message
       setPendingMessages(prev => {
         const newState = { ...prev };
         delete newState[targetSessionId];
         return newState;
       });
       
-      // Only update UI if still on the same session (use ref for current value)
+      // Reload session to show final result
       if (currentSessionIdRef.current === targetSessionId) {
         await loadSession(targetSessionId);
       }
-    } catch (e) { 
-      console.error(e); 
-      // Clear pending message on error too
+      
+    } catch (e) {
+      console.error('❌ Stream error:', e);
       setPendingMessages(prev => {
         const newState = { ...prev };
         delete newState[targetSessionId];
         return newState;
       });
-      // Revert optimistic update on error - only if still on same session
       if (currentSessionIdRef.current === targetSessionId) {
         await loadSession(targetSessionId);
       }
     }
+    
     setChatLoadingStates(prev => ({ ...prev, [targetSessionId]: false }));
   };
 
@@ -945,22 +1022,38 @@ function App() {
                         </span>
                       </div>
                       <div className="space-y-2 text-xs text-gray-500 dark:text-gray-400 border-l-2 border-emerald-300 pl-3 ml-2">
-                        <div className="flex items-center gap-2 animate-pulse">
-                          <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
-                          <span>{language === 'es' ? 'Entendiendo la consulta...' : 'Understanding query...'}</span>
-                        </div>
-                        <div className="flex items-center gap-2 opacity-60">
-                          <span className="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
-                          <span>{language === 'es' ? `Buscando en ${currentSession?.cvs?.length || 0} CVs...` : `Searching ${currentSession?.cvs?.length || 0} CVs...`}</span>
-                        </div>
-                        <div className="flex items-center gap-2 opacity-40">
-                          <span className="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
-                          <span>{language === 'es' ? 'Analizando candidatos relevantes...' : 'Analyzing relevant candidates...'}</span>
-                        </div>
-                        <div className="flex items-center gap-2 opacity-30">
-                          <span className="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
-                          <span>{language === 'es' ? 'Generando recomendación...' : 'Generating recommendation...'}</span>
-                        </div>
+                        {/* REAL-TIME PROGRESS from SSE events */}
+                        {(() => {
+                          const pendingMsg = pendingMessages[currentSessionId];
+                          const progress = pendingMsg?.progress;
+                          if (!progress) return null;
+                          
+                          return Object.entries(progress).map(([key, step]) => {
+                            const isRunning = step.status === 'running';
+                            const isCompleted = step.status === 'completed';
+                            const isPending = step.status === 'pending';
+                            
+                            return (
+                              <div 
+                                key={key}
+                                className={`flex items-center gap-2 transition-opacity ${
+                                  isRunning ? 'animate-pulse' : 
+                                  isCompleted ? 'opacity-100' : 
+                                  'opacity-40'
+                                }`}
+                              >
+                                {isCompleted ? (
+                                  <CheckCircle className="w-3 h-3 text-emerald-500" />
+                                ) : isRunning ? (
+                                  <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                                ) : (
+                                  <span className="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
+                                )}
+                                <span>{step.label}</span>
+                              </div>
+                            );
+                          });
+                        })()}
                       </div>
                     </div>
                   </div>

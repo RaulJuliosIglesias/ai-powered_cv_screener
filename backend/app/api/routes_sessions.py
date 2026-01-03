@@ -5,9 +5,10 @@ import logging
 from pathlib import Path
 from typing import List, Optional
 from fastapi import APIRouter, HTTPException, Query, File, UploadFile, BackgroundTasks
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, StreamingResponse
 from pydantic import BaseModel, Field
 import pdfplumber
+import json
 
 from app.config import settings, Mode
 

@@ -7,6 +7,7 @@ import sys
 from app.config import get_settings
 from app.api.routes_v2 import router
 from app.api.routes_sessions import router as sessions_router
+from app.api.routes_sessions_stream import router as sessions_stream_router
 from app.utils.exceptions import CVScreenerException
 
 
@@ -66,6 +67,7 @@ async def general_exception_handler(request: Request, exc: Exception):
 # Include routers
 app.include_router(router)
 app.include_router(sessions_router)
+app.include_router(sessions_stream_router)
 
 
 # Root endpoint
