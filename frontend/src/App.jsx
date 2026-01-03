@@ -32,9 +32,10 @@ function App() {
   const [pdfViewerTitle, setPdfViewerTitle] = useState('');
 
   const openPdfViewer = (cvId, filename) => {
-    const url = `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/cvs/${cvId}/pdf`;
-    setPdfViewerUrl(url);
-    setPdfViewerTitle(filename || cvId);
+    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:6000';
+    const url = `${baseUrl}/api/cvs/${cvId}/pdf`;
+    // Open directly in new tab
+    window.open(url, '_blank');
   };
 
   const closePdfViewer = () => {
@@ -47,11 +48,41 @@ function App() {
     setTimeout(() => setToast(null), 3000);
   };
 
-  // Preprocess message content to handle :::conclusion blocks
+  // Preprocess message content to handle special blocks and CV links
   const preprocessContent = (content) => {
-    if (!content) return content;
-    // Convert :::conclusion blocks to a special format that we can detect
-    return content.replace(/:::conclusion\n([\s\S]*?):::/g, '\n\n<CONCLUSION_BLOCK>\n$1\n</CONCLUSION_BLOCK>\n\n');
+    if (!content) return { mainContent: content, conclusionContent: null, thinkingContent: null };
+    
+    // Extract thinking block (for collapsible reasoning)
+    const thinkingMatch = content.match(/:::thinking\n?([\s\S]*?):::/);
+    const thinkingContent = thinkingMatch ? thinkingMatch[1].trim() : null;
+    
+    // Extract conclusion block
+    const conclusionMatch = content.match(/:::conclusion\n?([\s\S]*?):::/);
+    const conclusionContent = conclusionMatch ? conclusionMatch[1].trim() : null;
+    
+    // Remove thinking and conclusion blocks from main content
+    let mainContent = content
+      .replace(/:::thinking\n?[\s\S]*?:::/g, '')
+      .replace(/:::conclusion\n?[\s\S]*?:::/g, '');
+    
+    // Convert [CV:cv_id] format to clickable links
+    // Pattern: Name [CV:cv_id] -> keep name, make CV link
+    const cvLinkPattern = /([A-Za-zÀ-ÿ\s]+)\s*\[CV:(cv_[a-z0-9]+)\]/g;
+    
+    const processCV = (text) => {
+      return text.replace(cvLinkPattern, (match, name, cvId) => {
+        return `${name.trim()} [📄](cvlink:${cvId})`;
+      });
+    };
+    
+    mainContent = processCV(mainContent);
+    const processedConclusion = conclusionContent ? processCV(conclusionContent) : null;
+    
+    return { 
+      mainContent: mainContent.trim(), 
+      conclusionContent: processedConclusion,
+      thinkingContent 
+    };
   };
   
   const messagesEndRef = useRef(null);
@@ -341,6 +372,26 @@ function App() {
                     <div className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ${msg.role === 'user' ? 'bg-blue-500' : 'bg-gradient-to-br from-emerald-400 to-cyan-500'}`}>{msg.role === 'user' ? <User className="w-5 h-5 text-white" /> : <Sparkles className="w-5 h-5 text-white" />}</div>
                     <div className={`flex-1 ${msg.role === 'user' ? '' : 'min-w-0'}`}>
                       <div className={`p-4 rounded-2xl ${msg.role === 'user' ? 'bg-blue-500 text-white' : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm text-gray-800 dark:text-gray-100'}`}>
+                        
+                        {/* Thinking/Reasoning Collapsible - Only for assistant messages */}
+                        {msg.role === 'assistant' && (() => {
+                          const { thinkingContent } = preprocessContent(msg.content);
+                          if (thinkingContent) {
+                            return (
+                              <details className="mb-4 group">
+                                <summary className="flex items-center gap-2 cursor-pointer text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 select-none">
+                                  <ChevronRight className="w-4 h-4 transition-transform group-open:rotate-90" />
+                                  <span className="font-medium">{language === 'es' ? 'Ver razonamiento interno' : 'View internal reasoning'}</span>
+                                </summary>
+                                <div className="mt-2 p-3 bg-gray-50 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-400 italic">
+                                  {thinkingContent}
+                                </div>
+                              </details>
+                            );
+                          }
+                          return null;
+                        })()}
+                        
                         <div className={`max-w-none ${msg.role === 'user' ? '' : '[&_p]:text-gray-700 dark:[&_p]:text-gray-200 [&_h1]:text-gray-900 dark:[&_h1]:text-white [&_h2]:text-gray-900 dark:[&_h2]:text-white [&_h3]:text-gray-900 dark:[&_h3]:text-white [&_li]:text-gray-700 dark:[&_li]:text-gray-200 [&_strong]:text-gray-900 dark:[&_strong]:text-white'}`}>
                           <ReactMarkdown 
                             remarkPlugins={[remarkGfm]}
@@ -396,68 +447,68 @@ function App() {
                                 );
                               },
                               a: ({node, href, children, ...props}) => {
+                                // Handle cvlink: format (from preprocessed content)
+                                if (href?.startsWith('cvlink:')) {
+                                  const cvId = href.replace('cvlink:', '');
+                                  return (
+                                    <button
+                                      onClick={() => openPdfViewer(cvId, String(children))}
+                                      className="inline-flex items-center gap-1 mx-0.5 px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800 rounded text-sm font-medium transition-colors border border-blue-200 dark:border-blue-700"
+                                      title={language === 'es' ? 'Ver CV' : 'View CV'}
+                                    >
+                                      <FileText className="w-3 h-3" />
+                                      <span>{children}</span>
+                                    </button>
+                                  );
+                                }
+                                // Handle cv: format (legacy)
                                 if (href?.startsWith('cv:')) {
                                   const cvId = href.replace('cv:', '');
                                   return (
                                     <button
                                       onClick={() => openPdfViewer(cvId, String(children))}
-                                      className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800/50 rounded-md text-sm font-medium transition-colors"
+                                      className="inline-flex items-center gap-1 mx-0.5 px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800 rounded text-sm font-medium transition-colors border border-blue-200 dark:border-blue-700"
                                       title={language === 'es' ? 'Ver CV' : 'View CV'}
                                     >
-                                      <FileText className="w-3.5 h-3.5" />
-                                      {children}
+                                      <FileText className="w-3 h-3" />
+                                      <span>{children}</span>
                                     </button>
                                   );
                                 }
                                 return <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline" {...props}>{children}</a>;
                               },
-                              p: ({node, children, ...props}) => {
-                                // Check if this paragraph contains conclusion block markers
-                                const text = String(children);
-                                if (text.includes('<CONCLUSION_BLOCK>') || text.includes('</CONCLUSION_BLOCK>')) {
-                                  return null; // Skip the marker paragraphs
-                                }
-                                return <p {...props}>{children}</p>;
-                              },
                             }}
                           >
-                            {(() => {
-                              const processed = preprocessContent(msg.content);
-                              // Check if there's a conclusion block
-                              const conclusionMatch = processed.match(/<CONCLUSION_BLOCK>\n([\s\S]*?)\n<\/CONCLUSION_BLOCK>/);
-                              const mainContent = processed.replace(/<CONCLUSION_BLOCK>[\s\S]*?<\/CONCLUSION_BLOCK>/, '');
-                              
-                              return mainContent;
-                            })()}
+                            {preprocessContent(msg.content).mainContent}
                           </ReactMarkdown>
                           
                           {/* Render Conclusion Block Separately */}
                           {(() => {
-                            const conclusionMatch = msg.content?.match(/:::conclusion\n([\s\S]*?):::/);
-                            if (conclusionMatch) {
+                            const { conclusionContent } = preprocessContent(msg.content);
+                            if (conclusionContent) {
                               return (
-                                <div className="mt-6 p-4 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-900/30 dark:via-teal-900/30 dark:to-cyan-900/30 rounded-xl border-2 border-emerald-200 dark:border-emerald-700 shadow-sm">
-                                  <div className="flex items-center gap-2 mb-3 pb-2 border-b border-emerald-200 dark:border-emerald-700">
-                                    <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center">
-                                      <Check className="w-5 h-5 text-white" />
+                                <div className="mt-6 p-5 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-900/30 dark:via-teal-900/30 dark:to-cyan-900/30 rounded-xl border-2 border-emerald-300 dark:border-emerald-600 shadow-lg">
+                                  <div className="flex items-center gap-3 mb-4 pb-3 border-b border-emerald-200 dark:border-emerald-700">
+                                    <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl flex items-center justify-center shadow-md">
+                                      <Check className="w-6 h-6 text-white" />
                                     </div>
-                                    <span className="font-bold text-emerald-800 dark:text-emerald-200 text-lg">
+                                    <span className="font-bold text-emerald-800 dark:text-emerald-200 text-xl">
                                       {language === 'es' ? 'Conclusión' : 'Conclusion'}
                                     </span>
                                   </div>
-                                  <div className="text-gray-800 dark:text-gray-100">
+                                  <div className="text-gray-800 dark:text-gray-100 text-base">
                                     <ReactMarkdown 
                                       remarkPlugins={[remarkGfm]}
                                       components={{
-                                        p: ({children}) => <p className="mb-2 last:mb-0">{children}</p>,
+                                        p: ({children}) => <p className="mb-3 last:mb-0 leading-relaxed">{children}</p>,
                                         strong: ({children}) => <strong className="text-emerald-800 dark:text-emerald-200">{children}</strong>,
                                         ul: ({children}) => <ul className="list-disc list-inside space-y-1 mt-2">{children}</ul>,
                                         li: ({children}) => <li className="text-gray-700 dark:text-gray-200">{children}</li>,
                                         a: ({href, children}) => {
-                                          if (href?.startsWith('cv:')) {
-                                            const cvId = href.replace('cv:', '');
+                                          if (href?.startsWith('cvlink:') || href?.startsWith('cv:')) {
+                                            const cvId = href.replace('cvlink:', '').replace('cv:', '');
                                             return (
-                                              <button onClick={() => openPdfViewer(cvId, String(children))} className="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-200 dark:bg-emerald-800 text-emerald-800 dark:text-emerald-200 rounded text-sm font-medium">
+                                              <button onClick={() => openPdfViewer(cvId, String(children))} className="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-200 dark:bg-emerald-800 text-emerald-800 dark:text-emerald-200 rounded text-sm font-medium border border-emerald-300 dark:border-emerald-700">
                                                 <FileText className="w-3 h-3" />{children}
                                               </button>
                                             );
@@ -466,7 +517,7 @@ function App() {
                                         },
                                       }}
                                     >
-                                      {conclusionMatch[1].trim()}
+                                      {conclusionContent}
                                     </ReactMarkdown>
                                   </div>
                                 </div>

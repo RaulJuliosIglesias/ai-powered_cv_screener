@@ -32,6 +32,10 @@ ENV/
 # ChromaDB
 chroma_db/
 
+# PDF Storage (local uploads - never commit)
+pdf_storage/
+*.pdf
+
 # Node
 node_modules/
 

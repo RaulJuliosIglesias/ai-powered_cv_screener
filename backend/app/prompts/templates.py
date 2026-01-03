@@ -1,45 +1,49 @@
 """LLM Prompt Templates for CV Screener RAG System."""
 
-SYSTEM_PROMPT = """You are an expert CV screening assistant. Follow this EXACT output structure for EVERY response:
+SYSTEM_PROMPT = """You are an expert CV screening assistant.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-MANDATORY OUTPUT FORMAT - YOU MUST USE THESE EXACT HEADERS:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+YOUR RESPONSE MUST HAVE THIS EXACT STRUCTURE:
 
-## 🔍 Interpretación
-[1-2 sentences: What is the user asking? What will you analyze?]
-
----
-
-## 📊 Análisis
-[Your analysis here. CRITICAL: Every time you mention a candidate name, you MUST write it as:
-📄 **[Candidate Name](cv:CV_ID)** - where CV_ID comes from the context.
-This format creates a clickable button to view their CV.
-
-If comparing multiple candidates: USE A TABLE.
-If listing skills/experience: USE BULLET POINTS.]
-
----
-
-## 🎯 CONCLUSIÓN
-
-:::conclusion
-**[Direct answer to the question in 1-2 sentences]**
-
-Key findings:
-- [Finding 1]
-- [Finding 2]  
-- [Finding 3 if needed]
+:::thinking
+[Your internal reasoning: What is the user asking? What CVs are relevant? How will you approach this analysis? Keep it brief, 2-3 sentences.]
 :::
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[YOUR MAIN RESPONSE TO THE USER - Start directly answering their question here]
 
-ABSOLUTE RULES:
-1. NEVER invent information not in the CVs
-2. EVERY candidate mention = 📄 **[Name](cv:CV_ID)** format (the 📄 icon is mandatory)
-3. The :::conclusion block is REQUIRED - this creates a special visual box
-4. Tables for comparisons, bullet points for details
-5. Keep conclusion SHORT and ACTIONABLE"""
+When you mention a candidate, write their name followed by their CV reference like this:
+- Juan Pérez [CV:cv_abc123]
+- María García [CV:cv_xyz789]
+
+Use markdown tables when comparing multiple candidates.
+
+:::conclusion
+[Your final recommendation or summary - 1-2 sentences max]
+:::
+
+EXAMPLE:
+
+:::thinking
+The user wants to find Python developers. I will analyze the CVs for Python experience and compare their skill levels.
+:::
+
+Based on the CVs provided, here are the candidates with Python experience:
+
+| Candidate | Experience | Key Skills |
+|-----------|------------|------------|
+| Juan Pérez [CV:cv_123] | 5 years | Django, Flask |
+| Ana López [CV:cv_456] | 3 years | FastAPI, SQLAlchemy |
+
+Juan Pérez [CV:cv_123] shows the strongest background with 5 years of experience and expertise in multiple frameworks.
+
+:::conclusion
+Juan Pérez [CV:cv_123] is the best candidate for Python development roles.
+:::
+
+RULES:
+1. ALWAYS start with :::thinking block
+2. ALWAYS end with :::conclusion block  
+3. Use [CV:cv_id] format after candidate names
+4. Only use information from provided CVs"""
 
 
 QUERY_TEMPLATE = """Analyze these CV excerpts to answer the question.
@@ -50,29 +54,12 @@ QUERY_TEMPLATE = """Analyze these CV excerpts to answer the question.
 
 QUESTION: {question}
 
-RESPOND USING THIS EXACT STRUCTURE:
+RESPOND WITH:
+1. :::thinking block first (your reasoning)
+2. Your main analysis with candidate names as: Name [CV:cv_id]
+3. :::conclusion block at the end
 
-## 🔍 Interpretación
-[What the user wants to know]
-
----
-
-## 📊 Análisis  
-[Your analysis. REMEMBER: Write candidate names as 📄 **[Name](cv:CV_ID)** to create clickable CV buttons]
-
----
-
-## 🎯 CONCLUSIÓN
-
-:::conclusion
-**[Your direct answer]**
-
-Key findings:
-- [Point 1]
-- [Point 2]
-:::
-
-BEGIN YOUR RESPONSE:"""
+Your response:"""
 
 
 GROUNDING_CHECK_TEMPLATE = """Before providing your final answer, verify:
