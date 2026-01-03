@@ -214,14 +214,64 @@ class RAGServiceV3:
         logger.debug(f"Query embedded in {metrics['embedding_ms']:.1f}ms")
         
         # ═══════════════════════════════════════════════════════════════
-        # STEP 3: VECTOR SEARCH
+        # STEP 2.5: DETERMINE SESSION SIZE (critical for strategy)
+        # ═══════════════════════════════════════════════════════════════
+        # Count unique CVs in session to inform retrieval strategy
+        num_cvs_in_session = total_cvs_in_session or (len(cv_ids) if cv_ids else None)
+        
+        if not num_cvs_in_session:
+            # If not provided, count from vector store metadata
+            # This is a quick metadata query, not a full search
+            all_docs = await self.vector_store.search(
+                embedding=query_embedding,
+                k=10000,  # Large number to get all
+                threshold=0.0,  # No threshold
+                cv_ids=cv_ids,
+                diversify_by_cv=False
+            )
+            unique_cvs = set(doc.cv_id for doc in all_docs)
+            num_cvs_in_session = len(unique_cvs)
+        
+        logger.info(f"Session contains {num_cvs_in_session} CVs")
+        
+        # ═══════════════════════════════════════════════════════════════
+        # STEP 3: VECTOR SEARCH (adaptive strategy based on query + size)
         # ═══════════════════════════════════════════════════════════════
         search_start = time.perf_counter()
+        
+        # ADAPTIVE STRATEGY: Choose retrieval method based on:
+        # 1. Query type (ranking/comparison vs search/filter)
+        # 2. Session size (10 CVs vs 500 CVs)
+        
+        query_type = query_understanding.query_type
+        is_ranking_query = query_type in {"ranking", "comparison"}
+        
+        # Decision matrix:
+        # - Ranking/Comparison with ANY size → Diversified (need all CVs)
+        # - Search/Filter with <100 CVs → Diversified (can afford full coverage)
+        # - Search/Filter with ≥100 CVs → Top-K Global (precision over coverage)
+        
+        if is_ranking_query:
+            diversify = True
+            effective_k = num_cvs_in_session
+            strategy_reason = "ranking/comparison query"
+        elif num_cvs_in_session < 100:
+            diversify = True
+            effective_k = num_cvs_in_session
+            strategy_reason = f"small session ({num_cvs_in_session} CVs)"
+        else:
+            diversify = False
+            effective_k = min(k, num_cvs_in_session)
+            strategy_reason = f"large session ({num_cvs_in_session} CVs), using top-k for precision"
+        
+        logger.info(f"Search strategy: {'diversified' if diversify else 'top-k global'} ({strategy_reason}, k={effective_k})")
+        
         search_results = await self.vector_store.search(
             embedding=query_embedding,
-            k=k,
+            k=effective_k,
             threshold=threshold,
-            cv_ids=cv_ids
+            cv_ids=cv_ids,
+            diversify_by_cv=diversify
         )
         metrics["search_ms"] = (time.perf_counter() - search_start) * 1000
         metrics["results_count"] = len(search_results)

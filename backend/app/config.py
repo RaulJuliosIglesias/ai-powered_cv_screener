@@ -61,9 +61,10 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
     log_file: str = "app.log"
     
-    # RAG
-    retrieval_k: int = 20  # Increased to get more candidates
-    retrieval_score_threshold: float = 0.2  # Lower threshold to include more results
+    # RAG - Adaptive Retrieval Strategy
+    retrieval_k: int = 50  # For top-k global (search/filter queries): multiple chunks per CV
+    retrieval_score_threshold: float = 0.15  # Balanced threshold for quality vs coverage
+    # Note: For ranking/comparison queries, k is automatically set to total_cvs_in_session
     
     # LLM
     llm_temperature: float = 0.1

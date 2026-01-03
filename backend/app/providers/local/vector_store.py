@@ -128,9 +128,19 @@ class SimpleVectorStore(VectorStoreProvider):
         embedding: List[float],
         k: int = 10,
         threshold: float = 0.3,
-        cv_ids: Optional[List[str]] = None
+        cv_ids: Optional[List[str]] = None,
+        diversify_by_cv: bool = True
     ) -> List[SearchResult]:
-        """Search for similar documents."""
+        """Search for similar documents.
+        
+        Args:
+            embedding: Query embedding
+            k: Max results to return
+            threshold: Minimum similarity threshold
+            cv_ids: Optional list of CV IDs to filter by
+            diversify_by_cv: If True, return top chunk from each CV (better for ranking queries)
+                           If False, return global top-k chunks (better for specific searches)
+        """
         if not self._documents:
             logger.warning("Search on empty store")
             return []
@@ -146,25 +156,44 @@ class SimpleVectorStore(VectorStoreProvider):
             
             sim = self._cosine_similarity(embedding, emb)
             if sim >= threshold:
-                similarities.append((i, sim))
+                similarities.append((i, sim, doc["cv_id"]))
         
         # Sort by similarity descending
         similarities.sort(key=lambda x: x[1], reverse=True)
         
-        # Build results
+        # Build results with diversification
         results = []
-        for idx, sim in similarities[:k]:
-            doc = self._documents[idx]
-            results.append(SearchResult(
-                id=doc["id"],
-                cv_id=doc["cv_id"],
-                filename=doc["filename"],
-                content=doc["content"],
-                similarity=sim,
-                metadata=doc.get("metadata", {})
-            ))
+        if diversify_by_cv:
+            # Get best chunk from each CV (ensures all CVs represented)
+            seen_cvs = set()
+            for idx, sim, cv_id in similarities:
+                if cv_id not in seen_cvs:
+                    doc = self._documents[idx]
+                    results.append(SearchResult(
+                        id=doc["id"],
+                        cv_id=doc["cv_id"],
+                        filename=doc["filename"],
+                        content=doc["content"],
+                        similarity=sim,
+                        metadata=doc.get("metadata", {})
+                    ))
+                    seen_cvs.add(cv_id)
+                    if len(results) >= k:
+                        break
+        else:
+            # Traditional top-k (may have multiple chunks from same CV)
+            for idx, sim, cv_id in similarities[:k]:
+                doc = self._documents[idx]
+                results.append(SearchResult(
+                    id=doc["id"],
+                    cv_id=doc["cv_id"],
+                    filename=doc["filename"],
+                    content=doc["content"],
+                    similarity=sim,
+                    metadata=doc.get("metadata", {})
+                ))
         
-        logger.debug(f"Search returned {len(results)} results (threshold={threshold})")
+        logger.debug(f"Search returned {len(results)} results (threshold={threshold}, diversify={diversify_by_cv})")
         return results
     
     async def delete_cv(self, cv_id: str) -> bool:
