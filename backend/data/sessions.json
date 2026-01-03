@@ -785,10 +785,450 @@
           "content": "I can only help with CV screening and candidate analysis. Please ask a question about the uploaded CVs.",
           "sources": [],
           "timestamp": "2026-01-03T17:41:14.577925"
+        },
+        {
+          "id": "3a596f8b-e992-4b92-9316-667d54e6009e",
+          "role": "user",
+          "content": "y para front end quien seria el mejroi candidato?",
+          "sources": [],
+          "timestamp": "2026-01-03T18:55:08.235024"
+        },
+        {
+          "id": "01204f4d-dc12-4a56-8314-9de835cecf5d",
+          "role": "assistant",
+          "content": ":::thinking\nI need to analyze the CVs to find the candidate with the strongest front end web development skills and experience. I'll look for specific mentions of front end technologies, frameworks, years of experience, and project impact.\n\nLooking through the CV excerpts:\n\n1.  **[Priya Patel (cv_4a4e87c4)]**: The header section explicitly mentions \"Junior Software Developer\" with experience using React and Node.js. It details developing RESTful API endpoints and refactoring React components, directly showing front end skills.\n2.  Other CVs mention various roles (UX Designer, Mobile Engineer, CFO, Therapist, etc.) but do not explicitly detail front end web development skills or experience with specific technologies like HTML, CSS, JavaScript, or frameworks like React, Angular, or Vue.\n\nBased on the provided excerpts, only **[Priya Patel](cv:cv_4a4e87c4)** has clear, explicit experience and skills related to front end web development (React). While the excerpts are limited, this is the only candidate whose role and skills directly align with front end development requirements.\n:::\n\nBased on the analysis of the CV excerpts, **[Priya Patel](cv:cv_4a4e87c4)** is the candidate with the most explicit front end web development experience.\n\n| Candidate | Role | Front End Skills Mentioned | Experience Highlight |\n| :--- | :--- | :--- | :--- |\n| **[Priya Patel](cv:cv_4a4e87c4)** | Junior Software Developer | React, Node.js, RESTful APIs | Developed and deployed 3 new RESTful API endpoints; Collaborated in a team to refactor a legacy React component, reducing rendering time by 40%. |\n\n:::conclusion\nThe candidate with the strongest identifiable front end web development skills from the provided excerpts is **[Priya Patel](cv:cv_4a4e87c4)**, based on explicit mentions of React experience and measurable contributions to front end projects.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_4a4e87c4",
+              "filename": "50e1f4e5_Priya_Patel_Junior_Software_Developer.pdf",
+              "relevance": 0.575
+            },
+            {
+              "cv_id": "cv_c6a1c351",
+              "filename": "7f6337b7_Thierry_NDiaye_Lead_UX_Designer.pdf",
+              "relevance": 0.568
+            },
+            {
+              "cv_id": "cv_a41ed349",
+              "filename": "f180c979_Khalid_Al-Mansur_Mobile_Engineer.pdf",
+              "relevance": 0.565
+            },
+            {
+              "cv_id": "cv_41b5ec14",
+              "filename": "ab71577d_Ana_Silva_Junior_Interaction_Designer.pdf",
+              "relevance": 0.561
+            },
+            {
+              "cv_id": "cv_09eb1245",
+              "filename": "4662a9ee_Patricia_Williams_Medical_Intern.pdf",
+              "relevance": 0.616
+            },
+            {
+              "cv_id": "cv_035f3bb0",
+              "filename": "a2971b00_Carlos_Mendoza_Research_Assistant.pdf",
+              "relevance": 0.612
+            },
+            {
+              "cv_id": "cv_d2dfa555",
+              "filename": "a44c7258_Isabel_Mendoza_Total_Rewards_Manager.pdf",
+              "relevance": 0.597
+            },
+            {
+              "cv_id": "cv_445299db",
+              "filename": "06659811_Lucas_Moreau_CFO.pdf",
+              "relevance": 0.592
+            },
+            {
+              "cv_id": "cv_619d6727",
+              "filename": "1ef4e451_Dirk_van_der_Meer_Therapist.pdf",
+              "relevance": 0.59
+            },
+            {
+              "cv_id": "cv_cff0e051",
+              "filename": "c042a902_Priya_Kapoor_Culinary_Officer.pdf",
+              "relevance": 0.589
+            },
+            {
+              "cv_id": "cv_8c30cd67",
+              "filename": "c71c69ae_Margaret_Whitmore_CFO.pdf",
+              "relevance": 0.584
+            },
+            {
+              "cv_id": "cv_4ef3f804",
+              "filename": "1774687d_Layla_Al-Mansoori_Postdoctoral_Researcher.pdf",
+              "relevance": 0.577
+            },
+            {
+              "cv_id": "cv_8c8f46d8",
+              "filename": "dc85bc48_Priya_Sharma_Fernández_CHRO.pdf",
+              "relevance": 0.576
+            },
+            {
+              "cv_id": "cv_77d4a967",
+              "filename": "477ae7a5_Liam_Nguyen_Concept_Artist.pdf",
+              "relevance": 0.574
+            },
+            {
+              "cv_id": "cv_20e0817b",
+              "filename": "68835e12_Ethan_Park_Physical_Therapist.pdf",
+              "relevance": 0.572
+            },
+            {
+              "cv_id": "cv_ede9f382",
+              "filename": "8117dbda_Aya_Cohen_Hard_Surface_Modeler.pdf",
+              "relevance": 0.571
+            },
+            {
+              "cv_id": "cv_daea7380",
+              "filename": "6202baf5_Erik_Johansson_FB_Director.pdf",
+              "relevance": 0.568
+            },
+            {
+              "cv_id": "cv_38a9b38c",
+              "filename": "27948e8c_Isabel_Rodrigues_Principal_Software_Engineer.pdf",
+              "relevance": 0.565
+            },
+            {
+              "cv_id": "cv_1796971b",
+              "filename": "366a6a8e_Patricia_Okafor_Senior_Accountant.pdf",
+              "relevance": 0.564
+            },
+            {
+              "cv_id": "cv_6412f75e",
+              "filename": "d78a62ae_Jamie_Patel_General_Manager.pdf",
+              "relevance": 0.564
+            },
+            {
+              "cv_id": "cv_10a6a5b1",
+              "filename": "52deb5e4_Li_Wei_Chen_Managing_Principal.pdf",
+              "relevance": 0.564
+            },
+            {
+              "cv_id": "cv_a2656618",
+              "filename": "a45e5735_Layla_Al-Mansoori_Sales_Executive.pdf",
+              "relevance": 0.561
+            },
+            {
+              "cv_id": "cv_b77cfa5f",
+              "filename": "c9727c1b_Priya_Patel_Senior_Counsel.pdf",
+              "relevance": 0.559
+            },
+            {
+              "cv_id": "cv_853527de",
+              "filename": "44eb074e_Liam_Ndlovu_Sales_Manager.pdf",
+              "relevance": 0.559
+            },
+            {
+              "cv_id": "cv_900c7bc8",
+              "filename": "d5289c50_Carlos_Mendoza_Junior_Cloud_Engineer.pdf",
+              "relevance": 0.557
+            },
+            {
+              "cv_id": "cv_33b900b1",
+              "filename": "2a4fe182_Thierry_Nguyen_EVP.pdf",
+              "relevance": 0.557
+            },
+            {
+              "cv_id": "cv_c9025ebf",
+              "filename": "44080c0a_Elisabeth_van_der_Berg_Senior_Management_Consultant.pdf",
+              "relevance": 0.556
+            },
+            {
+              "cv_id": "cv_12d4ce24",
+              "filename": "c2533d2e_Adewale_Patel_3D_Artist.pdf",
+              "relevance": 0.556
+            },
+            {
+              "cv_id": "cv_1ef415b9",
+              "filename": "23621408_Kamal_Patel_Head_of_Audio.pdf",
+              "relevance": 0.555
+            },
+            {
+              "cv_id": "cv_5e98c0b9",
+              "filename": "69ed5706_Aisha_Nkrumah_Associate_Designer.pdf",
+              "relevance": 0.545
+            },
+            {
+              "cv_id": "cv_1cdbc06a",
+              "filename": "b4b377d4_Layla_Kim_Concept_Artist.pdf",
+              "relevance": 0.537
+            },
+            {
+              "cv_id": "cv_a8277dac",
+              "filename": "bc252667_Carlos_Mendoza_Manager.pdf",
+              "relevance": 0.534
+            },
+            {
+              "cv_id": "cv_f6df01f9",
+              "filename": "bf3a5fa7_Carmen_López_Lighting_Artist.pdf",
+              "relevance": 0.533
+            },
+            {
+              "cv_id": "cv_3285b64b",
+              "filename": "263a613b_Rajiv_Patel_Publishing_Director.pdf",
+              "relevance": 0.522
+            },
+            {
+              "cv_id": "cv_b33c6394",
+              "filename": "9450f274_Rajiv_Patel_Content_Creator.pdf",
+              "relevance": 0.521
+            },
+            {
+              "cv_id": "cv_61f1d281",
+              "filename": "45d8cbc0_Carlos_Mendoza_Accessories_Designer.pdf",
+              "relevance": 0.52
+            },
+            {
+              "cv_id": "cv_962470ff",
+              "filename": "5a519af7_Li_Wei_Content_Strategist.pdf",
+              "relevance": 0.517
+            },
+            {
+              "cv_id": "cv_17d6ba07",
+              "filename": "84ea127f_Li_Wei_Content_Officer.pdf",
+              "relevance": 0.516
+            },
+            {
+              "cv_id": "cv_067fdb46",
+              "filename": "0762284b_Aïssa_Diallo_Composer.pdf",
+              "relevance": 0.508
+            },
+            {
+              "cv_id": "cv_87de9667",
+              "filename": "06b109ef_Li_Wei_Research_Intern.pdf",
+              "relevance": 0.502
+            },
+            {
+              "cv_id": "cv_9a615f58",
+              "filename": "a32dd7e1_Isabela_Costa_Model.pdf",
+              "relevance": 0.49
+            }
+          ],
+          "timestamp": "2026-01-03T18:56:18.170206"
+        },
+        {
+          "id": "98068db0-e180-4807-b84b-b484345ba1fd",
+          "role": "user",
+          "content": "y para front end quien seria el mejroi candidato con gamificacion?",
+          "sources": [],
+          "timestamp": "2026-01-03T19:09:22.497042"
+        },
+        {
+          "id": "ecd9db46-3743-49d2-8f11-9d565ab42580",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for candidates suitable for a front-end position with a focus on gamification experience. I need to identify candidates whose CVs mention front-end development skills and prioritize those with explicit experience or projects related to gamification. I will analyze the provided CV excerpts to find relevant skills, projects, or experience indicating front-end development and gamification involvement.\n:::\n\nBased on the CVs provided, I have identified candidates with front-end development skills. However, explicit mention of gamification experience is rare. Here are the candidates ranked by their suitability for a front-end role, with priority given to those who might have tangential experience relevant to gamification:\n\n| Candidate | Front-End Skills | Gamification Experience | Notes |\n|-----------|-------------------|-------------------------|-------|\n| **[Priya Patel](cv:cv_4a4e87c4)** | React, Node.js, JavaScript, Full-stack | Not explicitly mentioned | Junior Software Developer with full-stack experience using React. Potential to work on gamification elements within web apps. |\n| **[Aya Cohen](cv:cv_ede9f382)** | Not specified in excerpt | AAA game titles | Director of Hard Surface Modeling for games. Experience with AAA titles suggests possible involvement in gamification aspects of game development. |\n| **[Liam Nguyen](cv:cv_77d4a967)** | Photoshop, Illustrator, Blender, ZBrush | Concept art for animated films/series | Junior Concept Artist. Skills are more focused on visual assets than front-end development. |\n| **[Isabel Rodrigues](cv:cv_38a9b38c)** | Not specified in excerpt | Distributed systems, real-time analytics | Principal Software Engineer. Expertise is in backend/cloud systems, not front-end. |\n| **[Carlos Mendoza](cv:cv_9a615f58)** | Not specified | Junior Cloud Engineer projects | Experience with AWS Lambda/API Gateway. Skills are cloud-focused, not front-end. |\n\n:::conclusion\nThe best candidate for a front-end role is **[Priya Patel](cv:cv_4a4e87c4)**, who has direct experience with React and Node.js. While explicit gamification experience is not detailed in the provided excerpts, **[Aya Cohen](cv:cv_ede9f382)**'s work on AAA game titles may involve relevant skills. Other candidates lack clear front-end or gamification experience.\n:::\n\n⚠️ *Some information could not be fully verified against the CVs.*",
+          "sources": [
+            {
+              "cv_id": "cv_09eb1245",
+              "filename": "4662a9ee_Patricia_Williams_Medical_Intern.pdf",
+              "relevance": 0.628
+            },
+            {
+              "cv_id": "cv_619d6727",
+              "filename": "1ef4e451_Dirk_van_der_Meer_Therapist.pdf",
+              "relevance": 0.624
+            },
+            {
+              "cv_id": "cv_035f3bb0",
+              "filename": "a2971b00_Carlos_Mendoza_Research_Assistant.pdf",
+              "relevance": 0.605
+            },
+            {
+              "cv_id": "cv_8c30cd67",
+              "filename": "c71c69ae_Margaret_Whitmore_CFO.pdf",
+              "relevance": 0.604
+            },
+            {
+              "cv_id": "cv_445299db",
+              "filename": "06659811_Lucas_Moreau_CFO.pdf",
+              "relevance": 0.603
+            },
+            {
+              "cv_id": "cv_cff0e051",
+              "filename": "c042a902_Priya_Kapoor_Culinary_Officer.pdf",
+              "relevance": 0.596
+            },
+            {
+              "cv_id": "cv_daea7380",
+              "filename": "6202baf5_Erik_Johansson_FB_Director.pdf",
+              "relevance": 0.596
+            },
+            {
+              "cv_id": "cv_77d4a967",
+              "filename": "477ae7a5_Liam_Nguyen_Concept_Artist.pdf",
+              "relevance": 0.59
+            },
+            {
+              "cv_id": "cv_8c8f46d8",
+              "filename": "dc85bc48_Priya_Sharma_Fernández_CHRO.pdf",
+              "relevance": 0.588
+            },
+            {
+              "cv_id": "cv_853527de",
+              "filename": "44eb074e_Liam_Ndlovu_Sales_Manager.pdf",
+              "relevance": 0.587
+            },
+            {
+              "cv_id": "cv_ede9f382",
+              "filename": "8117dbda_Aya_Cohen_Hard_Surface_Modeler.pdf",
+              "relevance": 0.584
+            },
+            {
+              "cv_id": "cv_4a4e87c4",
+              "filename": "50e1f4e5_Priya_Patel_Junior_Software_Developer.pdf",
+              "relevance": 0.584
+            },
+            {
+              "cv_id": "cv_d2dfa555",
+              "filename": "a44c7258_Isabel_Mendoza_Total_Rewards_Manager.pdf",
+              "relevance": 0.584
+            },
+            {
+              "cv_id": "cv_20e0817b",
+              "filename": "68835e12_Ethan_Park_Physical_Therapist.pdf",
+              "relevance": 0.578
+            },
+            {
+              "cv_id": "cv_38a9b38c",
+              "filename": "27948e8c_Isabel_Rodrigues_Principal_Software_Engineer.pdf",
+              "relevance": 0.578
+            },
+            {
+              "cv_id": "cv_900c7bc8",
+              "filename": "d5289c50_Carlos_Mendoza_Junior_Cloud_Engineer.pdf",
+              "relevance": 0.577
+            },
+            {
+              "cv_id": "cv_c9025ebf",
+              "filename": "44080c0a_Elisabeth_van_der_Berg_Senior_Management_Consultant.pdf",
+              "relevance": 0.575
+            },
+            {
+              "cv_id": "cv_10a6a5b1",
+              "filename": "52deb5e4_Li_Wei_Chen_Managing_Principal.pdf",
+              "relevance": 0.569
+            },
+            {
+              "cv_id": "cv_c6a1c351",
+              "filename": "7f6337b7_Thierry_NDiaye_Lead_UX_Designer.pdf",
+              "relevance": 0.568
+            },
+            {
+              "cv_id": "cv_b77cfa5f",
+              "filename": "c9727c1b_Priya_Patel_Senior_Counsel.pdf",
+              "relevance": 0.566
+            },
+            {
+              "cv_id": "cv_4ef3f804",
+              "filename": "1774687d_Layla_Al-Mansoori_Postdoctoral_Researcher.pdf",
+              "relevance": 0.565
+            },
+            {
+              "cv_id": "cv_1ef415b9",
+              "filename": "23621408_Kamal_Patel_Head_of_Audio.pdf",
+              "relevance": 0.565
+            },
+            {
+              "cv_id": "cv_12d4ce24",
+              "filename": "c2533d2e_Adewale_Patel_3D_Artist.pdf",
+              "relevance": 0.562
+            },
+            {
+              "cv_id": "cv_5e98c0b9",
+              "filename": "69ed5706_Aisha_Nkrumah_Associate_Designer.pdf",
+              "relevance": 0.56
+            },
+            {
+              "cv_id": "cv_6412f75e",
+              "filename": "d78a62ae_Jamie_Patel_General_Manager.pdf",
+              "relevance": 0.56
+            },
+            {
+              "cv_id": "cv_a2656618",
+              "filename": "a45e5735_Layla_Al-Mansoori_Sales_Executive.pdf",
+              "relevance": 0.56
+            },
+            {
+              "cv_id": "cv_1796971b",
+              "filename": "366a6a8e_Patricia_Okafor_Senior_Accountant.pdf",
+              "relevance": 0.559
+            },
+            {
+              "cv_id": "cv_41b5ec14",
+              "filename": "ab71577d_Ana_Silva_Junior_Interaction_Designer.pdf",
+              "relevance": 0.555
+            },
+            {
+              "cv_id": "cv_f6df01f9",
+              "filename": "bf3a5fa7_Carmen_López_Lighting_Artist.pdf",
+              "relevance": 0.555
+            },
+            {
+              "cv_id": "cv_33b900b1",
+              "filename": "2a4fe182_Thierry_Nguyen_EVP.pdf",
+              "relevance": 0.551
+            },
+            {
+              "cv_id": "cv_a41ed349",
+              "filename": "f180c979_Khalid_Al-Mansur_Mobile_Engineer.pdf",
+              "relevance": 0.546
+            },
+            {
+              "cv_id": "cv_b33c6394",
+              "filename": "9450f274_Rajiv_Patel_Content_Creator.pdf",
+              "relevance": 0.544
+            },
+            {
+              "cv_id": "cv_1cdbc06a",
+              "filename": "b4b377d4_Layla_Kim_Concept_Artist.pdf",
+              "relevance": 0.541
+            },
+            {
+              "cv_id": "cv_962470ff",
+              "filename": "5a519af7_Li_Wei_Content_Strategist.pdf",
+              "relevance": 0.538
+            },
+            {
+              "cv_id": "cv_067fdb46",
+              "filename": "0762284b_Aïssa_Diallo_Composer.pdf",
+              "relevance": 0.537
+            },
+            {
+              "cv_id": "cv_17d6ba07",
+              "filename": "84ea127f_Li_Wei_Content_Officer.pdf",
+              "relevance": 0.534
+            },
+            {
+              "cv_id": "cv_3285b64b",
+              "filename": "263a613b_Rajiv_Patel_Publishing_Director.pdf",
+              "relevance": 0.533
+            },
+            {
+              "cv_id": "cv_a8277dac",
+              "filename": "bc252667_Carlos_Mendoza_Manager.pdf",
+              "relevance": 0.531
+            },
+            {
+              "cv_id": "cv_87de9667",
+              "filename": "06b109ef_Li_Wei_Research_Intern.pdf",
+              "relevance": 0.522
+            },
+            {
+              "cv_id": "cv_61f1d281",
+              "filename": "45d8cbc0_Carlos_Mendoza_Accessories_Designer.pdf",
+              "relevance": 0.513
+            },
+            {
+              "cv_id": "cv_9a615f58",
+              "filename": "a32dd7e1_Isabela_Costa_Model.pdf",
+              "relevance": 0.509
+            }
+          ],
+          "timestamp": "2026-01-03T19:12:43.515307"
         }
       ],
       "created_at": "2026-01-03T15:41:18.352784",
-      "updated_at": "2026-01-03T18:17:15.737997"
+      "updated_at": "2026-01-03T19:12:43.515307"
     },
     {
       "id": "2503f62f-8b3e-4c9d-9918-a4d4c602b038",
@@ -1437,16 +1877,16 @@
           "timestamp": "2026-01-03T18:32:01.660022"
         },
         {
-          "id": "0fec235f-4223-4354-bbd2-5e012af80d9c",
+          "id": "74e97a41-01e3-40c3-afdb-e237f1c193f7",
           "role": "user",
           "content": "Create a top 3 shortlist from 28 candidates",
           "sources": [],
-          "timestamp": "2026-01-03T18:36:41.250639"
+          "timestamp": "2026-01-03T18:44:55.725644"
         },
         {
-          "id": "67c9c083-f0e2-4e28-b9c2-ec4e38fc63bc",
+          "id": "8127fd6e-0aea-4668-8836-250fffff788c",
           "role": "assistant",
-          "content": ":::thinking\nThe user wants to rank all 28 candidates based on their qualifications and experience and shortlist the top 3. However, the provided data only includes excerpts from 20 CVs. Without complete information for all 28 candidates, it's impossible to provide a full ranking or a definitive shortlist of the top 3. I must inform the user that the analysis is limited to the available data.\n:::\n\nBased on the provided CV excerpts for 20 candidates, I can offer an analysis. However, a complete ranking of all 28 candidates and a definitive shortlist of the top 3 cannot be generated due to missing data.\n\n| Candidate Name & ID | Key Qualifications & Experience | Preliminary Ranking (Based on Available Data) |\n| :--- | :--- | :--- |\n| **[Dirk van der Meer](cv:cv_d5fff4c9)** | PhD in Clinical Psychology, over 30 years of experience, extensive expertise in therapy (CBT, Mindfulness, Trauma), supervision, research, and improving service delivery. | 1 |\n| **[Lucas Moreau](cv:cv_1b63bb02)** | Master of Science in Finance (Summa Cum Laude), CFA, CMA, Chartered Financial Analyst with experience at CFO level, proven strategic leadership, M&A, and mentoring. | 2 |\n| **[Erik Johansson](cv:cv_544894ec)** | Master of Business Administration (Hospitality focus), Certified Hospitality Educator, extensive F&B management experience, event planning, staff training, and operational improvements. | 3 |\n| **[Layla Al-Mansoori](cv:cv_2f622639)** | Bachelor of Business Administration (Summa Cum Laude, Sales focus), CPSP certified, successful sales experience in luxury retail, CRM, negotiation, and marketing campaign execution. | 4 |\n| **[Aisha Nkrumah](cv:cv_ada4d211)** | Bachelor of Fine Arts in Graphic Design (Dean's List), Adobe Certified Expert, experience creating production-ready assets, brand identity, UI/UX, and contributing to successful pitches. | 5 |\n| **[Ana Silva](cv:cv_da8d5709)** | Bachelor of Fine Arts in Interaction Design (Graduated with Honors), Figma & Adobe Creative Suite skills, experience in user research, prototyping, and contributing to successful redesign projects. | 6 |\n| **[Carlos Mendoza](cv:cv_cef2591a)** | PhD in Research Methods, extensive experience as a Research Assistant, publication record, developing data analysis frameworks, and mentoring junior researchers. | 7 |\n| **[Patricia Williams](cv:cv_5129e7fb)** | Doctor of Medicine (MD) (Clinical Graduated with High Honors), Bachelor of Science in Biology (Magna Cum Laude), BLS/ACLS certified, clinical experience, and research skills. | 8 |\n| **[Liam Nguyen](cv:cv_fa03aaf5)** | Bachelor of Fine Arts in Illustration (Graduated with Distinction), Concept Art skills (Photoshop, Illustrator, Blender), experience contributing to animated film production and character design. | 9 |\n| **[Isabela Costa](cv:cv_2ccd1763)** | Bachelor of Arts in Fashion Design (Graduated with Honors), Professional Modeling Certificate, extensive modeling experience including major brand campaigns (Coca-Cola, Samsung), runway, and commercial work. | 10 |\n| **[Li Wei](cv:cv_18e816a4)** | Bachelor of Arts in Journalism (Graduated with Honors), extensive content strategy and creation experience, SEO expertise, content management, and driving engagement through campaigns. | 11 |\n| **[Kamal Patel](cv:cv_fddd9b6c)** | Bachelor of Science in Audio Engineering (Cum Laude), Avid Pro Tools Expert, Dolby Atmos certified, experience managing audio engineering projects, post-production, and mentoring. | 12 |\n| **[Ethan Park](cv:cv_b391b319)** | Master of Physical Therapy, experience providing therapy for sports injuries and post-surgical rehab, treatment plan development, assessments, and community outreach. | 13 |\n| **[Adewale Patel](cv:cv_2180538e)** | 12+ years of experience as a 3D Artist, created acclaimed 3D models/animations for film/TV, collaborated on award-winning projects, and improved studio efficiency. | 14 |\n| **[Layla Kim](cv:cv_1ecae031)** | Concept Artist specializing in character/environment design, experience working on animated series/films, strong portfolio, and communication of visual concepts. | 15 |\n\n:::conclusion\nBased on the available data, the candidates with the strongest qualifications and experience are **[Dirk van der Meer](cv:cv_d5fff4c9)** (Clinical Psychologist), **[Lucas Moreau](cv:cv_1b63bb02)** (CFO), and **[Erik Johansson](cv:cv_544894ec)** (F&B Director). Please note that this ranking is preliminary and based on partial data from only 20 out of the 28 requested CVs.\n:::\n\n⚠️ *Some information could not be fully verified against the CVs.*",
+          "content": ":::thinking\nThe user has asked for a top 3 shortlist from 28 candidates but hasn't specified the role or criteria for shortlisting. Without knowing which position these candidates are being considered for, it's impossible to determine who should be shortlisted. I must point out that no selection criteria were provided and that shortlisting requires specific requirements to match against the CVs.\n:::\n\n**No shortlist can be created because no role or selection criteria were specified.** To create a meaningful shortlist, please provide the job role and key requirements (e.g., skills, experience, education) so I can match candidates accordingly.\n\n:::conclusion\nPlease specify the position and required qualifications to generate a relevant shortlist from these candidates.\n:::",
           "sources": [
             {
               "cv_id": "cv_544894ec",
@@ -1457,6 +1897,11 @@
               "cv_id": "cv_2180538e",
               "filename": "c2533d2e_Adewale_Patel_3D_Artist.pdf",
               "relevance": 0.581
+            },
+            {
+              "cv_id": "cv_d5fff4c9",
+              "filename": "1ef4e451_Dirk_van_der_Meer_Therapist.pdf",
+              "relevance": 0.572
             },
             {
               "cv_id": "cv_1b63bb02",
@@ -1509,26 +1954,403 @@
               "relevance": 0.544
             },
             {
+              "cv_id": "cv_2ccd1763",
+              "filename": "a32dd7e1_Isabela_Costa_Model.pdf",
+              "relevance": 0.543
+            },
+            {
               "cv_id": "cv_2f622639",
               "filename": "a45e5735_Layla_Al-Mansoori_Sales_Executive.pdf",
               "relevance": 0.539
             },
             {
-              "cv_id": "cv_d5fff4c9",
-              "filename": "1ef4e451_Dirk_van_der_Meer_Therapist.pdf",
-              "relevance": 0.572
+              "cv_id": "cv_88820361",
+              "filename": "9450f274_Rajiv_Patel_Content_Creator.pdf",
+              "relevance": 0.537
+            },
+            {
+              "cv_id": "cv_9130a3e7",
+              "filename": "c71c69ae_Margaret_Whitmore_CFO.pdf",
+              "relevance": 0.534
+            },
+            {
+              "cv_id": "cv_65f9aeab",
+              "filename": "06b109ef_Li_Wei_Research_Intern.pdf",
+              "relevance": 0.533
+            },
+            {
+              "cv_id": "cv_08ee0bb4",
+              "filename": "bf3a5fa7_Carmen_López_Lighting_Artist.pdf",
+              "relevance": 0.532
+            },
+            {
+              "cv_id": "cv_5ade461f",
+              "filename": "1774687d_Layla_Al-Mansoori_Postdoctoral_Researcher.pdf",
+              "relevance": 0.528
+            },
+            {
+              "cv_id": "cv_3be11e42",
+              "filename": "d78a62ae_Jamie_Patel_General_Manager.pdf",
+              "relevance": 0.527
+            },
+            {
+              "cv_id": "cv_6bd2a793",
+              "filename": "c042a902_Priya_Kapoor_Culinary_Officer.pdf",
+              "relevance": 0.519
+            },
+            {
+              "cv_id": "cv_0d4fdd39",
+              "filename": "8117dbda_Aya_Cohen_Hard_Surface_Modeler.pdf",
+              "relevance": 0.519
+            },
+            {
+              "cv_id": "cv_c3d70890",
+              "filename": "f180c979_Khalid_Al-Mansur_Mobile_Engineer.pdf",
+              "relevance": 0.513
+            },
+            {
+              "cv_id": "cv_4e8ff42e",
+              "filename": "d5289c50_Carlos_Mendoza_Junior_Cloud_Engineer.pdf",
+              "relevance": 0.51
+            },
+            {
+              "cv_id": "cv_e0449b24",
+              "filename": "0762284b_Aïssa_Diallo_Composer.pdf",
+              "relevance": 0.495
+            },
+            {
+              "cv_id": "cv_848272cd",
+              "filename": "263a613b_Rajiv_Patel_Publishing_Director.pdf",
+              "relevance": 0.473
+            },
+            {
+              "cv_id": "cv_df60329f",
+              "filename": "45d8cbc0_Carlos_Mendoza_Accessories_Designer.pdf",
+              "relevance": 0.504
+            }
+          ],
+          "timestamp": "2026-01-03T18:45:28.090874"
+        },
+        {
+          "id": "bea74732-4b88-4d3b-b96a-5c8578937bd4",
+          "role": "user",
+          "content": "create top short list of 3 candidates for full stack expertise",
+          "sources": [],
+          "timestamp": "2026-01-03T18:54:54.996948"
+        },
+        {
+          "id": "0e78506f-15c6-40ef-a00f-c65857140be1",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the top 3 candidates with the strongest full stack development expertise based on their CVs. I need to analyze the provided CV excerpts for mentions of frontend and backend skills, frameworks, and technologies.\n\nI'll review each CV for explicit mentions of:\n- Frontend technologies (e.g., HTML, CSS, JavaScript, React, Angular, Vue)\n- Backend technologies (e.g., Node.js, Python, Java, PHP, Ruby, C#, SQL, NoSQL)\n- Frameworks (e.g., Express.js, Django, Flask, Spring, .NET, Laravel)\n- Databases (e.g., MySQL, PostgreSQL, MongoDB, SQL Server)\n- Full stack development experience or projects\n\nLet's go through the CVs:\n\n1.  **CV #1 (Khalid Al-Mansur, Mobile Engineer):** Mentions React Native, Flutter, Objective-C, Java. These are mobile development skills, not full stack web development.\n2.  **CV #2 (Carlos Mendoza, Junior Cloud Engineer):** Mentions Python, Bash, AWS Lambda, API Gateway. Focuses on cloud infrastructure and automation, not full stack development.\n3.  **CV #3 (Layla Al-Mansoori, Postdoctoral Researcher):** Research focus, no development skills mentioned.\n4.  **CV #4 (Aisha Nkrumah, Associate Designer):** UI/UX, Adobe Creative Suite, HTML/CSS basics. Design focus, not backend development.\n5.  **CV #5 (Adewale Patel, 3D Artist):** 3D software (Maya, Blender, ZBrush). No web development skills.\n6.  **CV #6 (Aïssa Diallo, Composer):** Music composition. No development skills.\n7.  **CV #7 (Li Wei, Content Officer):** Content strategy, SEO, Copywriting. No technical development skills.\n8.  **CV #8 (Carlos Mendoza, Research Assistant):** Research, data analysis (R), psychology. No web development.\n9.  **CV #9 (Ethan Park, Physical Therapist):** Healthcare. No development skills.\n10. **CV #10 (Margaret Whitmore, CFO):** Finance, M&A. No development skills.\n11. **CV #11 (Lucas Moreau, CFO):** Finance, financial analysis, modeling. No development skills.\n12. **CV #12 (Rajiv Patel, Content Creator):** Content creation, Adobe Creative Suite, Video Editing. No backend or full stack development.\n13. **CV #13 (Isabela Costa, Model):** Modeling. No development skills.\n14. **CV #14 (Kamal Patel, Head of Audio):** Audio engineering, Pro Tools. No web development.\n15. **CV #15 (Dirk van der Meer, Therapist):** Psychology, therapy. No development skills.\n16. **CV #16 (Aya Cohen, Hard Surface Modeler):** 3D modeling for VFX/Games. No web development.\n17. **CV #17 (Jamie Patel, General Manager):** Business management, operations. No development skills.\n18. **CV #18 (Priya Kapoor, Culinary Officer):** Culinary arts. No development skills.\n19. **CV #19 (Carlos Mendoza, Accessories Designer):** Fashion design, Adobe Creative Suite. No backend or full stack development.\n20. **CV #20 (Rajiv Patel, Publishing Director):** Publishing, editorial process. No development skills.\n21. **CV #21 (Liam Nguyen, Concept Artist):** Concept art, digital painting (Photoshop, Blender). No backend or full stack development.\n22. **CV #22 (Erik Johansson, FB Director):** Food & Beverage management. No development skills.\n23. **CV #23 (Carmen López, Lighting Artist):** VFX lighting (Maya, Arnold). No web development.\n24. **CV #24 (Layla Al-Mansoori, Sales Executive):** Sales. No development skills.\n25. **CV #25 (Patricia Williams, Medical Intern):** Medicine. No development skills.\n26. **CV #26 (Li Wei, Research Intern):** Research, NLP (mentioned Python implicitly via NLP model). Very limited and implicit development skills, not full stack.\n27. **CV #27 (Ana Silva, Junior Interaction Designer):** UX/UI design (Figma, Adobe Creative Suite, HTML/CSS basics, User Research). Strong frontend design skills, but no backend technologies or frameworks mentioned. Not a full stack developer.\n28. **CV #28 (Layla Kim, Concept Artist):** Concept art. No web development.\n\nAfter reviewing all 28 CV excerpts, none of them explicitly mention the combination of frontend (HTML, CSS, JavaScript, frameworks like React/Angular) and backend (Node.js, Python/Java/PHP, databases) skills required for full stack web development. The closest is **[Ana Silva](cv:cv_27)** with some frontend design skills, but she lacks backend expertise. Several candidates have skills in adjacent fields like mobile development, cloud engineering, or 3D art, but these do not constitute full stack web development.\n:::\n\n**None of the candidates have the required full stack development expertise.** After reviewing all CVs, no candidate lists both frontend (HTML, CSS, JavaScript, frameworks) and backend (servers, databases, APIs) skills necessary for full stack development.\n\n:::conclusion\nNone of the candidates match this requirement. No suitable candidates found for full stack development.\n:::\n\n⚠️ *Some information could not be fully verified against the CVs.*",
+          "sources": [
+            {
+              "cv_id": "cv_c3d70890",
+              "filename": "f180c979_Khalid_Al-Mansur_Mobile_Engineer.pdf",
+              "relevance": 0.553
+            },
+            {
+              "cv_id": "cv_4e8ff42e",
+              "filename": "d5289c50_Carlos_Mendoza_Junior_Cloud_Engineer.pdf",
+              "relevance": 0.552
+            },
+            {
+              "cv_id": "cv_5ade461f",
+              "filename": "1774687d_Layla_Al-Mansoori_Postdoctoral_Researcher.pdf",
+              "relevance": 0.623
+            },
+            {
+              "cv_id": "cv_ada4d211",
+              "filename": "69ed5706_Aisha_Nkrumah_Associate_Designer.pdf",
+              "relevance": 0.62
+            },
+            {
+              "cv_id": "cv_2180538e",
+              "filename": "c2533d2e_Adewale_Patel_3D_Artist.pdf",
+              "relevance": 0.617
+            },
+            {
+              "cv_id": "cv_e0449b24",
+              "filename": "0762284b_Aïssa_Diallo_Composer.pdf",
+              "relevance": 0.614
+            },
+            {
+              "cv_id": "cv_18e816a4",
+              "filename": "84ea127f_Li_Wei_Content_Officer.pdf",
+              "relevance": 0.597
+            },
+            {
+              "cv_id": "cv_cef2591a",
+              "filename": "a2971b00_Carlos_Mendoza_Research_Assistant.pdf",
+              "relevance": 0.596
+            },
+            {
+              "cv_id": "cv_b391b319",
+              "filename": "68835e12_Ethan_Park_Physical_Therapist.pdf",
+              "relevance": 0.586
+            },
+            {
+              "cv_id": "cv_9130a3e7",
+              "filename": "c71c69ae_Margaret_Whitmore_CFO.pdf",
+              "relevance": 0.584
+            },
+            {
+              "cv_id": "cv_1b63bb02",
+              "filename": "06659811_Lucas_Moreau_CFO.pdf",
+              "relevance": 0.582
+            },
+            {
+              "cv_id": "cv_88820361",
+              "filename": "9450f274_Rajiv_Patel_Content_Creator.pdf",
+              "relevance": 0.58
             },
             {
               "cv_id": "cv_2ccd1763",
               "filename": "a32dd7e1_Isabela_Costa_Model.pdf",
-              "relevance": 0.543
+              "relevance": 0.579
+            },
+            {
+              "cv_id": "cv_fddd9b6c",
+              "filename": "23621408_Kamal_Patel_Head_of_Audio.pdf",
+              "relevance": 0.579
+            },
+            {
+              "cv_id": "cv_d5fff4c9",
+              "filename": "1ef4e451_Dirk_van_der_Meer_Therapist.pdf",
+              "relevance": 0.578
+            },
+            {
+              "cv_id": "cv_0d4fdd39",
+              "filename": "8117dbda_Aya_Cohen_Hard_Surface_Modeler.pdf",
+              "relevance": 0.578
+            },
+            {
+              "cv_id": "cv_3be11e42",
+              "filename": "d78a62ae_Jamie_Patel_General_Manager.pdf",
+              "relevance": 0.574
+            },
+            {
+              "cv_id": "cv_6bd2a793",
+              "filename": "c042a902_Priya_Kapoor_Culinary_Officer.pdf",
+              "relevance": 0.564
+            },
+            {
+              "cv_id": "cv_df60329f",
+              "filename": "45d8cbc0_Carlos_Mendoza_Accessories_Designer.pdf",
+              "relevance": 0.564
+            },
+            {
+              "cv_id": "cv_848272cd",
+              "filename": "263a613b_Rajiv_Patel_Publishing_Director.pdf",
+              "relevance": 0.561
+            },
+            {
+              "cv_id": "cv_fa03aaf5",
+              "filename": "477ae7a5_Liam_Nguyen_Concept_Artist.pdf",
+              "relevance": 0.561
+            },
+            {
+              "cv_id": "cv_544894ec",
+              "filename": "6202baf5_Erik_Johansson_FB_Director.pdf",
+              "relevance": 0.549
+            },
+            {
+              "cv_id": "cv_08ee0bb4",
+              "filename": "bf3a5fa7_Carmen_López_Lighting_Artist.pdf",
+              "relevance": 0.547
+            },
+            {
+              "cv_id": "cv_2f622639",
+              "filename": "a45e5735_Layla_Al-Mansoori_Sales_Executive.pdf",
+              "relevance": 0.546
+            },
+            {
+              "cv_id": "cv_5129e7fb",
+              "filename": "4662a9ee_Patricia_Williams_Medical_Intern.pdf",
+              "relevance": 0.545
+            },
+            {
+              "cv_id": "cv_65f9aeab",
+              "filename": "06b109ef_Li_Wei_Research_Intern.pdf",
+              "relevance": 0.544
+            },
+            {
+              "cv_id": "cv_da8d5709",
+              "filename": "ab71577d_Ana_Silva_Junior_Interaction_Designer.pdf",
+              "relevance": 0.541
+            },
+            {
+              "cv_id": "cv_1ecae031",
+              "filename": "b4b377d4_Layla_Kim_Concept_Artist.pdf",
+              "relevance": 0.538
             }
           ],
-          "timestamp": "2026-01-03T18:38:18.618477"
+          "timestamp": "2026-01-03T18:56:44.464607"
+        },
+        {
+          "id": "bee94d75-c69d-4e26-ae9e-6835d5f9e70f",
+          "role": "user",
+          "content": "create top short list of 3 candidates for full stack expertise",
+          "sources": [],
+          "timestamp": "2026-01-03T19:09:02.859399"
+        },
+        {
+          "id": "0ec16756-0cb6-4e09-8d67-f6c306478ea2",
+          "role": "assistant",
+          "content": ":::thinking\nThe user wants to identify the top 3 candidates with the strongest full stack development expertise. I need to evaluate each candidate's frontend and backend skills holistically to assess their overall full stack strength.\n\nI will analyze the provided CV excerpts for keywords and experiences related to both frontend and backend development. This includes looking for explicit mentions of full stack roles, experience with both client-side and server-side technologies, and projects that likely involved both ends of the stack.\n\nAfter reviewing all 28 CV excerpts:\n\n- **[Khalid Al-Mansur](cv:cv_c3d70890)** (CV #1): Strong mobile development skills (iOS/Android, React Native, Flutter) indicate frontend expertise for mobile. Languages like Java and Objective-C are backend/mobile backend relevant. However, the excerpt lacks explicit full-stack project details or web backend experience.\n- **[Carlos Mendoza - Junior Cloud Engineer](cv:cv_4e8ff42e)** (CV #2): Focus is on cloud infrastructure (AWS, Lambda, Bash, Python). This is more backend/cloud infrastructure than full stack involving frontend web development.\n- **[Layla Al-Mansoori - Postdoctoral Researcher](cv:cv_5ade461f)** (CV #3): Research background in molecular biology/genetics. No development skills mentioned.\n- **[Aisha Nkrumah - Associate Designer](cv:cv_ada4d211)** (CV #4): Background in graphic/UI/UX design. Limited technical skills (Figma, Adobe Suite, basic HTML/CSS). Not a developer.\n- **[Adewale Patel - 3D Artist](cv:cv_2180538e)** (CV #5): Expertise in 3D modeling/animation software. Not a software developer.\n- **[Aïssa Diallo - Composer](cv:cv_e0449b24)** (CV #6): Background in music composition. No development skills.\n- **[Li Wei - Content Officer](cv:cv_18e816a4)** (CV #7): Content creation/writing background. Some basic technical understanding (HTML/CSS) but not a developer.\n- **[Carlos Mendoza - Research Assistant](cv:cv_cef2591a)** (CV #8): Background in research methodology, data analysis. Not a software developer.\n- **[Ethan Park - Physical Therapist](cv:cv_b391b319)** (CV #9): Healthcare background. No development skills.\n- **[Margaret Whitmore - CFO](cv:cv_9130a3e7)** (CV #10): Finance background. No development skills.\n- **[Lucas Moreau - CFO](cv:cv_1b63bb02)** (CV #11): Finance background. No development skills.\n- **[Rajiv Patel - Content Creator](cv:cv_88820361)** (CV #12): Content creation background, video editing. Some technical tools (Adobe Suite) but not a software developer.\n- **[Isabela Costa - Model](cv:cv_2ccd1763)** (CV #13): Modeling career. No development skills.\n- **[Kamal Patel - Head of Audio](cv:cv_fddd9b6c)** (CV #14): Audio engineering background. No software development skills mentioned.\n- **[Dirk van der Meer - Therapist](cv:cv_d5fff4c9)** (CV #15): Psychology/therapy background. No development skills.\n- **[Aya Cohen - Hard Surface Modeler](cv:cv_0d4fdd39)** (CV #16): 3D modeling for VFX/games. Expertise in modeling tools. Not a software developer.\n- **[Jamie Patel - General Manager](cv:cv_3be11e42)** (CV #17): Business management background. No development skills.\n- **[Priya Kapoor - Culinary Officer](cv:cv_6bd2a793)** (CV #18): Culinary background. No development skills.\n- **[Carlos Mendoza - Accessories Designer](cv:cv_df60329f)** (CV #19): Fashion design background. Some technical tools (Adobe Suite) but not a software developer.\n- **[Rajiv Patel - Publishing Director](cv:cv_848272cd)** (CV #20): Publishing background. No development skills.\n- **[Liam Nguyen - Concept Artist](cv:cv_fa03aaf5)** (CV #21): Digital art/illustration background. No software development skills.\n- **[Erik Johansson - FB Director](cv:cv_544894ec)** (CV #22): Hospitality/F&B background. No development skills.\n- **[Carmen López - Lighting Artist](cv:cv_08ee0bb4)** (CV #23): VFX/Digital arts background (Maya, Arnold). No software development skills.\n- **[Layla Al-Mansoori - Sales Executive](cv:cv_2f622639)** (CV #24): Sales background. No development skills.\n- **[Patricia Williams - Medical Intern](cv:cv_5129e7fb)** (CV #25): Medical background. No development skills.\n- **[Li Wei - Research Intern](cv:cv_65f9aeab)** (CV #26): Research background with some data analysis/NLP. Mentions contributing to an NLP model, suggesting some technical/programming skills, but not full stack web development.\n- **[Ana Silva - Junior Interaction Designer](cv:cv_da8d5709)** (CV #27): UI/UX design background. Some technical skills (Figma, Adobe Suite, HTML/CSS, prototyping). Not a backend developer.\n- **[Layla Kim - Concept Artist](cv:cv_1ecae031)** (CV #28): Digital art/illustration background. No software development skills.\n\nBased on the analysis, none of the provided CV excerpts demonstrate strong full stack development expertise, which requires a combination of both frontend (e.g., web interfaces, user experience) and backend (e.g., servers, databases, APIs) development skills. Several candidates have technical or creative backgrounds, but they do not indicate proficiency in building both the client-side and server-side of applications.\n:::\n\n**None of the candidates have strong full stack development expertise based on the provided CV excerpts.** After reviewing all 28 CVs, no candidate lists experience or skills that holistically cover both frontend and backend development to constitute strong full stack capabilities.\n\n:::conclusion\nNone of the candidates match this requirement. No suitable candidates found for full stack development.\n:::\n\n⚠️ *Some information could not be fully verified against the CVs.*",
+          "sources": [
+            {
+              "cv_id": "cv_c3d70890",
+              "filename": "f180c979_Khalid_Al-Mansur_Mobile_Engineer.pdf",
+              "relevance": 0.553
+            },
+            {
+              "cv_id": "cv_4e8ff42e",
+              "filename": "d5289c50_Carlos_Mendoza_Junior_Cloud_Engineer.pdf",
+              "relevance": 0.552
+            },
+            {
+              "cv_id": "cv_5ade461f",
+              "filename": "1774687d_Layla_Al-Mansoori_Postdoctoral_Researcher.pdf",
+              "relevance": 0.623
+            },
+            {
+              "cv_id": "cv_ada4d211",
+              "filename": "69ed5706_Aisha_Nkrumah_Associate_Designer.pdf",
+              "relevance": 0.62
+            },
+            {
+              "cv_id": "cv_2180538e",
+              "filename": "c2533d2e_Adewale_Patel_3D_Artist.pdf",
+              "relevance": 0.617
+            },
+            {
+              "cv_id": "cv_e0449b24",
+              "filename": "0762284b_Aïssa_Diallo_Composer.pdf",
+              "relevance": 0.614
+            },
+            {
+              "cv_id": "cv_18e816a4",
+              "filename": "84ea127f_Li_Wei_Content_Officer.pdf",
+              "relevance": 0.597
+            },
+            {
+              "cv_id": "cv_cef2591a",
+              "filename": "a2971b00_Carlos_Mendoza_Research_Assistant.pdf",
+              "relevance": 0.596
+            },
+            {
+              "cv_id": "cv_b391b319",
+              "filename": "68835e12_Ethan_Park_Physical_Therapist.pdf",
+              "relevance": 0.586
+            },
+            {
+              "cv_id": "cv_9130a3e7",
+              "filename": "c71c69ae_Margaret_Whitmore_CFO.pdf",
+              "relevance": 0.584
+            },
+            {
+              "cv_id": "cv_1b63bb02",
+              "filename": "06659811_Lucas_Moreau_CFO.pdf",
+              "relevance": 0.582
+            },
+            {
+              "cv_id": "cv_88820361",
+              "filename": "9450f274_Rajiv_Patel_Content_Creator.pdf",
+              "relevance": 0.58
+            },
+            {
+              "cv_id": "cv_2ccd1763",
+              "filename": "a32dd7e1_Isabela_Costa_Model.pdf",
+              "relevance": 0.579
+            },
+            {
+              "cv_id": "cv_fddd9b6c",
+              "filename": "23621408_Kamal_Patel_Head_of_Audio.pdf",
+              "relevance": 0.579
+            },
+            {
+              "cv_id": "cv_d5fff4c9",
+              "filename": "1ef4e451_Dirk_van_der_Meer_Therapist.pdf",
+              "relevance": 0.578
+            },
+            {
+              "cv_id": "cv_0d4fdd39",
+              "filename": "8117dbda_Aya_Cohen_Hard_Surface_Modeler.pdf",
+              "relevance": 0.578
+            },
+            {
+              "cv_id": "cv_3be11e42",
+              "filename": "d78a62ae_Jamie_Patel_General_Manager.pdf",
+              "relevance": 0.574
+            },
+            {
+              "cv_id": "cv_6bd2a793",
+              "filename": "c042a902_Priya_Kapoor_Culinary_Officer.pdf",
+              "relevance": 0.564
+            },
+            {
+              "cv_id": "cv_df60329f",
+              "filename": "45d8cbc0_Carlos_Mendoza_Accessories_Designer.pdf",
+              "relevance": 0.564
+            },
+            {
+              "cv_id": "cv_848272cd",
+              "filename": "263a613b_Rajiv_Patel_Publishing_Director.pdf",
+              "relevance": 0.561
+            },
+            {
+              "cv_id": "cv_fa03aaf5",
+              "filename": "477ae7a5_Liam_Nguyen_Concept_Artist.pdf",
+              "relevance": 0.561
+            },
+            {
+              "cv_id": "cv_544894ec",
+              "filename": "6202baf5_Erik_Johansson_FB_Director.pdf",
+              "relevance": 0.549
+            },
+            {
+              "cv_id": "cv_08ee0bb4",
+              "filename": "bf3a5fa7_Carmen_López_Lighting_Artist.pdf",
+              "relevance": 0.547
+            },
+            {
+              "cv_id": "cv_2f622639",
+              "filename": "a45e5735_Layla_Al-Mansoori_Sales_Executive.pdf",
+              "relevance": 0.546
+            },
+            {
+              "cv_id": "cv_5129e7fb",
+              "filename": "4662a9ee_Patricia_Williams_Medical_Intern.pdf",
+              "relevance": 0.545
+            },
+            {
+              "cv_id": "cv_65f9aeab",
+              "filename": "06b109ef_Li_Wei_Research_Intern.pdf",
+              "relevance": 0.544
+            },
+            {
+              "cv_id": "cv_da8d5709",
+              "filename": "ab71577d_Ana_Silva_Junior_Interaction_Designer.pdf",
+              "relevance": 0.541
+            },
+            {
+              "cv_id": "cv_1ecae031",
+              "filename": "b4b377d4_Layla_Kim_Concept_Artist.pdf",
+              "relevance": 0.538
+            }
+          ],
+          "timestamp": "2026-01-03T19:12:59.030675"
+        },
+        {
+          "id": "dc16e341-33e3-49c3-b5c7-16f3cdb16bbf",
+          "role": "user",
+          "content": "pero de enbtre todos cual se acercaria ams sino tuviera mas candidatos que elegir?",
+          "sources": [],
+          "timestamp": "2026-01-03T19:13:56.377385"
         }
       ],
       "created_at": "2026-01-03T17:22:15.568352",
-      "updated_at": "2026-01-03T18:38:18.618477"
+      "updated_at": "2026-01-03T19:13:56.377385"
     },
     {
       "id": "bd03435f-2a1c-4e33-8412-33a823fea667",
@@ -2968,10 +3790,31 @@
             }
           ],
           "timestamp": "2026-01-03T18:32:58.331000"
+        },
+        {
+          "id": "c29ec2b2-726e-490a-9d86-29cc265ae31a",
+          "role": "user",
+          "content": "Create a top 3 shortlist from all candidates",
+          "sources": [],
+          "timestamp": "2026-01-03T18:45:07.862550"
+        },
+        {
+          "id": "a39d48de-3a84-440b-bc0f-7c3b2448f2ba",
+          "role": "user",
+          "content": "create top short list of 3 candidates for full stack expertise",
+          "sources": [],
+          "timestamp": "2026-01-03T18:54:58.574271"
+        },
+        {
+          "id": "0657eb5c-d886-41d0-a2c3-288fcbac575f",
+          "role": "user",
+          "content": "create top short list of 3 candidates for full stack expertise con IA",
+          "sources": [],
+          "timestamp": "2026-01-03T19:09:32.971307"
         }
       ],
       "created_at": "2026-01-03T17:50:31.848359",
-      "updated_at": "2026-01-03T18:32:58.331000"
+      "updated_at": "2026-01-03T19:09:32.971307"
     }
   ]
 }

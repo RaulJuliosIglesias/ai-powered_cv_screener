@@ -70,7 +70,7 @@ class RerankingService:
         self.model = model or self.DEFAULT_MODEL
         self.enabled = enabled
         self.api_key = settings.openrouter_api_key or ""
-        self.client = httpx.AsyncClient(timeout=30.0)
+        # Don't create persistent client - use context manager per request
         logger.info(f"RerankingService initialized with model: {self.model}, enabled: {enabled}")
     
     async def rerank(
@@ -121,21 +121,23 @@ class RerankingService:
             chunks_text = self._format_chunks(results)
             prompt = RERANKING_PROMPT.format(query=query, chunks=chunks_text)
             
-            response = await self.client.post(
-                "https://openrouter.ai/api/v1/chat/completions",
-                headers={
-                    "Authorization": f"Bearer {self.api_key}",
-                    "Content-Type": "application/json"
-                },
-                json={
-                    "model": self.model,
-                    "messages": [{"role": "user", "content": prompt}],
-                    "temperature": 0.0,
-                    "max_tokens": 200
-                }
-            )
-            response.raise_for_status()
-            data = response.json()
+            # Use context manager to ensure client is closed after request
+            async with httpx.AsyncClient(timeout=30.0) as client:
+                response = await client.post(
+                    "https://openrouter.ai/api/v1/chat/completions",
+                    headers={
+                        "Authorization": f"Bearer {self.api_key}",
+                        "Content-Type": "application/json"
+                    },
+                    json={
+                        "model": self.model,
+                        "messages": [{"role": "user", "content": prompt}],
+                        "temperature": 0.0,
+                        "max_tokens": 200
+                    }
+                )
+                response.raise_for_status()
+                data = response.json()
             
             content = data["choices"][0]["message"]["content"].strip()
             

@@ -216,21 +216,8 @@ class RAGServiceV3:
         # ═══════════════════════════════════════════════════════════════
         # STEP 2.5: DETERMINE SESSION SIZE (critical for strategy)
         # ═══════════════════════════════════════════════════════════════
-        # Count unique CVs in session to inform retrieval strategy
-        num_cvs_in_session = total_cvs_in_session or (len(cv_ids) if cv_ids else None)
-        
-        if not num_cvs_in_session:
-            # If not provided, count from vector store metadata
-            # This is a quick metadata query, not a full search
-            all_docs = await self.vector_store.search(
-                embedding=query_embedding,
-                k=10000,  # Large number to get all
-                threshold=0.0,  # No threshold
-                cv_ids=cv_ids,
-                diversify_by_cv=False
-            )
-            unique_cvs = set(doc.cv_id for doc in all_docs)
-            num_cvs_in_session = len(unique_cvs)
+        # Use provided total_cvs_in_session or count from cv_ids
+        num_cvs_in_session = total_cvs_in_session or (len(cv_ids) if cv_ids else 100)
         
         logger.info(f"Session contains {num_cvs_in_session} CVs")
         
