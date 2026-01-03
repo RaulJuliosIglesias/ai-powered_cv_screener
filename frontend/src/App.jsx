@@ -30,6 +30,10 @@ function App() {
   const [toast, setToast] = useState(null);
   const [pdfViewerUrl, setPdfViewerUrl] = useState(null);
   const [pdfViewerTitle, setPdfViewerTitle] = useState('');
+  
+  // Upload progress modal state
+  const [uploadProgress, setUploadProgress] = useState(null);
+  // { files: ['file1.pdf', 'file2.pdf'], current: 1, total: 3, status: 'uploading' | 'processing' | 'completed', logs: ['Processing file1.pdf...'] }
 
   const openPdfViewer = (cvId, filename) => {
     const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:6000';
@@ -50,37 +54,35 @@ function App() {
 
   // Preprocess message content to handle special blocks and CV links
   const preprocessContent = (content) => {
-    if (!content) return { mainContent: content, conclusionContent: null, thinkingContent: null };
+    if (!content) return { mainContent: content || '', conclusionContent: null, thinkingContent: null };
+    
+    let text = content;
     
     // Extract thinking block (for collapsible reasoning)
-    const thinkingMatch = content.match(/:::thinking\n?([\s\S]*?):::/);
+    const thinkingMatch = text.match(/:::thinking\s*\n?([\s\S]*?)\n?:::/);
     const thinkingContent = thinkingMatch ? thinkingMatch[1].trim() : null;
+    if (thinkingMatch) {
+      text = text.replace(thinkingMatch[0], '');
+    }
     
     // Extract conclusion block
-    const conclusionMatch = content.match(/:::conclusion\n?([\s\S]*?):::/);
+    const conclusionMatch = text.match(/:::conclusion\s*\n?([\s\S]*?)\n?:::/);
     const conclusionContent = conclusionMatch ? conclusionMatch[1].trim() : null;
+    if (conclusionMatch) {
+      text = text.replace(conclusionMatch[0], '');
+    }
     
-    // Remove thinking and conclusion blocks from main content
-    let mainContent = content
-      .replace(/:::thinking\n?[\s\S]*?:::/g, '')
-      .replace(/:::conclusion\n?[\s\S]*?:::/g, '');
+    // Convert [CV:cv_id] format to clickable button
+    // Multiple patterns to catch different LLM outputs
+    text = text.replace(/\[CV:(cv_[a-z0-9]+)\]/gi, '[📄]($1)');
+    text = text.replace(/\(cv:(cv_[a-z0-9]+)\)/gi, ' [📄]($1)');
     
-    // Convert [CV:cv_id] format to clickable links
-    // Pattern: Name [CV:cv_id] -> keep name, make CV link
-    const cvLinkPattern = /([A-Za-zÀ-ÿ\s]+)\s*\[CV:(cv_[a-z0-9]+)\]/g;
-    
-    const processCV = (text) => {
-      return text.replace(cvLinkPattern, (match, name, cvId) => {
-        return `${name.trim()} [📄](cvlink:${cvId})`;
-      });
-    };
-    
-    mainContent = processCV(mainContent);
-    const processedConclusion = conclusionContent ? processCV(conclusionContent) : null;
+    // Clean up multiple newlines
+    text = text.replace(/\n{3,}/g, '\n\n').trim();
     
     return { 
-      mainContent: mainContent.trim(), 
-      conclusionContent: processedConclusion,
+      mainContent: text, 
+      conclusionContent,
       thinkingContent 
     };
   };
@@ -164,15 +166,54 @@ function App() {
     const files = Array.from(e.target.files).filter(f => f.name.endsWith('.pdf'));
     if (!files.length || !currentSessionId) return;
     setIsUploading(true);
+    
+    // Initialize progress modal
+    const fileNames = files.map(f => f.name);
+    setUploadProgress({
+      files: fileNames,
+      current: 0,
+      total: files.length,
+      status: 'uploading',
+      logs: [language === 'es' ? `Subiendo ${files.length} archivo(s)...` : `Uploading ${files.length} file(s)...`]
+    });
+    
     try {
       const res = await uploadCVsToSession(currentSessionId, files, mode);
+      setUploadProgress(prev => ({
+        ...prev,
+        status: 'processing',
+        logs: [...prev.logs, language === 'es' ? 'Procesando y extrayendo texto...' : 'Processing and extracting text...']
+      }));
+      
       const poll = async () => {
         const status = await getSessionUploadStatus(currentSessionId, res.job_id);
-        if (status.status === 'processing') setTimeout(poll, 1000);
-        else { setIsUploading(false); await loadSession(currentSessionId); await loadSessions(); }
+        if (status.status === 'processing') {
+          setUploadProgress(prev => ({
+            ...prev,
+            current: status.processed_files || 0,
+            logs: prev.logs.length < 5 ? [...prev.logs, language === 'es' ? `Procesado ${status.processed_files || 0}/${files.length}` : `Processed ${status.processed_files || 0}/${files.length}`] : prev.logs
+          }));
+          setTimeout(poll, 1000);
+        } else {
+          setUploadProgress(prev => ({
+            ...prev,
+            status: 'completed',
+            current: files.length,
+            logs: [...prev.logs, language === 'es' ? '✓ Completado' : '✓ Completed']
+          }));
+          setTimeout(() => setUploadProgress(null), 2000);
+          setIsUploading(false);
+          await loadSession(currentSessionId);
+          await loadSessions();
+        }
       };
       poll();
-    } catch (e) { console.error(e); setIsUploading(false); }
+    } catch (e) { 
+      console.error(e); 
+      setIsUploading(false); 
+      setUploadProgress(prev => prev ? {...prev, status: 'error', logs: [...prev.logs, `Error: ${e.message}`]} : null);
+      setTimeout(() => setUploadProgress(null), 3000);
+    }
     e.target.value = '';
   };
 
@@ -221,14 +262,41 @@ function App() {
     const targetSessionId = cvPanelSessionId || currentSessionId;
     if (!files.length || !targetSessionId) return;
     setIsUploading(true);
+    
+    // Initialize progress modal
+    setUploadProgress({
+      files: files.map(f => f.name),
+      current: 0,
+      total: files.length,
+      status: 'uploading',
+      logs: [language === 'es' ? `Subiendo ${files.length} archivo(s)...` : `Uploading ${files.length} file(s)...`]
+    });
+    
     try {
       const res = await uploadCVsToSession(targetSessionId, files, mode);
+      setUploadProgress(prev => ({
+        ...prev,
+        status: 'processing',
+        logs: [...prev.logs, language === 'es' ? 'Procesando CVs...' : 'Processing CVs...']
+      }));
+      
       const poll = async () => {
         const status = await getSessionUploadStatus(targetSessionId, res.job_id);
-        if (status.status === 'processing') setTimeout(poll, 1000);
-        else {
+        if (status.status === 'processing') {
+          setUploadProgress(prev => ({
+            ...prev,
+            current: status.processed_files || 0
+          }));
+          setTimeout(poll, 1000);
+        } else {
+          setUploadProgress(prev => ({
+            ...prev,
+            status: 'completed',
+            current: files.length,
+            logs: [...prev.logs, language === 'es' ? '✓ Completado' : '✓ Completed']
+          }));
+          setTimeout(() => setUploadProgress(null), 2000);
           setIsUploading(false);
-          // Refresh panel data
           const sessionData = await getSession(targetSessionId, mode);
           setCvPanelSession(sessionData);
           await loadSessions();
@@ -447,31 +515,28 @@ function App() {
                                 );
                               },
                               a: ({node, href, children, ...props}) => {
-                                // Handle cvlink: format (from preprocessed content)
+                                // Handle cv_id format (from preprocessed [📄](cv_xxx))
+                                if (href?.startsWith('cv_')) {
+                                  return (
+                                    <button
+                                      onClick={() => openPdfViewer(href, href)}
+                                      className="inline-flex items-center justify-center w-5 h-5 bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-800 rounded transition-colors border border-blue-200 dark:border-blue-600"
+                                      title={language === 'es' ? 'Ver CV' : 'View CV'}
+                                    >
+                                      <FileText className="w-3 h-3" />
+                                    </button>
+                                  );
+                                }
+                                // Handle cvlink: format (legacy)
                                 if (href?.startsWith('cvlink:')) {
                                   const cvId = href.replace('cvlink:', '');
                                   return (
                                     <button
-                                      onClick={() => openPdfViewer(cvId, String(children))}
-                                      className="inline-flex items-center gap-1 mx-0.5 px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800 rounded text-sm font-medium transition-colors border border-blue-200 dark:border-blue-700"
+                                      onClick={() => openPdfViewer(cvId, cvId)}
+                                      className="inline-flex items-center justify-center w-5 h-5 bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-800 rounded transition-colors border border-blue-200 dark:border-blue-600"
                                       title={language === 'es' ? 'Ver CV' : 'View CV'}
                                     >
                                       <FileText className="w-3 h-3" />
-                                      <span>{children}</span>
-                                    </button>
-                                  );
-                                }
-                                // Handle cv: format (legacy)
-                                if (href?.startsWith('cv:')) {
-                                  const cvId = href.replace('cv:', '');
-                                  return (
-                                    <button
-                                      onClick={() => openPdfViewer(cvId, String(children))}
-                                      className="inline-flex items-center gap-1 mx-0.5 px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800 rounded text-sm font-medium transition-colors border border-blue-200 dark:border-blue-700"
-                                      title={language === 'es' ? 'Ver CV' : 'View CV'}
-                                    >
-                                      <FileText className="w-3 h-3" />
-                                      <span>{children}</span>
                                     </button>
                                   );
                                 }
@@ -526,7 +591,7 @@ function App() {
                             return null;
                           })()}
                         </div>
-                        {msg.sources?.length > 0 && <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-600 flex flex-wrap gap-1.5">{msg.sources.map((src, i) => <SourceBadge key={i} filename={src.filename} score={src.relevance} cvId={src.cv_id} onViewCV={() => openPdfViewer(src.cv_id, src.filename)} />)}</div>}
+                        {/* Referencias eliminadas - solo se muestran junto al nombre del candidato */}
                       </div>
                     </div>
                   </div>
@@ -771,6 +836,75 @@ function App() {
                 className="w-full h-full rounded-b-2xl"
                 title={pdfViewerTitle}
               />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Upload Progress Modal */}
+      {uploadProgress && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[70]">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md p-6 shadow-2xl mx-4">
+            <div className="flex items-center gap-3 mb-4">
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                uploadProgress.status === 'completed' ? 'bg-emerald-100 dark:bg-emerald-900/30' :
+                uploadProgress.status === 'error' ? 'bg-red-100 dark:bg-red-900/30' :
+                'bg-blue-100 dark:bg-blue-900/30'
+              }`}>
+                {uploadProgress.status === 'completed' ? (
+                  <Check className="w-6 h-6 text-emerald-500" />
+                ) : uploadProgress.status === 'error' ? (
+                  <X className="w-6 h-6 text-red-500" />
+                ) : (
+                  <Loader className="w-6 h-6 text-blue-500 animate-spin" />
+                )}
+              </div>
+              <div>
+                <h3 className="font-semibold text-gray-900 dark:text-white">
+                  {uploadProgress.status === 'uploading' ? (language === 'es' ? 'Subiendo CVs' : 'Uploading CVs') :
+                   uploadProgress.status === 'processing' ? (language === 'es' ? 'Procesando CVs' : 'Processing CVs') :
+                   uploadProgress.status === 'completed' ? (language === 'es' ? 'Completado' : 'Completed') :
+                   'Error'}
+                </h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  {uploadProgress.current} / {uploadProgress.total} {language === 'es' ? 'archivos' : 'files'}
+                </p>
+              </div>
+            </div>
+            
+            {/* Progress bar */}
+            <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mb-4">
+              <div 
+                className={`h-full transition-all duration-300 ${
+                  uploadProgress.status === 'completed' ? 'bg-emerald-500' :
+                  uploadProgress.status === 'error' ? 'bg-red-500' :
+                  'bg-blue-500'
+                }`}
+                style={{ width: `${(uploadProgress.current / uploadProgress.total) * 100}%` }}
+              />
+            </div>
+            
+            {/* Log messages */}
+            <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3 max-h-32 overflow-y-auto">
+              {uploadProgress.logs.map((log, i) => (
+                <p key={i} className="text-xs text-gray-600 dark:text-gray-400 font-mono">
+                  {log}
+                </p>
+              ))}
+            </div>
+            
+            {/* File list */}
+            <div className="mt-3 flex flex-wrap gap-1">
+              {uploadProgress.files.slice(0, 5).map((file, i) => (
+                <span key={i} className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-gray-600 dark:text-gray-300">
+                  {file.length > 20 ? file.slice(0, 20) + '...' : file}
+                </span>
+              ))}
+              {uploadProgress.files.length > 5 && (
+                <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-gray-600 dark:text-gray-300">
+                  +{uploadProgress.files.length - 5} more
+                </span>
+              )}
             </div>
           </div>
         </div>

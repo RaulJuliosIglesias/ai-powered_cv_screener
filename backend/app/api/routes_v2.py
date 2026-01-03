@@ -9,8 +9,8 @@ import pdfplumber
 
 from app.config import Mode, settings
 
-# Directory to store uploaded PDFs
-PDF_STORAGE_DIR = Path("pdf_storage")
+# Directory to store uploaded PDFs - use absolute path relative to backend
+PDF_STORAGE_DIR = Path(__file__).parent.parent.parent / "pdf_storage"
 PDF_STORAGE_DIR.mkdir(exist_ok=True)
 
 # Mapping of cv_id to PDF file path (in production, use database)
