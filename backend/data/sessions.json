@@ -1232,10 +1232,17 @@
           "content": "ersto noe s front end sia caso es ui ux por photoshop pero no front end de proigramacion\n\nLiam Nguyen 📄 \tPhotoshop, Illustrator, Blender, ZBrush\tConcept art for animated films/series\tJunior Concept Artist. Skills are more focused on visual assets than front-end development.",
           "sources": [],
           "timestamp": "2026-01-03T19:38:41.376336"
+        },
+        {
+          "id": "593bb07e-027d-4428-acfb-dce8e461413c",
+          "role": "assistant",
+          "content": "I can only help with CV screening and candidate analysis. Please ask a question about the uploaded CVs.",
+          "sources": [],
+          "timestamp": "2026-01-03T19:38:45.742728"
         }
       ],
       "created_at": "2026-01-03T15:41:18.352784",
-      "updated_at": "2026-01-03T19:38:41.376336"
+      "updated_at": "2026-01-03T19:38:45.742728"
     },
     {
       "id": "2503f62f-8b3e-4c9d-9918-a4d4c602b038",
