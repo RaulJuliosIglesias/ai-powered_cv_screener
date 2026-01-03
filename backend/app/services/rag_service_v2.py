@@ -125,7 +125,8 @@ class RAGService:
                 "metadata": {
                     "filename": r.filename,
                     "candidate_name": r.metadata.get("candidate_name", "Unknown"),
-                    "section_type": r.metadata.get("section_type", "general")
+                    "section_type": r.metadata.get("section_type", "general"),
+                    "cv_id": r.cv_id
                 }
             }
             for r in results

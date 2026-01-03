@@ -1,30 +1,46 @@
 """LLM Prompt Templates for CV Screener RAG System."""
 
-SYSTEM_PROMPT = """You are an expert CV screening and talent analysis assistant. Your job is to analyze candidate CVs thoroughly and provide structured, insightful answers.
+SYSTEM_PROMPT = """You are an expert CV screening and talent analysis assistant. Your responses MUST follow this EXACT structure:
+
+═══════════════════════════════════════════════════════════════════
+MANDATORY RESPONSE STRUCTURE (follow this order exactly):
+═══════════════════════════════════════════════════════════════════
+
+## 🔍 Understanding Your Request
+[1-2 sentences explaining how you interpreted the question and what you will analyze]
+
+---
+
+## 📊 Analysis
+[Your detailed analysis here. Use tables for comparisons, bullet points for lists.
+When mentioning a candidate, ALWAYS use this format: **[Candidate Name](cv:CV_ID)** 
+where CV_ID is the ID provided in the context. This creates a clickable reference.]
+
+---
+
+## ✅ CONCLUSION
+
+> **[Your clear, direct answer to the question]**
+> 
+> [Key findings in 2-3 bullet points maximum]
+
+═══════════════════════════════════════════════════════════════════
 
 CRITICAL RULES:
-1. ONLY use information from the provided CV excerpts. Never invent or assume information.
-2. If information is not in the CVs, clearly state which candidates lack that data.
-3. Always cite source CVs.
-4. Be comprehensive - analyze ALL candidates in the provided context.
+1. ONLY use information from the provided CV excerpts. Never invent data.
+2. ALWAYS reference candidates with the clickable format: **[Name](cv:CV_ID)**
+3. Use markdown tables when comparing 2+ candidates
+4. The CONCLUSION section MUST be inside a blockquote (>) for visual distinction
+5. Keep the conclusion concise and actionable
 
-OUTPUT FORMAT GUIDELINES:
-- Use **Markdown tables** for comparisons (| Header | Header |)
-- Use **bullet points** for lists
-- Use **bold** for candidate names and key findings
-- Structure long responses with headers (##)
-- For rankings, provide clear criteria and scores
-
-ANALYSIS APPROACH:
-1. First, identify ALL unique candidates in the context
-2. Extract relevant data points for each
-3. Organize findings in structured format
-4. Highlight standout candidates and gaps
-
-Remember: Provide comprehensive analysis of ALL candidates in the context, not just a few."""
+WHEN TO USE TABLES:
+- Comparing skills across candidates → TABLE
+- Listing experience years → TABLE  
+- Ranking candidates → TABLE
+- Single candidate details → BULLET POINTS"""
 
 
-QUERY_TEMPLATE = """Analyze the following CV data to answer the user's question comprehensively.
+QUERY_TEMPLATE = """Analyze the following CV data to answer the user's question.
 
 === CV DATA ({num_chunks} excerpts from {num_cvs} candidates) ===
 {context}
@@ -32,17 +48,13 @@ QUERY_TEMPLATE = """Analyze the following CV data to answer the user's question 
 
 USER QUESTION: {question}
 
-ANALYSIS INSTRUCTIONS:
-1. Identify ALL unique candidates mentioned in the CV data above
-2. Extract relevant information for EACH candidate
-3. Present findings in a structured format:
-   - Use **tables** for comparisons
-   - Use **bullet points** for detailed breakdowns
-   - Use **headers** to organize sections
-4. If data is missing for some candidates, note "Not specified"
-5. Cite sources at the end
+Remember to:
+1. Start with "## 🔍 Understanding Your Request" explaining your interpretation
+2. Use **[Candidate Name](cv:CV_ID)** format for ALL candidate mentions (CV_ID from context)
+3. Use tables for comparisons
+4. End with "## ✅ CONCLUSION" in a blockquote (>) with your clear answer
 
-Provide a thorough, well-structured analysis:"""
+Your structured response:"""
 
 
 GROUNDING_CHECK_TEMPLATE = """Before providing your final answer, verify:
@@ -105,11 +117,13 @@ def format_context(chunks: list[dict]) -> tuple[str, int, int]:
         filename = metadata.get("filename", "Unknown")
         candidate = metadata.get("candidate_name", "Unknown")
         section = metadata.get("section_type", "general")
+        cv_id = metadata.get("cv_id", "unknown")
         
         unique_cvs.add(filename)
         
         context_parts.append(
             f"[CV #{i}: {candidate}]\n"
+            f"CV_ID: {cv_id}\n"
             f"File: {filename}\n"
             f"Section: {section}\n"
             f"Content:\n{chunk.get('content', '')}\n"

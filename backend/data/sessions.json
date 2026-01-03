@@ -1,300 +1,253 @@
 {
   "sessions": [
     {
-      "id": "a4a5af29-e82b-411d-958b-29d716137f32",
-      "name": "CV-TEST1",
+      "id": "75e57c88-4f19-47a7-8e55-a47465ea6674",
+      "name": "New chat",
       "description": "",
       "cvs": [
         {
-          "id": "cv_a4d5200b",
-          "filename": "0d9c2ed3_Isabella_Rodriguez_Cloud_Infrastructure_Engineer.pdf",
+          "id": "cv_eb3a77b7",
+          "filename": "79c657bb_Claudine_Moreau_Product_Manager_specializing_in_Legacy_System_Modernization.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T11:36:18.309116"
+        },
+        {
+          "id": "cv_25694a73",
+          "filename": "fad6bfe1_Ling_Mei_Tan_Senior_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
           "chunk_count": 3,
-          "uploaded_at": "2026-01-03T11:10:30.289293"
+          "uploaded_at": "2026-01-03T11:36:18.453496"
         },
         {
-          "id": "cv_42f2e850",
-          "filename": "0f8a3160_Kwame_Nkrumah_Android_Developer_with_a_Focus_on_UI-UX_Optimization.pdf",
-          "chunk_count": 2,
-          "uploaded_at": "2026-01-03T11:10:30.406344"
-        },
-        {
-          "id": "cv_d8a90c94",
-          "filename": "1c6800d5_Gabriela_Mendoza_AI_Engineer_specializing_in_Natural_Language_Processing.pdf",
+          "id": "cv_dd29850f",
+          "filename": "f9c94d11_Ling_Chen_UX-UI_Designer_with_a_focus_on_Mobile_App_Experiences.pdf",
           "chunk_count": 4,
-          "uploaded_at": "2026-01-03T11:10:30.529109"
+          "uploaded_at": "2026-01-03T11:36:18.574124"
         },
         {
-          "id": "cv_92e50968",
-          "filename": "1d7db204_Layla_Al-Mansoor_iOS_Specialist_focused_on_Accessibility.pdf",
+          "id": "cv_1b5f52e6",
+          "filename": "e3d79ef9_Meera_Kapoor_Cloud_Solutions_Architect_specializing_in_Legacy_System_Migration.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T11:36:18.698124"
+        },
+        {
+          "id": "cv_8809b4c1",
+          "filename": "9b917100_Rafael_Silva_Blockchain_Developer_specializing_in_Smart_Contracts.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T11:10:30.674262"
+          "uploaded_at": "2026-01-03T11:36:18.885615"
         },
         {
-          "id": "cv_3ccf7e3e",
-          "filename": "2ae5b253_Anika_Mehta_Senior_Product_Manager_specializing_in_AI-driven_SaaS_solutions.pdf",
+          "id": "cv_0668452c",
+          "filename": "33634977_Aarohi_Mehta_Junior_Data_Analyst_with_a_focus_on_Healthcare_Analytics.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T11:36:18.999854"
+        },
+        {
+          "id": "cv_b3e0a3dc",
+          "filename": "164935a6_Carmen_Rodriguez_Senior_DevOps_Engineer_with_a_focus_on_Cloud_Migration.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T11:36:19.133291"
+        },
+        {
+          "id": "cv_bdf5e582",
+          "filename": "b7e6af78_Layla_Nguyen_Cloud_Solutions_Architect_focused_on_Scalability.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T11:10:30.858121"
+          "uploaded_at": "2026-01-03T11:36:19.251257"
         },
         {
-          "id": "cv_d685100f",
-          "filename": "2b5ee074_Lucas_Almeida_Junior_DevOps_Engineer.pdf",
+          "id": "cv_890d032c",
+          "filename": "f34cbc6e_Lucien_Moreau_Senior_Mobile_App_Developer_specializing_in_Cross-Platform_Solutions.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T11:36:19.426377"
+        },
+        {
+          "id": "cv_3f10d3fe",
+          "filename": "269e7798_Diego_Mendoza_Full_Stack_Developer_with_a_Focus_on_React_and_Nodejs.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-03T11:36:19.532241"
+        },
+        {
+          "id": "cv_d7196265",
+          "filename": "289c6ab4_Anjali_Kapoor_Lead_System_Architect_specializing_in_Cloud_Migration.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T11:36:19.660030"
+        },
+        {
+          "id": "cv_e1896aa9",
+          "filename": "7eebf9b9_Oliver_Whitmore_Product_Manager_specializing_in_Fintech_Solutions.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T11:36:19.804990"
+        },
+        {
+          "id": "cv_8ef02c19",
+          "filename": "8713c23b_Aïcha_Moreau_Cloud_Solutions_Architect_with_a_focus_on_Hybrid_Cloud_Integrations.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T11:36:19.932840"
+        },
+        {
+          "id": "cv_641ef0eb",
+          "filename": "a4bb6816_Ana_Sofia_Mendes_Legacy_System_Modernization_Architect.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T11:36:20.155932"
+        },
+        {
+          "id": "cv_55859902",
+          "filename": "6db961aa_Lina_Tan_Associate_Product_Manager_focused_on_User_Engagement.pdf",
           "chunk_count": 1,
-          "uploaded_at": "2026-01-03T11:10:30.960257"
+          "uploaded_at": "2026-01-03T11:36:20.253463"
         },
         {
-          "id": "cv_10a13ace",
-          "filename": "3b1d2ca8_Aisha_Nkrumah_Senior_UX-UI_Designer_with_a_focus_on_Inclusive_Digital_Experiences.pdf",
-          "chunk_count": 4,
-          "uploaded_at": "2026-01-03T11:10:31.087338"
-        },
-        {
-          "id": "cv_ca8ccf01",
-          "filename": "4c6fd16c_Rahul_Mehta_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
+          "id": "cv_9637aaff",
+          "filename": "ef404596_Aisha_Nkrumah_Senior_DevOps_Engineer_specializing_in_Cloud_Infrastructure_and_CI-CD_Pipelines.pdf",
           "chunk_count": 2,
-          "uploaded_at": "2026-01-03T11:10:31.196989"
+          "uploaded_at": "2026-01-03T11:36:20.394721"
         },
         {
-          "id": "cv_aed81281",
-          "filename": "6d995c33_Meera_Khan_Full_Stack_Developer_with_a_focus_on_JavaScript_Frameworks.pdf",
+          "id": "cv_51ce9dac",
+          "filename": "fc28f7b3_Ana_Silva_Senior_DevOps_Engineer_with_a_focus_on_Cloud_Migration.pdf",
           "chunk_count": 3,
-          "uploaded_at": "2026-01-03T11:10:31.760331"
+          "uploaded_at": "2026-01-03T11:36:20.532070"
         },
         {
-          "id": "cv_93575faf",
-          "filename": "8f745b31_Aisha_Oluwaseun_Lead_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
-          "chunk_count": 2,
-          "uploaded_at": "2026-01-03T11:10:31.900068"
-        },
-        {
-          "id": "cv_10175007",
-          "filename": "8fde35dc_Javier_Morales_Junior_System_Architect_focused_on_Cloud_Integration.pdf",
-          "chunk_count": 5,
-          "uploaded_at": "2026-01-03T11:10:32.161031"
-        },
-        {
-          "id": "cv_19100add",
-          "filename": "9f9a38b4_Aisha_Johnson_Blockchain_Developer_specializing_in_Smart_Contracts.pdf",
-          "chunk_count": 5,
-          "uploaded_at": "2026-01-03T11:10:32.402622"
-        },
-        {
-          "id": "cv_e0dabcca",
-          "filename": "37df0382_Rahul_Kapoor_Full_Stack_Developer_with_a_focus_on_E-commerce_Solutions.pdf",
+          "id": "cv_15ccfbb3",
+          "filename": "aad52b0c_Ana_Silva_Full_Stack_Developer_with_a_focus_on_Legacy_System_Modernization.pdf",
           "chunk_count": 3,
-          "uploaded_at": "2026-01-03T11:10:32.514097"
+          "uploaded_at": "2026-01-03T11:36:20.673282"
         },
         {
-          "id": "cv_b7a3235d",
-          "filename": "057cb342_Kwame_Nkrumah_Product_Manager_specializing_in_Fintech_Solutions.pdf",
-          "chunk_count": 2,
-          "uploaded_at": "2026-01-03T11:10:32.649822"
-        },
-        {
-          "id": "cv_eac6212e",
-          "filename": "542b1562_Idriss_Diop_AI_Engineer_specializing_in_Natural_Language_Processing.pdf",
-          "chunk_count": 7,
-          "uploaded_at": "2026-01-03T11:10:32.840877"
-        },
-        {
-          "id": "cv_071163d6",
-          "filename": "1228af19_Gregory_Michael_Thompson_Full_Stack_Developer_with_a_focus_on_Legacy_System_Modernization.pdf",
-          "chunk_count": 2,
-          "uploaded_at": "2026-01-03T11:10:33.005184"
-        },
-        {
-          "id": "cv_72730ef9",
-          "filename": "0530309b_Kwame_Adjei_Full_Stack_Developer_with_a_focus_on_Legacy_System_Modernization.pdf",
-          "chunk_count": 2,
-          "uploaded_at": "2026-01-03T11:10:33.175977"
-        },
-        {
-          "id": "cv_6f08a5a9",
-          "filename": "3847227c_Lukas_Weber_Full_Stack_Developer_with_a_focus_on_JavaScript_and_Python.pdf",
-          "chunk_count": 4,
-          "uploaded_at": "2026-01-03T11:10:33.448114"
-        },
-        {
-          "id": "cv_8c49a52b",
-          "filename": "7776618a_Kenji_Tanaka_Cybersecurity_Analyst_specializing_in_Threat_Intelligence.pdf",
-          "chunk_count": 2,
-          "uploaded_at": "2026-01-03T11:10:33.581580"
-        },
-        {
-          "id": "cv_293f36eb",
-          "filename": "62893701_Aisha_Okafor_Full_Stack_Developer_with_a_focus_on_JavaScript_Frameworks.pdf",
-          "chunk_count": 1,
-          "uploaded_at": "2026-01-03T11:10:33.681119"
-        },
-        {
-          "id": "cv_c099c91d",
-          "filename": "a6d5e5f0_Aiko_Tanaka_iOS_Developer_with_a_Focus_on_User_Experience.pdf",
-          "chunk_count": 9,
-          "uploaded_at": "2026-01-03T11:10:33.956466"
-        },
-        {
-          "id": "cv_9cdcd4f3",
-          "filename": "b684a994_Isabel_Mendoza_Narrative_Designer_for_Indie_Games.pdf",
-          "chunk_count": 12,
-          "uploaded_at": "2026-01-03T11:10:34.403707"
-        },
-        {
-          "id": "cv_f28cc08a",
-          "filename": "c8b5a9c4_Rajiv_Mehta_Unity_Developer_specializing_in_Mobile_Game_Optimization.pdf",
-          "chunk_count": 7,
-          "uploaded_at": "2026-01-03T11:10:34.739987"
-        },
-        {
-          "id": "cv_436ccd7e",
-          "filename": "c15227b5_Lucía_Martínez_Full_Stack_Developer_with_a_focus_on_JavaScript_frameworks.pdf",
-          "chunk_count": 5,
-          "uploaded_at": "2026-01-03T11:10:34.907636"
-        },
-        {
-          "id": "cv_158f97ea",
-          "filename": "d1ce196d_Lucien_Moreau_Full_Stack_Developer_with_a_Focus_on_Scalable_Backend_Solutions.pdf",
+          "id": "cv_38a5cad1",
+          "filename": "38d5cf94_Lucien_Moreau_Cloud_Solutions_Architect_specializing_in_Legacy_System_Migration.pdf",
           "chunk_count": 3,
-          "uploaded_at": "2026-01-03T11:10:35.277340"
+          "uploaded_at": "2026-01-03T11:36:20.858451"
         },
         {
-          "id": "cv_4bef867f",
-          "filename": "d5d2fe01_Ling_Zhang_Full_Stack_Developer_with_a_focus_on_Legacy_System_Modernization.pdf",
-          "chunk_count": 2,
-          "uploaded_at": "2026-01-03T11:10:35.495878"
+          "id": "cv_4c65203e",
+          "filename": "24a9c393_Anika_Mehta_Blockchain_Developer_specializing_in_Smart_Contracts_and_DeFi.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T11:36:21.018722"
         },
         {
-          "id": "cv_04709a7c",
-          "filename": "d027f235_Amélie_Moreau_Blockchain_Developer_specializing_in_Smart_Contracts.pdf",
-          "chunk_count": 5,
-          "uploaded_at": "2026-01-03T11:10:35.756658"
-        },
-        {
-          "id": "cv_cd5740f6",
-          "filename": "e64adbb5_Arjun_Mehta_Senior_Gameplay_Programmer_with_a_focus_on_Multiplayer_Systems.pdf",
+          "id": "cv_12b0639f",
+          "filename": "8148b375_Lars_Andersson_Senior_UX-UI_Designer_with_a_focus_on_Accessibility.pdf",
           "chunk_count": 4,
-          "uploaded_at": "2026-01-03T11:10:35.933205"
+          "uploaded_at": "2026-01-03T11:36:21.157554"
         },
         {
-          "id": "cv_a587fafb",
-          "filename": "f5c89f3b_Ling_Chen_Cybersecurity_Analyst_with_a_focus_on_Threat_Intelligence.pdf",
-          "chunk_count": 4,
-          "uploaded_at": "2026-01-03T11:10:36.227364"
+          "id": "cv_04e0afab",
+          "filename": "70631bd3_Larissa_Oliveira_Blockchain_Developer_focused_on_DeFi_Protocols.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T11:36:21.312035"
         },
         {
-          "id": "cv_63357135",
-          "filename": "ffe9def4_Aisha_Okafor_AI_Engineer_specializing_in_Natural_Language_Processing.pdf",
-          "chunk_count": 8,
-          "uploaded_at": "2026-01-03T11:10:36.392833"
+          "id": "cv_f9be4bc7",
+          "filename": "a15b7ae8_Lucas_Almeida_Gameplay_Programmer_with_a_Focus_on_Multiplayer_Systems.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-03T11:36:21.502133"
         }
       ],
       "messages": [
         {
-          "id": "fb4e32b9-d9d8-491c-8f77-bb58617ae63a",
+          "id": "8a3d17d2-c59c-49ad-8449-9f8892358a84",
           "role": "user",
-          "content": "Compare the experience levels of all 32 candidates",
+          "content": "Who has the most experience with Python?",
           "sources": [],
-          "timestamp": "2026-01-03T11:10:39.795702"
+          "timestamp": "2026-01-03T11:36:24.701007"
         },
         {
-          "id": "0c68ea94-56a7-4824-9c10-363392f6d764",
+          "id": "1ad82e3e-1a51-4c6f-84ff-bac9e7c5608d",
           "role": "assistant",
-          "content": "## Candidate Experience Comparison\n\n### Unique Candidates Identified\nThe CV data provided includes 18 unique candidates. Below is a structured comparison of their experience levels based on the information available.\n\n### Experience Overview Table\n\n| **Candidate Name**          | **Role**                               | **Experience Duration** | **Key Achievements**                                                                                     |\n|-----------------------------|----------------------------------------|-------------------------|----------------------------------------------------------------------------------------------------------|\n| **Kwame Adjei**             | Full Stack Developer                   | 1995 - 2005             | - Led modernization of legacy systems<br>- Mentored junior developers                                     |\n| **Ling Zhang**              | Full Stack Developer                   | 2023                    | - Led large-scale migrations to microservices<br>- Reduced maintenance costs by 45%                       |\n| **Kwame Nkrumah**           | Product Manager                        | 2017 - 2019             | - Launched scalable payment platforms<br>- Increased transaction volume by 150%                           |\n| **Lukas Schneider**         | Senior Unity Developer                 | 2019 - 2021             | - Developed VR projects reaching 2.5 million users<br>- Reduced rendering times by 75%                   |\n| **Aiko Tanaka**             | iOS Developer                          | 2019 - 2020             | - Designed onboarding flow boosting retention by 18%                                                      |\n| **Isabel Mendoza**          | Narrative Designer                     | Not specified           | - Contributed to experimental games showcased at festivals<br>- Co-authored research paper                |\n| **Rahul Kapoor**            | Full Stack Developer                   | Not specified           | - Built scalable e-commerce platforms<br>- Led cross-functional teams                                     |\n| **Meera Khan**              | Full Stack Developer                   | Not specified           | - Delivered high-quality user-centric solutions<br>- Passionate about collaborative problem-solving       |\n| **Aisha Oluwaseun**         | Lead Data Scientist                    | 2010 - 2015             | - Designed predictive models improving patient outcomes<br>- Authored 15 peer-reviewed publications        |\n| **Anika Mehta**             | Senior Product Manager                 | 2010 - 2014             | - Scaled products to $50M ARR<br>- Optimized workflow saving $1.2M annually                              |\n| **Kenji Tanaka**            | Cybersecurity Analyst                  | Not specified           | - Delivered actionable intelligence for risk mitigation<br>- Passionate about mentoring junior analysts    |\n| **Isabella Rodriguez**      | Cloud Infrastructure Engineer          | Not specified           | - Transitioned 15 clients to cloud infrastructure<br>- Improved team efficiency by 30%                   |\n| **Javier Morales**          | Junior System Architect                | 2020 - 2021             | - Designed monitoring solutions for microservices<br>- Automated infrastructure provisioning              |\n| **Rahul Mehta**             | Data Scientist                         | Not specified           | - Expert in predictive modeling and machine learning pipelines                                            |\n| **Rajiv Mehta**            | Unity Developer                        | 2019 - 2021             | - Delivered AAA-quality mobile games<br>- Implemented advanced optimization techniques                    |\n| **Lucía Martínez**          | Full Stack Developer                   | Not specified           | - Experience in web technologies and distributed systems                                                  |\n| **Gregory Michael Thompson** | Full Stack Developer                   | Not specified           | - Led migrations to microservices<br>- Optimized cloud infrastructure                                      |\n| **Aiko Tanaka**             | iOS Developer                          | Not specified           | - Developed internal tools reducing ticket resolution time by 50%                                         |\n| **Kwame Nkrumah**           | Android Developer                      | Not specified           | - Specialized in UI/UX optimization<br>- Proven track record of enhancing user engagement                 |\n\n### Key Findings\n\n- **Most Experienced Candidates**:\n  - **Kwame Adjei**: 10 years of experience in full stack development with a focus on legacy systems.\n  - **Aisha Oluwaseun**: 5 years of experience in healthcare analytics with significant contributions to predictive modeling.\n  - **Anika Mehta**: 4 years of experience in product management with a strong record of scaling products.\n\n- **Recent Graduates**:\n  - **Ling Zhang**: Recently graduated and has already led significant projects in cloud-native solutions.\n  - **Javier Morales**: Has a brief experience as a junior system architect but has contributed to impactful projects.\n\n- **Candidates with Not Specified Experience**:\n  - Several candidates, including **Rahul Kapoor**, **Meera Khan**, **Kenji Tanaka**, and others, have not specified their experience duration, making it difficult to assess their overall experience level.\n\n### Conclusion\nThe candidates exhibit a diverse range of experiences across various domains, from full stack development to data science and product management. While some candidates have extensive experience, others are newer to the field or lack detailed experience information. This analysis highlights the strengths and gaps in experience among the candidates.\n\n### Sources\n- CV #1: Kwame Adjei\n- CV #2: Ling Zhang\n- CV #3: Kwame Nkrumah\n- CV #4: Lukas Schneider\n- CV #5: Aiko Tanaka\n- CV #6: Isabel Mendoza\n- CV #7: Rahul Kapoor\n- CV #8: Meera Khan\n- CV #9: Aisha Oluwaseun\n- CV #10: Anika Mehta\n- CV #11: Kenji Tanaka\n- CV #12: Isabella Rodriguez\n- CV #13: Javier Morales\n- CV #14: Rahul Mehta\n- CV #15: Rajiv Mehta\n- CV #16: Lucía Martínez\n- CV #17: Aiko Tanaka\n- CV #18: Kwame Nkrumah\n- CV #20: Gregory Michael Thompson",
+          "content": "## Candidate Analysis for Python Experience\n\nTo determine which candidates have the most experience with Python, we will analyze the provided CV excerpts for mentions of Python skills or experience. Below is a structured breakdown of the candidates and their relevant Python experience.\n\n### Unique Candidates and Python Experience\n\n| **Candidate Name**          | **Python Experience**                                   | **Source**                                      |\n|-----------------------------|--------------------------------------------------------|-------------------------------------------------|\n| **Carmen Rodriguez**        | Not specified                                          | CV #2, CV #20                                   |\n| **Aisha Nkrumah**          | Python mentioned as part of data analytics skills      | CV #3                                           |\n| **Ling Mei Tan**           | Python mentioned as part of machine learning skills     | CV #4, CV #9                                    |\n| **Layla Nguyen**           | Not specified                                          | CV #5                                           |\n| **Oliver Whitmore**        | Python mentioned as part of data analytics skills      | CV #6                                           |\n| **Anika Mehta**            | Not specified                                          | CV #7, CV #16                                   |\n| **Ana Silva**              | Not specified                                          | CV #8, CV #14                                   |\n| **Rafael Silva**           | Not specified                                          | CV #10                                          |\n| **Claudine Moreau**        | Not specified                                          | CV #11                                          |\n| **Lucien Moreau**          | Not specified                                          | CV #12                                          |\n| **Ana Sofia Mendes**       | Not specified                                          | CV #13                                          |\n| **Lars Andersson**         | Not specified                                          | CV #15                                          |\n| **Lucas Almeida**          | Not specified                                          | CV #17                                          |\n| **Aïcha Moreau**           | Not specified                                          | CV #18                                          |\n| **Anjali Kapoor**          | Not specified                                          | CV #19                                          |\n| **Larissa Oliveira**       | Not specified                                          | CV #1                                           |\n\n### Detailed Breakdown of Candidates with Python Experience\n\n- **Aisha Nkrumah**\n  - **Experience**: Python is mentioned in the context of CI/CD pipeline transformations and cloud-native infrastructures.\n  - **Source**: CV #3\n\n- **Ling Mei Tan**\n  - **Experience**: Python is highlighted as part of machine learning skills, specifically in healthcare analytics.\n  - **Source**: CV #4, CV #9\n\n- **Oliver Whitmore**\n  - **Experience**: Python is mentioned as part of data analytics skills, particularly in the context of fintech solutions.\n  - **Source**: CV #6\n\n### Summary of Findings\n\n- **Candidates with Python Experience**: \n  - **Aisha Nkrumah**\n  - **Ling Mei Tan**\n  - **Oliver Whitmore**\n\n- **Candidates without Specified Python Experience**: \n  - Most candidates did not specify any experience with Python, including notable roles in DevOps, cloud architecture, and blockchain development.\n\n### Conclusion\n\nAmong the candidates analyzed, **Ling Mei Tan** appears to have a strong focus on Python through machine learning applications, while **Aisha Nkrumah** and **Oliver Whitmore** also mention Python in their skill sets. However, none of the candidates provided extensive details about their Python experience, making it difficult to rank them definitively.\n\n### Sources\n- CV #1: Larissa Oliveira\n- CV #2: Carmen Rodriguez\n- CV #3: Aisha Nkrumah\n- CV #4: Ling Mei Tan\n- CV #5: Layla Nguyen\n- CV #6: Oliver Whitmore\n- CV #7: Anika Mehta\n- CV #8: Ana Silva\n- CV #9: Ling Mei Tan\n- CV #10: Rafael Silva\n- CV #11: Claudine Moreau\n- CV #12: Lucien Moreau\n- CV #13: Ana Sofia Mendes\n- CV #14: Ana Silva\n- CV #15: Lars Andersson\n- CV #16: Anika Mehta\n- CV #17: Lucas Almeida\n- CV #18: Aïcha Moreau\n- CV #19: Anjali Kapoor\n- CV #20: Carmen Rodriguez",
           "sources": [
             {
-              "cv_id": "cv_72730ef9",
-              "filename": "0530309b_Kwame_Adjei_Full_Stack_Developer_with_a_focus_on_Legacy_System_Modernization.pdf",
-              "relevance": 0.652
+              "cv_id": "cv_04e0afab",
+              "filename": "70631bd3_Larissa_Oliveira_Blockchain_Developer_focused_on_DeFi_Protocols.pdf",
+              "relevance": 0.627
             },
             {
-              "cv_id": "cv_4bef867f",
-              "filename": "d5d2fe01_Ling_Zhang_Full_Stack_Developer_with_a_focus_on_Legacy_System_Modernization.pdf",
-              "relevance": 0.651
+              "cv_id": "cv_b3e0a3dc",
+              "filename": "164935a6_Carmen_Rodriguez_Senior_DevOps_Engineer_with_a_focus_on_Cloud_Migration.pdf",
+              "relevance": 0.59
             },
             {
-              "cv_id": "cv_b7a3235d",
-              "filename": "057cb342_Kwame_Nkrumah_Product_Manager_specializing_in_Fintech_Solutions.pdf",
-              "relevance": 0.64
+              "cv_id": "cv_9637aaff",
+              "filename": "ef404596_Aisha_Nkrumah_Senior_DevOps_Engineer_specializing_in_Cloud_Infrastructure_and_CI-CD_Pipelines.pdf",
+              "relevance": 0.59
             },
             {
-              "cv_id": "cv_247143bd",
-              "filename": "5f931ae5_Lukas_Schneider_Unity_Developer_with_a_focus_on_VR-AR_experiences.pdf",
-              "relevance": 0.632
+              "cv_id": "cv_25694a73",
+              "filename": "fad6bfe1_Ling_Mei_Tan_Senior_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
+              "relevance": 0.588
             },
             {
-              "cv_id": "cv_c099c91d",
-              "filename": "a6d5e5f0_Aiko_Tanaka_iOS_Developer_with_a_Focus_on_User_Experience.pdf",
-              "relevance": 0.62
+              "cv_id": "cv_bdf5e582",
+              "filename": "b7e6af78_Layla_Nguyen_Cloud_Solutions_Architect_focused_on_Scalability.pdf",
+              "relevance": 0.585
             },
             {
-              "cv_id": "cv_9cdcd4f3",
-              "filename": "b684a994_Isabel_Mendoza_Narrative_Designer_for_Indie_Games.pdf",
-              "relevance": 0.619
+              "cv_id": "cv_e1896aa9",
+              "filename": "7eebf9b9_Oliver_Whitmore_Product_Manager_specializing_in_Fintech_Solutions.pdf",
+              "relevance": 0.577
             },
             {
-              "cv_id": "cv_e0dabcca",
-              "filename": "37df0382_Rahul_Kapoor_Full_Stack_Developer_with_a_focus_on_E-commerce_Solutions.pdf",
-              "relevance": 0.618
+              "cv_id": "cv_4c65203e",
+              "filename": "24a9c393_Anika_Mehta_Blockchain_Developer_specializing_in_Smart_Contracts_and_DeFi.pdf",
+              "relevance": 0.563
             },
             {
-              "cv_id": "cv_aed81281",
-              "filename": "6d995c33_Meera_Khan_Full_Stack_Developer_with_a_focus_on_JavaScript_Frameworks.pdf",
-              "relevance": 0.616
+              "cv_id": "cv_51ce9dac",
+              "filename": "fc28f7b3_Ana_Silva_Senior_DevOps_Engineer_with_a_focus_on_Cloud_Migration.pdf",
+              "relevance": 0.556
             },
             {
-              "cv_id": "cv_93575faf",
-              "filename": "8f745b31_Aisha_Oluwaseun_Lead_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
-              "relevance": 0.612
+              "cv_id": "cv_8809b4c1",
+              "filename": "9b917100_Rafael_Silva_Blockchain_Developer_specializing_in_Smart_Contracts.pdf",
+              "relevance": 0.552
             },
             {
-              "cv_id": "cv_3ccf7e3e",
-              "filename": "2ae5b253_Anika_Mehta_Senior_Product_Manager_specializing_in_AI-driven_SaaS_solutions.pdf",
-              "relevance": 0.607
+              "cv_id": "cv_eb3a77b7",
+              "filename": "79c657bb_Claudine_Moreau_Product_Manager_specializing_in_Legacy_System_Modernization.pdf",
+              "relevance": 0.549
             },
             {
-              "cv_id": "cv_8c49a52b",
-              "filename": "7776618a_Kenji_Tanaka_Cybersecurity_Analyst_specializing_in_Threat_Intelligence.pdf",
-              "relevance": 0.607
+              "cv_id": "cv_38a5cad1",
+              "filename": "38d5cf94_Lucien_Moreau_Cloud_Solutions_Architect_specializing_in_Legacy_System_Migration.pdf",
+              "relevance": 0.544
             },
             {
-              "cv_id": "cv_a4d5200b",
-              "filename": "0d9c2ed3_Isabella_Rodriguez_Cloud_Infrastructure_Engineer.pdf",
-              "relevance": 0.606
+              "cv_id": "cv_641ef0eb",
+              "filename": "a4bb6816_Ana_Sofia_Mendes_Legacy_System_Modernization_Architect.pdf",
+              "relevance": 0.542
             },
             {
-              "cv_id": "cv_10175007",
-              "filename": "8fde35dc_Javier_Morales_Junior_System_Architect_focused_on_Cloud_Integration.pdf",
-              "relevance": 0.606
+              "cv_id": "cv_15ccfbb3",
+              "filename": "aad52b0c_Ana_Silva_Full_Stack_Developer_with_a_focus_on_Legacy_System_Modernization.pdf",
+              "relevance": 0.542
             },
             {
-              "cv_id": "cv_ca8ccf01",
-              "filename": "4c6fd16c_Rahul_Mehta_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
-              "relevance": 0.604
+              "cv_id": "cv_12b0639f",
+              "filename": "8148b375_Lars_Andersson_Senior_UX-UI_Designer_with_a_focus_on_Accessibility.pdf",
+              "relevance": 0.54
             },
             {
-              "cv_id": "cv_f28cc08a",
-              "filename": "c8b5a9c4_Rajiv_Mehta_Unity_Developer_specializing_in_Mobile_Game_Optimization.pdf",
-              "relevance": 0.602
+              "cv_id": "cv_f9be4bc7",
+              "filename": "a15b7ae8_Lucas_Almeida_Gameplay_Programmer_with_a_Focus_on_Multiplayer_Systems.pdf",
+              "relevance": 0.535
             },
             {
-              "cv_id": "cv_436ccd7e",
-              "filename": "c15227b5_Lucía_Martínez_Full_Stack_Developer_with_a_focus_on_JavaScript_frameworks.pdf",
-              "relevance": 0.597
+              "cv_id": "cv_8ef02c19",
+              "filename": "8713c23b_Aïcha_Moreau_Cloud_Solutions_Architect_with_a_focus_on_Hybrid_Cloud_Integrations.pdf",
+              "relevance": 0.534
             },
             {
-              "cv_id": "cv_42f2e850",
-              "filename": "0f8a3160_Kwame_Nkrumah_Android_Developer_with_a_Focus_on_UI-UX_Optimization.pdf",
-              "relevance": 0.592
-            },
-            {
-              "cv_id": "cv_071163d6",
-              "filename": "1228af19_Gregory_Michael_Thompson_Full_Stack_Developer_with_a_focus_on_Legacy_System_Modernization.pdf",
-              "relevance": 0.583
+              "cv_id": "cv_d7196265",
+              "filename": "289c6ab4_Anjali_Kapoor_Lead_System_Architect_specializing_in_Cloud_Migration.pdf",
+              "relevance": 0.534
             }
           ],
-          "timestamp": "2026-01-03T11:11:12.572146"
+          "timestamp": "2026-01-03T11:36:44.014070"
         }
       ],
-      "created_at": "2026-01-03T11:10:22.276034",
-      "updated_at": "2026-01-03T11:18:17.248603"
+      "created_at": "2026-01-03T11:36:03.414378",
+      "updated_at": "2026-01-03T11:36:44.014070"
     }
   ]
 }

@@ -1,13 +1,30 @@
 import uuid
 import io
+from pathlib import Path
 from typing import List, Optional
 from fastapi import APIRouter, UploadFile, File, Query, HTTPException, BackgroundTasks
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import pdfplumber
 
 from app.config import Mode, settings
+
+# Directory to store uploaded PDFs
+PDF_STORAGE_DIR = Path("pdf_storage")
+PDF_STORAGE_DIR.mkdir(exist_ok=True)
+
+# Mapping of cv_id to PDF file path (in production, use database)
+cv_pdf_mapping = {}
 from app.services.rag_service_v2 import RAGService
 from app.services.chunking_service import ChunkingService
+from app.models.sessions import LocalSessionManager
+from app.providers.cloud.sessions import SupabaseSessionManager
+
+def get_session_manager(mode: Mode):
+    """Get session manager based on mode."""
+    if mode == Mode.cloud:
+        return SupabaseSessionManager()
+    return LocalSessionManager()
 
 
 router = APIRouter(prefix="/api", tags=["CV Screener"])
@@ -147,6 +164,13 @@ async def process_cvs(job_id: str, file_data: List[tuple], mode: Mode):
             )
             logger.info(f"[{job_id}] Created {len(chunks)} chunks for {filename}")
             
+            # Save PDF to disk
+            pdf_path = PDF_STORAGE_DIR / f"{cv_id}.pdf"
+            with open(pdf_path, "wb") as f:
+                f.write(content)
+            cv_pdf_mapping[cv_id] = str(pdf_path)
+            logger.info(f"[{job_id}] Saved PDF to {pdf_path}")
+            
             # Index chunks
             await rag_service.index_documents(chunks)
             logger.info(f"[{job_id}] Indexed chunks for {filename}")
@@ -267,14 +291,35 @@ async def delete_cv(
     cv_id: str,
     mode: Mode = Query(default=settings.default_mode)
 ):
-    """Delete a CV from the index."""
+    """Delete a CV from the index and remove from all sessions."""
     rag_service = RAGService(mode)
     success = await rag_service.vector_store.delete_cv(cv_id)
     
     if not success:
         raise HTTPException(status_code=404, detail="CV not found")
     
-    return {"success": True, "message": f"CV {cv_id} deleted"}
+    # Also remove CV from all sessions that reference it
+    mgr = get_session_manager(mode)
+    sessions = mgr.list_sessions()
+    sessions_updated = 0
+    for s in sessions:
+        session_id = s.get("id") if isinstance(s, dict) else s.id
+        session = mgr.get_session(session_id)
+        if session:
+            cvs = session.get("cvs", []) if isinstance(session, dict) else session.cvs
+            if any((cv.get("id") if isinstance(cv, dict) else cv.id) == cv_id for cv in cvs):
+                mgr.remove_cv_from_session(session_id, cv_id)
+                sessions_updated += 1
+    
+    # Delete PDF file if exists
+    if cv_id in cv_pdf_mapping:
+        try:
+            Path(cv_pdf_mapping[cv_id]).unlink(missing_ok=True)
+            del cv_pdf_mapping[cv_id]
+        except Exception:
+            pass
+    
+    return {"success": True, "message": f"CV {cv_id} deleted", "sessions_updated": sessions_updated}
 
 
 @router.get("/stats", response_model=StatsResponse)
@@ -330,7 +375,41 @@ async def delete_all_cvs(mode: Mode = Query(default=settings.default_mode)):
     cvs = await rag_service.vector_store.list_cvs()
     deleted = 0
     for cv in cvs:
-        if await rag_service.vector_store.delete_cv(cv["id"]):
+        cv_id = cv["id"]
+        if await rag_service.vector_store.delete_cv(cv_id):
+            # Also delete PDF file
+            if cv_id in cv_pdf_mapping:
+                try:
+                    Path(cv_pdf_mapping[cv_id]).unlink(missing_ok=True)
+                    del cv_pdf_mapping[cv_id]
+                except Exception:
+                    pass
             deleted += 1
     
     return {"success": True, "deleted": deleted}
+
+
+@router.get("/cvs/{cv_id}/pdf")
+async def get_cv_pdf(cv_id: str):
+    """Get the PDF file for a CV."""
+    # First check mapping
+    if cv_id in cv_pdf_mapping:
+        pdf_path = Path(cv_pdf_mapping[cv_id])
+        if pdf_path.exists():
+            return FileResponse(
+                path=str(pdf_path),
+                media_type="application/pdf",
+                filename=pdf_path.name
+            )
+    
+    # Try to find by cv_id in storage directory
+    pdf_path = PDF_STORAGE_DIR / f"{cv_id}.pdf"
+    if pdf_path.exists():
+        cv_pdf_mapping[cv_id] = str(pdf_path)
+        return FileResponse(
+            path=str(pdf_path),
+            media_type="application/pdf",
+            filename=pdf_path.name
+        )
+    
+    raise HTTPException(status_code=404, detail=f"PDF not found for CV {cv_id}")

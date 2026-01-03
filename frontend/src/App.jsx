@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy, Eye } from 'lucide-react';
+import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy, Eye, ExternalLink } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import useMode from './hooks/useMode';
@@ -7,7 +7,7 @@ import useTheme from './hooks/useTheme';
 import { useLanguage } from './contexts/LanguageContext';
 import SourceBadge from './components/SourceBadge';
 import ModelSelector from './components/ModelSelector';
-import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList, clearSessionCVs, deleteAllCVsFromDatabase } from './services/api';
+import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList, clearSessionCVs, deleteAllCVsFromDatabase, deleteCV } from './services/api';
 
 function App() {
   const [sessions, setSessions] = useState([]);
@@ -28,6 +28,19 @@ function App() {
   const cvPanelFileInputRef = useRef(null);
   const [isLoadingMode, setIsLoadingMode] = useState(false);
   const [toast, setToast] = useState(null);
+  const [pdfViewerUrl, setPdfViewerUrl] = useState(null);
+  const [pdfViewerTitle, setPdfViewerTitle] = useState('');
+
+  const openPdfViewer = (cvId, filename) => {
+    const url = `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/cvs/${cvId}/pdf`;
+    setPdfViewerUrl(url);
+    setPdfViewerTitle(filename || cvId);
+  };
+
+  const closePdfViewer = () => {
+    setPdfViewerUrl(null);
+    setPdfViewerTitle('');
+  };
 
   const showToast = (message, type = 'info') => {
     setToast({ message, type });
@@ -204,7 +217,25 @@ function App() {
       await deleteAllCVsFromDatabase(mode);
       await loadSessions();
       if (currentSessionId) await loadSession(currentSessionId);
+      const data = await getCVList(mode);
+      setAllCVs(data.cvs || []);
       showToast(language === 'es' ? 'Base de datos limpiada' : 'Database cleared', 'success');
+    } catch (e) { console.error(e); showToast('Error', 'error'); }
+  };
+
+  const handleDeleteCVFromDB = async (cvId) => {
+    try {
+      await deleteCV(cvId, mode);
+      const data = await getCVList(mode);
+      setAllCVs(data.cvs || []);
+      await loadSessions();
+      if (currentSessionId) await loadSession(currentSessionId);
+      // Also refresh cvPanelSession if viewing a specific session
+      if (cvPanelSessionId) {
+        const sessionData = await getSession(cvPanelSessionId, mode);
+        setCvPanelSession(sessionData);
+      }
+      showToast(language === 'es' ? 'CV eliminado de la base de datos' : 'CV deleted from database', 'success');
     } catch (e) { console.error(e); showToast('Error', 'error'); }
   };
 
@@ -234,7 +265,7 @@ function App() {
                   {deleteConfirm === s.id ? (
                     <><button onClick={(e) => { e.stopPropagation(); handleDelete(s.id); }} className="p-1 hover:bg-red-500/20 rounded"><Check className="w-3.5 h-3.5 text-red-400" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(null); }} className="p-1"><X className="w-3.5 h-3.5" /></button></>
                   ) : (
-                    <><button onClick={(e) => { e.stopPropagation(); setCvPanelSessionId(s.id); setShowCVPanel(true); }} className="p-1 hover:bg-gray-700 rounded" title={language === 'es' ? 'Ver CVs' : 'View CVs'}><Eye className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setEditingId(s.id); setEditName(s.name); }} className="p-1 hover:bg-gray-700 rounded"><Edit2 className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(s.id); }} className="p-1 hover:bg-gray-700 rounded"><Trash2 className="w-3.5 h-3.5" /></button></>
+                    <><button onClick={(e) => { e.stopPropagation(); setCvPanelSessionId(s.id); setShowCVPanel(true); }} className="p-1 hover:bg-gray-700 rounded" title={language === 'es' ? 'Ver CVs' : 'View CVs'}><FileText className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setEditingId(s.id); setEditName(s.name); }} className="p-1 hover:bg-gray-700 rounded"><Edit2 className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(s.id); }} className="p-1 hover:bg-gray-700 rounded"><Trash2 className="w-3.5 h-3.5" /></button></>
                   )}
                 </div>
               </div>
@@ -357,6 +388,28 @@ function App() {
                                   </div>
                                 );
                               },
+                              a: ({node, href, children, ...props}) => {
+                                if (href?.startsWith('cv:')) {
+                                  const cvId = href.replace('cv:', '');
+                                  return (
+                                    <button
+                                      onClick={() => openPdfViewer(cvId, String(children))}
+                                      className="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline decoration-dotted underline-offset-2 font-medium"
+                                    >
+                                      <FileText className="w-3.5 h-3.5" />
+                                      {children}
+                                    </button>
+                                  );
+                                }
+                                return <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline" {...props}>{children}</a>;
+                              },
+                              blockquote: ({node, children, ...props}) => (
+                                <div className="my-4 p-4 bg-gradient-to-r from-emerald-50 to-cyan-50 dark:from-emerald-900/20 dark:to-cyan-900/20 border-l-4 border-emerald-500 rounded-r-xl" {...props}>
+                                  <div className="text-emerald-800 dark:text-emerald-200 font-medium">
+                                    {children}
+                                  </div>
+                                </div>
+                              ),
                             }}
                           >
                             {msg.content}
@@ -387,7 +440,7 @@ function App() {
       {/* CV Panel Modal - Improved Card UI */}
       {showCVPanel && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setShowCVPanel(false)}>
-          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-3xl max-h-[85vh] flex flex-col shadow-2xl" onClick={e => e.stopPropagation()}>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-5xl max-h-[90vh] flex flex-col shadow-2xl" onClick={e => e.stopPropagation()}>
             {/* Header */}
             <div className="p-5 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
               <div>
@@ -424,12 +477,12 @@ function App() {
                   </div>
                   
                   {(cvPanelSession || currentSession).cvs?.length > 0 ? (
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-3 gap-3">
                       {(cvPanelSession || currentSession).cvs.map(cv => (
-                        <div key={cv.id} className="group relative bg-white dark:bg-gray-800 rounded-xl p-3 shadow-sm hover:shadow-md transition-all border border-gray-200 dark:border-gray-700">
+                        <div key={cv.id} className="group relative bg-white dark:bg-gray-800 rounded-xl p-3 shadow-sm hover:shadow-md transition-all border border-gray-200 dark:border-gray-700 cursor-pointer" onClick={() => openPdfViewer(cv.id, cv.filename)}>
                           <button 
-                            onClick={() => cvPanelSessionId ? handleRemoveCVFromPanel(cvPanelSessionId, cv.id) : handleRemoveCV(cv.id)} 
-                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                            onClick={(e) => { e.stopPropagation(); cvPanelSessionId ? handleRemoveCVFromPanel(cvPanelSessionId, cv.id) : handleRemoveCV(cv.id); }} 
+                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg z-10"
                           >
                             <X className="w-3.5 h-3.5" />
                           </button>
@@ -441,6 +494,7 @@ function App() {
                               <p className="text-sm font-medium text-gray-900 dark:text-white truncate" title={cv.filename}>{cv.filename}</p>
                               <p className="text-xs text-gray-500 mt-0.5">{cv.chunk_count} chunks</p>
                             </div>
+                            <Eye className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                           </div>
                         </div>
                       ))}
@@ -482,9 +536,15 @@ function App() {
                 </div>
                 
                 {allCVs.length > 0 ? (
-                  <div className="grid grid-cols-2 gap-3 max-h-64 overflow-y-auto">
+                  <div className="grid grid-cols-3 gap-3">
                     {allCVs.map(cv => (
-                      <div key={cv.id} className="bg-white dark:bg-gray-800 rounded-xl p-3 shadow-sm border border-gray-200 dark:border-gray-700">
+                      <div key={cv.id} className="group relative bg-white dark:bg-gray-800 rounded-xl p-3 shadow-sm hover:shadow-md transition-all border border-gray-200 dark:border-gray-700 cursor-pointer" onClick={() => openPdfViewer(cv.id, cv.filename)}>
+                        <button 
+                          onClick={(e) => { e.stopPropagation(); handleDeleteCVFromDB(cv.id); }} 
+                          className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg z-10"
+                        >
+                          <X className="w-3.5 h-3.5" />
+                        </button>
                         <div className="flex items-start gap-3">
                           <div className="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
                             <FileText className="w-5 h-5 text-red-500" />
@@ -493,6 +553,7 @@ function App() {
                             <p className="text-sm font-medium text-gray-900 dark:text-white truncate" title={cv.filename}>{cv.filename}</p>
                             <p className="text-xs text-gray-500 mt-0.5">{cv.chunk_count} chunks</p>
                           </div>
+                          <Eye className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                         </div>
                       </div>
                     ))}
@@ -514,11 +575,23 @@ function App() {
                 <p className="text-xs text-gray-500">
                   {language === 'es' ? 'Pasa el ratón sobre un CV para eliminarlo' : 'Hover over a CV to delete it'}
                 </p>
-                <label className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-xl cursor-pointer transition-colors">
-                  {isUploading ? <Loader className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
-                  <span className="text-sm font-medium">{isUploading ? (language === 'es' ? 'Subiendo...' : 'Uploading...') : (language === 'es' ? 'Subir CVs' : 'Upload CVs')}</span>
-                  <input ref={cvPanelFileInputRef} type="file" multiple accept=".pdf" onChange={handleUploadToPanel} className="hidden" disabled={isUploading} />
-                </label>
+                {(cvPanelSessionId || currentSessionId) ? (
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs text-gray-500">
+                      {language === 'es' ? 'Subir a:' : 'Upload to:'} <span className="font-medium text-blue-600">{cvPanelSession?.name || currentSession?.name}</span>
+                    </span>
+                    <label className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-xl cursor-pointer transition-colors">
+                      {isUploading ? <Loader className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
+                      <span className="text-sm font-medium">{isUploading ? (language === 'es' ? 'Subiendo...' : 'Uploading...') : (language === 'es' ? 'Subir CVs' : 'Upload CVs')}</span>
+                      <input ref={cvPanelFileInputRef} type="file" multiple accept=".pdf" onChange={handleUploadToPanel} className="hidden" disabled={isUploading} />
+                    </label>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400">
+                    <MessageSquare className="w-4 h-4" />
+                    <span className="text-sm">{language === 'es' ? 'Crea o selecciona un chat para subir CVs' : 'Create or select a chat to upload CVs'}</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -548,6 +621,46 @@ function App() {
              toast.type === 'error' ? <X className="w-5 h-5" /> : 
              <Sparkles className="w-5 h-5" />}
             <span className="text-sm font-medium">{toast.message}</span>
+          </div>
+        </div>
+      )}
+
+      {/* PDF Viewer Modal */}
+      {pdfViewerUrl && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-[60] p-4" onClick={closePdfViewer}>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-5xl h-[90vh] flex flex-col shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center">
+                  <FileText className="w-5 h-5 text-red-500" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">{pdfViewerTitle}</h3>
+                  <p className="text-xs text-gray-500">{language === 'es' ? 'Vista previa del CV' : 'CV Preview'}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <a 
+                  href={pdfViewerUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-3 py-2 text-sm text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  {language === 'es' ? 'Abrir en nueva pestaña' : 'Open in new tab'}
+                </a>
+                <button onClick={closePdfViewer} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-colors">
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+            <div className="flex-1 bg-gray-100 dark:bg-gray-900">
+              <iframe 
+                src={pdfViewerUrl} 
+                className="w-full h-full rounded-b-2xl"
+                title={pdfViewerTitle}
+              />
+            </div>
           </div>
         </div>
       )}
