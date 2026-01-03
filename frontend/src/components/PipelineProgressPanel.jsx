@@ -95,14 +95,28 @@ const PipelineProgressPanel = ({ isExpanded, onToggleExpand, progress, autoExpan
 
         {/* Collapsed View */}
         {!isExpanded && (
-          <div className="flex flex-col items-center py-6 gap-4">
-            <Brain className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
-            <div className="writing-mode-vertical text-xs font-medium text-gray-600 dark:text-gray-400 transform rotate-180">
-              RAG
+          <div className="flex flex-col items-center justify-between h-full py-6">
+            <Brain className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+            
+            {/* Vertical Text - Readable without tilting head */}
+            <div className="flex flex-col items-center gap-0.5 text-xs font-bold text-gray-600 dark:text-gray-400 tracking-wider">
+              <span>R</span>
+              <span>A</span>
+              <span>G</span>
             </div>
-            {currentStep && (
-              <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-            )}
+            
+            {/* Progress indicator */}
+            <div className="flex flex-col items-center gap-2">
+              {currentStep && (
+                <>
+                  <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                  <div className="h-8 w-0.5 bg-gradient-to-b from-emerald-500 to-transparent" />
+                </>
+              )}
+              <span className="text-[9px] font-medium text-gray-500 dark:text-gray-500">
+                {completedCount}/{steps.length}
+              </span>
+            </div>
           </div>
         )}
 

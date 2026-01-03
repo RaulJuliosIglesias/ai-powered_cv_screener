@@ -40,7 +40,7 @@ async def event_generator(rag_service, question: str, session_id: str, cv_ids: l
             yield f"data: {json.dumps(event_data)}\n\n"
         
         # Save assistant message to session with structured_output
-        if final_response and final_response.get("response"):
+        if final_response and final_response.get("answer"):
             structured_output_dict = None
             if final_response.get("structured_output"):
                 structured_output_dict = final_response["structured_output"]
@@ -51,7 +51,7 @@ async def event_generator(rag_service, question: str, session_id: str, cv_ids: l
             mgr.add_message(
                 session_id=session_id,
                 role="assistant",
-                content=final_response["response"],
+                content=final_response["answer"],
                 sources=sources,
                 pipeline_steps=pipeline_steps,
                 structured_output=structured_output_dict

@@ -44,8 +44,8 @@ function App() {
   const [showRAGSettings, setShowRAGSettings] = useState(false);
   const [ragPipelineSettings, setRagPipelineSettings] = useState(getRAGPipelineSettings());
   const [showMetricsPanel, setShowMetricsPanel] = useState(false);
-  const [showPipelinePanel, setShowPipelinePanel] = useState(false);
-  const [isPipelineExpanded, setIsPipelineExpanded] = useState(true);
+  const [showPipelinePanel, setShowPipelinePanel] = useState(true);
+  const [isPipelineExpanded, setIsPipelineExpanded] = useState(false);
   const [autoExpandPipeline, setAutoExpandPipeline] = useState(() => {
     const saved = localStorage.getItem('autoExpandPipeline');
     return saved !== null ? JSON.parse(saved) : true;
@@ -451,7 +451,12 @@ function App() {
             // Handle complete event
             if (data.response || data.answer) {
               finalResult = data;
-              console.log('✅ Stream complete, received final result');
+              console.log('✅ Stream complete, received final result:', {
+                has_answer: !!data.answer,
+                has_response: !!data.response,
+                has_sources: !!data.sources,
+                source_count: data.sources?.length || 0
+              });
             }
           }
         }
@@ -471,6 +476,8 @@ function App() {
         window.dispatchEvent(new Event('metrics-updated'));
       }
       
+      console.log('🔄 Clearing pending messages and reloading session...');
+      
       // Clear pending message
       setPendingMessages(prev => {
         const newState = { ...prev };
@@ -479,8 +486,13 @@ function App() {
       });
       
       // Reload session to show final result
+      console.log('🔄 Current session ID:', currentSessionIdRef.current, 'Target:', targetSessionId);
       if (currentSessionIdRef.current === targetSessionId) {
+        console.log('🔄 Reloading session to fetch new messages...');
         await loadSession(targetSessionId);
+        console.log('✅ Session reloaded');
+      } else {
+        console.log('⚠️ Session IDs do not match, skipping reload');
       }
       
     } catch (e) {
@@ -1398,13 +1410,8 @@ function App() {
         <PipelineProgressPanel
           isExpanded={isPipelineExpanded}
           onToggleExpand={() => {
-            const newExpanded = !isPipelineExpanded;
-            setIsPipelineExpanded(newExpanded);
-            // If user collapses manually, disable auto-expand
-            if (!newExpanded && autoExpandPipeline) {
-              setAutoExpandPipeline(false);
-              localStorage.setItem('autoExpandPipeline', 'false');
-            }
+            // Just toggle expanded state, don't touch auto-expand
+            setIsPipelineExpanded(!isPipelineExpanded);
           }}
           progress={pipelineProgress}
           autoExpand={autoExpandPipeline}
