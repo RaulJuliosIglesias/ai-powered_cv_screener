@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy, Eye, ExternalLink, Sliders } from 'lucide-react';
+import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy, Eye, ExternalLink, Sliders, BarChart3 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import useMode from './hooks/useMode';
@@ -8,6 +8,7 @@ import { useLanguage } from './contexts/LanguageContext';
 import SourceBadge from './components/SourceBadge';
 import ModelSelector from './components/ModelSelector';
 import RAGPipelineSettings, { getRAGPipelineSettings } from './components/RAGPipelineSettings';
+import MetricsPanel, { saveMetricEntry } from './components/MetricsPanel';
 import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList, clearSessionCVs, deleteAllCVsFromDatabase, deleteCV } from './services/api';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
   const [pdfViewerTitle, setPdfViewerTitle] = useState('');
   const [showRAGSettings, setShowRAGSettings] = useState(false);
   const [ragPipelineSettings, setRagPipelineSettings] = useState(getRAGPipelineSettings());
+  const [showMetricsPanel, setShowMetricsPanel] = useState(false);
   
   // Upload progress modal state
   const [uploadProgress, setUploadProgress] = useState(null);
@@ -329,6 +331,18 @@ function App() {
         console.log('📊 RAG Pipeline - Metrics:', response.metrics);
       }
       
+      // Save metrics to history
+      saveMetricEntry({
+        query: userMessage,
+        mode: mode,
+        metrics: response.metrics || {},
+        confidence_score: response.confidence_score,
+        guardrail_passed: response.guardrail_passed,
+        query_understanding: response.query_understanding,
+        session_id: currentSessionId,
+      });
+      window.dispatchEvent(new Event('metrics-updated'));
+      
       await loadSession(currentSessionId); 
     } catch (e) { 
       console.error(e); 
@@ -593,6 +607,13 @@ function App() {
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{currentSession ? `${currentSession.name} · ${currentSession.cvs?.length || 0} CVs` : 'CV Screener'}</span>
           </div>
           <div className="flex items-center gap-2">
+            <button 
+              onClick={() => setShowMetricsPanel(true)}
+              className="flex items-center gap-1.5 px-2.5 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-cyan-300 dark:hover:border-cyan-600 transition-colors text-sm"
+              title={language === 'es' ? 'Ver métricas RAG' : 'View RAG Metrics'}
+            >
+              <BarChart3 className="w-4 h-4 text-cyan-500" />
+            </button>
             <button 
               onClick={() => setShowRAGSettings(true)}
               className="flex items-center gap-1.5 px-3 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-purple-300 dark:hover:border-purple-600 transition-colors text-sm"
@@ -1159,6 +1180,12 @@ function App() {
           setRagPipelineSettings(settings);
           showToast(language === 'es' ? 'Configuración guardada' : 'Settings saved', 'success');
         }}
+      />
+
+      {/* Metrics Panel */}
+      <MetricsPanel 
+        isOpen={showMetricsPanel}
+        onClose={() => setShowMetricsPanel(false)}
       />
     </div>
   );
