@@ -33,7 +33,7 @@ ENV/
 chroma_db/
 
 # PDF Storage (local uploads - never commit)
-pdf_storage/
+storage/
 *.pdf
 
 # Node

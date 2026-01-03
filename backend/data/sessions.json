@@ -635,10 +635,110 @@
             }
           ],
           "timestamp": "2026-01-03T12:45:50.963882"
+        },
+        {
+          "id": "a6667918-8cbe-4507-b1d0-39238385d3df",
+          "role": "user",
+          "content": "cual sabe ams de next?",
+          "sources": [],
+          "timestamp": "2026-01-03T12:52:32.427488"
+        },
+        {
+          "id": "352bd780-23d6-4225-a6c0-64b537e446b7",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for an analysis of candidates with expertise in \"next,\" which likely refers to Next.js or similar technologies. I will identify candidates with relevant experience in web development, particularly those who mention frameworks or technologies associated with Next.js. \n:::\n\nBased on the CV excerpts provided, here are the candidates with relevant web development experience:\n\n| Candidate | Experience | Key Skills |\n|-----------|------------|------------|\n| Rahul Mehta [CV:cv_ce503512] | 4 years | React, Node.js, Microservices |\n| Ana Sofia Mendes [CV:cv_a8668606] | 8 years | Java EE, Spring Boot, AWS Cloud Architecture |\n| Carlos Mendoza [CV:cv_ce88e0ea] | 3 years | Solidity, Ethereum, Smart Contracts |\n| Meera Kapoor [CV:cv_b788d8a7] | 5 years | Cloud Migration, Microservices, CI/CD |\n\nRahul Mehta [CV:cv_ce503512] has the most relevant experience in full-stack web applications using React and Node.js, which are closely related to Next.js development.\n\n:::conclusion\nRahul Mehta [CV:cv_ce503512] is the best candidate for roles requiring expertise in Next.js or similar web technologies.",
+          "sources": [
+            {
+              "cv_id": "cv_5edfa94e",
+              "filename": "38d5cf94_Lucien_Moreau_Cloud_Solutions_Architect_specializing_in_Legacy_System_Migration.pdf",
+              "relevance": 0.531
+            },
+            {
+              "cv_id": "cv_ed2c191b",
+              "filename": "33634977_Aarohi_Mehta_Junior_Data_Analyst_with_a_focus_on_Healthcare_Analytics.pdf",
+              "relevance": 0.518
+            },
+            {
+              "cv_id": "cv_ce88e0ea",
+              "filename": "dda1cfbc_Carlos_Mendoza_Blockchain_Architect_with_a_focus_on_Financial_Inclusion.pdf",
+              "relevance": 0.502
+            },
+            {
+              "cv_id": "cv_e052dae8",
+              "filename": "79c657bb_Claudine_Moreau_Product_Manager_specializing_in_Legacy_System_Modernization.pdf",
+              "relevance": 0.496
+            },
+            {
+              "cv_id": "cv_0296112a",
+              "filename": "057cb342_Kwame_Nkrumah_Product_Manager_specializing_in_Fintech_Solutions.pdf",
+              "relevance": 0.493
+            },
+            {
+              "cv_id": "cv_6d5aea52",
+              "filename": "eb22b926_Ling_Mei_Chen_Senior_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
+              "relevance": 0.49
+            },
+            {
+              "cv_id": "cv_0f64dde9",
+              "filename": "293c41c2_Nigel_Whitmore_Senior_Product_Manager_specializing_in_Legacy_System_Modernization.pdf",
+              "relevance": 0.488
+            },
+            {
+              "cv_id": "cv_a8668606",
+              "filename": "a4bb6816_Ana_Sofia_Mendes_Legacy_System_Modernization_Architect.pdf",
+              "relevance": 0.485
+            },
+            {
+              "cv_id": "cv_a02d5623",
+              "filename": "6db961aa_Lina_Tan_Associate_Product_Manager_focused_on_User_Engagement.pdf",
+              "relevance": 0.484
+            },
+            {
+              "cv_id": "cv_e42911ac",
+              "filename": "8148b375_Lars_Andersson_Senior_UX-UI_Designer_with_a_focus_on_Accessibility.pdf",
+              "relevance": 0.483
+            },
+            {
+              "cv_id": "cv_0ba95c2c",
+              "filename": "f4e3566c_Amaia_Nkrumah_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
+              "relevance": 0.483
+            },
+            {
+              "cv_id": "cv_2c1af9e4",
+              "filename": "fad6bfe1_Ling_Mei_Tan_Senior_Data_Scientist_specializing_in_Healthcare_Analytics.pdf",
+              "relevance": 0.478
+            },
+            {
+              "cv_id": "cv_ce503512",
+              "filename": "e20545a7_Rahul_Mehta_Product_Manager_focused_on_AI-driven_SaaS_Solutions.pdf",
+              "relevance": 0.478
+            },
+            {
+              "cv_id": "cv_e8623e6c",
+              "filename": "9b917100_Rafael_Silva_Blockchain_Developer_specializing_in_Smart_Contracts.pdf",
+              "relevance": 0.476
+            },
+            {
+              "cv_id": "cv_3602a66d",
+              "filename": "7776618a_Kenji_Tanaka_Cybersecurity_Analyst_specializing_in_Threat_Intelligence.pdf",
+              "relevance": 0.474
+            },
+            {
+              "cv_id": "cv_f9954157",
+              "filename": "9d39a3b5_Élodie_Moreau-Dubois_Blockchain_Architect_with_a_Focus_on_Decentralized_Identity_Solutions.pdf",
+              "relevance": 0.474
+            },
+            {
+              "cv_id": "cv_b788d8a7",
+              "filename": "e3d79ef9_Meera_Kapoor_Cloud_Solutions_Architect_specializing_in_Legacy_System_Migration.pdf",
+              "relevance": 0.474
+            }
+          ],
+          "timestamp": "2026-01-03T12:52:40.531764"
         }
       ],
       "created_at": "2026-01-03T12:18:26.056517",
-      "updated_at": "2026-01-03T12:45:50.963882"
+      "updated_at": "2026-01-03T12:52:40.531764"
     }
   ]
 }
