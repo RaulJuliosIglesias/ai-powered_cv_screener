@@ -137,14 +137,22 @@ def format_context(chunks: list[dict]) -> tuple[str, int, int]:
     return "\n---\n".join(context_parts), len(chunks), len(unique_cvs)
 
 
-def build_query_prompt(question: str, chunks: list[dict]) -> str:
-    """Build the complete query prompt with context."""
-    context, num_chunks, num_cvs = format_context(chunks)
+def build_query_prompt(question: str, chunks: list[dict], total_cvs: int = None) -> str:
+    """Build the complete query prompt with context.
+    
+    Args:
+        question: User's question
+        chunks: Retrieved CV chunks
+        total_cvs: Total CVs in session (if known, use this instead of counting unique CVs in chunks)
+    """
+    context, num_chunks, num_cvs_in_chunks = format_context(chunks)
+    # Use total_cvs if provided (more accurate), otherwise fall back to chunks count
+    actual_num_cvs = total_cvs if total_cvs is not None else num_cvs_in_chunks
     return QUERY_TEMPLATE.format(
         context=context, 
         question=question,
         num_chunks=num_chunks,
-        num_cvs=num_cvs
+        num_cvs=actual_num_cvs
     )
 
 

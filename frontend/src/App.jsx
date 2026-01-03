@@ -183,55 +183,50 @@ function App() {
     if (!files.length || !currentSessionId) return;
     setIsUploading(true);
     
-    // Initialize progress modal with animated progress
+    // Initialize progress modal
     const fileNames = files.map(f => f.name);
-    let fakeProgress = 0;
     setUploadProgress({
       files: fileNames,
       current: 0,
       total: files.length,
-      percent: 0,
+      percent: 5,
       status: 'uploading',
       logs: [language === 'es' ? `Subiendo ${files.length} archivo(s)...` : `Uploading ${files.length} file(s)...`]
     });
     
-    // Animate progress bar during upload (fake progress until real data arrives)
-    const progressInterval = setInterval(() => {
-      fakeProgress = Math.min(fakeProgress + Math.random() * 5, 30);
-      setUploadProgress(prev => prev ? { ...prev, percent: fakeProgress } : null);
-    }, 200);
-    
     try {
+      // Upload phase (5% to 20%)
       const res = await uploadCVsToSession(currentSessionId, files, mode);
-      clearInterval(progressInterval);
       
       setUploadProgress(prev => ({
         ...prev,
-        percent: 35,
+        percent: 20,
         status: 'processing',
-        logs: [...prev.logs, language === 'es' ? 'Extrayendo texto de PDFs...' : 'Extracting text from PDFs...']
+        logs: [...prev.logs, language === 'es' ? 'Procesando PDFs...' : 'Processing PDFs...']
       }));
       
+      // Processing phase (20% to 100%) - poll for real progress
       let lastProcessed = 0;
       const poll = async () => {
         const status = await getSessionUploadStatus(currentSessionId, res.job_id);
         const processed = status.processed_files || 0;
-        const progressPercent = 35 + ((processed / files.length) * 60);
+        // Real progress: 20% base + (processed/total * 80%)
+        const progressPercent = 20 + ((processed / files.length) * 80);
         
         if (status.status === 'processing') {
           setUploadProgress(prev => {
             const newLogs = processed > lastProcessed 
-              ? [...prev.logs, language === 'es' ? `✓ ${files.length > 1 ? `Procesado ${processed}/${files.length}` : 'Procesando...'}` : `✓ ${files.length > 1 ? `Processed ${processed}/${files.length}` : 'Processing...'}`]
+              ? [...prev.logs, language === 'es' ? `✓ Procesado: ${fileNames[processed - 1] || `CV ${processed}`}` : `✓ Processed: ${fileNames[processed - 1] || `CV ${processed}`}`]
               : prev.logs;
             lastProcessed = processed;
             return {
               ...prev,
               current: processed,
-              percent: progressPercent,
+              percent: Math.round(progressPercent),
               logs: newLogs.slice(-6)
             };
           });
-          setTimeout(poll, 500);
+          setTimeout(poll, 300); // Poll faster for more responsive UI
         } else {
           setUploadProgress(prev => ({
             ...prev,
@@ -240,15 +235,14 @@ function App() {
             percent: 100,
             logs: [...prev.logs.slice(-5), language === 'es' ? '✓ ¡Completado!' : '✓ Completed!']
           }));
-          setTimeout(() => setUploadProgress(null), 1500);
+          setTimeout(() => setUploadProgress(null), 1200);
           setIsUploading(false);
           await loadSession(currentSessionId);
           await loadSessions();
         }
       };
       poll();
-    } catch (e) {
-      clearInterval(progressInterval); 
+    } catch (e) { 
       console.error(e); 
       setIsUploading(false); 
       setUploadProgress(prev => prev ? {...prev, status: 'error', logs: [...prev.logs, `Error: ${e.message}`]} : null);
@@ -303,48 +297,41 @@ function App() {
     if (!files.length || !targetSessionId) return;
     setIsUploading(true);
     
-    // Initialize progress modal with animated progress
-    let fakeProgress = 0;
+    const fileNames = files.map(f => f.name);
     setUploadProgress({
-      files: files.map(f => f.name),
+      files: fileNames,
       current: 0,
       total: files.length,
-      percent: 0,
+      percent: 5,
       status: 'uploading',
       logs: [language === 'es' ? `Subiendo ${files.length} archivo(s)...` : `Uploading ${files.length} file(s)...`]
     });
     
-    const progressInterval = setInterval(() => {
-      fakeProgress = Math.min(fakeProgress + Math.random() * 5, 30);
-      setUploadProgress(prev => prev ? { ...prev, percent: fakeProgress } : null);
-    }, 200);
-    
     try {
       const res = await uploadCVsToSession(targetSessionId, files, mode);
-      clearInterval(progressInterval);
       
       setUploadProgress(prev => ({
         ...prev,
-        percent: 35,
+        percent: 20,
         status: 'processing',
-        logs: [...prev.logs, language === 'es' ? 'Extrayendo texto...' : 'Extracting text...']
+        logs: [...prev.logs, language === 'es' ? 'Procesando PDFs...' : 'Processing PDFs...']
       }));
       
       let lastProcessed = 0;
       const poll = async () => {
         const status = await getSessionUploadStatus(targetSessionId, res.job_id);
         const processed = status.processed_files || 0;
-        const progressPercent = 35 + ((processed / files.length) * 60);
+        const progressPercent = 20 + ((processed / files.length) * 80);
         
         if (status.status === 'processing') {
           setUploadProgress(prev => {
             const newLogs = processed > lastProcessed 
-              ? [...prev.logs, language === 'es' ? `✓ Procesado ${processed}/${files.length}` : `✓ Processed ${processed}/${files.length}`]
+              ? [...prev.logs, language === 'es' ? `✓ Procesado: ${fileNames[processed - 1] || `CV ${processed}`}` : `✓ Processed: ${fileNames[processed - 1] || `CV ${processed}`}`]
               : prev.logs;
             lastProcessed = processed;
-            return { ...prev, current: processed, percent: progressPercent, logs: newLogs.slice(-6) };
+            return { ...prev, current: processed, percent: Math.round(progressPercent), logs: newLogs.slice(-6) };
           });
-          setTimeout(poll, 500);
+          setTimeout(poll, 300);
         } else {
           setUploadProgress(prev => ({
             ...prev,
@@ -353,7 +340,7 @@ function App() {
             percent: 100,
             logs: [...prev.logs.slice(-5), language === 'es' ? '✓ ¡Completado!' : '✓ Completed!']
           }));
-          setTimeout(() => setUploadProgress(null), 1500);
+          setTimeout(() => setUploadProgress(null), 1200);
           setIsUploading(false);
           const sessionData = await getSession(targetSessionId, mode);
           setCvPanelSession(sessionData);

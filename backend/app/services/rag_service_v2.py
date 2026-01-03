@@ -59,12 +59,16 @@ class RAGService:
         question: str,
         k: int = None,
         threshold: float = None,
-        cv_ids: List[str] = None
+        cv_ids: List[str] = None,
+        total_cvs_in_session: int = None
     ) -> RAGResponse:
         """Query the RAG system. Optionally filter by cv_ids for session-based queries."""
         k = k or settings.retrieval_k
         threshold = threshold or settings.retrieval_score_threshold
         metrics = {}
+        
+        # Total CVs = passed value or length of cv_ids filter
+        total_cvs = total_cvs_in_session or (len(cv_ids) if cv_ids else None)
         
         # 1. Embed the question
         embed_result = await self.embedder.embed_query(question)
@@ -89,8 +93,9 @@ class RAGService:
         
         context = self._build_context(search_results)
         
-        # 4. Generate response
-        prompt = build_query_prompt(question, self._results_to_chunks(search_results))
+        # 4. Generate response - pass total_cvs for accurate context
+        chunks = self._results_to_chunks(search_results)
+        prompt = build_query_prompt(question, chunks, total_cvs=total_cvs)
         llm_result = await self.llm.generate(prompt, system_prompt=SYSTEM_PROMPT)
         metrics["llm_ms"] = llm_result.latency_ms
         

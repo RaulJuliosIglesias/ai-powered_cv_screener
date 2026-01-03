@@ -408,13 +408,14 @@ async def chat_in_session(
     
     # Get CV IDs for this session
     cv_ids = mgr.get_cv_ids_for_session(session_id)
+    total_cvs = len(cvs)
     
     # Save user message
     mgr.add_message(session_id, "user", request.message)
     
-    # Query RAG with session's CVs only
+    # Query RAG with session's CVs only - pass total CVs for accurate context
     rag_service = RAGService(mode)
-    result = await rag_service.query(request.message, cv_ids=cv_ids)
+    result = await rag_service.query(request.message, cv_ids=cv_ids, total_cvs_in_session=total_cvs)
     
     # Save assistant message
     mgr.add_message(session_id, "assistant", result.answer, result.sources)
@@ -441,6 +442,8 @@ async def get_suggested_questions(
     mode: Mode = Query(default=settings.default_mode)
 ):
     """Generate suggested questions based on session's CVs."""
+    import random
+    
     mgr = get_session_manager(mode)
     session = mgr.get_session(session_id)
     if not session:
@@ -450,30 +453,43 @@ async def get_suggested_questions(
     if not cvs:
         return {"suggestions": []}
     
-    # Get CV info to generate relevant suggestions
-    cv_names = [(cv.get("filename", "") if isinstance(cv, dict) else cv.filename).replace('.pdf', '') for cv in cvs]
+    cv_names = [(cv.get("filename", "") if isinstance(cv, dict) else cv.filename).replace('.pdf', '').replace('_', ' ') for cv in cvs]
     num_cvs = len(cvs)
-    
-    # Generate contextual suggestions based on CVs
-    suggestions = []
     
     if num_cvs == 1:
         name = cv_names[0]
         suggestions = [
-            f"What are the main skills of {name}?",
+            f"What are {name}'s main technical skills?",
             f"Summarize {name}'s work experience",
-            f"What technologies does {name} know?",
-            f"Is {name} suitable for a senior role?"
+            f"Is {name} suitable for a senior position?",
+            f"What are {name}'s strongest qualifications?"
         ]
     else:
-        suggestions = [
-            f"Compare the experience levels of all {num_cvs} candidates",
-            "Who has the most experience with Python?",
-            "Which candidate is best for a leadership role?",
-            "Summarize each candidate's main strengths",
-            "Who has the strongest technical background?",
-            f"Rank the {num_cvs} candidates by years of experience"
+        # Generic strategic questions (always include 2-3)
+        generic_questions = [
+            f"Rank all {num_cvs} candidates by years of experience",
+            "Who would be the best fit for a leadership/management role?",
+            "Which candidates have the strongest technical background?",
+            "Compare the education levels of all candidates",
+            "Who has experience working in startups vs large companies?",
+            "Which candidates show the most career progression?",
+            "Who has the best combination of technical and soft skills?",
+            f"Create a shortlist of top 3 candidates from the {num_cvs} CVs",
+            "Which candidates have remote work experience?",
+            "Who has the most diverse skill set?",
         ]
+        
+        # Pick 2-3 random candidates for specific questions
+        sample_names = random.sample(cv_names, min(3, len(cv_names)))
+        specific_questions = [
+            f"Compare {sample_names[0]} vs {sample_names[1] if len(sample_names) > 1 else sample_names[0]}: who is more experienced?",
+        ]
+        if len(sample_names) >= 2:
+            specific_questions.append(f"Would {sample_names[0]} or {sample_names[1]} be better for a senior role?")
+        
+        # Combine: 3 generic + 1 specific
+        random.shuffle(generic_questions)
+        suggestions = generic_questions[:3] + specific_questions[:1]
     
     return {"suggestions": suggestions[:4]}
 
