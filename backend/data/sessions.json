@@ -1435,10 +1435,100 @@
             }
           ],
           "timestamp": "2026-01-03T18:32:01.660022"
+        },
+        {
+          "id": "0fec235f-4223-4354-bbd2-5e012af80d9c",
+          "role": "user",
+          "content": "Create a top 3 shortlist from 28 candidates",
+          "sources": [],
+          "timestamp": "2026-01-03T18:36:41.250639"
+        },
+        {
+          "id": "67c9c083-f0e2-4e28-b9c2-ec4e38fc63bc",
+          "role": "assistant",
+          "content": ":::thinking\nThe user wants to rank all 28 candidates based on their qualifications and experience and shortlist the top 3. However, the provided data only includes excerpts from 20 CVs. Without complete information for all 28 candidates, it's impossible to provide a full ranking or a definitive shortlist of the top 3. I must inform the user that the analysis is limited to the available data.\n:::\n\nBased on the provided CV excerpts for 20 candidates, I can offer an analysis. However, a complete ranking of all 28 candidates and a definitive shortlist of the top 3 cannot be generated due to missing data.\n\n| Candidate Name & ID | Key Qualifications & Experience | Preliminary Ranking (Based on Available Data) |\n| :--- | :--- | :--- |\n| **[Dirk van der Meer](cv:cv_d5fff4c9)** | PhD in Clinical Psychology, over 30 years of experience, extensive expertise in therapy (CBT, Mindfulness, Trauma), supervision, research, and improving service delivery. | 1 |\n| **[Lucas Moreau](cv:cv_1b63bb02)** | Master of Science in Finance (Summa Cum Laude), CFA, CMA, Chartered Financial Analyst with experience at CFO level, proven strategic leadership, M&A, and mentoring. | 2 |\n| **[Erik Johansson](cv:cv_544894ec)** | Master of Business Administration (Hospitality focus), Certified Hospitality Educator, extensive F&B management experience, event planning, staff training, and operational improvements. | 3 |\n| **[Layla Al-Mansoori](cv:cv_2f622639)** | Bachelor of Business Administration (Summa Cum Laude, Sales focus), CPSP certified, successful sales experience in luxury retail, CRM, negotiation, and marketing campaign execution. | 4 |\n| **[Aisha Nkrumah](cv:cv_ada4d211)** | Bachelor of Fine Arts in Graphic Design (Dean's List), Adobe Certified Expert, experience creating production-ready assets, brand identity, UI/UX, and contributing to successful pitches. | 5 |\n| **[Ana Silva](cv:cv_da8d5709)** | Bachelor of Fine Arts in Interaction Design (Graduated with Honors), Figma & Adobe Creative Suite skills, experience in user research, prototyping, and contributing to successful redesign projects. | 6 |\n| **[Carlos Mendoza](cv:cv_cef2591a)** | PhD in Research Methods, extensive experience as a Research Assistant, publication record, developing data analysis frameworks, and mentoring junior researchers. | 7 |\n| **[Patricia Williams](cv:cv_5129e7fb)** | Doctor of Medicine (MD) (Clinical Graduated with High Honors), Bachelor of Science in Biology (Magna Cum Laude), BLS/ACLS certified, clinical experience, and research skills. | 8 |\n| **[Liam Nguyen](cv:cv_fa03aaf5)** | Bachelor of Fine Arts in Illustration (Graduated with Distinction), Concept Art skills (Photoshop, Illustrator, Blender), experience contributing to animated film production and character design. | 9 |\n| **[Isabela Costa](cv:cv_2ccd1763)** | Bachelor of Arts in Fashion Design (Graduated with Honors), Professional Modeling Certificate, extensive modeling experience including major brand campaigns (Coca-Cola, Samsung), runway, and commercial work. | 10 |\n| **[Li Wei](cv:cv_18e816a4)** | Bachelor of Arts in Journalism (Graduated with Honors), extensive content strategy and creation experience, SEO expertise, content management, and driving engagement through campaigns. | 11 |\n| **[Kamal Patel](cv:cv_fddd9b6c)** | Bachelor of Science in Audio Engineering (Cum Laude), Avid Pro Tools Expert, Dolby Atmos certified, experience managing audio engineering projects, post-production, and mentoring. | 12 |\n| **[Ethan Park](cv:cv_b391b319)** | Master of Physical Therapy, experience providing therapy for sports injuries and post-surgical rehab, treatment plan development, assessments, and community outreach. | 13 |\n| **[Adewale Patel](cv:cv_2180538e)** | 12+ years of experience as a 3D Artist, created acclaimed 3D models/animations for film/TV, collaborated on award-winning projects, and improved studio efficiency. | 14 |\n| **[Layla Kim](cv:cv_1ecae031)** | Concept Artist specializing in character/environment design, experience working on animated series/films, strong portfolio, and communication of visual concepts. | 15 |\n\n:::conclusion\nBased on the available data, the candidates with the strongest qualifications and experience are **[Dirk van der Meer](cv:cv_d5fff4c9)** (Clinical Psychologist), **[Lucas Moreau](cv:cv_1b63bb02)** (CFO), and **[Erik Johansson](cv:cv_544894ec)** (F&B Director). Please note that this ranking is preliminary and based on partial data from only 20 out of the 28 requested CVs.\n:::\n\n⚠️ *Some information could not be fully verified against the CVs.*",
+          "sources": [
+            {
+              "cv_id": "cv_544894ec",
+              "filename": "6202baf5_Erik_Johansson_FB_Director.pdf",
+              "relevance": 0.584
+            },
+            {
+              "cv_id": "cv_2180538e",
+              "filename": "c2533d2e_Adewale_Patel_3D_Artist.pdf",
+              "relevance": 0.581
+            },
+            {
+              "cv_id": "cv_1b63bb02",
+              "filename": "06659811_Lucas_Moreau_CFO.pdf",
+              "relevance": 0.571
+            },
+            {
+              "cv_id": "cv_fddd9b6c",
+              "filename": "23621408_Kamal_Patel_Head_of_Audio.pdf",
+              "relevance": 0.566
+            },
+            {
+              "cv_id": "cv_1ecae031",
+              "filename": "b4b377d4_Layla_Kim_Concept_Artist.pdf",
+              "relevance": 0.564
+            },
+            {
+              "cv_id": "cv_5129e7fb",
+              "filename": "4662a9ee_Patricia_Williams_Medical_Intern.pdf",
+              "relevance": 0.56
+            },
+            {
+              "cv_id": "cv_cef2591a",
+              "filename": "a2971b00_Carlos_Mendoza_Research_Assistant.pdf",
+              "relevance": 0.557
+            },
+            {
+              "cv_id": "cv_ada4d211",
+              "filename": "69ed5706_Aisha_Nkrumah_Associate_Designer.pdf",
+              "relevance": 0.557
+            },
+            {
+              "cv_id": "cv_da8d5709",
+              "filename": "ab71577d_Ana_Silva_Junior_Interaction_Designer.pdf",
+              "relevance": 0.55
+            },
+            {
+              "cv_id": "cv_18e816a4",
+              "filename": "84ea127f_Li_Wei_Content_Officer.pdf",
+              "relevance": 0.549
+            },
+            {
+              "cv_id": "cv_b391b319",
+              "filename": "68835e12_Ethan_Park_Physical_Therapist.pdf",
+              "relevance": 0.545
+            },
+            {
+              "cv_id": "cv_fa03aaf5",
+              "filename": "477ae7a5_Liam_Nguyen_Concept_Artist.pdf",
+              "relevance": 0.544
+            },
+            {
+              "cv_id": "cv_2f622639",
+              "filename": "a45e5735_Layla_Al-Mansoori_Sales_Executive.pdf",
+              "relevance": 0.539
+            },
+            {
+              "cv_id": "cv_d5fff4c9",
+              "filename": "1ef4e451_Dirk_van_der_Meer_Therapist.pdf",
+              "relevance": 0.572
+            },
+            {
+              "cv_id": "cv_2ccd1763",
+              "filename": "a32dd7e1_Isabela_Costa_Model.pdf",
+              "relevance": 0.543
+            }
+          ],
+          "timestamp": "2026-01-03T18:38:18.618477"
         }
       ],
       "created_at": "2026-01-03T17:22:15.568352",
-      "updated_at": "2026-01-03T18:32:01.660022"
+      "updated_at": "2026-01-03T18:38:18.618477"
     },
     {
       "id": "bd03435f-2a1c-4e33-8412-33a823fea667",

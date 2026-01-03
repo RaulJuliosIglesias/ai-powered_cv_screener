@@ -301,9 +301,11 @@ const RAGPipelineSettings = ({ isOpen, onClose, onSave }) => {
                             {step.title[language] || step.title.en}
                           </p>
                           {step.optional && (
-                            <button
+                            <span
+                              role="switch"
+                              aria-checked={stepEnabled}
                               onClick={(e) => { e.stopPropagation(); handleToggleStep(step.id); }}
-                              className="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded transition-colors"
+                              className="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded transition-colors cursor-pointer"
                               title={stepEnabled ? 'Disable' : 'Enable'}
                             >
                               {stepEnabled ? (
@@ -311,7 +313,7 @@ const RAGPipelineSettings = ({ isOpen, onClose, onSave }) => {
                               ) : (
                                 <ToggleLeft className="w-5 h-5 text-gray-400" />
                               )}
-                            </button>
+                            </span>
                           )}
                         </div>
                         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">

@@ -151,12 +151,27 @@ class QueryUnderstandingService:
             
             parsed = json.loads(content)
             
+            query_type = parsed.get("query_type", "general")
+            is_cv_related = parsed.get("is_cv_related", True)
+            
+            # IMPORTANT: If query_type indicates CV analysis intent, force is_cv_related=True
+            # This fixes cases where LLM incorrectly marks "candidates" queries as non-CV
+            cv_related_types = {"ranking", "comparison", "search", "filter"}
+            if query_type in cv_related_types:
+                is_cv_related = True
+            
+            # Also check for CV-related keywords as fallback
+            cv_keywords = ["candidate", "cv", "resume", "shortlist", "rank", "experience", "skill"]
+            query_lower = query.lower()
+            if any(kw in query_lower for kw in cv_keywords):
+                is_cv_related = True
+            
             return QueryUnderstanding(
                 original_query=query,
                 understood_query=parsed.get("understood_query", query),
-                query_type=parsed.get("query_type", "general"),
+                query_type=query_type,
                 requirements=parsed.get("requirements", []),
-                is_cv_related=parsed.get("is_cv_related", True),
+                is_cv_related=is_cv_related,
                 confidence=0.9,
                 reformulated_prompt=parsed.get("reformulated_prompt", query)
             )
