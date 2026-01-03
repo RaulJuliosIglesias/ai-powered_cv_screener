@@ -18,7 +18,14 @@ function App() {
   const [suggestions, setSuggestions] = useState([]);
   const [message, setMessage] = useState('');
   const [chatLoadingStates, setChatLoadingStates] = useState({});
+  const [pendingMessages, setPendingMessages] = useState({}); // {sessionId: {userMsg, status}}
   const isChatLoading = currentSessionId ? chatLoadingStates[currentSessionId] : false;
+  const currentSessionIdRef = useRef(currentSessionId);
+  
+  // Keep ref in sync with state
+  useEffect(() => {
+    currentSessionIdRef.current = currentSessionId;
+  }, [currentSessionId]);
   const [isUploading, setIsUploading] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editName, setEditName] = useState('');
@@ -315,15 +322,15 @@ function App() {
     const targetSessionId = currentSessionId; // Capture current session
     setMessage('');
     
-    // Optimistically add user message to UI
-    setCurrentSession(prev => ({
+    // Add pending message for this specific session (not currentSession directly)
+    setPendingMessages(prev => ({
       ...prev,
-      messages: [...(prev.messages || []), { role: 'user', content: userMessage }]
+      [targetSessionId]: { userMsg: userMessage, status: 'sending' }
     }));
     
     setChatLoadingStates(prev => ({ ...prev, [targetSessionId]: true }));
     try { 
-      const response = await sendSessionMessage(currentSessionId, userMessage, mode, ragPipelineSettings);
+      const response = await sendSessionMessage(targetSessionId, userMessage, mode, ragPipelineSettings);
       
       // Log pipeline info for debugging
       if (response.query_understanding) {
@@ -345,14 +352,27 @@ function App() {
       });
       window.dispatchEvent(new Event('metrics-updated'));
       
-      // Only update UI if still on the same session
-      if (currentSessionId === targetSessionId) {
+      // Clear pending message for this session
+      setPendingMessages(prev => {
+        const newState = { ...prev };
+        delete newState[targetSessionId];
+        return newState;
+      });
+      
+      // Only update UI if still on the same session (use ref for current value)
+      if (currentSessionIdRef.current === targetSessionId) {
         await loadSession(targetSessionId);
       }
     } catch (e) { 
       console.error(e); 
-      // Revert optimistic update on error
-      if (currentSessionId === targetSessionId) {
+      // Clear pending message on error too
+      setPendingMessages(prev => {
+        const newState = { ...prev };
+        delete newState[targetSessionId];
+        return newState;
+      });
+      // Revert optimistic update on error - only if still on same session
+      if (currentSessionIdRef.current === targetSessionId) {
         await loadSession(targetSessionId);
       }
     }
@@ -640,13 +660,17 @@ function App() {
         <div className="flex-1 overflow-y-auto p-4">
           {!currentSession ? (
             <div className="h-full flex items-center justify-center"><div className="text-center"><Sparkles className="w-12 h-12 text-blue-500 mx-auto mb-4" /><h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-2">CV Screener</h2><p className="text-gray-500 mb-6">{language === 'es' ? 'Crea un chat y sube CVs' : 'Create a chat and upload CVs'}</p><button onClick={handleNewChat} className="px-6 py-3 bg-blue-500 text-white rounded-xl">{language === 'es' ? 'Nuevo chat' : 'New chat'}</button></div></div>
-          ) : currentSession.messages?.length === 0 ? (
+          ) : (currentSession.messages?.length === 0 && !pendingMessages[currentSessionId]) ? (
             <div className="h-full flex flex-col items-center justify-center"><Sparkles className="w-10 h-10 text-blue-500 mb-4" /><h3 className="text-xl font-medium text-gray-800 dark:text-white mb-6">{currentSession.cvs?.length ? (language === 'es' ? '¿Qué quieres saber?' : 'What do you want to know?') : (language === 'es' ? 'Sube CVs para empezar' : 'Upload CVs to start')}</h3>
               {suggestions.length > 0 && <div className="grid grid-cols-2 gap-3 max-w-2xl">{suggestions.map((s, i) => (<button key={i} onClick={() => handleSend(s)} className="p-4 text-left text-sm bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-xl text-gray-700 dark:text-gray-200">{s}</button>))}</div>}
             </div>
           ) : (
             <div className="max-w-5xl mx-auto space-y-6">
-              {currentSession.messages.map((msg, idx) => (
+              {/* Combine actual messages with pending message for THIS session only */}
+              {[
+                ...(currentSession.messages || []),
+                ...(pendingMessages[currentSessionId] ? [{ role: 'user', content: pendingMessages[currentSessionId].userMsg, isPending: true }] : [])
+              ].map((msg, idx) => (
                 <div key={idx} className={msg.role === 'user' ? 'flex justify-end' : ''}>
                   <div className={`flex gap-4 ${msg.role === 'user' ? 'flex-row-reverse max-w-[70%]' : 'w-full'}`}>
                     <div className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ${msg.role === 'user' ? 'bg-blue-500' : 'bg-gradient-to-br from-emerald-400 to-cyan-500'}`}>{msg.role === 'user' ? <User className="w-5 h-5 text-white" /> : <Sparkles className="w-5 h-5 text-white" />}</div>
