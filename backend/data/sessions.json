@@ -14081,10 +14081,143 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-04T14:28:27.690744"
+        },
+        {
+          "id": "00424ce1-b6b7-4496-8571-4a0ddc4e178d",
+          "role": "user",
+          "content": "dime el mejor perfil para 2d artist",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T14:34:51.696288"
+        },
+        {
+          "id": "300b25d2-28a3-4145-b6cd-7971a8d85ff0",
+          "role": "assistant",
+          "content": ":::thinking\n- The question asks for the best profile for a 2D artist role.\n- I need to check if any of the provided CVs explicitly mention 2D art skills or related experience.\n- The CVs available are for NFT Developer, Podcast Assistant, Human Resources Director, Cloud Engineer, and 3D Modeler.\n- None of these CVs explicitly mention 2D art skills or experience.\n- I should clearly state that no candidates match the criteria.\n:::\n\nNo candidates in the provided CVs match the criteria for a 2D artist role.\n\n| Candidate | Skills | Experience | Match |\n|---|---|---|---|\n|**[ Layla Hassan  NFT](cv:cv_71736e47)**| NFT development, Solidity, Ethereum | NFT platforms, smart contracts | ⭐ (No 2D art skills) |\n|**[ Abdullah Mohamed  Podcast](cv:cv_943da331)**| Audio editing, podcast production | Podcast assistant, audio engineering | ⭐ (No 2D art skills) |\n|**[ Mei-Ling Chen  Human Resources](cv:cv_ffc6d564)**| HR management, talent acquisition | HR director, organizational development | ⭐ (No 2D art skills) |\n|**[ Luca Müller  Cloud](cv:cv_fe6338e6)**| Cloud engineering, AWS, Kubernetes | Cloud infrastructure, DevOps | ⭐ (No 2D art skills) |\n|**[ Carlos Mendoza  3D](cv:cv_f01ac22c)**| 3D modeling, texturing, rigging | 3D artist, film/game assets | ⭐ (3D, not 2D) |\n\n:::conclusion\nNo candidates match the specified criteria for a 2D artist role. None of the analyzed CVs explicitly mention 2D art skills or experience.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_71736e47",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_943da331",
+              "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_ffc6d564",
+              "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf"
+            },
+            {
+              "cv_id": "cv_fe6338e6",
+              "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_f01ac22c",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_bbc748f9",
+              "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_dd668ac0",
+              "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_653fbf59",
+              "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf"
+            },
+            {
+              "cv_id": "cv_916fd244",
+              "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf"
+            },
+            {
+              "cv_id": "cv_7b0f7ab3",
+              "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 3163.4,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 9.87,
+              "details": "Found 18 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 69096.21,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 34678.23,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "No candidates in the provided CVs match the criteria for a 2D artist role.",
+            "raw_content": ":::thinking\n- The question asks for the best profile for a 2D artist role.\n- I need to check if any of the provided CVs explicitly mention 2D art skills or related experience.\n- The CVs available are for NFT Developer, Podcast Assistant, Human Resources Director, Cloud Engineer, and 3D Modeler.\n- None of these CVs explicitly mention 2D art skills or experience.\n- I should clearly state that no candidates match the criteria.\n:::\n\nNo candidates in the provided CVs match the criteria for a 2D artist role.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[ Layla Hassan  NFT](cv:cv_71736e47)** | NFT development, Solidity, Ethereum | NFT platforms, smart contracts | ⭐ (No 2D art skills) |\n| **[ Abdullah Mohamed  Podcast](cv:cv_943da331)** | Audio editing, podcast production | Podcast assistant, audio engineering | ⭐ (No 2D art skills) |\n| **[ Mei-Ling Chen  Human Resources](cv:cv_ffc6d564)** | HR management, talent acquisition | HR director, organizational development | ⭐ (No 2D art skills) |\n| **[ Luca Müller  Cloud](cv:cv_fe6338e6)** | Cloud engineering, AWS, Kubernetes | Cloud infrastructure, DevOps | ⭐ (No 2D art skills) |\n| **[ Carlos Mendoza  3D](cv:cv_f01ac22c)** | 3D modeling, texturing, rigging | 3D artist, film/game assets | ⭐ (3D, not 2D) |\n\n:::conclusion\nNo candidates match the specified criteria for a 2D artist role. None of the analyzed CVs explicitly mention 2D art skills or experience.\n:::",
+            "thinking": "- The question asks for the best profile for a 2D artist role.\n- I need to check if any of the provided CVs explicitly mention 2D art skills or related experience.\n- The CVs available are for NFT Developer, Podcast Assistant, Human Resources Director, Cloud Engineer, and 3D Modeler.\n- None of these CVs explicitly mention 2D art skills or experience.\n- I should clearly state that no candidates match the criteria.",
+            "analysis": null,
+            "table_data": {
+              "headers": [
+                "Candidate",
+                "Skills",
+                "Experience",
+                "Match"
+              ],
+              "rows": [
+                [
+                  "**[ Layla Hassan  NFT](cv:cv_71736e47)**",
+                  "NFT development, Solidity, Ethereum",
+                  "NFT platforms, smart contracts",
+                  "⭐ (No 2D art skills)"
+                ],
+                [
+                  "**[ Abdullah Mohamed  Podcast](cv:cv_943da331)**",
+                  "Audio editing, podcast production",
+                  "Podcast assistant, audio engineering",
+                  "⭐ (No 2D art skills)"
+                ],
+                [
+                  "**[ Mei-Ling Chen  Human Resources](cv:cv_ffc6d564)**",
+                  "HR management, talent acquisition",
+                  "HR director, organizational development",
+                  "⭐ (No 2D art skills)"
+                ],
+                [
+                  "**[ Luca Müller  Cloud](cv:cv_fe6338e6)**",
+                  "Cloud engineering, AWS, Kubernetes",
+                  "Cloud infrastructure, DevOps",
+                  "⭐ (No 2D art skills)"
+                ],
+                [
+                  "**[ Carlos Mendoza  3D](cv:cv_f01ac22c)**",
+                  "3D modeling, texturing, rigging",
+                  "3D artist, film/game assets",
+                  "⭐ (3D, not 2D)"
+                ]
+              ]
+            },
+            "conclusion": "No candidates match the specified criteria for a 2D artist role. None of the analyzed CVs explicitly mention 2D art skills or experience.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-04T14:37:04.945360"
         }
       ],
       "created_at": "2026-01-03T22:15:07.573740",
-      "updated_at": "2026-01-04T14:28:27.690744"
+      "updated_at": "2026-01-04T14:37:04.945360"
     }
   ]
 }

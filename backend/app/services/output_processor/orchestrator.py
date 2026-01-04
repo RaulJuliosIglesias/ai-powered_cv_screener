@@ -64,8 +64,11 @@ class OutputOrchestrator:
         """
         logger.info("[ORCHESTRATOR] Starting processing")
         
+        # STEP 0: PRE-PROCESS - Clean raw LLM output before any module processing
+        cleaned_llm_output = self._pre_clean_llm_output(raw_llm_output)
+        
         # STEP 1: Extract all components using processor (which uses modules)
-        structured = self.processor.process(raw_llm_output, chunks)
+        structured = self.processor.process(cleaned_llm_output, chunks)
         
         logger.info(
             f"[ORCHESTRATOR] Components extracted: "
@@ -107,9 +110,108 @@ class OutputOrchestrator:
         # CRITICAL: Final cleanup - remove any duplicated paragraphs that slipped through
         final_answer = self._remove_duplicate_paragraphs(final_answer)
         
+        # STEP 4: POST-PROCESS - Final cleanup of formatting issues
+        final_answer = self._post_clean_output(final_answer)
+        
         logger.info(f"[ORCHESTRATOR] Final answer: {len(final_answer)} chars")
         
         return structured, final_answer
+    
+    def _pre_clean_llm_output(self, text: str) -> str:
+        """
+        Pre-process raw LLM output BEFORE module extraction.
+        
+        This handles cases where LLM wraps EVERYTHING in a code block.
+        """
+        import re
+        
+        if not text:
+            return text
+        
+        original_len = len(text)
+        
+        # CRITICAL: Detect if entire output is wrapped in a code block
+        # Pattern: ```code\n...content...\n``` or ```\n...content...\n```
+        code_block_wrapper = re.match(
+            r'^```(?:code|markdown|text|)?\s*\n([\s\S]*?)\n```\s*$',
+            text.strip(),
+            flags=re.IGNORECASE
+        )
+        
+        if code_block_wrapper:
+            text = code_block_wrapper.group(1)
+            logger.info(f"[ORCHESTRATOR] Unwrapped content from code block wrapper")
+        
+        # Also handle partial code blocks at the start
+        text = re.sub(r'^```(?:code|markdown|text|)?\s*\n', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'\n```\s*$', '', text)
+        
+        # Remove "code Copy code" artifacts
+        text = re.sub(r'^code\s*$', '', text, flags=re.MULTILINE)
+        text = re.sub(r'code\s*Copy\s*code', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'\bCopy\s+code\b', '', text, flags=re.IGNORECASE)
+        
+        if len(text) != original_len:
+            logger.info(f"[ORCHESTRATOR] Pre-cleaned: {original_len} -> {len(text)} chars")
+        
+        return text.strip()
+    
+    def _post_clean_output(self, text: str) -> str:
+        """
+        Post-process final output AFTER module formatting.
+        
+        This catches any formatting issues that slipped through modules.
+        """
+        import re
+        
+        if not text:
+            return text
+        
+        original = text
+        
+        # 1. Fix bold formatting globally: ** Name** -> **Name**
+        text = re.sub(r'\*\*\s+', '**', text)  # Remove space after **
+        text = re.sub(r'\s+\*\*', '**', text)  # Remove space before **
+        
+        # 2. Fix duplicated cv_id references: cv_xxx [cv_xxx](cv_xxx) -> [Name](cv:cv_xxx)
+        # Pattern: cv_xxx [cv_xxx](cv_xxx) or cv_xxx [cv_xxx](cv:cv_xxx)
+        text = re.sub(
+            r'(cv_[a-z0-9_-]+)\s*\[\1\]\(\1\)',
+            r'[\1](cv:\1)',
+            text,
+            flags=re.IGNORECASE
+        )
+        text = re.sub(
+            r'(cv_[a-z0-9_-]+)\s*\[\1\]\(cv:\1\)',
+            r'[\1](cv:\1)',
+            text,
+            flags=re.IGNORECASE
+        )
+        
+        # 3. Fix triple cv_id: Name cv_xxx [cv_xxx](cv_xxx) -> **Name** cv_xxx
+        text = re.sub(
+            r'\*\*([^*]+)\*\*\s*(cv_[a-z0-9_-]+)\s*\[\2\]\(\2\)',
+            r'**\1** \2',
+            text,
+            flags=re.IGNORECASE
+        )
+        text = re.sub(
+            r'\*\*([^*]+)\*\*\s*(cv_[a-z0-9_-]+)\s*\[\2\]\(cv:\2\)',
+            r'**\1** \2',
+            text,
+            flags=re.IGNORECASE
+        )
+        
+        # 4. Remove any remaining "code" artifacts at line start
+        text = re.sub(r'^code\s*$', '', text, flags=re.MULTILINE)
+        
+        # 5. Clean up excessive whitespace
+        text = re.sub(r'\n{3,}', '\n\n', text)
+        
+        if text != original:
+            logger.info(f"[ORCHESTRATOR] Post-cleaned formatting issues")
+        
+        return text.strip()
     
     def _remove_duplicate_paragraphs(self, text: str) -> str:
         """
@@ -180,3 +282,10 @@ def get_orchestrator() -> OutputOrchestrator:
     if _orchestrator is None:
         _orchestrator = OutputOrchestrator()
     return _orchestrator
+
+
+def reset_orchestrator():
+    """Reset singleton for testing or after code changes."""
+    global _orchestrator
+    _orchestrator = None
+    logger.info("[ORCHESTRATOR] Singleton reset")

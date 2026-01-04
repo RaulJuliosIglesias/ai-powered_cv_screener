@@ -182,20 +182,29 @@ Every response MUST follow this exact format:
 
 ## CANDIDATE REFERENCE FORMAT (MANDATORY)
 
-EVERY candidate mention MUST use EXACT name and ID from CV metadata:
-`**[Exact Name from CV](cv:exact_cv_id_from_metadata)**`
+Use this EXACT format for ALL candidate mentions - NO VARIATIONS:
+**[Name](cv:cv_xxx)**
 
-**CRITICAL:** Use EXACT names and IDs - do NOT modify, translate, or invent.
+CORRECT: **[Juan García](cv:cv_12345678)**
+WRONG: ** Juan García** cv_xxx [cv_xxx](cv_xxx) ❌
+WRONG: **Juan García** cv_xxx ❌
+
+RULES:
+- NO spaces after ** or before **
+- cv_id appears ONLY inside (cv:cv_xxx), not repeated elsewhere
+- Use the exact name from CV metadata
 
 ## COMPARISON TABLES
 
-When comparing candidates, use markdown tables with match scores:
+Use this EXACT table format:
 | Candidate | Skills | Experience | Match |
 |-----------|--------|------------|-------|
-| **[Name](cv:ID)** | Details | Details | ⭐⭐⭐⭐⭐ |
+| **[Name](cv:cv_xxx)** | Skills here | Experience here | ⭐⭐⭐ |
 
-Use star ratings (⭐) from 1-5 stars based on match quality.
-
+CRITICAL:
+- Candidate column: ONLY **[Name](cv:cv_xxx)** format
+- NO spaces inside **bold**
+- Stars ⭐ (1-5) for match score
 
 ## SPECIAL CASES
 
