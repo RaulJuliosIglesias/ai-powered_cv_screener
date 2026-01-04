@@ -116,15 +116,21 @@ class GuardrailService:
                 for pattern in self.OFF_TOPIC_PATTERNS
             ]
     
-    def check(self, question: str) -> GuardrailResult:
+    def check(self, question: str, has_cvs: bool = False) -> GuardrailResult:
         """
         Check if a question is allowed (CV-related).
         
         Args:
             question: The user's question
+            has_cvs: Whether CVs are loaded in the session
             
         Returns:
             GuardrailResult with is_allowed and optional rejection message
+            
+        Note:
+            When has_cvs=True, guardrail is more permissive - only rejects
+            obviously off-topic patterns (weather, food, politics).
+            Ambiguous queries are allowed so LLM can interpret them.
         """
         if not question or not question.strip():
             return GuardrailResult(
@@ -147,7 +153,29 @@ class GuardrailService:
                     reason="too_short"
                 )
         
-        # Check 2: Contains CV keywords → ALLOW IMMEDIATELY (before off-topic check)
+        # Check 2: If CVs are loaded, be permissive - only block obvious off-topic
+        if has_cvs:
+            # With CVs loaded, only check for obviously off-topic patterns
+            # Let LLM handle ambiguous queries like "best artist" 
+            for pattern in self._compiled_patterns:
+                if pattern.search(question_lower):
+                    logger.info(f"Guardrail: Rejected off-topic (CVs loaded but clear off-topic pattern)")
+                    return GuardrailResult(
+                        is_allowed=False,
+                        rejection_message="I can only help with CV screening and candidate analysis. Please ask a question about the uploaded CVs.",
+                        confidence=0.95,
+                        reason="off_topic_pattern"
+                    )
+            
+            # Allow everything else when CVs are present
+            logger.debug(f"Guardrail: Allowed (CVs loaded, permissive mode)")
+            return GuardrailResult(
+                is_allowed=True,
+                confidence=0.9,
+                reason="cvs_loaded_permissive"
+            )
+        
+        # Check 3: Contains CV keywords → ALLOW IMMEDIATELY (before off-topic check)
         # This ensures "game developer", "full stack", etc. are always allowed
         if words & self.CV_KEYWORDS:
             logger.debug(f"Guardrail: Allowed (CV keywords found: {words & self.CV_KEYWORDS})")
@@ -157,7 +185,7 @@ class GuardrailService:
                 reason="cv_keywords"
             )
         
-        # Check 3: Question words that suggest CV analysis
+        # Check 4: Question words that suggest CV analysis
         analysis_patterns = [
             r"\b(who|quién|cuál|cual|which|what|qué|compare|comparar)\b",
             r"\b(best|mejor|top|rank|ranking|suitable|adecuado)\b",
@@ -177,7 +205,7 @@ class GuardrailService:
                     reason="analysis_pattern"
                 )
         
-        # Check 4: Off-topic patterns - ONLY if no CV-related content found
+        # Check 5: Off-topic patterns - ONLY if no CV-related content found
         for pattern in self._compiled_patterns:
             if pattern.search(question_lower):
                 logger.info(f"Guardrail: Rejected off-topic question (pattern match)")
@@ -197,9 +225,9 @@ class GuardrailService:
             reason="default_allow"
         )
     
-    async def check_async(self, question: str) -> GuardrailResult:
+    async def check_async(self, question: str, has_cvs: bool = False) -> GuardrailResult:
         """Async wrapper for check method."""
-        return self.check(question)
+        return self.check(question, has_cvs=has_cvs)
     
     def is_cv_related(self, question: str) -> Tuple[bool, Optional[str]]:
         """
