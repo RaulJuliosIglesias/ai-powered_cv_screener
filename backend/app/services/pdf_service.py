@@ -45,8 +45,8 @@ class PDFService:
     }
     
     def __init__(self, chunk_size: int = 500, chunk_overlap: int = 50):
-        self.chunk_size = chunk_size
-        self.chunk_overlap = chunk_overlap
+        self.default_chunk_size = chunk_size
+        self.default_chunk_overlap = chunk_overlap
     
     def extract_text_from_pdf(self, pdf_path: str | Path) -> str:
         """Extract all text from a PDF file."""
@@ -179,25 +179,22 @@ class PDFService:
         
         return sections
     
-    def _chunk_text(self, text: str, section_type: str) -> list[str]:
-        """Split text into chunks using recursive character splitting."""
-        if len(text) <= self.chunk_size:
+    def _chunk_text(self, text: str, section_type: str, chunk_size: int, chunk_overlap: int) -> list[str]:
+        """Split text into chunks using recursive character splitting with dynamic sizing."""
+        if len(text) <= chunk_size:
             return [text] if text.strip() else []
         
         chunks = []
         start = 0
         
         while start < len(text):
-            end = start + self.chunk_size
+            end = start + chunk_size
             
             if end < len(text):
-                # Try to break at paragraph
                 break_point = text.rfind("\n\n", start, end)
                 if break_point == -1 or break_point <= start:
-                    # Try to break at sentence
                     break_point = text.rfind(". ", start, end)
                 if break_point == -1 or break_point <= start:
-                    # Try to break at space
                     break_point = text.rfind(" ", start, end)
                 if break_point > start:
                     end = break_point + 1
@@ -206,12 +203,12 @@ class PDFService:
             if chunk:
                 chunks.append(chunk)
             
-            start = end - self.chunk_overlap if end < len(text) else end
+            start = end - chunk_overlap if end < len(text) else end
         
         return chunks
     
     def process_cv(self, pdf_path: str | Path, cv_id: str) -> ExtractedCV:
-        """Extract and chunk a CV from a PDF file."""
+        """Extract and chunk a CV from a PDF file with ADAPTIVE chunking."""
         pdf_path = Path(pdf_path)
         filename = pdf_path.name
         
@@ -224,6 +221,15 @@ class PDFService:
                 details={"filename": filename}
             )
         
+        total_length = len(raw_text)
+        
+        target_chunks = 18
+        optimal_chunk_size = max(300, min(800, total_length // target_chunks))
+        optimal_overlap = max(30, int(optimal_chunk_size * 0.1))
+        
+        logger.info(f"Adaptive chunking for {filename}: {total_length} chars → "
+                    f"{optimal_chunk_size} chunk size, {optimal_overlap} overlap")
+        
         # Extract metadata
         candidate_name = self.extract_candidate_name(raw_text)
         skills = self.extract_skills(raw_text)
@@ -235,7 +241,12 @@ class PDFService:
         chunk_index = 0
         
         for section_type, section_content in sections:
-            section_chunks = self._chunk_text(section_content, section_type)
+            section_chunks = self._chunk_text(
+                section_content, 
+                section_type,
+                chunk_size=optimal_chunk_size,
+                chunk_overlap=optimal_overlap
+            )
             
             for chunk_content in section_chunks:
                 chunk = CVChunk(

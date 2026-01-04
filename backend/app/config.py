@@ -71,6 +71,10 @@ class Settings(BaseSettings):
     retrieval_score_threshold: float = 0.15  # Balanced threshold for quality vs coverage
     # Note: For ranking/comparison queries, k is automatically set to total_cvs_in_session
     
+    # Adaptive retrieval configuration
+    ranking_retrieval_percentage: float = 0.2  # Retrieve 20% of CVs for ranking queries
+    min_ranking_k: int = 10  # Minimum CVs to retrieve for ranking
+    
     # LLM
     llm_temperature: float = 0.1
     llm_max_tokens: int = 4096  # Increased for longer structured responses

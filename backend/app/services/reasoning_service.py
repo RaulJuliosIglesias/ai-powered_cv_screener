@@ -11,6 +11,7 @@ from dataclasses import dataclass, field
 import httpx
 
 from app.config import settings
+from app.utils.text_utils import smart_truncate
 
 logger = logging.getLogger(__name__)
 
@@ -234,9 +235,14 @@ class ReasoningService:
         total_cvs: int
     ) -> tuple[str, str]:
         """Execute self-ask reasoning process."""
+        truncated_context = smart_truncate(
+            context,
+            max_chars=15000,
+            preserve="both"
+        )
         prompt = SELF_ASK_PROMPT.format(
             question=question,
-            context=context[:15000],  # Limit context size
+            context=truncated_context,
             total_cvs=total_cvs
         )
         from app.providers.base import get_openrouter_url
@@ -307,10 +313,15 @@ class ReasoningService:
         context: str
     ) -> str:
         """Reflect on draft and refine if needed."""
+        truncated_context = smart_truncate(
+            context,
+            max_chars=10000,
+            preserve="end"
+        )
         prompt = REFLECTION_PROMPT.format(
             question=question,
             draft=draft,
-            context=context[:10000]
+            context=truncated_context
         )
         from app.providers.base import get_openrouter_url
         

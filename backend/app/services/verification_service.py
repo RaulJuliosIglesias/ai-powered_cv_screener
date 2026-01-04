@@ -11,6 +11,8 @@ from dataclasses import dataclass, field
 import httpx
 
 from app.config import settings
+from app.providers.base import SearchResult
+from app.utils.text_utils import smart_truncate
 
 logger = logging.getLogger(__name__)
 
@@ -150,9 +152,14 @@ class LLMVerificationService:
             # Format context
             context_text = self._format_context(context_chunks)
             
+            truncated_response = smart_truncate(
+                response,
+                max_chars=2000,
+                preserve="start"
+            )
             prompt = VERIFICATION_PROMPT.format(
                 context=context_text,
-                response=response[:2000],  # Limit response length
+                response=truncated_response,
                 query=query
             )
             

@@ -13,6 +13,34 @@ from dataclasses import dataclass, field
 logger = logging.getLogger(__name__)
 
 
+ADAPTIVE_THRESHOLDS = {
+    'factual_simple': {
+        'high': 0.90,
+        'good': 0.75,
+        'moderate': 0.60,
+        'low': 0.40
+    },
+    'comparison': {
+        'high': 0.80,
+        'good': 0.65,
+        'moderate': 0.50,
+        'low': 0.35
+    },
+    'analysis': {
+        'high': 0.75,
+        'good': 0.60,
+        'moderate': 0.45,
+        'low': 0.30
+    },
+    'default': {
+        'high': 0.85,
+        'good': 0.70,
+        'moderate': 0.50,
+        'low': 0.30
+    }
+}
+
+
 @dataclass
 class FactorExplanation:
     """Detailed explanation for a single confidence factor."""
@@ -571,20 +599,40 @@ class ConfidenceCalculator:
         }
     
     def _get_score_interpretation(self, score: float, factors: ConfidenceFactors) -> str:
-        """Provide human-readable interpretation of the confidence score."""
+        """
+        Provide ADAPTIVE interpretation based on query type and context.
+        """
         if not factors.has_verification:
-            return f"Score {score:.0%}: Claim verification not performed - confidence based only on source quality and response structure"
+            return (f"Score {score:.0%}: Claim verification not performed - "
+                    f"confidence based only on source quality")
         
-        if score >= 0.85:
-            return f"Score {score:.0%}: High confidence - claims well-verified, good source coverage"
-        elif score >= 0.70:
-            return f"Score {score:.0%}: Good confidence - most claims verified, adequate sources"
-        elif score >= 0.50:
-            return f"Score {score:.0%}: Moderate confidence - some unverified claims or limited sources"
-        elif score >= 0.30:
-            return f"Score {score:.0%}: Low confidence - significant unverified or contradicted claims"
+        query_type = factors.query_type
+        if query_type in ["search", "verify"]:
+            thresholds = ADAPTIVE_THRESHOLDS['factual_simple']
+        elif query_type in ["ranking", "comparison"]:
+            thresholds = ADAPTIVE_THRESHOLDS['comparison']
+        elif query_type in ["summarize", "aggregate"]:
+            thresholds = ADAPTIVE_THRESHOLDS['analysis']
         else:
-            return f"Score {score:.0%}: Very low confidence - response may contain errors"
+            thresholds = ADAPTIVE_THRESHOLDS['default']
+        
+        if score >= thresholds['high']:
+            level = "High"
+            desc = "claims well-verified, excellent source coverage"
+        elif score >= thresholds['good']:
+            level = "Good"
+            desc = "most claims verified, adequate sources"
+        elif score >= thresholds['moderate']:
+            level = "Moderate"
+            desc = "some unverified claims or limited sources"
+        elif score >= thresholds['low']:
+            level = "Low"
+            desc = "significant unverified or contradicted claims"
+        else:
+            level = "Very low"
+            desc = "response may contain errors"
+        
+        return f"Score {score:.0%} ({level} for {query_type}): {desc}"
 
 
 # Singleton instance

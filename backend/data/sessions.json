@@ -15967,10 +15967,281 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-04T16:38:15.856189"
+        },
+        {
+          "id": "a688fadf-d91a-41bb-b1c2-7e172cef57fb",
+          "role": "user",
+          "content": "answer in english who is the best marketing director profile",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T16:43:44.567444"
+        },
+        {
+          "id": "2b9a11d6-33de-42fc-90c3-9d152a414afc",
+          "role": "assistant",
+          "content": ":::thinking\n- The question asks for the best marketing director profile.\n- I need to analyze the provided CVs to identify candidates with marketing director experience or relevant skills.\n- None of the candidates explicitly mention \"Marketing Director\" in their titles or experience.\n- I need to check for related skills or experience that could qualify them for a marketing director role.\n- The CVs provided are for roles like Podcast Assistant, Cloud Engineer, Legal Secretary, NFT Developer, Human Resources Director, and Brand Designer.\n- Only**[ Patrik Hübner  Brand](cv:cv_dd668ac0)**has a role related to branding and design, which could be relevant to marketing.\n- However, the CV does not explicitly mention marketing director experience or related skills.\n:::\n\nNone of the analyzed candidates have explicit experience as a Marketing Director. Here is a detailed analysis of the candidates:.\n\n### Analysis\n\n| Candidate | Skills | Experience | Match Score |\n|---|---|---|---|\n| Abdullah Mohamed  Podcast | Audio Editing, Content Production, Interview Coordination, Sound Engineering | Podcast Assistant, Audio Content Management | 20% |\n| Luca Müller  Cloud | AWS Cloud Platform, Kubernetes, Terraform, Docker, CI/CD Pipelines | Cloud Engineer, Scalable Cloud Infrastructures | 20% |\n| Carlos Mejuto  Legal | Microsoft Office Suite, Case Management Systems, Legal Research | Legal Secretary, Client Scheduling, Document Drafting | 20% |\n| Layla Hassan  NFT | Solidity, Ethereum, IPFS, React, Node.js, Smart Contract Auditing | NFT Developer, Smart Contract Design, Cross-Chain Token Ecosystems | 20% |\n| Mei-Ling Chen  Human Resources | Talent Acquisition, Employee Relations, HRIS Platforms, Compensation & Benefits, Change Management | Human Resources Director, HR Manager, HR Generalist | 20% |\n| Patrik Hübner  Brand | Brand Strategy, Visual Design, Campaign Development | Brand Designer, Award-Winning Campaigns | 40% |\n\n:::conclusion\nNo candidates explicitly match the criteria for a Marketing Director role. The closest match is [📄](cv:cv_dd668ac0)**Patrik Hübner  Brand**, who has experience in brand strategy and campaign development, but this is not equivalent to a marketing director role.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_943da331",
+              "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_fe6338e6",
+              "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_653fbf59",
+              "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf"
+            },
+            {
+              "cv_id": "cv_71736e47",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_ffc6d564",
+              "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf"
+            },
+            {
+              "cv_id": "cv_dd668ac0",
+              "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_bbc748f9",
+              "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_916fd244",
+              "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf"
+            },
+            {
+              "cv_id": "cv_7b0f7ab3",
+              "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_f01ac22c",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 3166.16,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 10.43,
+              "details": "Found 16 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 43353.1,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 62632.35,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "None of the analyzed candidates have explicit experience as a Marketing Director. Here is a detailed analysis of the candidates:.",
+            "raw_content": ":::thinking\n- The question asks for the best marketing director profile.\n- I need to analyze the provided CVs to identify candidates with marketing director experience or relevant skills.\n- None of the candidates explicitly mention \"Marketing Director\" in their titles or experience.\n- I need to check for related skills or experience that could qualify them for a marketing director role.\n- The CVs provided are for roles like Podcast Assistant, Cloud Engineer, Legal Secretary, NFT Developer, Human Resources Director, and Brand Designer.\n- Only **[ Patrik Hübner  Brand](cv:cv_dd668ac0)** has a role related to branding and design, which could be relevant to marketing.\n- However, the CV does not explicitly mention marketing director experience or related skills.\n:::\n\nNone of the analyzed candidates have explicit experience as a Marketing Director.\n\nHere is a detailed analysis of the candidates:\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[ Abdullah Mohamed  Podcast](cv:cv_943da331)** | Audio Editing, Content Production, Interview Coordination, Sound Engineering | Podcast Assistant, Audio Content Management | ⭐ |\n| **[ Luca Müller  Cloud](cv:cv_fe6338e6)** | AWS Cloud Platform, Kubernetes, Terraform, Docker, CI/CD Pipelines | Cloud Engineer, Scalable Cloud Infrastructures | ⭐ |\n| **[ Carlos Mejuto  Legal](cv:cv_653fbf59)** | Microsoft Office Suite, Case Management Systems, Legal Research | Legal Secretary, Client Scheduling, Document Drafting | ⭐ |\n| **[ Layla Hassan  NFT](cv:cv_71736e47)** | Solidity, Ethereum, IPFS, React, Node.js, Smart Contract Auditing | NFT Developer, Smart Contract Design, Cross-Chain Token Ecosystems | ⭐ |\n| **[ Mei-Ling Chen  Human Resources](cv:cv_ffc6d564)** | Talent Acquisition, Employee Relations, HRIS Platforms, Compensation & Benefits, Change Management | Human Resources Director, HR Manager, HR Generalist | ⭐ |\n| **[ Patrik Hübner  Brand](cv:cv_dd668ac0)** | Brand Strategy, Visual Design, Campaign Development | Brand Designer, Award-Winning Campaigns | ⭐⭐ |\n\n:::conclusion\nNo candidates explicitly match the criteria for a Marketing Director role. The closest match is **[ Patrik Hübner  Brand](cv:cv_dd668ac0)**, who has experience in brand strategy and campaign development, but this is not equivalent to a marketing director role.\n:::",
+            "thinking": "- The question asks for the best marketing director profile.\n- I need to analyze the provided CVs to identify candidates with marketing director experience or relevant skills.\n- None of the candidates explicitly mention \"Marketing Director\" in their titles or experience.\n- I need to check for related skills or experience that could qualify them for a marketing director role.\n- The CVs provided are for roles like Podcast Assistant, Cloud Engineer, Legal Secretary, NFT Developer, Human Resources Director, and Brand Designer.\n- Only **[ Patrik Hübner  Brand](cv:cv_dd668ac0)** has a role related to branding and design, which could be relevant to marketing.\n- However, the CV does not explicitly mention marketing director experience or related skills.",
+            "analysis": "None of the analyzed candidates have explicit experience as a Marketing Director.\nHere is a detailed analysis of the candidates:",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Skills",
+                "Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Abdullah Mohamed  Podcast",
+                  "cv_id": "cv_943da331",
+                  "columns": {
+                    "Skills": "Audio Editing, Content Production, Interview Coordination, Sound Engineering",
+                    "Experience": "Podcast Assistant, Audio Content Management"
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Luca Müller  Cloud",
+                  "cv_id": "cv_fe6338e6",
+                  "columns": {
+                    "Skills": "AWS Cloud Platform, Kubernetes, Terraform, Docker, CI/CD Pipelines",
+                    "Experience": "Cloud Engineer, Scalable Cloud Infrastructures"
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Carlos Mejuto  Legal",
+                  "cv_id": "cv_653fbf59",
+                  "columns": {
+                    "Skills": "Microsoft Office Suite, Case Management Systems, Legal Research",
+                    "Experience": "Legal Secretary, Client Scheduling, Document Drafting"
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Layla Hassan  NFT",
+                  "cv_id": "cv_71736e47",
+                  "columns": {
+                    "Skills": "Solidity, Ethereum, IPFS, React, Node.js, Smart Contract Auditing",
+                    "Experience": "NFT Developer, Smart Contract Design, Cross-Chain Token Ecosystems"
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Mei-Ling Chen  Human Resources",
+                  "cv_id": "cv_ffc6d564",
+                  "columns": {
+                    "Skills": "Talent Acquisition, Employee Relations, HRIS Platforms, Compensation & Benefits, Change Management",
+                    "Experience": "Human Resources Director, HR Manager, HR Generalist"
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Patrik Hübner  Brand",
+                  "cv_id": "cv_dd668ac0",
+                  "columns": {
+                    "Skills": "Brand Strategy, Visual Design, Campaign Development",
+                    "Experience": "Brand Designer, Award-Winning Campaigns"
+                  },
+                  "match_score": 40
+                }
+              ]
+            },
+            "conclusion": "No candidates explicitly match the criteria for a Marketing Director role. The closest match is [📄](cv:cv_dd668ac0) ** Patrik Hübner  Brand**, who has experience in brand strategy and campaign development, but this is not equivalent to a marketing director role.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-04T16:46:32.523649"
+        },
+        {
+          "id": "35c79e22-4124-4c1e-8480-8bd1ed0cebbd",
+          "role": "user",
+          "content": "ahrao dame respesuta en español para el mejor perfil de startup desarrolaldor con conocimeitnsot ecnicos de programacion full stack",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T16:59:55.912422"
+        },
+        {
+          "id": "b8786185-c481-4413-854c-275b2f89a8aa",
+          "role": "assistant",
+          "content": ":::thinking\n- The user is asking for a response in Spanish about the best startup developer profile with full-stack programming knowledge.\n- I need to analyze the CVs to find candidates with explicit full-stack development skills (e.g., React, Node.js, or similar frameworks).\n- From the CVs:\n  -**[Layla Hassan  NFT](cv:cv_71736e47)**has experience with React and Node.js, which are full-stack technologies.\n  -**[Luca Müller  Cloud](cv:cv_fe6338e6)**is a Cloud Engineer but does not explicitly mention full-stack development skills.\n  - Other candidates do not have relevant technical skills for a full-stack developer role.\n- I must ensure all claims are verified by the CV data and avoid unverified statements.\n:::\n\nEl mejor perfil para un desarrollador de startup con conocimientos técnicos de programación full-stack es [📄](cv:cv_71736e47)**Layla Hassan  NFT**.\n\n### Analysis\n\nSe analizaron 1 candidato(s) en base a los requisitos especificados. 1 candidato(s) tienen match score alto (≥70%): [📄](cv:cv_71736e47)**Layla Hassan  NFT**. El candidato con mejor puntuación es Layla Hassan  NFT con 80% de match.\n\n| Candidate | Habilidades | Experiencia | Match Score |\n|---|---|---|---|\n| Layla Hassan  NFT | React, Node.js, Solidity, Ethereum | Desarrolladora con experiencia en contratos inteligentes, plataformas NFT y ecosistemas cross-chain | 80% |\n\n:::conclusion\nRecomiendo a [📄](cv:cv_71736e47)**Layla Hassan  NFT**para el puesto de desarrollador full-stack en una startup, ya que tiene experiencia explícita en tecnologías relevantes como React y Node.js.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_943da331",
+              "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_fe6338e6",
+              "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_ffc6d564",
+              "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf"
+            },
+            {
+              "cv_id": "cv_71736e47",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_f01ac22c",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_916fd244",
+              "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf"
+            },
+            {
+              "cv_id": "cv_653fbf59",
+              "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf"
+            },
+            {
+              "cv_id": "cv_dd668ac0",
+              "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_bbc748f9",
+              "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_7b0f7ab3",
+              "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 3492.54,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 9.45,
+              "details": "Found 17 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 26318.37,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 26238.19,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "El mejor perfil para un desarrollador de startup con conocimientos técnicos de programación full-stack es [📄](cv:cv_71736e47) **Layla Hassan  NFT**.",
+            "raw_content": ":::thinking\n- The user is asking for a response in Spanish about the best startup developer profile with full-stack programming knowledge.\n- I need to analyze the CVs to find candidates with explicit full-stack development skills (e.g., React, Node.js, or similar frameworks).\n- From the CVs:\n  - **[Layla Hassan  NFT](cv:cv_71736e47)** has experience with React and Node.js, which are full-stack technologies.\n  - **[Luca Müller  Cloud](cv:cv_fe6338e6)** is a Cloud Engineer but does not explicitly mention full-stack development skills.\n  - Other candidates do not have relevant technical skills for a full-stack developer role.\n- I must ensure all claims are verified by the CV data and avoid unverified statements.\n:::\n\nEl mejor perfil para un desarrollador de startup con conocimientos técnicos de programación full-stack es **[Layla Hassan  NFT](cv:cv_71736e47)**.\n\n| Candidato | Habilidades | Experiencia | Coincidencia |\n|-----------|------------|-------------|--------------|\n| **[Layla Hassan  NFT](cv:cv_71736e47)** | React, Node.js, Solidity, Ethereum | Desarrolladora con experiencia en contratos inteligentes, plataformas NFT y ecosistemas cross-chain | ⭐⭐⭐⭐ |\n\n:::conclusion\nRecomiendo a **[Layla Hassan  NFT](cv:cv_71736e47)** para el puesto de desarrollador full-stack en una startup, ya que tiene experiencia explícita en tecnologías relevantes como React y Node.js.\n:::",
+            "thinking": "- The user is asking for a response in Spanish about the best startup developer profile with full-stack programming knowledge.\n- I need to analyze the CVs to find candidates with explicit full-stack development skills (e.g., React, Node.js, or similar frameworks).\n- From the CVs:\n  - **[Layla Hassan  NFT](cv:cv_71736e47)** has experience with React and Node.js, which are full-stack technologies.\n  - **[Luca Müller  Cloud](cv:cv_fe6338e6)** is a Cloud Engineer but does not explicitly mention full-stack development skills.\n  - Other candidates do not have relevant technical skills for a full-stack developer role.\n- I must ensure all claims are verified by the CV data and avoid unverified statements.",
+            "analysis": "Se analizaron 1 candidato(s) en base a los requisitos especificados. 1 candidato(s) tienen match score alto (≥70%): [📄](cv:cv_71736e47) **Layla Hassan  NFT**. El candidato con mejor puntuación es Layla Hassan  NFT con 80% de match.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Habilidades",
+                "Experiencia",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Layla Hassan  NFT",
+                  "cv_id": "cv_71736e47",
+                  "columns": {
+                    "Habilidades": "React, Node.js, Solidity, Ethereum",
+                    "Experiencia": "Desarrolladora con experiencia en contratos inteligentes, plataformas NFT y ecosistemas cross-chain"
+                  },
+                  "match_score": 80
+                }
+              ]
+            },
+            "conclusion": "Recomiendo a [📄](cv:cv_71736e47) **Layla Hassan  NFT** para el puesto de desarrollador full-stack en una startup, ya que tiene experiencia explícita en tecnologías relevantes como React y Node.js.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-04T17:01:57.528221"
         }
       ],
       "created_at": "2026-01-03T22:15:07.573740",
-      "updated_at": "2026-01-04T16:38:15.856189"
+      "updated_at": "2026-01-04T17:01:57.528240"
     }
   ]
 }

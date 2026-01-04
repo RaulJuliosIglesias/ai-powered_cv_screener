@@ -1013,6 +1013,13 @@ class RAGServiceV5:
         await self._step_query_understanding(ctx)
         logger.info(f"[PIPELINE] Query Understanding complete: type={ctx.query_understanding.query_type if ctx.query_understanding else 'None'}")
         
+        # Apply adaptive retrieval strategy after understanding query type
+        if ctx.total_cvs_in_session and ctx.query_understanding:
+            effective_k, adjusted_threshold, strategy_reason = self._determine_adaptive_strategy(ctx)
+            ctx.k = effective_k
+            ctx.threshold = adjusted_threshold
+            logger.info(f"[PIPELINE] Adaptive strategy: {strategy_reason}")
+        
         # Stage 2: Multi-Query Generation (V5)
         if self.config.multi_query_enabled:
             logger.info("[PIPELINE] Stage 2: Multi-Query")
@@ -1076,6 +1083,59 @@ class RAGServiceV5:
     # =========================================================================
     # PIPELINE STEPS
     # =========================================================================
+    
+    def _determine_adaptive_strategy(self, ctx: PipelineContextV5) -> tuple[int, float, str]:
+        """
+        Determine retrieval strategy ADAPTIVELY based on REAL data.
+        
+        Returns:
+            (effective_k, adjusted_threshold, reason)
+        """
+        num_cvs = ctx.total_cvs_in_session or 10
+        query_type = ctx.query_understanding.query_type if ctx.query_understanding else "search"
+        base_threshold = ctx.threshold
+        
+        is_ranking = query_type in {"ranking", "comparison"}
+        
+        if is_ranking:
+            optimal_k = min(
+                num_cvs,
+                max(10, int(num_cvs * 0.2))
+            )
+            
+            if num_cvs > 50:
+                reduction = min(0.15, (num_cvs - 50) / 3000)
+                adjusted_threshold = max(0.05, base_threshold - reduction)
+            else:
+                adjusted_threshold = base_threshold
+            
+            return (
+                optimal_k,
+                adjusted_threshold,
+                f"ranking: {optimal_k}/{num_cvs} CVs, threshold={adjusted_threshold:.2f}"
+            )
+        
+        elif num_cvs <= 20:
+            return (
+                num_cvs,
+                base_threshold,
+                f"small session: all {num_cvs} CVs"
+            )
+        
+        else:
+            effective_k = min(ctx.k, num_cvs)
+            
+            query_words = len(ctx.original_query.split())
+            if query_words <= 3:
+                adjusted_threshold = base_threshold + 0.05
+            else:
+                adjusted_threshold = base_threshold
+            
+            return (
+                effective_k,
+                adjusted_threshold,
+                f"search: top {effective_k}/{num_cvs}, threshold={adjusted_threshold:.2f}"
+            )
     
     async def _step_query_understanding(self, ctx: PipelineContextV5) -> None:
         """Step 1: Understand the query."""
