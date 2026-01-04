@@ -72,17 +72,17 @@ class RerankingService:
     then reorders results by this score.
     """
     
-    DEFAULT_MODEL = "google/gemini-2.0-flash-001"
-    
-    def __init__(self, model: Optional[str] = None, enabled: bool = True):
+    def __init__(self, model: str, enabled: bool = True):
         """
         Initialize the re-ranking service.
         
         Args:
-            model: LLM model to use for scoring
+            model: LLM model to use for scoring (required)
             enabled: Whether re-ranking is enabled
         """
-        self.model = model or self.DEFAULT_MODEL
+        if not model:
+            raise ValueError("model parameter is required and cannot be empty")
+        self.model = model
         self.enabled = enabled
         self.api_key = settings.openrouter_api_key or ""
         # Don't create persistent client - use context manager per request
@@ -265,9 +265,9 @@ class RerankingService:
 _reranking_service: Optional[RerankingService] = None
 
 
-def get_reranking_service(model: Optional[str] = None, enabled: bool = True) -> RerankingService:
+def get_reranking_service(model: str, enabled: bool = True) -> RerankingService:
     """Get singleton instance of RerankingService."""
     global _reranking_service
-    if _reranking_service is None or _reranking_service.model != (model or RerankingService.DEFAULT_MODEL):
+    if _reranking_service is None or _reranking_service.model != model:
         _reranking_service = RerankingService(model=model, enabled=enabled)
     return _reranking_service

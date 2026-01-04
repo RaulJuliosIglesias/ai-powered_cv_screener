@@ -95,13 +95,11 @@ class QueryUnderstandingService:
     the main RAG generation step.
     """
     
-    # Default fast model for query understanding
-    DEFAULT_MODEL = "google/gemini-2.0-flash-001"
-    
-    def __init__(self, model: Optional[str] = None):
-        self.model = model or self.DEFAULT_MODEL
+    def __init__(self, model: str):
+        if not model:
+            raise ValueError("model parameter is required and cannot be empty")
+        self.model = model
         self.api_key = settings.openrouter_api_key or ""
-        # Don't create persistent client - use context manager per request
         logger.info(f"QueryUnderstandingService initialized with model: {self.model}")
         logger.info(f"  API key available: {bool(self.api_key)}")
     
@@ -116,8 +114,7 @@ class QueryUnderstandingService:
             QueryUnderstanding with parsed intent and reformulated prompt
         """
         if not self.api_key:
-            logger.warning("No API key, returning original query")
-            return self._fallback_understanding(query)
+            raise ValueError("OpenRouter API key is required for query understanding")
         
         try:
             prompt = QUERY_UNDERSTANDING_PROMPT.format(query=query)
@@ -180,19 +177,7 @@ class QueryUnderstandingService:
             
         except Exception as e:
             logger.error(f"Query understanding failed: {e}")
-            return self._fallback_understanding(query)
-    
-    def _fallback_understanding(self, query: str) -> QueryUnderstanding:
-        """Fallback when API fails - return original query."""
-        return QueryUnderstanding(
-            original_query=query,
-            understood_query=query,
-            query_type="general",
-            requirements=[],
-            is_cv_related=True,  # Assume CV-related
-            confidence=0.5,
-            reformulated_prompt=query
-        )
+            raise
     
     async def close(self):
         """Close HTTP client."""

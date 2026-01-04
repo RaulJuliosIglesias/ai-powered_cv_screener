@@ -347,24 +347,11 @@ async def health_check():
 @router.get("/models")
 async def get_models():
     """Get available LLM models from OpenRouter."""
-    from app.providers.cloud.llm import fetch_openrouter_models, get_current_model
+    from app.providers.cloud.llm import fetch_openrouter_models
     models = await fetch_openrouter_models()
     return {
-        "models": models,
-        "current": get_current_model()
+        "models": models
     }
-
-
-@router.post("/models/{model_id:path}")
-async def set_model(model_id: str):
-    """Set the current LLM model."""
-    from app.providers.cloud.llm import set_current_model, get_current_model
-    
-    success = set_current_model(model_id)
-    if not success:
-        raise HTTPException(status_code=400, detail=f"Invalid model: {model_id}")
-    
-    return {"success": True, "current": get_current_model()}
 
 
 @router.delete("/cvs")

@@ -70,17 +70,17 @@ class LLMVerificationService:
     in the provided CV context.
     """
     
-    DEFAULT_MODEL = "google/gemini-2.0-flash-001"
-    
-    def __init__(self, model: Optional[str] = None, enabled: bool = True):
+    def __init__(self, model: str, enabled: bool = True):
         """
         Initialize the verification service.
         
         Args:
-            model: LLM model to use for verification
+            model: LLM model to use for verification (required)
             enabled: Whether verification is enabled
         """
-        self.model = model or self.DEFAULT_MODEL
+        if not model:
+            raise ValueError("model parameter is required and cannot be empty")
+        self.model = model
         self.enabled = enabled
         self.api_key = settings.openrouter_api_key or ""
         # Don't create persistent client - use context manager per request
@@ -282,9 +282,9 @@ class LLMVerificationService:
 _verification_service: Optional[LLMVerificationService] = None
 
 
-def get_verification_service(model: Optional[str] = None, enabled: bool = True) -> LLMVerificationService:
+def get_verification_service(model: str, enabled: bool = True) -> LLMVerificationService:
     """Get singleton instance of LLMVerificationService."""
     global _verification_service
-    if _verification_service is None or _verification_service.model != (model or LLMVerificationService.DEFAULT_MODEL):
+    if _verification_service is None or _verification_service.model != model:
         _verification_service = LLMVerificationService(model=model, enabled=enabled)
     return _verification_service

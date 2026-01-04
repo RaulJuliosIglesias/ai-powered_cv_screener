@@ -405,7 +405,11 @@ function App() {
       // Use SSE endpoint for real-time progress with pipeline settings
       const payload = { 
         message: userMessage,
+        understanding_model: ragPipelineSettings.understanding,
+        reranking_model: ragPipelineSettings.reranking,
         reranking_enabled: ragPipelineSettings.reranking_enabled,
+        generation_model: ragPipelineSettings.generation,
+        verification_model: ragPipelineSettings.verification,
         verification_enabled: ragPipelineSettings.verification_enabled
       };
       

@@ -88,14 +88,14 @@ class ClaimVerifierService:
     3. Flagging responses with too many unverified claims
     """
     
-    DEFAULT_MODEL = "google/gemini-2.0-flash-001"
-    
     def __init__(
         self,
-        model: Optional[str] = None,
+        model: str,
         min_verified_ratio: float = 0.7
     ):
-        self.model = model or self.DEFAULT_MODEL
+        if not model:
+            raise ValueError("model parameter is required and cannot be empty")
+        self.model = model
         self.min_verified_ratio = min_verified_ratio
         self.api_key = settings.openrouter_api_key or ""
         logger.info(f"ClaimVerifierService initialized")
@@ -335,10 +335,10 @@ _claim_verifier: Optional[ClaimVerifierService] = None
 
 
 def get_claim_verifier_service(
-    model: Optional[str] = None
+    model: str
 ) -> ClaimVerifierService:
     """Get singleton instance."""
     global _claim_verifier
-    if _claim_verifier is None:
+    if _claim_verifier is None or _claim_verifier.model != model:
         _claim_verifier = ClaimVerifierService(model=model)
     return _claim_verifier

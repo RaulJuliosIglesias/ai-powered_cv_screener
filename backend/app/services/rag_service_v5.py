@@ -732,22 +732,95 @@ class RAGServiceV5:
         
         service = cls(config)
         
-        service.initialize_providers(
-            embedder=ProviderFactory.get_embedding_provider(mode),
-            vector_store=ProviderFactory.get_vector_store(mode),
-            llm=ProviderFactory.get_llm_provider(mode),
-            query_understanding=QueryUnderstandingService(),
-            multi_query=MultiQueryService(hyde_enabled=config.hyde_enabled),
-            reranking=RerankingService(enabled=config.reranking_enabled),
-            reasoning=ReasoningService(reflection_enabled=config.reflection_enabled),
-            claim_verifier=ClaimVerifierService(),
-            guardrail=GuardrailService(),
-            hallucination=HallucinationService(),
-            eval_service=EvalService(),
-            prompt_builder=PromptBuilder()
-        )
-        
+        # Don't initialize providers yet - let the caller configure models first
+        # The stream endpoint will set models from frontend, then call a separate init method
         return service
+    
+    def lazy_initialize_providers(self):
+        """Initialize providers after models have been configured."""
+        logger.info(f"[LAZY_INIT] Starting lazy_initialize_providers")
+        logger.info(f"[LAZY_INIT] Config models: understanding={self.config.understanding_model}, generation={self.config.generation_model}, reranking={self.config.reranking_model}, verification={self.config.verification_model}")
+        
+        from app.config import settings
+        from app.providers.factory import ProviderFactory
+        from app.services.guardrail_service import GuardrailService
+        from app.services.hallucination_service import HallucinationService
+        from app.services.eval_service import EvalService
+        from app.services.query_understanding_service import QueryUnderstandingService
+        from app.services.reranking_service import RerankingService
+        from app.services.multi_query_service import MultiQueryService
+        from app.services.reasoning_service import ReasoningService
+        from app.services.claim_verifier_service import ClaimVerifierService
+        from app.prompts.templates import PromptBuilder
+        
+        logger.info("[LAZY_INIT] Imports completed")
+        
+        # Validate that all required models are configured
+        logger.info("[LAZY_INIT] Validating required models")
+        if not self.config.understanding_model:
+            raise ValueError("understanding_model is required in RAGConfigV5")
+        if not self.config.generation_model:
+            raise ValueError("generation_model is required in RAGConfigV5")
+        if self.config.reranking_enabled and not self.config.reranking_model:
+            raise ValueError("reranking_model is required when reranking is enabled")
+        if self.config.claim_verification_enabled and not self.config.verification_model:
+            raise ValueError("verification_model is required when verification is enabled")
+        
+        logger.info("[LAZY_INIT] Model validation passed")
+        
+        logger.info("[LAZY_INIT] Creating providers...")
+        
+        try:
+            embedder = ProviderFactory.get_embedding_provider(self.config.mode)
+            logger.info("[LAZY_INIT] Embedder created")
+            
+            vector_store = ProviderFactory.get_vector_store(self.config.mode)
+            logger.info("[LAZY_INIT] Vector store created")
+            
+            llm = ProviderFactory.get_llm_provider(self.config.mode, self.config.generation_model)
+            logger.info(f"[LAZY_INIT] LLM provider created with model: {self.config.generation_model}")
+            
+            query_understanding = QueryUnderstandingService(model=self.config.understanding_model)
+            logger.info(f"[LAZY_INIT] Query understanding service created with model: {self.config.understanding_model}")
+            
+            multi_query = MultiQueryService(model=self.config.understanding_model, hyde_enabled=self.config.hyde_enabled)
+            logger.info("[LAZY_INIT] Multi-query service created")
+            
+            reranking = RerankingService(model=self.config.reranking_model or self.config.generation_model, enabled=self.config.reranking_enabled)
+            logger.info("[LAZY_INIT] Reranking service created")
+            
+            reasoning = ReasoningService(model=self.config.generation_model, reflection_enabled=self.config.reflection_enabled)
+            logger.info("[LAZY_INIT] Reasoning service created")
+            
+            claim_verifier = ClaimVerifierService(model=self.config.verification_model or self.config.generation_model)
+            logger.info("[LAZY_INIT] Claim verifier created")
+            
+            guardrail = GuardrailService()
+            hallucination = HallucinationService()
+            eval_service = EvalService()
+            prompt_builder = PromptBuilder()
+            logger.info("[LAZY_INIT] Other services created")
+            
+            logger.info("[LAZY_INIT] Calling initialize_providers()")
+            self.initialize_providers(
+                embedder=embedder,
+                vector_store=vector_store,
+                llm=llm,
+                query_understanding=query_understanding,
+                multi_query=multi_query,
+                reranking=reranking,
+                reasoning=reasoning,
+                claim_verifier=claim_verifier,
+                guardrail=guardrail,
+                hallucination=hallucination,
+                eval_service=eval_service,
+                prompt_builder=prompt_builder
+            )
+            logger.info(f"[LAZY_INIT] initialize_providers() completed. _providers_initialized={self._providers_initialized}")
+            
+        except Exception as e:
+            logger.exception(f"[LAZY_INIT] Error creating providers: {e}")
+            raise
     
     async def query(
         self,
@@ -1563,8 +1636,8 @@ Provide a corrected response:"""
             chunks=ctx.effective_chunks
         )
         
-        # Use raw content for backward compatibility, structured_output for new features
-        formatted_answer = structured_output.raw_content
+        # Build formatted answer using structured components
+        formatted_answer = self._build_formatted_answer(structured_output)
         
         # Build pipeline steps from metrics for UI
         pipeline_steps = self._build_pipeline_steps(ctx)
@@ -1584,6 +1657,114 @@ Provide a corrected response:"""
             cached=ctx.response_cached,
             request_id=ctx.request_id
         )
+    
+    def _build_formatted_answer(self, structured_output: Any) -> str:
+        """
+        Build formatted answer from structured output components.
+        
+        Ensures the response always has:
+        - :::thinking block (if extracted)
+        - Direct answer
+        - Analysis/table content
+        - :::conclusion block (if extracted)
+        
+        Args:
+            structured_output: StructuredOutput object from OutputProcessor
+            
+        Returns:
+            Formatted answer string with all components
+        """
+        parts = []
+        
+        # 1. Add thinking block if present
+        if structured_output.thinking:
+            parts.append(f":::thinking\n{structured_output.thinking}\n:::")
+            parts.append("")  # Empty line
+        
+        # 2. Add direct answer (always present)
+        parts.append(structured_output.direct_answer)
+        parts.append("")  # Empty line
+        
+        # 3. Add table if present
+        if structured_output.table_data:
+            table_md = self._format_table_markdown(structured_output.table_data)
+            parts.append(table_md)
+            parts.append("")  # Empty line
+        
+        # 4. Add any additional analysis from raw content
+        # Extract content between direct answer and conclusion from raw
+        analysis_content = self._extract_analysis_section(
+            structured_output.raw_content,
+            structured_output.direct_answer,
+            structured_output.conclusion
+        )
+        if analysis_content:
+            parts.append(analysis_content)
+            parts.append("")  # Empty line
+        
+        # 5. Add conclusion block if present
+        if structured_output.conclusion:
+            parts.append(f":::conclusion\n{structured_output.conclusion}\n:::")
+        
+        result = "\n".join(parts).strip()
+        logger.info(f"[BUILD_ANSWER] Built formatted answer: {len(result)} chars, has_thinking={bool(structured_output.thinking)}, has_table={bool(structured_output.table_data)}, has_conclusion={bool(structured_output.conclusion)}")
+        
+        return result
+    
+    def _format_table_markdown(self, table_data: Any) -> str:
+        """Format TableData object as markdown table."""
+        if not table_data or not table_data.headers or not table_data.rows:
+            return ""
+        
+        lines = []
+        
+        # Header row
+        lines.append("| " + " | ".join(table_data.headers) + " |")
+        
+        # Separator row
+        lines.append("|" + "|".join(["---"] * len(table_data.headers)) + "|")
+        
+        # Data rows
+        for row in table_data.rows:
+            lines.append("| " + " | ".join(str(cell) for cell in row) + " |")
+        
+        return "\n".join(lines)
+    
+    def _extract_analysis_section(self, raw_content: str, direct_answer: str, conclusion: str | None) -> str:
+        """
+        Extract analysis section between direct answer and conclusion.
+        
+        This captures any detailed analysis, bullet points, or additional
+        context that's not in the table.
+        """
+        import re
+        
+        if not raw_content:
+            return ""
+        
+        # Remove thinking and conclusion blocks
+        clean = raw_content
+        clean = re.sub(r':::thinking[\s\S]*?:::', '', clean, flags=re.IGNORECASE)
+        clean = re.sub(r':::conclusion[\s\S]*?:::', '', clean, flags=re.IGNORECASE)
+        
+        # Remove the direct answer
+        if direct_answer and direct_answer in clean:
+            clean = clean.replace(direct_answer, '', 1)
+        
+        # Remove table (basic detection)
+        clean = re.sub(r'\|[^\n]*\|[\s\S]*?\|[^\n]*\|', '', clean)
+        
+        # Clean up
+        clean = clean.strip()
+        
+        # Remove multiple empty lines
+        clean = re.sub(r'\n{3,}', '\n\n', clean)
+        
+        # Only return if there's meaningful content
+        if len(clean) > 50:
+            return clean
+        
+        return ""
     
     def _build_pipeline_steps(self, ctx: PipelineContextV5) -> list[PipelineStep]:
         """Build pipeline steps from metrics for UI display."""

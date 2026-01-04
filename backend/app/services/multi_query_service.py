@@ -111,10 +111,10 @@ class MultiQueryService:
     3. Entity Extraction: Enable hybrid keyword search
     """
     
-    DEFAULT_MODEL = "google/gemini-2.0-flash-001"
-    
-    def __init__(self, model: Optional[str] = None, hyde_enabled: bool = True):
-        self.model = model or self.DEFAULT_MODEL
+    def __init__(self, model: str, hyde_enabled: bool = True):
+        if not model:
+            raise ValueError("model parameter is required and cannot be empty")
+        self.model = model
         self.hyde_enabled = hyde_enabled
         self.api_key = settings.openrouter_api_key or ""
         logger.info(f"MultiQueryService initialized with model: {self.model}")
@@ -232,11 +232,11 @@ _multi_query_service: Optional[MultiQueryService] = None
 
 
 def get_multi_query_service(
-    model: Optional[str] = None,
+    model: str,
     hyde_enabled: bool = True
 ) -> MultiQueryService:
     """Get singleton instance."""
     global _multi_query_service
-    if _multi_query_service is None:
+    if _multi_query_service is None or _multi_query_service.model != model:
         _multi_query_service = MultiQueryService(model=model, hyde_enabled=hyde_enabled)
     return _multi_query_service

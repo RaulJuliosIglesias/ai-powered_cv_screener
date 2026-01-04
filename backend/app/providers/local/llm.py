@@ -8,9 +8,11 @@ from app.config import settings
 class GeminiLLMProvider(LLMProvider):
     """LLM provider using Google Gemini via AI Studio."""
     
-    def __init__(self):
+    def __init__(self, model: str):
+        if not model:
+            raise ValueError("model parameter is required and cannot be empty")
         genai.configure(api_key=settings.google_api_key)
-        self.model = genai.GenerativeModel("gemini-1.5-flash")
+        self.model = genai.GenerativeModel(model)
     
     async def generate(
         self,

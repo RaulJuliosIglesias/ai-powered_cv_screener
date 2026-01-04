@@ -15,7 +15,11 @@ router = APIRouter(prefix="/api/sessions", tags=["sessions-stream"])
 
 class ChatStreamRequest(BaseModel):
     message: str
+    understanding_model: str
+    reranking_model: str
     reranking_enabled: bool = True
+    generation_model: str
+    verification_model: str
     verification_enabled: bool = True
 
 
@@ -97,12 +101,29 @@ async def chat_stream(
         raise HTTPException(status_code=400, detail="No CVs in session")
     
     # Create RAG service with custom configuration
-    logger.info(f"[STREAM] Creating RAG service with mode={mode}, reranking={request.reranking_enabled}, verification={request.verification_enabled}")
-    rag_service = RAGServiceV5.from_factory(mode)
+    logger.info(f"[STREAM] Creating RAG service with mode={mode}, models: understanding={request.understanding_model}, reranking={request.reranking_model}, generation={request.generation_model}, verification={request.verification_model}")
     
-    # Override pipeline settings if provided
-    rag_service.config.reranking_enabled = request.reranking_enabled
-    rag_service.config.claim_verification_enabled = request.verification_enabled
+    try:
+        rag_service = RAGServiceV5.from_factory(mode)
+        logger.info("[STREAM] RAG service created successfully")
+        
+        # Configure pipeline settings with models from frontend
+        rag_service.config.understanding_model = request.understanding_model
+        rag_service.config.reranking_model = request.reranking_model
+        rag_service.config.reranking_enabled = request.reranking_enabled
+        rag_service.config.generation_model = request.generation_model
+        rag_service.config.verification_model = request.verification_model
+        rag_service.config.claim_verification_enabled = request.verification_enabled
+        logger.info("[STREAM] Models configured in RAG service")
+        
+        # Now initialize providers with configured models
+        logger.info("[STREAM] Calling lazy_initialize_providers()")
+        rag_service.lazy_initialize_providers()
+        logger.info(f"[STREAM] Providers initialized: {rag_service._providers_initialized}")
+        
+    except Exception as e:
+        logger.exception(f"[STREAM] Error during RAG service initialization: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to initialize RAG service: {str(e)}")
     
     return StreamingResponse(
         event_generator(rag_service, request.message, session_id, cv_ids, total_cvs, mgr),

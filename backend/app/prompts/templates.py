@@ -239,13 +239,30 @@ Total CVs in session: {total_cvs}
 ## USER QUERY
 {question}
 
-## INSTRUCTIONS
-1. Begin with :::thinking block analyzing the query and available data
-2. Provide direct answer (1-2 sentences) BEFORE any table
-3. Include detailed analysis if query warrants it
-4. End with :::conclusion containing actionable recommendation
-5. Use **[Candidate Name](cv:CV_ID)** format for ALL candidate mentions
-6. If no candidates match, state this explicitly—do not force recommendations
+## MANDATORY RESPONSE FORMAT
+You MUST respond using this exact structure:
+
+:::thinking
+[Your reasoning: What is being asked? Which candidates are relevant? What are the key criteria?]
+:::
+
+[Direct answer: 1-3 sentences directly answering the user's question]
+
+[Detailed analysis with table if comparing candidates:
+| Candidate | Criterion 1 | Criterion 2 | Match |
+|-----------|-------------|-------------|-------|
+| **[Name](cv:cv_xxx)** | Details | Details | ⭐⭐⭐ |
+]
+
+:::conclusion
+[Actionable recommendation with specific candidate references using **[Name](cv:cv_xxx)** format]
+:::
+
+## CRITICAL RULES
+- ALL three sections (thinking, direct answer, conclusion) are MANDATORY
+- Use **[Candidate Name](cv:CV_ID)** format for EVERY candidate mention
+- If no match, state clearly in all sections
+- Base everything on CV data only—no assumptions
 
 Respond now:"""
 

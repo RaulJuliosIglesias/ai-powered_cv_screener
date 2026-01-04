@@ -164,14 +164,14 @@ class ReasoningService:
     - Reflection: Self-critique before final answer
     """
     
-    DEFAULT_MODEL = "google/gemini-2.0-flash-001"
-    
     def __init__(
         self,
-        model: Optional[str] = None,
+        model: str,
         reflection_enabled: bool = True
     ):
-        self.model = model or self.DEFAULT_MODEL
+        if not model:
+            raise ValueError("model parameter is required and cannot be empty")
+        self.model = model
         self.reflection_enabled = reflection_enabled
         self.api_key = settings.openrouter_api_key or ""
         logger.info(f"ReasoningService initialized with model: {self.model}")
@@ -385,12 +385,12 @@ _reasoning_service: Optional[ReasoningService] = None
 
 
 def get_reasoning_service(
-    model: Optional[str] = None,
+    model: str,
     reflection_enabled: bool = True
 ) -> ReasoningService:
     """Get singleton instance."""
     global _reasoning_service
-    if _reasoning_service is None:
+    if _reasoning_service is None or _reasoning_service.model != model:
         _reasoning_service = ReasoningService(
             model=model,
             reflection_enabled=reflection_enabled

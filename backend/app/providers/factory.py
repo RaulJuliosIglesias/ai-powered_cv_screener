@@ -37,13 +37,26 @@ class ProviderFactory:
         return cls._instances[key]
     
     @classmethod
-    def get_llm_provider(cls, mode: Mode = None) -> LLMProvider:
-        # Always use OpenRouter (supports multiple models)
-        key = "llm_openrouter"
+    def get_llm_provider(cls, mode: Mode, model: str) -> LLMProvider:
+        """
+        Get LLM provider configured for specific model.
+        
+        Args:
+            mode: Operating mode (LOCAL or CLOUD)
+            model: Model ID to use (required)
+        
+        Returns:
+            LLMProvider instance configured for the specified model
+        """
+        if not model:
+            raise ValueError("model parameter is required")
+        
+        # Create unique key per model to cache instances
+        key = f"llm_{mode}_{model}"
         
         if key not in cls._instances:
             from app.providers.cloud.llm import OpenRouterLLMProvider
-            cls._instances[key] = OpenRouterLLMProvider()
+            cls._instances[key] = OpenRouterLLMProvider(model=model)
         
         return cls._instances[key]
     

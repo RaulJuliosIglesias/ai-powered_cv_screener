@@ -9,7 +9,6 @@ logger = logging.getLogger(__name__)
 
 # Cache for models fetched from OpenRouter
 _cached_models: List[Dict] = []
-_current_model = "openai/gpt-4o-mini"  # Safe default
 
 
 async def fetch_openrouter_models() -> List[Dict]:
@@ -79,26 +78,15 @@ def get_available_models() -> List[Dict]:
     return _cached_models
 
 
-def get_current_model() -> str:
-    """Get currently selected model."""
-    return _current_model
-
-
-def set_current_model(model_id: str) -> bool:
-    """Set the current model."""
-    global _current_model
-    _current_model = model_id
-    logger.info(f"Model changed to: {model_id}")
-    return True
-
-
 class OpenRouterLLMProvider(LLMProvider):
     """LLM provider using OpenRouter API."""
     
-    def __init__(self, model: str = None):
+    def __init__(self, model: str):
+        if not model:
+            raise ValueError("model parameter is required and cannot be empty")
         self.api_key = settings.openrouter_api_key
         self.base_url = "https://openrouter.ai/api/v1"
-        self.model = model or _current_model
+        self.model = model
     
     async def generate(
         self,
@@ -110,8 +98,7 @@ class OpenRouterLLMProvider(LLMProvider):
         import asyncio
         start = time.perf_counter()
         
-        # Use instance model if set, otherwise use global current model
-        model = self.model or _current_model
+        model = self.model
         
         messages = []
         if system_prompt:

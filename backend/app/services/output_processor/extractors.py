@@ -119,38 +119,60 @@ class DirectAnswerExtractor:
             logger.warning("Empty text, using fallback direct answer")
             return fallback
         
-        # Remove thinking and conclusion blocks for cleaner extraction
+        # Remove thinking block for cleaner extraction (but keep conclusion)
         clean_text = text
         clean_text = re.sub(r':::thinking[\s\S]*?:::', '', clean_text, flags=re.IGNORECASE)
-        clean_text = re.sub(r':::conclusion[\s\S]*?:::', '', clean_text, flags=re.IGNORECASE)
+        
+        # Also remove conclusion block temporarily
+        conclusion_removed = re.sub(r':::conclusion[\s\S]*?:::', '', clean_text, flags=re.IGNORECASE)
+        conclusion_removed = re.sub(r':::conclusion[\s\S]*$', '', conclusion_removed, flags=re.IGNORECASE)
         
         # Look for "Direct Answer" or "Answer" section
         match = re.search(
             r'\*\*(?:Direct\s+)?Answer\*\*\s*\n(.*?)(?=\n\n|\n\*\*|\n\||\Z)',
-            clean_text,
+            conclusion_removed,
             re.IGNORECASE | re.DOTALL
         )
         if match:
             answer = match.group(1).strip()
-            if answer:
-                logger.debug(f"Extracted direct answer: {len(answer)} chars")
+            if answer and len(answer) > 10:
+                logger.debug(f"Extracted direct answer from section: {len(answer)} chars")
                 return answer
         
-        # Fallback: Take first paragraph after thinking block
-        paragraphs = [p.strip() for p in clean_text.split('\n\n') if p.strip()]
+        # Strategy 2: Take first 1-3 sentences after thinking block
+        paragraphs = [p.strip() for p in conclusion_removed.split('\n\n') if p.strip()]
         for para in paragraphs:
             # Skip table lines
             if '|' in para and para.count('|') > 2:
                 continue
-            # Skip section headers
-            if para.startswith('#') or para.startswith('**'):
+            # Skip section headers (but allow bold text that's part of answer)
+            if para.startswith('###') or para.startswith('##') or para.startswith('#'):
                 continue
             # Skip very short paragraphs
-            if len(para) < 20:
+            if len(para) < 30:
                 continue
             
-            logger.debug(f"Using first valid paragraph as direct answer: {len(para)} chars")
-            return para
+            # Extract first 1-3 sentences (up to 300 chars)
+            sentences = re.split(r'(?<=[.!?])\s+', para)
+            direct = ' '.join(sentences[:3])
+            if len(direct) > 300:
+                direct = direct[:300].rsplit(' ', 1)[0] + '...'
+            
+            if len(direct) > 20:
+                logger.debug(f"Using first sentences as direct answer: {len(direct)} chars")
+                return direct
+        
+        # Strategy 3: Try to find first meaningful sentence in entire text
+        all_text = conclusion_removed.replace('\n', ' ').strip()
+        sentences = re.split(r'(?<=[.!?])\s+', all_text)
+        for sent in sentences[:5]:  # Check first 5 sentences
+            sent = sent.strip()
+            # Skip metadata-like sentences
+            if any(skip in sent.lower() for skip in ['retrieved:', 'cv data', 'instructions:', 'total cvs']):
+                continue
+            if len(sent) > 30 and not sent.startswith('|'):
+                logger.debug(f"Using first meaningful sentence: {len(sent)} chars")
+                return sent
         
         # Ultimate fallback
         logger.warning("Could not extract direct answer, using fallback")
