@@ -68,6 +68,23 @@ class AnalysisModule:
         # CRITICAL: Remove ALL prompt contamination (same as DirectAnswerModule)
         cleaned = re.sub(r'\*\*ABSOLUTELY FORBIDDEN[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
         cleaned = re.sub(r'ABSOLUTELY FORBIDDEN[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
+        
+        # CRITICAL: Remove "CRITICAL RULES" section (prompt leakage)
+        cleaned = re.sub(r'##?\s*CRITICAL RULES[\s\S]*?(?=\n\n[A-Z]|\n\n\*\*[A-Z]|$)', '', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'\bCRITICAL RULES\b[^\n]*\n?', '', cleaned, flags=re.IGNORECASE)
+        
+        # Remove specific leaked instruction lines (be precise to avoid false positives)
+        leaked_instructions = [
+            r'-\s*ALL three sections \(thinking,? direct answer,? conclusion\) are MANDATORY[^\n]*\n?',
+            r'-\s*Use \*?\*?\[?Candidate Name\]?\*?\*?\s*\(?CV_ID\)?.*?format for EVERY candidate mention[^\n]*\n?',
+            r'-\s*Use Candidate Name CV_ID CV_ID format[^\n]*\n?',
+            r'-\s*If no match,? state clearly in all sections[^\n]*\n?',
+            r'-\s*Base everything on CV data only—no assumptions[^\n]*\n?',
+            r'##?\s*MANDATORY RESPONSE FORMAT[^\n]*\n?',
+        ]
+        for pattern in leaked_instructions:
+            cleaned = re.sub(pattern, '', cleaned, flags=re.IGNORECASE)
+        
         cleaned = re.sub(r'Match Score Legend[\s\S]*?(?=\n\n|Table|Conclusion|$)', '', cleaned, flags=re.IGNORECASE)
         cleaned = re.sub(r'COMPARISON TABLES[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
         cleaned = re.sub(r'SPECIAL CASES[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
@@ -87,13 +104,20 @@ class AnalysisModule:
         cleaned = re.sub(r'^\s*\n', '', cleaned, flags=re.MULTILINE)
         
         # Validate: ensure no prompt contamination remains
+        # Be precise to avoid false positives like "No candidates match"
         contamination_patterns = [
-            r'FORBIDDEN',
+            r'ABSOLUTELY FORBIDDEN',
             r'Match Score Legend',
-            r'COMPARISON TABLES',
+            r'##\s*COMPARISON TABLES',
             r'code\s*Copy code',
-            r'^References?:',
-            r'web search was conducted'
+            r'^References?:\s*$',
+            r'web search was conducted',
+            r'##?\s*CRITICAL RULES',
+            r'^-\s*ALL three sections',
+            r'##?\s*MANDATORY RESPONSE FORMAT',
+            r'^-\s*Use.*Candidate Name.*CV_ID.*format',
+            r'^-\s*If no match.*state clearly in all',
+            r'^-\s*Base everything on CV data',
         ]
         
         if any(re.search(pattern, cleaned, re.IGNORECASE) for pattern in contamination_patterns):

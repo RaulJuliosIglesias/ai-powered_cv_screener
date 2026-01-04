@@ -68,6 +68,22 @@ class ConclusionModule:
         text = re.sub(r'code\s*Copy code', '', text, flags=re.IGNORECASE)
         text = re.sub(r'^(?:Text|List|Example):\s*', '', text, flags=re.MULTILINE)
         
+        # CRITICAL: Remove "CRITICAL RULES" section (prompt leakage)
+        text = re.sub(r'##?\s*CRITICAL RULES[\s\S]*?(?=\n\n[A-Z]|\n\n\*\*[A-Z]|$)', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'\bCRITICAL RULES\b[^\n]*\n?', '', text, flags=re.IGNORECASE)
+        
+        # Remove specific leaked instruction lines (be precise to avoid false positives)
+        leaked_instructions = [
+            r'-\s*ALL three sections \(thinking,? direct answer,? conclusion\) are MANDATORY[^\n]*\n?',
+            r'-\s*Use \*?\*?\[?Candidate Name\]?\*?\*?\s*\(?CV_ID\)?.*?format for EVERY candidate mention[^\n]*\n?',
+            r'-\s*Use Candidate Name CV_ID CV_ID format[^\n]*\n?',
+            r'-\s*If no match,? state clearly in all sections[^\n]*\n?',
+            r'-\s*Base everything on CV data only—no assumptions[^\n]*\n?',
+            r'##?\s*MANDATORY RESPONSE FORMAT[^\n]*\n?',
+        ]
+        for pattern in leaked_instructions:
+            text = re.sub(pattern, '', text, flags=re.IGNORECASE)
+        
         # Remove hallucinated URLs
         text = re.sub(r'(?:engx\.space|resumekraft\.com|github\.com|linkedin\.com)[^\s]*', '', text, flags=re.IGNORECASE)
         

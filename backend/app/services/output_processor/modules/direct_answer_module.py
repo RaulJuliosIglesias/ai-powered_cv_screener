@@ -64,6 +64,22 @@ class DirectAnswerModule:
         cleaned = re.sub(r'\*\*ABSOLUTELY FORBIDDEN[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
         cleaned = re.sub(r'ABSOLUTELY FORBIDDEN[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
         
+        # CRITICAL: Remove "CRITICAL RULES" section (prompt leakage)
+        cleaned = re.sub(r'##?\s*CRITICAL RULES[\s\S]*?(?=\n\n[A-Z]|\n\n\*\*[A-Z]|$)', '', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'\bCRITICAL RULES\b[^\n]*\n?', '', cleaned, flags=re.IGNORECASE)
+        
+        # Remove specific leaked instruction lines (be precise to avoid false positives)
+        leaked_instructions = [
+            r'-\s*ALL three sections \(thinking,? direct answer,? conclusion\) are MANDATORY[^\n]*\n?',
+            r'-\s*Use \*?\*?\[?Candidate Name\]?\*?\*?\s*\(?CV_ID\)?.*?format for EVERY candidate mention[^\n]*\n?',
+            r'-\s*Use Candidate Name CV_ID CV_ID format[^\n]*\n?',
+            r'-\s*If no match,? state clearly in all sections[^\n]*\n?',
+            r'-\s*Base everything on CV data only—no assumptions[^\n]*\n?',
+            r'##?\s*MANDATORY RESPONSE FORMAT[^\n]*\n?',
+        ]
+        for pattern in leaked_instructions:
+            cleaned = re.sub(pattern, '', cleaned, flags=re.IGNORECASE)
+        
         # Remove "Match Score Legend" section
         cleaned = re.sub(r'Match Score Legend[\s\S]*?(?=\n\n|Table|Conclusion|$)', '', cleaned, flags=re.IGNORECASE)
         
@@ -95,19 +111,30 @@ class DirectAnswerModule:
         cleaned = re.sub(r'\n{3,}', '\n\n', cleaned)
         cleaned = re.sub(r'^\s*\n', '', cleaned, flags=re.MULTILINE)
         
+        # CRITICAL: Detect and remove duplicated content
+        # Sometimes the LLM duplicates its response
+        cleaned = self._remove_duplicate_content(cleaned)
+        
         # Take first paragraph (up to double newline or first 3 sentences)
         paragraphs = [p.strip() for p in cleaned.split('\n\n') if p.strip()]
         if paragraphs and paragraphs[0]:
             first_para = paragraphs[0].strip()
             
             # Skip if it looks like an instruction or prompt fragment
+            # Be precise to avoid false positives like "No candidates match"
             skip_patterns = [
                 r'^(?:Text|List|Example|References?)[:.]',
-                r'^[❌✓⭐•-]\s',
+                r'^[❌✓•]\s',  # Removed ⭐- to allow star ratings and bullet points
                 r'^code\s*Copy',
-                r'FORBIDDEN',
-                r'Match Score',
-                r'http[s]?://'
+                r'ABSOLUTELY FORBIDDEN',
+                r'Match Score Legend',
+                r'^http[s]?://',
+                r'^##?\s*CRITICAL RULES',
+                r'^-\s*ALL three sections',
+                r'^##?\s*MANDATORY',
+                r'^-\s*Use.*Candidate Name.*CV_ID.*format',
+                r'^-\s*If no match.*state clearly in all',
+                r'^-\s*Base everything on CV data',
             ]
             
             if any(re.search(pattern, first_para, re.IGNORECASE) for pattern in skip_patterns):
@@ -127,10 +154,93 @@ class DirectAnswerModule:
             logger.debug(f"[DIRECT_ANSWER] Extracted: {len(direct_answer)} chars")
             return direct_answer
         
-        # Fallback: first 200 chars
-        fallback = cleaned[:200].strip()
-        logger.warning(f"[DIRECT_ANSWER] Fallback used: {len(fallback)} chars")
-        return fallback if fallback else "Response could not be parsed."
+        # Fallback: Try to extract ANY meaningful content
+        # Look for sentences that start with common response patterns
+        meaningful_patterns = [
+            r'(No candidates?[^.]*\.)',
+            r'(None of the[^.]*\.)',
+            r'(The best candidate[^.]*\.)',
+            r'(Based on[^.]*\.)',
+            r'([A-Z][^.]{20,}\.)'
+        ]
+        
+        for pattern in meaningful_patterns:
+            match = re.search(pattern, llm_output, re.IGNORECASE)
+            if match:
+                fallback = match.group(1).strip()
+                logger.info(f"[DIRECT_ANSWER] Pattern fallback: {fallback[:50]}...")
+                return fallback
+        
+        # Last resort: first 200 chars of cleaned content
+        fallback = cleaned[:200].strip() if cleaned else ""
+        if fallback:
+            logger.warning(f"[DIRECT_ANSWER] Char fallback used: {len(fallback)} chars")
+            return fallback
+        
+        # Generate a generic response based on conclusion if available
+        conclusion_match = re.search(r':::conclusion\s*([\s\S]*?):::', llm_output, re.IGNORECASE)
+        if conclusion_match:
+            conclusion_text = conclusion_match.group(1).strip()
+            first_sentence = re.split(r'[.!?]', conclusion_text)[0]
+            if first_sentence and len(first_sentence) > 10:
+                logger.info(f"[DIRECT_ANSWER] Using conclusion as fallback")
+                return first_sentence.strip() + '.'
+        
+        logger.warning("[DIRECT_ANSWER] Could not extract direct answer")
+        return "See the analysis below for candidate details."
+    
+    def _remove_duplicate_content(self, text: str) -> str:
+        """
+        Detect and remove duplicated content in LLM output.
+        
+        Sometimes LLMs repeat the same response multiple times.
+        This method identifies and removes such duplications.
+        
+        Args:
+            text: Text that may contain duplicated content
+            
+        Returns:
+            Text with duplications removed
+        """
+        if not text or len(text) < 100:
+            return text
+        
+        paragraphs = text.split('\n\n')
+        if len(paragraphs) < 2:
+            return text
+        
+        # Look for exact or near-exact duplicates
+        seen_paragraphs = []
+        unique_paragraphs = []
+        
+        for para in paragraphs:
+            para_stripped = para.strip()
+            if not para_stripped:
+                continue
+            
+            # Check if this paragraph is a duplicate (or very similar)
+            is_duplicate = False
+            for seen in seen_paragraphs:
+                # Exact match
+                if para_stripped == seen:
+                    is_duplicate = True
+                    break
+                # Very similar (80% overlap) - check first 50 chars
+                if len(para_stripped) > 50 and len(seen) > 50:
+                    if para_stripped[:50] == seen[:50]:
+                        is_duplicate = True
+                        break
+            
+            if not is_duplicate:
+                seen_paragraphs.append(para_stripped)
+                unique_paragraphs.append(para)
+        
+        result = '\n\n'.join(unique_paragraphs)
+        
+        if len(result) < len(text):
+            logger.info(f"[DIRECT_ANSWER] Removed duplicate content: {len(text)} -> {len(result)} chars")
+        
+        return result
     
     def format(self, content: str) -> str:
         """
