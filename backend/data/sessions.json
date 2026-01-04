@@ -9552,10 +9552,195 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-04T20:30:01.200083"
+        },
+        {
+          "id": "617b0b95-a786-4174-ad28-76c276a1c6ca",
+          "role": "user",
+          "content": "y el mejor para front end? dame una lsita de 5 y porque estos 5 son los mejroes de entre todos",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T21:13:03.852507"
+        },
+        {
+          "id": "3c788010-c674-4c4b-a9a1-e5a21ded692a",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to identify the top 5 frontend developers from the provided CVs, including their experience, skills, and a rationale for their selection. I need to analyze each CV for relevant frontend skills (HTML, CSS, JavaScript, React, etc.) and experience. I will then rank the candidates based on these criteria and provide a table with the top 5. If there are fewer than 5 suitable candidates, I will include the closest matches and explain the limitations.\n:::\n\nI have identified the top candidates based on their explicit frontend development skills and experience. The following analysis highlights the skills and experience of the selected candidates, along with the reasons for their selection. ### Analysis\n[📄](cv:cv_9c7f44c3)**Sofia Grijalva**is a strong match due to their experience with React, TypeScript, and CSS, which are core frontend technologies.\n\n### Analysis\n\n| Candidate | Skills | Experience | Match |\n\n| Candidate | Skills | Experience | Match Score |\n|---|---|---|---|\n| Sofia Grijalva | React, TypeScript, CSS | 2021-2022: Experience building responsive, user-centric web applications. | 80% |\n| Aisha Okafor | AWS, Docker, Kubernetes | The CV does not explicitly mention frontend skills, but mentions AWS, Docker, and Kubernetes. | 20% |\n| Jinyu Li | Figma, Sketch, User Research, Interaction Design, Prototyping, Usability Testing, Design Systems, Data-Driven Design | The CV does not explicitly mention frontend skills. | 20% |\n| Liam Nguyen | Photoshop, Illustrator, Blender, ZBrush | The CV does not explicitly mention frontend skills. | 50% |\n| Liam Nguyen | Photoshop, Illustrator, Blender, ZBrush | The CV does not explicitly mention frontend skills. | 50% |\n\n:::conclusion\nThe top candidate for frontend development is [📄](cv:cv_9c7f44c3)**Sofia Grijalva**. Other candidates with related skills are [📄](cv:cv_57cb15fc)**Aisha Okafor**and [📄](cv:cv_03fdf445)**Jinyu Li**.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_d465a173",
+              "filename": "d7982b4e_María_Paula_Castaneda_Accessories_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_4bb3c643",
+              "filename": "1ef4e451_Dirk_van_der_Meer_Therapist.pdf"
+            },
+            {
+              "cv_id": "cv_53b52b51",
+              "filename": "477ae7a5_Liam_Nguyen_Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_2a5af411",
+              "filename": "477ae7a5_Liam_Nguyen_Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_57cb15fc",
+              "filename": "84885a0c__Aisha_Okafor__Software_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_9c7f44c3",
+              "filename": "32a19f88_Sofia_Grijalva_Frontend_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_9f37d305",
+              "filename": "69ed5706_Aisha_Nkrumah_Associate_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_398cd226",
+              "filename": "06659811_Lucas_Moreau_CFO.pdf"
+            },
+            {
+              "cv_id": "cv_d2ad5f3e",
+              "filename": "c042a902_Priya_Kapoor_Culinary_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_b0b74341",
+              "filename": "e3521ef7_Kwame_Agyei_Agile_Coach.pdf"
+            },
+            {
+              "cv_id": "cv_223b168e",
+              "filename": "4662a9ee_Patricia_Williams_Medical_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_03fdf445",
+              "filename": "bc71f888__Jinyu_Li__Product_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_f0da3cc4",
+              "filename": "8ce2db38__Sofía_Rodríguez__Game_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_4767e98e",
+              "filename": "d355ad6c__Carlos_Lopez__Junior_Composer.pdf"
+            },
+            {
+              "cv_id": "cv_87b5b4ee",
+              "filename": "37a5388e_Carla_Mendoza_Architect.pdf"
+            },
+            {
+              "cv_id": "cv_1c7a225c",
+              "filename": "68835e12_Ethan_Park_Physical_Therapist.pdf"
+            },
+            {
+              "cv_id": "cv_c1c3357e",
+              "filename": "68835e12_Ethan_Park_Physical_Therapist.pdf"
+            },
+            {
+              "cv_id": "cv_ac82b28a",
+              "filename": "4b35135f__Adepoju_Emmanuel__Associate_Art_Director.pdf"
+            },
+            {
+              "cv_id": "cv_f025d121",
+              "filename": "568eac3c_Priya_Patel_Regional_Sales_Manager.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 65926.1,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 55.51,
+              "details": "Found 20 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 4530.49,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4805.55,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "I have identified the top candidates based on their explicit frontend development skills and experience. The following analysis highlights the skills and experience of the selected candidates, along with the reasons for their selection. ### Analysis\n[📄](cv:cv_9c7f44c3) **Sofia Grijalva** is a strong match due to their experience with React, TypeScript, and CSS, which are core frontend technologies.",
+            "raw_content": ":::thinking\nThe user is asking to identify the top 5 frontend developers from the provided CVs, including their experience, skills, and a rationale for their selection. I need to analyze each CV for relevant frontend skills (HTML, CSS, JavaScript, React, etc.) and experience. I will then rank the candidates based on these criteria and provide a table with the top 5. If there are fewer than 5 suitable candidates, I will include the closest matches and explain the limitations.\n:::\n\nI have identified the top candidates based on their explicit frontend development skills and experience. The following analysis highlights the skills and experience of the selected candidates, along with the reasons for their selection.\n\n### Analysis\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Sofia Grijalva](cv:cv_9c7f44c3)** | React, TypeScript, CSS | 2021-2022: Experience building responsive, user-centric web applications. | ⭐⭐⭐⭐ |\n| **[Aisha Okafor](cv:cv_57cb15fc)** | AWS, Docker, Kubernetes | The CV does not explicitly mention frontend skills, but mentions AWS, Docker, and Kubernetes. | ⭐ |\n| **[Jinyu Li](cv:cv_03fdf445)** | Figma, Sketch, User Research, Interaction Design, Prototyping, Usability Testing, Design Systems, Data-Driven Design | The CV does not explicitly mention frontend skills. | ⭐ |\n| **[Liam Nguyen](cv:cv_53b52b51)** | Photoshop, Illustrator, Blender, ZBrush | The CV does not explicitly mention frontend skills. | ❌ |\n| **[Liam Nguyen](cv:cv_2a5af411)** | Photoshop, Illustrator, Blender, ZBrush | The CV does not explicitly mention frontend skills. | ❌ |\n\n**[Sofia Grijalva](cv:cv_9c7f44c3)** is a strong match due to their experience with React, TypeScript, and CSS, which are core frontend technologies.\n\n**[Aisha Okafor](cv:cv_57cb15fc)** has experience with AWS, Docker, and Kubernetes, which are related to frontend development.\n\n**[Jinyu Li](cv:cv_03fdf445)** has experience with design tools, which are related to frontend development.\n\n**[Liam Nguyen](cv:cv_53b52b51)** and **[Liam Nguyen](cv:cv_2a5af411)** are concept artists and do not have frontend skills.\n\n:::conclusion\nThe top candidate for frontend development is **[Sofia Grijalva](cv:cv_9c7f44c3)**. Other candidates with related skills are **[Aisha Okafor](cv:cv_57cb15fc)** and **[Jinyu Li](cv:cv_03fdf445)**.",
+            "thinking": "The user is asking to identify the top 5 frontend developers from the provided CVs, including their experience, skills, and a rationale for their selection. I need to analyze each CV for relevant frontend skills (HTML, CSS, JavaScript, React, etc.) and experience. I will then rank the candidates based on these criteria and provide a table with the top 5. If there are fewer than 5 suitable candidates, I will include the closest matches and explain the limitations.",
+            "analysis": "| Candidate | Skills | Experience | Match |",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Skills",
+                "Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Sofia Grijalva",
+                  "cv_id": "cv_9c7f44c3",
+                  "columns": {
+                    "Skills": "React, TypeScript, CSS",
+                    "Experience": "2021-2022: Experience building responsive, user-centric web applications."
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Aisha Okafor",
+                  "cv_id": "cv_57cb15fc",
+                  "columns": {
+                    "Skills": "AWS, Docker, Kubernetes",
+                    "Experience": "The CV does not explicitly mention frontend skills, but mentions AWS, Docker, and Kubernetes."
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Jinyu Li",
+                  "cv_id": "cv_03fdf445",
+                  "columns": {
+                    "Skills": "Figma, Sketch, User Research, Interaction Design, Prototyping, Usability Testing, Design Systems, Data-Driven Design",
+                    "Experience": "The CV does not explicitly mention frontend skills."
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Liam Nguyen",
+                  "cv_id": "cv_53b52b51",
+                  "columns": {
+                    "Skills": "Photoshop, Illustrator, Blender, ZBrush",
+                    "Experience": "The CV does not explicitly mention frontend skills."
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Liam Nguyen",
+                  "cv_id": "cv_2a5af411",
+                  "columns": {
+                    "Skills": "Photoshop, Illustrator, Blender, ZBrush",
+                    "Experience": "The CV does not explicitly mention frontend skills."
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "The top candidate for frontend development is [📄](cv:cv_9c7f44c3) **Sofia Grijalva**. Other candidates with related skills are [📄](cv:cv_57cb15fc) **Aisha Okafor** and [📄](cv:cv_03fdf445) **Jinyu Li**.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-04T21:15:17.563927"
         }
       ],
       "created_at": "2026-01-04T20:04:25.781418",
-      "updated_at": "2026-01-04T20:30:01.200083"
+      "updated_at": "2026-01-04T21:15:17.563927"
     }
   ]
 }

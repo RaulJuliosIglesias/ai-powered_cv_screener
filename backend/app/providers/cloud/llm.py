@@ -79,6 +79,22 @@ def get_available_models() -> List[Dict]:
     return _cached_models
 
 
+def calculate_openrouter_cost(model: str, prompt_tokens: int, completion_tokens: int) -> float:
+    """Calculate cost for an OpenRouter model based on token counts.
+    
+    This is a shared utility function that can be used by any service
+    that makes OpenRouter API calls.
+    """
+    for m in _cached_models:
+        if m["id"] == model:
+            pricing = m.get("pricing_raw", {})
+            # pricing_raw is per 1M tokens
+            prompt_cost = (prompt_tokens / 1_000_000) * pricing.get("prompt", 0)
+            completion_cost = (completion_tokens / 1_000_000) * pricing.get("completion", 0)
+            return prompt_cost + completion_cost
+    return 0.0
+
+
 class OpenRouterLLMProvider(LLMProvider):
     """LLM provider using OpenRouter API."""
     
@@ -157,21 +173,33 @@ class OpenRouterLLMProvider(LLMProvider):
         latency = (time.perf_counter() - start) * 1000
         
         usage = data.get("usage", {})
+        prompt_tokens = usage.get("prompt_tokens", 0)
+        completion_tokens = usage.get("completion_tokens", 0)
         
-        # Extract real cost from OpenRouter response
-        # OpenRouter returns cost in the response under different possible fields
-        total_cost = 0.0
-        if "usage" in data:
-            # Try to get cost from usage metadata
-            total_cost = data["usage"].get("total_cost", 0.0)
-            # Some models return it as a string or in cents
-            if isinstance(total_cost, str):
-                total_cost = float(total_cost)
+        # Calculate cost from tokens and model pricing
+        # OpenRouter doesn't return cost directly in chat/completions response
+        total_cost = self._calculate_cost(prompt_tokens, completion_tokens)
+        
+        logger.info(f"[LLM] {self.model}: {prompt_tokens}+{completion_tokens} tokens, cost=${total_cost:.6f}")
         
         return LLMResult(
             text=data["choices"][0]["message"]["content"],
-            prompt_tokens=usage.get("prompt_tokens", 0),
-            completion_tokens=usage.get("completion_tokens", 0),
+            prompt_tokens=prompt_tokens,
+            completion_tokens=completion_tokens,
             latency_ms=latency,
-            metadata={"openrouter_cost": total_cost} if total_cost else {}
+            metadata={"openrouter_cost": total_cost}
         )
+    
+    def _calculate_cost(self, prompt_tokens: int, completion_tokens: int) -> float:
+        """Calculate cost based on model pricing and token counts."""
+        # Try to get pricing from cached models
+        for m in _cached_models:
+            if m["id"] == self.model:
+                pricing = m.get("pricing_raw", {})
+                # pricing_raw is per 1M tokens
+                prompt_cost = (prompt_tokens / 1_000_000) * pricing.get("prompt", 0)
+                completion_cost = (completion_tokens / 1_000_000) * pricing.get("completion", 0)
+                return prompt_cost + completion_cost
+        
+        # Fallback: if model not in cache, return 0 (will be updated when models are fetched)
+        return 0.0

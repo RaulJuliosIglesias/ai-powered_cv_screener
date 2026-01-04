@@ -845,6 +845,9 @@ class RAGServiceV5:
         total_cvs_in_session: int | None = None
     ) -> RAGResponseV5:
         """Execute complete RAG v5 query pipeline."""
+        # Reset degradation state for each new request
+        degradation.enable_feature('reasoning')
+        
         if not self._providers_initialized:
             raise RAGError("Providers not initialized")
         
@@ -894,6 +897,10 @@ class RAGServiceV5:
         
         Yields SSE events as the pipeline executes.
         """
+        # Reset degradation state for each new request
+        # (reasoning should be retried each time, not stay disabled forever)
+        degradation.enable_feature('reasoning')
+        
         if not self._providers_initialized:
             yield {"event": "error", "data": {"message": "Providers not initialized"}}
             return
@@ -1484,8 +1491,19 @@ class RAGServiceV5:
     
     async def _step_reasoning(self, ctx: PipelineContextV5) -> None:
         """Step 7: Apply structured reasoning with graceful degradation."""
-        if not self.config.reasoning_enabled or not degradation.is_enabled('reasoning'):
-            logger.info("Reasoning disabled or degraded, skipping")
+        if not self.config.reasoning_enabled:
+            logger.info("Reasoning disabled in config, skipping")
+            return
+        
+        # Check degradation but still record stage metric
+        if not degradation.is_enabled('reasoning'):
+            logger.info("Reasoning degraded (previous error), recording skipped stage")
+            ctx.metrics.add_stage(StageMetrics(
+                stage=PipelineStage.REASONING,
+                duration_ms=0,
+                success=False,
+                error="Skipped due to previous error (degraded)"
+            ))
             return
         
         start = time.perf_counter()

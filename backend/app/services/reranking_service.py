@@ -12,6 +12,7 @@ import httpx
 
 from app.config import settings, timeouts
 from app.providers.base import SearchResult
+from app.providers.cloud.llm import calculate_openrouter_cost
 
 logger = logging.getLogger(__name__)
 
@@ -158,14 +159,19 @@ class RerankingService:
             
             content = data["choices"][0]["message"]["content"].strip()
             
-            # Extract OpenRouter usage metadata
+            # Extract OpenRouter usage metadata and calculate cost
             metadata = {}
             if "usage" in data:
                 usage = data["usage"]
-                metadata["prompt_tokens"] = usage.get("prompt_tokens", 0)
-                metadata["completion_tokens"] = usage.get("completion_tokens", 0)
-                metadata["total_tokens"] = usage.get("total_tokens", 0)
-                metadata["openrouter_cost"] = usage.get("total_cost", 0.0)
+                prompt_tokens = usage.get("prompt_tokens", 0)
+                completion_tokens = usage.get("completion_tokens", 0)
+                metadata["prompt_tokens"] = prompt_tokens
+                metadata["completion_tokens"] = completion_tokens
+                metadata["total_tokens"] = prompt_tokens + completion_tokens
+                # Calculate cost from tokens and model pricing
+                metadata["openrouter_cost"] = calculate_openrouter_cost(
+                    self.model, prompt_tokens, completion_tokens
+                )
                 logger.info(f"[RERANKING] OpenRouter usage: {metadata['total_tokens']} tokens, ${metadata['openrouter_cost']:.6f}")
             
             # Parse scores

@@ -10,6 +10,7 @@ from dataclasses import dataclass, field
 import httpx
 
 from app.config import settings, timeouts
+from app.providers.cloud.llm import calculate_openrouter_cost
 
 logger = logging.getLogger(__name__)
 
@@ -143,21 +144,21 @@ class QueryUnderstandingService:
             
             content = data["choices"][0]["message"]["content"].strip()
             
-            # Extract OpenRouter usage metadata
+            # Extract OpenRouter usage metadata and calculate cost
             metadata = {}
             if "usage" in data:
                 usage = data["usage"]
-                # OpenRouter returns usage as object with prompt_tokens, completion_tokens, total_cost
                 if isinstance(usage, dict):
-                    metadata["prompt_tokens"] = usage.get("prompt_tokens", 0)
-                    metadata["completion_tokens"] = usage.get("completion_tokens", 0)
-                    metadata["total_tokens"] = usage.get("total_tokens", metadata.get("prompt_tokens", 0) + metadata.get("completion_tokens", 0))
-                    metadata["openrouter_cost"] = usage.get("total_cost", 0.0)
+                    prompt_tokens = usage.get("prompt_tokens", 0)
+                    completion_tokens = usage.get("completion_tokens", 0)
+                    metadata["prompt_tokens"] = prompt_tokens
+                    metadata["completion_tokens"] = completion_tokens
+                    metadata["total_tokens"] = prompt_tokens + completion_tokens
+                    # Calculate cost from tokens and model pricing
+                    metadata["openrouter_cost"] = calculate_openrouter_cost(
+                        self.model, prompt_tokens, completion_tokens
+                    )
                     logger.info(f"[QUERY_UNDERSTANDING] OpenRouter usage: {metadata}")
-                else:
-                    # If usage is just a number (cost), use it directly
-                    metadata["openrouter_cost"] = float(usage) if usage else 0.0
-                    logger.info(f"[QUERY_UNDERSTANDING] OpenRouter cost (numeric): ${metadata['openrouter_cost']}")
             else:
                 logger.warning("[QUERY_UNDERSTANDING] No 'usage' field in OpenRouter response")
             

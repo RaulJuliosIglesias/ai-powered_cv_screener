@@ -12,6 +12,7 @@ import httpx
 
 from app.config import settings, timeouts
 from app.utils.text_utils import smart_truncate
+from app.providers.cloud.llm import calculate_openrouter_cost
 
 logger = logging.getLogger(__name__)
 
@@ -267,18 +268,21 @@ class ReasoningService:
         
         content = data["choices"][0]["message"]["content"].strip()
         
-        # Extract OpenRouter usage metadata
+        # Extract OpenRouter usage metadata and calculate cost
         usage_metadata = {}
         if "usage" in data:
             usage = data["usage"]
             if isinstance(usage, dict):
-                usage_metadata["prompt_tokens"] = usage.get("prompt_tokens", 0)
-                usage_metadata["completion_tokens"] = usage.get("completion_tokens", 0)
-                usage_metadata["total_tokens"] = usage.get("total_tokens", 0)
-                usage_metadata["openrouter_cost"] = usage.get("total_cost", 0.0)
+                prompt_tokens = usage.get("prompt_tokens", 0)
+                completion_tokens = usage.get("completion_tokens", 0)
+                usage_metadata["prompt_tokens"] = prompt_tokens
+                usage_metadata["completion_tokens"] = completion_tokens
+                usage_metadata["total_tokens"] = prompt_tokens + completion_tokens
+                # Calculate cost from tokens and model pricing
+                usage_metadata["openrouter_cost"] = calculate_openrouter_cost(
+                    self.model, prompt_tokens, completion_tokens
+                )
                 logger.info(f"[REASONING] OpenRouter usage: {usage_metadata}")
-            else:
-                usage_metadata["openrouter_cost"] = float(usage) if usage else 0.0
         
         # Split thinking from final answer
         thinking = content
