@@ -1297,35 +1297,6 @@ function App() {
       )}
 
 
-      {/* Legacy CV Panel for specific session view - kept for backward compatibility */}
-      {false && showCVPanel && cvPanelSessionId && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setShowCVPanel(false)}>
-          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-5xl max-h-[90vh] flex flex-col shadow-2xl" onClick={e => e.stopPropagation()}>
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 rounded-b-2xl">
-              <div className="flex items-center justify-between">
-                <p className="text-xs text-gray-500">Legacy panel</p>
-                {(cvPanelSessionId || currentSessionId) ? (
-                  <div className="flex items-center gap-3">
-                    <span className="text-xs text-gray-500">
-                      {language === 'es' ? 'Subir a:' : 'Upload to:'} <span className="font-medium text-blue-600">{cvPanelSession?.name || currentSession?.name}</span>
-                    </span>
-                    <label className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-xl cursor-pointer transition-colors">
-                      {isUploading ? <Loader className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
-                      <span className="text-sm font-medium">{isUploading ? (language === 'es' ? 'Subiendo...' : 'Uploading...') : (language === 'es' ? 'Subir CVs' : 'Upload CVs')}</span>
-                      <input ref={cvPanelFileInputRef} type="file" multiple accept=".pdf" onChange={handleUploadToPanel} className="hidden" disabled={isUploading} />
-                    </label>
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400">
-                    <MessageSquare className="w-4 h-4" />
-                    <span className="text-sm">{language === 'es' ? 'Crea o selecciona un chat para subir CVs' : 'Create or select a chat to upload CVs'}</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
 
       {/* Loading Overlay for Mode Switch */}

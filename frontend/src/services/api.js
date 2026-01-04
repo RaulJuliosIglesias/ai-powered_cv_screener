@@ -80,11 +80,6 @@ export const setModel = async (modelId) => {
   return response.data;
 };
 
-export const deleteCVById = async (cvId, mode = 'local') => {
-  const response = await api.delete(`/cvs/${cvId}?mode=${mode}`);
-  return response.data;
-};
-
 export const deleteAllCVs = async (mode = 'local') => {
   const response = await api.delete(`/cvs?mode=${mode}`);
   return response.data;

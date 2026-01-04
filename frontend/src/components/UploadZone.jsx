@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Upload, X, FileText, AlertCircle, Cloud, Loader } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function UploadZone({
   files,
@@ -11,6 +12,7 @@ export default function UploadZone({
   uploadProgress,
   error,
 }) {
+  const { language } = useLanguage();
   const onDrop = useCallback(
     (acceptedFiles) => {
       onFilesAdded(acceptedFiles);
@@ -32,13 +34,15 @@ export default function UploadZone({
         {/* Header */}
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <Cloud className="w-8 h-8 text-blue-500" />
+            <Cloud className="w-8 h-8 text-blue-500" aria-hidden="true" />
           </div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-            Subir CVs
+            {language === 'es' ? 'Subir CVs' : 'Upload CVs'}
           </h2>
           <p className="text-gray-500 dark:text-gray-400">
-            Arrastra y suelta archivos PDF para comenzar el análisis
+            {language === 'es' 
+              ? 'Arrastra y suelta archivos PDF para comenzar el análisis' 
+              : 'Drag and drop PDF files to start the analysis'}
           </p>
         </div>
 
@@ -62,14 +66,19 @@ export default function UploadZone({
             <Upload className="w-8 h-8" />
           </div>
           {isDragActive ? (
-            <p className="text-blue-500 text-lg font-medium">¡Suelta los archivos aquí!</p>
+            <p className="text-blue-500 text-lg font-medium">
+              {language === 'es' ? '¡Suelta los archivos aquí!' : 'Drop the files here!'}
+            </p>
           ) : (
             <>
               <p className="text-gray-700 dark:text-gray-300 text-lg mb-2 font-medium">
-                Arrastra archivos PDF aquí
+                {language === 'es' ? 'Arrastra archivos PDF aquí' : 'Drag PDF files here'}
               </p>
               <p className="text-gray-400 dark:text-gray-500 text-sm">
-                o <span className="text-blue-500 hover:underline">haz clic para seleccionar</span>
+                {language === 'es' ? 'o ' : 'or '}
+                <span className="text-blue-500 hover:underline">
+                  {language === 'es' ? 'haz clic para seleccionar' : 'click to select'}
+                </span>
               </p>
             </>
           )}
@@ -88,10 +97,10 @@ export default function UploadZone({
           <div className="mt-6">
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                Archivos seleccionados
+                {language === 'es' ? 'Archivos seleccionados' : 'Selected files'}
               </h3>
               <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium rounded-full">
-                {files.length} archivo{files.length > 1 ? 's' : ''}
+                {files.length} {language === 'es' ? (files.length > 1 ? 'archivos' : 'archivo') : (files.length > 1 ? 'files' : 'file')}
               </span>
             </div>
             <div className="space-y-2 max-h-48 overflow-y-auto">
@@ -132,22 +141,27 @@ export default function UploadZone({
             <button
               onClick={onUpload}
               disabled={isUploading || files.length === 0}
-              className={`mt-6 w-full py-4 px-4 rounded-xl font-semibold text-lg transition-all flex items-center justify-center gap-3
+              className={`mt-6 w-full py-4 px-4 rounded-xl font-semibold text-lg transition-all flex items-center justify-center gap-3 focus-ring
                 ${isUploading || files.length === 0
                   ? 'bg-gray-200 dark:bg-gray-700 text-gray-400 cursor-not-allowed'
                   : 'bg-blue-500 hover:bg-blue-600 text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40'
                 }
               `}
+              aria-busy={isUploading}
             >
               {isUploading ? (
                 <>
-                  <Loader className="w-5 h-5 animate-spin" />
-                  <span>Subiendo... {uploadProgress}%</span>
+                  <Loader className="w-5 h-5 animate-spin" aria-hidden="true" />
+                  <span>{language === 'es' ? 'Subiendo...' : 'Uploading...'} {uploadProgress}%</span>
                 </>
               ) : (
                 <>
-                  <Upload className="w-5 h-5" />
-                  <span>Subir {files.length} archivo{files.length > 1 ? 's' : ''}</span>
+                  <Upload className="w-5 h-5" aria-hidden="true" />
+                  <span>
+                    {language === 'es' 
+                      ? `Subir ${files.length} ${files.length > 1 ? 'archivos' : 'archivo'}` 
+                      : `Upload ${files.length} ${files.length > 1 ? 'files' : 'file'}`}
+                  </span>
                 </>
               )}
             </button>
@@ -158,13 +172,15 @@ export default function UploadZone({
         {files.length === 0 && (
           <div className="mt-8 grid grid-cols-3 gap-4">
             {[
-              { icon: '📄', text: 'Solo PDF' },
-              { icon: '📦', text: 'Múltiples archivos' },
-              { icon: '⚡', text: 'Proceso rápido' },
+              { icon: '📄', textEs: 'Solo PDF', textEn: 'PDF only' },
+              { icon: '📦', textEs: 'Múltiples archivos', textEn: 'Multiple files' },
+              { icon: '⚡', textEs: 'Proceso rápido', textEn: 'Fast processing' },
             ].map((tip, i) => (
               <div key={i} className="text-center p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
-                <span className="text-2xl mb-1 block">{tip.icon}</span>
-                <span className="text-xs text-gray-500 dark:text-gray-400">{tip.text}</span>
+                <span className="text-2xl mb-1 block" aria-hidden="true">{tip.icon}</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">
+                  {language === 'es' ? tip.textEs : tip.textEn}
+                </span>
               </div>
             ))}
           </div>
