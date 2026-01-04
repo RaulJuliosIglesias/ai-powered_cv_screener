@@ -3,10 +3,17 @@ Structured output models for modular LLM response processing.
 
 This module defines the data structures for processed LLM outputs,
 ensuring consistent and type-safe handling of output components.
+
+VISUAL OUTPUT STRUCTURE:
+1. Thinking Process (collapsible, purple)
+2. Direct Answer (yellow/gold border)
+3. Analysis (cyan border)
+4. Candidate Table (with colored match scores)
+5. Conclusion (green border)
 """
 
 from dataclasses import dataclass, field
-from typing import Any, List, Optional
+from typing import Any, Dict, List, Optional
 
 
 @dataclass
@@ -14,28 +21,58 @@ class CVReference:
     """A candidate reference in the output."""
     cv_id: str
     name: str
-    context: str = ""  # Where it was mentioned
+    context: str = ""
+
+
+@dataclass
+class TableRow:
+    """A single row in the candidate comparison table."""
+    candidate_name: str
+    cv_id: str
+    columns: Dict[str, str]  # {"Experience": "5 years", "Skills": "Python, Django"}
+    match_score: int  # 0-100 for coloring (green >=90, yellow 70-89, gray <70)
     
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "candidate_name": self.candidate_name,
+            "cv_id": self.cv_id,
+            "columns": self.columns,
+            "match_score": self.match_score
+        }
+    
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> "TableRow":
+        return cls(
+            candidate_name=data.get("candidate_name", ""),
+            cv_id=data.get("cv_id", ""),
+            columns=data.get("columns", {}),
+            match_score=data.get("match_score", 0)
+        )
+
 
 @dataclass
 class TableData:
-    """Parsed table structure."""
-    headers: List[str]
-    rows: List[List[str]]
+    """Parsed table structure with match scores."""
+    title: str = "Candidate Comparison Table"
+    headers: List[str] = field(default_factory=list)
+    rows: List[TableRow] = field(default_factory=list)
     
     def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary for JSON serialization."""
         return {
+            "title": self.title,
             "headers": self.headers,
-            "rows": self.rows
+            "rows": [row.to_dict() for row in self.rows]
         }
     
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "TableData":
         """Create from dictionary."""
+        rows = [TableRow.from_dict(r) for r in data.get("rows", [])]
         return cls(
+            title=data.get("title", "Candidate Comparison Table"),
             headers=data.get("headers", []),
-            rows=data.get("rows", [])
+            rows=rows
         )
 
 

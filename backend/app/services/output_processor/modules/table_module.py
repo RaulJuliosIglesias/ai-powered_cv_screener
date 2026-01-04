@@ -1,49 +1,54 @@
 """
-Table Module - IMMUTABLE - FINAL FORMAT
+Table Module - Visual Structured Output
 
-Extracts and formats markdown tables.
-DO NOT MODIFY without explicit user request.
+Extracts candidate comparison tables with match scores.
+Returns TableData with TableRow objects containing numeric match_score for coloring.
 
-CRITICAL FORMAT:
-- Candidate names: **[Name](cv:cv_xxx)** (NO spaces before **)
-- Relevance: ⭐ stars based on score
+MATCH SCORE COLORS:
+- Green (>=90%): Strong match
+- Yellow (70-89%): Partial match  
+- Gray (<70%): Weak match
 """
 
 import re
 import logging
-from typing import Optional, List
-from app.models.structured_output import TableData
+from typing import Optional, List, Dict
+from app.models.structured_output import TableData, TableRow
 
 logger = logging.getLogger(__name__)
 
 
 class TableModule:
     """
-    Handles table extraction and formatting.
+    Extracts and structures candidate comparison tables.
     
-    FINAL FORMAT - DO NOT CHANGE:
-    | Candidate | Key Skills | Relevance |
-    |-----------|------------|-----------|
-    | **[Name](cv:cv_xxx)** | Skills | ⭐⭐⭐ |
+    Output: TableData with TableRow objects containing:
+    - candidate_name: str
+    - cv_id: str
+    - columns: Dict[str, str] (column_name -> value)
+    - match_score: int (0-100 for coloring)
     """
     
     def extract(self, llm_output: str, chunks: List[dict] = None) -> Optional[TableData]:
         """
-        Extract table from LLM output or generate fallback.
+        Extract table from LLM output with match scores.
         
         Args:
             llm_output: Raw LLM response
             chunks: CV chunks for fallback generation
             
         Returns:
-            TableData or None
+            TableData with TableRow objects
         """
         if not llm_output:
             return self._generate_fallback_table(chunks) if chunks else None
         
+        # Pre-process: extract tables from code blocks
+        text = self._extract_tables_from_code_blocks(llm_output)
+        
         # Try to parse existing table
-        table_data = self._parse_markdown_table(llm_output)
-        if table_data:
+        table_data = self._parse_markdown_table(text)
+        if table_data and table_data.rows:
             logger.info(f"[TABLE] Parsed from LLM: {len(table_data.rows)} rows")
             return table_data
         
@@ -57,39 +62,25 @@ class TableModule:
     
     def format(self, table_data: TableData) -> str:
         """
-        Format table as markdown.
-        
-        CRITICAL: Cells are used AS-IS from extract() - no modifications.
-        
-        Args:
-            table_data: TableData object
-            
-        Returns:
-            Markdown table string
+        Format table - NOT USED for visual output.
+        The frontend renders TableData directly as JSON.
+        This is kept for backward compatibility.
         """
-        if not table_data or not table_data.headers or not table_data.rows:
+        if not table_data or not table_data.rows:
             return ""
         
-        lines = []
-        
-        # Header
-        lines.append("| " + " | ".join(table_data.headers) + " |")
-        
-        # Separator
+        # For backward compatibility only
+        lines = [f"| {' | '.join(table_data.headers)} |"]
         lines.append("|" + "|".join(["---"] * len(table_data.headers)) + "|")
         
-        # Rows - EXACTLY as provided
         for row in table_data.rows:
-            lines.append("| " + " | ".join(str(cell) for cell in row) + " |")
+            cols = [row.candidate_name] + list(row.columns.values()) + [f"{row.match_score}%"]
+            lines.append("| " + " | ".join(cols) + " |")
         
         return "\n".join(lines)
     
     def _parse_markdown_table(self, text: str) -> Optional[TableData]:
-        """Parse markdown table from text."""
-        # STEP 1: Extract tables from inside code blocks first
-        # This handles cases where LLM wraps table in ```markdown ... ``` or ``` ... ```
-        text = self._extract_tables_from_code_blocks(text)
-        
+        """Parse markdown table and extract TableRow objects with match scores."""
         # Find table region
         lines = text.split('\n')
         table_lines = []
@@ -102,18 +93,18 @@ class TableModule:
                     in_table = True
                 table_lines.append(line)
             elif in_table and stripped == '':
-                continue  # Allow empty lines
+                continue
             elif in_table:
-                break  # End of table
+                break
         
         if len(table_lines) < 2:
             return None
         
         # Parse header
         header_line = table_lines[0]
-        headers = [cell.strip() for cell in header_line.split('|') if cell.strip()]
+        raw_headers = [cell.strip() for cell in header_line.split('|') if cell.strip()]
         
-        if not headers:
+        if not raw_headers:
             return None
         
         # Find separator
@@ -126,8 +117,9 @@ class TableModule:
         if separator_idx is None:
             separator_idx = 1
         
-        # Parse rows
-        rows = []
+        # Parse rows into TableRow objects
+        table_rows: List[TableRow] = []
+        
         for line in table_lines[separator_idx + 1:]:
             if not line or '|' not in line:
                 continue
@@ -136,30 +128,108 @@ class TableModule:
             if not any(cells):
                 continue
             
-            # CRITICAL: Fix malformed bold formatting from LLM
-            # LLM sometimes generates "** Name**" instead of "**Name**"
+            # Fix bold formatting
             cells = [self._fix_bold_formatting(cell) for cell in cells]
             
-            # Ensure row matches header length
-            while len(cells) < len(headers):
-                cells.append("")
-            cells = cells[:len(headers)]
+            # Extract candidate info from first cell
+            candidate_name, cv_id = self._extract_candidate_info(cells[0] if cells else "")
             
-            rows.append(cells)
+            # Extract match score from last cell (or any cell with %, ⭐, or numbers)
+            match_score = self._extract_match_score(cells[-1] if cells else "")
+            
+            # Build columns dict (excluding first and last columns)
+            columns: Dict[str, str] = {}
+            for i, header in enumerate(raw_headers[1:-1], start=1):
+                if i < len(cells) - 1:
+                    columns[header] = cells[i]
+                else:
+                    columns[header] = ""
+            
+            # If no middle columns, use all except first as columns
+            if not columns and len(cells) > 1:
+                for i, header in enumerate(raw_headers[1:], start=1):
+                    if i < len(cells):
+                        columns[header] = cells[i]
+            
+            table_rows.append(TableRow(
+                candidate_name=candidate_name,
+                cv_id=cv_id,
+                columns=columns,
+                match_score=match_score
+            ))
         
-        if not rows:
+        if not table_rows:
             return None
         
-        return TableData(headers=headers, rows=rows)
+        # Headers without Candidate and Match Score columns
+        display_headers = ["Candidate"] + raw_headers[1:-1] + ["Match Score"]
+        if len(raw_headers) <= 2:
+            display_headers = raw_headers + ["Match Score"]
+        
+        return TableData(
+            title="Candidate Comparison Table",
+            headers=display_headers,
+            rows=table_rows
+        )
+    
+    def _extract_candidate_info(self, cell: str) -> tuple:
+        """Extract candidate name and cv_id from cell."""
+        # Pattern: **[Name](cv:cv_xxx)** or **Name** cv_xxx or just Name cv_xxx
+        
+        # Try **[Name](cv:cv_xxx)** format
+        match = re.search(r'\*?\*?\[([^\]]+)\]\(cv:?(cv_[a-z0-9_-]+)\)\*?\*?', cell, re.IGNORECASE)
+        if match:
+            return match.group(1).strip(), match.group(2)
+        
+        # Try **Name** cv_xxx format
+        match = re.search(r'\*\*([^*]+)\*\*\s*(cv_[a-z0-9_-]+)?', cell, re.IGNORECASE)
+        if match:
+            name = match.group(1).strip()
+            cv_id = match.group(2) if match.group(2) else ""
+            return name, cv_id
+        
+        # Try Name cv_xxx format
+        match = re.search(r'([^*\[\]]+?)\s*(cv_[a-z0-9_-]+)', cell, re.IGNORECASE)
+        if match:
+            return match.group(1).strip(), match.group(2)
+        
+        # Just return cleaned cell as name
+        clean_name = re.sub(r'\*+|\[|\]|\(.*?\)', '', cell).strip()
+        cv_match = re.search(r'(cv_[a-z0-9_-]+)', cell, re.IGNORECASE)
+        cv_id = cv_match.group(1) if cv_match else ""
+        
+        return clean_name or "Unknown", cv_id
+    
+    def _extract_match_score(self, cell: str) -> int:
+        """Extract numeric match score from cell (0-100)."""
+        if not cell:
+            return 50
+        
+        # Try percentage: "95%" or "95"
+        match = re.search(r'(\d+)\s*%?', cell)
+        if match:
+            score = int(match.group(1))
+            if score <= 100:
+                return score
+        
+        # Try stars: ⭐⭐⭐⭐⭐ = 100, ⭐ = 20
+        stars = cell.count('⭐')
+        if stars > 0:
+            return min(100, stars * 20)
+        
+        # Try text indicators
+        cell_lower = cell.lower()
+        if 'excellent' in cell_lower or 'strong' in cell_lower:
+            return 95
+        if 'good' in cell_lower or 'partial' in cell_lower:
+            return 75
+        if 'weak' in cell_lower or 'low' in cell_lower or 'no match' in cell_lower:
+            return 30
+        
+        return 50  # Default
     
     def _generate_fallback_table(self, chunks: List[dict]) -> Optional[TableData]:
-        """
-        Generate fallback table from chunks.
-        
-        CRITICAL FORMAT:
-        - Names: **[Name](cv:cv_xxx)** (NO spaces)
-        - Relevance: ⭐ stars
-        """
+        """Generate fallback table from chunks using TableRow structure."""
         if not chunks:
             return None
         
@@ -176,35 +246,41 @@ class TableModule:
             name = metadata.get('candidate_name', 'Unknown')
             content = chunk.get('content', '')
             skills = self._extract_skills(content)
+            score = chunk.get('score', 0.5)
             
             candidates[cv_id] = {
                 'name': name,
                 'cv_id': cv_id,
                 'skills': skills[:3] if skills else ['N/A'],
-                'score': chunk.get('score', 0.0)
+                'score': score
             }
         
         if not candidates:
             return None
         
-        # Build table with FINAL FORMAT
-        headers = ['Candidate', 'Key Skills', 'Relevance']
-        rows = []
+        # Build TableRow objects
+        table_rows: List[TableRow] = []
         
         for cv_id, info in candidates.items():
-            # CRITICAL: **[Name](cv:cv_xxx)** - NO spaces before **
-            name_cell = f"**[{info['name']}](cv:cv_{cv_id})**"
+            # Convert similarity score (0-1) to match percentage (0-100)
+            match_score = int(min(100, max(0, info['score'] * 100)))
             
-            skills_cell = ', '.join(info['skills'])
-            
-            # Relevance: stars based on score
-            num_stars = min(5, max(1, int(info['score'] * 5)))
-            relevance_cell = '⭐' * num_stars
-            
-            rows.append([name_cell, skills_cell, relevance_cell])
+            table_rows.append(TableRow(
+                candidate_name=info['name'],
+                cv_id=cv_id,
+                columns={"Key Skills": ', '.join(info['skills'])},
+                match_score=match_score
+            ))
         
-        logger.info(f"[TABLE] Generated {len(rows)} rows")
-        return TableData(headers=headers, rows=rows)
+        # Sort by match score descending
+        table_rows.sort(key=lambda r: r.match_score, reverse=True)
+        
+        logger.info(f"[TABLE] Generated {len(table_rows)} rows")
+        return TableData(
+            title="Candidate Comparison Table",
+            headers=["Candidate", "Key Skills", "Match Score"],
+            rows=table_rows
+        )
     
     def _fix_bold_formatting(self, text: str) -> str:
         """

@@ -11,6 +11,7 @@ import RAGPipelineSettings, { getRAGPipelineSettings } from './components/RAGPip
 import MetricsPanel, { saveMetricEntry } from './components/MetricsPanel';
 import PipelineProgressPanel from './components/PipelineProgressPanel';
 import ChatInputField from './components/ChatInputField';
+import { StructuredOutputRenderer } from './components/output';
 import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList, clearSessionCVs, deleteAllCVsFromDatabase, deleteCV, deleteMessage, deleteMessagesFrom } from './services/api';
 
 function App() {
@@ -875,27 +876,53 @@ function App() {
                   <div className={`flex gap-4 ${msg.role === 'user' ? 'flex-row-reverse max-w-[70%]' : 'w-full'}`}>
                     <div className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ${msg.role === 'user' ? 'bg-blue-500' : 'bg-gradient-to-br from-emerald-400 to-cyan-500'}`}>{msg.role === 'user' ? <User className="w-5 h-5 text-white" /> : <Sparkles className="w-5 h-5 text-white" />}</div>
                     <div className={`flex-1 ${msg.role === 'user' ? '' : 'min-w-0'}`}>
-                      <div className={`p-4 rounded-2xl ${msg.role === 'user' ? 'bg-blue-500 text-white' : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-slate-800 dark:text-slate-100'}`}>
+                      <div className={`p-4 rounded-2xl ${msg.role === 'user' ? 'bg-blue-500 text-white' : 'bg-slate-900 border border-slate-700 shadow-sm text-slate-100'}`}>
                         
-                        {/* Thinking/Reasoning Collapsible - Only for assistant messages */}
-                        {msg.role === 'assistant' && (() => {
-                          const { thinkingContent } = preprocessContent(msg.content);
-                          if (thinkingContent) {
-                            return (
-                              <details className="mb-4 group">
-                                <summary className="flex items-center gap-2 cursor-pointer text-sm text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 select-none">
-                                  <ChevronRight className="w-4 h-4 transition-transform group-open:rotate-90" />
-                                  <span className="font-medium">{language === 'es' ? 'Ver razonamiento interno' : 'View internal reasoning'}</span>
-                                </summary>
-                                <div className="mt-2 p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-200 dark:border-slate-700 text-sm text-slate-600 dark:text-slate-400 italic">
-                                  {thinkingContent}
-                                </div>
-                              </details>
-                            );
-                          }
-                          return null;
-                        })()}
+                        {/* USE STRUCTURED OUTPUT RENDERER for assistant messages with structured_output */}
+                        {msg.role === 'assistant' && msg.structured_output ? (
+                          <StructuredOutputRenderer 
+                            structuredOutput={msg.structured_output}
+                            cvLinkRenderer={({href, children}) => {
+                              // Handle cv: format
+                              if (href?.startsWith('cv:')) {
+                                const cvId = href.replace('cv:', '');
+                                return (
+                                  <button
+                                    onClick={() => openPdfViewer(cvId, cvId)}
+                                    className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-600/30 text-blue-400 hover:bg-blue-600/50 rounded transition-colors text-sm"
+                                    title={language === 'es' ? 'Ver CV' : 'View CV'}
+                                  >
+                                    <FileText className="w-3 h-3" />
+                                    {children}
+                                  </button>
+                                );
+                              }
+                              return <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">{children}</a>;
+                            }}
+                          />
+                        ) : msg.role === 'assistant' ? (
+                          /* FALLBACK: Old thinking collapsible for messages without structured_output */
+                          (() => {
+                            const { thinkingContent } = preprocessContent(msg.content);
+                            if (thinkingContent) {
+                              return (
+                                <details className="mb-4 group">
+                                  <summary className="flex items-center gap-2 cursor-pointer text-sm text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 select-none">
+                                    <ChevronRight className="w-4 h-4 transition-transform group-open:rotate-90" />
+                                    <span className="font-medium">{language === 'es' ? 'Ver razonamiento interno' : 'View internal reasoning'}</span>
+                                  </summary>
+                                  <div className="mt-2 p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-200 dark:border-slate-700 text-sm text-slate-600 dark:text-slate-400 italic">
+                                    {thinkingContent}
+                                  </div>
+                                </details>
+                              );
+                            }
+                            return null;
+                          })()
+                        ) : null}
                         
+                        {/* Only render ReactMarkdown for user messages OR assistant messages WITHOUT structured_output */}
+                        {(msg.role === 'user' || !msg.structured_output) && (
                         <div className={`max-w-none ${msg.role === 'user' ? '' : '[&_p]:text-gray-700 dark:[&_p]:text-gray-200 [&_h1]:text-gray-900 dark:[&_h1]:text-white [&_h2]:text-gray-900 dark:[&_h2]:text-white [&_h3]:text-gray-900 dark:[&_h3]:text-white [&_li]:text-gray-700 dark:[&_li]:text-gray-200 [&_strong]:text-gray-900 dark:[&_strong]:text-white'}`}>
                           <ReactMarkdown 
                             remarkPlugins={[remarkGfm]}
@@ -1034,6 +1061,7 @@ function App() {
                             return null;
                           })()}
                         </div>
+                        )}
                         {/* Referencias eliminadas - solo se muestran junto al nombre del candidato */}
                       </div>
                       {/* Message action buttons - only for non-pending messages */}

@@ -4,3 +4,4 @@
 
 export { default as DirectAnswerSection } from './DirectAnswerSection';
 export { default as TableComponent } from './TableComponent';
+export { default as StructuredOutputRenderer } from './StructuredOutputRenderer';

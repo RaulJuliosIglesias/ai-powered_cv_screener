@@ -14214,10 +14214,168 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-04T14:37:04.945360"
+        },
+        {
+          "id": "255ab2af-2217-48b4-a966-271f6d341f6e",
+          "role": "user",
+          "content": "dime el mejor perfil para 2d artist",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T14:44:32.215220"
+        },
+        {
+          "id": "924f96e2-7426-4bf1-b449-7e4e4dc4e11c",
+          "role": "assistant",
+          "content": ":::thinking\n- The question asks for the best profile for a 2D artist role.\n- I need to check if any of the provided CVs mention 2D art, digital art, or related skills.\n- The CVs provided are for Podcast Assistant, Human Resources Director, NFT Developer, Cloud Engineer, VP of Data Science, and Legal Secretary.\n- None of these CVs explicitly mention 2D art, digital art, or related skills.\n- I should clearly state that no candidates match the criteria.\n:::\n\nNo candidates match the specified criteria for a 2D artist role.\n\n| Candidate | Skills | Experience | Match Score |\n|---|---|---|---|\n| Abdullah Mohamed  Podcast | Audio Editing, Content Production | Podcast Assistant | 20% |\n| Mei-Ling Chen  Human Resources | Talent Acquisition, Employee Relations | Human Resources Director | 20% |\n| Layla Hassan  NFT | Solidity, Ethereum, IPFS | NFT Developer | 20% |\n| Luca Müller  Cloud | AWS, Kubernetes, Terraform | Cloud Engineer | 20% |\n| Sofía López  VP of Data | Python, Data Science | VP of Data Science | 20% |\n| Carlos Mejuto  Legal | Legal Support, Document Management | Legal Secretary | 20% |\n\n:::conclusion\nNo candidates match the specified criteria for a 2D artist role. None of the analyzed candidates have the required skills or experience in 2D art or digital art.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_943da331",
+              "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_ffc6d564",
+              "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf"
+            },
+            {
+              "cv_id": "cv_71736e47",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_fe6338e6",
+              "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_bbc748f9",
+              "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_653fbf59",
+              "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf"
+            },
+            {
+              "cv_id": "cv_f01ac22c",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_dd668ac0",
+              "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_916fd244",
+              "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf"
+            },
+            {
+              "cv_id": "cv_7b0f7ab3",
+              "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 3263.61,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 10.14,
+              "details": "Found 19 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 26451.84,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 19691.44,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "No candidates match the specified criteria for a 2D artist role.",
+            "raw_content": ":::thinking\n- The question asks for the best profile for a 2D artist role.\n- I need to check if any of the provided CVs mention 2D art, digital art, or related skills.\n- The CVs provided are for Podcast Assistant, Human Resources Director, NFT Developer, Cloud Engineer, VP of Data Science, and Legal Secretary.\n- None of these CVs explicitly mention 2D art, digital art, or related skills.\n- I should clearly state that no candidates match the criteria.\n:::\n\nNo candidates match the specified criteria for a 2D artist role.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[ Abdullah Mohamed  Podcast](cv:cv_943da331)** | Audio Editing, Content Production | Podcast Assistant | ⭐ |\n| **[ Mei-Ling Chen  Human Resources](cv:cv_ffc6d564)** | Talent Acquisition, Employee Relations | Human Resources Director | ⭐ |\n| **[ Layla Hassan  NFT](cv:cv_71736e47)** | Solidity, Ethereum, IPFS | NFT Developer | ⭐ |\n| **[ Luca Müller  Cloud](cv:cv_fe6338e6)** | AWS, Kubernetes, Terraform | Cloud Engineer | ⭐ |\n| **[ Sofía López  VP of Data](cv:cv_bbc748f9)** | Python, Data Science | VP of Data Science | ⭐ |\n| **[ Carlos Mejuto  Legal](cv:cv_653fbf59)** | Legal Support, Document Management | Legal Secretary | ⭐ |\n\n:::conclusion\nNo candidates match the specified criteria for a 2D artist role. None of the analyzed candidates have the required skills or experience in 2D art or digital art.\n:::",
+            "thinking": "- The question asks for the best profile for a 2D artist role.\n- I need to check if any of the provided CVs mention 2D art, digital art, or related skills.\n- The CVs provided are for Podcast Assistant, Human Resources Director, NFT Developer, Cloud Engineer, VP of Data Science, and Legal Secretary.\n- None of these CVs explicitly mention 2D art, digital art, or related skills.\n- I should clearly state that no candidates match the criteria.",
+            "analysis": null,
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Skills",
+                "Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Abdullah Mohamed  Podcast",
+                  "cv_id": "cv_943da331",
+                  "columns": {
+                    "Skills": "Audio Editing, Content Production",
+                    "Experience": "Podcast Assistant"
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Mei-Ling Chen  Human Resources",
+                  "cv_id": "cv_ffc6d564",
+                  "columns": {
+                    "Skills": "Talent Acquisition, Employee Relations",
+                    "Experience": "Human Resources Director"
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Layla Hassan  NFT",
+                  "cv_id": "cv_71736e47",
+                  "columns": {
+                    "Skills": "Solidity, Ethereum, IPFS",
+                    "Experience": "NFT Developer"
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Luca Müller  Cloud",
+                  "cv_id": "cv_fe6338e6",
+                  "columns": {
+                    "Skills": "AWS, Kubernetes, Terraform",
+                    "Experience": "Cloud Engineer"
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Sofía López  VP of Data",
+                  "cv_id": "cv_bbc748f9",
+                  "columns": {
+                    "Skills": "Python, Data Science",
+                    "Experience": "VP of Data Science"
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Carlos Mejuto  Legal",
+                  "cv_id": "cv_653fbf59",
+                  "columns": {
+                    "Skills": "Legal Support, Document Management",
+                    "Experience": "Legal Secretary"
+                  },
+                  "match_score": 20
+                }
+              ]
+            },
+            "conclusion": "No candidates match the specified criteria for a 2D artist role. None of the analyzed candidates have the required skills or experience in 2D art or digital art.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-04T14:46:17.696029"
         }
       ],
       "created_at": "2026-01-03T22:15:07.573740",
-      "updated_at": "2026-01-04T14:37:04.945360"
+      "updated_at": "2026-01-04T14:46:17.696029"
     }
   ]
 }
