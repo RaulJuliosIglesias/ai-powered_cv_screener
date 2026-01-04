@@ -37,19 +37,41 @@ class ConclusionModule:
         if match:
             content = match.group(1).strip()
             if content:
-                logger.debug(f"[CONCLUSION] Extracted: {len(content)} chars")
-                return content
+                # Clean prompt contamination from conclusion
+                content = self._clean_contamination(content)
+                if content:
+                    logger.debug(f"[CONCLUSION] Extracted: {len(content)} chars")
+                    return content
         
         # Pattern 2: :::conclusion ... (no closing, take rest of text)
         match = re.search(r':::conclusion\s*([\s\S]*)', llm_output, re.IGNORECASE)
         if match:
             content = match.group(1).strip()
             if content:
-                logger.debug(f"[CONCLUSION] Extracted (no closing): {len(content)} chars")
-                return content
+                # Clean prompt contamination from conclusion
+                content = self._clean_contamination(content)
+                if content:
+                    logger.debug(f"[CONCLUSION] Extracted (no closing): {len(content)} chars")
+                    return content
         
         logger.debug("[CONCLUSION] Not found")
         return None
+    
+    def _clean_contamination(self, text: str) -> str:
+        """Remove prompt fragments from conclusion text."""
+        # Remove web search artifacts
+        text = re.sub(r'A web search was conducted[\s\S]*?(?=\n\n|$)', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'IMPORTANT: Cite them[\s\S]*?(?=\n\n|$)', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'References?\s*\n[\s\S]*?(?=\n\n|$)', '', text, flags=re.IGNORECASE)
+        
+        # Remove instruction fragments
+        text = re.sub(r'code\s*Copy code', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'^(?:Text|List|Example):\s*', '', text, flags=re.MULTILINE)
+        
+        # Remove hallucinated URLs
+        text = re.sub(r'(?:engx\.space|resumekraft\.com|github\.com|linkedin\.com)[^\s]*', '', text, flags=re.IGNORECASE)
+        
+        return text.strip()
     
     def format(self, content: str) -> str:
         """

@@ -28,7 +28,8 @@ class AnalysisModule:
         1. Remove thinking and conclusion blocks
         2. Remove direct answer
         3. Remove tables
-        4. Return remaining meaningful content
+        4. Remove ALL prompt fragments and contamination
+        5. Return remaining meaningful content
         
         Args:
             llm_output: Raw LLM response
@@ -53,9 +54,39 @@ class AnalysisModule:
         # Remove tables
         cleaned = re.sub(r'\|[^\n]*\|[\s\S]*?\|[^\n]*\|', '', cleaned)
         
+        # CRITICAL: Remove ALL prompt contamination (same as DirectAnswerModule)
+        cleaned = re.sub(r'\*\*ABSOLUTELY FORBIDDEN[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'ABSOLUTELY FORBIDDEN[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'Match Score Legend[\s\S]*?(?=\n\n|Table|Conclusion|$)', '', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'COMPARISON TABLES[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'SPECIAL CASES[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'```[\w]*\s*Copy code[\s\S]*?```', '', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'code\s*Copy code', '', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'A web search was conducted on[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'IMPORTANT: Cite them using[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'References?\s*\n[\s\S]*?(?=\n\n|Table|Conclusion|$)', '', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'[❌✓⭐•-]\s*(?:External URLs|Email addresses|Phone numbers|http)[^\n]*\n?', '', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'^(?:Text|List|Example):\s*$', '', cleaned, flags=re.MULTILINE)
+        cleaned = re.sub(r'^(?:Text|List|Example):\s*\n(?:code\s*)?(?:Copy code\s*)?.*?$', '', cleaned, flags=re.MULTILINE)
+        
         # Clean up
         cleaned = cleaned.strip()
         cleaned = re.sub(r'\n{3,}', '\n\n', cleaned)
+        cleaned = re.sub(r'^\s*\n', '', cleaned, flags=re.MULTILINE)
+        
+        # Validate: ensure no prompt contamination remains
+        contamination_patterns = [
+            r'FORBIDDEN',
+            r'Match Score Legend',
+            r'COMPARISON TABLES',
+            r'code\s*Copy code',
+            r'^References?:',
+            r'web search was conducted'
+        ]
+        
+        if any(re.search(pattern, cleaned, re.IGNORECASE) for pattern in contamination_patterns):
+            logger.warning("[ANALYSIS] Contaminated content detected, discarding")
+            return None
         
         # Only return if substantial content (> 50 chars)
         if len(cleaned) > 50:
