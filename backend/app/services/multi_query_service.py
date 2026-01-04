@@ -162,10 +162,11 @@ class MultiQueryService:
     async def _generate_variations(self, query: str) -> tuple[List[str], dict]:
         """Generate query variations and extract entities."""
         prompt = MULTI_QUERY_PROMPT.format(query=query)
+        from app.providers.base import get_openrouter_url
         
         async with httpx.AsyncClient(timeout=30.0) as client:
             response = await client.post(
-                "https://openrouter.ai/api/v1/chat/completions",
+                get_openrouter_url("chat/completions"),
                 headers={
                     "Authorization": f"Bearer {self.api_key}",
                     "Content-Type": "application/json"
@@ -204,10 +205,11 @@ class MultiQueryService:
     async def _generate_hyde(self, query: str) -> str:
         """Generate hypothetical document for HyDE."""
         prompt = HYDE_PROMPT.format(query=query)
+        from app.providers.base import get_openrouter_url
         
         async with httpx.AsyncClient(timeout=20.0) as client:
             response = await client.post(
-                "https://openrouter.ai/api/v1/chat/completions",
+                get_openrouter_url("chat/completions"),
                 headers={
                     "Authorization": f"Bearer {self.api_key}",
                     "Content-Type": "application/json"

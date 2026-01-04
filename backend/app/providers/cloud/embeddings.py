@@ -10,7 +10,7 @@ class OpenRouterEmbeddingProvider(EmbeddingProvider):
     
     def __init__(self):
         self.api_key = settings.openrouter_api_key
-        self.base_url = "https://openrouter.ai/api/v1"
+        self.base_url = settings.openrouter_base_url
         self.model = "nomic-ai/nomic-embed-text-v1.5"
     
     @property

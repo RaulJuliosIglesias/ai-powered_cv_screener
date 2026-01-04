@@ -210,10 +210,11 @@ class ClaimVerifierService:
     async def _extract_claims(self, response: str) -> List[Claim]:
         """Extract claims from response."""
         prompt = CLAIM_EXTRACTION_PROMPT.format(response=response[:3000])
+        from app.providers.base import get_openrouter_url
         
         async with httpx.AsyncClient(timeout=30.0) as client:
             resp = await client.post(
-                "https://openrouter.ai/api/v1/chat/completions",
+                get_openrouter_url("chat/completions"),
                 headers={
                     "Authorization": f"Bearer {self.api_key}",
                     "Content-Type": "application/json"
@@ -283,9 +284,10 @@ class ClaimVerifierService:
         )
         
         try:
+            from app.providers.base import get_openrouter_url
             async with httpx.AsyncClient(timeout=20.0) as client:
                 resp = await client.post(
-                    "https://openrouter.ai/api/v1/chat/completions",
+                    get_openrouter_url("chat/completions"),
                     headers={
                         "Authorization": f"Bearer {self.api_key}",
                         "Content-Type": "application/json"

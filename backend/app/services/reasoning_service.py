@@ -239,10 +239,11 @@ class ReasoningService:
             context=context[:15000],  # Limit context size
             total_cvs=total_cvs
         )
+        from app.providers.base import get_openrouter_url
         
         async with httpx.AsyncClient(timeout=60.0) as client:
             response = await client.post(
-                "https://openrouter.ai/api/v1/chat/completions",
+                get_openrouter_url("chat/completions"),
                 headers={
                     "Authorization": f"Bearer {self.api_key}",
                     "Content-Type": "application/json"
@@ -311,10 +312,11 @@ class ReasoningService:
             draft=draft,
             context=context[:10000]
         )
+        from app.providers.base import get_openrouter_url
         
         async with httpx.AsyncClient(timeout=45.0) as client:
             response = await client.post(
-                "https://openrouter.ai/api/v1/chat/completions",
+                get_openrouter_url("chat/completions"),
                 headers={
                     "Authorization": f"Bearer {self.api_key}",
                     "Content-Type": "application/json"

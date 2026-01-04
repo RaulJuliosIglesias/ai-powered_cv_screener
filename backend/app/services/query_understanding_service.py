@@ -123,9 +123,10 @@ class QueryUnderstandingService:
             prompt = QUERY_UNDERSTANDING_PROMPT.format(query=query)
             
             # Use context manager to ensure client is closed after request
+            from app.providers.base import get_openrouter_url
             async with httpx.AsyncClient(timeout=30.0) as client:
                 response = await client.post(
-                    "https://openrouter.ai/api/v1/chat/completions",
+                    get_openrouter_url("chat/completions"),
                     headers={
                         "Authorization": f"Bearer {self.api_key}",
                         "Content-Type": "application/json"

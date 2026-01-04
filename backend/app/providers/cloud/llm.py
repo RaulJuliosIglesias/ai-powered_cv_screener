@@ -15,9 +15,10 @@ async def fetch_openrouter_models() -> List[Dict]:
     """Fetch all available models from OpenRouter API."""
     global _cached_models
     try:
+        from app.providers.base import get_openrouter_url
         async with httpx.AsyncClient(timeout=30.0) as client:
             response = await client.get(
-                "https://openrouter.ai/api/v1/models",
+                get_openrouter_url("models"),
                 headers={"Authorization": f"Bearer {settings.openrouter_api_key}"}
             )
             response.raise_for_status()
@@ -85,7 +86,7 @@ class OpenRouterLLMProvider(LLMProvider):
         if not model:
             raise ValueError("model parameter is required and cannot be empty")
         self.api_key = settings.openrouter_api_key
-        self.base_url = "https://openrouter.ai/api/v1"
+        self.base_url = settings.openrouter_base_url
         self.model = model
     
     async def generate(
@@ -117,8 +118,8 @@ class OpenRouterLLMProvider(LLMProvider):
                         f"{self.base_url}/chat/completions",
                         headers={
                             "Authorization": f"Bearer {self.api_key}",
-                            "HTTP-Referer": "https://cv-screener.local",
-                            "X-Title": "CV Screener RAG",
+                            "HTTP-Referer": settings.http_referer,
+                            "X-Title": settings.app_title,
                             "Content-Type": "application/json"
                         },
                         json={

@@ -103,3 +103,14 @@ class LLMProvider(ABC):
     ) -> LLMResult:
         """Generate a response from the LLM."""
         pass
+
+
+def get_openrouter_url(endpoint: str = "") -> str:
+    """Get OpenRouter API URL with optional endpoint."""
+    from app.config import settings
+    
+    base = settings.openrouter_base_url.rstrip("/")
+    if endpoint:
+        endpoint = endpoint.lstrip("/")
+        return f"{base}/{endpoint}"
+    return base

@@ -35,8 +35,9 @@ class OpenRouterEmbeddings:
         if isinstance(texts, str):
             texts = [texts]
         
+        from app.providers.base import get_openrouter_url
         response = self.client.post(
-            "https://openrouter.ai/api/v1/embeddings",
+            get_openrouter_url("embeddings"),
             headers={
                 "Authorization": f"Bearer {self.api_key}",
                 "Content-Type": "application/json"
