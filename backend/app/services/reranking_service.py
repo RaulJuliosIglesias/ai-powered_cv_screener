@@ -40,6 +40,7 @@ class RerankResult:
     latency_ms: float
     model_used: str
     enabled: bool = True
+    metadata: Dict[str, Any] = field(default_factory=dict)  # OpenRouter usage metadata
 
 
 RERANKING_PROMPT = """You are a relevance scoring assistant for a CV screening system.
@@ -156,6 +157,16 @@ class RerankingService:
             
             content = data["choices"][0]["message"]["content"].strip()
             
+            # Extract OpenRouter usage metadata
+            metadata = {}
+            if "usage" in data:
+                usage = data["usage"]
+                metadata["prompt_tokens"] = usage.get("prompt_tokens", 0)
+                metadata["completion_tokens"] = usage.get("completion_tokens", 0)
+                metadata["total_tokens"] = usage.get("total_tokens", 0)
+                metadata["openrouter_cost"] = usage.get("total_cost", 0.0)
+                logger.info(f"[RERANKING] OpenRouter usage: {metadata['total_tokens']} tokens, ${metadata['openrouter_cost']:.6f}")
+            
             # Parse scores
             scores = self._parse_scores(content, len(results))
             
@@ -190,7 +201,8 @@ class RerankingService:
                 scores=score_dict,
                 latency_ms=latency,
                 model_used=self.model,
-                enabled=True
+                enabled=True,
+                metadata=metadata
             )
             
         except Exception as e:

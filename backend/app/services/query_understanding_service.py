@@ -6,7 +6,7 @@ before sending it to the main generation model.
 """
 import logging
 from typing import Optional, Dict, Any
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import httpx
 
 from app.config import settings
@@ -16,14 +16,17 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class QueryUnderstanding:
-    """Result of query understanding step."""
+    """Result of query understanding analysis."""
     original_query: str
     understood_query: str
     query_type: str  # ranking, comparison, search, filter, general
     requirements: list  # List of requirements extracted
     is_cv_related: bool
     confidence: float
-    reformulated_prompt: str
+    query_variations: list = field(default_factory=list)
+    hyde_document: str | None = None
+    reformulated_prompt: str | None = None
+    metadata: dict = field(default_factory=dict)  # OpenRouter usage metadata
 
 
 QUERY_UNDERSTANDING_PROMPT = """You are a query understanding assistant for a CV screening system.
@@ -139,6 +142,24 @@ class QueryUnderstandingService:
             
             content = data["choices"][0]["message"]["content"].strip()
             
+            # Extract OpenRouter usage metadata
+            metadata = {}
+            if "usage" in data:
+                usage = data["usage"]
+                # OpenRouter returns usage as object with prompt_tokens, completion_tokens, total_cost
+                if isinstance(usage, dict):
+                    metadata["prompt_tokens"] = usage.get("prompt_tokens", 0)
+                    metadata["completion_tokens"] = usage.get("completion_tokens", 0)
+                    metadata["total_tokens"] = usage.get("total_tokens", metadata.get("prompt_tokens", 0) + metadata.get("completion_tokens", 0))
+                    metadata["openrouter_cost"] = usage.get("total_cost", 0.0)
+                    logger.info(f"[QUERY_UNDERSTANDING] OpenRouter usage: {metadata}")
+                else:
+                    # If usage is just a number (cost), use it directly
+                    metadata["openrouter_cost"] = float(usage) if usage else 0.0
+                    logger.info(f"[QUERY_UNDERSTANDING] OpenRouter cost (numeric): ${metadata['openrouter_cost']}")
+            else:
+                logger.warning("[QUERY_UNDERSTANDING] No 'usage' field in OpenRouter response")
+            
             # Parse JSON response
             import json
             # Clean up markdown if present
@@ -172,7 +193,8 @@ class QueryUnderstandingService:
                 requirements=parsed.get("requirements", []),
                 is_cv_related=is_cv_related,
                 confidence=0.9,
-                reformulated_prompt=parsed.get("reformulated_prompt", query)
+                reformulated_prompt=parsed.get("reformulated_prompt", query),
+                metadata=metadata
             )
             
         except Exception as e:

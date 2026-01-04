@@ -181,17 +181,12 @@ class ReasoningService:
         question: str,
         context: str,
         total_cvs: int = 0
-    ) -> ReasoningResult:
+    ) -> 'LLMResult':
         """
-        Apply structured reasoning to generate a well-thought answer.
+        Apply structured reasoning to question with context.
         
-        Args:
-            question: User's question
-            context: Formatted context from retrieved chunks
-            total_cvs: Total CVs in session for context
-            
         Returns:
-            ReasoningResult with steps, answer, and metadata
+            LLMResult with reasoning trace and final answer including OpenRouter metadata
         """
         if not self.api_key:
             logger.warning("No API key for reasoning")
@@ -264,6 +259,19 @@ class ReasoningService:
         
         content = data["choices"][0]["message"]["content"].strip()
         
+        # Extract OpenRouter usage metadata
+        usage_metadata = {}
+        if "usage" in data:
+            usage = data["usage"]
+            if isinstance(usage, dict):
+                usage_metadata["prompt_tokens"] = usage.get("prompt_tokens", 0)
+                usage_metadata["completion_tokens"] = usage.get("completion_tokens", 0)
+                usage_metadata["total_tokens"] = usage.get("total_tokens", 0)
+                usage_metadata["openrouter_cost"] = usage.get("total_cost", 0.0)
+                logger.info(f"[REASONING] OpenRouter usage: {usage_metadata}")
+            else:
+                usage_metadata["openrouter_cost"] = float(usage) if usage else 0.0
+        
         # Split thinking from final answer
         thinking = content
         answer = ""
@@ -289,7 +297,7 @@ class ReasoningService:
             answer = content
         
         logger.debug(f"Reasoning produced {len(thinking)} chars of thinking")
-        return thinking, answer
+        return thinking, answer, usage_metadata
     
     async def _reflect_and_refine(
         self,

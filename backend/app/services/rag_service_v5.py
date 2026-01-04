@@ -1083,24 +1083,17 @@ class RAGServiceV5:
         try:
             result = await self._query_understanding.understand(ctx.question)
             
-            ctx.query_understanding = QueryUnderstandingV5(
-                original_query=result.original_query,
-                understood_query=result.understood_query,
-                query_type=result.query_type,
-                is_cv_related=result.is_cv_related,
-                requirements=result.requirements or [],
-                reformulated_prompt=result.reformulated_prompt,
-                confidence=getattr(result, "confidence", 1.0)
-            )
+            ctx.query_understanding = result
             
-            # Extract OpenRouter cost if available
+            # Extract OpenRouter cost if available from result.metadata
             openrouter_cost = 0.0
             prompt_tokens = 0
             completion_tokens = 0
-            if hasattr(result, 'metadata') and result.metadata:
+            if result.metadata:
                 openrouter_cost = result.metadata.get('openrouter_cost', 0.0)
                 prompt_tokens = result.metadata.get('prompt_tokens', 0)
                 completion_tokens = result.metadata.get('completion_tokens', 0)
+                logger.info(f"[STEP_UNDERSTANDING] Captured: {prompt_tokens}+{completion_tokens}={prompt_tokens+completion_tokens} tokens, ${openrouter_cost}")
             
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.QUERY_UNDERSTANDING,
@@ -1366,10 +1359,25 @@ class RAGServiceV5:
             
             ctx.reranked_chunks = result.reranked_results
             
+            # Extract OpenRouter cost and tokens from reranking metadata
+            openrouter_cost = 0.0
+            prompt_tokens = 0
+            completion_tokens = 0
+            if result.metadata:
+                openrouter_cost = result.metadata.get('openrouter_cost', 0.0)
+                prompt_tokens = result.metadata.get('prompt_tokens', 0)
+                completion_tokens = result.metadata.get('completion_tokens', 0)
+            
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.RERANKING,
                 duration_ms=(time.perf_counter() - start) * 1000,
-                success=True
+                success=True,
+                metadata={
+                    "prompt_tokens": prompt_tokens,
+                    "completion_tokens": completion_tokens,
+                    "total_tokens": prompt_tokens + completion_tokens,
+                    "openrouter_cost": openrouter_cost
+                }
             ))
         except Exception as e:
             logger.error(f"Reranking failed: {e}")
@@ -1403,17 +1411,21 @@ class RAGServiceV5:
             
             # Extract OpenRouter cost from reasoning LLM call
             openrouter_cost = 0.0
+            prompt_tokens = result.prompt_tokens
+            completion_tokens = result.completion_tokens
             if result.metadata and "openrouter_cost" in result.metadata:
                 openrouter_cost = result.metadata["openrouter_cost"]
+            
+            logger.info(f"[STEP_REASONING] Captured: {prompt_tokens}+{completion_tokens}={prompt_tokens+completion_tokens} tokens, ${openrouter_cost}")
             
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.REASONING,
                 duration_ms=(time.perf_counter() - start) * 1000,
                 success=True,
                 metadata={
-                    "prompt_tokens": result.prompt_tokens,
-                    "completion_tokens": result.completion_tokens,
-                    "total_tokens": result.prompt_tokens + result.completion_tokens,
+                    "prompt_tokens": prompt_tokens,
+                    "completion_tokens": completion_tokens,
+                    "total_tokens": prompt_tokens + completion_tokens,
                     "openrouter_cost": openrouter_cost
                 }
             ))
@@ -1475,20 +1487,24 @@ class RAGServiceV5:
                 "completion": result.completion_tokens
             }
             
-            # Extract real OpenRouter cost if available
+            # Extract OpenRouter cost from generation metadata
             openrouter_cost = 0.0
+            prompt_tokens = result.prompt_tokens
+            completion_tokens = result.completion_tokens
             if result.metadata and "openrouter_cost" in result.metadata:
                 openrouter_cost = result.metadata["openrouter_cost"]
+            
+            logger.info(f"[STEP_GENERATION] Captured: {prompt_tokens}+{completion_tokens}={prompt_tokens+completion_tokens} tokens, ${openrouter_cost}")
             
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.GENERATION,
                 duration_ms=(time.perf_counter() - start) * 1000,
                 success=True,
                 metadata={
-                    "prompt_tokens": result.prompt_tokens,
-                    "completion_tokens": result.completion_tokens,
-                    "total_tokens": result.prompt_tokens + result.completion_tokens,
-                    "openrouter_cost": openrouter_cost  # Real cost from OpenRouter API
+                    "prompt_tokens": prompt_tokens,
+                    "completion_tokens": completion_tokens,
+                    "total_tokens": prompt_tokens + completion_tokens,
+                    "openrouter_cost": openrouter_cost
                 }
             ))
         except Exception as e:

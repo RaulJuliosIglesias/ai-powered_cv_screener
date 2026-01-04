@@ -88,13 +88,19 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
   const promptTokens = stages.generation?.metadata?.prompt_tokens || 0;
   const completionTokens = stages.generation?.metadata?.completion_tokens || 0;
   
-  // Build cost breakdown by RAG component
+  // Build cost breakdown by RAG component (ONLY stages that call OpenRouter LLM)
   const costBreakdown = [
     {
       name: "Understanding",
       active: !!stages.query_understanding,
       cost: stages.query_understanding?.metadata?.openrouter_cost || 0,
       tokens: stages.query_understanding?.metadata?.total_tokens || 0
+    },
+    {
+      name: "Reranking",
+      active: !!stages.reranking,
+      cost: stages.reranking?.metadata?.openrouter_cost || 0,
+      tokens: stages.reranking?.metadata?.total_tokens || 0
     },
     {
       name: "Reasoning",
