@@ -13366,10 +13366,223 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-04T13:42:44.022094"
+        },
+        {
+          "id": "a299dc6c-4eb6-412a-94fb-bb279405ca0b",
+          "role": "user",
+          "content": "dime el mejor perfil para front end",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T13:43:53.945356"
+        },
+        {
+          "id": "b769ea51-e1be-414b-98ef-09dd28f4d25f",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the top skills, technologies, and qualifications that define an ideal front-end developer profile. This includes technical skills (e.g., HTML, CSS, JavaScript, frameworks like React or Angular), soft skills, and other relevant attributes (e.g., experience with responsive design, UI/UX principles, or version control tools).\n\nFrom the provided CVs, I need to identify candidates with front-end development experience or related skills. However, none of the CVs explicitly mention front-end development roles or skills like HTML, CSS, JavaScript, React, Angular, or other front-end technologies. The closest match might be candidates with general programming or web development experience, but even these do not explicitly list front-end skills.\n\nKey criteria for a front-end developer:\n1. Technical skills: HTML, CSS, JavaScript, front-end frameworks (React, Angular, Vue.js), responsive design, UI/UX principles, version control (Git).\n2. Soft skills: Problem-solving, teamwork, communication, creativity.\n3. Other attributes: Experience with testing frameworks, performance optimization, accessibility standards.\n\nGiven the lack of explicit front-end skills in the CVs, I will outline the ideal profile based on industry standards and note that none of the candidates match this profile.\n:::\n\nAn ideal front-end developer profile includes strong technical skills in HTML, CSS, JavaScript, and frameworks like React or Angular, along with soft skills such as problem-solving and teamwork. Additional qualifications include experience with responsive design, UI/UX principles, and version control tools like Git. | **Other Attributes** | Testing Frameworks, Performance Optimization, Accessibility Standards, Cross-browser Testing |.\n\nAn ideal front-end developer profile includes strong technical skills in HTML, CSS, JavaScript, and frameworks like React or Angular, along with soft skills such as problem-solving and teamwork. Additional qualifications include experience with responsive design, UI/UX principles, and version control tools like Git.\n| **Other Attributes** | Testing Frameworks, Performance Optimization, Accessibility Standards, Cross-browser Testing |\n\n| Skill Category | Key Skills and Qualifications |\n|---|---|\n| **Technical Skills** | HTML, CSS, JavaScript, React/Angular/Vue.js, Responsive Design, UI/UX Principles, Git |\n| **Soft Skills** | Problem-solving, Teamwork, Communication, Creativity |\n| **Other Attributes** | Testing Frameworks, Performance Optimization, Accessibility Standards, Cross-browser Testing |\n\n:::conclusion\nNone of the analyzed candidates explicitly match the ideal front-end developer profile. The CVs do not mention key front-end technologies like HTML, CSS, JavaScript, or frameworks such as React or Angular. For a front-end developer role, candidates should ideally have experience with these technologies and related skills.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_ffc6d564",
+              "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf"
+            },
+            {
+              "cv_id": "cv_71736e47",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_943da331",
+              "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_653fbf59",
+              "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf"
+            },
+            {
+              "cv_id": "cv_916fd244",
+              "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf"
+            },
+            {
+              "cv_id": "cv_fe6338e6",
+              "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_f01ac22c",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_7b0f7ab3",
+              "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_bbc748f9",
+              "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_dd668ac0",
+              "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 3883.66,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 9.41,
+              "details": "Found 22 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 15162.34,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 12222.37,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "An ideal front-end developer profile includes strong technical skills in HTML, CSS, JavaScript, and frameworks like React or Angular, along with soft skills such as problem-solving and teamwork. Additional qualifications include experience with responsive design, UI/UX principles, and version control tools like Git. | **Other Attributes** | Testing Frameworks, Performance Optimization, Accessibility Standards, Cross-browser Testing |.",
+            "raw_content": ":::thinking\nThe user is asking for the top skills, technologies, and qualifications that define an ideal front-end developer profile. This includes technical skills (e.g., HTML, CSS, JavaScript, frameworks like React or Angular), soft skills, and other relevant attributes (e.g., experience with responsive design, UI/UX principles, or version control tools).\n\nFrom the provided CVs, I need to identify candidates with front-end development experience or related skills. However, none of the CVs explicitly mention front-end development roles or skills like HTML, CSS, JavaScript, React, Angular, or other front-end technologies. The closest match might be candidates with general programming or web development experience, but even these do not explicitly list front-end skills.\n\nKey criteria for a front-end developer:\n1. Technical skills: HTML, CSS, JavaScript, front-end frameworks (React, Angular, Vue.js), responsive design, UI/UX principles, version control (Git).\n2. Soft skills: Problem-solving, teamwork, communication, creativity.\n3. Other attributes: Experience with testing frameworks, performance optimization, accessibility standards.\n\nGiven the lack of explicit front-end skills in the CVs, I will outline the ideal profile based on industry standards and note that none of the candidates match this profile.\n:::\n\nAn ideal front-end developer profile includes strong technical skills in HTML, CSS, JavaScript, and frameworks like React or Angular, along with soft skills such as problem-solving and teamwork. Additional qualifications include experience with responsive design, UI/UX principles, and version control tools like Git.\n\n| Skill Category       | Key Skills and Qualifications                                                                 |\n|----------------------|---------------------------------------------------------------------------------------------|\n| **Technical Skills** | HTML, CSS, JavaScript, React/Angular/Vue.js, Responsive Design, UI/UX Principles, Git       |\n| **Soft Skills**      | Problem-solving, Teamwork, Communication, Creativity                                        |\n| **Other Attributes** | Testing Frameworks, Performance Optimization, Accessibility Standards, Cross-browser Testing |\n\n:::conclusion\nNone of the analyzed candidates explicitly match the ideal front-end developer profile. The CVs do not mention key front-end technologies like HTML, CSS, JavaScript, or frameworks such as React or Angular. For a front-end developer role, candidates should ideally have experience with these technologies and related skills.\n:::",
+            "thinking": "The user is asking for the top skills, technologies, and qualifications that define an ideal front-end developer profile. This includes technical skills (e.g., HTML, CSS, JavaScript, frameworks like React or Angular), soft skills, and other relevant attributes (e.g., experience with responsive design, UI/UX principles, or version control tools).\n\nFrom the provided CVs, I need to identify candidates with front-end development experience or related skills. However, none of the CVs explicitly mention front-end development roles or skills like HTML, CSS, JavaScript, React, Angular, or other front-end technologies. The closest match might be candidates with general programming or web development experience, but even these do not explicitly list front-end skills.\n\nKey criteria for a front-end developer:\n1. Technical skills: HTML, CSS, JavaScript, front-end frameworks (React, Angular, Vue.js), responsive design, UI/UX principles, version control (Git).\n2. Soft skills: Problem-solving, teamwork, communication, creativity.\n3. Other attributes: Experience with testing frameworks, performance optimization, accessibility standards.\n\nGiven the lack of explicit front-end skills in the CVs, I will outline the ideal profile based on industry standards and note that none of the candidates match this profile.",
+            "analysis": "An ideal front-end developer profile includes strong technical skills in HTML, CSS, JavaScript, and frameworks like React or Angular, along with soft skills such as problem-solving and teamwork. Additional qualifications include experience with responsive design, UI/UX principles, and version control tools like Git.\n| **Other Attributes** | Testing Frameworks, Performance Optimization, Accessibility Standards, Cross-browser Testing |",
+            "table_data": {
+              "headers": [
+                "Skill Category",
+                "Key Skills and Qualifications"
+              ],
+              "rows": [
+                [
+                  "**Technical Skills**",
+                  "HTML, CSS, JavaScript, React/Angular/Vue.js, Responsive Design, UI/UX Principles, Git"
+                ],
+                [
+                  "**Soft Skills**",
+                  "Problem-solving, Teamwork, Communication, Creativity"
+                ],
+                [
+                  "**Other Attributes**",
+                  "Testing Frameworks, Performance Optimization, Accessibility Standards, Cross-browser Testing"
+                ]
+              ]
+            },
+            "conclusion": "None of the analyzed candidates explicitly match the ideal front-end developer profile. The CVs do not mention key front-end technologies like HTML, CSS, JavaScript, or frameworks such as React or Angular. For a front-end developer role, candidates should ideally have experience with these technologies and related skills.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-04T13:44:34.171930"
+        },
+        {
+          "id": "654d75fe-033d-4bab-8f5f-a10bba2df1ae",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the top skills, qualifications, and experience required for a front-end developer role. This includes technical skills (e.g., HTML, CSS, JavaScript, frameworks like React or Angular), soft skills, and other relevant criteria. I need to analyze the CVs to identify candidates with front-end development experience or related skills. However, none of the CVs explicitly mention front-end development roles or skills like HTML, CSS, JavaScript, or frameworks like React or Angular. The closest match is Layla Hassan, who has experience with React and Node.js, but her primary focus is on NFT development and smart contracts. The other candidates have roles in podcasting, cloud engineering, human resources, legal, 3D modeling, data science, and brand design, none of which are directly relevant to front-end development.\n:::\n\nNone of the analyzed candidates have the required technical skills for a front-end developer role.\n\n| Candidate | Technical Skills | Experience | Match |\n|---|---|---|---|\n| **[Layla Hassan](cv:cv_71736e47)** | React, Node.js | NFT Developer | ⭐ |\n\n:::conclusion\nNo candidates match the specified criteria for a front-end developer role. The closest candidate is **[Layla Hassan](cv:cv_71736e47)**, who has experience with React and Node.js but is primarily focused on NFT development. It is recommended to look for candidates with explicit front-end development experience and skills in HTML, CSS, JavaScript, and frameworks like React or Angular.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_71736e47",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_943da331",
+              "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_fe6338e6",
+              "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_ffc6d564",
+              "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf"
+            },
+            {
+              "cv_id": "cv_916fd244",
+              "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf"
+            },
+            {
+              "cv_id": "cv_f01ac22c",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_bbc748f9",
+              "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_653fbf59",
+              "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf"
+            },
+            {
+              "cv_id": "cv_7b0f7ab3",
+              "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_dd668ac0",
+              "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 5135.46,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 9.85,
+              "details": "Found 19 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 69875.11,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 10105.13,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "None of the analyzed candidates have the required technical skills for a front-end developer role.",
+            "raw_content": ":::thinking\nThe user is asking for the top skills, qualifications, and experience required for a front-end developer role. This includes technical skills (e.g., HTML, CSS, JavaScript, frameworks like React or Angular), soft skills, and other relevant criteria. I need to analyze the CVs to identify candidates with front-end development experience or related skills. However, none of the CVs explicitly mention front-end development roles or skills like HTML, CSS, JavaScript, or frameworks like React or Angular. The closest match is Layla Hassan, who has experience with React and Node.js, but her primary focus is on NFT development and smart contracts. The other candidates have roles in podcasting, cloud engineering, human resources, legal, 3D modeling, data science, and brand design, none of which are directly relevant to front-end development.\n:::\n\nNone of the analyzed candidates have the required technical skills for a front-end developer role.\n\n| Candidate | Technical Skills | Experience | Match |\n|-----------|------------------|------------|-------|\n| **[Layla Hassan](cv:cv_71736e47)** | React, Node.js | NFT Developer | ⭐ |\n\n:::conclusion\nNo candidates match the specified criteria for a front-end developer role. The closest candidate is **[Layla Hassan](cv:cv_71736e47)**, who has experience with React and Node.js but is primarily focused on NFT development. It is recommended to look for candidates with explicit front-end development experience and skills in HTML, CSS, JavaScript, and frameworks like React or Angular.\n:::",
+            "thinking": "The user is asking for the top skills, qualifications, and experience required for a front-end developer role. This includes technical skills (e.g., HTML, CSS, JavaScript, frameworks like React or Angular), soft skills, and other relevant criteria. I need to analyze the CVs to identify candidates with front-end development experience or related skills. However, none of the CVs explicitly mention front-end development roles or skills like HTML, CSS, JavaScript, or frameworks like React or Angular. The closest match is Layla Hassan, who has experience with React and Node.js, but her primary focus is on NFT development and smart contracts. The other candidates have roles in podcasting, cloud engineering, human resources, legal, 3D modeling, data science, and brand design, none of which are directly relevant to front-end development.",
+            "analysis": null,
+            "table_data": {
+              "headers": [
+                "Candidate",
+                "Technical Skills",
+                "Experience",
+                "Match"
+              ],
+              "rows": [
+                [
+                  "**[Layla Hassan](cv:cv_71736e47)**",
+                  "React, Node.js",
+                  "NFT Developer",
+                  "⭐"
+                ]
+              ]
+            },
+            "conclusion": "No candidates match the specified criteria for a front-end developer role. The closest candidate is **[Layla Hassan](cv:cv_71736e47)**, who has experience with React and Node.js but is primarily focused on NFT development. It is recommended to look for candidates with explicit front-end development experience and skills in HTML, CSS, JavaScript, and frameworks like React or Angular.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-04T13:44:43.081080"
         }
       ],
       "created_at": "2026-01-03T22:15:07.573740",
-      "updated_at": "2026-01-04T13:42:44.022094"
+      "updated_at": "2026-01-04T13:44:43.082420"
     }
   ]
 }

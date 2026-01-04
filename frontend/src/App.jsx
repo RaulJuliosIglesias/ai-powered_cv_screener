@@ -180,7 +180,17 @@ function App() {
   const { theme, toggleTheme } = useTheme();
   const { language, setLanguage } = useLanguage();
 
-  useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [currentSession?.messages]);
+  // Auto-scroll to bottom when messages change or when loading starts
+  useEffect(() => { 
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); 
+  }, [currentSession?.messages]);
+  
+  // Scroll to bottom when user sends a message (loading starts)
+  useEffect(() => {
+    if (isChatLoading) {
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [isChatLoading]);
 
   const loadSessions = useCallback(async () => {
     try { const data = await getSessions(mode); setSessions(data.sessions || []); } catch (e) { console.error(e); }
