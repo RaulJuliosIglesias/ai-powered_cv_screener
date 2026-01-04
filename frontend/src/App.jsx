@@ -32,6 +32,7 @@ function App() {
   const [editingId, setEditingId] = useState(null);
   const [editName, setEditName] = useState('');
   const [deleteConfirm, setDeleteConfirm] = useState(null);
+  const [deletingSessionId, setDeletingSessionId] = useState(null);
   const [deleteMessageConfirm, setDeleteMessageConfirm] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
   const [allCVs, setAllCVs] = useState([]);
@@ -247,10 +248,15 @@ function App() {
   };
 
   const handleDelete = async (id) => {
-    await deleteSession(id, mode);
-    await loadSessions();
-    if (currentSessionId === id) setCurrentSessionId(null);
+    setDeletingSessionId(id);
     setDeleteConfirm(null);
+    try {
+      await deleteSession(id, mode);
+      await loadSessions();
+      if (currentSessionId === id) setCurrentSessionId(null);
+    } finally {
+      setDeletingSessionId(null);
+    }
   };
 
   const handleRename = async (id) => {
@@ -520,6 +526,9 @@ function App() {
         console.log('⚠️ Session IDs do not match, skipping reload');
       }
       
+      // Reload sessions list to reorder by last activity
+      await loadSessions();
+      
     } catch (e) {
       console.error('❌ Stream error:', e);
       setPendingMessages(prev => {
@@ -769,8 +778,19 @@ function App() {
         <div className="flex-1 overflow-y-auto px-2">
           {sessions.map((s) => (
             <div key={s.id} className="mb-1">
-              <div onClick={() => setCurrentSessionId(s.id)} className={`group flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-colors ${currentSessionId === s.id ? 'bg-blue-100 dark:bg-slate-800 text-blue-700 dark:text-white' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800/50'}`}>
-                {chatLoadingStates[s.id] ? (
+              <div 
+                onClick={() => !deletingSessionId && setCurrentSessionId(s.id)} 
+                className={`group flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
+                  deletingSessionId === s.id 
+                    ? 'bg-red-50 dark:bg-red-900/20 opacity-60 cursor-not-allowed' 
+                    : currentSessionId === s.id 
+                      ? 'bg-blue-100 dark:bg-slate-800 text-blue-700 dark:text-white cursor-pointer' 
+                      : 'text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800/50 cursor-pointer'
+                }`}
+              >
+                {deletingSessionId === s.id ? (
+                  <Loader className="w-4 h-4 flex-shrink-0 animate-spin text-red-400" />
+                ) : chatLoadingStates[s.id] ? (
                   <Loader className="w-4 h-4 flex-shrink-0 animate-spin text-cyan-400" />
                 ) : (
                   <MessageSquare className="w-4 h-4 flex-shrink-0" />
@@ -779,17 +799,21 @@ function App() {
                   <input value={editName} onChange={(e) => setEditName(e.target.value)} onBlur={() => handleRename(s.id)} onKeyDown={(e) => e.key === 'Enter' && handleRename(s.id)} className="flex-1 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm px-2 py-0.5 rounded outline-none border border-slate-300 dark:border-slate-600" autoFocus onClick={(e) => e.stopPropagation()} />
                 ) : (
                   <div className="flex-1 min-w-0">
-                    <span className="text-sm truncate block">{s.name}</span>
+                    <span className="text-sm truncate block">
+                      {deletingSessionId === s.id ? (language === 'es' ? 'Eliminando...' : 'Deleting...') : s.name}
+                    </span>
                     <span className="text-xs text-slate-400 dark:text-slate-500">{s.cv_count || 0} CVs</span>
                   </div>
                 )}
-                <div className="hidden group-hover:flex items-center gap-1">
-                  {deleteConfirm === s.id ? (
-                    <><button onClick={(e) => { e.stopPropagation(); handleDelete(s.id); }} className="p-1 hover:bg-red-500/20 rounded"><Check className="w-3.5 h-3.5 text-red-400" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(null); }} className="p-1"><X className="w-3.5 h-3.5" /></button></>
-                  ) : (
-                    <><button onClick={(e) => { e.stopPropagation(); setCvPanelSessionId(s.id); setShowCVPanel(true); }} className="p-1 hover:bg-slate-300 dark:hover:bg-slate-700 rounded transition-colors" title={language === 'es' ? 'Ver CVs' : 'View CVs'}><FileText className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setEditingId(s.id); setEditName(s.name); }} className="p-1 hover:bg-slate-300 dark:hover:bg-slate-700 rounded transition-colors"><Edit2 className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(s.id); }} className="p-1 hover:bg-slate-300 dark:hover:bg-slate-700 rounded transition-colors"><Trash2 className="w-3.5 h-3.5" /></button></>
-                  )}
-                </div>
+                {deletingSessionId !== s.id && (
+                  <div className="hidden group-hover:flex items-center gap-1">
+                    {deleteConfirm === s.id ? (
+                      <><button onClick={(e) => { e.stopPropagation(); handleDelete(s.id); }} className="p-1 hover:bg-red-500/20 rounded"><Check className="w-3.5 h-3.5 text-red-400" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(null); }} className="p-1"><X className="w-3.5 h-3.5" /></button></>
+                    ) : (
+                      <><button onClick={(e) => { e.stopPropagation(); setCvPanelSessionId(s.id); setShowCVPanel(true); }} className="p-1 hover:bg-slate-300 dark:hover:bg-slate-700 rounded transition-colors" title={language === 'es' ? 'Ver CVs' : 'View CVs'}><FileText className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setEditingId(s.id); setEditName(s.name); }} className="p-1 hover:bg-slate-300 dark:hover:bg-slate-700 rounded transition-colors"><Edit2 className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(s.id); }} className="p-1 hover:bg-slate-300 dark:hover:bg-slate-700 rounded transition-colors"><Trash2 className="w-3.5 h-3.5" /></button></>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           ))}
