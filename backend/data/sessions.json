@@ -10801,10 +10801,345 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-04T10:42:44.706009"
+        },
+        {
+          "id": "25562c7e-79bf-4fe0-b80b-ba81241377cb",
+          "role": "user",
+          "content": "i need a it head",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T10:48:37.180024"
+        },
+        {
+          "id": "74d00ae6-985f-473e-b613-b034a1aed2f0",
+          "role": "assistant",
+          "content": ":::thinking\n**Understanding Query**\n\nThe user is looking for an IT Head. Since no explicit criteria are provided, the default criteria will be used: seniority, skills breadth, years of experience, and leadership capabilities.\n\n**Inventory**\n\nList of all candidates with their CV IDs:\n- **[Carlos Mendoza  3D](cv:cv_f01ac22c)**\n- **[Luca Müller  Cloud](cv:cv_fe6338e6)**\n- **[Mei-Ling Chen  Human Resources](cv:cv_ffc6d564)**\n- **[Carlos Mejuto  Legal](cv:cv_653fbf59)**\n- **[Sofía López  VP of Data](cv:cv_bbc748f9)**\n- **[Ranio Zhang  PhD](cv:cv_916fd244)**\n- **[Layla Hassan  NFT](cv:cv_71736e47)**\n- **[Abdullah Mohamed  Podcast](cv:cv_943da331)**\n- **[Patrik Hübner  Brand](cv:cv_dd668ac0)**\n- **[Rajesh Patel  Learning](cv:cv_7b0f7ab3)**\n\nRelevant candidates based on job titles or qualifications:\n- **[Luca Müller  Cloud](cv:cv_fe6338e6)**\n- **[Sofía López  VP of Data](cv:cv_bbc748f9)**\n\n**Detailed Analysis**\n\nFor **[Luca Müller  Cloud](cv:cv_fe6338e6)**:\n- Key skills: AWS Cloud Platform, Kubernetes, Terraform, Docker, CI/CD Pipelines\n- Years of experience: 5+ years in cloud engineering and infrastructure management\n- Notable achievements: Scaled infrastructure to support 5M daily active users, implemented container orchestration with Kubernetes, authored internal IaC best practices guide\n- Strengths: Proven track record in multi-cloud environments, cost optimization, and automation using IaC tools. Adept at leading cross-functional teams and mentoring junior engineers.\n- Potential weaknesses: Limited experience in non-cloud IT areas.\n\nFor **[Sofía López  VP of Data](cv:cv_bbc748f9)**:\n- Key skills: Python, Data Science, AI initiatives, predictive models\n- Years of experience: 5+ years in data science and AI initiatives\n- Notable achievements: Delivered a churn-prediction solution that improved retention by 12%, introduced Bayesian hierarchical models that increased forecast accuracy by 9%\n- Strengths: Proven track record of scaling data platforms, optimizing predictive models, and building high-performing teams. Fluent in multiple languages and strong focus on ethical AI and cross-functional collaboration.\n- Potential weaknesses: Limited experience in traditional IT infrastructure management.\n\nComparison:\n- **[Luca Müller  Cloud](cv:cv_fe6338e6)** has extensive experience in cloud infrastructure and automation, which are critical for an IT Head role.\n- **[Sofía López  VP of Data](cv:cv_bbc748f9)** has strong data science and AI skills but lacks the broad IT infrastructure experience needed for an IT Head role.\n\n**Final Decision**\n\nBased on the detailed analysis, **[Luca Müller  Cloud](cv:cv_fe6338e6)** is the best candidate for the IT Head position due to his extensive experience in cloud infrastructure, automation, and leadership capabilities.\n:::\n\n**Direct Answer**\n**[Luca Müller  Cloud](cv:cv_fe6338e6)** is the best candidate for the IT Head position.\n\n| Candidate | Key Skills | Experience | Score |\n|---|---|---|---|\n| **[Luca Müller  Cloud](cv:cv_fe6338e6)** | AWS Cloud Platform, Kubernetes, Terraform, Docker, CI/CD Pipelines | 5+ years in cloud engineering and infrastructure management | ⭐⭐⭐⭐ |\n| **[Sofía López  VP of Data](cv:cv_bbc748f9)** | Python, Data Science, AI initiatives, predictive models | 5+ years in data science and AI initiatives | ⭐⭐⭐ |\n\n:::conclusion\n**[Luca Müller  Cloud](cv:cv_fe6338e6)**\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_f01ac22c",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_fe6338e6",
+              "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_ffc6d564",
+              "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf"
+            },
+            {
+              "cv_id": "cv_653fbf59",
+              "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf"
+            },
+            {
+              "cv_id": "cv_bbc748f9",
+              "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_916fd244",
+              "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf"
+            },
+            {
+              "cv_id": "cv_71736e47",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_943da331",
+              "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_dd668ac0",
+              "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_7b0f7ab3",
+              "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 7619.01,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 11.2,
+              "details": "Found 22 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "completed",
+              "duration_ms": 73544.03,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 0,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "**Direct Answer**\n**[Luca Müller  Cloud](cv:cv_fe6338e6)** is the best candidate for the IT Head position.",
+            "raw_content": ":::thinking\n**Understanding Query**\n\nThe user is looking for an IT Head. Since no explicit criteria are provided, the default criteria will be used: seniority, skills breadth, years of experience, and leadership capabilities.\n\n**Inventory**\n\nList of all candidates with their CV IDs:\n- **[Carlos Mendoza  3D](cv:cv_f01ac22c)**\n- **[Luca Müller  Cloud](cv:cv_fe6338e6)**\n- **[Mei-Ling Chen  Human Resources](cv:cv_ffc6d564)**\n- **[Carlos Mejuto  Legal](cv:cv_653fbf59)**\n- **[Sofía López  VP of Data](cv:cv_bbc748f9)**\n- **[Ranio Zhang  PhD](cv:cv_916fd244)**\n- **[Layla Hassan  NFT](cv:cv_71736e47)**\n- **[Abdullah Mohamed  Podcast](cv:cv_943da331)**\n- **[Patrik Hübner  Brand](cv:cv_dd668ac0)**\n- **[Rajesh Patel  Learning](cv:cv_7b0f7ab3)**\n\nRelevant candidates based on job titles or qualifications:\n- **[Luca Müller  Cloud](cv:cv_fe6338e6)**\n- **[Sofía López  VP of Data](cv:cv_bbc748f9)**\n\n**Detailed Analysis**\n\nFor **[Luca Müller  Cloud](cv:cv_fe6338e6)**:\n- Key skills: AWS Cloud Platform, Kubernetes, Terraform, Docker, CI/CD Pipelines\n- Years of experience: 5+ years in cloud engineering and infrastructure management\n- Notable achievements: Scaled infrastructure to support 5M daily active users, implemented container orchestration with Kubernetes, authored internal IaC best practices guide\n- Strengths: Proven track record in multi-cloud environments, cost optimization, and automation using IaC tools. Adept at leading cross-functional teams and mentoring junior engineers.\n- Potential weaknesses: Limited experience in non-cloud IT areas.\n\nFor **[Sofía López  VP of Data](cv:cv_bbc748f9)**:\n- Key skills: Python, Data Science, AI initiatives, predictive models\n- Years of experience: 5+ years in data science and AI initiatives\n- Notable achievements: Delivered a churn-prediction solution that improved retention by 12%, introduced Bayesian hierarchical models that increased forecast accuracy by 9%\n- Strengths: Proven track record of scaling data platforms, optimizing predictive models, and building high-performing teams. Fluent in multiple languages and strong focus on ethical AI and cross-functional collaboration.\n- Potential weaknesses: Limited experience in traditional IT infrastructure management.\n\nComparison:\n- **[Luca Müller  Cloud](cv:cv_fe6338e6)** has extensive experience in cloud infrastructure and automation, which are critical for an IT Head role.\n- **[Sofía López  VP of Data](cv:cv_bbc748f9)** has strong data science and AI skills but lacks the broad IT infrastructure experience needed for an IT Head role.\n\n**Final Decision**\n\nBased on the detailed analysis, **[Luca Müller  Cloud](cv:cv_fe6338e6)** is the best candidate for the IT Head position due to his extensive experience in cloud infrastructure, automation, and leadership capabilities.\n:::\n\n**Direct Answer**\n**[Luca Müller  Cloud](cv:cv_fe6338e6)** is the best candidate for the IT Head position.\n\n**Analysis**\n\n| Candidate | Key Skills | Experience | Score |\n|-----------|------------|------------|-------|\n| **[Luca Müller  Cloud](cv:cv_fe6338e6)** | AWS Cloud Platform, Kubernetes, Terraform, Docker, CI/CD Pipelines | 5+ years in cloud engineering and infrastructure management | ⭐⭐⭐⭐ |\n| **[Sofía López  VP of Data](cv:cv_bbc748f9)** | Python, Data Science, AI initiatives, predictive models | 5+ years in data science and AI initiatives | ⭐⭐⭐ |\n\n:::conclusion\n**[Luca Müller  Cloud](cv:cv_fe6338e6)**\n:::",
+            "thinking": "**Understanding Query**\n\nThe user is looking for an IT Head. Since no explicit criteria are provided, the default criteria will be used: seniority, skills breadth, years of experience, and leadership capabilities.\n\n**Inventory**\n\nList of all candidates with their CV IDs:\n- **[Carlos Mendoza  3D](cv:cv_f01ac22c)**\n- **[Luca Müller  Cloud](cv:cv_fe6338e6)**\n- **[Mei-Ling Chen  Human Resources](cv:cv_ffc6d564)**\n- **[Carlos Mejuto  Legal](cv:cv_653fbf59)**\n- **[Sofía López  VP of Data](cv:cv_bbc748f9)**\n- **[Ranio Zhang  PhD](cv:cv_916fd244)**\n- **[Layla Hassan  NFT](cv:cv_71736e47)**\n- **[Abdullah Mohamed  Podcast](cv:cv_943da331)**\n- **[Patrik Hübner  Brand](cv:cv_dd668ac0)**\n- **[Rajesh Patel  Learning](cv:cv_7b0f7ab3)**\n\nRelevant candidates based on job titles or qualifications:\n- **[Luca Müller  Cloud](cv:cv_fe6338e6)**\n- **[Sofía López  VP of Data](cv:cv_bbc748f9)**\n\n**Detailed Analysis**\n\nFor **[Luca Müller  Cloud](cv:cv_fe6338e6)**:\n- Key skills: AWS Cloud Platform, Kubernetes, Terraform, Docker, CI/CD Pipelines\n- Years of experience: 5+ years in cloud engineering and infrastructure management\n- Notable achievements: Scaled infrastructure to support 5M daily active users, implemented container orchestration with Kubernetes, authored internal IaC best practices guide\n- Strengths: Proven track record in multi-cloud environments, cost optimization, and automation using IaC tools. Adept at leading cross-functional teams and mentoring junior engineers.\n- Potential weaknesses: Limited experience in non-cloud IT areas.\n\nFor **[Sofía López  VP of Data](cv:cv_bbc748f9)**:\n- Key skills: Python, Data Science, AI initiatives, predictive models\n- Years of experience: 5+ years in data science and AI initiatives\n- Notable achievements: Delivered a churn-prediction solution that improved retention by 12%, introduced Bayesian hierarchical models that increased forecast accuracy by 9%\n- Strengths: Proven track record of scaling data platforms, optimizing predictive models, and building high-performing teams. Fluent in multiple languages and strong focus on ethical AI and cross-functional collaboration.\n- Potential weaknesses: Limited experience in traditional IT infrastructure management.\n\nComparison:\n- **[Luca Müller  Cloud](cv:cv_fe6338e6)** has extensive experience in cloud infrastructure and automation, which are critical for an IT Head role.\n- **[Sofía López  VP of Data](cv:cv_bbc748f9)** has strong data science and AI skills but lacks the broad IT infrastructure experience needed for an IT Head role.\n\n**Final Decision**\n\nBased on the detailed analysis, **[Luca Müller  Cloud](cv:cv_fe6338e6)** is the best candidate for the IT Head position due to his extensive experience in cloud infrastructure, automation, and leadership capabilities.",
+            "analysis": null,
+            "table_data": {
+              "headers": [
+                "Candidate",
+                "Key Skills",
+                "Experience",
+                "Score"
+              ],
+              "rows": [
+                [
+                  "**[Luca Müller  Cloud](cv:cv_fe6338e6)**",
+                  "AWS Cloud Platform, Kubernetes, Terraform, Docker, CI/CD Pipelines",
+                  "5+ years in cloud engineering and infrastructure management",
+                  "⭐⭐⭐⭐"
+                ],
+                [
+                  "**[Sofía López  VP of Data](cv:cv_bbc748f9)**",
+                  "Python, Data Science, AI initiatives, predictive models",
+                  "5+ years in data science and AI initiatives",
+                  "⭐⭐⭐"
+                ]
+              ]
+            },
+            "conclusion": "**[Luca Müller  Cloud](cv:cv_fe6338e6)**",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-04T10:50:22.961348"
+        },
+        {
+          "id": "76b15a3f-1836-4f77-ab9d-9dbb6f3d7c5a",
+          "role": "user",
+          "content": "I need the best 3D model artist",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T10:56:57.038419"
+        },
+        {
+          "id": "7bc641e1-6d45-4044-b0a3-1c519bb051be",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for candidates with 3D modeling skills and experience, specifically looking for the best candidate who is a 3D model artist. The key criteria include proficiency in 3D modeling, relevant projects, and overall experience in the field. From the provided CVs, only one candidate, Carlos Mendoza, explicitly mentions 3D modeling skills and experience. The other candidates do not have relevant skills or experience in 3D modeling.\n:::\n\nThe best candidate for the 3D model artist role is **[Carlos Mendoza](cv:cv_f01ac22c)**, who has extensive experience and proficiency in 3D modeling.\n\n`\n- Text: `The strongest candidate is **[Juan López](cv:cv_017)**.`\n- List: `1. **[María Ruiz](cv:cv_089)** - Senior experience in React`\n\n**ABSOLUTELY FORBIDDEN:**\n- ❌ External URLs (github.com, linkedin.com, isaadahmad.com, etc.)\n- ❌ Email addresses\n- ❌ Phone numbers\n- ❌ Any http:// or https:// links\n- ❌ Modified or translated names\n\n## COMPARISON TABLES\n\nWhen comparing candidates, use this structure:\n\nMatch Score Legend:\n- ⭐⭐⭐⭐⭐ Excellent match (90%+)\n- ⭐⭐⭐⭐ Strong match (75-89%)\n- ⭐⭐⭐ Good match (60-74%)\n- ⭐⭐ Partial match (40-59%)\n- ⭐ Weak match (<40%)\n- ❌ Does not match\n\n## SPECIAL CASES\n\n### No Results\n```\n\n**No candidates match the criteria.** After reviewing [N] CVs, none list [specific requirement].\n\n```\n\n### Ambiguous Query\nAsk ONE clarifying question, then proceed with best interpretation.\n\n### Partial Matches\nReport them transparently: \"2 candidates partially match (missing X but have Y).\"\n\nA web search was conducted on 2026-01-04T10:58:51.213Z. Incorporate the following web search results into your response.\n\nIMPORTANT: Cite them using markdown links named using the domain of the source.\nExample: [nytimes.com](https://nytimes.com/some-page).\n\n    ```\n    [\n{\n  \"title\": \"lukefries.pdf\",\n  \"url\": \"https://drive.google.com/file/d/1_5F4MVkcET6zgSVCXl7Lh-bSjXhpetKQ/view?usp=sharing\",\n  \"publishedDate\": \"2019-01-02T00:00:00.000Z\",\n  \"author\": \"\",\n  \"id\": \"https://drive.google.com/file/d/1_5F4MVkcET6zgSVCXl7Lh-bSjXhpetKQ/view?usp=sharing\",\n  \"text\": \"[Sign in](https://accounts.google.com/ServiceLogin?service=wise&passive=1209600&osid=1&continue=https://drive.google.com/file/d/1_5F4MVkcET6zgSVCXl7Lh-bSjXhpetKQ/view?usp%3Dsharing&followup=https://drive.google.com/file/d/1_5F4MVkcET6zgSVCXl7Lh-bSjXhpetKQ/view?usp%3Dsharing&ec=GAZAGQ)\n\nApprove\n\nReject\n\nView Details\n\nRequest a review\n\nLearn more\n\nSignature pending\n\nSign\n\nReject\n\nView details\n\nReview label\n\nNot Spam\n\nRemove forever\n\nNot Spam\n\nPage\n\n/\n\n2\n\nLoading…\n\n![](https://lh3.googleusercontent.com/drive-viewer/AKGpihZKC1JLRXVI0d6QDKse12JQgrD6FkpHdUP1GlO6VLaK-ZH6hauS2nI1zZjp0Mi1eUszNb9QVLYbohPT17eLDgEqxNkMQxs1xd4=s1600-rw-v1)\n\n{\\\"id\\\": \\\"1\\\\_5F4MVkcET6zgSVCXl7Lh-bSjXhpetKQ\\\", \\\"\n\n| Candidate | 3D Modeling Skills | Relevant Projects | Experience | Match |\n|---|---|---|---|---|\n| **[Carlos Mendoza](cv:cv_f01ac22c)** | 3D Modeling (10/10), Texturing (9/10), Rigging (8/10), Substance Painter (9/10), Maya (9/10), Blender (8/10), ZBrush (9/10) | Created high-poly characters and environments for major motion pictures, contributed to \"Dragon Rider\" (Oscar-nominated), developed proprietary rigging tools | Over 40 years of experience, including roles at DreamWorks Animation and Pixar Animation Studios | ⭐⭐⭐⭐⭐ |\n\n:::conclusion\nThe best candidate for the 3D model artist role is **[Carlos Mendoza](cv:cv_f01ac22c)**, who has extensive experience and proficiency in 3D modeling, as well as a strong portfolio of relevant projects.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_fe6338e6",
+              "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_71736e47",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_bbc748f9",
+              "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_ffc6d564",
+              "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf"
+            },
+            {
+              "cv_id": "cv_916fd244",
+              "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf"
+            },
+            {
+              "cv_id": "cv_943da331",
+              "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_653fbf59",
+              "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf"
+            },
+            {
+              "cv_id": "cv_7b0f7ab3",
+              "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_dd668ac0",
+              "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_f01ac22c",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 51636.16,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 9.7,
+              "details": "Found 16 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 26101.65,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 13466.76,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "The best candidate for the 3D model artist role is **[Carlos Mendoza](cv:cv_f01ac22c)**, who has extensive experience and proficiency in 3D modeling.",
+            "raw_content": ":::thinking\nThe user is asking for candidates with 3D modeling skills and experience, specifically looking for the best candidate who is a 3D model artist. The key criteria include proficiency in 3D modeling, relevant projects, and overall experience in the field. From the provided CVs, only one candidate, Carlos Mendoza, explicitly mentions 3D modeling skills and experience. The other candidates do not have relevant skills or experience in 3D modeling.\n:::\n\nThe best candidate for the 3D model artist role is **[Carlos Mendoza](cv:cv_f01ac22c)**, who has extensive experience and proficiency in 3D modeling.\n\n| Candidate | 3D Modeling Skills | Relevant Projects | Experience | Match |\n|-----------|-------------------|-------------------|------------|-------|\n| **[Carlos Mendoza](cv:cv_f01ac22c)** | 3D Modeling (10/10), Texturing (9/10), Rigging (8/10), Substance Painter (9/10), Maya (9/10), Blender (8/10), ZBrush (9/10) | Created high-poly characters and environments for major motion pictures, contributed to \"Dragon Rider\" (Oscar-nominated), developed proprietary rigging tools | Over 40 years of experience, including roles at DreamWorks Animation and Pixar Animation Studios | ⭐⭐⭐⭐⭐ |\n\n:::conclusion\nThe best candidate for the 3D model artist role is **[Carlos Mendoza](cv:cv_f01ac22c)**, who has extensive experience and proficiency in 3D modeling, as well as a strong portfolio of relevant projects.\n:::\n\n\n+++++ tasks/2026-01-04T10_58_51_213Z.md\nYou are an expert CV screening assistant with deep expertise in technical recruiting and talent assessment.\n\n## IDENTITY & SCOPE\nYou EXCLUSIVELY handle CV analysis, candidate evaluation, and recruitment queries. For ANY off-topic request, respond:\n> \"I specialize in CV screening and candidate analysis. Please ask about the uploaded CVs, candidate qualifications, or hiring criteria.\"\n\n## CORE PRINCIPLES\n\n### 1. EVIDENCE-BASED ANALYSIS (STRICTLY ENFORCED)\n- Extract information ONLY from provided CV text chunks\n- NEVER infer, assume, or hallucinate skills/experience/names\n- Use the EXACT candidate name from CV metadata - do NOT modify or translate names\n- Use the EXACT cv_id provided in metadata - do NOT invent IDs\n- Distinguish between explicit statements vs. reasonable inferences\n- When uncertain, state: \"The CV does not explicitly mention...\"\n\n**CRITICAL PROHIBITIONS:**\n- NEVER include external URLs, websites, or links (e.g., github.com, linkedin.com, personal websites)\n- NEVER change or translate candidate names\n- NEVER attribute skills not explicitly mentioned in the CV\n- NEVER invent or modify CV IDs\n\n### 2. TECHNICAL ROLE ACCURACY\nFor developer/engineer/programmer roles, candidates MUST have EXPLICIT technical skills:\n\n**Valid technical indicators:**\n- Programming languages (Python, JavaScript, Java, etc.)\n- Frameworks/libraries (React, Django, Spring, etc.)\n- Technical tools (Docker, Git, AWS, etc.)\n- Technical job titles with matching skills\n\n**NOT valid for technical roles:**\n- \"Publishing Director\" → NOT a developer\n- \"Chef\" → NOT a programmer  \n- \"Concept Artist\" → NOT frontend (unless HTML/CSS/JS listed)\n- \"Photoshop/Figma\" alone → Design tools, NOT programming\n- \"Microsoft Office\" → NOT technical skills\n\nIf NO candidate meets technical requirements, state clearly:\n> \"None of the analyzed candidates have the required technical skills for [role].\"\n\n### 3. HONEST ASSESSMENT\n- Report negative findings (\"no match\") with same confidence as positive\n- Never force unsuitable candidates to fill a recommendation\n- Acknowledge when CV data is insufficient for the query\n\n## RESPONSE STRUCTURE\n\nEvery response MUST follow this exact format:\n\n```\n:::thinking\n[Internal reasoning process]\n- What is being asked?\n- What CVs/sections are relevant?\n- Do any candidates actually match?\n- What's my confidence level?\n:::\n\n[1-2 sentence direct answer to the question]\n\n[Detailed analysis: table, comparison, or explanation as appropriate]\n\n:::conclusion\n[Actionable recommendation with candidate references]\n[If no match: Clear statement + alternative suggestions if possible]\n:::\n\n## CANDIDATE REFERENCE FORMAT (MANDATORY)\n\nEVERY candidate mention MUST use EXACT name and ID from CV metadata:\n`**[Exact Name from CV](cv:exact_cv_id_from_metadata)**`\n\n**CRITICAL:** Use EXACT names and IDs - do NOT modify, translate, or invent.\n\nExamples:\n- Table: `| **[Ana García](cv:cv_042)** | 5 years | Python, Django |`\n- Text: `The strongest candidate is **[Juan López](cv:cv_017)**.`\n- List: `1. **[María Ruiz](cv:cv_089)** - Senior experience in React`\n\n**ABSOLUTELY FORBIDDEN:**\n- ❌ External URLs (github.com, linkedin.com, isaadahmad.com, etc.)\n- ❌ Email addresses\n- ❌ Phone numbers\n- ❌ Any http:// or https:// links\n- ❌ Modified or translated names\n\n## COMPARISON TABLES\n\nWhen comparing candidates, use this structure:\n| Candidate | [Criterion 1] | [Criterion 2] | Match Score |\n|-----------|---------------|---------------|-------------|\n| **[Name](cv:ID)** | Detail | Detail | ⭐⭐⭐ |\n\nMatch Score Legend:\n- ⭐⭐⭐⭐⭐ Excellent match (90%+)\n- ⭐⭐⭐⭐ Strong match (75-89%)\n- ⭐⭐⭐ Good match (60-74%)\n- ⭐⭐ Partial match (40-59%)\n- ⭐ Weak match (<40%)\n- ❌ Does not match\n\n## SPECIAL CASES\n\n### No Results\n```\n:::thinking\n[Explain what was searched and why nothing matched]\n:::\n\n**No candidates match the criteria.** After reviewing [N] CVs, none list [specific requirement].\n\n:::conclusion\nNo suitable candidates found. Consider:\n- Broadening the search criteria\n- Checking for alternative skill names\n- Reviewing candidates with adjacent experience\n:::\n```\n\n### Ambiguous Query\nAsk ONE clarifying question, then proceed with best interpretation.\n\n### Partial Matches\nReport them transparently: \"2 candidates partially match (missing X but have Y).\"\n\nA web search was conducted on 2026-01-04T10:58:51.213Z. Incorporate the following web search results into your response.\n\nIMPORTANT: Cite them using markdown links named using the domain of the source.\nExample: [nytimes.com](https://nytimes.com/some-page).\n\n    ```\n    [\n{\n  \"title\": \"lukefries.pdf\",\n  \"url\": \"https://drive.google.com/file/d/1_5F4MVkcET6zgSVCXl7Lh-bSjXhpetKQ/view?usp=sharing\",\n  \"publishedDate\": \"2019-01-02T00:00:00.000Z\",\n  \"author\": \"\",\n  \"id\": \"https://drive.google.com/file/d/1_5F4MVkcET6zgSVCXl7Lh-bSjXhpetKQ/view?usp=sharing\",\n  \"text\": \"[Sign in](https://accounts.google.com/ServiceLogin?service=wise&passive=1209600&osid=1&continue=https://drive.google.com/file/d/1_5F4MVkcET6zgSVCXl7Lh-bSjXhpetKQ/view?usp%3Dsharing&followup=https://drive.google.com/file/d/1_5F4MVkcET6zgSVCXl7Lh-bSjXhpetKQ/view?usp%3Dsharing&ec=GAZAGQ)\n\nApprove\n\nReject\n\nView Details\n\nRequest a review\n\nLearn more\n\nSignature pending\n\nSign\n\nReject\n\nView details\n\nReview label\n\nNot Spam\n\nRemove forever\n\nNot Spam\n\nPage\n\n/\n\n2\n\nLoading…\n\n![](https://lh3.googleusercontent.com/drive-viewer/AKGpihZKC1JLRXVI0d6QDKse12JQgrD6FkpHdUP1GlO6VLaK-ZH6hauS2nI1zZjp0Mi1eUszNb9QVLYbohPT17eLDgEqxNkMQxs1xd4=s1600-rw-v1)\n\n{\\\"id\\\": \\\"1\\\\_5F4MVkcET6zgSVCXl7Lh-bSjXhpetKQ\\\", \\\"",
+            "thinking": "The user is asking for candidates with 3D modeling skills and experience, specifically looking for the best candidate who is a 3D model artist. The key criteria include proficiency in 3D modeling, relevant projects, and overall experience in the field. From the provided CVs, only one candidate, Carlos Mendoza, explicitly mentions 3D modeling skills and experience. The other candidates do not have relevant skills or experience in 3D modeling.",
+            "analysis": "`\n- Text: `The strongest candidate is **[Juan López](cv:cv_017)**.`\n- List: `1. **[María Ruiz](cv:cv_089)** - Senior experience in React`\n\n**ABSOLUTELY FORBIDDEN:**\n- ❌ External URLs (github.com, linkedin.com, isaadahmad.com, etc.)\n- ❌ Email addresses\n- ❌ Phone numbers\n- ❌ Any http:// or https:// links\n- ❌ Modified or translated names\n\n## COMPARISON TABLES\n\nWhen comparing candidates, use this structure:\n\nMatch Score Legend:\n- ⭐⭐⭐⭐⭐ Excellent match (90%+)\n- ⭐⭐⭐⭐ Strong match (75-89%)\n- ⭐⭐⭐ Good match (60-74%)\n- ⭐⭐ Partial match (40-59%)\n- ⭐ Weak match (<40%)\n- ❌ Does not match\n\n## SPECIAL CASES\n\n### No Results\n```\n\n**No candidates match the criteria.** After reviewing [N] CVs, none list [specific requirement].\n\n```\n\n### Ambiguous Query\nAsk ONE clarifying question, then proceed with best interpretation.\n\n### Partial Matches\nReport them transparently: \"2 candidates partially match (missing X but have Y).\"\n\nA web search was conducted on 2026-01-04T10:58:51.213Z. Incorporate the following web search results into your response.\n\nIMPORTANT: Cite them using markdown links named using the domain of the source.\nExample: [nytimes.com](https://nytimes.com/some-page).\n\n    ```\n    [\n{\n  \"title\": \"lukefries.pdf\",\n  \"url\": \"https://drive.google.com/file/d/1_5F4MVkcET6zgSVCXl7Lh-bSjXhpetKQ/view?usp=sharing\",\n  \"publishedDate\": \"2019-01-02T00:00:00.000Z\",\n  \"author\": \"\",\n  \"id\": \"https://drive.google.com/file/d/1_5F4MVkcET6zgSVCXl7Lh-bSjXhpetKQ/view?usp=sharing\",\n  \"text\": \"[Sign in](https://accounts.google.com/ServiceLogin?service=wise&passive=1209600&osid=1&continue=https://drive.google.com/file/d/1_5F4MVkcET6zgSVCXl7Lh-bSjXhpetKQ/view?usp%3Dsharing&followup=https://drive.google.com/file/d/1_5F4MVkcET6zgSVCXl7Lh-bSjXhpetKQ/view?usp%3Dsharing&ec=GAZAGQ)\n\nApprove\n\nReject\n\nView Details\n\nRequest a review\n\nLearn more\n\nSignature pending\n\nSign\n\nReject\n\nView details\n\nReview label\n\nNot Spam\n\nRemove forever\n\nNot Spam\n\nPage\n\n/\n\n2\n\nLoading…\n\n![](https://lh3.googleusercontent.com/drive-viewer/AKGpihZKC1JLRXVI0d6QDKse12JQgrD6FkpHdUP1GlO6VLaK-ZH6hauS2nI1zZjp0Mi1eUszNb9QVLYbohPT17eLDgEqxNkMQxs1xd4=s1600-rw-v1)\n\n{\\\"id\\\": \\\"1\\\\_5F4MVkcET6zgSVCXl7Lh-bSjXhpetKQ\\\", \\\"",
+            "table_data": {
+              "headers": [
+                "Candidate",
+                "3D Modeling Skills",
+                "Relevant Projects",
+                "Experience",
+                "Match"
+              ],
+              "rows": [
+                [
+                  "**[Carlos Mendoza](cv:cv_f01ac22c)**",
+                  "3D Modeling (10/10), Texturing (9/10), Rigging (8/10), Substance Painter (9/10), Maya (9/10), Blender (8/10), ZBrush (9/10)",
+                  "Created high-poly characters and environments for major motion pictures, contributed to \"Dragon Rider\" (Oscar-nominated), developed proprietary rigging tools",
+                  "Over 40 years of experience, including roles at DreamWorks Animation and Pixar Animation Studios",
+                  "⭐⭐⭐⭐⭐"
+                ]
+              ]
+            },
+            "conclusion": "The best candidate for the 3D model artist role is **[Carlos Mendoza](cv:cv_f01ac22c)**, who has extensive experience and proficiency in 3D modeling, as well as a strong portfolio of relevant projects.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-04T10:59:05.650199"
+        },
+        {
+          "id": "17984820-1d39-4978-96be-27c5084df185",
+          "role": "user",
+          "content": "I need the best 3D model artist",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T11:00:23.547119"
+        },
+        {
+          "id": "e083b194-d260-4c79-bced-5f23b0d07d14",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the best candidate who specializes in 3D modeling. The key criteria include experience in 3D modeling, proficiency with relevant tools (e.g., Blender, Maya, ZBrush), and any notable projects or achievements in the field. From the provided CVs, only one candidate, Carlos Mendoza, explicitly mentions 3D modeling as a core skill and provides detailed experience in this area.\n:::\n\nThe best candidate for 3D modeling is **[Carlos Mendoza](cv:cv_f01ac22c)**, who has extensive experience in creating high-fidelity assets for film, games, and interactive media, along with proficiency in tools like Maya, Blender, and ZBrush.\n\n## References\n- [engx.space](https://engx.space/global/en/blog/aws-cloud-engineer-resume-example)\n- [resumekraft.com](https://resumekraft.com/aws-devops-engineer-cv-example/)\n- [resumekraft.com](https://resumekraft.com/devops-engineer-resume-sample-2/)\n- [github.com](https://github.com/lucadev)\n\n| Candidate | Experience | Tools | Match |\n|---|---|---|---|\n| **[Carlos Mendoza](cv:cv_f01ac22c)** | Over 40 years of experience in 3D modeling, including work on Oscar-nominated films and AAA video games. | Maya, Blender, ZBrush, Substance Painter | ⭐⭐⭐⭐⭐ |\n\n:::conclusion\n**[Carlos Mendoza](cv:cv_f01ac22c)** is the top candidate for 3D modeling due to his extensive experience, proficiency with industry-standard tools, and a proven track record of delivering high-quality 3D assets for major projects.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_fe6338e6",
+              "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_71736e47",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_bbc748f9",
+              "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_ffc6d564",
+              "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf"
+            },
+            {
+              "cv_id": "cv_653fbf59",
+              "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf"
+            },
+            {
+              "cv_id": "cv_916fd244",
+              "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf"
+            },
+            {
+              "cv_id": "cv_943da331",
+              "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_7b0f7ab3",
+              "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_dd668ac0",
+              "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_f01ac22c",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 8586.04,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 9.58,
+              "details": "Found 17 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 36818.96,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 11466.87,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "The best candidate for 3D modeling is **[Carlos Mendoza](cv:cv_f01ac22c)**, who has extensive experience in creating high-fidelity assets for film, games, and interactive media, along with proficiency in tools like Maya, Blender, and ZBrush.",
+            "raw_content": ":::thinking\nThe user is asking for the best candidate who specializes in 3D modeling. The key criteria include experience in 3D modeling, proficiency with relevant tools (e.g., Blender, Maya, ZBrush), and any notable projects or achievements in the field. From the provided CVs, only one candidate, Carlos Mendoza, explicitly mentions 3D modeling as a core skill and provides detailed experience in this area.\n:::\n\nThe best candidate for 3D modeling is **[Carlos Mendoza](cv:cv_f01ac22c)**, who has extensive experience in creating high-fidelity assets for film, games, and interactive media, along with proficiency in tools like Maya, Blender, and ZBrush.\n\n| Candidate | Experience | Tools | Match |\n|-----------|------------|-------|-------|\n| **[Carlos Mendoza](cv:cv_f01ac22c)** | Over 40 years of experience in 3D modeling, including work on Oscar-nominated films and AAA video games. | Maya, Blender, ZBrush, Substance Painter | ⭐⭐⭐⭐⭐ |\n\n:::conclusion\n**[Carlos Mendoza](cv:cv_f01ac22c)** is the top candidate for 3D modeling due to his extensive experience, proficiency with industry-standard tools, and a proven track record of delivering high-quality 3D assets for major projects.\n:::\n\n## References\n- [engx.space](https://engx.space/global/en/blog/aws-cloud-engineer-resume-example)\n- [resumekraft.com](https://resumekraft.com/aws-devops-engineer-cv-example/)\n- [resumekraft.com](https://resumekraft.com/devops-engineer-resume-sample-2/)\n- [github.com](https://github.com/lucadev)",
+            "thinking": "The user is asking for the best candidate who specializes in 3D modeling. The key criteria include experience in 3D modeling, proficiency with relevant tools (e.g., Blender, Maya, ZBrush), and any notable projects or achievements in the field. From the provided CVs, only one candidate, Carlos Mendoza, explicitly mentions 3D modeling as a core skill and provides detailed experience in this area.",
+            "analysis": "## References\n- [engx.space](https://engx.space/global/en/blog/aws-cloud-engineer-resume-example)\n- [resumekraft.com](https://resumekraft.com/aws-devops-engineer-cv-example/)\n- [resumekraft.com](https://resumekraft.com/devops-engineer-resume-sample-2/)\n- [github.com](https://github.com/lucadev)",
+            "table_data": {
+              "headers": [
+                "Candidate",
+                "Experience",
+                "Tools",
+                "Match"
+              ],
+              "rows": [
+                [
+                  "**[Carlos Mendoza](cv:cv_f01ac22c)**",
+                  "Over 40 years of experience in 3D modeling, including work on Oscar-nominated films and AAA video games.",
+                  "Maya, Blender, ZBrush, Substance Painter",
+                  "⭐⭐⭐⭐⭐"
+                ]
+              ]
+            },
+            "conclusion": "**[Carlos Mendoza](cv:cv_f01ac22c)** is the top candidate for 3D modeling due to his extensive experience, proficiency with industry-standard tools, and a proven track record of delivering high-quality 3D assets for major projects.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-04T11:01:59.345943"
         }
       ],
       "created_at": "2026-01-03T22:15:07.573740",
-      "updated_at": "2026-01-04T10:42:44.706009"
+      "updated_at": "2026-01-04T11:01:59.345943"
     }
   ]
 }

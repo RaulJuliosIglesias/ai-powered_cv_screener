@@ -87,10 +87,39 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
   // Extract tokens from generation stage metadata (REAL data from backend)
   const promptTokens = stages.generation?.metadata?.prompt_tokens || 0;
   const completionTokens = stages.generation?.metadata?.completion_tokens || 0;
-  const totalTokens = stages.generation?.metadata?.total_tokens || promptTokens + completionTokens;
   
-  // Calculate REAL OpenRouter cost (not fake)
-  const estimatedCost = calculateOpenRouterCost(promptTokens, completionTokens);
+  // Build cost breakdown by RAG component
+  const costBreakdown = [
+    {
+      name: "Understanding",
+      active: !!stages.query_understanding,
+      cost: stages.query_understanding?.metadata?.openrouter_cost || 0,
+      tokens: stages.query_understanding?.metadata?.total_tokens || 0
+    },
+    {
+      name: "Reasoning",
+      active: !!stages.reasoning,
+      cost: stages.reasoning?.metadata?.openrouter_cost || 0,
+      tokens: stages.reasoning?.metadata?.total_tokens || 0
+    },
+    {
+      name: "Generation",
+      active: !!stages.generation,
+      cost: stages.generation?.metadata?.openrouter_cost || 0,
+      tokens: stages.generation?.metadata?.total_tokens || 0
+    },
+    {
+      name: "Verification",
+      active: !!stages.claim_verification,
+      cost: stages.claim_verification?.metadata?.openrouter_cost || 0,
+      tokens: stages.claim_verification?.metadata?.total_tokens || 0
+    }
+  ];
+  
+  // Calculate totals from REAL costs
+  const totalCost = costBreakdown.reduce((sum, item) => sum + (item.active ? item.cost : 0), 0);
+  const totalTokens = costBreakdown.reduce((sum, item) => sum + (item.active ? item.tokens : 0), 0);
+  const hasRealCost = costBreakdown.some(item => item.active && item.cost > 0);
   
   const getConfidenceColor = (score) => {
     if (score >= 0.8) return 'text-green-400';
@@ -193,119 +222,129 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
             </div>
             </div>
             
-            {/* COST TABLE */}
+            {/* COST BY COMPONENT TABLE */}
             <div>
-              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2 font-semibold">💰 OpenRouter Cost</div>
+              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2 font-semibold">💰 Cost Breakdown</div>
               <div className="bg-gray-900/50 rounded-lg overflow-hidden">
                 <table className="w-full text-xs">
                   <thead>
                     <tr className="bg-gray-800/50">
-                      <th className="text-left px-2 py-1.5 text-gray-400 font-medium">Type</th>
+                      <th className="text-left px-2 py-1.5 text-gray-400 font-medium">Component</th>
+                      <th className="text-center px-2 py-1.5 text-gray-400 font-medium">Status</th>
                       <th className="text-right px-2 py-1.5 text-gray-400 font-medium">Tokens</th>
                       <th className="text-right px-2 py-1.5 text-gray-400 font-medium">Cost</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="border-t border-gray-700/30">
-                      <td className="px-2 py-1.5 text-gray-300">Prompt</td>
-                      <td className="px-2 py-1.5 text-right font-mono text-blue-400">{promptTokens.toLocaleString()}</td>
-                      <td className="px-2 py-1.5 text-right font-mono text-emerald-400">{formatCost(calculateOpenRouterCost(promptTokens, 0))}</td>
-                    </tr>
-                    <tr className="border-t border-gray-700/30">
-                      <td className="px-2 py-1.5 text-gray-300">Completion</td>
-                      <td className="px-2 py-1.5 text-right font-mono text-cyan-400">{completionTokens.toLocaleString()}</td>
-                      <td className="px-2 py-1.5 text-right font-mono text-emerald-400">{formatCost(calculateOpenRouterCost(0, completionTokens))}</td>
-                    </tr>
+                    {costBreakdown.map(item => (
+                      <tr key={item.name} className="border-t border-gray-700/30">
+                        <td className="px-2 py-1.5 text-gray-300">{item.name}</td>
+                        <td className="px-2 py-1.5 text-center">
+                          {item.active ? <CheckCircle size={10} className="inline text-green-400" /> : <span className="text-gray-600 text-[10px]">OFF</span>}
+                        </td>
+                        <td className="px-2 py-1.5 text-right font-mono text-cyan-400">
+                          {item.active ? item.tokens.toLocaleString() : '-'}
+                        </td>
+                        <td className="px-2 py-1.5 text-right font-mono text-emerald-400">
+                          {item.active ? formatCost(item.cost) : '-'}
+                        </td>
+                      </tr>
+                    ))}
                     <tr className="border-t-2 border-gray-600 bg-gray-800/30">
                       <td className="px-2 py-1.5 text-white font-semibold">💵 Total</td>
+                      <td className="px-2 py-1.5 text-center"></td>
                       <td className="px-2 py-1.5 text-right font-mono text-white font-bold">{totalTokens.toLocaleString()}</td>
-                      <td className="px-2 py-1.5 text-right font-mono text-white font-bold">{formatCost(estimatedCost)}</td>
+                      <td className="px-2 py-1.5 text-right font-mono text-white font-bold">{formatCost(totalCost)}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <div className="mt-1 text-[10px] text-gray-500 italic">* Real OpenRouter pricing</div>
+              <div className="mt-1 text-[10px] text-gray-500 italic">
+                {hasRealCost ? '✓ Real cost from OpenRouter API' : '⚠ Cost data unavailable'}
+              </div>
             </div>
           </div>
           
-          {/* QUALITY METRICS */}
-          <div className="mb-3">
-            <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2 font-semibold">📊 Quality Metrics</div>
-            <div className="bg-gray-900/50 rounded-lg p-2 space-y-1.5">
-              <MetricRow 
-                icon={Shield} 
-                label="Guardrail" 
-                value={guardrail === undefined ? '-' : guardrail ? '✓ Pass' : '✗ Blocked'} 
-                color={guardrail ? 'text-green-400' : 'text-red-400'} 
-              />
-              <MetricRow 
-                icon={AlertTriangle} 
-                label="Confidence" 
-                value={confidence !== undefined ? `${Math.round(confidence * 100)}%` : '-'} 
-                subValue={entry.verification?.is_grounded !== undefined ? `(${entry.verification.is_grounded ? 'Grounded' : 'Not grounded'})` : ''}
-                color={getConfidenceColor(confidence)} 
-              />
-            </div>
-          </div>
-          
-          {/* FEATURES ENABLED */}
-          {Object.keys(featuresEnabled).length > 0 && (
-            <div className="mb-3">
-              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2 font-semibold">🔧 RAG Components</div>
-              <div className="bg-gray-900/50 rounded-lg p-2">
-                <div className="grid grid-cols-2 gap-1.5 text-xs">
-                  {featuresEnabled.query_understanding !== undefined && (
-                    <div className="flex items-center gap-1.5">
-                      {featuresEnabled.query_understanding ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
-                      <span className={featuresEnabled.query_understanding ? 'text-gray-300' : 'text-gray-600'}>Understanding</span>
+          {/* QUALITY METRICS & RAG COMPONENTS SIDE BY SIDE */}
+          <div className="grid grid-cols-2 gap-3 mb-3">
+            {/* QUALITY METRICS */}
+            <div>
+              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2 font-semibold">📊 Quality Metrics</div>
+              <div className="bg-gray-900/50 rounded-lg p-2.5 space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Shield size={14} className={guardrail ? 'text-green-400' : 'text-red-400'} />
+                    <span className="text-xs text-gray-400">Guardrail</span>
+                  </div>
+                  <span className={`text-xs font-medium ${guardrail ? 'text-green-400' : 'text-red-400'}`}>
+                    {guardrail === undefined ? '-' : guardrail ? '✓ Pass' : '✗ Block'}
+                  </span>
+                </div>
+                <div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <AlertTriangle size={14} className={getConfidenceColor(confidence)} />
+                      <span className="text-xs text-gray-400">Confidence</span>
                     </div>
-                  )}
-                  {featuresEnabled.multi_query !== undefined && (
-                    <div className="flex items-center gap-1.5">
-                      {featuresEnabled.multi_query ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
-                      <span className={featuresEnabled.multi_query ? 'text-gray-300' : 'text-gray-600'}>Multi-Query</span>
-                    </div>
-                  )}
-                  {featuresEnabled.hyde !== undefined && (
-                    <div className="flex items-center gap-1.5">
-                      {featuresEnabled.hyde ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
-                      <span className={featuresEnabled.hyde ? 'text-gray-300' : 'text-gray-600'}>HyDE</span>
-                    </div>
-                  )}
-                  {featuresEnabled.guardrail !== undefined && (
-                    <div className="flex items-center gap-1.5">
-                      {featuresEnabled.guardrail ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
-                      <span className={featuresEnabled.guardrail ? 'text-gray-300' : 'text-gray-600'}>Guardrail</span>
-                    </div>
-                  )}
-                  {featuresEnabled.reranking !== undefined && (
-                    <div className="flex items-center gap-1.5">
-                      {featuresEnabled.reranking ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
-                      <span className={featuresEnabled.reranking ? 'text-gray-300' : 'text-gray-600'}>Reranking</span>
-                    </div>
-                  )}
-                  {featuresEnabled.reasoning !== undefined && (
-                    <div className="flex items-center gap-1.5">
-                      {featuresEnabled.reasoning ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
-                      <span className={featuresEnabled.reasoning ? 'text-gray-300' : 'text-gray-600'}>Reasoning</span>
-                    </div>
-                  )}
-                  {featuresEnabled.claim_verification !== undefined && (
-                    <div className="flex items-center gap-1.5">
-                      {featuresEnabled.claim_verification ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
-                      <span className={featuresEnabled.claim_verification ? 'text-gray-300' : 'text-gray-600'}>Verification</span>
-                    </div>
-                  )}
-                  {featuresEnabled.refinement !== undefined && (
-                    <div className="flex items-center gap-1.5">
-                      {featuresEnabled.refinement ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
-                      <span className={featuresEnabled.refinement ? 'text-gray-300' : 'text-gray-600'}>Refinement</span>
+                    <span className={`text-xs font-mono font-bold ${getConfidenceColor(confidence)}`}>
+                      {confidence !== undefined ? `${Math.round(confidence * 100)}%` : '-'}
+                    </span>
+                  </div>
+                  {entry.confidence_explanation && (
+                    <div className="mt-1.5 p-1.5 bg-gray-800/50 rounded text-[10px]">
+                      <div className="text-gray-400 mb-0.5">Based on:</div>
+                      <div className="text-gray-300">
+                        • {entry.confidence_explanation.source === 'claim_verification' ? 'Claim Verification' : entry.confidence_explanation.source}
+                        {entry.confidence_explanation.details?.verified_claims !== undefined && (
+                          <>
+                            <br />• {entry.confidence_explanation.details.verified_claims}/{entry.confidence_explanation.details.total_claims} claims verified
+                          </>
+                        )}
+                        {entry.confidence_explanation.note && (
+                          <>
+                            <br /><span className="text-gray-500 italic">{entry.confidence_explanation.note}</span>
+                          </>
+                        )}
+                      </div>
                     </div>
                   )}
                 </div>
               </div>
             </div>
-          )}
+            
+            {/* RAG COMPONENTS (VERTICAL) */}
+            <div>
+              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2 font-semibold">🔧 RAG Components</div>
+              <div className="bg-gray-900/50 rounded-lg p-2.5">
+                <div className="space-y-1.5 text-xs">
+                  {featuresEnabled.query_understanding !== undefined && (
+                    <div className="flex items-center justify-between">
+                      <span className={featuresEnabled.query_understanding ? 'text-gray-300' : 'text-gray-600'}>Understanding</span>
+                      {featuresEnabled.query_understanding ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
+                    </div>
+                  )}
+                  {featuresEnabled.reranking !== undefined && (
+                    <div className="flex items-center justify-between">
+                      <span className={featuresEnabled.reranking ? 'text-gray-300' : 'text-gray-600'}>Reranking</span>
+                      {featuresEnabled.reranking ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
+                    </div>
+                  )}
+                  {featuresEnabled.reasoning !== undefined && (
+                    <div className="flex items-center justify-between">
+                      <span className={featuresEnabled.reasoning ? 'text-gray-300' : 'text-gray-600'}>Reasoning</span>
+                      {featuresEnabled.reasoning ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
+                    </div>
+                  )}
+                  {featuresEnabled.claim_verification !== undefined && (
+                    <div className="flex items-center justify-between">
+                      <span className={featuresEnabled.claim_verification ? 'text-gray-300' : 'text-gray-600'}>Verification</span>
+                      {featuresEnabled.claim_verification ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
           
         </div>
       )}

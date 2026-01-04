@@ -29,6 +29,7 @@ class LLMResult:
     prompt_tokens: int
     completion_tokens: int
     latency_ms: float
+    metadata: Dict[str, Any] = None
 
 
 class EmbeddingProvider(ABC):

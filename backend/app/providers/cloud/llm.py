@@ -157,9 +157,20 @@ class OpenRouterLLMProvider(LLMProvider):
         
         usage = data.get("usage", {})
         
+        # Extract real cost from OpenRouter response
+        # OpenRouter returns cost in the response under different possible fields
+        total_cost = 0.0
+        if "usage" in data:
+            # Try to get cost from usage metadata
+            total_cost = data["usage"].get("total_cost", 0.0)
+            # Some models return it as a string or in cents
+            if isinstance(total_cost, str):
+                total_cost = float(total_cost)
+        
         return LLMResult(
             text=data["choices"][0]["message"]["content"],
             prompt_tokens=usage.get("prompt_tokens", 0),
             completion_tokens=usage.get("completion_tokens", 0),
-            latency_ms=latency
+            latency_ms=latency,
+            metadata={"openrouter_cost": total_cost} if total_cost else {}
         )

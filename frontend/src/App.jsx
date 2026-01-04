@@ -475,13 +475,14 @@ function App() {
       }
       
       if (finalResult) {
-        // Save metrics
+        // Save metrics with confidence explanation
         saveMetricEntry({
           query: userMessage,
           mode: mode,
           metrics: finalResult.metrics || {},
           confidence_score: finalResult.confidence_score,
           guardrail_passed: finalResult.guardrail_passed,
+          confidence_explanation: finalResult.confidence_explanation,
           query_understanding: finalResult.query_understanding,
           session_id: targetSessionId,
           timestamp: new Date().toISOString(),

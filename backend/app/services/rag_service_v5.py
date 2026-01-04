@@ -291,6 +291,9 @@ class RAGResponseV5:
     # Pipeline steps for UI
     pipeline_steps: list[PipelineStep] = field(default_factory=list)
     
+    # Confidence explanation (NO hardcoded values)
+    confidence_explanation: dict[str, Any] | None = None
+    
     # Metadata
     mode: str = "local"
     cached: bool = False
@@ -305,6 +308,7 @@ class RAGResponseV5:
             "metrics": self.metrics.to_dict(),
             "confidence_score": round(self.confidence_score, 3),
             "guardrail_passed": self.guardrail_passed,
+            "confidence_explanation": self.confidence_explanation,
             "mode": self.mode,
             "cached": self.cached,
             "request_id": self.request_id,
@@ -1089,11 +1093,26 @@ class RAGServiceV5:
                 confidence=getattr(result, "confidence", 1.0)
             )
             
+            # Extract OpenRouter cost if available
+            openrouter_cost = 0.0
+            prompt_tokens = 0
+            completion_tokens = 0
+            if hasattr(result, 'metadata') and result.metadata:
+                openrouter_cost = result.metadata.get('openrouter_cost', 0.0)
+                prompt_tokens = result.metadata.get('prompt_tokens', 0)
+                completion_tokens = result.metadata.get('completion_tokens', 0)
+            
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.QUERY_UNDERSTANDING,
                 duration_ms=(time.perf_counter() - start) * 1000,
                 success=True,
-                metadata={"query_type": result.query_type}
+                metadata={
+                    "query_type": result.query_type,
+                    "prompt_tokens": prompt_tokens,
+                    "completion_tokens": completion_tokens,
+                    "total_tokens": prompt_tokens + completion_tokens,
+                    "openrouter_cost": openrouter_cost
+                }
             ))
         except Exception as e:
             logger.error(f"Query understanding failed: {e}")
@@ -1382,15 +1401,21 @@ class RAGServiceV5:
                 for s in result.steps
             ]
             
-            # If reasoning produced a final answer, use it
-            if result.final_answer:
-                ctx.generated_response = result.final_answer
+            # Extract OpenRouter cost from reasoning LLM call
+            openrouter_cost = 0.0
+            if result.metadata and "openrouter_cost" in result.metadata:
+                openrouter_cost = result.metadata["openrouter_cost"]
             
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.REASONING,
                 duration_ms=(time.perf_counter() - start) * 1000,
                 success=True,
-                metadata={"num_steps": len(result.steps)}
+                metadata={
+                    "prompt_tokens": result.prompt_tokens,
+                    "completion_tokens": result.completion_tokens,
+                    "total_tokens": result.prompt_tokens + result.completion_tokens,
+                    "openrouter_cost": openrouter_cost
+                }
             ))
         except Exception as e:
             logger.error(f"Reasoning failed: {e}")
@@ -1450,6 +1475,11 @@ class RAGServiceV5:
                 "completion": result.completion_tokens
             }
             
+            # Extract real OpenRouter cost if available
+            openrouter_cost = 0.0
+            if result.metadata and "openrouter_cost" in result.metadata:
+                openrouter_cost = result.metadata["openrouter_cost"]
+            
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.GENERATION,
                 duration_ms=(time.perf_counter() - start) * 1000,
@@ -1457,7 +1487,8 @@ class RAGServiceV5:
                 metadata={
                     "prompt_tokens": result.prompt_tokens,
                     "completion_tokens": result.completion_tokens,
-                    "total_tokens": result.prompt_tokens + result.completion_tokens
+                    "total_tokens": result.prompt_tokens + result.completion_tokens,
+                    "openrouter_cost": openrouter_cost  # Real cost from OpenRouter API
                 }
             ))
         except Exception as e:
@@ -1492,6 +1523,15 @@ class RAGServiceV5:
                 needs_regeneration=result.needs_regeneration
             )
             
+            # Extract cost if claim verifier captured it
+            openrouter_cost = 0.0
+            prompt_tokens = 0
+            completion_tokens = 0
+            if hasattr(result, 'metadata') and result.metadata:
+                openrouter_cost = result.metadata.get('openrouter_cost', 0.0)
+                prompt_tokens = result.metadata.get('prompt_tokens', 0)
+                completion_tokens = result.metadata.get('completion_tokens', 0)
+            
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.CLAIM_VERIFICATION,
                 duration_ms=(time.perf_counter() - start) * 1000,
@@ -1499,7 +1539,11 @@ class RAGServiceV5:
                 metadata={
                     "verified": len(result.verified_claims),
                     "unverified": len(result.unverified_claims),
-                    "contradicted": len(result.contradicted_claims)
+                    "contradicted": len(result.contradicted_claims),
+                    "prompt_tokens": prompt_tokens,
+                    "completion_tokens": completion_tokens,
+                    "total_tokens": prompt_tokens + completion_tokens,
+                    "openrouter_cost": openrouter_cost
                 }
             ))
         except Exception as e:
@@ -1634,9 +1678,47 @@ Provide a corrected response:"""
                     "filename": chunk.get("metadata", {}).get("filename", "Unknown")
                 })
         
-        confidence = 0.8
+        # Calculate confidence based on verification (NO hardcoded values)
+        confidence = 0.0
+        confidence_explanation = None
+        
         if ctx.verification_result:
+            # Real confidence from claim verification
             confidence = ctx.verification_result.groundedness_score
+            confidence_explanation = {
+                "source": "claim_verification",
+                "score": confidence,
+                "details": {
+                    "verified_claims": len(ctx.verification_result.verified_claims),
+                    "unverified_claims": len(ctx.verification_result.unverified_claims),
+                    "contradicted_claims": len(ctx.verification_result.contradicted_claims),
+                    "total_claims": (len(ctx.verification_result.verified_claims) + 
+                                   len(ctx.verification_result.unverified_claims) + 
+                                   len(ctx.verification_result.contradicted_claims))
+                },
+                "formula": "verified_claims / total_claims"
+            }
+        else:
+            # No verification enabled - use heuristic based on sources
+            if len(ctx.effective_chunks) > 0:
+                confidence = 0.7  # Has sources but no verification
+                confidence_explanation = {
+                    "source": "heuristic",
+                    "score": confidence,
+                    "details": {
+                        "reasoning": "Based on number of sources found",
+                        "source_count": len(ctx.effective_chunks)
+                    },
+                    "note": "Claim verification disabled - confidence is estimated"
+                }
+            else:
+                confidence = 0.5  # No sources
+                confidence_explanation = {
+                    "source": "default",
+                    "score": confidence,
+                    "details": {"reasoning": "No sources found"},
+                    "note": "Low confidence due to lack of supporting sources"
+                }
         
         # NEW: Process output with OutputOrchestrator (single entry point)
         logger.info("[RAG] Processing LLM output with OutputOrchestrator")
@@ -1659,6 +1741,7 @@ Provide a corrected response:"""
             metrics=ctx.metrics,
             confidence_score=confidence,
             guardrail_passed=True,
+            confidence_explanation=confidence_explanation,
             query_understanding=ctx.query_understanding,
             verification=ctx.verification_result,
             reasoning_trace=ctx.reasoning_trace,
@@ -1994,6 +2077,14 @@ Provide a corrected response:"""
         """Build no results response."""
         ctx.metrics.total_ms = ctx.elapsed_ms
         
+        # No hardcoded confidence - explain why it's 0
+        confidence_explanation = {
+            "source": "no_results",
+            "score": 0.0,
+            "details": {"reasoning": "No relevant sources found to answer the query"},
+            "note": "Confidence is 0 because no information was found"
+        }
+        
         return RAGResponseV5(
             answer=(
                 "I couldn't find any relevant information in the CVs. "
@@ -2001,8 +2092,9 @@ Provide a corrected response:"""
             ),
             sources=[],
             metrics=ctx.metrics,
-            confidence_score=0.8,
+            confidence_score=0.0,
             guardrail_passed=True,
+            confidence_explanation=confidence_explanation,
             query_understanding=ctx.query_understanding,
             mode=self.config.mode.value,
             request_id=ctx.request_id
