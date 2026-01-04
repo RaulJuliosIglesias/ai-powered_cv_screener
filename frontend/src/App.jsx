@@ -1035,8 +1035,8 @@ function App() {
                   </div>
                 </div>
               ))}
-              {isChatLoading && (
-                <div className="flex gap-4">
+              {isChatLoading && pendingMessages[currentSessionId] && (
+                <div className="flex gap-3 items-start animate-fade-in">
                   <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center">
                     <Sparkles className="w-5 h-5 text-white" />
                   </div>
@@ -1044,7 +1044,26 @@ function App() {
                     <div className="flex items-center gap-2">
                       <Loader className="w-5 h-5 animate-spin text-emerald-500" />
                       <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
-                        {language === 'es' ? 'Analizando CVs...' : 'Analyzing CVs...'}
+                        {(() => {
+                          // Show active pipeline step
+                          const activeStep = Object.entries(pipelineProgress).find(([_, v]) => v.status === 'running');
+                          if (activeStep) {
+                            const stepLabels = {
+                              query_understanding: language === 'es' ? 'Entendiendo consulta...' : 'Understanding query...',
+                              multi_query: language === 'es' ? 'Generando multi-query...' : 'Generating multi-query...',
+                              guardrail: language === 'es' ? 'Verificando seguridad...' : 'Safety check...',
+                              embedding: language === 'es' ? 'Generando embeddings...' : 'Generating embeddings...',
+                              retrieval: language === 'es' ? 'Recuperando CVs...' : 'Retrieving CVs...',
+                              reranking: language === 'es' ? 'Reordenando resultados...' : 'Reranking results...',
+                              reasoning: language === 'es' ? 'Razonando...' : 'Reasoning...',
+                              generation: language === 'es' ? 'Generando respuesta...' : 'Generating response...',
+                              verification: language === 'es' ? 'Verificando respuesta...' : 'Verifying response...',
+                              refinement: language === 'es' ? 'Refinando...' : 'Refining...'
+                            };
+                            return stepLabels[activeStep[0]] || (language === 'es' ? 'Procesando...' : 'Processing...');
+                          }
+                          return language === 'es' ? 'Analizando CVs...' : 'Analyzing CVs...';
+                        })()}
                       </span>
                     </div>
                   </div>

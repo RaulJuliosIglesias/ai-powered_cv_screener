@@ -210,9 +210,10 @@ class TableModule:
         """
         Fix malformed bold markdown formatting from LLM.
         
-        LLM generates two formats:
+        LLM generates multiple formats:
         1. **[Name](cv:id)** - link inside bold (PRESERVE THIS)
-        2. ** Name** cv_id - name in bold, link separate (FIX THIS)
+        2. ** Name** cv_id - name in bold with spaces, link separate (FIX THIS)
+        3. ** Name Role** cv_id - name+role in bold with spaces (FIX THIS)
         
         Args:
             text: Cell text that may have malformed bold
@@ -226,14 +227,16 @@ class TableModule:
         original = text
         
         # Case 1: If text contains **[...](...)**  format, preserve it exactly
-        if re.search(r'\*\*\s*\[.+?\]\(.+?\)\s*\*\*', text):
-            # This is the correct format with link inside bold, don't touch it
+        # This is the CORRECT format where link is inside bold
+        if re.search(r'\*\*\[.+?\]\(.+?\)\*\*', text):
+            # Don't touch this format at all
             return text
         
-        # Case 2: Fix "** text**" format (name in bold, no link inside)
-        # Remove ALL spaces after opening ** and before closing **
-        text = re.sub(r'\*\*[ \t\u00a0]+', '**', text)
-        text = re.sub(r'[ \t\u00a0]+\*\*', '**', text)
+        # Case 2: Fix "** text**" or "** text **" format (name in bold, no link inside)
+        # Remove ALL spaces/tabs/nbsp after opening ** and before closing **
+        # This handles: "** Mei-Ling Chen Human Resources** cv_ffc6d564"
+        text = re.sub(r'\*\*[ \t\u00a0\xa0]+', '**', text)
+        text = re.sub(r'[ \t\u00a0\xa0]+\*\*', '**', text)
         
         if original != text:
             logger.debug(f"[TABLE] Fixed bold formatting: '{original[:50]}' -> '{text[:50]}'")

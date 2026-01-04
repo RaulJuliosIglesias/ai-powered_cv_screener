@@ -111,12 +111,20 @@ class DirectAnswerModule:
         cleaned = re.sub(r'\n{3,}', '\n\n', cleaned)
         cleaned = re.sub(r'^\s*\n', '', cleaned, flags=re.MULTILINE)
         
-        # CRITICAL: Detect and remove duplicated content
-        # Sometimes the LLM duplicates its response
-        cleaned = self._remove_duplicate_content(cleaned)
-        
         # Take first paragraph (up to double newline or first 3 sentences)
         paragraphs = [p.strip() for p in cleaned.split('\n\n') if p.strip()]
+        
+        # CRITICAL: Detect and remove duplicated paragraphs BEFORE processing
+        unique_paragraphs = []
+        seen = set()
+        for para in paragraphs:
+            # Normalize for comparison (remove extra spaces, lowercase)
+            normalized = ' '.join(para.split()).lower()
+            if normalized not in seen and len(normalized) > 10:
+                seen.add(normalized)
+                unique_paragraphs.append(para)
+        
+        paragraphs = unique_paragraphs
         if paragraphs and paragraphs[0]:
             first_para = paragraphs[0].strip()
             
