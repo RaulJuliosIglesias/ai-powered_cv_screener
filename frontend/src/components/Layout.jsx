@@ -13,7 +13,12 @@ const Layout = ({ children, onAddClick, showAddButton = false, theme, onThemeTog
               <Sparkles className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white">{t('appName')}</h1>
+              <div className="flex items-center gap-2">
+                <h1 className="text-xl font-bold text-gray-900 dark:text-white">{t('appName')}</h1>
+                <span className="px-1.5 py-0.5 bg-gradient-to-r from-purple-500 to-blue-500 text-white text-[10px] font-bold rounded">
+                  v1.0.0
+                </span>
+              </div>
               <p className="text-xs text-gray-500 dark:text-gray-400">{t('appTagline')}</p>
             </div>
           </div>

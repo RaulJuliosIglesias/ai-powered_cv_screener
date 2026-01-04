@@ -164,7 +164,7 @@ class RAGConfigV5:
     embedding_timeout: float = 10.0
     search_timeout: float = 20.0
     llm_timeout: float = 120.0
-    reasoning_timeout: float = 90.0
+    reasoning_timeout: float = 120.0
     total_timeout: float = 240.0  # Increased for multi-step reasoning
 
 

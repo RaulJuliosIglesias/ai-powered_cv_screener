@@ -10602,10 +10602,201 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-04T21:44:56.851794"
+        },
+        {
+          "id": "8aa7345a-dfbe-40c3-b1a8-e1be3e1f81d1",
+          "role": "user",
+          "content": "dame un artista",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T22:39:41.391474"
+        },
+        {
+          "id": "c674b242-9d21-4afa-b9a7-94109779e571",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for an artist. I need to identify candidates whose CVs mention artistic skills or roles. I will review the provided CVs and look for relevant job titles, skills, and experience.\n:::\n\nSeveral candidates have experience in artistic roles. The most relevant candidates are those with \"Concept Artist\" or \"Lighting Artist\" in their job titles. ### Analysis\nI have selected the following candidates based on their explicit mentions of artistic skills and experience:\n*   [📄](cv:cv_53b52b51)**Liam Nguyen**and [📄](cv:cv_2a5af411)**Liam Nguyen**: Both CVs list \"Concept Artist\" as a job title and mention skills like Photoshop, Illustrator, Blender, and ZBrush.\n\n### Analysis\n\nI have selected the following candidates based on their explicit mentions of artistic skills and experience:\n\n*   [📄](cv:cv_53b52b51)**Liam Nguyen**and [📄](cv:cv_2a5af411)**Liam Nguyen**: Both CVs list \"Concept Artist\" as a job title and mention skills like Photoshop, Illustrator, Blender, and ZBrush.\n*   [📄](cv:cv_e36f62d6)**Carmen López**: This CV lists \"Lighting Artist\" as a job title and mentions skills like Maya, Arnold, Nuke, and Photoshop.\n\n| Candidate | Skills | Experience | Match Score |\n|---|---|---|---|\n| Liam Nguyen | Photoshop, Illustrator, Blender, ZBrush | Concept Artist | 80% |\n| Liam Nguyen | Photoshop, Illustrator, Blender, ZBrush | Concept Artist | 80% |\n| Carmen López | Maya, Arnold, Nuke, Photoshop | Lighting Artist | 80% |\n\n:::conclusion\nThe most relevant candidates are [📄](cv:cv_53b52b51)**Liam Nguyen**, [📄](cv:cv_2a5af411)**Liam Nguyen**, and [📄](cv:cv_e36f62d6)**Carmen López**, as they have experience in artistic roles and list relevant skills.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_4bb3c643",
+              "filename": "1ef4e451_Dirk_van_der_Meer_Therapist.pdf"
+            },
+            {
+              "cv_id": "cv_4767e98e",
+              "filename": "d355ad6c__Carlos_Lopez__Junior_Composer.pdf"
+            },
+            {
+              "cv_id": "cv_53b52b51",
+              "filename": "477ae7a5_Liam_Nguyen_Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_2a5af411",
+              "filename": "477ae7a5_Liam_Nguyen_Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d465a173",
+              "filename": "d7982b4e_María_Paula_Castaneda_Accessories_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_0272aa5f",
+              "filename": "ab71577d_Ana_Silva_Junior_Interaction_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_70701848",
+              "filename": "82db6ff5_Carlos_Rodriguez_Head_of_Design.pdf"
+            },
+            {
+              "cv_id": "cv_03fdf445",
+              "filename": "bc71f888__Jinyu_Li__Product_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_9f37d305",
+              "filename": "69ed5706_Aisha_Nkrumah_Associate_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_b0b74341",
+              "filename": "e3521ef7_Kwame_Agyei_Agile_Coach.pdf"
+            },
+            {
+              "cv_id": "cv_18c8e8ab",
+              "filename": "4dcb20e9_Carlos_Rodriguez_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_c53af158",
+              "filename": "da58e258_Carlos_Mendoza_Junior_Podcaster.pdf"
+            },
+            {
+              "cv_id": "cv_9d74c62a",
+              "filename": "85f24eb3_Kwame_Al_Hassan_Mobile_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_f0da3cc4",
+              "filename": "8ce2db38__Sofía_Rodríguez__Game_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_9fa70ab3",
+              "filename": "23621408_Kamal_Patel_Head_of_Audio.pdf"
+            },
+            {
+              "cv_id": "cv_6fa8920f",
+              "filename": "6202baf5_Erik_Johansson_FB_Director.pdf"
+            },
+            {
+              "cv_id": "cv_733df9ba",
+              "filename": "53a88558_Sofia_Martinez_Junior_Buyer.pdf"
+            },
+            {
+              "cv_id": "cv_b3874118",
+              "filename": "2bb4cb36_Rajiv_Patel_Solutions_Architect.pdf"
+            },
+            {
+              "cv_id": "cv_52fde7fa",
+              "filename": "9450f274_Rajiv_Patel_Content_Creator.pdf"
+            },
+            {
+              "cv_id": "cv_22d73835",
+              "filename": "9450f274_Rajiv_Patel_Content_Creator.pdf"
+            },
+            {
+              "cv_id": "cv_863515fc",
+              "filename": "56f9cf27__Aminata_Diop__Staff_Product_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_57cb15fc",
+              "filename": "84885a0c__Aisha_Okafor__Software_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_e36f62d6",
+              "filename": "bf3a5fa7_Carmen_López_Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_4fb60650",
+              "filename": "d6243621_Luca_Chen_VP_of_Talent.pdf"
+            },
+            {
+              "cv_id": "cv_6fe98c89",
+              "filename": "a89fda48_Mira_Patel_Content_Creator.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 24590.25,
+              "details": "Query type: general"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 57.84,
+              "details": "Found 30 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 16117.11,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 3890.97,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Several candidates have experience in artistic roles. The most relevant candidates are those with \"Concept Artist\" or \"Lighting Artist\" in their job titles. ### Analysis\nI have selected the following candidates based on their explicit mentions of artistic skills and experience:\n*   [📄](cv:cv_53b52b51) **Liam Nguyen** and [📄](cv:cv_2a5af411) **Liam Nguyen**: Both CVs list \"Concept Artist\" as a job title and mention skills like Photoshop, Illustrator, Blender, and ZBrush.",
+            "raw_content": ":::thinking\nThe user is asking for an artist. I need to identify candidates whose CVs mention artistic skills or roles. I will review the provided CVs and look for relevant job titles, skills, and experience.\n\n:::\n\nSeveral candidates have experience in artistic roles. The most relevant candidates are those with \"Concept Artist\" or \"Lighting Artist\" in their job titles.\n\n### Analysis\n\nI have selected the following candidates based on their explicit mentions of artistic skills and experience:\n\n*   **[Liam Nguyen](cv:cv_53b52b51)** and **[Liam Nguyen](cv:cv_2a5af411)**: Both CVs list \"Concept Artist\" as a job title and mention skills like Photoshop, Illustrator, Blender, and ZBrush.\n*   **[Carmen López](cv:cv_e36f62d6)**: This CV lists \"Lighting Artist\" as a job title and mentions skills like Maya, Arnold, Nuke, and Photoshop.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Liam Nguyen](cv:cv_53b52b51)** | Photoshop, Illustrator, Blender, ZBrush | Concept Artist | ⭐⭐⭐⭐ |\n| **[Liam Nguyen](cv:cv_2a5af411)** | Photoshop, Illustrator, Blender, ZBrush | Concept Artist | ⭐⭐⭐⭐ |\n| **[Carmen López](cv:cv_e36f62d6)** | Maya, Arnold, Nuke, Photoshop | Lighting Artist | ⭐⭐⭐⭐ |\n\n:::conclusion\nThe most relevant candidates are **[Liam Nguyen](cv:cv_53b52b51)**, **[Liam Nguyen](cv:cv_2a5af411)**, and **[Carmen López](cv:cv_e36f62d6)**, as they have experience in artistic roles and list relevant skills.\n:::",
+            "thinking": "The user is asking for an artist. I need to identify candidates whose CVs mention artistic skills or roles. I will review the provided CVs and look for relevant job titles, skills, and experience.",
+            "analysis": "I have selected the following candidates based on their explicit mentions of artistic skills and experience:\n\n*   [📄](cv:cv_53b52b51) **Liam Nguyen** and [📄](cv:cv_2a5af411) **Liam Nguyen**: Both CVs list \"Concept Artist\" as a job title and mention skills like Photoshop, Illustrator, Blender, and ZBrush.\n*   [📄](cv:cv_e36f62d6) **Carmen López**: This CV lists \"Lighting Artist\" as a job title and mentions skills like Maya, Arnold, Nuke, and Photoshop.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Skills",
+                "Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Liam Nguyen",
+                  "cv_id": "cv_53b52b51",
+                  "columns": {
+                    "Skills": "Photoshop, Illustrator, Blender, ZBrush",
+                    "Experience": "Concept Artist"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Liam Nguyen",
+                  "cv_id": "cv_2a5af411",
+                  "columns": {
+                    "Skills": "Photoshop, Illustrator, Blender, ZBrush",
+                    "Experience": "Concept Artist"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Carmen López",
+                  "cv_id": "cv_e36f62d6",
+                  "columns": {
+                    "Skills": "Maya, Arnold, Nuke, Photoshop",
+                    "Experience": "Lighting Artist"
+                  },
+                  "match_score": 80
+                }
+              ]
+            },
+            "conclusion": "The most relevant candidates are [📄](cv:cv_53b52b51) **Liam Nguyen**, [📄](cv:cv_2a5af411) **Liam Nguyen**, and [📄](cv:cv_e36f62d6) **Carmen López**, as they have experience in artistic roles and list relevant skills.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-04T22:41:29.869543"
         }
       ],
       "created_at": "2026-01-04T20:04:25.781418",
-      "updated_at": "2026-01-04T21:44:56.851794"
+      "updated_at": "2026-01-04T22:41:29.869543"
     }
   ]
 }

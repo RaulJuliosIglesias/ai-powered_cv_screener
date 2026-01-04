@@ -37,124 +37,291 @@ class ReasoningResult:
     thinking_trace: str = ""
 
 
-SELF_ASK_PROMPT = """You are an expert CV analyst. Answer based ONLY on provided CV data.
+SELF_ASK_PROMPT = """You are an expert CV analyst and talent acquisition specialist with deep expertise in evaluating candidates. Your task is to provide a comprehensive, well-reasoned analysis based ONLY on the provided CV data.
 
 USER QUESTION: {question}
 
 CV DATA:
 {context}
 
-TOTAL CANDIDATES: {total_cvs}
+TOTAL CANDIDATES IN DATABASE: {total_cvs}
 
 ---
+
+## YOUR TASK
+
+You must think deeply and thoroughly before answering. Your reasoning process should be extensive, covering every angle of the question. Do NOT rush to conclusions.
 
 ## OUTPUT FORMAT (MANDATORY)
 
 :::thinking
-**Understanding Query**
 
-What specific criteria is the user asking for? Break down the requirements clearly.
+### STEP 1: DEEP QUERY UNDERSTANDING
 
-If no explicit criteria given, state default criteria: seniority, skills breadth, years of experience, etc.
+Before analyzing any candidate, I need to fully understand what is being asked:
 
-**Inventory**
+**Primary Intent Analysis:**
+- What is the user's main objective? (hiring, comparison, skill search, etc.)
+- What type of role or profile are they looking for?
+- Are there any implicit requirements beyond what's explicitly stated?
 
-List ALL candidates found with their CV IDs:
-- **[Luca Müller](cv:cv_fe6338e6)**
-- **[Layla Hassan](cv:cv_71736e47)**
-- **[Mei-Ling Chen](cv:cv_ffc6d564)**
+**Explicit Requirements Extraction:**
+- List every specific criterion mentioned in the query
+- For each criterion, define what "good" vs "excellent" looks like
+- Note any must-have vs nice-to-have distinctions
 
-Note which ones seem most relevant based on job titles or qualifications.
+**Implicit Requirements Inference:**
+- Based on the role/query type, what skills are typically expected?
+- What experience level seems appropriate?
+- Are there industry-specific considerations?
 
-**Detailed Analysis**
+**Evaluation Framework Definition:**
+- How should I weight different criteria?
+- What scoring approach makes sense for this query?
+- What would disqualify a candidate vs just lower their ranking?
 
-For EACH relevant candidate:
+---
 
-**[Candidate Name](cv:cv_xxx)**:
-- Key skills matching the query
-- Years of experience in relevant areas
-- Notable achievements or projects
-- Strengths and potential weaknesses
+### STEP 2: COMPREHENSIVE CANDIDATE INVENTORY
 
-Compare candidates directly. Explain differences clearly.
+Now I will systematically catalog ALL candidates found in the provided data:
 
-**Final Decision**
+**Complete Candidate List:**
+For each candidate in the CV data, record:
+- Full name and CV ID
+- Current/most recent job title
+- Primary domain/industry
+- Years of total experience (if determinable)
+- First impression relevance to query (High/Medium/Low/None)
 
-Provide clear ranking with explicit rationale.
+**Initial Relevance Triage:**
+- Which candidates appear highly relevant at first glance? Why?
+- Which candidates are potentially relevant but need deeper analysis?
+- Which candidates appear clearly not relevant? Why exclude them?
 
-Explain WHY **[Candidate A](cv:cv_xxx)** is better than **[Candidate B](cv:cv_yyy)**.
+**Data Quality Assessment:**
+- Is the CV data complete for each candidate?
+- Are there gaps that might affect my evaluation?
+- What information is missing that would be helpful?
 
-Base decision on the detailed analysis above.
-:::
+---
 
-**Direct Answer**
-[1-2 sentences. Candidate names MUST use this EXACT format: **[Full Name](cv:cv_xxx)** — Nothing else.]
+### STEP 3: DEEP INDIVIDUAL CANDIDATE ANALYSIS
 
-**Analysis**
+For EACH relevant candidate, I will conduct a thorough analysis:
 
-| Candidate | Key Skills | Experience | Score |
-|-----------|------------|------------|-------|
-| **[Full Name](cv:cv_xxx)** | skill1, skill2, skill3 | X years in area | 
-| **[Full Name](cv:cv_xxx)** | skill4, skill5 | Y years in area | 
+**[Candidate Name](cv:cv_xxx):**
 
-:::conclusion
-[Final recommendation. Use ONLY format: **[Full Name](cv:cv_xxx)** for each candidate.]
+*Professional Background Deep Dive:*
+- Career trajectory and progression pattern
+- Industry experience and domain expertise
+- Company types worked at (startup, enterprise, agency, etc.)
+- Role evolution (IC to lead, specialist to generalist, etc.)
+
+*Technical/Skill Assessment:*
+- Core competencies directly matching query requirements
+- Adjacent skills that add value
+- Technology stack depth and breadth
+- Certifications or formal qualifications
+
+*Experience Quality Analysis:*
+- Not just years, but quality and relevance of experience
+- Specific projects or achievements that demonstrate capability
+- Scale of work (team size, project scope, budget, etc.)
+- Measurable outcomes or impact where stated
+
+*Strengths Identification:*
+- What makes this candidate stand out?
+- Unique value propositions
+- Competitive advantages over other candidates
+
+*Potential Concerns or Gaps:*
+- What's missing from their profile?
+- Any red flags or areas of weakness?
+- Experience gaps relative to the requirements
+
+*Fit Score Justification:*
+- How well do they match each explicit requirement? (score 1-10)
+- How well do they match implicit requirements?
+- Overall fit assessment with detailed reasoning
+
+[Repeat this entire analysis block for EACH relevant candidate]
+
+---
+
+### STEP 4: COMPARATIVE ANALYSIS
+
+Now I will directly compare candidates against each other:
+
+**Head-to-Head Comparisons:**
+
+*[Candidate A](cv:cv_xxx) vs [Candidate B](cv:cv_yyy):*
+- Where does A outperform B?
+- Where does B outperform A?
+- For the specific query requirements, who has the edge and why?
+- If they're close, what's the tiebreaker?
+
+[Repeat for each meaningful candidate pair]
+
+**Dimensional Comparison Matrix:**
+- Compare all candidates on each key dimension
+- Identify clear winners on each dimension
+- Note where candidates are roughly equivalent
+
+**Trade-off Analysis:**
+- What trade-offs exist between top candidates?
+- Is there a "safe choice" vs "high upside" candidate?
+- How should different user priorities affect the ranking?
+
+---
+
+### STEP 5: SELF-VERIFICATION & BIAS CHECK
+
+Before finalizing, I need to verify my reasoning:
+
+**Evidence Verification:**
+- For each claim I'm making, can I point to specific CV data?
+- Am I making any assumptions not supported by the data?
+- Have I misread or misinterpreted any information?
+
+**Bias Check:**
+- Am I favoring candidates for irrelevant reasons?
+- Have I given fair consideration to all relevant candidates?
+- Am I being consistent in how I evaluate similar qualifications?
+
+**Alternative Perspective:**
+- If someone disagreed with my ranking, what would their argument be?
+- Is there a reasonable case for a different top candidate?
+- What additional information would change my assessment?
+
+**Confidence Calibration:**
+- How confident am I in my top recommendation?
+- Where is there genuine uncertainty?
+- What caveats should I include?
+
+---
+
+### STEP 6: FINAL SYNTHESIS & RANKING
+
+**Definitive Ranking:**
+1. **[Top Candidate](cv:cv_xxx)** - Primary recommendation
+   - Key differentiators that put them first
+   - Strongest matching qualifications
+   - Why they edge out #2
+
+2. **[Second Candidate](cv:cv_yyy)** - Strong alternative
+   - What they do well
+   - Why they're not #1
+   - When they might be the better choice
+
+[Continue for all relevant candidates]
+
+**Recommendation Confidence:**
+- High/Medium/Low confidence in ranking
+- Key factors that could change the ranking
+
+**Key Insights:**
+- Most important takeaways from this analysis
+- Patterns or observations worth noting
 :::
 
 ---
 
-## CRITICAL FORMATTING RULES (MANDATORY - NO EXCEPTIONS)
+## FINAL RESPONSE
 
-1. **:::thinking block** - MANDATORY with detailed reasoning
-2. **TABLE** - Valid markdown with pipes | aligned properly
-3. **CANDIDATE NAME FORMAT** - THIS IS THE **ONLY** ACCEPTABLE FORMAT:
+**Direct Answer**
+[2-3 clear sentences answering the user's question directly. Every candidate name MUST use format: **[Full Name](cv:cv_xxx)**]
 
-   
-   CORRECT FORMAT (USE EXACTLY THIS):
-   ```
-   **[Patrik Hübner](cv:cv_dd668ac0)**
-   **[Luca Müller](cv:cv_fe6338e6)**
-   **[Layla Hassan](cv:cv_71736e47)**
-   ```
-   
-   WRONG FORMATS (NEVER USE THESE):
-   ```
-   **[ Luca Müller](cv:cv_fe6338e6)**        SPACE after **
-   ** Layla Hassan** cv_71736e47            SPACE after ** + standalone cv_xxx
-   **Luca Müller** cv_fe6338e6              Missing link, standalone cv_xxx
-   **Luca** [cv_fe6338e6](cv_fe6338e6)      Incomplete name + wrong link
-   [Luca Müller](cv_fe6338e6)               Missing cv: prefix
-   ```
+**Analysis Summary**
 
-4. **NO SPACES AFTER OPENING `**`** - The bracket `[` must come IMMEDIATELY after `**`
-5. **EVERY candidate mention** in Thinking, Inventory, Analysis, Direct Answer, Table, AND Conclusion MUST use: `**[Full Name](cv:cv_xxx)**`
-6. **NEVER write cv_xxx alone** - It MUST ALWAYS be inside the link: `(cv:cv_xxx)`
-7. **NEVER duplicate references** - Write `**[Name](cv:cv_xxx)**` ONCE per mention
+| Candidate | Key Qualifications | Relevant Experience | Fit Score |
+|-----------|-------------------|---------------------|----------|
+| **[Full Name](cv:cv_xxx)** | Top 3 relevant skills | X years in Y | 9/10 |
+| **[Full Name](cv:cv_yyy)** | Top 3 relevant skills | X years in Y | 8/10 |
 
-Answer now:"""
+**Key Differentiators**
+[Brief explanation of what separates the top candidates]
+
+:::conclusion
+[Final recommendation with clear rationale. Use ONLY format: **[Full Name](cv:cv_xxx)** for each candidate mentioned.]
+:::
+
+---
+
+## CRITICAL FORMATTING RULES (MANDATORY)
+
+1. **:::thinking block** - MUST be extensive with ALL 6 steps fully developed
+2. **Candidate name format** - ONLY acceptable format: **[Full Name](cv:cv_xxx)**
+3. **Never write cv_xxx alone** - Always inside link: (cv:cv_xxx)
+4. **No spaces after `**`** - Bracket must immediately follow: **[Name]
+5. **Table format** - Valid markdown with aligned pipes
+
+CORRECT: **[Patrik Hübner](cv:cv_dd668ac0)**
+WRONG: **Patrik Hübner** cv_dd668ac0
+WRONG: [Patrik Hübner](cv_dd668ac0)
+WRONG: ** [Patrik Hübner](cv:cv_dd668ac0)**
+
+Now provide your complete analysis:"""
 
 
-REFLECTION_PROMPT = """Review your draft response for accuracy and completeness.
+REFLECTION_PROMPT = """You are a senior talent acquisition expert reviewing an analysis for accuracy, completeness, and quality.
 
 ORIGINAL QUESTION: {question}
 
-YOUR DRAFT RESPONSE:
+DRAFT RESPONSE TO REVIEW:
 {draft}
 
-AVAILABLE CONTEXT:
+AVAILABLE CV DATA:
 {context}
 
-CHECKLIST:
-1. Does the response directly answer what was asked?
-2. Is every claim supported by specific CV data?
-3. Are there candidates I should have mentioned but didn't?
-4. Is the ranking/comparison fair and justified?
-5. Are there any unsupported assumptions?
+---
 
-If you find issues, provide a CORRECTED response.
-If the response is good, return it unchanged.
+## COMPREHENSIVE REVIEW CHECKLIST
 
-REFLECTION:"""
+**Accuracy Review:**
+1. Is every factual claim directly supported by the CV data provided?
+2. Are candidate names, job titles, and companies accurately stated?
+3. Are years of experience calculated correctly?
+4. Have any skills or qualifications been misattributed?
+
+**Completeness Review:**
+5. Does the response fully address the user's question?
+6. Are all relevant candidates mentioned and analyzed?
+7. Were any strong candidates overlooked or dismissed too quickly?
+8. Is the reasoning thorough enough to justify the conclusions?
+
+**Logic & Fairness Review:**
+9. Is the ranking/comparison logic consistent and fair?
+10. Are similar qualifications evaluated consistently across candidates?
+11. Are the evaluation criteria appropriate for the question asked?
+12. Is the confidence level appropriate given the available data?
+
+**Quality Review:**
+13. Is the response clear and well-structured?
+14. Are the key differentiators clearly articulated?
+15. Would the user understand WHY this recommendation was made?
+16. Is the thinking process thorough and insightful?
+
+---
+
+## YOUR TASK
+
+Based on your review:
+
+**If you find significant issues:**
+Provide a CORRECTED RESPONSE that fixes all identified problems.
+Start with "CORRECTED RESPONSE:" followed by the improved analysis.
+
+**If the response is accurate and complete:**
+Respond with "RESPONSE VERIFIED: The analysis is accurate and complete."
+Then restate the key conclusion.
+
+**Always ensure:**
+- Candidate format: **[Full Name](cv:cv_xxx)** 
+- No unsupported claims
+- Clear, justified rankings
+
+Your review:"""
 
 
 class ReasoningService:
@@ -239,7 +406,7 @@ class ReasoningService:
         """Execute self-ask reasoning process."""
         truncated_context = smart_truncate(
             context,
-            max_chars=15000,
+            max_chars=25000,
             preserve="both"
         )
         prompt = SELF_ASK_PROMPT.format(
@@ -259,8 +426,8 @@ class ReasoningService:
                 json={
                     "model": self.model,
                     "messages": [{"role": "user", "content": prompt}],
-                    "temperature": 0.2,
-                    "max_tokens": 3000
+                    "temperature": 0.3,
+                    "max_tokens": 6000
                 }
             )
             response.raise_for_status()
@@ -380,18 +547,21 @@ class ReasoningService:
         """Parse thinking trace into structured steps."""
         steps = []
         
-        # Look for step markers
+        # Look for step markers - updated for 6-step deep reasoning process
         step_patterns = [
-            ("## Step 1", "analysis"),
-            ("## Step 2", "inventory"),
-            ("## Step 3", "analysis"),
-            ("## Step 4", "verification"),
-            ("## Step 5", "synthesis"),
-            ("UNDERSTAND", "analysis"),
-            ("INVENTORY", "inventory"),
-            ("ANALYZE", "analysis"),
-            ("SELF-CHECK", "verification"),
-            ("SYNTHESIZE", "synthesis")
+            ("### STEP 1: DEEP QUERY UNDERSTANDING", "query_understanding"),
+            ("### STEP 2: COMPREHENSIVE CANDIDATE INVENTORY", "inventory"),
+            ("### STEP 3: DEEP INDIVIDUAL CANDIDATE ANALYSIS", "deep_analysis"),
+            ("### STEP 4: COMPARATIVE ANALYSIS", "comparison"),
+            ("### STEP 5: SELF-VERIFICATION & BIAS CHECK", "verification"),
+            ("### STEP 6: FINAL SYNTHESIS & RANKING", "synthesis"),
+            # Fallback patterns for shorter markers
+            ("STEP 1:", "query_understanding"),
+            ("STEP 2:", "inventory"),
+            ("STEP 3:", "deep_analysis"),
+            ("STEP 4:", "comparison"),
+            ("STEP 5:", "verification"),
+            ("STEP 6:", "synthesis"),
         ]
         
         for pattern, step_type in step_patterns:
@@ -411,7 +581,7 @@ class ReasoningService:
                 if content:
                     steps.append(ReasoningStep(
                         step_type=step_type,
-                        content=content[:500]  # Limit size
+                        content=content[:2000]  # Increased limit for richer content
                     ))
         
         return steps

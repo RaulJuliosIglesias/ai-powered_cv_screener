@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, CheckCircle, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy, Eye, ExternalLink, Sliders, BarChart3, RotateCcw } from 'lucide-react';
+import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, CheckCircle, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy, Eye, ExternalLink, Sliders, BarChart3, RotateCcw, Info, Github, Linkedin } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import useMode from './hooks/useMode';
@@ -47,6 +47,7 @@ function App() {
   const [showRAGSettings, setShowRAGSettings] = useState(false);
   const [ragPipelineSettings, setRagPipelineSettings] = useState(getRAGPipelineSettings());
   const [showMetricsPanel, setShowMetricsPanel] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
   const [showPipelinePanel, setShowPipelinePanel] = useState(true);
   const [isPipelineExpanded, setIsPipelineExpanded] = useState(false);
   const [autoExpandPipeline, setAutoExpandPipeline] = useState(() => {
@@ -863,6 +864,13 @@ function App() {
           </div>
           <div className="flex items-center gap-3">
             <button 
+              onClick={() => setShowAbout(true)}
+              className="flex items-center gap-2 px-3 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-purple-100 dark:hover:bg-purple-900/30 rounded-lg transition-colors group"
+              title={language === 'es' ? 'Acerca de' : 'About'}
+            >
+              <Info className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+            </button>
+            <button 
               onClick={() => setShowMetricsPanel(true)}
               className="flex items-center gap-2 px-3 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-cyan-100 dark:hover:bg-cyan-900/30 rounded-lg transition-colors group"
               title={language === 'es' ? 'Ver métricas RAG' : 'View RAG Metrics'}
@@ -1543,6 +1551,81 @@ function App() {
             localStorage.setItem('autoExpandPipeline', JSON.stringify(newValue));
           }}
         />
+      )}
+
+      {/* About Modal */}
+      {showAbout && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md shadow-2xl">
+            <div className="p-6 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl">
+                  <Sparkles className="w-5 h-5 text-white" />
+                </div>
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  {language === 'es' ? 'Acerca de' : 'About'}
+                </h2>
+              </div>
+              <button 
+                onClick={() => setShowAbout(false)} 
+                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+              >
+                <X className="w-5 h-5 text-gray-500" />
+              </button>
+            </div>
+            
+            <div className="p-6 space-y-5">
+              <div className="text-center">
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white">AI CV Screener</h3>
+                <div className="flex items-center justify-center gap-2 mt-2">
+                  <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm font-medium text-gray-600 dark:text-gray-300">v1.0.0</span>
+                  <span className="px-2 py-1 bg-gradient-to-r from-purple-500 to-emerald-500 text-white text-sm font-bold rounded">RAG V5</span>
+                </div>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
+                  {language === 'es' 
+                    ? 'Sistema inteligente de análisis de CVs con RAG Pipeline avanzado' 
+                    : 'Intelligent CV analysis system with advanced RAG Pipeline'}
+                </p>
+              </div>
+
+              <div className="border-t border-gray-200 dark:border-gray-700" />
+
+              <div>
+                <p className="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-2">
+                  {language === 'es' ? 'Creado por' : 'Created by'}
+                </p>
+                <p className="font-semibold text-gray-900 dark:text-white">Raúl Iglesias Julios</p>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <a
+                  href="https://github.com/RaulJuliosIglesias"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-colors group"
+                >
+                  <Github className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+                  <span className="flex-1 text-sm font-medium text-gray-700 dark:text-gray-300">GitHub</span>
+                  <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-blue-500" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/rauliglesiasjulios/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-colors group"
+                >
+                  <Linkedin className="w-5 h-5 text-blue-600" />
+                  <span className="flex-1 text-sm font-medium text-gray-700 dark:text-gray-300">LinkedIn</span>
+                  <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-blue-500" />
+                </a>
+              </div>
+
+              <p className="text-xs text-center text-gray-400 dark:text-gray-500">
+                © 2026 - {language === 'es' ? 'Todos los derechos reservados' : 'All rights reserved'}
+              </p>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
