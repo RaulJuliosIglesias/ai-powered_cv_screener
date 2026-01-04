@@ -29,6 +29,92 @@ const getScoreColor = (score) => {
   return 'bg-gray-500 text-white';
 };
 
+// CV Reference Renderer - FUNCIÓN ÚNICA para renderizar contenido con CVs
+// Detecta el patrón [📄](cv:cv_xxx) **Nombre** y lo renderiza como botón + negrita
+const ContentWithCVLinks = ({ content, onOpenCV }) => {
+  if (!content) return null;
+  
+  // Patrón: [📄](cv:cv_xxx) **Nombre**
+  const cvPattern = /\[📄\]\(cv:(cv_[a-z0-9_-]+)\)\s*\*\*([^*]+)\*\*/gi;
+  
+  // Dividir el contenido en partes
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+  
+  const regex = new RegExp(cvPattern);
+  const contentStr = String(content);
+  
+  while ((match = regex.exec(contentStr)) !== null) {
+    // Añadir texto antes del match
+    if (match.index > lastIndex) {
+      parts.push({
+        type: 'text',
+        content: contentStr.slice(lastIndex, match.index)
+      });
+    }
+    
+    // Añadir el CV reference
+    parts.push({
+      type: 'cv',
+      cvId: match[1],
+      name: match[2]
+    });
+    
+    lastIndex = match.index + match[0].length;
+  }
+  
+  // Añadir texto restante
+  if (lastIndex < contentStr.length) {
+    parts.push({
+      type: 'text',
+      content: contentStr.slice(lastIndex)
+    });
+  }
+  
+  // Si no hay CVs, renderizar todo como markdown
+  if (parts.length === 0 || (parts.length === 1 && parts[0].type === 'text')) {
+    return (
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+        {content}
+      </ReactMarkdown>
+    );
+  }
+  
+  // Renderizar partes mixtas
+  return (
+    <>
+      {parts.map((part, idx) => {
+        if (part.type === 'cv') {
+          return (
+            <span key={idx} className="inline-flex items-center gap-1">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  if (onOpenCV) onOpenCV(part.cvId, part.name);
+                }}
+                className="inline-flex items-center justify-center w-5 h-5 bg-blue-600/30 text-blue-400 hover:bg-blue-600/50 rounded transition-colors"
+                title={`View CV: ${part.name}`}
+              >
+                <FileText className="w-3 h-3" />
+              </button>
+              <strong className="font-semibold text-white">{part.name}</strong>
+            </span>
+          );
+        } else {
+          return (
+            <ReactMarkdown key={idx} remarkPlugins={[remarkGfm]}>
+              {part.content}
+            </ReactMarkdown>
+          );
+        }
+      })}
+    </>
+  );
+};
+
 const getScoreBgColor = (score) => {
   if (score >= 90) return 'bg-emerald-500/10 border-emerald-500/30';
   if (score >= 70) return 'bg-amber-500/10 border-amber-500/30';
@@ -69,7 +155,7 @@ const ThinkingSection = ({ content }) => {
 };
 
 // Section: Direct Answer (Yellow/Gold border)
-const DirectAnswerSection = ({ content, cvLinkRenderer }) => {
+const DirectAnswerSection = ({ content, onOpenCV }) => {
   if (!content) return null;
   
   return (
@@ -78,28 +164,15 @@ const DirectAnswerSection = ({ content, cvLinkRenderer }) => {
         <FileText className="w-5 h-5 text-amber-400" />
         <span className="font-semibold text-amber-400">Direct Answer</span>
       </div>
-      <div className="prose prose-sm max-w-none dark:prose-invert">
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          components={{
-            a: cvLinkRenderer,
-            p: ({ children }) => (
-              <p className="mb-2 text-gray-200 leading-relaxed">{children}</p>
-            ),
-            strong: ({ children }) => (
-              <strong className="font-semibold text-white">{children}</strong>
-            ),
-          }}
-        >
-          {content}
-        </ReactMarkdown>
+      <div className="prose prose-sm max-w-none dark:prose-invert text-gray-200">
+        <ContentWithCVLinks content={content} onOpenCV={onOpenCV} />
       </div>
     </div>
   );
 };
 
 // Section: Analysis (Cyan border)
-const AnalysisSection = ({ content, cvLinkRenderer }) => {
+const AnalysisSection = ({ content, onOpenCV }) => {
   if (!content) return null;
   
   return (
@@ -108,21 +181,8 @@ const AnalysisSection = ({ content, cvLinkRenderer }) => {
         <BarChart3 className="w-5 h-5 text-cyan-400" />
         <span className="font-semibold text-cyan-400">Analysis</span>
       </div>
-      <div className="prose prose-sm max-w-none dark:prose-invert">
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          components={{
-            a: cvLinkRenderer,
-            p: ({ children }) => (
-              <p className="mb-2 text-gray-300 leading-relaxed">{children}</p>
-            ),
-            strong: ({ children }) => (
-              <strong className="font-semibold text-white">{children}</strong>
-            ),
-          }}
-        >
-          {content}
-        </ReactMarkdown>
+      <div className="prose prose-sm max-w-none dark:prose-invert text-gray-300">
+        <ContentWithCVLinks content={content} onOpenCV={onOpenCV} />
       </div>
     </div>
   );
@@ -208,7 +268,7 @@ const CandidateTable = ({ tableData, onOpenCV }) => {
 };
 
 // Section: Conclusion (Green border)
-const ConclusionSection = ({ content, cvLinkRenderer }) => {
+const ConclusionSection = ({ content, onOpenCV }) => {
   if (!content) return null;
   
   return (
@@ -217,21 +277,8 @@ const ConclusionSection = ({ content, cvLinkRenderer }) => {
         <CheckCircle2 className="w-5 h-5 text-emerald-400" />
         <span className="font-semibold text-emerald-400">Conclusion</span>
       </div>
-      <div className="prose prose-sm max-w-none dark:prose-invert">
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          components={{
-            a: cvLinkRenderer,
-            p: ({ children }) => (
-              <p className="mb-2 text-gray-200 leading-relaxed">{children}</p>
-            ),
-            strong: ({ children }) => (
-              <strong className="font-semibold text-white">{children}</strong>
-            ),
-          }}
-        >
-          {content}
-        </ReactMarkdown>
+      <div className="prose prose-sm max-w-none dark:prose-invert text-gray-200">
+        <ContentWithCVLinks content={content} onOpenCV={onOpenCV} />
       </div>
     </div>
   );
@@ -243,75 +290,22 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
   
   const { thinking, direct_answer, analysis, table_data, conclusion } = structuredOutput;
   
-  // CV Link Renderer - FORMATO ÚNICO (misma lógica que la tabla)
-  // Backend genera: [📄](cv:cv_xxx) **Nombre**
-  // - El link [📄](cv:cv_xxx) se renderiza como botón con icono FileText
-  // - El **Nombre** se renderiza en negrita por ReactMarkdown (no es link)
-  const cvLinkRenderer = ({ href, children }) => {
-    // Extract cv_id from href
-    let cvId = null;
-    
-    if (href) {
-      // Format: cv:cv_xxx
-      if (href.startsWith('cv:')) {
-        cvId = href.replace('cv:', '');
-      }
-      // Format: contains cv_xxx somewhere
-      else {
-        const match = href.match(/cv_[a-z0-9_-]+/i);
-        if (match) {
-          cvId = match[0];
-        }
-      }
-    }
-    
-    // Si es link de CV, renderizar botón con icono (MISMA LÓGICA QUE LA TABLA)
-    if (cvId && onOpenCV) {
-      return (
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            onOpenCV(cvId, '');
-          }}
-          className="inline-flex items-center justify-center w-5 h-5 bg-blue-600/30 text-blue-400 hover:bg-blue-600/50 rounded transition-colors"
-          title={`View CV: ${cvId}`}
-        >
-          <FileText className="w-3 h-3" />
-        </button>
-      );
-    }
-    
-    // Link normal (no es CV)
-    return (
-      <a 
-        href={href} 
-        className="text-blue-400 hover:text-blue-300 underline"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {children}
-      </a>
-    );
-  };
-  
   return (
     <div className="space-y-2">
       {/* 1. Thinking Process (collapsible) */}
       <ThinkingSection content={thinking} />
       
-      {/* 2. Direct Answer */}
-      <DirectAnswerSection content={direct_answer} cvLinkRenderer={cvLinkRenderer} />
+      {/* 2. Direct Answer - usa ContentWithCVLinks */}
+      <DirectAnswerSection content={direct_answer} onOpenCV={onOpenCV} />
       
-      {/* 3. Analysis */}
-      <AnalysisSection content={analysis} cvLinkRenderer={cvLinkRenderer} />
+      {/* 3. Analysis - usa ContentWithCVLinks */}
+      <AnalysisSection content={analysis} onOpenCV={onOpenCV} />
       
-      {/* 4. Candidate Table */}
+      {/* 4. Candidate Table - botones directos en JSX */}
       <CandidateTable tableData={table_data} onOpenCV={onOpenCV} />
       
-      {/* 5. Conclusion */}
-      <ConclusionSection content={conclusion} cvLinkRenderer={cvLinkRenderer} />
+      {/* 5. Conclusion - usa ContentWithCVLinks */}
+      <ConclusionSection content={conclusion} onOpenCV={onOpenCV} />
     </div>
   );
 };
