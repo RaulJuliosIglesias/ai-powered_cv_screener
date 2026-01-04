@@ -1641,8 +1641,10 @@ Provide a corrected response:"""
             chunks=ctx.effective_chunks
         )
         
-        # Build formatted answer using structured components
-        formatted_answer = self._build_formatted_answer(structured_output)
+        # Build formatted answer using SEPARATE formatter module
+        from app.services.output_processor.formatter import get_formatter
+        formatter = get_formatter()
+        formatted_answer = formatter.build_formatted_answer(structured_output)
         
         # Build pipeline steps from metrics for UI
         pipeline_steps = self._build_pipeline_steps(ctx)
@@ -1662,114 +1664,6 @@ Provide a corrected response:"""
             cached=ctx.response_cached,
             request_id=ctx.request_id
         )
-    
-    def _build_formatted_answer(self, structured_output: Any) -> str:
-        """
-        Build formatted answer from structured output components.
-        
-        Ensures the response always has:
-        - :::thinking block (if extracted)
-        - Direct answer
-        - Analysis/table content
-        - :::conclusion block (if extracted)
-        
-        Args:
-            structured_output: StructuredOutput object from OutputProcessor
-            
-        Returns:
-            Formatted answer string with all components
-        """
-        parts = []
-        
-        # 1. Add thinking block if present
-        if structured_output.thinking:
-            parts.append(f":::thinking\n{structured_output.thinking}\n:::")
-            parts.append("")  # Empty line
-        
-        # 2. Add direct answer (always present)
-        parts.append(structured_output.direct_answer)
-        parts.append("")  # Empty line
-        
-        # 3. Add table if present
-        if structured_output.table_data:
-            table_md = self._format_table_markdown(structured_output.table_data)
-            parts.append(table_md)
-            parts.append("")  # Empty line
-        
-        # 4. Add any additional analysis from raw content
-        # Extract content between direct answer and conclusion from raw
-        analysis_content = self._extract_analysis_section(
-            structured_output.raw_content,
-            structured_output.direct_answer,
-            structured_output.conclusion
-        )
-        if analysis_content:
-            parts.append(analysis_content)
-            parts.append("")  # Empty line
-        
-        # 5. Add conclusion block if present
-        if structured_output.conclusion:
-            parts.append(f":::conclusion\n{structured_output.conclusion}\n:::")
-        
-        result = "\n".join(parts).strip()
-        logger.info(f"[BUILD_ANSWER] Built formatted answer: {len(result)} chars, has_thinking={bool(structured_output.thinking)}, has_table={bool(structured_output.table_data)}, has_conclusion={bool(structured_output.conclusion)}")
-        
-        return result
-    
-    def _format_table_markdown(self, table_data: Any) -> str:
-        """Format TableData object as markdown table."""
-        if not table_data or not table_data.headers or not table_data.rows:
-            return ""
-        
-        lines = []
-        
-        # Header row
-        lines.append("| " + " | ".join(table_data.headers) + " |")
-        
-        # Separator row
-        lines.append("|" + "|".join(["---"] * len(table_data.headers)) + "|")
-        
-        # Data rows
-        for row in table_data.rows:
-            lines.append("| " + " | ".join(str(cell) for cell in row) + " |")
-        
-        return "\n".join(lines)
-    
-    def _extract_analysis_section(self, raw_content: str, direct_answer: str, conclusion: str | None) -> str:
-        """
-        Extract analysis section between direct answer and conclusion.
-        
-        This captures any detailed analysis, bullet points, or additional
-        context that's not in the table.
-        """
-        import re
-        
-        if not raw_content:
-            return ""
-        
-        # Remove thinking and conclusion blocks
-        clean = raw_content
-        clean = re.sub(r':::thinking[\s\S]*?:::', '', clean, flags=re.IGNORECASE)
-        clean = re.sub(r':::conclusion[\s\S]*?:::', '', clean, flags=re.IGNORECASE)
-        
-        # Remove the direct answer
-        if direct_answer and direct_answer in clean:
-            clean = clean.replace(direct_answer, '', 1)
-        
-        # Remove table (basic detection)
-        clean = re.sub(r'\|[^\n]*\|[\s\S]*?\|[^\n]*\|', '', clean)
-        
-        # Clean up
-        clean = clean.strip()
-        
-        # Remove multiple empty lines
-        clean = re.sub(r'\n{3,}', '\n\n', clean)
-        
-        # Only return if there's meaningful content
-        if len(clean) > 50:
-            return clean
-        
-        return ""
     
     def _build_pipeline_steps(self, ctx: PipelineContextV5) -> list[PipelineStep]:
         """Build pipeline steps from metrics for UI display."""

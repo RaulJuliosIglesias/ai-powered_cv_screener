@@ -185,11 +185,14 @@ class TableParser:
         rows = []
         
         for cv_id, info in candidates.items():
-            name_link = f"**[{info['name']}](cv:cv_{cv_id})**"
-            skills_str = ', '.join(info['skills'])
-            score_stars = '⭐' * min(5, max(1, int(info['score'] * 5)))
+            # CRITICAL: No spaces before/after ** for bold to work
+            name_link = f"**{info['name']}** `cv_{cv_id}`"
+            skills_str = ', '.join(info['skills']) if info['skills'] else 'N/A'
+            # Make relevance more meaningful - use actual score
+            score_normalized = int(info['score'] * 100)  # Convert 0.0-1.0 to 0-100
+            relevance = f"{score_normalized}%"
             
-            rows.append([name_link, skills_str, score_stars])
+            rows.append([name_link, skills_str, relevance])
         
         logger.info(f"Generated fallback table with {len(rows)} candidates")
         return TableData(headers=headers, rows=rows)
