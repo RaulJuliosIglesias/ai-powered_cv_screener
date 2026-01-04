@@ -86,6 +86,10 @@ class TableModule:
     
     def _parse_markdown_table(self, text: str) -> Optional[TableData]:
         """Parse markdown table from text."""
+        # STEP 1: Extract tables from inside code blocks first
+        # This handles cases where LLM wraps table in ```markdown ... ``` or ``` ... ```
+        text = self._extract_tables_from_code_blocks(text)
+        
         # Find table region
         lines = text.split('\n')
         table_lines = []
@@ -226,3 +230,45 @@ class TableModule:
                 unique.append(skill)
         
         return unique[:5]
+    
+    def _extract_tables_from_code_blocks(self, text: str) -> str:
+        """
+        Extract tables from inside code blocks.
+        
+        Handles cases where LLM wraps tables in:
+        - ```markdown ... ```
+        - ``` ... ```
+        - ```code ... ```
+        - code Copy code blocks
+        
+        Args:
+            text: Raw text that may contain code blocks
+            
+        Returns:
+            Text with code block wrappers removed, tables exposed
+        """
+        if not text:
+            return text
+        
+        # Pattern 1: ```language ... ``` blocks containing tables
+        # Extract content from code blocks that contain table markers (|)
+        code_block_pattern = r'```(?:markdown|code|text|)?\s*\n?([\s\S]*?)\n?```'
+        
+        def replace_code_block(match):
+            content = match.group(1)
+            # If the content contains a table (has | characters), extract it
+            if '|' in content and '---' in content:
+                logger.debug("[TABLE] Extracted table from code block")
+                return content
+            # Otherwise keep the original (non-table code blocks)
+            return match.group(0)
+        
+        result = re.sub(code_block_pattern, replace_code_block, text, flags=re.IGNORECASE)
+        
+        # Pattern 2: Clean up "code Copy code" artifacts
+        result = re.sub(r'code\s*Copy\s*code\s*', '', result, flags=re.IGNORECASE)
+        
+        # Pattern 3: Remove standalone "Copy code" text
+        result = re.sub(r'\bCopy\s+code\b', '', result, flags=re.IGNORECASE)
+        
+        return result

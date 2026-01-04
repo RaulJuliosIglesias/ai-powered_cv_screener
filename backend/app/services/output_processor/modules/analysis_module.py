@@ -54,6 +54,17 @@ class AnalysisModule:
         # Remove tables
         cleaned = re.sub(r'\|[^\n]*\|[\s\S]*?\|[^\n]*\|', '', cleaned)
         
+        # CRITICAL: Remove ALL code blocks that contain tables
+        def remove_table_code_blocks(match):
+            content = match.group(1)
+            if '|' in content and '---' in content:
+                return ''  # Remove entire block if it's a table
+            return match.group(0)  # Keep non-table code blocks
+        cleaned = re.sub(r'```(?:markdown|code|text|)?\s*\n?([\s\S]*?)\n?```', remove_table_code_blocks, cleaned, flags=re.IGNORECASE)
+        
+        # Remove any remaining fenced code blocks
+        cleaned = re.sub(r'```[\s\S]*?```', '', cleaned)
+        
         # CRITICAL: Remove ALL prompt contamination (same as DirectAnswerModule)
         cleaned = re.sub(r'\*\*ABSOLUTELY FORBIDDEN[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
         cleaned = re.sub(r'ABSOLUTELY FORBIDDEN[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
@@ -62,6 +73,7 @@ class AnalysisModule:
         cleaned = re.sub(r'SPECIAL CASES[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
         cleaned = re.sub(r'```[\w]*\s*Copy code[\s\S]*?```', '', cleaned, flags=re.IGNORECASE)
         cleaned = re.sub(r'code\s*Copy code', '', cleaned, flags=re.IGNORECASE)
+        cleaned = re.sub(r'\bCopy\s+code\b', '', cleaned, flags=re.IGNORECASE)
         cleaned = re.sub(r'A web search was conducted on[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
         cleaned = re.sub(r'IMPORTANT: Cite them using[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
         cleaned = re.sub(r'References?\s*\n[\s\S]*?(?=\n\n|Table|Conclusion|$)', '', cleaned, flags=re.IGNORECASE)
