@@ -183,7 +183,7 @@ class OutputOrchestrator:
         """
         Formato ÚNICO para menciones de candidatos en TODAS las secciones.
         
-        Convierte: [Nombre](cv:cv_xxx) o [Nombre](cv_xxx)
+        Convierte: [Nombre](cv:cv_xxx) o [Nombre](cv_xxx) o **[Nombre](cv_xxx)**
         A:         [📄](cv:cv_xxx) **Nombre**
         
         - El icono 📄 es el ÚNICO elemento clicable (abre PDF)
@@ -191,6 +191,14 @@ class OutputOrchestrator:
         """
         if not text:
             return text
+        
+        # Paso 0: Eliminar negrita externa que el LLM añade alrededor de links
+        # **[Nombre](cv_xxx)** -> [Nombre](cv_xxx)
+        text = re.sub(
+            r'\*\*\[([^\]]+)\]\(([^)]+)\)\*\*',
+            r'[\1](\2)',
+            text
+        )
         
         # Paso 1: Normalizar links sin prefijo cv:
         # [Nombre](cv_xxx) -> [Nombre](cv:cv_xxx)
