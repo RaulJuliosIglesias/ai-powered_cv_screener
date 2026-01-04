@@ -79,25 +79,29 @@ const PipelineProgressPanel = ({ isExpanded, onToggleExpand, progress, autoExpan
 
   return (
     <div className={`
-      fixed top-14 right-0 h-[calc(100%-3.5rem)] bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-xl
+      fixed top-0 right-0 h-full bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-xl
       transition-all duration-300 ease-in-out z-20
       ${isExpanded ? 'w-72' : 'w-11'}
     `}>
       <div className="flex flex-col h-full">
-        {/* Collapse/Expand Button - Integrated into panel */}
+        {/* Header spacer to align with main header */}
+        <div className="h-14 flex-shrink-0 bg-slate-100 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-center">
+          {isExpanded ? (
+            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">RAG Pipeline</span>
+          ) : (
+            <Brain className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+          )}
+        </div>
+        
+        {/* Collapse/Expand Button */}
         <button
           onClick={onToggleExpand}
-          className={`
-            flex items-center justify-center h-10 w-full
-            bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600
-            text-white transition-all duration-200
-            ${isExpanded ? 'rounded-none' : 'rounded-none'}
-          `}
+          className="flex items-center justify-center h-9 w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white transition-all duration-200 flex-shrink-0"
           title={isExpanded ? 'Collapse' : 'Expand'}
         >
           {isExpanded ? (
             <div className="flex items-center gap-2">
-              <span className="text-xs font-medium">RAG Pipeline</span>
+              <span className="text-xs font-medium">{language === 'es' ? 'Colapsar' : 'Collapse'}</span>
               <ChevronRight className="w-4 h-4" />
             </div>
           ) : (

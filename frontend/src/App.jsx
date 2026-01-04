@@ -808,7 +808,7 @@ function App() {
       </div>
 
       {/* Main Content */}
-      <div className={`flex-1 flex flex-col overflow-hidden bg-slate-50 dark:bg-slate-900 transition-all duration-300 ${
+      <div className={`flex-1 flex flex-col overflow-hidden bg-slate-50 dark:bg-slate-950 transition-all duration-300 ${
         showPipelinePanel && isPipelineExpanded ? 'mr-72' : showPipelinePanel ? 'mr-11' : ''
       }`}>
         <div className="h-14 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-4">
