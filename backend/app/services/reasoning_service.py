@@ -50,23 +50,39 @@ TOTAL CANDIDATES: {total_cvs}
 
 :::thinking
 **Understanding Query**
-[Detailed explanation: What specific criteria is the user asking for? Break down the requirements. If no explicit criteria given, state which default criteria you'll use: seniority, skills breadth, years of experience, etc.]
+
+What specific criteria is the user asking for? Break down the requirements clearly.
+
+If no explicit criteria given, state default criteria: seniority, skills breadth, years of experience, etc.
 
 **Inventory**
-[List ALL candidates found with their CV IDs using EXACT format: **[Full Name](cv:cv_xxx)**
-Example: **[Luca Müller](cv:cv_fe6338e6)**, **[Layla Hassan](cv:cv_71736e47)**
-NO spaces after opening **, NO standalone cv_xxx]
+
+List ALL candidates found with their CV IDs:
+- **[Luca Müller](cv:cv_fe6338e6)**
+- **[Layla Hassan](cv:cv_71736e47)**
+- **[Mei-Ling Chen](cv:cv_ffc6d564)**
+
+Note which ones seem most relevant based on job titles or qualifications.
 
 **Detailed Analysis**
-[For EACH relevant candidate using **[Name](cv:cv_xxx)** format:
+
+For EACH relevant candidate:
+
+**[Candidate Name](cv:cv_xxx)**:
 - Key skills matching the query
 - Years of experience in relevant areas
 - Notable achievements or projects
 - Strengths and potential weaknesses
-Compare candidates directly using **[Name](cv:cv_xxx)** consistently.]
+
+Compare candidates directly. Explain differences clearly.
 
 **Final Decision**
-[Provide clear ranking with explicit rationale using **[Name](cv:cv_xxx)** format. Explain WHY **[Candidate A](cv:cv_xxx)** is better than **[Candidate B](cv:cv_yyy)** based on the analysis above.]
+
+Provide clear ranking with explicit rationale.
+
+Explain WHY **[Candidate A](cv:cv_xxx)** is better than **[Candidate B](cv:cv_yyy)**.
+
+Base decision on the detailed analysis above.
 :::
 
 **Direct Answer**
