@@ -1137,21 +1137,42 @@ class RAGServiceV5:
         """Step 3: Check guardrails."""
         start = time.perf_counter()
         try:
-            if ctx.query_understanding and not ctx.query_understanding.is_cv_related:
-                ctx.guardrail_passed = False
-                ctx.guardrail_message = (
-                    "I can only help with CV screening and candidate analysis."
-                )
-                return False
+            # If CVs are loaded, be VERY permissive - let LLM handle interpretation
+            # The user uploaded CVs, so they obviously want to analyze them
+            # LLM can say "no artists in these CVs" if the question doesn't match
+            has_cvs = ctx.cv_ids and len(ctx.cv_ids) > 0
             
-            result = self._guardrail.check(ctx.question)
-            
-            if not result.is_allowed:
-                ctx.guardrail_passed = False
-                ctx.guardrail_message = result.rejection_message
-                return False
-            
-            ctx.guardrail_passed = True
+            if has_cvs:
+                # With CVs loaded, only reject obviously off-topic questions
+                # (weather, food, politics, etc.) but allow ambiguous queries
+                result = self._guardrail.check(ctx.question)
+                
+                if not result.is_allowed and result.reason == "off_topic_pattern":
+                    # Only reject if it matched a clear off-topic pattern
+                    ctx.guardrail_passed = False
+                    ctx.guardrail_message = result.rejection_message
+                    return False
+                
+                # Allow everything else when CVs are loaded
+                ctx.guardrail_passed = True
+                logger.debug(f"Guardrail: Allowed (CVs loaded, permissive mode)")
+            else:
+                # No CVs loaded - apply strict guardrail
+                if ctx.query_understanding and not ctx.query_understanding.is_cv_related:
+                    ctx.guardrail_passed = False
+                    ctx.guardrail_message = (
+                        "I can only help with CV screening and candidate analysis."
+                    )
+                    return False
+                
+                result = self._guardrail.check(ctx.question)
+                
+                if not result.is_allowed:
+                    ctx.guardrail_passed = False
+                    ctx.guardrail_message = result.rejection_message
+                    return False
+                
+                ctx.guardrail_passed = True
             
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.GUARDRAIL,
