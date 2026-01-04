@@ -14372,10 +14372,168 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-04T14:46:17.696029"
+        },
+        {
+          "id": "4a11ef09-7e43-44ec-a639-e0366c1edbe0",
+          "role": "user",
+          "content": "cual es el mejor eprfile para front end y full stack? hazme una comparativa de todos rol experiencai y conocimeitnso para full stack dame la sltia ordenadna",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T14:53:03.358550"
+        },
+        {
+          "id": "2d80c56a-bb64-4fd6-bb75-c7dd68aefbc1",
+          "role": "assistant",
+          "content": ":::thinking\n- The question asks for the best profiles for frontend and full-stack roles, with a comparison of all candidates' roles, experience, and knowledge.\n- I need to analyze each candidate's CV to identify relevant technical skills for frontend (e.g., React, JavaScript, HTML/CSS) and full-stack (frontend + backend, e.g., Node.js, Python, databases).\n- Only**[Layla Hassan  NFT](cv:cv_71736e47)**has explicit technical skills (Solidity, Ethereum, React, Node.js), making her the only candidate with potential for frontend or full-stack roles.\n- The other candidates lack explicit technical skills for these roles (e.g., HR, Cloud, Podcast, PhD, Learning Officer).\n- I must avoid unverified claims and strictly reference the CV data.\n:::\n\nThe best profile for frontend and full-stack roles is**[Layla Hassan  NFT](cv:cv_71736e47)**, as she is the only candidate with explicit technical skills relevant to these roles. ### Comparison of All Candidates for Frontend and Full-Stack Roles\n### Detailed Analysis\n-**[Layla Hassan  NFT](cv:cv_71736e47)**is the only candidate with explicit frontend (React) and full-stack (Node.js, Solidity) skills. -**[Luca Müller  Cloud](cv:cv_fe6338e6)**has cloud/DevOps skills but no frontend or full-stack experience.\n\n### Analysis\n\n| Candidate | Skills | Experience | Match Score |\n|---|---|---|---|\n| Layla Hassan  NFT | Solidity, Ethereum, React, Node.js | NFT Developer, Smart Contract Developer | 80% |\n| Luca Müller  Cloud | AWS, Kubernetes, Terraform, Docker | Cloud Engineer | 15% |\n| Mei-Ling Chen  Human Resources | HRIS, Talent Acquisition | HR Director | 50% |\n| Abdullah Mohamed  Podcast | Audio Editing, Content Production | Podcast Assistant | 50% |\n| Ranio Zhang  PhD | Python, Machine Learning, Data Science | PhD Student | 20% |\n| Rajesh Patel  Learning | [No technical skills listed] | Learning Officer | 50% |\n\n:::conclusion**[Layla Hassan  NFT](cv:cv_71736e47)**is the best and only viable candidate for frontend and full-stack roles based on the provided CVs. No other candidates meet the technical requirements for these positions.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_ffc6d564",
+              "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf"
+            },
+            {
+              "cv_id": "cv_fe6338e6",
+              "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_943da331",
+              "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_71736e47",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_916fd244",
+              "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf"
+            },
+            {
+              "cv_id": "cv_7b0f7ab3",
+              "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_653fbf59",
+              "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf"
+            },
+            {
+              "cv_id": "cv_f01ac22c",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_bbc748f9",
+              "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_dd668ac0",
+              "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 3430.81,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 9.9,
+              "details": "Found 19 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 29823.76,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 40371.74,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "The best profile for frontend and full-stack roles is **[Layla Hassan  NFT](cv:cv_71736e47)**, as she is the only candidate with explicit technical skills relevant to these roles. ### Comparison of All Candidates for Frontend and Full-Stack Roles\n### Detailed Analysis\n- **[Layla Hassan  NFT](cv:cv_71736e47)** is the only candidate with explicit frontend (React) and full-stack (Node.js, Solidity) skills. - **[Luca Müller  Cloud](cv:cv_fe6338e6)** has cloud/DevOps skills but no frontend or full-stack experience.",
+            "raw_content": ":::thinking\n- The question asks for the best profiles for frontend and full-stack roles, with a comparison of all candidates' roles, experience, and knowledge.\n- I need to analyze each candidate's CV to identify relevant technical skills for frontend (e.g., React, JavaScript, HTML/CSS) and full-stack (frontend + backend, e.g., Node.js, Python, databases).\n- Only **[Layla Hassan  NFT](cv:cv_71736e47)** has explicit technical skills (Solidity, Ethereum, React, Node.js), making her the only candidate with potential for frontend or full-stack roles.\n- The other candidates lack explicit technical skills for these roles (e.g., HR, Cloud, Podcast, PhD, Learning Officer).\n- I must avoid unverified claims and strictly reference the CV data.\n:::\n\nThe best profile for frontend and full-stack roles is **[Layla Hassan  NFT](cv:cv_71736e47)**, as she is the only candidate with explicit technical skills relevant to these roles.\n\n### Comparison of All Candidates for Frontend and Full-Stack Roles\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Layla Hassan  NFT](cv:cv_71736e47)** | Solidity, Ethereum, React, Node.js | NFT Developer, Smart Contract Developer | ⭐⭐⭐⭐ |\n| **[Luca Müller  Cloud](cv:cv_fe6338e6)** | AWS, Kubernetes, Terraform, Docker | Cloud Engineer | ⭐ (Not frontend/full-stack) |\n| **[Mei-Ling Chen  Human Resources](cv:cv_ffc6d564)** | HRIS, Talent Acquisition | HR Director | ❌ (Non-technical) |\n| **[Abdullah Mohamed  Podcast](cv:cv_943da331)** | Audio Editing, Content Production | Podcast Assistant | ❌ (Non-technical) |\n| **[Ranio Zhang  PhD](cv:cv_916fd244)** | Python, Machine Learning, Data Science | PhD Student | ⭐ (Partial backend, no frontend) |\n| **[Rajesh Patel  Learning](cv:cv_7b0f7ab3)** | [No technical skills listed] | Learning Officer | ❌ (Non-technical) |\n\n### Detailed Analysis\n- **[Layla Hassan  NFT](cv:cv_71736e47)** is the only candidate with explicit frontend (React) and full-stack (Node.js, Solidity) skills.\n- **[Luca Müller  Cloud](cv:cv_fe6338e6)** has cloud/DevOps skills but no frontend or full-stack experience.\n- **[Ranio Zhang  PhD](cv:cv_916fd244)** has Python and data science skills but lacks frontend or full-stack experience.\n- The remaining candidates have no technical skills relevant to frontend or full-stack roles.\n\n:::conclusion\n**[Layla Hassan  NFT](cv:cv_71736e47)** is the best and only viable candidate for frontend and full-stack roles based on the provided CVs. No other candidates meet the technical requirements for these positions.\n:::",
+            "thinking": "- The question asks for the best profiles for frontend and full-stack roles, with a comparison of all candidates' roles, experience, and knowledge.\n- I need to analyze each candidate's CV to identify relevant technical skills for frontend (e.g., React, JavaScript, HTML/CSS) and full-stack (frontend + backend, e.g., Node.js, Python, databases).\n- Only **[Layla Hassan  NFT](cv:cv_71736e47)** has explicit technical skills (Solidity, Ethereum, React, Node.js), making her the only candidate with potential for frontend or full-stack roles.\n- The other candidates lack explicit technical skills for these roles (e.g., HR, Cloud, Podcast, PhD, Learning Officer).\n- I must avoid unverified claims and strictly reference the CV data.",
+            "analysis": "The best profile for frontend and full-stack roles is **[Layla Hassan  NFT](cv:cv_71736e47)**, as she is the only candidate with explicit technical skills relevant to these roles.\n### Comparison of All Candidates for Frontend and Full-Stack Roles\n### Detailed Analysis\n- **[Layla Hassan  NFT](cv:cv_71736e47)** is the only candidate with explicit frontend (React) and full-stack (Node.js, Solidity) skills.\n- **[Luca Müller  Cloud](cv:cv_fe6338e6)** has cloud/DevOps skills but no frontend or full-stack experience.\n- **[Ranio Zhang  PhD](cv:cv_916fd244)** has Python and data science skills but lacks frontend or full-stack experience.\n- The remaining candidates have no technical skills relevant to frontend or full-stack roles.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Skills",
+                "Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Layla Hassan  NFT",
+                  "cv_id": "cv_71736e47",
+                  "columns": {
+                    "Skills": "Solidity, Ethereum, React, Node.js",
+                    "Experience": "NFT Developer, Smart Contract Developer"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Luca Müller  Cloud",
+                  "cv_id": "cv_fe6338e6",
+                  "columns": {
+                    "Skills": "AWS, Kubernetes, Terraform, Docker",
+                    "Experience": "Cloud Engineer"
+                  },
+                  "match_score": 15
+                },
+                {
+                  "candidate_name": "Mei-Ling Chen  Human Resources",
+                  "cv_id": "cv_ffc6d564",
+                  "columns": {
+                    "Skills": "HRIS, Talent Acquisition",
+                    "Experience": "HR Director"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Abdullah Mohamed  Podcast",
+                  "cv_id": "cv_943da331",
+                  "columns": {
+                    "Skills": "Audio Editing, Content Production",
+                    "Experience": "Podcast Assistant"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Ranio Zhang  PhD",
+                  "cv_id": "cv_916fd244",
+                  "columns": {
+                    "Skills": "Python, Machine Learning, Data Science",
+                    "Experience": "PhD Student"
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Rajesh Patel  Learning",
+                  "cv_id": "cv_7b0f7ab3",
+                  "columns": {
+                    "Skills": "[No technical skills listed]",
+                    "Experience": "Learning Officer"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "**[Layla Hassan  NFT](cv:cv_71736e47)** is the best and only viable candidate for frontend and full-stack roles based on the provided CVs. No other candidates meet the technical requirements for these positions.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-04T14:55:42.026556"
         }
       ],
       "created_at": "2026-01-03T22:15:07.573740",
-      "updated_at": "2026-01-04T14:46:17.696029"
+      "updated_at": "2026-01-04T14:55:42.027555"
     }
   ]
 }

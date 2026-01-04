@@ -134,8 +134,8 @@ class TableModule:
             # Extract candidate info from first cell
             candidate_name, cv_id = self._extract_candidate_info(cells[0] if cells else "")
             
-            # Extract match score from last cell (or any cell with %, ⭐, or numbers)
-            match_score = self._extract_match_score(cells[-1] if cells else "")
+            # Extract match score - search all cells for percentage/score
+            match_score = self._extract_match_score(cells[-1] if cells else "", all_cells=cells)
             
             # Build columns dict (excluding first and last columns)
             columns: Dict[str, str] = {}
@@ -200,33 +200,55 @@ class TableModule:
         
         return clean_name or "Unknown", cv_id
     
-    def _extract_match_score(self, cell: str) -> int:
-        """Extract numeric match score from cell (0-100)."""
-        if not cell:
-            return 50
+    def _extract_match_score(self, cell: str, all_cells: List[str] = None) -> int:
+        """Extract numeric match score from cell (0-100).
         
-        # Try percentage: "95%" or "95"
-        match = re.search(r'(\d+)\s*%?', cell)
-        if match:
-            score = int(match.group(1))
-            if score <= 100:
-                return score
+        Search strategy:
+        1. First try to find explicit percentage in any cell
+        2. Then try stars (but scale appropriately)
+        3. Look for text indicators
+        4. Default based on context
+        """
+        # Search all cells if provided
+        cells_to_search = [cell]
+        if all_cells:
+            cells_to_search = all_cells
         
-        # Try stars: ⭐⭐⭐⭐⭐ = 100, ⭐ = 20
-        stars = cell.count('⭐')
-        if stars > 0:
-            return min(100, stars * 20)
+        for search_cell in cells_to_search:
+            if not search_cell:
+                continue
+            
+            # Try percentage: "95%" or "(95)"
+            match = re.search(r'(\d{1,3})\s*%', search_cell)
+            if match:
+                score = int(match.group(1))
+                if 0 <= score <= 100:
+                    return score
         
-        # Try text indicators
-        cell_lower = cell.lower()
-        if 'excellent' in cell_lower or 'strong' in cell_lower:
-            return 95
-        if 'good' in cell_lower or 'partial' in cell_lower:
-            return 75
-        if 'weak' in cell_lower or 'low' in cell_lower or 'no match' in cell_lower:
-            return 30
+        # Check for stars in the specific cell
+        if cell:
+            stars = cell.count('⭐')
+            if stars > 0:
+                # Scale stars: 5 stars = 100%, 1 star = 20%
+                # But if context shows "no match", lower the score
+                base_score = min(100, stars * 20)
+                cell_lower = cell.lower()
+                if 'no match' in cell_lower or 'no 2d' in cell_lower or 'not' in cell_lower:
+                    return max(15, base_score - 50)  # Reduce significantly for non-matches
+                return base_score
+            
+            # Try text indicators
+            cell_lower = cell.lower()
+            if 'excellent' in cell_lower or 'strong' in cell_lower or 'perfect' in cell_lower:
+                return 95
+            if 'good' in cell_lower or 'partial' in cell_lower:
+                return 75
+            if 'weak' in cell_lower or 'low' in cell_lower or 'no match' in cell_lower:
+                return 25
+            if 'none' in cell_lower or 'n/a' in cell_lower:
+                return 15
         
-        return 50  # Default
+        return 50  # Default when no indicator found
     
     def _generate_fallback_table(self, chunks: List[dict]) -> Optional[TableData]:
         """Generate fallback table from chunks using TableRow structure."""

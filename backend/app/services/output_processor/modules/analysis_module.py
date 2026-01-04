@@ -142,8 +142,45 @@ class AnalysisModule:
             logger.debug(f"[ANALYSIS] Extracted: {len(cleaned)} chars")
             return cleaned
         
-        logger.debug("[ANALYSIS] No additional content")
+        logger.debug("[ANALYSIS] No additional content found")
         return None
+    
+    def generate_fallback(self, direct_answer: str, table_data, conclusion: str) -> Optional[str]:
+        """
+        Generate fallback analysis when LLM doesn't provide one.
+        
+        This ensures the Analysis section is ALWAYS present.
+        """
+        parts = []
+        
+        # Analyze based on direct answer
+        if direct_answer:
+            da_lower = direct_answer.lower()
+            if 'no candidate' in da_lower or 'no match' in da_lower or 'none of' in da_lower:
+                parts.append("The search did not find candidates that fully match the specified criteria.")
+            elif 'candidate' in da_lower:
+                parts.append("The analysis evaluated candidates based on the specified requirements.")
+        
+        # Analyze based on table
+        if table_data and hasattr(table_data, 'rows') and table_data.rows:
+            num_candidates = len(table_data.rows)
+            parts.append(f"A total of {num_candidates} candidate(s) were analyzed and compared.")
+            
+            # Check match scores
+            if hasattr(table_data.rows[0], 'match_score'):
+                scores = [r.match_score for r in table_data.rows]
+                high_matches = sum(1 for s in scores if s >= 70)
+                if high_matches == 0:
+                    parts.append("None of the candidates showed a strong match for the specified requirements.")
+                elif high_matches == len(scores):
+                    parts.append("All candidates show good alignment with the requirements.")
+                else:
+                    parts.append(f"{high_matches} candidate(s) show partial or good alignment with the requirements.")
+        
+        if not parts:
+            return None
+        
+        return " ".join(parts)
     
     def _clean_content(self, text: str) -> str:
         """Clean analysis content by removing prompt contamination."""

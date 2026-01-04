@@ -129,7 +129,7 @@ const AnalysisSection = ({ content, cvLinkRenderer }) => {
 };
 
 // Section: Candidate Comparison Table (with colored match scores)
-const CandidateTable = ({ tableData, cvLinkRenderer }) => {
+const CandidateTable = ({ tableData, onOpenCV }) => {
   if (!tableData || !tableData.rows || tableData.rows.length === 0) {
     return null;
   }
@@ -163,14 +163,26 @@ const CandidateTable = ({ tableData, cvLinkRenderer }) => {
                 key={rowIdx} 
                 className={`hover:bg-slate-700/30 transition-colors ${getScoreBgColor(row.match_score)}`}
               >
-                {/* Candidate Name Column */}
+                {/* Candidate Name Column with CV Link */}
                 <td className="px-4 py-3 text-sm text-slate-200 font-medium">
-                  {row.candidate_name}
-                  {row.cv_id && (
-                    <span className="ml-2 text-xs text-slate-500">
-                      ({row.cv_id})
-                    </span>
-                  )}
+                  <div className="flex items-center gap-2">
+                    {/* CV Document Icon Button */}
+                    {row.cv_id && onOpenCV && (
+                      <button
+                        onClick={() => onOpenCV(row.cv_id, row.candidate_name)}
+                        className="inline-flex items-center justify-center w-6 h-6 bg-blue-600/30 text-blue-400 hover:bg-blue-600/50 rounded transition-colors flex-shrink-0"
+                        title={`View CV: ${row.candidate_name}`}
+                      >
+                        <FileText className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                    <span className="font-semibold">{row.candidate_name}</span>
+                    {row.cv_id && (
+                      <span className="text-xs text-slate-500">
+                        ({row.cv_id})
+                      </span>
+                    )}
+                  </div>
                 </td>
                 
                 {/* Dynamic Columns */}
@@ -226,7 +238,7 @@ const ConclusionSection = ({ content, cvLinkRenderer }) => {
 };
 
 // Main Component
-const StructuredOutputRenderer = ({ structuredOutput, cvLinkRenderer }) => {
+const StructuredOutputRenderer = ({ structuredOutput, cvLinkRenderer, onOpenCV }) => {
   if (!structuredOutput) return null;
   
   const { thinking, direct_answer, analysis, table_data, conclusion } = structuredOutput;
@@ -255,7 +267,7 @@ const StructuredOutputRenderer = ({ structuredOutput, cvLinkRenderer }) => {
       <AnalysisSection content={analysis} cvLinkRenderer={linkRenderer} />
       
       {/* 4. Candidate Table */}
-      <CandidateTable tableData={table_data} cvLinkRenderer={linkRenderer} />
+      <CandidateTable tableData={table_data} onOpenCV={onOpenCV} />
       
       {/* 5. Conclusion */}
       <ConclusionSection content={conclusion} cvLinkRenderer={linkRenderer} />

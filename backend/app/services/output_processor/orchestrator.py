@@ -74,8 +74,20 @@ class OutputOrchestrator:
             f"[ORCHESTRATOR] Components extracted: "
             f"thinking={bool(structured.thinking)}, "
             f"table={bool(structured.table_data)}, "
-            f"conclusion={bool(structured.conclusion)}"
+            f"conclusion={bool(structured.conclusion)}, "
+            f"analysis={bool(structured.analysis)}"
         )
+        
+        # STEP 1.5: Generate fallback analysis if none was extracted
+        if not structured.analysis:
+            fallback_analysis = self.analysis_module.generate_fallback(
+                structured.direct_answer,
+                structured.table_data,
+                structured.conclusion
+            )
+            if fallback_analysis:
+                structured.analysis = fallback_analysis
+                logger.info(f"[ORCHESTRATOR] Generated fallback analysis: {len(fallback_analysis)} chars")
         
         # STEP 2: Assemble output SEQUENTIALLY using module format methods
         parts = []
@@ -89,7 +101,7 @@ class OutputOrchestrator:
         formatted_answer = self.direct_answer_module.format(structured.direct_answer)
         parts.append(formatted_answer)
         
-        # 3. Analysis (if exists)
+        # 3. Analysis (ALWAYS present - fallback generated if needed)
         if structured.analysis:
             formatted_analysis = self.analysis_module.format(structured.analysis)
             parts.append(formatted_analysis)

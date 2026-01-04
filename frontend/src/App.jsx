@@ -882,6 +882,7 @@ function App() {
                         {msg.role === 'assistant' && msg.structured_output ? (
                           <StructuredOutputRenderer 
                             structuredOutput={msg.structured_output}
+                            onOpenCV={(cvId, name) => openPdfViewer(cvId, name || cvId)}
                             cvLinkRenderer={({href, children}) => {
                               // Handle cv: format
                               if (href?.startsWith('cv:')) {
