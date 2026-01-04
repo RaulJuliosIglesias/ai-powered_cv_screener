@@ -92,6 +92,10 @@ class DirectAnswerModule:
         cleaned = re.sub(r'code\s*Copy code', '', cleaned, flags=re.IGNORECASE)
         cleaned = re.sub(r'\bCopy\s+code\b', '', cleaned, flags=re.IGNORECASE)
         
+        # Remove standalone "code" at start of line (artifact from LLM)
+        cleaned = re.sub(r'^code\s*$', '', cleaned, flags=re.MULTILINE | re.IGNORECASE)
+        cleaned = re.sub(r'^code\s+', '', cleaned, flags=re.MULTILINE | re.IGNORECASE)
+        
         # Remove web search injection artifacts
         cleaned = re.sub(r'A web search was conducted on[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
         cleaned = re.sub(r'IMPORTANT: Cite them using[\s\S]*?(?=\n\n|$)', '', cleaned, flags=re.IGNORECASE)
@@ -118,9 +122,22 @@ class DirectAnswerModule:
         unique_paragraphs = []
         seen = set()
         for para in paragraphs:
-            # Normalize for comparison (remove extra spaces, lowercase)
+            # Normalize for comparison: remove extra spaces, pipes, special chars, lowercase
             normalized = ' '.join(para.split()).lower()
-            if normalized not in seen and len(normalized) > 10:
+            # Remove trailing pipe patterns like "| Other Attributes | ... |"
+            normalized = re.sub(r'\|[^|]*\|[^|]*\|?$', '', normalized).strip()
+            # Remove any remaining pipes and extra whitespace
+            normalized = re.sub(r'\s*\|\s*', ' ', normalized).strip()
+            normalized = ' '.join(normalized.split())  # Re-normalize spaces
+            
+            # Check for exact duplicate or prefix duplicate (first 100 chars match)
+            is_duplicate = normalized in seen
+            if not is_duplicate and len(normalized) > 100:
+                # Also check if first 100 chars already seen (handles slight variations)
+                prefix = normalized[:100]
+                is_duplicate = any(s.startswith(prefix) or prefix.startswith(s[:100]) for s in seen if len(s) > 50)
+            
+            if not is_duplicate and len(normalized) > 10:
                 seen.add(normalized)
                 unique_paragraphs.append(para)
         

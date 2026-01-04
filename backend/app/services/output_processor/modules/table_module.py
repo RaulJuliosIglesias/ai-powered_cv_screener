@@ -238,6 +238,21 @@ class TableModule:
         text = re.sub(r'\*\*[ \t\u00a0\xa0]+', '**', text)
         text = re.sub(r'[ \t\u00a0\xa0]+\*\*', '**', text)
         
+        # Case 3: Fix double asterisks with space in between like "* * Name"
+        text = re.sub(r'\*\s+\*', '**', text)
+        
+        # Case 4: Remove bold entirely if malformed (orphan ** without matching pair)
+        # Count asterisks - if odd number of **, remove them all
+        double_asterisk_count = len(re.findall(r'\*\*', text))
+        if double_asterisk_count == 1:
+            # Single ** without pair - remove it
+            text = text.replace('**', '')
+        
+        # Case 5: Convert **Name** cv_id to just Name cv_id (remove bold, keep cv_id link)
+        # This creates cleaner output that frontend can render properly
+        # Pattern: **Name Role** cv_xxx -> Name Role cv_xxx
+        text = re.sub(r'\*\*([^*]+)\*\*(\s*)(cv_[a-z0-9_-]+)', r'**\1** \3', text)
+        
         if original != text:
             logger.debug(f"[TABLE] Fixed bold formatting: '{original[:50]}' -> '{text[:50]}'")
         

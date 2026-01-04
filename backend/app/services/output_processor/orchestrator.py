@@ -104,9 +104,66 @@ class OutputOrchestrator:
         # Join with double newlines for readability
         final_answer = "\n\n".join(parts)
         
+        # CRITICAL: Final cleanup - remove any duplicated paragraphs that slipped through
+        final_answer = self._remove_duplicate_paragraphs(final_answer)
+        
         logger.info(f"[ORCHESTRATOR] Final answer: {len(final_answer)} chars")
         
         return structured, final_answer
+    
+    def _remove_duplicate_paragraphs(self, text: str) -> str:
+        """
+        Final pass to remove duplicated paragraphs from assembled output.
+        
+        This catches cases where the same content appears multiple times
+        due to LLM generating duplicates that weren't caught earlier.
+        """
+        import re
+        
+        if not text or len(text) < 100:
+            return text
+        
+        paragraphs = text.split('\n\n')
+        unique_paragraphs = []
+        seen_normalized = set()
+        
+        for para in paragraphs:
+            para_stripped = para.strip()
+            if not para_stripped:
+                continue
+            
+            # Normalize: lowercase, remove extra spaces, remove pipes
+            normalized = ' '.join(para_stripped.lower().split())
+            normalized = re.sub(r'\s*\|\s*', ' ', normalized)
+            normalized = re.sub(r'\|[^|]*\|[^|]*\|?', '', normalized)
+            normalized = ' '.join(normalized.split())[:150]  # First 150 chars for comparison
+            
+            # Skip if this is a table line (starts with |)
+            if para_stripped.startswith('|'):
+                unique_paragraphs.append(para)
+                continue
+            
+            # Check for duplicate
+            is_dup = normalized in seen_normalized
+            if not is_dup and len(normalized) > 50:
+                # Also check prefix match
+                is_dup = any(
+                    (normalized.startswith(s[:50]) or s.startswith(normalized[:50]))
+                    for s in seen_normalized if len(s) > 30
+                )
+            
+            if not is_dup:
+                seen_normalized.add(normalized)
+                unique_paragraphs.append(para)
+            else:
+                logger.debug(f"[ORCHESTRATOR] Removed duplicate paragraph: {para_stripped[:60]}...")
+        
+        result = '\n\n'.join(unique_paragraphs)
+        
+        if len(result) < len(text):
+            logger.info(f"[ORCHESTRATOR] Removed duplicates: {len(text)} -> {len(result)} chars")
+        
+        return result
 
 
 # Singleton instance
