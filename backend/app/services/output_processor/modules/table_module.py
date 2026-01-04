@@ -232,11 +232,11 @@ class TableModule:
             # Don't touch this format at all
             return text
         
-        # Case 2: Fix "** text**" or "** text **" format (name in bold, no link inside)
-        # Remove ALL spaces/tabs/nbsp after opening ** and before closing **
-        # This handles: "** Mei-Ling Chen Human Resources** cv_ffc6d564"
-        text = re.sub(r'\*\*[ \t\u00a0\xa0]+', '**', text)
-        text = re.sub(r'[ \t\u00a0\xa0]+\*\*', '**', text)
+        # Case 2: Fix "** text**" pattern - space AFTER opening **
+        # This is the main issue: "** Layla Hassan NFT** cv_xxx"
+        # Use a more aggressive pattern that captures any whitespace
+        text = re.sub(r'\*\*\s+', '**', text)  # Remove space after **
+        text = re.sub(r'\s+\*\*', '**', text)  # Remove space before **
         
         # Case 3: Fix double asterisks with space in between like "* * Name"
         text = re.sub(r'\*\s+\*', '**', text)
@@ -248,13 +248,12 @@ class TableModule:
             # Single ** without pair - remove it
             text = text.replace('**', '')
         
-        # Case 5: Convert **Name** cv_id to just Name cv_id (remove bold, keep cv_id link)
-        # This creates cleaner output that frontend can render properly
-        # Pattern: **Name Role** cv_xxx -> Name Role cv_xxx
-        text = re.sub(r'\*\*([^*]+)\*\*(\s*)(cv_[a-z0-9_-]+)', r'**\1** \3', text)
+        # Case 5: Ensure proper spacing between bold name and cv_id
+        # Pattern: **Name** cv_xxx (ensure space before cv_)
+        text = re.sub(r'\*\*([^*]+)\*\*(cv_)', r'**\1** \2', text)
         
         if original != text:
-            logger.debug(f"[TABLE] Fixed bold formatting: '{original[:50]}' -> '{text[:50]}'")
+            logger.info(f"[TABLE] Fixed bold formatting: '{original[:60]}' -> '{text[:60]}'")
         
         return text
     

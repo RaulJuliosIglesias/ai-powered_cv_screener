@@ -25,11 +25,9 @@ class AnalysisModule:
         Extract analysis section from LLM output.
         
         Strategy:
-        1. Remove thinking and conclusion blocks
-        2. Remove direct answer
-        3. Remove tables
-        4. Remove ALL prompt fragments and contamination
-        5. Return remaining meaningful content
+        1. First try to extract explicit ### Analysis section
+        2. If not found, fall back to extracting content between direct answer and table/conclusion
+        3. Remove ALL prompt fragments and contamination
         
         Args:
             llm_output: Raw LLM response
@@ -42,7 +40,22 @@ class AnalysisModule:
         if not llm_output:
             return None
         
-        # Remove special blocks
+        # FIRST: Try to extract explicit ### Analysis section
+        analysis_match = re.search(
+            r'###?\s*Analysis\s*\n([\s\S]*?)(?=\n\||\n:::conclusion|\n###|\Z)',
+            llm_output,
+            flags=re.IGNORECASE
+        )
+        
+        if analysis_match:
+            analysis_content = analysis_match.group(1).strip()
+            # Clean up the analysis content
+            analysis_content = self._clean_content(analysis_content)
+            if analysis_content and len(analysis_content) > 30:
+                logger.info(f"[ANALYSIS] Extracted explicit Analysis section: {len(analysis_content)} chars")
+                return analysis_content
+        
+        # FALLBACK: Remove special blocks and extract remaining content
         cleaned = llm_output
         cleaned = re.sub(r':::thinking[\s\S]*?:::', '', cleaned, flags=re.IGNORECASE)
         cleaned = re.sub(r':::conclusion[\s\S]*?:::', '', cleaned, flags=re.IGNORECASE)
@@ -132,16 +145,48 @@ class AnalysisModule:
         logger.debug("[ANALYSIS] No additional content")
         return None
     
+    def _clean_content(self, text: str) -> str:
+        """Clean analysis content by removing prompt contamination."""
+        if not text:
+            return text
+        
+        # Remove prompt contamination patterns
+        contamination_patterns = [
+            r'\*\*ABSOLUTELY FORBIDDEN[\s\S]*?(?=\n\n|$)',
+            r'ABSOLUTELY FORBIDDEN[\s\S]*?(?=\n\n|$)',
+            r'##?\s*CRITICAL RULES[\s\S]*?(?=\n\n|$)',
+            r'##?\s*MANDATORY RESPONSE FORMAT[\s\S]*?(?=\n\n|$)',
+            r'code\s*Copy code',
+            r'\bCopy\s+code\b',
+        ]
+        
+        for pattern in contamination_patterns:
+            text = re.sub(pattern, '', text, flags=re.IGNORECASE)
+        
+        # Clean up whitespace
+        text = re.sub(r'\n{3,}', '\n\n', text)
+        text = text.strip()
+        
+        return text
+    
     def format(self, content: str) -> str:
         """
-        Format analysis content.
+        Format analysis content with a visible header.
         
-        NO custom labels - return content as-is.
+        Adds "### Analysis" header so users can see the reasoning section.
         
         Args:
             content: Analysis text
             
         Returns:
-            Formatted text (no modifications)
+            Formatted text with Analysis header
         """
-        return content.strip()
+        text = content.strip()
+        if not text:
+            return text
+        
+        # Add Analysis header if not already present
+        if not text.startswith('###') and not text.startswith('## '):
+            return f"### Analysis\n\n{text}"
+        
+        return text

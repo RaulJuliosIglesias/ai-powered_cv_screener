@@ -231,9 +231,12 @@ You MUST respond using this exact structure:
 [Your reasoning: What is being asked? Which candidates are relevant? What are the key criteria?]
 :::
 
-[Direct answer: 1-3 sentences directly answering the user's question]
+[Direct answer: 2-3 sentences directly answering the user's question. Start with a capital letter and provide context.]
 
-[Detailed analysis with table if comparing candidates:
+### Analysis
+[MANDATORY: Explain your reasoning for the selection shown in the table below. Why did you choose these specific candidates? What criteria did you use to evaluate them? If no candidates match, explain why you are showing certain candidates anyway (e.g., "I'm showing the closest matches even though none fully meet the criteria").]
+
+[Table if comparing candidates - use EXACT format with NO spaces after **:
 | Candidate | Criterion 1 | Criterion 2 | Match |
 |-----------|-------------|-------------|-------|
 | **[Name](cv:cv_xxx)** | Details | Details | ⭐⭐⭐ |
@@ -244,9 +247,10 @@ You MUST respond using this exact structure:
 :::
 
 ## CRITICAL RULES
-- ALL three sections (thinking, direct answer, conclusion) are MANDATORY
-- Use **[Candidate Name](cv:CV_ID)** format for EVERY candidate mention
-- If no match, state clearly in all sections
+- ALL sections (thinking, direct answer, analysis, table, conclusion) are MANDATORY
+- Use **[Candidate Name](cv:CV_ID)** format for EVERY candidate mention - NO spaces after **
+- The Analysis section MUST explain WHY you selected those candidates for the table
+- If no match, state clearly in all sections and explain your reasoning
 - Base everything on CV data only—no assumptions
 
 Respond now:"""

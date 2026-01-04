@@ -271,12 +271,21 @@ class DirectAnswerModule:
         """
         Format direct answer.
         
-        NO custom labels - return content as-is.
+        Ensures proper capitalization and formatting.
         
         Args:
             content: Direct answer text
             
         Returns:
-            Formatted text (no modifications)
+            Formatted text with proper capitalization
         """
-        return content.strip()
+        text = content.strip()
+        
+        if not text:
+            return text
+        
+        # Ensure first letter is capitalized
+        if text[0].islower():
+            text = text[0].upper() + text[1:]
+        
+        return text
