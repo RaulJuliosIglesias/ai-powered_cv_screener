@@ -302,6 +302,16 @@ async def process_cvs_for_session(
                 f.write(content)
             logger.info(f"[{job_id}] Saved PDF to {pdf_path}")
             
+            # Upload to Supabase Storage if in cloud mode
+            if mode == Mode.CLOUD:
+                try:
+                    from app.providers.cloud.pdf_storage import pdf_storage
+                    await pdf_storage.upload_pdf(cv_id, pdf_path)
+                    logger.info(f"[{job_id}] Uploaded PDF to Supabase Storage: {cv_id}")
+                except Exception as e:
+                    logger.warning(f"[{job_id}] Failed to upload PDF to Supabase Storage: {e}")
+                    # Don't fail the entire process if storage upload fails
+            
             # Chunk the document
             jobs[job_id]["current_phase"] = "chunking"
             chunks = chunking_service.chunk_cv(text=text, cv_id=cv_id, filename=filename)

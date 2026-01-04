@@ -736,8 +736,17 @@ class RAGServiceV5:
         
         service = cls(config)
         
-        # Don't initialize providers yet - let the caller configure models first
-        # The stream endpoint will set models from frontend, then call a separate init method
+        # Initialize ONLY embedder and vector_store for basic operations like index_documents
+        # LLM-based providers will be initialized lazily when needed (in query operations)
+        embedder = ProviderFactory.get_embedding_provider(mode)
+        vector_store = ProviderFactory.get_vector_store(mode)
+        
+        # Set these so index_documents works
+        service._embedder = embedder
+        service._vector_store = vector_store
+        service._providers_initialized = True  # Mark as initialized for basic operations
+        
+        logger.info(f"RAGServiceV5 created with embedder and vector_store for mode={mode}")
         return service
     
     def lazy_initialize_providers(self):
@@ -839,6 +848,10 @@ class RAGServiceV5:
         if not self._providers_initialized:
             raise RAGError("Providers not initialized")
         
+        # Check if LLM providers are initialized (needed for query)
+        if self._llm is None:
+            raise RAGError("LLM providers not initialized. Call lazy_initialize_providers() first.")
+        
         ctx = PipelineContextV5(
             question=question,
             session_id=session_id,
@@ -883,6 +896,11 @@ class RAGServiceV5:
         """
         if not self._providers_initialized:
             yield {"event": "error", "data": {"message": "Providers not initialized"}}
+            return
+        
+        # Check if LLM providers are initialized (needed for query)
+        if self._llm is None:
+            yield {"event": "error", "data": {"message": "LLM providers not initialized. Call lazy_initialize_providers() first."}}
             return
         
         ctx = PipelineContextV5(

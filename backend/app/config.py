@@ -41,9 +41,10 @@ class Settings(BaseSettings):
     http_referer: str = "https://cv-screener.local"
     app_title: str = "CV Screener RAG"
     
-    # Supabase (for pgvector)
+    # Supabase (for pgvector + storage)
     supabase_url: Optional[str] = None
     supabase_service_key: Optional[str] = None
+    supabase_bucket_name: str = "cv-pdfs"
     
     # ============================================
     # LANGCHAIN CONFIGURATION
@@ -55,8 +56,8 @@ class Settings(BaseSettings):
     # ============================================
     # Server
     api_host: str = "0.0.0.0"
-    api_port: int = 6000
-    cors_origins: str = "http://localhost:5173,http://localhost:5174,http://localhost:5175"
+    api_port: int = 8000
+    cors_origins: str = "http://localhost:5173,http://localhost:5174,http://localhost:5175,http://localhost:6001"
     
     # File limits
     max_file_size_mb: int = 10

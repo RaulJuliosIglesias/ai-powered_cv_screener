@@ -7,10 +7,18 @@ from pydantic import BaseModel
 
 from app.config import settings, Mode
 from app.models.sessions import session_manager
+from app.providers.cloud.sessions import supabase_session_manager
 from app.services.rag_service_v5 import RAGServiceV5
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/sessions", tags=["sessions-stream"])
+
+
+def get_session_manager(mode: Mode):
+    """Get the appropriate session manager based on mode."""
+    if mode == Mode.CLOUD:
+        return supabase_session_manager
+    return session_manager
 
 
 class ChatStreamRequest(BaseModel):
@@ -84,7 +92,7 @@ async def chat_stream(
     - complete: Final response with full data
     - error: Error occurred
     """
-    mgr = session_manager
+    mgr = get_session_manager(mode)
     session = mgr.get_session(session_id)
     
     if not session:
@@ -95,7 +103,8 @@ async def chat_stream(
     
     # Get CV IDs for this session
     cv_ids = mgr.get_cv_ids_for_session(session_id)
-    total_cvs = len(session.cvs)
+    # Handle both dict (cloud) and Session object (local)
+    total_cvs = len(session.get("cvs", [])) if isinstance(session, dict) else len(session.cvs)
     
     if not cv_ids:
         raise HTTPException(status_code=400, detail="No CVs in session")

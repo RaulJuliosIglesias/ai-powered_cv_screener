@@ -98,6 +98,8 @@ class SupabaseSessionManager:
                 "role": msg["role"],
                 "content": msg["content"],
                 "sources": msg.get("sources", []),
+                "pipeline_steps": msg.get("pipeline_steps", []),
+                "structured_output": msg.get("structured_output"),
                 "timestamp": msg["timestamp"]
             }
             for msg in msgs_result.data
@@ -197,7 +199,7 @@ class SupabaseSessionManager:
         logger.info(f"Removed CV {cv_id} from Supabase session {session_id}")
         return self.get_session(session_id)
     
-    def add_message(self, session_id: str, role: str, content: str, sources: List[Dict] = None) -> Optional[Dict]:
+    def add_message(self, session_id: str, role: str, content: str, sources: List[Dict] = None, pipeline_steps: List[Dict] = None, structured_output: Optional[Dict] = None) -> Optional[Dict]:
         """Add a chat message to a session."""
         self._ensure_client()
         
@@ -210,6 +212,8 @@ class SupabaseSessionManager:
             "role": role,
             "content": content,
             "sources": sources or [],
+            "pipeline_steps": pipeline_steps or [],
+            "structured_output": structured_output,
             "timestamp": now
         }
         
@@ -218,11 +222,15 @@ class SupabaseSessionManager:
         # Update session timestamp
         self.client.table("sessions").update({"updated_at": now}).eq("id", session_id).execute()
         
+        logger.info(f"Added {role} message to session {session_id}")
+        
         return {
             "id": message_id,
             "role": role,
             "content": content,
             "sources": sources or [],
+            "pipeline_steps": pipeline_steps or [],
+            "structured_output": structured_output,
             "timestamp": now
         }
     
@@ -243,6 +251,49 @@ class SupabaseSessionManager:
             return True
         except Exception:
             return False
+    
+    def delete_message(self, session_id: str, message_index: int) -> bool:
+        """Delete a specific message by index from a session."""
+        self._ensure_client()
+        
+        try:
+            # Get all messages for the session
+            msgs_result = self.client.table("session_messages").select("*").eq("session_id", session_id).order("timestamp").execute()
+            
+            if 0 <= message_index < len(msgs_result.data):
+                message_to_delete = msgs_result.data[message_index]
+                self.client.table("session_messages").delete().eq("id", message_to_delete["id"]).execute()
+                self.client.table("sessions").update({"updated_at": datetime.now().isoformat()}).eq("id", session_id).execute()
+                logger.info(f"Deleted message {message_index} from session {session_id}")
+                return True
+            return False
+        except Exception as e:
+            logger.error(f"Failed to delete message {message_index} from session {session_id}: {e}")
+            return False
+    
+    def delete_messages_from(self, session_id: str, from_index: int) -> int:
+        """Delete all messages from a specific index onwards (inclusive)."""
+        self._ensure_client()
+        
+        try:
+            # Get all messages for the session
+            msgs_result = self.client.table("session_messages").select("*").eq("session_id", session_id).order("timestamp").execute()
+            
+            if from_index < 0 or from_index >= len(msgs_result.data):
+                return 0
+            
+            # Delete messages from index onwards
+            deleted_count = 0
+            for msg in msgs_result.data[from_index:]:
+                self.client.table("session_messages").delete().eq("id", msg["id"]).execute()
+                deleted_count += 1
+            
+            self.client.table("sessions").update({"updated_at": datetime.now().isoformat()}).eq("id", session_id).execute()
+            logger.info(f"Deleted {deleted_count} messages from session {session_id} starting at index {from_index}")
+            return deleted_count
+        except Exception as e:
+            logger.error(f"Failed to delete messages from session {session_id}: {e}")
+            return 0
 
 
 # Global instance

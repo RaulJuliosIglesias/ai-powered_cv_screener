@@ -378,11 +378,25 @@ async def delete_all_cvs(mode: Mode = Query(default=settings.default_mode)):
 
 
 @router.get("/cvs/{cv_id}/pdf")
-async def get_cv_pdf(cv_id: str):
+async def get_cv_pdf(cv_id: str, mode: Mode = Query(default=settings.default_mode)):
     """Get the PDF file for a CV."""
     import logging
+    from fastapi.responses import RedirectResponse
     logger = logging.getLogger(__name__)
     
+    # Cloud mode - get from Supabase Storage
+    if mode == Mode.CLOUD:
+        try:
+            from app.providers.cloud.pdf_storage import pdf_storage
+            url = await pdf_storage.get_pdf_url(cv_id)
+            if url:
+                logger.info(f"Redirecting to Supabase Storage URL for CV {cv_id}")
+                return RedirectResponse(url=url)
+            # Fall through to local storage if not found in cloud
+        except Exception as e:
+            logger.warning(f"Failed to get PDF from Supabase Storage: {e}")
+    
+    # Local mode or fallback - check local storage
     # First check mapping
     if cv_id in cv_pdf_mapping:
         pdf_path = Path(cv_pdf_mapping[cv_id])

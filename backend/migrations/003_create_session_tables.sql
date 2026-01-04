@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS cv_embeddings (
     filename TEXT NOT NULL,
     chunk_index INTEGER NOT NULL,
     content TEXT NOT NULL,
-    embedding vector(384),  -- Dimension for all-MiniLM-L6-v2
+    embedding vector(768),  -- Dimension for nomic-embed-text-v1.5
     metadata JSONB DEFAULT '{}'::jsonb,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     UNIQUE(cv_id, chunk_index)
@@ -63,6 +63,8 @@ CREATE TABLE IF NOT EXISTS session_messages (
     role TEXT NOT NULL CHECK (role IN ('user', 'assistant')),
     content TEXT NOT NULL,
     sources JSONB DEFAULT '[]'::jsonb,
+    pipeline_steps JSONB DEFAULT '[]'::jsonb,
+    structured_output JSONB DEFAULT NULL,
     timestamp TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -79,7 +81,7 @@ CREATE INDEX IF NOT EXISTS idx_session_messages_timestamp ON session_messages(ti
 -- VECTOR SIMILARITY SEARCH FUNCTION
 -- ============================================
 CREATE OR REPLACE FUNCTION match_cv_embeddings(
-    query_embedding vector(384),
+    query_embedding vector(768),
     match_count INT DEFAULT 5,
     match_threshold FLOAT DEFAULT 0.3
 )
