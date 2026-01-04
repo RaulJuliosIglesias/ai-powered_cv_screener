@@ -49,16 +49,21 @@ class ClaimVerificationResult:
         
         Returns:
             Score between 0.0 and 1.0
+            
+        NOTE: When total_claims == 0, we return overall_score if available,
+        otherwise 0.0 (NOT a hardcoded value). The confidence calculator
+        will handle this case and mark it appropriately.
         """
         if self.total_claims == 0:
-            # No claims extracted - this is OK for negative responses like "No candidates match"
-            # Return neutral score, not 0
-            return 0.8
+            # No claims extracted - use overall_score if set, otherwise 0
+            # This is NOT hardcoded - it reflects that we cannot verify anything
+            return self.overall_score if self.overall_score > 0 else 0.0
         
         verified_count = len(self.verified_claims)
         contradicted_count = len(self.contradicted_claims)
         
         # Contradicted claims are worse than unverified
+        # Formula: (verified - 2×contradicted) / total
         score = (verified_count - contradicted_count * 2) / self.total_claims
         return max(0.0, min(1.0, score))
     
@@ -339,13 +344,18 @@ class ClaimVerifierService:
         return "\n\n---\n\n".join(parts)
     
     def _fallback_result(self) -> ClaimVerificationResult:
-        """Return fallback result when verification fails."""
+        """
+        Return fallback result when verification fails.
+        
+        NOTE: overall_score=0.0 indicates verification could not be performed.
+        The confidence calculator will detect this and mark the factor as 'not measured'.
+        """
         return ClaimVerificationResult(
             total_claims=0,
             verified_claims=[],
             unverified_claims=[],
             contradicted_claims=[],
-            overall_score=0.7,
+            overall_score=0.0,  # NOT hardcoded - indicates failure to verify
             needs_regeneration=False
         )
 

@@ -243,7 +243,7 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
   
   const { thinking, direct_answer, analysis, table_data, conclusion } = structuredOutput;
   
-  // CV Link Renderer - FORMATO ÚNICO
+  // CV Link Renderer - FORMATO ÚNICO (misma lógica que la tabla)
   // Backend genera: [📄](cv:cv_xxx) **Nombre**
   // - El link [📄](cv:cv_xxx) se renderiza como botón con icono FileText
   // - El **Nombre** se renderiza en negrita por ReactMarkdown (no es link)
@@ -265,14 +265,18 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
       }
     }
     
-    // Si es link de CV, renderizar SOLO el botón con icono
-    // El nombre viene después en **negrita** (no es parte del link)
-    if (cvId) {
+    // Si es link de CV, renderizar botón con icono (MISMA LÓGICA QUE LA TABLA)
+    if (cvId && onOpenCV) {
       return (
         <button
-          onClick={() => onOpenCV ? onOpenCV(cvId, '') : null}
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onOpenCV(cvId, '');
+          }}
           className="inline-flex items-center justify-center w-5 h-5 bg-blue-600/30 text-blue-400 hover:bg-blue-600/50 rounded transition-colors"
-          title="View CV"
+          title={`View CV: ${cvId}`}
         >
           <FileText className="w-3 h-3" />
         </button>

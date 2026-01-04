@@ -298,20 +298,45 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
                   </div>
                   {entry.confidence_explanation && (
                     <div className="mt-1.5 p-1.5 bg-gray-800/50 rounded text-[10px]">
-                      <div className="text-gray-400 mb-0.5">Based on:</div>
-                      <div className="text-gray-300">
-                        • {entry.confidence_explanation.source === 'claim_verification' ? 'Claim Verification' : entry.confidence_explanation.source}
-                        {entry.confidence_explanation.details?.verified_claims !== undefined && (
-                          <>
-                            <br />• {entry.confidence_explanation.details.verified_claims}/{entry.confidence_explanation.details.total_claims} claims verified
-                          </>
-                        )}
-                        {entry.confidence_explanation.note && (
-                          <>
-                            <br /><span className="text-gray-500 italic">{entry.confidence_explanation.note}</span>
-                          </>
-                        )}
+                      <div className="text-gray-400 mb-1 flex items-center justify-between">
+                        <span>Based on:</span>
+                        <span className="text-cyan-400">{entry.confidence_explanation.measurement_coverage || '?/?'} factors</span>
                       </div>
+                      
+                      {/* Factor breakdown */}
+                      {entry.confidence_explanation.factors && (
+                        <div className="space-y-1">
+                          {Object.entries(entry.confidence_explanation.factors).map(([name, factor]) => (
+                            <div key={name} className="flex items-center justify-between text-[9px]">
+                              <div className="flex items-center gap-1">
+                                {factor.is_measured ? (
+                                  <span className="text-green-400">●</span>
+                                ) : (
+                                  <span className="text-gray-600">○</span>
+                                )}
+                                <span className={factor.is_measured ? 'text-gray-300' : 'text-gray-500'}>
+                                  {name.replace(/_/g, ' ')}
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <span className={`font-mono ${factor.is_measured ? 'text-cyan-400' : 'text-gray-600'}`}>
+                                  {factor.is_measured ? `${Math.round(factor.score * 100)}%` : 'N/A'}
+                                </span>
+                                <span className="text-gray-600 w-8 text-right">
+                                  ×{Math.round(factor.weight * 100)}%
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {/* Interpretation */}
+                      {entry.confidence_explanation.interpretation && (
+                        <div className="mt-1.5 pt-1.5 border-t border-gray-700/50 text-gray-400 italic">
+                          {entry.confidence_explanation.interpretation}
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
