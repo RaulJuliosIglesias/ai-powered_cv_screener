@@ -241,6 +241,23 @@ const ReasoningPanel = ({ content, isExpanded, onToggle }) => {
 };
 
 /**
+ * Fix malformed bold markdown from LLM: "** text**" -> "**text**"
+ * BUT preserve CV links format: **[Name](cv:id)**
+ */
+const fixBoldFormatting = (text) => {
+  if (!text || !text.includes('*')) return text;
+  
+  // ONLY fix spaces that are NOT part of a markdown link
+  // Fix "** text" -> "**text" ONLY if not followed by [
+  text = text.replace(/\*\*\s+(?!\[)/g, '**');
+  
+  // Fix "text **" -> "text**" ONLY if not preceded by )
+  text = text.replace(/(?<!\))\s+\*\*/g, '**');
+  
+  return text;
+};
+
+/**
  * Conclusion Panel Component
  */
 const ConclusionPanel = ({ content }) => {
@@ -267,7 +284,7 @@ const ConclusionPanel = ({ content }) => {
             li: ({ children }) => <li className="text-green-900 dark:text-green-100">{children}</li>,
           }}
         >
-          {content}
+          {fixBoldFormatting(content)}
         </ReactMarkdown>
       </div>
     </div>

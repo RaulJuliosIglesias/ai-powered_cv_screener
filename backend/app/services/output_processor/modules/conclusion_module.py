@@ -87,7 +87,40 @@ class ConclusionModule:
         # Remove hallucinated URLs
         text = re.sub(r'(?:engx\.space|resumekraft\.com|github\.com|linkedin\.com)[^\s]*', '', text, flags=re.IGNORECASE)
         
+        # CRITICAL: Fix malformed bold formatting from LLM
+        # LLM sometimes generates "** Name**" instead of "**Name**"
+        text = self._fix_bold_formatting(text)
+        
         return text.strip()
+    
+    def _fix_bold_formatting(self, text: str) -> str:
+        """
+        Fix malformed bold markdown formatting from LLM.
+        
+        LLM generates two formats:
+        1. **[Name](cv:id)** - link inside bold (PRESERVE THIS)
+        2. ** Name** - name in bold only (FIX THIS)
+        
+        Args:
+            text: Text that may have malformed bold
+            
+        Returns:
+            Text with corrected bold formatting
+        """
+        if not text or '*' not in text:
+            return text
+        
+        # Case 1: If text contains **[...](...)**  format, preserve it exactly
+        if re.search(r'\*\*\s*\[.+?\]\(.+?\)\s*\*\*', text):
+            # This is the correct format with link inside bold, don't touch it
+            return text
+        
+        # Case 2: Fix "** text**" format (name in bold, no link inside)
+        # Remove ALL spaces after opening ** and before closing **
+        text = re.sub(r'\*\*[ \t\u00a0]+', '**', text)
+        text = re.sub(r'[ \t\u00a0]+\*\*', '**', text)
+        
+        return text
     
     def format(self, content: str) -> str:
         """

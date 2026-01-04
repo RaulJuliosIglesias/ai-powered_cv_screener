@@ -16,6 +16,23 @@ const TableComponent = ({ tableData, cvLinkRenderer }) => {
 
   const { headers, rows } = tableData;
 
+  // Fix malformed bold markdown from LLM: "** text**" -> "**text**"
+  // BUT preserve CV links format: **[Name](cv:id)**
+  const fixBoldFormatting = (text) => {
+    if (!text || !text.includes('*')) return text;
+    
+    // ONLY fix spaces that are NOT part of a markdown link
+    // Pattern: **[text](url)** should remain untouched
+    
+    // Fix "** text" -> "**text" ONLY if not followed by [
+    text = text.replace(/\*\*\s+(?!\[)/g, '**');
+    
+    // Fix "text **" -> "text**" ONLY if not preceded by )
+    text = text.replace(/(?<!\))\s+\*\*/g, '**');
+    
+    return text;
+  };
+
   const copyTable = () => {
     // Create plain text version
     let text = headers.join('\t') + '\n';
@@ -94,7 +111,7 @@ const TableComponent = ({ tableData, cvLinkRenderer }) => {
                           ),
                         }}
                       >
-                        {cell}
+                        {fixBoldFormatting(cell)}
                       </ReactMarkdown>
                     </td>
                   ))}

@@ -136,6 +136,10 @@ class TableModule:
             if not any(cells):
                 continue
             
+            # CRITICAL: Fix malformed bold formatting from LLM
+            # LLM sometimes generates "** Name**" instead of "**Name**"
+            cells = [self._fix_bold_formatting(cell) for cell in cells]
+            
             # Ensure row matches header length
             while len(cells) < len(headers):
                 cells.append("")
@@ -201,6 +205,40 @@ class TableModule:
         
         logger.info(f"[TABLE] Generated {len(rows)} rows")
         return TableData(headers=headers, rows=rows)
+    
+    def _fix_bold_formatting(self, text: str) -> str:
+        """
+        Fix malformed bold markdown formatting from LLM.
+        
+        LLM generates two formats:
+        1. **[Name](cv:id)** - link inside bold (PRESERVE THIS)
+        2. ** Name** cv_id - name in bold, link separate (FIX THIS)
+        
+        Args:
+            text: Cell text that may have malformed bold
+            
+        Returns:
+            Text with corrected bold formatting
+        """
+        if not text or '*' not in text:
+            return text
+        
+        original = text
+        
+        # Case 1: If text contains **[...](...)**  format, preserve it exactly
+        if re.search(r'\*\*\s*\[.+?\]\(.+?\)\s*\*\*', text):
+            # This is the correct format with link inside bold, don't touch it
+            return text
+        
+        # Case 2: Fix "** text**" format (name in bold, no link inside)
+        # Remove ALL spaces after opening ** and before closing **
+        text = re.sub(r'\*\*[ \t\u00a0]+', '**', text)
+        text = re.sub(r'[ \t\u00a0]+\*\*', '**', text)
+        
+        if original != text:
+            logger.debug(f"[TABLE] Fixed bold formatting: '{original[:50]}' -> '{text[:50]}'")
+        
+        return text
     
     def _extract_skills(self, content: str) -> List[str]:
         """Extract skills from content."""
