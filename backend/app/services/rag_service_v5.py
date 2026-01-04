@@ -1633,18 +1633,16 @@ Provide a corrected response:"""
         if ctx.verification_result:
             confidence = ctx.verification_result.groundedness_score
         
-        # NEW: Process output with modular OutputProcessor
-        logger.info("[RAG] Processing LLM output with OutputProcessor")
-        processor = OutputProcessor()
-        structured_output = processor.process(
+        # NEW: Process output with OutputOrchestrator (single entry point)
+        logger.info("[RAG] Processing LLM output with OutputOrchestrator")
+        from app.services.output_processor.orchestrator import get_orchestrator
+        orchestrator = get_orchestrator()
+        
+        # Orchestrator returns both structured data and formatted answer
+        structured_output, formatted_answer = orchestrator.process(
             raw_llm_output=ctx.generated_response or "",
             chunks=ctx.effective_chunks
         )
-        
-        # Build formatted answer using SEPARATE formatter module
-        from app.services.output_processor.formatter import get_formatter
-        formatter = get_formatter()
-        formatted_answer = formatter.build_formatted_answer(structured_output)
         
         # Build pipeline steps from metrics for UI
         pipeline_steps = self._build_pipeline_steps(ctx)
