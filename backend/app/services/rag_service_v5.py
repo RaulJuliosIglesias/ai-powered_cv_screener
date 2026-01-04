@@ -1453,7 +1453,12 @@ class RAGServiceV5:
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.GENERATION,
                 duration_ms=(time.perf_counter() - start) * 1000,
-                success=True
+                success=True,
+                metadata={
+                    "prompt_tokens": result.prompt_tokens,
+                    "completion_tokens": result.completion_tokens,
+                    "total_tokens": result.prompt_tokens + result.completion_tokens
+                }
             ))
         except Exception as e:
             logger.error(f"Generation failed: {e}")

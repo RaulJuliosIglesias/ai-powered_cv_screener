@@ -1,15 +1,9 @@
-import { useState, useEffect } from 'react';
-import { BarChart3, X, Clock, Zap, Search, Brain, Shield, AlertTriangle, DollarSign, Trash2, ChevronDown, ChevronUp, Database, Cloud, Shuffle, ShieldCheck, MessageSquare } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { BarChart3, X, Clock, Zap, Search, Brain, Shield, AlertTriangle, DollarSign, Trash2, ChevronDown, ChevronUp, Database, Cloud, Shuffle, ShieldCheck, MessageSquare, CheckCircle, XCircle, Activity, Calendar } from 'lucide-react';
+import { calculateOpenRouterCost, formatCost } from '../utils/openRouterPricing';
 
 const STORAGE_KEY = 'cv-screener-metrics-history';
 const MAX_HISTORY = 50;
-
-// Estimated costs per 1M tokens (approximate OpenRouter pricing)
-const COST_ESTIMATES = {
-  'embed': 0.02,      // per 1M tokens
-  'llm_input': 0.15,  // per 1M tokens (avg)
-  'llm_output': 0.60, // per 1M tokens (avg)
-};
 
 export function getMetricsHistory() {
   try {
@@ -48,13 +42,6 @@ function formatMs(ms) {
   return `${(ms / 1000).toFixed(2)}s`;
 }
 
-function formatCost(tokens, type = 'llm_input') {
-  if (!tokens) return '-';
-  const costPer1M = COST_ESTIMATES[type] || 0.15;
-  const cost = (tokens / 1000000) * costPer1M;
-  if (cost < 0.0001) return '<$0.0001';
-  return `$${cost.toFixed(4)}`;
-}
 
 function MetricRow({ icon: Icon, label, value, subValue, color = 'text-gray-400' }) {
   return (
@@ -73,8 +60,37 @@ function MetricRow({ icon: Icon, label, value, subValue, color = 'text-gray-400'
 
 function QueryEntry({ entry, isExpanded, onToggle }) {
   const metrics = entry.metrics || {};
+  const stages = metrics.stages || {};
   const confidence = entry.confidence_score;
   const guardrail = entry.guardrail_passed;
+  const timestamp = entry.timestamp;
+  const mode = entry.mode;
+  
+  // Extract latencies from stages (original backend structure)
+  const latencies = {
+    understand_ms: stages.query_understanding?.duration_ms,
+    search_ms: stages.search?.duration_ms,
+    rerank_ms: stages.reranking?.duration_ms,
+    llm_ms: (stages.reasoning?.duration_ms || 0) + (stages.generation?.duration_ms || 0) || undefined,
+    verify_ms: stages.claim_verification?.duration_ms,
+    total_ms: metrics.total_ms
+  };
+  
+  // Determine which features were used based on stages presence
+  const featuresEnabled = {
+    query_understanding: !!stages.query_understanding,
+    reranking: !!stages.reranking,
+    reasoning: !!stages.reasoning,
+    claim_verification: !!stages.claim_verification
+  };
+  
+  // Extract tokens from generation stage metadata (REAL data from backend)
+  const promptTokens = stages.generation?.metadata?.prompt_tokens || 0;
+  const completionTokens = stages.generation?.metadata?.completion_tokens || 0;
+  const totalTokens = stages.generation?.metadata?.total_tokens || promptTokens + completionTokens;
+  
+  // Calculate REAL OpenRouter cost (not fake)
+  const estimatedCost = calculateOpenRouterCost(promptTokens, completionTokens);
   
   const getConfidenceColor = (score) => {
     if (score >= 0.8) return 'text-green-400';
@@ -94,7 +110,7 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
         className="w-full px-3 py-2 flex items-center justify-between hover:bg-gray-700/30 transition-colors"
       >
         <div className="flex items-center gap-2 min-w-0 flex-1">
-          {entry.mode === 'cloud' ? (
+          {mode === 'cloud' ? (
             <Cloud size={12} className="text-blue-400 flex-shrink-0" />
           ) : (
             <Database size={12} className="text-green-400 flex-shrink-0" />
@@ -102,7 +118,7 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
           <span className="text-xs text-gray-300 truncate">{truncateQuery(entry.query)}</span>
         </div>
         <div className="flex items-center gap-2 flex-shrink-0 ml-2">
-          <span className="text-[10px] text-gray-500">{formatMs(metrics.total_ms || metrics.llm_ms)}</span>
+          <span className="text-[10px] text-gray-500">{formatMs(metrics.total_ms)}</span>
           {confidence !== undefined && (
             <span className={`text-[10px] font-mono ${getConfidenceColor(confidence)}`}>
               {Math.round(confidence * 100)}%
@@ -114,28 +130,108 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
       
       {isExpanded && (
         <div className="px-3 pb-3 pt-1 border-t border-gray-700/50">
-          <div className="grid grid-cols-2 gap-x-4">
-            <div>
-              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Latencies</div>
-              <MetricRow icon={Zap} label="Understand" value={formatMs(metrics.understanding_ms)} color="text-amber-400" />
-              <MetricRow icon={Search} label="Search" value={formatMs(metrics.search_ms)} color="text-blue-400" />
-              <MetricRow 
-                icon={Shuffle} 
-                label="Rerank" 
-                value={metrics.reranking_enabled === false ? 'OFF' : formatMs(metrics.reranking_ms)} 
-                color={metrics.reranking_enabled === false ? 'text-gray-500' : 'text-purple-400'} 
-              />
-              <MetricRow icon={MessageSquare} label="LLM" value={formatMs(metrics.llm_ms)} color="text-cyan-400" />
-              <MetricRow 
-                icon={ShieldCheck} 
-                label="Verify" 
-                value={metrics.verification_enabled === false ? 'OFF' : formatMs(metrics.verification_ms)} 
-                color={metrics.verification_enabled === false ? 'text-gray-500' : 'text-green-400'} 
-              />
-              <MetricRow icon={Clock} label="Total" value={formatMs(metrics.total_ms)} color="text-white" />
+          {/* TIMESTAMP */}
+          <div className="mb-3 pb-2 border-b border-gray-700/30">
+            <div className="flex items-center gap-2 text-xs text-gray-400">
+              <Calendar size={14} className="text-cyan-400" />
+              <span className="font-semibold">{timestamp ? new Date(timestamp).toLocaleString('es-ES', { 
+                dateStyle: 'short', 
+                timeStyle: 'medium' 
+              }) : 'Unknown time'}</span>
+              <span className="text-gray-600">•</span>
+              <span className="uppercase text-[10px]">{mode || 'unknown'} mode</span>
             </div>
+          </div>
+          
+          {/* TABLES SIDE BY SIDE */}
+          <div className="grid grid-cols-2 gap-3 mb-3">
+            {/* LATENCIES TABLE */}
             <div>
-              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Quality</div>
+            <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2 font-semibold">⏱️ Latency Breakdown</div>
+            <div className="bg-gray-900/50 rounded-lg overflow-hidden">
+              <table className="w-full text-xs">
+                <thead>
+                  <tr className="bg-gray-800/50">
+                    <th className="text-left px-2 py-1.5 text-gray-400 font-medium">Stage</th>
+                    <th className="text-right px-2 py-1.5 text-gray-400 font-medium">Time</th>
+                    <th className="text-center px-2 py-1.5 text-gray-400 font-medium">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-t border-gray-700/30">
+                    <td className="px-2 py-1.5 text-gray-300">🧠 Understand</td>
+                    <td className="px-2 py-1.5 text-right font-mono text-amber-400">{formatMs(latencies.understand_ms)}</td>
+                    <td className="px-2 py-1.5 text-center">{latencies.understand_ms ? <CheckCircle size={12} className="inline text-green-400" /> : <span className="text-gray-600">-</span>}</td>
+                  </tr>
+                  <tr className="border-t border-gray-700/30">
+                    <td className="px-2 py-1.5 text-gray-300">🔍 Search</td>
+                    <td className="px-2 py-1.5 text-right font-mono text-blue-400">{formatMs(latencies.search_ms)}</td>
+                    <td className="px-2 py-1.5 text-center">{latencies.search_ms ? <CheckCircle size={12} className="inline text-green-400" /> : <span className="text-gray-600">-</span>}</td>
+                  </tr>
+                  <tr className="border-t border-gray-700/30">
+                    <td className="px-2 py-1.5 text-gray-300">🔄 Rerank</td>
+                    <td className="px-2 py-1.5 text-right font-mono text-purple-400">{featuresEnabled.reranking === false ? <span className="text-gray-600">OFF</span> : formatMs(latencies.rerank_ms)}</td>
+                    <td className="px-2 py-1.5 text-center">{featuresEnabled.reranking === false ? <XCircle size={12} className="inline text-gray-600" /> : latencies.rerank_ms ? <CheckCircle size={12} className="inline text-green-400" /> : <span className="text-gray-600">-</span>}</td>
+                  </tr>
+                  <tr className="border-t border-gray-700/30">
+                    <td className="px-2 py-1.5 text-gray-300">💬 LLM</td>
+                    <td className="px-2 py-1.5 text-right font-mono text-cyan-400">{formatMs(latencies.llm_ms)}</td>
+                    <td className="px-2 py-1.5 text-center">{latencies.llm_ms ? <CheckCircle size={12} className="inline text-green-400" /> : <span className="text-gray-600">-</span>}</td>
+                  </tr>
+                  <tr className="border-t border-gray-700/30">
+                    <td className="px-2 py-1.5 text-gray-300">✅ Verify</td>
+                    <td className="px-2 py-1.5 text-right font-mono text-green-400">{featuresEnabled.claim_verification === false ? <span className="text-gray-600">OFF</span> : formatMs(latencies.verify_ms)}</td>
+                    <td className="px-2 py-1.5 text-center">{featuresEnabled.claim_verification === false ? <XCircle size={12} className="inline text-gray-600" /> : latencies.verify_ms ? <CheckCircle size={12} className="inline text-green-400" /> : <span className="text-gray-600">-</span>}</td>
+                  </tr>
+                  <tr className="border-t-2 border-gray-600 bg-gray-800/30">
+                    <td className="px-2 py-1.5 text-white font-semibold">⚡ Total</td>
+                    <td className="px-2 py-1.5 text-right font-mono text-white font-bold">{formatMs(metrics.total_ms)}</td>
+                    <td className="px-2 py-1.5 text-center"><CheckCircle size={12} className="inline text-green-400" /></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            </div>
+            
+            {/* COST TABLE */}
+            <div>
+              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2 font-semibold">💰 OpenRouter Cost</div>
+              <div className="bg-gray-900/50 rounded-lg overflow-hidden">
+                <table className="w-full text-xs">
+                  <thead>
+                    <tr className="bg-gray-800/50">
+                      <th className="text-left px-2 py-1.5 text-gray-400 font-medium">Type</th>
+                      <th className="text-right px-2 py-1.5 text-gray-400 font-medium">Tokens</th>
+                      <th className="text-right px-2 py-1.5 text-gray-400 font-medium">Cost</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-t border-gray-700/30">
+                      <td className="px-2 py-1.5 text-gray-300">Prompt</td>
+                      <td className="px-2 py-1.5 text-right font-mono text-blue-400">{promptTokens.toLocaleString()}</td>
+                      <td className="px-2 py-1.5 text-right font-mono text-emerald-400">{formatCost(calculateOpenRouterCost(promptTokens, 0))}</td>
+                    </tr>
+                    <tr className="border-t border-gray-700/30">
+                      <td className="px-2 py-1.5 text-gray-300">Completion</td>
+                      <td className="px-2 py-1.5 text-right font-mono text-cyan-400">{completionTokens.toLocaleString()}</td>
+                      <td className="px-2 py-1.5 text-right font-mono text-emerald-400">{formatCost(calculateOpenRouterCost(0, completionTokens))}</td>
+                    </tr>
+                    <tr className="border-t-2 border-gray-600 bg-gray-800/30">
+                      <td className="px-2 py-1.5 text-white font-semibold">💵 Total</td>
+                      <td className="px-2 py-1.5 text-right font-mono text-white font-bold">{totalTokens.toLocaleString()}</td>
+                      <td className="px-2 py-1.5 text-right font-mono text-white font-bold">{formatCost(estimatedCost)}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-1 text-[10px] text-gray-500 italic">* Real OpenRouter pricing</div>
+            </div>
+          </div>
+          
+          {/* QUALITY METRICS */}
+          <div className="mb-3">
+            <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2 font-semibold">📊 Quality Metrics</div>
+            <div className="bg-gray-900/50 rounded-lg p-2 space-y-1.5">
               <MetricRow 
                 icon={Shield} 
                 label="Guardrail" 
@@ -146,94 +242,71 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
                 icon={AlertTriangle} 
                 label="Confidence" 
                 value={confidence !== undefined ? `${Math.round(confidence * 100)}%` : '-'} 
+                subValue={entry.verification?.is_grounded !== undefined ? `(${entry.verification.is_grounded ? 'Grounded' : 'Not grounded'})` : ''}
                 color={getConfidenceColor(confidence)} 
               />
-              <MetricRow 
-                icon={DollarSign} 
-                label="Est. Cost" 
-                value={formatCost(metrics.tokens_used || 500)} 
-                color="text-emerald-400" 
-              />
             </div>
           </div>
           
-          {entry.query_understanding && (
-            <div className="mt-2 pt-2 border-t border-gray-700/50">
-              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Query Understanding</div>
-              <div className="text-xs text-gray-300 bg-gray-900/50 rounded p-2">
-                <div className="flex gap-2 mb-1">
-                  <span className="text-gray-500">Type:</span>
-                  <span className="text-cyan-400">{entry.query_understanding.query_type || 'general'}</span>
+          {/* FEATURES ENABLED */}
+          {Object.keys(featuresEnabled).length > 0 && (
+            <div className="mb-3">
+              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2 font-semibold">🔧 RAG Components</div>
+              <div className="bg-gray-900/50 rounded-lg p-2">
+                <div className="grid grid-cols-2 gap-1.5 text-xs">
+                  {featuresEnabled.query_understanding !== undefined && (
+                    <div className="flex items-center gap-1.5">
+                      {featuresEnabled.query_understanding ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
+                      <span className={featuresEnabled.query_understanding ? 'text-gray-300' : 'text-gray-600'}>Understanding</span>
+                    </div>
+                  )}
+                  {featuresEnabled.multi_query !== undefined && (
+                    <div className="flex items-center gap-1.5">
+                      {featuresEnabled.multi_query ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
+                      <span className={featuresEnabled.multi_query ? 'text-gray-300' : 'text-gray-600'}>Multi-Query</span>
+                    </div>
+                  )}
+                  {featuresEnabled.hyde !== undefined && (
+                    <div className="flex items-center gap-1.5">
+                      {featuresEnabled.hyde ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
+                      <span className={featuresEnabled.hyde ? 'text-gray-300' : 'text-gray-600'}>HyDE</span>
+                    </div>
+                  )}
+                  {featuresEnabled.guardrail !== undefined && (
+                    <div className="flex items-center gap-1.5">
+                      {featuresEnabled.guardrail ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
+                      <span className={featuresEnabled.guardrail ? 'text-gray-300' : 'text-gray-600'}>Guardrail</span>
+                    </div>
+                  )}
+                  {featuresEnabled.reranking !== undefined && (
+                    <div className="flex items-center gap-1.5">
+                      {featuresEnabled.reranking ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
+                      <span className={featuresEnabled.reranking ? 'text-gray-300' : 'text-gray-600'}>Reranking</span>
+                    </div>
+                  )}
+                  {featuresEnabled.reasoning !== undefined && (
+                    <div className="flex items-center gap-1.5">
+                      {featuresEnabled.reasoning ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
+                      <span className={featuresEnabled.reasoning ? 'text-gray-300' : 'text-gray-600'}>Reasoning</span>
+                    </div>
+                  )}
+                  {featuresEnabled.claim_verification !== undefined && (
+                    <div className="flex items-center gap-1.5">
+                      {featuresEnabled.claim_verification ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
+                      <span className={featuresEnabled.claim_verification ? 'text-gray-300' : 'text-gray-600'}>Verification</span>
+                    </div>
+                  )}
+                  {featuresEnabled.refinement !== undefined && (
+                    <div className="flex items-center gap-1.5">
+                      {featuresEnabled.refinement ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
+                      <span className={featuresEnabled.refinement ? 'text-gray-300' : 'text-gray-600'}>Refinement</span>
+                    </div>
+                  )}
                 </div>
-                {entry.query_understanding.understood_query && (
-                  <div className="flex gap-2">
-                    <span className="text-gray-500">Understood:</span>
-                    <span className="text-gray-300 truncate">{entry.query_understanding.understood_query}</span>
-                  </div>
-                )}
               </div>
             </div>
           )}
           
-          {/* Pipeline Models Used */}
-          {(metrics.reranking_model || metrics.verification_model) && (
-            <div className="mt-2 pt-2 border-t border-gray-700/50">
-              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Pipeline Models</div>
-              <div className="text-xs text-gray-300 bg-gray-900/50 rounded p-2 space-y-1">
-                {metrics.reranking_model && (
-                  <div className="flex items-center gap-2">
-                    <Shuffle size={10} className={metrics.reranking_enabled === false ? 'text-gray-500' : 'text-purple-400'} />
-                    <span className="text-gray-500">Rerank:</span>
-                    <span className={metrics.reranking_enabled === false ? 'text-gray-500' : 'text-purple-300'}>
-                      {metrics.reranking_enabled === false ? 'Disabled' : metrics.reranking_model.split('/').pop()}
-                    </span>
-                  </div>
-                )}
-                {metrics.verification_model && (
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck size={10} className={metrics.verification_enabled === false ? 'text-gray-500' : 'text-green-400'} />
-                    <span className="text-gray-500">Verify:</span>
-                    <span className={metrics.verification_enabled === false ? 'text-gray-500' : 'text-green-300'}>
-                      {metrics.verification_enabled === false ? 'Disabled' : metrics.verification_model.split('/').pop()}
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-          
-          {/* Verification Results */}
-          {entry.verification_info && entry.verification_info.enabled && (
-            <div className="mt-2 pt-2 border-t border-gray-700/50">
-              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">LLM Verification</div>
-              <div className="text-xs text-gray-300 bg-gray-900/50 rounded p-2">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-gray-500">Grounded:</span>
-                  <span className={entry.verification_info.is_grounded ? 'text-green-400' : 'text-red-400'}>
-                    {entry.verification_info.is_grounded ? '✓ Yes' : '✗ No'}
-                  </span>
-                  <span className="text-gray-500 ml-2">Score:</span>
-                  <span className="text-cyan-400">
-                    {Math.round((entry.verification_info.groundedness_score || 0) * 100)}%
-                  </span>
-                </div>
-                {entry.verification_info.ungrounded_claims?.length > 0 && (
-                  <div className="mt-1">
-                    <span className="text-red-400 text-[10px]">Ungrounded claims:</span>
-                    <ul className="text-[10px] text-red-300 ml-2">
-                      {entry.verification_info.ungrounded_claims.slice(0, 2).map((claim, i) => (
-                        <li key={i} className="truncate">• {claim}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-          
-          <div className="mt-2 text-[10px] text-gray-600">
-            {new Date(entry.timestamp).toLocaleString()} • {entry.mode}
-          </div>
         </div>
       )}
     </div>
@@ -245,6 +318,7 @@ export default function MetricsPanel({ isOpen, onClose, sessionId = null, sessio
   const [expandedId, setExpandedId] = useState(null);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [showAllSessions, setShowAllSessions] = useState(false);
+  const panelRef = useRef(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -257,6 +331,27 @@ export default function MetricsPanel({ isOpen, onClose, sessionId = null, sessio
       }
     }
   }, [isOpen, sessionId, showAllSessions]);
+
+  // Click outside to close
+  useEffect(() => {
+    if (!isOpen) return;
+    
+    const handleClickOutside = (event) => {
+      if (panelRef.current && !panelRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
+    
+    // Add a small delay to avoid immediate close on open
+    const timer = setTimeout(() => {
+      document.addEventListener('mousedown', handleClickOutside);
+    }, 100);
+    
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen, onClose]);
 
   // Listen for new metrics
   useEffect(() => {
@@ -292,7 +387,7 @@ export default function MetricsPanel({ isOpen, onClose, sessionId = null, sessio
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="bg-gray-900 border border-gray-700 rounded-xl shadow-2xl w-full max-w-lg max-h-[80vh] flex flex-col">
+      <div ref={panelRef} className="bg-gray-900 border border-gray-700 rounded-xl shadow-2xl w-full max-w-4xl max-h-[85vh] flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700">
           <div className="flex items-center gap-2">

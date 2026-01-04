@@ -484,6 +484,7 @@ function App() {
           guardrail_passed: finalResult.guardrail_passed,
           query_understanding: finalResult.query_understanding,
           session_id: targetSessionId,
+          timestamp: new Date().toISOString(),
         });
         window.dispatchEvent(new Event('metrics-updated'));
       }
