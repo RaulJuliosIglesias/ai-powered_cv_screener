@@ -93,9 +93,45 @@ class Settings(BaseSettings):
         extra = "ignore"
 
 
+class TimeoutConfig:
+    """Centralized timeout configuration (in seconds)."""
+    
+    # HTTP Request Timeouts
+    HTTP_SHORT: float = 20.0      # Quick operations (embeddings, simple queries)
+    HTTP_MEDIUM: float = 30.0     # Standard LLM calls
+    HTTP_LONG: float = 60.0       # Complex reasoning, reflection
+    HTTP_VERY_LONG: float = 90.0  # Multi-step operations
+    
+    # Pipeline Stage Timeouts (from RAG v5)
+    EMBEDDING: float = 10.0
+    SEARCH: float = 20.0
+    LLM: float = 120.0
+    REASONING: float = 90.0
+    TOTAL: float = 240.0
+    
+    @classmethod
+    def get_timeout(cls, operation: str) -> float:
+        """Get timeout for operation type."""
+        mapping = {
+            'embedding': cls.EMBEDDING,
+            'search': cls.SEARCH,
+            'llm': cls.LLM,
+            'reasoning': cls.REASONING,
+            'total': cls.TOTAL,
+            'short': cls.HTTP_SHORT,
+            'medium': cls.HTTP_MEDIUM,
+            'long': cls.HTTP_LONG,
+        }
+        return mapping.get(operation, cls.HTTP_MEDIUM)
+
+
 @lru_cache()
 def get_settings() -> Settings:
     return Settings()
+
+
+# Global instances
+timeouts = TimeoutConfig()
 
 
 settings = Settings()

@@ -10,7 +10,7 @@ from typing import List, Optional, Dict, Any
 from dataclasses import dataclass, field
 import httpx
 
-from app.config import settings
+from app.config import settings, timeouts
 from app.utils.text_utils import smart_truncate
 
 logger = logging.getLogger(__name__)
@@ -93,8 +93,8 @@ Base decision on the detailed analysis above.
 
 | Candidate | Key Skills | Experience | Score |
 |-----------|------------|------------|-------|
-| **[Full Name](cv:cv_xxx)** | skill1, skill2, skill3 | X years in area | ⭐⭐⭐⭐ |
-| **[Full Name](cv:cv_xxx)** | skill4, skill5 | Y years in area | ⭐⭐⭐ |
+| **[Full Name](cv:cv_xxx)** | skill1, skill2, skill3 | X years in area | 
+| **[Full Name](cv:cv_xxx)** | skill4, skill5 | Y years in area | 
 
 :::conclusion
 [Final recommendation. Use ONLY format: **[Full Name](cv:cv_xxx)** for each candidate.]
@@ -108,20 +108,21 @@ Base decision on the detailed analysis above.
 2. **TABLE** - Valid markdown with pipes | aligned properly
 3. **CANDIDATE NAME FORMAT** - THIS IS THE **ONLY** ACCEPTABLE FORMAT:
 
-   ✅ CORRECT FORMAT (USE EXACTLY THIS):
+   
+   CORRECT FORMAT (USE EXACTLY THIS):
    ```
    **[Patrik Hübner](cv:cv_dd668ac0)**
    **[Luca Müller](cv:cv_fe6338e6)**
    **[Layla Hassan](cv:cv_71736e47)**
    ```
    
-   ❌ WRONG FORMATS (NEVER USE THESE):
+   WRONG FORMATS (NEVER USE THESE):
    ```
-   **[ Luca Müller](cv:cv_fe6338e6)**        ← SPACE after **
-   ** Layla Hassan** cv_71736e47            ← SPACE after ** + standalone cv_xxx
-   **Luca Müller** cv_fe6338e6              ← Missing link, standalone cv_xxx
-   **Luca** [cv_fe6338e6](cv_fe6338e6)      ← Incomplete name + wrong link
-   [Luca Müller](cv_fe6338e6)               ← Missing cv: prefix
+   **[ Luca Müller](cv:cv_fe6338e6)**        SPACE after **
+   ** Layla Hassan** cv_71736e47            SPACE after ** + standalone cv_xxx
+   **Luca Müller** cv_fe6338e6              Missing link, standalone cv_xxx
+   **Luca** [cv_fe6338e6](cv_fe6338e6)      Incomplete name + wrong link
+   [Luca Müller](cv_fe6338e6)               Missing cv: prefix
    ```
 
 4. **NO SPACES AFTER OPENING `**`** - The bracket `[` must come IMMEDIATELY after `**`
@@ -247,7 +248,7 @@ class ReasoningService:
         )
         from app.providers.base import get_openrouter_url
         
-        async with httpx.AsyncClient(timeout=60.0) as client:
+        async with httpx.AsyncClient(timeout=timeouts.HTTP_LONG) as client:
             response = await client.post(
                 get_openrouter_url("chat/completions"),
                 headers={
@@ -294,10 +295,21 @@ class ReasoningService:
         
         for marker in answer_markers:
             if marker in content:
-                parts = content.split(marker, 1)
-                thinking = parts[0]
-                answer = parts[1].strip() if len(parts) > 1 else ""
-                break
+                # Extract content after pattern
+                idx = content.find(marker)
+                end_idx = len(content)
+                
+                # Find next step
+                for next_pattern, _ in answer_markers:
+                    if next_pattern != marker:
+                        next_idx = content.find(next_pattern, idx + len(marker))
+                        if next_idx > 0:
+                            end_idx = min(end_idx, next_idx)
+                
+                content = content[idx:end_idx].strip()
+                if content:
+                    thinking = content
+                    answer = content
         
         # If no clear split, use the full content as thinking
         if not answer:
@@ -325,7 +337,7 @@ class ReasoningService:
         )
         from app.providers.base import get_openrouter_url
         
-        async with httpx.AsyncClient(timeout=45.0) as client:
+        async with httpx.AsyncClient(timeout=timeouts.HTTP_LONG) as client:
             response = await client.post(
                 get_openrouter_url("chat/completions"),
                 headers={

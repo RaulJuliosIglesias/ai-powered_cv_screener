@@ -13,19 +13,19 @@ Author: CV Screener RAG System
 Version: 5.0.0
 """
 
-from __future__ import annotations
-
-import asyncio
-import hashlib
 import logging
+import asyncio
 import time
-from abc import ABC, abstractmethod
-from collections.abc import AsyncIterator
-from contextlib import asynccontextmanager
-from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+import hashlib
+import json
 from enum import Enum, auto
-from functools import wraps
+from dataclasses import dataclass, field
+from typing import Any, Optional, List, Dict, AsyncGenerator
+from datetime import datetime
+import httpx
+
+from app.config import settings
+from app.utils.error_handling import degradation
 from typing import (
     Any,
     Callable,
@@ -1177,7 +1177,11 @@ class RAGServiceV5:
             ))
     
     async def _step_multi_query(self, ctx: PipelineContextV5) -> None:
-        """Step 2: Generate query variations and HyDE."""
+        """Step 2: Generate query variations and HyDE with graceful degradation."""
+        if not degradation.is_enabled('multi_query'):
+            logger.info("Multi-query disabled, skipping")
+            return
+        
         start = time.perf_counter()
         try:
             result = await self._multi_query.generate(ctx.question)
@@ -1196,8 +1200,18 @@ class RAGServiceV5:
                     "hyde_enabled": result.hyde_document is not None
                 }
             ))
+        except httpx.TimeoutException as e:
+            logger.warning(f"Multi-query timeout: {e}. Continuing without variations.")
+            degradation.disable_feature('multi_query', 'Timeout')
+            ctx.metrics.add_stage(StageMetrics(
+                stage=PipelineStage.MULTI_QUERY,
+                duration_ms=(time.perf_counter() - start) * 1000,
+                success=False,
+                error=f"Timeout: {str(e)}"
+            ))
         except Exception as e:
-            logger.error(f"Multi-query generation failed: {e}")
+            logger.error(f"Multi-query generation failed: {e}. Continuing without variations.")
+            degradation.disable_feature('multi_query', str(e))
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.MULTI_QUERY,
                 duration_ms=(time.perf_counter() - start) * 1000,
@@ -1440,16 +1454,22 @@ class RAGServiceV5:
                 }
             ))
         except Exception as e:
-            logger.error(f"Reranking failed: {e}")
+            logger.warning(f"Reranking failed: {e}. Using original order.")
+            degradation.disable_feature('reranking', str(e))
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.RERANKING,
                 duration_ms=(time.perf_counter() - start) * 1000,
                 success=False,
                 error=str(e)
             ))
+            # Don't fail - continue with original results
     
     async def _step_reasoning(self, ctx: PipelineContextV5) -> None:
-        """Step 7: Apply structured reasoning."""
+        """Step 7: Apply structured reasoning with graceful degradation."""
+        if not self.config.reasoning_enabled or not degradation.is_enabled('reasoning'):
+            logger.info("Reasoning disabled or degraded, skipping")
+            return
+        
         start = time.perf_counter()
         try:
             context_str = self._format_context(ctx.effective_chunks)
@@ -1489,8 +1509,20 @@ class RAGServiceV5:
                     "openrouter_cost": openrouter_cost
                 }
             ))
+        except httpx.TimeoutException as e:
+            logger.warning(f"Reasoning timeout: {e}. Skipping reasoning step.")
+            ctx.reasoning_trace = None
+            degradation.disable_feature('reasoning', 'Timeout')
+            ctx.metrics.add_stage(StageMetrics(
+                stage=PipelineStage.REASONING,
+                duration_ms=(time.perf_counter() - start) * 1000,
+                success=False,
+                error=f"Timeout: {str(e)}"
+            ))
         except Exception as e:
-            logger.error(f"Reasoning failed: {e}")
+            logger.error(f"Reasoning error: {e}. Continuing without reasoning.")
+            ctx.reasoning_trace = None
+            degradation.disable_feature('reasoning', str(e))
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.REASONING,
                 duration_ms=(time.perf_counter() - start) * 1000,

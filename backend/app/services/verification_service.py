@@ -10,7 +10,7 @@ from typing import List, Optional, Dict, Any
 from dataclasses import dataclass, field
 import httpx
 
-from app.config import settings
+from app.config import settings, timeouts
 from app.providers.base import SearchResult
 from app.utils.text_utils import smart_truncate
 
@@ -165,7 +165,7 @@ class LLMVerificationService:
             
             # Use context manager to ensure client is closed after request
             from app.providers.base import get_openrouter_url
-            async with httpx.AsyncClient(timeout=30.0) as client:
+            async with httpx.AsyncClient(timeout=timeouts.HTTP_MEDIUM) as client:
                 api_response = await client.post(
                     get_openrouter_url("chat/completions"),
                     headers={

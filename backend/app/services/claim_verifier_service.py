@@ -10,7 +10,7 @@ from typing import List, Optional, Dict, Any
 from dataclasses import dataclass, field
 import httpx
 
-from app.config import settings
+from app.config import settings, timeouts
 
 logger = logging.getLogger(__name__)
 
@@ -285,7 +285,7 @@ class ClaimVerifierService:
         
         try:
             from app.providers.base import get_openrouter_url
-            async with httpx.AsyncClient(timeout=20.0) as client:
+            async with httpx.AsyncClient(timeout=timeouts.HTTP_SHORT) as client:
                 resp = await client.post(
                     get_openrouter_url("chat/completions"),
                     headers={

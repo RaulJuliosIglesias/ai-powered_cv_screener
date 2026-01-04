@@ -9,7 +9,7 @@ from typing import List, Optional
 from dataclasses import dataclass
 import httpx
 
-from app.config import settings
+from app.config import settings, timeouts
 
 logger = logging.getLogger(__name__)
 
@@ -164,7 +164,7 @@ class MultiQueryService:
         prompt = MULTI_QUERY_PROMPT.format(query=query)
         from app.providers.base import get_openrouter_url
         
-        async with httpx.AsyncClient(timeout=30.0) as client:
+        async with httpx.AsyncClient(timeout=timeouts.HTTP_MEDIUM) as client:
             response = await client.post(
                 get_openrouter_url("chat/completions"),
                 headers={
@@ -207,7 +207,7 @@ class MultiQueryService:
         prompt = HYDE_PROMPT.format(query=query)
         from app.providers.base import get_openrouter_url
         
-        async with httpx.AsyncClient(timeout=20.0) as client:
+        async with httpx.AsyncClient(timeout=timeouts.HTTP_SHORT) as client:
             response = await client.post(
                 get_openrouter_url("chat/completions"),
                 headers={
