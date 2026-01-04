@@ -176,6 +176,9 @@ class DirectAnswerModule:
             if not direct_answer.endswith('.'):
                 direct_answer += '.'
             
+            # CRITICAL: Limpiar frases de transición al análisis
+            direct_answer = self._clean_transition_phrases(direct_answer)
+            
             logger.debug(f"[DIRECT_ANSWER] Extracted: {len(direct_answer)} chars")
             return direct_answer
         
@@ -266,6 +269,37 @@ class DirectAnswerModule:
             logger.info(f"[DIRECT_ANSWER] Removed duplicate content: {len(text)} -> {len(result)} chars")
         
         return result
+    
+    def _clean_transition_phrases(self, text: str) -> str:
+        """
+        Elimina frases de transición al análisis que NO deben estar en Direct Answer.
+        
+        Ejemplos de frases a eliminar:
+        - "Here is the detailed analysis"
+        - "Below is the analysis"
+        - "See the analysis below"
+        """
+        if not text:
+            return text
+        
+        # Patrones de frases de transición a eliminar
+        transition_patterns = [
+            r'\.\s*Here is the detailed analysis[:\.]?',
+            r'\.\s*Below is the analysis[:\.]?',
+            r'\.\s*See the analysis below[:\.]?',
+            r'\.\s*Here is the analysis[:\.]?',
+            r'\.\s*The detailed analysis follows[:\.]?',
+            r'###\s*Detailed Analysis[:\.]?',
+            r'\.\s*Detailed Analysis[:\.]?',
+        ]
+        
+        for pattern in transition_patterns:
+            text = re.sub(pattern, '.', text, flags=re.IGNORECASE)
+        
+        # Limpiar puntos dobles
+        text = re.sub(r'\.+', '.', text)
+        
+        return text.strip()
     
     def format(self, content: str) -> str:
         """

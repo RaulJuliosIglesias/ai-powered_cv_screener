@@ -147,36 +147,53 @@ class AnalysisModule:
     
     def generate_fallback(self, direct_answer: str, table_data, conclusion: str) -> Optional[str]:
         """
-        Generate fallback analysis when LLM doesn't provide one.
+        Generate fallback analysis with RAZONAMIENTO real.
         
-        This ensures the Analysis section is ALWAYS present.
+        El análisis debe explicar:
+        - Cuántos candidatos se analizaron
+        - Criterios de selección utilizados
+        - Por qué se eligieron los candidatos de la tabla
+        - Distribución de match scores
+        
+        NO debe repetir el direct_answer.
         """
         parts = []
         
-        # Analyze based on direct answer
-        if direct_answer:
-            da_lower = direct_answer.lower()
-            if 'no candidate' in da_lower or 'no match' in da_lower or 'none of' in da_lower:
-                parts.append("The search did not find candidates that fully match the specified criteria.")
-            elif 'candidate' in da_lower:
-                parts.append("The analysis evaluated candidates based on the specified requirements.")
-        
-        # Analyze based on table
+        # 1. Número de candidatos analizados
         if table_data and hasattr(table_data, 'rows') and table_data.rows:
             num_candidates = len(table_data.rows)
-            parts.append(f"A total of {num_candidates} candidate(s) were analyzed and compared.")
+            parts.append(f"Se analizaron {num_candidates} candidato(s) en base a los requisitos especificados.")
             
-            # Check match scores
+            # 2. Análisis de match scores
             if hasattr(table_data.rows[0], 'match_score'):
                 scores = [r.match_score for r in table_data.rows]
-                high_matches = sum(1 for s in scores if s >= 70)
-                if high_matches == 0:
-                    parts.append("None of the candidates showed a strong match for the specified requirements.")
-                elif high_matches == len(scores):
-                    parts.append("All candidates show good alignment with the requirements.")
-                else:
-                    parts.append(f"{high_matches} candidate(s) show partial or good alignment with the requirements.")
+                high_matches = [r for r in table_data.rows if r.match_score >= 70]
+                medium_matches = [r for r in table_data.rows if 40 <= r.match_score < 70]
+                low_matches = [r for r in table_data.rows if r.match_score < 40]
+                
+                # Distribución de scores
+                if high_matches:
+                    names = [r.candidate_name for r in high_matches[:3]]
+                    parts.append(f"{len(high_matches)} candidato(s) tienen match score alto (≥70%): {', '.join(names)}.")
+                
+                if medium_matches:
+                    parts.append(f"{len(medium_matches)} candidato(s) tienen match score medio (40-69%).")
+                
+                if low_matches:
+                    parts.append(f"{len(low_matches)} candidato(s) no cumplen los requisitos principales (<40%).")
+                
+                # Mejor candidato
+                best = max(table_data.rows, key=lambda r: r.match_score)
+                if best.match_score >= 70:
+                    parts.append(f"El candidato con mejor puntuación es {best.candidate_name} con {best.match_score}% de match.")
         
+        # 3. Si no hay candidatos adecuados
+        if not parts:
+            if direct_answer:
+                da_lower = direct_answer.lower()
+                if 'no candidate' in da_lower or 'no match' in da_lower or 'none of' in da_lower:
+                    parts.append("No se encontraron candidatos que cumplan completamente con los criterios especificados.")
+            
         if not parts:
             return None
         

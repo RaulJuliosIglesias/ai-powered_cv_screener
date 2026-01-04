@@ -8,6 +8,7 @@ DO NOT create parallel assembly logic - use modules parametrically.
 """
 
 import logging
+import re
 from typing import List, Dict, Any
 
 from app.models.structured_output import StructuredOutput
@@ -89,6 +90,16 @@ class OutputOrchestrator:
                 structured.analysis = fallback_analysis
                 logger.info(f"[ORCHESTRATOR] Generated fallback analysis: {len(fallback_analysis)} chars")
         
+        # STEP 1.6: CRITICAL - Format candidate references with ÚNICO formato
+        # Convierte [Nombre](cv_xxx) -> [📄](cv:cv_xxx) **Nombre**
+        # Icono clicable + nombre en negrita (sin subrayado)
+        if structured.direct_answer:
+            structured.direct_answer = self._format_candidate_references(structured.direct_answer)
+        if structured.analysis:
+            structured.analysis = self._format_candidate_references(structured.analysis)
+        if structured.conclusion:
+            structured.conclusion = self._format_candidate_references(structured.conclusion)
+        
         # STEP 2: Assemble output SEQUENTIALLY using module format methods
         parts = []
         
@@ -168,6 +179,39 @@ class OutputOrchestrator:
         
         return text.strip()
     
+    def _format_candidate_references(self, text: str) -> str:
+        """
+        Formato ÚNICO para menciones de candidatos en TODAS las secciones.
+        
+        Convierte: [Nombre](cv:cv_xxx) o [Nombre](cv_xxx)
+        A:         [📄](cv:cv_xxx) **Nombre**
+        
+        - El icono 📄 es el ÚNICO elemento clicable (abre PDF)
+        - El nombre va en negrita, SIN subrayado, SIN link
+        """
+        if not text:
+            return text
+        
+        # Paso 1: Normalizar links sin prefijo cv:
+        # [Nombre](cv_xxx) -> [Nombre](cv:cv_xxx)
+        text = re.sub(
+            r'\[([^\]]+)\]\((cv_[a-z0-9_-]+)\)',
+            r'[\1](cv:\2)',
+            text,
+            flags=re.IGNORECASE
+        )
+        
+        # Paso 2: Convertir al formato final con icono + negrita
+        # [Nombre](cv:cv_xxx) -> [📄](cv:cv_xxx) **Nombre**
+        text = re.sub(
+            r'\[([^\]]+)\]\((cv:cv_[a-z0-9_-]+)\)',
+            r'[📄](\2) **\1**',
+            text,
+            flags=re.IGNORECASE
+        )
+        
+        return text
+    
     def _post_clean_output(self, text: str) -> str:
         """
         Post-process final output AFTER module formatting.
@@ -185,8 +229,16 @@ class OutputOrchestrator:
         text = re.sub(r'\*\*\s+', '**', text)  # Remove space after **
         text = re.sub(r'\s+\*\*', '**', text)  # Remove space before **
         
-        # 2. Fix duplicated cv_id references: cv_xxx [cv_xxx](cv_xxx) -> [Name](cv:cv_xxx)
-        # Pattern: cv_xxx [cv_xxx](cv_xxx) or cv_xxx [cv_xxx](cv:cv_xxx)
+        # 2. CRITICAL: Ensure ALL cv_id links have cv: prefix for frontend detection
+        # Convert [Name](cv_xxx) -> [Name](cv:cv_xxx)
+        text = re.sub(
+            r'\[([^\]]+)\]\((cv_[a-z0-9_-]+)\)',
+            r'[\1](cv:\2)',
+            text,
+            flags=re.IGNORECASE
+        )
+        
+        # 3. Fix duplicated cv_id references: cv_xxx [cv_xxx](cv_xxx) -> [cv_xxx](cv:cv_xxx)
         text = re.sub(
             r'(cv_[a-z0-9_-]+)\s*\[\1\]\(\1\)',
             r'[\1](cv:\1)',
@@ -200,7 +252,7 @@ class OutputOrchestrator:
             flags=re.IGNORECASE
         )
         
-        # 3. Fix triple cv_id: Name cv_xxx [cv_xxx](cv_xxx) -> **Name** cv_xxx
+        # 4. Fix triple cv_id: Name cv_xxx [cv_xxx](cv_xxx) -> **Name** cv_xxx
         text = re.sub(
             r'\*\*([^*]+)\*\*\s*(cv_[a-z0-9_-]+)\s*\[\2\]\(\2\)',
             r'**\1** \2',
@@ -214,10 +266,10 @@ class OutputOrchestrator:
             flags=re.IGNORECASE
         )
         
-        # 4. Remove any remaining "code" artifacts at line start
+        # 5. Remove any remaining "code" artifacts at line start
         text = re.sub(r'^code\s*$', '', text, flags=re.MULTILINE)
         
-        # 5. Clean up excessive whitespace
+        # 6. Clean up excessive whitespace
         text = re.sub(r'\n{3,}', '\n\n', text)
         
         if text != original:

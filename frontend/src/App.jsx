@@ -883,23 +883,6 @@ function App() {
                           <StructuredOutputRenderer 
                             structuredOutput={msg.structured_output}
                             onOpenCV={(cvId, name) => openPdfViewer(cvId, name || cvId)}
-                            cvLinkRenderer={({href, children}) => {
-                              // Handle cv: format
-                              if (href?.startsWith('cv:')) {
-                                const cvId = href.replace('cv:', '');
-                                return (
-                                  <button
-                                    onClick={() => openPdfViewer(cvId, cvId)}
-                                    className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-600/30 text-blue-400 hover:bg-blue-600/50 rounded transition-colors text-sm"
-                                    title={language === 'es' ? 'Ver CV' : 'View CV'}
-                                  >
-                                    <FileText className="w-3 h-3" />
-                                    {children}
-                                  </button>
-                                );
-                              }
-                              return <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">{children}</a>;
-                            }}
                           />
                         ) : msg.role === 'assistant' ? (
                           /* FALLBACK: Old thinking collapsible for messages without structured_output */

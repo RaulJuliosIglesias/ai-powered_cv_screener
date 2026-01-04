@@ -238,22 +238,59 @@ const ConclusionSection = ({ content, cvLinkRenderer }) => {
 };
 
 // Main Component
-const StructuredOutputRenderer = ({ structuredOutput, cvLinkRenderer, onOpenCV }) => {
+const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
   if (!structuredOutput) return null;
   
   const { thinking, direct_answer, analysis, table_data, conclusion } = structuredOutput;
   
-  // Default CV link renderer if none provided
-  const linkRenderer = cvLinkRenderer || (({ href, children }) => (
-    <a 
-      href={href} 
-      className="text-blue-400 hover:text-blue-300 underline"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {children}
-    </a>
-  ));
+  // CV Link Renderer - FORMATO ÚNICO
+  // Backend genera: [📄](cv:cv_xxx) **Nombre**
+  // - El link [📄](cv:cv_xxx) se renderiza como botón con icono FileText
+  // - El **Nombre** se renderiza en negrita por ReactMarkdown (no es link)
+  const cvLinkRenderer = ({ href, children }) => {
+    // Extract cv_id from href
+    let cvId = null;
+    
+    if (href) {
+      // Format: cv:cv_xxx
+      if (href.startsWith('cv:')) {
+        cvId = href.replace('cv:', '');
+      }
+      // Format: contains cv_xxx somewhere
+      else {
+        const match = href.match(/cv_[a-z0-9_-]+/i);
+        if (match) {
+          cvId = match[0];
+        }
+      }
+    }
+    
+    // Si es link de CV, renderizar SOLO el botón con icono
+    // El nombre viene después en **negrita** (no es parte del link)
+    if (cvId) {
+      return (
+        <button
+          onClick={() => onOpenCV ? onOpenCV(cvId, '') : null}
+          className="inline-flex items-center justify-center w-5 h-5 bg-blue-600/30 text-blue-400 hover:bg-blue-600/50 rounded transition-colors"
+          title="View CV"
+        >
+          <FileText className="w-3 h-3" />
+        </button>
+      );
+    }
+    
+    // Link normal (no es CV)
+    return (
+      <a 
+        href={href} 
+        className="text-blue-400 hover:text-blue-300 underline"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {children}
+      </a>
+    );
+  };
   
   return (
     <div className="space-y-2">
@@ -261,16 +298,16 @@ const StructuredOutputRenderer = ({ structuredOutput, cvLinkRenderer, onOpenCV }
       <ThinkingSection content={thinking} />
       
       {/* 2. Direct Answer */}
-      <DirectAnswerSection content={direct_answer} cvLinkRenderer={linkRenderer} />
+      <DirectAnswerSection content={direct_answer} cvLinkRenderer={cvLinkRenderer} />
       
       {/* 3. Analysis */}
-      <AnalysisSection content={analysis} cvLinkRenderer={linkRenderer} />
+      <AnalysisSection content={analysis} cvLinkRenderer={cvLinkRenderer} />
       
       {/* 4. Candidate Table */}
       <CandidateTable tableData={table_data} onOpenCV={onOpenCV} />
       
       {/* 5. Conclusion */}
-      <ConclusionSection content={conclusion} cvLinkRenderer={linkRenderer} />
+      <ConclusionSection content={conclusion} cvLinkRenderer={cvLinkRenderer} />
     </div>
   );
 };
