@@ -31,6 +31,7 @@ function App() {
   const [editingId, setEditingId] = useState(null);
   const [editName, setEditName] = useState('');
   const [deleteConfirm, setDeleteConfirm] = useState(null);
+  const [deleteMessageConfirm, setDeleteMessageConfirm] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
   const [allCVs, setAllCVs] = useState([]);
   const [showCVPanel, setShowCVPanel] = useState(false);
@@ -542,6 +543,13 @@ function App() {
 
   const handleDeleteMessage = async (messageIndex) => {
     if (!currentSessionId) return;
+    // If not confirmed, show confirmation
+    if (deleteMessageConfirm !== messageIndex) {
+      setDeleteMessageConfirm(messageIndex);
+      return;
+    }
+    // Confirmed, proceed with deletion
+    setDeleteMessageConfirm(null);
     try {
       await deleteMessage(currentSessionId, messageIndex, mode);
       await loadSession(currentSessionId);
@@ -550,6 +558,15 @@ function App() {
       console.error(e);
       showToast(language === 'es' ? 'Error al eliminar mensaje' : 'Error deleting message', 'error');
     }
+  };
+
+  const handleCopyMessage = (content) => {
+    navigator.clipboard.writeText(content);
+    showToast(language === 'es' ? 'Mensaje copiado' : 'Message copied', 'success');
+  };
+
+  const cancelDeleteMessage = () => {
+    setDeleteMessageConfirm(null);
   };
 
   const handleRetryMessage = async (messageContent, messageIndex) => {
@@ -1033,12 +1050,38 @@ function App() {
                             </button>
                           )}
                           <button
-                            onClick={() => handleDeleteMessage(idx)}
-                            className="p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
-                            title={language === 'es' ? 'Eliminar mensaje' : 'Delete message'}
+                            onClick={() => handleCopyMessage(msg.content)}
+                            className="p-1.5 text-gray-400 hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
+                            title={language === 'es' ? 'Copiar mensaje' : 'Copy message'}
                           >
-                            <Trash2 className="w-3.5 h-3.5" />
+                            <Copy className="w-3.5 h-3.5" />
                           </button>
+                          {deleteMessageConfirm === idx ? (
+                            <div className="flex items-center gap-1">
+                              <button
+                                onClick={() => handleDeleteMessage(idx)}
+                                className="p-1.5 bg-red-500 text-white rounded-lg transition-colors"
+                                title={language === 'es' ? 'Confirmar eliminar' : 'Confirm delete'}
+                              >
+                                <Check className="w-3.5 h-3.5" />
+                              </button>
+                              <button
+                                onClick={cancelDeleteMessage}
+                                className="p-1.5 bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg transition-colors"
+                                title={language === 'es' ? 'Cancelar' : 'Cancel'}
+                              >
+                                <X className="w-3.5 h-3.5" />
+                              </button>
+                            </div>
+                          ) : (
+                            <button
+                              onClick={() => handleDeleteMessage(idx)}
+                              className="p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+                              title={language === 'es' ? 'Eliminar mensaje' : 'Delete message'}
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          )}
                         </div>
                       )}
                     </div>
