@@ -6983,7 +6983,7 @@
     },
     {
       "id": "141914be-fff7-4a6c-bad4-a6546bb67202",
-      "name": "10 CVS",
+      "name": "SMALL SAMPLE MIXED",
       "description": "",
       "cvs": [
         {
@@ -13700,10 +13700,143 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-04T13:51:42.869982"
+        },
+        {
+          "id": "22486f52-f24b-4e77-81a9-90bdff275fad",
+          "role": "user",
+          "content": "dime el mejor perfil para 2d artist",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T13:58:59.423249"
+        },
+        {
+          "id": "32601b91-3a89-420b-9910-e65dba434689",
+          "role": "assistant",
+          "content": ":::thinking\n- The question asks for the best profile for a 2D artist role.\n- I need to check which candidates have explicit 2D art skills or related experience.\n- From the provided CVs, none explicitly mention 2D art skills, 2D animation, or related tools (e.g., Photoshop for 2D, Illustrator, etc.).\n- Layla Hassan is an NFT developer with no art skills mentioned.\n- Abdullah Mohamed is a podcast assistant with no art skills.\n- Mei-Ling Chen is in HR with no art skills.\n- Luca Müller is a cloud engineer with no art skills.\n- Carlos Mendoza is a 3D modeler, which is different from 2D art.\n- Since no candidate explicitly mentions 2D art skills, I must conclude there is no match.\n:::\n\nno candidate explicitly mentions 2D art skills, I must conclude there is no match.\n\n| Candidate | Skills | Experience | Match |\n|---|---|---|---|\n| **[ Layla Hassan  NFT](cv:cv_71736e47)** | NFT development, Solidity, Ethereum | Smart contract design, NFT platforms | ⭐ (No 2D art skills) |\n| **[ Abdullah Mohamed  Podcast](cv:cv_943da331)** | Audio editing, podcast production | Podcast assistant, sound engineering | ⭐ (No 2D art skills) |\n| **[ Mei-Ling Chen  Human Resources](cv:cv_ffc6d564)** | HR management, talent acquisition | HR director, organizational development | ⭐ (No 2D art skills) |\n| **[ Luca Müller  Cloud](cv:cv_fe6338e6)** | Cloud engineering, AWS, Kubernetes | Cloud infrastructure, DevOps | ⭐ (No 2D art skills) |\n| **[ Carlos Mendoza  3D](cv:cv_f01ac22c)** | 3D modeling, texturing, rigging | 3D artist for film/games | ⭐ (3D, not 2D) |\n\n:::conclusion\nNo candidates match the specified criteria for a 2D artist role. None of the provided CVs explicitly mention 2D art skills, tools, or relevant experience.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_71736e47",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_943da331",
+              "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_ffc6d564",
+              "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf"
+            },
+            {
+              "cv_id": "cv_fe6338e6",
+              "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_f01ac22c",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_bbc748f9",
+              "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_653fbf59",
+              "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf"
+            },
+            {
+              "cv_id": "cv_916fd244",
+              "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf"
+            },
+            {
+              "cv_id": "cv_dd668ac0",
+              "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_7b0f7ab3",
+              "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 4691.24,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 9.35,
+              "details": "Found 20 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 22262.52,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 9140.05,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "no candidate explicitly mentions 2D art skills, I must conclude there is no match.",
+            "raw_content": "```\n:::thinking\n- The question asks for the best profile for a 2D artist role.\n- I need to check which candidates have explicit 2D art skills or related experience.\n- From the provided CVs, none explicitly mention 2D art skills, 2D animation, or related tools (e.g., Photoshop for 2D, Illustrator, etc.).\n- Layla Hassan is an NFT developer with no art skills mentioned.\n- Abdullah Mohamed is a podcast assistant with no art skills.\n- Mei-Ling Chen is in HR with no art skills.\n- Luca Müller is a cloud engineer with no art skills.\n- Carlos Mendoza is a 3D modeler, which is different from 2D art.\n- Since no candidate explicitly mentions 2D art skills, I must conclude there is no match.\n:::\n\nNone of the analyzed candidates have the required skills for a 2D artist role.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[ Layla Hassan  NFT](cv:cv_71736e47)** | NFT development, Solidity, Ethereum | Smart contract design, NFT platforms | ⭐ (No 2D art skills) |\n| **[ Abdullah Mohamed  Podcast](cv:cv_943da331)** | Audio editing, podcast production | Podcast assistant, sound engineering | ⭐ (No 2D art skills) |\n| **[ Mei-Ling Chen  Human Resources](cv:cv_ffc6d564)** | HR management, talent acquisition | HR director, organizational development | ⭐ (No 2D art skills) |\n| **[ Luca Müller  Cloud](cv:cv_fe6338e6)** | Cloud engineering, AWS, Kubernetes | Cloud infrastructure, DevOps | ⭐ (No 2D art skills) |\n| **[ Carlos Mendoza  3D](cv:cv_f01ac22c)** | 3D modeling, texturing, rigging | 3D artist for film/games | ⭐ (3D, not 2D) |\n\n:::conclusion\nNo candidates match the specified criteria for a 2D artist role. None of the provided CVs explicitly mention 2D art skills, tools, or relevant experience.\n:::\n```",
+            "thinking": "- The question asks for the best profile for a 2D artist role.\n- I need to check which candidates have explicit 2D art skills or related experience.\n- From the provided CVs, none explicitly mention 2D art skills, 2D animation, or related tools (e.g., Photoshop for 2D, Illustrator, etc.).\n- Layla Hassan is an NFT developer with no art skills mentioned.\n- Abdullah Mohamed is a podcast assistant with no art skills.\n- Mei-Ling Chen is in HR with no art skills.\n- Luca Müller is a cloud engineer with no art skills.\n- Carlos Mendoza is a 3D modeler, which is different from 2D art.\n- Since no candidate explicitly mentions 2D art skills, I must conclude there is no match.",
+            "analysis": null,
+            "table_data": {
+              "headers": [
+                "Candidate",
+                "Skills",
+                "Experience",
+                "Match"
+              ],
+              "rows": [
+                [
+                  "**[ Layla Hassan  NFT](cv:cv_71736e47)**",
+                  "NFT development, Solidity, Ethereum",
+                  "Smart contract design, NFT platforms",
+                  "⭐ (No 2D art skills)"
+                ],
+                [
+                  "**[ Abdullah Mohamed  Podcast](cv:cv_943da331)**",
+                  "Audio editing, podcast production",
+                  "Podcast assistant, sound engineering",
+                  "⭐ (No 2D art skills)"
+                ],
+                [
+                  "**[ Mei-Ling Chen  Human Resources](cv:cv_ffc6d564)**",
+                  "HR management, talent acquisition",
+                  "HR director, organizational development",
+                  "⭐ (No 2D art skills)"
+                ],
+                [
+                  "**[ Luca Müller  Cloud](cv:cv_fe6338e6)**",
+                  "Cloud engineering, AWS, Kubernetes",
+                  "Cloud infrastructure, DevOps",
+                  "⭐ (No 2D art skills)"
+                ],
+                [
+                  "**[ Carlos Mendoza  3D](cv:cv_f01ac22c)**",
+                  "3D modeling, texturing, rigging",
+                  "3D artist for film/games",
+                  "⭐ (3D, not 2D)"
+                ]
+              ]
+            },
+            "conclusion": "No candidates match the specified criteria for a 2D artist role. None of the provided CVs explicitly mention 2D art skills, tools, or relevant experience.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-04T14:00:23.467686"
         }
       ],
       "created_at": "2026-01-03T22:15:07.573740",
-      "updated_at": "2026-01-04T13:51:42.869982"
+      "updated_at": "2026-01-04T14:00:23.467686"
     }
   ]
 }

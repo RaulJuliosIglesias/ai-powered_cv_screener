@@ -79,44 +79,65 @@ const PipelineProgressPanel = ({ isExpanded, onToggleExpand, progress, autoExpan
 
   return (
     <div className={`
-      fixed top-0 right-0 h-full bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 shadow-xl
-      transition-all duration-300 ease-in-out z-30
-      ${isExpanded ? 'w-80' : 'w-12'}
+      fixed top-14 right-0 h-[calc(100%-3.5rem)] bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-xl
+      transition-all duration-300 ease-in-out z-20
+      ${isExpanded ? 'w-72' : 'w-11'}
     `}>
       <div className="flex flex-col h-full">
-        {/* Collapse/Expand Button */}
+        {/* Collapse/Expand Button - Integrated into panel */}
         <button
           onClick={onToggleExpand}
-          className="absolute -left-6 top-4 w-6 h-12 bg-emerald-500 hover:bg-emerald-600 text-white rounded-l-lg flex items-center justify-center shadow-lg transition-colors z-10"
+          className={`
+            flex items-center justify-center h-10 w-full
+            bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600
+            text-white transition-all duration-200
+            ${isExpanded ? 'rounded-none' : 'rounded-none'}
+          `}
           title={isExpanded ? 'Collapse' : 'Expand'}
         >
-          {isExpanded ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+          {isExpanded ? (
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium">RAG Pipeline</span>
+              <ChevronRight className="w-4 h-4" />
+            </div>
+          ) : (
+            <ChevronLeft className="w-4 h-4" />
+          )}
         </button>
 
         {/* Collapsed View */}
         {!isExpanded && (
-          <div className="flex flex-col items-center justify-between h-full py-6">
-            <Brain className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-            
-            {/* Vertical Text - Readable without tilting head */}
-            <div className="flex flex-col items-center gap-0.5 text-xs font-bold text-gray-600 dark:text-gray-400 tracking-wider">
-              <span>R</span>
-              <span>A</span>
-              <span>G</span>
-            </div>
-            
-            {/* Progress indicator */}
-            <div className="flex flex-col items-center gap-2">
-              {currentStep && (
-                <>
-                  <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                  <div className="h-8 w-0.5 bg-gradient-to-b from-emerald-500 to-transparent" />
-                </>
+          <div className="flex flex-col items-center py-4 gap-3 flex-1">
+            {/* Mini progress indicator */}
+            <div className="flex flex-col items-center gap-1">
+              {currentStep ? (
+                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+              ) : (
+                <Brain className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               )}
-              <span className="text-[9px] font-medium text-gray-500 dark:text-gray-500">
-                {completedCount}/{steps.length}
-              </span>
             </div>
+            
+            {/* Vertical progress dots */}
+            <div className="flex flex-col gap-1">
+              {steps.slice(0, 5).map((stepName, i) => {
+                const status = getStepStatus(stepName);
+                return (
+                  <div
+                    key={stepName}
+                    className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                      status === 'completed' ? 'bg-emerald-500' :
+                      status === 'running' ? 'bg-emerald-400 animate-pulse' :
+                      'bg-slate-300 dark:bg-slate-700'
+                    }`}
+                  />
+                );
+              })}
+            </div>
+            
+            {/* Count */}
+            <span className="text-[9px] font-semibold text-slate-500 dark:text-slate-500">
+              {completedCount}/{steps.length}
+            </span>
           </div>
         )}
 
@@ -124,51 +145,44 @@ const PipelineProgressPanel = ({ isExpanded, onToggleExpand, progress, autoExpan
         {isExpanded && (
           <>
             {/* Header */}
-            <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-emerald-50 to-cyan-50 dark:from-gray-900 dark:to-gray-800">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="relative">
-                  <Brain className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
-                  {currentStep && (
-                    <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full animate-pulse" />
-                  )}
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-gray-900 dark:text-white text-sm">
-                    {language === 'es' ? 'Pipeline RAG' : 'RAG Pipeline'}
-                  </h3>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">
-                    {completedCount}/{steps.length} {language === 'es' ? 'pasos' : 'steps'}
-                  </p>
-                </div>
-              </div>
-
-              {/* Auto-expand toggle */}
-              <div className="flex items-center justify-between p-2 bg-white/50 dark:bg-gray-800/50 rounded-lg">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={autoExpand}
-                    onChange={onToggleAutoExpand}
-                    className="w-4 h-4 text-emerald-600 bg-gray-100 border-gray-300 rounded focus:ring-emerald-500 dark:focus:ring-emerald-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  <span className="text-xs text-gray-700 dark:text-gray-300">
-                    {language === 'es' ? 'Auto-expandir' : 'Auto-expand'}
+            <div className="p-3 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+              {/* Progress info */}
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-medium text-slate-600 dark:text-slate-400">
+                  {completedCount}/{steps.length} {language === 'es' ? 'pasos' : 'steps'}
+                </span>
+                {currentStep && (
+                  <span className="flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400">
+                    <Loader className="w-3 h-3 animate-spin" />
+                    <span className="font-medium">{language === 'es' ? 'Procesando' : 'Processing'}</span>
                   </span>
-                </label>
-                <Settings className="w-3.5 h-3.5 text-gray-400" />
+                )}
               </div>
 
               {/* Progress Bar */}
-              <div className="mt-3 w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
+              <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
                 <div 
-                  className="h-full bg-gradient-to-r from-emerald-500 to-cyan-500 transition-all duration-500"
+                  className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-500"
                   style={{ width: `${(completedCount / steps.length) * 100}%` }}
                 />
               </div>
+
+              {/* Auto-expand toggle */}
+              <label className="flex items-center gap-2 mt-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={autoExpand}
+                  onChange={onToggleAutoExpand}
+                  className="w-3.5 h-3.5 text-emerald-600 bg-slate-100 border-slate-300 rounded focus:ring-emerald-500 dark:bg-slate-700 dark:border-slate-600"
+                />
+                <span className="text-xs text-slate-600 dark:text-slate-400">
+                  {language === 'es' ? 'Auto-expandir' : 'Auto-expand'}
+                </span>
+              </label>
             </div>
 
             {/* Steps List */}
-            <div className="flex-1 overflow-y-auto p-3 space-y-1.5">
+            <div className="flex-1 overflow-y-auto p-2 space-y-1">
               {steps.map((stepName, index) => {
                 const config = STEP_CONFIG[stepName];
                 const status = getStepStatus(stepName);
@@ -180,78 +194,54 @@ const PipelineProgressPanel = ({ isExpanded, onToggleExpand, progress, autoExpan
                   <div
                     key={stepName}
                     className={`
-                      rounded-lg p-2 transition-all duration-200
-                      ${isRunning ? 'bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-300 dark:border-emerald-700' : 
-                        isCompleted ? 'bg-gray-50 dark:bg-gray-800/50' : 
-                        'bg-gray-50/50 dark:bg-gray-800/30 opacity-50'}
+                      rounded-lg px-2 py-1.5 transition-all duration-200 flex items-center gap-2
+                      ${isRunning ? 'bg-emerald-50 dark:bg-emerald-900/30' : 
+                        isCompleted ? 'bg-slate-50 dark:bg-slate-800/50' : 
+                        'opacity-40'}
                     `}
                   >
-                    <div className="flex items-center gap-2">
-                      {/* Step Number/Status */}
-                      <div className={`
-                        flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs
-                        ${isCompleted ? 'bg-emerald-500 text-white' :
-                          isRunning ? 'bg-emerald-500 text-white' :
-                          'bg-gray-300 dark:bg-gray-700 text-gray-600 dark:text-gray-400'}
-                      `}>
-                        {isCompleted ? (
-                          <CheckCircle className="w-3.5 h-3.5" />
-                        ) : isRunning ? (
-                          <Loader className="w-3.5 h-3.5 animate-spin" />
-                        ) : (
-                          <span className="text-[10px] font-bold">{index + 1}</span>
-                        )}
-                      </div>
-
-                      {/* Icon */}
-                      <div className="flex-shrink-0">
-                        <Icon className={`
-                          w-4 h-4
-                          ${isRunning ? 'text-emerald-600 dark:text-emerald-400 animate-pulse' :
-                            isCompleted ? 'text-emerald-600 dark:text-emerald-400' :
-                            'text-gray-400 dark:text-gray-600'}
-                        `} />
-                      </div>
-
-                      {/* Label */}
-                      <div className="flex-1 min-w-0">
-                        <p className={`
-                          text-xs font-medium truncate
-                          ${isRunning ? 'text-gray-900 dark:text-white' :
-                            isCompleted ? 'text-gray-700 dark:text-gray-300' :
-                            'text-gray-500 dark:text-gray-500'}
-                        `}>
-                          {language === 'es' ? config.labelEs : config.labelEn}
-                        </p>
-                      </div>
-
-                      {/* Status */}
-                      {isRunning && (
-                        <Loader className="w-3.5 h-3.5 text-emerald-500 animate-spin flex-shrink-0" />
-                      )}
-                      {isCompleted && (
-                        <CheckCircle className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
-                      )}
-                      {!isRunning && !isCompleted && (
-                        <Clock className="w-3.5 h-3.5 text-gray-300 dark:text-gray-600 flex-shrink-0" />
+                    {/* Status indicator */}
+                    <div className={`
+                      flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center
+                      ${isCompleted ? 'bg-emerald-500 text-white' :
+                        isRunning ? 'bg-emerald-500 text-white' :
+                        'bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-500'}
+                    `}>
+                      {isCompleted ? (
+                        <CheckCircle className="w-3 h-3" />
+                      ) : isRunning ? (
+                        <Loader className="w-3 h-3 animate-spin" />
+                      ) : (
+                        <span className="text-[9px] font-bold">{index + 1}</span>
                       )}
                     </div>
+
+                    {/* Icon */}
+                    <Icon className={`
+                      w-3.5 h-3.5 flex-shrink-0
+                      ${isRunning ? 'text-emerald-600 dark:text-emerald-400' :
+                        isCompleted ? 'text-emerald-600 dark:text-emerald-400' :
+                        'text-slate-400 dark:text-slate-600'}
+                    `} />
+
+                    {/* Label */}
+                    <span className={`
+                      text-xs truncate flex-1
+                      ${isRunning ? 'text-slate-900 dark:text-white font-medium' :
+                        isCompleted ? 'text-slate-600 dark:text-slate-400' :
+                        'text-slate-500 dark:text-slate-600'}
+                    `}>
+                      {language === 'es' ? config.labelEs : config.labelEn}
+                    </span>
+
+                    {/* Right status icon */}
+                    {isCompleted && (
+                      <CheckCircle className="w-3 h-3 text-emerald-500 flex-shrink-0" />
+                    )}
                   </div>
                 );
               })}
             </div>
-
-            {/* Footer */}
-            {currentStep && (
-              <div className="p-3 border-t border-gray-200 dark:border-gray-700 bg-gradient-to-r from-emerald-50 to-cyan-50 dark:from-gray-900 dark:to-gray-800">
-                <div className="flex items-center gap-2">
-                  <Loader className="w-3.5 h-3.5 animate-spin text-emerald-600 dark:text-emerald-400" />
-                  <span className="text-xs text-gray-700 dark:text-gray-300">
-                    {language === 'es' ? STEP_CONFIG[currentStep].labelEs : STEP_CONFIG[currentStep].labelEn}...
-                  </span>
-                </div>
-              </div>
-            )}
           </>
         )}
       </div>

@@ -742,109 +742,110 @@ function App() {
   return (
     <div className={`h-screen flex ${theme === 'dark' ? 'dark' : ''}`}>
       {/* Sidebar */}
-      <div className="w-64 flex-shrink-0 bg-gray-900 flex flex-col">
+      <div className="w-64 flex-shrink-0 bg-slate-100 dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 flex flex-col">
         <div className="p-3">
-          <button onClick={handleNewChat} className="w-full flex items-center gap-3 px-3 py-3 rounded-lg border border-gray-700 hover:bg-gray-800 text-white">
+          <button onClick={handleNewChat} className="w-full flex items-center gap-3 px-3 py-3 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-white transition-colors">
             <Plus className="w-4 h-4" /><span className="text-sm">{language === 'es' ? 'Nuevo chat' : 'New chat'}</span>
           </button>
         </div>
         <div className="flex-1 overflow-y-auto px-2">
           {sessions.map((s) => (
             <div key={s.id} className="mb-1">
-              <div onClick={() => setCurrentSessionId(s.id)} className={`group flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer ${currentSessionId === s.id ? 'bg-gray-800 text-white' : 'text-gray-300 hover:bg-gray-800/50'}`}>
+              <div onClick={() => setCurrentSessionId(s.id)} className={`group flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-colors ${currentSessionId === s.id ? 'bg-blue-100 dark:bg-slate-800 text-blue-700 dark:text-white' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800/50'}`}>
                 {chatLoadingStates[s.id] ? (
                   <Loader className="w-4 h-4 flex-shrink-0 animate-spin text-cyan-400" />
                 ) : (
                   <MessageSquare className="w-4 h-4 flex-shrink-0" />
                 )}
                 {editingId === s.id ? (
-                  <input value={editName} onChange={(e) => setEditName(e.target.value)} onBlur={() => handleRename(s.id)} onKeyDown={(e) => e.key === 'Enter' && handleRename(s.id)} className="flex-1 bg-gray-700 text-white text-sm px-2 py-0.5 rounded outline-none" autoFocus onClick={(e) => e.stopPropagation()} />
+                  <input value={editName} onChange={(e) => setEditName(e.target.value)} onBlur={() => handleRename(s.id)} onKeyDown={(e) => e.key === 'Enter' && handleRename(s.id)} className="flex-1 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm px-2 py-0.5 rounded outline-none border border-slate-300 dark:border-slate-600" autoFocus onClick={(e) => e.stopPropagation()} />
                 ) : (
                   <div className="flex-1 min-w-0">
                     <span className="text-sm truncate block">{s.name}</span>
-                    <span className="text-xs text-gray-500">{s.cv_count || 0} CVs</span>
+                    <span className="text-xs text-slate-400 dark:text-slate-500">{s.cv_count || 0} CVs</span>
                   </div>
                 )}
                 <div className="hidden group-hover:flex items-center gap-1">
                   {deleteConfirm === s.id ? (
                     <><button onClick={(e) => { e.stopPropagation(); handleDelete(s.id); }} className="p-1 hover:bg-red-500/20 rounded"><Check className="w-3.5 h-3.5 text-red-400" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(null); }} className="p-1"><X className="w-3.5 h-3.5" /></button></>
                   ) : (
-                    <><button onClick={(e) => { e.stopPropagation(); setCvPanelSessionId(s.id); setShowCVPanel(true); }} className="p-1 hover:bg-gray-700 rounded" title={language === 'es' ? 'Ver CVs' : 'View CVs'}><FileText className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setEditingId(s.id); setEditName(s.name); }} className="p-1 hover:bg-gray-700 rounded"><Edit2 className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(s.id); }} className="p-1 hover:bg-gray-700 rounded"><Trash2 className="w-3.5 h-3.5" /></button></>
+                    <><button onClick={(e) => { e.stopPropagation(); setCvPanelSessionId(s.id); setShowCVPanel(true); }} className="p-1 hover:bg-slate-300 dark:hover:bg-slate-700 rounded transition-colors" title={language === 'es' ? 'Ver CVs' : 'View CVs'}><FileText className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setEditingId(s.id); setEditName(s.name); }} className="p-1 hover:bg-slate-300 dark:hover:bg-slate-700 rounded transition-colors"><Edit2 className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(s.id); }} className="p-1 hover:bg-slate-300 dark:hover:bg-slate-700 rounded transition-colors"><Trash2 className="w-3.5 h-3.5" /></button></>
                   )}
                 </div>
               </div>
             </div>
           ))}
         </div>
-        <div className="p-3 border-t border-gray-800 space-y-1">
+        <div className="p-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
           {/* Mode Selector */}
-          <div className="flex items-center gap-2 px-3 py-2">
-            <span className="text-xs text-gray-500 w-12">Mode:</span>
-            <button onClick={() => setMode('local')} className={`flex-1 flex items-center justify-center gap-1 px-2 py-1.5 rounded text-xs ${mode === 'local' ? 'bg-blue-600 text-white' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'}`}>
+          <div className="flex items-center gap-2 px-2 py-2 bg-white dark:bg-slate-900 rounded-lg">
+            <span className="text-xs text-slate-500 dark:text-slate-400 w-12 font-medium">Mode:</span>
+            <button onClick={() => setMode('local')} className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-1.5 rounded-md text-xs font-medium transition-colors ${mode === 'local' ? 'bg-blue-500 text-white shadow-sm' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'}`}>
               <Database className="w-3 h-3" /> Local
             </button>
-            <button onClick={() => setMode('cloud')} className={`flex-1 flex items-center justify-center gap-1 px-2 py-1.5 rounded text-xs ${mode === 'cloud' ? 'bg-blue-600 text-white' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'}`}>
+            <button onClick={() => setMode('cloud')} className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-1.5 rounded-md text-xs font-medium transition-colors ${mode === 'cloud' ? 'bg-blue-500 text-white shadow-sm' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'}`}>
               <Cloud className="w-3 h-3" /> Supabase
             </button>
           </div>
           {/* Language Selector */}
-          <div className="flex items-center gap-2 px-3 py-2">
-            <span className="text-xs text-gray-500 w-12">Lang:</span>
-            <button onClick={() => setLanguage('en')} className={`flex-1 px-2 py-1.5 rounded text-xs ${language === 'en' ? 'bg-blue-600 text-white' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'}`}>EN</button>
-            <button onClick={() => setLanguage('es')} className={`flex-1 px-2 py-1.5 rounded text-xs ${language === 'es' ? 'bg-blue-600 text-white' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'}`}>ES</button>
+          <div className="flex items-center gap-2 px-2 py-2 bg-white dark:bg-slate-900 rounded-lg">
+            <span className="text-xs text-slate-500 dark:text-slate-400 w-12 font-medium">Lang:</span>
+            <button onClick={() => setLanguage('en')} className={`flex-1 px-2 py-1.5 rounded-md text-xs font-medium transition-colors ${language === 'en' ? 'bg-blue-500 text-white shadow-sm' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'}`}>EN</button>
+            <button onClick={() => setLanguage('es')} className={`flex-1 px-2 py-1.5 rounded-md text-xs font-medium transition-colors ${language === 'es' ? 'bg-blue-500 text-white shadow-sm' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'}`}>ES</button>
           </div>
           {/* Theme Toggle */}
-          <button onClick={toggleTheme} className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 text-sm">
-            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          <button onClick={toggleTheme} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-medium transition-colors">
+            {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-500" /> : <Moon className="w-4 h-4 text-slate-500" />}
             <span>{theme === 'dark' ? 'Light' : 'Dark'}</span>
           </button>
           {/* All CVs Button */}
-          <button onClick={() => { setCvPanelSessionId(null); setShowCVPanel(true); }} className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 text-sm">
-            <FileText className="w-4 h-4" />
+          <button onClick={() => { setCvPanelSessionId(null); setShowCVPanel(true); }} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-medium transition-colors">
+            <FileText className="w-4 h-4 text-blue-500" />
             <span>{language === 'es' ? 'Todos los CVs' : 'All CVs'}</span>
-            <ChevronRight className="w-4 h-4 ml-auto" />
+            <ChevronRight className="w-4 h-4 ml-auto text-slate-400" />
           </button>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className={`flex-1 flex flex-col overflow-hidden bg-gray-50 dark:bg-gray-900 transition-all duration-300 ${
-        showPipelinePanel && isPipelineExpanded ? 'mr-80' : showPipelinePanel ? 'mr-12' : ''
+      <div className={`flex-1 flex flex-col overflow-hidden bg-slate-50 dark:bg-slate-900 transition-all duration-300 ${
+        showPipelinePanel && isPipelineExpanded ? 'mr-72' : showPipelinePanel ? 'mr-11' : ''
       }`}>
-        <div className="h-14 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-4">
+        <div className="h-14 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-4">
           <div className="flex items-center gap-3">
-            <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${mode === 'cloud' ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300' : 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300'}`}>
+            <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold ${mode === 'cloud' ? 'bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300' : 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300'}`}>
               {mode === 'cloud' ? <Cloud className="w-3.5 h-3.5" /> : <Database className="w-3.5 h-3.5" />}
               {mode === 'cloud' ? 'Supabase' : 'Local'}
             </div>
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{currentSession ? `${currentSession.name} · ${currentSession.cvs?.length || 0} CVs` : 'CV Screener'}</span>
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{currentSession ? `${currentSession.name} · ${currentSession.cvs?.length || 0} CVs` : 'CV Screener'}</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <button 
               onClick={() => setShowMetricsPanel(true)}
-              className="flex items-center gap-1.5 px-2.5 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-cyan-300 dark:hover:border-cyan-600 transition-colors text-sm"
+              className="flex items-center gap-2 px-3 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-cyan-100 dark:hover:bg-cyan-900/30 rounded-lg transition-colors group"
               title={language === 'es' ? 'Ver métricas RAG' : 'View RAG Metrics'}
             >
-              <BarChart3 className="w-4 h-4 text-cyan-500" />
+              <BarChart3 className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
+              <span className="text-xs font-medium text-slate-600 dark:text-slate-400 group-hover:text-cyan-700 dark:group-hover:text-cyan-300 hidden sm:inline">{language === 'es' ? 'Métricas' : 'Metrics'}</span>
             </button>
             <button 
               onClick={() => setShowRAGSettings(true)}
-              className="flex items-center gap-1.5 px-3 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-purple-300 dark:hover:border-purple-600 transition-colors text-sm"
+              className="flex items-center gap-2 px-3 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-purple-100 dark:hover:bg-purple-900/30 rounded-lg transition-colors group"
               title={language === 'es' ? 'Configurar Pipeline RAG' : 'Configure RAG Pipeline'}
             >
-              <Sliders className="w-4 h-4 text-purple-500" />
-              <span className="text-gray-600 dark:text-gray-300 text-xs hidden sm:inline">{language === 'es' ? 'Pipeline' : 'Pipeline'}</span>
+              <Sliders className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+              <span className="text-xs font-medium text-slate-600 dark:text-slate-400 group-hover:text-purple-700 dark:group-hover:text-purple-300 hidden sm:inline">{language === 'es' ? 'Pipeline' : 'Pipeline'}</span>
             </button>
-            {currentSession && (<><input ref={fileInputRef} type="file" accept=".pdf" multiple onChange={handleUpload} className="hidden" /><button onClick={() => fileInputRef.current?.click()} disabled={isUploading} className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-blue-500 hover:bg-blue-600 text-white rounded-lg disabled:opacity-50">{isUploading ? <Loader className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}<span>{language === 'es' ? 'Añadir CVs' : 'Add CVs'}</span></button></>)}
+            {currentSession && (<><input ref={fileInputRef} type="file" accept=".pdf" multiple onChange={handleUpload} className="hidden" /><button onClick={() => fileInputRef.current?.click()} disabled={isUploading} className="flex items-center gap-2 px-4 py-2 text-sm bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg disabled:opacity-50 font-medium transition-colors shadow-sm">{isUploading ? <Loader className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}<span>{language === 'es' ? 'Añadir CVs' : 'Add CVs'}</span></button></>)}
           </div>
         </div>
 
         <div className="flex-1 overflow-y-auto p-4">
           {!currentSession ? (
-            <div className="h-full flex items-center justify-center"><div className="text-center"><Sparkles className="w-12 h-12 text-blue-500 mx-auto mb-4" /><h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-2">CV Screener</h2><p className="text-gray-500 mb-6">{language === 'es' ? 'Crea un chat y sube CVs' : 'Create a chat and upload CVs'}</p><button onClick={handleNewChat} className="px-6 py-3 bg-blue-500 text-white rounded-xl">{language === 'es' ? 'Nuevo chat' : 'New chat'}</button></div></div>
+            <div className="h-full flex items-center justify-center"><div className="text-center"><Sparkles className="w-12 h-12 text-blue-500 mx-auto mb-4" /><h2 className="text-2xl font-semibold text-slate-800 dark:text-white mb-2">CV Screener</h2><p className="text-slate-500 mb-6">{language === 'es' ? 'Crea un chat y sube CVs' : 'Create a chat and upload CVs'}</p><button onClick={handleNewChat} className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-xl transition-colors">{language === 'es' ? 'Nuevo chat' : 'New chat'}</button></div></div>
           ) : (currentSession.messages?.length === 0 && !pendingMessages[currentSessionId]) ? (
-            <div className="h-full flex flex-col items-center justify-center"><Sparkles className="w-10 h-10 text-blue-500 mb-4" /><h3 className="text-xl font-medium text-gray-800 dark:text-white mb-6">{currentSession.cvs?.length ? (language === 'es' ? '¿Qué quieres saber?' : 'What do you want to know?') : (language === 'es' ? 'Sube CVs para empezar' : 'Upload CVs to start')}</h3>
-              {suggestions.length > 0 && <div className="grid grid-cols-2 gap-3 max-w-2xl">{suggestions.map((s, i) => (<button key={i} onClick={() => handleSend(s)} className="p-4 text-left text-sm bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-xl text-gray-700 dark:text-gray-200">{s}</button>))}</div>}
+            <div className="h-full flex flex-col items-center justify-center"><Sparkles className="w-10 h-10 text-blue-500 mb-4" /><h3 className="text-xl font-medium text-slate-800 dark:text-white mb-6">{currentSession.cvs?.length ? (language === 'es' ? '¿Qué quieres saber?' : 'What do you want to know?') : (language === 'es' ? 'Sube CVs para empezar' : 'Upload CVs to start')}</h3>
+              {suggestions.length > 0 && <div className="grid grid-cols-2 gap-3 max-w-2xl">{suggestions.map((s, i) => (<button key={i} onClick={() => handleSend(s)} className="p-4 text-left text-sm bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-colors">{s}</button>))}</div>}
             </div>
           ) : (
             <div className="max-w-5xl mx-auto space-y-6">
@@ -857,7 +858,7 @@ function App() {
                   <div className={`flex gap-4 ${msg.role === 'user' ? 'flex-row-reverse max-w-[70%]' : 'w-full'}`}>
                     <div className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ${msg.role === 'user' ? 'bg-blue-500' : 'bg-gradient-to-br from-emerald-400 to-cyan-500'}`}>{msg.role === 'user' ? <User className="w-5 h-5 text-white" /> : <Sparkles className="w-5 h-5 text-white" />}</div>
                     <div className={`flex-1 ${msg.role === 'user' ? '' : 'min-w-0'}`}>
-                      <div className={`p-4 rounded-2xl ${msg.role === 'user' ? 'bg-blue-500 text-white' : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm text-gray-800 dark:text-gray-100'}`}>
+                      <div className={`p-4 rounded-2xl ${msg.role === 'user' ? 'bg-blue-500 text-white' : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-slate-800 dark:text-slate-100'}`}>
                         
                         {/* Thinking/Reasoning Collapsible - Only for assistant messages */}
                         {msg.role === 'assistant' && (() => {
@@ -865,11 +866,11 @@ function App() {
                           if (thinkingContent) {
                             return (
                               <details className="mb-4 group">
-                                <summary className="flex items-center gap-2 cursor-pointer text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 select-none">
+                                <summary className="flex items-center gap-2 cursor-pointer text-sm text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 select-none">
                                   <ChevronRight className="w-4 h-4 transition-transform group-open:rotate-90" />
                                   <span className="font-medium">{language === 'es' ? 'Ver razonamiento interno' : 'View internal reasoning'}</span>
                                 </summary>
-                                <div className="mt-2 p-3 bg-gray-50 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-400 italic">
+                                <div className="mt-2 p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-200 dark:border-slate-700 text-sm text-slate-600 dark:text-slate-400 italic">
                                   {thinkingContent}
                                 </div>
                               </details>
@@ -1049,10 +1050,10 @@ function App() {
                   <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center">
                     <Sparkles className="w-5 h-5 text-white" />
                   </div>
-                  <div className="flex-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-4 shadow-sm">
+                  <div className="flex-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 shadow-sm">
                     <div className="flex items-center gap-2">
                       <Loader className="w-5 h-5 animate-spin text-emerald-500" />
-                      <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
+                      <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
                         {(() => {
                           // Show active pipeline step
                           const activeStep = Object.entries(pipelineProgress).find(([_, v]) => v.status === 'running');
