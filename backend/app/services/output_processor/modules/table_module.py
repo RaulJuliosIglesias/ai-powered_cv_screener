@@ -161,6 +161,9 @@ class TableModule:
         if not table_rows:
             return None
         
+        # Deduplicate rows by cv_id (keep first occurrence with highest score)
+        table_rows = self._deduplicate_rows(table_rows)
+        
         # Headers without Candidate and Match Score columns
         display_headers = ["Candidate"] + raw_headers[1:-1] + ["Match Score"]
         if len(raw_headers) <= 2:
@@ -249,6 +252,62 @@ class TableModule:
                 return 15
         
         return 50  # Default when no indicator found
+    
+    def _deduplicate_rows(self, rows: List[TableRow]) -> List[TableRow]:
+        """
+        Deduplicate table rows by cv_id, keeping the one with highest match_score.
+        
+        This prevents the same candidate from appearing multiple times in the table
+        when the LLM receives multiple chunks from the same CV.
+        
+        Args:
+            rows: List of TableRow objects (may contain duplicates)
+            
+        Returns:
+            Deduplicated list of TableRow objects
+        """
+        if not rows:
+            return rows
+        
+        seen_cv_ids: Dict[str, TableRow] = {}
+        seen_names: Dict[str, TableRow] = {}  # Fallback for rows without cv_id
+        
+        for row in rows:
+            # Primary deduplication by cv_id
+            if row.cv_id:
+                if row.cv_id not in seen_cv_ids:
+                    seen_cv_ids[row.cv_id] = row
+                elif row.match_score > seen_cv_ids[row.cv_id].match_score:
+                    # Keep the one with higher score
+                    seen_cv_ids[row.cv_id] = row
+            else:
+                # Fallback: deduplicate by normalized candidate name
+                normalized_name = row.candidate_name.lower().strip()
+                if normalized_name not in seen_names:
+                    seen_names[normalized_name] = row
+                elif row.match_score > seen_names[normalized_name].match_score:
+                    seen_names[normalized_name] = row
+        
+        # Combine results (cv_id takes priority over name-based)
+        result = list(seen_cv_ids.values())
+        
+        # Add name-based rows that don't have cv_id matches
+        for name, row in seen_names.items():
+            # Check if this name already exists in cv_id results
+            name_exists = any(
+                r.candidate_name.lower().strip() == name 
+                for r in result
+            )
+            if not name_exists:
+                result.append(row)
+        
+        # Sort by match_score descending to maintain ranking
+        result.sort(key=lambda r: r.match_score, reverse=True)
+        
+        if len(result) < len(rows):
+            logger.info(f"[TABLE] Deduplicated: {len(rows)} -> {len(result)} rows")
+        
+        return result
     
     def _generate_fallback_table(self, chunks: List[dict]) -> Optional[TableData]:
         """Generate fallback table from chunks using TableRow structure."""

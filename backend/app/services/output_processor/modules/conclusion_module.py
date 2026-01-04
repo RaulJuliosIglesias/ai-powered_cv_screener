@@ -91,6 +91,9 @@ class ConclusionModule:
         # LLM sometimes generates "** Name**" instead of "**Name**"
         text = self._fix_bold_formatting(text)
         
+        # Deduplicate candidate mentions (same cv_id appearing multiple times)
+        text = self._deduplicate_candidates(text)
+        
         return text.strip()
     
     def _fix_bold_formatting(self, text: str) -> str:
@@ -121,6 +124,78 @@ class ConclusionModule:
         text = re.sub(r'[ \t\u00a0]+\*\*', '**', text)
         
         return text
+    
+    def _deduplicate_candidates(self, text: str) -> str:
+        """
+        Remove duplicate candidate mentions from conclusion text.
+        
+        When the same candidate (same cv_id) appears multiple times,
+        keep only the first mention to avoid "Sofia Grijalva and Sofia Grijalva".
+        
+        Args:
+            text: Conclusion text with potential duplicate candidates
+            
+        Returns:
+            Text with duplicate candidates removed
+        """
+        if not text:
+            return text
+        
+        # Find all candidate mentions with cv_id: **[Name](cv:cv_xxx)**
+        pattern = r'\*\*\[([^\]]+)\]\(cv:(cv_[a-z0-9_-]+)\)\*\*'
+        matches = list(re.finditer(pattern, text, re.IGNORECASE))
+        
+        if len(matches) <= 1:
+            return text
+        
+        # Track seen cv_ids and their positions
+        seen_cv_ids = {}
+        duplicates_to_remove = []
+        
+        for match in matches:
+            name = match.group(1)
+            cv_id = match.group(2)
+            
+            if cv_id in seen_cv_ids:
+                # This is a duplicate - mark for removal
+                duplicates_to_remove.append(match)
+                logger.info(f"[CONCLUSION] Removing duplicate: {name} ({cv_id})")
+            else:
+                seen_cv_ids[cv_id] = name
+        
+        if not duplicates_to_remove:
+            return text
+        
+        # Remove duplicates and cleanup (handle "and", commas, etc.)
+        result = text
+        for match in reversed(duplicates_to_remove):  # Reverse to preserve positions
+            start, end = match.start(), match.end()
+            
+            # Check for preceding "and " or ", " to also remove
+            prefix_start = start
+            if start >= 5 and result[start-5:start] == ' and ':
+                prefix_start = start - 5
+            elif start >= 4 and result[start-4:start] == 'and ':
+                prefix_start = start - 4
+            elif start >= 2 and result[start-2:start] == ', ':
+                prefix_start = start - 2
+            
+            # Check for trailing " and" or ","
+            suffix_end = end
+            if end + 5 <= len(result) and result[end:end+5] == ' and ':
+                suffix_end = end + 5
+            elif end + 1 <= len(result) and result[end:end+1] == ',':
+                suffix_end = end + 1
+            
+            result = result[:prefix_start] + result[suffix_end:]
+        
+        # Clean up any double spaces or orphaned punctuation
+        result = re.sub(r'\s+', ' ', result)
+        result = re.sub(r'\s*,\s*,', ',', result)
+        result = re.sub(r'\s*\.\s*\.', '.', result)
+        result = re.sub(r',\s*\.', '.', result)
+        
+        return result.strip()
     
     def format(self, content: str) -> str:
         """
