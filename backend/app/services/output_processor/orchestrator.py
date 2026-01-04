@@ -1,18 +1,10 @@
 """
-Structured Output Orchestrator.
+Orchestrator - Assembles structured output using ONLY modular components.
 
 This is the MAIN ENTRY POINT that RAG service calls.
-It orchestrates all modular components to build the final structured output.
+It coordinates processor and modules to build final output SEQUENTIALLY.
 
-Architecture:
-- RAG service calls: OutputOrchestrator.process()
-- Orchestrator uses:
-  1. Processor (extracts components from LLM output)
-  2. Formatter (assembles final markdown with labels)
-- Returns: StructuredOutput object
-
-CRITICAL: This is the ONLY place RAG service should interact with output processing.
-Do NOT modify this when changing RAG service logic - keep separation clean.
+DO NOT create parallel assembly logic - use modules parametrically.
 """
 
 import logging
@@ -20,29 +12,38 @@ from typing import List, Dict, Any
 
 from app.models.structured_output import StructuredOutput
 from .processor import OutputProcessor
-from .formatter import StructuredOutputFormatter
+from .modules import (
+    ThinkingModule,
+    DirectAnswerModule,
+    AnalysisModule,
+    TableModule,
+    ConclusionModule
+)
 
 logger = logging.getLogger(__name__)
 
 
 class OutputOrchestrator:
     """
-    Main orchestrator for structured output processing.
+    Main orchestrator - RAG service calls this.
     
-    This is what RAG service calls. It coordinates:
-    - Component extraction (thinking, direct answer, table, conclusion)
-    - Final assembly with proper formatting and labels
-    
-    Components used (all modular):
-    1. OutputProcessor - extracts components from LLM output
-    2. StructuredOutputFormatter - formats components with labels
+    Coordinates:
+    1. Extraction (via OutputProcessor using modules)
+    2. Sequential assembly (using each module's format method)
     """
     
     def __init__(self):
-        """Initialize orchestrator with component services."""
+        """Initialize with processor and modules."""
         self.processor = OutputProcessor()
-        self.formatter = StructuredOutputFormatter()
-        logger.info("[ORCHESTRATOR] Initialized with processor and formatter")
+        
+        # Module instances for formatting
+        self.thinking_module = ThinkingModule()
+        self.direct_answer_module = DirectAnswerModule()
+        self.analysis_module = AnalysisModule()
+        self.table_module = TableModule()
+        self.conclusion_module = ConclusionModule()
+        
+        logger.info("[ORCHESTRATOR] Initialized")
     
     def process(
         self,
@@ -50,7 +51,7 @@ class OutputOrchestrator:
         chunks: List[Dict[str, Any]] = None
     ) -> tuple[StructuredOutput, str]:
         """
-        Process raw LLM output into structured output with formatted answer.
+        Process LLM output into structured components and formatted answer.
         
         This is the MAIN METHOD that RAG service calls.
         
@@ -59,51 +60,66 @@ class OutputOrchestrator:
             chunks: Retrieved CV chunks for fallback
             
         Returns:
-            Tuple of (StructuredOutput object, formatted_answer_string)
-            
-        Flow:
-            1. Extract components (thinking, direct answer, table, conclusion)
-            2. Build StructuredOutput object
-            3. Format final markdown with labels
-            4. Return both structured data and display string
+            Tuple of (StructuredOutput, formatted_answer_string)
         """
-        logger.info("[ORCHESTRATOR] Starting output processing")
+        logger.info("[ORCHESTRATOR] Starting processing")
         
-        # Step 1: Extract all components using processor
-        structured_output = self.processor.process(
-            raw_llm_output=raw_llm_output,
-            chunks=chunks
-        )
+        # STEP 1: Extract all components using processor (which uses modules)
+        structured = self.processor.process(raw_llm_output, chunks)
         
         logger.info(
             f"[ORCHESTRATOR] Components extracted: "
-            f"thinking={bool(structured_output.thinking)}, "
-            f"table={bool(structured_output.table_data)}, "
-            f"conclusion={bool(structured_output.conclusion)}"
+            f"thinking={bool(structured.thinking)}, "
+            f"table={bool(structured.table_data)}, "
+            f"conclusion={bool(structured.conclusion)}"
         )
         
-        # Step 2: Format final answer with labels using formatter
-        formatted_answer = self.formatter.build_formatted_answer(structured_output)
+        # STEP 2: Assemble output SEQUENTIALLY using module format methods
+        parts = []
         
-        logger.info(
-            f"[ORCHESTRATOR] Final answer formatted: {len(formatted_answer)} chars"
-        )
+        # 1. Thinking block (collapsible dropdown)
+        if structured.thinking:
+            formatted_thinking = self.thinking_module.format(structured.thinking)
+            parts.append(formatted_thinking)
         
-        # Step 3: Return both structured data and formatted string
-        return structured_output, formatted_answer
+        # 2. Direct answer (no label)
+        formatted_answer = self.direct_answer_module.format(structured.direct_answer)
+        parts.append(formatted_answer)
+        
+        # 3. Analysis (if exists)
+        if structured.analysis:
+            formatted_analysis = self.analysis_module.format(structured.analysis)
+            parts.append(formatted_analysis)
+        
+        # 4. Table (if exists)
+        if structured.table_data:
+            formatted_table = self.table_module.format(structured.table_data)
+            parts.append(formatted_table)
+        
+        # 5. Conclusion block
+        if structured.conclusion:
+            formatted_conclusion = self.conclusion_module.format(structured.conclusion)
+            parts.append(formatted_conclusion)
+        
+        # Join with double newlines for readability
+        final_answer = "\n\n".join(parts)
+        
+        logger.info(f"[ORCHESTRATOR] Final answer: {len(final_answer)} chars")
+        
+        return structured, final_answer
 
 
-# Singleton instance for easy import
-_orchestrator_instance = None
+# Singleton instance
+_orchestrator = None
 
 
 def get_orchestrator() -> OutputOrchestrator:
     """
     Get singleton orchestrator instance.
     
-    This is what RAG service should import and use.
+    This is what RAG service imports and uses.
     """
-    global _orchestrator_instance
-    if _orchestrator_instance is None:
-        _orchestrator_instance = OutputOrchestrator()
-    return _orchestrator_instance
+    global _orchestrator
+    if _orchestrator is None:
+        _orchestrator = OutputOrchestrator()
+    return _orchestrator

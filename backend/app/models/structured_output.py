@@ -53,6 +53,7 @@ class StructuredOutput:
     
     # Optional components (null if not found/parsed)
     thinking: Optional[str] = None
+    analysis: Optional[str] = None
     table_data: Optional[TableData] = None
     conclusion: Optional[str] = None
     
@@ -67,6 +68,7 @@ class StructuredOutput:
             "direct_answer": self.direct_answer,
             "raw_content": self.raw_content,
             "thinking": self.thinking,
+            "analysis": self.analysis,
             "table_data": self.table_data.to_dict() if self.table_data else None,
             "conclusion": self.conclusion,
             "cv_references": [
@@ -93,6 +95,7 @@ class StructuredOutput:
             direct_answer=data["direct_answer"],
             raw_content=data["raw_content"],
             thinking=data.get("thinking"),
+            analysis=data.get("analysis"),
             table_data=table_data,
             conclusion=data.get("conclusion"),
             cv_references=cv_refs,
