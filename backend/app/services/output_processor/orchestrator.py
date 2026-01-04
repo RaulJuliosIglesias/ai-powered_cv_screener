@@ -91,14 +91,21 @@ class OutputOrchestrator:
                 logger.info(f"[ORCHESTRATOR] Generated fallback analysis: {len(fallback_analysis)} chars")
         
         # STEP 1.6: CRITICAL - Format candidate references with ÚNICO formato
+        # Primero extraer nombres de candidatos de la tabla para detectarlos en texto
+        candidate_map = {}  # {nombre: cv_id}
+        if structured.table_data and hasattr(structured.table_data, 'rows'):
+            for row in structured.table_data.rows:
+                if hasattr(row, 'candidate_name') and hasattr(row, 'cv_id'):
+                    candidate_map[row.candidate_name] = row.cv_id
+        
         # Convierte [Nombre](cv_xxx) -> [📄](cv:cv_xxx) **Nombre**
-        # Icono clicable + nombre en negrita (sin subrayado)
+        # Y también detecta nombres en texto plano y los convierte
         if structured.direct_answer:
-            structured.direct_answer = self._format_candidate_references(structured.direct_answer)
+            structured.direct_answer = self._format_candidate_references(structured.direct_answer, candidate_map)
         if structured.analysis:
-            structured.analysis = self._format_candidate_references(structured.analysis)
+            structured.analysis = self._format_candidate_references(structured.analysis, candidate_map)
         if structured.conclusion:
-            structured.conclusion = self._format_candidate_references(structured.conclusion)
+            structured.conclusion = self._format_candidate_references(structured.conclusion, candidate_map)
         
         # STEP 2: Assemble output SEQUENTIALLY using module format methods
         parts = []
@@ -179,18 +186,22 @@ class OutputOrchestrator:
         
         return text.strip()
     
-    def _format_candidate_references(self, text: str) -> str:
+    def _format_candidate_references(self, text: str, candidate_map: dict = None) -> str:
         """
         Formato ÚNICO para menciones de candidatos en TODAS las secciones.
         
         Convierte: [Nombre](cv:cv_xxx) o [Nombre](cv_xxx) o **[Nombre](cv_xxx)**
         A:         [📄](cv:cv_xxx) **Nombre**
         
+        También detecta nombres de candidatos en texto plano y los convierte.
+        
         - El icono 📄 es el ÚNICO elemento clicable (abre PDF)
         - El nombre va en negrita, SIN subrayado, SIN link
         """
         if not text:
             return text
+        
+        candidate_map = candidate_map or {}
         
         # Paso 0: Eliminar negrita externa que el LLM añade alrededor de links
         # **[Nombre](cv_xxx)** -> [Nombre](cv_xxx)
@@ -217,6 +228,16 @@ class OutputOrchestrator:
             text,
             flags=re.IGNORECASE
         )
+        
+        # Paso 3: Detectar nombres de candidatos en texto plano y convertirlos
+        # Solo si tenemos el mapa de candidatos de la tabla
+        for name, cv_id in candidate_map.items():
+            # Evitar reemplazar si ya está formateado (tiene 📄 antes o ** alrededor)
+            # Buscar nombre que NO esté ya formateado
+            # Patrón: nombre que no está precedido por 📄 ni rodeado de **
+            pattern = rf'(?<!\*\*)(?<!\] )(?<!📄\]\(cv:{cv_id}\) \*\*){re.escape(name)}(?!\*\*)'
+            replacement = f'[📄](cv:{cv_id}) **{name}**'
+            text = re.sub(pattern, replacement, text, count=1)  # Solo primera ocurrencia
         
         return text
     

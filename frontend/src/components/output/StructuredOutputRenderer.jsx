@@ -81,9 +81,9 @@ const ContentWithCVLinks = ({ content, onOpenCV }) => {
     );
   }
   
-  // Renderizar partes mixtas
+  // Renderizar partes mixtas - INLINE sin saltos de línea
   return (
-    <>
+    <span className="inline">
       {parts.map((part, idx) => {
         if (part.type === 'cv') {
           return (
@@ -104,14 +104,23 @@ const ContentWithCVLinks = ({ content, onOpenCV }) => {
             </span>
           );
         } else {
+          // Renderizar texto sin crear bloques <p> - usar span inline
           return (
-            <ReactMarkdown key={idx} remarkPlugins={[remarkGfm]}>
-              {part.content}
-            </ReactMarkdown>
+            <span key={idx} className="inline">
+              <ReactMarkdown 
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  // Convertir p a span para evitar saltos de línea
+                  p: ({ children }) => <span>{children} </span>,
+                }}
+              >
+                {part.content}
+              </ReactMarkdown>
+            </span>
           );
         }
       })}
-    </>
+    </span>
   );
 };
 
