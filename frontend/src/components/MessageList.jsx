@@ -116,14 +116,29 @@ const WelcomeMessage = ({ onSuggestionClick }) => {
 };
 
 const MessageList = memo(({ messages, isLoading, onSuggestionClick, reasoningSteps = [], showReasoning = true }) => {
-  const bottomRef = useRef(null);
+  const containerRef = useRef(null);
 
+  // Auto-scroll to bottom when messages change or loading starts
+  const scrollToBottom = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
+  };
+
+  // Scroll when new message is added
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages.length, isLoading]);
+    scrollToBottom();
+  }, [messages.length]);
+
+  // Scroll when loading starts (user sent a message)
+  useEffect(() => {
+    if (isLoading) {
+      scrollToBottom();
+    }
+  }, [isLoading]);
 
   return (
-    <div className="flex-1 overflow-y-auto p-6 space-y-6">
+    <div ref={containerRef} className="flex-1 overflow-y-auto p-6 space-y-6">
       {messages.length === 0 && !isLoading && <WelcomeMessage onSuggestionClick={onSuggestionClick} />}
 
       {messages.map((message) => (
@@ -131,8 +146,6 @@ const MessageList = memo(({ messages, isLoading, onSuggestionClick, reasoningSte
       ))}
 
       {isLoading && <LoadingIndicator reasoningSteps={reasoningSteps} showReasoning={showReasoning} />}
-
-      <div ref={bottomRef} />
     </div>
   );
 });

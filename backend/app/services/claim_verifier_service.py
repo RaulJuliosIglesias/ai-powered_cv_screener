@@ -42,6 +42,26 @@ class ClaimVerificationResult:
     overall_score: float
     needs_regeneration: bool = False
     
+    @property
+    def groundedness_score(self) -> float:
+        """
+        Calculate groundedness score (how well claims are supported by sources).
+        
+        Returns:
+            Score between 0.0 and 1.0
+        """
+        if self.total_claims == 0:
+            # No claims extracted - this is OK for negative responses like "No candidates match"
+            # Return neutral score, not 0
+            return 0.8
+        
+        verified_count = len(self.verified_claims)
+        contradicted_count = len(self.contradicted_claims)
+        
+        # Contradicted claims are worse than unverified
+        score = (verified_count - contradicted_count * 2) / self.total_claims
+        return max(0.0, min(1.0, score))
+    
 
 CLAIM_EXTRACTION_PROMPT = """Extract all factual claims about candidates from this response.
 Focus on claims about: skills, experience, companies, education, years of experience.

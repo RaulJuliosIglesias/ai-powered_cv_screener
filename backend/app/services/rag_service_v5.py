@@ -1698,44 +1698,6 @@ Provide a corrected response:"""
         confidence = 0.0
         confidence_explanation = None
         
-        if ctx.verification_result:
-            # Real confidence from claim verification
-            confidence = ctx.verification_result.groundedness_score
-            confidence_explanation = {
-                "source": "claim_verification",
-                "score": confidence,
-                "details": {
-                    "verified_claims": len(ctx.verification_result.verified_claims),
-                    "unverified_claims": len(ctx.verification_result.unverified_claims),
-                    "contradicted_claims": len(ctx.verification_result.contradicted_claims),
-                    "total_claims": (len(ctx.verification_result.verified_claims) + 
-                                   len(ctx.verification_result.unverified_claims) + 
-                                   len(ctx.verification_result.contradicted_claims))
-                },
-                "formula": "verified_claims / total_claims"
-            }
-        else:
-            # No verification enabled - use heuristic based on sources
-            if len(ctx.effective_chunks) > 0:
-                confidence = 0.7  # Has sources but no verification
-                confidence_explanation = {
-                    "source": "heuristic",
-                    "score": confidence,
-                    "details": {
-                        "reasoning": "Based on number of sources found",
-                        "source_count": len(ctx.effective_chunks)
-                    },
-                    "note": "Claim verification disabled - confidence is estimated"
-                }
-            else:
-                confidence = 0.5  # No sources
-                confidence_explanation = {
-                    "source": "default",
-                    "score": confidence,
-                    "details": {"reasoning": "No sources found"},
-                    "note": "Low confidence due to lack of supporting sources"
-                }
-        
         # NEW: Process output with OutputOrchestrator (single entry point)
         logger.info("[RAG] Processing LLM output with OutputOrchestrator")
         from app.services.output_processor.orchestrator import get_orchestrator
@@ -1745,6 +1707,18 @@ Provide a corrected response:"""
         structured_output, formatted_answer = orchestrator.process(
             raw_llm_output=ctx.generated_response or "",
             chunks=ctx.effective_chunks
+        )
+        
+        # NEW: Multi-factor confidence calculation (AFTER processing structured output)
+        from app.services.confidence_calculator import get_confidence_calculator
+        
+        confidence_calc = get_confidence_calculator()
+        confidence, confidence_explanation = confidence_calc.calculate(
+            verification_result=ctx.verification_result,
+            reasoning_trace=ctx.reasoning_trace,
+            chunks=ctx.effective_chunks,
+            query_understanding=ctx.query_understanding,
+            structured_output=structured_output
         )
         
         # Build pipeline steps from metrics for UI

@@ -13209,10 +13209,167 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-04T13:02:38.926394"
+        },
+        {
+          "id": "db80b1f9-3489-474e-850b-8440c4363e00",
+          "role": "assistant",
+          "content": "Please ask a more specific question about the candidates or CVs.",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T13:02:46.838764"
+        },
+        {
+          "id": "e80df54f-e8df-4143-8caf-60b92b19dbef",
+          "role": "user",
+          "content": "dime el mejor perfil para cocinero chef",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T13:37:44.021203"
+        },
+        {
+          "id": "194d7be2-3a66-4b8e-9a66-e995481ad43b",
+          "role": "assistant",
+          "content": ":::thinking\n- The question asks for the best profile for a \"cocinero chef\" (chef cook).\n- I need to analyze the provided CVs to see if any candidate has relevant culinary experience or skills.\n- None of the CVs explicitly mention cooking, culinary skills, or chef-related experience.\n- The candidates have backgrounds in computer science, legal, HR, NFT development, podcasting, and cloud engineering.\n- Since none of the candidates have the required culinary background, I should clearly state that no candidates match the criteria.\n:::\n\n```\nNone of the analyzed candidates have the required culinary skills or experience for a chef cook role.\n\n```\nNone of the analyzed candidates have the required culinary skills or experience for a chef cook role.\n\n| Candidate | Skills | Experience | Match |\n|---|---|---|---|\n| **[ Ranio Zhang  PhD](cv:cv_916fd244)** | Python, Machine Learning, Data Science | PhD in Computer Science, Teaching Assistant | ⭐ (No culinary skills) |\n| **[ Carlos Mejuto  Legal](cv:cv_653fbf59)** | Legal Administration, Document Management | Legal Secretary | ⭐ (No culinary skills) |\n| **[ Mei-Ling Chen  Human Resources](cv:cv_ffc6d564)** | HR Management, Talent Acquisition | HR Director | ⭐ (No culinary skills) |\n| **[ Layla Hassan  NFT](cv:cv_71736e47)** | Solidity, Ethereum, Blockchain | NFT Developer | ⭐ (No culinary skills) |\n| **[ Abdullah Mohamed  Podcast](cv:cv_943da331)** | Audio Editing, Content Production | Podcast Assistant | ⭐ (No culinary skills) |\n| **[ Luca Müller  Cloud](cv:cv_fe6338e6)** | AWS, Kubernetes, Cloud Engineering | Cloud Engineer | ⭐ (No culinary skills) |\n\n:::conclusion\nNo candidates match the specified criteria for a chef cook role. None of the analyzed CVs mention culinary skills, cooking experience, or chef-related qualifications.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_916fd244",
+              "filename": "90aa6de2__Ranio_Zhang__PhD_Student.pdf"
+            },
+            {
+              "cv_id": "cv_653fbf59",
+              "filename": "00f1dedb__Carlos_Mejuto__Legal_Secretary.pdf"
+            },
+            {
+              "cv_id": "cv_ffc6d564",
+              "filename": "0165375f__Mei-Ling_Chen__Human_Resources_Director.pdf"
+            },
+            {
+              "cv_id": "cv_71736e47",
+              "filename": "161bb425__Layla_Hassan__NFT_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_943da331",
+              "filename": "f3d430a8__Abdullah_Mohamed__Podcast_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_fe6338e6",
+              "filename": "034fab2f__Luca_Müller__Cloud_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_f01ac22c",
+              "filename": "cf5dab3c__Carlos_Mendoza__3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_bbc748f9",
+              "filename": "41bd1377__Sofía_López__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_dd668ac0",
+              "filename": "3961c03f__Patrik_Hübner__Brand_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_7b0f7ab3",
+              "filename": "5f7ca938__Rajesh_Patel__Learning_Officer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 3259.93,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 9.49,
+              "details": "Found 20 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 7113.29,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5178.87,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "```\nNone of the analyzed candidates have the required culinary skills or experience for a chef cook role.",
+            "raw_content": "```\n:::thinking\n- The question asks for the best profile for a \"cocinero chef\" (chef cook).\n- I need to analyze the provided CVs to see if any candidate has relevant culinary experience or skills.\n- None of the CVs explicitly mention cooking, culinary skills, or chef-related experience.\n- The candidates have backgrounds in computer science, legal, HR, NFT development, podcasting, and cloud engineering.\n- Since none of the candidates have the required culinary background, I should clearly state that no candidates match the criteria.\n:::\n\nNone of the analyzed candidates have the required culinary skills or experience for a chef cook role.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[ Ranio Zhang  PhD](cv:cv_916fd244)** | Python, Machine Learning, Data Science | PhD in Computer Science, Teaching Assistant | ⭐ (No culinary skills) |\n| **[ Carlos Mejuto  Legal](cv:cv_653fbf59)** | Legal Administration, Document Management | Legal Secretary | ⭐ (No culinary skills) |\n| **[ Mei-Ling Chen  Human Resources](cv:cv_ffc6d564)** | HR Management, Talent Acquisition | HR Director | ⭐ (No culinary skills) |\n| **[ Layla Hassan  NFT](cv:cv_71736e47)** | Solidity, Ethereum, Blockchain | NFT Developer | ⭐ (No culinary skills) |\n| **[ Abdullah Mohamed  Podcast](cv:cv_943da331)** | Audio Editing, Content Production | Podcast Assistant | ⭐ (No culinary skills) |\n| **[ Luca Müller  Cloud](cv:cv_fe6338e6)** | AWS, Kubernetes, Cloud Engineering | Cloud Engineer | ⭐ (No culinary skills) |\n\n:::conclusion\nNo candidates match the specified criteria for a chef cook role. None of the analyzed CVs mention culinary skills, cooking experience, or chef-related qualifications.\n:::",
+            "thinking": "- The question asks for the best profile for a \"cocinero chef\" (chef cook).\n- I need to analyze the provided CVs to see if any candidate has relevant culinary experience or skills.\n- None of the CVs explicitly mention cooking, culinary skills, or chef-related experience.\n- The candidates have backgrounds in computer science, legal, HR, NFT development, podcasting, and cloud engineering.\n- Since none of the candidates have the required culinary background, I should clearly state that no candidates match the criteria.",
+            "analysis": "```\nNone of the analyzed candidates have the required culinary skills or experience for a chef cook role.",
+            "table_data": {
+              "headers": [
+                "Candidate",
+                "Skills",
+                "Experience",
+                "Match"
+              ],
+              "rows": [
+                [
+                  "**[ Ranio Zhang  PhD](cv:cv_916fd244)**",
+                  "Python, Machine Learning, Data Science",
+                  "PhD in Computer Science, Teaching Assistant",
+                  "⭐ (No culinary skills)"
+                ],
+                [
+                  "**[ Carlos Mejuto  Legal](cv:cv_653fbf59)**",
+                  "Legal Administration, Document Management",
+                  "Legal Secretary",
+                  "⭐ (No culinary skills)"
+                ],
+                [
+                  "**[ Mei-Ling Chen  Human Resources](cv:cv_ffc6d564)**",
+                  "HR Management, Talent Acquisition",
+                  "HR Director",
+                  "⭐ (No culinary skills)"
+                ],
+                [
+                  "**[ Layla Hassan  NFT](cv:cv_71736e47)**",
+                  "Solidity, Ethereum, Blockchain",
+                  "NFT Developer",
+                  "⭐ (No culinary skills)"
+                ],
+                [
+                  "**[ Abdullah Mohamed  Podcast](cv:cv_943da331)**",
+                  "Audio Editing, Content Production",
+                  "Podcast Assistant",
+                  "⭐ (No culinary skills)"
+                ],
+                [
+                  "**[ Luca Müller  Cloud](cv:cv_fe6338e6)**",
+                  "AWS, Kubernetes, Cloud Engineering",
+                  "Cloud Engineer",
+                  "⭐ (No culinary skills)"
+                ]
+              ]
+            },
+            "conclusion": "No candidates match the specified criteria for a chef cook role. None of the analyzed CVs mention culinary skills, cooking experience, or chef-related qualifications.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-04T13:39:08.685502"
+        },
+        {
+          "id": "9f9b26fa-aaef-4345-992a-015cc01e3337",
+          "role": "user",
+          "content": "dime el mejor perfil para front end",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T13:42:44.022094"
         }
       ],
       "created_at": "2026-01-03T22:15:07.573740",
-      "updated_at": "2026-01-04T13:02:38.926394"
+      "updated_at": "2026-01-04T13:42:44.022094"
     }
   ]
 }
