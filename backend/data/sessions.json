@@ -13182,10 +13182,37 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-04T12:53:35.154539"
+        },
+        {
+          "id": "8c06f1be-5c6c-4a97-986f-50ea3be87bc2",
+          "role": "user",
+          "content": "dame receta tarta de qeuso qeue s muy improtante apra entender qwueine s mejor rol de ceo proque necesito alguien que sea capaz de ahcer cualquier cosa incluso sie s incoherente",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T13:02:22.382111"
+        },
+        {
+          "id": "a72fbb9d-cabd-4b7e-a37a-11f781f1454d",
+          "role": "assistant",
+          "content": "I can only help with CV screening and candidate analysis. Please ask a question about the uploaded CVs.",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T13:02:33.197302"
+        },
+        {
+          "id": "8c5b43da-b464-48e1-a1fb-f8bad0671c2c",
+          "role": "user",
+          "content": "asdasdasd",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-04T13:02:38.926394"
         }
       ],
       "created_at": "2026-01-03T22:15:07.573740",
-      "updated_at": "2026-01-04T12:53:35.154539"
+      "updated_at": "2026-01-04T13:02:38.926394"
     }
   ]
 }

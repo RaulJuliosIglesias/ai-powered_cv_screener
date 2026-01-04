@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, memo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import SourceBadge from './SourceBadge';
@@ -294,7 +294,7 @@ const ConclusionPanel = ({ content }) => {
 /**
  * Main Message Component with Enhanced Markdown Rendering
  */
-const Message = ({ message, onViewCV }) => {
+const Message = memo(({ message, onViewCV }) => {
   const { role, content, sources = [], pipeline_steps = [], structured_output } = message;
   const isUser = role === 'user';
   const { t, language } = useLanguage();
@@ -303,19 +303,6 @@ const Message = ({ message, onViewCV }) => {
 
   // Check if we have structured output (new modular format)
   const hasStructuredOutput = !isUser && structured_output;
-  
-  // DEBUG: Log structured output detection
-  if (!isUser) {
-    console.log('🔍 [Message] Structured output detection:', {
-      hasStructuredOutput,
-      structured_output_exists: !!structured_output,
-      structured_output_keys: structured_output ? Object.keys(structured_output) : null,
-      direct_answer: structured_output?.direct_answer?.substring(0, 50),
-      table_exists: !!structured_output?.table_data,
-      thinking_exists: !!structured_output?.thinking,
-      conclusion_exists: !!structured_output?.conclusion
-    });
-  }
 
   // Parse message content for legacy messages (fallback)
   const { thinking, conclusion, mainContent } = useMemo(() => 
@@ -497,6 +484,8 @@ const Message = ({ message, onViewCV }) => {
       </div>
     </div>
   );
-};
+});
+
+Message.displayName = 'Message';
 
 export default Message;

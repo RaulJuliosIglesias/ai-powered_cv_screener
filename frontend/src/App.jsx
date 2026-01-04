@@ -10,6 +10,7 @@ import ModelSelector from './components/ModelSelector';
 import RAGPipelineSettings, { getRAGPipelineSettings } from './components/RAGPipelineSettings';
 import MetricsPanel, { saveMetricEntry } from './components/MetricsPanel';
 import PipelineProgressPanel from './components/PipelineProgressPanel';
+import ChatInputField from './components/ChatInputField';
 import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList, clearSessionCVs, deleteAllCVsFromDatabase, deleteCV, deleteMessage, deleteMessagesFrom } from './services/api';
 
 function App() {
@@ -17,7 +18,6 @@ function App() {
   const [currentSessionId, setCurrentSessionId] = useState(null);
   const [currentSession, setCurrentSession] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
-  const [message, setMessage] = useState('');
   const [chatLoadingStates, setChatLoadingStates] = useState({});
   const [pendingMessages, setPendingMessages] = useState({}); // {sessionId: {userMsg, status}}
   const isChatLoading = currentSessionId ? chatLoadingStates[currentSessionId] : false;
@@ -359,11 +359,10 @@ function App() {
     e.target.value = '';
   };
 
-  const handleSend = async (text = message) => {
+  const handleSend = async (text) => {
     if (!text.trim() || !currentSessionId || isChatLoading || !currentSession?.cvs?.length) return;
     const userMessage = text.trim();
     const targetSessionId = currentSessionId;
-    setMessage('');
     
     // Add pending message for this specific session
     setPendingMessages(prev => ({
@@ -1075,12 +1074,12 @@ function App() {
         </div>
 
         {currentSession && (
-          <div className="border-t border-gray-200 dark:border-gray-700 p-4 bg-gray-50 dark:bg-gray-900">
-            <div className="max-w-5xl mx-auto flex gap-3">
-              <textarea value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }}} placeholder={currentSession.cvs?.length ? (language === 'es' ? 'Pregunta sobre los CVs...' : 'Ask about the CVs...') : (language === 'es' ? 'Sube CVs primero' : 'Upload CVs first')} disabled={isChatLoading || !currentSession.cvs?.length} rows={1} className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 shadow-sm" />
-              <button onClick={() => handleSend()} disabled={!message.trim() || isChatLoading || !currentSession.cvs?.length} className="p-3 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white rounded-xl disabled:opacity-50 shadow-sm">{isChatLoading ? <Loader className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}</button>
-            </div>
-          </div>
+          <ChatInputField 
+            onSend={handleSend}
+            isLoading={isChatLoading}
+            hasCV={currentSession.cvs?.length > 0}
+            sessionName={currentSession.name}
+          />
         )}
       </div>
 

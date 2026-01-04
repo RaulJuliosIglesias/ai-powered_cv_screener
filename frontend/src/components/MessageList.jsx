@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, memo } from 'react';
 import Message from './Message';
 import { Bot, Sparkles, MessageCircle, ChevronDown, ChevronRight, Search, Cpu, Database, Zap } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -115,12 +115,12 @@ const WelcomeMessage = ({ onSuggestionClick }) => {
   );
 };
 
-const MessageList = ({ messages, isLoading, onSuggestionClick, reasoningSteps = [], showReasoning = true }) => {
+const MessageList = memo(({ messages, isLoading, onSuggestionClick, reasoningSteps = [], showReasoning = true }) => {
   const bottomRef = useRef(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isLoading, reasoningSteps]);
+  }, [messages.length, isLoading]);
 
   return (
     <div className="flex-1 overflow-y-auto p-6 space-y-6">
@@ -135,6 +135,8 @@ const MessageList = ({ messages, isLoading, onSuggestionClick, reasoningSteps = 
       <div ref={bottomRef} />
     </div>
   );
-};
+});
+
+MessageList.displayName = 'MessageList';
 
 export default MessageList;
