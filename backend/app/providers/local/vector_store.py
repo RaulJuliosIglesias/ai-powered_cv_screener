@@ -257,6 +257,85 @@ class SimpleVectorStore(VectorStoreProvider):
             "storage_type": "json",
             "persist_dir": str(self._persist_dir)
         }
+    
+    def get_all_chunks_by_candidate(
+        self, 
+        candidate_name: str, 
+        cv_ids: Optional[List[str]] = None
+    ) -> List[Dict[str, Any]]:
+        """
+        Get ALL chunks for a specific candidate (case-insensitive partial match).
+        
+        This is used for targeted retrieval when querying about a specific person,
+        ensuring we get their complete CV information, not just semantically similar chunks.
+        
+        Args:
+            candidate_name: Name to search for (partial match, case-insensitive)
+            cv_ids: Optional list of CV IDs to filter by (e.g., session CVs)
+            
+        Returns:
+            List of chunk dictionaries with content, metadata, and score=1.0
+        """
+        if not self._documents:
+            logger.warning("[TARGETED_RETRIEVAL] No documents in vector store")
+            return []
+        
+        candidate_name_lower = candidate_name.lower().strip()
+        matching_chunks = []
+        
+        # Log available candidates for debugging
+        unique_candidates = set()
+        for doc in self._documents:
+            name = doc.get("metadata", {}).get("candidate_name", "")
+            if name:
+                unique_candidates.add(name)
+        
+        logger.info(f"[TARGETED_RETRIEVAL] Searching for '{candidate_name}' in {len(self._documents)} chunks")
+        logger.info(f"[TARGETED_RETRIEVAL] Available candidates: {unique_candidates}")
+        
+        for doc in self._documents:
+            # Filter by cv_ids if provided
+            if cv_ids and doc["cv_id"] not in cv_ids:
+                continue
+            
+            doc_candidate = doc.get("metadata", {}).get("candidate_name", "").lower()
+            
+            # Partial match (either direction)
+            if candidate_name_lower in doc_candidate or doc_candidate in candidate_name_lower:
+                matching_chunks.append({
+                    "content": doc["content"],
+                    "metadata": {
+                        "cv_id": doc["cv_id"],
+                        "filename": doc["filename"],
+                        "candidate_name": doc.get("metadata", {}).get("candidate_name", ""),
+                        "section_type": doc.get("metadata", {}).get("section_type", "general"),
+                        "current_role": doc.get("metadata", {}).get("current_role", ""),
+                        "current_company": doc.get("metadata", {}).get("current_company", ""),
+                        "total_experience_years": doc.get("metadata", {}).get("total_experience_years", 0),
+                        "is_current": doc.get("metadata", {}).get("is_current", False),
+                        "is_summary": doc.get("metadata", {}).get("is_summary", False),
+                    },
+                    "score": 1.0  # Direct match = highest confidence
+                })
+        
+        # Sort: summary first, then by section type priority
+        section_priority = {
+            "summary": 0, "experience": 1, "skills": 2, 
+            "education": 3, "full_cv": 4, "general": 5
+        }
+        matching_chunks.sort(
+            key=lambda c: (
+                0 if c["metadata"].get("is_summary") else 1,
+                section_priority.get(c["metadata"].get("section_type", "general"), 5)
+            )
+        )
+        
+        logger.info(f"[TARGETED_RETRIEVAL] Found {len(matching_chunks)} chunks for '{candidate_name}'")
+        if matching_chunks:
+            sections = [c["metadata"]["section_type"] for c in matching_chunks]
+            logger.info(f"[TARGETED_RETRIEVAL] Sections: {sections}")
+        
+        return matching_chunks
 
 
 # Alias for compatibility

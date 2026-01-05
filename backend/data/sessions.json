@@ -31381,10 +31381,1760 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-05T18:38:42.124191"
+        },
+        {
+          "id": "53c659f6-99e3-4f12-bc9a-bdcce0ef27fc",
+          "role": "user",
+          "content": "damelo todo sobre Matteo Rossi Group",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T18:51:27.385839"
+        },
+        {
+          "id": "eb810bf6-2268-4c71-8b63-8cfc4f9d5d07",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a profile analysis of Matteo Rossi (cv_096e7947). The analysis should include current role, total experience, top achievement, core expertise, education, career trajectory, skills, and credentials. The user is asking for all available information from the CV.\n:::\n\n## 👤 [📄](cv:cv_096e7947)**Matteo Rossi**[📄](cv:cv_096e7947)**Matteo Rossi**is currently a Junior Merchandiser at Boutique Holdings Italia (2018-2021), with experience in assortment planning and inventory optimization across apparel sectors. He is skilled in translating commercial goals into data-driven merchandising plans. ---\n### 📊 Candidate Highlights\n---\n### 📜 Credentials\n- SQL for Business Intelligence, 2020\n- Advanced Retail Forecasting & Planning, 2022\n---.\n\n| Category | Key Information | Match Score |\n|---|---|---|\n| 🎯 Current Role | Junior Merchandiser at Boutique Holdings Italia (2018-2021) | 50% |\n| ⏱️ Total Experience | 3+ years in merchandising | 50% |\n| 🏆 Top Achievement | Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week. | 50% |\n| 💡 Core Expertise | Inventory Planning & Forecasting, Assortment Planning (Open-to-Buy), WSSI Management | 50% |\n| 🎓 Education | M.Sc. in Fashion Retail Management - Politecnico di Milano, 2018 | 50% |\n\n:::conclusion**Assessment:**[📄](cv:cv_096e7947)**Matteo Rossi**has experience as a Junior Merchandiser with a strong focus on data analysis and inventory management. His skills in VBA and SQL, along with his master's degree, make him a capable candidate in the merchandising field.**Key Strengths:**- Automation of sales tracking using VBA\n- Proficiency in inventory planning and forecasting\n- Education in Fashion Retail Management\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_13fc6990",
+              "filename": "2829ac4e__Adam_Al-Mansoori__Group_PM.pdf"
+            },
+            {
+              "cv_id": "cv_48ffa562",
+              "filename": "aa719eac__Rahul_Patel__Information_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_b3a9f9fa",
+              "filename": "16c037be__Lotte_van_der_Berg__Camera_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_096e7947",
+              "filename": "42256dc8__Matteo_Rossi__Merchandiser.pdf"
+            },
+            {
+              "cv_id": "cv_9f28cbec",
+              "filename": "5d0b9a4c__Javier_Morales__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_1cf4493b",
+              "filename": "f8d0bf70__Layla_Al-Jamil__Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_6d18325b",
+              "filename": "95e7fe8f__Sofia_Morales__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_377a8045",
+              "filename": "a579777d__Isabelle_Dubois__Commercial_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_b91f3204",
+              "filename": "7591f180__Ji-Yeon_Kim__Dean.pdf"
+            },
+            {
+              "cv_id": "cv_857805d5",
+              "filename": "3a963b30__Rahul_Patel__Junior_Digital_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_8d5c947d",
+              "filename": "b73fabea__Isabella_Nystrom__Junior_Blockchain_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_c6600d96",
+              "filename": "7ceb10f6__Liam_van_der_Merwe__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_472e3635",
+              "filename": "70eb6b33__Maximilian_Richter__Performance_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_68098664",
+              "filename": "2ee790a4__Lotte_van_der_Berg__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_d59a37ea",
+              "filename": "2fd0d810__Kamran_Alizadeh__Law_Clerk.pdf"
+            },
+            {
+              "cv_id": "cv_9eb38702",
+              "filename": "8339ab64__Mei_Lin_Chen__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_f061e22a",
+              "filename": "4ef2ef97__Aisha_Tan__Pizza_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_f42db6d5",
+              "filename": "4a9a82d3__Kwame_Addo__Celebrity_Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_aad40cac",
+              "filename": "fd904bcd__Layla_Al_Mansoori__Content_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_78e42a51",
+              "filename": "d882f390__Lucía_Kim__Service_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_57fd52f0",
+              "filename": "ceca0723__Pierre_Dubois__Comic_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a5818a13",
+              "filename": "eb3b44f7__Javier_Rodriguez__UX_Research_Lead.pdf"
+            },
+            {
+              "cv_id": "cv_748fd655",
+              "filename": "cfcdbde8__Priya_Sharma__IP_Counsel.pdf"
+            },
+            {
+              "cv_id": "cv_0fe998d7",
+              "filename": "b560f23b__Rajiv_Patel__Sous_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_d71a1bd2",
+              "filename": "d306c0c3__Chloé_Dubois__Computer_Vision_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_a1db2d0c",
+              "filename": "d18bc369__Rafael_Oliveira__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_141ff971",
+              "filename": "6be44d4b__Rajiv_Patel__Growth_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_1a0f73d2",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_e07a68b7",
+              "filename": "9c9af9ff__Amir_Al-Farsi__Instructional_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_becdba61",
+              "filename": "4ca041d0__Lucien_Moreau__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_ec1238ea",
+              "filename": "22ca62fd__Rajiv_Patel__Camera_Operator.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1478.31,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 139.7,
+              "details": "Found 32 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 12004.89,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4400.39,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "## 👤 [📄](cv:cv_096e7947) **Matteo Rossi**\n[📄](cv:cv_096e7947) **Matteo Rossi** is currently a Junior Merchandiser at Boutique Holdings Italia (2018-2021), with experience in assortment planning and inventory optimization across apparel sectors. He is skilled in translating commercial goals into data-driven merchandising plans. ---\n### 📊 Candidate Highlights\n---\n### 📜 Credentials\n- SQL for Business Intelligence, 2020\n- Advanced Retail Forecasting & Planning, 2022\n---.",
+            "raw_content": ":::thinking\nThe user is asking for a profile analysis of **[Matteo Rossi](cv:cv_096e7947)**. The analysis should include current role, total experience, top achievement, core expertise, education, career trajectory, skills, and credentials. The user is asking for all available information from the CV.\n:::\n\n## 👤 **[Matteo Rossi](cv:cv_096e7947)**\n\n[Matteo Rossi](cv:cv_096e7947) is currently a Junior Merchandiser at Boutique Holdings Italia (2018-2021), with experience in assortment planning and inventory optimization across apparel sectors. He is skilled in translating commercial goals into data-driven merchandising plans.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Junior Merchandiser at Boutique Holdings Italia (2018-2021) |\n| **⏱️ Total Experience** | 3+ years in merchandising |\n| **🏆 Top Achievement** | Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week. |\n| **💡 Core Expertise** | Inventory Planning & Forecasting, Assortment Planning (Open-to-Buy), WSSI Management |\n| **🎓 Education** | M.Sc. in Fashion Retail Management - Politecnico di Milano, 2018 |\n\n---\n\n### 💼 Career Trajectory\n\n**Junior Merchandiser** — *Boutique Holdings Italia* (2018 - 2021)\n→ Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **Inventory Planning** | Inventory Planning & Forecasting | 10/10 |\n| **Assortment Planning** | Assortment Planning (Open-to-Buy) | 9/10 |\n| **Retail Mix** | Retail Mix Optimization | 8/10 |\n| **SAP** | SAP Merchandising Modules | 8/10 |\n| **WSSI** | WSSI Management | 9/10 |\n| **Data Analysis** | Data Analysis (Advanced Excel/SQL) | 8/10 |\n| **Languages** | Italian, English, French | N/A |\n\n---\n\n### 📜 Credentials\n\n- SQL for Business Intelligence, 2020\n- Advanced Retail Forecasting & Planning, 2022\n\n---\n\n:::conclusion\n**Assessment:** [Matteo Rossi](cv:cv_096e7947) has experience as a Junior Merchandiser with a strong focus on data analysis and inventory management. His skills in VBA and SQL, along with his master's degree, make him a capable candidate in the merchandising field.\n\n**Key Strengths:**\n- Automation of sales tracking using VBA\n- Proficiency in inventory planning and forecasting\n- Education in Fashion Retail Management\n:::",
+            "thinking": "The user is asking for a profile analysis of Matteo Rossi (cv_096e7947). The analysis should include current role, total experience, top achievement, core expertise, education, career trajectory, skills, and credentials. The user is asking for all available information from the CV.",
+            "analysis": "## 👤 [📄](cv:cv_096e7947) **Matteo Rossi**\n[📄](cv:cv_096e7947) **Matteo Rossi** is currently a Junior Merchandiser at Boutique Holdings Italia (2018-2021), with experience in assortment planning and inventory optimization across apparel sectors. He is skilled in translating commercial goals into data-driven merchandising plans.\n---\n### 📊 Candidate Highlights\n---\n### 📜 Credentials\n- SQL for Business Intelligence, 2020\n- Advanced Retail Forecasting & Planning, 2022\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Category",
+                "Key Information",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "🎯 Current Role",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Junior Merchandiser at Boutique Holdings Italia (2018-2021)"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "⏱️ Total Experience",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "3+ years in merchandising"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🏆 Top Achievement",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week."
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "💡 Core Expertise",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Inventory Planning & Forecasting, Assortment Planning (Open-to-Buy), WSSI Management"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🎓 Education",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "M.Sc. in Fashion Retail Management - Politecnico di Milano, 2018"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "**Assessment:**[📄](cv:cv_096e7947) **Matteo Rossi** has experience as a Junior Merchandiser with a strong focus on data analysis and inventory management. His skills in VBA and SQL, along with his master's degree, make him a capable candidate in the merchandising field.\n\n**Key Strengths:**\n- Automation of sales tracking using VBA\n- Proficiency in inventory planning and forecasting\n- Education in Fashion Retail Management",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T18:52:20.096263"
+        },
+        {
+          "id": "b9d35c13-cae9-49d9-8d77-6cfe5fc37974",
+          "role": "user",
+          "content": "damelo todo sobre Matteo Rossi Group",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T19:03:30.834048"
+        },
+        {
+          "id": "e026f452-8d5e-4b13-9e6f-b952d4b8495b",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a profile analysis of Matteo Rossi (cv_096e7947), focusing on his current role, total experience, career trajectory, skills, and credentials. The user wants to know if Matteo Rossi (cv_096e7947) is associated with the 'Matteo Rossi Group'. I will extract the requested information from the provided CV data.\n:::\n\n## 👤 [📄](cv:cv_096e7947)**Matteo Rossi**is currently a Junior Merchandiser at Boutique Holdings Italia (2018-2021), with experience driving profitable assortment planning and inventory optimization. He has over 3 years of experience in fast-moving apparel sectors. --- ### 📊 Candidate Highlights --- ### 📜 Credentials - Advanced Retail Forecasting & Planning, Retail Insights Academy, 2022 - SQL for Business Intelligence, Udemy, 2020 ---.\n\n## 👤 [📄](cv:cv_096e7947)**Matteo Rossi**[📄](cv:cv_096e7947)**Matteo Rossi**is currently a Junior Merchandiser at Boutique Holdings Italia (2018-2021), with experience driving profitable assortment planning and inventory optimization. He has over 3 years of experience in fast-moving apparel sectors.\n---\n### 📊 Candidate Highlights\n---\n### 📜 Credentials\n- Advanced Retail Forecasting & Planning, Retail Insights Academy, 2022\n- SQL for Business Intelligence, Udemy, 2020\n---\n\n| Category | Key Information | Match Score |\n|---|---|---|\n| 🎯 Current Role | Junior Merchandiser at Boutique Holdings Italia (2018-2021) | 50% |\n| ⏱️ Total Experience | 3+ years in merchandising | 50% |\n| 🏆 Top Achievement | Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week. | 50% |\n| 💡 Core Expertise | Inventory Planning & Forecasting, Assortment Planning (Open-to-Buy), WSSI Management | 50% |\n| 🎓 Education | M.Sc. in Fashion Retail Management - Politecnico di Milano, 2018 | 50% |\n\n:::conclusion**Assessment:**[📄](cv:cv_096e7947)**Matteo Rossi**is a Junior Merchandiser with experience in inventory planning, assortment planning, and data analysis. He has a Master's degree in Fashion Retail Management and has demonstrated the ability to automate processes and improve efficiency.**Key Strengths:**- Strong skills in inventory planning and forecasting.\n- Experience in automating sales tracking reports using VBA macros.\n- Education in Fashion Retail Management.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_b3a9f9fa",
+              "filename": "16c037be__Lotte_van_der_Berg__Camera_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_13fc6990",
+              "filename": "2829ac4e__Adam_Al-Mansoori__Group_PM.pdf"
+            },
+            {
+              "cv_id": "cv_6d18325b",
+              "filename": "95e7fe8f__Sofia_Morales__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_096e7947",
+              "filename": "42256dc8__Matteo_Rossi__Merchandiser.pdf"
+            },
+            {
+              "cv_id": "cv_2a37d4f2",
+              "filename": "99f808ef__Ling_Wei__QA.pdf"
+            },
+            {
+              "cv_id": "cv_57fd52f0",
+              "filename": "ceca0723__Pierre_Dubois__Comic_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_b91f3204",
+              "filename": "7591f180__Ji-Yeon_Kim__Dean.pdf"
+            },
+            {
+              "cv_id": "cv_857805d5",
+              "filename": "3a963b30__Rahul_Patel__Junior_Digital_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_21db3eb3",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_c6600d96",
+              "filename": "7ceb10f6__Liam_van_der_Merwe__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_27fe1043",
+              "filename": "dba2704c__Priya_Patel__Character_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_f061e22a",
+              "filename": "4ef2ef97__Aisha_Tan__Pizza_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_472e3635",
+              "filename": "70eb6b33__Maximilian_Richter__Performance_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_48ffa562",
+              "filename": "aa719eac__Rahul_Patel__Information_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_af1f35b7",
+              "filename": "cadc8dd8__Laila_Al-Mansoori__Board_Member.pdf"
+            },
+            {
+              "cv_id": "cv_d59a37ea",
+              "filename": "2fd0d810__Kamran_Alizadeh__Law_Clerk.pdf"
+            },
+            {
+              "cv_id": "cv_9eb38702",
+              "filename": "8339ab64__Mei_Lin_Chen__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_377a8045",
+              "filename": "a579777d__Isabelle_Dubois__Commercial_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_f42db6d5",
+              "filename": "4a9a82d3__Kwame_Addo__Celebrity_Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_9f28cbec",
+              "filename": "5d0b9a4c__Javier_Morales__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_0be2bd72",
+              "filename": "8ce653c9__Layla_Al-Mansouri__Crypto_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_aad40cac",
+              "filename": "fd904bcd__Layla_Al_Mansoori__Content_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_87713376",
+              "filename": "7d40b1ab__Ingrid_Larsson__Consultant.pdf"
+            },
+            {
+              "cv_id": "cv_85fa2b7b",
+              "filename": "16879178__Sofia_Ramirez__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_a5818a13",
+              "filename": "eb3b44f7__Javier_Rodriguez__UX_Research_Lead.pdf"
+            },
+            {
+              "cv_id": "cv_dc44ea0b",
+              "filename": "52e99c15__Aïssa_Diallo__Merchandiser.pdf"
+            },
+            {
+              "cv_id": "cv_1cf4493b",
+              "filename": "f8d0bf70__Layla_Al-Jamil__Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_d71a1bd2",
+              "filename": "d306c0c3__Chloé_Dubois__Computer_Vision_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_e2c27ef8",
+              "filename": "e42cafdd__Carlos_Mendoza__Head_Bartender.pdf"
+            },
+            {
+              "cv_id": "cv_ec1238ea",
+              "filename": "22ca62fd__Rajiv_Patel__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_1a0f73d2",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_e07a68b7",
+              "filename": "9c9af9ff__Amir_Al-Farsi__Instructional_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_68098664",
+              "filename": "2ee790a4__Lotte_van_der_Berg__Camera_Operator.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1358.27,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 137.32,
+              "details": "Found 35 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 16708.26,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6431.49,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "## 👤 [📄](cv:cv_096e7947) **Matteo Rossi** is currently a Junior Merchandiser at Boutique Holdings Italia (2018-2021), with experience driving profitable assortment planning and inventory optimization. He has over 3 years of experience in fast-moving apparel sectors. --- ### 📊 Candidate Highlights --- ### 📜 Credentials - Advanced Retail Forecasting & Planning, Retail Insights Academy, 2022 - SQL for Business Intelligence, Udemy, 2020 ---.",
+            "raw_content": ":::thinking\nThe user is asking for a profile analysis of **[Matteo Rossi](cv:cv_096e7947)**, focusing on his current role, total experience, career trajectory, skills, and credentials. The user wants to know if **[Matteo Rossi](cv:cv_096e7947)** is associated with the 'Matteo Rossi Group'. I will extract the requested information from the provided CV data.\n:::\n\n## 👤 **[Matteo Rossi](cv:cv_096e7947)**\n\n**[Matteo Rossi](cv:cv_096e7947)** is currently a Junior Merchandiser at Boutique Holdings Italia (2018-2021), with experience driving profitable assortment planning and inventory optimization. He has over 3 years of experience in fast-moving apparel sectors.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Junior Merchandiser at Boutique Holdings Italia (2018-2021) |\n| **⏱️ Total Experience** | 3+ years in merchandising |\n| **🏆 Top Achievement** | Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week. |\n| **💡 Core Expertise** | Inventory Planning & Forecasting, Assortment Planning (Open-to-Buy), WSSI Management |\n| **🎓 Education** | M.Sc. in Fashion Retail Management - Politecnico di Milano, 2018 |\n\n---\n\n### 💼 Career Trajectory\n\n**Junior Merchandiser** — *Boutique Holdings Italia* (2018 - 2021)\n→ Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **Inventory Planning** | Inventory Planning & Forecasting | 10/10 |\n| **Assortment Planning** | Assortment Planning (Open-to-Buy) | 9/10 |\n| **Retail Mix Optimization** | Retail Mix Optimization | 8/10 |\n| **SAP Merchandising** | SAP Merchandising Modules | 8/10 |\n| **WSSI Management** | WSSI Management | 9/10 |\n| **Data Analysis** | Data Analysis (Advanced Excel/SQL) | 8/10 |\n| **Languages** | Italian, English, French |  |\n\n---\n\n### 📜 Credentials\n\n- Advanced Retail Forecasting & Planning, Retail Insights Academy, 2022\n- SQL for Business Intelligence, Udemy, 2020\n\n---\n\n:::conclusion\n**Assessment:** **[Matteo Rossi](cv:cv_096e7947)** is a Junior Merchandiser with experience in inventory planning, assortment planning, and data analysis. He has a Master's degree in Fashion Retail Management and has demonstrated the ability to automate processes and improve efficiency.\n\n**Key Strengths:**\n- Strong skills in inventory planning and forecasting.\n- Experience in automating sales tracking reports using VBA macros.\n- Education in Fashion Retail Management.\n:::",
+            "thinking": "The user is asking for a profile analysis of Matteo Rossi (cv_096e7947), focusing on his current role, total experience, career trajectory, skills, and credentials. The user wants to know if Matteo Rossi (cv_096e7947) is associated with the 'Matteo Rossi Group'. I will extract the requested information from the provided CV data.",
+            "analysis": "## 👤 [📄](cv:cv_096e7947) **Matteo Rossi**\n[📄](cv:cv_096e7947) **Matteo Rossi** is currently a Junior Merchandiser at Boutique Holdings Italia (2018-2021), with experience driving profitable assortment planning and inventory optimization. He has over 3 years of experience in fast-moving apparel sectors.\n---\n### 📊 Candidate Highlights\n---\n### 📜 Credentials\n- Advanced Retail Forecasting & Planning, Retail Insights Academy, 2022\n- SQL for Business Intelligence, Udemy, 2020\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Category",
+                "Key Information",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "🎯 Current Role",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Junior Merchandiser at Boutique Holdings Italia (2018-2021)"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "⏱️ Total Experience",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "3+ years in merchandising"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🏆 Top Achievement",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week."
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "💡 Core Expertise",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Inventory Planning & Forecasting, Assortment Planning (Open-to-Buy), WSSI Management"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🎓 Education",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "M.Sc. in Fashion Retail Management - Politecnico di Milano, 2018"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "**Assessment:** [📄](cv:cv_096e7947) **Matteo Rossi** is a Junior Merchandiser with experience in inventory planning, assortment planning, and data analysis. He has a Master's degree in Fashion Retail Management and has demonstrated the ability to automate processes and improve efficiency.\n\n**Key Strengths:**\n- Strong skills in inventory planning and forecasting.\n- Experience in automating sales tracking reports using VBA macros.\n- Education in Fashion Retail Management.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T19:03:58.475459"
+        },
+        {
+          "id": "aa7220e0-be7f-4055-a068-f2d3d3bb6df2",
+          "role": "user",
+          "content": "damelo todo sobre Matteo Rossi Group",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T19:12:13.663585"
+        },
+        {
+          "id": "5693bb15-b3f2-4077-9db7-3390b52770d2",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a profile analysis of Matteo Rossi (cv_096e7947), but seems to have confused the instructions and is asking for candidates associated with a \"Matteo Rossi Group\". There is no such group mentioned in the provided CVs. I will proceed with analyzing the CV of Matteo Rossi (cv_096e7947) as requested, and ignore the non-existent group.\n:::\n\n## 👤 [📄](cv:cv_096e7947)**Matteo Rossi**is a Junior Merchandiser at Boutique Holdings Italia (2018-2021), with experience in assortment planning and inventory optimization in the apparel sector. He is skilled in translating commercial goals into data-driven merchandising plans. --- ### 📊 Candidate Highlights --- ### 📜 Credentials - Advanced Retail Forecasting & Planning, Retail Insights Academy, 2022 - SQL for Business Intelligence, Udemy, 2020 ---.\n\n## 👤 [📄](cv:cv_096e7947)**Matteo Rossi**[📄](cv:cv_096e7947)**Matteo Rossi**is a Junior Merchandiser at Boutique Holdings Italia (2018-2021), with experience in assortment planning and inventory optimization in the apparel sector. He is skilled in translating commercial goals into data-driven merchandising plans.\n---\n### 📊 Candidate Highlights\n---\n### 📜 Credentials\n- Advanced Retail Forecasting & Planning, Retail Insights Academy, 2022\n- SQL for Business Intelligence, Udemy, 2020\n---\n\n| Category | Key Information | Match Score |\n|---|---|---|\n| 🎯 Current Role | Junior Merchandiser at Boutique Holdings Italia (2018-2021) | 50% |\n| ⏱️ Total Experience | 3+ years in merchandising | 50% |\n| 🏆 Top Achievement | Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week. | 50% |\n| 💡 Core Expertise | Inventory Planning & Forecasting, Assortment Planning (Open-to-Buy), WSSI Management | 50% |\n| 🎓 Education | M.Sc. in Fashion Retail Management - Politecnico di Milano, 2018 | 50% |\n\n:::conclusion**Assessment:**[📄](cv:cv_096e7947)**Matteo Rossi**has experience as a Junior Merchandiser with a strong educational background in fashion retail management and skills in inventory planning, assortment planning, and data analysis.**Key Strengths:**- Experience in inventory optimization and assortment planning.\n- Proficiency in data analysis using Excel and SQL.\n- Educational background in fashion retail management.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_13fc6990",
+              "filename": "2829ac4e__Adam_Al-Mansoori__Group_PM.pdf"
+            },
+            {
+              "cv_id": "cv_857805d5",
+              "filename": "3a963b30__Rahul_Patel__Junior_Digital_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_48ffa562",
+              "filename": "aa719eac__Rahul_Patel__Information_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_b3a9f9fa",
+              "filename": "16c037be__Lotte_van_der_Berg__Camera_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_1cf4493b",
+              "filename": "f8d0bf70__Layla_Al-Jamil__Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_d71a1bd2",
+              "filename": "d306c0c3__Chloé_Dubois__Computer_Vision_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_e07a68b7",
+              "filename": "9c9af9ff__Amir_Al-Farsi__Instructional_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_377a8045",
+              "filename": "a579777d__Isabelle_Dubois__Commercial_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_b91f3204",
+              "filename": "7591f180__Ji-Yeon_Kim__Dean.pdf"
+            },
+            {
+              "cv_id": "cv_8d5c947d",
+              "filename": "b73fabea__Isabella_Nystrom__Junior_Blockchain_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_c6600d96",
+              "filename": "7ceb10f6__Liam_van_der_Merwe__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_3c4bc7ab",
+              "filename": "72cb0e20__Carmen_Rodriguez__Resident.pdf"
+            },
+            {
+              "cv_id": "cv_472e3635",
+              "filename": "70eb6b33__Maximilian_Richter__Performance_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_0fe998d7",
+              "filename": "b560f23b__Rajiv_Patel__Sous_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_d59a37ea",
+              "filename": "2fd0d810__Kamran_Alizadeh__Law_Clerk.pdf"
+            },
+            {
+              "cv_id": "cv_9eb38702",
+              "filename": "8339ab64__Mei_Lin_Chen__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_2a37d4f2",
+              "filename": "99f808ef__Ling_Wei__QA.pdf"
+            },
+            {
+              "cv_id": "cv_ec1238ea",
+              "filename": "22ca62fd__Rajiv_Patel__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_f42db6d5",
+              "filename": "4a9a82d3__Kwame_Addo__Celebrity_Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_9f28cbec",
+              "filename": "5d0b9a4c__Javier_Morales__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_85fa2b7b",
+              "filename": "16879178__Sofia_Ramirez__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_096e7947",
+              "filename": "42256dc8__Matteo_Rossi__Merchandiser.pdf"
+            },
+            {
+              "cv_id": "cv_aad40cac",
+              "filename": "fd904bcd__Layla_Al_Mansoori__Content_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_af1f35b7",
+              "filename": "cadc8dd8__Laila_Al-Mansoori__Board_Member.pdf"
+            },
+            {
+              "cv_id": "cv_a5818a13",
+              "filename": "eb3b44f7__Javier_Rodriguez__UX_Research_Lead.pdf"
+            },
+            {
+              "cv_id": "cv_6d18325b",
+              "filename": "95e7fe8f__Sofia_Morales__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_62706e5a",
+              "filename": "6b9204bf__Matteo_Romano__Brand_Ambassador.pdf"
+            },
+            {
+              "cv_id": "cv_87713376",
+              "filename": "7d40b1ab__Ingrid_Larsson__Consultant.pdf"
+            },
+            {
+              "cv_id": "cv_c7c90643",
+              "filename": "0c185b57__Matteo_Rossi__Associate_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_1a0f73d2",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_57fd52f0",
+              "filename": "ceca0723__Pierre_Dubois__Comic_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1451.72,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 147.81,
+              "details": "Found 32 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 16098.01,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5602.16,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "## 👤 [📄](cv:cv_096e7947) **Matteo Rossi** is a Junior Merchandiser at Boutique Holdings Italia (2018-2021), with experience in assortment planning and inventory optimization in the apparel sector. He is skilled in translating commercial goals into data-driven merchandising plans. --- ### 📊 Candidate Highlights --- ### 📜 Credentials - Advanced Retail Forecasting & Planning, Retail Insights Academy, 2022 - SQL for Business Intelligence, Udemy, 2020 ---.",
+            "raw_content": ":::thinking\nThe user is asking for a profile analysis of **[Matteo Rossi](cv:cv_096e7947)**, but seems to have confused the instructions and is asking for candidates associated with a \"Matteo Rossi Group\". There is no such group mentioned in the provided CVs. I will proceed with analyzing the CV of **[Matteo Rossi](cv:cv_096e7947)** as requested, and ignore the non-existent group.\n:::\n\n## 👤 **[Matteo Rossi](cv:cv_096e7947)**\n\n**[Matteo Rossi](cv:cv_096e7947)** is a Junior Merchandiser at Boutique Holdings Italia (2018-2021), with experience in assortment planning and inventory optimization in the apparel sector. He is skilled in translating commercial goals into data-driven merchandising plans.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Junior Merchandiser at Boutique Holdings Italia (2018-2021) |\n| **⏱️ Total Experience** | 3+ years in merchandising |\n| **🏆 Top Achievement** | Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week. |\n| **💡 Core Expertise** | Inventory Planning & Forecasting, Assortment Planning (Open-to-Buy), WSSI Management |\n| **🎓 Education** | M.Sc. in Fashion Retail Management - Politecnico di Milano, 2018 |\n\n---\n\n### 💼 Career Trajectory\n\n**Junior Merchandiser** — *Boutique Holdings Italia* (2018 - 2021)\n→ Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **Inventory Management** | Inventory Planning & Forecasting | 10/10 |\n| **Assortment Planning** | Assortment Planning (Open-to-Buy) | 9/10 |\n| **Retail Optimization** | Retail Mix Optimization | 8/10 |\n| **SAP** | SAP Merchandising Modules | 8/10 |\n| **WSSI** | WSSI Management | 9/10 |\n| **Data Analysis** | Data Analysis (Advanced Excel/SQL) | 8/10 |\n\n---\n\n### 📜 Credentials\n\n- Advanced Retail Forecasting & Planning, Retail Insights Academy, 2022\n- SQL for Business Intelligence, Udemy, 2020\n\n---\n\n:::conclusion\n**Assessment:** **[Matteo Rossi](cv:cv_096e7947)** has experience as a Junior Merchandiser with a strong educational background in fashion retail management and skills in inventory planning, assortment planning, and data analysis.\n\n**Key Strengths:**\n- Experience in inventory optimization and assortment planning.\n- Proficiency in data analysis using Excel and SQL.\n- Educational background in fashion retail management.\n:::",
+            "thinking": "The user is asking for a profile analysis of Matteo Rossi (cv_096e7947), but seems to have confused the instructions and is asking for candidates associated with a \"Matteo Rossi Group\". There is no such group mentioned in the provided CVs. I will proceed with analyzing the CV of Matteo Rossi (cv_096e7947) as requested, and ignore the non-existent group.",
+            "analysis": "## 👤 [📄](cv:cv_096e7947) **Matteo Rossi**\n[📄](cv:cv_096e7947) **Matteo Rossi** is a Junior Merchandiser at Boutique Holdings Italia (2018-2021), with experience in assortment planning and inventory optimization in the apparel sector. He is skilled in translating commercial goals into data-driven merchandising plans.\n---\n### 📊 Candidate Highlights\n---\n### 📜 Credentials\n- Advanced Retail Forecasting & Planning, Retail Insights Academy, 2022\n- SQL for Business Intelligence, Udemy, 2020\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Category",
+                "Key Information",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "🎯 Current Role",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Junior Merchandiser at Boutique Holdings Italia (2018-2021)"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "⏱️ Total Experience",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "3+ years in merchandising"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🏆 Top Achievement",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week."
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "💡 Core Expertise",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Inventory Planning & Forecasting, Assortment Planning (Open-to-Buy), WSSI Management"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🎓 Education",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "M.Sc. in Fashion Retail Management - Politecnico di Milano, 2018"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "**Assessment:** [📄](cv:cv_096e7947) **Matteo Rossi** has experience as a Junior Merchandiser with a strong educational background in fashion retail management and skills in inventory planning, assortment planning, and data analysis.\n\n**Key Strengths:**\n- Experience in inventory optimization and assortment planning.\n- Proficiency in data analysis using Excel and SQL.\n- Educational background in fashion retail management.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T19:12:41.453492"
+        },
+        {
+          "id": "58711b9a-9541-4a03-abc1-6df11f41875e",
+          "role": "user",
+          "content": "damelo todo sobre Matteo Rossi Group",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T19:27:10.756630"
+        },
+        {
+          "id": "91d86e22-509b-4693-813a-30c76c8b29c7",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a profile of Matteo Rossi (cv_096e7947), including his current role, total experience, career trajectory, skills, and credentials. I need to extract all relevant information from the provided CV text chunk for Matteo Rossi (cv_096e7947) and present it in the specified format.\n:::\n\n## 👤 [📄](cv:cv_096e7947)**Matteo Rossi**[📄](cv:cv_096e7947)**Matteo Rossi**is a Junior Merchandiser at Boutique Holdings Italia, where he supports the merchandising team in sales analysis, order placement, and inventory transfers. He has experience in assortment planning, inventory forecasting, and retail mix optimization. Matteo is skilled in using SAP merchandising modules and data analysis tools like Excel and SQL.\n\n| Category | Key Information | Match Score |\n|---|---|---|\n| 🎯 Current Role | Junior Merchandiser at Boutique Holdings Italia (2018-2021) | 50% |\n| ⏱️ Total Experience | 3 years in merchandising | 50% |\n| 🏆 Top Achievement | Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week. | 50% |\n| 💡 Core Expertise | Inventory Planning & Forecasting, Assortment Planning, WSSI Management | 50% |\n| 🎓 Education | M.Sc. in Fashion Retail Management - Politecnico di Milano, 2018 | 50% |\n\n:::conclusion**Assessment:**[📄](cv:cv_096e7947)**Matteo Rossi**has 3 years of experience as a Junior Merchandiser with a strong focus on inventory planning, forecasting, and data analysis. He has a Master's degree in Fashion Retail Management and is proficient in using SAP merchandising modules and SQL.**Key Strengths:**- Strong skills in inventory planning and forecasting.\n- Experience in automating sales tracking reports using VBA macros.\n- Educational background in fashion retail management.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_13fc6990",
+              "filename": "2829ac4e__Adam_Al-Mansoori__Group_PM.pdf"
+            },
+            {
+              "cv_id": "cv_857805d5",
+              "filename": "3a963b30__Rahul_Patel__Junior_Digital_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_48ffa562",
+              "filename": "aa719eac__Rahul_Patel__Information_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_b3a9f9fa",
+              "filename": "16c037be__Lotte_van_der_Berg__Camera_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_d71a1bd2",
+              "filename": "d306c0c3__Chloé_Dubois__Computer_Vision_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_1cf4493b",
+              "filename": "f8d0bf70__Layla_Al-Jamil__Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_e07a68b7",
+              "filename": "9c9af9ff__Amir_Al-Farsi__Instructional_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_57fd52f0",
+              "filename": "ceca0723__Pierre_Dubois__Comic_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_b91f3204",
+              "filename": "7591f180__Ji-Yeon_Kim__Dean.pdf"
+            },
+            {
+              "cv_id": "cv_377a8045",
+              "filename": "a579777d__Isabelle_Dubois__Commercial_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_c6600d96",
+              "filename": "7ceb10f6__Liam_van_der_Merwe__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_3c4bc7ab",
+              "filename": "72cb0e20__Carmen_Rodriguez__Resident.pdf"
+            },
+            {
+              "cv_id": "cv_8d5c947d",
+              "filename": "b73fabea__Isabella_Nystrom__Junior_Blockchain_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_472e3635",
+              "filename": "70eb6b33__Maximilian_Richter__Performance_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_ec1238ea",
+              "filename": "22ca62fd__Rajiv_Patel__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_d59a37ea",
+              "filename": "2fd0d810__Kamran_Alizadeh__Law_Clerk.pdf"
+            },
+            {
+              "cv_id": "cv_9eb38702",
+              "filename": "8339ab64__Mei_Lin_Chen__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_2a37d4f2",
+              "filename": "99f808ef__Ling_Wei__QA.pdf"
+            },
+            {
+              "cv_id": "cv_85fa2b7b",
+              "filename": "16879178__Sofia_Ramirez__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_f42db6d5",
+              "filename": "4a9a82d3__Kwame_Addo__Celebrity_Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_9f28cbec",
+              "filename": "5d0b9a4c__Javier_Morales__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_6d18325b",
+              "filename": "95e7fe8f__Sofia_Morales__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_096e7947",
+              "filename": "42256dc8__Matteo_Rossi__Merchandiser.pdf"
+            },
+            {
+              "cv_id": "cv_aad40cac",
+              "filename": "fd904bcd__Layla_Al_Mansoori__Content_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_af1f35b7",
+              "filename": "cadc8dd8__Laila_Al-Mansoori__Board_Member.pdf"
+            },
+            {
+              "cv_id": "cv_a5818a13",
+              "filename": "eb3b44f7__Javier_Rodriguez__UX_Research_Lead.pdf"
+            },
+            {
+              "cv_id": "cv_62706e5a",
+              "filename": "6b9204bf__Matteo_Romano__Brand_Ambassador.pdf"
+            },
+            {
+              "cv_id": "cv_9dd8faae",
+              "filename": "173ee9f4__Antoine_Dubois__Brand_Ambassador.pdf"
+            },
+            {
+              "cv_id": "cv_0f35661e",
+              "filename": "5730fb81__Kamran_Alizadeh__Proofreader.pdf"
+            },
+            {
+              "cv_id": "cv_1a0f73d2",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1456.14,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 143.33,
+              "details": "Found 32 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 18656.87,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5554.08,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "## 👤 [📄](cv:cv_096e7947) **Matteo Rossi**\n[📄](cv:cv_096e7947) **Matteo Rossi** is a Junior Merchandiser at Boutique Holdings Italia, where he supports the merchandising team in sales analysis, order placement, and inventory transfers. He has experience in assortment planning, inventory forecasting, and retail mix optimization. Matteo is skilled in using SAP merchandising modules and data analysis tools like Excel and SQL.",
+            "raw_content": ":::thinking\nThe user is asking for a profile of **[Matteo Rossi](cv:cv_096e7947)**, including his current role, total experience, career trajectory, skills, and credentials. I need to extract all relevant information from the provided CV text chunk for **[Matteo Rossi](cv:cv_096e7947)** and present it in the specified format.\n:::\n\n## 👤 **[Matteo Rossi](cv:cv_096e7947)**\n\n[Matteo Rossi](cv:cv_096e7947) is a Junior Merchandiser at Boutique Holdings Italia, where he supports the merchandising team in sales analysis, order placement, and inventory transfers. He has experience in assortment planning, inventory forecasting, and retail mix optimization. Matteo is skilled in using SAP merchandising modules and data analysis tools like Excel and SQL.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Junior Merchandiser at Boutique Holdings Italia (2018-2021) |\n| **⏱️ Total Experience** | 3 years in merchandising |\n| **🏆 Top Achievement** | Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week. |\n| **💡 Core Expertise** | Inventory Planning & Forecasting, Assortment Planning, WSSI Management |\n| **🎓 Education** | M.Sc. in Fashion Retail Management - Politecnico di Milano, 2018 |\n\n---\n\n### 💼 Career Trajectory\n\n**Junior Merchandiser** — *Boutique Holdings Italia* (2018-2021)\n→ Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **Merchandising** | Inventory Planning & Forecasting | 10/10 |\n| **Merchandising** | Assortment Planning (Open-to-Buy) | 9/10 |\n| **Merchandising** | Retail Mix Optimization | 8/10 |\n| **Systems** | SAP Merchandising Modules | 8/10 |\n| **Management** | WSSI Management | 9/10 |\n| **Data Analysis** | Data Analysis (Advanced Excel/SQL) | 8/10 |\n| **Languages** | Italian | C2 |\n| **Languages** | English | C1 |\n| **Languages** | French | B1 |\n\n---\n\n### 📜 Credentials\n\n- SQL for Business Intelligence, 2020\n- Advanced Retail Forecasting & Planning, 2022\n\n---\n\n:::conclusion\n**Assessment:** [Matteo Rossi](cv:cv_096e7947) has 3 years of experience as a Junior Merchandiser with a strong focus on inventory planning, forecasting, and data analysis. He has a Master's degree in Fashion Retail Management and is proficient in using SAP merchandising modules and SQL.\n\n**Key Strengths:**\n- Strong skills in inventory planning and forecasting.\n- Experience in automating sales tracking reports using VBA macros.\n- Educational background in fashion retail management.\n:::",
+            "thinking": "The user is asking for a profile of Matteo Rossi (cv_096e7947), including his current role, total experience, career trajectory, skills, and credentials. I need to extract all relevant information from the provided CV text chunk for Matteo Rossi (cv_096e7947) and present it in the specified format.",
+            "analysis": "## 👤 [📄](cv:cv_096e7947) **Matteo Rossi**\n[📄](cv:cv_096e7947) **Matteo Rossi** is a Junior Merchandiser at Boutique Holdings Italia, where he supports the merchandising team in sales analysis, order placement, and inventory transfers. He has experience in assortment planning, inventory forecasting, and retail mix optimization. Matteo is skilled in using SAP merchandising modules and data analysis tools like Excel and SQL.\n---\n### 📊 Candidate Highlights\n---\n### 📜 Credentials\n- SQL for Business Intelligence, 2020\n- Advanced Retail Forecasting & Planning, 2022\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Category",
+                "Key Information",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "🎯 Current Role",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Junior Merchandiser at Boutique Holdings Italia (2018-2021)"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "⏱️ Total Experience",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "3 years in merchandising"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🏆 Top Achievement",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week."
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "💡 Core Expertise",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Inventory Planning & Forecasting, Assortment Planning, WSSI Management"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🎓 Education",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "M.Sc. in Fashion Retail Management - Politecnico di Milano, 2018"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "**Assessment:**[📄](cv:cv_096e7947) **Matteo Rossi** has 3 years of experience as a Junior Merchandiser with a strong focus on inventory planning, forecasting, and data analysis. He has a Master's degree in Fashion Retail Management and is proficient in using SAP merchandising modules and SQL.\n\n**Key Strengths:**\n- Strong skills in inventory planning and forecasting.\n- Experience in automating sales tracking reports using VBA macros.\n- Educational background in fashion retail management.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T19:27:40.893614"
+        },
+        {
+          "id": "ac7e44b4-12cd-464d-8f3a-2c0730ad1edb",
+          "role": "user",
+          "content": "damelo todo sobre Matteo Rossi Group",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T19:41:41.557269"
+        },
+        {
+          "id": "a8995fb2-ae57-4b15-bc07-363cef8b635d",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a profile analysis of Matteo Rossi (cv_096e7947). I need to extract all relevant information from the provided CV text chunk, including current role, total experience, career trajectory, skills, and credentials. I will then format the information according to the specified structure.\n:::\n\n## 👤 [📄](cv:cv_096e7947)**Matteo Rossi**[📄](cv:cv_096e7947)**Matteo Rossi**is a Junior Merchandiser at Boutique Holdings Italia since 2018, driving profitable assortment planning and inventory optimization. He has a background in fashion retail management and economics, with experience in sales analysis, order placement, and market analysis. He automated sales tracking using VBA macros, saving the planning team approximately 5 hours per week.\n\n| Category | Key Information | Match Score |\n|---|---|---|\n| 🎯 Current Role | Junior Merchandiser at Boutique Holdings Italia (2018-2021) | 50% |\n| ⏱️ Total Experience | 3 years in merchandising | 50% |\n| 🏆 Top Achievement | Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week. | 50% |\n| 💡 Core Expertise | Inventory Planning & Forecasting, Assortment Planning (Open-to-Buy), WSSI Management | 50% |\n| 🎓 Education | M.Sc. in Fashion Retail Management - Politecnico di Milano, 2018 | 50% |\n\n:::conclusion**Assessment:**[📄](cv:cv_096e7947)**Matteo Rossi**has 3 years of experience as a Junior Merchandiser with a strong focus on inventory planning, assortment planning, and data analysis. His experience includes automating sales tracking and processing purchase orders.**Key Strengths:**- Strong skills in inventory planning and forecasting.\n- Experience in automating processes using VBA macros.\n- Education in Fashion Retail Management.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_13fc6990",
+              "filename": "2829ac4e__Adam_Al-Mansoori__Group_PM.pdf"
+            },
+            {
+              "cv_id": "cv_857805d5",
+              "filename": "3a963b30__Rahul_Patel__Junior_Digital_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_48ffa562",
+              "filename": "aa719eac__Rahul_Patel__Information_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_b3a9f9fa",
+              "filename": "16c037be__Lotte_van_der_Berg__Camera_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_1cf4493b",
+              "filename": "f8d0bf70__Layla_Al-Jamil__Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_d71a1bd2",
+              "filename": "d306c0c3__Chloé_Dubois__Computer_Vision_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_096e7947",
+              "filename": "42256dc8__Matteo_Rossi__Merchandiser.pdf"
+            },
+            {
+              "cv_id": "cv_e07a68b7",
+              "filename": "9c9af9ff__Amir_Al-Farsi__Instructional_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_377a8045",
+              "filename": "a579777d__Isabelle_Dubois__Commercial_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_b91f3204",
+              "filename": "7591f180__Ji-Yeon_Kim__Dean.pdf"
+            },
+            {
+              "cv_id": "cv_8d5c947d",
+              "filename": "b73fabea__Isabella_Nystrom__Junior_Blockchain_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_c6600d96",
+              "filename": "7ceb10f6__Liam_van_der_Merwe__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_3c4bc7ab",
+              "filename": "72cb0e20__Carmen_Rodriguez__Resident.pdf"
+            },
+            {
+              "cv_id": "cv_ec1238ea",
+              "filename": "22ca62fd__Rajiv_Patel__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_472e3635",
+              "filename": "70eb6b33__Maximilian_Richter__Performance_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_d59a37ea",
+              "filename": "2fd0d810__Kamran_Alizadeh__Law_Clerk.pdf"
+            },
+            {
+              "cv_id": "cv_9eb38702",
+              "filename": "8339ab64__Mei_Lin_Chen__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_2a37d4f2",
+              "filename": "99f808ef__Ling_Wei__QA.pdf"
+            },
+            {
+              "cv_id": "cv_6acf462c",
+              "filename": "014b47a1__Javier_Morales__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_f42db6d5",
+              "filename": "4a9a82d3__Kwame_Addo__Celebrity_Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_9f28cbec",
+              "filename": "5d0b9a4c__Javier_Morales__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_63c45322",
+              "filename": "323df925__Khalid_Al-Farsi__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_aad40cac",
+              "filename": "fd904bcd__Layla_Al_Mansoori__Content_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_af1f35b7",
+              "filename": "cadc8dd8__Laila_Al-Mansoori__Board_Member.pdf"
+            },
+            {
+              "cv_id": "cv_f061e22a",
+              "filename": "4ef2ef97__Aisha_Tan__Pizza_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_a5818a13",
+              "filename": "eb3b44f7__Javier_Rodriguez__UX_Research_Lead.pdf"
+            },
+            {
+              "cv_id": "cv_6d18325b",
+              "filename": "95e7fe8f__Sofia_Morales__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_62706e5a",
+              "filename": "6b9204bf__Matteo_Romano__Brand_Ambassador.pdf"
+            },
+            {
+              "cv_id": "cv_1a0f73d2",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1407.74,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 144.7,
+              "details": "Found 31 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 16458.12,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5429.89,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "## 👤 [📄](cv:cv_096e7947) **Matteo Rossi**\n[📄](cv:cv_096e7947) **Matteo Rossi** is a Junior Merchandiser at Boutique Holdings Italia since 2018, driving profitable assortment planning and inventory optimization. He has a background in fashion retail management and economics, with experience in sales analysis, order placement, and market analysis. He automated sales tracking using VBA macros, saving the planning team approximately 5 hours per week.",
+            "raw_content": ":::thinking\nThe user is asking for a profile analysis of **[Matteo Rossi](cv:cv_096e7947)**. I need to extract all relevant information from the provided CV text chunk, including current role, total experience, career trajectory, skills, and credentials. I will then format the information according to the specified structure.\n:::\n\n## 👤 **[Matteo Rossi](cv:cv_096e7947)**\n\n[Matteo Rossi](cv:cv_096e7947) is a Junior Merchandiser at Boutique Holdings Italia since 2018, driving profitable assortment planning and inventory optimization. He has a background in fashion retail management and economics, with experience in sales analysis, order placement, and market analysis. He automated sales tracking using VBA macros, saving the planning team approximately 5 hours per week.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Junior Merchandiser at Boutique Holdings Italia (2018-2021) |\n| **⏱️ Total Experience** | 3 years in merchandising |\n| **🏆 Top Achievement** | Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week. |\n| **💡 Core Expertise** | Inventory Planning & Forecasting, Assortment Planning (Open-to-Buy), WSSI Management |\n| **🎓 Education** | M.Sc. in Fashion Retail Management - Politecnico di Milano, 2018 |\n\n---\n\n### 💼 Career Trajectory\n\n**Junior Merchandiser** — *Boutique Holdings Italia* (2018 - 2021)\n→ Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **Inventory Planning** | Inventory Planning & Forecasting | 10/10 |\n| **Assortment Planning** | Assortment Planning (Open-to-Buy) | 9/10 |\n| **Retail Mix** | Retail Mix Optimization | 8/10 |\n| **SAP** | SAP Merchandising Modules | 8/10 |\n| **WSSI** | WSSI Management | 9/10 |\n| **Data Analysis** | Data Analysis (Advanced Excel/SQL) | 8/10 |\n\n---\n\n### 📜 Credentials\n\n- Advanced Retail Forecasting & Planning, 2022\n- SQL for Business Intelligence, 2020\n\n---\n\n:::conclusion\n**Assessment:** [Matteo Rossi](cv:cv_096e7947) has 3 years of experience as a Junior Merchandiser with a strong focus on inventory planning, assortment planning, and data analysis. His experience includes automating sales tracking and processing purchase orders.\n\n**Key Strengths:**\n- Strong skills in inventory planning and forecasting.\n- Experience in automating processes using VBA macros.\n- Education in Fashion Retail Management.\n:::",
+            "thinking": "The user is asking for a profile analysis of Matteo Rossi (cv_096e7947). I need to extract all relevant information from the provided CV text chunk, including current role, total experience, career trajectory, skills, and credentials. I will then format the information according to the specified structure.",
+            "analysis": "## 👤 [📄](cv:cv_096e7947) **Matteo Rossi**\n[📄](cv:cv_096e7947) **Matteo Rossi** is a Junior Merchandiser at Boutique Holdings Italia since 2018, driving profitable assortment planning and inventory optimization. He has a background in fashion retail management and economics, with experience in sales analysis, order placement, and market analysis. He automated sales tracking using VBA macros, saving the planning team approximately 5 hours per week.\n---\n### 📊 Candidate Highlights\n---\n### 📜 Credentials\n- Advanced Retail Forecasting & Planning, 2022\n- SQL for Business Intelligence, 2020\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Category",
+                "Key Information",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "🎯 Current Role",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Junior Merchandiser at Boutique Holdings Italia (2018-2021)"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "⏱️ Total Experience",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "3 years in merchandising"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🏆 Top Achievement",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week."
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "💡 Core Expertise",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Inventory Planning & Forecasting, Assortment Planning (Open-to-Buy), WSSI Management"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🎓 Education",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "M.Sc. in Fashion Retail Management - Politecnico di Milano, 2018"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "**Assessment:**[📄](cv:cv_096e7947) **Matteo Rossi** has 3 years of experience as a Junior Merchandiser with a strong focus on inventory planning, assortment planning, and data analysis. His experience includes automating sales tracking and processing purchase orders.\n\n**Key Strengths:**\n- Strong skills in inventory planning and forecasting.\n- Experience in automating processes using VBA macros.\n- Education in Fashion Retail Management.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T19:42:10.331507"
         }
       ],
       "created_at": "2026-01-05T16:29:50.861270",
-      "updated_at": "2026-01-05T18:38:42.124191"
+      "updated_at": "2026-01-05T19:42:10.331507"
+    },
+    {
+      "id": "efd3af78-42ef-4a12-b051-ce9d55638e13",
+      "name": "Media Production 2959",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_9f38db8f",
+          "filename": "0d1b1a1b__Aisha_Patel__Animator.pdf",
+          "chunk_count": 4,
+          "content_hash": "ca45c6173c9f80460346aa7b62214a360e6f7cd26a9dc2170052b3f3f446fa86",
+          "uploaded_at": "2026-01-05T19:55:13.879959"
+        },
+        {
+          "id": "cv_79d78dc9",
+          "filename": "0ed822eb__Antoine_Dubois__Junior_Texture_Artist.pdf",
+          "chunk_count": 3,
+          "content_hash": "a9cb7a1c5ef94b4dd67d4173e415093c32b3a0e98a32c10709536faff7e1d025",
+          "uploaded_at": "2026-01-05T19:55:15.296564"
+        },
+        {
+          "id": "cv_a118e22e",
+          "filename": "02f9626b__Marco_Rossi__3D_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "dbf5a97b45d0f7f4b8713bf4bf6a3271d80e7fb269868a8aaa1b6e78a243f370",
+          "uploaded_at": "2026-01-05T19:55:16.844632"
+        },
+        {
+          "id": "cv_2fd6ca86",
+          "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "7d4e53308fd3679d49fefec9229d3bd9507d495067e152e54b3c637dfaf95eae",
+          "uploaded_at": "2026-01-05T19:55:18.337261"
+        },
+        {
+          "id": "cv_e9e3ae63",
+          "filename": "5c2c5d6b__Arjun_Mehta__Junior_Concept_Artist.pdf",
+          "chunk_count": 3,
+          "content_hash": "045f3597c76b27df977bb0aca53cbc1741e53fd734f3deab732ee4991014fa14",
+          "uploaded_at": "2026-01-05T19:55:19.801023"
+        },
+        {
+          "id": "cv_3a277495",
+          "filename": "7ef319f7__Adrian_Morales__Junior_Animator.pdf",
+          "chunk_count": 3,
+          "content_hash": "58219c2a7c09e05918aa8f3454e63dd06869d536f02e13e2e32903ef45ddb1b8",
+          "uploaded_at": "2026-01-05T19:55:21.188264"
+        },
+        {
+          "id": "cv_ccd3d052",
+          "filename": "8cf248e0__Mateo_Rodriguez__Rigger.pdf",
+          "chunk_count": 5,
+          "content_hash": "7c493207f06b04b41034d40f7b27594eed7d424083ce9a6bc0912a1c671ab1a9",
+          "uploaded_at": "2026-01-05T19:55:22.672995"
+        },
+        {
+          "id": "cv_758c8e0c",
+          "filename": "9a484d82__Carlos_Mendoza__Texture_Artist.pdf",
+          "chunk_count": 5,
+          "content_hash": "d59c12f8f1ec080c249aded4ef2b6de4e5e62caf28483a047e7b1b408837f9ba",
+          "uploaded_at": "2026-01-05T19:55:24.161326"
+        },
+        {
+          "id": "cv_77f9630a",
+          "filename": "9e50441e__Matteo_Rossi__Creature_Designer.pdf",
+          "chunk_count": 4,
+          "content_hash": "290c912e27e91de516a503a49a538109c78222d647e5497246fa687f67b7f3ba",
+          "uploaded_at": "2026-01-05T19:55:25.665929"
+        },
+        {
+          "id": "cv_1dc40e8e",
+          "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf",
+          "chunk_count": 7,
+          "content_hash": "bd2da06d8d02512bab1b0606559fe14f7a7e881ec7ce85e4d4184b08b11512f2",
+          "uploaded_at": "2026-01-05T19:55:27.040749"
+        },
+        {
+          "id": "cv_5a0fea7b",
+          "filename": "53f55f6a__Mei_Rossi__3D_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "ab78cfe6bd794aa0676afa7afcdba3cb8558a397112bd52626894e92619be8b5",
+          "uploaded_at": "2026-01-05T19:55:28.516883"
+        },
+        {
+          "id": "cv_1bcbf780",
+          "filename": "55c0e841__Ricardo_De_Vries__Animator.pdf",
+          "chunk_count": 3,
+          "content_hash": "11c7fc5a4a6ff8bad820b895e07df84d6c15fabc0d1359171ecf07aec3547686",
+          "uploaded_at": "2026-01-05T19:55:29.961742"
+        },
+        {
+          "id": "cv_4cb4870f",
+          "filename": "63ce3a7c__Emma_Whitmore__Texture_Artist.pdf",
+          "chunk_count": 5,
+          "content_hash": "7050f253fc157464478bb25fd2a49375bb27d43ea38e6d5309be32fd93845047",
+          "uploaded_at": "2026-01-05T19:55:31.486517"
+        },
+        {
+          "id": "cv_fcb5ce85",
+          "filename": "74a0c87c__Mei_Lin_Chen__VFX_Supervisor.pdf",
+          "chunk_count": 4,
+          "content_hash": "8730b34ef70065d5808c382297d9140637c3e68d190ebbf2878766c165fb93c9",
+          "uploaded_at": "2026-01-05T19:55:32.949922"
+        },
+        {
+          "id": "cv_70208b59",
+          "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "2eca2a371ef05eb6d0fbafb6c24712d4d3e8ec57df5eb93009bbd658f7372299",
+          "uploaded_at": "2026-01-05T19:55:34.366390"
+        },
+        {
+          "id": "cv_8ef1597b",
+          "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf",
+          "chunk_count": 6,
+          "content_hash": "0808568a66aa77ab1d92f794af4d54628de5d9d5ab0a01b2d1ebde246bcd5072",
+          "uploaded_at": "2026-01-05T19:55:35.888013"
+        },
+        {
+          "id": "cv_f081aab4",
+          "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf",
+          "chunk_count": 5,
+          "content_hash": "7e152a6737adb6072e1076864533574469521b899270ea7d65569dff310615a8",
+          "uploaded_at": "2026-01-05T19:55:37.371864"
+        },
+        {
+          "id": "cv_9bb77a87",
+          "filename": "8742ca7a__Sofia_Mendoza__Environment_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "f3d5b99f8d47cadfae597fd68f42a9d684c874fafbf952cabe5c661a220cf7da",
+          "uploaded_at": "2026-01-05T19:55:38.915538"
+        },
+        {
+          "id": "cv_c01b87f9",
+          "filename": "749745cf__Aisha_Johnson__Animator.pdf",
+          "chunk_count": 5,
+          "content_hash": "fc4df9844655dc53b8c437b423443383094ee61c744fad93112dd13114f86c2d",
+          "uploaded_at": "2026-01-05T19:55:40.372139"
+        },
+        {
+          "id": "cv_5f291191",
+          "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf",
+          "chunk_count": 3,
+          "content_hash": "fca8a83a0edadee1c4bbc2ca635a9c888e1d0e630e689ccbda81a8bfd5c77e5e",
+          "uploaded_at": "2026-01-05T19:55:41.822252"
+        },
+        {
+          "id": "cv_d7c6c811",
+          "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf",
+          "chunk_count": 4,
+          "content_hash": "9ed63ccc7f2f7c0cc81da35ff3453dcec31c300ead2b4f946d4db5d6048ac157",
+          "uploaded_at": "2026-01-05T19:55:43.399231"
+        },
+        {
+          "id": "cv_cf2a121d",
+          "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf",
+          "chunk_count": 3,
+          "content_hash": "6858a468a4cdf946a86d01fd652ea2c146f8409afbe9337d0f43ebbeb0e4104f",
+          "uploaded_at": "2026-01-05T19:55:44.878442"
+        },
+        {
+          "id": "cv_e14a1e30",
+          "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf",
+          "chunk_count": 7,
+          "content_hash": "61979aaf1446d8b5d11d28b9b65cdd95e6e8100ee8667c9ad52d4104796d51ef",
+          "uploaded_at": "2026-01-05T19:55:46.314190"
+        },
+        {
+          "id": "cv_32cdbd7e",
+          "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf",
+          "chunk_count": 3,
+          "content_hash": "13213d6ec70b08b54b753f691859eb562813f17ed272f4754ad12a5a4b19e370",
+          "uploaded_at": "2026-01-05T19:55:47.801392"
+        },
+        {
+          "id": "cv_1e745097",
+          "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf",
+          "chunk_count": 3,
+          "content_hash": "0e996b38a95c64aca7129e2554ee5a0e684da1c7f40a72e8c912ab14faad7f18",
+          "uploaded_at": "2026-01-05T19:55:49.213457"
+        },
+        {
+          "id": "cv_f9a24650",
+          "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf",
+          "chunk_count": 11,
+          "content_hash": "fb9a97f91218eb858e3c8647e40b5b25a35d25039dc923bfe0a4da640eb2a90f",
+          "uploaded_at": "2026-01-05T19:55:50.810772"
+        },
+        {
+          "id": "cv_2629ddd7",
+          "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf",
+          "chunk_count": 6,
+          "content_hash": "9ac96c226a0824b5a8df589c45c1a9886ffb2f05442986faa0a5e6491c6eba80",
+          "uploaded_at": "2026-01-05T19:55:52.284808"
+        },
+        {
+          "id": "cv_566a176f",
+          "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf",
+          "chunk_count": 6,
+          "content_hash": "85d898ad89ecc8cb7267e5b49adba1f1cac5b408dd4c4fc2d71d14dc5bbd9786",
+          "uploaded_at": "2026-01-05T19:55:53.766883"
+        },
+        {
+          "id": "cv_91690f27",
+          "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "74f41b5728cefd055be7ae50f0cd92f821fc552c3f1623d099aafbc0f0110cf1",
+          "uploaded_at": "2026-01-05T19:55:55.284584"
+        },
+        {
+          "id": "cv_fa279041",
+          "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf",
+          "chunk_count": 7,
+          "content_hash": "b0ac973a41aa837f6956db83be7efc36c49d2569068d401372609dee2fb1805b",
+          "uploaded_at": "2026-01-05T19:55:56.803421"
+        }
+      ],
+      "messages": [
+        {
+          "id": "36df09be-9941-4314-b842-45b01ece25a8",
+          "role": "user",
+          "content": "Who shows the most career growth?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T19:56:01.499801"
+        },
+        {
+          "id": "8845b74d-52c1-46eb-b8eb-754ec6772775",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a ranking of candidates based on their career growth trajectory as evidenced by their CVs. Career growth is defined as promotions, increased responsibilities, significant skill development, movement to more senior roles, or company growth. The ranking should consider the time frame in which the growth occurred. I need to analyze each CV, identify evidence of career growth, and then rank the candidates accordingly. I will provide a table with the top candidates and a brief explanation of why each candidate was ranked as such.\n:::\n\nHere is a ranking of the candidates based on their demonstrated career growth, considering promotions, increased responsibilities, skill development, and the timeframe of their career progression. ### Analysis\nThe ranking is based on the progression of roles, responsibilities, and skills demonstrated in each candidate's CV. Candidates with clear promotions, increasing responsibilities, and evidence of skill development over time are ranked higher.\n\n### Analysis\n\nThe ranking is based on the progression of roles, responsibilities, and skills demonstrated in each candidate's CV. Candidates with clear promotions, increasing responsibilities, and evidence of skill development over time are ranked higher. The timeframe in which this growth occurred is also considered, with more recent growth being weighted slightly higher. Candidates were included in the table if they demonstrated some form of career growth, even if it was less pronounced than others.\n\n| Candidate | Career Growth Indicators | Timeframe | Match Score |\n|---|---|---|---|\n| Isabel Mendoza | Multiple promotions (3D Artist to Chief Creative Officer), increasing responsibilities, leadership roles, and consistent skill development. | 1976-Present (47 years) | 100% |\n| Carmen Rodriguez | Progression from 3D Artist to Chief Creative Officer, leading teams, spearheading visual strategies, and increasing client retention. | 1979-Present (44 years) | 80% |\n| Rajiv Kapoor | Advanced from Intern Technical Artist to VP of Creative Technology, leading teams, implementing pipeline improvements, and mentoring artists. | 2000-Present (23 years) | 80% |\n| Thierry Dubois | Moved from Concept Artist to Visual Development Director, leading visual narratives, and implementing iterative concept review pipelines. | 2010-Present (13 years) | 60% |\n| Daan van Dijk | Progression from Junior 3D Artist to Lead Hard Surface Modeler, directing pipelines, optimizing assets, and mentoring modelers. | 2010-Present (13 years) | 60% |\n| Karim El Amrani | Advanced from 3D Artist to Lead 3D Artist, leading teams, improving asset creation pipelines, and mentoring junior artists. | 2018-Present (5 years) | 60% |\n| Mateo Rodriguez | Progression from Rigger/Technical Artist to Lead Rigging Supervisor, directing rigging departments, standardizing tools, and mentoring riggers. | 2006-Present (17 years) | 60% |\n\n:::conclusion\nThe candidates demonstrating the most significant career growth are [📄](cv:cv_f9a24650)**Isabel Mendoza**, [📄](cv:cv_fa279041)**Carmen Rodriguez**, and [📄](cv:cv_8ef1597b)**Rajiv Kapoor**, showcasing consistent promotions, increased responsibilities, and skill development throughout their careers.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_1bcbf780",
+              "filename": "55c0e841__Ricardo_De_Vries__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_c01b87f9",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_8ef1597b",
+              "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_91690f27",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_ccd3d052",
+              "filename": "8cf248e0__Mateo_Rodriguez__Rigger.pdf"
+            },
+            {
+              "cv_id": "cv_f081aab4",
+              "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d7c6c811",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_3a277495",
+              "filename": "7ef319f7__Adrian_Morales__Junior_Animator.pdf"
+            },
+            {
+              "cv_id": "cv_fcb5ce85",
+              "filename": "74a0c87c__Mei_Lin_Chen__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_70208b59",
+              "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_f9a24650",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a118e22e",
+              "filename": "02f9626b__Marco_Rossi__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_2629ddd7",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_2fd6ca86",
+              "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_fa279041",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_77f9630a",
+              "filename": "9e50441e__Matteo_Rossi__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_9f38db8f",
+              "filename": "0d1b1a1b__Aisha_Patel__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_5f291191",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_566a176f",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_5a0fea7b",
+              "filename": "53f55f6a__Mei_Rossi__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_9bb77a87",
+              "filename": "8742ca7a__Sofia_Mendoza__Environment_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1867.55,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 38.82,
+              "details": "Found 34 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 20732.78,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 7127.02,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Here is a ranking of the candidates based on their demonstrated career growth, considering promotions, increased responsibilities, skill development, and the timeframe of their career progression. ### Analysis\nThe ranking is based on the progression of roles, responsibilities, and skills demonstrated in each candidate's CV. Candidates with clear promotions, increasing responsibilities, and evidence of skill development over time are ranked higher.",
+            "raw_content": ":::thinking\nThe user is asking for a ranking of candidates based on their career growth trajectory as evidenced by their CVs. Career growth is defined as promotions, increased responsibilities, significant skill development, movement to more senior roles, or company growth. The ranking should consider the time frame in which the growth occurred. I need to analyze each CV, identify evidence of career growth, and then rank the candidates accordingly. I will provide a table with the top candidates and a brief explanation of why each candidate was ranked as such.\n\n:::\n\nHere is a ranking of the candidates based on their demonstrated career growth, considering promotions, increased responsibilities, skill development, and the timeframe of their career progression.\n\n### Analysis\n\nThe ranking is based on the progression of roles, responsibilities, and skills demonstrated in each candidate's CV. Candidates with clear promotions, increasing responsibilities, and evidence of skill development over time are ranked higher. The timeframe in which this growth occurred is also considered, with more recent growth being weighted slightly higher. Candidates were included in the table if they demonstrated some form of career growth, even if it was less pronounced than others.\n\n| Candidate | Career Growth Indicators | Timeframe | Match |\n|-----------|--------------------------|-----------|-------|\n| **[Isabel Mendoza](cv:cv_f9a24650)** | Multiple promotions (3D Artist to Chief Creative Officer), increasing responsibilities, leadership roles, and consistent skill development. | 1976-Present (47 years) | ⭐⭐⭐⭐⭐ |\n| **[Carmen Rodriguez](cv:cv_fa279041)** | Progression from 3D Artist to Chief Creative Officer, leading teams, spearheading visual strategies, and increasing client retention. | 1979-Present (44 years) | ⭐⭐⭐⭐ |\n| **[Rajiv Kapoor](cv:cv_8ef1597b)** | Advanced from Intern Technical Artist to VP of Creative Technology, leading teams, implementing pipeline improvements, and mentoring artists. | 2000-Present (23 years) | ⭐⭐⭐⭐ |\n| **[Thierry Dubois](cv:cv_2fd6ca86)** | Moved from Concept Artist to Visual Development Director, leading visual narratives, and implementing iterative concept review pipelines. | 2010-Present (13 years) | ⭐⭐⭐ |\n| **[Daan van Dijk](cv:cv_d7c6c811)** | Progression from Junior 3D Artist to Lead Hard Surface Modeler, directing pipelines, optimizing assets, and mentoring modelers. | 2010-Present (13 years) | ⭐⭐⭐ |\n| **[Karim El Amrani](cv:cv_70208b59)** | Advanced from 3D Artist to Lead 3D Artist, leading teams, improving asset creation pipelines, and mentoring junior artists. | 2018-Present (5 years) | ⭐⭐⭐ |\n| **[Mateo Rodriguez](cv:cv_ccd3d052)** | Progression from Rigger/Technical Artist to Lead Rigging Supervisor, directing rigging departments, standardizing tools, and mentoring riggers. | 2006-Present (17 years) | ⭐⭐⭐ |\n\n:::conclusion\nThe candidates demonstrating the most significant career growth are **[Isabel Mendoza](cv:cv_f9a24650)**, **[Carmen Rodriguez](cv:cv_fa279041)**, and **[Rajiv Kapoor](cv:cv_8ef1597b)**, showcasing consistent promotions, increased responsibilities, and skill development throughout their careers.\n:::",
+            "thinking": "The user is asking for a ranking of candidates based on their career growth trajectory as evidenced by their CVs. Career growth is defined as promotions, increased responsibilities, significant skill development, movement to more senior roles, or company growth. The ranking should consider the time frame in which the growth occurred. I need to analyze each CV, identify evidence of career growth, and then rank the candidates accordingly. I will provide a table with the top candidates and a brief explanation of why each candidate was ranked as such.",
+            "analysis": "The ranking is based on the progression of roles, responsibilities, and skills demonstrated in each candidate's CV. Candidates with clear promotions, increasing responsibilities, and evidence of skill development over time are ranked higher. The timeframe in which this growth occurred is also considered, with more recent growth being weighted slightly higher. Candidates were included in the table if they demonstrated some form of career growth, even if it was less pronounced than others.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Career Growth Indicators",
+                "Timeframe",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Isabel Mendoza",
+                  "cv_id": "cv_f9a24650",
+                  "columns": {
+                    "Career Growth Indicators": "Multiple promotions (3D Artist to Chief Creative Officer), increasing responsibilities, leadership roles, and consistent skill development.",
+                    "Timeframe": "1976-Present (47 years)"
+                  },
+                  "match_score": 100
+                },
+                {
+                  "candidate_name": "Carmen Rodriguez",
+                  "cv_id": "cv_fa279041",
+                  "columns": {
+                    "Career Growth Indicators": "Progression from 3D Artist to Chief Creative Officer, leading teams, spearheading visual strategies, and increasing client retention.",
+                    "Timeframe": "1979-Present (44 years)"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Rajiv Kapoor",
+                  "cv_id": "cv_8ef1597b",
+                  "columns": {
+                    "Career Growth Indicators": "Advanced from Intern Technical Artist to VP of Creative Technology, leading teams, implementing pipeline improvements, and mentoring artists.",
+                    "Timeframe": "2000-Present (23 years)"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Thierry Dubois",
+                  "cv_id": "cv_2fd6ca86",
+                  "columns": {
+                    "Career Growth Indicators": "Moved from Concept Artist to Visual Development Director, leading visual narratives, and implementing iterative concept review pipelines.",
+                    "Timeframe": "2010-Present (13 years)"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Daan van Dijk",
+                  "cv_id": "cv_d7c6c811",
+                  "columns": {
+                    "Career Growth Indicators": "Progression from Junior 3D Artist to Lead Hard Surface Modeler, directing pipelines, optimizing assets, and mentoring modelers.",
+                    "Timeframe": "2010-Present (13 years)"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Karim El Amrani",
+                  "cv_id": "cv_70208b59",
+                  "columns": {
+                    "Career Growth Indicators": "Advanced from 3D Artist to Lead 3D Artist, leading teams, improving asset creation pipelines, and mentoring junior artists.",
+                    "Timeframe": "2018-Present (5 years)"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Mateo Rodriguez",
+                  "cv_id": "cv_ccd3d052",
+                  "columns": {
+                    "Career Growth Indicators": "Progression from Rigger/Technical Artist to Lead Rigging Supervisor, directing rigging departments, standardizing tools, and mentoring riggers.",
+                    "Timeframe": "2006-Present (17 years)"
+                  },
+                  "match_score": 60
+                }
+              ]
+            },
+            "conclusion": "The candidates demonstrating the most significant career growth are [📄](cv:cv_f9a24650) **Isabel Mendoza**, [📄](cv:cv_fa279041) **Carmen Rodriguez**, and [📄](cv:cv_8ef1597b) **Rajiv Kapoor**, showcasing consistent promotions, increased responsibilities, and skill development throughout their careers.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T19:56:35.084555"
+        },
+        {
+          "id": "7ec6d36b-9d9e-4719-a4e9-e17ee0b79781",
+          "role": "user",
+          "content": "dame mucho mas detallado sobre \nIsabel Mendoza\n y analzia su eprfil bien para saber cuales seria sus roels potenciales",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T19:57:08.724950"
+        },
+        {
+          "id": "a027cc51-367b-4c02-b0c9-cc6494b4ffb7",
+          "role": "assistant",
+          "content": ":::thinking\nOkay, I need to analyze Isabel Mendoza (cv_f9a24650)'s CV, extract key information like current role, total experience, skills, and career trajectory. Then, I'll summarize her strengths and suggest suitable job roles based on the extracted data. I will follow the specified format strictly.\n:::\n\n## 👤 [📄](cv:cv_f9a24650)**Isabel Mendoza**[📄](cv:cv_f9a24650)**Isabel Mendoza**is currently the Chief Creative Officer at FutureFrame Studios (2023-Present), where she oversees the creative vision for multi-platform projects. With over 47 years of experience in the 3D art field, she has progressed through various roles, including Vice President of Creative Development at Nova Media and Director of 3D Production at Global Render Studios, demonstrating expertise in leading creative teams and delivering high-fidelity 3D assets. ---\n### 📊 Candidate Highlights\n---.\n\n| Category | Key Information | Match Score |\n|---|---|---|\n| 🎯 Current Role | Chief Creative Officer at FutureFrame Studios (2023-Present) | 50% |\n| ⏱️ Total Experience | 47+ years in 3D art | 50% |\n| 💡 Core Expertise | 3D Modeling, Texturing, Unreal Engine | 50% |\n| 🏆 Top Achievement | Spearheaded a visual overhaul that increased user engagement by 45% across VR experiences. | 45% |\n| 🎓 Education | N/A | 15% |\n\n:::conclusion**Assessment:**[📄](cv:cv_f9a24650)**Isabel Mendoza**is a highly experienced 3D artist with a strong background in creative leadership and a proven track record of delivering successful projects across various media. Her extensive experience and diverse skill set make her well-suited for senior leadership roles in the 3D art and visual effects industries.**Key Strengths:**- Extensive experience in leading and mentoring creative teams.\n- Proven ability to drive visual innovation and increase user engagement.\n- Strong technical skills in 3D modeling, texturing, and real-time rendering using industry-standard software.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_fa279041",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_70208b59",
+              "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_9f38db8f",
+              "filename": "0d1b1a1b__Aisha_Patel__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_f9a24650",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_1dc40e8e",
+              "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_ccd3d052",
+              "filename": "8cf248e0__Mateo_Rodriguez__Rigger.pdf"
+            },
+            {
+              "cv_id": "cv_91690f27",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a118e22e",
+              "filename": "02f9626b__Marco_Rossi__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_77f9630a",
+              "filename": "9e50441e__Matteo_Rossi__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_f081aab4",
+              "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_2629ddd7",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_1e745097",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_e14a1e30",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_566a176f",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_1bcbf780",
+              "filename": "55c0e841__Ricardo_De_Vries__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_8ef1597b",
+              "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d7c6c811",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_e9e3ae63",
+              "filename": "5c2c5d6b__Arjun_Mehta__Junior_Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_5f291191",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_4cb4870f",
+              "filename": "63ce3a7c__Emma_Whitmore__Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_fcb5ce85",
+              "filename": "74a0c87c__Mei_Lin_Chen__VFX_Supervisor.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1563.09,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 42.48,
+              "details": "Found 31 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 15252.5,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5515.08,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "## 👤 [📄](cv:cv_f9a24650) **Isabel Mendoza**\n[📄](cv:cv_f9a24650) **Isabel Mendoza** is currently the Chief Creative Officer at FutureFrame Studios (2023-Present), where she oversees the creative vision for multi-platform projects. With over 47 years of experience in the 3D art field, she has progressed through various roles, including Vice President of Creative Development at Nova Media and Director of 3D Production at Global Render Studios, demonstrating expertise in leading creative teams and delivering high-fidelity 3D assets. ---\n### 📊 Candidate Highlights\n---.",
+            "raw_content": ":::thinking\nOkay, I need to analyze **[Isabel Mendoza](cv:cv_f9a24650)**'s CV, extract key information like current role, total experience, skills, and career trajectory. Then, I'll summarize her strengths and suggest suitable job roles based on the extracted data. I will follow the specified format strictly.\n:::\n\n## 👤 **[Isabel Mendoza](cv:cv_f9a24650)**\n\n[Isabel Mendoza](cv:cv_f9a24650) is currently the Chief Creative Officer at FutureFrame Studios (2023-Present), where she oversees the creative vision for multi-platform projects. With over 47 years of experience in the 3D art field, she has progressed through various roles, including Vice President of Creative Development at Nova Media and Director of 3D Production at Global Render Studios, demonstrating expertise in leading creative teams and delivering high-fidelity 3D assets.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Chief Creative Officer at FutureFrame Studios (2023-Present) |\n| **⏱️ Total Experience** | 47+ years in 3D art |\n| **🏆 Top Achievement** | Spearheaded a visual overhaul that increased user engagement by 45% across VR experiences. |\n| **💡 Core Expertise** | 3D Modeling, Texturing, Unreal Engine |\n| **🎓 Education** | N/A |\n\n---\n\n### 💼 Career Trajectory\n\n**Chief Creative Officer** — *FutureFrame Studios* (2023-Present)\n→ Spearheaded a visual overhaul that increased user engagement by 45% across VR experiences.\n\n**Vice President of Creative Development** — *Nova Media* (2020-2023)\n→ Delivered a $12M campaign that earned a Cannes Lion award for visual storytelling.\n\n**Director of 3D Production** — *Global Render Studios* (2010-2020)\n→ Led a team of 25 artists to launch a flagship game that sold 5 million copies in its first week.\n\n**3D** — *Immersive Creations* (2000-2010)\n→ Produced award‑winning visual effects for a prime‑time series, winning a BAFTA for Best Visual Effects.\n\n**3D Artist** — *Creative Lab* (1990-1995)\n→ Modeled over 200 complex structures, praised for anatomical precision and realistic textures.\n\n**3D Artist** — *EuroGraphics* (1984-1990)\n→ Designed immersive virtual tours that increased client conversion rates by 18%.\n\n**Junior 3D Artist** — *Pixel Dynamics* (1979-1984)\n→ Supported the creation of a short animated short that won a student award.\n\n**Intern 3D Artist** — *Studio L'Atelier* (1976-1979)\n→ Observed an\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **3D Art** | 3D Modeling, Texturing, Rigging | 10/10, 9/10, 8/10 |\n| **Software** | Substance Painter, Unreal Engine, Maya | 9/10, 9/10, 9/10 |\n| **Languages** | French, English, Spanish | C2, C1, C1 |\n\n---\n\n:::conclusion\n**Assessment:** [Isabel Mendoza](cv:cv_f9a24650) is a highly experienced 3D artist with a strong background in creative leadership and a proven track record of delivering successful projects across various media. Her extensive experience and diverse skill set make her well-suited for senior leadership roles in the 3D art and visual effects industries.\n\n**Key Strengths:**\n- Extensive experience in leading and mentoring creative teams.\n- Proven ability to drive visual innovation and increase user engagement.\n- Strong technical skills in 3D modeling, texturing, and real-time rendering using industry-standard software.\n:::",
+            "thinking": "Okay, I need to analyze Isabel Mendoza (cv_f9a24650)'s CV, extract key information like current role, total experience, skills, and career trajectory. Then, I'll summarize her strengths and suggest suitable job roles based on the extracted data. I will follow the specified format strictly.",
+            "analysis": "## 👤 [📄](cv:cv_f9a24650) **Isabel Mendoza**\n[📄](cv:cv_f9a24650) **Isabel Mendoza** is currently the Chief Creative Officer at FutureFrame Studios (2023-Present), where she oversees the creative vision for multi-platform projects. With over 47 years of experience in the 3D art field, she has progressed through various roles, including Vice President of Creative Development at Nova Media and Director of 3D Production at Global Render Studios, demonstrating expertise in leading creative teams and delivering high-fidelity 3D assets.\n---\n### 📊 Candidate Highlights\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Category",
+                "Key Information",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "🎯 Current Role",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Chief Creative Officer at FutureFrame Studios (2023-Present)"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "⏱️ Total Experience",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "47+ years in 3D art"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "💡 Core Expertise",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "3D Modeling, Texturing, Unreal Engine"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🏆 Top Achievement",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Spearheaded a visual overhaul that increased user engagement by 45% across VR experiences."
+                  },
+                  "match_score": 45
+                },
+                {
+                  "candidate_name": "🎓 Education",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "N/A"
+                  },
+                  "match_score": 15
+                }
+              ]
+            },
+            "conclusion": "**Assessment:**[📄](cv:cv_f9a24650) **Isabel Mendoza** is a highly experienced 3D artist with a strong background in creative leadership and a proven track record of delivering successful projects across various media. Her extensive experience and diverse skill set make her well-suited for senior leadership roles in the 3D art and visual effects industries.\n\n**Key Strengths:**\n- Extensive experience in leading and mentoring creative teams.\n- Proven ability to drive visual innovation and increase user engagement.\n- Strong technical skills in 3D modeling, texturing, and real-time rendering using industry-standard software.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T19:57:35.818431"
+        }
+      ],
+      "created_at": "2026-01-05T19:55:04.425937",
+      "updated_at": "2026-01-05T19:57:35.818431"
     }
   ]
 }

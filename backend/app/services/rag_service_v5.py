@@ -1268,45 +1268,19 @@ class RAGServiceV5:
             List of chunk dictionaries with content, metadata, and score
         """
         try:
-            # Get all chunks from vector store
-            all_results = self._vector_store.collection.get(
-                where={"cv_id": {"$in": cv_ids}} if cv_ids else None,
-                include=["documents", "metadatas"]
-            )
-            
-            if not all_results["ids"]:
+            # Use the vector store's dedicated method for targeted retrieval
+            # This works with both SimpleVectorStore (local) and other implementations
+            if hasattr(self._vector_store, 'get_all_chunks_by_candidate'):
+                # New method that works with SimpleVectorStore
+                matching_chunks = self._vector_store.get_all_chunks_by_candidate(
+                    candidate_name=candidate_name,
+                    cv_ids=cv_ids
+                )
+                return matching_chunks
+            else:
+                # Fallback for other vector store implementations (e.g., ChromaDB)
+                logger.warning(f"[TARGETED_RETRIEVAL] Vector store doesn't support get_all_chunks_by_candidate")
                 return []
-            
-            # Filter by candidate name (case-insensitive, partial match)
-            candidate_name_lower = candidate_name.lower()
-            matching_chunks = []
-            
-            for i, metadata in enumerate(all_results["metadatas"]):
-                chunk_candidate = metadata.get("candidate_name", "").lower()
-                
-                # Check for exact match or partial match
-                if candidate_name_lower in chunk_candidate or chunk_candidate in candidate_name_lower:
-                    matching_chunks.append({
-                        "content": all_results["documents"][i],
-                        "metadata": {
-                            "cv_id": metadata.get("cv_id", ""),
-                            "filename": metadata.get("filename", ""),
-                            "candidate_name": metadata.get("candidate_name", ""),
-                            "section_type": metadata.get("section_type", "general"),
-                        },
-                        "score": 1.0  # Direct match, highest confidence
-                    })
-            
-            # Sort by section type to get most important sections first
-            section_priority = {
-                "summary": 0, "experience": 1, "skills": 2, 
-                "education": 3, "certifications": 4, "general": 5
-            }
-            matching_chunks.sort(
-                key=lambda c: section_priority.get(c["metadata"].get("section_type", "general"), 5)
-            )
-            
-            return matching_chunks
             
         except Exception as e:
             logger.error(f"Error getting chunks by candidate name: {e}")
@@ -1370,6 +1344,13 @@ class RAGServiceV5:
             result = await self._query_understanding.understand(ctx.question, progress_callback)
             
             ctx.query_understanding = result
+            
+            # Early detection of single candidate queries for targeted retrieval
+            from app.prompts.templates import extract_candidate_name_from_query
+            detected_name = extract_candidate_name_from_query(ctx.question)
+            if detected_name:
+                ctx.target_candidate_name = detected_name.strip()
+                logger.info(f"[QUERY_UNDERSTANDING] Detected single candidate query for: '{detected_name}'")
             
             # Extract OpenRouter cost if available from result.metadata
             openrouter_cost = 0.0
@@ -1701,6 +1682,18 @@ class RAGServiceV5:
             if not chunks:
                 return
             
+            # SKIP reranking for targeted single-candidate retrieval
+            # We want ALL chunks from the candidate, not filtered by semantic relevance
+            if ctx.target_candidate_name and ctx.retrieval_result and ctx.retrieval_result.strategy == "targeted_candidate":
+                logger.info(f"[RERANKING] Skipping reranking for targeted candidate retrieval - keeping all {len(chunks)} chunks")
+                ctx.metrics.add_stage(StageMetrics(
+                    stage=PipelineStage.RERANKING,
+                    duration_ms=(time.perf_counter() - start) * 1000,
+                    success=True,
+                    metadata={"skipped": True, "reason": "targeted_candidate_retrieval"}
+                ))
+                return
+            
             effective_question = (
                 ctx.query_understanding.reformulated_prompt
                 if ctx.query_understanding and ctx.query_understanding.reformulated_prompt
@@ -1864,6 +1857,9 @@ class RAGServiceV5:
         
         try:
             chunks = ctx.effective_chunks
+            
+            # Log chunk summary for debugging
+            logger.info(f"[GENERATION] Sending {len(chunks)} chunks to LLM")
             
             effective_question = (
                 ctx.query_understanding.reformulated_prompt

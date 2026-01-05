@@ -19,6 +19,7 @@ export const isSingleCandidateResponse = (content) => {
     /### 💼 Career Trajectory/,                // Career section
     /### 🛠️ Skills Snapshot/,                 // Skills section
     /SINGLE CANDIDATE PROFILE/i,               // Template marker
+    /CRITICAL DATA EXTRACTION RULES/i,         // New template marker
   ];
   
   const matchCount = singleCandidateIndicators.filter(pattern => pattern.test(content)).length;
@@ -141,7 +142,7 @@ export const extractHighlights = (content) => {
 };
 
 /**
- * Extract career trajectory
+ * Extract career trajectory - captures ALL positions
  * @param {string} content 
  * @returns {Array<{ title: string, company: string, period: string, achievement: string }>}
  */
@@ -154,24 +155,35 @@ export const extractCareer = (content) => {
   const careerStart = content.indexOf('### 💼 Career Trajectory');
   if (careerStart === -1) return [];
   
-  // Find end of career section (next ### or ---)
-  let careerEnd = content.indexOf('###', careerStart + 1);
+  // Find end of career section (next ### or --- followed by ###)
+  let careerEnd = content.indexOf('### 🛠️', careerStart + 1);
+  if (careerEnd === -1) careerEnd = content.indexOf('### 📜', careerStart + 1);
+  if (careerEnd === -1) careerEnd = content.indexOf(':::conclusion', careerStart + 1);
   if (careerEnd === -1) careerEnd = content.length;
   
   const careerSection = content.substring(careerStart, careerEnd);
-  
-  // Pattern: **Title** — *Company* (Year-Year)
-  // → Achievement
-  const jobPattern = /\*\*([^*]+)\*\*\s*[—–-]\s*\*([^*]+)\*\s*(?:\(([^)]+)\))?/g;
-  const achievementPattern = /[→>]\s*(.+)/;
   
   const lines = careerSection.split('\n');
   let currentJob = null;
   
   for (const line of lines) {
-    const jobMatch = line.match(/\*\*([^*]+)\*\*\s*[—–-]\s*\*([^*]+)\*\s*(?:\(([^)]+)\))?/);
+    // Multiple patterns for job titles
+    // Pattern 1: **Title** — *Company* (Year-Year)
+    // Pattern 2: **Title** - *Company* (Year)
+    // Pattern 3: **[Title]** at Company
+    const jobPatterns = [
+      /\*\*([^*\[\]]+)\*\*\s*[—–-]\s*\*([^*]+)\*\s*(?:\(([^)]+)\))?/,
+      /\*\*\[?([^\]*]+)\]?\*\*\s+(?:at|@|-|—)\s+\*?([^*\n(]+)\*?\s*(?:\(([^)]+)\))?/,
+    ];
+    
+    let jobMatch = null;
+    for (const pattern of jobPatterns) {
+      jobMatch = line.match(pattern);
+      if (jobMatch) break;
+    }
     
     if (jobMatch) {
+      // Save previous job if exists
       if (currentJob) {
         career.push(currentJob);
       }
@@ -182,13 +194,18 @@ export const extractCareer = (content) => {
         achievement: ''
       };
     } else if (currentJob) {
-      const achieveMatch = line.match(achievementPattern);
-      if (achieveMatch) {
-        currentJob.achievement = achieveMatch[1].trim();
+      // Look for achievement line (→ or > or - followed by text)
+      const achieveMatch = line.match(/^[\s]*[→>•\-]\s*(.+)/);
+      if (achieveMatch && achieveMatch[1].trim().length > 10) {
+        // Only take first achievement if we don't have one yet
+        if (!currentJob.achievement) {
+          currentJob.achievement = achieveMatch[1].trim();
+        }
       }
     }
   }
   
+  // Don't forget the last job
   if (currentJob) {
     career.push(currentJob);
   }

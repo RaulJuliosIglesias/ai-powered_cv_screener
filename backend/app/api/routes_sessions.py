@@ -22,6 +22,7 @@ from app.models.sessions import session_manager, Session, ChatMessage, CVInfo
 from app.providers.cloud.sessions import supabase_session_manager
 from app.providers.factory import ProviderFactory
 from app.services.chunking_service import ChunkingService
+from app.services.smart_chunking_service import SmartChunkingService
 
 
 def get_session_manager(mode: Mode):
@@ -313,7 +314,9 @@ async def process_cvs_for_session(
     logger.info(f"[{job_id}] Processing {len(file_data)} CVs for session {session_id}")
     
     try:
-        chunking_service = ChunkingService()
+        # Use SmartChunkingService for enriched metadata extraction
+        chunking_service = SmartChunkingService()
+        logger.info(f"[{job_id}] Using SmartChunkingService for intelligent CV parsing")
         rag_service = ProviderFactory.get_rag_service(mode=mode)
     except Exception as e:
         logger.error(f"[{job_id}] Service init failed: {e}")

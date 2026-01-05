@@ -317,7 +317,6 @@ Respond in this exact JSON structure:
 }}
 """
 
-
 # =============================================================================
 # SINGLE CANDIDATE TEMPLATE (Individual Analysis - NO Comparisons)
 # =============================================================================
@@ -333,18 +332,40 @@ SINGLE_CANDIDATE_TEMPLATE = """## SINGLE CANDIDATE PROFILE ANALYSIS
 ## USER QUERY
 {question}
 
-## RESPONSE INSTRUCTIONS
-You are analyzing ONE SPECIFIC CANDIDATE. Your goal is to help the reader quickly understand this candidate's profile - do NOT duplicate the entire CV, but highlight the most relevant information.
+## CRITICAL DATA EXTRACTION RULES (READ CAREFULLY)
+
+### CURRENT ROLE DEFINITION
+**Current Role = The MOST RECENT job** (the one with "Present" or the highest/most recent year)
+- CVs list jobs in REVERSE chronological order (newest first)
+- The FIRST job listed is typically the CURRENT role
+- Look for "Present", "Actual", "Current" or the most recent year (e.g., 2023-Present)
+- NEVER show an old job as "Current Role"
+
+### TOTAL EXPERIENCE CALCULATION
+**Total Experience = From EARLIEST job start year to NOW (or most recent end date)**
+- Find the OLDEST job's start year
+- Calculate: Current Year (or latest end year) - Oldest Start Year
+- Example: Jobs from 2018-2021, 2021-2023, 2023-Present = **6+ years** (2018 to Present)
+
+### CAREER TRAJECTORY
+**Include ALL positions listed in the CV**, not just one
+- List in reverse chronological order (newest first)
+- Each position with its KEY achievement
+
+---
+
+## RESPONSE FORMAT
 
 :::thinking
 [Brief reasoning - 2-3 lines max]
-- What does the user want to know about {candidate_name}?
-- What are the KEY highlights from their CV?
+- What is {candidate_name}'s CURRENT role? (Look for "Present" or most recent dates)
+- How many TOTAL years of experience? (From oldest job to newest)
+- What are ALL their positions?
 :::
 
 ## 👤 **[{candidate_name}](cv:{cv_id})**
 
-[One paragraph summary answering the user's question directly. Be specific and concise.]
+[One paragraph summary highlighting their CURRENT position and career progression. Be specific and accurate.]
 
 ---
 
@@ -352,64 +373,65 @@ You are analyzing ONE SPECIFIC CANDIDATE. Your goal is to help the reader quickl
 
 | Category | Key Information |
 |:---------|:----------------|
-| **🎯 Current Role** | [Job title at Company - include years if recent] |
-| **⏱️ Total Experience** | [X years in field/industry] |
-| **🏆 Top Achievement** | [Single most impressive accomplishment with metrics] |
-| **💡 Core Expertise** | [2-3 main skills/technologies most relevant to query] |
-| **🎓 Education** | [Highest degree - Institution] |
+| **🎯 Current Role** | [MOST RECENT job title at Company (Year-Present)] |
+| **⏱️ Total Experience** | [Calculate: from oldest job year to now] years in [field] |
+| **🏆 Top Achievement** | [From their CURRENT or most senior role - with metrics] |
+| **💡 Core Expertise** | [Top 3 skills from their highest-rated skills] |
+| **🎓 Education** | [Highest degree - Institution, Year] |
 
 ---
 
 ### 💼 Career Trajectory
 
-[List 2-3 most relevant positions in reverse chronological order, each with ONE key achievement]
+[List ALL positions from the CV in reverse chronological order]
 
-**[Job Title]** — *[Company]* ([Year-Year])
-→ [Key achievement or responsibility]
+**[Most Recent Job Title]** — *[Company]* ([Year-Present])
+→ [Key achievement with metrics]
+
+**[Previous Job Title]** — *[Company]* ([Year-Year])
+→ [Key achievement]
+
+**[Earlier Job Title]** — *[Company]* ([Year-Year])
+→ [Key achievement]
+
+[Continue for ALL positions in CV]
 
 ---
 
 ### 🛠️ Skills Snapshot
 
-[Create a dynamic table based on what skills are ACTUALLY in the CV and relevant to the query]
-
-| Skill Area | Details |
-|:-----------|:--------|
-| **[Category 1]** | [Specific skills/tools] |
-| **[Category 2]** | [Specific skills/tools] |
+| Skill Area | Details | Level |
+|:-----------|:--------|:------|
+| **[Category]** | [Skills] | [X/10 if provided] |
 
 ---
 
 ### 📜 Credentials
 
-[Only include if present in CV - certifications, awards, publications]
+[Only if present in CV]
 
-- [Credential 1]
-- [Credential 2]
+- [Certification, Year]
+- [Award or Course, Year]
 
 ---
 
 :::conclusion
-**Assessment:** [Direct answer to the user's question about {candidate_name}]
+**Assessment:** [Summary based on their CURRENT role and full career trajectory]
 
-**Key Strengths:** [2-3 bullet points of what makes this candidate stand out]
+**Key Strengths:**
+- [Strength from CURRENT role]
+- [Strength from skills/achievements]
+- [Strength from experience breadth]
 :::
 
-## OUTPUT RULES
-1. **DO NOT duplicate the CV** - summarize and highlight, don't copy everything
-2. **Answer the user's specific question** in the first paragraph
-3. **Use the Highlights table** to show the most important facts at a glance
-4. **Be selective** - only include sections that have data in the CV
-5. **Format for scannability** - use the visual structure provided
-6. **NEVER compare** with other candidates or mention others
-7. **NEVER include external URLs** - only use cv:{cv_id} format for links
-8. If something is not in the CV, simply omit it from the output (don't say "not specified")
+## VALIDATION CHECKLIST (Before responding)
+☑ Current Role shows the MOST RECENT position (with "Present" or latest year)
+☑ Total Experience calculated from OLDEST job to PRESENT
+☑ Career Trajectory includes ALL positions, not just one
+☑ Top Achievement is from senior/current role, not oldest role
+☑ Skills reflect highest proficiency levels mentioned
 
 Respond now:"""
-
-
-# =============================================================================
-# SPECIALIZED TEMPLATES (Multi-Candidate)
 # =============================================================================
 
 COMPARISON_TEMPLATE = """## COMPARISON REQUEST
@@ -1337,29 +1359,43 @@ def extract_candidate_name_from_query(question: str) -> str | None:
     """
     # Patterns that indicate a single candidate query with name capture
     # The name is expected to be 2-3 capitalized words (e.g., "Ling Wei", "Juan García")
+    # Name pattern: First name (capitalized) + optional middle/last name(s)
+    NAME_PATTERN = r"([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){1,2})"
+    
     patterns = [
-        # Spanish patterns
-        r"(?:dame|dime|muéstrame|proporciona)\s+(?:todo|información|detalles|datos|el perfil)\s+(?:sobre|de|acerca de)\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,2})",
-        r"(?:háblame|cuéntame)\s+(?:sobre|de)\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,2})",
-        r"(?:quién|quien)\s+es\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,2})",
-        r"perfil\s+de\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,2})",
-        r"cv\s+de\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,2})",
-        r"(?:todo|información)\s+sobre\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,2})",
+        # Spanish patterns - extended to catch variations like "damelo", "dámelo", "dame lo"
+        rf"(?:d[aá]me(?:lo)?|dime|mu[eé]strame|proporciona)\s+(?:todo|información|detalles|datos|el perfil)\s+(?:sobre|de|acerca de)\s+{NAME_PATTERN}",
+        rf"(?:h[aá]blame|cu[eé]ntame)\s+(?:sobre|de)\s+{NAME_PATTERN}",
+        rf"(?:qui[eé]n|quien)\s+es\s+{NAME_PATTERN}",
+        rf"perfil\s+de\s+{NAME_PATTERN}",
+        rf"cv\s+de\s+{NAME_PATTERN}",
+        rf"(?:todo|información)\s+(?:sobre|de)\s+{NAME_PATTERN}",
+        rf"analiza(?:r)?\s+(?:a|el cv de)?\s*{NAME_PATTERN}",
         
         # English patterns
-        r"(?:tell me|give me|show me|provide)\s+(?:everything|all|information|details)\s+(?:about|on)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,2})",
-        r"(?:who is|what about)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,2})",
-        r"([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,2})(?:'s)?\s+(?:profile|cv|resume|experience|skills|background)",
-        r"about\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,2})\b",
-        r"information\s+(?:on|about)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,2})",
+        rf"(?:tell me|give me|show me|provide)\s+(?:everything|all|information|details)\s+(?:about|on)\s+{NAME_PATTERN}",
+        rf"(?:who is|what about)\s+{NAME_PATTERN}",
+        rf"{NAME_PATTERN}(?:'s)?\s+(?:profile|cv|resume|experience|skills|background)",
+        rf"about\s+{NAME_PATTERN}\b",
+        rf"information\s+(?:on|about)\s+{NAME_PATTERN}",
     ]
     
     for pattern in patterns:
         match = re.search(pattern, question, re.IGNORECASE)
         if match:
             candidate_name = match.group(1).strip()
-            # Validate: must be at least 2 chars and look like a name
-            if len(candidate_name) >= 2 and not candidate_name.lower() in {'the', 'all', 'top', 'best', 'candidate', 'candidates'}:
+            # Clean up: remove trailing non-name words
+            stop_words = {'group', 'team', 'cv', 'profile', 'resume', 'please', 'por favor'}
+            words = candidate_name.split()
+            cleaned_words = []
+            for word in words:
+                if word.lower() in stop_words:
+                    break
+                cleaned_words.append(word)
+            candidate_name = ' '.join(cleaned_words)
+            
+            # Validate: must be at least 2 words (first + last name) and look like a name
+            if len(candidate_name) >= 2 and candidate_name.lower() not in {'the', 'all', 'top', 'best', 'candidate', 'candidates'}:
                 return candidate_name
     
     return None
