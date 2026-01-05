@@ -25,3 +25,9 @@ Documentos de planificación para mejoras futuras del proyecto.
 - Citation verification
 - Sistema de calibración
 - Métricas de producción
+
+### [Security Improvements](./SECURITY_IMPROVEMENTS.md)
+- Mejoras de seguridad en autenticación
+- Rate limiting y protección contra abusos
+- Validación de inputs y sanitización
+- Hardening de la infraestructura
