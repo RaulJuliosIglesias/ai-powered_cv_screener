@@ -388,8 +388,70 @@ class StageMetrics:
 │  │ • Cache previous successful responses                   │    │
 │  └─────────────────────────────────────────────────────────┘    │
 │                                                                  │
+│  3-LEVEL FALLBACK FOR QUERY UNDERSTANDING                       │
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │ LEVEL 1: Retry with Exponential Backoff                 │    │
+│  │   • 3 attempts per model                                │    │
+│  │   • Delays: 1.5s → 3s → 4.5s                           │    │
+│  │   • Only for HTTP 429 (rate limiting)                   │    │
+│  ├─────────────────────────────────────────────────────────┤    │
+│  │ LEVEL 2: Free Model Fallback Chain                      │    │
+│  │   • gemini-2.0-flash-exp:free                          │    │
+│  │   • llama-3.3-70b-instruct:free                        │    │
+│  │   • gemma-3-27b-it:free                                │    │
+│  │   • deepseek-r1-0528:free                              │    │
+│  │   • mistral-7b-instruct:free                           │    │
+│  │   ✓ Strict validation: only `:free` suffix allowed     │    │
+│  ├─────────────────────────────────────────────────────────┤    │
+│  │ LEVEL 3: Heuristic Fallback (No LLM)                    │    │
+│  │   • Keyword detection for query_type                    │    │
+│  │   • Pattern matching for is_cv_related                  │    │
+│  │   • Cost: $0.00 - NEVER FAILS                          │    │
+│  └─────────────────────────────────────────────────────────┘    │
+│                                                                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
+### 3-Level Fallback System (Query Understanding)
+
+```python
+# From query_understanding_service.py
+FREE_MODEL_FALLBACK_CHAIN = [
+    "google/gemini-2.0-flash-exp:free",
+    "meta-llama/llama-3.3-70b-instruct:free",
+    "google/gemma-3-27b-it:free",
+    "deepseek/deepseek-r1-0528:free",
+    "mistralai/mistral-7b-instruct:free",
+]
+
+def _get_models_to_try(self) -> List[str]:
+    """Get ordered list of models: primary + free fallbacks."""
+    models = [self.model]
+    for fallback in FREE_MODEL_FALLBACK_CHAIN:
+        if fallback != self.model and fallback.endswith(":free"):
+            models.append(fallback)
+    return models
+
+def _create_heuristic_fallback(self, query: str) -> QueryUnderstanding:
+    """Level 3: Pure heuristic fallback - NEVER fails, costs $0."""
+    query_lower = query.lower()
+    
+    # Detect query type by keywords
+    if any(kw in query_lower for kw in ['rank', 'order', 'sort', 'best']):
+        query_type = 'ranking'
+    elif any(kw in query_lower for kw in ['compare', 'versus', 'vs']):
+        query_type = 'comparison'
+    # ... more patterns
+    
+    return QueryUnderstanding(
+        understood_query=query,
+        query_type=query_type,
+        is_cv_related=is_cv_related,
+        reformulated_prompt=query
+    )
+```
+
+**Guarantee**: Query Understanding **NEVER fails** - always produces a result with $0 cost fallback.
 
 ### Caching Strategy
 
