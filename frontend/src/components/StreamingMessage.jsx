@@ -39,7 +39,7 @@ export const useTypewriter = (text, speed = 3, enabled = true) => {
 /**
  * Dynamic typing indicator with phase awareness
  */
-export const TypingIndicator = memo(({ phase, details }) => {
+export const TypingIndicator = memo(({ phase, details, progress }) => {
   const { language } = useLanguage();
   
   const phases = {
@@ -109,14 +109,36 @@ export const TypingIndicator = memo(({ phase, details }) => {
   const Icon = currentPhase.icon;
   const label = language === 'es' ? currentPhase.labelEs : currentPhase.labelEn;
   
+  // Determine if we're in a retry/fallback state
+  const isRetrying = progress === 'retrying' || progress === 'trying_fallback' || progress === 'timeout';
+  const isFallback = progress === 'fallback' || progress === 'trying_fallback';
+  
   return (
-    <div className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 animate-pulse-soft">
-      <div className={`p-2 rounded-xl bg-gray-100 dark:bg-gray-700 ${currentPhase.color}`}>
+    <div className={`flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border ${
+      isRetrying ? 'border-amber-200 dark:border-amber-700' : 
+      isFallback ? 'border-orange-200 dark:border-orange-700' : 
+      'border-gray-100 dark:border-gray-700'
+    } animate-pulse-soft`}>
+      <div className={`p-2 rounded-xl ${
+        isRetrying ? 'bg-amber-100 dark:bg-amber-900/30' : 
+        isFallback ? 'bg-orange-100 dark:bg-orange-900/30' : 
+        'bg-gray-100 dark:bg-gray-700'
+      } ${isRetrying ? 'text-amber-500' : isFallback ? 'text-orange-500' : currentPhase.color}`}>
         <Icon className="w-5 h-5 animate-pulse" />
       </div>
       <div className="flex-1">
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{label}</span>
+          {isRetrying && (
+            <span className="px-1.5 py-0.5 text-[10px] font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded">
+              RETRY
+            </span>
+          )}
+          {isFallback && !isRetrying && (
+            <span className="px-1.5 py-0.5 text-[10px] font-medium bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded">
+              FALLBACK
+            </span>
+          )}
           <div className="flex gap-px items-end">
             <span className="w-[3px] h-[3px] bg-current opacity-60 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
             <span className="w-[3px] h-[3px] bg-current opacity-60 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
@@ -124,7 +146,11 @@ export const TypingIndicator = memo(({ phase, details }) => {
           </div>
         </div>
         {details && (
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{details}</p>
+          <p className={`text-xs mt-0.5 ${
+            isRetrying ? 'text-amber-600 dark:text-amber-400' : 
+            isFallback ? 'text-orange-600 dark:text-orange-400' : 
+            'text-gray-500 dark:text-gray-400'
+          }`}>{details}</p>
         )}
       </div>
     </div>
@@ -361,7 +387,7 @@ const StreamingMessage = ({
   
   if (!streamingState) return null;
   
-  const { currentStep, steps, queryUnderstanding, candidates, partialAnswer } = streamingState;
+  const { currentStep, steps, queryUnderstanding, candidates, partialAnswer, currentProgress } = streamingState;
   
   // MINIMAL MODE: Only show TypingIndicator when preview is disabled
   if (!showPreview) {
@@ -373,7 +399,7 @@ const StreamingMessage = ({
           </div>
         </div>
         <div className="flex-1 min-w-0">
-          <TypingIndicator phase={currentStep} details={steps[currentStep]?.details} />
+          <TypingIndicator phase={currentStep} details={steps[currentStep]?.details} progress={currentProgress} />
         </div>
       </div>
     );
@@ -436,11 +462,10 @@ const StreamingMessage = ({
           </div>
         )}
         
-        {/* Loading indicator - show when:
-            1. No partial answer yet AND
-            2. Either no queryUnderstanding OR current step is NOT query_understanding (other steps running) */}
-        {!partialAnswer && (!queryUnderstanding || currentStep !== 'query_understanding') && (
-          <TypingIndicator phase={currentStep} details={steps[currentStep]?.details} />
+        {/* Loading indicator - show when no partial answer yet
+            Always show to indicate pipeline is still running */}
+        {!partialAnswer && (
+          <TypingIndicator phase={currentStep} details={steps[currentStep]?.details} progress={currentProgress} />
         )}
       </div>
     </div>

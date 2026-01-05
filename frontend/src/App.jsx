@@ -409,7 +409,9 @@ function App() {
                 const newState = { 
                   ...prev, 
                   currentStep: stepName,
-                  steps: { ...prev.steps, [stepName]: { status: stepStatus, details: data.details } }
+                  steps: { ...prev.steps, [stepName]: { status: stepStatus, details: data.details, progress: data.progress } },
+                  // Track progress state for retry/fallback visualization
+                  currentProgress: data.progress || null
                 };
                 
                 // Capture query understanding content
@@ -491,6 +493,8 @@ function App() {
       
     } catch (e) {
       console.error('❌ Stream error:', e);
+      // Clear streaming state on error to prevent UI from being stuck
+      setStreamingState(null);
       setPendingMessages(prev => {
         const newState = { ...prev };
         delete newState[targetSessionId];

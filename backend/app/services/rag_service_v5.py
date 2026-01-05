@@ -935,10 +935,43 @@ class RAGServiceV5:
         """Execute pipeline with streaming progress events."""
         import time
         
-        # Stage 1: Query Understanding
+        # Stage 1: Query Understanding with progress updates
         yield {"event": "step", "data": {"step": "query_understanding", "status": "running"}}
         start = time.perf_counter()
-        await self._step_query_understanding(ctx)
+        
+        # Use queue to collect progress events from callback
+        progress_queue: asyncio.Queue = asyncio.Queue()
+        
+        async def progress_callback(status: str, details: str):
+            """Callback to queue progress updates."""
+            await progress_queue.put({"status": status, "details": details})
+        
+        # Run query understanding with progress callback in background
+        understanding_task = asyncio.create_task(
+            self._step_query_understanding_with_callback(ctx, progress_callback)
+        )
+        
+        # Yield progress events while waiting for understanding to complete
+        while not understanding_task.done():
+            try:
+                # Wait for either a progress event or task completion
+                progress_event = await asyncio.wait_for(progress_queue.get(), timeout=0.1)
+                yield {
+                    "event": "step", 
+                    "data": {
+                        "step": "query_understanding", 
+                        "status": "running",
+                        "progress": progress_event["status"],
+                        "details": progress_event["details"]
+                    }
+                }
+            except asyncio.TimeoutError:
+                # No progress event, continue waiting
+                pass
+        
+        # Ensure task completed (get any exception)
+        await understanding_task
+        
         duration = (time.perf_counter() - start) * 1000
         
         # Emit query understanding content for progressive display
@@ -951,6 +984,8 @@ class RAGServiceV5:
                 "keywords": qu.requirements if hasattr(qu, 'requirements') else [],
                 "entities": qu.entities if hasattr(qu, 'entities') else {},
                 "confidence": qu.confidence if hasattr(qu, 'confidence') else None,
+                "used_fallback": qu.metadata.get("fallback", False) if hasattr(qu, 'metadata') else False,
+                "fallback_model": qu.metadata.get("used_fallback_model") if hasattr(qu, 'metadata') else None,
             }
         yield {"event": "step", "data": {"step": "query_understanding", "status": "completed", "duration_ms": duration, "content": understanding_content}}
         
@@ -1238,6 +1273,51 @@ class RAGServiceV5:
                     "completion_tokens": completion_tokens,
                     "total_tokens": prompt_tokens + completion_tokens,
                     "openrouter_cost": openrouter_cost
+                }
+            ))
+        except Exception as e:
+            logger.error(f"Query understanding failed: {e}")
+            ctx.metrics.add_stage(StageMetrics(
+                stage=PipelineStage.QUERY_UNDERSTANDING,
+                duration_ms=(time.perf_counter() - start) * 1000,
+                success=False,
+                error=str(e)
+            ))
+    
+    async def _step_query_understanding_with_callback(
+        self, 
+        ctx: PipelineContextV5, 
+        progress_callback
+    ) -> None:
+        """Step 1: Understand the query with progress callback for streaming."""
+        start = time.perf_counter()
+        try:
+            # Pass the progress callback to understand() for retry/fallback progress updates
+            result = await self._query_understanding.understand(ctx.question, progress_callback)
+            
+            ctx.query_understanding = result
+            
+            # Extract OpenRouter cost if available from result.metadata
+            openrouter_cost = 0.0
+            prompt_tokens = 0
+            completion_tokens = 0
+            if result.metadata:
+                openrouter_cost = result.metadata.get('openrouter_cost', 0.0)
+                prompt_tokens = result.metadata.get('prompt_tokens', 0)
+                completion_tokens = result.metadata.get('completion_tokens', 0)
+                logger.info(f"[STEP_UNDERSTANDING] Captured: {prompt_tokens}+{completion_tokens}={prompt_tokens+completion_tokens} tokens, ${openrouter_cost}")
+            
+            ctx.metrics.add_stage(StageMetrics(
+                stage=PipelineStage.QUERY_UNDERSTANDING,
+                duration_ms=(time.perf_counter() - start) * 1000,
+                success=True,
+                metadata={
+                    "query_type": result.query_type,
+                    "prompt_tokens": prompt_tokens,
+                    "completion_tokens": completion_tokens,
+                    "total_tokens": prompt_tokens + completion_tokens,
+                    "openrouter_cost": openrouter_cost,
+                    "used_fallback": result.metadata.get("fallback", False) if result.metadata else False
                 }
             ))
         except Exception as e:

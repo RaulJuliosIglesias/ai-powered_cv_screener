@@ -3,9 +3,16 @@ Query Understanding Service - Step 1 of 2-step RAG.
 
 Uses a fast model to understand, reformulate, and structure the user's query
 before sending it to the main generation model.
+
+Features:
+- Retry with exponential backoff for rate limits (429)
+- Model fallback chain (only FREE models)
+- Heuristic fallback as last resort (never fails)
 """
 import logging
-from typing import Optional, Dict, Any
+import asyncio
+import json
+from typing import Optional, Dict, Any, List
 from dataclasses import dataclass, field
 import httpx
 
@@ -13,6 +20,27 @@ from app.config import settings, timeouts
 from app.providers.cloud.llm import calculate_openrouter_cost
 
 logger = logging.getLogger(__name__)
+
+# =============================================================================
+# CONFIGURATION: Free Model Fallback Chain
+# =============================================================================
+
+# GUARANTEED FREE MODELS (all end with :free)
+# These are verified OpenRouter free models as of 2024
+FREE_MODEL_FALLBACK_CHAIN = [
+    "google/gemini-2.0-flash-exp:free",
+    "meta-llama/llama-3.3-70b-instruct:free",
+    "google/gemma-3-27b-it:free",
+    "deepseek/deepseek-r1-0528:free",
+    "mistralai/mistral-7b-instruct:free",
+]
+
+# Retry configuration
+MAX_RETRIES_PER_MODEL = 3
+RETRY_BASE_DELAY_SECONDS = 1.5  # 1.5s, 3s, 4.5s
+
+# Safety: Only allow :free models in fallback
+ONLY_FREE_MODELS_IN_FALLBACK = True
 
 
 @dataclass
@@ -97,6 +125,11 @@ class QueryUnderstandingService:
     
     Uses a fast, cheap model for quick query analysis before
     the main RAG generation step.
+    
+    RESILIENCE FEATURES:
+    - Level 1: Retry with exponential backoff (same model)
+    - Level 2: Fallback to alternative FREE models
+    - Level 3: Heuristic fallback (NEVER fails)
     """
     
     def __init__(self, model: str):
@@ -106,99 +139,255 @@ class QueryUnderstandingService:
         self.api_key = settings.openrouter_api_key or ""
         logger.info(f"QueryUnderstandingService initialized with model: {self.model}")
         logger.info(f"  API key available: {bool(self.api_key)}")
+        logger.info(f"  Fallback models: {len(FREE_MODEL_FALLBACK_CHAIN)} free models available")
     
-    async def understand(self, query: str) -> QueryUnderstanding:
+    def _get_models_to_try(self) -> List[str]:
         """
-        Analyze and understand the user's query.
+        Build ordered list of models to try.
+        Primary model first, then free fallbacks.
+        """
+        models = [self.model]
+        
+        # Add fallback models (only those not already in list)
+        for fallback in FREE_MODEL_FALLBACK_CHAIN:
+            if fallback != self.model:
+                # Safety check: only allow :free models in fallback
+                if ONLY_FREE_MODELS_IN_FALLBACK and not fallback.endswith(':free'):
+                    continue
+                models.append(fallback)
+        
+        return models
+    
+    async def understand(self, query: str, progress_callback=None) -> QueryUnderstanding:
+        """
+        Analyze and understand the user's query with 3-level fallback.
+        
+        This method NEVER raises exceptions - it always returns a result.
         
         Args:
             query: The user's original question
+            progress_callback: Optional async callback(status: str, details: str) for progress updates
             
         Returns:
             QueryUnderstanding with parsed intent and reformulated prompt
         """
-        if not self.api_key:
-            raise ValueError("OpenRouter API key is required for query understanding")
+        async def report_progress(status: str, details: str = ""):
+            """Helper to report progress if callback is provided."""
+            if progress_callback:
+                try:
+                    await progress_callback(status, details)
+                except Exception as e:
+                    logger.warning(f"Progress callback failed: {e}")
         
-        try:
-            prompt = QUERY_UNDERSTANDING_PROMPT.format(query=query)
+        if not self.api_key:
+            logger.warning("No API key available, using heuristic fallback")
+            await report_progress("fallback", "No API key, using heuristics")
+            return self._create_heuristic_fallback(query, "No API key")
+        
+        models_to_try = self._get_models_to_try()
+        last_error = None
+        total_models = len(models_to_try)
+        
+        # Try each model with retries
+        for model_idx, model in enumerate(models_to_try):
+            is_fallback = model_idx > 0
+            model_short = model.split('/')[-1].split(':')[0]  # Extract short name
             
-            # Use context manager to ensure client is closed after request
-            from app.providers.base import get_openrouter_url
-            async with httpx.AsyncClient(timeout=timeouts.HTTP_MEDIUM) as client:
-                response = await client.post(
-                    get_openrouter_url("chat/completions"),
-                    headers={
-                        "Authorization": f"Bearer {self.api_key}",
-                        "Content-Type": "application/json"
-                    },
-                    json={
-                        "model": self.model,
-                        "messages": [{"role": "user", "content": prompt}],
-                        "temperature": 0.1,
-                        "max_tokens": 500
-                    }
-                )
-                response.raise_for_status()
-                data = response.json()
+            if is_fallback:
+                await report_progress("trying_fallback", f"Trying fallback {model_idx}/{total_models-1}: {model_short}")
             
-            content = data["choices"][0]["message"]["content"].strip()
-            
-            # Extract OpenRouter usage metadata and calculate cost
-            metadata = {}
-            if "usage" in data:
-                usage = data["usage"]
-                if isinstance(usage, dict):
-                    prompt_tokens = usage.get("prompt_tokens", 0)
-                    completion_tokens = usage.get("completion_tokens", 0)
-                    metadata["prompt_tokens"] = prompt_tokens
-                    metadata["completion_tokens"] = completion_tokens
-                    metadata["total_tokens"] = prompt_tokens + completion_tokens
-                    # Calculate cost from tokens and model pricing
-                    metadata["openrouter_cost"] = calculate_openrouter_cost(
-                        self.model, prompt_tokens, completion_tokens
-                    )
-                    logger.info(f"[QUERY_UNDERSTANDING] OpenRouter usage: {metadata}")
-            else:
-                logger.warning("[QUERY_UNDERSTANDING] No 'usage' field in OpenRouter response")
-            
-            # Parse JSON response
-            import json
-            # Clean up markdown if present
-            if content.startswith("```"):
-                content = content.split("```")[1]
-                if content.startswith("json"):
-                    content = content[4:]
-            content = content.strip()
-            
-            parsed = json.loads(content)
-            
-            query_type = parsed.get("query_type", "general")
-            is_cv_related = parsed.get("is_cv_related", True)
-            
-            # IMPORTANT: If query_type indicates CV analysis intent, force is_cv_related=True
-            # This fixes cases where LLM incorrectly marks "candidates" queries as non-CV
-            cv_related_types = {"ranking", "comparison", "search", "filter"}
-            if query_type in cv_related_types:
-                is_cv_related = True
-            
-            # Also check for CV-related keywords as fallback
-            cv_keywords = ["candidate", "cv", "resume", "shortlist", "rank", "experience", "skill"]
-            query_lower = query.lower()
-            if any(kw in query_lower for kw in cv_keywords):
-                is_cv_related = True
-            
-            return QueryUnderstanding(
-                original_query=query,
-                understood_query=parsed.get("understood_query", query),
-                query_type=query_type,
-                requirements=parsed.get("requirements", []),
-                is_cv_related=is_cv_related,
-                confidence=0.9,
-                reformulated_prompt=parsed.get("reformulated_prompt", query),
-                metadata=metadata
+            for attempt in range(MAX_RETRIES_PER_MODEL):
+                try:
+                    result = await self._call_llm(query, model)
+                    
+                    # Success!
+                    if is_fallback:
+                        logger.warning(f"[QUERY_UNDERSTANDING] Succeeded with fallback model: {model}")
+                        result.metadata["used_fallback_model"] = model
+                    
+                    return result
+                    
+                except httpx.HTTPStatusError as e:
+                    last_error = e
+                    
+                    if e.response.status_code == 429:
+                        # Rate limited - retry with backoff
+                        wait_time = RETRY_BASE_DELAY_SECONDS * (attempt + 1)
+                        logger.warning(
+                            f"[QUERY_UNDERSTANDING] Rate limited (429) on {model}, "
+                            f"attempt {attempt + 1}/{MAX_RETRIES_PER_MODEL}, waiting {wait_time}s..."
+                        )
+                        await report_progress(
+                            "retrying", 
+                            f"Rate limited, retry {attempt + 1}/{MAX_RETRIES_PER_MODEL} in {wait_time:.0f}s"
+                        )
+                        await asyncio.sleep(wait_time)
+                    else:
+                        # Other HTTP error - skip to next model
+                        logger.warning(
+                            f"[QUERY_UNDERSTANDING] HTTP {e.response.status_code} on {model}, "
+                            f"trying next model..."
+                        )
+                        break
+                        
+                except httpx.TimeoutException as e:
+                    last_error = e
+                    logger.warning(f"[QUERY_UNDERSTANDING] Timeout on {model}, trying next model...")
+                    await report_progress("timeout", f"Timeout on {model_short}")
+                    break
+                    
+                except json.JSONDecodeError as e:
+                    last_error = e
+                    logger.warning(f"[QUERY_UNDERSTANDING] Invalid JSON from {model}, trying next model...")
+                    break
+                    
+                except Exception as e:
+                    last_error = e
+                    logger.warning(f"[QUERY_UNDERSTANDING] Error on {model}: {type(e).__name__}: {e}")
+                    break
+        
+        # ALL models failed - use heuristic fallback (Level 3)
+        logger.error(
+            f"[QUERY_UNDERSTANDING] All {len(models_to_try)} models failed. "
+            f"Using heuristic fallback. Last error: {last_error}"
+        )
+        await report_progress("fallback", "Using heuristic analysis")
+        return self._create_heuristic_fallback(query, str(last_error))
+    
+    async def _call_llm(self, query: str, model: str) -> QueryUnderstanding:
+        """
+        Make a single LLM call for query understanding.
+        
+        Raises exceptions on failure (handled by caller).
+        """
+        from app.providers.base import get_openrouter_url
+        
+        prompt = QUERY_UNDERSTANDING_PROMPT.format(query=query)
+        
+        async with httpx.AsyncClient(timeout=timeouts.HTTP_MEDIUM) as client:
+            response = await client.post(
+                get_openrouter_url("chat/completions"),
+                headers={
+                    "Authorization": f"Bearer {self.api_key}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "model": model,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "temperature": 0.1,
+                    "max_tokens": 500
+                }
             )
-            
-        except Exception as e:
-            logger.error(f"Query understanding failed: {e}")
-            raise
+            response.raise_for_status()
+            data = response.json()
+        
+        content = data["choices"][0]["message"]["content"].strip()
+        
+        # Extract usage metadata
+        metadata = {"model_used": model}
+        if "usage" in data:
+            usage = data["usage"]
+            if isinstance(usage, dict):
+                prompt_tokens = usage.get("prompt_tokens", 0)
+                completion_tokens = usage.get("completion_tokens", 0)
+                metadata["prompt_tokens"] = prompt_tokens
+                metadata["completion_tokens"] = completion_tokens
+                metadata["total_tokens"] = prompt_tokens + completion_tokens
+                metadata["openrouter_cost"] = calculate_openrouter_cost(
+                    model, prompt_tokens, completion_tokens
+                )
+                logger.info(f"[QUERY_UNDERSTANDING] Success with {model}: {metadata['total_tokens']} tokens")
+        
+        # Parse JSON response
+        return self._parse_llm_response(query, content, metadata)
+    
+    def _parse_llm_response(self, query: str, content: str, metadata: dict) -> QueryUnderstanding:
+        """
+        Parse LLM response into QueryUnderstanding.
+        """
+        # Clean up markdown if present
+        if content.startswith("```"):
+            content = content.split("```")[1]
+            if content.startswith("json"):
+                content = content[4:]
+        content = content.strip()
+        
+        parsed = json.loads(content)
+        
+        query_type = parsed.get("query_type", "general")
+        is_cv_related = parsed.get("is_cv_related", True)
+        
+        # Force is_cv_related=True for CV-related query types
+        cv_related_types = {"ranking", "comparison", "search", "filter"}
+        if query_type in cv_related_types:
+            is_cv_related = True
+        
+        # Also check for CV-related keywords
+        cv_keywords = ["candidate", "cv", "resume", "shortlist", "rank", "experience", "skill"]
+        query_lower = query.lower()
+        if any(kw in query_lower for kw in cv_keywords):
+            is_cv_related = True
+        
+        return QueryUnderstanding(
+            original_query=query,
+            understood_query=parsed.get("understood_query", query),
+            query_type=query_type,
+            requirements=parsed.get("requirements", []),
+            is_cv_related=is_cv_related,
+            confidence=0.9,
+            reformulated_prompt=parsed.get("reformulated_prompt", query),
+            metadata=metadata
+        )
+    
+    def _create_heuristic_fallback(self, query: str, error_reason: str) -> QueryUnderstanding:
+        """
+        Create QueryUnderstanding using heuristics when ALL LLM calls fail.
+        
+        This is the LAST RESORT - ensures the pipeline NEVER fails.
+        """
+        query_lower = query.lower()
+        
+        # Detect query type from keywords
+        if any(kw in query_lower for kw in ['rank', 'best', 'top', 'order', 'sort', 'mejor', 'ordenar']):
+            query_type = 'ranking'
+        elif any(kw in query_lower for kw in ['compare', 'versus', 'vs', 'difference', 'comparar']):
+            query_type = 'comparison'
+        elif any(kw in query_lower for kw in ['filter', 'only', 'just', 'exclude', 'filtrar', 'solo']):
+            query_type = 'filter'
+        elif any(kw in query_lower for kw in ['who', 'which', 'find', 'search', 'has', 'know', 'quien', 'buscar']):
+            query_type = 'search'
+        else:
+            query_type = 'general'
+        
+        # Detect if CV-related
+        cv_keywords = [
+            'candidate', 'cv', 'resume', 'experience', 'skill', 'python', 
+            'developer', 'engineer', 'work', 'job', 'year', 'company',
+            'candidato', 'experiencia', 'habilidad', 'trabajo', 'empresa'
+        ]
+        is_cv_related = any(kw in query_lower for kw in cv_keywords)
+        
+        # If query type suggests CV analysis, force is_cv_related
+        if query_type in {'ranking', 'comparison', 'search', 'filter'}:
+            is_cv_related = True
+        
+        logger.warning(
+            f"[QUERY_UNDERSTANDING] Using HEURISTIC fallback: "
+            f"type={query_type}, cv_related={is_cv_related}, reason={error_reason[:100]}"
+        )
+        
+        return QueryUnderstanding(
+            original_query=query,
+            understood_query=query,  # Use original as-is
+            query_type=query_type,
+            requirements=[],  # Can't extract requirements without LLM
+            is_cv_related=is_cv_related,
+            confidence=0.5,  # Lower confidence for heuristic fallback
+            reformulated_prompt=query,
+            metadata={
+                "fallback": True,
+                "fallback_type": "heuristic",
+                "error": error_reason,
+                "openrouter_cost": 0.0  # No cost for heuristic
+            }
+        )
