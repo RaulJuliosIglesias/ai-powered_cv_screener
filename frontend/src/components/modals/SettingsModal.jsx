@@ -3,16 +3,19 @@ import { X, Settings, Sparkles, ChevronDown, Check } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 const CHEAP_MODELS = [
-  { id: 'mistralai/mistral-7b-instruct:free', name: 'Mistral 7B Instruct (Free)', price: 'Free', recommended: true },
-  { id: 'huggingfaceh4/zephyr-7b-beta:free', name: 'Zephyr 7B (Free)', price: 'Free' },
-  { id: 'openchat/openchat-7b:free', name: 'OpenChat 7B (Free)', price: 'Free' },
-  { id: 'nousresearch/nous-capybara-7b:free', name: 'Nous Capybara 7B (Free)', price: 'Free' },
-  { id: 'mistralai/mistral-tiny', name: 'Mistral Tiny', price: '$0.25/M' },
+  { id: 'google/gemini-2.0-flash-exp:free', name: 'Gemini 2.0 Flash (Free)', price: 'Free', recommended: true },
+  { id: 'meta-llama/llama-3.3-70b-instruct:free', name: 'Llama 3.3 70B (Free)', price: 'Free' },
+  { id: 'google/gemma-3-27b-it:free', name: 'Gemma 3 27B (Free)', price: 'Free' },
+  { id: 'deepseek/deepseek-r1-0528:free', name: 'DeepSeek R1 (Free)', price: 'Free' },
+  { id: 'qwen/qwen3-coder:free', name: 'Qwen3 Coder 480B (Free)', price: 'Free' },
+  { id: 'openai/gpt-oss-120b:free', name: 'GPT-OSS 120B (Free)', price: 'Free' },
+  { id: 'nvidia/nemotron-3-nano-30b-a3b:free', name: 'Nemotron 3 Nano 30B (Free)', price: 'Free' },
+  { id: 'allenai/olmo-3.1-32b-think:free', name: 'Olmo 3.1 32B Think (Free)', price: 'Free' },
 ];
 
 const DEFAULT_SETTINGS = {
   autoNamingEnabled: true,
-  autoNamingModel: 'mistralai/mistral-7b-instruct:free',
+  autoNamingModel: 'google/gemini-2.0-flash-exp:free',
 };
 
 const STORAGE_KEY = 'cv_screener_settings';

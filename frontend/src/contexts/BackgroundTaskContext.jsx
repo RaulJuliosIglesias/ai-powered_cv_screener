@@ -65,6 +65,7 @@ export function BackgroundTaskProvider({ children }) {
     files,
     mode,
     language,
+    isFirstUpload = false,  // Only auto-name if this is the first upload to the session
     onComplete,
     onError
   }) => {

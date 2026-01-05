@@ -692,7 +692,7 @@ async def get_suggested_questions(
 # ============================================
 
 class GenerateNameRequest(BaseModel):
-    model: str = "mistralai/mistral-7b-instruct:free"
+    model: str = "google/gemini-2.0-flash-exp:free"
 
 
 class GenerateNameResponse(BaseModel):
@@ -791,12 +791,13 @@ OUTPUT: Return ONLY 2 words. No quotes, no explanation, just the category name.
 
 Category:"""
 
-    # List of fallback models to try in order
+    # List of fallback models to try in order (from OpenRouter's official free models list)
     FALLBACK_MODELS = [
         request.model,  # Try user's selected model first
-        "mistralai/mistral-7b-instruct:free",
-        "huggingfaceh4/zephyr-7b-beta:free",
-        "openchat/openchat-7b:free",
+        "google/gemini-2.0-flash-exp:free",
+        "meta-llama/llama-3.3-70b-instruct:free",
+        "google/gemma-3-27b-it:free",
+        "deepseek/deepseek-r1-0528:free",
     ]
     
     name = None
