@@ -21,7 +21,7 @@
 
 ```
 docs/evaluation/
-├── INDEX.md                              ← You are here
+├── README.md                             ← You are here
 ├── 01_EXECUTION_AND_FUNCTIONALITY.md     ← Working features & demo
 ├── 02_THOUGHT_PROCESS.md                 ← Architecture decisions
 ├── 03_CODE_QUALITY.md                    ← Code standards
