@@ -9080,7 +9080,7 @@
     },
     {
       "id": "86fce112-a1fa-4693-ae92-133cfe774f14",
-      "name": "Tech Leadership 5676",
+      "name": "Research Directors 5858",
       "description": "",
       "cvs": [
         {
@@ -9615,7 +9615,7 @@
         }
       ],
       "created_at": "2026-01-05T02:15:22.786546",
-      "updated_at": "2026-01-05T04:03:07.922620"
+      "updated_at": "2026-01-05T04:04:18.922288"
     },
     {
       "id": "71cfaf4d-4258-40d8-98f7-e7c9d1a9bfd0",
@@ -15751,7 +15751,7 @@
     },
     {
       "id": "a4c97db1-ddbe-446b-9327-7c06ccb8e34f",
-      "name": "Business Management 5836",
+      "name": "Creative Design 5871",
       "description": "",
       "cvs": [
         {
@@ -16044,7 +16044,7 @@
       ],
       "messages": [],
       "created_at": "2026-01-05T04:02:44.497345",
-      "updated_at": "2026-01-05T04:03:56.513333"
+      "updated_at": "2026-01-05T04:04:31.872950"
     }
   ]
 }
