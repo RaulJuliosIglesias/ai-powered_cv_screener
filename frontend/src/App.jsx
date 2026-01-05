@@ -23,7 +23,8 @@ import { MemoizedTable, MemoizedCodeBlock } from './components/MemoizedTable';
 import StreamingMessage from './components/StreamingMessage';
 import SuggestionsPanel from './components/SuggestionsPanel';
 import { preprocessContent, parseCVFilename } from './utils/contentProcessor';
-import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList, clearSessionCVs, deleteAllCVsFromDatabase, deleteCV, deleteMessage, deleteMessagesFrom } from './services/api';
+import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList, clearSessionCVs, deleteAllCVsFromDatabase, deleteCV, deleteMessage, deleteMessagesFrom, generateSessionName } from './services/api';
+import { getSettings } from './components/modals/SettingsModal';
 
 function App() {
   const [sessions, setSessions] = useState([]);
@@ -45,6 +46,7 @@ function App() {
   const [deletingSessionId, setDeletingSessionId] = useState(null);
   const [deleteMessageConfirm, setDeleteMessageConfirm] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
+  const [aiRenamingSessionId, setAiRenamingSessionId] = useState(null);
   const [allCVs, setAllCVs] = useState([]);
   const [showCVPanel, setShowCVPanel] = useState(false);
   const [cvPanelSessionId, setCvPanelSessionId] = useState(null);
@@ -227,6 +229,26 @@ function App() {
     await loadSessions();
     if (currentSessionId === id) await loadSession(id);
     setEditingId(null);
+  };
+
+  const handleAIRename = async (sessionId) => {
+    if (aiRenamingSessionId) return; // Already renaming another session
+    setAiRenamingSessionId(sessionId);
+    try {
+      const settings = getSettings();
+      const result = await generateSessionName(sessionId, settings.autoNamingModel, mode);
+      if (result && result.full_name) {
+        await updateSession(sessionId, { name: result.full_name }, mode);
+        await loadSessions();
+        if (currentSessionId === sessionId) await loadSession(sessionId);
+        showToastMessage(language === 'es' ? `Renombrado: ${result.full_name}` : `Renamed: ${result.full_name}`, 'success');
+      }
+    } catch (error) {
+      console.error('AI rename failed:', error);
+      showToastMessage(language === 'es' ? 'Error al renombrar con IA' : 'AI rename failed', 'error');
+    } finally {
+      setAiRenamingSessionId(null);
+    }
   };
 
   const handleUpload = async (e) => {
@@ -715,7 +737,7 @@ function App() {
                     {deleteConfirm === s.id ? (
                       <><button onClick={(e) => { e.stopPropagation(); handleDelete(s.id); }} className="p-1 hover:bg-red-500/20 rounded"><Check className="w-3.5 h-3.5 text-red-400" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(null); }} className="p-1"><X className="w-3.5 h-3.5" /></button></>
                     ) : (
-                      <><button onClick={(e) => { e.stopPropagation(); setCvPanelSessionId(s.id); setShowCVPanel(true); }} className="p-1 hover:bg-slate-300 dark:hover:bg-slate-700 rounded transition-colors" title={language === 'es' ? 'Ver CVs' : 'View CVs'}><FileText className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setEditingId(s.id); setEditName(s.name); }} className="p-1 hover:bg-slate-300 dark:hover:bg-slate-700 rounded transition-colors"><Edit2 className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(s.id); }} className="p-1 hover:bg-slate-300 dark:hover:bg-slate-700 rounded transition-colors"><Trash2 className="w-3.5 h-3.5" /></button></>
+                      <><button onClick={(e) => { e.stopPropagation(); setCvPanelSessionId(s.id); setShowCVPanel(true); }} className="p-1 hover:bg-slate-300 dark:hover:bg-slate-700 rounded transition-colors" title={language === 'es' ? 'Ver CVs' : 'View CVs'}><FileText className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); setEditingId(s.id); setEditName(s.name); }} className="p-1 hover:bg-slate-300 dark:hover:bg-slate-700 rounded transition-colors" title={language === 'es' ? 'Renombrar' : 'Rename'}><Edit2 className="w-3.5 h-3.5" /></button><button onClick={(e) => { e.stopPropagation(); handleAIRename(s.id); }} className="p-1 hover:bg-purple-200 dark:hover:bg-purple-900/50 rounded transition-colors" title={language === 'es' ? 'Renombrar con IA' : 'AI Rename'} disabled={aiRenamingSessionId === s.id || (s.cv_count || 0) === 0}>{aiRenamingSessionId === s.id ? <Loader className="w-3.5 h-3.5 text-purple-500 animate-spin" /> : <Sparkles className="w-3.5 h-3.5 text-purple-500" />}</button><button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(s.id); }} className="p-1 hover:bg-slate-300 dark:hover:bg-slate-700 rounded transition-colors"><Trash2 className="w-3.5 h-3.5" /></button></>
                     )}
                   </div>
                 )}

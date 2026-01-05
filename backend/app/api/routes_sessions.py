@@ -692,7 +692,7 @@ async def get_suggested_questions(
 # ============================================
 
 class GenerateNameRequest(BaseModel):
-    model: str = "google/gemini-2.0-flash-exp:free"
+    model: str = "mistralai/mistral-7b-instruct:free"
 
 
 class GenerateNameResponse(BaseModel):
@@ -791,40 +791,66 @@ OUTPUT: Return ONLY 2 words. No quotes, no explanation, just the category name.
 
 Category:"""
 
-    try:
-        # Call OpenRouter API
-        async with httpx.AsyncClient(timeout=30.0) as client:
-            response = await client.post(
-                "https://openrouter.ai/api/v1/chat/completions",
-                headers={
-                    "Authorization": f"Bearer {settings.openrouter_api_key}",
-                    "HTTP-Referer": settings.http_referer,
-                    "X-Title": settings.app_title,
-                    "Content-Type": "application/json"
-                },
-                json={
-                    "model": request.model,
-                    "messages": [{"role": "user", "content": prompt}],
-                    "max_tokens": 20,
-                    "temperature": 0.3
-                }
-            )
-            
-            if response.status_code != 200:
-                logger.error(f"OpenRouter API error: {response.status_code} - {response.text}")
-                # Fallback to generic name
-                name = "CV Group"
-            else:
-                data = response.json()
-                name = data["choices"][0]["message"]["content"].strip()
-                # Clean up the response - take only first 2-3 words
-                words = name.replace('"', '').replace("'", '').split()[:3]
-                name = " ".join(words)
-                # Ensure it's title case
-                name = name.title()
-    except Exception as e:
-        logger.error(f"Failed to generate name via AI: {e}")
-        name = "CV Group"
+    # List of fallback models to try in order
+    FALLBACK_MODELS = [
+        request.model,  # Try user's selected model first
+        "mistralai/mistral-7b-instruct:free",
+        "huggingfaceh4/zephyr-7b-beta:free",
+        "openchat/openchat-7b:free",
+    ]
+    
+    name = None
+    last_error = None
+    
+    for model in FALLBACK_MODELS:
+        logger.info(f"[AUTO-NAME] Trying model: {model}")
+        
+        try:
+            async with httpx.AsyncClient(timeout=30.0) as client:
+                response = await client.post(
+                    "https://openrouter.ai/api/v1/chat/completions",
+                    headers={
+                        "Authorization": f"Bearer {settings.openrouter_api_key}",
+                        "HTTP-Referer": settings.http_referer,
+                        "X-Title": settings.app_title,
+                        "Content-Type": "application/json"
+                    },
+                    json={
+                        "model": model,
+                        "messages": [{"role": "user", "content": prompt}],
+                        "max_tokens": 20,
+                        "temperature": 0.3
+                    }
+                )
+                
+                logger.info(f"[AUTO-NAME] OpenRouter response status: {response.status_code}")
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    raw_response = data["choices"][0]["message"]["content"].strip()
+                    logger.info(f"[AUTO-NAME] Raw AI response: '{raw_response}'")
+                    
+                    # Clean up the response - take only first 2-3 words
+                    words = raw_response.replace('"', '').replace("'", '').split()[:3]
+                    name = " ".join(words)
+                    # Ensure it's title case
+                    name = name.title()
+                    logger.info(f"[AUTO-NAME] Final name: '{name}'")
+                    break  # Success! Exit the loop
+                else:
+                    error_text = response.text
+                    logger.warning(f"[AUTO-NAME] Model {model} failed: {response.status_code} - {error_text[:100]}")
+                    last_error = f"Model {model}: {error_text[:100]}"
+                    continue  # Try next model
+                    
+        except Exception as e:
+            logger.warning(f"[AUTO-NAME] Model {model} exception: {e}")
+            last_error = str(e)
+            continue  # Try next model
+    
+    if name is None:
+        logger.error(f"[AUTO-NAME] All models failed. Last error: {last_error}")
+        raise HTTPException(status_code=502, detail=f"All AI models failed. Last error: {last_error}")
     
     # Generate unique suffix (4 digits based on timestamp + random)
     import time

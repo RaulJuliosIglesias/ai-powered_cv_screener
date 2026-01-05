@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, MessageSquare, Trash2, Check, X, Edit2, Loader, FileText, Database, Cloud, Sun, Moon, ChevronRight } from 'lucide-react';
+import { Plus, MessageSquare, Trash2, Check, X, Edit2, Loader, FileText, Database, Cloud, Sun, Moon, ChevronRight, Sparkles } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Sidebar = ({
@@ -9,6 +9,8 @@ const Sidebar = ({
   onNewChat,
   onDeleteSession,
   onRenameSession,
+  onAIRename,
+  aiRenamingSessionId,
   onOpenCVPanel,
   onOpenAllCVs,
   mode,
@@ -143,8 +145,22 @@ const Sidebar = ({
                         onClick={(e) => { e.stopPropagation(); handleStartEdit(session); }} 
                         className="p-1 hover:bg-slate-300 dark:hover:bg-slate-700 rounded transition-colors focus-ring"
                         aria-label={language === 'es' ? 'Renombrar' : 'Rename'}
+                        title={language === 'es' ? 'Renombrar manualmente' : 'Rename manually'}
                       >
                         <Edit2 className="w-3.5 h-3.5" />
+                      </button>
+                      <button 
+                        onClick={(e) => { e.stopPropagation(); onAIRename && onAIRename(session.id); }} 
+                        className="p-1 hover:bg-purple-200 dark:hover:bg-purple-900/50 rounded transition-colors focus-ring"
+                        aria-label={language === 'es' ? 'Renombrar con IA' : 'AI Rename'}
+                        title={language === 'es' ? 'Renombrar con IA' : 'AI Rename'}
+                        disabled={aiRenamingSessionId === session.id || (session.cv_count || 0) === 0}
+                      >
+                        {aiRenamingSessionId === session.id ? (
+                          <Loader className="w-3.5 h-3.5 text-purple-500 animate-spin" />
+                        ) : (
+                          <Sparkles className="w-3.5 h-3.5 text-purple-500" />
+                        )}
                       </button>
                       <button 
                         onClick={(e) => { e.stopPropagation(); handleDeleteClick(session.id); }} 
