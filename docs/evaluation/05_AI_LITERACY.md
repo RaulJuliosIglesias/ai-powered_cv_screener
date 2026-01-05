@@ -360,7 +360,7 @@ class StageMetrics:
 │  │     jitter: bool = True  # Prevent thundering herd      │    │
 │  └─────────────────────────────────────────────────────────┘    │
 │                                                                  │
-│  CIRCUIT BREAKER CONFIGURATION                                  │
+│  CIRCUIT BREAKER (FULLY IMPLEMENTED & WIRED)                    │
 │  ┌─────────────────────────────────────────────────────────┐    │
 │  │ @dataclass(frozen=True)                                  │    │
 │  │ class CircuitBreakerConfig:                              │    │
@@ -369,7 +369,9 @@ class StageMetrics:
 │  │     recovery_timeout_seconds: int = 30                  │    │
 │  │     half_open_max_calls: int = 3                        │    │
 │  └─────────────────────────────────────────────────────────┘    │
-│  Note: Configuration dataclass - state machine for future       │
+│  ✓ Wired to LLM generation (allow_request/record_success/fail) │
+│  ✓ Wired to reasoning step with graceful degradation           │
+│  ✓ State machine: CLOSED → OPEN → HALF_OPEN → CLOSED           │
 │                                                                  │
 │  TIMEOUT MANAGEMENT                                             │
 │  ┌─────────────────────────────────────────────────────────┐    │

@@ -151,13 +151,34 @@ class HallucinationService:
 │                          │                                       │
 │                          ▼                                       │
 │  ┌─────────────────────────────────────────────────────────┐    │
-│  │   EMBED ALL 4 QUERIES → RETRIEVE FOR EACH → FUSE        │    │
+│  │   EMBED ALL → RETRIEVE → RRF FUSION (k=60)              │    │
 │  └─────────────────────────────────────────────────────────┘    │
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 **Why It's Clever**: The hypothetical document embedding captures what a GOOD ANSWER would look like, which often matches CV content better than the raw question. This technique comes from recent RAG research papers.
+
+**Fusion Algorithm**: Reciprocal Rank Fusion (RRF)
+```python
+# From multi_query_service.py - Standard RRF implementation
+RRF_K = 60  # Standard constant from literature
+
+def reciprocal_rank_fusion_with_scores(results_per_query, k=RRF_K):
+    """Combine results from multiple queries using RRF."""
+    scores = {}
+    for query_results in results_per_query:
+        for rank, (doc_id, similarity) in enumerate(query_results):
+            if doc_id not in scores:
+                scores[doc_id] = {"rrf": 0.0, "max_sim": 0.0}
+            # RRF score: sum of 1/(k + rank) across all queries
+            scores[doc_id]["rrf"] += 1.0 / (k + rank + 1)
+            scores[doc_id]["max_sim"] = max(scores[doc_id]["max_sim"], similarity)
+    # Sort by RRF score (documents appearing in multiple queries rank higher)
+    return sorted(scores.items(), key=lambda x: -x[1]["rrf"])
+```
+
+**Why RRF?** Documents that appear in results for multiple query variations get boosted, improving recall without sacrificing precision.
 
 ---
 
