@@ -69,8 +69,10 @@ class RedFlagsModule:
     
     # Thresholds for detection
     GAP_THRESHOLD_YEARS = 1.0  # Gaps > 1 year are flagged
-    JOB_HOPPING_THRESHOLD = 0.6  # job_hopping_score > 0.6 is flagged
+    JOB_HOPPING_THRESHOLD_HIGH = 0.6  # job_hopping_score > 0.6 is HIGH severity
+    JOB_HOPPING_THRESHOLD_MEDIUM = 0.4  # job_hopping_score > 0.4 is MEDIUM severity
     SHORT_TENURE_YEARS = 0.5  # Tenures < 6 months are flagged
+    SHORT_AVG_TENURE_THRESHOLD = 1.5  # avg_tenure < 1.5 years is flagged
     MIN_EXPERIENCE_YEARS = 0.5  # Minimum expected for non-entry roles
     
     def extract(
@@ -103,11 +105,11 @@ class RedFlagsModule:
             # Get summary chunk metadata (most complete)
             summary_meta = self._get_summary_metadata(cand_chunks)
             
-            # Check for job hopping
-            job_hopping_flag = self._check_job_hopping(candidate, summary_meta)
-            if job_hopping_flag:
-                flags.append(job_hopping_flag)
-                candidate_flags.append(job_hopping_flag.flag_type)
+            # Check for job hopping and short tenure
+            job_hopping_flags = self._check_job_hopping(candidate, summary_meta)
+            for flag in job_hopping_flags:
+                flags.append(flag)
+                candidate_flags.append(flag.flag_type)
             
             # Check for employment gaps
             gap_flags = self._check_employment_gaps(candidate, summary_meta, cand_chunks)
@@ -192,27 +194,62 @@ class RedFlagsModule:
         self,
         candidate: str,
         metadata: Dict[str, Any]
-    ) -> Optional[RedFlag]:
-        """Check for job hopping pattern."""
+    ) -> List[RedFlag]:
+        """
+        Check for job hopping pattern using METADATA from chunks.
+        
+        Uses job_hopping_score and avg_tenure_years calculated during chunking.
+        These values represent the COMPLETE CV, not just retrieved chunks.
+        """
+        flags = []
         job_hopping_score = metadata.get("job_hopping_score", 0)
         avg_tenure = metadata.get("avg_tenure_years", 0)
         position_count = metadata.get("position_count", 0)
+        total_exp = metadata.get("total_experience_years", 0)
         
-        if job_hopping_score > self.JOB_HOPPING_THRESHOLD and position_count >= 3:
-            severity = "high" if job_hopping_score > 0.8 else "medium"
-            
-            return RedFlag(
-                flag_type="job_hopping",
-                severity=severity,
-                description=f"Frequent job changes detected (avg tenure: {avg_tenure:.1f} years, {position_count} positions)",
-                candidate_name=candidate,
-                details={
-                    "job_hopping_score": job_hopping_score,
-                    "avg_tenure_years": avg_tenure,
-                    "position_count": position_count
-                }
-            )
-        return None
+        # Job hopping based on score
+        if job_hopping_score and position_count >= 3:
+            if job_hopping_score > self.JOB_HOPPING_THRESHOLD_HIGH:
+                flags.append(RedFlag(
+                    flag_type="job_hopping",
+                    severity="high",
+                    description=f"High job mobility: {position_count} positions with avg tenure {avg_tenure:.1f} years (score: {job_hopping_score:.0%})",
+                    candidate_name=candidate,
+                    details={
+                        "job_hopping_score": job_hopping_score,
+                        "avg_tenure_years": avg_tenure,
+                        "position_count": position_count
+                    }
+                ))
+            elif job_hopping_score > self.JOB_HOPPING_THRESHOLD_MEDIUM:
+                flags.append(RedFlag(
+                    flag_type="job_hopping",
+                    severity="medium",
+                    description=f"Moderate job mobility: {position_count} positions with avg tenure {avg_tenure:.1f} years (score: {job_hopping_score:.0%})",
+                    candidate_name=candidate,
+                    details={
+                        "job_hopping_score": job_hopping_score,
+                        "avg_tenure_years": avg_tenure,
+                        "position_count": position_count
+                    }
+                ))
+        
+        # Short average tenure (even if job_hopping_score is lower)
+        if avg_tenure and avg_tenure < self.SHORT_AVG_TENURE_THRESHOLD and position_count >= 2:
+            # Don't double-flag if already flagged for job hopping
+            if not any(f.flag_type == "job_hopping" for f in flags):
+                flags.append(RedFlag(
+                    flag_type="short_avg_tenure",
+                    severity="medium",
+                    description=f"Short average tenure: {avg_tenure:.1f} years across {position_count} positions",
+                    candidate_name=candidate,
+                    details={
+                        "avg_tenure_years": avg_tenure,
+                        "position_count": position_count
+                    }
+                ))
+        
+        return flags
     
     def _check_employment_gaps(
         self,
@@ -278,36 +315,49 @@ class RedFlagsModule:
         candidate: str,
         chunks: List[Dict[str, Any]]
     ) -> List[RedFlag]:
-        """Check for missing critical information."""
+        """
+        Check for missing critical information using METADATA, not section_types.
+        
+        ================================================================
+        IMPORTANT: DO NOT check section_types from retrieved chunks!
+        ================================================================
+        
+        The retrieval process only returns a subset of chunks (e.g., 8 out of 23).
+        A candidate may have "experience" chunks in the DB but they weren't 
+        retrieved for this specific query. Checking section_types would 
+        incorrectly flag them as "missing_experience".
+        
+        Instead, we use the METADATA fields that are calculated during 
+        chunking and stored on EVERY chunk:
+        - position_count: Number of positions (0 = no experience)
+        - total_experience_years: Total years of experience
+        - These values are reliable because they're calculated from the 
+          COMPLETE CV during chunking, not from partial retrieval.
+        ================================================================
+        """
         flags = []
         
-        # Check section types present
-        section_types = set()
+        # Get metadata from any chunk (all chunks have the same enriched metadata)
+        meta = {}
         for chunk in chunks:
-            section = chunk.get("metadata", {}).get("section_type", "")
-            if section:
-                section_types.add(section)
+            meta = chunk.get("metadata", {})
+            if meta.get("position_count") is not None:
+                break
         
-        # Check for missing critical sections
-        critical_sections = {"experience", "education"}
-        missing = critical_sections - section_types
+        # Check for missing/insufficient experience using metadata
+        position_count = meta.get("position_count", 0)
+        total_exp = meta.get("total_experience_years", 0)
         
-        if "experience" in missing:
+        # Only flag if we have metadata AND it shows no experience
+        # If position_count is 0 or 1 with 0 years, it might be entry-level
+        if position_count == 0 and total_exp == 0:
+            # Could be entry-level or intern - low severity
             flags.append(RedFlag(
-                flag_type="missing_experience",
-                severity="high",
-                description="No work experience section found in CV",
-                candidate_name=candidate,
-                details={"missing_section": "experience"}
-            ))
-        
-        if "education" in missing:
-            flags.append(RedFlag(
-                flag_type="missing_education",
+                flag_type="entry_level",
                 severity="low",
-                description="No education section found in CV",
+                description="Entry-level candidate with no prior work experience listed",
                 candidate_name=candidate,
-                details={"missing_section": "education"}
+                details={"position_count": position_count, "total_experience_years": total_exp}
             ))
         
         return flags

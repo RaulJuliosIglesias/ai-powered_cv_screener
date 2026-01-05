@@ -295,6 +295,45 @@ class SupabaseSessionManager:
         except Exception as e:
             logger.error(f"Failed to delete messages from session {session_id}: {e}")
             return 0
+    
+    def get_conversation_history(self, session_id: str, limit: int = 6) -> List[Dict]:
+        """
+        Get recent conversation history for context.
+        
+        Args:
+            session_id: Session ID
+            limit: Maximum number of messages to retrieve (default 6 = 3 turns)
+        
+        Returns:
+            List of recent messages ordered from oldest to newest
+        """
+        self._ensure_client()
+        
+        try:
+            # Get all messages ordered by timestamp
+            result = self.client.table("session_messages").select("*").eq("session_id", session_id).order("timestamp").execute()
+            
+            if not result.data:
+                return []
+            
+            # Get last N messages
+            recent_messages = result.data[-limit:] if len(result.data) > limit else result.data
+            
+            return [
+                {
+                    "id": msg["id"],
+                    "role": msg["role"],
+                    "content": msg["content"],
+                    "sources": msg.get("sources", []),
+                    "pipeline_steps": msg.get("pipeline_steps", []),
+                    "structured_output": msg.get("structured_output"),
+                    "timestamp": msg["timestamp"]
+                }
+                for msg in recent_messages
+            ]
+        except Exception as e:
+            logger.error(f"Failed to get conversation history for session {session_id}: {e}")
+            return []
 
 
 # Global instance

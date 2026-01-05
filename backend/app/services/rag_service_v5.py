@@ -26,6 +26,10 @@ import httpx
 
 from app.config import settings
 from app.utils.error_handling import degradation
+from app.utils.debug_logger import (
+    log_retrieval, log_template_selection, log_query_understanding,
+    log_llm_response, log_orchestrator_processing, log_event
+)
 from typing import (
     Any,
     Callable,
@@ -547,6 +551,7 @@ class PipelineContextV5:
     """Enhanced pipeline context for v5."""
     # Input
     question: str
+    conversation_history: list[dict[str, str]] = field(default_factory=list)  # Recent chat history for context
     session_id: str | None = None
     cv_ids: list[str] | None = None
     k: int = 15
@@ -890,6 +895,7 @@ class RAGServiceV5:
     async def query_stream(
         self,
         question: str,
+        conversation_history: list[dict[str, str]] | None = None,
         session_id: str | None = None,
         cv_ids: list[str] | None = None,
         k: int | None = None,
@@ -916,6 +922,7 @@ class RAGServiceV5:
         
         ctx = PipelineContextV5(
             question=question,
+            conversation_history=conversation_history or [],
             session_id=session_id,
             cv_ids=cv_ids,
             k=k or self.config.default_k,
@@ -1606,14 +1613,44 @@ class RAGServiceV5:
                     
                     # Store chunk data (only once)
                     if chunk_id not in all_chunks:
+                        # ================================================================
+                        # CRITICAL: PRESERVE ALL METADATA FROM VECTOR STORE
+                        # ================================================================
+                        # DO NOT rebuild metadata with only specific fields!
+                        # The metadata from SmartChunkingService contains enriched fields:
+                        #   - job_hopping_score: Career stability indicator (0-1)
+                        #   - avg_tenure_years: Average years per position
+                        #   - total_experience_years: Total career experience
+                        #   - position_count: Number of positions held
+                        #   - employment_gaps_count: Number of gaps > 1 year
+                        #   - current_role, current_company: Current position info
+                        #   - section_type: Type of CV section
+                        #   - candidate_name: Candidate's name
+                        #
+                        # These fields are used by:
+                        #   - templates.py:_extract_enriched_metadata() for LLM prompts
+                        #   - RedFlagsModule for risk analysis
+                        #   - TimelineModule for career trajectory
+                        #   - GapAnalysisModule for skills gap detection
+                        #
+                        # If you need to add NEW metadata fields:
+                        #   1. Add them in SmartChunkingService.chunk_cv()
+                        #   2. They will automatically flow through here
+                        #   3. Extract them in templates.py:_extract_enriched_metadata()
+                        # ================================================================
+                        
+                        # Start with ALL metadata from the search result
+                        full_metadata = dict(r.metadata) if r.metadata else {}
+                        
+                        # Ensure required fields are present (fallbacks for safety)
+                        full_metadata.setdefault("filename", r.filename)
+                        full_metadata.setdefault("cv_id", r.cv_id)
+                        full_metadata.setdefault("candidate_name", "Unknown")
+                        full_metadata.setdefault("section_type", "general")
+                        
                         all_chunks[chunk_id] = {
                             "content": r.content,
-                            "metadata": {
-                                "filename": r.filename,
-                                "candidate_name": r.metadata.get("candidate_name", "Unknown"),
-                                "section_type": r.metadata.get("section_type", "general"),
-                                "cv_id": r.cv_id
-                            },
+                            "metadata": full_metadata,
                             "original_score": r.similarity
                         }
                         query_sources[chunk_id] = []
@@ -1653,6 +1690,9 @@ class RAGServiceV5:
                 scores=scores,
                 query_sources=query_sources
             )
+            
+            # DEBUG LOGGING: Log retrieved chunks with metadata
+            log_retrieval(chunks, strategy="rrf_fusion")
             
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.SEARCH,
@@ -1884,11 +1924,20 @@ class RAGServiceV5:
                     f"[GENERATION] Using SINGLE_CANDIDATE_TEMPLATE for '{single_candidate_detection.candidate_name}' "
                     f"(method: {single_candidate_detection.detection_method}, confidence: {single_candidate_detection.confidence})"
                 )
+                
+                # DEBUG LOGGING: Log template selection
+                log_template_selection(
+                    "SINGLE_CANDIDATE_TEMPLATE",
+                    candidate_name=single_candidate_detection.candidate_name,
+                    detection_method=single_candidate_detection.detection_method
+                )
+                
                 prompt = self._prompt_builder.build_single_candidate_prompt(
                     question=effective_question,
                     candidate_name=single_candidate_detection.candidate_name,
                     cv_id=single_candidate_detection.cv_id or "",
-                    chunks=chunks
+                    chunks=chunks,
+                    conversation_history=ctx.conversation_history
                 )
             else:
                 # MULTI-CANDIDATE PATH - Standard comparison/search template
@@ -1896,10 +1945,18 @@ class RAGServiceV5:
                     f"[GENERATION] Using QUERY_TEMPLATE (multi-candidate) "
                     f"(method: {single_candidate_detection.detection_method})"
                 )
+                
+                # DEBUG LOGGING: Log template selection
+                log_template_selection(
+                    "QUERY_TEMPLATE",
+                    detection_method=single_candidate_detection.detection_method
+                )
+                
                 prompt = self._prompt_builder.build_query_prompt(
                     question=effective_question,
                     chunks=chunks,
-                    total_cvs=ctx.total_cvs_in_session
+                    total_cvs=ctx.total_cvs_in_session,
+                    conversation_history=ctx.conversation_history
                 )
             
             # Add requirements

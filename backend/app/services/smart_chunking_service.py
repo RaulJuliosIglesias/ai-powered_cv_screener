@@ -409,6 +409,48 @@ class SmartChunkingService:
         """
         Create intelligent chunks from CV with rich metadata.
         
+        ================================================================
+        METADATA FLOW DOCUMENTATION (READ BEFORE MODIFYING)
+        ================================================================
+        
+        This is the ENTRY POINT for all CV metadata. Metadata added here
+        flows through the entire pipeline:
+        
+        1. SmartChunkingService.chunk_cv() ← YOU ARE HERE
+           ↓ Creates chunks with metadata dict
+        2. rag_service_v5.py:index_documents()
+           ↓ Passes to vector store
+        3. vector_store.add_documents()
+           ↓ Stores in ChromaDB/local store
+        4. vector_store.search()
+           ↓ Returns SearchResult with full metadata
+        5. rag_service_v5.py:_step_fusion_retrieval()
+           ↓ Preserves ALL metadata (see CRITICAL comment there)
+        6. templates.py:_extract_enriched_metadata()
+           ↓ Extracts specific fields for LLM prompts
+        7. LLM receives enriched context
+        
+        TO ADD A NEW METADATA FIELD:
+        ─────────────────────────────
+        1. Calculate the value in this method (like job_hopping_score below)
+        2. Add it to the "metadata" dict of EACH chunk type below
+        3. In templates.py:_extract_enriched_metadata(), extract and format it
+        4. Test by checking logs: [ENRICHED_METADATA] should show your field
+        
+        CURRENT METADATA FIELDS:
+        ─────────────────────────
+        - total_experience_years: Total career experience in years
+        - job_hopping_score: Career stability (0-1, higher = less stable)
+        - avg_tenure_years: Average years per position
+        - position_count: Number of positions held
+        - employment_gaps_count: Number of gaps > 1 year
+        - current_role: Current job title
+        - current_company: Current employer
+        - section_type: Type of CV section (summary, experience, skills, etc.)
+        - candidate_name: Candidate's name
+        
+        ================================================================
+        
         Creates:
         1. A "summary" chunk with pre-calculated totals
         2. Individual chunks for each job position
@@ -418,6 +460,13 @@ class SmartChunkingService:
         structured = self.extract_structured_data(text, filename)
         chunks = []
         chunk_index = 0
+        
+        # ================================================================
+        # ENRICHED METADATA CALCULATIONS
+        # Add new calculations here, then add to metadata dicts below
+        # ================================================================
+        job_hopping_score, avg_tenure_years = self._calculate_job_hopping_metrics(structured.positions)
+        employment_gaps_count = self._detect_employment_gaps(structured.positions)
         
         # ============================================================
         # CHUNK 0: SUMMARY CHUNK (most important for quick lookups)
@@ -437,6 +486,10 @@ class SmartChunkingService:
                 "total_experience_years": structured.total_experience_years,
                 "is_summary": True,
                 "position_count": len(structured.positions),
+                # Enhanced metadata for red flags analysis
+                "job_hopping_score": job_hopping_score,
+                "avg_tenure_years": avg_tenure_years,
+                "employment_gaps_count": employment_gaps_count,
             }
         })
         chunk_index += 1
@@ -462,6 +515,12 @@ class SmartChunkingService:
                     "is_current": position.is_current,
                     "duration_years": position.duration_years,
                     "position_order": i + 1,
+                    # Enhanced metadata for red flags analysis
+                    "total_experience_years": structured.total_experience_years,
+                    "job_hopping_score": job_hopping_score,
+                    "avg_tenure_years": avg_tenure_years,
+                    "employment_gaps_count": employment_gaps_count,
+                    "position_count": len(structured.positions),
                 }
             })
             chunk_index += 1
@@ -482,6 +541,12 @@ class SmartChunkingService:
                     "section_type": "skills",
                     "candidate_name": structured.candidate_name,
                     "skill_count": len(structured.skills),
+                    # Enhanced metadata for red flags analysis
+                    "total_experience_years": structured.total_experience_years,
+                    "job_hopping_score": job_hopping_score,
+                    "avg_tenure_years": avg_tenure_years,
+                    "employment_gaps_count": employment_gaps_count,
+                    "position_count": len(structured.positions),
                 }
             })
             chunk_index += 1
@@ -508,6 +573,11 @@ class SmartChunkingService:
                 "current_role": structured.current_role or "",
                 "current_company": structured.current_company or "",
                 "total_experience_years": structured.total_experience_years,
+                # Enhanced metadata for red flags analysis
+                "job_hopping_score": job_hopping_score,
+                "avg_tenure_years": avg_tenure_years,
+                "employment_gaps_count": employment_gaps_count,
+                "position_count": len(structured.positions),
             }
         })
         
@@ -571,3 +641,44 @@ class SmartChunkingService:
         ]
         
         return "\n".join(lines)
+    
+    def _calculate_job_hopping_metrics(self, positions: List[JobPosition]) -> Tuple[float, float]:
+        """Calculate job hopping score and average tenure."""
+        if not positions:
+            return 0.0, 0.0
+        
+        total_duration = sum(pos.duration_years for pos in positions)
+        num_positions = len(positions)
+        
+        if total_duration > 0:
+            avg_tenure = total_duration / num_positions
+            # Job hopping score: higher = more frequent changes
+            job_hopping_score = min((num_positions - 1) / total_duration, 1.0)
+        else:
+            avg_tenure = 0.0
+            job_hopping_score = 0.0
+        
+        return job_hopping_score, avg_tenure
+    
+    def _detect_employment_gaps(self, positions: List[JobPosition]) -> int:
+        """Count employment gaps > 1 year between positions."""
+        if len(positions) < 2:
+            return 0
+        
+        # Sort positions by start year
+        sorted_positions = sorted(
+            [p for p in positions if p.start_year and p.end_year],
+            key=lambda p: p.start_year
+        )
+        
+        gaps = 0
+        for i in range(len(sorted_positions) - 1):
+            current_end = sorted_positions[i].end_year
+            next_start = sorted_positions[i + 1].start_year
+            
+            if current_end and next_start:
+                gap_years = next_start - current_end
+                if gap_years > 1:
+                    gaps += 1
+        
+        return gaps

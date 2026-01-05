@@ -9,6 +9,7 @@ from app.config import settings, Mode
 from app.models.sessions import session_manager
 from app.providers.cloud.sessions import supabase_session_manager
 from app.services.rag_service_v5 import RAGServiceV5
+from app.utils.debug_logger import log_query_start, log_final_response, save_session_log
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/sessions", tags=["sessions-stream"])
@@ -31,13 +32,17 @@ class ChatStreamRequest(BaseModel):
     verification_enabled: bool = True
 
 
-async def event_generator(rag_service, question: str, session_id: str, cv_ids: list, total_cvs: int, mgr):
+async def event_generator(rag_service, question: str, session_id: str, cv_ids: list, total_cvs: int, mgr, conversation_history: list = None):
     """Generate SSE events from RAG pipeline execution."""
     final_response = None
+    
+    # DEBUG LOGGING: Log query start
+    log_query_start(session_id, question, cv_ids)
     
     try:
         async for event in rag_service.query_stream(
             question=question,
+            conversation_history=conversation_history,
             session_id=session_id,
             cv_ids=cv_ids,
             total_cvs_in_session=total_cvs
@@ -72,6 +77,10 @@ async def event_generator(rag_service, question: str, session_id: str, cv_ids: l
             )
             logger.info(f"[STREAM] Saved assistant message with {len(sources)} sources to session {session_id}")
             
+            # DEBUG LOGGING: Log final response and save session log
+            log_final_response(final_response["answer"], structured_output_dict)
+            save_session_log(session_id)
+            
     except Exception as e:
         logger.exception(f"Stream error: {e}")
         yield f"event: error\n"
@@ -97,6 +106,18 @@ async def chat_stream(
     
     if not session:
         raise HTTPException(status_code=404, detail="Session not found")
+    
+    # Get conversation history for context (last 6 messages = 3 turns)
+    history = mgr.get_conversation_history(session_id, limit=6)
+    
+    # Convert to simple format for RAG service
+    conversation_history = [
+        {"role": msg.role if hasattr(msg, 'role') else msg.get('role'), 
+         "content": msg.content if hasattr(msg, 'content') else msg.get('content')}
+        for msg in history
+    ]
+    
+    logger.info(f"[STREAM] Retrieved {len(conversation_history)} messages for context")
     
     # Save user message
     mgr.add_message(session_id, "user", request.message)
@@ -135,7 +156,7 @@ async def chat_stream(
         raise HTTPException(status_code=500, detail=f"Failed to initialize RAG service: {str(e)}")
     
     return StreamingResponse(
-        event_generator(rag_service, request.message, session_id, cv_ids, total_cvs, mgr),
+        event_generator(rag_service, request.message, session_id, cv_ids, total_cvs, mgr, conversation_history),
         media_type="text/event-stream",
         headers={
             "Cache-Control": "no-cache",

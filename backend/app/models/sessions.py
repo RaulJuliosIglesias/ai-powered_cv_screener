@@ -197,6 +197,25 @@ class SessionManager:
             self._save()
             return count
         return 0
+    
+    def get_conversation_history(self, session_id: str, limit: int = 6) -> List[ChatMessage]:
+        """
+        Get recent conversation history for context.
+        
+        Args:
+            session_id: Session ID
+            limit: Maximum number of messages to retrieve (default 6 = 3 turns)
+        
+        Returns:
+            List of recent messages ordered from oldest to newest
+        """
+        session = self.sessions.get(session_id)
+        if not session:
+            return []
+        
+        # Get last N messages
+        recent_messages = session.messages[-limit:] if len(session.messages) > limit else session.messages
+        return recent_messages
 
 
 # Global session manager instance

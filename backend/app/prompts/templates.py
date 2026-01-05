@@ -18,6 +18,8 @@ from typing import Protocol, TypedDict, Callable
 import re
 from functools import lru_cache
 
+from app.utils.debug_logger import log_enriched_metadata_extraction, log_event
+
 
 # =============================================================================
 # CONFIGURATION & CONSTANTS
@@ -975,7 +977,8 @@ class PromptBuilder:
         question: str,
         chunks: list[dict],
         total_cvs: int | None = None,
-        response_format: ResponseFormat = ResponseFormat.FULL
+        response_format: ResponseFormat = ResponseFormat.FULL,
+        conversation_history: list[dict[str, str]] | None = None
     ) -> str:
         """
         Build the complete query prompt with context.
@@ -985,6 +988,7 @@ class PromptBuilder:
             chunks: Retrieved CV chunks
             total_cvs: Total CVs in session (if known)
             response_format: Desired response format
+            conversation_history: Recent chat history for context
             
         Returns:
             Formatted prompt string
@@ -999,13 +1003,33 @@ class PromptBuilder:
             ResponseFormat.TABLE_ONLY: QUERY_TEMPLATE_CONCISE,
         }.get(response_format, QUERY_TEMPLATE)
         
-        return template.format(
+        # Build conversation history section if available
+        history_section = ""
+        if conversation_history:
+            history_section = "## CONVERSATION HISTORY\n"
+            for msg in conversation_history:
+                role_label = "Usuario" if msg["role"] == "user" else "Asistente"
+                history_section += f"{role_label}: {msg['content']}\n"
+            history_section += "\n---\n\n"
+        
+        # Insert history before CV data context
+        formatted_prompt = template.format(
             context=ctx.text,
             question=question,
             num_chunks=ctx.num_chunks,
             num_cvs=ctx.num_unique_cvs,
             total_cvs=actual_total
         )
+        
+        if history_section:
+            # Insert after first line (before CV DATA CONTEXT)
+            lines = formatted_prompt.split('\n', 1)
+            if len(lines) > 1:
+                formatted_prompt = history_section + formatted_prompt
+            else:
+                formatted_prompt = history_section + formatted_prompt
+        
+        return formatted_prompt
     
     def build_comparison_prompt(
         self,
@@ -1115,7 +1139,8 @@ class PromptBuilder:
         question: str,
         candidate_name: str,
         cv_id: str,
-        chunks: list[dict]
+        chunks: list[dict],
+        conversation_history: list[dict[str, str]] | None = None
     ) -> str:
         """
         Build a prompt for analyzing a SINGLE specific candidate.
@@ -1128,6 +1153,7 @@ class PromptBuilder:
             candidate_name: Name of the target candidate
             cv_id: CV ID of the target candidate
             chunks: Retrieved CV chunks (should be filtered to this candidate)
+            conversation_history: Recent chat history for context
             
         Returns:
             Formatted prompt string for single candidate analysis
@@ -1137,7 +1163,16 @@ class PromptBuilder:
         # Extract enriched metadata for red flags and stability analysis
         red_flags_section, stability_section = self._extract_enriched_metadata(chunks)
         
-        return SINGLE_CANDIDATE_TEMPLATE.format(
+        # Build conversation history section if available
+        history_section = ""
+        if conversation_history:
+            history_section = "## CONVERSATION HISTORY\n"
+            for msg in conversation_history:
+                role_label = "Usuario" if msg["role"] == "user" else "Asistente"
+                history_section += f"{role_label}: {msg['content']}\n"
+            history_section += "\n---\n\n"
+        
+        formatted_prompt = SINGLE_CANDIDATE_TEMPLATE.format(
             candidate_name=candidate_name,
             cv_id=cv_id,
             context=ctx.text,
@@ -1145,10 +1180,50 @@ class PromptBuilder:
             red_flags_section=red_flags_section,
             stability_metrics_section=stability_section
         )
+        
+        # Prepend history if available
+        if history_section:
+            formatted_prompt = history_section + formatted_prompt
+        
+        return formatted_prompt
     
     def _extract_enriched_metadata(self, chunks: list[dict]) -> tuple[str, str]:
         """
         Extract enriched metadata from chunks for red flags and stability analysis.
+        
+        ================================================================
+        METADATA EXTRACTION POINT (READ BEFORE MODIFYING)
+        ================================================================
+        
+        This is where metadata from SmartChunkingService gets formatted
+        for the LLM prompt. The flow is:
+        
+        SmartChunkingService.chunk_cv() → metadata dict
+            ↓
+        rag_service_v5.py:_step_fusion_retrieval() → preserves ALL metadata
+            ↓
+        This function → extracts and formats for LLM
+        
+        TO ADD A NEW METADATA FIELD FOR LLM ANALYSIS:
+        ──────────────────────────────────────────────
+        1. First add it in SmartChunkingService.chunk_cv() metadata dict
+        2. Then extract it here with: new_field = meta.get("new_field")
+        3. Format it into red_flags_section or stability_section strings
+        4. Test: logs should show [ENRICHED_METADATA] with your field
+        
+        AVAILABLE FIELDS FROM SmartChunkingService:
+        ────────────────────────────────────────────
+        - job_hopping_score (float 0-1): Higher = more job changes
+        - avg_tenure_years (float): Average years per position
+        - total_experience_years (float): Total career experience
+        - position_count (int): Number of positions held
+        - employment_gaps_count (int): Gaps > 1 year between jobs
+        - current_role (str): Current job title
+        - current_company (str): Current employer
+        - section_type (str): Type of CV section
+        - candidate_name (str): Candidate's name
+        
+        ================================================================
         
         Returns:
             Tuple of (red_flags_section, stability_metrics_section) as formatted strings
@@ -1221,11 +1296,16 @@ class PromptBuilder:
                 
                 break  # Found metadata, stop looking
         
+        logger.info(f"[ENRICHED_METADATA] Final red_flags_section: {red_flags_section[:200]}...")
+        logger.info(f"[ENRICHED_METADATA] Final stability_section: {stability_section[:200]}...")
+        
+        # DEBUG LOGGING: Log enriched metadata extraction details
+        log_enriched_metadata_extraction(chunks, red_flags_section, stability_section)
+        
         return red_flags_section, stability_section
 
-
 # =============================================================================
-# QUERY CLASSIFICATION
+# CLASSIFICATION
 # =============================================================================
 
 @lru_cache(maxsize=128)

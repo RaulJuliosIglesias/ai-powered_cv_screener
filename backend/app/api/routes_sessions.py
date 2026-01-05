@@ -23,6 +23,7 @@ from app.providers.cloud.sessions import supabase_session_manager
 from app.providers.factory import ProviderFactory
 from app.services.chunking_service import ChunkingService
 from app.services.smart_chunking_service import SmartChunkingService
+from app.utils.debug_logger import log_cv_upload, log_chunks_created, set_current_session
 
 
 def get_session_manager(mode: Mode):
@@ -367,6 +368,10 @@ async def process_cvs_for_session(
             jobs[job_id]["current_phase"] = "chunking"
             chunks = await asyncio.to_thread(chunking_service.chunk_cv, text=text, cv_id=cv_id, filename=filename)
             logger.info(f"[{job_id}] Created {len(chunks)} chunks for {filename}")
+            
+            # DEBUG LOGGING: Log chunks with metadata for debugging
+            set_current_session(session_id)
+            log_chunks_created(cv_id, chunks)
             
             # Yield control before heavy embedding operation
             await asyncio.sleep(0)

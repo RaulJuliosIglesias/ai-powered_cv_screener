@@ -12,6 +12,7 @@ import re
 from typing import List, Dict, Any
 
 from app.models.structured_output import StructuredOutput
+from app.utils.debug_logger import log_orchestrator_processing, log_red_flags_module, log_event
 from .processor import OutputProcessor
 from .modules import (
     ThinkingModule,
@@ -131,13 +132,33 @@ class OutputOrchestrator:
                 logger.info(f"[ORCHESTRATOR] Gap analysis: {len(gap_data.skill_gaps)} gaps detected")
             
             # Red Flags
+            # DEBUG LOGGING: Log chunk metadata before red flags extraction
+            if chunks:
+                first_meta = chunks[0].get("metadata", {})
+                log_event("RED_FLAGS_INPUT", {
+                    "chunk_count": len(chunks),
+                    "first_chunk_metadata_keys": list(first_meta.keys()),
+                    "first_chunk_job_hopping_score": first_meta.get("job_hopping_score"),
+                    "first_chunk_avg_tenure": first_meta.get("avg_tenure_years"),
+                    "first_chunk_total_exp": first_meta.get("total_experience_years"),
+                })
+            
             red_flags_data = self.red_flags_module.extract(
                 chunks=chunks,
                 llm_output=cleaned_llm_output
             )
+            # Store the original object for later formatting (avoid reconstruction issues)
+            self._last_red_flags_data = red_flags_data
             if red_flags_data:
                 structured.red_flags = red_flags_data.to_dict()
                 logger.info(f"[ORCHESTRATOR] Red flags: {len(red_flags_data.flags)} flags detected")
+                
+                # DEBUG LOGGING: Log red flags results
+                log_red_flags_module(
+                    red_flags_data.flags,
+                    red_flags_data.high_risk_candidates,
+                    red_flags_data.clean_candidates
+                )
             
             # Timeline
             timeline_data = self.timeline_module.extract(
@@ -186,13 +207,29 @@ class OutputOrchestrator:
                 if formatted_gaps:
                     parts.append(formatted_gaps)
         
-        if structured.red_flags and structured.red_flags.get("flags"):
+        # Use stored original object if available, otherwise reconstruct
+        red_flags_to_format = getattr(self, '_last_red_flags_data', None)
+        if red_flags_to_format and red_flags_to_format.flags:
+            logger.info(f"[ORCHESTRATOR] Formatting {len(red_flags_to_format.flags)} red flags (using original object)")
+            formatted_flags = self.red_flags_module.format(red_flags_to_format)
+            logger.info(f"[ORCHESTRATOR] Formatted red flags: {len(formatted_flags) if formatted_flags else 0} chars")
+            if formatted_flags:
+                parts.append(formatted_flags)
+                logger.info(f"[ORCHESTRATOR] Red flags section ADDED to output")
+            else:
+                logger.warning(f"[ORCHESTRATOR] Red flags format returned empty string!")
+        elif structured.red_flags and structured.red_flags.get("flags"):
+            # Fallback: reconstruct from dict
             from .modules import RedFlagsData, RedFlag
+            logger.info(f"[ORCHESTRATOR] Red flags found (fallback): {len(structured.red_flags.get('flags', []))} flags")
             red_flags_data = self._reconstruct_red_flags(structured.red_flags)
             if red_flags_data:
                 formatted_flags = self.red_flags_module.format(red_flags_data)
                 if formatted_flags:
                     parts.append(formatted_flags)
+                    logger.info(f"[ORCHESTRATOR] Red flags section ADDED (fallback)")
+        else:
+            logger.info(f"[ORCHESTRATOR] No red flags to format")
         
         if structured.timeline and structured.timeline.get("timelines"):
             from .modules import TimelineData, CandidateTimeline
@@ -403,6 +440,11 @@ class OutputOrchestrator:
             
             # Skip if this is a table line (starts with |)
             if para_stripped.startswith('|'):
+                unique_paragraphs.append(para)
+                continue
+            
+            # NEVER remove Red Flags section - it's important analysis
+            if 'red flags' in para_stripped.lower() or '### red flags' in para_stripped.lower():
                 unique_paragraphs.append(para)
                 continue
             
