@@ -564,6 +564,10 @@ class PipelineContextV5:
     guardrail_passed: bool = True
     guardrail_message: str | None = None
     
+    # Single candidate detection (for targeted retrieval)
+    target_candidate_name: str | None = None
+    target_cv_id: str | None = None
+    
     # V5: Multi-query embeddings
     query_embeddings: dict[str, list[float]] = field(default_factory=dict)
     hyde_embedding: list[float] | None = None
@@ -1245,6 +1249,69 @@ class RAGServiceV5:
                 f"search: top {effective_k}/{num_cvs}, threshold={adjusted_threshold:.2f}"
             )
     
+    async def _get_chunks_by_candidate_name(
+        self, 
+        candidate_name: str, 
+        cv_ids: list[str] | None = None
+    ) -> list[dict]:
+        """
+        Get all chunks for a specific candidate by name.
+        
+        This enables targeted retrieval for single-candidate queries,
+        bypassing semantic search when we know exactly who to look for.
+        
+        Args:
+            candidate_name: Name of candidate to search for (case-insensitive)
+            cv_ids: Optional list of CV IDs to filter within
+            
+        Returns:
+            List of chunk dictionaries with content, metadata, and score
+        """
+        try:
+            # Get all chunks from vector store
+            all_results = self._vector_store.collection.get(
+                where={"cv_id": {"$in": cv_ids}} if cv_ids else None,
+                include=["documents", "metadatas"]
+            )
+            
+            if not all_results["ids"]:
+                return []
+            
+            # Filter by candidate name (case-insensitive, partial match)
+            candidate_name_lower = candidate_name.lower()
+            matching_chunks = []
+            
+            for i, metadata in enumerate(all_results["metadatas"]):
+                chunk_candidate = metadata.get("candidate_name", "").lower()
+                
+                # Check for exact match or partial match
+                if candidate_name_lower in chunk_candidate or chunk_candidate in candidate_name_lower:
+                    matching_chunks.append({
+                        "content": all_results["documents"][i],
+                        "metadata": {
+                            "cv_id": metadata.get("cv_id", ""),
+                            "filename": metadata.get("filename", ""),
+                            "candidate_name": metadata.get("candidate_name", ""),
+                            "section_type": metadata.get("section_type", "general"),
+                        },
+                        "score": 1.0  # Direct match, highest confidence
+                    })
+            
+            # Sort by section type to get most important sections first
+            section_priority = {
+                "summary": 0, "experience": 1, "skills": 2, 
+                "education": 3, "certifications": 4, "general": 5
+            }
+            matching_chunks.sort(
+                key=lambda c: section_priority.get(c["metadata"].get("section_type", "general"), 5)
+            )
+            
+            return matching_chunks
+            
+        except Exception as e:
+            logger.error(f"Error getting chunks by candidate name: {e}")
+            return []
+    
     async def _step_query_understanding(self, ctx: PipelineContextV5) -> None:
         """Step 1: Understand the query."""
         start = time.perf_counter()
@@ -1252,6 +1319,13 @@ class RAGServiceV5:
             result = await self._query_understanding.understand(ctx.question)
             
             ctx.query_understanding = result
+            
+            # Early detection of single candidate queries for targeted retrieval
+            from app.prompts.templates import extract_candidate_name_from_query
+            detected_name = extract_candidate_name_from_query(ctx.question)
+            if detected_name:
+                ctx.target_candidate_name = detected_name
+                logger.info(f"[QUERY_UNDERSTANDING] Detected single candidate query for: '{detected_name}'")
             
             # Extract OpenRouter cost if available from result.metadata
             openrouter_cost = 0.0
@@ -1476,6 +1550,48 @@ class RAGServiceV5:
         
         start = time.perf_counter()
         try:
+            # =================================================================
+            # TARGETED RETRIEVAL: If single candidate detected, get their chunks directly
+            # =================================================================
+            if ctx.target_candidate_name:
+                logger.info(f"[RETRIEVAL] Targeted retrieval for candidate: '{ctx.target_candidate_name}'")
+                targeted_chunks = await self._get_chunks_by_candidate_name(ctx.target_candidate_name, ctx.cv_ids)
+                
+                if targeted_chunks:
+                    logger.info(f"[RETRIEVAL] Found {len(targeted_chunks)} chunks for '{ctx.target_candidate_name}'")
+                    # Store cv_id for later use
+                    if targeted_chunks and targeted_chunks[0].get("metadata", {}).get("cv_id"):
+                        ctx.target_cv_id = targeted_chunks[0]["metadata"]["cv_id"]
+                    
+                    cv_ids = list({c["metadata"]["cv_id"] for c in targeted_chunks})
+                    scores = [c.get("score", 1.0) for c in targeted_chunks]
+                    
+                    ctx.retrieval_result = RetrievalResultV5(
+                        chunks=targeted_chunks,
+                        cv_ids=cv_ids,
+                        strategy="targeted_candidate",
+                        scores=scores,
+                        query_sources={}
+                    )
+                    
+                    ctx.metrics.add_stage(StageMetrics(
+                        stage=PipelineStage.SEARCH,
+                        duration_ms=(time.perf_counter() - start) * 1000,
+                        success=True,
+                        metadata={
+                            "num_chunks": len(targeted_chunks),
+                            "num_cvs": len(cv_ids),
+                            "strategy": "targeted_candidate",
+                            "target_candidate": ctx.target_candidate_name
+                        }
+                    ))
+                    return
+                else:
+                    logger.warning(f"[RETRIEVAL] No chunks found for '{ctx.target_candidate_name}', falling back to semantic search")
+            
+            # =================================================================
+            # STANDARD RRF FUSION RETRIEVAL
+            # =================================================================
             # Store results per query for RRF fusion
             results_per_query: list[list[tuple[str, float]]] = []
             all_chunks: dict[str, dict] = {}  # chunk_id -> chunk data

@@ -30685,10 +30685,253 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-05T18:30:14.795566"
+        },
+        {
+          "id": "9da26306-66e8-4a4f-a754-e394f4ee645c",
+          "role": "user",
+          "content": "dame todo sobre Ling Wei",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T18:35:52.359556"
+        },
+        {
+          "id": "0db936b5-5d6c-456a-ab63-452358a07492",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a summary of Ling Wei (cv_2a37d4f2)'s CV. I need to extract and present their personal details, education, work experience, skills, and any other relevant information. I will use the provided template to organize the information for easy readability.\n:::\n\n## 👤 [📄](cv:cv_2a37d4f2)**Ling Wei**is a Quality Assurance veteran with over 30 years of experience in orchestrating test ecosystems. Based in Dubai, United Arab Emirates has a proven track record of embedding risk-based testing frameworks, optimizing defect lifecycle management, and fostering mentorship. is adept at translating complex analytical metrics into strategic quality roadmaps, ensuring seamless alignment with agile delivery pipelines.\n\n## 👤 [📄](cv:cv_2a37d4f2)**Ling Wei**[📄](cv:cv_2a37d4f2)**Ling Wei**is a Quality Assurance veteran with over 30 years of experience in orchestrating test ecosystems. Based in Dubai, United Arab Emirates, [📄](cv:cv_2a37d4f2)**Ling Wei**has a proven track record of embedding risk-based testing frameworks, optimizing defect lifecycle management, and fostering mentorship. [📄](cv:cv_2a37d4f2)**Ling Wei**is adept at translating complex analytical metrics into strategic quality roadmaps, ensuring seamless alignment with agile delivery pipelines.\n---\n### 📊 Candidate Highlights\n|**CI/CD**| CI/CD Pipeline Integration (Jenkins) |\n---\n### 📜 Credentials\n- ISTQB Advanced Test Manager (2021)\n- Certified Agile Tester (2022)\n---\n\n| Category | Key Information | Match Score |\n|---|---|---|\n| 🎯 Current Role | Director of Quality Assurance | 50% |\n| ⏱️ Total Experience | 30+ years | 50% |\n| 🏆 Top Achievement | Scaled testing capacity by 150% while maintaining SLA compliance. | 50% |\n| 💡 Core Expertise | Test Automation Framework Development, Defect Lifecycle Management | 50% |\n| 🎓 Education | Master of Science in Quality Engineering - University of Dubai | 50% |\n\n:::conclusion**Assessment:**[📄](cv:cv_2a37d4f2)**Ling Wei**is a highly experienced QA professional with a strong background in test automation, defect management, and team leadership. Their experience spans multiple companies and roles, demonstrating a consistent track record of improving quality assurance processes.**Key Strengths:**- Extensive experience in quality assurance and testing (30+ years)\n- Proven ability to scale testing capacity and improve defect detection rates\n- Strong skills in test automation, defect lifecycle management, and CI/CD pipeline integration\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_67733682",
+              "filename": "4bd4fa01__Lukas_Schneider__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_f42db6d5",
+              "filename": "4a9a82d3__Kwame_Addo__Celebrity_Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_b3a9f9fa",
+              "filename": "16c037be__Lotte_van_der_Berg__Camera_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_a1db2d0c",
+              "filename": "d18bc369__Rafael_Oliveira__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_8afb9a4b",
+              "filename": "4e4b81a6__Sofia_Rossi__Graduate_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_27fe1043",
+              "filename": "dba2704c__Priya_Patel__Character_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_c745047d",
+              "filename": "ef74dd9e__Rohit_Kapoor__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_6acf462c",
+              "filename": "014b47a1__Javier_Morales__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_68098664",
+              "filename": "2ee790a4__Lotte_van_der_Berg__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_b9a24b82",
+              "filename": "07a0dc96__Aaliyah_Hassan__Crypto_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_aad40cac",
+              "filename": "fd904bcd__Layla_Al_Mansoori__Content_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_8d5c947d",
+              "filename": "b73fabea__Isabella_Nystrom__Junior_Blockchain_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_9f28cbec",
+              "filename": "5d0b9a4c__Javier_Morales__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_57fd52f0",
+              "filename": "ceca0723__Pierre_Dubois__Comic_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_3aae92ba",
+              "filename": "d1ef2ff1__Hassan_Al-Jamil__Blockchain_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_77bb2d16",
+              "filename": "c56a5d0f__Eitan_Levi__Headmaster.pdf"
+            },
+            {
+              "cv_id": "cv_fabc0fa0",
+              "filename": "29d2f61f__Valentina_Mendoza__Digital_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d71a1bd2",
+              "filename": "d306c0c3__Chloé_Dubois__Computer_Vision_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_76f67b2d",
+              "filename": "f3be335b__Sofia_Ricci__Digital_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_edc1e680",
+              "filename": "f95a288d__Aisha_Chen__YouTuber.pdf"
+            },
+            {
+              "cv_id": "cv_e07a68b7",
+              "filename": "9c9af9ff__Amir_Al-Farsi__Instructional_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_377a8045",
+              "filename": "a579777d__Isabelle_Dubois__Commercial_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_9bcbd73c",
+              "filename": "2aaf7352__Sofia_Rossi__Restaurant_Owner.pdf"
+            },
+            {
+              "cv_id": "cv_63c45322",
+              "filename": "323df925__Khalid_Al-Farsi__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_ec1238ea",
+              "filename": "22ca62fd__Rajiv_Patel__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_85fa2b7b",
+              "filename": "16879178__Sofia_Ramirez__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_35c38bf4",
+              "filename": "472590ef__Rafael_Oliveira__Computer_Vision_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_0fe998d7",
+              "filename": "b560f23b__Rajiv_Patel__Sous_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_92a4d467",
+              "filename": "836e187a__Sofia_Ramirez__Mobile_Tech.pdf"
+            },
+            {
+              "cv_id": "cv_2a37d4f2",
+              "filename": "99f808ef__Ling_Wei__QA.pdf"
+            },
+            {
+              "cv_id": "cv_41f3b3d9",
+              "filename": "d975c05b__Kenji_Tanaka__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_18defa26",
+              "filename": "d8560a1e__Wei_Chen__IP_Counsel.pdf"
+            },
+            {
+              "cv_id": "cv_637e1d23",
+              "filename": "ba7de3cf__Layla_Al-Mansoori__PA.pdf"
+            },
+            {
+              "cv_id": "cv_6b72acaa",
+              "filename": "b544ca1b__Lukas_Schmidt__Publication_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_a4421701",
+              "filename": "01def3e4__Mei_Lin_Chen__Accessories_Designer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1937.72,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 145.74,
+              "details": "Found 38 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 10561.02,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6592.29,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "## 👤 [📄](cv:cv_2a37d4f2) **Ling Wei** is a Quality Assurance veteran with over 30 years of experience in orchestrating test ecosystems. Based in Dubai, United Arab Emirates has a proven track record of embedding risk-based testing frameworks, optimizing defect lifecycle management, and fostering mentorship. is adept at translating complex analytical metrics into strategic quality roadmaps, ensuring seamless alignment with agile delivery pipelines.",
+            "raw_content": ":::thinking\nThe user is asking for a summary of **[Ling Wei](cv:cv_2a37d4f2)**'s CV. I need to extract and present their personal details, education, work experience, skills, and any other relevant information. I will use the provided template to organize the information for easy readability.\n:::\n\n## 👤 **[Ling Wei](cv:cv_2a37d4f2)**\n\n**[Ling Wei](cv:cv_2a37d4f2)** is a Quality Assurance veteran with over 30 years of experience in orchestrating test ecosystems. Based in Dubai, United Arab Emirates, **[Ling Wei](cv:cv_2a37d4f2)** has a proven track record of embedding risk-based testing frameworks, optimizing defect lifecycle management, and fostering mentorship. **[Ling Wei](cv:cv_2a37d4f2)** is adept at translating complex analytical metrics into strategic quality roadmaps, ensuring seamless alignment with agile delivery pipelines.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Director of Quality Assurance |\n| **⏱️ Total Experience** | 30+ years |\n| **🏆 Top Achievement** | Scaled testing capacity by 150% while maintaining SLA compliance. |\n| **💡 Core Expertise** | Test Automation Framework Development, Defect Lifecycle Management |\n| **🎓 Education** | Master of Science in Quality Engineering - University of Dubai |\n\n---\n\n### 💼 Career Trajectory\n\n**Director of Quality Assurance** — *[No Company Specified](cv:cv_2a37d4f2)*\n→ Scaled testing capacity by 150% while maintaining SLA compliance.\n\n**QA Lead** — *Precision Labs* (2014-2017)\n→ Managed a team of eight engineers, achieving a 98% defect detection rate pre-release.\n\n**QA Engineer** — *InnovateSoft* (2010-2014)\n→ Designed automated API tests using RestAssured, cutting release validation time by 35%.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details |\n|:-----------|:--------|\n| **Test Automation** | Test Automation Framework Development |\n| **Testing** | Performance Testing with JMeter, Risk-Based Test Prioritization |\n| **Defect Management** | Defect Lifecycle Management (ALM) |\n| **CI/CD** | CI/CD Pipeline Integration (Jenkins) |\n\n---\n\n### 📜 Credentials\n\n- ISTQB Advanced Test Manager (2021)\n- Certified Agile Tester (2022)\n\n---\n\n:::conclusion\n**Assessment:** **[Ling Wei](cv:cv_2a37d4f2)** is a highly experienced QA professional with a strong background in test automation, defect management, and team leadership. Their experience spans multiple companies and roles, demonstrating a consistent track record of improving quality assurance processes.\n\n**Key Strengths:**\n- Extensive experience in quality assurance and testing (30+ years)\n- Proven ability to scale testing capacity and improve defect detection rates\n- Strong skills in test automation, defect lifecycle management, and CI/CD pipeline integration\n:::",
+            "thinking": "The user is asking for a summary of Ling Wei (cv_2a37d4f2)'s CV. I need to extract and present their personal details, education, work experience, skills, and any other relevant information. I will use the provided template to organize the information for easy readability.",
+            "analysis": "## 👤 [📄](cv:cv_2a37d4f2) **Ling Wei**\n[📄](cv:cv_2a37d4f2) **Ling Wei** is a Quality Assurance veteran with over 30 years of experience in orchestrating test ecosystems. Based in Dubai, United Arab Emirates, [📄](cv:cv_2a37d4f2) **Ling Wei** has a proven track record of embedding risk-based testing frameworks, optimizing defect lifecycle management, and fostering mentorship. [📄](cv:cv_2a37d4f2) **Ling Wei** is adept at translating complex analytical metrics into strategic quality roadmaps, ensuring seamless alignment with agile delivery pipelines.\n---\n### 📊 Candidate Highlights\n| **CI/CD** | CI/CD Pipeline Integration (Jenkins) |\n---\n### 📜 Credentials\n- ISTQB Advanced Test Manager (2021)\n- Certified Agile Tester (2022)\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Category",
+                "Key Information",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "🎯 Current Role",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Director of Quality Assurance"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "⏱️ Total Experience",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "30+ years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🏆 Top Achievement",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Scaled testing capacity by 150% while maintaining SLA compliance."
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "💡 Core Expertise",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Test Automation Framework Development, Defect Lifecycle Management"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🎓 Education",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Master of Science in Quality Engineering - University of Dubai"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "**Assessment:** [📄](cv:cv_2a37d4f2) **Ling Wei** is a highly experienced QA professional with a strong background in test automation, defect management, and team leadership. Their experience spans multiple companies and roles, demonstrating a consistent track record of improving quality assurance processes.\n\n**Key Strengths:**\n- Extensive experience in quality assurance and testing (30+ years)\n- Proven ability to scale testing capacity and improve defect detection rates\n- Strong skills in test automation, defect lifecycle management, and CI/CD pipeline integration",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T18:36:16.021236"
         }
       ],
       "created_at": "2026-01-05T16:29:50.861270",
-      "updated_at": "2026-01-05T18:30:14.795566"
+      "updated_at": "2026-01-05T18:36:16.021236"
     }
   ]
 }

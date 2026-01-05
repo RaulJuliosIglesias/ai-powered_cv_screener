@@ -1316,6 +1316,55 @@ def detect_single_candidate_query(
     )
 
 
+def extract_candidate_name_from_query(question: str) -> str | None:
+    """
+    Extract a candidate name from a query BEFORE retrieval.
+    
+    This enables targeted retrieval - filtering chunks by candidate_name
+    when the user asks about a specific person.
+    
+    Patterns detected:
+    - "dame todo sobre [Name]"
+    - "tell me about [Name]"
+    - "háblame de [Name]"
+    - "quién es [Name]"
+    - "who is [Name]"
+    - "información sobre [Name]"
+    - "[Name]'s profile/experience/skills"
+    
+    Returns:
+        Extracted candidate name or None if not detected
+    """
+    # Patterns that indicate a single candidate query with name capture
+    # The name is expected to be 2-3 capitalized words (e.g., "Ling Wei", "Juan García")
+    patterns = [
+        # Spanish patterns
+        r"(?:dame|dime|muéstrame|proporciona)\s+(?:todo|información|detalles|datos|el perfil)\s+(?:sobre|de|acerca de)\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,2})",
+        r"(?:háblame|cuéntame)\s+(?:sobre|de)\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,2})",
+        r"(?:quién|quien)\s+es\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,2})",
+        r"perfil\s+de\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,2})",
+        r"cv\s+de\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,2})",
+        r"(?:todo|información)\s+sobre\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,2})",
+        
+        # English patterns
+        r"(?:tell me|give me|show me|provide)\s+(?:everything|all|information|details)\s+(?:about|on)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,2})",
+        r"(?:who is|what about)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,2})",
+        r"([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,2})(?:'s)?\s+(?:profile|cv|resume|experience|skills|background)",
+        r"about\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,2})\b",
+        r"information\s+(?:on|about)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,2})",
+    ]
+    
+    for pattern in patterns:
+        match = re.search(pattern, question, re.IGNORECASE)
+        if match:
+            candidate_name = match.group(1).strip()
+            # Validate: must be at least 2 chars and look like a name
+            if len(candidate_name) >= 2 and not candidate_name.lower() in {'the', 'all', 'top', 'best', 'candidate', 'candidates'}:
+                return candidate_name
+    
+    return None
+
+
 def is_multi_candidate_query(question: str) -> bool:
     """
     Detect if a query explicitly asks about MULTIPLE candidates.
@@ -1414,6 +1463,7 @@ __all__ = [
     "detect_off_topic",
     "detect_single_candidate_query",
     "is_multi_candidate_query",
+    "extract_candidate_name_from_query",
     
     # Legacy
     "build_query_prompt",
