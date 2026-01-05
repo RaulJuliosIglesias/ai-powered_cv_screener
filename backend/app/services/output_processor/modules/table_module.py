@@ -255,11 +255,12 @@ class TableModule:
     
     def _deduplicate_rows(self, rows: List[TableRow]) -> List[TableRow]:
         """
-        Deduplicate table rows by candidate NAME, keeping the one with highest match_score.
+        Deduplicate table rows by candidate NAME with ROBUST prioritization.
         
-        SMART DEDUPLICATION:
-        - Same candidate name = same person (even with different cv_ids)
-        - This handles duplicate CV uploads where same person has multiple cv_ids
+        PRIORITY ORDER (highest to lowest):
+        1. Most recent upload (indexed_at timestamp) - CV actualizado gana
+        2. Higher match_score - más relevante para la query
+        3. First occurrence - fallback
         
         Args:
             rows: List of TableRow objects (may contain duplicates)
@@ -271,7 +272,6 @@ class TableModule:
             return rows
         
         # Primary deduplication by normalized candidate name
-        # This ensures "Aisha Patel" with cv_abc and cv_xyz shows only once
         seen_names: Dict[str, TableRow] = {}
         
         for row in rows:
@@ -279,10 +279,19 @@ class TableModule:
             
             if normalized_name not in seen_names:
                 seen_names[normalized_name] = row
-            elif row.match_score > seen_names[normalized_name].match_score:
-                # Keep the one with higher score
-                logger.info(f"[TABLE] Dedup: keeping {row.candidate_name} ({row.cv_id}) over ({seen_names[normalized_name].cv_id})")
-                seen_names[normalized_name] = row
+            else:
+                existing = seen_names[normalized_name]
+                # Priority 1: Most recent upload wins (if timestamps available)
+                existing_time = existing.columns.get("_indexed_at", "")
+                new_time = row.columns.get("_indexed_at", "")
+                
+                if new_time and existing_time and new_time > existing_time:
+                    logger.info(f"[TABLE] Dedup: keeping NEWER {row.candidate_name} ({row.cv_id}, {new_time}) over ({existing.cv_id}, {existing_time})")
+                    seen_names[normalized_name] = row
+                # Priority 2: Higher match_score wins (more relevant to query)
+                elif row.match_score > existing.match_score:
+                    logger.info(f"[TABLE] Dedup: keeping HIGHER SCORE {row.candidate_name} ({row.cv_id}, {row.match_score}%) over ({existing.cv_id}, {existing.match_score}%)")
+                    seen_names[normalized_name] = row
         
         result = list(seen_names.values())
         
@@ -295,98 +304,80 @@ class TableModule:
         return result
     
     def _generate_fallback_table(self, chunks: List[dict]) -> Optional[TableData]:
-        """Generate fallback table from chunks using TableRow structure."""
+        """Generate fallback table from chunks using TableRow structure.
+        
+        ROBUST DEDUPLICATION:
+        - Same name = same person (even with different cv_ids)
+        - Priority: Most recent upload (indexed_at) > Higher similarity score
+        """
         if not chunks:
             return None
         
         logger.info("[TABLE] Generating fallback from chunks")
         
-        # Extract unique candidates with SMART DEDUPLICATION
-        # Same name + similar content = same person (duplicate CV upload)
-        # Same name + different content = different people (keep both)
-        candidates = {}
-        seen_cv_ids = set()
-        # Map: candidate_name_lower -> (content_signature, cv_id)
-        candidate_signatures: Dict[str, List[tuple]] = {}
+        # Group chunks by candidate name, keeping the BEST one per candidate
+        # Best = most recent (indexed_at) or highest score
+        candidates_by_name: Dict[str, dict] = {}
         
-        for chunk in chunks[:20]:  # Check more chunks for better deduplication
+        for chunk in chunks[:30]:  # Check more chunks for better coverage
             metadata = chunk.get('metadata', {})
             cv_id = metadata.get('cv_id')
             if not cv_id:
                 continue
             
-            # Skip if we already have this exact cv_id
-            if cv_id in seen_cv_ids:
-                continue
-            
             name = metadata.get('candidate_name', 'Unknown')
-            content = chunk.get('content', '')
             name_lower = name.lower().strip()
-            
-            # Create content signature from first 200 chars
-            content_sig = content[:200].lower() if content else ""
-            
-            # Check if this is a duplicate (same name + similar content but different cv_id)
-            is_duplicate = False
-            if name_lower in candidate_signatures:
-                for stored_sig, stored_cv_id in candidate_signatures[name_lower]:
-                    if stored_cv_id != cv_id:
-                        # Different cv_id - check content similarity
-                        if stored_sig and content_sig:
-                            overlap = sum(1 for a, b in zip(content_sig, stored_sig) if a == b)
-                            similarity = overlap / max(len(content_sig), len(stored_sig), 1)
-                            if similarity > 0.7:
-                                # Same person, duplicate CV - skip
-                                logger.info(f"[TABLE] Skipping duplicate: {name} ({cv_id}) - similar to {stored_cv_id}")
-                                is_duplicate = True
-                                break
-            
-            if is_duplicate:
-                continue
-            
-            # Not a duplicate - add to candidates
-            seen_cv_ids.add(cv_id)
-            
-            # Store signature for future deduplication
-            if name_lower not in candidate_signatures:
-                candidate_signatures[name_lower] = []
-            candidate_signatures[name_lower].append((content_sig, cv_id))
+            content = chunk.get('content', '')
+            score = chunk.get('score', 0.5)
+            indexed_at = metadata.get('indexed_at', '')
             
             skills = self._extract_skills(content)
-            score = chunk.get('score', 0.5)
             
-            candidates[cv_id] = {
+            candidate_data = {
                 'name': name,
                 'cv_id': cv_id,
                 'skills': skills[:3] if skills else ['N/A'],
-                'score': score
+                'score': score,
+                'indexed_at': indexed_at,
             }
             
-            # Limit to 10 unique candidates
-            if len(candidates) >= 10:
-                break
+            if name_lower not in candidates_by_name:
+                candidates_by_name[name_lower] = candidate_data
+            else:
+                existing = candidates_by_name[name_lower]
+                # Priority 1: Most recent indexed_at wins
+                if indexed_at and existing['indexed_at'] and indexed_at > existing['indexed_at']:
+                    logger.info(f"[TABLE] Fallback dedup: keeping NEWER {name} ({cv_id}) over ({existing['cv_id']})")
+                    candidates_by_name[name_lower] = candidate_data
+                # Priority 2: Higher similarity score wins
+                elif score > existing['score']:
+                    logger.info(f"[TABLE] Fallback dedup: keeping HIGHER SCORE {name} ({cv_id}, {score:.2f}) over ({existing['cv_id']}, {existing['score']:.2f})")
+                    candidates_by_name[name_lower] = candidate_data
         
-        if not candidates:
+        if not candidates_by_name:
             return None
+        
+        # Limit to top 10 candidates by score
+        sorted_candidates = sorted(candidates_by_name.values(), key=lambda x: x['score'], reverse=True)[:10]
         
         # Build TableRow objects
         table_rows: List[TableRow] = []
         
-        for cv_id, info in candidates.items():
+        for info in sorted_candidates:
             # Convert similarity score (0-1) to match percentage (0-100)
             match_score = int(min(100, max(0, info['score'] * 100)))
             
             table_rows.append(TableRow(
                 candidate_name=info['name'],
-                cv_id=cv_id,
-                columns={"Key Skills": ', '.join(info['skills'])},
+                cv_id=info['cv_id'],
+                columns={
+                    "Key Skills": ', '.join(info['skills']),
+                    "_indexed_at": info.get('indexed_at', ''),  # Hidden field for dedup
+                },
                 match_score=match_score
             ))
         
-        # Sort by match score descending
-        table_rows.sort(key=lambda r: r.match_score, reverse=True)
-        
-        logger.info(f"[TABLE] Generated {len(table_rows)} rows")
+        logger.info(f"[TABLE] Generated {len(table_rows)} rows (deduplicated by name)")
         return TableData(
             title="Candidate Comparison Table",
             headers=["Candidate", "Key Skills", "Match Score"],

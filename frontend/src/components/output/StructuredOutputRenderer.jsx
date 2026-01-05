@@ -318,8 +318,10 @@ const CandidateTable = ({ tableData, onOpenCV }) => {
                   </div>
                 </td>
                 
-                {/* Dynamic Columns */}
-                {row.columns && Object.values(row.columns).map((value, colIdx) => (
+                {/* Dynamic Columns - filter out internal fields starting with _ */}
+                {row.columns && Object.entries(row.columns)
+                  .filter(([key]) => !key.startsWith('_'))
+                  .map(([key, value], colIdx) => (
                   <td key={colIdx} className="px-4 py-3 text-sm text-slate-300">
                     {value}
                   </td>

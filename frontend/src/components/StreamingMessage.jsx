@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, memo } from 'react';
+import React, { useState, useEffect, useRef, memo, useCallback } from 'react';
 import { Brain, Search, FileText, Sparkles, Check, Loader, ChevronDown, ChevronUp, Zap, Users, Target } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -385,6 +385,57 @@ const StreamingMessage = ({
     !!streamingState?.partialAnswer
   );
   
+  // Auto-scroll state and refs
+  const scrollContainerRef = useRef(null);
+  const [userScrolled, setUserScrolled] = useState(false);
+  const scrollTimeoutRef = useRef(null);
+  
+  // Auto-scroll to bottom when text updates (unless user has scrolled up)
+  useEffect(() => {
+    if (!userScrolled && scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
+    }
+  }, [displayedText, userScrolled]);
+  
+  // Reset userScrolled state when partialAnswer changes (new content stream)
+  useEffect(() => {
+    setUserScrolled(false);
+  }, [streamingState?.partialAnswer]);
+  
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, []);
+  
+  // Handle user scroll - detect if user scrolled up manually
+  const handleScroll = useCallback((e) => {
+    const { scrollTop, scrollHeight, clientHeight } = e.target;
+    const isAtBottom = scrollHeight - scrollTop - clientHeight < 30; // 30px threshold
+    
+    if (!isAtBottom) {
+      // User scrolled up - pause auto-scroll
+      setUserScrolled(true);
+      
+      // Re-enable auto-scroll after 3 seconds of inactivity
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      scrollTimeoutRef.current = setTimeout(() => {
+        setUserScrolled(false);
+      }, 3000);
+    } else {
+      // User is at the bottom - re-enable auto-scroll immediately
+      setUserScrolled(false);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    }
+  }, []);
+  
   if (!streamingState) return null;
   
   const { currentStep, steps, queryUnderstanding, candidates, partialAnswer, currentProgress } = streamingState;
@@ -453,7 +504,11 @@ const StreamingMessage = ({
               </span>
               <Sparkles className="w-3 h-3 text-emerald-500 animate-pulse" />
             </div>
-            <pre className="p-4 bg-gray-50 dark:bg-gray-800 overflow-x-auto max-h-64 overflow-y-auto">
+            <pre 
+              ref={scrollContainerRef}
+              onScroll={handleScroll}
+              className="p-4 bg-gray-50 dark:bg-gray-800 overflow-x-auto max-h-64 overflow-y-auto scroll-smooth"
+            >
               <code className="text-xs text-gray-700 dark:text-gray-300 whitespace-pre-wrap break-words font-mono">
                 {displayedText}
                 {!isComplete && <span className="animate-pulse text-emerald-500">▊</span>}

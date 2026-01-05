@@ -28964,10 +28964,439 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-05T18:01:21.796152"
+        },
+        {
+          "id": "7a3c2264-66c7-4568-b266-d610fcd60db8",
+          "role": "user",
+          "content": "dame los 3 mejroes para QA roles",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T18:17:15.070386"
+        },
+        {
+          "id": "f4202ef6-db6e-4662-a434-e4f778bbbf8b",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the top 3 candidates for QA roles based on the provided CVs. The key criteria are experience, skills, and education relevant to Quality Assurance. I need to identify candidates with QA-related experience, skills like test automation, defect lifecycle management, CI/CD pipeline integration, and relevant education. Then, I will rank them based on the strength of their qualifications.\n:::\n\nThe top candidate for QA roles is [📄](cv:cv_2a37d4f2)**Ling Wei**, followed by candidates who demonstrate some QA skills, but lack the depth of experience. The other candidates do not have the required skills or experience for a QA role. ### Analysis**Explanation:*** : This candidate has extensive and direct experience in Quality Assurance, progressing from QA Analyst to Director of Quality Assurance.\n\n### Analysis\n\n| Candidate | Skills | Experience | Match |\n\n| Candidate | Skills | Experience | Match Score |\n|---|---|---|---|\n| Ling Wei | Test Automation Framework Development, Performance Testing with JMeter, Defect Lifecycle Management (ALM), CI/CD Pipeline Integration (Jenkins), Risk-Based Test Prioritization | Director of Quality Assurance, QA Lead, QA Engineer, QA Analyst | 100% |\n\n:::conclusion\n[📄](cv:cv_2a37d4f2)**Ling Wei**is the only candidate with the required skills and experience for a QA role.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_8afb9a4b",
+              "filename": "4e4b81a6__Sofia_Rossi__Graduate_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_93e485cd",
+              "filename": "e35f5e8e__Isabella_Richter__Nursing_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_b7afefc5",
+              "filename": "93565dce__Leila_Amari__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_becdba61",
+              "filename": "4ca041d0__Lucien_Moreau__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_ae890623",
+              "filename": "7e291026__Rajiv_Patel__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_e982012f",
+              "filename": "960c1e52__James_Whitmore__Smart_Contract_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_0fe998d7",
+              "filename": "b560f23b__Rajiv_Patel__Sous_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_9dd8faae",
+              "filename": "173ee9f4__Antoine_Dubois__Brand_Ambassador.pdf"
+            },
+            {
+              "cv_id": "cv_637e1d23",
+              "filename": "ba7de3cf__Layla_Al-Mansoori__PA.pdf"
+            },
+            {
+              "cv_id": "cv_2a37d4f2",
+              "filename": "99f808ef__Ling_Wei__QA.pdf"
+            },
+            {
+              "cv_id": "cv_62706e5a",
+              "filename": "6b9204bf__Matteo_Romano__Brand_Ambassador.pdf"
+            },
+            {
+              "cv_id": "cv_63c45322",
+              "filename": "323df925__Khalid_Al-Farsi__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c7c90643",
+              "filename": "0c185b57__Matteo_Rossi__Associate_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_3849c26e",
+              "filename": "071dc2e0__Ji-Yeon_Kim__Endowed_Chair.pdf"
+            },
+            {
+              "cv_id": "cv_edc1e680",
+              "filename": "f95a288d__Aisha_Chen__YouTuber.pdf"
+            },
+            {
+              "cv_id": "cv_e07a68b7",
+              "filename": "9c9af9ff__Amir_Al-Farsi__Instructional_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_d71a1bd2",
+              "filename": "d306c0c3__Chloé_Dubois__Computer_Vision_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_3aae92ba",
+              "filename": "d1ef2ff1__Hassan_Al-Jamil__Blockchain_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_ccac265e",
+              "filename": "39db3837__Layla_Kader__Game_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_db3f63a6",
+              "filename": "1b2a47e8__Amir_Hassan__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_1a0f73d2",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_28c70f5d",
+              "filename": "c6da4cc4__Rahul_Kapoor__Growth_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_141ff971",
+              "filename": "6be44d4b__Rajiv_Patel__Growth_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_a1db2d0c",
+              "filename": "d18bc369__Rafael_Oliveira__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_76f67b2d",
+              "filename": "f3be335b__Sofia_Ricci__Digital_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_57fd52f0",
+              "filename": "ceca0723__Pierre_Dubois__Comic_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_0be2bd72",
+              "filename": "8ce653c9__Layla_Al-Mansouri__Crypto_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_27fe1043",
+              "filename": "dba2704c__Priya_Patel__Character_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_bf2601ad",
+              "filename": "2a6972cc__Ji-eun_Kim__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_7bf60595",
+              "filename": "cac8113c__Jamal_Carter__Storyboard_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_9bcbd73c",
+              "filename": "2aaf7352__Sofia_Rossi__Restaurant_Owner.pdf"
+            },
+            {
+              "cv_id": "cv_bbc9e391",
+              "filename": "3baa7e58__Diego_Mendoza__Protocol_Engineer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1521.17,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 143.7,
+              "details": "Found 33 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 28087.67,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4784.24,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "The top candidate for QA roles is [📄](cv:cv_2a37d4f2) **Ling Wei**, followed by candidates who demonstrate some QA skills, but lack the depth of experience. The other candidates do not have the required skills or experience for a QA role. ### Analysis **Explanation:** * : This candidate has extensive and direct experience in Quality Assurance, progressing from QA Analyst to Director of Quality Assurance.",
+            "raw_content": ":::thinking\nThe user is asking for the top 3 candidates for QA roles based on the provided CVs. The key criteria are experience, skills, and education relevant to Quality Assurance. I need to identify candidates with QA-related experience, skills like test automation, defect lifecycle management, CI/CD pipeline integration, and relevant education. Then, I will rank them based on the strength of their qualifications.\n:::\n\nThe top candidate for QA roles is **[Ling Wei](cv:cv_2a37d4f2)**, followed by candidates who demonstrate some QA skills, but lack the depth of experience. The other candidates do not have the required skills or experience for a QA role.\n\n### Analysis\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Ling Wei](cv:cv_2a37d4f2)** | Test Automation Framework Development, Performance Testing with JMeter, Defect Lifecycle Management (ALM), CI/CD Pipeline Integration (Jenkins), Risk-Based Test Prioritization | Director of Quality Assurance, QA Lead, QA Engineer, QA Analyst | ⭐⭐⭐⭐⭐ |\n\n**Explanation:**\n\n*   **[Ling Wei](cv:cv_2a37d4f2)**: This candidate has extensive and direct experience in Quality Assurance, progressing from QA Analyst to Director of Quality Assurance. Their skills align perfectly with the requirements, including test automation, performance testing, defect lifecycle management, and CI/CD pipeline integration. Their education in Quality Engineering further strengthens their suitability.\n\n:::conclusion\n**[Ling Wei](cv:cv_2a37d4f2)** is the only candidate with the required skills and experience for a QA role.\n:::",
+            "thinking": "The user is asking for the top 3 candidates for QA roles based on the provided CVs. The key criteria are experience, skills, and education relevant to Quality Assurance. I need to identify candidates with QA-related experience, skills like test automation, defect lifecycle management, CI/CD pipeline integration, and relevant education. Then, I will rank them based on the strength of their qualifications.",
+            "analysis": "| Candidate | Skills | Experience | Match |",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Skills",
+                "Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Ling Wei",
+                  "cv_id": "cv_2a37d4f2",
+                  "columns": {
+                    "Skills": "Test Automation Framework Development, Performance Testing with JMeter, Defect Lifecycle Management (ALM), CI/CD Pipeline Integration (Jenkins), Risk-Based Test Prioritization",
+                    "Experience": "Director of Quality Assurance, QA Lead, QA Engineer, QA Analyst"
+                  },
+                  "match_score": 100
+                }
+              ]
+            },
+            "conclusion": "[📄](cv:cv_2a37d4f2) **Ling Wei** is the only candidate with the required skills and experience for a QA role.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T18:17:53.279493"
+        },
+        {
+          "id": "8295566e-204d-4f86-b723-de2309ff656b",
+          "role": "user",
+          "content": "dame los 3 mejroes para QA roles",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T18:24:22.266672"
+        },
+        {
+          "id": "6fe79df4-d133-4170-ae3e-84fe01e8e2d5",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the top 3 candidates for Quality Assurance (QA) roles, ranked by suitability based on their CVs. I need to identify candidates with skills and experience relevant to QA, such as testing, debugging, automation, and quality control. I will then rank them based on the strength of their QA-related qualifications and present the top 3. If fewer than 3 candidates have direct QA experience, I will include candidates with related technical skills, clearly indicating the strength of the match.\n:::\n\nHere are the top 3 candidates best suited for Quality Assurance (QA) roles based on their CVs, ranked by relevance. ### Analysis\nTo identify the best candidates for QA roles, I focused on skills and experience related to testing, debugging, automation, and quality control. I looked for explicit mentions of testing methodologies, tools, and experience in ensuring software or product quality.\n\n### Analysis\n\nTo identify the best candidates for QA roles, I focused on skills and experience related to testing, debugging, automation, and quality control. I looked for explicit mentions of testing methodologies, tools, and experience in ensuring software or product quality. Candidates with experience in development roles where they emphasized testing and quality assurance were also considered. The ranking is based on the depth and breadth of their QA-related skills and experience.\n\n| Candidate | Skills | Experience | Match Score |\n|---|---|---|---|\n| Aisha Nakamura | CI/CD pipelines with automated security testing | Cutting release cycle from weeks to days | 80% |\n| Naledi Smith | Unit and integration tests for smart contracts | Automated the deployment process of smart contracts using scripting and CI/CD pipelines | 60% |\n| Diego Mendoza | Developed and maintained unit tests | Participated in code reviews and provided constructive feedback | 40% |\n| Sofia Rossi | Unit Testing (Pytest) |  | 20% |\n\n:::conclusion\nThe top 3 candidates for QA roles are [📄](cv:cv_41afc6a3)**Aisha Nakamura**, [📄](cv:cv_a554500e)**Naledi Smith**, and [📄](cv:cv_bbc9e391)**Diego Mendoza**. has experience in automated security testing and CI/CD pipelines. has experience in unit and integration tests and automated deployment. has experience in developing and maintaining unit tests.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_93e485cd",
+              "filename": "e35f5e8e__Isabella_Richter__Nursing_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_8afb9a4b",
+              "filename": "4e4b81a6__Sofia_Rossi__Graduate_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_becdba61",
+              "filename": "4ca041d0__Lucien_Moreau__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_ccac265e",
+              "filename": "39db3837__Layla_Kader__Game_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_b7afefc5",
+              "filename": "93565dce__Leila_Amari__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_27fe1043",
+              "filename": "dba2704c__Priya_Patel__Character_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_63c45322",
+              "filename": "323df925__Khalid_Al-Farsi__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_637e1d23",
+              "filename": "ba7de3cf__Layla_Al-Mansoori__PA.pdf"
+            },
+            {
+              "cv_id": "cv_8d5c947d",
+              "filename": "b73fabea__Isabella_Nystrom__Junior_Blockchain_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_62706e5a",
+              "filename": "6b9204bf__Matteo_Romano__Brand_Ambassador.pdf"
+            },
+            {
+              "cv_id": "cv_87713376",
+              "filename": "7d40b1ab__Ingrid_Larsson__Consultant.pdf"
+            },
+            {
+              "cv_id": "cv_3aae92ba",
+              "filename": "d1ef2ff1__Hassan_Al-Jamil__Blockchain_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_3849c26e",
+              "filename": "071dc2e0__Ji-Yeon_Kim__Endowed_Chair.pdf"
+            },
+            {
+              "cv_id": "cv_9dd8faae",
+              "filename": "173ee9f4__Antoine_Dubois__Brand_Ambassador.pdf"
+            },
+            {
+              "cv_id": "cv_bbc9e391",
+              "filename": "3baa7e58__Diego_Mendoza__Protocol_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_e07a68b7",
+              "filename": "9c9af9ff__Amir_Al-Farsi__Instructional_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_85fa2b7b",
+              "filename": "16879178__Sofia_Ramirez__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_c7c90643",
+              "filename": "0c185b57__Matteo_Rossi__Associate_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_28c70f5d",
+              "filename": "c6da4cc4__Rahul_Kapoor__Growth_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_41afc6a3",
+              "filename": "54bfd995__Aisha_Nakamura__Blockchain_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_9bcbd73c",
+              "filename": "2aaf7352__Sofia_Rossi__Restaurant_Owner.pdf"
+            },
+            {
+              "cv_id": "cv_141ff971",
+              "filename": "6be44d4b__Rajiv_Patel__Growth_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_3c4bc7ab",
+              "filename": "72cb0e20__Carmen_Rodriguez__Resident.pdf"
+            },
+            {
+              "cv_id": "cv_7bf60595",
+              "filename": "cac8113c__Jamal_Carter__Storyboard_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a554500e",
+              "filename": "bf861716__Naledi_Smith__Web3_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_76f67b2d",
+              "filename": "f3be335b__Sofia_Ricci__Digital_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_0fe998d7",
+              "filename": "b560f23b__Rajiv_Patel__Sous_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_db3f63a6",
+              "filename": "1b2a47e8__Amir_Hassan__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_7682b529",
+              "filename": "9cd768c8__Emily_Tan__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_1a0f73d2",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_e982012f",
+              "filename": "960c1e52__James_Whitmore__Smart_Contract_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_a1db2d0c",
+              "filename": "d18bc369__Rafael_Oliveira__Production_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1773.01,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 142.17,
+              "details": "Found 33 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 31697.94,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5728.94,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Here are the top 3 candidates best suited for Quality Assurance (QA) roles based on their CVs, ranked by relevance. ### Analysis\nTo identify the best candidates for QA roles, I focused on skills and experience related to testing, debugging, automation, and quality control. I looked for explicit mentions of testing methodologies, tools, and experience in ensuring software or product quality.",
+            "raw_content": ":::thinking\nThe user is asking for the top 3 candidates for Quality Assurance (QA) roles, ranked by suitability based on their CVs. I need to identify candidates with skills and experience relevant to QA, such as testing, debugging, automation, and quality control. I will then rank them based on the strength of their QA-related qualifications and present the top 3. If fewer than 3 candidates have direct QA experience, I will include candidates with related technical skills, clearly indicating the strength of the match.\n:::\n\nHere are the top 3 candidates best suited for Quality Assurance (QA) roles based on their CVs, ranked by relevance.\n\n### Analysis\n\nTo identify the best candidates for QA roles, I focused on skills and experience related to testing, debugging, automation, and quality control. I looked for explicit mentions of testing methodologies, tools, and experience in ensuring software or product quality. Candidates with experience in development roles where they emphasized testing and quality assurance were also considered. The ranking is based on the depth and breadth of their QA-related skills and experience.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Aisha Nakamura](cv:cv_41afc6a3)** | CI/CD pipelines with automated security testing | Cutting release cycle from weeks to days | ⭐⭐⭐⭐ |\n| **[Naledi Smith](cv:cv_a554500e)** | Unit and integration tests for smart contracts | Automated the deployment process of smart contracts using scripting and CI/CD pipelines | ⭐⭐⭐ |\n| **[Diego Mendoza](cv:cv_bbc9e391)** | Developed and maintained unit tests | Participated in code reviews and provided constructive feedback | ⭐⭐ |\n| **[Sofia Rossi](cv:cv_8afb9a4b)** | Unit Testing (Pytest) |  | ⭐ |\n\n:::conclusion\nThe top 3 candidates for QA roles are **[Aisha Nakamura](cv:cv_41afc6a3)**, **[Naledi Smith](cv:cv_a554500e)**, and **[Diego Mendoza](cv:cv_bbc9e391)**. **[Aisha Nakamura](cv:cv_41afc6a3)** has experience in automated security testing and CI/CD pipelines. **[Naledi Smith](cv:cv_a554500e)** has experience in unit and integration tests and automated deployment. **[Diego Mendoza](cv:cv_bbc9e391)** has experience in developing and maintaining unit tests.\n:::",
+            "thinking": "The user is asking for the top 3 candidates for Quality Assurance (QA) roles, ranked by suitability based on their CVs. I need to identify candidates with skills and experience relevant to QA, such as testing, debugging, automation, and quality control. I will then rank them based on the strength of their QA-related qualifications and present the top 3. If fewer than 3 candidates have direct QA experience, I will include candidates with related technical skills, clearly indicating the strength of the match.",
+            "analysis": "To identify the best candidates for QA roles, I focused on skills and experience related to testing, debugging, automation, and quality control. I looked for explicit mentions of testing methodologies, tools, and experience in ensuring software or product quality. Candidates with experience in development roles where they emphasized testing and quality assurance were also considered. The ranking is based on the depth and breadth of their QA-related skills and experience.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Skills",
+                "Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Aisha Nakamura",
+                  "cv_id": "cv_41afc6a3",
+                  "columns": {
+                    "Skills": "CI/CD pipelines with automated security testing",
+                    "Experience": "Cutting release cycle from weeks to days"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Naledi Smith",
+                  "cv_id": "cv_a554500e",
+                  "columns": {
+                    "Skills": "Unit and integration tests for smart contracts",
+                    "Experience": "Automated the deployment process of smart contracts using scripting and CI/CD pipelines"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Diego Mendoza",
+                  "cv_id": "cv_bbc9e391",
+                  "columns": {
+                    "Skills": "Developed and maintained unit tests",
+                    "Experience": "Participated in code reviews and provided constructive feedback"
+                  },
+                  "match_score": 40
+                },
+                {
+                  "candidate_name": "Sofia Rossi",
+                  "cv_id": "cv_8afb9a4b",
+                  "columns": {
+                    "Skills": "Unit Testing (Pytest)",
+                    "Experience": ""
+                  },
+                  "match_score": 20
+                }
+              ]
+            },
+            "conclusion": "The top 3 candidates for QA roles are [📄](cv:cv_41afc6a3) **Aisha Nakamura**, [📄](cv:cv_a554500e) **Naledi Smith**, and [📄](cv:cv_bbc9e391) **Diego Mendoza**. has experience in automated security testing and CI/CD pipelines. has experience in unit and integration tests and automated deployment. has experience in developing and maintaining unit tests.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T18:25:31.901384"
         }
       ],
       "created_at": "2026-01-05T16:29:50.861270",
-      "updated_at": "2026-01-05T18:01:21.796152"
+      "updated_at": "2026-01-05T18:25:31.901384"
     }
   ]
 }
