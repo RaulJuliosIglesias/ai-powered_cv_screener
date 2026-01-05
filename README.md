@@ -1,75 +1,62 @@
-# CV Screener - AI-Powered Resume Analysis
+<div align="center">
 
-An AI-powered CV screening application with **switchable backend modes** (Local/Cloud). Upload PDF resumes and query them using natural language with RAG (Retrieval-Augmented Generation).
+# 🎯 AI-Powered CV Screener
 
-**Core Principle:** Zero hallucinations. Every response is traceable to source documents.
+### Intelligent Resume Analysis with RAG Technology
+
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)](https://fastapi.tiangolo.com)
+[![React](https://img.shields.io/badge/React-18+-61DAFB.svg)](https://reactjs.org)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+**A production-ready RAG pipeline for CV/Resume screening with dual-mode architecture, hallucination detection, and source-cited responses.**
+
+[Features](#-features) · [Quick Start](#-quick-start) · [Architecture](#-architecture) · [Demo](#-demo) · [Documentation](#-documentation)
+
+</div>
+
+---
+
+## 🌟 Highlights
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                                                              │
+│   📄 Upload CVs    →    🔍 Ask Questions    →    ✅ Get Cited Answers       │
+│                                                                              │
+│   "Who has Python experience?"                                               │
+│                                                                              │
+│   ✨ Response: Based on the CVs, John Doe [CV:cv_a1b2c3] has 5 years...     │
+│      📎 Sources: John_Doe.pdf (92%), Jane_Smith.pdf (87%)                   │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Core Principle**: Zero hallucinations. Every response is traceable to source documents.
+
+---
 
 ## ✨ Features
 
-- **Dual Mode Architecture**: Switch between Local and Cloud backends
-- **2-Step RAG Pipeline**: Query understanding + Response generation with configurable models
-- **LangChain Integration**: Optional LangChain-based RAG service
-- **PDF Upload**: Drag & drop multiple CV files for processing
-- **Smart Extraction**: Automatic text extraction and semantic chunking
-- **Natural Language Queries**: Ask questions about candidates in plain English
-- **Source Citations**: Every answer includes clickable references to source CVs
-- **Guardrails**: Pre-LLM filtering for off-topic questions
-- **Anti-Hallucination**: Post-LLM verification of CV references
-- **Performance Metrics**: Real-time display of embedding, search, and LLM latencies
-- **TypeScript Frontend**: Type-safe React components
-- **Shadcn UI Components**: Modern, accessible UI components
+### 🔄 Dual-Mode Architecture
+Switch seamlessly between **Local** (free development) and **Cloud** (production-ready) backends with a single parameter.
 
-## 🏗️ Architecture
+### 🧠 11-Stage RAG Pipeline
+Advanced pipeline with query understanding, multi-query expansion, guardrails, reranking, and verification.
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│                 FRONTEND (React + TypeScript + Shadcn)            │
-│  ┌────────────────────────────────────────────────────────────┐  │
-│  │  Sessions | CVs | Chat | RAG Pipeline Settings             │  │
-│  └────────────────────────────────────────────────────────────┘  │
-└──────────────────────────────────────────────────────────────────┘
-                               │
-                               ▼
-┌──────────────────────────────────────────────────────────────────┐
-│                    BACKEND (FastAPI + LangChain)                  │
-│                                                                   │
-│  ┌────────────────────────────────────────────────────────────┐  │
-│  │ STEP 1: Query Understanding (fast model)                   │  │
-│  │ → Analyze question → Extract requirements → Reformulate    │  │
-│  └────────────────────────────────────────────────────────────┘  │
-│                               │                                   │
-│                               ▼                                   │
-│  ┌────────────────────────────────────────────────────────────┐  │
-│  │ Guardrails → Embedding → Vector Search → LLM Generation    │  │
-│  └────────────────────────────────────────────────────────────┘  │
-│                               │                                   │
-│                               ▼                                   │
-│  ┌────────────────────────────────────────────────────────────┐  │
-│  │ STEP 2: Hallucination Check → Eval Logging                 │  │
-│  └────────────────────────────────────────────────────────────┘  │
-│                                                                   │
-│  ┌─────────────────┐              ┌─────────────────┐            │
-│  │  LOCAL MODE     │              │  CLOUD MODE     │            │
-│  │  SimpleVectorDB │              │  Supabase       │            │
-│  │  (JSON+cosine)  │              │  pgvector       │            │
-│  └─────────────────┘              └─────────────────┘            │
-└──────────────────────────────────────────────────────────────────┘
-```
+### 🛡️ Anti-Hallucination System
+Three-layer verification: Pre-LLM guardrails, claim verification, and entity validation.
 
-## 🛠️ Tech Stack
+### 📎 Source Citations
+Every answer includes clickable references to source CVs with relevance scores.
 
-| Layer | Technology | Purpose |
-|-------|------------|---------|
-| **Frontend** | React 18 + TypeScript | UI Framework |
-| **UI Components** | Shadcn UI + Radix | Accessible components |
-| **Styling** | TailwindCSS | Utility-first CSS |
-| **Backend** | FastAPI + Python 3.11+ | REST API |
-| **RAG Framework** | LangChain (optional) | RAG orchestration |
-| **Embeddings** | OpenRouter (nomic-embed-text-v1.5) | 768-dim vectors |
-| **Vector Store (Local)** | SimpleVectorStore | JSON + cosine similarity |
-| **Vector Store (Cloud)** | Supabase pgvector | PostgreSQL vectors |
-| **LLM** | OpenRouter API | Multi-model support |
-| **PDF Processing** | pdfplumber | Text extraction |
+### ⚡ Real-Time Streaming
+SSE-based streaming shows pipeline progress and token-by-token generation.
+
+### 🎨 Modern UI
+React 18 + Shadcn UI + TailwindCSS for a clean, accessible interface.
+
+---
 
 ## 🚀 Quick Start
 
@@ -77,20 +64,20 @@ An AI-powered CV screening application with **switchable backend modes** (Local/
 
 - Python 3.11+
 - Node.js 18+
-- OpenRouter API key (get free at https://openrouter.ai)
-- **(Cloud Mode)**: Supabase project
+- [OpenRouter API Key](https://openrouter.ai) (free tier available)
 
-### 1. Clone and Setup
+### Installation
 
 ```bash
-git clone https://github.com/yourusername/cv-screener.git
-cd cv-screener
+# Clone the repository
+git clone https://github.com/yourusername/ai-powered-cv-screener.git
+cd ai-powered-cv-screener
 
 # Backend setup
 cd backend
 python -m venv venv
-venv\Scripts\activate  # Windows
-# source venv/bin/activate  # macOS/Linux
+venv\Scripts\activate        # Windows
+# source venv/bin/activate   # macOS/Linux
 pip install -r requirements.txt
 
 # Configure environment
@@ -102,146 +89,236 @@ cd ../frontend
 npm install
 ```
 
-### 2. Run the Application
+### Run
 
 ```bash
-# From project root - starts both backend and frontend
+# Start both backend and frontend
 npm run dev
 
 # Or separately:
-python start_api.py   # Backend (auto-finds available port from 8000)
-python start_web.py   # Frontend (auto-finds available port from 6001)
+python start_api.py   # Backend → http://localhost:8000
+python start_web.py   # Frontend → http://localhost:6001
 ```
 
-### 3. Cloud Mode Setup (Optional)
+### Usage
 
-For Supabase pgvector:
+1. **Upload CVs**: Drag & drop PDF files
+2. **Ask Questions**: "Who has Python experience?"
+3. **Get Answers**: Receive cited responses with source documents
 
-1. Create project at https://supabase.com
-2. Run migration: `supabase/migrations/001_cv_embeddings.sql`
-3. Add credentials to `.env`:
-   ```
-   SUPABASE_URL=https://xxxxx.supabase.co
-   SUPABASE_SERVICE_KEY=eyJ...
-   ```
+---
 
-### 4. Enable LangChain (Optional)
-
-```bash
-# In .env
-USE_LANGCHAIN=true
-```
-
-## API Endpoints
-
-All endpoints accept a `mode` query parameter: `?mode=local` or `?mode=cloud`
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/upload?mode=local` | Upload PDF files |
-| GET | `/api/status/{job_id}` | Check processing status |
-| GET | `/api/cvs?mode=local` | List indexed CVs |
-| DELETE | `/api/cvs/{cv_id}?mode=local` | Remove a CV |
-| POST | `/api/chat?mode=local` | Send a query |
-| GET | `/api/stats?mode=local` | Get system statistics |
-| GET | `/api/health` | Health check |
-
-## Example Queries
-
-Once you've uploaded CVs, try asking:
-
-- "Who has experience with Python?"
-- "List candidates from New York"
-- "Who worked at Google?"
-- "Compare the top 3 candidates for a senior developer role"
-- "Which candidates have a Master's degree?"
-- "Who has more than 5 years of experience?"
-
-## Project Structure
+## 🏗️ Architecture
 
 ```
-cv-screener/
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         FRONTEND (React + Shadcn UI)                         │
+│   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐       │
+│   │   Upload    │  │    Chat     │  │   Sources   │  │   Metrics   │       │
+│   └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘       │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         BACKEND (FastAPI + Python)                           │
+│                                                                              │
+│   ┌─────────────────────────────────────────────────────────────────────┐   │
+│   │                      11-STAGE RAG PIPELINE                           │   │
+│   │                                                                      │   │
+│   │  Query → Understand → MultiQuery → Guardrail → Embed → Search →     │   │
+│   │  Rerank → Reason → Generate → Verify Claims → Check Hallucinations  │   │
+│   │                                                                      │   │
+│   └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                              │
+│   ┌───────────────────────┐          ┌───────────────────────┐             │
+│   │     LOCAL MODE        │          │     CLOUD MODE        │             │
+│   │  • JSON Vector Store  │   OR     │  • Supabase pgvector  │             │
+│   │  • sentence-transform │          │  • nomic-embed-v1.5   │             │
+│   │  • Zero cost          │          │  • Production-ready   │             │
+│   └───────────────────────┘          └───────────────────────┘             │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🎬 Demo
+
+### Sample Questions
+
+| Question | What It Tests |
+|----------|---------------|
+| "Who has experience with Python?" | Skill search |
+| "Which candidate graduated from UPC?" | Education lookup |
+| "Summarize the profile of Jane Doe" | Single CV summary |
+| "Compare top 3 candidates for a senior role" | Ranking & comparison |
+| "What's a good recipe for pasta?" | Off-topic rejection ✓ |
+
+### Response Format
+
+```json
+{
+  "response": "Based on the CVs, the following candidates have Python experience...",
+  "sources": [
+    {"cv_id": "cv_a1b2c3", "filename": "John_Doe.pdf", "relevance": 0.92},
+    {"cv_id": "cv_d4e5f6", "filename": "Jane_Smith.pdf", "relevance": 0.87}
+  ],
+  "metrics": {
+    "total_ms": 2340,
+    "embedding_ms": 45,
+    "search_ms": 120,
+    "generation_ms": 2100
+  },
+  "confidence": 0.95
+}
+```
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| **Frontend** | React 18 + TypeScript | UI Framework |
+| **UI Components** | Shadcn UI + Radix | Accessible components |
+| **Styling** | TailwindCSS | Utility-first CSS |
+| **Backend** | FastAPI + Python 3.11+ | REST API |
+| **Embeddings (Local)** | sentence-transformers | 384-dim vectors |
+| **Embeddings (Cloud)** | nomic-embed-text-v1.5 | 768-dim vectors |
+| **Vector Store (Local)** | JSON + cosine similarity | Development |
+| **Vector Store (Cloud)** | Supabase pgvector | Production |
+| **LLM** | OpenRouter API | 100+ models supported |
+| **PDF Processing** | pdfplumber | Text extraction |
+
+---
+
+## 📚 Documentation
+
+### Evaluation Criteria Documentation
+
+Comprehensive documentation explaining how this project meets professional evaluation standards:
+
+| Document | Description |
+|----------|-------------|
+| [📋 Evaluation Index](./docs/evaluation/INDEX.md) | Overview of all criteria |
+| [🚀 Execution & Functionality](./docs/evaluation/01_EXECUTION_AND_FUNCTIONALITY.md) | Working features & demo |
+| [🧠 Thought Process](./docs/evaluation/02_THOUGHT_PROCESS.md) | Architecture decisions |
+| [💎 Code Quality](./docs/evaluation/03_CODE_QUALITY.md) | Code standards & patterns |
+| [💡 Creativity & Ingenuity](./docs/evaluation/04_CREATIVITY_AND_INGENUITY.md) | Innovative solutions |
+| [🤖 AI Literacy](./docs/evaluation/05_AI_LITERACY.md) | AI industry knowledge |
+| [📈 Learn & Adapt](./docs/evaluation/06_LEARN_AND_ADAPT.md) | Learning demonstration |
+
+### Technical Documentation
+
+| Document | Description |
+|----------|-------------|
+| [ARCHITECTURE.md](./ARCHITECTURE.md) | Detailed architecture |
+| [MODES_EXPLANATION.md](./MODES_EXPLANATION.md) | Local vs Cloud modes |
+| [API Docs](http://localhost:8000/docs) | Interactive API (when running) |
+
+---
+
+## 📁 Project Structure
+
+```
+ai-powered-cv-screener/
 ├── backend/
 │   ├── app/
-│   │   ├── api/           # FastAPI routes
-│   │   ├── services/      # Business logic
-│   │   ├── models/        # Pydantic schemas
-│   │   ├── prompts/       # LLM prompt templates
-│   │   └── utils/         # Utilities
-│   ├── tests/             # Backend tests
+│   │   ├── api/              # FastAPI routes
+│   │   ├── providers/        # Embedding & storage providers
+│   │   │   ├── local/        # Local implementations
+│   │   │   └── cloud/        # Cloud implementations
+│   │   ├── services/         # Business logic & RAG pipeline
+│   │   ├── models/           # Pydantic schemas
+│   │   └── prompts/          # LLM prompt templates
+│   ├── tests/                # Backend tests
 │   └── requirements.txt
 ├── frontend/
 │   ├── src/
-│   │   ├── components/    # React components
-│   │   ├── hooks/         # Custom hooks
-│   │   └── services/      # API client
+│   │   ├── components/       # React components
+│   │   ├── hooks/            # Custom hooks
+│   │   └── services/         # API client
 │   └── package.json
-├── .env.example           # Environment template
-├── .gitignore
-└── README.md
+├── docs/
+│   └── evaluation/           # Evaluation criteria docs
+├── .env.example              # Environment template
+└── README.md                 # You are here
 ```
 
-## Environment Variables
+---
 
-Copy `.env.example` to `.env` in the backend directory:
+## ⚙️ Configuration
+
+### Environment Variables
 
 ```bash
 # Required
-OPENAI_API_KEY=sk-...
-GOOGLE_API_KEY=AIza...
+OPENROUTER_API_KEY=sk-or-v1-your_key_here
 
-# Optional
+# Mode Selection
+DEFAULT_MODE=local            # "local" | "cloud"
+
+# Cloud Mode (optional)
+SUPABASE_URL=https://xxxxx.supabase.co
+SUPABASE_SERVICE_KEY=your_key_here
+
+# Server
 API_HOST=0.0.0.0
 API_PORT=8000
 CORS_ORIGINS=http://localhost:5173
-LOG_LEVEL=INFO
 ```
 
-## Security
+### API Endpoints
 
-- API keys are stored in `.env` files (never committed to git)
-- `.env` is included in `.gitignore`
-- See `SECURITY.md` for best practices
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/upload?mode=local` | Upload PDF files |
+| `GET` | `/api/status/{job_id}` | Check processing status |
+| `GET` | `/api/cvs?mode=local` | List indexed CVs |
+| `DELETE` | `/api/cvs/{cv_id}?mode=local` | Remove a CV |
+| `POST` | `/api/chat?mode=local` | Send a query |
+| `GET` | `/api/health` | Health check |
 
-## Testing
+---
 
-### Backend Tests
+## 🧪 Testing
 
 ```bash
+# Backend tests
 cd backend
 pytest
-```
 
-### Frontend Tests
-
-```bash
+# Frontend tests
 cd frontend
 npm test
 ```
 
-## Cost Estimation
+---
+
+## 💰 Cost Estimation
 
 | Operation | Model | Cost |
 |-----------|-------|------|
-| Embeddings | text-embedding-3-small | $0.02 / 1M tokens |
-| Generation | gemini-1.5-flash | $0.075 / 1M input, $0.30 / 1M output |
+| Embeddings (Cloud) | nomic-embed-v1.5 | ~$0.02 / 1M tokens |
+| Query Understanding | GPT-3.5 / Gemini Flash | ~$0.0001 / query |
+| Generation | GPT-4o / Claude 3.5 | ~$0.01 / query |
 
-Typical usage (30 CVs, 50 queries): ~$0.05-0.15
+**Typical usage** (30 CVs, 50 queries): **~$0.10-0.20**
 
-## Contributing
+**Local mode**: **$0** (uses local embeddings)
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests
-5. Submit a pull request
+---
 
-## License
+## 📄 License
 
-MIT License - see LICENSE file for details.
+MIT License - see [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
+---
 
-- OpenAI for embeddings API
-- Google for Gemini LLM
-- LangChain community for RAG patterns
+<div align="center">
+
+**Built with ❤️ for intelligent CV screening**
+
+[⬆ Back to Top](#-ai-powered-cv-screener)
+
+</div>
