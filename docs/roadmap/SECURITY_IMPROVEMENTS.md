@@ -6,6 +6,429 @@ This document outlines critical and high-priority security vulnerabilities that 
 
 ---
 
+## 📍 Current State vs Future Vision
+
+### Current Architecture (Local Mode)
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        CURRENT STATE                                     │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                          │
+│   👤 Single User (Local)                                                │
+│         │                                                                │
+│         ▼                                                                │
+│   ┌─────────────┐     ┌─────────────┐     ┌─────────────┐              │
+│   │   Frontend  │────▶│   Backend   │────▶│  ChromaDB   │              │
+│   │  (React)    │     │  (FastAPI)  │     │  (Local)    │              │
+│   └─────────────┘     └─────────────┘     └─────────────┘              │
+│                              │                                          │
+│                              │ (Cloud mode only)                        │
+│                              ▼                                          │
+│                       ┌─────────────┐                                   │
+│                       │  Supabase   │                                   │
+│                       │  (pgvector) │                                   │
+│                       └─────────────┘                                   │
+│                                                                          │
+│   ❌ No authentication                                                  │
+│   ❌ No user accounts                                                   │
+│   ❌ No data isolation                                                  │
+│   ❌ Single tenant only                                                 │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+**Current Features**:
+- ✅ Local mode with ChromaDB (free, no cloud needed)
+- ✅ Cloud mode with Supabase pgvector (for embeddings only)
+- ✅ PDF upload and RAG pipeline
+- ✅ Session management (local JSON or Supabase)
+- ❌ No user authentication
+- ❌ No multi-tenancy
+- ❌ Public API (anyone can access)
+
+### Future Vision (SaaS Multi-Tenant)
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        FUTURE STATE (SaaS)                              │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                          │
+│   👤 User A        👤 User B        👤 User C                           │
+│      │                │                │                                │
+│      └────────────────┼────────────────┘                                │
+│                       ▼                                                  │
+│              ┌─────────────────┐                                        │
+│              │  Supabase Auth  │  ◀── Login/Register/OAuth              │
+│              │  (JWT tokens)   │                                        │
+│              └────────┬────────┘                                        │
+│                       │                                                  │
+│                       ▼                                                  │
+│   ┌─────────────┐     ┌─────────────┐     ┌─────────────┐              │
+│   │   Frontend  │────▶│   Backend   │────▶│  Supabase   │              │
+│   │  (React)    │     │  (FastAPI)  │     │  (pgvector) │              │
+│   │  + Auth UI  │     │  + JWT      │     │  + RLS      │              │
+│   └─────────────┘     └─────────────┘     └─────────────┘              │
+│                              │                    │                     │
+│                              │                    ▼                     │
+│                              │            ┌─────────────┐              │
+│                              │            │  Storage    │              │
+│                              │            │  (Private)  │              │
+│                              │            └─────────────┘              │
+│                              ▼                                          │
+│                       ┌─────────────┐                                   │
+│                       │  OpenRouter │                                   │
+│                       │  (LLM API)  │                                   │
+│                       └─────────────┘                                   │
+│                                                                          │
+│   ✅ User authentication (email/password, OAuth)                        │
+│   ✅ Multi-tenant data isolation (RLS)                                  │
+│   ✅ Private storage with signed URLs                                   │
+│   ✅ Per-user rate limiting                                             │
+│   ✅ Audit logging                                                      │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🚀 SaaS Implementation Roadmap
+
+### Phase 1: Authentication System (Weeks 1-2)
+
+#### 1.1 Supabase Auth Setup
+
+**Database Changes**:
+```sql
+-- Add user_id to all tables
+ALTER TABLE sessions ADD COLUMN user_id UUID REFERENCES auth.users(id);
+ALTER TABLE cvs ADD COLUMN user_id UUID REFERENCES auth.users(id);
+ALTER TABLE session_cvs ADD COLUMN user_id UUID REFERENCES auth.users(id);
+
+-- Create indexes for performance
+CREATE INDEX idx_sessions_user_id ON sessions(user_id);
+CREATE INDEX idx_cvs_user_id ON cvs(user_id);
+```
+
+**Backend Changes** (`backend/app/auth/`):
+```python
+# New file: backend/app/auth/supabase_auth.py
+from fastapi import Depends, HTTPException, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from supabase import create_client
+
+security = HTTPBearer()
+
+async def get_current_user(
+    credentials: HTTPAuthorizationCredentials = Depends(security)
+) -> dict:
+    """Validate JWT and return user info."""
+    token = credentials.credentials
+    
+    # Verify with Supabase
+    supabase = create_client(settings.supabase_url, settings.supabase_anon_key)
+    user = supabase.auth.get_user(token)
+    
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired token"
+        )
+    
+    return user
+```
+
+**Frontend Changes** (`frontend/src/auth/`):
+```jsx
+// New file: frontend/src/contexts/AuthContext.jsx
+import { createContext, useContext, useEffect, useState } from 'react';
+import { supabase } from '../lib/supabase';
+
+const AuthContext = createContext({});
+
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => setUser(session?.user ?? null)
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  return (
+    <AuthContext.Provider value={{ user, loading }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+```
+
+#### 1.2 Login/Register UI
+
+**New Components Needed**:
+- `LoginPage.jsx` - Email/password login
+- `RegisterPage.jsx` - User registration
+- `ForgotPasswordPage.jsx` - Password reset
+- `AuthCallback.jsx` - OAuth callback handler
+- `ProtectedRoute.jsx` - Route guard component
+
+**OAuth Providers** (optional):
+- Google
+- GitHub
+- Microsoft (for enterprise)
+
+---
+
+### Phase 2: Data Isolation (Weeks 3-4)
+
+#### 2.1 Row Level Security Policies
+
+```sql
+-- Enable RLS on all tables
+ALTER TABLE sessions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE cvs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE cv_embeddings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE session_cvs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE session_messages ENABLE ROW LEVEL SECURITY;
+
+-- Sessions: Users can only access their own
+CREATE POLICY "Users can view own sessions" ON sessions
+  FOR SELECT USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can create own sessions" ON sessions
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update own sessions" ON sessions
+  FOR UPDATE USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can delete own sessions" ON sessions
+  FOR DELETE USING (auth.uid() = user_id);
+
+-- CVs: Users can only access their own
+CREATE POLICY "Users can view own CVs" ON cvs
+  FOR SELECT USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can upload own CVs" ON cvs
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can delete own CVs" ON cvs
+  FOR DELETE USING (auth.uid() = user_id);
+
+-- Embeddings: Linked to CVs (inherit access)
+CREATE POLICY "Users can view own embeddings" ON cv_embeddings
+  FOR SELECT USING (
+    EXISTS (SELECT 1 FROM cvs WHERE cvs.id = cv_embeddings.cv_id AND cvs.user_id = auth.uid())
+  );
+
+-- Storage policies
+CREATE POLICY "Users can upload own PDFs" ON storage.objects
+  FOR INSERT WITH CHECK (
+    bucket_id = 'cv-pdfs' AND 
+    auth.uid()::text = (storage.foldername(name))[1]
+  );
+
+CREATE POLICY "Users can view own PDFs" ON storage.objects
+  FOR SELECT USING (
+    bucket_id = 'cv-pdfs' AND 
+    auth.uid()::text = (storage.foldername(name))[1]
+  );
+```
+
+#### 2.2 Backend Changes for User Context
+
+```python
+# Update all routes to include user context
+@router.post("/sessions")
+async def create_session(
+    request: CreateSessionRequest,
+    current_user: dict = Depends(get_current_user)  # Add this
+):
+    session = session_manager.create_session(
+        name=request.name,
+        user_id=current_user.id  # Add user_id
+    )
+    return session
+
+# Update Supabase client to use user JWT
+def get_supabase_client_for_user(user_token: str):
+    """Create Supabase client with user context (respects RLS)."""
+    client = create_client(
+        settings.supabase_url,
+        settings.supabase_anon_key  # Use anon key, not service_role
+    )
+    client.auth.set_session(user_token)
+    return client
+```
+
+---
+
+### Phase 3: Private Storage (Week 4)
+
+#### 3.1 Storage Structure
+
+```
+cv-pdfs/
+├── {user_id_1}/
+│   ├── {cv_id_1}.pdf
+│   └── {cv_id_2}.pdf
+├── {user_id_2}/
+│   └── {cv_id_3}.pdf
+└── ...
+```
+
+#### 3.2 Signed URL Implementation
+
+```python
+# backend/app/providers/cloud/pdf_storage.py
+
+async def upload_pdf(self, user_id: str, cv_id: str, pdf_path: Path) -> str:
+    """Upload PDF to user's private folder."""
+    file_path = f"{user_id}/{cv_id}.pdf"  # User-scoped path
+    
+    with open(pdf_path, 'rb') as f:
+        self.client.storage.from_(self.bucket_name).upload(
+            file_path, f.read(),
+            file_options={"content-type": "application/pdf", "upsert": "true"}
+        )
+    
+    # Return signed URL (expires in 1 hour)
+    return self.get_signed_url(user_id, cv_id)
+
+def get_signed_url(self, user_id: str, cv_id: str, expires_in: int = 3600) -> str:
+    """Generate temporary signed URL for PDF access."""
+    file_path = f"{user_id}/{cv_id}.pdf"
+    response = self.client.storage.from_(self.bucket_name).create_signed_url(
+        file_path, expires_in
+    )
+    return response['signedURL']
+```
+
+---
+
+### Phase 4: Rate Limiting & Monitoring (Week 5)
+
+#### 4.1 Per-User Rate Limiting
+
+```python
+# backend/app/middleware/rate_limit.py
+
+from collections import defaultdict
+import time
+
+class UserRateLimiter:
+    def __init__(self):
+        self.requests = defaultdict(list)
+        self.limits = {
+            "upload": {"requests": 10, "window": 60},      # 10 uploads/min
+            "chat": {"requests": 30, "window": 60},        # 30 messages/min
+            "query": {"requests": 60, "window": 60},       # 60 queries/min
+        }
+    
+    async def check_limit(self, user_id: str, action: str) -> bool:
+        key = f"{user_id}:{action}"
+        now = time.time()
+        limit = self.limits.get(action, {"requests": 100, "window": 60})
+        
+        # Clean old requests
+        self.requests[key] = [
+            t for t in self.requests[key] 
+            if now - t < limit["window"]
+        ]
+        
+        if len(self.requests[key]) >= limit["requests"]:
+            return False
+        
+        self.requests[key].append(now)
+        return True
+```
+
+#### 4.2 Audit Logging
+
+```sql
+-- Create audit log table
+CREATE TABLE audit_logs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES auth.users(id),
+    action VARCHAR(50) NOT NULL,
+    resource_type VARCHAR(50),
+    resource_id UUID,
+    ip_address INET,
+    user_agent TEXT,
+    metadata JSONB,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Index for fast queries
+CREATE INDEX idx_audit_user_id ON audit_logs(user_id);
+CREATE INDEX idx_audit_created_at ON audit_logs(created_at);
+```
+
+---
+
+## 📋 Complete Implementation Checklist
+
+### Prerequisites
+| # | Task | Effort | Status |
+|---|------|--------|--------|
+| 0.1 | Enable Supabase Auth in project settings | Low | ⬜ |
+| 0.2 | Configure email templates (confirmation, reset) | Low | ⬜ |
+| 0.3 | Set up OAuth providers (optional) | Medium | ⬜ |
+
+### Phase 1: Authentication
+| # | Task | Effort | Status |
+|---|------|--------|--------|
+| 1.1 | Add `user_id` column to all tables | Low | ⬜ |
+| 1.2 | Create `backend/app/auth/` module | Medium | ⬜ |
+| 1.3 | Add JWT validation middleware | Medium | ⬜ |
+| 1.4 | Create `AuthContext` in frontend | Medium | ⬜ |
+| 1.5 | Build Login/Register pages | Medium | ⬜ |
+| 1.6 | Add `ProtectedRoute` component | Low | ⬜ |
+| 1.7 | Update API calls to include JWT | Medium | ⬜ |
+
+### Phase 2: Data Isolation
+| # | Task | Effort | Status |
+|---|------|--------|--------|
+| 2.1 | Create RLS policies for all tables | Medium | ⬜ |
+| 2.2 | Update backend to pass user context | Medium | ⬜ |
+| 2.3 | Migrate from `service_role` to `anon` key | High | ⬜ |
+| 2.4 | Test data isolation between users | Medium | ⬜ |
+
+### Phase 3: Private Storage
+| # | Task | Effort | Status |
+|---|------|--------|--------|
+| 3.1 | Change bucket to private | Low | ⬜ |
+| 3.2 | Implement user-scoped storage paths | Medium | ⬜ |
+| 3.3 | Implement signed URL generation | Low | ⬜ |
+| 3.4 | Update frontend PDF viewer | Low | ⬜ |
+
+### Phase 4: Security Hardening
+| # | Task | Effort | Status |
+|---|------|--------|--------|
+| 4.1 | Implement per-user rate limiting | Medium | ⬜ |
+| 4.2 | Add MIME type validation | Low | ⬜ |
+| 4.3 | Create audit logging table | Low | ⬜ |
+| 4.4 | Add security headers middleware | Low | ⬜ |
+
+### Phase 5: Testing & Launch
+| # | Task | Effort | Status |
+|---|------|--------|--------|
+| 5.1 | Security penetration testing | High | ⬜ |
+| 5.2 | Load testing with multiple users | Medium | ⬜ |
+| 5.3 | GDPR compliance review | Medium | ⬜ |
+| 5.4 | Documentation update | Medium | ⬜ |
+
+---
+
 ## ⛔ Critical Priority (P0)
 
 ### 1. No Authentication/Authorization
