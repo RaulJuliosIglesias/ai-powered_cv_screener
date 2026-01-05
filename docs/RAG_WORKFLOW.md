@@ -12,13 +12,14 @@
 2. [Architecture Diagram](#architecture-diagram)
 3. [Pipeline Stages](#pipeline-stages)
 4. [V5 Advanced Features](#v5-advanced-features)
-5. [Core Scripts Reference](#core-scripts-reference)
-6. [Data Flow](#data-flow)
-7. [Configuration](#configuration)
-8. [Providers](#providers)
-9. [Error Handling](#error-handling)
-10. [Caching & Performance](#caching--performance)
-11. [Evaluation & Logging](#evaluation--logging)
+5. [Structured Output Processing](#structured-output-processing)
+6. [Core Scripts Reference](#core-scripts-reference)
+7. [Data Flow](#data-flow)
+8. [Configuration](#configuration)
+9. [Providers](#providers)
+10. [Error Handling](#error-handling)
+11. [Caching & Performance](#caching--performance)
+12. [Evaluation & Logging](#evaluation--logging)
 
 ---
 
@@ -398,6 +399,116 @@ if timeout_error:
 
 ---
 
+## Structured Output Processing
+
+> **📚 Full documentation**: [STRUCTURED_OUTPUT.md](./STRUCTURED_OUTPUT.md)
+
+The Structured Output system transforms raw LLM responses into consistent, type-safe data structures.
+
+### Pipeline Step: Output Processing
+
+After LLM generation, the response passes through the **OutputOrchestrator**:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  STEP 11: STRUCTURED OUTPUT PROCESSING (V5 NEW)                              │
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │ ORCHESTRATOR FLOW:                                                       ││
+│  │ 1. Pre-clean LLM output (remove code blocks, artifacts)                  ││
+│  │ 2. Extract components via 5 specialized modules:                         ││
+│  │    • ThinkingModule     → :::thinking::: blocks                          ││
+│  │    • DirectAnswerModule → First 1-3 sentences                            ││
+│  │    • AnalysisModule     → Detailed analysis section                      ││
+│  │    • TableModule        → Candidate table → TableData                    ││
+│  │    • ConclusionModule   → :::conclusion::: blocks                        ││
+│  │ 3. Generate fallback analysis if none extracted                          ││
+│  │ 4. Format candidate references: [📄](cv:cv_xxx) **Name**                 ││
+│  │ 5. Assemble components sequentially                                      ││
+│  │ 6. Post-clean (deduplicate, fix formatting)                              ││
+│  │                                                                          ││
+│  │ OUTPUT:                                                                  ││
+│  │ • StructuredOutput (data model with all components)                      ││
+│  │ • formatted_answer (markdown string for rendering)                       ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+│  Script: output_processor/orchestrator.py                                    │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Data Models
+
+```python
+@dataclass
+class StructuredOutput:
+    direct_answer: str              # Concise 1-3 sentence answer
+    raw_content: str                # Original LLM output
+    thinking: Optional[str]         # Reasoning (collapsible)
+    analysis: Optional[str]         # Detailed analysis
+    table_data: Optional[TableData] # Candidate comparison table
+    conclusion: Optional[str]       # Final recommendations
+    cv_references: List[CVReference]
+    parsing_warnings: List[str]
+    fallback_used: bool
+
+@dataclass
+class TableData:
+    title: str                      # "Candidate Comparison Table"
+    headers: List[str]              # ["Candidate", "Skills", "Match Score"]
+    rows: List[TableRow]            # One row per candidate
+
+@dataclass
+class TableRow:
+    candidate_name: str             # "Sofia Grijalva"
+    cv_id: str                      # "cv_sofia_grijalva_abc123"
+    columns: Dict[str, str]         # {"Skills": "Python", "Experience": "5 years"}
+    match_score: int                # 0-100 (for color coding)
+```
+
+### Table Modes: Comparison vs Individual
+
+| Mode | Use Case | Table Structure |
+|------|----------|-----------------|
+| **Comparison** | "Who has Python?" | Multiple candidates, one row per candidate |
+| **Individual** | "Tell me about Sofia" | Single candidate, one row per attribute |
+
+**Comparison Mode Example**:
+```
+| Candidate | Skills | Match Score |
+|-----------|--------|-------------|
+| Sofia G.  | Python | 95% 🟢      |
+| Carlos L. | Flask  | 75% 🟡      |
+```
+
+**Individual Mode Example**:
+```
+| Attribute  | Value                      |
+|------------|----------------------------|
+| Experience | 5 years backend dev        |
+| Skills     | Python, Django, AWS        |
+| Education  | B.S. Computer Science, MIT |
+```
+
+### Match Score Colors
+
+| Score | Color | Meaning |
+|-------|-------|---------|
+| ≥ 90% | 🟢 Green | Strong match |
+| 70-89% | 🟡 Yellow | Partial match |
+| < 70% | ⚪ Gray | Weak match |
+
+### Candidate Reference Format
+
+All candidate mentions are formatted uniformly:
+
+```
+[📄](cv:cv_xxx) **Candidate Name**
+ │      │            │
+ │      │            └── Bold name (NOT clickable)
+ │      └── cv: prefix (required for frontend)
+ └── 📄 icon (clickable → opens PDF)
+```
+
+---
+
 ## Core Scripts Reference
 
 ### 📁 Orchestration Layer
@@ -436,13 +547,18 @@ if timeout_error:
 
 ### 📁 Output Processing (V5)
 
+> **📚 Complete documentation**: See [STRUCTURED_OUTPUT.md](./STRUCTURED_OUTPUT.md) for detailed structured output documentation including orchestration flow, data models, and module descriptions.
+
 | Script | Class | Description |
 |--------|-------|-------------|
-| `output_processor/orchestrator.py` | `OutputOrchestrator` | Coordinates output modules |
-| `output_processor/modules/thinking_module.py` | `ThinkingModule` | Extracts :::thinking blocks |
-| `output_processor/modules/analysis_module.py` | `AnalysisModule` | Processes analysis sections |
-| `output_processor/modules/table_module.py` | `TableModule` | Formats comparison tables |
-| `output_processor/modules/conclusion_module.py` | `ConclusionModule` | Extracts final conclusions |
+| `output_processor/orchestrator.py` | `OutputOrchestrator` | **Main entry point** - Coordinates extraction and assembly |
+| `output_processor/processor.py` | `OutputProcessor` | Invokes 5 modules to extract components |
+| `output_processor/modules/thinking_module.py` | `ThinkingModule` | Extracts :::thinking::: blocks |
+| `output_processor/modules/direct_answer_module.py` | `DirectAnswerModule` | Extracts concise 1-3 sentence answer |
+| `output_processor/modules/analysis_module.py` | `AnalysisModule` | Processes analysis + generates fallbacks |
+| `output_processor/modules/table_module.py` | `TableModule` | Parses tables → TableData (comparison/individual) |
+| `output_processor/modules/conclusion_module.py` | `ConclusionModule` | Extracts :::conclusion::: blocks |
+| `models/structured_output.py` | `StructuredOutput`, `TableData`, `TableRow` | Data models for structured output |
 
 ---
 

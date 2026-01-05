@@ -30928,10 +30928,463 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-05T18:36:16.021236"
+        },
+        {
+          "id": "5b148e95-22f1-4dbf-b82e-a5930be84acf",
+          "role": "user",
+          "content": "Who has startup experience?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T18:37:30.680885"
+        },
+        {
+          "id": "d0104fe4-6cd1-42f8-bc49-262f2c55ecb1",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a list of candidates who have experience working at startup companies. I need to identify which CVs mention experience at companies that can be reasonably inferred to be startups based on the context provided in the CV. I will create a table listing the candidates and the startup companies they have worked for.\n:::\n\nThe following candidates have experience working at companies that can be identified as startups based on the context in their CVs. These companies include Insight Labs and TechStart Hub. ### Analysis\nI have selected these candidates because their CVs explicitly mention working at companies that, based on the context, appear to be startups.\n\n### Analysis\n\n| Candidate | Startup Company | Relevant Experience | Match |\n\n| Candidate | Startup Company | Relevant Experience | Match Score |\n|---|---|---|---|\n| Rajiv Patel Growth | Insight Labs | Conducted data‑driven market analysis and growth assessments. | 80% |\n| Matteo Rossi Group | TechStart Hub | Initial business analysis role focused on market research, competitor benchmarking, and initial data feasibility studies. | 80% |\n\n:::conclusion\nI recommend considering [📄](cv:cv_141ff971)**Rajiv Patel Growth**and [📄](cv:cv_b9829070)**Matteo Rossi Group**, as they both have experience at companies that appear to be startups.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_fcdcc4e0",
+              "filename": "5638ef07__Ethan_Koh__Colorist.pdf"
+            },
+            {
+              "cv_id": "cv_1cf4493b",
+              "filename": "f8d0bf70__Layla_Al-Jamil__Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_9f7c4952",
+              "filename": "49fcac19__Rajiv_Patel__CPO.pdf"
+            },
+            {
+              "cv_id": "cv_ae890623",
+              "filename": "7e291026__Rajiv_Patel__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_0f35661e",
+              "filename": "5730fb81__Kamran_Alizadeh__Proofreader.pdf"
+            },
+            {
+              "cv_id": "cv_77bb2d16",
+              "filename": "c56a5d0f__Eitan_Levi__Headmaster.pdf"
+            },
+            {
+              "cv_id": "cv_b91f3204",
+              "filename": "7591f180__Ji-Yeon_Kim__Dean.pdf"
+            },
+            {
+              "cv_id": "cv_2a37d4f2",
+              "filename": "99f808ef__Ling_Wei__QA.pdf"
+            },
+            {
+              "cv_id": "cv_6dfd28e5",
+              "filename": "8179c401__Sofía_Martínez__Learning_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_141ff971",
+              "filename": "6be44d4b__Rajiv_Patel__Growth_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_ec1238ea",
+              "filename": "22ca62fd__Rajiv_Patel__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_e07a68b7",
+              "filename": "9c9af9ff__Amir_Al-Farsi__Instructional_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_bbc9e391",
+              "filename": "3baa7e58__Diego_Mendoza__Protocol_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_a554500e",
+              "filename": "bf861716__Naledi_Smith__Web3_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_b9a24b82",
+              "filename": "07a0dc96__Aaliyah_Hassan__Crypto_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_1b6836e7",
+              "filename": "d4bbe8b6__Mei_Lin_Wong__Junior_Fashion_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_0fe998d7",
+              "filename": "b560f23b__Rajiv_Patel__Sous_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_6d18325b",
+              "filename": "95e7fe8f__Sofia_Morales__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_6316fa14",
+              "filename": "2126150f__Aisha_Moretti__Wardrobe_Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_af1f35b7",
+              "filename": "cadc8dd8__Laila_Al-Mansoori__Board_Member.pdf"
+            },
+            {
+              "cv_id": "cv_c745047d",
+              "filename": "ef74dd9e__Rohit_Kapoor__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_096e7947",
+              "filename": "42256dc8__Matteo_Rossi__Merchandiser.pdf"
+            },
+            {
+              "cv_id": "cv_edc1e680",
+              "filename": "f95a288d__Aisha_Chen__YouTuber.pdf"
+            },
+            {
+              "cv_id": "cv_3aae92ba",
+              "filename": "d1ef2ff1__Hassan_Al-Jamil__Blockchain_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_85fa2b7b",
+              "filename": "16879178__Sofia_Ramirez__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_1a0f73d2",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_b8d3fc0b",
+              "filename": "89d9e1bf__Lucas_Oliveira__Swift_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_41f3b3d9",
+              "filename": "d975c05b__Kenji_Tanaka__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_a4421701",
+              "filename": "01def3e4__Mei_Lin_Chen__Accessories_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_b9829070",
+              "filename": "1b215ef8__Matteo_Rossi__Group_PM.pdf"
+            },
+            {
+              "cv_id": "cv_8d5c947d",
+              "filename": "b73fabea__Isabella_Nystrom__Junior_Blockchain_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_9f28cbec",
+              "filename": "5d0b9a4c__Javier_Morales__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_b3a9f9fa",
+              "filename": "16c037be__Lotte_van_der_Berg__Camera_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_bf87b796",
+              "filename": "2e55e31d__Sofia_Mendoza__Designer.pdf"
+            },
+            {
+              "cv_id": "cv_fabc0fa0",
+              "filename": "29d2f61f__Valentina_Mendoza__Digital_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1225.5,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 144.23,
+              "details": "Found 36 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 18431.13,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4138.8,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "The following candidates have experience working at companies that can be identified as startups based on the context in their CVs. These companies include Insight Labs and TechStart Hub. ### Analysis\nI have selected these candidates because their CVs explicitly mention working at companies that, based on the context, appear to be startups.",
+            "raw_content": ":::thinking\nThe user is asking for a list of candidates who have experience working at startup companies. I need to identify which CVs mention experience at companies that can be reasonably inferred to be startups based on the context provided in the CV. I will create a table listing the candidates and the startup companies they have worked for.\n:::\n\nThe following candidates have experience working at companies that can be identified as startups based on the context in their CVs. These companies include Insight Labs and TechStart Hub.\n\n### Analysis\n| Candidate | Startup Company | Relevant Experience | Match |\n|---|---|---|---|\n| **[Rajiv Patel Growth](cv:cv_141ff971)** | Insight Labs | Conducted data‑driven market analysis and growth assessments. | ⭐⭐⭐⭐ |\n| **[Matteo Rossi Group](cv:cv_b9829070)** | Beta Systems | Leading complex, cross-functional product portfolios. | ⭐⭐⭐ |\n| **[Matteo Rossi Group](cv:cv_b9829070)** | TechStart Hub | Initial business analysis role focused on market research, competitor benchmarking, and initial data feasibility studies. | ⭐⭐⭐⭐ |\n\nI have selected these candidates because their CVs explicitly mention working at companies that, based on the context, appear to be startups. **[Rajiv Patel Growth](cv:cv_141ff971)** worked at Insight Labs, where he conducted data-driven market analysis, which is a common activity in startups. **[Matteo Rossi Group](cv:cv_b9829070)** worked at Beta Systems and TechStart Hub, both of which sound like early-stage companies.\n\n:::conclusion\nI recommend considering **[Rajiv Patel Growth](cv:cv_141ff971)** and **[Matteo Rossi Group](cv:cv_b9829070)**, as they both have experience at companies that appear to be startups.\n:::",
+            "thinking": "The user is asking for a list of candidates who have experience working at startup companies. I need to identify which CVs mention experience at companies that can be reasonably inferred to be startups based on the context provided in the CV. I will create a table listing the candidates and the startup companies they have worked for.",
+            "analysis": "| Candidate | Startup Company | Relevant Experience | Match |",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Startup Company",
+                "Relevant Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Rajiv Patel Growth",
+                  "cv_id": "cv_141ff971",
+                  "columns": {
+                    "Startup Company": "Insight Labs",
+                    "Relevant Experience": "Conducted data‑driven market analysis and growth assessments."
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Matteo Rossi Group",
+                  "cv_id": "cv_b9829070",
+                  "columns": {
+                    "Startup Company": "TechStart Hub",
+                    "Relevant Experience": "Initial business analysis role focused on market research, competitor benchmarking, and initial data feasibility studies."
+                  },
+                  "match_score": 80
+                }
+              ]
+            },
+            "conclusion": "I recommend considering [📄](cv:cv_141ff971) **Rajiv Patel Growth** and [📄](cv:cv_b9829070) **Matteo Rossi Group**, as they both have experience at companies that appear to be startups.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T18:37:58.160517"
+        },
+        {
+          "id": "c704420e-a689-4522-a720-242236514ada",
+          "role": "user",
+          "content": "damelo todo sobre Matteo Rossi Group",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T18:38:09.428252"
+        },
+        {
+          "id": "bfd9bf7c-8aef-4895-a92d-651427f8d219",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a summary of Matteo Rossi (cv_096e7947)'s qualifications, focusing on skills, experience, and education. The user wants to know if the candidate is associated with 'Matteo Rossi Group', but the CV provided is for Matteo Rossi (cv_096e7947), not a group. The CV mentions experience at Boutique Holdings Italia. I will summarize Matteo Rossi (cv_096e7947)'s experience, skills, and education based on the provided CV.\n:::\n\n## 👤 [📄](cv:cv_096e7947)**Matteo Rossi**has experience in assortment planning and inventory optimization within the apparel sector. He is skilled in data analysis using Excel and SQL, and has experience with SAP Merchandising Modules. He holds a M.Sc.\n\n## 👤 [📄](cv:cv_096e7947)**Matteo Rossi**[📄](cv:cv_096e7947)**Matteo Rossi**has experience in assortment planning and inventory optimization within the apparel sector. He is skilled in data analysis using Excel and SQL, and has experience with SAP Merchandising Modules. He holds a M.Sc. in Fashion Retail Management and a B.A. in Economics and Business.\n---\n### 📊 Candidate Highlights\n---\n### 📜 Credentials\n- Advanced Retail Forecasting & Planning (Retail Insights Academy, 2022)\n- SQL for Business Intelligence (Udemy, 2020)\n---\n\n| Category | Key Information | Match Score |\n|---|---|---|\n| 🎯 Current Role | Junior Merchandiser at Boutique Holdings Italia (2018-2021) | 50% |\n| ⏱️ Total Experience | 3 years in merchandising | 50% |\n| 🏆 Top Achievement | Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week. | 50% |\n| 💡 Core Expertise | Inventory Planning & Forecasting, Assortment Planning, Data Analysis (Advanced Excel/SQL) | 50% |\n| 🎓 Education | M.Sc. in Fashion Retail Management - Politecnico di Milano | 50% |\n\n:::conclusion**Assessment:**[📄](cv:cv_096e7947)**Matteo Rossi**has a solid foundation in merchandising with experience in inventory planning, assortment planning, and data analysis. His skills in VBA and SQL for automating reports are valuable.**Key Strengths:***   Experience in inventory planning and forecasting.\n*   Proficiency in data analysis using Excel and SQL.\n*   Education in Fashion Retail Management.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_13fc6990",
+              "filename": "2829ac4e__Adam_Al-Mansoori__Group_PM.pdf"
+            },
+            {
+              "cv_id": "cv_857805d5",
+              "filename": "3a963b30__Rahul_Patel__Junior_Digital_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_48ffa562",
+              "filename": "aa719eac__Rahul_Patel__Information_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_d71a1bd2",
+              "filename": "d306c0c3__Chloé_Dubois__Computer_Vision_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_096e7947",
+              "filename": "42256dc8__Matteo_Rossi__Merchandiser.pdf"
+            },
+            {
+              "cv_id": "cv_e07a68b7",
+              "filename": "9c9af9ff__Amir_Al-Farsi__Instructional_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_377a8045",
+              "filename": "a579777d__Isabelle_Dubois__Commercial_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_b91f3204",
+              "filename": "7591f180__Ji-Yeon_Kim__Dean.pdf"
+            },
+            {
+              "cv_id": "cv_ec1238ea",
+              "filename": "22ca62fd__Rajiv_Patel__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_b3a9f9fa",
+              "filename": "16c037be__Lotte_van_der_Berg__Camera_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_c6600d96",
+              "filename": "7ceb10f6__Liam_van_der_Merwe__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_3c4bc7ab",
+              "filename": "72cb0e20__Carmen_Rodriguez__Resident.pdf"
+            },
+            {
+              "cv_id": "cv_6acf462c",
+              "filename": "014b47a1__Javier_Morales__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_472e3635",
+              "filename": "70eb6b33__Maximilian_Richter__Performance_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_8d5c947d",
+              "filename": "b73fabea__Isabella_Nystrom__Junior_Blockchain_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_d59a37ea",
+              "filename": "2fd0d810__Kamran_Alizadeh__Law_Clerk.pdf"
+            },
+            {
+              "cv_id": "cv_9eb38702",
+              "filename": "8339ab64__Mei_Lin_Chen__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_2a37d4f2",
+              "filename": "99f808ef__Ling_Wei__QA.pdf"
+            },
+            {
+              "cv_id": "cv_57fd52f0",
+              "filename": "ceca0723__Pierre_Dubois__Comic_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_f42db6d5",
+              "filename": "4a9a82d3__Kwame_Addo__Celebrity_Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_9f28cbec",
+              "filename": "5d0b9a4c__Javier_Morales__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_85fa2b7b",
+              "filename": "16879178__Sofia_Ramirez__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_aad40cac",
+              "filename": "fd904bcd__Layla_Al_Mansoori__Content_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_af1f35b7",
+              "filename": "cadc8dd8__Laila_Al-Mansoori__Board_Member.pdf"
+            },
+            {
+              "cv_id": "cv_63c45322",
+              "filename": "323df925__Khalid_Al-Farsi__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a5818a13",
+              "filename": "eb3b44f7__Javier_Rodriguez__UX_Research_Lead.pdf"
+            },
+            {
+              "cv_id": "cv_6d18325b",
+              "filename": "95e7fe8f__Sofia_Morales__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_62706e5a",
+              "filename": "6b9204bf__Matteo_Romano__Brand_Ambassador.pdf"
+            },
+            {
+              "cv_id": "cv_0be2bd72",
+              "filename": "8ce653c9__Layla_Al-Mansouri__Crypto_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_1cf4493b",
+              "filename": "f8d0bf70__Layla_Al-Jamil__Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_1a0f73d2",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_9dd8faae",
+              "filename": "173ee9f4__Antoine_Dubois__Brand_Ambassador.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1302.13,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 145.62,
+              "details": "Found 33 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 22008.64,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6234.53,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "## 👤 [📄](cv:cv_096e7947) **Matteo Rossi** has experience in assortment planning and inventory optimization within the apparel sector. He is skilled in data analysis using Excel and SQL, and has experience with SAP Merchandising Modules. He holds a M.Sc.",
+            "raw_content": ":::thinking\nThe user is asking for a summary of **[Matteo Rossi](cv:cv_096e7947)**'s qualifications, focusing on skills, experience, and education. The user wants to know if the candidate is associated with 'Matteo Rossi Group', but the CV provided is for **[Matteo Rossi](cv:cv_096e7947)**, not a group. The CV mentions experience at Boutique Holdings Italia. I will summarize **[Matteo Rossi](cv:cv_096e7947)**'s experience, skills, and education based on the provided CV.\n:::\n\n## 👤 **[Matteo Rossi](cv:cv_096e7947)**\n\n**[Matteo Rossi](cv:cv_096e7947)** has experience in assortment planning and inventory optimization within the apparel sector. He is skilled in data analysis using Excel and SQL, and has experience with SAP Merchandising Modules. He holds a M.Sc. in Fashion Retail Management and a B.A. in Economics and Business.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Junior Merchandiser at Boutique Holdings Italia (2018-2021) |\n| **⏱️ Total Experience** | 3 years in merchandising |\n| **🏆 Top Achievement** | Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week. |\n| **💡 Core Expertise** | Inventory Planning & Forecasting, Assortment Planning, Data Analysis (Advanced Excel/SQL) |\n| **🎓 Education** | M.Sc. in Fashion Retail Management - Politecnico di Milano |\n\n---\n\n### 💼 Career Trajectory\n\n**Junior Merchandiser** — *Boutique Holdings Italia* (2018-2021)\n→ Automated daily sales tracking report using VBA macros, saving the planning team approximately 5 hours per week.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details |\n|:-----------|:--------|\n| **Merchandising** | Inventory Planning & Forecasting, Assortment Planning (Open-to-Buy), Retail Mix Optimization, SAP Merchandising Modules, WSSI Management |\n| **Data Analysis** | Data Analysis (Advanced Excel/SQL) |\n| **Languages** | Italian (Native), English (Professional), French (Intermediate) |\n\n---\n\n### 📜 Credentials\n\n- Advanced Retail Forecasting & Planning (Retail Insights Academy, 2022)\n- SQL for Business Intelligence (Udemy, 2020)\n\n---\n\n:::conclusion\n**Assessment:** **[Matteo Rossi](cv:cv_096e7947)** has a solid foundation in merchandising with experience in inventory planning, assortment planning, and data analysis. His skills in VBA and SQL for automating reports are valuable.\n\n**Key Strengths:**\n*   Experience in inventory planning and forecasting.\n*   Proficiency in data analysis using Excel and SQL.\n*   Education in Fashion Retail Management.\n:::",
+            "thinking": "The user is asking for a summary of Matteo Rossi (cv_096e7947)'s qualifications, focusing on skills, experience, and education. The user wants to know if the candidate is associated with 'Matteo Rossi Group', but the CV provided is for Matteo Rossi (cv_096e7947), not a group. The CV mentions experience at Boutique Holdings Italia. I will summarize Matteo Rossi (cv_096e7947)'s experience, skills, and education based on the provided CV.",
+            "analysis": "## 👤 [📄](cv:cv_096e7947) **Matteo Rossi**\n[📄](cv:cv_096e7947) **Matteo Rossi** has experience in assortment planning and inventory optimization within the apparel sector. He is skilled in data analysis using Excel and SQL, and has experience with SAP Merchandising Modules. He holds a M.Sc. in Fashion Retail Management and a B.A. in Economics and Business.\n---\n### 📊 Candidate Highlights\n---\n### 📜 Credentials\n- Advanced Retail Forecasting & Planning (Retail Insights Academy, 2022)\n- SQL for Business Intelligence (Udemy, 2020)\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Category",
+                "Key Information",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "🎯 Current Role",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Junior Merchandiser at Boutique Holdings Italia (2018-2021)"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "⏱️ Total Experience",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "3 years in merchandising"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🏆 Top Achievement",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Automated the daily sales tracking report using VBA macros, saving the planning team approximately 5 hours of manual aggregation per week."
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "💡 Core Expertise",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Inventory Planning & Forecasting, Assortment Planning, Data Analysis (Advanced Excel/SQL)"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🎓 Education",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "M.Sc. in Fashion Retail Management - Politecnico di Milano"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "**Assessment:** [📄](cv:cv_096e7947) **Matteo Rossi** has a solid foundation in merchandising with experience in inventory planning, assortment planning, and data analysis. His skills in VBA and SQL for automating reports are valuable.\n\n**Key Strengths:**\n*   Experience in inventory planning and forecasting.\n*   Proficiency in data analysis using Excel and SQL.\n*   Education in Fashion Retail Management.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T18:38:42.124191"
         }
       ],
       "created_at": "2026-01-05T16:29:50.861270",
-      "updated_at": "2026-01-05T18:36:16.021236"
+      "updated_at": "2026-01-05T18:38:42.124191"
     }
   ]
 }

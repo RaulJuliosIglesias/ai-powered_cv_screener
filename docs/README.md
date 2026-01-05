@@ -11,6 +11,7 @@ docs/
 ├── README.md                 ← You are here
 ├── INSTRUCTIONS.md           ← Complete setup and usage guide
 ├── RAG_WORKFLOW.md           ← RAG pipeline architecture
+├── STRUCTURED_OUTPUT.md      ← Structured output & orchestration (NEW)
 ├── evaluation/               ← Project evaluation criteria
 ├── roadmap/                  ← Future plans and improvements
 └── archive/                  ← Historical documentation
@@ -24,6 +25,7 @@ docs/
 |----------|-------------|
 | [INSTRUCTIONS.md](./INSTRUCTIONS.md) | Complete installation, configuration, and usage guide |
 | [RAG_WORKFLOW.md](./RAG_WORKFLOW.md) | Technical documentation of RAG pipeline, embeddings, and data flow |
+| [STRUCTURED_OUTPUT.md](./STRUCTURED_OUTPUT.md) | Structured output processing, orchestration, modules, and data models |
 
 ---
 
