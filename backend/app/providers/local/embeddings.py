@@ -11,6 +11,7 @@ import logging
 import hashlib
 import math
 import os
+import asyncio
 from typing import List, Optional
 import httpx
 from app.providers.base import EmbeddingProvider, EmbeddingResult
@@ -146,25 +147,33 @@ class LocalEmbeddingProvider(EmbeddingProvider):
         self._ensure_model()
         return self._backend
     
-    async def embed_texts(self, texts: List[str]) -> EmbeddingResult:
-        """Generate embeddings for a list of texts."""
-        if not texts:
-            return EmbeddingResult(embeddings=[], tokens_used=0, latency_ms=0)
-        
-        start = time.perf_counter()
-        self._ensure_model()
-        
+    def _encode_sync(self, texts: List[str]) -> List:
+        """Synchronous encoding - runs in thread pool to avoid blocking event loop."""
         if hasattr(self._model, 'encode'):
-            # sentence-transformers style
             result = self._model.encode(
                 texts,
                 show_progress_bar=False,
                 convert_to_numpy=True,
                 normalize_embeddings=True
             )
-            embeddings = result.tolist() if hasattr(result, 'tolist') else result
+            return result.tolist() if hasattr(result, 'tolist') else result
         else:
-            embeddings = self._model(texts)
+            return self._model(texts)
+    
+    async def embed_texts(self, texts: List[str]) -> EmbeddingResult:
+        """Generate embeddings for a list of texts.
+        
+        Uses asyncio.to_thread() to run encoding in a thread pool,
+        avoiding blocking the event loop during CPU-intensive operations.
+        """
+        if not texts:
+            return EmbeddingResult(embeddings=[], tokens_used=0, latency_ms=0)
+        
+        start = time.perf_counter()
+        self._ensure_model()
+        
+        # Run encoding in thread pool to avoid blocking
+        embeddings = await asyncio.to_thread(self._encode_sync, texts)
         
         latency = (time.perf_counter() - start) * 1000
         tokens_used = sum(len(t.split()) for t in texts)
@@ -177,11 +186,8 @@ class LocalEmbeddingProvider(EmbeddingProvider):
             latency_ms=latency
         )
     
-    async def embed_query(self, query: str) -> EmbeddingResult:
-        """Generate embedding for a single query."""
-        start = time.perf_counter()
-        self._ensure_model()
-        
+    def _encode_query_sync(self, query: str):
+        """Synchronous query encoding - runs in thread pool."""
         if hasattr(self._model, 'encode'):
             result = self._model.encode(
                 query,
@@ -189,10 +195,21 @@ class LocalEmbeddingProvider(EmbeddingProvider):
                 convert_to_numpy=True,
                 normalize_embeddings=True
             )
-            embedding = result.tolist() if hasattr(result, 'tolist') else result
+            return result.tolist() if hasattr(result, 'tolist') else result
         else:
             embeddings = self._model.encode([query])
-            embedding = embeddings[0]
+            return embeddings[0]
+    
+    async def embed_query(self, query: str) -> EmbeddingResult:
+        """Generate embedding for a single query.
+        
+        Uses asyncio.to_thread() to avoid blocking the event loop.
+        """
+        start = time.perf_counter()
+        self._ensure_model()
+        
+        # Run encoding in thread pool to avoid blocking
+        embedding = await asyncio.to_thread(self._encode_query_sync, query)
         
         latency = (time.perf_counter() - start) * 1000
         

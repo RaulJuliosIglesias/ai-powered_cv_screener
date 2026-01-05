@@ -2,6 +2,7 @@
 import uuid
 import io
 import logging
+import asyncio
 from pathlib import Path
 from typing import List, Optional
 from fastapi import APIRouter, HTTPException, Query, File, UploadFile, BackgroundTasks
@@ -284,13 +285,23 @@ async def delete_session(
 # CV MANAGEMENT ENDPOINTS
 # ============================================
 
+def _save_pdf_sync(pdf_path: Path, content: bytes):
+    """Synchronous helper to save PDF to disk."""
+    with open(pdf_path, "wb") as f:
+        f.write(content)
+
+
 async def process_cvs_for_session(
     job_id: str,
     session_id: str,
     file_data: List[tuple],
     mode: Mode
 ):
-    """Background task to process CVs and add them to a session."""
+    """Background task to process CVs and add them to a session.
+    
+    Uses asyncio.to_thread() for CPU-bound operations to avoid blocking the event loop.
+    This allows other requests to be processed while CVs are being uploaded.
+    """
     logger.info(f"[{job_id}] Processing {len(file_data)} CVs for session {session_id}")
     
     try:
@@ -308,18 +319,23 @@ async def process_cvs_for_session(
             jobs[job_id]["current_file"] = filename
             jobs[job_id]["current_phase"] = "extracting"
             
-            # Extract text
-            text = extract_text_from_pdf(content, filename)
+            # Yield control to event loop to process other requests
+            await asyncio.sleep(0)
+            
+            # Extract text - run in thread pool to avoid blocking
+            text = await asyncio.to_thread(extract_text_from_pdf, content, filename)
             logger.info(f"[{job_id}] Extracted {len(text)} chars from {filename}")
+            
+            # Yield control again
+            await asyncio.sleep(0)
             
             # Create CV ID
             cv_id = f"cv_{uuid.uuid4().hex[:8]}"
             
-            # Save PDF to disk for later viewing
+            # Save PDF to disk for later viewing - run in thread pool
             jobs[job_id]["current_phase"] = "saving"
             pdf_path = PDF_STORAGE_DIR / f"{cv_id}.pdf"
-            with open(pdf_path, "wb") as f:
-                f.write(content)
+            await asyncio.to_thread(_save_pdf_sync, pdf_path, content)
             logger.info(f"[{job_id}] Saved PDF to {pdf_path}")
             
             # Upload to Supabase Storage if in cloud mode
@@ -330,31 +346,39 @@ async def process_cvs_for_session(
                     logger.info(f"[{job_id}] Uploaded PDF to Supabase Storage: {cv_id}")
                 except Exception as e:
                     logger.warning(f"[{job_id}] Failed to upload PDF to Supabase Storage: {e}")
-                    # Don't fail the entire process if storage upload fails
             
-            # Chunk the document
+            # Yield control
+            await asyncio.sleep(0)
+            
+            # Chunk the document - run in thread pool
             jobs[job_id]["current_phase"] = "chunking"
-            chunks = chunking_service.chunk_cv(text=text, cv_id=cv_id, filename=filename)
+            chunks = await asyncio.to_thread(chunking_service.chunk_cv, text=text, cv_id=cv_id, filename=filename)
             logger.info(f"[{job_id}] Created {len(chunks)} chunks for {filename}")
             
-            # Index chunks (create embeddings)
+            # Yield control before heavy embedding operation
+            await asyncio.sleep(0)
+            
+            # Index chunks (create embeddings) - this is already async
             jobs[job_id]["current_phase"] = "embedding"
             await rag_service.index_documents(chunks)
             
             # Add CV to session (use mode-based manager)
             jobs[job_id]["current_phase"] = "indexing"
             mgr = get_session_manager(mode)
-            mgr.add_cv_to_session(session_id, cv_id, filename, len(chunks))
+            await asyncio.to_thread(mgr.add_cv_to_session, session_id, cv_id, filename, len(chunks))
             
             # Mark file as completed
             jobs[job_id]["processed_files"] += 1
             jobs[job_id]["current_phase"] = "done"
             logger.info(f"[{job_id}] Completed {idx + 1}/{len(file_data)}: {filename}")
             
+            # Yield control between files
+            await asyncio.sleep(0)
+            
         except Exception as e:
             logger.error(f"[{job_id}] Error processing {filename}: {e}")
             jobs[job_id]["errors"].append(f"{filename}: {str(e)}")
-            jobs[job_id]["processed_files"] += 1  # Count as processed even if failed
+            jobs[job_id]["processed_files"] += 1
     
     jobs[job_id]["status"] = "completed" if not jobs[job_id]["errors"] else "completed_with_errors"
     jobs[job_id]["current_file"] = None

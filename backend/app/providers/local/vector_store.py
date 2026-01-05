@@ -8,6 +8,7 @@ import json
 import os
 import math
 import logging
+import asyncio
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 from app.providers.base import VectorStoreProvider, SearchResult
@@ -93,7 +94,10 @@ class SimpleVectorStore(VectorStoreProvider):
         documents: List[Dict[str, Any]],
         embeddings: List[List[float]]
     ) -> None:
-        """Add documents with embeddings."""
+        """Add documents with embeddings.
+        
+        Uses asyncio.to_thread() for disk I/O to avoid blocking the event loop.
+        """
         if not documents:
             return
         
@@ -120,7 +124,8 @@ class SimpleVectorStore(VectorStoreProvider):
                 self._documents.append(doc_data)
                 self._embeddings.append(emb)
         
-        self._save()
+        # Run save in thread pool to avoid blocking event loop
+        await asyncio.to_thread(self._save)
         logger.info(f"Added/updated {len(documents)} documents. Total: {len(self._documents)}")
     
     async def search(
