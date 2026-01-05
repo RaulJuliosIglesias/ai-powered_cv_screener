@@ -784,24 +784,59 @@ def format_context(
     candidate_names: list[str] = []
     cv_ids: list[str] = []
     seen_candidates: set[str] = set()
+    # Map: (candidate_name, content_signature) -> cv_id
+    # This allows same name with DIFFERENT content to be treated as different people
+    candidate_content_to_cv_id: dict[tuple[str, str], str] = {}
+    # Track cv_ids we've already included to avoid duplicates
+    included_cv_ids: set[str] = set()
     
-    for i, chunk in enumerate(chunks, 1):
+    chunk_counter = 0
+    for chunk in chunks:
         metadata = ChunkMetadata.from_dict(chunk.get("metadata", {}))
         content = chunk.get("content", "").strip()
+        
+        # SMART DEDUPLICATION:
+        # - Same name + same/similar content = same person (duplicate CV upload)
+        # - Same name + different content = different people (keep both)
+        candidate_key = metadata.candidate_name.lower().strip() if metadata.candidate_name else ""
+        
+        # Create a content signature from first 200 chars (captures role/title usually)
+        content_signature = content[:200].lower() if content else ""
+        
+        if candidate_key:
+            # Check if this exact (name, content) combination exists
+            is_duplicate = False
+            for (stored_name, stored_sig), stored_cv_id in candidate_content_to_cv_id.items():
+                if stored_name == candidate_key:
+                    # Same name - check if content is similar (>70% overlap in signature)
+                    if stored_cv_id != metadata.cv_id:
+                        # Different cv_id - check content similarity
+                        overlap = sum(1 for a, b in zip(content_signature, stored_sig) if a == b)
+                        similarity = overlap / max(len(content_signature), len(stored_sig), 1)
+                        if similarity > 0.7:
+                            # Same person, duplicate CV - skip
+                            is_duplicate = True
+                            break
+            
+            if is_duplicate:
+                continue
+            
+            # Not a duplicate - register this chunk
+            if metadata.cv_id not in included_cv_ids:
+                candidate_content_to_cv_id[(candidate_key, content_signature)] = metadata.cv_id
+                included_cv_ids.add(metadata.cv_id)
+                candidate_names.append(metadata.candidate_name)
+                cv_ids.append(metadata.cv_id)
+                seen_candidates.add(metadata.candidate_name)
         
         if max_chunk_length and len(content) > max_chunk_length:
             content = content[:max_chunk_length] + "... [truncated]"
         
         unique_cvs.add(metadata.filename)
         
-        if metadata.candidate_name not in seen_candidates:
-            seen_candidates.add(metadata.candidate_name)
-            candidate_names.append(metadata.candidate_name)
-            cv_ids.append(metadata.cv_id)
-        
         if include_metadata:
             header = (
-                f"### CV #{i}: {metadata.candidate_name}\n"
+                f"### CV #{chunk_counter+1}: {metadata.candidate_name}\n"
                 f"- **CV_ID:** `{metadata.cv_id}`\n"
                 f"- **File:** {metadata.filename}\n"
                 f"- **Section:** {metadata.section_type}"

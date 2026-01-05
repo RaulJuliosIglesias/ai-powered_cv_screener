@@ -255,10 +255,11 @@ class TableModule:
     
     def _deduplicate_rows(self, rows: List[TableRow]) -> List[TableRow]:
         """
-        Deduplicate table rows by cv_id, keeping the one with highest match_score.
+        Deduplicate table rows by candidate NAME, keeping the one with highest match_score.
         
-        This prevents the same candidate from appearing multiple times in the table
-        when the LLM receives multiple chunks from the same CV.
+        SMART DEDUPLICATION:
+        - Same candidate name = same person (even with different cv_ids)
+        - This handles duplicate CV uploads where same person has multiple cv_ids
         
         Args:
             rows: List of TableRow objects (may contain duplicates)
@@ -269,37 +270,21 @@ class TableModule:
         if not rows:
             return rows
         
-        seen_cv_ids: Dict[str, TableRow] = {}
-        seen_names: Dict[str, TableRow] = {}  # Fallback for rows without cv_id
+        # Primary deduplication by normalized candidate name
+        # This ensures "Aisha Patel" with cv_abc and cv_xyz shows only once
+        seen_names: Dict[str, TableRow] = {}
         
         for row in rows:
-            # Primary deduplication by cv_id
-            if row.cv_id:
-                if row.cv_id not in seen_cv_ids:
-                    seen_cv_ids[row.cv_id] = row
-                elif row.match_score > seen_cv_ids[row.cv_id].match_score:
-                    # Keep the one with higher score
-                    seen_cv_ids[row.cv_id] = row
-            else:
-                # Fallback: deduplicate by normalized candidate name
-                normalized_name = row.candidate_name.lower().strip()
-                if normalized_name not in seen_names:
-                    seen_names[normalized_name] = row
-                elif row.match_score > seen_names[normalized_name].match_score:
-                    seen_names[normalized_name] = row
+            normalized_name = row.candidate_name.lower().strip()
+            
+            if normalized_name not in seen_names:
+                seen_names[normalized_name] = row
+            elif row.match_score > seen_names[normalized_name].match_score:
+                # Keep the one with higher score
+                logger.info(f"[TABLE] Dedup: keeping {row.candidate_name} ({row.cv_id}) over ({seen_names[normalized_name].cv_id})")
+                seen_names[normalized_name] = row
         
-        # Combine results (cv_id takes priority over name-based)
-        result = list(seen_cv_ids.values())
-        
-        # Add name-based rows that don't have cv_id matches
-        for name, row in seen_names.items():
-            # Check if this name already exists in cv_id results
-            name_exists = any(
-                r.candidate_name.lower().strip() == name 
-                for r in result
-            )
-            if not name_exists:
-                result.append(row)
+        result = list(seen_names.values())
         
         # Sort by match_score descending to maintain ranking
         result.sort(key=lambda r: r.match_score, reverse=True)
@@ -316,16 +301,57 @@ class TableModule:
         
         logger.info("[TABLE] Generating fallback from chunks")
         
-        # Extract unique candidates
+        # Extract unique candidates with SMART DEDUPLICATION
+        # Same name + similar content = same person (duplicate CV upload)
+        # Same name + different content = different people (keep both)
         candidates = {}
-        for chunk in chunks[:10]:
+        seen_cv_ids = set()
+        # Map: candidate_name_lower -> (content_signature, cv_id)
+        candidate_signatures: Dict[str, List[tuple]] = {}
+        
+        for chunk in chunks[:20]:  # Check more chunks for better deduplication
             metadata = chunk.get('metadata', {})
             cv_id = metadata.get('cv_id')
-            if not cv_id or cv_id in candidates:
+            if not cv_id:
+                continue
+            
+            # Skip if we already have this exact cv_id
+            if cv_id in seen_cv_ids:
                 continue
             
             name = metadata.get('candidate_name', 'Unknown')
             content = chunk.get('content', '')
+            name_lower = name.lower().strip()
+            
+            # Create content signature from first 200 chars
+            content_sig = content[:200].lower() if content else ""
+            
+            # Check if this is a duplicate (same name + similar content but different cv_id)
+            is_duplicate = False
+            if name_lower in candidate_signatures:
+                for stored_sig, stored_cv_id in candidate_signatures[name_lower]:
+                    if stored_cv_id != cv_id:
+                        # Different cv_id - check content similarity
+                        if stored_sig and content_sig:
+                            overlap = sum(1 for a, b in zip(content_sig, stored_sig) if a == b)
+                            similarity = overlap / max(len(content_sig), len(stored_sig), 1)
+                            if similarity > 0.7:
+                                # Same person, duplicate CV - skip
+                                logger.info(f"[TABLE] Skipping duplicate: {name} ({cv_id}) - similar to {stored_cv_id}")
+                                is_duplicate = True
+                                break
+            
+            if is_duplicate:
+                continue
+            
+            # Not a duplicate - add to candidates
+            seen_cv_ids.add(cv_id)
+            
+            # Store signature for future deduplication
+            if name_lower not in candidate_signatures:
+                candidate_signatures[name_lower] = []
+            candidate_signatures[name_lower].append((content_sig, cv_id))
+            
             skills = self._extract_skills(content)
             score = chunk.get('score', 0.5)
             
@@ -335,6 +361,10 @@ class TableModule:
                 'skills': skills[:3] if skills else ['N/A'],
                 'score': score
             }
+            
+            # Limit to 10 unique candidates
+            if len(candidates) >= 10:
+                break
         
         if not candidates:
             return None

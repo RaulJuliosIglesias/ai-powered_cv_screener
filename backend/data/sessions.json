@@ -12707,10 +12707,659 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-05T17:17:06.194385"
+        },
+        {
+          "id": "f6e6daa8-563f-4b2d-8595-c48d488979fa",
+          "role": "user",
+          "content": "y ahroa otro candidato dame los 3 mejroes candidatos para front end eladership",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T17:33:10.721332"
+        },
+        {
+          "id": "ceda0a48-23ab-4baa-a430-5133deb889bf",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the top 3 candidates for a Front End Leadership role, based on the provided CVs. The key criteria are front-end technologies experience, leadership experience, team management skills, and relevant projects. I need to identify candidates who possess these skills and rank them accordingly. Since \"Front End\" is a technical role, I will prioritize candidates with explicit mentions of relevant technologies (HTML, CSS, JavaScript, React, Angular, etc.).\n:::\n\nNone of the analyzed candidates have the required technical skills for a Front End Leadership role. Therefore, I cannot provide a ranked list based on the specified criteria. ### Analysis\nNone of the provided CVs explicitly mention front-end technologies or related skills.\n\n### Analysis\n\nNone of the provided CVs explicitly mention front-end technologies or related skills. While some candidates have leadership experience, team management skills, and project experience, these are not sufficient for a Front End Leadership role without the core technical skills.\n\n| Candidate | Key Skills | Match Score |\n|---|---|---|\n|  Lerato Nkosi  Blockchain Research | AWS | 80% |\n|  Lerato Nkosi  Blockchain Research | AWS | 80% |\n|  Aisha Patel  Postdoctoral | N/A | 78% |\n|  Aisha Patel  Postdoctoral | N/A | 78% |\n|  Isabel Mendoza  Pastry | N/A | 78% |\n|  Mei-Ling Chen  VP of | SQL | 76% |\n|  Margaret OConnor  Game | N/A | 76% |\n|  Margaret OConnor  Game | N/A | 76% |\n|  Mei-Ling Chen  VP of | SQL | 63% |\n|  Rajiv Patel  | AI | 61% |\n\n:::conclusion\nNo candidates match the specified criteria. I recommend expanding the search to include candidates with explicit experience in front-end technologies such as HTML, CSS, JavaScript, and relevant frameworks.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_fe4831ee",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_78b206ff",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_aafbc954",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_05ddacb3",
+              "filename": "6b0a7d7d__Isabel_Mendoza__Pastry_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_5c64fbcd",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_cf467081",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_ea414ebe",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_5463ea64",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_b9dd75c5",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_b85f594d",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_9fb0f971",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_5f249eef",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_8a369e60",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_4d8a6bfc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_fd34aa62",
+              "filename": "c4257bdc__Aisha_Müller__Producer.pdf"
+            },
+            {
+              "cv_id": "cv_f9769647",
+              "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf"
+            },
+            {
+              "cv_id": "cv_d1791bcc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_1dc0ef87",
+              "filename": "388c469f__Rajiv_Patel__Editorial_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_ffda47b5",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 2715.71,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 32.09,
+              "details": "Found 24 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 19446.5,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 2142.26,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "None of the analyzed candidates have the required technical skills for a Front End Leadership role. Therefore, I cannot provide a ranked list based on the specified criteria. ### Analysis\nNone of the provided CVs explicitly mention front-end technologies or related skills.",
+            "raw_content": ":::thinking\nThe user is asking for the top 3 candidates for a Front End Leadership role, based on the provided CVs. The key criteria are front-end technologies experience, leadership experience, team management skills, and relevant projects. I need to identify candidates who possess these skills and rank them accordingly. Since \"Front End\" is a technical role, I will prioritize candidates with explicit mentions of relevant technologies (HTML, CSS, JavaScript, React, Angular, etc.).\n:::\n\nNone of the analyzed candidates have the required technical skills for a Front End Leadership role. Therefore, I cannot provide a ranked list based on the specified criteria.\n\n### Analysis\nNone of the provided CVs explicitly mention front-end technologies or related skills. While some candidates have leadership experience, team management skills, and project experience, these are not sufficient for a Front End Leadership role without the core technical skills.\n\n:::conclusion\nNo candidates match the specified criteria. I recommend expanding the search to include candidates with explicit experience in front-end technologies such as HTML, CSS, JavaScript, and relevant frameworks.\n:::",
+            "thinking": "The user is asking for the top 3 candidates for a Front End Leadership role, based on the provided CVs. The key criteria are front-end technologies experience, leadership experience, team management skills, and relevant projects. I need to identify candidates who possess these skills and rank them accordingly. Since \"Front End\" is a technical role, I will prioritize candidates with explicit mentions of relevant technologies (HTML, CSS, JavaScript, React, Angular, etc.).",
+            "analysis": "None of the provided CVs explicitly mention front-end technologies or related skills. While some candidates have leadership experience, team management skills, and project experience, these are not sufficient for a Front End Leadership role without the core technical skills.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Key Skills",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": " Lerato Nkosi  Blockchain Research",
+                  "cv_id": "cv_5c64fbcd",
+                  "columns": {
+                    "Key Skills": "AWS"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": " Lerato Nkosi  Blockchain Research",
+                  "cv_id": "cv_ea414ebe",
+                  "columns": {
+                    "Key Skills": "AWS"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": " Aisha Patel  Postdoctoral",
+                  "cv_id": "cv_fe4831ee",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 78
+                },
+                {
+                  "candidate_name": " Aisha Patel  Postdoctoral",
+                  "cv_id": "cv_aafbc954",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 78
+                },
+                {
+                  "candidate_name": " Isabel Mendoza  Pastry",
+                  "cv_id": "cv_05ddacb3",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 78
+                },
+                {
+                  "candidate_name": " Mei-Ling Chen  VP of",
+                  "cv_id": "cv_78b206ff",
+                  "columns": {
+                    "Key Skills": "SQL"
+                  },
+                  "match_score": 76
+                },
+                {
+                  "candidate_name": " Margaret OConnor  Game",
+                  "cv_id": "cv_5463ea64",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 76
+                },
+                {
+                  "candidate_name": " Margaret OConnor  Game",
+                  "cv_id": "cv_b9dd75c5",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 76
+                },
+                {
+                  "candidate_name": " Mei-Ling Chen  VP of",
+                  "cv_id": "cv_cf467081",
+                  "columns": {
+                    "Key Skills": "SQL"
+                  },
+                  "match_score": 63
+                },
+                {
+                  "candidate_name": " Rajiv Patel ",
+                  "cv_id": "cv_b85f594d",
+                  "columns": {
+                    "Key Skills": "AI"
+                  },
+                  "match_score": 61
+                }
+              ]
+            },
+            "conclusion": "No candidates match the specified criteria. I recommend expanding the search to include candidates with explicit experience in front-end technologies such as HTML, CSS, JavaScript, and relevant frameworks.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T17:33:40.818274"
+        },
+        {
+          "id": "f2e8f3dc-0630-43b0-9d63-dd9a1ae84c90",
+          "role": "user",
+          "content": "y ahroa otro candidato dame los 3 mejroes candidatos para front end eladership",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T17:53:09.894441"
+        },
+        {
+          "id": "8edea196-7377-4b16-ba1b-362c5e9f5241",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the top 3 candidates for a Front End Leadership role, based on the provided CVs. The key criteria are experience in front-end technologies, leadership experience, team management skills, and relevant projects. I need to identify candidates who possess these skills and rank them based on their overall suitability for the role. Since the role is technical, candidates MUST have explicit technical skills listed in their CVs.\n:::\n\nNone of the analyzed candidates have the required technical skills for a Front End Leadership role. Therefore, I cannot provide a ranked list of suitable candidates. ### Analysis\nNone of the provided CVs explicitly mention front-end technologies or related skills (e.g., HTML, CSS, JavaScript, React, Angular, Vue.js).\n\n### Analysis\n\nNone of the provided CVs explicitly mention front-end technologies or related skills (e.g., HTML, CSS, JavaScript, React, Angular, Vue.js). While some candidates have leadership experience, team management skills, or project management experience, the absence of core front-end skills makes them unsuitable for a Front End Leadership role.\n\n| Candidate | Key Skills | Match Score |\n|---|---|---|\n|  Aisha Patel  Postdoctoral | N/A | 82% |\n|  Aisha Patel  Postdoctoral | N/A | 82% |\n|  Adewale Ogunleye  VP of | N/A | 81% |\n|  Mei-Ling Chen  VP of | SQL | 80% |\n|  Mei-Ling Chen  VP of | SQL | 80% |\n|  Aisha Okafor  Business | SQL | 80% |\n|  Ling Zhang  Director of | N/A | 61% |\n|  Aisha Müller  | N/A | 61% |\n|  Rajiv Patel  | AI | 61% |\n|  Rajiv Patel  | AI | 61% |\n\n:::conclusion\nNo candidates match the specified criteria. I recommend expanding the search to include candidates with demonstrable experience in front-end technologies.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_78b206ff",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_cf467081",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_5f249eef",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_fe4831ee",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_aafbc954",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_fd34aa62",
+              "filename": "c4257bdc__Aisha_Müller__Producer.pdf"
+            },
+            {
+              "cv_id": "cv_2a9de358",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_9fb0f971",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_b85f594d",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_ffda47b5",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_8a369e60",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_7e516bc6",
+              "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_5c64fbcd",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_ef75350d",
+              "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_ea414ebe",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_4d8a6bfc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_d1791bcc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_1dc0ef87",
+              "filename": "388c469f__Rajiv_Patel__Editorial_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_5463ea64",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_b9dd75c5",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_f9769647",
+              "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf"
+            },
+            {
+              "cv_id": "cv_3ce7327e",
+              "filename": "a9d37405__Rajiv_Patel__Audit_Associate.pdf"
+            },
+            {
+              "cv_id": "cv_86f2dc3f",
+              "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1620.5,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 32.1,
+              "details": "Found 26 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 24961.42,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 2852.0,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "None of the analyzed candidates have the required technical skills for a Front End Leadership role. Therefore, I cannot provide a ranked list of suitable candidates. ### Analysis\nNone of the provided CVs explicitly mention front-end technologies or related skills (e.g., HTML, CSS, JavaScript, React, Angular, Vue.js).",
+            "raw_content": ":::thinking\nThe user is asking for the top 3 candidates for a Front End Leadership role, based on the provided CVs. The key criteria are experience in front-end technologies, leadership experience, team management skills, and relevant projects. I need to identify candidates who possess these skills and rank them based on their overall suitability for the role. Since the role is technical, candidates MUST have explicit technical skills listed in their CVs.\n:::\n\nNone of the analyzed candidates have the required technical skills for a Front End Leadership role. Therefore, I cannot provide a ranked list of suitable candidates.\n\n### Analysis\nNone of the provided CVs explicitly mention front-end technologies or related skills (e.g., HTML, CSS, JavaScript, React, Angular, Vue.js). While some candidates have leadership experience, team management skills, or project management experience, the absence of core front-end skills makes them unsuitable for a Front End Leadership role.\n\n:::conclusion\nNo candidates match the specified criteria. I recommend expanding the search to include candidates with demonstrable experience in front-end technologies.\n:::",
+            "thinking": "The user is asking for the top 3 candidates for a Front End Leadership role, based on the provided CVs. The key criteria are experience in front-end technologies, leadership experience, team management skills, and relevant projects. I need to identify candidates who possess these skills and rank them based on their overall suitability for the role. Since the role is technical, candidates MUST have explicit technical skills listed in their CVs.",
+            "analysis": "None of the provided CVs explicitly mention front-end technologies or related skills (e.g., HTML, CSS, JavaScript, React, Angular, Vue.js). While some candidates have leadership experience, team management skills, or project management experience, the absence of core front-end skills makes them unsuitable for a Front End Leadership role.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Key Skills",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": " Aisha Patel  Postdoctoral",
+                  "cv_id": "cv_fe4831ee",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 82
+                },
+                {
+                  "candidate_name": " Aisha Patel  Postdoctoral",
+                  "cv_id": "cv_aafbc954",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 82
+                },
+                {
+                  "candidate_name": " Adewale Ogunleye  VP of",
+                  "cv_id": "cv_9fb0f971",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 81
+                },
+                {
+                  "candidate_name": " Mei-Ling Chen  VP of",
+                  "cv_id": "cv_78b206ff",
+                  "columns": {
+                    "Key Skills": "SQL"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": " Mei-Ling Chen  VP of",
+                  "cv_id": "cv_cf467081",
+                  "columns": {
+                    "Key Skills": "SQL"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": " Aisha Okafor  Business",
+                  "cv_id": "cv_2a9de358",
+                  "columns": {
+                    "Key Skills": "SQL"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": " Ling Zhang  Director of",
+                  "cv_id": "cv_5f249eef",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 61
+                },
+                {
+                  "candidate_name": " Aisha Müller ",
+                  "cv_id": "cv_fd34aa62",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 61
+                },
+                {
+                  "candidate_name": " Rajiv Patel ",
+                  "cv_id": "cv_b85f594d",
+                  "columns": {
+                    "Key Skills": "AI"
+                  },
+                  "match_score": 61
+                },
+                {
+                  "candidate_name": " Rajiv Patel ",
+                  "cv_id": "cv_ffda47b5",
+                  "columns": {
+                    "Key Skills": "AI"
+                  },
+                  "match_score": 61
+                }
+              ]
+            },
+            "conclusion": "No candidates match the specified criteria. I recommend expanding the search to include candidates with demonstrable experience in front-end technologies.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T17:54:55.874343"
+        },
+        {
+          "id": "318f2f97-5588-4f07-ab26-556c0802f0a0",
+          "role": "user",
+          "content": "y ahroa otro candidato dame los 3 mejroes candidatos para front end eladership",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T17:57:13.165107"
+        },
+        {
+          "id": "c55db5a0-e4cd-49fb-a947-6fb6e1c67dda",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the top 3 candidates for a Front End Leadership role, ranked by suitability based on their CVs. The key criteria are experience, skills, and leadership qualities relevant to front-end development. I need to identify candidates with relevant technical skills (e.g., JavaScript, React, HTML, CSS), leadership experience (e.g., managing teams, leading projects), and front-end specific experience. I will then rank the top 3 based on the strength of these criteria.\n:::\n\nNone of the analyzed candidates have the required technical skills for a Front End Leadership role. The CVs provided do not contain individuals with explicit front-end development skills such as proficiency in JavaScript, React, Angular, or similar technologies. ### Analysis\nThe provided CVs primarily showcase candidates in marketing, research, management, or other non-technical roles.\n\n### Analysis\n\nThe provided CVs primarily showcase candidates in marketing, research, management, or other non-technical roles. While some candidates demonstrate leadership experience or data analysis skills, none possess the core front-end development skills necessary for the specified role. Therefore, I cannot rank any of them as suitable for a Front End Leadership position.\n\n| Candidate | Technical Skills | Leadership Experience | Front-End Relevance | Match Score |\n|---|---|---|---|---|\n| Mei-Ling Chen | Marketing Automation, Data Analytics | Scaling brand narratives | None | 50% |\n| Aisha Patel | Machine Learning, Python, R | Mentoring junior researchers | None | 50% |\n| Lerato Nkosi | Smart Contract Development, Zero-Knowledge Proofs | Leading cross-continental team | None | 50% |\n\n:::conclusion\nNo candidates match the specified criteria. None of the analyzed candidates have the required technical skills for a Front End Leadership role. To fulfill this request, CVs of candidates with front-end development experience (e.g., JavaScript, React, Angular) and leadership experience are needed.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_78b206ff",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_cf467081",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_fe4831ee",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_aafbc954",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_5463ea64",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_b9dd75c5",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_9fb0f971",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_5f249eef",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_8a369e60",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_7e516bc6",
+              "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_5c64fbcd",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_ef75350d",
+              "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_ea414ebe",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_4d8a6bfc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_fd34aa62",
+              "filename": "c4257bdc__Aisha_Müller__Producer.pdf"
+            },
+            {
+              "cv_id": "cv_f9769647",
+              "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf"
+            },
+            {
+              "cv_id": "cv_d1791bcc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_e72557d8",
+              "filename": "68148332__Kamal_Al-Mansoor__HR_Business_Partner.pdf"
+            },
+            {
+              "cv_id": "cv_b85f594d",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_ffda47b5",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_86f2dc3f",
+              "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_1dc0ef87",
+              "filename": "388c469f__Rajiv_Patel__Editorial_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_933e3d69",
+              "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_3b11c6a9",
+              "filename": "bd3c4450__Mateo_Fernandez__Music_Producer.pdf"
+            },
+            {
+              "cv_id": "cv_2a9de358",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1569.72,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 31.9,
+              "details": "Found 29 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 13690.35,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5136.71,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "None of the analyzed candidates have the required technical skills for a Front End Leadership role. The CVs provided do not contain individuals with explicit front-end development skills such as proficiency in JavaScript, React, Angular, or similar technologies. ### Analysis\nThe provided CVs primarily showcase candidates in marketing, research, management, or other non-technical roles.",
+            "raw_content": ":::thinking\nThe user is asking for the top 3 candidates for a Front End Leadership role, ranked by suitability based on their CVs. The key criteria are experience, skills, and leadership qualities relevant to front-end development. I need to identify candidates with relevant technical skills (e.g., JavaScript, React, HTML, CSS), leadership experience (e.g., managing teams, leading projects), and front-end specific experience. I will then rank the top 3 based on the strength of these criteria.\n\n:::\n\nNone of the analyzed candidates have the required technical skills for a Front End Leadership role. The CVs provided do not contain individuals with explicit front-end development skills such as proficiency in JavaScript, React, Angular, or similar technologies.\n\n### Analysis\nThe provided CVs primarily showcase candidates in marketing, research, management, or other non-technical roles. While some candidates demonstrate leadership experience or data analysis skills, none possess the core front-end development skills necessary for the specified role. Therefore, I cannot rank any of them as suitable for a Front End Leadership position.\n\n| Candidate | Technical Skills | Leadership Experience | Front-End Relevance | Match |\n|-----------|------------------|-----------------------|----------------------|-------|\n| **[Mei-Ling Chen](cv:cv_78b206ff)** | Marketing Automation, Data Analytics | Scaling brand narratives | None | ❌ |\n| **[Aisha Patel](cv:cv_fe4831ee)** | Machine Learning, Python, R | Mentoring junior researchers | None | ❌ |\n| **[Lerato Nkosi](cv:cv_5c64fbcd)** | Smart Contract Development, Zero-Knowledge Proofs | Leading cross-continental team | None | ❌ |\n\n:::conclusion\nNo candidates match the specified criteria. None of the analyzed candidates have the required technical skills for a Front End Leadership role. To fulfill this request, CVs of candidates with front-end development experience (e.g., JavaScript, React, Angular) and leadership experience are needed.\n:::",
+            "thinking": "The user is asking for the top 3 candidates for a Front End Leadership role, ranked by suitability based on their CVs. The key criteria are experience, skills, and leadership qualities relevant to front-end development. I need to identify candidates with relevant technical skills (e.g., JavaScript, React, HTML, CSS), leadership experience (e.g., managing teams, leading projects), and front-end specific experience. I will then rank the top 3 based on the strength of these criteria.",
+            "analysis": "The provided CVs primarily showcase candidates in marketing, research, management, or other non-technical roles. While some candidates demonstrate leadership experience or data analysis skills, none possess the core front-end development skills necessary for the specified role. Therefore, I cannot rank any of them as suitable for a Front End Leadership position.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Technical Skills",
+                "Leadership Experience",
+                "Front-End Relevance",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Mei-Ling Chen",
+                  "cv_id": "cv_78b206ff",
+                  "columns": {
+                    "Technical Skills": "Marketing Automation, Data Analytics",
+                    "Leadership Experience": "Scaling brand narratives",
+                    "Front-End Relevance": "None"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Aisha Patel",
+                  "cv_id": "cv_fe4831ee",
+                  "columns": {
+                    "Technical Skills": "Machine Learning, Python, R",
+                    "Leadership Experience": "Mentoring junior researchers",
+                    "Front-End Relevance": "None"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Lerato Nkosi",
+                  "cv_id": "cv_5c64fbcd",
+                  "columns": {
+                    "Technical Skills": "Smart Contract Development, Zero-Knowledge Proofs",
+                    "Leadership Experience": "Leading cross-continental team",
+                    "Front-End Relevance": "None"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "No candidates match the specified criteria. None of the analyzed candidates have the required technical skills for a Front End Leadership role. To fulfill this request, CVs of candidates with front-end development experience (e.g., JavaScript, React, Angular) and leadership experience are needed.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T17:59:00.970718"
         }
       ],
       "created_at": "2026-01-05T02:15:22.786546",
-      "updated_at": "2026-01-05T17:17:06.194385"
+      "updated_at": "2026-01-05T17:59:00.970718"
     },
     {
       "id": "71cfaf4d-4258-40d8-98f7-e7c9d1a9bfd0",
@@ -27562,10 +28211,763 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-05T16:41:22.389858"
+        },
+        {
+          "id": "42066f90-ce12-460c-89d4-19092e4e3dd8",
+          "role": "user",
+          "content": "dame todo sobre \nLing Wei",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T17:58:20.288229"
+        },
+        {
+          "id": "20879486-6a66-4be8-bbe9-9e203fde64ff",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to find the CV for a candidate named Ling Wei and extract all available information from it. I need to identify the CV with the name \"Ling Wei\" and then present all the details listed in that CV, including personal details, education, work experience, and skills. If there is no candidate named Ling Wei, I should state that explicitly.\n:::\n\nThere is no candidate named Ling Wei among the analyzed CVs. Therefore, I cannot extract any information for that name. ### Analysis\nI searched for a CV with the exact name \"Ling Wei\" but could not find any matches within the provided CV data.\n\n### Analysis\n\nI searched for a CV with the exact name \"Ling Wei\" but could not find any matches within the provided CV data. The absence of a CV with this name prevents me from extracting any information related to personal details, education, work experience, or skills for a candidate named Ling Wei.\n\n| Candidate | Key Skills | Match Score |\n|---|---|---|\n|  Lucien Moreau  Creature | N/A | 84% |\n|  Aisha Okafor  Business | SQL | 83% |\n|  Hassan Al-Jamil  Blockchain | Rust, Go, Node.js | 83% |\n|  Aïssa Diallo  | N/A | 69% |\n|  Kiran Kumar  Social Media | N/A | 67% |\n|  Priya Patel  Character | N/A | 65% |\n|  Layla Al-Mansoori  | N/A | 64% |\n|  Rafael Oliveira  Production | N/A | 60% |\n|  Rohit Kapoor  Mix | N/A | 59% |\n|  Lotte van der Berg  Camera | N/A | 56% |\n\n:::conclusion\nNo candidates match the specified criteria. There is no CV available for a candidate named Ling Wei.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_27fe1043",
+              "filename": "dba2704c__Priya_Patel__Character_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_21db3eb3",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_637e1d23",
+              "filename": "ba7de3cf__Layla_Al-Mansoori__PA.pdf"
+            },
+            {
+              "cv_id": "cv_b3a9f9fa",
+              "filename": "16c037be__Lotte_van_der_Berg__Camera_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_a1db2d0c",
+              "filename": "d18bc369__Rafael_Oliveira__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_dc44ea0b",
+              "filename": "52e99c15__Aïssa_Diallo__Merchandiser.pdf"
+            },
+            {
+              "cv_id": "cv_becdba61",
+              "filename": "4ca041d0__Lucien_Moreau__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_c745047d",
+              "filename": "ef74dd9e__Rohit_Kapoor__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_5e9ab7a9",
+              "filename": "61fe52f0__Kiran_Kumar__Social_Media_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_3aae92ba",
+              "filename": "d1ef2ff1__Hassan_Al-Jamil__Blockchain_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_68098664",
+              "filename": "2ee790a4__Lotte_van_der_Berg__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_b9a24b82",
+              "filename": "07a0dc96__Aaliyah_Hassan__Crypto_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_3c4bc7ab",
+              "filename": "72cb0e20__Carmen_Rodriguez__Resident.pdf"
+            },
+            {
+              "cv_id": "cv_f42db6d5",
+              "filename": "4a9a82d3__Kwame_Addo__Celebrity_Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_9f28cbec",
+              "filename": "5d0b9a4c__Javier_Morales__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_ae890623",
+              "filename": "7e291026__Rajiv_Patel__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_77bb2d16",
+              "filename": "c56a5d0f__Eitan_Levi__Headmaster.pdf"
+            },
+            {
+              "cv_id": "cv_fabc0fa0",
+              "filename": "29d2f61f__Valentina_Mendoza__Digital_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d59a37ea",
+              "filename": "2fd0d810__Kamran_Alizadeh__Law_Clerk.pdf"
+            },
+            {
+              "cv_id": "cv_b7afefc5",
+              "filename": "93565dce__Leila_Amari__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_76f67b2d",
+              "filename": "f3be335b__Sofia_Ricci__Digital_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_edc1e680",
+              "filename": "f95a288d__Aisha_Chen__YouTuber.pdf"
+            },
+            {
+              "cv_id": "cv_6d18325b",
+              "filename": "95e7fe8f__Sofia_Morales__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_9bcbd73c",
+              "filename": "2aaf7352__Sofia_Rossi__Restaurant_Owner.pdf"
+            },
+            {
+              "cv_id": "cv_63c45322",
+              "filename": "323df925__Khalid_Al-Farsi__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_0fe998d7",
+              "filename": "b560f23b__Rajiv_Patel__Sous_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_35c38bf4",
+              "filename": "472590ef__Rafael_Oliveira__Computer_Vision_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_67733682",
+              "filename": "4bd4fa01__Lukas_Schneider__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_bde450c8",
+              "filename": "461c4e45__Isabela_Silva__Business_Unit_Leader.pdf"
+            },
+            {
+              "cv_id": "cv_8afb9a4b",
+              "filename": "4e4b81a6__Sofia_Rossi__Graduate_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_92a4d467",
+              "filename": "836e187a__Sofia_Ramirez__Mobile_Tech.pdf"
+            },
+            {
+              "cv_id": "cv_ec1238ea",
+              "filename": "22ca62fd__Rajiv_Patel__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_1a0f73d2",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_18defa26",
+              "filename": "d8560a1e__Wei_Chen__IP_Counsel.pdf"
+            },
+            {
+              "cv_id": "cv_78e42a51",
+              "filename": "d882f390__Lucía_Kim__Service_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_41f3b3d9",
+              "filename": "d975c05b__Kenji_Tanaka__Systems_Administrator.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1452.41,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 143.88,
+              "details": "Found 37 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 7867.85,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 2699.41,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "There is no candidate named Ling Wei among the analyzed CVs. Therefore, I cannot extract any information for that name. ### Analysis\nI searched for a CV with the exact name \"Ling Wei\" but could not find any matches within the provided CV data.",
+            "raw_content": ":::thinking\nThe user is asking to find the CV for a candidate named Ling Wei and extract all available information from it. I need to identify the CV with the name \"Ling Wei\" and then present all the details listed in that CV, including personal details, education, work experience, and skills. If there is no candidate named Ling Wei, I should state that explicitly.\n:::\n\nThere is no candidate named Ling Wei among the analyzed CVs. Therefore, I cannot extract any information for that name.\n\n### Analysis\nI searched for a CV with the exact name \"Ling Wei\" but could not find any matches within the provided CV data. The absence of a CV with this name prevents me from extracting any information related to personal details, education, work experience, or skills for a candidate named Ling Wei.\n\n:::conclusion\nNo candidates match the specified criteria. There is no CV available for a candidate named Ling Wei.\n:::",
+            "thinking": "The user is asking to find the CV for a candidate named Ling Wei and extract all available information from it. I need to identify the CV with the name \"Ling Wei\" and then present all the details listed in that CV, including personal details, education, work experience, and skills. If there is no candidate named Ling Wei, I should state that explicitly.",
+            "analysis": "I searched for a CV with the exact name \"Ling Wei\" but could not find any matches within the provided CV data. The absence of a CV with this name prevents me from extracting any information related to personal details, education, work experience, or skills for a candidate named Ling Wei.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Key Skills",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": " Lucien Moreau  Creature",
+                  "cv_id": "cv_becdba61",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 84
+                },
+                {
+                  "candidate_name": " Aisha Okafor  Business",
+                  "cv_id": "cv_21db3eb3",
+                  "columns": {
+                    "Key Skills": "SQL"
+                  },
+                  "match_score": 83
+                },
+                {
+                  "candidate_name": " Hassan Al-Jamil  Blockchain",
+                  "cv_id": "cv_3aae92ba",
+                  "columns": {
+                    "Key Skills": "Rust, Go, Node.js"
+                  },
+                  "match_score": 83
+                },
+                {
+                  "candidate_name": " Aïssa Diallo ",
+                  "cv_id": "cv_dc44ea0b",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 69
+                },
+                {
+                  "candidate_name": " Kiran Kumar  Social Media",
+                  "cv_id": "cv_5e9ab7a9",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 67
+                },
+                {
+                  "candidate_name": " Priya Patel  Character",
+                  "cv_id": "cv_27fe1043",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 65
+                },
+                {
+                  "candidate_name": " Layla Al-Mansoori ",
+                  "cv_id": "cv_637e1d23",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 64
+                },
+                {
+                  "candidate_name": " Rafael Oliveira  Production",
+                  "cv_id": "cv_a1db2d0c",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": " Rohit Kapoor  Mix",
+                  "cv_id": "cv_c745047d",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 59
+                },
+                {
+                  "candidate_name": " Lotte van der Berg  Camera",
+                  "cv_id": "cv_b3a9f9fa",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 56
+                }
+              ]
+            },
+            "conclusion": "No candidates match the specified criteria. There is no CV available for a candidate named Ling Wei.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T17:58:35.937092"
+        },
+        {
+          "id": "30c8cb54-365e-4824-bdc9-d1b169bccfb6",
+          "role": "user",
+          "content": "dame todo sobre \nLing Wei",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T17:59:48.808397"
+        },
+        {
+          "id": "a24eda56-a92d-492f-99aa-bb74e99604e9",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a summary of all information present in the CV of Ling Wei (cv_2a37d4f2). I need to extract all available details from the provided CV text chunk for Ling Wei (cv_2a37d4f2), including personal details, education, work experience, and skills.\n:::\n\n### About [📄](cv:cv_2a37d4f2)**Ling Wei**The CV of provides a comprehensive overview of their qualifications and experience in Quality Assurance.**Profile Summary:**|**Highlights**| Scaled testing capacity by 150% while maintaining SLA compliance, Integrated CI/CD pipelines with automated test suites, reducing regression cycle by 30% |**Personal Details:*****Location:**Dubai, United Arab Emirates ***Email:**ling.wei@example.com ***Phone:**+971 55 123 4567 ***LinkedIn:**linkedin.com/in/lingwei ***Website:**lingweiqa.com**Work [📄](cv:)**Experience**:*****Director of Quality Assurance**\\ *2017 - Present | TechForward Inc.* * Scaled testing capacity by 150% while maintaining SLA compliance. * Integrated CI/CD pipelines with automated test suites, reducing regression cycle by 30%.\n\n| Aspect | Details | Match Score |\n|---|---|---|\n| Current Role | Director of Quality Assurance | 50% |\n| Experience | 30+ years of expertise in orchestrating test ecosystems across multinational enterprises | 50% |\n| Key Skills | Test Automation Framework Development, Performance Testing with JMeter, Defect Lifecycle Management (ALM), CI/CD Pipeline Integration (Jenkins), Risk-Based Test Prioritization | 50% |\n| Education | Master of Science in Quality Engineering, Bachelor of Science in Computer Science | 50% |\n| Highlights | Scaled testing capacity by 150% while maintaining SLA compliance, Integrated CI/CD pipelines with automated test suites, reducing regression cycle by 30% | 50% |\n\n:::conclusion\nThe CV of [📄](cv:cv_2a37d4f2)**Ling Wei**provides detailed information about their extensive experience in quality assurance, their skills, education, and professional certifications. This information should be useful in evaluating 's suitability for relevant QA roles.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_27fe1043",
+              "filename": "dba2704c__Priya_Patel__Character_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_d59a37ea",
+              "filename": "2fd0d810__Kamran_Alizadeh__Law_Clerk.pdf"
+            },
+            {
+              "cv_id": "cv_637e1d23",
+              "filename": "ba7de3cf__Layla_Al-Mansoori__PA.pdf"
+            },
+            {
+              "cv_id": "cv_b3a9f9fa",
+              "filename": "16c037be__Lotte_van_der_Berg__Camera_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_a1db2d0c",
+              "filename": "d18bc369__Rafael_Oliveira__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_dc44ea0b",
+              "filename": "52e99c15__Aïssa_Diallo__Merchandiser.pdf"
+            },
+            {
+              "cv_id": "cv_3c4bc7ab",
+              "filename": "72cb0e20__Carmen_Rodriguez__Resident.pdf"
+            },
+            {
+              "cv_id": "cv_c745047d",
+              "filename": "ef74dd9e__Rohit_Kapoor__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_5e9ab7a9",
+              "filename": "61fe52f0__Kiran_Kumar__Social_Media_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_2a37d4f2",
+              "filename": "99f808ef__Ling_Wei__QA.pdf"
+            },
+            {
+              "cv_id": "cv_68098664",
+              "filename": "2ee790a4__Lotte_van_der_Berg__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_b9a24b82",
+              "filename": "07a0dc96__Aaliyah_Hassan__Crypto_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_d5d40101",
+              "filename": "9ffbf866__Farid_Al-Mansoor__Technical_Lead.pdf"
+            },
+            {
+              "cv_id": "cv_f42db6d5",
+              "filename": "4a9a82d3__Kwame_Addo__Celebrity_Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_9f28cbec",
+              "filename": "5d0b9a4c__Javier_Morales__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_21db3eb3",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_87713376",
+              "filename": "7d40b1ab__Ingrid_Larsson__Consultant.pdf"
+            },
+            {
+              "cv_id": "cv_77bb2d16",
+              "filename": "c56a5d0f__Eitan_Levi__Headmaster.pdf"
+            },
+            {
+              "cv_id": "cv_fabc0fa0",
+              "filename": "29d2f61f__Valentina_Mendoza__Digital_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_90754277",
+              "filename": "67df96eb__Rajiv_Patel__Podcaster.pdf"
+            },
+            {
+              "cv_id": "cv_76f67b2d",
+              "filename": "f3be335b__Sofia_Ricci__Digital_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_edc1e680",
+              "filename": "f95a288d__Aisha_Chen__YouTuber.pdf"
+            },
+            {
+              "cv_id": "cv_a4421701",
+              "filename": "01def3e4__Mei_Lin_Chen__Accessories_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_9bcbd73c",
+              "filename": "2aaf7352__Sofia_Rossi__Restaurant_Owner.pdf"
+            },
+            {
+              "cv_id": "cv_63c45322",
+              "filename": "323df925__Khalid_Al-Farsi__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_0fe998d7",
+              "filename": "b560f23b__Rajiv_Patel__Sous_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_1cf4493b",
+              "filename": "f8d0bf70__Layla_Al-Jamil__Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_35c38bf4",
+              "filename": "472590ef__Rafael_Oliveira__Computer_Vision_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_67733682",
+              "filename": "4bd4fa01__Lukas_Schneider__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_bde450c8",
+              "filename": "461c4e45__Isabela_Silva__Business_Unit_Leader.pdf"
+            },
+            {
+              "cv_id": "cv_41afc6a3",
+              "filename": "54bfd995__Aisha_Nakamura__Blockchain_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_92a4d467",
+              "filename": "836e187a__Sofia_Ramirez__Mobile_Tech.pdf"
+            },
+            {
+              "cv_id": "cv_ec1238ea",
+              "filename": "22ca62fd__Rajiv_Patel__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_18defa26",
+              "filename": "d8560a1e__Wei_Chen__IP_Counsel.pdf"
+            },
+            {
+              "cv_id": "cv_78e42a51",
+              "filename": "d882f390__Lucía_Kim__Service_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_71634ba8",
+              "filename": "07e9108d__Aisha_Okafor__CCO.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1779.45,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 139.65,
+              "details": "Found 37 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 9893.7,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5728.79,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "### About [📄](cv:cv_2a37d4f2) **Ling Wei** The CV of provides a comprehensive overview of their qualifications and experience in Quality Assurance. **Profile Summary:** | **Highlights** | Scaled testing capacity by 150% while maintaining SLA compliance, Integrated CI/CD pipelines with automated test suites, reducing regression cycle by 30% | **Personal Details:** * **Location:** Dubai, United Arab Emirates * **Email:** ling.wei@example.com * **Phone:** +971 55 123 4567 * **LinkedIn:** linkedin.com/in/lingwei * **Website:** lingweiqa.com **Work [📄](cv:) **Experience**:** * **Director of Quality Assurance**\\ *2017 - Present | TechForward Inc.* * Scaled testing capacity by 150% while maintaining SLA compliance. * Integrated CI/CD pipelines with automated test suites, reducing regression cycle by 30%.",
+            "raw_content": ":::thinking\nThe user is asking for a summary of all information present in the CV of **[Ling Wei](cv:cv_2a37d4f2)**. I need to extract all available details from the provided CV text chunk for **[Ling Wei](cv:cv_2a37d4f2)**, including personal details, education, work experience, and skills.\n:::\n\n### About **[Ling Wei](cv:cv_2a37d4f2)**\n\nThe CV of **[Ling Wei](cv:cv_2a37d4f2)** provides a comprehensive overview of their qualifications and experience in Quality Assurance.\n\n**Profile Summary:**\n| Aspect | Details |\n|--------|---------|\n| **Current Role** | Director of Quality Assurance |\n| **Experience** | 30+ years of expertise in orchestrating test ecosystems across multinational enterprises |\n| **Key Skills** | Test Automation Framework Development, Performance Testing with JMeter, Defect Lifecycle Management (ALM), CI/CD Pipeline Integration (Jenkins), Risk-Based Test Prioritization |\n| **Education** | Master of Science in Quality Engineering, Bachelor of Science in Computer Science |\n| **Highlights** | Scaled testing capacity by 150% while maintaining SLA compliance, Integrated CI/CD pipelines with automated test suites, reducing regression cycle by 30% |\n\n**Personal Details:**\n\n*   **Location:** Dubai, United Arab Emirates\n*   **Email:** ling.wei@example.com\n*   **Phone:** +971 55 123 4567\n*   **LinkedIn:** linkedin.com/in/lingwei\n*   **Website:** lingweiqa.com\n\n**Work Experience:**\n\n*   **Director of Quality Assurance**\\\n    *2017 - Present | TechForward Inc.*\n    *   Scaled testing capacity by 150% while maintaining SLA compliance.\n    *   Integrated CI/CD pipelines with automated test suites, reducing regression cycle by 30%.\n    *   Implemented mentorship framework, resulting in 30% retention of junior staff.\n*   **QA Lead**\\\n    *2014 - 2017 | Precision Labs*\n    *   Managed a team of eight engineers, achieving a 98% defect detection rate pre‑release.\n    *   Introduced exploratory testing framework, increasing test effectiveness by 15%.\n    *   Championed mentorship program that promoted four engineers to senior positions.\n*   **QA Engineer**\\\n    *2010 - 2014 | InnovateSoft*\n    *   Designed automated API tests using RestAssured, cutting release validation time by 35%.\n    *   Led cross‑functional defect triage meetings, decreasing defect resolution time by 20%.\n    *   Championed risk‑based testing approach across two product lines.\n*   **QA Analyst**\\\n    *2006 - 2010 | GlobalTech Solutions*\n    *   Authored 1,200+ test scripts reducing manual testing effort by 40%.\n    *   Implemented data‑driven testing that improved coverage by 25%.\n    *   Mentored three new hires on test documentation standards.\n\n**Skills:**\n\n*   Test Automation Framework Development (10/10)\n*   Performance Testing with JMeter (9/10)\n*   Defect Lifecycle Management (ALM) (9/10)\n*   CI/CD Pipeline Integration (Jenkins) (9/10)\n*   Risk-Based Test Prioritization (9/10)\n\n**Education:**\n\n*   **Master of Science in Quality Engineering**\\\n    University of Dubai, 2015\\\n    Dean's List, Research Excellence Award\n*   **Bachelor of Science in Computer Science**\\\n    American University of Sharjah, 2005\\\n    Cum Laude\n\n**Certificates:**\n\n*   ISTQB Advanced Test Manager, 2021\n*   Certified Agile Tester, ICAgile, 2022\n\n**Interests:**\n\n*   Hiking\n*   Open Source Community Participation\n\n:::conclusion\nThe CV of **[Ling Wei](cv:cv_2a37d4f2)** provides detailed information about their extensive experience in quality assurance, their skills, education, and professional certifications. This information should be useful in evaluating **[Ling Wei](cv:cv_2a37d4f2)**'s suitability for relevant QA roles.\n:::",
+            "thinking": "The user is asking for a summary of all information present in the CV of Ling Wei (cv_2a37d4f2). I need to extract all available details from the provided CV text chunk for Ling Wei (cv_2a37d4f2), including personal details, education, work experience, and skills.",
+            "analysis": "### About [📄](cv:cv_2a37d4f2) **Ling Wei**\nThe CV of [📄](cv:cv_2a37d4f2) **Ling Wei** provides a comprehensive overview of their qualifications and experience in Quality Assurance.\n**Profile Summary:**\n| **Highlights** | Scaled testing capacity by 150% while maintaining SLA compliance, Integrated CI/CD pipelines with automated test suites, reducing regression cycle by 30% |\n**Personal Details:**\n*   **Location:** Dubai, United Arab Emirates\n*   **Email:** ling.wei@example.com\n*   **Phone:** +971 55 123 4567\n*   **LinkedIn:** linkedin.com/in/lingwei\n*   **Website:** lingweiqa.com\n**Work [📄](cv:) **Experience**:**\n*   **Director of Quality Assurance**\\\n    *2017 - Present | TechForward Inc.*\n    *   Scaled testing capacity by 150% while maintaining SLA compliance.\n    *   Integrated CI/CD pipelines with automated test suites, reducing regression cycle by 30%.\n    *   Implemented mentorship framework, resulting in 30% retention of junior staff.\n*   **QA Lead**\\\n    *2014 - 2017 | Precision Labs*\n    *   Managed a team of eight engineers, achieving a 98% defect detection rate pre‑release.\n    *   Introduced exploratory testing framework, increasing test effectiveness by 15%.\n    *   Championed mentorship program that promoted four engineers to senior positions.\n*   **QA Engineer**\\\n    *2010 - 2014 | InnovateSoft*\n    *   Designed automated API tests using RestAssured, cutting release validation time by 35%.\n    *   Led cross‑functional defect triage meetings, decreasing defect resolution time by 20%.\n    *   Championed risk‑based testing approach across two product lines.\n*   **QA Analyst**\\\n    *2006 - 2010 | GlobalTech Solutions*\n    *   Authored 1,200+ test scripts reducing manual testing effort by 40%.\n    *   Implemented data‑driven testing that improved coverage by 25%.\n    *   Mentored three new hires on test documentation standards.\n**Skills:**\n*   Test Automation Framework Development (10/10)\n*   Performance Testing with JMeter (9/10)\n*   Defect Lifecycle Management (ALM) (9/10)\n*   CI/CD Pipeline Integration (Jenkins) (9/10)\n*   Risk-Based Test Prioritization (9/10)\n**Education:**\n*   **Master of Science in Quality Engineering**\\\n    University of Dubai, 2015\\\n    Dean's List, Research Excellence Award\n*   **Bachelor of Science in Computer Science**\\\n    American University of Sharjah, 2005\\\n    Cum Laude\n**Certificates:**\n*   ISTQB Advanced Test Manager, 2021\n*   Certified Agile Tester, ICAgile, 2022\n**Interests:**\n*   Hiking\n*   Open Source Community Participation",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Aspect",
+                "Details",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Current Role",
+                  "cv_id": "",
+                  "columns": {
+                    "Details": "Director of Quality Assurance"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Experience",
+                  "cv_id": "",
+                  "columns": {
+                    "Details": "30+ years of expertise in orchestrating test ecosystems across multinational enterprises"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Key Skills",
+                  "cv_id": "",
+                  "columns": {
+                    "Details": "Test Automation Framework Development, Performance Testing with JMeter, Defect Lifecycle Management (ALM), CI/CD Pipeline Integration (Jenkins), Risk-Based Test Prioritization"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Education",
+                  "cv_id": "",
+                  "columns": {
+                    "Details": "Master of Science in Quality Engineering, Bachelor of Science in Computer Science"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Highlights",
+                  "cv_id": "",
+                  "columns": {
+                    "Details": "Scaled testing capacity by 150% while maintaining SLA compliance, Integrated CI/CD pipelines with automated test suites, reducing regression cycle by 30%"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "The CV of [📄](cv:cv_2a37d4f2) **Ling Wei** provides detailed information about their extensive experience in quality assurance, their skills, education, and professional certifications. This information should be useful in evaluating 's suitability for relevant QA roles.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T18:00:11.293259"
+        },
+        {
+          "id": "cd16ec1a-9384-4630-a9cf-c97e8e7472c4",
+          "role": "user",
+          "content": "dame los 3 mejroes para QA roles",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T18:00:48.800000"
+        },
+        {
+          "id": "48aaef63-7f5b-4a9f-b6e9-5c501a74fc4e",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the top 3 candidates for Quality Assurance (QA) roles based on their CVs. The key criteria are skills, experience, and education relevant to QA. I need to identify candidates with QA-related skills and experience, rank them, and return the top 3.\n:::\n\nThe top three candidates best suited for Quality Assurance (QA) roles are [📄](cv:cv_2a37d4f2)**Ling Wei**, [📄](cv:cv_ae890623)**Rajiv Patel**, and [📄](cv:cv_bf2601ad)**Ji-eun Kim**. These candidates possess a combination of relevant skills, experience, and education that make them well-suited for QA positions. ### Analysis\nThe ranking is based on the following criteria: explicit QA experience, relevant skills (test automation, defect management, CI/CD), and relevant education.\n\n### Analysis\n\nThe ranking is based on the following criteria: explicit QA experience, relevant skills (test automation, defect management, CI/CD), and relevant education. [📄](cv:cv_2a37d4f2)**Ling Wei**has extensive QA experience and skills. [📄](cv:cv_ae890623)**Rajiv Patel**has experience in IT support and systems administration, with skills in automation and scripting that are valuable in QA. [📄](cv:cv_bf2601ad)**Ji-eun Kim**has experience as a Business Analyst, with skills in SQL, data visualization, and agile methodologies, which can be applied to QA.\n\n| Candidate | QA Skills | QA Experience | Match Score |\n|---|---|---|---|\n| Ling Wei | Test Automation, Performance Testing, Defect Lifecycle Management, CI/CD Pipeline Integration, Risk-Based Test Prioritization | Director of Quality Assurance, QA Lead, QA Engineer, QA Analyst | 100% |\n| Rajiv Patel | Scripting (Python, Bash), Automation (Ansible, Terraform), Monitoring & Alerting | IT Support Engineer, IT Support Intern | 80% |\n| Ji-eun Kim | SQL, Data Visualization, Agile Methodologies, Requirements Engineering | Business Analyst | 60% |\n\n:::conclusion\nI recommend [📄](cv:cv_2a37d4f2)**Ling Wei**, [📄](cv:cv_ae890623)**Rajiv Patel**, and [📄](cv:cv_bf2601ad)**Ji-eun Kim**as the top 3 candidates for QA roles based on their skills and experience.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_93e485cd",
+              "filename": "e35f5e8e__Isabella_Richter__Nursing_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_8afb9a4b",
+              "filename": "4e4b81a6__Sofia_Rossi__Graduate_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_becdba61",
+              "filename": "4ca041d0__Lucien_Moreau__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_b7afefc5",
+              "filename": "93565dce__Leila_Amari__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_e982012f",
+              "filename": "960c1e52__James_Whitmore__Smart_Contract_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_76f67b2d",
+              "filename": "f3be335b__Sofia_Ricci__Digital_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_9dd8faae",
+              "filename": "173ee9f4__Antoine_Dubois__Brand_Ambassador.pdf"
+            },
+            {
+              "cv_id": "cv_637e1d23",
+              "filename": "ba7de3cf__Layla_Al-Mansoori__PA.pdf"
+            },
+            {
+              "cv_id": "cv_2a37d4f2",
+              "filename": "99f808ef__Ling_Wei__QA.pdf"
+            },
+            {
+              "cv_id": "cv_62706e5a",
+              "filename": "6b9204bf__Matteo_Romano__Brand_Ambassador.pdf"
+            },
+            {
+              "cv_id": "cv_63c45322",
+              "filename": "323df925__Khalid_Al-Farsi__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_db3f63a6",
+              "filename": "1b2a47e8__Amir_Hassan__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_c7c90643",
+              "filename": "0c185b57__Matteo_Rossi__Associate_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_3849c26e",
+              "filename": "071dc2e0__Ji-Yeon_Kim__Endowed_Chair.pdf"
+            },
+            {
+              "cv_id": "cv_9f7c4952",
+              "filename": "49fcac19__Rajiv_Patel__CPO.pdf"
+            },
+            {
+              "cv_id": "cv_a1db2d0c",
+              "filename": "d18bc369__Rafael_Oliveira__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_e07a68b7",
+              "filename": "9c9af9ff__Amir_Al-Farsi__Instructional_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_d71a1bd2",
+              "filename": "d306c0c3__Chloé_Dubois__Computer_Vision_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_0be2bd72",
+              "filename": "8ce653c9__Layla_Al-Mansouri__Crypto_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_ccac265e",
+              "filename": "39db3837__Layla_Kader__Game_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_28c70f5d",
+              "filename": "c6da4cc4__Rahul_Kapoor__Growth_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_3aae92ba",
+              "filename": "d1ef2ff1__Hassan_Al-Jamil__Blockchain_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_141ff971",
+              "filename": "6be44d4b__Rajiv_Patel__Growth_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_bbc9e391",
+              "filename": "3baa7e58__Diego_Mendoza__Protocol_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_ae890623",
+              "filename": "7e291026__Rajiv_Patel__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_1a0f73d2",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_27fe1043",
+              "filename": "dba2704c__Priya_Patel__Character_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_bf2601ad",
+              "filename": "2a6972cc__Ji-eun_Kim__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_87713376",
+              "filename": "7d40b1ab__Ingrid_Larsson__Consultant.pdf"
+            },
+            {
+              "cv_id": "cv_6d18325b",
+              "filename": "95e7fe8f__Sofia_Morales__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_0fe998d7",
+              "filename": "b560f23b__Rajiv_Patel__Sous_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_90754277",
+              "filename": "67df96eb__Rajiv_Patel__Podcaster.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1500.36,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 142.16,
+              "details": "Found 34 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 22560.94,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5360.11,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "The top three candidates best suited for Quality Assurance (QA) roles are [📄](cv:cv_2a37d4f2) **Ling Wei**, [📄](cv:cv_ae890623) **Rajiv Patel**, and [📄](cv:cv_bf2601ad) **Ji-eun Kim**. These candidates possess a combination of relevant skills, experience, and education that make them well-suited for QA positions. ### Analysis\nThe ranking is based on the following criteria: explicit QA experience, relevant skills (test automation, defect management, CI/CD), and relevant education.",
+            "raw_content": ":::thinking\nThe user is asking for the top 3 candidates for Quality Assurance (QA) roles based on their CVs. The key criteria are skills, experience, and education relevant to QA. I need to identify candidates with QA-related skills and experience, rank them, and return the top 3.\n:::\n\nThe top three candidates best suited for Quality Assurance (QA) roles are **[Ling Wei](cv:cv_2a37d4f2)**, **[Rajiv Patel](cv:cv_ae890623)**, and **[Ji-eun Kim](cv:cv_bf2601ad)**. These candidates possess a combination of relevant skills, experience, and education that make them well-suited for QA positions.\n\n### Analysis\nThe ranking is based on the following criteria: explicit QA experience, relevant skills (test automation, defect management, CI/CD), and relevant education. **[Ling Wei](cv:cv_2a37d4f2)** has extensive QA experience and skills. **[Rajiv Patel](cv:cv_ae890623)** has experience in IT support and systems administration, with skills in automation and scripting that are valuable in QA. **[Ji-eun Kim](cv:cv_bf2601ad)** has experience as a Business Analyst, with skills in SQL, data visualization, and agile methodologies, which can be applied to QA.\n\n| Candidate | QA Skills | QA Experience | Match |\n|-----------|----------|---------------|-------|\n| **[Ling Wei](cv:cv_2a37d4f2)** | Test Automation, Performance Testing, Defect Lifecycle Management, CI/CD Pipeline Integration, Risk-Based Test Prioritization | Director of Quality Assurance, QA Lead, QA Engineer, QA Analyst | ⭐⭐⭐⭐⭐ |\n| **[Rajiv Patel](cv:cv_ae890623)** | Scripting (Python, Bash), Automation (Ansible, Terraform), Monitoring & Alerting | IT Support Engineer, IT Support Intern | ⭐⭐⭐⭐ |\n| **[Ji-eun Kim](cv:cv_bf2601ad)** | SQL, Data Visualization, Agile Methodologies, Requirements Engineering | Business Analyst | ⭐⭐⭐ |\n\n:::conclusion\nI recommend **[Ling Wei](cv:cv_2a37d4f2)**, **[Rajiv Patel](cv:cv_ae890623)**, and **[Ji-eun Kim](cv:cv_bf2601ad)** as the top 3 candidates for QA roles based on their skills and experience.\n:::",
+            "thinking": "The user is asking for the top 3 candidates for Quality Assurance (QA) roles based on their CVs. The key criteria are skills, experience, and education relevant to QA. I need to identify candidates with QA-related skills and experience, rank them, and return the top 3.",
+            "analysis": "The ranking is based on the following criteria: explicit QA experience, relevant skills (test automation, defect management, CI/CD), and relevant education. [📄](cv:cv_2a37d4f2) **Ling Wei** has extensive QA experience and skills. [📄](cv:cv_ae890623) **Rajiv Patel** has experience in IT support and systems administration, with skills in automation and scripting that are valuable in QA. [📄](cv:cv_bf2601ad) **Ji-eun Kim** has experience as a Business Analyst, with skills in SQL, data visualization, and agile methodologies, which can be applied to QA.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "QA Skills",
+                "QA Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Ling Wei",
+                  "cv_id": "cv_2a37d4f2",
+                  "columns": {
+                    "QA Skills": "Test Automation, Performance Testing, Defect Lifecycle Management, CI/CD Pipeline Integration, Risk-Based Test Prioritization",
+                    "QA Experience": "Director of Quality Assurance, QA Lead, QA Engineer, QA Analyst"
+                  },
+                  "match_score": 100
+                },
+                {
+                  "candidate_name": "Rajiv Patel",
+                  "cv_id": "cv_ae890623",
+                  "columns": {
+                    "QA Skills": "Scripting (Python, Bash), Automation (Ansible, Terraform), Monitoring & Alerting",
+                    "QA Experience": "IT Support Engineer, IT Support Intern"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Ji-eun Kim",
+                  "cv_id": "cv_bf2601ad",
+                  "columns": {
+                    "QA Skills": "SQL, Data Visualization, Agile Methodologies, Requirements Engineering",
+                    "QA Experience": "Business Analyst"
+                  },
+                  "match_score": 60
+                }
+              ]
+            },
+            "conclusion": "I recommend [📄](cv:cv_2a37d4f2) **Ling Wei**, [📄](cv:cv_ae890623) **Rajiv Patel**, and [📄](cv:cv_bf2601ad) **Ji-eun Kim** as the top 3 candidates for QA roles based on their skills and experience.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T18:01:21.796152"
         }
       ],
       "created_at": "2026-01-05T16:29:50.861270",
-      "updated_at": "2026-01-05T16:41:22.389858"
+      "updated_at": "2026-01-05T18:01:21.796152"
     }
   ]
 }
