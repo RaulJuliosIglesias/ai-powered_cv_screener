@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { 
   Brain, 
   FileText, 
@@ -10,6 +10,8 @@ import {
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import SingleCandidateProfile from './SingleCandidateProfile';
+import { isSingleCandidateResponse, parseSingleCandidateProfile } from './singleCandidateParser';
 
 /**
  * StructuredOutputRenderer - Visual structured output component
@@ -386,10 +388,58 @@ const buildCvMapFromTable = (tableData) => {
 const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
   if (!structuredOutput) return null;
   
-  const { thinking, direct_answer, analysis, table_data, conclusion } = structuredOutput;
+  const { thinking, direct_answer, analysis, table_data, conclusion, raw_content } = structuredOutput;
+  
+  // Detect if this is a single candidate response
+  const singleCandidateData = useMemo(() => {
+    // Check raw_content for single candidate indicators
+    if (raw_content && isSingleCandidateResponse(raw_content)) {
+      const parsed = parseSingleCandidateProfile(raw_content);
+      if (parsed && parsed.candidateName !== 'Unknown Candidate') {
+        console.log('[STRUCTURED_OUTPUT] Detected single candidate response:', parsed.candidateName);
+        return parsed;
+      }
+    }
+    
+    // Fallback: Check if table has only 1 row (legacy detection)
+    if (table_data?.rows?.length === 1) {
+      console.log('[STRUCTURED_OUTPUT] Single candidate detected via table (1 row)');
+      return null; // Will use standard rendering but hide comparison table
+    }
+    
+    return null;
+  }, [raw_content, table_data]);
   
   // Build cvMap from table to resolve "📄 Name" patterns without explicit cv_id
   const cvMap = buildCvMapFromTable(table_data);
+  
+  // If single candidate with parsed profile, render SingleCandidateProfile
+  if (singleCandidateData) {
+    return (
+      <div className="space-y-2">
+        {/* 1. Thinking Process (collapsible) - still show for single candidate */}
+        <ThinkingSection content={thinking} />
+        
+        {/* 2. Single Candidate Profile - replaces Direct Answer, Analysis, and Table */}
+        <SingleCandidateProfile
+          candidateName={singleCandidateData.candidateName}
+          cvId={singleCandidateData.cvId}
+          summary={singleCandidateData.summary}
+          highlights={singleCandidateData.highlights}
+          career={singleCandidateData.career}
+          skills={singleCandidateData.skills}
+          credentials={singleCandidateData.credentials}
+          assessment={singleCandidateData.assessment}
+          strengths={singleCandidateData.strengths}
+          onOpenCV={onOpenCV}
+        />
+      </div>
+    );
+  }
+  
+  // Standard multi-candidate rendering
+  // Detect if we should hide comparison table (single candidate via table detection)
+  const isSingleCandidateTable = table_data?.rows?.length === 1;
   
   return (
     <div className="space-y-2">
@@ -402,8 +452,10 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
       {/* 3. Analysis - usa ContentWithCVLinks con cvMap */}
       <AnalysisSection content={analysis} onOpenCV={onOpenCV} cvMap={cvMap} />
       
-      {/* 4. Candidate Table - botones directos en JSX */}
-      <CandidateTable tableData={table_data} onOpenCV={onOpenCV} />
+      {/* 4. Candidate Table - only show for multiple candidates */}
+      {!isSingleCandidateTable && (
+        <CandidateTable tableData={table_data} onOpenCV={onOpenCV} />
+      )}
       
       {/* 5. Conclusion - usa ContentWithCVLinks con cvMap */}
       <ConclusionSection content={conclusion} onOpenCV={onOpenCV} cvMap={cvMap} />

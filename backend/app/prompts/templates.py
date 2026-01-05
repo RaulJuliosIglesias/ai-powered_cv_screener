@@ -322,8 +322,8 @@ Respond in this exact JSON structure:
 # SINGLE CANDIDATE TEMPLATE (Individual Analysis - NO Comparisons)
 # =============================================================================
 
-SINGLE_CANDIDATE_TEMPLATE = """## SINGLE CANDIDATE ANALYSIS
-**Target Candidate:** {candidate_name}
+SINGLE_CANDIDATE_TEMPLATE = """## SINGLE CANDIDATE PROFILE ANALYSIS
+**Target:** {candidate_name}
 **CV ID:** {cv_id}
 
 ---
@@ -333,42 +333,77 @@ SINGLE_CANDIDATE_TEMPLATE = """## SINGLE CANDIDATE ANALYSIS
 ## USER QUERY
 {question}
 
-## RESPONSE FORMAT FOR SINGLE CANDIDATE
-You are answering a question about ONE SPECIFIC CANDIDATE. Do NOT compare with others.
+## RESPONSE INSTRUCTIONS
+You are analyzing ONE SPECIFIC CANDIDATE. Your goal is to help the reader quickly understand this candidate's profile - do NOT duplicate the entire CV, but highlight the most relevant information.
 
 :::thinking
-[Your reasoning about this specific candidate only]
-- What is being asked about {candidate_name}?
-- What information is available in their CV?
-- How well does their profile answer the question?
+[Brief reasoning - 2-3 lines max]
+- What does the user want to know about {candidate_name}?
+- What are the KEY highlights from their CV?
 :::
 
-### About **[{candidate_name}](cv:{cv_id})**
+## 👤 **[{candidate_name}](cv:{cv_id})**
 
-[Direct, detailed answer about THIS candidate. Focus entirely on their profile.]
+[One paragraph summary answering the user's question directly. Be specific and concise.]
 
-**Profile Summary:**
-| Aspect | Details |
-|--------|---------|
-| **Current Role** | [Their current/most recent position] |
-| **Experience** | [Years and relevant experience] |
-| **Key Skills** | [Skills relevant to the query] |
-| **Education** | [Highest qualification] |
-| **Highlights** | [Notable achievements or strengths] |
+---
 
-[Additional details answering the specific question asked]
+### 📊 Candidate Highlights
+
+| Category | Key Information |
+|:---------|:----------------|
+| **🎯 Current Role** | [Job title at Company - include years if recent] |
+| **⏱️ Total Experience** | [X years in field/industry] |
+| **🏆 Top Achievement** | [Single most impressive accomplishment with metrics] |
+| **💡 Core Expertise** | [2-3 main skills/technologies most relevant to query] |
+| **🎓 Education** | [Highest degree - Institution] |
+
+---
+
+### 💼 Career Trajectory
+
+[List 2-3 most relevant positions in reverse chronological order, each with ONE key achievement]
+
+**[Job Title]** — *[Company]* ([Year-Year])
+→ [Key achievement or responsibility]
+
+---
+
+### 🛠️ Skills Snapshot
+
+[Create a dynamic table based on what skills are ACTUALLY in the CV and relevant to the query]
+
+| Skill Area | Details |
+|:-----------|:--------|
+| **[Category 1]** | [Specific skills/tools] |
+| **[Category 2]** | [Specific skills/tools] |
+
+---
+
+### 📜 Credentials
+
+[Only include if present in CV - certifications, awards, publications]
+
+- [Credential 1]
+- [Credential 2]
+
+---
 
 :::conclusion
-[Specific assessment or recommendation for **[{candidate_name}](cv:{cv_id})**]
+**Assessment:** [Direct answer to the user's question about {candidate_name}]
+
+**Key Strengths:** [2-3 bullet points of what makes this candidate stand out]
 :::
 
-## CRITICAL RULES FOR SINGLE CANDIDATE QUERIES
-- Focus EXCLUSIVELY on **[{candidate_name}](cv:{cv_id})**
-- Do NOT create comparison tables with other candidates
-- Do NOT mention, reference, or compare with ANY other candidates
-- Answer the specific question asked about THIS candidate
-- Use **[{candidate_name}](cv:{cv_id})** format for ALL references to this candidate
-- If information is not in the CV, state: "The CV does not mention..."
+## OUTPUT RULES
+1. **DO NOT duplicate the CV** - summarize and highlight, don't copy everything
+2. **Answer the user's specific question** in the first paragraph
+3. **Use the Highlights table** to show the most important facts at a glance
+4. **Be selective** - only include sections that have data in the CV
+5. **Format for scannability** - use the visual structure provided
+6. **NEVER compare** with other candidates or mention others
+7. **NEVER include external URLs** - only use cv:{cv_id} format for links
+8. If something is not in the CV, simply omit it from the output (don't say "not specified")
 
 Respond now:"""
 
