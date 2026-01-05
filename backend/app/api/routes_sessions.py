@@ -701,6 +701,43 @@ class GenerateNameResponse(BaseModel):
     full_name: str
 
 
+def extract_role_from_filename(filename: str) -> str:
+    """Extract just the role/job title from a CV filename.
+    
+    Filename format: ID__Name_Surname__Role.pdf or similar variations.
+    Examples:
+        'c1fcfa41__Priya_Patel__Engineering_Lead.pdf' -> 'Engineering Lead'
+        'fa1c2540__Priya_Patel__Software_Engineer.pdf' -> 'Software Engineer'
+    """
+    import re
+    # Remove .pdf extension
+    name = filename.replace('.pdf', '').replace('.PDF', '')
+    
+    # Split by double underscore to get parts
+    parts = name.split('__')
+    
+    if len(parts) >= 3:
+        # Format: ID__Name__Role - take the last part as role
+        role = parts[-1]
+    elif len(parts) == 2:
+        # Format: ID__Role or Name__Role - take last part
+        role = parts[-1]
+    else:
+        # Fallback: try to extract role after last underscore pattern
+        # Remove leading hash/ID (8 hex chars followed by underscore)
+        name = re.sub(r'^[a-f0-9]{8}_', '', name)
+        parts = name.split('_')
+        # Take last 2-3 words as role (skip name parts)
+        if len(parts) > 2:
+            role = '_'.join(parts[-2:])
+        else:
+            role = name
+    
+    # Replace underscores with spaces and clean up
+    role = role.replace('_', ' ').strip()
+    return role
+
+
 @router.post("/{session_id}/generate-name", response_model=GenerateNameResponse)
 async def generate_session_name(
     session_id: str,
@@ -720,21 +757,26 @@ async def generate_session_name(
     if not cvs:
         raise HTTPException(status_code=400, detail="No CVs in session to analyze")
     
-    # Extract filenames and any available text snippets
-    cv_info = []
-    for cv in cvs[:10]:  # Limit to first 10 CVs to keep it cheap
+    # Extract ONLY the roles from filenames (not names or IDs)
+    roles = []
+    for cv in cvs[:15]:  # Limit to first 15 CVs
         filename = cv.get("filename", "") if isinstance(cv, dict) else cv.filename
-        cv_info.append(filename)
+        role = extract_role_from_filename(filename)
+        if role:
+            roles.append(role)
     
-    # Create a simple prompt for the AI
-    prompt = f"""Analyze these CV filenames and generate a 2-word category name that describes the type of professionals in this group.
+    logger.info(f"[AUTO-NAME] Extracted roles for session {session_id}: {roles}")
+    
+    # Create a simple prompt for the AI with just roles
+    prompt = f"""Analyze these job roles and generate a 2-word category name that best describes this group of professionals.
 
-Filenames:
-{chr(10).join(cv_info)}
+Job Roles:
+{chr(10).join(roles)}
 
 Rules:
-- Return ONLY 2 words that describe the professional category (e.g., "Software Development", "Data Science", "Marketing Sales", "Finance Accounting")
-- If the CVs are mixed, combine the two main categories (e.g., "Tech Marketing")
+- Return ONLY 2 words that describe the professional category
+- Examples: "Software Development", "Data Science", "Marketing Sales", "Finance Accounting", "Engineering Leadership", "Mobile Development"
+- If roles are mixed, combine the two main areas (e.g., "Tech Sales", "Design Engineering")
 - Be concise and professional
 - Do NOT include any other text, just the 2 words
 

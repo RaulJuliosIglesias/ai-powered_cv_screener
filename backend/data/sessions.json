@@ -9080,7 +9080,7 @@
     },
     {
       "id": "86fce112-a1fa-4693-ae92-133cfe774f14",
-      "name": "New chat",
+      "name": "CV Group 4294",
       "description": "",
       "cvs": [
         {
@@ -9229,6 +9229,69 @@
           "chunk_count": 5,
           "content_hash": "",
           "uploaded_at": "2026-01-05T02:19:30.068708"
+        },
+        {
+          "id": "cv_05ddacb3",
+          "filename": "6b0a7d7d__Isabel_Mendoza__Pastry_Chef.pdf",
+          "chunk_count": 2,
+          "content_hash": "8b153742a3b06c85e5819a51fccd351cfec784ab7b616fae61892f8643efa8e8",
+          "uploaded_at": "2026-01-05T03:37:51.161332"
+        },
+        {
+          "id": "cv_16ce0b4c",
+          "filename": "73be0a6e__Aisha_Johnson__Solidity_Developer.pdf",
+          "chunk_count": 4,
+          "content_hash": "0c37b178af967c6a839afcdb470dcf12bfbd18a1ca128ef9231b4fa3dde50372",
+          "uploaded_at": "2026-01-05T03:37:53.589291"
+        },
+        {
+          "id": "cv_1dc0ef87",
+          "filename": "388c469f__Rajiv_Patel__Editorial_Designer.pdf",
+          "chunk_count": 5,
+          "content_hash": "0b41a202924649a00c74321855af66a28eb169e3a76875dd1c06bc63b3b68ee7",
+          "uploaded_at": "2026-01-05T03:37:56.070262"
+        },
+        {
+          "id": "cv_ea14ecf0",
+          "filename": "738200b7__Leila_Amari__Auditor.pdf",
+          "chunk_count": 1,
+          "content_hash": "1d310088d2cdbd39de26836f5e73f5208fc0fae0de95d58dec015d6080164b82",
+          "uploaded_at": "2026-01-05T03:37:58.379002"
+        },
+        {
+          "id": "cv_e72557d8",
+          "filename": "68148332__Kamal_Al-Mansoor__HR_Business_Partner.pdf",
+          "chunk_count": 4,
+          "content_hash": "af7977f3525de5817e073e8ec717d9725edf94e9ef0c1aa4cb5dac8b664ed19c",
+          "uploaded_at": "2026-01-05T03:38:00.813581"
+        },
+        {
+          "id": "cv_66173b63",
+          "filename": "a6b7570f__Daniel_Müller__Editor.pdf",
+          "chunk_count": 2,
+          "content_hash": "d8a9e33e33326346f9898c5ef2deb5f1c4d66930f31d6f028cf60d16e35091c7",
+          "uploaded_at": "2026-01-05T03:38:03.124598"
+        },
+        {
+          "id": "cv_3ce7327e",
+          "filename": "a9d37405__Rajiv_Patel__Audit_Associate.pdf",
+          "chunk_count": 3,
+          "content_hash": "edd94983e7204119a5fe4fc48d54ebf44f6f687101acaa92bdf83be73d5d88af",
+          "uploaded_at": "2026-01-05T03:38:06.662578"
+        },
+        {
+          "id": "cv_3b11c6a9",
+          "filename": "bd3c4450__Mateo_Fernandez__Music_Producer.pdf",
+          "chunk_count": 7,
+          "content_hash": "ff5142a2c4549df006279ea2b6f49626113f2c0ace67b6755c5b599576a838fb",
+          "uploaded_at": "2026-01-05T03:38:10.248603"
+        },
+        {
+          "id": "cv_fd34aa62",
+          "filename": "c4257bdc__Aisha_Müller__Producer.pdf",
+          "chunk_count": 4,
+          "content_hash": "ef02789ab8f714de127e4efb2eb76ee2cc635d982fa1fa653109d8671e3282d9",
+          "uploaded_at": "2026-01-05T03:38:13.872604"
         }
       ],
       "messages": [
@@ -9545,11 +9608,11 @@
         }
       ],
       "created_at": "2026-01-05T02:15:22.786546",
-      "updated_at": "2026-01-05T02:36:55.675476"
+      "updated_at": "2026-01-05T03:38:14.717611"
     },
     {
       "id": "71cfaf4d-4258-40d8-98f7-e7c9d1a9bfd0",
-      "name": "New chat",
+      "name": "CV Group 4304",
       "description": "",
       "cvs": [
         {
@@ -9649,6 +9712,55 @@
           "chunk_count": 5,
           "content_hash": "",
           "uploaded_at": "2026-01-05T02:21:51.947596"
+        },
+        {
+          "id": "cv_0f82c8ec",
+          "filename": "0ed5d24f__Mateo_Alvarez__Lab_Technician.pdf",
+          "chunk_count": 4,
+          "content_hash": "e8c8a7d9fe2397d5ea4a1630e99382d907f335529896a11f07d7d099e5608b0e",
+          "uploaded_at": "2026-01-05T03:38:06.660578"
+        },
+        {
+          "id": "cv_00c4e497",
+          "filename": "03ddcb57__Priya_Naidoo__Research_Assistant.pdf",
+          "chunk_count": 4,
+          "content_hash": "d053df0713f15f53e3f85a4bbab7ca6daec64e5724dc621183dfd45101595b84",
+          "uploaded_at": "2026-01-05T03:38:10.245603"
+        },
+        {
+          "id": "cv_02854530",
+          "filename": "10b55aa7__Ji-Yeon_Kim__Researcher.pdf",
+          "chunk_count": 4,
+          "content_hash": "a41ba1bc4cbde29d94dd47d081494b4a6b8c0c8bb13ef5ee4ea7a02dbee7f0ce",
+          "uploaded_at": "2026-01-05T03:38:13.874176"
+        },
+        {
+          "id": "cv_dd44d875",
+          "filename": "312feb56__Layla_Al-Mansoor__Lab_Technician.pdf",
+          "chunk_count": 3,
+          "content_hash": "53a3944fc171b4f29262bab21f72f9e44e508b9c5968efa0eaab194761ee1de1",
+          "uploaded_at": "2026-01-05T03:38:16.080908"
+        },
+        {
+          "id": "cv_a079128e",
+          "filename": "c5d4a6de__Gabriela_Martinez__Research_Associate.pdf",
+          "chunk_count": 4,
+          "content_hash": "ec9b2ea38ca98b6aa57dc26502eaa9a45c34f17033f1dfe5cfaa28a216e10f3d",
+          "uploaded_at": "2026-01-05T03:38:18.483286"
+        },
+        {
+          "id": "cv_117eba77",
+          "filename": "d2621eee__Khalid_Al-Mansoori__Research_Scientist.pdf",
+          "chunk_count": 5,
+          "content_hash": "030e8ed9e91d9c380e9ff2be136ab1cc67ac3a7ca2d90410b6d1ab9ad18bf614",
+          "uploaded_at": "2026-01-05T03:38:21.017956"
+        },
+        {
+          "id": "cv_5fbb3f97",
+          "filename": "d2674dc3__Ji-Yeon_Kim__Research_Associate_I.pdf",
+          "chunk_count": 2,
+          "content_hash": "5a939af4c7b1c8a0f8762e0f208aed2b2b3a29ecfaec9688dacb08242a9ea9e4",
+          "uploaded_at": "2026-01-05T03:38:23.509597"
         }
       ],
       "messages": [
@@ -9895,7 +10007,7 @@
         }
       ],
       "created_at": "2026-01-05T02:21:17.464498",
-      "updated_at": "2026-01-05T02:26:57.061211"
+      "updated_at": "2026-01-05T03:38:24.495858"
     },
     {
       "id": "e47b6131-cc76-4ec9-9219-a87d5443dc72",
@@ -10238,7 +10350,7 @@
     },
     {
       "id": "844b3828-efac-4e7b-bc92-230dfa6e7a82",
-      "name": "New chat",
+      "name": "CV Group 4310",
       "description": "",
       "cvs": [
         {
@@ -10345,6 +10457,174 @@
           "chunk_count": 8,
           "content_hash": "",
           "uploaded_at": "2026-01-05T02:44:01.727403"
+        },
+        {
+          "id": "cv_1233277e",
+          "filename": "6012e3bb__Layla_Al-Mansouri__CMO.pdf",
+          "chunk_count": 3,
+          "content_hash": "0a57247678dd915ab096015f763342258fa4fa9bec863abd68f512478cd107b7",
+          "uploaded_at": "2026-01-05T03:37:39.832433"
+        },
+        {
+          "id": "cv_45ba84d7",
+          "filename": "84764d6f__Aisha_Patel__Visual_Effects_Director.pdf",
+          "chunk_count": 5,
+          "content_hash": "4fd3988e59fffae3d079793e764b87578b650b75e9cf9040d46b699117d21cb8",
+          "uploaded_at": "2026-01-05T03:37:42.242537"
+        },
+        {
+          "id": "cv_7c440a87",
+          "filename": "20354788__Maria_Rodriguez__Online_Instructor.pdf",
+          "chunk_count": 6,
+          "content_hash": "01f24a8e16ed46de343592233293583b179efa271f3caa8de7601d905528b093",
+          "uploaded_at": "2026-01-05T03:37:44.570507"
+        },
+        {
+          "id": "cv_fb527443",
+          "filename": "53721311__Adewale_Patel__VP_of_Design.pdf",
+          "chunk_count": 3,
+          "content_hash": "9cef5883501879bbb20d50191521f378237c76ddb39c7da7cbf2e09268a98dd7",
+          "uploaded_at": "2026-01-05T03:37:46.630405"
+        },
+        {
+          "id": "cv_621123af",
+          "filename": "83724102__Lien_Nguyen__Wine_Director.pdf",
+          "chunk_count": 5,
+          "content_hash": "b8ae493d3152bf4b272cda34d6d077bdb893c5c9121f9edbc33d204b271da96c",
+          "uploaded_at": "2026-01-05T03:37:47.744738"
+        },
+        {
+          "id": "cv_228a9102",
+          "filename": "a73ca65c__Isabel_Mendoza__Director_of_AI.pdf",
+          "chunk_count": 2,
+          "content_hash": "97584d6f56ea72fcd784e3e895424fde098f65e74239ebb5fe3710d564e3e746",
+          "uploaded_at": "2026-01-05T03:37:48.830075"
+        },
+        {
+          "id": "cv_2cc574d6",
+          "filename": "a5303ce5__Priya_Patel__VP_of_HR.pdf",
+          "chunk_count": 4,
+          "content_hash": "0f6de804b9f719b5ef5d1d0de608f0199f31f94bc8cd7fae7ccacc6e396e1663",
+          "uploaded_at": "2026-01-05T03:37:51.160333"
+        },
+        {
+          "id": "cv_7c1f9a37",
+          "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf",
+          "chunk_count": 3,
+          "content_hash": "134b04545f00e9077a08f2bfad9e589c9e42c8fd2c35e4e2410400675b5198cf",
+          "uploaded_at": "2026-01-05T03:37:53.590292"
+        },
+        {
+          "id": "cv_b611e36a",
+          "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf",
+          "chunk_count": 4,
+          "content_hash": "6633bfa6af4ed3afffdedc424eb7edaeb224d05f000231c4395d7479a20aea57",
+          "uploaded_at": "2026-01-05T03:37:56.071210"
+        },
+        {
+          "id": "cv_f0aba890",
+          "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf",
+          "chunk_count": 4,
+          "content_hash": "b350f2e948957b4f82643e8ca90cf204f31132f86534cba907dd95e15aa76fee",
+          "uploaded_at": "2026-01-05T03:37:58.380069"
+        },
+        {
+          "id": "cv_935f1986",
+          "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf",
+          "chunk_count": 1,
+          "content_hash": "7bc00e05b66898c9c31b39890124aff5f74025ad8336ad9f976c7c2cfdaae48b",
+          "uploaded_at": "2026-01-05T03:38:00.814581"
+        },
+        {
+          "id": "cv_b3b7faca",
+          "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf",
+          "chunk_count": 4,
+          "content_hash": "e27fbd663b4d7d5f5859f95ae1b2c059d089fbeb3872590b646fa829c9d402f8",
+          "uploaded_at": "2026-01-05T03:38:03.126598"
+        },
+        {
+          "id": "cv_2e8eefd1",
+          "filename": "c4f1840e__Dirk_van_der_Meer__SVP.pdf",
+          "chunk_count": 3,
+          "content_hash": "1fe597f9ab762aa9d73c9ffc667b83613d1168139e321f7ead69f8068ac4a7f9",
+          "uploaded_at": "2026-01-05T03:38:06.665578"
+        },
+        {
+          "id": "cv_12b939ec",
+          "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf",
+          "chunk_count": 2,
+          "content_hash": "2f1c6d54613517caa71509bc9fee255276cc7e06e1d45ca06dbc1f73ff0a13b2",
+          "uploaded_at": "2026-01-05T03:38:10.246603"
+        },
+        {
+          "id": "cv_3f95ba9c",
+          "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf",
+          "chunk_count": 2,
+          "content_hash": "f7cfe25eb392afea67d5a19cf13d3a79455451ab9aed894340e0917cae07f51e",
+          "uploaded_at": "2026-01-05T03:38:13.876807"
+        },
+        {
+          "id": "cv_f92ec1a4",
+          "filename": "d9c50ecd__Ling_Chen__Studio_Director.pdf",
+          "chunk_count": 8,
+          "content_hash": "b08970192f4b03e6ddce33427553b4d59c85d49acfdfb4934ddad56b904a3e52",
+          "uploaded_at": "2026-01-05T03:38:16.626633"
+        },
+        {
+          "id": "cv_f15dd216",
+          "filename": "d13add8f__Lucas_Oliveira__Instructor.pdf",
+          "chunk_count": 6,
+          "content_hash": "4977ca30625314d2732954b7a730a5458d53d3707c2947162abb6681ba40ad6b",
+          "uploaded_at": "2026-01-05T03:38:19.051302"
+        },
+        {
+          "id": "cv_d9cd450e",
+          "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf",
+          "chunk_count": 2,
+          "content_hash": "fc3e53c80875157d2921b5030f2afc499b950f572e8411f1810ad50ce7cd04c8",
+          "uploaded_at": "2026-01-05T03:38:21.387339"
+        },
+        {
+          "id": "cv_ff4faca8",
+          "filename": "d9785747__Ethan_MacLeod__Technical_Director.pdf",
+          "chunk_count": 4,
+          "content_hash": "122f58f7eae4dae56ab7ef60fc6812b6de06a71bdbbed26813b2047a27910f6a",
+          "uploaded_at": "2026-01-05T03:38:23.629333"
+        },
+        {
+          "id": "cv_15702a39",
+          "filename": "d9929195__Layla_Hassan__CFO.pdf",
+          "chunk_count": 1,
+          "content_hash": "1c629b180366652fb91af06d4e6aa5257a4876bef434392698f785d440fc4768",
+          "uploaded_at": "2026-01-05T03:38:24.836730"
+        },
+        {
+          "id": "cv_3f34e813",
+          "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf",
+          "chunk_count": 4,
+          "content_hash": "3e0abe6df7681af1037b9c2a09967f9cd87c5b9574c8f76391ae62c9c656c200",
+          "uploaded_at": "2026-01-05T03:38:26.102451"
+        },
+        {
+          "id": "cv_4e9720fd",
+          "filename": "e6cb6422__Rajiv_Patel__CMO.pdf",
+          "chunk_count": 1,
+          "content_hash": "fed15ac5121852d8eb943894b058c0db0acefeb4f16fb35de901eddf1c3d20aa",
+          "uploaded_at": "2026-01-05T03:38:27.254832"
+        },
+        {
+          "id": "cv_f6d3c906",
+          "filename": "f4f61592__Ethan_Reynolds__Content_Director.pdf",
+          "chunk_count": 4,
+          "content_hash": "d34e360a4b0879a17e90fd10ac9fd63f81e0a7d2ebe7048eb34d286bde4e07b6",
+          "uploaded_at": "2026-01-05T03:38:28.409581"
+        },
+        {
+          "id": "cv_32e2f23d",
+          "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf",
+          "chunk_count": 5,
+          "content_hash": "a4d6a519e12e2ebd89c23e596597bc450d880ca5caf3bfa1256c190f070db73e",
+          "uploaded_at": "2026-01-05T03:38:29.625571"
         }
       ],
       "messages": [
@@ -10492,11 +10772,11 @@
         }
       ],
       "created_at": "2026-01-05T02:36:30.672588",
-      "updated_at": "2026-01-05T02:44:01.727403"
+      "updated_at": "2026-01-05T03:38:30.642224"
     },
     {
       "id": "84dcbb16-5344-446e-8d3e-5d4322b6583a",
-      "name": "New chat",
+      "name": "CV Group 4266",
       "description": "",
       "cvs": [
         {
@@ -10610,6 +10890,62 @@
           "chunk_count": 3,
           "content_hash": "",
           "uploaded_at": "2026-01-05T02:50:08.467623"
+        },
+        {
+          "id": "cv_f093987b",
+          "filename": "d13add8f__Lucas_Oliveira__Instructor.pdf",
+          "chunk_count": 6,
+          "content_hash": "4977ca30625314d2732954b7a730a5458d53d3707c2947162abb6681ba40ad6b",
+          "uploaded_at": "2026-01-05T03:37:33.380641"
+        },
+        {
+          "id": "cv_4c92d785",
+          "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf",
+          "chunk_count": 2,
+          "content_hash": "fc3e53c80875157d2921b5030f2afc499b950f572e8411f1810ad50ce7cd04c8",
+          "uploaded_at": "2026-01-05T03:37:34.494112"
+        },
+        {
+          "id": "cv_fa230409",
+          "filename": "d9785747__Ethan_MacLeod__Technical_Director.pdf",
+          "chunk_count": 4,
+          "content_hash": "122f58f7eae4dae56ab7ef60fc6812b6de06a71bdbbed26813b2047a27910f6a",
+          "uploaded_at": "2026-01-05T03:37:35.588235"
+        },
+        {
+          "id": "cv_f76ddfbb",
+          "filename": "d9929195__Layla_Hassan__CFO.pdf",
+          "chunk_count": 1,
+          "content_hash": "1c629b180366652fb91af06d4e6aa5257a4876bef434392698f785d440fc4768",
+          "uploaded_at": "2026-01-05T03:37:36.783042"
+        },
+        {
+          "id": "cv_95e79721",
+          "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf",
+          "chunk_count": 4,
+          "content_hash": "3e0abe6df7681af1037b9c2a09967f9cd87c5b9574c8f76391ae62c9c656c200",
+          "uploaded_at": "2026-01-05T03:37:38.696390"
+        },
+        {
+          "id": "cv_07841696",
+          "filename": "e6cb6422__Rajiv_Patel__CMO.pdf",
+          "chunk_count": 1,
+          "content_hash": "fed15ac5121852d8eb943894b058c0db0acefeb4f16fb35de901eddf1c3d20aa",
+          "uploaded_at": "2026-01-05T03:37:41.094339"
+        },
+        {
+          "id": "cv_18ab3117",
+          "filename": "f4f61592__Ethan_Reynolds__Content_Director.pdf",
+          "chunk_count": 4,
+          "content_hash": "d34e360a4b0879a17e90fd10ac9fd63f81e0a7d2ebe7048eb34d286bde4e07b6",
+          "uploaded_at": "2026-01-05T03:37:43.493628"
+        },
+        {
+          "id": "cv_7827c2c1",
+          "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf",
+          "chunk_count": 5,
+          "content_hash": "a4d6a519e12e2ebd89c23e596597bc450d880ca5caf3bfa1256c190f070db73e",
+          "uploaded_at": "2026-01-05T03:37:45.940116"
         }
       ],
       "messages": [
@@ -10809,7 +11145,7 @@
         }
       ],
       "created_at": "2026-01-05T02:49:49.045740",
-      "updated_at": "2026-01-05T03:02:45.998326"
+      "updated_at": "2026-01-05T03:37:46.983060"
     },
     {
       "id": "fec4e081-fea8-4b5a-b5b0-8c2cf7f78c1f",
@@ -13103,7 +13439,7 @@
     },
     {
       "id": "c56d4303-b386-4f44-96ee-232278a1eca9",
-      "name": "Software Engineering 3520",
+      "name": "CV Group 3669",
       "description": "",
       "cvs": [
         {
@@ -13336,6 +13672,132 @@
           "chunk_count": 4,
           "content_hash": "e7b8a55aeb5114267291ecfe820f9ddeb3c6e711c11bfb6954451ba24d3b1f65",
           "uploaded_at": "2026-01-05T03:25:18.508057"
+        },
+        {
+          "id": "cv_aff4557c",
+          "filename": "1df56595__Priya_Patel__Junior_Illustrator.pdf",
+          "chunk_count": 2,
+          "content_hash": "bf1799ae627662c05966bdf0477cd6a7e2362ed885e8bc58ecaedc8f8f5c41d4",
+          "uploaded_at": "2026-01-05T03:27:29.561383"
+        },
+        {
+          "id": "cv_18643aef",
+          "filename": "6bff950f__Ethan_Park__Junior_Music_Producer.pdf",
+          "chunk_count": 3,
+          "content_hash": "f967b5052f82a7d4700d35f0945e281e0158fd0247ba3f682db8e3df5c82c1db",
+          "uploaded_at": "2026-01-05T03:27:30.618288"
+        },
+        {
+          "id": "cv_ef95147d",
+          "filename": "6e13510c__Carmen_Rodriguez__Illustrator.pdf",
+          "chunk_count": 5,
+          "content_hash": "129d2d6bc56f6e9be064becaa3a5e5d3100d6bc83fb3dde1aac9369e60ef30e1",
+          "uploaded_at": "2026-01-05T03:27:31.727302"
+        },
+        {
+          "id": "cv_5b65ce92",
+          "filename": "08e1cbb6__Rafael_Al-Mansur__Assistant_Sound_Designer.pdf",
+          "chunk_count": 4,
+          "content_hash": "8a57e03696fcc297af968eb649d5c57edc8f708cbcd8de25bb6b56f784d385e9",
+          "uploaded_at": "2026-01-05T03:27:32.879614"
+        },
+        {
+          "id": "cv_4b3162c6",
+          "filename": "45e712f8__Isabella_Mendoza__Composer.pdf",
+          "chunk_count": 4,
+          "content_hash": "241249507ad1c68d1d471de3d7e35d63084d1436bed14cc047d87f5bc4c91a9b",
+          "uploaded_at": "2026-01-05T03:27:34.000024"
+        },
+        {
+          "id": "cv_8aa9b3c0",
+          "filename": "85e145e9__Hiroki_Chen__Assistant_Sound_Designer.pdf",
+          "chunk_count": 5,
+          "content_hash": "1908d8822a1cfe096889a73b43e4ec185a2be30ca71385f08eab07eaa943bf91",
+          "uploaded_at": "2026-01-05T03:27:35.096519"
+        },
+        {
+          "id": "cv_7bd8a6ba",
+          "filename": "414b0f00__Lerato_Nkosi__Cinematographer.pdf",
+          "chunk_count": 2,
+          "content_hash": "3eebbf3b7bbef22c398d307c91333cc2bb52019a747877a523078b1272967334",
+          "uploaded_at": "2026-01-05T03:27:36.256171"
+        },
+        {
+          "id": "cv_36983dc6",
+          "filename": "2708e217__Aisha_Khan__Art_Director.pdf",
+          "chunk_count": 6,
+          "content_hash": "5e6bec8047b738252ee9d7c048dfcf0de32019535412b3ecb6f6715925d1c8cc",
+          "uploaded_at": "2026-01-05T03:27:37.397523"
+        },
+        {
+          "id": "cv_b19bd7ef",
+          "filename": "7358b4d1__Lucía_Martínez__Director_of_Photography.pdf",
+          "chunk_count": 3,
+          "content_hash": "e17febe0377e8241ff71c4fd1594cd2b6563ca3d770a31b790dc2806df7bfd13",
+          "uploaded_at": "2026-01-05T03:27:38.465475"
+        },
+        {
+          "id": "cv_42c0e97f",
+          "filename": "091586a0__Yuki_Tanaka__Art_Director.pdf",
+          "chunk_count": 5,
+          "content_hash": "365d90f02f2af99d7098675b5ddba63dcf22f34d1faa351b7f7495720d3b3203",
+          "uploaded_at": "2026-01-05T03:27:39.646498"
+        },
+        {
+          "id": "cv_bbf22526",
+          "filename": "b4362343__Rajiv_Patel__Fashion_Photographer.pdf",
+          "chunk_count": 3,
+          "content_hash": "e3d5a581a2320f220d2b0ec9244a75c22b63ac2693db7447356b83730ea076e5",
+          "uploaded_at": "2026-01-05T03:27:40.713563"
+        },
+        {
+          "id": "cv_a923af59",
+          "filename": "c13b934f__Luca_Nguyen__Cinematographer.pdf",
+          "chunk_count": 4,
+          "content_hash": "2a6d35bfd01ed90a6451e983c3d86675304ae0f16296232a4433abd88ccc5ca9",
+          "uploaded_at": "2026-01-05T03:27:41.800547"
+        },
+        {
+          "id": "cv_6bf0dc98",
+          "filename": "c68b5db8__Adam_Al-Mansoori__Creative_Director.pdf",
+          "chunk_count": 8,
+          "content_hash": "4a687f0eae4fda79b1a282f9486b07dc8dcd50fff10d21cf156617f6c037dcc1",
+          "uploaded_at": "2026-01-05T03:27:42.989627"
+        },
+        {
+          "id": "cv_501af5a5",
+          "filename": "d32f5aa9__Rafael_Al-Mansur__Illustrator.pdf",
+          "chunk_count": 4,
+          "content_hash": "cd11b935f0e1bad6a4cb8b8f9a2f8cb548de59ba7c1ed619f16b718310aa483e",
+          "uploaded_at": "2026-01-05T03:27:44.134312"
+        },
+        {
+          "id": "cv_a7ffd818",
+          "filename": "d5318bdf__Rahul_Mehta__Game_Composer.pdf",
+          "chunk_count": 6,
+          "content_hash": "fcf0954beddcd980157de3f037113199a9e6350a0026d10158ad642d4c33f3e3",
+          "uploaded_at": "2026-01-05T03:27:45.228201"
+        },
+        {
+          "id": "cv_d391721b",
+          "filename": "df1df2ad__Aisha_Johnson__Portrait_Photographer.pdf",
+          "chunk_count": 4,
+          "content_hash": "4be16d7818bb30328868a01c160f08786736630bb6ec9ee746d8417cbb07a59a",
+          "uploaded_at": "2026-01-05T03:27:46.415619"
+        },
+        {
+          "id": "cv_a49024ee",
+          "filename": "ea12afd1__Rajesh_Nair__Head_of_Audio.pdf",
+          "chunk_count": 6,
+          "content_hash": "ca8f77e580907ed8f7196a92c2aeff5db54f0a59066a195d4c80b21a144a84e0",
+          "uploaded_at": "2026-01-05T03:27:47.578248"
+        },
+        {
+          "id": "cv_209e9628",
+          "filename": "f084b8b7__Aisha_Khan__Art_Director.pdf",
+          "chunk_count": 6,
+          "content_hash": "f1f3cca90eda5b865b099ebd29419115a7e671cc4e9578a822ee534df9a472bb",
+          "uploaded_at": "2026-01-05T03:27:48.785609"
         }
       ],
       "messages": [
@@ -13356,14 +13818,140 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-05T03:25:31.903353"
+        },
+        {
+          "id": "78d00395-f347-4092-8fab-0da2e4a9d004",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to identify and rank candidates with leadership experience based on their CVs. The key criteria are previous leadership roles, team size managed, and leadership achievements. I will analyze the provided CVs, looking for these indicators and create a ranked list.\n:::\n\nBased on the provided CVs, the strongest candidates for a leadership position are [📄](cv:cv_3a2366f9)**Carlos Rodrigues**and [📄](cv:cv_10f10045)**Layla Al-Mansoor**. These candidates have demonstrated leadership experience through management roles and team mentorship. ### Analysis\nI evaluated the candidates based on their leadership experience, considering management roles, team size, and leadership achievements.\n\n### Analysis\n\nI evaluated the candidates based on their leadership experience, considering management roles, team size, and leadership achievements.\n\n| Candidate | Leadership Role | Team Size (Inferred) | Leadership Achievements | Match Score |\n|---|---|---|---|---|\n| Layla Al-Mansoor | Flutter Developer | Mentored junior interns | Co-authored internal Flutter best-practice guide adopted company-wide | 60% |\n| Carlos Rodrigues | Director of Engineering, Engineering Manager | Managed teams (unspecified size) | Delivered a SaaS platform that achieved $10M ARR, Introduced agile delivery metrics that improved release frequency by 50%, Mentored junior leads | 50% |\n| Isabel Mendoza | Junior Developer | Managed no team | Created reusable UI components that later formed the basis of the company’s design system | 20% |\n\n:::conclusion\nThe top candidates for a leadership position are [📄](cv:cv_3a2366f9)**Carlos Rodrigues**and [📄](cv:cv_10f10045)**Layla Al-Mansoor**. I recommend further evaluation of these candidates based on their leadership experience.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_7c253f5e",
+              "filename": "40a3a141__Isabel_Mendoza__Full_Stack_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_e20ca1ea",
+              "filename": "35a54edb__Marco_Chen__Medical_Technologist.pdf"
+            },
+            {
+              "cv_id": "cv_a32c4454",
+              "filename": "ad98e9dd__Carmen_Rodriguez__Unreal_Engine_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_3a2366f9",
+              "filename": "3ae58553__Carlos_Rodrigues__Distinguished_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_a5fb38a7",
+              "filename": "2ceae85e__Layla_Hassan__NLP_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_6708c8f7",
+              "filename": "3a183baa__Rajiv_Patel__Physical_Therapist.pdf"
+            },
+            {
+              "cv_id": "cv_10f10045",
+              "filename": "16d91ce8__Layla_Al-Mansoor__Flutter_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_3003a12f",
+              "filename": "2a6dddd5__Aarohi_Patel__Physician_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_105b544b",
+              "filename": "dcef762d__Alicia_Mendoza__Junior_Mobile_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_be920b95",
+              "filename": "47129175__Elin_Andersson__Automation_Engineer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 7844.9,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 8.19,
+              "details": "Found 10 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 20340.5,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4531.88,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Based on the provided CVs, the strongest candidates for a leadership position are [📄](cv:cv_3a2366f9) **Carlos Rodrigues** and [📄](cv:cv_10f10045) **Layla Al-Mansoor**. These candidates have demonstrated leadership experience through management roles and team mentorship. ### Analysis\nI evaluated the candidates based on their leadership experience, considering management roles, team size, and leadership achievements.",
+            "raw_content": ":::thinking\nThe user is asking to identify and rank candidates with leadership experience based on their CVs. The key criteria are previous leadership roles, team size managed, and leadership achievements. I will analyze the provided CVs, looking for these indicators and create a ranked list.\n\n:::\n\nBased on the provided CVs, the strongest candidates for a leadership position are **[Carlos Rodrigues](cv:cv_3a2366f9)** and **[Layla Al-Mansoor](cv:cv_10f10045)**. These candidates have demonstrated leadership experience through management roles and team mentorship.\n\n### Analysis\n\nI evaluated the candidates based on their leadership experience, considering management roles, team size, and leadership achievements.\n\n| Candidate | Leadership Role | Team Size (Inferred) | Leadership Achievements | Match |\n|-----------|-----------------|----------------------|-------------------------|-------|\n| **[Carlos Rodrigues](cv:cv_3a2366f9)** | Director of Engineering, Engineering Manager | Managed teams (unspecified size) | Delivered a SaaS platform that achieved $10M ARR, Introduced agile delivery metrics that improved release frequency by 50%, Mentored junior leads | ⭐⭐⭐⭐ |\n| **[Layla Al-Mansoor](cv:cv_10f10045)** | Flutter Developer | Mentored junior interns | Co-authored internal Flutter best-practice guide adopted company-wide | ⭐⭐⭐ |\n| **[Isabel Mendoza](cv:cv_7c253f5e)** | Junior Developer | Managed no team | Created reusable UI components that later formed the basis of the company’s design system | ⭐ |\n\n**[Carlos Rodrigues](cv:cv_3a2366f9)** has the most explicit leadership experience, with roles as Director of Engineering and Engineering Manager. The CV highlights achievements like managing product development, delivering a successful SaaS platform, and mentoring junior leads. **[Layla Al-Mansoor](cv:cv_10f10045)** demonstrates leadership through mentoring junior interns and co-authoring a best-practice guide. **[Isabel Mendoza](cv:cv_7c253f5e)** has some leadership qualities but is not a strong match.\n\n:::conclusion\nThe top candidates for a leadership position are **[Carlos Rodrigues](cv:cv_3a2366f9)** and **[Layla Al-Mansoor](cv:cv_10f10045)**. I recommend further evaluation of these candidates based on their leadership experience.\n:::",
+            "thinking": "The user is asking to identify and rank candidates with leadership experience based on their CVs. The key criteria are previous leadership roles, team size managed, and leadership achievements. I will analyze the provided CVs, looking for these indicators and create a ranked list.",
+            "analysis": "I evaluated the candidates based on their leadership experience, considering management roles, team size, and leadership achievements.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Leadership Role",
+                "Team Size (Inferred)",
+                "Leadership Achievements",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Layla Al-Mansoor",
+                  "cv_id": "cv_10f10045",
+                  "columns": {
+                    "Leadership Role": "Flutter Developer",
+                    "Team Size (Inferred)": "Mentored junior interns",
+                    "Leadership Achievements": "Co-authored internal Flutter best-practice guide adopted company-wide"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Carlos Rodrigues",
+                  "cv_id": "cv_3a2366f9",
+                  "columns": {
+                    "Leadership Role": "Director of Engineering, Engineering Manager",
+                    "Team Size (Inferred)": "Managed teams (unspecified size)",
+                    "Leadership Achievements": "Delivered a SaaS platform that achieved $10M ARR, Introduced agile delivery metrics that improved release frequency by 50%, Mentored junior leads"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Isabel Mendoza",
+                  "cv_id": "cv_7c253f5e",
+                  "columns": {
+                    "Leadership Role": "Junior Developer",
+                    "Team Size (Inferred)": "Managed no team",
+                    "Leadership Achievements": "Created reusable UI components that later formed the basis of the company’s design system"
+                  },
+                  "match_score": 20
+                }
+              ]
+            },
+            "conclusion": "The top candidates for a leadership position are [📄](cv:cv_3a2366f9) **Carlos Rodrigues** and [📄](cv:cv_10f10045) **Layla Al-Mansoor**. I recommend further evaluation of these candidates based on their leadership experience.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T03:26:13.903367"
         }
       ],
       "created_at": "2026-01-05T03:11:02.932665",
-      "updated_at": "2026-01-05T03:25:31.903353"
+      "updated_at": "2026-01-05T03:27:49.430417"
     },
     {
       "id": "95377387-f7a7-4c8c-95f5-4a888cf2d3b7",
-      "name": "New chat",
+      "name": "CV Group 3777",
       "description": "",
       "cvs": [
         {
@@ -13631,6 +14219,20 @@
           "chunk_count": 3,
           "content_hash": "1a700337100870a0ba0d55af03132034a8aedc3cc90f7d6117d44ffa43b94151",
           "uploaded_at": "2026-01-05T03:17:35.190285"
+        },
+        {
+          "id": "cv_0c88c8bd",
+          "filename": "ea12afd1__Rajesh_Nair__Head_of_Audio.pdf",
+          "chunk_count": 6,
+          "content_hash": "ca8f77e580907ed8f7196a92c2aeff5db54f0a59066a195d4c80b21a144a84e0",
+          "uploaded_at": "2026-01-05T03:29:35.401883"
+        },
+        {
+          "id": "cv_bee78b71",
+          "filename": "f084b8b7__Aisha_Khan__Art_Director.pdf",
+          "chunk_count": 6,
+          "content_hash": "f1f3cca90eda5b865b099ebd29419115a7e671cc4e9578a822ee534df9a472bb",
+          "uploaded_at": "2026-01-05T03:29:36.515647"
         }
       ],
       "messages": [
@@ -13831,7 +14433,7 @@
         }
       ],
       "created_at": "2026-01-05T03:15:22.560376",
-      "updated_at": "2026-01-05T03:18:04.185323"
+      "updated_at": "2026-01-05T03:29:37.734944"
     },
     {
       "id": "598822fc-952a-41bd-955a-975f2113e2ca",
@@ -14135,10 +14737,184 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-05T03:25:29.225325"
+        },
+        {
+          "id": "a6b4b2df-b45f-42e6-aeaf-51953e658676",
+          "role": "assistant",
+          "content": ":::thinking\nThe user wants a ranked list of all 41 candidates based on their total years of professional experience, extracted from the provided CV excerpts. I need to calculate the years of experience for each candidate based on the dates in their experience sections. Since I only have 10 CV excerpts, I will calculate the years of experience for those 10 candidates and then state that I cannot fulfill the request for all 41 candidates.\n:::\n\nI am unable to provide a ranked list of all 41 candidates with their total years of professional experience because I only have access to 10 CV excerpts. However, I can calculate the years of experience for the 10 candidates whose CVs are provided. ### Analysis\nI will calculate the years of experience for each of the 10 candidates by subtracting the start year of their first listed job from the current year (2024).\n\n### Analysis\n\nI will calculate the years of experience for each of the 10 candidates by subtracting the start year of their first listed job from the current year (2024).\n\n| Candidate | Years of Experience | Match Score |\n|---|---|---|\n| Priya Patel | 8 | 50% |\n| Leila Al-Mansoor | 14 | 50% |\n| Sofia Bianchi | 14 | 50% |\n| Priya Patel | 16 | 50% |\n| Priya Patel | 12 | 50% |\n| Wei Liang Tan | 13 | 50% |\n| Javier Mendoza | 3 | 50% |\n| Rajiv Patel | 16 | 50% |\n| Luca Nguyen | 6 | 50% |\n| Isabel Mendoza | 25 | 50% |\n\n:::conclusion\nI have provided the years of experience for the 10 candidates whose CVs were provided. To fulfill the request for all 41 candidates, I would need access to the complete set of CVs.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_88ba2dd6",
+              "filename": "f283d769__Priya_Patel__AI_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_c3712bd0",
+              "filename": "a6efaf4b__Leila_Al-Mansoor__Learning__Development_Specialist.pdf"
+            },
+            {
+              "cv_id": "cv_27a77e6e",
+              "filename": "99231373__Sofia_Bianchi__Clinical_Research_Coordinator.pdf"
+            },
+            {
+              "cv_id": "cv_11dea801",
+              "filename": "c1fcfa41__Priya_Patel__Engineering_Lead.pdf"
+            },
+            {
+              "cv_id": "cv_a67dc18f",
+              "filename": "238ebc65__Priya_Patel__Infrastructure_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_76f479c2",
+              "filename": "acb0a31b__Wei_Liang_Tan__Contract_Manager.pdf"
+            },
+            {
+              "cv_id": "cv_4ea694eb",
+              "filename": "cb3a97ee__Javier_Mendoza__Contract_Manager.pdf"
+            },
+            {
+              "cv_id": "cv_e4bdfe53",
+              "filename": "9914b605__Rajiv_Patel__Software_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_fac8ad44",
+              "filename": "2502875c__Luca_Nguyen__Mastering_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_56de519e",
+              "filename": "40a3a141__Isabel_Mendoza__Full_Stack_Developer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 9014.26,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 13.94,
+              "details": "Found 10 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 20285.98,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 3652.76,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "I am unable to provide a ranked list of all 41 candidates with their total years of professional experience because I only have access to 10 CV excerpts. However, I can calculate the years of experience for the 10 candidates whose CVs are provided. ### Analysis\nI will calculate the years of experience for each of the 10 candidates by subtracting the start year of their first listed job from the current year (2024).",
+            "raw_content": ":::thinking\nThe user wants a ranked list of all 41 candidates based on their total years of professional experience, extracted from the provided CV excerpts. I need to calculate the years of experience for each candidate based on the dates in their experience sections. Since I only have 10 CV excerpts, I will calculate the years of experience for those 10 candidates and then state that I cannot fulfill the request for all 41 candidates.\n:::\n\nI am unable to provide a ranked list of all 41 candidates with their total years of professional experience because I only have access to 10 CV excerpts. However, I can calculate the years of experience for the 10 candidates whose CVs are provided.\n\n### Analysis\n\nI will calculate the years of experience for each of the 10 candidates by subtracting the start year of their first listed job from the current year (2024).\n\n| Candidate | Years of Experience |\n|-----------|---------------------|\n| **[Priya Patel](cv:cv_88ba2dd6)** | 8 |\n| **[Leila Al-Mansoor](cv:cv_c3712bd0)** | 14 |\n| **[Sofia Bianchi](cv:cv_27a77e6e)** | 14 |\n| **[Priya Patel](cv:cv_11dea801)** | 16 |\n| **[Priya Patel](cv:cv_a67dc18f)** | 12 |\n| **[Wei Liang Tan](cv:cv_76f479c2)** | 13 |\n| **[Javier Mendoza](cv:cv_4ea694eb)** | 3 |\n| **[Rajiv Patel](cv:cv_e4bdfe53)** | 16 |\n| **[Luca Nguyen](cv:cv_fac8ad44)** | 6 |\n| **[Isabel Mendoza](cv:cv_56de519e)** | 25 |\n\n:::conclusion\nI have provided the years of experience for the 10 candidates whose CVs were provided. To fulfill the request for all 41 candidates, I would need access to the complete set of CVs.",
+            "thinking": "The user wants a ranked list of all 41 candidates based on their total years of professional experience, extracted from the provided CV excerpts. I need to calculate the years of experience for each candidate based on the dates in their experience sections. Since I only have 10 CV excerpts, I will calculate the years of experience for those 10 candidates and then state that I cannot fulfill the request for all 41 candidates.",
+            "analysis": "I will calculate the years of experience for each of the 10 candidates by subtracting the start year of their first listed job from the current year (2024).",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Years of Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Priya Patel",
+                  "cv_id": "cv_88ba2dd6",
+                  "columns": {
+                    "Years of Experience": "8"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Leila Al-Mansoor",
+                  "cv_id": "cv_c3712bd0",
+                  "columns": {
+                    "Years of Experience": "14"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Sofia Bianchi",
+                  "cv_id": "cv_27a77e6e",
+                  "columns": {
+                    "Years of Experience": "14"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Priya Patel",
+                  "cv_id": "cv_11dea801",
+                  "columns": {
+                    "Years of Experience": "16"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Priya Patel",
+                  "cv_id": "cv_a67dc18f",
+                  "columns": {
+                    "Years of Experience": "12"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Wei Liang Tan",
+                  "cv_id": "cv_76f479c2",
+                  "columns": {
+                    "Years of Experience": "13"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Javier Mendoza",
+                  "cv_id": "cv_4ea694eb",
+                  "columns": {
+                    "Years of Experience": "3"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Rajiv Patel",
+                  "cv_id": "cv_e4bdfe53",
+                  "columns": {
+                    "Years of Experience": "16"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Luca Nguyen",
+                  "cv_id": "cv_fac8ad44",
+                  "columns": {
+                    "Years of Experience": "6"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Isabel Mendoza",
+                  "cv_id": "cv_56de519e",
+                  "columns": {
+                    "Years of Experience": "25"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "I have provided the years of experience for the 10 candidates whose CVs were provided. To fulfill the request for all 41 candidates, I would need access to the complete set of CVs.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T03:26:11.345250"
         }
       ],
       "created_at": "2026-01-05T03:19:28.632434",
-      "updated_at": "2026-01-05T03:25:29.225325"
+      "updated_at": "2026-01-05T03:26:11.345250"
     }
   ]
 }
