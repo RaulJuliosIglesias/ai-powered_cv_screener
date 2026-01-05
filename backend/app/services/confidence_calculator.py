@@ -12,6 +12,10 @@ from dataclasses import dataclass, field
 
 logger = logging.getLogger(__name__)
 
+# Configurable constants for source coverage calculation
+EXPECTED_CHUNKS_FOR_GOOD_COVERAGE = 5  # Expected number of chunks for good coverage
+EXPECTED_UNIQUE_CVS_FOR_DIVERSITY = 3  # Expected number of unique CVs for diversity score
+
 
 ADAPTIVE_THRESHOLDS = {
     'factual_simple': {
@@ -251,12 +255,11 @@ class ConfidenceCalculator:
         
         num_chunks = len(chunks)
         unique_cvs = len(set(c.get('metadata', {}).get('cv_id', f'unknown_{i}') for i, c in enumerate(chunks)))
-        expected_chunks = 5  # Reasonable expectation for good coverage
         
-        # Score based on actual coverage
+        # Score based on actual coverage (using configurable constants)
         # Use both chunk count and CV diversity
-        chunk_score = min(1.0, num_chunks / expected_chunks)
-        cv_diversity_score = min(1.0, unique_cvs / 3)  # Expect at least 3 unique CVs
+        chunk_score = min(1.0, num_chunks / EXPECTED_CHUNKS_FOR_GOOD_COVERAGE)
+        cv_diversity_score = min(1.0, unique_cvs / EXPECTED_UNIQUE_CVS_FOR_DIVERSITY)
         
         # Combined score (weighted average: 60% chunks, 40% diversity)
         score = chunk_score * 0.6 + cv_diversity_score * 0.4
@@ -265,11 +268,11 @@ class ConfidenceCalculator:
             score=score,
             weight=self.BASE_WEIGHTS['source_coverage'],
             contribution=score * self.BASE_WEIGHTS['source_coverage'],
-            calculation_method=f"({num_chunks} chunks / {expected_chunks} expected) × 0.6 + ({unique_cvs} unique CVs / 3 expected) × 0.4",
+            calculation_method=f"({num_chunks} chunks / {EXPECTED_CHUNKS_FOR_GOOD_COVERAGE} expected) × 0.6 + ({unique_cvs} unique CVs / {EXPECTED_UNIQUE_CVS_FOR_DIVERSITY} expected) × 0.4",
             raw_data={
                 "num_chunks": num_chunks,
                 "unique_cvs": unique_cvs,
-                "expected_chunks": expected_chunks,
+                "expected_chunks": EXPECTED_CHUNKS_FOR_GOOD_COVERAGE,
                 "chunk_score": round(chunk_score, 3),
                 "cv_diversity_score": round(cv_diversity_score, 3)
             },

@@ -13,6 +13,9 @@ from app.config import settings, timeouts
 
 logger = logging.getLogger(__name__)
 
+# RRF (Reciprocal Rank Fusion) constant
+RRF_K = 60  # Standard RRF constant - higher values give more weight to lower-ranked results
+
 
 @dataclass
 class MultiQueryResult:
@@ -25,6 +28,72 @@ class MultiQueryResult:
     def __post_init__(self):
         if self.entities is None:
             self.entities = {}
+
+
+def reciprocal_rank_fusion(
+    results_per_query: List[List[str]],
+    k: int = RRF_K
+) -> List[tuple[str, float]]:
+    """
+    Fuse multiple ranked result lists using Reciprocal Rank Fusion (RRF).
+    
+    RRF is a simple but effective method to combine rankings from multiple sources.
+    Formula: RRF_score(doc) = sum(1 / (k + rank_i)) for each query i where doc appears
+    
+    Args:
+        results_per_query: List of ranked result lists (each containing doc IDs)
+        k: RRF constant (default 60). Higher values reduce the impact of high rankings.
+        
+    Returns:
+        List of (doc_id, rrf_score) tuples sorted by score descending
+    """
+    scores: dict[str, float] = {}
+    
+    for results in results_per_query:
+        for rank, doc_id in enumerate(results):
+            if doc_id not in scores:
+                scores[doc_id] = 0.0
+            # RRF formula: 1 / (k + rank + 1) where rank is 0-indexed
+            scores[doc_id] += 1.0 / (k + rank + 1)
+    
+    # Sort by score descending
+    return sorted(scores.items(), key=lambda x: -x[1])
+
+
+def reciprocal_rank_fusion_with_scores(
+    results_per_query: List[List[tuple[str, float]]],
+    k: int = RRF_K
+) -> List[tuple[str, float, float]]:
+    """
+    Fuse multiple ranked result lists using RRF, preserving original scores.
+    
+    Args:
+        results_per_query: List of ranked result lists, each containing (doc_id, score) tuples
+        k: RRF constant
+        
+    Returns:
+        List of (doc_id, rrf_score, max_original_score) tuples sorted by RRF score descending
+    """
+    rrf_scores: dict[str, float] = {}
+    max_scores: dict[str, float] = {}
+    
+    for results in results_per_query:
+        for rank, (doc_id, original_score) in enumerate(results):
+            if doc_id not in rrf_scores:
+                rrf_scores[doc_id] = 0.0
+                max_scores[doc_id] = 0.0
+            
+            # RRF formula
+            rrf_scores[doc_id] += 1.0 / (k + rank + 1)
+            # Track max original score for reference
+            max_scores[doc_id] = max(max_scores[doc_id], original_score)
+    
+    # Combine and sort
+    combined = [
+        (doc_id, rrf_score, max_scores[doc_id])
+        for doc_id, rrf_score in rrf_scores.items()
+    ]
+    return sorted(combined, key=lambda x: -x[1])
 
 
 MULTI_QUERY_PROMPT = """You are a query expansion assistant for a CV/resume screening system.

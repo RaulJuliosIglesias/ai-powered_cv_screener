@@ -14,6 +14,9 @@ from app.config import settings, timeouts
 
 logger = logging.getLogger(__name__)
 
+# Configurable constants
+DEFAULT_MIN_VERIFIED_RATIO = 0.7  # Default threshold for claim verification ratio
+
 
 @dataclass
 class Claim:
@@ -116,7 +119,7 @@ class ClaimVerifierService:
     def __init__(
         self,
         model: str,
-        min_verified_ratio: float = 0.7
+        min_verified_ratio: float = DEFAULT_MIN_VERIFIED_RATIO
     ):
         if not model:
             raise ValueError("model parameter is required and cannot be empty")

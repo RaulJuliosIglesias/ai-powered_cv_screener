@@ -1391,10 +1391,14 @@ class RAGServiceV5:
             raise RetrievalError(f"Embedding failed: {e}", cause=e)
     
     async def _step_fusion_retrieval(self, ctx: PipelineContextV5) -> None:
-        """Step 5: Search with all embeddings and fuse results."""
+        """Step 5: Search with all embeddings and fuse results using RRF."""
+        from app.services.multi_query_service import reciprocal_rank_fusion_with_scores, RRF_K
+        
         start = time.perf_counter()
         try:
-            all_results: dict[str, dict] = {}  # chunk_id -> chunk with max score
+            # Store results per query for RRF fusion
+            results_per_query: list[list[tuple[str, float]]] = []
+            all_chunks: dict[str, dict] = {}  # chunk_id -> chunk data
             query_sources: dict[str, list[str]] = {}  # chunk_id -> queries that found it
             
             # Search with each embedding
@@ -1416,11 +1420,16 @@ class RAGServiceV5:
                     timeout=self.config.search_timeout
                 )
                 
+                # Build ranked list for this query (for RRF)
+                query_results: list[tuple[str, float]] = []
+                
                 for r in results:
                     chunk_id = r.id
+                    query_results.append((chunk_id, r.similarity))
                     
-                    if chunk_id not in all_results:
-                        all_results[chunk_id] = {
+                    # Store chunk data (only once)
+                    if chunk_id not in all_chunks:
+                        all_chunks[chunk_id] = {
                             "content": r.content,
                             "metadata": {
                                 "filename": r.filename,
@@ -1428,38 +1437,42 @@ class RAGServiceV5:
                                 "section_type": r.metadata.get("section_type", "general"),
                                 "cv_id": r.cv_id
                             },
-                            "max_score": r.similarity,
-                            "query_count": 0
+                            "original_score": r.similarity
                         }
                         query_sources[chunk_id] = []
                     
-                    # Update max score (RRF-like fusion)
-                    all_results[chunk_id]["max_score"] = max(
-                        all_results[chunk_id]["max_score"],
-                        r.similarity
-                    )
-                    all_results[chunk_id]["query_count"] += 1
                     query_sources[chunk_id].append(query_name)
+                
+                if query_results:
+                    results_per_query.append(query_results)
             
-            # Sort by combined score (max_score * query_count boost)
-            sorted_chunks = sorted(
-                all_results.values(),
-                key=lambda x: x["max_score"] * (1 + 0.1 * x["query_count"]),
-                reverse=True
-            )[:ctx.k]
+            # Apply Reciprocal Rank Fusion (RRF) to combine results
+            if results_per_query:
+                fused_results = reciprocal_rank_fusion_with_scores(results_per_query, k=RRF_K)
+                
+                # Build sorted chunks list from RRF results
+                sorted_chunks = []
+                for chunk_id, rrf_score, max_original_score in fused_results[:ctx.k]:
+                    if chunk_id in all_chunks:
+                        chunk_data = all_chunks[chunk_id]
+                        chunk_data["rrf_score"] = rrf_score
+                        chunk_data["score"] = max_original_score  # Keep original similarity for confidence calc
+                        sorted_chunks.append(chunk_data)
+            else:
+                sorted_chunks = []
             
             chunks = [
-                {"content": c["content"], "metadata": c["metadata"]}
+                {"content": c["content"], "metadata": c["metadata"], "score": c.get("score", 0)}
                 for c in sorted_chunks
             ]
             
             cv_ids = list({c["metadata"]["cv_id"] for c in chunks})
-            scores = [c["max_score"] for c in sorted_chunks]
+            scores = [c.get("score", 0) for c in sorted_chunks]
             
             ctx.retrieval_result = RetrievalResultV5(
                 chunks=chunks,
                 cv_ids=cv_ids,
-                strategy="multi_query_fusion",
+                strategy="rrf_fusion",
                 scores=scores,
                 query_sources=query_sources
             )
@@ -1554,6 +1567,17 @@ class RAGServiceV5:
             ))
             return
         
+        # Check circuit breaker before reasoning LLM call
+        if "reasoning" in self._circuit_breakers and not self._circuit_breakers["reasoning"].allow_request():
+            logger.warning("Reasoning circuit breaker open, skipping reasoning step")
+            ctx.metrics.add_stage(StageMetrics(
+                stage=PipelineStage.REASONING,
+                duration_ms=0,
+                success=False,
+                error="Circuit breaker open"
+            ))
+            return
+        
         start = time.perf_counter()
         try:
             context_str = self._format_context(ctx.effective_chunks)
@@ -1582,6 +1606,10 @@ class RAGServiceV5:
             
             logger.info(f"[STEP_REASONING] Captured: {prompt_tokens}+{completion_tokens}={prompt_tokens+completion_tokens} tokens, ${openrouter_cost}")
             
+            # Record success with circuit breaker
+            if "reasoning" in self._circuit_breakers:
+                self._circuit_breakers["reasoning"].record_success()
+            
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.REASONING,
                 duration_ms=(time.perf_counter() - start) * 1000,
@@ -1594,6 +1622,9 @@ class RAGServiceV5:
                 }
             ))
         except httpx.TimeoutException as e:
+            # Record failure with circuit breaker
+            if "reasoning" in self._circuit_breakers:
+                self._circuit_breakers["reasoning"].record_failure()
             logger.warning(f"Reasoning timeout: {e}. Skipping reasoning step.")
             ctx.reasoning_trace = None
             degradation.disable_feature('reasoning', 'Timeout')
@@ -1604,6 +1635,9 @@ class RAGServiceV5:
                 error=f"Timeout: {str(e)}"
             ))
         except Exception as e:
+            # Record failure with circuit breaker
+            if "reasoning" in self._circuit_breakers:
+                self._circuit_breakers["reasoning"].record_failure()
             logger.error(f"Reasoning error: {e}. Continuing without reasoning.")
             ctx.reasoning_trace = None
             degradation.disable_feature('reasoning', str(e))
@@ -1627,6 +1661,10 @@ class RAGServiceV5:
                 metadata={"from_reasoning": True}
             ))
             return
+        
+        # Check circuit breaker before LLM call
+        if "llm" in self._circuit_breakers and not self._circuit_breakers["llm"].allow_request():
+            raise GenerationError("LLM circuit breaker open - too many recent failures")
         
         try:
             chunks = ctx.effective_chunks
@@ -1657,6 +1695,10 @@ class RAGServiceV5:
                 timeout=self.config.llm_timeout
             )
             
+            # Record success with circuit breaker
+            if "llm" in self._circuit_breakers:
+                self._circuit_breakers["llm"].record_success()
+            
             ctx.generated_response = result.text
             ctx.generation_tokens = {
                 "prompt": result.prompt_tokens,
@@ -1684,6 +1726,9 @@ class RAGServiceV5:
                 }
             ))
         except Exception as e:
+            # Record failure with circuit breaker
+            if "llm" in self._circuit_breakers:
+                self._circuit_breakers["llm"].record_failure()
             logger.error(f"Generation failed: {e}")
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.GENERATION,

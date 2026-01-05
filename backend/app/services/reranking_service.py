@@ -16,6 +16,11 @@ from app.providers.cloud.llm import calculate_openrouter_cost
 
 logger = logging.getLogger(__name__)
 
+# Configurable constants (moved from hardcoded values)
+DEFAULT_RELEVANCE_SCORE = 5.0  # Neutral score when parsing fails
+LLM_SCORE_WEIGHT = 0.7  # Weight for LLM relevance score in combined scoring
+SIMILARITY_WEIGHT = 0.3  # Weight for original similarity score
+
 
 def _get_attr(obj, key, default=None):
     """Get attribute from object or dict."""
@@ -182,9 +187,9 @@ class RerankingService:
             score_dict = {}
             for i, result in enumerate(results):
                 score = scores[i] if i < len(scores) else 0
-                # Combine LLM score with original similarity
+                # Combine LLM score with original similarity (configurable weights)
                 similarity = _get_attr(result, 'similarity', 0.5)
-                combined_score = (score / 10.0) * 0.7 + similarity * 0.3
+                combined_score = (score / 10.0) * LLM_SCORE_WEIGHT + similarity * SIMILARITY_WEIGHT
                 scored_results.append((result, combined_score, score))
                 cv_id = _get_attr(result, 'cv_id')
                 if cv_id:
@@ -263,21 +268,17 @@ class RerankingService:
                     s = float(score)
                     validated.append(max(0, min(10, s)))
                 except:
-                    validated.append(5.0)
+                    validated.append(DEFAULT_RELEVANCE_SCORE)
             
             # Pad if needed
             while len(validated) < expected_count:
-                validated.append(5.0)
+                validated.append(DEFAULT_RELEVANCE_SCORE)
             
             return validated
             
         except Exception as e:
             logger.error(f"Failed to parse reranking scores: {e}")
-            return [5.0] * expected_count
-    
-    async def close(self):
-        """Close HTTP client."""
-        await self.client.aclose()
+            return [DEFAULT_RELEVANCE_SCORE] * expected_count
 
 
 # Singleton instance

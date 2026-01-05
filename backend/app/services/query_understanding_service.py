@@ -202,7 +202,3 @@ class QueryUnderstandingService:
         except Exception as e:
             logger.error(f"Query understanding failed: {e}")
             raise
-    
-    async def close(self):
-        """Close HTTP client."""
-        await self.client.aclose()

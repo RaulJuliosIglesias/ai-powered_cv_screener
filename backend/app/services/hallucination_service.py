@@ -12,6 +12,9 @@ from dataclasses import dataclass, field
 
 logger = logging.getLogger(__name__)
 
+# Configurable thresholds (moved from hardcoded values)
+MIN_CONFIDENCE_THRESHOLD = 0.5  # Minimum confidence score for valid response
+
 
 @dataclass
 class HallucinationCheckResult:
@@ -119,7 +122,7 @@ class HallucinationService:
         )
         
         # 4. Determine overall validity
-        is_valid = len(unverified_cv_ids) == 0 and confidence_score >= 0.5
+        is_valid = len(unverified_cv_ids) == 0 and confidence_score >= MIN_CONFIDENCE_THRESHOLD
         
         result = HallucinationCheckResult(
             is_valid=is_valid,
