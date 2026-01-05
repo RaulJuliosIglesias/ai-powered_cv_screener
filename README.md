@@ -272,6 +272,13 @@ Comprehensive documentation explaining how this project meets professional evalu
 | [MODES_EXPLANATION.md](./MODES_EXPLANATION.md) | Local vs Cloud modes |
 | [API Docs](http://localhost:8000/docs) | Interactive API (when running) |
 
+### 🔒 Security & Roadmap
+
+| Document | Description |
+|----------|-------------|
+| [SECURITY.md](./SECURITY.md) | Security best practices |
+| [**🚨 SECURITY_IMPROVEMENTS.md**](./docs/roadmap/SECURITY_IMPROVEMENTS.md) | **Critical security improvements pending** |
+
 ---
 
 ## 📁 Project Structure

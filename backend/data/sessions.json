@@ -13192,10 +13192,195 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-05T13:51:29.147244"
+        },
+        {
+          "id": "dd75db05-b61d-45cb-99ee-afeba54f80dc",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to rank candidates based on their technical skills, considering programming languages, frameworks, tools, and technologies. I need to analyze each CV, identify technical skills, and then rank the candidates accordingly. The ranking will be based on the presence and depth of technical skills mentioned in the CVs.\n\nRelevant CVs: All CVs need to be reviewed.\n\nKey Criteria:\n1. Presence of programming languages, frameworks, and tools.\n2. Depth of experience with these technologies (e.g., years of experience, specific projects).\n3. Job titles indicating technical roles.\n\nI will create a table to compare the candidates and their technical skills.\n:::\n\nBased on the CVs, the candidates are ranked by the strength of their technical skills. The ranking considers the presence of programming languages, frameworks, tools, and technologies, as well as the depth of experience. ### Analysis\nI reviewed all the provided CVs and identified the candidates with the most relevant technical skills.\n\n### Analysis\n\nI reviewed all the provided CVs and identified the candidates with the most relevant technical skills.\n\n[📄](cv:cv_90dc9497)**Lerato Nkosi**and [📄](cv:cv_10ccdb51)**Lerato Nkosi**: Both CVs of [📄](cv:cv_10ccdb51)**Lerato Nkosi**show strong technical skills, including smart contract development, zero-knowledge proofs, consensus algorithm design, and experience with blockchain technologies. The CVs also mention experience with AWS, Ethereum, and Bitcoin.\n\n[📄](cv:cv_a05290e1)**Aisha Patel**: [📄](cv:cv_a05290e1)**Aisha Patel**'s CV mentions experience with machine learning models and algorithm design, which are relevant to technical roles.\n\n[📄](cv:cv_117eba77)**Khalid Al-Mansoori**: [📄](cv:cv_117eba77)**Khalid Al-Mansoori**'s CV mentions experience with Python and machine learning, indicating some technical skills.\n\n[📄](cv:cv_00c4e497)**Priya Naidoo**: [📄](cv:cv_00c4e497)**Priya Naidoo**'s CV mentions experience with Python and data analysis.\n\n[📄](cv:cv_dd44d875)**Layla Al-Mansoor**: [📄](cv:cv_dd44d875)**Layla Al-Mansoor**'s CV mentions experience with PCR & qRT-PCR, Mass Spectrometry, Cell Culture, ELISA & Western Blot, and Data Analysis (R, Python).\n\n[📄](cv:cv_1b1dea70)**Margaret OConnor**and [📄](cv:cv_d17dfe23)**Margaret OConnor**: [📄](cv:cv_d17dfe23)**Margaret OConnor**'s CVs do not explicitly mention any programming languages, frameworks, or tools.\n\n[📄](cv:cv_0f82c8ec)**Mateo Alvarez**and [📄](cv:cv_a079128e)**Gabriela Martinez**: These CVs do not explicitly mention any programming languages, frameworks, or tools.\n\n| Candidate | Skills | Experience | Match Score |\n|---|---|---|---|\n| Lerato Nkosi | Smart Contract Development, Zero-Knowledge Proofs, Consensus Algorithm Design, AWS, Ethereum, Bitcoin | Blockchain Engineer, Blockchain Research Director | 100% |\n| Lerato Nkosi | Smart Contract Development, Zero-Knowledge Proofs, Consensus Algorithm Design, AWS, Ethereum, Bitcoin | Blockchain Engineer, Blockchain Research Director | 100% |\n| Aisha Patel | Machine Learning, Algorithm Design | Research Scientist | 60% |\n| Khalid Al-Mansoori | Python, Machine Learning | Research Assistant | 40% |\n| Priya Naidoo | Python, Data Analysis | Research Assistant | 40% |\n| Layla Al-Mansoor | Data Analysis (R, Python) | Lab Technician | 40% |\n| Margaret OConnor | None | Game Director | 20% |\n| Margaret OConnor | None | Game Director | 20% |\n| Mateo Alvarez | None | Senior Laboratory Manager | 20% |\n| Gabriela Martinez | Python (Pandas, SciPy) | Research Associate | 20% |\n\n:::conclusion\nThe candidates with the strongest technical skills are [📄](cv:cv_90dc9497)**Lerato Nkosi**and [📄](cv:cv_10ccdb51)**Lerato Nkosi**.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_a05290e1",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_117eba77",
+              "filename": "d2621eee__Khalid_Al-Mansoori__Research_Scientist.pdf"
+            },
+            {
+              "cv_id": "cv_1b1dea70",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_d17dfe23",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_0f82c8ec",
+              "filename": "0ed5d24f__Mateo_Alvarez__Lab_Technician.pdf"
+            },
+            {
+              "cv_id": "cv_dd44d875",
+              "filename": "312feb56__Layla_Al-Mansoor__Lab_Technician.pdf"
+            },
+            {
+              "cv_id": "cv_a079128e",
+              "filename": "c5d4a6de__Gabriela_Martinez__Research_Associate.pdf"
+            },
+            {
+              "cv_id": "cv_00c4e497",
+              "filename": "03ddcb57__Priya_Naidoo__Research_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_90dc9497",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_10ccdb51",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 14721.76,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 5.27,
+              "details": "Found 10 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 24630.68,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6781.2,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Based on the CVs, the candidates are ranked by the strength of their technical skills. The ranking considers the presence of programming languages, frameworks, tools, and technologies, as well as the depth of experience. ### Analysis\nI reviewed all the provided CVs and identified the candidates with the most relevant technical skills.",
+            "raw_content": ":::thinking\nThe user is asking to rank candidates based on their technical skills, considering programming languages, frameworks, tools, and technologies. I need to analyze each CV, identify technical skills, and then rank the candidates accordingly. The ranking will be based on the presence and depth of technical skills mentioned in the CVs.\n\nRelevant CVs: All CVs need to be reviewed.\n\nKey Criteria:\n1.  Presence of programming languages, frameworks, and tools.\n2.  Depth of experience with these technologies (e.g., years of experience, specific projects).\n3.  Job titles indicating technical roles.\n\nI will create a table to compare the candidates and their technical skills.\n:::\n\nBased on the CVs, the candidates are ranked by the strength of their technical skills. The ranking considers the presence of programming languages, frameworks, tools, and technologies, as well as the depth of experience.\n\n### Analysis\n\nI reviewed all the provided CVs and identified the candidates with the most relevant technical skills.\n\n**[Lerato Nkosi](cv:cv_90dc9497)** and **[Lerato Nkosi](cv:cv_10ccdb51)**: Both CVs of Lerato Nkosi show strong technical skills, including smart contract development, zero-knowledge proofs, consensus algorithm design, and experience with blockchain technologies. The CVs also mention experience with AWS, Ethereum, and Bitcoin.\n\n**[Aisha Patel](cv:cv_a05290e1)**: Aisha Patel's CV mentions experience with machine learning models and algorithm design, which are relevant to technical roles.\n\n**[Khalid Al-Mansoori](cv:cv_117eba77)**: Khalid Al-Mansoori's CV mentions experience with Python and machine learning, indicating some technical skills.\n\n**[Priya Naidoo](cv:cv_00c4e497)**: Priya Naidoo's CV mentions experience with Python and data analysis.\n\n**[Layla Al-Mansoor](cv:cv_dd44d875)**: Layla Al-Mansoor's CV mentions experience with PCR & qRT-PCR, Mass Spectrometry, Cell Culture, ELISA & Western Blot, and Data Analysis (R, Python).\n\n**[Margaret OConnor](cv:cv_1b1dea70)** and **[Margaret OConnor](cv:cv_d17dfe23)**: Margaret OConnor's CVs do not explicitly mention any programming languages, frameworks, or tools.\n\n**[Mateo Alvarez](cv:cv_0f82c8ec)** and **[Gabriela Martinez](cv:cv_a079128e)**: These CVs do not explicitly mention any programming languages, frameworks, or tools.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Lerato Nkosi](cv:cv_90dc9497)** | Smart Contract Development, Zero-Knowledge Proofs, Consensus Algorithm Design, AWS, Ethereum, Bitcoin | Blockchain Engineer, Blockchain Research Director | ⭐⭐⭐⭐⭐ |\n| **[Lerato Nkosi](cv:cv_10ccdb51)** | Smart Contract Development, Zero-Knowledge Proofs, Consensus Algorithm Design, AWS, Ethereum, Bitcoin | Blockchain Engineer, Blockchain Research Director | ⭐⭐⭐⭐⭐ |\n| **[Aisha Patel](cv:cv_a05290e1)** | Machine Learning, Algorithm Design | Research Scientist | ⭐⭐⭐ |\n| **[Khalid Al-Mansoori](cv:cv_117eba77)** | Python, Machine Learning | Research Assistant | ⭐⭐ |\n| **[Priya Naidoo](cv:cv_00c4e497)** | Python, Data Analysis | Research Assistant | ⭐⭐ |\n| **[Layla Al-Mansoor](cv:cv_dd44d875)** | Data Analysis (R, Python) | Lab Technician | ⭐⭐ |\n| **[Margaret OConnor](cv:cv_1b1dea70)** | None | Game Director | ⭐️ |\n| **[Margaret OConnor](cv:cv_d17dfe23)** | None | Game Director | ⭐️ |\n| **[Mateo Alvarez](cv:cv_0f82c8ec)** | None | Senior Laboratory Manager | ⭐️ |\n| **[Gabriela Martinez](cv:cv_a079128e)** | Python (Pandas, SciPy) | Research Associate | ⭐️ |\n\n:::conclusion\nThe candidates with the strongest technical skills are **[Lerato Nkosi](cv:cv_90dc9497)** and **[Lerato Nkosi](cv:cv_10ccdb51)**.",
+            "thinking": "The user is asking to rank candidates based on their technical skills, considering programming languages, frameworks, tools, and technologies. I need to analyze each CV, identify technical skills, and then rank the candidates accordingly. The ranking will be based on the presence and depth of technical skills mentioned in the CVs.\n\nRelevant CVs: All CVs need to be reviewed.\n\nKey Criteria:\n1. Presence of programming languages, frameworks, and tools.\n2. Depth of experience with these technologies (e.g., years of experience, specific projects).\n3. Job titles indicating technical roles.\n\nI will create a table to compare the candidates and their technical skills.",
+            "analysis": "I reviewed all the provided CVs and identified the candidates with the most relevant technical skills.\n\n[📄](cv:cv_90dc9497) **Lerato Nkosi** and [📄](cv:cv_10ccdb51) **Lerato Nkosi**: Both CVs of [📄](cv:cv_10ccdb51) **Lerato Nkosi** show strong technical skills, including smart contract development, zero-knowledge proofs, consensus algorithm design, and experience with blockchain technologies. The CVs also mention experience with AWS, Ethereum, and Bitcoin.\n\n[📄](cv:cv_a05290e1) **Aisha Patel**: [📄](cv:cv_a05290e1) **Aisha Patel**'s CV mentions experience with machine learning models and algorithm design, which are relevant to technical roles.\n\n[📄](cv:cv_117eba77) **Khalid Al-Mansoori**: [📄](cv:cv_117eba77) **Khalid Al-Mansoori**'s CV mentions experience with Python and machine learning, indicating some technical skills.\n\n[📄](cv:cv_00c4e497) **Priya Naidoo**: [📄](cv:cv_00c4e497) **Priya Naidoo**'s CV mentions experience with Python and data analysis.\n\n[📄](cv:cv_dd44d875) **Layla Al-Mansoor**: [📄](cv:cv_dd44d875) **Layla Al-Mansoor**'s CV mentions experience with PCR & qRT-PCR, Mass Spectrometry, Cell Culture, ELISA & Western Blot, and Data Analysis (R, Python).\n\n[📄](cv:cv_1b1dea70) **Margaret OConnor** and [📄](cv:cv_d17dfe23) **Margaret OConnor**: [📄](cv:cv_d17dfe23) **Margaret OConnor**'s CVs do not explicitly mention any programming languages, frameworks, or tools.\n\n[📄](cv:cv_0f82c8ec) **Mateo Alvarez** and [📄](cv:cv_a079128e) **Gabriela Martinez**: These CVs do not explicitly mention any programming languages, frameworks, or tools.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Skills",
+                "Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Lerato Nkosi",
+                  "cv_id": "cv_90dc9497",
+                  "columns": {
+                    "Skills": "Smart Contract Development, Zero-Knowledge Proofs, Consensus Algorithm Design, AWS, Ethereum, Bitcoin",
+                    "Experience": "Blockchain Engineer, Blockchain Research Director"
+                  },
+                  "match_score": 100
+                },
+                {
+                  "candidate_name": "Lerato Nkosi",
+                  "cv_id": "cv_10ccdb51",
+                  "columns": {
+                    "Skills": "Smart Contract Development, Zero-Knowledge Proofs, Consensus Algorithm Design, AWS, Ethereum, Bitcoin",
+                    "Experience": "Blockchain Engineer, Blockchain Research Director"
+                  },
+                  "match_score": 100
+                },
+                {
+                  "candidate_name": "Aisha Patel",
+                  "cv_id": "cv_a05290e1",
+                  "columns": {
+                    "Skills": "Machine Learning, Algorithm Design",
+                    "Experience": "Research Scientist"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Khalid Al-Mansoori",
+                  "cv_id": "cv_117eba77",
+                  "columns": {
+                    "Skills": "Python, Machine Learning",
+                    "Experience": "Research Assistant"
+                  },
+                  "match_score": 40
+                },
+                {
+                  "candidate_name": "Priya Naidoo",
+                  "cv_id": "cv_00c4e497",
+                  "columns": {
+                    "Skills": "Python, Data Analysis",
+                    "Experience": "Research Assistant"
+                  },
+                  "match_score": 40
+                },
+                {
+                  "candidate_name": "Layla Al-Mansoor",
+                  "cv_id": "cv_dd44d875",
+                  "columns": {
+                    "Skills": "Data Analysis (R, Python)",
+                    "Experience": "Lab Technician"
+                  },
+                  "match_score": 40
+                },
+                {
+                  "candidate_name": "Margaret OConnor",
+                  "cv_id": "cv_1b1dea70",
+                  "columns": {
+                    "Skills": "None",
+                    "Experience": "Game Director"
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Margaret OConnor",
+                  "cv_id": "cv_d17dfe23",
+                  "columns": {
+                    "Skills": "None",
+                    "Experience": "Game Director"
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Mateo Alvarez",
+                  "cv_id": "cv_0f82c8ec",
+                  "columns": {
+                    "Skills": "None",
+                    "Experience": "Senior Laboratory Manager"
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Gabriela Martinez",
+                  "cv_id": "cv_a079128e",
+                  "columns": {
+                    "Skills": "Python (Pandas, SciPy)",
+                    "Experience": "Research Associate"
+                  },
+                  "match_score": 20
+                }
+              ]
+            },
+            "conclusion": "The candidates with the strongest technical skills are [📄](cv:cv_90dc9497) **Lerato Nkosi** and [📄](cv:cv_10ccdb51) **Lerato Nkosi**.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T13:53:04.025873"
         }
       ],
       "created_at": "2026-01-05T02:21:17.464498",
-      "updated_at": "2026-01-05T13:51:29.147244"
+      "updated_at": "2026-01-05T13:53:04.025873"
     },
     {
       "id": "e47b6131-cc76-4ec9-9219-a87d5443dc72",
@@ -23878,10 +24063,141 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-05T13:51:32.423415"
+        },
+        {
+          "id": "9be13a50-4202-4703-ba37-2de5d70a0731",
+          "role": "assistant",
+          "content": ":::thinking\nThe user wants to compare the education levels of all candidates, extracting their highest degree and major. I need to scan each CV's education section and identify the highest degree earned. I will then present the findings in a table.\n:::\n\nThe following candidates have education information in their CVs, and their highest degrees are presented below. The table includes the degree and the field of study, if available. ### Analysis\nI reviewed the education sections of each CV to identify the highest degree earned.\n\n### Analysis\n\nI reviewed the education sections of each CV to identify the highest degree earned. I included the major or field of study when explicitly mentioned in the CV. Candidates without an education section or without degree information were excluded from the table.\n\n| Candidate | Degree | Major/Field of Study | Match Score |\n|---|---|---|---|\n| Aisha Al Mansoori | Postdoc | Advanced machine learning | 60% |\n| Amir Al-Farsi | Bachelor of Science | Psychology | 60% |\n| Lukas Schneider | Bachelor of Arts | Sound Design and Production | 60% |\n| Adewale Patel | Bachelor of Arts | Visual Communication | 60% |\n\n:::conclusion\nThe candidates with the highest degrees and majors are: [📄](cv:cv_b428bff4)**Aisha Al Mansoori**, [📄](cv:cv_7aef282d)**Amir Al-Farsi**, [📄](cv:cv_fbe1da0a)**Lukas Schneider**, and [📄](cv:cv_99db78c9)**Adewale Patel**.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_b428bff4",
+              "filename": "4a8697d7__Aisha_Al_Mansoori__Postdoc.pdf"
+            },
+            {
+              "cv_id": "cv_8bd3aefd",
+              "filename": "5d0b9a4c__Javier_Morales__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_7aef282d",
+              "filename": "9c9af9ff__Amir_Al-Farsi__Instructional_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_fbe1da0a",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_2b90bfc9",
+              "filename": "9cd768c8__Emily_Tan__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_61120d45",
+              "filename": "2a6972cc__Ji-eun_Kim__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_5d42c773",
+              "filename": "2aaf7352__Sofia_Rossi__Restaurant_Owner.pdf"
+            },
+            {
+              "cv_id": "cv_7fe59646",
+              "filename": "4ef2ef97__Aisha_Tan__Pizza_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_99db78c9",
+              "filename": "6af7b13a__Adewale_Patel__Junior_Graphic_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_1fd34bb0",
+              "filename": "4bd4fa01__Lukas_Schneider__Stylist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 10487.25,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 13.7,
+              "details": "Found 10 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 20103.35,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 3310.86,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "The following candidates have education information in their CVs, and their highest degrees are presented below. The table includes the degree and the field of study, if available. ### Analysis\nI reviewed the education sections of each CV to identify the highest degree earned.",
+            "raw_content": ":::thinking\nThe user wants to compare the education levels of all candidates, extracting their highest degree and major. I need to scan each CV's education section and identify the highest degree earned. I will then present the findings in a table.\n:::\n\nThe following candidates have education information in their CVs, and their highest degrees are presented below. The table includes the degree and the field of study, if available.\n\n### Analysis\n\nI reviewed the education sections of each CV to identify the highest degree earned. I included the major or field of study when explicitly mentioned in the CV. Candidates without an education section or without degree information were excluded from the table.\n\n| Candidate | Degree | Major/Field of Study | Match |\n|-----------|--------|----------------------|-------|\n| **[Aisha Al Mansoori](cv:cv_b428bff4)** | Postdoc | Advanced machine learning | ⭐⭐⭐ |\n| **[Amir Al-Farsi](cv:cv_7aef282d)** | Bachelor of Science | Psychology | ⭐⭐⭐ |\n| **[Lukas Schneider](cv:cv_fbe1da0a)** | Bachelor of Arts | Sound Design and Production | ⭐⭐⭐ |\n| **[Adewale Patel](cv:cv_99db78c9)** | Bachelor of Arts | Visual Communication | ⭐⭐⭐ |\n\n:::conclusion\nThe candidates with the highest degrees and majors are: **[Aisha Al Mansoori](cv:cv_b428bff4)**, **[Amir Al-Farsi](cv:cv_7aef282d)**, **[Lukas Schneider](cv:cv_fbe1da0a)**, and **[Adewale Patel](cv:cv_99db78c9)**.",
+            "thinking": "The user wants to compare the education levels of all candidates, extracting their highest degree and major. I need to scan each CV's education section and identify the highest degree earned. I will then present the findings in a table.",
+            "analysis": "I reviewed the education sections of each CV to identify the highest degree earned. I included the major or field of study when explicitly mentioned in the CV. Candidates without an education section or without degree information were excluded from the table.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Degree",
+                "Major/Field of Study",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Aisha Al Mansoori",
+                  "cv_id": "cv_b428bff4",
+                  "columns": {
+                    "Degree": "Postdoc",
+                    "Major/Field of Study": "Advanced machine learning"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Amir Al-Farsi",
+                  "cv_id": "cv_7aef282d",
+                  "columns": {
+                    "Degree": "Bachelor of Science",
+                    "Major/Field of Study": "Psychology"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Lukas Schneider",
+                  "cv_id": "cv_fbe1da0a",
+                  "columns": {
+                    "Degree": "Bachelor of Arts",
+                    "Major/Field of Study": "Sound Design and Production"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Adewale Patel",
+                  "cv_id": "cv_99db78c9",
+                  "columns": {
+                    "Degree": "Bachelor of Arts",
+                    "Major/Field of Study": "Visual Communication"
+                  },
+                  "match_score": 60
+                }
+              ]
+            },
+            "conclusion": "The candidates with the highest degrees and majors are: [📄](cv:cv_b428bff4) **Aisha Al Mansoori**, [📄](cv:cv_7aef282d) **Amir Al-Farsi**, [📄](cv:cv_fbe1da0a) **Lukas Schneider**, and [📄](cv:cv_99db78c9) **Adewale Patel**.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T13:52:08.302458"
         }
       ],
       "created_at": "2026-01-05T04:02:44.497345",
-      "updated_at": "2026-01-05T13:51:32.423415"
+      "updated_at": "2026-01-05T13:52:08.302458"
     }
   ]
 }
