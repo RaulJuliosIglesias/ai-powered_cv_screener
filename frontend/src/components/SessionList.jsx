@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { 
   FolderPlus, MessageSquare, FileText, Trash2, 
-  ChevronRight, Users, Calendar, Edit2, X, Check 
+  ChevronRight, Users, Calendar, Edit2, X, Check, Loader2 
 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useBackgroundTask } from '../contexts/BackgroundTaskContext';
 
 const SessionList = ({ 
   sessions = [], 
@@ -17,6 +18,7 @@ const SessionList = ({
   const [newSessionDesc, setNewSessionDesc] = useState('');
   const [deleteConfirm, setDeleteConfirm] = useState(null);
   const { language } = useLanguage();
+  const { isSessionProcessing, getSessionProcessingInfo } = useBackgroundTask();
 
   const handleCreate = () => {
     if (newSessionName.trim()) {
@@ -104,71 +106,102 @@ const SessionList = ({
             </div>
           ) : (
             <div className="grid gap-4 md:grid-cols-2">
-              {sessions.map((session) => (
-                <div
-                  key={session.id}
-                  onClick={() => onSelectSession(session.id)}
-                  className="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-5 hover:border-blue-300 dark:hover:border-blue-600 hover:shadow-lg cursor-pointer transition-all"
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-gray-900 dark:text-white truncate text-lg">
-                        {session.name}
-                      </h3>
-                      {session.description && (
-                        <p className="text-sm text-gray-500 dark:text-gray-400 truncate mt-1">
-                          {session.description}
-                        </p>
+              {sessions.map((session) => {
+                const processing = isSessionProcessing(session.id);
+                const processingInfo = processing ? getSessionProcessingInfo(session.id) : null;
+                
+                return (
+                  <div
+                    key={session.id}
+                    onClick={() => onSelectSession(session.id)}
+                    className={`group rounded-2xl border p-5 cursor-pointer transition-all relative overflow-hidden
+                      ${processing 
+                        ? 'bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border-amber-300 dark:border-amber-600 shadow-amber-100 dark:shadow-amber-900/30 shadow-md' 
+                        : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 hover:shadow-lg'
+                      }`}
+                  >
+                    {/* Processing indicator bar */}
+                    {processing && processingInfo && (
+                      <div className="absolute top-0 left-0 right-0 h-1 bg-amber-200 dark:bg-amber-800">
+                        <div 
+                          className="h-full bg-amber-500 transition-all duration-300 ease-out"
+                          style={{ width: `${processingInfo.percent}%` }}
+                        />
+                      </div>
+                    )}
+                    
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <h3 className="font-semibold text-gray-900 dark:text-white truncate text-lg">
+                            {session.name}
+                          </h3>
+                          {processing && (
+                            <Loader2 className="w-4 h-4 text-amber-500 animate-spin flex-shrink-0" />
+                          )}
+                        </div>
+                        {session.description && (
+                          <p className="text-sm text-gray-500 dark:text-gray-400 truncate mt-1">
+                            {session.description}
+                          </p>
+                        )}
+                        {processing && processingInfo && (
+                          <p className="text-xs text-amber-600 dark:text-amber-400 mt-1 font-medium">
+                            {language === 'es' 
+                              ? `Procesando CVs... ${processingInfo.percent}%` 
+                              : `Processing CVs... ${processingInfo.percent}%`}
+                          </p>
+                        )}
+                      </div>
+                      <ChevronRight className={`w-5 h-5 transition-colors flex-shrink-0 ${processing ? 'text-amber-500' : 'text-gray-400 group-hover:text-blue-500'}`} />
+                    </div>
+
+                    <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+                      <div className="flex items-center gap-1.5">
+                        <FileText className="w-4 h-4" />
+                        <span>{session.cv_count} CVs</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <MessageSquare className="w-4 h-4" />
+                        <span>{session.message_count} {language === 'es' ? 'msgs' : 'msgs'}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100 dark:border-gray-700">
+                      <div className="flex items-center gap-1.5 text-xs text-gray-400">
+                        <Calendar className="w-3.5 h-3.5" />
+                        <span>{formatDate(session.updated_at)}</span>
+                      </div>
+                      
+                      {deleteConfirm === session.id ? (
+                        <div className="flex gap-1" onClick={(e) => e.stopPropagation()}>
+                          <button
+                            onClick={(e) => handleDelete(e, session.id)}
+                            className="p-1.5 bg-red-500 text-white rounded hover:bg-red-600"
+                            title={language === 'es' ? 'Confirmar' : 'Confirm'}
+                          >
+                            <Check className="w-3.5 h-3.5" />
+                          </button>
+                          <button
+                            onClick={(e) => { e.stopPropagation(); setDeleteConfirm(null); }}
+                            className="p-1.5 bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 rounded"
+                          >
+                            <X className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={(e) => { e.stopPropagation(); setDeleteConfirm(session.id); }}
+                          className="opacity-0 group-hover:opacity-100 p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-all"
+                          title={language === 'es' ? 'Eliminar' : 'Delete'}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
                       )}
                     </div>
-                    <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors flex-shrink-0" />
                   </div>
-
-                  <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
-                    <div className="flex items-center gap-1.5">
-                      <FileText className="w-4 h-4" />
-                      <span>{session.cv_count} CVs</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <MessageSquare className="w-4 h-4" />
-                      <span>{session.message_count} {language === 'es' ? 'msgs' : 'msgs'}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100 dark:border-gray-700">
-                    <div className="flex items-center gap-1.5 text-xs text-gray-400">
-                      <Calendar className="w-3.5 h-3.5" />
-                      <span>{formatDate(session.updated_at)}</span>
-                    </div>
-                    
-                    {deleteConfirm === session.id ? (
-                      <div className="flex gap-1" onClick={(e) => e.stopPropagation()}>
-                        <button
-                          onClick={(e) => handleDelete(e, session.id)}
-                          className="p-1.5 bg-red-500 text-white rounded hover:bg-red-600"
-                          title={language === 'es' ? 'Confirmar' : 'Confirm'}
-                        >
-                          <Check className="w-3.5 h-3.5" />
-                        </button>
-                        <button
-                          onClick={(e) => { e.stopPropagation(); setDeleteConfirm(null); }}
-                          className="p-1.5 bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 rounded"
-                        >
-                          <X className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    ) : (
-                      <button
-                        onClick={(e) => { e.stopPropagation(); setDeleteConfirm(session.id); }}
-                        className="opacity-0 group-hover:opacity-100 p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-all"
-                        title={language === 'es' ? 'Eliminar' : 'Delete'}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    )}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>

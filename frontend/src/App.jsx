@@ -112,7 +112,7 @@ function App() {
   };
 
   const { toast: toastState, showToast: showToastMessage, hideToast } = useToast();
-  const { startUploadTask, hasActiveTasks } = useBackgroundTask();
+  const { startUploadTask, hasActiveTasks, isSessionProcessing } = useBackgroundTask();
   
   const messagesEndRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -680,13 +680,17 @@ function App() {
                 className={`group flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
                   deletingSessionId === s.id 
                     ? 'bg-red-50 dark:bg-red-900/20 opacity-60 cursor-not-allowed' 
-                    : currentSessionId === s.id 
-                      ? 'bg-blue-100 dark:bg-slate-800 text-blue-700 dark:text-white cursor-pointer' 
-                      : 'text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800/50 cursor-pointer'
+                    : isSessionProcessing(s.id)
+                      ? 'bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 text-amber-800 dark:text-amber-200 cursor-pointer'
+                      : currentSessionId === s.id 
+                        ? 'bg-blue-100 dark:bg-slate-800 text-blue-700 dark:text-white cursor-pointer' 
+                        : 'text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800/50 cursor-pointer'
                 }`}
               >
                 {deletingSessionId === s.id ? (
                   <Loader className="w-4 h-4 flex-shrink-0 animate-spin text-red-400" />
+                ) : isSessionProcessing(s.id) ? (
+                  <Loader className="w-4 h-4 flex-shrink-0 animate-spin text-amber-500" />
                 ) : chatLoadingStates[s.id] ? (
                   <Loader className="w-4 h-4 flex-shrink-0 animate-spin text-cyan-400" />
                 ) : (
@@ -699,7 +703,11 @@ function App() {
                     <span className="text-sm truncate block">
                       {deletingSessionId === s.id ? (language === 'es' ? 'Eliminando...' : 'Deleting...') : s.name}
                     </span>
-                    <span className="text-xs text-slate-400 dark:text-slate-500">{s.cv_count || 0} CVs</span>
+                    <span className={`text-xs ${isSessionProcessing(s.id) ? 'text-amber-600 dark:text-amber-400' : 'text-slate-400 dark:text-slate-500'}`}>
+                      {isSessionProcessing(s.id) 
+                        ? (language === 'es' ? 'Procesando...' : 'Processing...') 
+                        : `${s.cv_count || 0} CVs`}
+                    </span>
                   </div>
                 )}
                 {deletingSessionId !== s.id && (
@@ -795,6 +803,24 @@ function App() {
             </div>
           ) : (
             <div className="max-w-5xl mx-auto space-y-6">
+              {/* Processing Banner - shown when CVs are being uploaded */}
+              {isSessionProcessing(currentSessionId) && (
+                <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/30 border border-amber-200 dark:border-amber-700 rounded-xl p-4 flex items-start gap-3">
+                  <div className="flex-shrink-0 w-8 h-8 bg-amber-100 dark:bg-amber-800 rounded-full flex items-center justify-center">
+                    <Loader className="w-4 h-4 text-amber-600 dark:text-amber-400 animate-spin" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-sm font-semibold text-amber-800 dark:text-amber-200">
+                      {language === 'es' ? 'Procesando CVs...' : 'Processing CVs...'}
+                    </h4>
+                    <p className="text-xs text-amber-700 dark:text-amber-300 mt-0.5">
+                      {language === 'es' 
+                        ? 'La base de datos está siendo actualizada. Puedes seguir haciendo consultas, pero las respuestas estarán limitadas a los CVs ya procesados.' 
+                        : 'Database is being updated. You can continue making queries, but responses will be limited to already processed CVs.'}
+                    </p>
+                  </div>
+                </div>
+              )}
               {/* Combine actual messages with pending message for THIS session only */}
               {[
                 ...(currentSession.messages || []),

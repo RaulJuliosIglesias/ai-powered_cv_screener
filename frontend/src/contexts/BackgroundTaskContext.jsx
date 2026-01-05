@@ -242,6 +242,39 @@ export function BackgroundTaskProvider({ children }) {
     t.status === 'completed'
   ).length;
 
+  // Get set of session IDs that are currently processing
+  const getProcessingSessionIds = useCallback(() => {
+    const ids = new Set();
+    Object.values(tasksRef.current).forEach(t => {
+      if (t.status === 'uploading' || t.status === 'processing') {
+        ids.add(t.sessionId);
+      }
+    });
+    return ids;
+  }, []);
+
+  // Check if a specific session is processing
+  const isSessionProcessing = useCallback((sessionId) => {
+    return Object.values(tasksRef.current).some(t => 
+      t.sessionId === sessionId && (t.status === 'uploading' || t.status === 'processing')
+    );
+  }, []);
+
+  // Get processing info for a session
+  const getSessionProcessingInfo = useCallback((sessionId) => {
+    const task = Object.values(tasksRef.current).find(t => 
+      t.sessionId === sessionId && (t.status === 'uploading' || t.status === 'processing')
+    );
+    if (!task) return null;
+    return {
+      percent: task.percent,
+      phase: task.phase,
+      currentFile: task.currentFile,
+      totalFiles: task.totalFiles,
+      status: task.status
+    };
+  }, []);
+
   // tasksVersion is used to trigger re-renders - eslint-disable-next-line
   void tasksVersion;
 
@@ -257,7 +290,10 @@ export function BackgroundTaskProvider({ children }) {
       removeTask,
       minimize,
       maximize,
-      toggleMinimize
+      toggleMinimize,
+      getProcessingSessionIds,
+      isSessionProcessing,
+      getSessionProcessingInfo
     }}>
       {children}
     </BackgroundTaskContext.Provider>
