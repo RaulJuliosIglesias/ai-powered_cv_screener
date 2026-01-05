@@ -21,8 +21,8 @@ This guide will help you configure Supabase for the CV Screener RAG system cloud
 
 1. In your project dashboard, go to **Settings** → **API**
 2. Copy these values:
-   - **Project URL**: `https://xxxxx.supabase.co`
-   - **Service Role Key** (not anon key!): `eyJhbGci...` (very long token)
+   - **Project URL**: `your_supabase_project_url`
+   - **Service Role Key** (not anon key!): `your_service_role_key` (very long token)
 
 ## Step 3: Run Database Migrations
 
@@ -81,12 +81,12 @@ FOR DELETE USING (bucket_id = 'cv-pdfs');
    DEFAULT_MODE=cloud
 
    # Supabase credentials
-   SUPABASE_URL=https://YOUR-PROJECT.supabase.co
-   SUPABASE_SERVICE_KEY=eyJhbGci...YOUR-SERVICE-KEY
+   SUPABASE_URL=your_supabase_project_url
+   SUPABASE_SERVICE_KEY=your_supabase_service_role_key
    SUPABASE_BUCKET_NAME=cv-pdfs
 
    # OpenRouter (required for cloud mode)
-   OPENROUTER_API_KEY=sk-or-v1-YOUR-KEY
+   OPENROUTER_API_KEY=your_openrouter_api_key
    ```
 
 3. Install dependencies:

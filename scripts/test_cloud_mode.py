@@ -107,7 +107,7 @@ if settings.default_mode == Mode.CLOUD:
     else:
         print("\n❌ FALTA OPENROUTER_API_KEY")
         print("\nConfigura en backend/.env:")
-        print("  OPENROUTER_API_KEY=sk-or-v1-TU-KEY")
+        print("  OPENROUTER_API_KEY=your_openrouter_key")
         print("\nConsigue tu key en: https://openrouter.ai/keys")
 else:
     print("\n⚠️  BACKEND EN MODO LOCAL")

@@ -187,10 +187,10 @@ Run this in **Supabase SQL Editor**:
 
 ```env
 DEFAULT_MODE=cloud
-SUPABASE_URL=https://YOUR-PROJECT.supabase.co
-SUPABASE_SERVICE_KEY=eyJ...YOUR-SERVICE-KEY
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_SERVICE_KEY=your_supabase_service_role_key
 SUPABASE_BUCKET_NAME=cv-pdfs
-OPENROUTER_API_KEY=sk-or-v1-YOUR-KEY
+OPENROUTER_API_KEY=your_openrouter_api_key
 ```
 
 ---

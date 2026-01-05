@@ -26,8 +26,8 @@ def run_setup():
     if not settings.supabase_url or not settings.supabase_service_key:
         print("❌ ERROR: Supabase credentials not found in backend/.env")
         print("\nMake sure backend/.env has:")
-        print("  SUPABASE_URL=https://vuodihyvlvhgxyppetug.supabase.co")
-        print("  SUPABASE_SERVICE_KEY=eyJhbGc...")
+        print("  SUPABASE_URL=your_supabase_project_url_here")
+        print("  SUPABASE_SERVICE_KEY=your_supabase_service_role_key_here")
         return False
     
     print("=" * 60)
@@ -160,7 +160,7 @@ def run_setup():
         print("=" * 60)
         print("\nNext steps:")
         print("1. Make sure backend/.env has DEFAULT_MODE=cloud")
-        print("2. Make sure backend/.env has OPENROUTER_API_KEY=sk-or-v1-...")
+        print("2. Make sure backend/.env has OPENROUTER_API_KEY=your_openrouter_key")
         print("3. Run: npm run dev")
         print("4. Upload a CV and test!")
         

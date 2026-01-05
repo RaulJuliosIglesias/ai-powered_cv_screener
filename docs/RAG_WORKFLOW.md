@@ -363,12 +363,12 @@ class RAGConfig:
 
 ```bash
 # Required
-OPENAI_API_KEY=sk-...           # For embeddings
-OPENROUTER_API_KEY=sk-or-...    # For LLM generation
+OPENAI_API_KEY=your_openai_key           # For embeddings
+OPENROUTER_API_KEY=your_openrouter_key    # For LLM generation
 
 # Optional (Cloud mode)
-SUPABASE_URL=https://xxx.supabase.co
-SUPABASE_KEY=eyJ...
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_KEY=your_supabase_service_key
 GOOGLE_API_KEY=...              # For LangChain Gemini
 
 # Feature flags

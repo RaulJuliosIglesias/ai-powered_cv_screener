@@ -22,7 +22,7 @@ async def test_cloud_mode_upload():
     
     if not settings.openrouter_api_key:
         print("\n❌ OPENROUTER_API_KEY not set. Cannot test cloud mode.")
-        print("   Edit backend/.env line 7: OPENROUTER_API_KEY=sk-or-v1-YOUR-KEY")
+        print("   Edit backend/.env line 7: OPENROUTER_API_KEY=your_openrouter_key")
         return
     
     # Create RAG service in CLOUD mode

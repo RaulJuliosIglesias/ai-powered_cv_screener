@@ -309,13 +309,13 @@ ai-powered-cv-screener/
 
 ```bash
 # Required
-OPENROUTER_API_KEY=sk-or-v1-your_key_here
+OPENROUTER_API_KEY=your_openrouter_api_key
 
 # Mode Selection
 DEFAULT_MODE=local            # "local" | "cloud"
 
 # Cloud Mode (optional)
-SUPABASE_URL=https://xxxxx.supabase.co
+SUPABASE_URL=your_supabase_project_url
 SUPABASE_SERVICE_KEY=your_key_here
 
 # Server
