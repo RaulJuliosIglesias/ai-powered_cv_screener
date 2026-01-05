@@ -1,6 +1,51 @@
-import { useState } from 'react';
-import { ChevronLeft, ChevronRight, CheckCircle, Loader, Clock, Search, Database, Sparkles, Shield, Brain, FileText, Zap, Eye, Settings } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, CheckCircle, Loader, Clock, Search, Database, Sparkles, Shield, Brain, FileText, Zap, Eye, Settings, X } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+
+// Toast notification component
+const Toast = ({ message, type, onClose }) => {
+  useEffect(() => {
+    const timer = setTimeout(onClose, 5000);
+    return () => clearTimeout(timer);
+  }, [onClose]);
+
+  return (
+    <div className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-xl shadow-2xl animate-slide-in-up max-w-sm ${
+      type === 'enabled' 
+        ? 'bg-emerald-600 border border-emerald-400' 
+        : 'bg-slate-800 border border-slate-600'
+    }`}>
+      <span className="text-base font-medium text-white leading-snug">{message}</span>
+      <button onClick={onClose} className="p-1 hover:bg-white/20 rounded-lg transition-colors flex-shrink-0">
+        <X className="w-4 h-4 text-white" />
+      </button>
+    </div>
+  );
+};
+
+// Switch toggle component
+const Switch = ({ checked, onChange, label }) => (
+  <label className="flex items-center justify-between gap-3 cursor-pointer group">
+    <span className="text-xs text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200 transition-colors">
+      {label}
+    </span>
+    <button
+      type="button"
+      role="switch"
+      aria-checked={checked}
+      onClick={onChange}
+      className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-1 ${
+        checked ? 'bg-emerald-500' : 'bg-slate-300 dark:bg-slate-600'
+      }`}
+    >
+      <span
+        className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white shadow-sm transition-transform duration-200 ${
+          checked ? 'translate-x-5' : 'translate-x-1'
+        }`}
+      />
+    </button>
+  </label>
+);
 
 const STEP_CONFIG = {
   query_understanding: {
@@ -65,8 +110,46 @@ const STEP_CONFIG = {
   }
 };
 
-const PipelineProgressPanel = ({ isExpanded, onToggleExpand, progress, autoExpand, onToggleAutoExpand }) => {
+const PipelineProgressPanel = ({ isExpanded, onToggleExpand, progress, autoExpand, onToggleAutoExpand, showPreview, onTogglePreview }) => {
   const { language } = useLanguage();
+  const [toast, setToast] = useState(null);
+
+  const showToast = (key, enabled) => {
+    const messages = {
+      autoExpand: {
+        enabled: language === 'es' 
+          ? '✓ Auto-expandir activado: El panel se abrirá automáticamente al procesar' 
+          : '✓ Auto-expand enabled: Panel will open automatically when processing',
+        disabled: language === 'es' 
+          ? '✗ Auto-expandir desactivado: El panel permanecerá cerrado' 
+          : '✗ Auto-expand disabled: Panel will stay closed'
+      },
+      showPreview: {
+        enabled: language === 'es' 
+          ? '✓ Vista previa activada: Verás el progreso detallado con mini-bar' 
+          : '✓ Preview enabled: You\'ll see detailed progress with mini-bar',
+        disabled: language === 'es' 
+          ? '✗ Vista previa desactivada: Solo indicador simple de carga' 
+          : '✗ Preview disabled: Only simple loading indicator'
+      }
+    };
+    setToast({
+      message: enabled ? messages[key].enabled : messages[key].disabled,
+      type: enabled ? 'enabled' : 'disabled'
+    });
+  };
+
+  const handleAutoExpandToggle = () => {
+    const newValue = !autoExpand;
+    onToggleAutoExpand();
+    showToast('autoExpand', newValue);
+  };
+
+  const handlePreviewToggle = () => {
+    const newValue = !showPreview;
+    onTogglePreview();
+    showToast('showPreview', newValue);
+  };
 
   const getStepStatus = (stepName) => {
     if (!progress || !progress[stepName]) return 'pending';
@@ -174,18 +257,19 @@ const PipelineProgressPanel = ({ isExpanded, onToggleExpand, progress, autoExpan
                 />
               </div>
 
-              {/* Auto-expand toggle */}
-              <label className="flex items-center gap-2 mt-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={autoExpand}
-                  onChange={onToggleAutoExpand}
-                  className="w-3.5 h-3.5 text-emerald-600 bg-slate-100 border-slate-300 rounded focus:ring-emerald-500 dark:bg-slate-700 dark:border-slate-600"
+              {/* Settings switches */}
+              <div className="mt-3 space-y-2 pt-2 border-t border-slate-200 dark:border-slate-700">
+                <Switch 
+                  checked={autoExpand} 
+                  onChange={handleAutoExpandToggle}
+                  label={language === 'es' ? 'Auto-expandir' : 'Auto-expand'}
                 />
-                <span className="text-xs text-slate-600 dark:text-slate-400">
-                  {language === 'es' ? 'Auto-expandir' : 'Auto-expand'}
-                </span>
-              </label>
+                <Switch 
+                  checked={showPreview} 
+                  onChange={handlePreviewToggle}
+                  label={language === 'es' ? 'Vista previa' : 'Show preview'}
+                />
+              </div>
             </div>
 
             {/* Steps List */}
@@ -252,6 +336,15 @@ const PipelineProgressPanel = ({ isExpanded, onToggleExpand, progress, autoExpan
           </>
         )}
       </div>
+
+      {/* Toast notification */}
+      {toast && (
+        <Toast 
+          message={toast.message} 
+          type={toast.type} 
+          onClose={() => setToast(null)} 
+        />
+      )}
     </div>
   );
 };

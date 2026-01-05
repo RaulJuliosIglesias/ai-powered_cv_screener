@@ -940,7 +940,19 @@ class RAGServiceV5:
         start = time.perf_counter()
         await self._step_query_understanding(ctx)
         duration = (time.perf_counter() - start) * 1000
-        yield {"event": "step", "data": {"step": "query_understanding", "status": "completed", "duration_ms": duration}}
+        
+        # Emit query understanding content for progressive display
+        understanding_content = None
+        if ctx.query_understanding:
+            qu = ctx.query_understanding
+            understanding_content = {
+                "intent": qu.query_type if hasattr(qu, 'query_type') else None,
+                "understood_query": qu.understood_query if hasattr(qu, 'understood_query') else None,
+                "keywords": qu.requirements if hasattr(qu, 'requirements') else [],
+                "entities": qu.entities if hasattr(qu, 'entities') else {},
+                "confidence": qu.confidence if hasattr(qu, 'confidence') else None,
+            }
+        yield {"event": "step", "data": {"step": "query_understanding", "status": "completed", "duration_ms": duration, "content": understanding_content}}
         
         # Stage 2: Multi-Query (if enabled)
         if self.config.multi_query_enabled:
@@ -979,7 +991,34 @@ class RAGServiceV5:
             yield {"event": "complete", "data": self._build_no_results_response(ctx).to_dict()}
             return
         
-        yield {"event": "step", "data": {"step": "retrieval", "status": "completed", "duration_ms": duration, "details": f"Found {len(ctx.retrieval_result.chunks)} chunks"}}
+        # Emit retrieval results with candidate info for progressive display
+        candidates_preview = []
+        seen_cvs = set()
+        for chunk in ctx.retrieval_result.chunks[:10]:  # Top 10 chunks
+            # Handle both dict and object access patterns
+            if isinstance(chunk, dict):
+                metadata = chunk.get("metadata", {})
+                score = chunk.get("score")
+            else:
+                metadata = chunk.metadata if hasattr(chunk, 'metadata') else {}
+                score = chunk.score if hasattr(chunk, 'score') else None
+            
+            cv_id = metadata.get("cv_id", "") if isinstance(metadata, dict) else ""
+            if cv_id and cv_id not in seen_cvs:
+                seen_cvs.add(cv_id)
+                candidates_preview.append({
+                    "cv_id": cv_id,
+                    "filename": metadata.get("filename", "") if isinstance(metadata, dict) else "",
+                    "score": round(score, 3) if score else None
+                })
+        
+        yield {"event": "step", "data": {
+            "step": "retrieval", 
+            "status": "completed", 
+            "duration_ms": duration, 
+            "details": f"Found {len(ctx.retrieval_result.chunks)} chunks from {len(seen_cvs)} CVs",
+            "candidates": candidates_preview
+        }}
         
         # Stage 6: Reranking
         if self.config.reranking_enabled:
@@ -1002,7 +1041,16 @@ class RAGServiceV5:
         start = time.perf_counter()
         await self._step_generation(ctx)
         duration = (time.perf_counter() - start) * 1000
-        yield {"event": "step", "data": {"step": "generation", "status": "completed", "duration_ms": duration}}
+        
+        # Emit full response for typewriter display (not truncated)
+        # This allows the frontend to show the complete response progressively
+        partial_answer = ctx.generated_response if ctx.generated_response else None
+        yield {"event": "step", "data": {
+            "step": "generation", 
+            "status": "completed", 
+            "duration_ms": duration,
+            "partial_answer": partial_answer
+        }}
         
         # Stage 9: Verification
         if self.config.claim_verification_enabled:

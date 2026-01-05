@@ -30,38 +30,84 @@ const getScoreColor = (score) => {
 };
 
 // CV Reference Renderer - FUNCIÓN ÚNICA para renderizar contenido con CVs
-// Detecta el patrón [📄](cv:cv_xxx) **Nombre** y lo renderiza como botón + negrita
+// Detecta múltiples patrones de CV links y los renderiza como botón clickeable + nombre
 const ContentWithCVLinks = ({ content, onOpenCV }) => {
   if (!content) return null;
   
-  // Patrón: [📄](cv:cv_xxx) **Nombre**
-  const cvPattern = /\[📄\]\(cv:(cv_[a-z0-9_-]+)\)\s*\*\*([^*]+)\*\*/gi;
+  const contentStr = String(content);
+  
+  // Múltiples patrones para capturar diferentes formatos de CV links
+  // cv_id puede tener letras, números y guiones
+  const patterns = [
+    /\*\*\[([^\]]+)\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\*\*/g,  // **[Name](cv:xxx)**
+    /\[([^\]]+)\]\(cv:(cv_[a-zA-Z0-9_-]+)\)/g,          // [Name](cv:xxx)
+  ];
+  
+  // Extraer todos los CV refs con todos los patrones
+  const refs = [];
+  for (const pattern of patterns) {
+    let match;
+    while ((match = pattern.exec(contentStr)) !== null) {
+      const name = match[1].trim();
+      const cvId = match[2];
+      
+      // Validar que el nombre no sea un emoji solo
+      if (name && name !== '📄' && cvId) {
+        // Evitar duplicados en la misma posición
+        const exists = refs.some(r => r.index === match.index);
+        if (!exists) {
+          refs.push({ 
+            index: match.index, 
+            length: match[0].length, 
+            name, 
+            cvId 
+          });
+        }
+      }
+    }
+  }
+  
+  // Si no hay CVs válidos, renderizar todo como markdown
+  if (refs.length === 0) {
+    return (
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+        {content}
+      </ReactMarkdown>
+    );
+  }
+  
+  // Ordenar por posición y eliminar solapamientos
+  refs.sort((a, b) => a.index - b.index);
+  const uniqueRefs = [];
+  let lastEnd = 0;
+  for (const ref of refs) {
+    if (ref.index >= lastEnd) {
+      uniqueRefs.push(ref);
+      lastEnd = ref.index + ref.length;
+    }
+  }
   
   // Dividir el contenido en partes
   const parts = [];
   let lastIndex = 0;
-  let match;
   
-  const regex = new RegExp(cvPattern);
-  const contentStr = String(content);
-  
-  while ((match = regex.exec(contentStr)) !== null) {
+  for (const ref of uniqueRefs) {
     // Añadir texto antes del match
-    if (match.index > lastIndex) {
+    if (ref.index > lastIndex) {
       parts.push({
         type: 'text',
-        content: contentStr.slice(lastIndex, match.index)
+        content: contentStr.slice(lastIndex, ref.index)
       });
     }
     
     // Añadir el CV reference
     parts.push({
       type: 'cv',
-      cvId: match[1],
-      name: match[2]
+      cvId: ref.cvId,
+      name: ref.name
     });
     
-    lastIndex = match.index + match[0].length;
+    lastIndex = ref.index + ref.length;
   }
   
   // Añadir texto restante
@@ -72,22 +118,13 @@ const ContentWithCVLinks = ({ content, onOpenCV }) => {
     });
   }
   
-  // Si no hay CVs, renderizar todo como markdown
-  if (parts.length === 0 || (parts.length === 1 && parts[0].type === 'text')) {
-    return (
-      <ReactMarkdown remarkPlugins={[remarkGfm]}>
-        {content}
-      </ReactMarkdown>
-    );
-  }
-  
   // Renderizar partes mixtas - INLINE sin saltos de línea
   return (
     <span className="inline">
       {parts.map((part, idx) => {
         if (part.type === 'cv') {
           return (
-            <span key={idx} className="inline-flex items-center gap-1">
+            <span key={idx} className="inline-flex items-center gap-1 mx-0.5">
               <button
                 type="button"
                 onClick={(e) => {
@@ -95,12 +132,16 @@ const ContentWithCVLinks = ({ content, onOpenCV }) => {
                   e.stopPropagation();
                   if (onOpenCV) onOpenCV(part.cvId, part.name);
                 }}
-                className="inline-flex items-center justify-center w-5 h-5 bg-blue-600/30 text-blue-400 hover:bg-blue-600/50 rounded transition-colors"
+                className="inline-flex items-center justify-center w-5 h-5 bg-emerald-600/30 text-emerald-400 hover:bg-emerald-600/50 rounded transition-colors cursor-pointer"
                 title={`View CV: ${part.name}`}
               >
                 <FileText className="w-3 h-3" />
               </button>
-              <strong className="font-semibold text-white">{part.name}</strong>
+              <strong className="font-semibold text-emerald-300 hover:text-emerald-200 cursor-pointer" onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (onOpenCV) onOpenCV(part.cvId, part.name);
+              }}>{part.name}</strong>
             </span>
           );
         } else {

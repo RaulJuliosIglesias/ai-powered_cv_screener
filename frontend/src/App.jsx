@@ -18,6 +18,8 @@ import Toast from './components/Toast';
 import { UploadProgressModal, AboutModal } from './components/modals';
 import { SessionSkeleton, MessageSkeleton } from './components/SkeletonLoader';
 import { MemoizedTable, MemoizedCodeBlock } from './components/MemoizedTable';
+import StreamingMessage from './components/StreamingMessage';
+import SuggestionsPanel from './components/SuggestionsPanel';
 import { preprocessContent, parseCVFilename } from './utils/contentProcessor';
 import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList, clearSessionCVs, deleteAllCVsFromDatabase, deleteCV, deleteMessage, deleteMessagesFrom } from './services/api';
 
@@ -61,7 +63,15 @@ function App() {
     const saved = localStorage.getItem('autoExpandPipeline');
     return saved !== null ? JSON.parse(saved) : true;
   });
+  const [showStreamingPreview, setShowStreamingPreview] = useState(() => {
+    const saved = localStorage.getItem('showStreamingPreview');
+    return saved !== null ? JSON.parse(saved) : true;
+  });
   const [pipelineProgress, setPipelineProgress] = useState({});
+  
+  // Streaming state for progressive message display
+  const [streamingState, setStreamingState] = useState(null);
+  // { currentStep: 'query_understanding', steps: {}, queryUnderstanding: null, candidates: [], partialAnswer: null }
   
   // Upload progress modal state
   const [uploadProgress, setUploadProgress] = useState(null);
@@ -346,6 +356,15 @@ function App() {
       refinement: { status: 'pending' }
     });
     
+    // Initialize streaming state for progressive display
+    setStreamingState({
+      currentStep: 'query_understanding',
+      steps: {},
+      queryUnderstanding: null,
+      candidates: [],
+      partialAnswer: null
+    });
+    
     setPendingMessages(prev => ({
       ...prev,
       [targetSessionId]: { 
@@ -400,17 +419,43 @@ function App() {
           if (line.startsWith('data:')) {
             const data = JSON.parse(line.substring(5).trim());
             
-            // Handle step events - UPDATE PIPELINE PANEL
+            // Handle step events - UPDATE PIPELINE PANEL AND STREAMING STATE
             if (data.step) {
               const stepName = data.step;
               const stepStatus = data.status;
               
-              console.log(`🔄 REAL Step: ${stepName} - ${stepStatus}`);
+              console.log(`🔄 REAL Step: ${stepName} - ${stepStatus}`, data);
               
               setPipelineProgress(prev => ({
                 ...prev,
                 [stepName]: { status: stepStatus, details: data.details }
               }));
+              
+              // Update streaming state with progressive content
+              setStreamingState(prev => {
+                const newState = { 
+                  ...prev, 
+                  currentStep: stepName,
+                  steps: { ...prev.steps, [stepName]: { status: stepStatus, details: data.details } }
+                };
+                
+                // Capture query understanding content
+                if (stepName === 'query_understanding' && data.content) {
+                  newState.queryUnderstanding = data.content;
+                }
+                
+                // Capture candidate previews from retrieval
+                if (stepName === 'retrieval' && data.candidates) {
+                  newState.candidates = data.candidates;
+                }
+                
+                // Capture partial answer from generation
+                if (stepName === 'generation' && data.partial_answer) {
+                  newState.partialAnswer = data.partial_answer;
+                }
+                
+                return newState;
+              });
             }
             
             // Handle complete event
@@ -444,6 +489,12 @@ function App() {
       }
       
       console.log('🔄 Clearing pending messages and reloading session...');
+      
+      // Small delay to let user see final pipeline step before clearing
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Clear streaming state
+      setStreamingState(null);
       
       // Clear pending message
       setPendingMessages(prev => {
@@ -1027,40 +1078,35 @@ function App() {
                   </div>
                 </div>
               ))}
-              {isChatLoading && pendingMessages[currentSessionId] && (
-                <div className="flex gap-3 items-start animate-fade-in">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center">
-                    <Sparkles className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="flex-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 shadow-sm">
-                    <div className="flex items-center gap-2">
-                      <Loader className="w-5 h-5 animate-spin text-emerald-500" />
-                      <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
-                        {(() => {
-                          // Show active pipeline step
-                          const activeStep = Object.entries(pipelineProgress).find(([_, v]) => v.status === 'running');
-                          if (activeStep) {
-                            const stepLabels = {
-                              query_understanding: language === 'es' ? 'Entendiendo consulta...' : 'Understanding query...',
-                              multi_query: language === 'es' ? 'Generando multi-query...' : 'Generating multi-query...',
-                              guardrail: language === 'es' ? 'Verificando seguridad...' : 'Safety check...',
-                              embedding: language === 'es' ? 'Generando embeddings...' : 'Generating embeddings...',
-                              retrieval: language === 'es' ? 'Recuperando CVs...' : 'Retrieving CVs...',
-                              reranking: language === 'es' ? 'Reordenando resultados...' : 'Reranking results...',
-                              reasoning: language === 'es' ? 'Razonando...' : 'Reasoning...',
-                              generation: language === 'es' ? 'Generando respuesta...' : 'Generating response...',
-                              verification: language === 'es' ? 'Verificando respuesta...' : 'Verifying response...',
-                              refinement: language === 'es' ? 'Refinando...' : 'Refining...'
-                            };
-                            return stepLabels[activeStep[0]] || (language === 'es' ? 'Procesando...' : 'Processing...');
-                          }
-                          return language === 'es' ? 'Analizando CVs...' : 'Analyzing CVs...';
-                        })()}
-                      </span>
-                    </div>
-                  </div>
-                </div>
+              {/* Streaming Message - Progressive content display */}
+              {/* When showStreamingPreview=false, shows minimal TypingIndicator only */}
+              {isChatLoading && streamingState && (
+                <StreamingMessage 
+                  streamingState={streamingState}
+                  onViewCV={openPdfViewer}
+                  showPreview={showStreamingPreview}
+                  enabledSteps={[
+                    'query_understanding',
+                    'embedding', 
+                    'retrieval',
+                    ...(ragPipelineSettings.reranking_enabled ? ['reranking'] : []),
+                    'reasoning',
+                    'generation',
+                    ...(ragPipelineSettings.verification_enabled ? ['verification'] : []),
+                    'refinement'
+                  ]}
+                />
               )}
+              
+              {/* Suggestions Panel - appears after response */}
+              {!isChatLoading && currentSession?.messages?.length > 0 && currentSession.cvs?.length > 0 && (
+                <SuggestionsPanel 
+                  suggestions={suggestions}
+                  onSelectSuggestion={handleSend}
+                  cvCount={currentSession.cvs?.length || 0}
+                />
+              )}
+              
               <div ref={messagesEndRef} />
             </div>
           )}
@@ -1346,6 +1392,12 @@ function App() {
             const newValue = !autoExpandPipeline;
             setAutoExpandPipeline(newValue);
             localStorage.setItem('autoExpandPipeline', JSON.stringify(newValue));
+          }}
+          showPreview={showStreamingPreview}
+          onTogglePreview={() => {
+            const newValue = !showStreamingPreview;
+            setShowStreamingPreview(newValue);
+            localStorage.setItem('showStreamingPreview', JSON.stringify(newValue));
           }}
         />
       )}
