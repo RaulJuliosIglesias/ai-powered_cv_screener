@@ -360,14 +360,16 @@ class StageMetrics:
 │  │     jitter: bool = True  # Prevent thundering herd      │    │
 │  └─────────────────────────────────────────────────────────┘    │
 │                                                                  │
-│  CIRCUIT BREAKER                                                │
+│  CIRCUIT BREAKER CONFIGURATION                                  │
 │  ┌─────────────────────────────────────────────────────────┐    │
-│  │ @dataclass                                               │    │
+│  │ @dataclass(frozen=True)                                  │    │
 │  │ class CircuitBreakerConfig:                              │    │
+│  │     enabled: bool = True                                 │    │
 │  │     failure_threshold: int = 5                          │    │
-│  │     recovery_timeout: int = 30                          │    │
-│  │     half_open_requests: int = 3                         │    │
+│  │     recovery_timeout_seconds: int = 30                  │    │
+│  │     half_open_max_calls: int = 3                        │    │
 │  └─────────────────────────────────────────────────────────┘    │
+│  Note: Configuration dataclass - state machine for future       │
 │                                                                  │
 │  TIMEOUT MANAGEMENT                                             │
 │  ┌─────────────────────────────────────────────────────────┐    │

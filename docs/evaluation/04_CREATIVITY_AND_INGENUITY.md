@@ -46,29 +46,33 @@
 
 **Why It's Original**: Most RAG implementations trust LLM output blindly. This system treats LLM output as "untrusted input" that must be verified — a security-mindset approach rarely seen in RAG tutorials.
 
-**Code Example**:
+**Code Example** (from actual `hallucination_service.py`):
 ```python
 class HallucinationService:
-    CV_ID_PATTERN = re.compile(r'\[CV:(cv_[a-zA-Z0-9]+)\]')
+    # Regex to extract CV IDs from LLM response
+    CV_ID_PATTERN = re.compile(r'\[CV:(cv_[a-f0-9]+)\]', re.IGNORECASE)
     
-    def verify_response(self, llm_response: str, cv_metadata: List[Dict]):
-        # Extract CV IDs mentioned in response
-        mentioned_ids = set(self.CV_ID_PATTERN.findall(llm_response))
-        real_ids = {cv["cv_id"] for cv in cv_metadata}
+    def verify_response(self, llm_response: str, context_chunks: List[Dict], cv_metadata: List[Dict]):
+        # Extract real CV IDs from metadata
+        real_cv_ids = {meta.get("cv_id", "") for meta in cv_metadata if meta.get("cv_id")}
         
-        # Verify against actual data
-        verified = mentioned_ids & real_ids
-        unverified = mentioned_ids - real_ids
+        # Check CV IDs mentioned in response
+        mentioned_cv_ids = set(self.CV_ID_PATTERN.findall(llm_response))
+        verified_cv_ids = mentioned_cv_ids & real_cv_ids
+        unverified_cv_ids = mentioned_cv_ids - real_cv_ids
         
-        # Calculate confidence
-        confidence = len(verified) / len(mentioned_ids) if mentioned_ids else 0
+        if unverified_cv_ids:
+            warnings.append(f"Unverified CV IDs mentioned: {list(unverified_cv_ids)}")
+        
+        # Calculate confidence score based on multiple factors
+        confidence_score = self._calculate_confidence(...)
         
         return HallucinationCheckResult(
-            is_valid=len(unverified) == 0,
-            confidence_score=confidence,
-            verified_cv_ids=list(verified),
-            unverified_cv_ids=list(unverified),
-            warnings=[f"Unverified: {unverified}"] if unverified else []
+            is_valid=len(unverified_cv_ids) == 0 and confidence_score >= 0.5,
+            confidence_score=confidence_score,
+            verified_cv_ids=list(verified_cv_ids),
+            unverified_cv_ids=list(unverified_cv_ids),
+            warnings=warnings
         )
 ```
 
@@ -282,50 +286,56 @@ OFF_TOPIC_PATTERNS = [
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│              COMPOSITE CONFIDENCE SCORING                        │
+│              COMPOSITE CONFIDENCE SCORING (5 FACTORS)            │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  Response confidence: 92% ████████████░░ HIGH                   │
+│  Response confidence: 85% ████████████░░ HIGH                   │
 │                                                                  │
-│  Breakdown:                                                      │
-│  ├─ Retrieval quality (30%):  95% │████████████████████│        │
-│  │  └─ Average similarity score of retrieved chunks             │
+│  Breakdown (weights from actual confidence_calculator.py):       │
+│  ├─ Source coverage (15%):     90% │██████████████████░░│       │
+│  │  └─ Number of chunks retrieved + CV diversity                │
 │  │                                                               │
-│  ├─ Source diversity (20%):   80% │████████████████░░░░│        │
-│  │  └─ Number of unique CVs cited                               │
+│  ├─ Source relevance (15%):    88% │█████████████████░░░│       │
+│  │  └─ Average vector similarity scores from search             │
 │  │                                                               │
-│  ├─ Entity verification (30%): 100% │████████████████████│      │
-│  │  └─ All CV IDs and names verified                            │
+│  ├─ Claim verification (40%):  82% │████████████████░░░░│       │
+│  │  └─ (verified - 2×contradicted) / total claims [CRITICAL]    │
 │  │                                                               │
-│  └─ Claim verification (20%):  90% │██████████████████░░│       │
-│     └─ % of claims traceable to source                          │
+│  ├─ Response completeness (15%): 75% │███████████████░░░░░│     │
+│  │  └─ Components present: answer, table, conclusion, analysis  │
+│  │                                                               │
+│  └─ Internal consistency (15%): 100% │████████████████████│     │
+│     └─ Table ↔ Conclusion alignment, sentiment consistency      │
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-**Implementation**:
+**Implementation** (from actual `confidence_calculator.py`):
 ```python
-def calculate_confidence(
-    retrieval_results: List[SearchResult],
-    hallucination_check: HallucinationCheckResult,
-    claim_verification: ClaimVerificationResult
-) -> float:
-    # Factor 1: Retrieval quality (30%)
-    avg_similarity = mean([r.similarity for r in retrieval_results])
-    retrieval_score = avg_similarity * 0.30
+class ConfidenceCalculator:
+    # Base weights when ALL factors are available (sum to 1.0)
+    BASE_WEIGHTS = {
+        'source_coverage': 0.15,       # 15% - Did we retrieve relevant sources?
+        'source_relevance': 0.15,      # 15% - Are sources highly relevant?
+        'claim_verification': 0.40,    # 40% - Are claims verified? (MOST IMPORTANT)
+        'response_completeness': 0.15, # 15% - Does response have all components?
+        'internal_consistency': 0.15   # 15% - Is response self-consistent?
+    }
     
-    # Factor 2: Source diversity (20%)
-    unique_cvs = len(set(r.cv_id for r in retrieval_results))
-    diversity_score = min(unique_cvs / 5, 1.0) * 0.20
-    
-    # Factor 3: Hallucination check (30%)
-    hallucination_score = hallucination_check.confidence_score * 0.30
-    
-    # Factor 4: Claim verification (20%)
-    verified_ratio = claim_verification.verified / claim_verification.total
-    claim_score = verified_ratio * 0.20
-    
-    return retrieval_score + diversity_score + hallucination_score + claim_score
+    def calculate(self, verification_result, chunks, structured_output, ...):
+        # Calculate each factor from REAL data
+        factors.source_coverage = self._calc_source_coverage(chunks)
+        factors.source_relevance = self._calc_source_relevance(chunks)  # From vector similarity scores
+        factors.claim_verification = self._calc_claim_verification(verification_result)
+        factors.response_completeness = self._calc_response_completeness(structured_output)
+        factors.internal_consistency = self._calc_internal_consistency(structured_output)
+        
+        # Dynamic weight redistribution if some factors unavailable
+        active_weights = self._calculate_active_weights(factors)
+        
+        # Calculate weighted score
+        score = sum(getattr(factors, name) * weight for name, weight in active_weights.items())
+        return score, detailed_explanation
 ```
 
 ---
