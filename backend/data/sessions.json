@@ -19546,10 +19546,19 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-05T12:16:57.430623"
+        },
+        {
+          "id": "fe2dbfcb-1001-42b5-9106-4898a5e3d208",
+          "role": "user",
+          "content": "Compare years of experience",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T12:19:04.900043"
         }
       ],
       "created_at": "2026-01-05T04:02:44.497345",
-      "updated_at": "2026-01-05T12:16:57.430623"
+      "updated_at": "2026-01-05T12:19:04.900043"
     }
   ]
 }

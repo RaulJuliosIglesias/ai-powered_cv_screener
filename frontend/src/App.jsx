@@ -864,10 +864,19 @@ function App() {
                 </div>
               )}
               {/* Combine actual messages with pending message for THIS session only */}
-              {[
-                ...(currentSession.messages || []),
-                ...(pendingMessages[currentSessionId] ? [{ role: 'user', content: pendingMessages[currentSessionId].userMsg, isPending: true }] : [])
-              ].map((msg, idx) => (
+              {/* Avoid duplicate: only show pending if not already in session messages */}
+              {(() => {
+                const sessionMsgs = currentSession.messages || [];
+                const pending = pendingMessages[currentSessionId];
+                // Check if pending message is already saved in session (to avoid duplicate)
+                const pendingAlreadySaved = pending && sessionMsgs.some(
+                  m => m.role === 'user' && m.content === pending.userMsg
+                );
+                return [
+                  ...sessionMsgs,
+                  ...(pending && !pendingAlreadySaved ? [{ role: 'user', content: pending.userMsg, isPending: true }] : [])
+                ];
+              })().map((msg, idx) => (
                 <div key={idx} className={msg.role === 'user' ? 'flex justify-end' : ''}>
                   <div className={`flex gap-4 ${msg.role === 'user' ? 'flex-row-reverse max-w-[70%]' : 'w-full'}`}>
                     <div className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ${msg.role === 'user' ? 'bg-blue-500' : 'bg-gradient-to-br from-emerald-400 to-cyan-500'}`}>{msg.role === 'user' ? <User className="w-5 h-5 text-white" /> : <Sparkles className="w-5 h-5 text-white" />}</div>
