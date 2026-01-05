@@ -2146,9 +2146,11 @@ Provide a corrected response:"""
         orchestrator = get_orchestrator()
         
         # Orchestrator returns both structured data and formatted answer
+        # Pass original query for enhanced modules (gap analysis, etc.)
         structured_output, formatted_answer = orchestrator.process(
             raw_llm_output=ctx.generated_response or "",
-            chunks=ctx.effective_chunks
+            chunks=ctx.effective_chunks,
+            query=ctx.question
         )
         
         # NEW: Multi-factor confidence calculation (AFTER processing structured output)

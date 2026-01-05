@@ -1,10 +1,83 @@
 import pdfplumber
 import re
-from typing import Optional
+import logging
+from typing import Optional, List, Tuple
 from pathlib import Path
 from dataclasses import dataclass, field
+from datetime import datetime
 
 from app.utils.exceptions import PDFExtractionError
+
+logger = logging.getLogger(__name__)
+
+
+@dataclass
+class ExperienceEntry:
+    """Represents a single work experience entry."""
+    job_title: str
+    company: str
+    start_year: Optional[int] = None
+    end_year: Optional[int] = None  # None means "Present"
+    duration_years: float = 0.0
+    is_current: bool = False
+    description: str = ""
+    
+    def to_dict(self) -> dict:
+        return {
+            "job_title": self.job_title,
+            "company": self.company,
+            "start_year": self.start_year,
+            "end_year": self.end_year,
+            "duration_years": self.duration_years,
+            "is_current": self.is_current,
+            "description": self.description
+        }
+
+
+@dataclass
+class EnrichedMetadata:
+    """Rich metadata extracted from CV for improved indexing and retrieval."""
+    # Basic info
+    skills: List[str] = field(default_factory=list)
+    
+    # Experience analysis
+    total_experience_years: float = 0.0
+    experiences: List[ExperienceEntry] = field(default_factory=list)
+    current_role: Optional[str] = None
+    current_company: Optional[str] = None
+    
+    # Seniority detection
+    seniority_level: str = "unknown"  # junior, mid, senior, lead, executive
+    
+    # Companies
+    companies_worked: List[str] = field(default_factory=list)
+    has_faang_experience: bool = False
+    
+    # Red flags detection
+    employment_gaps: List[Tuple[int, int]] = field(default_factory=list)  # (start_year, end_year)
+    job_hopping_score: float = 0.0  # 0-1, higher = more job changes
+    avg_tenure_years: float = 0.0
+    
+    # Education
+    highest_education: Optional[str] = None
+    education_institutions: List[str] = field(default_factory=list)
+    
+    def to_dict(self) -> dict:
+        return {
+            "skills": self.skills,
+            "total_experience_years": self.total_experience_years,
+            "experiences": [e.to_dict() for e in self.experiences],
+            "current_role": self.current_role,
+            "current_company": self.current_company,
+            "seniority_level": self.seniority_level,
+            "companies_worked": self.companies_worked,
+            "has_faang_experience": self.has_faang_experience,
+            "employment_gaps": self.employment_gaps,
+            "job_hopping_score": self.job_hopping_score,
+            "avg_tenure_years": self.avg_tenure_years,
+            "highest_education": self.highest_education,
+            "education_institutions": self.education_institutions
+        }
 
 
 @dataclass
@@ -17,6 +90,7 @@ class CVChunk:
     filename: str
     candidate_name: Optional[str] = None
     metadata: dict = field(default_factory=dict)
+    is_summary_chunk: bool = False  # Special flag for summary chunks
 
 
 @dataclass
@@ -26,8 +100,9 @@ class ExtractedCV:
     filename: str
     raw_text: str
     candidate_name: Optional[str]
-    chunks: list[CVChunk]
+    chunks: List[CVChunk]
     metadata: dict
+    enriched_metadata: Optional[EnrichedMetadata] = None
 
 
 class PDFService:
@@ -111,7 +186,7 @@ class PDFService:
         
         return None
     
-    def extract_skills(self, text: str) -> list[str]:
+    def extract_skills(self, text: str) -> List[str]:
         """Extract skills from CV text."""
         skills = []
         
@@ -133,6 +208,353 @@ class PDFService:
                 skills.append(skill)
         
         return skills
+    
+    # =========================================================================
+    # ENRICHED METADATA EXTRACTION
+    # =========================================================================
+    
+    FAANG_COMPANIES = {
+        "google", "alphabet", "meta", "facebook", "amazon", "apple", "netflix",
+        "microsoft", "openai", "deepmind", "nvidia", "tesla", "uber", "airbnb",
+        "spotify", "stripe", "salesforce", "oracle", "ibm", "intel", "adobe"
+    }
+    
+    SENIORITY_PATTERNS = {
+        "executive": r"(?i)\b(cto|ceo|cfo|coo|vp|vice president|director|head of|chief)\b",
+        "lead": r"(?i)\b(lead|principal|staff|architect|manager|team lead)\b",
+        "senior": r"(?i)\b(senior|sr\.?|ssr)\b",
+        "mid": r"(?i)\b(mid[- ]?level|intermediate|regular)\b",
+        "junior": r"(?i)\b(junior|jr\.?|entry[- ]?level|trainee|intern|graduate)\b",
+    }
+    
+    EDUCATION_LEVELS = {
+        "phd": r"(?i)\b(ph\.?d|doctor|doctorate)\b",
+        "masters": r"(?i)\b(master|m\.?s\.?|m\.?a\.?|mba|m\.?sc)\b",
+        "bachelors": r"(?i)\b(bachelor|b\.?s\.?|b\.?a\.?|b\.?sc|degree|licenciatura|grado)\b",
+        "associate": r"(?i)\b(associate|diploma|certificate)\b",
+    }
+    
+    def extract_experiences(self, text: str) -> List[ExperienceEntry]:
+        """Extract work experience entries from CV text."""
+        experiences = []
+        current_year = datetime.now().year
+        
+        # Pattern for date ranges: "2020 - 2023", "2020 - Present", "Jan 2020 - Dec 2023"
+        date_patterns = [
+            # Year - Year or Present
+            r"(?P<start>\d{4})\s*[-–—to]+\s*(?P<end>(?:\d{4}|present|current|actual|now|actualidad))",
+            # Month Year - Month Year
+            r"(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|enero|febrero|marzo|abril|mayo|junio|julio|agosto|sept|octubre|noviembre|diciembre)[a-z]*\.?\s*(?P<start2>\d{4})\s*[-–—to]+\s*(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|enero|febrero|marzo|abril|mayo|junio|julio|agosto|sept|octubre|noviembre|diciembre)?[a-z]*\.?\s*(?P<end2>(?:\d{4}|present|current|actual|now|actualidad))",
+        ]
+        
+        # Split text into potential experience blocks
+        lines = text.split("\n")
+        current_block = []
+        blocks = []
+        
+        for line in lines:
+            line_stripped = line.strip()
+            # New block starts with a date pattern or job title indicators
+            has_date = any(re.search(p, line_stripped, re.IGNORECASE) for p in date_patterns)
+            if has_date and current_block:
+                blocks.append("\n".join(current_block))
+                current_block = [line_stripped]
+            else:
+                current_block.append(line_stripped)
+        
+        if current_block:
+            blocks.append("\n".join(current_block))
+        
+        # Parse each block
+        for block in blocks:
+            for pattern in date_patterns:
+                match = re.search(pattern, block, re.IGNORECASE)
+                if match:
+                    groups = match.groupdict()
+                    start_year = int(groups.get("start") or groups.get("start2") or 0)
+                    end_str = (groups.get("end") or groups.get("end2") or "").lower()
+                    
+                    is_current = end_str in ("present", "current", "actual", "now", "actualidad", "")
+                    end_year = current_year if is_current else int(end_str) if end_str.isdigit() else None
+                    
+                    if start_year and start_year > 1970:
+                        duration = (end_year or current_year) - start_year
+                        
+                        # Extract job title (usually first meaningful line)
+                        title_match = re.search(
+                            r"(?:^|\n)([A-Z][^|\n]{5,60})(?:\s*[|@at]\s*|\s+at\s+|\s+-\s+)?",
+                            block
+                        )
+                        job_title = title_match.group(1).strip() if title_match else "Unknown Role"
+                        
+                        # Extract company name
+                        company = self._extract_company_from_block(block)
+                        
+                        experiences.append(ExperienceEntry(
+                            job_title=job_title[:100],
+                            company=company,
+                            start_year=start_year,
+                            end_year=end_year if not is_current else None,
+                            duration_years=max(0, duration),
+                            is_current=is_current,
+                            description=block[:500]
+                        ))
+                    break
+        
+        # Sort by start year descending (most recent first)
+        experiences.sort(key=lambda x: x.start_year or 0, reverse=True)
+        return experiences
+    
+    def _extract_company_from_block(self, block: str) -> str:
+        """Extract company name from experience block."""
+        # Common patterns: "at Company", "@ Company", "Company Inc.", etc.
+        patterns = [
+            r"(?:at|@|en)\s+([A-Z][A-Za-z0-9\s&,\.]+?)(?:\s*[|\n]|$)",
+            r"([A-Z][A-Za-z0-9\s&]+(?:Inc|LLC|Ltd|Corp|Company|GmbH|S\.?A\.?|S\.?L\.?)\.?)",
+        ]
+        
+        for pattern in patterns:
+            match = re.search(pattern, block)
+            if match:
+                return match.group(1).strip()[:80]
+        
+        return "Unknown Company"
+    
+    def detect_seniority_level(self, text: str, experiences: List[ExperienceEntry]) -> str:
+        """Detect seniority level from CV text and experience."""
+        # First check titles in text
+        for level, pattern in self.SENIORITY_PATTERNS.items():
+            if re.search(pattern, text):
+                return level
+        
+        # Infer from total experience
+        total_years = sum(e.duration_years for e in experiences)
+        if total_years >= 15:
+            return "lead"
+        elif total_years >= 8:
+            return "senior"
+        elif total_years >= 3:
+            return "mid"
+        elif total_years > 0:
+            return "junior"
+        
+        return "unknown"
+    
+    def detect_employment_gaps(self, experiences: List[ExperienceEntry]) -> List[Tuple[int, int]]:
+        """Detect gaps in employment history."""
+        gaps = []
+        if len(experiences) < 2:
+            return gaps
+        
+        # Sort by end year descending
+        sorted_exp = sorted(experiences, key=lambda x: x.end_year or datetime.now().year, reverse=True)
+        
+        for i in range(len(sorted_exp) - 1):
+            current = sorted_exp[i]
+            previous = sorted_exp[i + 1]
+            
+            current_start = current.start_year or 0
+            previous_end = previous.end_year or previous.start_year or 0
+            
+            if current_start and previous_end and current_start > previous_end + 1:
+                gaps.append((previous_end, current_start))
+        
+        return gaps
+    
+    def calculate_job_hopping_score(self, experiences: List[ExperienceEntry]) -> Tuple[float, float]:
+        """
+        Calculate job-hopping score (0-1) and average tenure.
+        
+        Higher score = more job changes relative to career length.
+        """
+        if not experiences:
+            return 0.0, 0.0
+        
+        durations = [e.duration_years for e in experiences if e.duration_years > 0]
+        if not durations:
+            return 0.0, 0.0
+        
+        avg_tenure = sum(durations) / len(durations)
+        
+        # Score based on average tenure
+        # < 1 year avg = high job hopping (0.8-1.0)
+        # 1-2 years avg = moderate (0.4-0.6)
+        # > 3 years avg = stable (0.0-0.2)
+        if avg_tenure < 1:
+            score = 0.8 + (1 - avg_tenure) * 0.2
+        elif avg_tenure < 2:
+            score = 0.4 + (2 - avg_tenure) * 0.2
+        elif avg_tenure < 3:
+            score = 0.2 + (3 - avg_tenure) * 0.2
+        else:
+            score = max(0, 0.2 - (avg_tenure - 3) * 0.05)
+        
+        return min(1.0, max(0.0, score)), avg_tenure
+    
+    def extract_companies(self, experiences: List[ExperienceEntry]) -> Tuple[List[str], bool]:
+        """Extract company list and check for FAANG experience."""
+        companies = list(set(e.company for e in experiences if e.company != "Unknown Company"))
+        
+        has_faang = any(
+            any(faang in company.lower() for faang in self.FAANG_COMPANIES)
+            for company in companies
+        )
+        
+        return companies, has_faang
+    
+    def detect_highest_education(self, text: str) -> Tuple[Optional[str], List[str]]:
+        """Detect highest education level and institutions."""
+        highest = None
+        institutions = []
+        
+        # Check education level
+        for level, pattern in self.EDUCATION_LEVELS.items():
+            if re.search(pattern, text):
+                highest = level
+                break
+        
+        # Extract institution names
+        institution_patterns = [
+            r"(?i)(?:university|universidad|college|institute|school|academy)\s+(?:of\s+)?([A-Z][A-Za-z\s]+)",
+            r"([A-Z][A-Za-z\s]+(?:University|Universidad|College|Institute|School|Academy))",
+        ]
+        
+        for pattern in institution_patterns:
+            matches = re.findall(pattern, text)
+            institutions.extend([m.strip()[:60] for m in matches if len(m.strip()) > 3])
+        
+        return highest, list(set(institutions))[:5]
+    
+    def build_enriched_metadata(self, text: str, skills: List[str]) -> EnrichedMetadata:
+        """Build complete enriched metadata from CV text."""
+        # Extract experiences
+        experiences = self.extract_experiences(text)
+        
+        # Calculate totals
+        total_years = sum(e.duration_years for e in experiences)
+        
+        # Get current role
+        current_role = None
+        current_company = None
+        for exp in experiences:
+            if exp.is_current:
+                current_role = exp.job_title
+                current_company = exp.company
+                break
+        
+        # Detect seniority
+        seniority = self.detect_seniority_level(text, experiences)
+        
+        # Detect gaps
+        gaps = self.detect_employment_gaps(experiences)
+        
+        # Calculate job hopping
+        job_hopping_score, avg_tenure = self.calculate_job_hopping_score(experiences)
+        
+        # Extract companies
+        companies, has_faang = self.extract_companies(experiences)
+        
+        # Detect education
+        highest_edu, institutions = self.detect_highest_education(text)
+        
+        return EnrichedMetadata(
+            skills=skills,
+            total_experience_years=total_years,
+            experiences=experiences,
+            current_role=current_role,
+            current_company=current_company,
+            seniority_level=seniority,
+            companies_worked=companies,
+            has_faang_experience=has_faang,
+            employment_gaps=gaps,
+            job_hopping_score=job_hopping_score,
+            avg_tenure_years=avg_tenure,
+            highest_education=highest_edu,
+            education_institutions=institutions
+        )
+    
+    def create_summary_chunk(
+        self,
+        cv_id: str,
+        filename: str,
+        candidate_name: Optional[str],
+        enriched: EnrichedMetadata
+    ) -> CVChunk:
+        """
+        Create a special summary chunk with key CV information.
+        
+        This chunk is designed for high-level queries and ranking.
+        """
+        parts = []
+        
+        # Candidate header
+        name = candidate_name or "Unknown Candidate"
+        parts.append(f"CANDIDATE SUMMARY: {name}")
+        parts.append(f"CV ID: {cv_id}")
+        
+        # Current position
+        if enriched.current_role:
+            parts.append(f"Current Role: {enriched.current_role}")
+        if enriched.current_company:
+            parts.append(f"Current Company: {enriched.current_company}")
+        
+        # Experience summary
+        parts.append(f"Total Experience: {enriched.total_experience_years:.1f} years")
+        parts.append(f"Seniority Level: {enriched.seniority_level.upper()}")
+        parts.append(f"Number of Positions: {len(enriched.experiences)}")
+        
+        # Key skills
+        if enriched.skills:
+            parts.append(f"Key Skills: {', '.join(enriched.skills[:10])}")
+        
+        # Companies
+        if enriched.companies_worked:
+            parts.append(f"Companies: {', '.join(enriched.companies_worked[:5])}")
+        if enriched.has_faang_experience:
+            parts.append("Has FAANG/Big Tech Experience: Yes")
+        
+        # Education
+        if enriched.highest_education:
+            parts.append(f"Education Level: {enriched.highest_education.upper()}")
+        
+        # Red flags summary
+        if enriched.employment_gaps:
+            parts.append(f"Employment Gaps: {len(enriched.employment_gaps)} gap(s) detected")
+        if enriched.job_hopping_score > 0.6:
+            parts.append(f"Job Stability: Low (avg tenure {enriched.avg_tenure_years:.1f} years)")
+        elif enriched.job_hopping_score < 0.3:
+            parts.append(f"Job Stability: High (avg tenure {enriched.avg_tenure_years:.1f} years)")
+        
+        # Career trajectory
+        if enriched.experiences:
+            trajectory = " → ".join([
+                f"{e.job_title} ({e.start_year or '?'})"
+                for e in reversed(enriched.experiences[:5])
+            ])
+            parts.append(f"Career Path: {trajectory}")
+        
+        content = "\n".join(parts)
+        
+        return CVChunk(
+            content=content,
+            section_type="summary",
+            chunk_index=0,  # Always first chunk
+            cv_id=cv_id,
+            filename=filename,
+            candidate_name=candidate_name,
+            metadata={
+                "is_summary": True,
+                "skills": enriched.skills,
+                "total_experience_years": enriched.total_experience_years,
+                "current_role": enriched.current_role,
+                "current_company": enriched.current_company,
+                "seniority_level": enriched.seniority_level,
+                "has_faang": enriched.has_faang_experience,
+                "job_hopping_score": enriched.job_hopping_score,
+                "position_count": len(enriched.experiences),
+            },
+            is_summary_chunk=True
+        )
     
     def _identify_section(self, text: str) -> str:
         """Identify which section type a text block belongs to."""
@@ -208,7 +630,7 @@ class PDFService:
         return chunks
     
     def process_cv(self, pdf_path: str | Path, cv_id: str) -> ExtractedCV:
-        """Extract and chunk a CV from a PDF file with ADAPTIVE chunking."""
+        """Extract and chunk a CV from a PDF file with ADAPTIVE chunking and enriched metadata."""
         pdf_path = Path(pdf_path)
         filename = pdf_path.name
         
@@ -230,15 +652,37 @@ class PDFService:
         logger.info(f"Adaptive chunking for {filename}: {total_length} chars → "
                     f"{optimal_chunk_size} chunk size, {optimal_overlap} overlap")
         
-        # Extract metadata
+        # Extract basic metadata
         candidate_name = self.extract_candidate_name(raw_text)
         skills = self.extract_skills(raw_text)
+        
+        # Build enriched metadata
+        enriched_metadata = self.build_enriched_metadata(raw_text, skills)
+        
+        logger.info(
+            f"Enriched metadata for {candidate_name or filename}: "
+            f"{enriched_metadata.total_experience_years:.1f}y exp, "
+            f"seniority={enriched_metadata.seniority_level}, "
+            f"{len(enriched_metadata.experiences)} positions, "
+            f"gaps={len(enriched_metadata.employment_gaps)}, "
+            f"job_hopping={enriched_metadata.job_hopping_score:.2f}"
+        )
         
         # Split into sections and chunk
         sections = self._split_into_sections(raw_text)
         
         chunks = []
-        chunk_index = 0
+        
+        # FIRST: Create summary chunk (always index 0)
+        summary_chunk = self.create_summary_chunk(
+            cv_id=cv_id,
+            filename=filename,
+            candidate_name=candidate_name,
+            enriched=enriched_metadata
+        )
+        chunks.append(summary_chunk)
+        
+        chunk_index = 1  # Start at 1 since summary is 0
         
         for section_type, section_content in sections:
             section_chunks = self._chunk_text(
@@ -249,6 +693,29 @@ class PDFService:
             )
             
             for chunk_content in section_chunks:
+                # Build enriched chunk metadata
+                chunk_metadata = {
+                    "skills": skills,
+                    "section": section_type,
+                    "total_experience_years": enriched_metadata.total_experience_years,
+                    "seniority_level": enriched_metadata.seniority_level,
+                    "current_role": enriched_metadata.current_role,
+                    "current_company": enriched_metadata.current_company,
+                    "has_faang": enriched_metadata.has_faang_experience,
+                }
+                
+                # For experience sections, add position-specific metadata
+                if section_type == "experience":
+                    for exp in enriched_metadata.experiences:
+                        if exp.job_title in chunk_content or exp.company in chunk_content:
+                            chunk_metadata["job_title"] = exp.job_title
+                            chunk_metadata["company"] = exp.company
+                            chunk_metadata["start_year"] = exp.start_year
+                            chunk_metadata["end_year"] = exp.end_year
+                            chunk_metadata["is_current"] = exp.is_current
+                            chunk_metadata["duration_years"] = exp.duration_years
+                            break
+                
                 chunk = CVChunk(
                     content=chunk_content,
                     section_type=section_type,
@@ -256,10 +723,7 @@ class PDFService:
                     cv_id=cv_id,
                     filename=filename,
                     candidate_name=candidate_name,
-                    metadata={
-                        "skills": skills,
-                        "section": section_type,
-                    }
+                    metadata=chunk_metadata
                 )
                 chunks.append(chunk)
                 chunk_index += 1
@@ -274,5 +738,12 @@ class PDFService:
                 "skills": skills,
                 "chunk_count": len(chunks),
                 "sections": list(set(s[0] for s in sections)),
-            }
+                "total_experience_years": enriched_metadata.total_experience_years,
+                "seniority_level": enriched_metadata.seniority_level,
+                "current_role": enriched_metadata.current_role,
+                "has_faang": enriched_metadata.has_faang_experience,
+                "job_hopping_score": enriched_metadata.job_hopping_score,
+                "employment_gaps_count": len(enriched_metadata.employment_gaps),
+            },
+            enriched_metadata=enriched_metadata
         )

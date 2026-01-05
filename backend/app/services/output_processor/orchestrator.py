@@ -18,7 +18,11 @@ from .modules import (
     DirectAnswerModule,
     AnalysisModule,
     TableModule,
-    ConclusionModule
+    ConclusionModule,
+    # Enhanced modules (v5.1)
+    GapAnalysisModule,
+    RedFlagsModule,
+    TimelineModule,
 )
 
 logger = logging.getLogger(__name__)
@@ -37,19 +41,25 @@ class OutputOrchestrator:
         """Initialize with processor and modules."""
         self.processor = OutputProcessor()
         
-        # Module instances for formatting
+        # Core module instances for formatting
         self.thinking_module = ThinkingModule()
         self.direct_answer_module = DirectAnswerModule()
         self.analysis_module = AnalysisModule()
         self.table_module = TableModule()
         self.conclusion_module = ConclusionModule()
         
-        logger.info("[ORCHESTRATOR] Initialized")
+        # Enhanced modules (v5.1)
+        self.gap_analysis_module = GapAnalysisModule()
+        self.red_flags_module = RedFlagsModule()
+        self.timeline_module = TimelineModule()
+        
+        logger.info("[ORCHESTRATOR] Initialized with enhanced modules")
     
     def process(
         self,
         raw_llm_output: str,
-        chunks: List[Dict[str, Any]] = None
+        chunks: List[Dict[str, Any]] = None,
+        query: str = ""
     ) -> tuple[StructuredOutput, str]:
         """
         Process LLM output into structured components and formatted answer.
@@ -59,6 +69,7 @@ class OutputOrchestrator:
         Args:
             raw_llm_output: Raw text from LLM
             chunks: Retrieved CV chunks for fallback
+            query: Original user query for enhanced modules (gap analysis, etc.)
             
         Returns:
             Tuple of (StructuredOutput, formatted_answer_string)
@@ -107,6 +118,36 @@ class OutputOrchestrator:
         if structured.conclusion:
             structured.conclusion = self._format_candidate_references(structured.conclusion, candidate_map)
         
+        # STEP 1.7: Extract enhanced modules (v5.1) from chunks
+        if chunks:
+            # Gap Analysis - uses query for requirement extraction
+            gap_data = self.gap_analysis_module.extract(
+                llm_output=cleaned_llm_output,
+                chunks=chunks,
+                query=query
+            )
+            if gap_data:
+                structured.gap_analysis = gap_data.to_dict()
+                logger.info(f"[ORCHESTRATOR] Gap analysis: {len(gap_data.skill_gaps)} gaps detected")
+            
+            # Red Flags
+            red_flags_data = self.red_flags_module.extract(
+                chunks=chunks,
+                llm_output=cleaned_llm_output
+            )
+            if red_flags_data:
+                structured.red_flags = red_flags_data.to_dict()
+                logger.info(f"[ORCHESTRATOR] Red flags: {len(red_flags_data.flags)} flags detected")
+            
+            # Timeline
+            timeline_data = self.timeline_module.extract(
+                chunks=chunks,
+                llm_output=cleaned_llm_output
+            )
+            if timeline_data:
+                structured.timeline = timeline_data.to_dict()
+                logger.info(f"[ORCHESTRATOR] Timeline: {len(timeline_data.timelines)} candidates")
+        
         # STEP 2: Assemble output SEQUENTIALLY using module format methods
         parts = []
         
@@ -133,6 +174,33 @@ class OutputOrchestrator:
         if structured.conclusion:
             formatted_conclusion = self.conclusion_module.format(structured.conclusion)
             parts.append(formatted_conclusion)
+        
+        # 6. Enhanced modules (v5.1) - Optional sections after main content
+        # These are included in structured output but also formatted for display
+        if structured.gap_analysis and structured.gap_analysis.get("skill_gaps"):
+            from .modules import GapAnalysisData, SkillGap
+            # Reconstruct data object for formatting
+            gap_data = self._reconstruct_gap_analysis(structured.gap_analysis)
+            if gap_data:
+                formatted_gaps = self.gap_analysis_module.format(gap_data)
+                if formatted_gaps:
+                    parts.append(formatted_gaps)
+        
+        if structured.red_flags and structured.red_flags.get("flags"):
+            from .modules import RedFlagsData, RedFlag
+            red_flags_data = self._reconstruct_red_flags(structured.red_flags)
+            if red_flags_data:
+                formatted_flags = self.red_flags_module.format(red_flags_data)
+                if formatted_flags:
+                    parts.append(formatted_flags)
+        
+        if structured.timeline and structured.timeline.get("timelines"):
+            from .modules import TimelineData, CandidateTimeline
+            timeline_data = self._reconstruct_timeline(structured.timeline)
+            if timeline_data:
+                formatted_timeline = self.timeline_module.format(timeline_data)
+                if formatted_timeline:
+                    parts.append(formatted_timeline)
         
         # Join with double newlines for readability
         final_answer = "\n\n".join(parts)
@@ -359,6 +427,102 @@ class OutputOrchestrator:
             logger.info(f"[ORCHESTRATOR] Removed duplicates: {len(text)} -> {len(result)} chars")
         
         return result
+    
+    # =========================================================================
+    # HELPER METHODS FOR ENHANCED MODULES
+    # =========================================================================
+    
+    def _reconstruct_gap_analysis(self, data: Dict[str, Any]):
+        """Reconstruct GapAnalysisData from dict for formatting."""
+        from .modules import GapAnalysisData, SkillGap
+        
+        try:
+            skill_gaps = [
+                SkillGap(
+                    skill=g.get("skill", ""),
+                    importance=g.get("importance", "preferred"),
+                    candidates_missing=g.get("candidates_missing", []),
+                    candidates_have=g.get("candidates_have", [])
+                )
+                for g in data.get("skill_gaps", [])
+            ]
+            
+            return GapAnalysisData(
+                required_skills=data.get("required_skills", []),
+                skill_gaps=skill_gaps,
+                coverage_score=data.get("coverage_score", 0),
+                best_coverage_candidate=data.get("best_coverage_candidate"),
+                summary=data.get("summary", "")
+            )
+        except Exception as e:
+            logger.warning(f"[ORCHESTRATOR] Failed to reconstruct gap analysis: {e}")
+            return None
+    
+    def _reconstruct_red_flags(self, data: Dict[str, Any]):
+        """Reconstruct RedFlagsData from dict for formatting."""
+        from .modules import RedFlagsData, RedFlag
+        
+        try:
+            flags = [
+                RedFlag(
+                    flag_type=f.get("flag_type", ""),
+                    severity=f.get("severity", "low"),
+                    description=f.get("description", ""),
+                    candidate_name=f.get("candidate_name", ""),
+                    details=f.get("details", {})
+                )
+                for f in data.get("flags", [])
+            ]
+            
+            return RedFlagsData(
+                flags=flags,
+                candidates_with_flags=data.get("candidates_with_flags", {}),
+                high_risk_candidates=data.get("high_risk_candidates", []),
+                clean_candidates=data.get("clean_candidates", []),
+                summary=data.get("summary", "")
+            )
+        except Exception as e:
+            logger.warning(f"[ORCHESTRATOR] Failed to reconstruct red flags: {e}")
+            return None
+    
+    def _reconstruct_timeline(self, data: Dict[str, Any]):
+        """Reconstruct TimelineData from dict for formatting."""
+        from .modules import TimelineData, CandidateTimeline
+        from .modules.timeline_module import TimelineEntry
+        
+        try:
+            timelines = []
+            for t in data.get("timelines", []):
+                entries = [
+                    TimelineEntry(
+                        year_start=e.get("year_start", 2000),
+                        year_end=e.get("year_end"),
+                        title=e.get("title", ""),
+                        company=e.get("company", ""),
+                        is_current=e.get("is_current", False),
+                        duration_years=e.get("duration_years", 0),
+                        transition_type=e.get("transition_type", "")
+                    )
+                    for e in t.get("entries", [])
+                ]
+                
+                timelines.append(CandidateTimeline(
+                    candidate_name=t.get("candidate_name", ""),
+                    cv_id=t.get("cv_id", ""),
+                    entries=entries,
+                    career_span_years=t.get("career_span_years", 0),
+                    total_companies=t.get("total_companies", 0),
+                    progression_score=t.get("progression_score", 0),
+                    current_role=t.get("current_role")
+                ))
+            
+            return TimelineData(
+                timelines=timelines,
+                summary=data.get("summary", "")
+            )
+        except Exception as e:
+            logger.warning(f"[ORCHESTRATOR] Failed to reconstruct timeline: {e}")
+            return None
 
 
 # Singleton instance

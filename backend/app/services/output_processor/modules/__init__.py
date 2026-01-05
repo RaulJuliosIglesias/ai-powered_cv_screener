@@ -17,11 +17,25 @@ from .direct_answer_module import DirectAnswerModule
 from .analysis_module import AnalysisModule
 from .table_module import TableModule
 from .conclusion_module import ConclusionModule
+from .gap_analysis_module import GapAnalysisModule, GapAnalysisData, SkillGap
+from .red_flags_module import RedFlagsModule, RedFlagsData, RedFlag
+from .timeline_module import TimelineModule, TimelineData, CandidateTimeline
 
 __all__ = [
-    'ThinkingModule',
-    'DirectAnswerModule',
-    'AnalysisModule',
-    'TableModule',
-    'ConclusionModule',
+    # Core modules
+    "ThinkingModule",
+    "DirectAnswerModule",
+    "AnalysisModule",
+    "TableModule",
+    "ConclusionModule",
+    # Enhanced modules
+    "GapAnalysisModule",
+    "GapAnalysisData",
+    "SkillGap",
+    "RedFlagsModule",
+    "RedFlagsData",
+    "RedFlag",
+    "TimelineModule",
+    "TimelineData",
+    "CandidateTimeline",
 ]

@@ -83,16 +83,25 @@ class StructuredOutput:
     
     This structure guarantees that the frontend always receives
     consistent data, regardless of LLM output quality.
+    
+    Components (v5.1):
+    - Core: direct_answer, thinking, analysis, table_data, conclusion
+    - Enhanced: gap_analysis, red_flags, timeline
     """
     # Core components (always present)
     direct_answer: str
     raw_content: str
     
-    # Optional components (null if not found/parsed)
+    # Optional core components (null if not found/parsed)
     thinking: Optional[str] = None
     analysis: Optional[str] = None
     table_data: Optional[TableData] = None
     conclusion: Optional[str] = None
+    
+    # Enhanced components (v5.1)
+    gap_analysis: Optional[Dict[str, Any]] = None  # GapAnalysisData.to_dict()
+    red_flags: Optional[Dict[str, Any]] = None     # RedFlagsData.to_dict()
+    timeline: Optional[Dict[str, Any]] = None      # TimelineData.to_dict()
     
     # Metadata
     cv_references: List[CVReference] = field(default_factory=list)
@@ -108,6 +117,11 @@ class StructuredOutput:
             "analysis": self.analysis,
             "table_data": self.table_data.to_dict() if self.table_data else None,
             "conclusion": self.conclusion,
+            # Enhanced components (v5.1)
+            "gap_analysis": self.gap_analysis,
+            "red_flags": self.red_flags,
+            "timeline": self.timeline,
+            # Metadata
             "cv_references": [
                 {"cv_id": ref.cv_id, "name": ref.name, "context": ref.context}
                 for ref in self.cv_references
@@ -135,6 +149,11 @@ class StructuredOutput:
             analysis=data.get("analysis"),
             table_data=table_data,
             conclusion=data.get("conclusion"),
+            # Enhanced components
+            gap_analysis=data.get("gap_analysis"),
+            red_flags=data.get("red_flags"),
+            timeline=data.get("timeline"),
+            # Metadata
             cv_references=cv_refs,
             parsing_warnings=data.get("parsing_warnings", []),
             fallback_used=data.get("fallback_used", False)

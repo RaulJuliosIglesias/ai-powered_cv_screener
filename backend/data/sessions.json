@@ -33449,10 +33449,1941 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-05T20:00:02.735130"
+        },
+        {
+          "id": "c3da2f04-2875-4a95-93c1-b4147395fa7b",
+          "role": "user",
+          "content": "Who is best for a leadership role?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T20:06:18.419101"
+        },
+        {
+          "id": "faeefe28-ef7a-46ff-bc0c-2537dbac78fc",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a ranked list of candidates suitable for a leadership role, based on leadership experience, skills (team management, project leadership, strategic thinking, communication), and accomplishments. I need to identify candidates who have held leadership positions, demonstrated leadership skills, and achieved significant accomplishments in their roles. I will create a table comparing the top candidates based on these criteria and provide a ranked list with justifications.\n:::\n\nHere is a ranked list of candidates based on their suitability for a leadership role, considering their experience, skills, and accomplishments. ### Analysis\nThe following candidates were selected based on explicit mentions of leadership roles, team management experience, project leadership, strategic thinking, and communication skills. The ranking is based on the depth and breadth of their leadership experience, as well as the quantifiable impact of their leadership.\n\n### Analysis\n\nThe following candidates were selected based on explicit mentions of leadership roles, team management experience, project leadership, strategic thinking, and communication skills. The ranking is based on the depth and breadth of their leadership experience, as well as the quantifiable impact of their leadership. Candidates with more extensive leadership experience and demonstrable achievements are ranked higher.\n\n| Candidate | Leadership Experience | Skills & Accomplishments | Match Score |\n|---|---|---|---|\n| Isabel Mendoza | Chief Creative Officer, VP of Creative Development, Director of 3D Production | Oversees creative vision, increased user engagement by 45%, streamlined asset pipeline, mentored talent, delivered $12M campaign, reduced render costs by 20%, championed inclusive design. | 45% |\n| Rajiv Kapoor | VP of Creative Technology, Director of Technical Art | Led teams, boosted player engagement by 45%, cut iteration cycles by 30%, mentored senior artists, scaled pipeline capacity, deployed real-time shader compilation tools, championed accessibility standards. | 45% |\n| Priya Patel | Lead 3D Artist | Spearheaded 3D art direction, led a team of 10 artists, increased user reviews by 30%, pioneered photogrammetry techniques, developed a standardized 3D asset pipeline, mentored junior artists. | 30% |\n\n:::conclusion\n[📄](cv:cv_f9a24650)**Isabel Mendoza**is the top candidate due to her extensive experience as Chief Creative Officer and VP of Creative Development. [📄](cv:cv_8ef1597b)**Rajiv Kapoor**is a strong second choice with experience as VP of Creative Technology and Director of Technical Art. [📄](cv:cv_f081aab4)**Priya Patel**is also a suitable candidate with experience as a Lead 3D Artist.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_d7c6c811",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_1bcbf780",
+              "filename": "55c0e841__Ricardo_De_Vries__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_ccd3d052",
+              "filename": "8cf248e0__Mateo_Rodriguez__Rigger.pdf"
+            },
+            {
+              "cv_id": "cv_c01b87f9",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_2629ddd7",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_91690f27",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_f9a24650",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_fcb5ce85",
+              "filename": "74a0c87c__Mei_Lin_Chen__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_758c8e0c",
+              "filename": "9a484d82__Carlos_Mendoza__Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_77f9630a",
+              "filename": "9e50441e__Matteo_Rossi__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_fa279041",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_9bb77a87",
+              "filename": "8742ca7a__Sofia_Mendoza__Environment_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_f081aab4",
+              "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_2fd6ca86",
+              "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_e14a1e30",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_8ef1597b",
+              "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a118e22e",
+              "filename": "02f9626b__Marco_Rossi__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_79d78dc9",
+              "filename": "0ed822eb__Antoine_Dubois__Junior_Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_4cb4870f",
+              "filename": "63ce3a7c__Emma_Whitmore__Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_566a176f",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_cf2a121d",
+              "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1815.49,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 45.04,
+              "details": "Found 31 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 18762.77,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5822.23,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Here is a ranked list of candidates based on their suitability for a leadership role, considering their experience, skills, and accomplishments. ### Analysis\nThe following candidates were selected based on explicit mentions of leadership roles, team management experience, project leadership, strategic thinking, and communication skills. The ranking is based on the depth and breadth of their leadership experience, as well as the quantifiable impact of their leadership.",
+            "raw_content": ":::thinking\nThe user is asking for a ranked list of candidates suitable for a leadership role, based on leadership experience, skills (team management, project leadership, strategic thinking, communication), and accomplishments. I need to identify candidates who have held leadership positions, demonstrated leadership skills, and achieved significant accomplishments in their roles. I will create a table comparing the top candidates based on these criteria and provide a ranked list with justifications.\n:::\n\nHere is a ranked list of candidates based on their suitability for a leadership role, considering their experience, skills, and accomplishments.\n\n### Analysis\n\nThe following candidates were selected based on explicit mentions of leadership roles, team management experience, project leadership, strategic thinking, and communication skills. The ranking is based on the depth and breadth of their leadership experience, as well as the quantifiable impact of their leadership. Candidates with more extensive leadership experience and demonstrable achievements are ranked higher.\n\n| Candidate | Leadership Experience | Skills & Accomplishments | Match |\n|-----------|-----------------------|--------------------------|-------|\n| **[Isabel Mendoza](cv:cv_f9a24650)** | Chief Creative Officer, VP of Creative Development, Director of 3D Production | Oversees creative vision, increased user engagement by 45%, streamlined asset pipeline, mentored talent, delivered $12M campaign, reduced render costs by 20%, championed inclusive design. | ⭐⭐⭐⭐⭐ |\n| **[Rajiv Kapoor](cv:cv_8ef1597b)** | VP of Creative Technology, Director of Technical Art | Led teams, boosted player engagement by 45%, cut iteration cycles by 30%, mentored senior artists, scaled pipeline capacity, deployed real-time shader compilation tools, championed accessibility standards. | ⭐⭐⭐⭐ |\n| **[Priya Patel](cv:cv_f081aab4)** | Lead 3D Artist | Spearheaded 3D art direction, led a team of 10 artists, increased user reviews by 30%, pioneered photogrammetry techniques, developed a standardized 3D asset pipeline, mentored junior artists. | ⭐⭐⭐ |\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_f9a24650)** is the top candidate due to her extensive experience as Chief Creative Officer and VP of Creative Development. **[Rajiv Kapoor](cv:cv_8ef1597b)** is a strong second choice with experience as VP of Creative Technology and Director of Technical Art. **[Priya Patel](cv:cv_f081aab4)** is also a suitable candidate with experience as a Lead 3D Artist.\n:::",
+            "thinking": "The user is asking for a ranked list of candidates suitable for a leadership role, based on leadership experience, skills (team management, project leadership, strategic thinking, communication), and accomplishments. I need to identify candidates who have held leadership positions, demonstrated leadership skills, and achieved significant accomplishments in their roles. I will create a table comparing the top candidates based on these criteria and provide a ranked list with justifications.",
+            "analysis": "The following candidates were selected based on explicit mentions of leadership roles, team management experience, project leadership, strategic thinking, and communication skills. The ranking is based on the depth and breadth of their leadership experience, as well as the quantifiable impact of their leadership. Candidates with more extensive leadership experience and demonstrable achievements are ranked higher.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Leadership Experience",
+                "Skills & Accomplishments",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Isabel Mendoza",
+                  "cv_id": "cv_f9a24650",
+                  "columns": {
+                    "Leadership Experience": "Chief Creative Officer, VP of Creative Development, Director of 3D Production",
+                    "Skills & Accomplishments": "Oversees creative vision, increased user engagement by 45%, streamlined asset pipeline, mentored talent, delivered $12M campaign, reduced render costs by 20%, championed inclusive design."
+                  },
+                  "match_score": 45
+                },
+                {
+                  "candidate_name": "Rajiv Kapoor",
+                  "cv_id": "cv_8ef1597b",
+                  "columns": {
+                    "Leadership Experience": "VP of Creative Technology, Director of Technical Art",
+                    "Skills & Accomplishments": "Led teams, boosted player engagement by 45%, cut iteration cycles by 30%, mentored senior artists, scaled pipeline capacity, deployed real-time shader compilation tools, championed accessibility standards."
+                  },
+                  "match_score": 45
+                },
+                {
+                  "candidate_name": "Priya Patel",
+                  "cv_id": "cv_f081aab4",
+                  "columns": {
+                    "Leadership Experience": "Lead 3D Artist",
+                    "Skills & Accomplishments": "Spearheaded 3D art direction, led a team of 10 artists, increased user reviews by 30%, pioneered photogrammetry techniques, developed a standardized 3D asset pipeline, mentored junior artists."
+                  },
+                  "match_score": 30
+                }
+              ]
+            },
+            "conclusion": "[📄](cv:cv_f9a24650) **Isabel Mendoza** is the top candidate due to her extensive experience as Chief Creative Officer and VP of Creative Development. [📄](cv:cv_8ef1597b) **Rajiv Kapoor** is a strong second choice with experience as VP of Creative Technology and Director of Technical Art. [📄](cv:cv_f081aab4) **Priya Patel** is also a suitable candidate with experience as a Lead 3D Artist.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T20:06:48.838458"
+        },
+        {
+          "id": "1b64e350-7d7d-4d4e-8fb8-997a80a759d2",
+          "role": "user",
+          "content": "and for front end ui ux?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T20:08:54.531982"
+        },
+        {
+          "id": "799d19ca-b64b-4deb-8228-ee81dd1a0d7a",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for candidates with skills and experience in front-end development, UI design, and UX design, including specific technologies, frameworks, and tools. I need to identify candidates who have explicitly mentioned these skills in their CVs. I must provide the requested number of candidates even if there are only partial matches.\n:::\n\nBased on the provided CVs, none of the analyzed candidates explicitly demonstrate a combination of front-end development, UI design, and UX design skills. However, some candidates possess skills that align with either design or development aspects of the request. ### Analysis\nThe query requires a blend of front-end development (HTML, CSS, JavaScript, React, Angular, Vue.js) and UI/UX design skills (Figma, Adobe XD, Sketch, user research, usability testing).\n\n### Analysis\n\nThe query requires a blend of front-end development (HTML, CSS, JavaScript, React, Angular, Vue.js) and UI/UX design skills (Figma, Adobe XD, Sketch, user research, usability testing). Many candidates have design skills but lack the necessary development skills, or vice versa. I am including candidates who have some of the requested skills, even if they are not a complete match, to fulfill the user's request for a specific number of candidates.\n\n| Candidate | UI/UX Design Skills | Front-End Development Skills | Match Score |\n|---|---|---|---|\n| Aisha Johnson | Storyboarding, Motion Graphics | None explicitly mentioned | 20% |\n| Aisha Patel | Storyboarding | None explicitly mentioned | 20% |\n| Aisha Nkrumah Junior 2D | Character Design, Background Design, Storyboarding, Digital Painting, Concept Art | None explicitly mentioned | 20% |\n\n:::conclusion\nNone of the analyzed candidates have the required technical skills for front-end development. The closest matches are [📄](cv:cv_c01b87f9)**Aisha Johnson**, [📄](cv:cv_9f38db8f)**Aisha Patel**, and [📄](cv:cv_91690f27)**Aisha Nkrumah Junior 2D**, who have design-related skills like storyboarding, motion graphics, and character design, but lack explicit front-end development skills.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_c01b87f9",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_9f38db8f",
+              "filename": "0d1b1a1b__Aisha_Patel__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_f081aab4",
+              "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_91690f27",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_2629ddd7",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_4cb4870f",
+              "filename": "63ce3a7c__Emma_Whitmore__Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_e9e3ae63",
+              "filename": "5c2c5d6b__Arjun_Mehta__Junior_Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_70208b59",
+              "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_77f9630a",
+              "filename": "9e50441e__Matteo_Rossi__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_fa279041",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_cf2a121d",
+              "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_1dc40e8e",
+              "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_e14a1e30",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_ccd3d052",
+              "filename": "8cf248e0__Mateo_Rodriguez__Rigger.pdf"
+            },
+            {
+              "cv_id": "cv_fcb5ce85",
+              "filename": "74a0c87c__Mei_Lin_Chen__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_5a0fea7b",
+              "filename": "53f55f6a__Mei_Rossi__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_1bcbf780",
+              "filename": "55c0e841__Ricardo_De_Vries__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_79d78dc9",
+              "filename": "0ed822eb__Antoine_Dubois__Junior_Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_566a176f",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_f9a24650",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 2087.65,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 39.5,
+              "details": "Found 30 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 19682.88,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4918.66,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Based on the provided CVs, none of the analyzed candidates explicitly demonstrate a combination of front-end development, UI design, and UX design skills. However, some candidates possess skills that align with either design or development aspects of the request. ### Analysis\nThe query requires a blend of front-end development (HTML, CSS, JavaScript, React, Angular, Vue.js) and UI/UX design skills (Figma, Adobe XD, Sketch, user research, usability testing).",
+            "raw_content": ":::thinking\nThe user is asking for candidates with skills and experience in front-end development, UI design, and UX design, including specific technologies, frameworks, and tools. I need to identify candidates who have explicitly mentioned these skills in their CVs. I must provide the requested number of candidates even if there are only partial matches.\n:::\n\nBased on the provided CVs, none of the analyzed candidates explicitly demonstrate a combination of front-end development, UI design, and UX design skills. However, some candidates possess skills that align with either design or development aspects of the request.\n\n### Analysis\n\nThe query requires a blend of front-end development (HTML, CSS, JavaScript, React, Angular, Vue.js) and UI/UX design skills (Figma, Adobe XD, Sketch, user research, usability testing). Many candidates have design skills but lack the necessary development skills, or vice versa. I am including candidates who have some of the requested skills, even if they are not a complete match, to fulfill the user's request for a specific number of candidates.\n\n| Candidate | UI/UX Design Skills | Front-End Development Skills | Match |\n|-----------|----------------------|-------------------------------|-------|\n| **[Aisha Johnson](cv:cv_c01b87f9)** | Storyboarding, Motion Graphics | None explicitly mentioned | ⭐ |\n| **[Aisha Patel](cv:cv_9f38db8f)** | Storyboarding | None explicitly mentioned | ⭐ |\n| **[Aisha Nkrumah Junior 2D](cv:cv_91690f27)** | Character Design, Background Design, Storyboarding, Digital Painting, Concept Art | None explicitly mentioned | ⭐ |\n\n:::conclusion\nNone of the analyzed candidates have the required technical skills for front-end development. The closest matches are **[Aisha Johnson](cv:cv_c01b87f9)**, **[Aisha Patel](cv:cv_9f38db8f)**, and **[Aisha Nkrumah Junior 2D](cv:cv_91690f27)**, who have design-related skills like storyboarding, motion graphics, and character design, but lack explicit front-end development skills.\n:::",
+            "thinking": "The user is asking for candidates with skills and experience in front-end development, UI design, and UX design, including specific technologies, frameworks, and tools. I need to identify candidates who have explicitly mentioned these skills in their CVs. I must provide the requested number of candidates even if there are only partial matches.",
+            "analysis": "The query requires a blend of front-end development (HTML, CSS, JavaScript, React, Angular, Vue.js) and UI/UX design skills (Figma, Adobe XD, Sketch, user research, usability testing). Many candidates have design skills but lack the necessary development skills, or vice versa. I am including candidates who have some of the requested skills, even if they are not a complete match, to fulfill the user's request for a specific number of candidates.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "UI/UX Design Skills",
+                "Front-End Development Skills",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Aisha Johnson",
+                  "cv_id": "cv_c01b87f9",
+                  "columns": {
+                    "UI/UX Design Skills": "Storyboarding, Motion Graphics",
+                    "Front-End Development Skills": "None explicitly mentioned"
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Aisha Patel",
+                  "cv_id": "cv_9f38db8f",
+                  "columns": {
+                    "UI/UX Design Skills": "Storyboarding",
+                    "Front-End Development Skills": "None explicitly mentioned"
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Aisha Nkrumah Junior 2D",
+                  "cv_id": "cv_91690f27",
+                  "columns": {
+                    "UI/UX Design Skills": "Character Design, Background Design, Storyboarding, Digital Painting, Concept Art",
+                    "Front-End Development Skills": "None explicitly mentioned"
+                  },
+                  "match_score": 20
+                }
+              ]
+            },
+            "conclusion": "None of the analyzed candidates have the required technical skills for front-end development. The closest matches are [📄](cv:cv_c01b87f9) **Aisha Johnson**, [📄](cv:cv_9f38db8f) **Aisha Patel**, and [📄](cv:cv_91690f27) **Aisha Nkrumah Junior 2D**, who have design-related skills like storyboarding, motion graphics, and character design, but lack explicit front-end development skills.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T20:09:25.691153"
+        },
+        {
+          "id": "828f6be5-000c-479b-b0fc-1a6b3f6cdbb5",
+          "role": "user",
+          "content": "analzia mucho mejor Aisha Patel\n\ny porque pdoria ser la mejor candidato o porque no",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T20:09:59.358597"
+        },
+        {
+          "id": "4d8b6115-b2c8-4d28-b006-6f3684bcf12c",
+          "role": "assistant",
+          "content": ":::thinking\nOkay, I need to analyze Aisha Patel (cv_9f38db8f)'s CV, identify her current role, total experience, key skills, and career trajectory. Then, I'll assess her strengths and weaknesses based on the CV content to determine her suitability for an animation role.\n:::\n\n## 👤 [📄](cv:cv_9f38db8f)**Aisha Patel**is currently an Animator at Sunrise Animation Studios (2022-Present), where she leads animation on high-profile series and campaigns. With over 10 years of experience in animation, she has a strong background in both 2D and 3D animation, storyboarding, and character rigging. Her career showcases a progression from intern to leading animator, demonstrating increasing responsibility and expertise.\n\n## 👤 [📄](cv:cv_9f38db8f)**Aisha Patel**[📄](cv:cv_9f38db8f)**Aisha Patel**is currently an Animator at Sunrise Animation Studios (2022-Present), where she leads animation on high-profile series and campaigns. With over 10 years of experience in animation, she has a strong background in both 2D and 3D animation, storyboarding, and character rigging. Her career showcases a progression from intern to leading animator, demonstrating increasing responsibility and expertise.\n---\n### 📊 Candidate Highlights\n---\n### 📜 Credentials\n- Autodesk Maya Certified Professional, 2021\n- Adobe Certified Expert - After Effects, 2022\n---\n\n| Category | Key Information | Match Score |\n|---|---|---|\n| 🎯 Current Role | Animator at Sunrise Animation Studios (2022-Present) | 50% |\n| ⏱️ Total Experience | 10 years in Animation | 50% |\n| 💡 Core Expertise | 3D Animation, 2D Animation, Storyboarding | 50% |\n| 🎓 Education | Bachelor of Arts in Fine Arts (Animation), University of Lagos, 2012 | 50% |\n| 🏆 Top Achievement | Spearheaded the animation of a 10-episode series that increased viewer engagement by 45%. | 45% |\n\n:::conclusion**Assessment:**[📄](cv:cv_9f38db8f)**Aisha Patel**appears to be a strong candidate for an animation role, given her extensive experience, key skills, and career progression. Her current role as an Animator at Sunrise Animation Studios and her track record of contributing to award-winning projects make her a valuable asset.**Key Strengths:**- Proven ability to lead and deliver high-impact animation projects, as demonstrated by her work at Sunrise Animation Studios.\n- Strong technical skills in both 2D and 3D animation, as well as related areas like storyboarding and character rigging.\n- Consistent career progression from intern to animator, indicating increasing expertise and responsibility.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_f081aab4",
+              "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_ccd3d052",
+              "filename": "8cf248e0__Mateo_Rodriguez__Rigger.pdf"
+            },
+            {
+              "cv_id": "cv_cf2a121d",
+              "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_fcb5ce85",
+              "filename": "74a0c87c__Mei_Lin_Chen__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_9f38db8f",
+              "filename": "0d1b1a1b__Aisha_Patel__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_a118e22e",
+              "filename": "02f9626b__Marco_Rossi__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d7c6c811",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_8ef1597b",
+              "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_5a0fea7b",
+              "filename": "53f55f6a__Mei_Rossi__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_91690f27",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_1bcbf780",
+              "filename": "55c0e841__Ricardo_De_Vries__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_f9a24650",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_5f291191",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_e14a1e30",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_1e745097",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_79d78dc9",
+              "filename": "0ed822eb__Antoine_Dubois__Junior_Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_4cb4870f",
+              "filename": "63ce3a7c__Emma_Whitmore__Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_32cdbd7e",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c01b87f9",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_2fd6ca86",
+              "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_2629ddd7",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_566a176f",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_fa279041",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_70208b59",
+              "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1884.33,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 39.79,
+              "details": "Found 30 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 24040.73,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6903.26,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "## 👤 [📄](cv:cv_9f38db8f) **Aisha Patel** is currently an Animator at Sunrise Animation Studios (2022-Present), where she leads animation on high-profile series and campaigns. With over 10 years of experience in animation, she has a strong background in both 2D and 3D animation, storyboarding, and character rigging. Her career showcases a progression from intern to leading animator, demonstrating increasing responsibility and expertise.",
+            "raw_content": ":::thinking\nOkay, I need to analyze **[Aisha Patel](cv:cv_9f38db8f)**'s CV, identify her current role, total experience, key skills, and career trajectory. Then, I'll assess her strengths and weaknesses based on the CV content to determine her suitability for an animation role.\n:::\n\n## 👤 **[Aisha Patel](cv:cv_9f38db8f)**\n\n**[Aisha Patel](cv:cv_9f38db8f)** is currently an Animator at Sunrise Animation Studios (2022-Present), where she leads animation on high-profile series and campaigns. With over 10 years of experience in animation, she has a strong background in both 2D and 3D animation, storyboarding, and character rigging. Her career showcases a progression from intern to leading animator, demonstrating increasing responsibility and expertise.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Animator at Sunrise Animation Studios (2022-Present) |\n| **⏱️ Total Experience** | 10 years in Animation |\n| **🏆 Top Achievement** | Spearheaded the animation of a 10-episode series that increased viewer engagement by 45%. |\n| **💡 Core Expertise** | 3D Animation, 2D Animation, Storyboarding |\n| **🎓 Education** | Bachelor of Arts in Fine Arts (Animation), University of Lagos, 2012 |\n\n---\n\n### 💼 Career Trajectory\n\n**Animator** — *Sunrise Animation Studios* (2022-Present)\n→ Spearheaded the animation of a 10‑episode series that increased viewer engagement by 45%.\n\n**Junior Animator** — *Creative Spark Studios* (2019-2022)\n→ Delivered key animation sequences for a brand campaign that won a Cannes Lion award.\n\n**Intern Animator** — *Lagos Arts Collective* (2017-2019)\n→ Contributed to award‑winning short film that screened at the African Film Festival.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **Animation** | 3D Animation, 2D Animation | 10/10, 9/10 |\n| **Design** | Storyboarding, Character Rigging | 9/10, 9/10 |\n| **VFX** | Visual Effects | 8/10 |\n\n---\n\n### 📜 Credentials\n\n- Autodesk Maya Certified Professional, 2021\n- Adobe Certified Expert - After Effects, 2022\n\n---\n\n:::conclusion\n**Assessment:** **[Aisha Patel](cv:cv_9f38db8f)** appears to be a strong candidate for an animation role, given her extensive experience, key skills, and career progression. Her current role as an Animator at Sunrise Animation Studios and her track record of contributing to award-winning projects make her a valuable asset.\n\n**Key Strengths:**\n- Proven ability to lead and deliver high-impact animation projects, as demonstrated by her work at Sunrise Animation Studios.\n- Strong technical skills in both 2D and 3D animation, as well as related areas like storyboarding and character rigging.\n- Consistent career progression from intern to animator, indicating increasing expertise and responsibility.\n:::",
+            "thinking": "Okay, I need to analyze Aisha Patel (cv_9f38db8f)'s CV, identify her current role, total experience, key skills, and career trajectory. Then, I'll assess her strengths and weaknesses based on the CV content to determine her suitability for an animation role.",
+            "analysis": "## 👤 [📄](cv:cv_9f38db8f) **Aisha Patel**\n[📄](cv:cv_9f38db8f) **Aisha Patel** is currently an Animator at Sunrise Animation Studios (2022-Present), where she leads animation on high-profile series and campaigns. With over 10 years of experience in animation, she has a strong background in both 2D and 3D animation, storyboarding, and character rigging. Her career showcases a progression from intern to leading animator, demonstrating increasing responsibility and expertise.\n---\n### 📊 Candidate Highlights\n---\n### 📜 Credentials\n- Autodesk Maya Certified Professional, 2021\n- Adobe Certified Expert - After Effects, 2022\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Category",
+                "Key Information",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "🎯 Current Role",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Animator at Sunrise Animation Studios (2022-Present)"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "⏱️ Total Experience",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "10 years in Animation"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "💡 Core Expertise",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "3D Animation, 2D Animation, Storyboarding"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🎓 Education",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Bachelor of Arts in Fine Arts (Animation), University of Lagos, 2012"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🏆 Top Achievement",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Spearheaded the animation of a 10-episode series that increased viewer engagement by 45%."
+                  },
+                  "match_score": 45
+                }
+              ]
+            },
+            "conclusion": "**Assessment:** [📄](cv:cv_9f38db8f) **Aisha Patel** appears to be a strong candidate for an animation role, given her extensive experience, key skills, and career progression. Her current role as an Animator at Sunrise Animation Studios and her track record of contributing to award-winning projects make her a valuable asset.\n\n**Key Strengths:**\n- Proven ability to lead and deliver high-impact animation projects, as demonstrated by her work at Sunrise Animation Studios.\n- Strong technical skills in both 2D and 3D animation, as well as related areas like storyboarding and character rigging.\n- Consistent career progression from intern to animator, indicating increasing expertise and responsibility.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T20:10:35.372160"
         }
       ],
       "created_at": "2026-01-05T19:55:04.425937",
-      "updated_at": "2026-01-05T20:00:02.735130"
+      "updated_at": "2026-01-05T20:10:35.372160"
+    },
+    {
+      "id": "63365224-12d9-4e0f-bccd-338e82ddfa52",
+      "name": "Media Production 6028",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_1b984a8e",
+          "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "2eca2a371ef05eb6d0fbafb6c24712d4d3e8ec57df5eb93009bbd658f7372299",
+          "uploaded_at": "2026-01-05T20:46:12.974475"
+        },
+        {
+          "id": "cv_d91a61b8",
+          "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf",
+          "chunk_count": 6,
+          "content_hash": "0808568a66aa77ab1d92f794af4d54628de5d9d5ab0a01b2d1ebde246bcd5072",
+          "uploaded_at": "2026-01-05T20:46:16.064371"
+        },
+        {
+          "id": "cv_799072fc",
+          "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf",
+          "chunk_count": 5,
+          "content_hash": "7e152a6737adb6072e1076864533574469521b899270ea7d65569dff310615a8",
+          "uploaded_at": "2026-01-05T20:46:19.185984"
+        },
+        {
+          "id": "cv_b64ddc67",
+          "filename": "8742ca7a__Sofia_Mendoza__Environment_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "f3d5b99f8d47cadfae597fd68f42a9d684c874fafbf952cabe5c661a220cf7da",
+          "uploaded_at": "2026-01-05T20:46:22.167198"
+        },
+        {
+          "id": "cv_f3522818",
+          "filename": "749745cf__Aisha_Johnson__Animator.pdf",
+          "chunk_count": 5,
+          "content_hash": "fc4df9844655dc53b8c437b423443383094ee61c744fad93112dd13114f86c2d",
+          "uploaded_at": "2026-01-05T20:46:25.177383"
+        },
+        {
+          "id": "cv_fefc53fa",
+          "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf",
+          "chunk_count": 3,
+          "content_hash": "fca8a83a0edadee1c4bbc2ca635a9c888e1d0e630e689ccbda81a8bfd5c77e5e",
+          "uploaded_at": "2026-01-05T20:46:28.110822"
+        },
+        {
+          "id": "cv_c424c7a5",
+          "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf",
+          "chunk_count": 4,
+          "content_hash": "9ed63ccc7f2f7c0cc81da35ff3453dcec31c300ead2b4f946d4db5d6048ac157",
+          "uploaded_at": "2026-01-05T20:46:31.242226"
+        },
+        {
+          "id": "cv_038e143e",
+          "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf",
+          "chunk_count": 3,
+          "content_hash": "6858a468a4cdf946a86d01fd652ea2c146f8409afbe9337d0f43ebbeb0e4104f",
+          "uploaded_at": "2026-01-05T20:46:34.263422"
+        },
+        {
+          "id": "cv_18905883",
+          "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf",
+          "chunk_count": 7,
+          "content_hash": "61979aaf1446d8b5d11d28b9b65cdd95e6e8100ee8667c9ad52d4104796d51ef",
+          "uploaded_at": "2026-01-05T20:46:37.244224"
+        },
+        {
+          "id": "cv_e41be25b",
+          "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf",
+          "chunk_count": 3,
+          "content_hash": "13213d6ec70b08b54b753f691859eb562813f17ed272f4754ad12a5a4b19e370",
+          "uploaded_at": "2026-01-05T20:46:40.315428"
+        },
+        {
+          "id": "cv_fe8eb7c7",
+          "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf",
+          "chunk_count": 3,
+          "content_hash": "0e996b38a95c64aca7129e2554ee5a0e684da1c7f40a72e8c912ab14faad7f18",
+          "uploaded_at": "2026-01-05T20:46:43.646710"
+        },
+        {
+          "id": "cv_3ab08300",
+          "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf",
+          "chunk_count": 11,
+          "content_hash": "fb9a97f91218eb858e3c8647e40b5b25a35d25039dc923bfe0a4da640eb2a90f",
+          "uploaded_at": "2026-01-05T20:46:46.955609"
+        },
+        {
+          "id": "cv_a118ffb4",
+          "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf",
+          "chunk_count": 6,
+          "content_hash": "9ac96c226a0824b5a8df589c45c1a9886ffb2f05442986faa0a5e6491c6eba80",
+          "uploaded_at": "2026-01-05T20:46:50.113221"
+        },
+        {
+          "id": "cv_d47869db",
+          "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf",
+          "chunk_count": 6,
+          "content_hash": "85d898ad89ecc8cb7267e5b49adba1f1cac5b408dd4c4fc2d71d14dc5bbd9786",
+          "uploaded_at": "2026-01-05T20:46:53.245135"
+        },
+        {
+          "id": "cv_9db34e37",
+          "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "74f41b5728cefd055be7ae50f0cd92f821fc552c3f1623d099aafbc0f0110cf1",
+          "uploaded_at": "2026-01-05T20:46:56.397515"
+        },
+        {
+          "id": "cv_2a912757",
+          "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf",
+          "chunk_count": 7,
+          "content_hash": "b0ac973a41aa837f6956db83be7efc36c49d2569068d401372609dee2fb1805b",
+          "uploaded_at": "2026-01-05T20:46:59.554623"
+        }
+      ],
+      "messages": [
+        {
+          "id": "4ec6a7d8-72f1-45ea-a898-7792ccabbaab",
+          "role": "user",
+          "content": "Who is best for a leadership role?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T20:47:10.662600"
+        },
+        {
+          "id": "3e5d3faf-55b1-4836-a866-3f65c9f30010",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a ranked list of candidates suitable for a leadership role, based on their CVs. I need to identify candidates with leadership experience, skills (team management, project leadership, strategic thinking, communication), and accomplishments. I must provide a ranked list of candidates, highlighting their relevant leadership qualifications, and stick to the requested quantity.\n:::\n\nHere are the top three candidates ranked by their suitability for a leadership role, based on their CVs, highlighting their leadership experience, skills, and accomplishments. The ranking prioritizes explicit mentions of leadership roles, team management, strategic thinking, and project leadership. ### Analysis\nThe following candidates were selected based on explicit mentions of leadership roles, team management experience, strategic thinking, and project leadership.\n\n### Analysis\n\nThe following candidates were selected based on explicit mentions of leadership roles, team management experience, strategic thinking, and project leadership. Candidates with titles such as \"Chief Creative Officer,\" \"VP of Creative Technology,\" and \"Lead Artist\" were prioritized. The ranking is based on the depth and breadth of their leadership experience, as well as quantifiable achievements in their roles.\n\n| Candidate | Leadership Experience | Skills | Match Score |\n|---|---|---|---|\n| Carmen Rodriguez | Chief Creative Officer, VP of Visual Innovation, Creative Director, Art Department Manager | Team leadership, project management, strategic planning, communication | 100% |\n| Rajiv Kapoor | VP of Creative Technology, Director of Technical Art | Team leadership, pipeline management, strategic planning, communication | 80% |\n| Isabel Mendoza | Chief Creative Officer, Vice President of Creative Development, Director of 3D Production | Team leadership, strategic creative initiatives, vendor negotiation, inclusive design practices | 60% |\n| Priya Patel | Lead 3D Artist | Team leadership, 3D art direction, photogrammetry, asset pipeline development | 40% |\n\n:::conclusion\n[📄](cv:cv_2a912757)**Carmen Rodriguez**is the strongest candidate due to extensive experience in leadership roles and quantifiable achievements. [📄](cv:cv_d91a61b8)**Rajiv Kapoor**is a strong second choice with experience in technical art leadership. [📄](cv:cv_3ab08300)**Isabel Mendoza**also demonstrates significant leadership experience, making them a suitable third candidate.\n:::\n\n### Skills Gap Analysis\n\nBest match:  Carmen Rodriguez  3D covers 67% of requirements**Overall Coverage:**12%**Preferred Skills:**- Leadership: 1/14 candidates\n\n### Red Flags Analysis\n\n⚠️ High-risk:  Aisha Johnson ,  Karim El Amrani  3D,  Aisha Nkrumah  Junior 2D (+2 more) | Flags detected: 14 missing_education, 5 missing_experience**⚠️ High Priority:**-**Aisha Johnson**: No work experience section found in CV\n-**Karim El Amrani  3D**: No work experience section found in CV\n-**Aisha Nkrumah  Junior 2D**: No work experience section found in CV\n-**Carmen Rodriguez  3D**: No work experience section found in CV\n-**Rajiv Patel  Junior VFX**: No work experience section found in CV",
+          "sources": [
+            {
+              "cv_id": "cv_a118ffb4",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_3ab08300",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_f3522818",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_1b984a8e",
+              "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_9db34e37",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c424c7a5",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_fefc53fa",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_2a912757",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d91a61b8",
+              "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_b64ddc67",
+              "filename": "8742ca7a__Sofia_Mendoza__Environment_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d47869db",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_799072fc",
+              "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_e41be25b",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_18905883",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1516.52,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 27.03,
+              "details": "Found 27 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 25997.26,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5233.04,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Here are the top three candidates ranked by their suitability for a leadership role, based on their CVs, highlighting their leadership experience, skills, and accomplishments. The ranking prioritizes explicit mentions of leadership roles, team management, strategic thinking, and project leadership. ### Analysis\nThe following candidates were selected based on explicit mentions of leadership roles, team management experience, strategic thinking, and project leadership.",
+            "raw_content": ":::thinking\nThe user is asking for a ranked list of candidates suitable for a leadership role, based on their CVs. I need to identify candidates with leadership experience, skills (team management, project leadership, strategic thinking, communication), and accomplishments. I must provide a ranked list of candidates, highlighting their relevant leadership qualifications, and stick to the requested quantity.\n:::\n\nHere are the top three candidates ranked by their suitability for a leadership role, based on their CVs, highlighting their leadership experience, skills, and accomplishments. The ranking prioritizes explicit mentions of leadership roles, team management, strategic thinking, and project leadership.\n\n### Analysis\n\nThe following candidates were selected based on explicit mentions of leadership roles, team management experience, strategic thinking, and project leadership. Candidates with titles such as \"Chief Creative Officer,\" \"VP of Creative Technology,\" and \"Lead Artist\" were prioritized. The ranking is based on the depth and breadth of their leadership experience, as well as quantifiable achievements in their roles.\n\n| Candidate | Leadership Experience | Skills | Match |\n|-----------|-----------------------|--------|-------|\n| **[Carmen Rodriguez](cv:cv_2a912757)** | Chief Creative Officer, VP of Visual Innovation, Creative Director, Art Department Manager | Team leadership, project management, strategic planning, communication | ⭐⭐⭐⭐⭐ |\n| **[Rajiv Kapoor](cv:cv_d91a61b8)** | VP of Creative Technology, Director of Technical Art | Team leadership, pipeline management, strategic planning, communication | ⭐⭐⭐⭐ |\n| **[Isabel Mendoza](cv:cv_3ab08300)** | Chief Creative Officer, Vice President of Creative Development, Director of 3D Production | Team leadership, strategic creative initiatives, vendor negotiation, inclusive design practices | ⭐⭐⭐ |\n| **[Priya Patel](cv:cv_799072fc)** | Lead 3D Artist | Team leadership, 3D art direction, photogrammetry, asset pipeline development | ⭐⭐ |\n\n:::conclusion\n**[Carmen Rodriguez](cv:cv_2a912757)** is the strongest candidate due to extensive experience in leadership roles and quantifiable achievements. **[Rajiv Kapoor](cv:cv_d91a61b8)** is a strong second choice with experience in technical art leadership. **[Isabel Mendoza](cv:cv_3ab08300)** also demonstrates significant leadership experience, making them a suitable third candidate.\n:::",
+            "thinking": "The user is asking for a ranked list of candidates suitable for a leadership role, based on their CVs. I need to identify candidates with leadership experience, skills (team management, project leadership, strategic thinking, communication), and accomplishments. I must provide a ranked list of candidates, highlighting their relevant leadership qualifications, and stick to the requested quantity.",
+            "analysis": "The following candidates were selected based on explicit mentions of leadership roles, team management experience, strategic thinking, and project leadership. Candidates with titles such as \"Chief Creative Officer,\" \"VP of Creative Technology,\" and \"Lead Artist\" were prioritized. The ranking is based on the depth and breadth of their leadership experience, as well as quantifiable achievements in their roles.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Leadership Experience",
+                "Skills",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Carmen Rodriguez",
+                  "cv_id": "cv_2a912757",
+                  "columns": {
+                    "Leadership Experience": "Chief Creative Officer, VP of Visual Innovation, Creative Director, Art Department Manager",
+                    "Skills": "Team leadership, project management, strategic planning, communication"
+                  },
+                  "match_score": 100
+                },
+                {
+                  "candidate_name": "Rajiv Kapoor",
+                  "cv_id": "cv_d91a61b8",
+                  "columns": {
+                    "Leadership Experience": "VP of Creative Technology, Director of Technical Art",
+                    "Skills": "Team leadership, pipeline management, strategic planning, communication"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Isabel Mendoza",
+                  "cv_id": "cv_3ab08300",
+                  "columns": {
+                    "Leadership Experience": "Chief Creative Officer, Vice President of Creative Development, Director of 3D Production",
+                    "Skills": "Team leadership, strategic creative initiatives, vendor negotiation, inclusive design practices"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Priya Patel",
+                  "cv_id": "cv_799072fc",
+                  "columns": {
+                    "Leadership Experience": "Lead 3D Artist",
+                    "Skills": "Team leadership, 3D art direction, photogrammetry, asset pipeline development"
+                  },
+                  "match_score": 40
+                }
+              ]
+            },
+            "conclusion": "[📄](cv:cv_2a912757) **Carmen Rodriguez** is the strongest candidate due to extensive experience in leadership roles and quantifiable achievements. [📄](cv:cv_d91a61b8) **Rajiv Kapoor** is a strong second choice with experience in technical art leadership. [📄](cv:cv_3ab08300) **Isabel Mendoza** also demonstrates significant leadership experience, making them a suitable third candidate.",
+            "gap_analysis": {
+              "required_skills": [
+                "To Identify Candidates With Leadership",
+                "Experience In Technical Art Leadership",
+                "Leadership Roles",
+                "Quantifiable Achievements.",
+                "Technical Art Leadership.",
+                "Go",
+                "Leadership",
+                "Communication",
+                "Management"
+              ],
+              "skill_gaps": [
+                {
+                  "skill": "To Identify Candidates With Leadership",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Isabel Mendoza  3D",
+                    " Aisha Johnson ",
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Daan van Dijk  Hard Surface",
+                    " Kenji Tanaka  3D Artist",
+                    " Rajiv Kapoor  Technical",
+                    " Sofia Mendoza  Environment",
+                    " Carlos Mendoza  Lighting",
+                    " Priya Patel  3D",
+                    " Rajiv Patel  Junior VFX",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": [
+                    " Carmen Rodriguez  3D"
+                  ]
+                },
+                {
+                  "skill": "Experience In Technical Art Leadership",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Isabel Mendoza  3D",
+                    " Aisha Johnson ",
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Daan van Dijk  Hard Surface",
+                    " Kenji Tanaka  3D Artist",
+                    " Rajiv Kapoor  Technical",
+                    " Sofia Mendoza  Environment",
+                    " Carlos Mendoza  Lighting",
+                    " Priya Patel  3D",
+                    " Rajiv Patel  Junior VFX",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": [
+                    " Carmen Rodriguez  3D"
+                  ]
+                },
+                {
+                  "skill": "Leadership Roles",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Isabel Mendoza  3D",
+                    " Aisha Johnson ",
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Daan van Dijk  Hard Surface",
+                    " Kenji Tanaka  3D Artist",
+                    " Rajiv Kapoor  Technical",
+                    " Sofia Mendoza  Environment",
+                    " Carlos Mendoza  Lighting",
+                    " Priya Patel  3D",
+                    " Rajiv Patel  Junior VFX",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": [
+                    " Carmen Rodriguez  3D"
+                  ]
+                },
+                {
+                  "skill": "Quantifiable Achievements.",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Isabel Mendoza  3D",
+                    " Aisha Johnson ",
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Daan van Dijk  Hard Surface",
+                    " Kenji Tanaka  3D Artist",
+                    " Carmen Rodriguez  3D",
+                    " Rajiv Kapoor  Technical",
+                    " Sofia Mendoza  Environment",
+                    " Carlos Mendoza  Lighting",
+                    " Priya Patel  3D",
+                    " Rajiv Patel  Junior VFX",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Technical Art Leadership.",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Isabel Mendoza  3D",
+                    " Aisha Johnson ",
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Daan van Dijk  Hard Surface",
+                    " Kenji Tanaka  3D Artist",
+                    " Rajiv Kapoor  Technical",
+                    " Sofia Mendoza  Environment",
+                    " Carlos Mendoza  Lighting",
+                    " Priya Patel  3D",
+                    " Rajiv Patel  Junior VFX",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": [
+                    " Carmen Rodriguez  3D"
+                  ]
+                },
+                {
+                  "skill": "Go",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Aisha Johnson ",
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Kenji Tanaka  3D Artist",
+                    " Rajiv Kapoor  Technical",
+                    " Sofia Mendoza  Environment",
+                    " Carlos Mendoza  Lighting",
+                    " Priya Patel  3D",
+                    " Rajiv Patel  Junior VFX",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": [
+                    " Isabel Mendoza  3D",
+                    " Daan van Dijk  Hard Surface",
+                    " Carmen Rodriguez  3D"
+                  ]
+                },
+                {
+                  "skill": "Leadership",
+                  "importance": "preferred",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Isabel Mendoza  3D",
+                    " Aisha Johnson ",
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Daan van Dijk  Hard Surface",
+                    " Kenji Tanaka  3D Artist",
+                    " Rajiv Kapoor  Technical",
+                    " Sofia Mendoza  Environment",
+                    " Carlos Mendoza  Lighting",
+                    " Priya Patel  3D",
+                    " Rajiv Patel  Junior VFX",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": [
+                    " Carmen Rodriguez  3D"
+                  ]
+                },
+                {
+                  "skill": "Communication",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Isabel Mendoza  3D",
+                    " Aisha Johnson ",
+                    " Karim El Amrani  3D",
+                    " Daan van Dijk  Hard Surface",
+                    " Carmen Rodriguez  3D",
+                    " Sofia Mendoza  Environment",
+                    " Carlos Mendoza  Lighting",
+                    " Rajiv Patel  Junior VFX",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": [
+                    " Aisha Nkrumah  Junior 2D",
+                    " Kenji Tanaka  3D Artist",
+                    " Rajiv Kapoor  Technical",
+                    " Priya Patel  3D"
+                  ]
+                },
+                {
+                  "skill": "Management",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Isabel Mendoza  3D",
+                    " Aisha Johnson ",
+                    " Kenji Tanaka  3D Artist",
+                    " Carmen Rodriguez  3D",
+                    " Rajiv Kapoor  Technical",
+                    " Sofia Mendoza  Environment",
+                    " Carlos Mendoza  Lighting",
+                    " Priya Patel  3D",
+                    " Rajiv Patel  Junior VFX",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": [
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Daan van Dijk  Hard Surface"
+                  ]
+                }
+              ],
+              "coverage_score": 11.904761904761903,
+              "best_coverage_candidate": " Carmen Rodriguez  3D",
+              "summary": "Best match:  Carmen Rodriguez  3D covers 67% of requirements"
+            },
+            "red_flags": {
+              "flags": [
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Imani Jones  Concept",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_experience",
+                  "severity": "high",
+                  "description": "No work experience section found in CV",
+                  "candidate_name": " Aisha Johnson ",
+                  "details": {
+                    "missing_section": "experience"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Aisha Johnson ",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_experience",
+                  "severity": "high",
+                  "description": "No work experience section found in CV",
+                  "candidate_name": " Karim El Amrani  3D",
+                  "details": {
+                    "missing_section": "experience"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Karim El Amrani  3D",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_experience",
+                  "severity": "high",
+                  "description": "No work experience section found in CV",
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "details": {
+                    "missing_section": "experience"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Daan van Dijk  Hard Surface",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Kenji Tanaka  3D Artist",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_experience",
+                  "severity": "high",
+                  "description": "No work experience section found in CV",
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "details": {
+                    "missing_section": "experience"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Rajiv Kapoor  Technical",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Sofia Mendoza  Environment",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Carlos Mendoza  Lighting",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Priya Patel  3D",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_experience",
+                  "severity": "high",
+                  "description": "No work experience section found in CV",
+                  "candidate_name": " Rajiv Patel  Junior VFX",
+                  "details": {
+                    "missing_section": "experience"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Rajiv Patel  Junior VFX",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                }
+              ],
+              "candidates_with_flags": {
+                " Imani Jones  Concept": [
+                  "missing_education"
+                ],
+                " Isabel Mendoza  3D": [
+                  "missing_education"
+                ],
+                " Aisha Johnson ": [
+                  "missing_education",
+                  "missing_experience"
+                ],
+                " Karim El Amrani  3D": [
+                  "missing_education",
+                  "missing_experience"
+                ],
+                " Aisha Nkrumah  Junior 2D": [
+                  "missing_education",
+                  "missing_experience"
+                ],
+                " Daan van Dijk  Hard Surface": [
+                  "missing_education"
+                ],
+                " Kenji Tanaka  3D Artist": [
+                  "missing_education"
+                ],
+                " Carmen Rodriguez  3D": [
+                  "missing_education",
+                  "missing_experience"
+                ],
+                " Rajiv Kapoor  Technical": [
+                  "missing_education"
+                ],
+                " Sofia Mendoza  Environment": [
+                  "missing_education"
+                ],
+                " Carlos Mendoza  Lighting": [
+                  "missing_education"
+                ],
+                " Priya Patel  3D": [
+                  "missing_education"
+                ],
+                " Rajiv Patel  Junior VFX": [
+                  "missing_education",
+                  "missing_experience"
+                ],
+                " Liam Chen  3D Artist": [
+                  "missing_education"
+                ]
+              },
+              "high_risk_candidates": [
+                " Aisha Johnson ",
+                " Karim El Amrani  3D",
+                " Aisha Nkrumah  Junior 2D",
+                " Carmen Rodriguez  3D",
+                " Rajiv Patel  Junior VFX"
+              ],
+              "clean_candidates": [],
+              "summary": "⚠️ High-risk:  Aisha Johnson ,  Karim El Amrani  3D,  Aisha Nkrumah  Junior 2D (+2 more) | Flags detected: 14 missing_education, 5 missing_experience"
+            },
+            "timeline": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T20:47:47.321347"
+        },
+        {
+          "id": "1424ba6a-2955-43db-afae-9ca29a792640",
+          "role": "user",
+          "content": "dime ams sobre Carmen Rodriguez",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T20:49:08.510965"
+        },
+        {
+          "id": "3bd31731-8471-4ce0-be9b-280321fab5b4",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a comprehensive profile of Carmen Rodriguez 3D (cv_2a912757), including her current role, total experience, career trajectory, skills, and credentials. I will extract this information directly from the provided CV text, adhering to the specified format and constraints.\n:::\n\n## 👤 [📄](cv:cv_2a912757)**Carmen Rodriguez 3D**is currently the Chief Creative Officer at Netherlands Digital Futures (2023-Present), overseeing global visual strategy and innovation. With over four decades of experience, she has progressed from early internships in Dutch animation studios to executive leadership in global media, blending creative storytelling with technical precision. --- ### 📊 Candidate Highlights --- ### 📜 Credentials - Autodesk Maya Certified Professional, 2022 - ZBrush Core Certification, 2021 - Unreal Engine Advanced Production, 2020 ---.\n\n## 👤 [📄](cv:cv_2a912757)**Carmen Rodriguez 3D**[📄](cv:cv_2a912757)**Carmen Rodriguez 3D**is currently the Chief Creative Officer at Netherlands Digital Futures (2023-Present), overseeing global visual strategy and innovation. With over four decades of experience, she has progressed from early internships in Dutch animation studios to executive leadership in global media, blending creative storytelling with technical precision.\n---\n### 📊 Candidate Highlights\n---\n### 📜 Credentials\n- Autodesk Maya Certified Professional, 2022\n- ZBrush Core Certification, 2021\n- Unreal Engine Advanced Production, 2020\n---\n\n| Category | Key Information | Match Score |\n|---|---|---|\n| 🎯 Current Role | Chief Creative Officer at Netherlands Digital Futures (2023-Present) | 50% |\n| ⏱️ Total Experience | 45+ years in 3D art and visual strategy | 50% |\n| 💡 Core Expertise | 3D Modeling, Texturing, Lighting | 50% |\n| 🎓 Education | Master of Fine Arts in Visual Arts, Academy of Art University, 2000 | 50% |\n| 🏆 Top Achievement | Spearheaded a company‑wide rebrand that increased client retention by 35%. | 35% |\n\n:::conclusion**Assessment:**[📄](cv:cv_2a912757)**Carmen Rodriguez 3D**is a highly experienced 3D artist with a strong track record of leadership and innovation in the visual arts. Her career spans multiple decades and encompasses a wide range of roles, from hands-on 3D artistry to executive leadership.**Key Strengths:**- Extensive experience in 3D modeling, texturing, and lighting.\n- Proven ability to lead and mentor creative teams.\n- Strong track record of delivering award-winning visual experiences.\n:::\n\n### Skills Gap Analysis\n\nBest match:  Carmen Rodriguez  3D covers 30% of requirements**Overall Coverage:**6%\n\n### Red Flags Analysis\n\n⚠️ High-risk:  Carmen Rodriguez  3D,  Rajiv Kapoor  Technical,  Daan van Dijk  Hard Surface (+5 more) | Flags detected: 8 missing_experience, 14 missing_education**⚠️ High Priority:**-**Carmen Rodriguez  3D**: No work experience section found in CV\n-**Rajiv Kapoor  Technical**: No work experience section found in CV\n-**Daan van Dijk  Hard Surface**: No work experience section found in CV\n-**Rajesh Patel  VFX**: No work experience section found in CV\n-**Imani Jones  Concept**: No work experience section found in CV\n-**Rajiv Patel  Junior VFX**: No work experience section found in CV\n-**Aisha Nkrumah  Junior 2D**: No work experience section found in CV\n-**Aisha Johnson**: No work experience section found in CV",
+          "sources": [
+            {
+              "cv_id": "cv_2a912757",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d91a61b8",
+              "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c424c7a5",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_038e143e",
+              "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_fefc53fa",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_a118ffb4",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_3ab08300",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_e41be25b",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_1b984a8e",
+              "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_9db34e37",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_799072fc",
+              "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_f3522818",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_d47869db",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_18905883",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 2272.57,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 22.74,
+              "details": "Found 22 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 13572.7,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5452.97,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "## 👤 [📄](cv:cv_2a912757) **Carmen Rodriguez 3D** is currently the Chief Creative Officer at Netherlands Digital Futures (2023-Present), overseeing global visual strategy and innovation. With over four decades of experience, she has progressed from early internships in Dutch animation studios to executive leadership in global media, blending creative storytelling with technical precision. --- ### 📊 Candidate Highlights --- ### 📜 Credentials - Autodesk Maya Certified Professional, 2022 - ZBrush Core Certification, 2021 - Unreal Engine Advanced Production, 2020 ---.",
+            "raw_content": ":::thinking\nThe user is asking for a comprehensive profile of **[Carmen Rodriguez 3D](cv:cv_2a912757)**, including her current role, total experience, career trajectory, skills, and credentials. I will extract this information directly from the provided CV text, adhering to the specified format and constraints.\n:::\n\n## 👤 **[Carmen Rodriguez 3D](cv:cv_2a912757)**\n\n**[Carmen Rodriguez 3D](cv:cv_2a912757)** is currently the Chief Creative Officer at Netherlands Digital Futures (2023-Present), overseeing global visual strategy and innovation. With over four decades of experience, she has progressed from early internships in Dutch animation studios to executive leadership in global media, blending creative storytelling with technical precision.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Chief Creative Officer at Netherlands Digital Futures (2023-Present) |\n| **⏱️ Total Experience** | 45+ years in 3D art and visual strategy |\n| **🏆 Top Achievement** | Spearheaded a company‑wide rebrand that increased client retention by 35%. |\n| **💡 Core Expertise** | 3D Modeling, Texturing, Lighting |\n| **🎓 Education** | Master of Fine Arts in Visual Arts, Academy of Art University, 2000 |\n\n---\n\n### 💼 Career Trajectory\n\n**Chief Creative Officer** — *Netherlands Digital Futures* (2023 - Present)\n→ Spearheaded a company‑wide rebrand that increased client retention by 35%.\n\n**VP of Visual Innovation** — *Global Media Corp* (2018 - 2023)\n→ Delivered a $10M VR experience that won the 2021 Global Innovation Award.\n\n**Creative Director** — *Rotterdam Visual Arts Group* (2010 - 2018)\n→ Produced a campaign that earned a Cannes Lions Gold for Best Animation.\n\n**Art Department Manager** — *Amsterdam Creative Agency* (2002 - 2010)\n→ Oversaw delivery of 30+ high‑profile projects on schedule and budget.\n\n**3D Artist** — *Utrecht Digital Works* (1989 - 1995)\n→ Created flagship character designs that became industry benchmarks.\n\n**3D Artist** — *The Hague Creative Labs* (1984 - 1989)\n→ Produced textured assets that earned a Dutch Animation Award.\n\n**Junior 3D Artist** — *Rotterdam Visual Effects Ltd.* (1981 - 1984)\n→ Learned advanced texturing techniques, contributing to award‑winning sequences.\n\n**Intern 3D Artist** — *Amsterdam Animation Studio* (1979 - 1981)\n→ Showed early talent in detail‑oriented workflows.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **3D Art** | 3D Modeling | 10/10 |\n| **3D Art** | Texturing | 9/10 |\n| **3D Art** | Lighting | 9/10 |\n| **3D Art** | Rendering | 9/10 |\n| **3D Art** | Animation | 8/10 |\n| **Technical** | Pipeline Development | 8/10 |\n\n---\n\n### 📜 Credentials\n\n- Autodesk Maya Certified Professional, 2022\n- ZBrush Core Certification, 2021\n- Unreal Engine Advanced Production, 2020\n\n---\n\n:::conclusion\n**Assessment:** **[Carmen Rodriguez 3D](cv:cv_2a912757)** is a highly experienced 3D artist with a strong track record of leadership and innovation in the visual arts. Her career spans multiple decades and encompasses a wide range of roles, from hands-on 3D artistry to executive leadership.\n\n**Key Strengths:**\n- Extensive experience in 3D modeling, texturing, and lighting.\n- Proven ability to lead and mentor creative teams.\n- Strong track record of delivering award-winning visual experiences.\n:::",
+            "thinking": "The user is asking for a comprehensive profile of Carmen Rodriguez 3D (cv_2a912757), including her current role, total experience, career trajectory, skills, and credentials. I will extract this information directly from the provided CV text, adhering to the specified format and constraints.",
+            "analysis": "## 👤 [📄](cv:cv_2a912757) **Carmen Rodriguez 3D**\n[📄](cv:cv_2a912757) **Carmen Rodriguez 3D** is currently the Chief Creative Officer at Netherlands Digital Futures (2023-Present), overseeing global visual strategy and innovation. With over four decades of experience, she has progressed from early internships in Dutch animation studios to executive leadership in global media, blending creative storytelling with technical precision.\n---\n### 📊 Candidate Highlights\n---\n### 📜 Credentials\n- Autodesk Maya Certified Professional, 2022\n- ZBrush Core Certification, 2021\n- Unreal Engine Advanced Production, 2020\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Category",
+                "Key Information",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "🎯 Current Role",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Chief Creative Officer at Netherlands Digital Futures (2023-Present)"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "⏱️ Total Experience",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "45+ years in 3D art and visual strategy"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "💡 Core Expertise",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "3D Modeling, Texturing, Lighting"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🎓 Education",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Master of Fine Arts in Visual Arts, Academy of Art University, 2000"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🏆 Top Achievement",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Spearheaded a company‑wide rebrand that increased client retention by 35%."
+                  },
+                  "match_score": 35
+                }
+              ]
+            },
+            "conclusion": "**Assessment:** [📄](cv:cv_2a912757) **Carmen Rodriguez 3D** is a highly experienced 3D artist with a strong track record of leadership and innovation in the visual arts. Her career spans multiple decades and encompasses a wide range of roles, from hands-on 3D artistry to executive leadership.\n\n**Key Strengths:**\n- Extensive experience in 3D modeling, texturing, and lighting.\n- Proven ability to lead and mentor creative teams.\n- Strong track record of delivering award-winning visual experiences.",
+            "gap_analysis": {
+              "required_skills": [
+                "Over Four Decades Of",
+                "Technical Precision",
+                "A Strong Track Record Of Leadership",
+                "Innovation In The Visual Arts",
+                "3D Modeling",
+                "Texturing",
+                "Lighting.\n- Proven Ability To Lead",
+                "Mentor Creative Teams.\n- Strong Track Record Of Delivering Award-Winning Visual Experiences.",
+                "Go",
+                "Leadership"
+              ],
+              "skill_gaps": [
+                {
+                  "skill": "Over Four Decades Of",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Carmen Rodriguez  3D",
+                    " Rajiv Kapoor  Technical",
+                    " Daan van Dijk  Hard Surface",
+                    " Rajesh Patel  VFX",
+                    " Kenji Tanaka  3D Artist",
+                    " Imani Jones  Concept",
+                    " Isabel Mendoza  3D",
+                    " Rajiv Patel  Junior VFX",
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Priya Patel  3D",
+                    " Aisha Johnson ",
+                    " Carlos Mendoza  Lighting",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Technical Precision",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Carmen Rodriguez  3D",
+                    " Rajiv Kapoor  Technical",
+                    " Daan van Dijk  Hard Surface",
+                    " Rajesh Patel  VFX",
+                    " Kenji Tanaka  3D Artist",
+                    " Imani Jones  Concept",
+                    " Isabel Mendoza  3D",
+                    " Rajiv Patel  Junior VFX",
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Priya Patel  3D",
+                    " Aisha Johnson ",
+                    " Carlos Mendoza  Lighting",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "A Strong Track Record Of Leadership",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Rajiv Kapoor  Technical",
+                    " Daan van Dijk  Hard Surface",
+                    " Kenji Tanaka  3D Artist",
+                    " Imani Jones  Concept",
+                    " Isabel Mendoza  3D",
+                    " Rajiv Patel  Junior VFX",
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Priya Patel  3D",
+                    " Aisha Johnson ",
+                    " Carlos Mendoza  Lighting",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": [
+                    " Carmen Rodriguez  3D",
+                    " Rajesh Patel  VFX"
+                  ]
+                },
+                {
+                  "skill": "Innovation In The Visual Arts",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Carmen Rodriguez  3D",
+                    " Rajiv Kapoor  Technical",
+                    " Daan van Dijk  Hard Surface",
+                    " Rajesh Patel  VFX",
+                    " Kenji Tanaka  3D Artist",
+                    " Imani Jones  Concept",
+                    " Isabel Mendoza  3D",
+                    " Rajiv Patel  Junior VFX",
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Priya Patel  3D",
+                    " Aisha Johnson ",
+                    " Carlos Mendoza  Lighting",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "3D Modeling",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Carmen Rodriguez  3D",
+                    " Rajiv Kapoor  Technical",
+                    " Daan van Dijk  Hard Surface",
+                    " Rajesh Patel  VFX",
+                    " Kenji Tanaka  3D Artist",
+                    " Imani Jones  Concept",
+                    " Isabel Mendoza  3D",
+                    " Rajiv Patel  Junior VFX",
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Priya Patel  3D",
+                    " Aisha Johnson ",
+                    " Carlos Mendoza  Lighting",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Texturing",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Carmen Rodriguez  3D",
+                    " Rajiv Kapoor  Technical",
+                    " Daan van Dijk  Hard Surface",
+                    " Rajesh Patel  VFX",
+                    " Kenji Tanaka  3D Artist",
+                    " Imani Jones  Concept",
+                    " Isabel Mendoza  3D",
+                    " Rajiv Patel  Junior VFX",
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Priya Patel  3D",
+                    " Aisha Johnson ",
+                    " Carlos Mendoza  Lighting",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Lighting.\n- Proven Ability To Lead",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Carmen Rodriguez  3D",
+                    " Rajiv Kapoor  Technical",
+                    " Daan van Dijk  Hard Surface",
+                    " Rajesh Patel  VFX",
+                    " Kenji Tanaka  3D Artist",
+                    " Imani Jones  Concept",
+                    " Isabel Mendoza  3D",
+                    " Rajiv Patel  Junior VFX",
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Priya Patel  3D",
+                    " Aisha Johnson ",
+                    " Carlos Mendoza  Lighting",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Mentor Creative Teams.\n- Strong Track Record Of Delivering Award-Winning Visual Experiences.",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Carmen Rodriguez  3D",
+                    " Rajiv Kapoor  Technical",
+                    " Daan van Dijk  Hard Surface",
+                    " Rajesh Patel  VFX",
+                    " Kenji Tanaka  3D Artist",
+                    " Imani Jones  Concept",
+                    " Isabel Mendoza  3D",
+                    " Rajiv Patel  Junior VFX",
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Priya Patel  3D",
+                    " Aisha Johnson ",
+                    " Carlos Mendoza  Lighting",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Go",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Rajiv Kapoor  Technical",
+                    " Rajesh Patel  VFX",
+                    " Kenji Tanaka  3D Artist",
+                    " Imani Jones  Concept",
+                    " Rajiv Patel  Junior VFX",
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Priya Patel  3D",
+                    " Carlos Mendoza  Lighting",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": [
+                    " Carmen Rodriguez  3D",
+                    " Daan van Dijk  Hard Surface",
+                    " Isabel Mendoza  3D",
+                    " Aisha Johnson "
+                  ]
+                },
+                {
+                  "skill": "Leadership",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Rajiv Kapoor  Technical",
+                    " Daan van Dijk  Hard Surface",
+                    " Kenji Tanaka  3D Artist",
+                    " Imani Jones  Concept",
+                    " Isabel Mendoza  3D",
+                    " Rajiv Patel  Junior VFX",
+                    " Karim El Amrani  3D",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Priya Patel  3D",
+                    " Aisha Johnson ",
+                    " Carlos Mendoza  Lighting",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": [
+                    " Carmen Rodriguez  3D",
+                    " Rajesh Patel  VFX"
+                  ]
+                }
+              ],
+              "coverage_score": 5.714285714285714,
+              "best_coverage_candidate": " Carmen Rodriguez  3D",
+              "summary": "Best match:  Carmen Rodriguez  3D covers 30% of requirements"
+            },
+            "red_flags": {
+              "flags": [
+                {
+                  "flag_type": "missing_experience",
+                  "severity": "high",
+                  "description": "No work experience section found in CV",
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "details": {
+                    "missing_section": "experience"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_experience",
+                  "severity": "high",
+                  "description": "No work experience section found in CV",
+                  "candidate_name": " Rajiv Kapoor  Technical",
+                  "details": {
+                    "missing_section": "experience"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Rajiv Kapoor  Technical",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_experience",
+                  "severity": "high",
+                  "description": "No work experience section found in CV",
+                  "candidate_name": " Daan van Dijk  Hard Surface",
+                  "details": {
+                    "missing_section": "experience"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Daan van Dijk  Hard Surface",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_experience",
+                  "severity": "high",
+                  "description": "No work experience section found in CV",
+                  "candidate_name": " Rajesh Patel  VFX",
+                  "details": {
+                    "missing_section": "experience"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Rajesh Patel  VFX",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Kenji Tanaka  3D Artist",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_experience",
+                  "severity": "high",
+                  "description": "No work experience section found in CV",
+                  "candidate_name": " Imani Jones  Concept",
+                  "details": {
+                    "missing_section": "experience"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Imani Jones  Concept",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_experience",
+                  "severity": "high",
+                  "description": "No work experience section found in CV",
+                  "candidate_name": " Rajiv Patel  Junior VFX",
+                  "details": {
+                    "missing_section": "experience"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Rajiv Patel  Junior VFX",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Karim El Amrani  3D",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_experience",
+                  "severity": "high",
+                  "description": "No work experience section found in CV",
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "details": {
+                    "missing_section": "experience"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Priya Patel  3D",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_experience",
+                  "severity": "high",
+                  "description": "No work experience section found in CV",
+                  "candidate_name": " Aisha Johnson ",
+                  "details": {
+                    "missing_section": "experience"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Aisha Johnson ",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Carlos Mendoza  Lighting",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                },
+                {
+                  "flag_type": "missing_education",
+                  "severity": "low",
+                  "description": "No education section found in CV",
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "details": {
+                    "missing_section": "education"
+                  }
+                }
+              ],
+              "candidates_with_flags": {
+                " Carmen Rodriguez  3D": [
+                  "missing_education",
+                  "missing_experience"
+                ],
+                " Rajiv Kapoor  Technical": [
+                  "missing_education",
+                  "missing_experience"
+                ],
+                " Daan van Dijk  Hard Surface": [
+                  "missing_education",
+                  "missing_experience"
+                ],
+                " Rajesh Patel  VFX": [
+                  "missing_education",
+                  "missing_experience"
+                ],
+                " Kenji Tanaka  3D Artist": [
+                  "missing_education"
+                ],
+                " Imani Jones  Concept": [
+                  "missing_education",
+                  "missing_experience"
+                ],
+                " Isabel Mendoza  3D": [
+                  "missing_education"
+                ],
+                " Rajiv Patel  Junior VFX": [
+                  "missing_education",
+                  "missing_experience"
+                ],
+                " Karim El Amrani  3D": [
+                  "missing_education"
+                ],
+                " Aisha Nkrumah  Junior 2D": [
+                  "missing_education",
+                  "missing_experience"
+                ],
+                " Priya Patel  3D": [
+                  "missing_education"
+                ],
+                " Aisha Johnson ": [
+                  "missing_education",
+                  "missing_experience"
+                ],
+                " Carlos Mendoza  Lighting": [
+                  "missing_education"
+                ],
+                " Liam Chen  3D Artist": [
+                  "missing_education"
+                ]
+              },
+              "high_risk_candidates": [
+                " Carmen Rodriguez  3D",
+                " Rajiv Kapoor  Technical",
+                " Daan van Dijk  Hard Surface",
+                " Rajesh Patel  VFX",
+                " Imani Jones  Concept",
+                " Rajiv Patel  Junior VFX",
+                " Aisha Nkrumah  Junior 2D",
+                " Aisha Johnson "
+              ],
+              "clean_candidates": [],
+              "summary": "⚠️ High-risk:  Carmen Rodriguez  3D,  Rajiv Kapoor  Technical,  Daan van Dijk  Hard Surface (+5 more) | Flags detected: 8 missing_experience, 14 missing_education"
+            },
+            "timeline": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T20:49:33.621622"
+        }
+      ],
+      "created_at": "2026-01-05T20:46:03.741490",
+      "updated_at": "2026-01-05T20:49:33.621622"
     }
   ]
 }

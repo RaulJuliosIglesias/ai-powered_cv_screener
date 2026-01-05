@@ -52,7 +52,7 @@ class VectorStoreService:
         chunks: List[CVChunk],
         embeddings: List[List[float]]
     ) -> int:
-        """Add CV chunks to the vector store."""
+        """Add CV chunks to the vector store with enriched metadata."""
         try:
             if len(chunks) != len(embeddings):
                 raise VectorStoreError(
@@ -65,17 +65,58 @@ class VectorStoreService:
             
             ids = [f"{chunk.cv_id}_{chunk.chunk_index}" for chunk in chunks]
             documents = [chunk.content for chunk in chunks]
-            metadatas = [
-                {
+            metadatas = []
+            
+            for chunk in chunks:
+                # Build enriched metadata from chunk
+                meta = {
                     "cv_id": chunk.cv_id,
                     "filename": chunk.filename,
                     "candidate_name": chunk.candidate_name or "",
                     "section_type": chunk.section_type,
                     "chunk_index": chunk.chunk_index,
                     "indexed_at": datetime.now().isoformat(),
+                    "is_summary": getattr(chunk, 'is_summary_chunk', False),
                 }
-                for chunk in chunks
-            ]
+                
+                # Add enriched metadata from chunk.metadata if available
+                chunk_meta = chunk.metadata or {}
+                
+                # Core enriched fields (convert to ChromaDB-compatible types)
+                if "total_experience_years" in chunk_meta:
+                    meta["total_experience_years"] = float(chunk_meta["total_experience_years"])
+                if "seniority_level" in chunk_meta:
+                    meta["seniority_level"] = str(chunk_meta["seniority_level"])
+                if "current_role" in chunk_meta:
+                    meta["current_role"] = str(chunk_meta["current_role"] or "")
+                if "current_company" in chunk_meta:
+                    meta["current_company"] = str(chunk_meta["current_company"] or "")
+                if "has_faang" in chunk_meta:
+                    meta["has_faang"] = bool(chunk_meta["has_faang"])
+                if "job_hopping_score" in chunk_meta:
+                    meta["job_hopping_score"] = float(chunk_meta["job_hopping_score"])
+                if "position_count" in chunk_meta:
+                    meta["position_count"] = int(chunk_meta["position_count"])
+                
+                # Experience-specific fields
+                if "job_title" in chunk_meta:
+                    meta["job_title"] = str(chunk_meta["job_title"])
+                if "company" in chunk_meta:
+                    meta["company"] = str(chunk_meta["company"])
+                if "start_year" in chunk_meta and chunk_meta["start_year"]:
+                    meta["start_year"] = int(chunk_meta["start_year"])
+                if "end_year" in chunk_meta and chunk_meta["end_year"]:
+                    meta["end_year"] = int(chunk_meta["end_year"])
+                if "is_current" in chunk_meta:
+                    meta["is_current"] = bool(chunk_meta["is_current"])
+                if "duration_years" in chunk_meta:
+                    meta["duration_years"] = float(chunk_meta["duration_years"])
+                
+                # Skills as comma-separated string (ChromaDB doesn't support lists)
+                if "skills" in chunk_meta and chunk_meta["skills"]:
+                    meta["skills"] = ",".join(chunk_meta["skills"][:20])
+                
+                metadatas.append(meta)
             
             self.collection.add(
                 ids=ids,
