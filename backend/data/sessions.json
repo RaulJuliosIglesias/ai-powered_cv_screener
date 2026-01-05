@@ -10427,10 +10427,919 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-05T12:53:49.051012"
+        },
+        {
+          "id": "3b035050-7abf-49c1-a3ae-4c24b47ebd4e",
+          "role": "user",
+          "content": "Who would fit a senior position?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T12:54:21.183703"
+        },
+        {
+          "id": "2b92d132-191d-4526-a948-bdc7173c9731",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to identify candidates suitable for a senior role based on their CVs. The key criteria are: 8+ years of relevant experience, leadership/management roles, advanced degrees/certifications, and significant accomplishments. I will analyze each CV to find candidates matching these criteria.\n\nI will examine the experience sections for the length of experience and leadership roles, the education and certifications sections for advanced qualifications, and the projects/experience sections for significant accomplishments.\n:::\n\nSeveral candidates appear to meet the criteria for a senior role, demonstrating extensive experience, leadership positions, and significant achievements. These candidates have held titles such as VP, Director, and CMO, and have a proven track record of delivering results. ### Analysis\nI have selected the following candidates based on the criteria:\n*   [📄](cv:cv_4d8a6bfc)**Aisha Nkrumah**and [📄](cv:cv_d1791bcc)**Aisha Nkrumah**: Both CVs show extensive experience as a Marketing Manager with 5+ years of experience, and a MBA.\n\n### Analysis\n\nI have selected the following candidates based on the criteria:\n\n*   [📄](cv:cv_4d8a6bfc)**Aisha Nkrumah**and [📄](cv:cv_d1791bcc)**Aisha Nkrumah**: Both CVs show extensive experience as a Marketing Manager with 5+ years of experience, and a MBA.\n*   [📄](cv:cv_5c64fbcd)**Lerato Nkosi**and [📄](cv:cv_ea414ebe)**Lerato Nkosi**: Both CVs show extensive experience in blockchain, with leadership roles and a PhD.\n*   [📄](cv:cv_7e516bc6)**Priya Kapoor**, [📄](cv:cv_ef75350d)**Priya Kapoor**and [📄](cv:cv_7e516bc6)**Priya Kapoor**: These CVs show extensive experience as a VP of Data, with a PhD and certifications.\n*   [📄](cv:cv_3a4418da)**Isabel Mendoza**: This CV shows experience as a Director of AI, with a MSc.\n*   [📄](cv:cv_b85f594d)**Rajiv Patel**: This CV shows experience as a CMO, with an MSc and certifications.\n\n| Candidate | Relevant Experience | Leadership/Management | Advanced Degree/Certifications | Match Score |\n|---|---|---|---|---|\n| Aisha Nkrumah | Yes | Yes | Yes | 60% |\n| Aisha Nkrumah | Yes | Yes | Yes | 60% |\n| Lerato Nkosi | Yes | Yes | Yes | 60% |\n| Lerato Nkosi | Yes | Yes | Yes | 60% |\n| Priya Kapoor | Yes | Yes | Yes | 60% |\n| Priya Kapoor | Yes | Yes | Yes | 60% |\n| Isabel Mendoza | Yes | Yes | Yes | 60% |\n| Rajiv Patel | Yes | Yes | Yes | 60% |\n\n:::conclusion\nThe following candidates are recommended for a senior role based on their qualifications: [📄](cv:cv_4d8a6bfc)**Aisha Nkrumah**, [📄](cv:cv_d1791bcc)**Aisha Nkrumah**, [📄](cv:cv_5c64fbcd)**Lerato Nkosi**, [📄](cv:cv_ea414ebe)**Lerato Nkosi**, [📄](cv:cv_7e516bc6)**Priya Kapoor**, [📄](cv:cv_ef75350d)**Priya Kapoor**, [📄](cv:cv_3a4418da)**Isabel Mendoza**, and [📄](cv:cv_b85f594d)**Rajiv Patel**.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_4d8a6bfc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_d1791bcc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_5c64fbcd",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_ea414ebe",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_2a9de358",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_7e516bc6",
+              "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_ef75350d",
+              "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_fe4831ee",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_3ce7327e",
+              "filename": "a9d37405__Rajiv_Patel__Audit_Associate.pdf"
+            },
+            {
+              "cv_id": "cv_f9769647",
+              "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf"
+            },
+            {
+              "cv_id": "cv_5f249eef",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_aafbc954",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_8a369e60",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_78b206ff",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_cf467081",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_16ce0b4c",
+              "filename": "73be0a6e__Aisha_Johnson__Solidity_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_e72557d8",
+              "filename": "68148332__Kamal_Al-Mansoor__HR_Business_Partner.pdf"
+            },
+            {
+              "cv_id": "cv_fd34aa62",
+              "filename": "c4257bdc__Aisha_Müller__Producer.pdf"
+            },
+            {
+              "cv_id": "cv_1dc0ef87",
+              "filename": "388c469f__Rajiv_Patel__Editorial_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_66173b63",
+              "filename": "a6b7570f__Daniel_Müller__Editor.pdf"
+            },
+            {
+              "cv_id": "cv_3a4418da",
+              "filename": "a73ca65c__Isabel_Mendoza__Director_of_AI.pdf"
+            },
+            {
+              "cv_id": "cv_b85f594d",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 24803.3,
+              "details": "Query type: filter"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 30.33,
+              "details": "Found 28 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 23437.02,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6593.64,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Several candidates appear to meet the criteria for a senior role, demonstrating extensive experience, leadership positions, and significant achievements. These candidates have held titles such as VP, Director, and CMO, and have a proven track record of delivering results. ### Analysis\nI have selected the following candidates based on the criteria:\n*   [📄](cv:cv_4d8a6bfc) **Aisha Nkrumah** and [📄](cv:cv_d1791bcc) **Aisha Nkrumah**: Both CVs show extensive experience as a Marketing Manager with 5+ years of experience, and a MBA.",
+            "raw_content": ":::thinking\nThe user is asking to identify candidates suitable for a senior role based on their CVs. The key criteria are: 8+ years of relevant experience, leadership/management roles, advanced degrees/certifications, and significant accomplishments. I will analyze each CV to find candidates matching these criteria.\n\nI will examine the experience sections for the length of experience and leadership roles, the education and certifications sections for advanced qualifications, and the projects/experience sections for significant accomplishments.\n:::\n\nSeveral candidates appear to meet the criteria for a senior role, demonstrating extensive experience, leadership positions, and significant achievements. These candidates have held titles such as VP, Director, and CMO, and have a proven track record of delivering results.\n\n### Analysis\n\nI have selected the following candidates based on the criteria:\n\n*   **[Aisha Nkrumah](cv:cv_4d8a6bfc)** and **[Aisha Nkrumah](cv:cv_d1791bcc)**: Both CVs show extensive experience as a Marketing Manager with 5+ years of experience, and a MBA.\n*   **[Lerato Nkosi](cv:cv_5c64fbcd)** and **[Lerato Nkosi](cv:cv_ea414ebe)**: Both CVs show extensive experience in blockchain, with leadership roles and a PhD.\n*   **[Priya Kapoor](cv:cv_7e516bc6)**, **[Priya Kapoor](cv:cv_ef75350d)** and **[Priya Kapoor](cv:cv_7e516bc6)**: These CVs show extensive experience as a VP of Data, with a PhD and certifications.\n*   **[Isabel Mendoza](cv:cv_3a4418da)**: This CV shows experience as a Director of AI, with a MSc.\n*   **[Rajiv Patel](cv:cv_b85f594d)**: This CV shows experience as a CMO, with an MSc and certifications.\n\n| Candidate | Relevant Experience | Leadership/Management | Advanced Degree/Certifications | Match |\n|-----------|---------------------|-----------------------|--------------------------------|-------|\n| **[Aisha Nkrumah](cv:cv_4d8a6bfc)** | Yes | Yes | Yes | ⭐⭐⭐ |\n| **[Aisha Nkrumah](cv:cv_d1791bcc)** | Yes | Yes | Yes | ⭐⭐⭐ |\n| **[Lerato Nkosi](cv:cv_5c64fbcd)** | Yes | Yes | Yes | ⭐⭐⭐ |\n| **[Lerato Nkosi](cv:cv_ea414ebe)** | Yes | Yes | Yes | ⭐⭐⭐ |\n| **[Priya Kapoor](cv:cv_7e516bc6)** | Yes | Yes | Yes | ⭐⭐⭐ |\n| **[Priya Kapoor](cv:cv_ef75350d)** | Yes | Yes | Yes | ⭐⭐⭐ |\n| **[Isabel Mendoza](cv:cv_3a4418da)** | Yes | Yes | Yes | ⭐⭐⭐ |\n| **[Rajiv Patel](cv:cv_b85f594d)** | Yes | Yes | Yes | ⭐⭐⭐ |\n\n:::conclusion\nThe following candidates are recommended for a senior role based on their qualifications: **[Aisha Nkrumah](cv:cv_4d8a6bfc)**, **[Aisha Nkrumah](cv:cv_d1791bcc)**, **[Lerato Nkosi](cv:cv_5c64fbcd)**, **[Lerato Nkosi](cv:cv_ea414ebe)**, **[Priya Kapoor](cv:cv_7e516bc6)**, **[Priya Kapoor](cv:cv_ef75350d)**, **[Isabel Mendoza](cv:cv_3a4418da)**, and **[Rajiv Patel](cv:cv_b85f594d)**.\n:::",
+            "thinking": "The user is asking to identify candidates suitable for a senior role based on their CVs. The key criteria are: 8+ years of relevant experience, leadership/management roles, advanced degrees/certifications, and significant accomplishments. I will analyze each CV to find candidates matching these criteria.\n\nI will examine the experience sections for the length of experience and leadership roles, the education and certifications sections for advanced qualifications, and the projects/experience sections for significant accomplishments.",
+            "analysis": "I have selected the following candidates based on the criteria:\n\n*   [📄](cv:cv_4d8a6bfc) **Aisha Nkrumah** and [📄](cv:cv_d1791bcc) **Aisha Nkrumah**: Both CVs show extensive experience as a Marketing Manager with 5+ years of experience, and a MBA.\n*   [📄](cv:cv_5c64fbcd) **Lerato Nkosi** and [📄](cv:cv_ea414ebe) **Lerato Nkosi**: Both CVs show extensive experience in blockchain, with leadership roles and a PhD.\n*   [📄](cv:cv_7e516bc6) **Priya Kapoor**, [📄](cv:cv_ef75350d) **Priya Kapoor** and [📄](cv:cv_7e516bc6) **Priya Kapoor**: These CVs show extensive experience as a VP of Data, with a PhD and certifications.\n*   [📄](cv:cv_3a4418da) **Isabel Mendoza**: This CV shows experience as a Director of AI, with a MSc.\n*   [📄](cv:cv_b85f594d) **Rajiv Patel**: This CV shows experience as a CMO, with an MSc and certifications.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Relevant Experience",
+                "Leadership/Management",
+                "Advanced Degree/Certifications",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Aisha Nkrumah",
+                  "cv_id": "cv_4d8a6bfc",
+                  "columns": {
+                    "Relevant Experience": "Yes",
+                    "Leadership/Management": "Yes",
+                    "Advanced Degree/Certifications": "Yes"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Aisha Nkrumah",
+                  "cv_id": "cv_d1791bcc",
+                  "columns": {
+                    "Relevant Experience": "Yes",
+                    "Leadership/Management": "Yes",
+                    "Advanced Degree/Certifications": "Yes"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Lerato Nkosi",
+                  "cv_id": "cv_5c64fbcd",
+                  "columns": {
+                    "Relevant Experience": "Yes",
+                    "Leadership/Management": "Yes",
+                    "Advanced Degree/Certifications": "Yes"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Lerato Nkosi",
+                  "cv_id": "cv_ea414ebe",
+                  "columns": {
+                    "Relevant Experience": "Yes",
+                    "Leadership/Management": "Yes",
+                    "Advanced Degree/Certifications": "Yes"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Priya Kapoor",
+                  "cv_id": "cv_7e516bc6",
+                  "columns": {
+                    "Relevant Experience": "Yes",
+                    "Leadership/Management": "Yes",
+                    "Advanced Degree/Certifications": "Yes"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Priya Kapoor",
+                  "cv_id": "cv_ef75350d",
+                  "columns": {
+                    "Relevant Experience": "Yes",
+                    "Leadership/Management": "Yes",
+                    "Advanced Degree/Certifications": "Yes"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Isabel Mendoza",
+                  "cv_id": "cv_3a4418da",
+                  "columns": {
+                    "Relevant Experience": "Yes",
+                    "Leadership/Management": "Yes",
+                    "Advanced Degree/Certifications": "Yes"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Rajiv Patel",
+                  "cv_id": "cv_b85f594d",
+                  "columns": {
+                    "Relevant Experience": "Yes",
+                    "Leadership/Management": "Yes",
+                    "Advanced Degree/Certifications": "Yes"
+                  },
+                  "match_score": 60
+                }
+              ]
+            },
+            "conclusion": "The following candidates are recommended for a senior role based on their qualifications: [📄](cv:cv_4d8a6bfc) **Aisha Nkrumah**, [📄](cv:cv_d1791bcc) **Aisha Nkrumah**, [📄](cv:cv_5c64fbcd) **Lerato Nkosi**, [📄](cv:cv_ea414ebe) **Lerato Nkosi**, [📄](cv:cv_7e516bc6) **Priya Kapoor**, [📄](cv:cv_ef75350d) **Priya Kapoor**, [📄](cv:cv_3a4418da) **Isabel Mendoza**, and [📄](cv:cv_b85f594d) **Rajiv Patel**.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T12:55:27.251826"
+        },
+        {
+          "id": "b72a0e44-4817-4be8-b6ae-e1e6221f3ede",
+          "role": "user",
+          "content": "dime ahroa todo sobre Aisha Nkrumah\n,",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T12:55:49.394282"
+        },
+        {
+          "id": "b2007fc2-c150-4d3b-8da6-d68f465f4095",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a summary of the candidate Aisha Nkrumah's CV, including years of experience, skills, education, work history, and achievements. I need to locate the CVs for Aisha Nkrumah and extract the requested information.\n\nI will examine the provided CV excerpts to identify the relevant candidate and then extract the required details.\n:::\n\n[📄](cv:cv_d1791bcc)**Aisha Nkrumah**has extensive experience in marketing, with a focus on brand strategy and digital marketing. Her CV highlights her skills in data analytics, digital marketing, brand strategy, and CRM platforms. She has an MBA in Marketing and a BSc in Business Administration.\n\n### Analysis\n\nI identified two CVs for**Aisha Nkrumah**. Both CVs contain the same information, so I will analyze the first one. The analysis will focus on extracting the requested information: total years of experience, relevant skills, education, work history with dates, and notable achievements.\n\n| Candidate | Total Years of Experience | Relevant Skills | Education | Work History | Notable Achievements | Match Score |\n|---|---|---|---|---|---|---|\n| Aisha Nkrumah | 24 | Data Analytics, Digital Marketing, Brand Strategy, CRM Platforms | MBA, Marketing; BSc, Business Administration | Chief Marketing Officer (2023-Present); Vice President of Marketing (2020-2023); Director of Brand Strategy (2017-2020); Marketing Manager (2015-2017); Marketing Manager (2013-2015); Brand Assistant (2002-2006); Marketing Intern (1999-2002) | Elevated brand revenue by 250%; Scaled product launch success from 3 to 12 markets; Crafted a cross-platform narrative that increased brand equity scores by 40 points. | 100% |\n| Aisha Nkrumah | 24 | Data Analytics, Digital Marketing, Brand Strategy, CRM Platforms | MBA, Marketing; BSc, Business Administration | Chief Marketing Officer (2023-Present); Vice President of Marketing (2020-2023); Director of Brand Strategy (2017-2020); Marketing Manager (2015-2017); Marketing Manager (2013-2015); Brand Assistant (2002-2006); Marketing Intern (1999-2002) | Elevated brand revenue by 250%; Scaled product launch success from 3 to 12 markets; Crafted a cross-platform narrative that increased brand equity scores by 40 points. | 100% |\n\n:::conclusion\nThe candidate [📄](cv:cv_4d8a6bfc)**Aisha Nkrumah**and [📄](cv:cv_d1791bcc)**Aisha Nkrumah**are a strong match. The provided summary includes the requested information: total years of experience, relevant skills, education, work history with dates, and notable achievements.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_2a9de358",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_e72557d8",
+              "filename": "68148332__Kamal_Al-Mansoor__HR_Business_Partner.pdf"
+            },
+            {
+              "cv_id": "cv_9fb0f971",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_5f249eef",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_8a369e60",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_66173b63",
+              "filename": "a6b7570f__Daniel_Müller__Editor.pdf"
+            },
+            {
+              "cv_id": "cv_5c64fbcd",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_16ce0b4c",
+              "filename": "73be0a6e__Aisha_Johnson__Solidity_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_ea414ebe",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_fe4831ee",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_f9769647",
+              "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf"
+            },
+            {
+              "cv_id": "cv_3b11c6a9",
+              "filename": "bd3c4450__Mateo_Fernandez__Music_Producer.pdf"
+            },
+            {
+              "cv_id": "cv_3ce7327e",
+              "filename": "a9d37405__Rajiv_Patel__Audit_Associate.pdf"
+            },
+            {
+              "cv_id": "cv_4d8a6bfc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_d1791bcc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_aafbc954",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_78b206ff",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_05ddacb3",
+              "filename": "6b0a7d7d__Isabel_Mendoza__Pastry_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_1dc0ef87",
+              "filename": "388c469f__Rajiv_Patel__Editorial_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_cf467081",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_5463ea64",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_b9dd75c5",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_b85f594d",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 10896.7,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 27.8,
+              "details": "Found 27 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 7533.17,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6234.61,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "[📄](cv:cv_d1791bcc) **Aisha Nkrumah** has extensive experience in marketing, with a focus on brand strategy and digital marketing. Her CV highlights her skills in data analytics, digital marketing, brand strategy, and CRM platforms. She has an MBA in Marketing and a BSc in Business Administration.",
+            "raw_content": ":::thinking\nThe user is asking for a summary of the candidate Aisha Nkrumah's CV, including years of experience, skills, education, work history, and achievements. I need to locate the CVs for Aisha Nkrumah and extract the requested information.\n\nI will examine the provided CV excerpts to identify the relevant candidate and then extract the required details.\n:::\n\nAisha Nkrumah has extensive experience in marketing, with a focus on brand strategy and digital marketing. Her CV highlights her skills in data analytics, digital marketing, brand strategy, and CRM platforms. She has an MBA in Marketing and a BSc in Business Administration.\n\n### Analysis\n\nI identified two CVs for **Aisha Nkrumah**. Both CVs contain the same information, so I will analyze the first one. The analysis will focus on extracting the requested information: total years of experience, relevant skills, education, work history with dates, and notable achievements.\n\n| Candidate | Total Years of Experience | Relevant Skills | Education | Work History | Notable Achievements | Match |\n|---|---|---|---|---|---|---|\n| **[Aisha Nkrumah](cv:cv_4d8a6bfc)** | 24 | Data Analytics, Digital Marketing, Brand Strategy, CRM Platforms | MBA, Marketing; BSc, Business Administration | Chief Marketing Officer (2023-Present); Vice President of Marketing (2020-2023); Director of Brand Strategy (2017-2020); Marketing Manager (2015-2017); Marketing Manager (2013-2015); Brand Assistant (2002-2006); Marketing Intern (1999-2002) | Elevated brand revenue by 250%; Scaled product launch success from 3 to 12 markets; Crafted a cross-platform narrative that increased brand equity scores by 40 points. | ⭐⭐⭐⭐⭐ |\n| **[Aisha Nkrumah](cv:cv_d1791bcc)** | 24 | Data Analytics, Digital Marketing, Brand Strategy, CRM Platforms | MBA, Marketing; BSc, Business Administration | Chief Marketing Officer (2023-Present); Vice President of Marketing (2020-2023); Director of Brand Strategy (2017-2020); Marketing Manager (2015-2017); Marketing Manager (2013-2015); Brand Assistant (2002-2006); Marketing Intern (1999-2002) | Elevated brand revenue by 250%; Scaled product launch success from 3 to 12 markets; Crafted a cross-platform narrative that increased brand equity scores by 40 points. | ⭐⭐⭐⭐⭐ |\n\nThe table summarizes the key information extracted from the CVs of **[Aisha Nkrumah](cv:cv_4d8a6bfc)** and **[Aisha Nkrumah](cv:cv_d1791bcc)**. Both CVs contain the same information.\n\n:::conclusion\nThe candidate **[Aisha Nkrumah](cv:cv_4d8a6bfc)** and **[Aisha Nkrumah](cv:cv_d1791bcc)** are a strong match. The provided summary includes the requested information: total years of experience, relevant skills, education, work history with dates, and notable achievements.",
+            "thinking": "The user is asking for a summary of the candidate Aisha Nkrumah's CV, including years of experience, skills, education, work history, and achievements. I need to locate the CVs for Aisha Nkrumah and extract the requested information.\n\nI will examine the provided CV excerpts to identify the relevant candidate and then extract the required details.",
+            "analysis": "I identified two CVs for **Aisha Nkrumah**. Both CVs contain the same information, so I will analyze the first one. The analysis will focus on extracting the requested information: total years of experience, relevant skills, education, work history with dates, and notable achievements.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Total Years of Experience",
+                "Relevant Skills",
+                "Education",
+                "Work History",
+                "Notable Achievements",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Aisha Nkrumah",
+                  "cv_id": "cv_4d8a6bfc",
+                  "columns": {
+                    "Total Years of Experience": "24",
+                    "Relevant Skills": "Data Analytics, Digital Marketing, Brand Strategy, CRM Platforms",
+                    "Education": "MBA, Marketing; BSc, Business Administration",
+                    "Work History": "Chief Marketing Officer (2023-Present); Vice President of Marketing (2020-2023); Director of Brand Strategy (2017-2020); Marketing Manager (2015-2017); Marketing Manager (2013-2015); Brand Assistant (2002-2006); Marketing Intern (1999-2002)",
+                    "Notable Achievements": "Elevated brand revenue by 250%; Scaled product launch success from 3 to 12 markets; Crafted a cross-platform narrative that increased brand equity scores by 40 points."
+                  },
+                  "match_score": 100
+                },
+                {
+                  "candidate_name": "Aisha Nkrumah",
+                  "cv_id": "cv_d1791bcc",
+                  "columns": {
+                    "Total Years of Experience": "24",
+                    "Relevant Skills": "Data Analytics, Digital Marketing, Brand Strategy, CRM Platforms",
+                    "Education": "MBA, Marketing; BSc, Business Administration",
+                    "Work History": "Chief Marketing Officer (2023-Present); Vice President of Marketing (2020-2023); Director of Brand Strategy (2017-2020); Marketing Manager (2015-2017); Marketing Manager (2013-2015); Brand Assistant (2002-2006); Marketing Intern (1999-2002)",
+                    "Notable Achievements": "Elevated brand revenue by 250%; Scaled product launch success from 3 to 12 markets; Crafted a cross-platform narrative that increased brand equity scores by 40 points."
+                  },
+                  "match_score": 100
+                }
+              ]
+            },
+            "conclusion": "The candidate [📄](cv:cv_4d8a6bfc) **Aisha Nkrumah** and [📄](cv:cv_d1791bcc) **Aisha Nkrumah** are a strong match. The provided summary includes the requested information: total years of experience, relevant skills, education, work history with dates, and notable achievements.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T12:56:29.842769"
+        },
+        {
+          "id": "45152b5f-91cf-4230-92cc-6ea013ae2056",
+          "role": "user",
+          "content": "Who has startup experience?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T13:04:30.064468"
+        },
+        {
+          "id": "2c3ea60e-ac0d-4246-b8b2-7889ea160cea",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to identify candidates with experience working at startups, including the startup names and their roles. I need to scan the provided CV excerpts for mentions of \"startup\" or similar terms and extract the relevant information.\n\nRelevant CVs: All CVs need to be checked.\n\nKey criteria:\n1. Explicit mention of \"startup\" or similar terms.\n2. The name of the startup.\n3. The candidate's role or responsibilities at the startup.\n:::\n\nSeveral candidates have experience working at startups. These candidates have held various roles and responsibilities within the startup environment, as detailed below. ### Analysis\nI reviewed all the provided CV excerpts and identified the following candidates who explicitly mentioned working at a startup.\n\n### Analysis\n\nI reviewed all the provided CV excerpts and identified the following candidates who explicitly mentioned working at a startup. The table below summarizes their experience, including the startup names and their roles/responsibilities.\n\n| Candidate | Startup | Role/Responsibilities | Match Score |\n|---|---|---|---|\n| Rajiv Patel | StartUpX | Led digital acquisition initiatives | 60% |\n| Aisha Johnson | Quantum Solutions | Software Development Intern | 40% |\n| Lerato Nkosi | FinTech Solutions | Blockchain Engineer | 40% |\n| Lerato Nkosi | FinTech Solutions | Blockchain Engineer | 40% |\n\n:::conclusion\nThe following candidates have experience working at startups: [📄](cv:cv_16ce0b4c)**Aisha Johnson**, [📄](cv:cv_5c64fbcd)**Lerato Nkosi**, [📄](cv:cv_ea414ebe)**Lerato Nkosi**, and [📄](cv:cv_19b85f594d)**Rajiv Patel**.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_4d8a6bfc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_d1791bcc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_16ce0b4c",
+              "filename": "73be0a6e__Aisha_Johnson__Solidity_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_f9769647",
+              "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf"
+            },
+            {
+              "cv_id": "cv_fe4831ee",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_aafbc954",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_2a9de358",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_9fb0f971",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_7e516bc6",
+              "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_ef75350d",
+              "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_3b11c6a9",
+              "filename": "bd3c4450__Mateo_Fernandez__Music_Producer.pdf"
+            },
+            {
+              "cv_id": "cv_5c64fbcd",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_1dc0ef87",
+              "filename": "388c469f__Rajiv_Patel__Editorial_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_ea414ebe",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_66173b63",
+              "filename": "a6b7570f__Daniel_Müller__Editor.pdf"
+            },
+            {
+              "cv_id": "cv_e72557d8",
+              "filename": "68148332__Kamal_Al-Mansoor__HR_Business_Partner.pdf"
+            },
+            {
+              "cv_id": "cv_78b206ff",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_cf467081",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_b85f594d",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_ffda47b5",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_5463ea64",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_fd34aa62",
+              "filename": "c4257bdc__Aisha_Müller__Producer.pdf"
+            },
+            {
+              "cv_id": "cv_3ce7327e",
+              "filename": "a9d37405__Rajiv_Patel__Audit_Associate.pdf"
+            },
+            {
+              "cv_id": "cv_b9dd75c5",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 6668.2,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 30.12,
+              "details": "Found 24 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 18677.51,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4621.13,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Several candidates have experience working at startups. These candidates have held various roles and responsibilities within the startup environment, as detailed below. ### Analysis\nI reviewed all the provided CV excerpts and identified the following candidates who explicitly mentioned working at a startup.",
+            "raw_content": ":::thinking\nThe user is asking to identify candidates with experience working at startups, including the startup names and their roles. I need to scan the provided CV excerpts for mentions of \"startup\" or similar terms and extract the relevant information.\n\nRelevant CVs: All CVs need to be checked.\n\nKey criteria:\n1.  Explicit mention of \"startup\" or similar terms.\n2.  The name of the startup.\n3.  The candidate's role or responsibilities at the startup.\n:::\n\nSeveral candidates have experience working at startups. These candidates have held various roles and responsibilities within the startup environment, as detailed below.\n\n### Analysis\n\nI reviewed all the provided CV excerpts and identified the following candidates who explicitly mentioned working at a startup. The table below summarizes their experience, including the startup names and their roles/responsibilities.\n\n| Candidate | Startup | Role/Responsibilities | Match |\n|---|---|---|---|\n| **[Aisha Johnson](cv:cv_16ce0b4c)** | Quantum Solutions | Software Development Intern | ⭐⭐ |\n| **[Lerato Nkosi](cv:cv_5c64fbcd)** | FinTech Solutions | Blockchain Engineer | ⭐⭐ |\n| **[Lerato Nkosi](cv:cv_ea414ebe)** | FinTech Solutions | Blockchain Engineer | ⭐⭐ |\n| **[Rajiv Patel](cv:cv_19b85f594d)** | StartUpX | Led digital acquisition initiatives | ⭐⭐⭐ |\n\n**Reasoning:**\n*   **[Aisha Johnson](cv:cv_16ce0b4c)**: The CV mentions \"Software Development Intern\" at \"Quantum Solutions\".\n*   **[Lerato Nkosi](cv:cv_5c64fbcd)**: The CV mentions \"Blockchain Engineer\" at \"FinTech Solutions\".\n*   **[Lerato Nkosi](cv:cv_ea414ebe)**: The CV mentions \"Blockchain Engineer\" at \"FinTech Solutions\".\n*   **[Rajiv Patel](cv:cv_19b85f594d)**: The CV mentions \"Led digital acquisition initiatives\" at \"StartUpX\".\n\n:::conclusion\nThe following candidates have experience working at startups: **[Aisha Johnson](cv:cv_16ce0b4c)**, **[Lerato Nkosi](cv:cv_5c64fbcd)**, **[Lerato Nkosi](cv:cv_ea414ebe)**, and **[Rajiv Patel](cv:cv_19b85f594d)**.",
+            "thinking": "The user is asking to identify candidates with experience working at startups, including the startup names and their roles. I need to scan the provided CV excerpts for mentions of \"startup\" or similar terms and extract the relevant information.\n\nRelevant CVs: All CVs need to be checked.\n\nKey criteria:\n1. Explicit mention of \"startup\" or similar terms.\n2. The name of the startup.\n3. The candidate's role or responsibilities at the startup.",
+            "analysis": "I reviewed all the provided CV excerpts and identified the following candidates who explicitly mentioned working at a startup. The table below summarizes their experience, including the startup names and their roles/responsibilities.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Startup",
+                "Role/Responsibilities",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Rajiv Patel",
+                  "cv_id": "cv_19b85f594d",
+                  "columns": {
+                    "Startup": "StartUpX",
+                    "Role/Responsibilities": "Led digital acquisition initiatives"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Aisha Johnson",
+                  "cv_id": "cv_16ce0b4c",
+                  "columns": {
+                    "Startup": "Quantum Solutions",
+                    "Role/Responsibilities": "Software Development Intern"
+                  },
+                  "match_score": 40
+                },
+                {
+                  "candidate_name": "Lerato Nkosi",
+                  "cv_id": "cv_5c64fbcd",
+                  "columns": {
+                    "Startup": "FinTech Solutions",
+                    "Role/Responsibilities": "Blockchain Engineer"
+                  },
+                  "match_score": 40
+                },
+                {
+                  "candidate_name": "Lerato Nkosi",
+                  "cv_id": "cv_ea414ebe",
+                  "columns": {
+                    "Startup": "FinTech Solutions",
+                    "Role/Responsibilities": "Blockchain Engineer"
+                  },
+                  "match_score": 40
+                }
+              ]
+            },
+            "conclusion": "The following candidates have experience working at startups: [📄](cv:cv_16ce0b4c) **Aisha Johnson**, [📄](cv:cv_5c64fbcd) **Lerato Nkosi**, [📄](cv:cv_ea414ebe) **Lerato Nkosi**, and [📄](cv:cv_19b85f594d) **Rajiv Patel**.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T13:05:50.122247"
+        },
+        {
+          "id": "51053f66-f39d-4617-bd96-024504ea2f72",
+          "role": "user",
+          "content": "Compare years of experience",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T13:09:55.463925"
+        },
+        {
+          "id": "f2a42d64-dde7-4502-84be-41a3c1c39bcb",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to compare the total years of professional experience for each candidate and order them from most to least experienced. I need to extract the start and end dates of each role from the provided CV excerpts, calculate the duration of each role, and sum the durations to determine the total years of experience for each candidate. I will then present the candidates in a table, ordered by their total experience.\n:::\n\nI have analyzed the provided CV excerpts and calculated the total years of experience for each candidate. The candidates are presented in the table below, ordered from most to least experienced based on the information available in their CVs. ### Analysis\nI reviewed each CV excerpt to identify work experience, extracting start and end dates for each role.\n\n### Analysis\n\nI reviewed each CV excerpt to identify work experience, extracting start and end dates for each role. I calculated the duration of each role in years and summed them to determine the total professional experience. The table below presents the candidates and their total years of experience, based on the available data. Note that the accuracy of the calculation depends on the completeness of the work history provided in each CV.\n\n| Candidate | Total Experience (Years) | Match Score |\n|---|---|---|\n| Adewale Ogunleye | 19 | 50% |\n| Priya Kapoor | 25 | 50% |\n| Priya Kapoor | 25 | 50% |\n| Aisha Patel | 2 | 50% |\n| Aisha Patel | 2 | 50% |\n| Aisha Okafor | 19 | 50% |\n| Mei-Ling Chen | 2 | 50% |\n| Mei-Ling Chen | 2 | 50% |\n| Aisha Johnson | 2 | 50% |\n| Rajiv Patel | 0 | 50% |\n| Rajiv Patel | 2 | 50% |\n| Priya Patel | 0 | 50% |\n| Isabel Mendoza | 0 | 50% |\n| Margaret OConnor | 0 | 50% |\n| Margaret OConnor | 0 | 50% |\n| Daniel Müller | 0 | 50% |\n| Kamal Al-Mansoor | 1 | 50% |\n| Mateo Fernandez | 0 | 50% |\n\n:::conclusion\nThe candidates with the most experience are [📄](cv:cv_7e516bc6)**Priya Kapoor**and [📄](cv:cv_ef75350d)**Priya Kapoor**, each with 25 years of experience.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_f9769647",
+              "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf"
+            },
+            {
+              "cv_id": "cv_05ddacb3",
+              "filename": "6b0a7d7d__Isabel_Mendoza__Pastry_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_78b206ff",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_fe4831ee",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_aafbc954",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_9fb0f971",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_5463ea64",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_b9dd75c5",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_66173b63",
+              "filename": "a6b7570f__Daniel_Müller__Editor.pdf"
+            },
+            {
+              "cv_id": "cv_2a9de358",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_cf467081",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_16ce0b4c",
+              "filename": "73be0a6e__Aisha_Johnson__Solidity_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_e72557d8",
+              "filename": "68148332__Kamal_Al-Mansoor__HR_Business_Partner.pdf"
+            },
+            {
+              "cv_id": "cv_7e516bc6",
+              "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_ef75350d",
+              "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_3b11c6a9",
+              "filename": "bd3c4450__Mateo_Fernandez__Music_Producer.pdf"
+            },
+            {
+              "cv_id": "cv_3ce7327e",
+              "filename": "a9d37405__Rajiv_Patel__Audit_Associate.pdf"
+            },
+            {
+              "cv_id": "cv_1dc0ef87",
+              "filename": "388c469f__Rajiv_Patel__Editorial_Designer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 6919.14,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 30.02,
+              "details": "Found 25 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 0,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6117.55,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "I have analyzed the provided CV excerpts and calculated the total years of experience for each candidate. The candidates are presented in the table below, ordered from most to least experienced based on the information available in their CVs. ### Analysis\nI reviewed each CV excerpt to identify work experience, extracting start and end dates for each role.",
+            "raw_content": ":::thinking\nThe user is asking to compare the total years of professional experience for each candidate and order them from most to least experienced. I need to extract the start and end dates of each role from the provided CV excerpts, calculate the duration of each role, and sum the durations to determine the total years of experience for each candidate. I will then present the candidates in a table, ordered by their total experience.\n:::\n\nI have analyzed the provided CV excerpts and calculated the total years of experience for each candidate. The candidates are presented in the table below, ordered from most to least experienced based on the information available in their CVs.\n\n### Analysis\n\nI reviewed each CV excerpt to identify work experience, extracting start and end dates for each role. I calculated the duration of each role in years and summed them to determine the total professional experience. The table below presents the candidates and their total years of experience, based on the available data. Note that the accuracy of the calculation depends on the completeness of the work history provided in each CV.\n\n| Candidate | Total Experience (Years) |\n|-----------|--------------------------|\n| **[Adewale Ogunleye](cv:cv_9fb0f971)** | 19 |\n| **[Priya Kapoor](cv:cv_7e516bc6)** | 25 |\n| **[Priya Kapoor](cv:cv_ef75350d)** | 25 |\n| **[Aisha Patel](cv:cv_fe4831ee)** | 2 |\n| **[Aisha Patel](cv:cv_aafbc954)** | 2 |\n| **[Aisha Okafor](cv:cv_2a9de358)** | 19 |\n| **[Mei-Ling Chen](cv:cv_78b206ff)** | 2 |\n| **[Mei-Ling Chen](cv:cv_cf467081)** | 2 |\n| **[Aisha Johnson](cv:cv_16ce0b4c)** | 2 |\n| **[Rajiv Patel](cv:cv_3ce7327e)** | 0 |\n| **[Rajiv Patel](cv:cv_1dc0ef87)** | 2 |\n| **[Priya Patel](cv:cv_f9769647)** | 0 |\n| **[Isabel Mendoza](cv:cv_05ddacb3)** | 0 |\n| **[Margaret OConnor](cv:cv_5463ea64)** | 0 |\n| **[Margaret OConnor](cv:cv_b9dd75c5)** | 0 |\n| **[Daniel Müller](cv:cv_66173b63)** | 0 |\n| **[Kamal Al-Mansoor](cv:cv_e72557d8)** | 1 |\n| **[Mateo Fernandez](cv:cv_3b11c6a9)** | 0 |\n| **[Mateo Fernandez](cv:cv_3b11c6a9)** | 0 |\n\n:::conclusion\nThe candidates with the most experience are **[Priya Kapoor](cv:cv_7e516bc6)** and **[Priya Kapoor](cv:cv_ef75350d)**, each with 25 years of experience.",
+            "thinking": "The user is asking to compare the total years of professional experience for each candidate and order them from most to least experienced. I need to extract the start and end dates of each role from the provided CV excerpts, calculate the duration of each role, and sum the durations to determine the total years of experience for each candidate. I will then present the candidates in a table, ordered by their total experience.",
+            "analysis": "I reviewed each CV excerpt to identify work experience, extracting start and end dates for each role. I calculated the duration of each role in years and summed them to determine the total professional experience. The table below presents the candidates and their total years of experience, based on the available data. Note that the accuracy of the calculation depends on the completeness of the work history provided in each CV.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Total Experience (Years)",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Adewale Ogunleye",
+                  "cv_id": "cv_9fb0f971",
+                  "columns": {
+                    "Total Experience (Years)": "19"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Priya Kapoor",
+                  "cv_id": "cv_7e516bc6",
+                  "columns": {
+                    "Total Experience (Years)": "25"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Priya Kapoor",
+                  "cv_id": "cv_ef75350d",
+                  "columns": {
+                    "Total Experience (Years)": "25"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Aisha Patel",
+                  "cv_id": "cv_fe4831ee",
+                  "columns": {
+                    "Total Experience (Years)": "2"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Aisha Patel",
+                  "cv_id": "cv_aafbc954",
+                  "columns": {
+                    "Total Experience (Years)": "2"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Aisha Okafor",
+                  "cv_id": "cv_2a9de358",
+                  "columns": {
+                    "Total Experience (Years)": "19"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Mei-Ling Chen",
+                  "cv_id": "cv_78b206ff",
+                  "columns": {
+                    "Total Experience (Years)": "2"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Mei-Ling Chen",
+                  "cv_id": "cv_cf467081",
+                  "columns": {
+                    "Total Experience (Years)": "2"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Aisha Johnson",
+                  "cv_id": "cv_16ce0b4c",
+                  "columns": {
+                    "Total Experience (Years)": "2"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Rajiv Patel",
+                  "cv_id": "cv_3ce7327e",
+                  "columns": {
+                    "Total Experience (Years)": "0"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Rajiv Patel",
+                  "cv_id": "cv_1dc0ef87",
+                  "columns": {
+                    "Total Experience (Years)": "2"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Priya Patel",
+                  "cv_id": "cv_f9769647",
+                  "columns": {
+                    "Total Experience (Years)": "0"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Isabel Mendoza",
+                  "cv_id": "cv_05ddacb3",
+                  "columns": {
+                    "Total Experience (Years)": "0"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Margaret OConnor",
+                  "cv_id": "cv_5463ea64",
+                  "columns": {
+                    "Total Experience (Years)": "0"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Margaret OConnor",
+                  "cv_id": "cv_b9dd75c5",
+                  "columns": {
+                    "Total Experience (Years)": "0"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Daniel Müller",
+                  "cv_id": "cv_66173b63",
+                  "columns": {
+                    "Total Experience (Years)": "0"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Kamal Al-Mansoor",
+                  "cv_id": "cv_e72557d8",
+                  "columns": {
+                    "Total Experience (Years)": "1"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Mateo Fernandez",
+                  "cv_id": "cv_3b11c6a9",
+                  "columns": {
+                    "Total Experience (Years)": "0"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "The candidates with the most experience are [📄](cv:cv_7e516bc6) **Priya Kapoor** and [📄](cv:cv_ef75350d) **Priya Kapoor**, each with 25 years of experience.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T13:10:41.502178"
+        },
+        {
+          "id": "b697974b-5f28-4371-808f-8d45c46950d8",
+          "role": "user",
+          "content": "Create a top 3 shortlist from 31 candidates",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T13:11:05.568398"
+        },
+        {
+          "id": "4938f446-f97a-471a-b584-91117fd0af80",
+          "role": "user",
+          "content": "Compare education levels",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T13:12:41.396908"
         }
       ],
       "created_at": "2026-01-05T02:15:22.786546",
-      "updated_at": "2026-01-05T12:53:49.051012"
+      "updated_at": "2026-01-05T13:12:41.396908"
     },
     {
       "id": "71cfaf4d-4258-40d8-98f7-e7c9d1a9bfd0",
@@ -14450,10 +15359,28 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-05T12:52:21.183950"
+        },
+        {
+          "id": "c7b1ed08-069f-4c9d-b5d9-db002330661a",
+          "role": "user",
+          "content": "Compare education levels",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T13:10:30.225464"
+        },
+        {
+          "id": "bfda5fea-b887-4ed2-808c-3881eae5a9dc",
+          "role": "user",
+          "content": "Who has the strongest technical skills?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T13:12:52.834992"
         }
       ],
       "created_at": "2026-01-05T02:36:30.672588",
-      "updated_at": "2026-01-05T12:52:21.183950"
+      "updated_at": "2026-01-05T13:12:52.834992"
     },
     {
       "id": "84dcbb16-5344-446e-8d3e-5d4322b6583a",
@@ -20614,10 +21541,505 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-05T12:47:44.738386"
+        },
+        {
+          "id": "d2c1d004-26e7-4cda-8d49-b4b3796dee8f",
+          "role": "user",
+          "content": "Compare education levels",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T13:04:46.533458"
+        },
+        {
+          "id": "38b03b71-694d-4aa6-b8c4-641207616526",
+          "role": "assistant",
+          "content": ":::thinking\nThe user wants a comparison of the education levels of all candidates, including their highest degree and field of study. I need to scan all provided CVs, extract the education sections, and create a table comparing the candidates based on their highest degree and major.\n:::\n\nHere's a comparison of the highest degrees earned by the candidates, along with their fields of study. The analysis is based solely on the education sections of the provided CV excerpts. ### Analysis\nI reviewed all the provided CV excerpts and extracted the highest degree and major/field of study for each candidate.\n\n### Analysis\n\nI reviewed all the provided CV excerpts and extracted the highest degree and major/field of study for each candidate. The table below presents this information for all candidates with education sections.\n\n| Candidate | Highest Degree | Match Score |\n|---|---|---|\n| Amir Al-Farsi | Master of Arts | 50% |\n| Matteo Rossi | Master of Business Administration (MBA) | 50% |\n| Lukas Schneider | Bachelor of Arts | 50% |\n| Matteo Romano | Bachelor of Arts | 50% |\n| Aisha Okafor | Not explicitly mentioned | 50% |\n| Matteo Rossi | Not explicitly mentioned | 50% |\n| Lucien Moreau | Master of Fine Arts | 50% |\n| Kamran Alizadeh | Not explicitly mentioned | 50% |\n| Sofia de Vries | Not explicitly mentioned | 50% |\n| Emily Tan | Not explicitly mentioned | 50% |\n| Liam van der Merwe | Master of Science | 50% |\n| Ji-eun Kim | Not explicitly mentioned | 50% |\n| Javier Morales | Ph.D. | 50% |\n| Sofia Rossi | Master of Science | 50% |\n| Farid Al-Mansoor | Master of Science | 50% |\n| Adewale Patel | Bachelor of Arts | 50% |\n\n:::conclusion\nThe table provides a clear overview of the highest degrees and fields of study for each candidate.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_7aef282d",
+              "filename": "9c9af9ff__Amir_Al-Farsi__Instructional_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_b428bff4",
+              "filename": "4a8697d7__Aisha_Al_Mansoori__Postdoc.pdf"
+            },
+            {
+              "cv_id": "cv_fbe1da0a",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_ad4a24b4",
+              "filename": "1b215ef8__Matteo_Rossi__Group_PM.pdf"
+            },
+            {
+              "cv_id": "cv_7fe59646",
+              "filename": "4ef2ef97__Aisha_Tan__Pizza_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_8ecd7d95",
+              "filename": "6b9204bf__Matteo_Romano__Brand_Ambassador.pdf"
+            },
+            {
+              "cv_id": "cv_f07420aa",
+              "filename": "014b47a1__Javier_Morales__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_ac17bfa8",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_125e8853",
+              "filename": "0c185b57__Matteo_Rossi__Associate_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_8bd3aefd",
+              "filename": "5d0b9a4c__Javier_Morales__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_1fd34bb0",
+              "filename": "4bd4fa01__Lukas_Schneider__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_b1d80241",
+              "filename": "16c037be__Lotte_van_der_Berg__Camera_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_b63b092f",
+              "filename": "4ca041d0__Lucien_Moreau__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_d5e8a637",
+              "filename": "2fd0d810__Kamran_Alizadeh__Law_Clerk.pdf"
+            },
+            {
+              "cv_id": "cv_ef2adc81",
+              "filename": "34ec1a17__Sofia_de_Vries__Swift_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_5d42c773",
+              "filename": "2aaf7352__Sofia_Rossi__Restaurant_Owner.pdf"
+            },
+            {
+              "cv_id": "cv_1d703953",
+              "filename": "01def3e4__Mei_Lin_Chen__Accessories_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_2b90bfc9",
+              "filename": "9cd768c8__Emily_Tan__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_f2521121",
+              "filename": "3baa7e58__Diego_Mendoza__Protocol_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_b02a5c0c",
+              "filename": "7ceb10f6__Liam_van_der_Merwe__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_61120d45",
+              "filename": "2a6972cc__Ji-eun_Kim__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_3bdba068",
+              "filename": "2ee790a4__Lotte_van_der_Berg__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_37db3173",
+              "filename": "9ffbf866__Farid_Al-Mansoor__Technical_Lead.pdf"
+            },
+            {
+              "cv_id": "cv_99db78c9",
+              "filename": "6af7b13a__Adewale_Patel__Junior_Graphic_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_2462b1dc",
+              "filename": "4e4b81a6__Sofia_Rossi__Graduate_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_3fb4448e",
+              "filename": "29d2f61f__Valentina_Mendoza__Digital_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 6040.92,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 46.45,
+              "details": "Found 33 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 0,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5099.01,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Here's a comparison of the highest degrees earned by the candidates, along with their fields of study. The analysis is based solely on the education sections of the provided CV excerpts. ### Analysis\nI reviewed all the provided CV excerpts and extracted the highest degree and major/field of study for each candidate.",
+            "raw_content": ":::thinking\nThe user wants a comparison of the education levels of all candidates, including their highest degree and field of study. I need to scan all provided CVs, extract the education sections, and create a table comparing the candidates based on their highest degree and major.\n:::\n\nHere's a comparison of the highest degrees earned by the candidates, along with their fields of study. The analysis is based solely on the education sections of the provided CV excerpts.\n\n### Analysis\nI reviewed all the provided CV excerpts and extracted the highest degree and major/field of study for each candidate. The table below presents this information for all candidates with education sections.\n\n| Candidate | Highest Degree | Major/Field of Study |\n|-----------|----------------|----------------------|\n| **[Amir Al-Farsi](cv:cv_7aef282d)** | Master of Arts | Educational Technology |\n| **[Matteo Rossi](cv:cv_ad4a24b4)** | Master of Business Administration (MBA) | Technology Management |\n| **[Lukas Schneider](cv:cv_fbe1da0a)** | Bachelor of Arts | Sound Design and Production |\n| **[Matteo Romano](cv:cv_8ecd7d95)** | Bachelor of Arts | Communications and Media |\n| **[Aisha Okafor](cv:cv_ac17bfa8)** | Not explicitly mentioned | Not explicitly mentioned |\n| **[Matteo Rossi](cv:cv_125e8853)** | Not explicitly mentioned | Not explicitly mentioned |\n| **[Lucien Moreau](cv:cv_b63b092f)** | Master of Fine Arts | Digital Arts |\n| **[Kamran Alizadeh](cv:cv_d5e8a637)** | Not explicitly mentioned | Not explicitly mentioned |\n| **[Sofia de Vries](cv:cv_ef2adc81)** | Not explicitly mentioned | Not explicitly mentioned |\n| **[Emily Tan](cv:cv_2b90bfc9)** | Not explicitly mentioned | Not explicitly mentioned |\n| **[Liam van der Merwe](cv:cv_b02a5c0c)** | Master of Science | Business Analytics |\n| **[Ji-eun Kim](cv:cv_61120d45)** | Not explicitly mentioned | Not explicitly mentioned |\n| **[Javier Morales](cv:cv_8bd3aefd)** | Ph.D. | Clinical Psychology |\n| **[Sofia Rossi](cv:cv_2462b1dc)** | Master of Science | Software Engineering |\n| **[Farid Al-Mansoor](cv:cv_37db3173)** | Master of Science | Computer Science |\n| **[Adewale Patel](cv:cv_99db78c9)** | Bachelor of Arts | Visual Communication |\n\n:::conclusion\nThe table provides a clear overview of the highest degrees and fields of study for each candidate.",
+            "thinking": "The user wants a comparison of the education levels of all candidates, including their highest degree and field of study. I need to scan all provided CVs, extract the education sections, and create a table comparing the candidates based on their highest degree and major.",
+            "analysis": "I reviewed all the provided CV excerpts and extracted the highest degree and major/field of study for each candidate. The table below presents this information for all candidates with education sections.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Highest Degree",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Amir Al-Farsi",
+                  "cv_id": "cv_7aef282d",
+                  "columns": {
+                    "Highest Degree": "Master of Arts"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Matteo Rossi",
+                  "cv_id": "cv_ad4a24b4",
+                  "columns": {
+                    "Highest Degree": "Master of Business Administration (MBA)"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Lukas Schneider",
+                  "cv_id": "cv_fbe1da0a",
+                  "columns": {
+                    "Highest Degree": "Bachelor of Arts"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Matteo Romano",
+                  "cv_id": "cv_8ecd7d95",
+                  "columns": {
+                    "Highest Degree": "Bachelor of Arts"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Aisha Okafor",
+                  "cv_id": "cv_ac17bfa8",
+                  "columns": {
+                    "Highest Degree": "Not explicitly mentioned"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Matteo Rossi",
+                  "cv_id": "cv_125e8853",
+                  "columns": {
+                    "Highest Degree": "Not explicitly mentioned"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Lucien Moreau",
+                  "cv_id": "cv_b63b092f",
+                  "columns": {
+                    "Highest Degree": "Master of Fine Arts"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Kamran Alizadeh",
+                  "cv_id": "cv_d5e8a637",
+                  "columns": {
+                    "Highest Degree": "Not explicitly mentioned"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Sofia de Vries",
+                  "cv_id": "cv_ef2adc81",
+                  "columns": {
+                    "Highest Degree": "Not explicitly mentioned"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Emily Tan",
+                  "cv_id": "cv_2b90bfc9",
+                  "columns": {
+                    "Highest Degree": "Not explicitly mentioned"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Liam van der Merwe",
+                  "cv_id": "cv_b02a5c0c",
+                  "columns": {
+                    "Highest Degree": "Master of Science"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Ji-eun Kim",
+                  "cv_id": "cv_61120d45",
+                  "columns": {
+                    "Highest Degree": "Not explicitly mentioned"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Javier Morales",
+                  "cv_id": "cv_8bd3aefd",
+                  "columns": {
+                    "Highest Degree": "Ph.D."
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Sofia Rossi",
+                  "cv_id": "cv_2462b1dc",
+                  "columns": {
+                    "Highest Degree": "Master of Science"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Farid Al-Mansoor",
+                  "cv_id": "cv_37db3173",
+                  "columns": {
+                    "Highest Degree": "Master of Science"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Adewale Patel",
+                  "cv_id": "cv_99db78c9",
+                  "columns": {
+                    "Highest Degree": "Bachelor of Arts"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "The table provides a clear overview of the highest degrees and fields of study for each candidate.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T13:05:50.523319"
+        },
+        {
+          "id": "4b821865-6332-4cf9-8743-dbfd93e777d7",
+          "role": "user",
+          "content": "Create a top 3 shortlist from 41 candidates",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T13:09:51.009513"
+        },
+        {
+          "id": "b9e18951-466a-416a-bb65-d6286a34703f",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to identify the top 3 candidates from a pool of 41, based on their qualifications and experience. I need to analyze all provided CV excerpts to determine the best fit, considering the information available in each. Since the role is not specified, I will select candidates with strong, diverse experience.\n:::\n\nI have analyzed the provided CV excerpts and identified three candidates with strong and diverse experience. These candidates demonstrate a range of skills and accomplishments across different fields. ### Analysis\nI have selected the following candidates based on the information available in their CV excerpts:\nI chose these candidates because they demonstrate relevant skills and experience in their respective fields, as evidenced by the details in their CV excerpts.\n\n### Analysis\n\nI have selected the following candidates based on the information available in their CV excerpts:\n\n| Candidate | Skills | Experience | Match Score |\n|---|---|---|---|\n| Layla Al-Mansouri | Solidity, Rust, Go, Ethereum, Zero-Knowledge Proofs, Docker & Kubernetes | Crypto Developer with experience in token issuance services, high-throughput blockchain solutions, and smart contract systems. | 80% |\n| Emily Tan | Windows Server Administration, Linux Server Administration, VMware vSphere, Active Directory, Networking, Cloud Computing, Scripting, System Security, Storage Management, Backup and Recovery | Systems Administrator with experience in managing and optimizing complex IT infrastructures, troubleshooting critical issues, and implementing proactive solutions. | 80% |\n| Rajiv Patel | Linux Systems Administration, Network connectivity, Virtualization, Cloud Platforms, Scripting, Automation, Monitoring & Alerting, Security & Compliance | Systems Administrator with experience in designing, deploying, and scaling enterprise-grade infrastructure. | 80% |\n\n:::conclusion\nI recommend further evaluation of [📄](cv:cv_5cb9a7fb)**Layla Al-Mansouri**, [📄](cv:cv_2b90bfc9)**Emily Tan**, and [📄](cv:cv_032469e1)**Rajiv Patel**for their strong qualifications and experience.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_5cb9a7fb",
+              "filename": "8ce653c9__Layla_Al-Mansouri__Crypto_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_e1ed0ce6",
+              "filename": "39db3837__Layla_Kader__Game_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_b1d80241",
+              "filename": "16c037be__Lotte_van_der_Berg__Camera_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_32f01702",
+              "filename": "22ca62fd__Rajiv_Patel__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_1fd34bb0",
+              "filename": "4bd4fa01__Lukas_Schneider__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_2b90bfc9",
+              "filename": "9cd768c8__Emily_Tan__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_032469e1",
+              "filename": "7e291026__Rajiv_Patel__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_f2521121",
+              "filename": "3baa7e58__Diego_Mendoza__Protocol_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_ac17bfa8",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_8ecd7d95",
+              "filename": "6b9204bf__Matteo_Romano__Brand_Ambassador.pdf"
+            },
+            {
+              "cv_id": "cv_99db78c9",
+              "filename": "6af7b13a__Adewale_Patel__Junior_Graphic_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_b02a5c0c",
+              "filename": "7ceb10f6__Liam_van_der_Merwe__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_125e8853",
+              "filename": "0c185b57__Matteo_Rossi__Associate_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_bf3d0fa9",
+              "filename": "3d0c9f5d__Lena_Schmidt__Pharmacy_Technician.pdf"
+            },
+            {
+              "cv_id": "cv_7fe59646",
+              "filename": "4ef2ef97__Aisha_Tan__Pizza_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_7aef282d",
+              "filename": "9c9af9ff__Amir_Al-Farsi__Instructional_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_a12149e5",
+              "filename": "6be44d4b__Rajiv_Patel__Growth_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_bfb2752d",
+              "filename": "7d40b1ab__Ingrid_Larsson__Consultant.pdf"
+            },
+            {
+              "cv_id": "cv_b63b092f",
+              "filename": "4ca041d0__Lucien_Moreau__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_2462b1dc",
+              "filename": "4e4b81a6__Sofia_Rossi__Graduate_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_1d703953",
+              "filename": "01def3e4__Mei_Lin_Chen__Accessories_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_61120d45",
+              "filename": "2a6972cc__Ji-eun_Kim__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_fbe1da0a",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_2f6b5a6a",
+              "filename": "07e9108d__Aisha_Okafor__CCO.pdf"
+            },
+            {
+              "cv_id": "cv_5d42c773",
+              "filename": "2aaf7352__Sofia_Rossi__Restaurant_Owner.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 8881.88,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 49.14,
+              "details": "Found 25 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 20795.74,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4769.84,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "I have analyzed the provided CV excerpts and identified three candidates with strong and diverse experience. These candidates demonstrate a range of skills and accomplishments across different fields. ### Analysis\nI have selected the following candidates based on the information available in their CV excerpts:\nI chose these candidates because they demonstrate relevant skills and experience in their respective fields, as evidenced by the details in their CV excerpts.",
+            "raw_content": ":::thinking\nThe user is asking to identify the top 3 candidates from a pool of 41, based on their qualifications and experience. I need to analyze all provided CV excerpts to determine the best fit, considering the information available in each. Since the role is not specified, I will select candidates with strong, diverse experience.\n:::\n\nI have analyzed the provided CV excerpts and identified three candidates with strong and diverse experience. These candidates demonstrate a range of skills and accomplishments across different fields.\n\n### Analysis\n\nI have selected the following candidates based on the information available in their CV excerpts:\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Layla Al-Mansouri](cv:cv_5cb9a7fb)** | Solidity, Rust, Go, Ethereum, Zero-Knowledge Proofs, Docker & Kubernetes | Crypto Developer with experience in token issuance services, high-throughput blockchain solutions, and smart contract systems. | ⭐⭐⭐⭐ |\n| **[Emily Tan](cv:cv_2b90bfc9)** | Windows Server Administration, Linux Server Administration, VMware vSphere, Active Directory, Networking, Cloud Computing, Scripting, System Security, Storage Management, Backup and Recovery | Systems Administrator with experience in managing and optimizing complex IT infrastructures, troubleshooting critical issues, and implementing proactive solutions. | ⭐⭐⭐⭐ |\n| **[Rajiv Patel](cv:cv_032469e1)** | Linux Systems Administration, Network connectivity, Virtualization, Cloud Platforms, Scripting, Automation, Monitoring & Alerting, Security & Compliance | Systems Administrator with experience in designing, deploying, and scaling enterprise-grade infrastructure. | ⭐⭐⭐⭐ |\n\nI chose these candidates because they demonstrate relevant skills and experience in their respective fields, as evidenced by the details in their CV excerpts.\n\n:::conclusion\nI recommend further evaluation of **[Layla Al-Mansouri](cv:cv_5cb9a7fb)**, **[Emily Tan](cv:cv_2b90bfc9)**, and **[Rajiv Patel](cv:cv_032469e1)** for their strong qualifications and experience.\n:::",
+            "thinking": "The user is asking to identify the top 3 candidates from a pool of 41, based on their qualifications and experience. I need to analyze all provided CV excerpts to determine the best fit, considering the information available in each. Since the role is not specified, I will select candidates with strong, diverse experience.",
+            "analysis": "I have selected the following candidates based on the information available in their CV excerpts:",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Skills",
+                "Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Layla Al-Mansouri",
+                  "cv_id": "cv_5cb9a7fb",
+                  "columns": {
+                    "Skills": "Solidity, Rust, Go, Ethereum, Zero-Knowledge Proofs, Docker & Kubernetes",
+                    "Experience": "Crypto Developer with experience in token issuance services, high-throughput blockchain solutions, and smart contract systems."
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Emily Tan",
+                  "cv_id": "cv_2b90bfc9",
+                  "columns": {
+                    "Skills": "Windows Server Administration, Linux Server Administration, VMware vSphere, Active Directory, Networking, Cloud Computing, Scripting, System Security, Storage Management, Backup and Recovery",
+                    "Experience": "Systems Administrator with experience in managing and optimizing complex IT infrastructures, troubleshooting critical issues, and implementing proactive solutions."
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Rajiv Patel",
+                  "cv_id": "cv_032469e1",
+                  "columns": {
+                    "Skills": "Linux Systems Administration, Network connectivity, Virtualization, Cloud Platforms, Scripting, Automation, Monitoring & Alerting, Security & Compliance",
+                    "Experience": "Systems Administrator with experience in designing, deploying, and scaling enterprise-grade infrastructure."
+                  },
+                  "match_score": 80
+                }
+              ]
+            },
+            "conclusion": "I recommend further evaluation of [📄](cv:cv_5cb9a7fb) **Layla Al-Mansouri**, [📄](cv:cv_2b90bfc9) **Emily Tan**, and [📄](cv:cv_032469e1) **Rajiv Patel** for their strong qualifications and experience.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T13:10:38.416066"
+        },
+        {
+          "id": "9306858d-3153-407f-9570-00f652773f6a",
+          "role": "user",
+          "content": "Compare years of experience",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T13:12:44.047184"
         }
       ],
       "created_at": "2026-01-05T04:02:44.497345",
-      "updated_at": "2026-01-05T12:47:44.738386"
+      "updated_at": "2026-01-05T13:12:44.047184"
     }
   ]
 }

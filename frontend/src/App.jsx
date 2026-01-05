@@ -7,6 +7,7 @@ import useTheme from './hooks/useTheme';
 import useToast from './hooks/useToast';
 import { useLanguage } from './contexts/LanguageContext';
 import { useBackgroundTask } from './contexts/BackgroundTaskContext';
+import { usePipeline } from './contexts/PipelineContext';
 import SourceBadge from './components/SourceBadge';
 import ModelSelector from './components/ModelSelector';
 import RAGPipelineSettings, { getRAGPipelineSettings } from './components/RAGPipelineSettings';
@@ -71,7 +72,7 @@ function App() {
     const saved = localStorage.getItem('showStreamingPreview');
     return saved !== null ? JSON.parse(saved) : true;
   });
-  const [pipelineProgress, setPipelineProgress] = useState({});
+  // Pipeline state moved to PipelineContext for per-session tracking
   
   // Streaming state for progressive message display
   const [streamingState, setStreamingState] = useState(null);
@@ -115,6 +116,7 @@ function App() {
 
   const { toast: toastState, showToast: showToastMessage, hideToast } = useToast();
   const { startUploadTask, hasActiveTasks, isSessionProcessing } = useBackgroundTask();
+  const { initPipeline, updateStep, completePipeline, clearPipeline, setActiveSession, activePipeline } = usePipeline();
   
   const messagesEndRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -154,6 +156,8 @@ function App() {
       // Only update if this is still the selected session (avoid race conditions)
       if (currentSessionIdRef.current === id) {
         setCurrentSession(data);
+        // Sync pipeline state with this session's messages
+        setActiveSession(id, data.messages || []);
         const sugg = await getSessionSuggestions(id, mode);
         if (currentSessionIdRef.current === id) {
           setSuggestions(sugg.suggestions || []);
@@ -163,7 +167,7 @@ function App() {
       console.error(e); 
       if (currentSessionIdRef.current === id) setCurrentSessionId(null); 
     }
-  }, [mode]);
+  }, [mode, setActiveSession]);
 
   // Reload sessions when mode changes
   useEffect(() => { 
@@ -314,19 +318,8 @@ function App() {
       setIsPipelineExpanded(true);
     }
     
-    // Initialize pipeline progress
-    setPipelineProgress({
-      query_understanding: { status: 'pending' },
-      multi_query: { status: 'pending' },
-      guardrail: { status: 'pending' },
-      embedding: { status: 'pending' },
-      retrieval: { status: 'pending' },
-      reranking: { status: 'pending' },
-      reasoning: { status: 'pending' },
-      generation: { status: 'pending' },
-      verification: { status: 'pending' },
-      refinement: { status: 'pending' }
-    });
+    // Initialize pipeline progress for this specific session (via context)
+    initPipeline(targetSessionId);
     
     // Initialize streaming state for progressive display
     setStreamingState({
@@ -398,10 +391,8 @@ function App() {
               
               console.log(`🔄 REAL Step: ${stepName} - ${stepStatus}`, data);
               
-              setPipelineProgress(prev => ({
-                ...prev,
-                [stepName]: { status: stepStatus, details: data.details }
-              }));
+              // Update pipeline for this specific session (via context)
+              updateStep(targetSessionId, stepName, stepStatus, data.details);
               
               // Update streaming state with progressive content
               setStreamingState(prev => {
@@ -468,6 +459,9 @@ function App() {
       // Small delay to let user see final pipeline step before clearing
       await new Promise(resolve => setTimeout(resolve, 500));
       
+      // Mark pipeline as complete for this session
+      completePipeline(targetSessionId);
+      
       // Clear streaming state
       setStreamingState(null);
       
@@ -493,6 +487,8 @@ function App() {
       
     } catch (e) {
       console.error('❌ Stream error:', e);
+      // Clear pipeline state on error
+      clearPipeline(targetSessionId);
       // Clear streaming state on error to prevent UI from being stuck
       setStreamingState(null);
       setPendingMessages(prev => {
@@ -1365,7 +1361,6 @@ function App() {
             // Just toggle expanded state, don't touch auto-expand
             setIsPipelineExpanded(!isPipelineExpanded);
           }}
-          progress={pipelineProgress}
           autoExpand={autoExpandPipeline}
           onToggleAutoExpand={() => {
             const newValue = !autoExpandPipeline;

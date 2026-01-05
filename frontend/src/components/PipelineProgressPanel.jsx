@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, CheckCircle, Loader, Clock, Search, Database, Sparkles, Shield, Brain, FileText, Zap, Eye, Settings, X } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { usePipeline } from '../contexts/PipelineContext';
 
 // Toast notification component
 const Toast = ({ message, type, onClose }) => {
@@ -110,9 +111,18 @@ const STEP_CONFIG = {
   }
 };
 
-const PipelineProgressPanel = ({ isExpanded, onToggleExpand, progress, autoExpand, onToggleAutoExpand, showPreview, onTogglePreview }) => {
+const PipelineProgressPanel = ({ isExpanded, onToggleExpand, autoExpand, onToggleAutoExpand, showPreview, onTogglePreview }) => {
   const { language } = useLanguage();
+  const { activePipeline, isActiveStreaming, activeSessionId } = usePipeline();
   const [toast, setToast] = useState(null);
+  
+  // Get progress from context instead of prop
+  const progress = activePipeline || {};
+  
+  // Determine if we're showing live data or historical data
+  const isLiveData = isActiveStreaming && activePipeline?.isStreaming;
+  const isHistoricalData = activePipeline?.derivedFromMessage === true;
+  const hasData = activePipeline !== null && Object.keys(activePipeline).length > 0;
 
   const showToast = (key, enabled) => {
     const messages = {
@@ -236,12 +246,25 @@ const PipelineProgressPanel = ({ isExpanded, onToggleExpand, progress, autoExpan
           <>
             {/* Header */}
             <div className="p-3 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+              {/* Status indicator - Live vs Historical */}
+              {hasData && (
+                <div className={`mb-2 px-2 py-1 rounded-md text-[10px] font-medium ${
+                  isLiveData 
+                    ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300' 
+                    : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400'
+                }`}>
+                  {isLiveData 
+                    ? (language === 'es' ? '🔴 EN VIVO' : '🔴 LIVE')
+                    : (language === 'es' ? '📋 Última ejecución' : '📋 Last run')}
+                </div>
+              )}
+              
               {/* Progress info */}
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs font-medium text-slate-600 dark:text-slate-400">
                   {completedCount}/{steps.length} {language === 'es' ? 'pasos' : 'steps'}
                 </span>
-                {currentStep && (
+                {isLiveData && currentStep && (
                   <span className="flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400">
                     <Loader className="w-3 h-3 animate-spin" />
                     <span className="font-medium">{language === 'es' ? 'Procesando' : 'Processing'}</span>
