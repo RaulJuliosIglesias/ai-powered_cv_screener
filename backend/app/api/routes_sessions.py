@@ -3,6 +3,7 @@ import uuid
 import io
 import logging
 import asyncio
+import hashlib
 from pathlib import Path
 from typing import List, Optional
 from fastapi import APIRouter, HTTPException, Query, File, UploadFile, BackgroundTasks
@@ -31,6 +32,11 @@ def get_session_manager(mode: Mode):
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/sessions", tags=["sessions"])
+
+
+def calculate_content_hash(content: bytes) -> str:
+    """Calculate SHA256 hash of PDF content for duplicate detection."""
+    return hashlib.sha256(content).hexdigest()
 
 
 def extract_text_from_pdf(content: bytes, filename: str) -> str:
@@ -112,7 +118,9 @@ class ChatResponse(BaseModel):
 class UploadResponse(BaseModel):
     job_id: str
     files_received: int
+    files_processing: int = 0  # Files actually being processed (excluding duplicates)
     status: str
+    duplicates: List[str] = Field(default_factory=list)  # List of duplicate filenames skipped
 
 
 # Job tracking
@@ -313,7 +321,9 @@ async def process_cvs_for_session(
         jobs[job_id]["errors"].append(str(e))
         return
     
-    for idx, (filename, content) in enumerate(file_data):
+    for idx, file_tuple in enumerate(file_data):
+        # file_data now contains (filename, content, content_hash) tuples
+        filename, content, content_hash = file_tuple
         try:
             # Update current file being processed
             jobs[job_id]["current_file"] = filename
@@ -362,10 +372,10 @@ async def process_cvs_for_session(
             jobs[job_id]["current_phase"] = "embedding"
             await rag_service.index_documents(chunks)
             
-            # Add CV to session (use mode-based manager)
+            # Add CV to session (use mode-based manager) with content_hash for duplicate detection
             jobs[job_id]["current_phase"] = "indexing"
             mgr = get_session_manager(mode)
-            await asyncio.to_thread(mgr.add_cv_to_session, session_id, cv_id, filename, len(chunks))
+            await asyncio.to_thread(mgr.add_cv_to_session, session_id, cv_id, filename, len(chunks), content_hash)
             
             # Mark file as completed
             jobs[job_id]["processed_files"] += 1
@@ -393,7 +403,7 @@ async def upload_cvs_to_session(
     files: List[UploadFile] = File(...),
     mode: Mode = Query(default=settings.default_mode)
 ):
-    """Upload CVs to a session."""
+    """Upload CVs to a session with duplicate detection."""
     mgr = get_session_manager(mode)
     session = mgr.get_session(session_id)
     if not session:
@@ -402,24 +412,53 @@ async def upload_cvs_to_session(
     if not files:
         raise HTTPException(status_code=400, detail="No files provided")
     
-    # Read file data before background task
+    # Get existing content hashes from session CVs
+    existing_cvs = session.get("cvs", []) if isinstance(session, dict) else session.cvs
+    existing_hashes = set()
+    for cv in existing_cvs:
+        cv_hash = cv.get("content_hash", "") if isinstance(cv, dict) else getattr(cv, "content_hash", "")
+        if cv_hash:
+            existing_hashes.add(cv_hash)
+    
+    # Read file data and check for duplicates
     file_data = []
+    duplicates = []
+    
     for file in files:
         if not file.filename.lower().endswith(".pdf"):
             raise HTTPException(status_code=400, detail=f"Invalid file type: {file.filename}")
         content = await file.read()
-        file_data.append((file.filename, content))
+        content_hash = calculate_content_hash(content)
+        
+        # Check if this file is a duplicate
+        if content_hash in existing_hashes:
+            duplicates.append(file.filename)
+            logger.info(f"Duplicate CV detected: {file.filename} (hash: {content_hash[:16]}...)")
+        else:
+            file_data.append((file.filename, content, content_hash))
+            existing_hashes.add(content_hash)  # Prevent duplicates within same upload batch
+    
+    # If all files are duplicates, return immediately
+    if not file_data:
+        return UploadResponse(
+            job_id="",
+            files_received=len(files),
+            files_processing=0,
+            status="completed",
+            duplicates=duplicates
+        )
     
     # Create job with detailed progress tracking
     job_id = str(uuid.uuid4())
     jobs[job_id] = {
         "status": "processing",
         "session_id": session_id,
-        "total_files": len(files),
+        "total_files": len(file_data),
         "processed_files": 0,
         "current_file": None,
-        "current_phase": None,  # extracting, saving, chunking, embedding, indexing, done
-        "errors": []
+        "current_phase": None,
+        "errors": [],
+        "duplicates": duplicates
     }
     
     # Process in background
@@ -428,7 +467,9 @@ async def upload_cvs_to_session(
     return UploadResponse(
         job_id=job_id,
         files_received=len(files),
-        status="processing"
+        files_processing=len(file_data),
+        status="processing",
+        duplicates=duplicates
     )
 
 

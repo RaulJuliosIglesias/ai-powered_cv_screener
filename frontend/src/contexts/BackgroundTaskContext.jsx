@@ -105,15 +105,55 @@ export function BackgroundTaskProvider({ children }) {
         // Upload phase - NO UI updates during upload to avoid blocking
         const res = await uploadCVsToSession(sessionId, filesArray, mode);
 
+        // Check for duplicates in response
+        const duplicates = res.duplicates || [];
+        const filesProcessing = res.files_processing || 0;
+        
+        // If all files are duplicates, complete immediately
+        if (filesProcessing === 0 && duplicates.length > 0) {
+          const dupList = duplicates.length <= 3 
+            ? duplicates.join(', ') 
+            : `${duplicates.slice(0, 3).join(', ')} +${duplicates.length - 3}`;
+          
+          updateTaskInternal(taskId, {
+            status: 'completed',
+            percent: 100,
+            duplicates: duplicates,
+            logs: [language === 'es' 
+              ? `⚠️ CVs duplicados (ya existen): ${dupList}` 
+              : `⚠️ Duplicate CVs (already exist): ${dupList}`],
+            endTime: Date.now()
+          }, true);
+
+          if (onCompleteCallbacks.current[taskId]) {
+            onCompleteCallbacks.current[taskId]({ taskId, sessionId, filesCount: 0, duplicates });
+          }
+
+          setTimeout(() => removeTask(taskId), 8000);
+          return;
+        }
+
+        // Build log message including duplicates if any
+        let logMsg = language === 'es' ? 'Procesando en servidor...' : 'Processing on server...';
+        if (duplicates.length > 0) {
+          const dupList = duplicates.length <= 2 
+            ? duplicates.join(', ') 
+            : `${duplicates.slice(0, 2).join(', ')} +${duplicates.length - 2}`;
+          logMsg = language === 'es' 
+            ? `⚠️ ${duplicates.length} duplicado(s): ${dupList}. Procesando ${filesProcessing}...`
+            : `⚠️ ${duplicates.length} duplicate(s): ${dupList}. Processing ${filesProcessing}...`;
+        }
+
         // Update to processing phase (single UI update)
         updateTaskInternal(taskId, {
           percent: 50,
           status: 'processing',
           phase: 'processing',
-          logs: [language === 'es' ? 'Procesando en servidor...' : 'Processing on server...']
+          duplicates: duplicates,
+          logs: [logMsg]
         }, true);
 
-        const totalFiles = filesArray.length;
+        const totalFiles = filesProcessing;
         let lastProcessed = 0;
 
         // Poll with minimal UI updates
@@ -135,17 +175,24 @@ export function BackgroundTaskProvider({ children }) {
               }
               setTimeout(poll, 1000); // Poll every 1 second
             } else {
-              // Completed - final UI update
+              // Completed - final UI update with duplicate info
+              let finalLog = language === 'es' ? '✓ ¡Completado!' : '✓ Complete!';
+              if (duplicates.length > 0) {
+                finalLog += language === 'es' 
+                  ? ` (${duplicates.length} duplicado(s) omitido(s))` 
+                  : ` (${duplicates.length} duplicate(s) skipped)`;
+              }
+              
               updateTaskInternal(taskId, {
                 status: 'completed',
                 currentFile: totalFiles,
                 percent: 100,
-                logs: [language === 'es' ? '✓ ¡Completado!' : '✓ Complete!'],
+                logs: [finalLog],
                 endTime: Date.now()
               }, true);
 
               if (onCompleteCallbacks.current[taskId]) {
-                onCompleteCallbacks.current[taskId]({ taskId, sessionId, filesCount: totalFiles });
+                onCompleteCallbacks.current[taskId]({ taskId, sessionId, filesCount: totalFiles, duplicates });
               }
 
               setTimeout(() => removeTask(taskId), 5000);

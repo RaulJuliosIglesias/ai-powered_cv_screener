@@ -28,6 +28,7 @@ class CVInfo(BaseModel):
     id: str
     filename: str
     chunk_count: int = 0
+    content_hash: str = ""  # SHA256 hash of PDF content for duplicate detection
     uploaded_at: str = Field(default_factory=lambda: datetime.now().isoformat())
 
 
@@ -121,11 +122,11 @@ class SessionManager:
             return True
         return False
     
-    def add_cv_to_session(self, session_id: str, cv_id: str, filename: str, chunk_count: int = 0) -> Optional[Session]:
+    def add_cv_to_session(self, session_id: str, cv_id: str, filename: str, chunk_count: int = 0, content_hash: str = "") -> Optional[Session]:
         """Add a CV to a session."""
         session = self.sessions.get(session_id)
         if session:
-            cv_info = CVInfo(id=cv_id, filename=filename, chunk_count=chunk_count)
+            cv_info = CVInfo(id=cv_id, filename=filename, chunk_count=chunk_count, content_hash=content_hash)
             session.cvs.append(cv_info)
             session.updated_at = datetime.now().isoformat()
             self._save()

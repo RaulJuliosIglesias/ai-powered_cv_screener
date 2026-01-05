@@ -166,7 +166,7 @@ class SupabaseSessionManager:
             logger.error(f"Failed to delete session {session_id}: {e}")
             return False
     
-    def add_cv_to_session(self, session_id: str, cv_id: str, filename: str, chunk_count: int = 0) -> Optional[Dict]:
+    def add_cv_to_session(self, session_id: str, cv_id: str, filename: str, chunk_count: int = 0, content_hash: str = "") -> Optional[Dict]:
         """Add a CV to a session."""
         self._ensure_client()
         
@@ -176,6 +176,7 @@ class SupabaseSessionManager:
             "cv_id": cv_id,
             "filename": filename,
             "chunk_count": chunk_count,
+            "content_hash": content_hash,
             "uploaded_at": datetime.now().isoformat()
         }
         
