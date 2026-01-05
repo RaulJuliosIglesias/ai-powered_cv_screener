@@ -5,7 +5,7 @@ Test if cloud mode will work with current configuration
 import sys
 from pathlib import Path
 
-backend_path = Path(__file__).parent / "backend"
+backend_path = Path(__file__).parent.parent / "backend"
 sys.path.insert(0, str(backend_path))
 
 print("=" * 60)

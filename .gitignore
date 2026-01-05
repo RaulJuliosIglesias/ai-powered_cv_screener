@@ -61,3 +61,7 @@ frontend/.env
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Runtime data (auto-generated, do not commit)
+backend/data/sessions.json
+eval_logs/
