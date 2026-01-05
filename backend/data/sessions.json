@@ -12454,17 +12454,210 @@
       ],
       "messages": [
         {
-          "id": "afa770fd-0178-4bb7-8922-bba9ff5f8daa",
+          "id": "f289719b-b33a-4ecf-b408-0bc464bab2d9",
           "role": "user",
           "content": "Who is best for a leadership role?",
           "sources": [],
           "pipeline_steps": [],
           "structured_output": null,
-          "timestamp": "2026-01-05T02:36:13.885329"
+          "timestamp": "2026-01-05T02:37:41.400084"
+        },
+        {
+          "id": "4551bef5-bd85-4e64-a29e-f1f886393997",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to rank candidates based on their suitability for a leadership role, prioritizing those with strong leadership experience. I need to analyze the provided CVs, focusing on job titles, team management experience, and leadership achievements. I will then create a table to compare the most relevant candidates.\n:::\n\nSeveral candidates demonstrate leadership experience through management roles and team leadership. The following analysis ranks the candidates based on their leadership experience, considering factors like team size, leadership achievements, and seniority of roles. ### Analysis\nI have identified the following candidates as having relevant leadership experience:\n*   [📄](cv:cv_e710f738)**Margaret OConnor**: Has experience as a Game Director and team leadership.\n\n### Analysis\n\nI have identified the following candidates as having relevant leadership experience:\n\n*   [📄](cv:cv_e710f738)**Margaret OConnor**: Has experience as a Game Director and team leadership.\n*   [📄](cv:cv_8a9f7ded)**Lerato Nkosi**: Has experience as a Blockchain Research Director and leading a cross-continental team.\n*   [📄](cv:cv_e5169dae)**Mei-Ling Chen**: Has experience as a VP of Marketing.\n*   [📄](cv:cv_1115467e)**Ji-hoon Kim**: Has experience as a Research Director.\n*   [📄](cv:cv_48f46067)**Isabel Mendoza**: Has experience as a Director of AI.\n*   [📄](cv:cv_df5a8e44)**Priya Kapoor**: Has experience as a VP of Data Science.\n*   [📄](cv:cv_970ed801)**Ling Zhang**: Has experience as a Director of Animation.\n*   [📄](cv:cv_e84822b6)**Rajiv Patel**: Has experience as a Chief Marketing Officer and VP of Marketing.\n*   [📄](cv:cv_bdb4b94f)**Aisha Nkrumah**: Has experience as a CMO.\n*   [📄](cv:cv_3c2f7c2c)**Adewale Ogunleye**: Has experience as a VP of Nursing.\n\nI will rank them based on the seniority of their roles and the scope of their leadership responsibilities.\n\n| Candidate | Leadership Role | Team Size/Scope | Match Score |\n|---|---|---|---|\n| Rajiv Patel | Chief Marketing Officer | Leading the end-to-end marketing vision for a multinational consumer goods conglomerate. | 100% |\n| Isabel Mendoza | Director of AI | Mentored a cross-functional team of 15 engineers and data scientists. | 80% |\n| Priya Kapoor | VP of Data Science | Leading a global team of 45 data scientists and engineers. | 80% |\n| Aisha Nkrumah | CMO | Experience driving growth for global brands. | 80% |\n| Ji-hoon Kim | Research Director | Lead a multidisciplinary research team. | 60% |\n| Lerato Nkosi | Blockchain Research Director | Led a cross-continental team. | 60% |\n| Mei-Ling Chen | VP of Marketing | Known for fostering cross‑functional teams. | 60% |\n| Ling Zhang | Director of Animation | Managed a team of 15 animators. | 60% |\n| Margaret OConnor | Game Director | Led a design team of 12. | 40% |\n| Adewale Ogunleye | VP of Nursing | Experience in healthcare leadership. | 40% |\n\n:::conclusion\nBased on the CVs, [📄](cv:cv_e84822b6)**Rajiv Patel**is the most suitable candidate for a leadership role, followed by [📄](cv:cv_48f46067)**Isabel Mendoza**, [📄](cv:cv_df5a8e44)**Priya Kapoor**, and [📄](cv:cv_bdb4b94f)**Aisha Nkrumah**.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_e710f738",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_8a9f7ded",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_e5169dae",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_3563c0cc",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_1115467e",
+              "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_946dd2c5",
+              "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf"
+            },
+            {
+              "cv_id": "cv_bdb4b94f",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_e84822b6",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_970ed801",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_3c2f7c2c",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_48f46067",
+              "filename": "a73ca65c__Isabel_Mendoza__Director_of_AI.pdf"
+            },
+            {
+              "cv_id": "cv_df5a8e44",
+              "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 12230.27,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 10.35,
+              "details": "Found 15 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 31170.59,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6287.09,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Several candidates demonstrate leadership experience through management roles and team leadership. The following analysis ranks the candidates based on their leadership experience, considering factors like team size, leadership achievements, and seniority of roles. ### Analysis\nI have identified the following candidates as having relevant leadership experience:\n*   [📄](cv:cv_e710f738) **Margaret OConnor**: Has experience as a Game Director and team leadership.",
+            "raw_content": ":::thinking\nThe user is asking to rank candidates based on their suitability for a leadership role, prioritizing those with strong leadership experience. I need to analyze the provided CVs, focusing on job titles, team management experience, and leadership achievements. I will then create a table to compare the most relevant candidates.\n:::\n\nSeveral candidates demonstrate leadership experience through management roles and team leadership. The following analysis ranks the candidates based on their leadership experience, considering factors like team size, leadership achievements, and seniority of roles.\n\n### Analysis\n\nI have identified the following candidates as having relevant leadership experience:\n\n*   **[Margaret OConnor](cv:cv_e710f738)**: Has experience as a Game Director and team leadership.\n*   **[Lerato Nkosi](cv:cv_8a9f7ded)**: Has experience as a Blockchain Research Director and leading a cross-continental team.\n*   **[Mei-Ling Chen](cv:cv_e5169dae)**: Has experience as a VP of Marketing.\n*   **[Ji-hoon Kim](cv:cv_1115467e)**: Has experience as a Research Director.\n*   **[Isabel Mendoza](cv:cv_48f46067)**: Has experience as a Director of AI.\n*   **[Priya Kapoor](cv:cv_df5a8e44)**: Has experience as a VP of Data Science.\n*   **[Ling Zhang](cv:cv_970ed801)**: Has experience as a Director of Animation.\n*   **[Rajiv Patel](cv:cv_e84822b6)**: Has experience as a Chief Marketing Officer and VP of Marketing.\n*   **[Aisha Nkrumah](cv:cv_bdb4b94f)**: Has experience as a CMO.\n*   **[Adewale Ogunleye](cv:cv_3c2f7c2c)**: Has experience as a VP of Nursing.\n\nI will rank them based on the seniority of their roles and the scope of their leadership responsibilities.\n\n| Candidate | Leadership Role | Team Size/Scope | Match |\n|-----------|-----------------|-----------------|-------|\n| **[Rajiv Patel](cv:cv_e84822b6)** | Chief Marketing Officer | Leading the end-to-end marketing vision for a multinational consumer goods conglomerate. | ⭐⭐⭐⭐⭐ |\n| **[Isabel Mendoza](cv:cv_48f46067)** | Director of AI | Mentored a cross-functional team of 15 engineers and data scientists. | ⭐⭐⭐⭐ |\n| **[Priya Kapoor](cv:cv_df5a8e44)** | VP of Data Science | Leading a global team of 45 data scientists and engineers. | ⭐⭐⭐⭐ |\n| **[Aisha Nkrumah](cv:cv_bdb4b94f)** | CMO | Experience driving growth for global brands. | ⭐⭐⭐⭐ |\n| **[Ji-hoon Kim](cv:cv_1115467e)** | Research Director | Lead a multidisciplinary research team. | ⭐⭐⭐ |\n| **[Lerato Nkosi](cv:cv_8a9f7ded)** | Blockchain Research Director | Led a cross-continental team. | ⭐⭐⭐ |\n| **[Mei-Ling Chen](cv:cv_e5169dae)** | VP of Marketing | Known for fostering cross‑functional teams. | ⭐⭐⭐ |\n| **[Ling Zhang](cv:cv_970ed801)** | Director of Animation | Managed a team of 15 animators. | ⭐⭐⭐ |\n| **[Margaret OConnor](cv:cv_e710f738)** | Game Director | Led a design team of 12. | ⭐⭐ |\n| **[Adewale Ogunleye](cv:cv_3c2f7c2c)** | VP of Nursing | Experience in healthcare leadership. | ⭐⭐ |\n\n:::conclusion\nBased on the CVs, **[Rajiv Patel](cv:cv_e84822b6)** is the most suitable candidate for a leadership role, followed by **[Isabel Mendoza](cv:cv_48f46067)**, **[Priya Kapoor](cv:cv_df5a8e44)**, and **[Aisha Nkrumah](cv:cv_bdb4b94f)**.",
+            "thinking": "The user is asking to rank candidates based on their suitability for a leadership role, prioritizing those with strong leadership experience. I need to analyze the provided CVs, focusing on job titles, team management experience, and leadership achievements. I will then create a table to compare the most relevant candidates.",
+            "analysis": "I have identified the following candidates as having relevant leadership experience:\n\n*   [📄](cv:cv_e710f738) **Margaret OConnor**: Has experience as a Game Director and team leadership.\n*   [📄](cv:cv_8a9f7ded) **Lerato Nkosi**: Has experience as a Blockchain Research Director and leading a cross-continental team.\n*   [📄](cv:cv_e5169dae) **Mei-Ling Chen**: Has experience as a VP of Marketing.\n*   [📄](cv:cv_1115467e) **Ji-hoon Kim**: Has experience as a Research Director.\n*   [📄](cv:cv_48f46067) **Isabel Mendoza**: Has experience as a Director of AI.\n*   [📄](cv:cv_df5a8e44) **Priya Kapoor**: Has experience as a VP of Data Science.\n*   [📄](cv:cv_970ed801) **Ling Zhang**: Has experience as a Director of Animation.\n*   [📄](cv:cv_e84822b6) **Rajiv Patel**: Has experience as a Chief Marketing Officer and VP of Marketing.\n*   [📄](cv:cv_bdb4b94f) **Aisha Nkrumah**: Has experience as a CMO.\n*   [📄](cv:cv_3c2f7c2c) **Adewale Ogunleye**: Has experience as a VP of Nursing.\n\nI will rank them based on the seniority of their roles and the scope of their leadership responsibilities.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Leadership Role",
+                "Team Size/Scope",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Rajiv Patel",
+                  "cv_id": "cv_e84822b6",
+                  "columns": {
+                    "Leadership Role": "Chief Marketing Officer",
+                    "Team Size/Scope": "Leading the end-to-end marketing vision for a multinational consumer goods conglomerate."
+                  },
+                  "match_score": 100
+                },
+                {
+                  "candidate_name": "Isabel Mendoza",
+                  "cv_id": "cv_48f46067",
+                  "columns": {
+                    "Leadership Role": "Director of AI",
+                    "Team Size/Scope": "Mentored a cross-functional team of 15 engineers and data scientists."
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Priya Kapoor",
+                  "cv_id": "cv_df5a8e44",
+                  "columns": {
+                    "Leadership Role": "VP of Data Science",
+                    "Team Size/Scope": "Leading a global team of 45 data scientists and engineers."
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Aisha Nkrumah",
+                  "cv_id": "cv_bdb4b94f",
+                  "columns": {
+                    "Leadership Role": "CMO",
+                    "Team Size/Scope": "Experience driving growth for global brands."
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Ji-hoon Kim",
+                  "cv_id": "cv_1115467e",
+                  "columns": {
+                    "Leadership Role": "Research Director",
+                    "Team Size/Scope": "Lead a multidisciplinary research team."
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Lerato Nkosi",
+                  "cv_id": "cv_8a9f7ded",
+                  "columns": {
+                    "Leadership Role": "Blockchain Research Director",
+                    "Team Size/Scope": "Led a cross-continental team."
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Mei-Ling Chen",
+                  "cv_id": "cv_e5169dae",
+                  "columns": {
+                    "Leadership Role": "VP of Marketing",
+                    "Team Size/Scope": "Known for fostering cross‑functional teams."
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Ling Zhang",
+                  "cv_id": "cv_970ed801",
+                  "columns": {
+                    "Leadership Role": "Director of Animation",
+                    "Team Size/Scope": "Managed a team of 15 animators."
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Margaret OConnor",
+                  "cv_id": "cv_e710f738",
+                  "columns": {
+                    "Leadership Role": "Game Director",
+                    "Team Size/Scope": "Led a design team of 12."
+                  },
+                  "match_score": 40
+                },
+                {
+                  "candidate_name": "Adewale Ogunleye",
+                  "cv_id": "cv_3c2f7c2c",
+                  "columns": {
+                    "Leadership Role": "VP of Nursing",
+                    "Team Size/Scope": "Experience in healthcare leadership."
+                  },
+                  "match_score": 40
+                }
+              ]
+            },
+            "conclusion": "Based on the CVs, [📄](cv:cv_e84822b6) **Rajiv Patel** is the most suitable candidate for a leadership role, followed by [📄](cv:cv_48f46067) **Isabel Mendoza**, [📄](cv:cv_df5a8e44) **Priya Kapoor**, and [📄](cv:cv_bdb4b94f) **Aisha Nkrumah**.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T02:37:51.811619"
         }
       ],
       "created_at": "2026-01-05T02:19:41.313691",
-      "updated_at": "2026-01-05T02:36:13.885329"
+      "updated_at": "2026-01-05T02:37:51.811619"
     },
     {
       "id": "71cfaf4d-4258-40d8-98f7-e7c9d1a9bfd0",
@@ -12836,6 +13029,30 @@
           "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf",
           "chunk_count": 5,
           "uploaded_at": "2026-01-05T02:25:23.399114"
+        },
+        {
+          "id": "cv_c49eb91b",
+          "filename": "84764d6f__Aisha_Patel__Visual_Effects_Director.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-05T02:38:30.757548"
+        },
+        {
+          "id": "cv_d67ede31",
+          "filename": "20354788__Maria_Rodriguez__Online_Instructor.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-05T02:38:31.674501"
+        },
+        {
+          "id": "cv_39d3bc51",
+          "filename": "53721311__Adewale_Patel__VP_of_Design.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-05T02:38:32.606074"
+        },
+        {
+          "id": "cv_35f13b47",
+          "filename": "83724102__Lien_Nguyen__Wine_Director.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-05T02:38:33.547422"
         }
       ],
       "messages": [
@@ -12952,7 +13169,7 @@
         }
       ],
       "created_at": "2026-01-05T02:25:09.924396",
-      "updated_at": "2026-01-05T02:37:02.645387"
+      "updated_at": "2026-01-05T02:38:33.547422"
     },
     {
       "id": "844b3828-efac-4e7b-bc92-230dfa6e7a82",
@@ -12996,9 +13213,19 @@
           "uploaded_at": "2026-01-05T02:36:46.386196"
         }
       ],
-      "messages": [],
+      "messages": [
+        {
+          "id": "1f1c3e37-d1b3-45dc-8c6e-f3a29897bdfb",
+          "role": "user",
+          "content": "Who has the most diverse skill set?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T02:37:46.519667"
+        }
+      ],
       "created_at": "2026-01-05T02:36:30.672588",
-      "updated_at": "2026-01-05T02:36:46.386196"
+      "updated_at": "2026-01-05T02:37:46.519667"
     }
   ]
 }

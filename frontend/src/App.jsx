@@ -376,6 +376,7 @@ function App() {
               
               // Update streaming state with progressive content
               setStreamingState(prev => {
+                if (!prev) return prev;
                 const newState = { 
                   ...prev, 
                   currentStep: stepName,
