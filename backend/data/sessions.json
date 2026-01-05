@@ -44235,10 +44235,811 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-05T22:45:43.006670"
+        },
+        {
+          "id": "b7474f2f-8a7a-4ce7-8fdb-eec0440b7187",
+          "role": "user",
+          "content": "dame red flags de carmen mendoza",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T22:49:44.185240"
+        },
+        {
+          "id": "330d5513-6b96-43b0-8479-850602d9d5bf",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a red flag analysis of Carmen Rodriguez (cv_0c0a6bd3)'s CV. I need to identify any inconsistencies in employment history, unexplained gaps in work experience, frequent job changes, lack of relevant skills, or any other information that might raise concerns about the candidate's suitability. I will summarize her current role, total experience, career trajectory, skills, and credentials, and then provide a red flag analysis and career stability metrics.\n:::\n\n✅**No se detectaron red flags significativas para [📄](cv:cv_0c0a6bd3)**📄****Carmen Rodriguez. Su perfil demuestra una trayectoria profesional estable:\nSu perfil demuestra una trayectoria profesional estable:\n-**Estabilidad laboral**: 5.5 años promedio por posición (excelente)\n-**Progresión de carrera**: Ascenso constante desde roles junior hasta C-level\n-**Sin gaps de empleo**: Historial continuo sin interrupciones\n## 👤 [📄](cv:cv_0c0a6bd3)**Carmen Rodriguez 3D**[📄](cv:cv_0c0a6bd3)**📄****Carmen Rodriguez 3D**is currently the Chief Creative Officer at Netherlands Digital Futures (2023-Present), overseeing global visual strategy and innovation. With 16 years of experience, she has a strong background in leading creative teams and driving visual projects for multinational brands.\n\n### Analysis\n\n✅**No se detectaron red flags significativas para [📄](cv:cv_0c0a6bd3)**📄****Carmen Rodriguez. Su perfil demuestra una trayectoria profesional estable:\nSu perfil demuestra una trayectoria profesional estable:\n-**Estabilidad laboral**: 5.5 años promedio por posición (excelente)\n-**Progresión de carrera**: Ascenso constante desde roles junior hasta C-level\n-**Sin gaps de empleo**: Historial continuo sin interrupciones\n## 👤 [📄](cv:cv_0c0a6bd3)**Carmen Rodriguez 3D**[📄](cv:cv_0c0a6bd3)**📄****Carmen Rodriguez 3D**is currently the Chief Creative Officer at Netherlands Digital Futures (2023-Present), overseeing global visual strategy and innovation. With 16 years of experience, she has a strong background in leading creative teams and driving visual projects for multinational brands. Her career spans from early internships in Dutch animation studios to executive leadership in global media, blending creative storytelling with technical precision.\n---\n### 📊 Candidate Highlights\n---\n### 📜 Credentials\n- Autodesk Maya Certified Professional, 2022\n- ZBrush Core Certification, 2021\n- Unreal Engine Advanced Production, 2020\n---\n### Red Flags Analysis\n✅**No significant red flags detected in pre-analysis.**Review CV for any additional concerns not captured automatically.\n---\n### Career Stability Metrics**Pre-calculated Metrics:**-**Total Experience**: 44 years\n-**Average Tenure**: 5.5 years per position\n-**Positions Held**: 8\n-**Career Stability**: Stable (score: 18.8%)\n---\n\n| Category | Key Information | Match Score |\n|---|---|---|\n| 🎯 Current Role | Chief Creative Officer at Netherlands Digital Futures (2023-Present) | 50% |\n| ⏱️ Total Experience | 44 years in 3D Art | 50% |\n| 💡 Core Expertise | 3D Modeling, Texturing, Lighting | 50% |\n| 🎓 Education | Master of Fine Arts in Visual Arts, Academy of Art University, 2000 | 50% |\n| 🏆 Top Achievement | Spearheaded a company‑wide rebrand that increased client retention by 35%. | 35% |\n\n:::conclusion**Assessment:**[📄](cv:cv_0c0a6bd3)**📄****Carmen Rodriguez 3D**presents a strong and stable career trajectory with consistent progression into leadership roles. Her extensive experience and quantifiable achievements demonstrate her expertise and leadership capabilities.**Key Strengths:**- Extensive experience in 3D art and visual effects.\n- Proven leadership in creative and strategic roles.\n- Strong track record of delivering successful projects and increasing client retention.**Potential Concerns:**No significant concerns identified.\n:::\n\n### Skills Gap Analysis\n\nBest match:  Carmen Rodriguez  3D covers 40% of requirements**Overall Coverage:**6%\n\n### Red Flags Analysis\n\n✓ 5 candidate(s) with no red flags | ⚠️ High-risk:  Carlos Mendoza  Lighting | Flags detected: 3 job_hopping**⚠️ High Priority:**-**Carlos Mendoza  Lighting**: High job mobility: 4 positions with avg tenure 1.0 years (score: 75%)**⚡ Attention:**-  Imani Jones  Concept: Moderate job mobility: 3 positions with avg tenure 1.3 years (score: 50%)\n-  Liam Chen  3D Artist: Moderate job mobility: 4 positions with avg tenure 1.5 years (score: 50%)**✓ Clean profiles:**Aisha Nkrumah  Junior 2D,  Carlos Mendoza  Junior VFX,  Carmen Rodriguez  3D,  Isabel Mendoza  3D,  Rajiv Patel  Junior VFX\n\n### Career Timelines\n\nLongest career:  Isabel Mendoza  3D (10 years) | 3 candidate(s) currently employed**Carlos Mendoza  Junior VFX**(-4444y career)\n  • 8765-Present:  São Paulo @ Brazil Contributed to an award‑winning commercial that**Isabel Mendoza  3D**(10y career)\n  • 2000-2010: 2000 @ 2010 | Immersive Creations**Liam Chen  3D Artist**(6y career)\n  • 2020-2021: 2020 @ 2021 | ArtStart NL\n  • 2021-2023: 2021 @ 2023 | PixelCraft Studios\n  • 2023-Present: E X P E R I E N C E @ Supporting senior artists on upcoming AAA title**Rajiv Patel  Junior VFX**(2y career)\n  • 2020-Present: high‑quality visual effects for film and broadcast. @ Nova Animation",
+          "sources": [
+            {
+              "cv_id": "cv_e13d4991",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_85bb082e",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_878da37f",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_0c0a6bd3",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_b1fad82d",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_7d2ff169",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_9a2928bd",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_423f8ab4",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1425.68,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 12.48,
+              "details": "Found 16 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 13180.44,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5849.75,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "✅ **No se detectaron red flags significativas para [📄](cv:cv_0c0a6bd3) **📄****Carmen Rodriguez. Su perfil demuestra una trayectoria profesional estable:\nSu perfil demuestra una trayectoria profesional estable:\n- **Estabilidad laboral**: 5.5 años promedio por posición (excelente)\n- **Progresión de carrera**: Ascenso constante desde roles junior hasta C-level\n- **Sin gaps de empleo**: Historial continuo sin interrupciones\n## 👤 [📄](cv:cv_0c0a6bd3) **Carmen Rodriguez 3D**\n[📄](cv:cv_0c0a6bd3) **📄****Carmen Rodriguez 3D**is currently the Chief Creative Officer at Netherlands Digital Futures (2023-Present), overseeing global visual strategy and innovation. With 16 years of experience, she has a strong background in leading creative teams and driving visual projects for multinational brands.",
+            "raw_content": ":::thinking\nThe user is asking for a red flag analysis of Carmen Rodriguez (cv_0c0a6bd3)'s CV. I need to identify any inconsistencies in employment history, unexplained gaps in work experience, frequent job changes, lack of relevant skills, or any other information that might raise concerns about the candidate's suitability. I will summarize her current role, total experience, career trajectory, skills, and credentials, and then provide a red flag analysis and career stability metrics.\n:::\n\n✅ **No se detectaron red flags significativas para [📄](cv:cv_0c0a6bd3)**Carmen Rodriguez. Su perfil demuestra una trayectoria profesional estable:\n\nSu perfil demuestra una trayectoria profesional estable:\n- **Estabilidad laboral**: 5.5 años promedio por posición (excelente)\n- **Progresión de carrera**: Ascenso constante desde roles junior hasta C-level\n- **Sin gaps de empleo**: Historial continuo sin interrupciones\n\n## 👤 **[Carmen Rodriguez 3D](cv:cv_0c0a6bd3)**\n\n[📄](cv:cv_0c0a6bd3)**Carmen Rodriguez 3D**is currently the Chief Creative Officer at Netherlands Digital Futures (2023-Present), overseeing global visual strategy and innovation. With 16 years of experience, she has a strong background in leading creative teams and driving visual projects for multinational brands. Her career spans from early internships in Dutch animation studios to executive leadership in global media, blending creative storytelling with technical precision.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Chief Creative Officer at Netherlands Digital Futures (2023-Present) |\n| **⏱️ Total Experience** | 44 years in 3D Art |\n| **🏆 Top Achievement** | Spearheaded a company‑wide rebrand that increased client retention by 35%. |\n| **💡 Core Expertise** | 3D Modeling, Texturing, Lighting |\n| **🎓 Education** | Master of Fine Arts in Visual Arts, Academy of Art University, 2000 |\n\n---\n\n### 💼 Career Trajectory\n\n**Chief Creative Officer** — *Netherlands Digital Futures* (2023-Present)\n→ Spearheaded a company‑wide rebrand that increased client retention by 35%.\n\n**VP of Visual Innovation** — *Global Media Corp* (2018-2023)\n→ Delivered a $10M VR experience that won the 2021 Global Innovation Award.\n\n**Creative Director** — *Rotterdam Visual Arts Group* (2010-2018)\n→ Produced a campaign that earned a Cannes Lions Gold for Best Animation.\n\n**Art Department Manager** — *Amsterdam Creative Agency* (2002-2010)\n→ Oversaw delivery of 30+ high‑profile projects on schedule and budget.\n\n**3D Artist** — *Utrecht Digital Works* (1989-1995)\n→ Created flagship character designs that became industry benchmarks.\n\n**3D Artist** — *The Hague Creative Labs* (1984-1989)\n→ Produced textured assets that earned a Dutch Animation Award.\n\n**Junior 3D Artist** — *Rotterdam Visual Effects Ltd.* (1981-1984)\n→ Learned advanced texturing techniques, contributing to award‑winning sequences.\n\n**Intern 3D Artist** — *Amsterdam Animation Studio* (1979-1981)\n→ Supported senior artists with asset preparation and clean‑up.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **3D Art** | 3D Modeling, Texturing, Lighting, Rendering, Animation | 10/10, 9/10, 9/10, 9/10, 8/10 |\n| **Pipeline** | Pipeline Development | 8/10 |\n| **Languages** | Dutch, English, German | C2, C1, B1 |\n\n---\n\n### 📜 Credentials\n\n- Autodesk Maya Certified Professional, 2022\n- ZBrush Core Certification, 2021\n- Unreal Engine Advanced Production, 2020\n\n---\n\n### Red Flags Analysis\n\n✅ **No significant red flags detected in pre-analysis.**\nReview CV for any additional concerns not captured automatically.\n\n---\n\n### Career Stability Metrics\n\n**Pre-calculated Metrics:**\n- **Total Experience**: 44 years\n- **Average Tenure**: 5.5 years per position\n- **Positions Held**: 8\n- **Career Stability**: Stable (score: 18.8%)\n\n---\n\n:::conclusion\n**Assessment:** [📄](cv:cv_0c0a6bd3)**Carmen Rodriguez 3D**presents a strong and stable career trajectory with consistent progression into leadership roles. Her extensive experience and quantifiable achievements demonstrate her expertise and leadership capabilities.\n\n**Key Strengths:**\n- Extensive experience in 3D art and visual effects.\n- Proven leadership in creative and strategic roles.\n- Strong track record of delivering successful projects and increasing client retention.\n\n**Potential Concerns:**\nNo significant concerns identified.\n:::",
+            "thinking": "The user is asking for a red flag analysis of Carmen Rodriguez (cv_0c0a6bd3)'s CV. I need to identify any inconsistencies in employment history, unexplained gaps in work experience, frequent job changes, lack of relevant skills, or any other information that might raise concerns about the candidate's suitability. I will summarize her current role, total experience, career trajectory, skills, and credentials, and then provide a red flag analysis and career stability metrics.",
+            "analysis": "✅ **No se detectaron red flags significativas para [📄](cv:cv_0c0a6bd3) **📄****Carmen Rodriguez. Su perfil demuestra una trayectoria profesional estable:\nSu perfil demuestra una trayectoria profesional estable:\n- **Estabilidad laboral**: 5.5 años promedio por posición (excelente)\n- **Progresión de carrera**: Ascenso constante desde roles junior hasta C-level\n- **Sin gaps de empleo**: Historial continuo sin interrupciones\n## 👤 [📄](cv:cv_0c0a6bd3) **Carmen Rodriguez 3D**\n[📄](cv:cv_0c0a6bd3) **📄****Carmen Rodriguez 3D**is currently the Chief Creative Officer at Netherlands Digital Futures (2023-Present), overseeing global visual strategy and innovation. With 16 years of experience, she has a strong background in leading creative teams and driving visual projects for multinational brands. Her career spans from early internships in Dutch animation studios to executive leadership in global media, blending creative storytelling with technical precision.\n---\n### 📊 Candidate Highlights\n---\n### 📜 Credentials\n- Autodesk Maya Certified Professional, 2022\n- ZBrush Core Certification, 2021\n- Unreal Engine Advanced Production, 2020\n---\n### Red Flags Analysis\n✅ **No significant red flags detected in pre-analysis.**\nReview CV for any additional concerns not captured automatically.\n---\n### Career Stability Metrics\n**Pre-calculated Metrics:**\n- **Total Experience**: 44 years\n- **Average Tenure**: 5.5 years per position\n- **Positions Held**: 8\n- **Career Stability**: Stable (score: 18.8%)\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Category",
+                "Key Information",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "🎯 Current Role",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Chief Creative Officer at Netherlands Digital Futures (2023-Present)"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "⏱️ Total Experience",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "44 years in 3D Art"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "💡 Core Expertise",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "3D Modeling, Texturing, Lighting"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🎓 Education",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Master of Fine Arts in Visual Arts, Academy of Art University, 2000"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🏆 Top Achievement",
+                  "cv_id": "",
+                  "columns": {
+                    "Key Information": "Spearheaded a company‑wide rebrand that increased client retention by 35%."
+                  },
+                  "match_score": 35
+                }
+              ]
+            },
+            "conclusion": "**Assessment:** [📄](cv:cv_0c0a6bd3) **📄****Carmen Rodriguez 3D**presents a strong and stable career trajectory with consistent progression into leadership roles. Her extensive experience and quantifiable achievements demonstrate her expertise and leadership capabilities.\n\n**Key Strengths:**\n- Extensive experience in 3D art and visual effects.\n- Proven leadership in creative and strategic roles.\n- Strong track record of delivering successful projects and increasing client retention.\n\n**Potential Concerns:**\nNo significant concerns identified.",
+            "gap_analysis": {
+              "required_skills": [
+                "To Identify Any Inconsistencies In Employment History",
+                "16 Years Of",
+                "Technical Precision",
+                "Consistent Progression Into Leadership Roles",
+                "3D Art",
+                "Visual Effects.\n- Proven Leadership In Creative",
+                "Strategic Roles.\n- Strong Track Record Of Delivering Successful Projects",
+                "Increasing Client Retention.",
+                "Go",
+                "Leadership"
+              ],
+              "skill_gaps": [
+                {
+                  "skill": "To Identify Any Inconsistencies In Employment History",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carlos Mendoza  Lighting",
+                    " Carlos Mendoza  Junior VFX",
+                    " Carmen Rodriguez  3D",
+                    " Isabel Mendoza  3D",
+                    " Imani Jones  Concept",
+                    " Liam Chen  3D Artist",
+                    " Rajiv Patel  Junior VFX"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "16 Years Of",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carlos Mendoza  Lighting",
+                    " Carlos Mendoza  Junior VFX",
+                    " Carmen Rodriguez  3D",
+                    " Isabel Mendoza  3D",
+                    " Imani Jones  Concept",
+                    " Liam Chen  3D Artist",
+                    " Rajiv Patel  Junior VFX"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Technical Precision",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carlos Mendoza  Lighting",
+                    " Carlos Mendoza  Junior VFX",
+                    " Carmen Rodriguez  3D",
+                    " Isabel Mendoza  3D",
+                    " Imani Jones  Concept",
+                    " Liam Chen  3D Artist",
+                    " Rajiv Patel  Junior VFX"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Consistent Progression Into Leadership Roles",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carlos Mendoza  Lighting",
+                    " Carlos Mendoza  Junior VFX",
+                    " Isabel Mendoza  3D",
+                    " Imani Jones  Concept",
+                    " Liam Chen  3D Artist",
+                    " Rajiv Patel  Junior VFX"
+                  ],
+                  "candidates_have": [
+                    " Carmen Rodriguez  3D"
+                  ]
+                },
+                {
+                  "skill": "3D Art",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carlos Mendoza  Lighting",
+                    " Carlos Mendoza  Junior VFX",
+                    " Carmen Rodriguez  3D",
+                    " Isabel Mendoza  3D",
+                    " Imani Jones  Concept",
+                    " Liam Chen  3D Artist",
+                    " Rajiv Patel  Junior VFX"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Visual Effects.\n- Proven Leadership In Creative",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carlos Mendoza  Lighting",
+                    " Carlos Mendoza  Junior VFX",
+                    " Isabel Mendoza  3D",
+                    " Imani Jones  Concept",
+                    " Liam Chen  3D Artist",
+                    " Rajiv Patel  Junior VFX"
+                  ],
+                  "candidates_have": [
+                    " Carmen Rodriguez  3D"
+                  ]
+                },
+                {
+                  "skill": "Strategic Roles.\n- Strong Track Record Of Delivering Successful Projects",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carlos Mendoza  Lighting",
+                    " Carlos Mendoza  Junior VFX",
+                    " Carmen Rodriguez  3D",
+                    " Isabel Mendoza  3D",
+                    " Imani Jones  Concept",
+                    " Liam Chen  3D Artist",
+                    " Rajiv Patel  Junior VFX"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Increasing Client Retention.",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carlos Mendoza  Lighting",
+                    " Carlos Mendoza  Junior VFX",
+                    " Carmen Rodriguez  3D",
+                    " Isabel Mendoza  3D",
+                    " Imani Jones  Concept",
+                    " Liam Chen  3D Artist",
+                    " Rajiv Patel  Junior VFX"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Go",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carlos Mendoza  Lighting",
+                    " Carlos Mendoza  Junior VFX",
+                    " Imani Jones  Concept",
+                    " Liam Chen  3D Artist",
+                    " Rajiv Patel  Junior VFX"
+                  ],
+                  "candidates_have": [
+                    " Carmen Rodriguez  3D",
+                    " Isabel Mendoza  3D"
+                  ]
+                },
+                {
+                  "skill": "Leadership",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carlos Mendoza  Lighting",
+                    " Carlos Mendoza  Junior VFX",
+                    " Isabel Mendoza  3D",
+                    " Imani Jones  Concept",
+                    " Liam Chen  3D Artist",
+                    " Rajiv Patel  Junior VFX"
+                  ],
+                  "candidates_have": [
+                    " Carmen Rodriguez  3D"
+                  ]
+                }
+              ],
+              "coverage_score": 6.25,
+              "best_coverage_candidate": " Carmen Rodriguez  3D",
+              "summary": "Best match:  Carmen Rodriguez  3D covers 40% of requirements"
+            },
+            "red_flags": {
+              "flags": [
+                {
+                  "flag_type": "job_hopping",
+                  "severity": "high",
+                  "description": "High job mobility: 4 positions with avg tenure 1.0 years (score: 75%)",
+                  "candidate_name": " Carlos Mendoza  Lighting",
+                  "details": {
+                    "job_hopping_score": 0.75,
+                    "avg_tenure_years": 1.0,
+                    "position_count": 4
+                  }
+                },
+                {
+                  "flag_type": "job_hopping",
+                  "severity": "medium",
+                  "description": "Moderate job mobility: 3 positions with avg tenure 1.3 years (score: 50%)",
+                  "candidate_name": " Imani Jones  Concept",
+                  "details": {
+                    "job_hopping_score": 0.5,
+                    "avg_tenure_years": 1.3333333333333333,
+                    "position_count": 3
+                  }
+                },
+                {
+                  "flag_type": "job_hopping",
+                  "severity": "medium",
+                  "description": "Moderate job mobility: 4 positions with avg tenure 1.5 years (score: 50%)",
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "details": {
+                    "job_hopping_score": 0.5,
+                    "avg_tenure_years": 1.5,
+                    "position_count": 4
+                  }
+                }
+              ],
+              "candidates_with_flags": {
+                " Carlos Mendoza  Lighting": [
+                  "job_hopping"
+                ],
+                " Imani Jones  Concept": [
+                  "job_hopping"
+                ],
+                " Liam Chen  3D Artist": [
+                  "job_hopping"
+                ]
+              },
+              "high_risk_candidates": [
+                " Carlos Mendoza  Lighting"
+              ],
+              "clean_candidates": [
+                " Aisha Nkrumah  Junior 2D",
+                " Carlos Mendoza  Junior VFX",
+                " Carmen Rodriguez  3D",
+                " Isabel Mendoza  3D",
+                " Rajiv Patel  Junior VFX"
+              ],
+              "summary": "✓ 5 candidate(s) with no red flags | ⚠️ High-risk:  Carlos Mendoza  Lighting | Flags detected: 3 job_hopping"
+            },
+            "timeline": {
+              "timelines": [
+                {
+                  "candidate_name": " Carlos Mendoza  Junior VFX",
+                  "cv_id": "cv_878da37f",
+                  "entries": [
+                    {
+                      "year_start": 8765,
+                      "year_end": 4321,
+                      "title": " São Paulo",
+                      "company": "Brazil Contributed to an award‑winning commercial that",
+                      "is_current": true,
+                      "duration_years": 0,
+                      "transition_type": ""
+                    }
+                  ],
+                  "career_span_years": -4444,
+                  "total_companies": 1,
+                  "progression_score": 50.0,
+                  "current_role": " São Paulo"
+                },
+                {
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "cv_id": "cv_b1fad82d",
+                  "entries": [
+                    {
+                      "year_start": 2000,
+                      "year_end": 2010,
+                      "title": "2000",
+                      "company": "2010 | Immersive Creations",
+                      "is_current": false,
+                      "duration_years": 10,
+                      "transition_type": ""
+                    }
+                  ],
+                  "career_span_years": 10,
+                  "total_companies": 1,
+                  "progression_score": 50.0,
+                  "current_role": null
+                },
+                {
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "cv_id": "cv_9a2928bd",
+                  "entries": [
+                    {
+                      "year_start": 2020,
+                      "year_end": 2021,
+                      "title": "2020",
+                      "company": "2021 | ArtStart NL",
+                      "is_current": false,
+                      "duration_years": 1,
+                      "transition_type": ""
+                    },
+                    {
+                      "year_start": 2021,
+                      "year_end": 2023,
+                      "title": "2021",
+                      "company": "2023 | PixelCraft Studios",
+                      "is_current": false,
+                      "duration_years": 2,
+                      "transition_type": "company_change"
+                    },
+                    {
+                      "year_start": 2023,
+                      "year_end": null,
+                      "title": "E X P E R I E N C E",
+                      "company": "Supporting senior artists on upcoming AAA title",
+                      "is_current": true,
+                      "duration_years": 3,
+                      "transition_type": "company_change"
+                    }
+                  ],
+                  "career_span_years": 6,
+                  "total_companies": 3,
+                  "progression_score": 0.0,
+                  "current_role": "E X P E R I E N C E"
+                },
+                {
+                  "candidate_name": " Rajiv Patel  Junior VFX",
+                  "cv_id": "cv_423f8ab4",
+                  "entries": [
+                    {
+                      "year_start": 2020,
+                      "year_end": 2022,
+                      "title": "high‑quality visual effects for film and broadcast.",
+                      "company": "Nova Animation",
+                      "is_current": true,
+                      "duration_years": 2,
+                      "transition_type": ""
+                    }
+                  ],
+                  "career_span_years": 2,
+                  "total_companies": 1,
+                  "progression_score": 50.0,
+                  "current_role": "high‑quality visual effects for film and broadcast."
+                }
+              ],
+              "summary": "Longest career:  Isabel Mendoza  3D (10 years) | 3 candidate(s) currently employed"
+            },
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T22:50:08.270508"
+        },
+        {
+          "id": "26d8ac45-d42b-47b8-8f3d-d88697a3c254",
+          "role": "user",
+          "content": "dame red flags de carmen mendoza",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T22:53:20.835066"
+        },
+        {
+          "id": "c5f8308a-35f7-494d-854e-a1e68f9e7743",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a red flag analysis of Carmen Rodriguez 3D (cv_0c0a6bd3)'s CV. The pre-calculated data indicates no significant red flags were detected. I need to confirm this by reviewing the CV for inconsistencies, unexplained gaps, frequent job changes, or other potential concerns. I will then provide a brief profile summary and an overall assessment.\n:::\n\n### 🚩 Red Flags Analysis for [📄](cv:cv_0c0a6bd3)**Carmen Rodriguez 3D**✅**No se detectaron red flags significativas para [📄](cv:cv_0c0a6bd3)**Carmen Rodriguez 3D**.**Su perfil demuestra una trayectoria profesional estable:\n-**Estabilidad laboral**: 5.5 años promedio por posición\n-**Progresión de carrera**: Ascenso constante desde roles junior hasta C-level\n-**Gaps de empleo**: None detected\n---\n### 📊 Brief Profile Summary\n---.\n\n### 🚩 Red Flags Analysis for [📄](cv:cv_0c0a6bd3)**Carmen Rodriguez 3D**✅**No se detectaron red flags significativas para [📄](cv:cv_0c0a6bd3)**Carmen Rodriguez 3D**.**Su perfil demuestra una trayectoria profesional estable:\n-**Estabilidad laboral**: 5.5 años promedio por posición\n-**Progresión de carrera**: Ascenso constante desde roles junior hasta C-level\n-**Gaps de empleo**: None detected\n---\n### 📊 Brief Profile Summary\n---\n\n| Metric | Value | Match Score |\n|---|---|---|\n| Current Role | Chief Creative Officer at Netherlands Digital Futures | 50% |\n| Total Experience | 16 years | 50% |\n| Avg Tenure | 5.5 years per position | 50% |\n| Stability Score | Stable | 50% |\n\n:::conclusion**Assessment:**[📄](cv:cv_0c0a6bd3)**Carmen Rodriguez 3D**presents a stable and progressive career trajectory with no significant red flags detected. Her experience and career progression suggest a reliable and qualified candidate.\n:::\n\n### Skills Gap Analysis\n\nNo significant skill gaps identified.**Overall Coverage:**0%\n\n### Red Flags Analysis\n\n✓ 5 candidate(s) with no red flags | ⚠️ High-risk:  Carlos Mendoza  Lighting | Flags detected: 3 job_hopping**⚠️ High Priority:**-**Carlos Mendoza  Lighting**: High job mobility: 4 positions with avg tenure 1.0 years (score: 75%)**⚡ Attention:**-  Imani Jones  Concept: Moderate job mobility: 3 positions with avg tenure 1.3 years (score: 50%)\n-  Liam Chen  3D Artist: Moderate job mobility: 4 positions with avg tenure 1.5 years (score: 50%)**✓ Clean profiles:**Aisha Nkrumah  Junior 2D,  Carmen Rodriguez  3D,  Carlos Mendoza  Junior VFX,  Rajiv Patel  Junior VFX,  Isabel Mendoza  3D\n\n### Career Timelines\n\nLongest career:  Isabel Mendoza  3D (10 years) | 3 candidate(s) currently employed**Carlos Mendoza  Junior VFX**(-4444y career)\n  • 8765-Present:  São Paulo @ Brazil Contributed to an award‑winning commercial that**Rajiv Patel  Junior VFX**(2y career)\n  • 2020-Present: high‑quality visual effects for film and broadcast. @ Nova Animation**Isabel Mendoza  3D**(10y career)\n  • 2000-2010: 2000 @ 2010 | Immersive Creations**Liam Chen  3D Artist**(6y career)\n  • 2020-2021: 2020 @ 2021 | ArtStart NL\n  • 2021-2023: 2021 @ 2023 | PixelCraft Studios\n  • 2023-Present: E X P E R I E N C E @ Supporting senior artists on upcoming AAA title",
+          "sources": [
+            {
+              "cv_id": "cv_e13d4991",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_0c0a6bd3",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_7d2ff169",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_878da37f",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_85bb082e",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_423f8ab4",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_b1fad82d",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_9a2928bd",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 2342.39,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 11.77,
+              "details": "Found 16 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 9960.45,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 2602.35,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "### 🚩 Red Flags Analysis for [📄](cv:cv_0c0a6bd3) **Carmen Rodriguez 3D**\n✅ **No se detectaron red flags significativas para [📄](cv:cv_0c0a6bd3) **Carmen Rodriguez 3D**.**\nSu perfil demuestra una trayectoria profesional estable:\n- **Estabilidad laboral**: 5.5 años promedio por posición\n- **Progresión de carrera**: Ascenso constante desde roles junior hasta C-level\n- **Gaps de empleo**: None detected\n---\n### 📊 Brief Profile Summary\n---.",
+            "raw_content": ":::thinking\nThe user is asking for a red flag analysis of **[Carmen Rodriguez 3D](cv:cv_0c0a6bd3)**'s CV. The pre-calculated data indicates no significant red flags were detected. I need to confirm this by reviewing the CV for inconsistencies, unexplained gaps, frequent job changes, or other potential concerns. I will then provide a brief profile summary and an overall assessment.\n:::\n\n### 🚩 Red Flags Analysis for **[Carmen Rodriguez 3D](cv:cv_0c0a6bd3)**\n\n✅ **No se detectaron red flags significativas para [Carmen Rodriguez 3D](cv:cv_0c0a6bd3).**\n\nSu perfil demuestra una trayectoria profesional estable:\n- **Estabilidad laboral**: 5.5 años promedio por posición\n- **Progresión de carrera**: Ascenso constante desde roles junior hasta C-level\n- **Gaps de empleo**: None detected\n\n---\n\n### 📊 Brief Profile Summary\n\n| Metric | Value |\n|--------|-------|\n| **Current Role** | Chief Creative Officer at Netherlands Digital Futures |\n| **Total Experience** | 16 years |\n| **Avg Tenure** | 5.5 years per position |\n| **Stability Score** | Stable |\n\n---\n\n:::conclusion\n**Assessment:** **[Carmen Rodriguez 3D](cv:cv_0c0a6bd3)** presents a stable and progressive career trajectory with no significant red flags detected. Her experience and career progression suggest a reliable and qualified candidate.\n:::",
+            "thinking": "The user is asking for a red flag analysis of Carmen Rodriguez 3D (cv_0c0a6bd3)'s CV. The pre-calculated data indicates no significant red flags were detected. I need to confirm this by reviewing the CV for inconsistencies, unexplained gaps, frequent job changes, or other potential concerns. I will then provide a brief profile summary and an overall assessment.",
+            "analysis": "### 🚩 Red Flags Analysis for [📄](cv:cv_0c0a6bd3) **Carmen Rodriguez 3D**\n✅ **No se detectaron red flags significativas para [📄](cv:cv_0c0a6bd3) **Carmen Rodriguez 3D**.**\nSu perfil demuestra una trayectoria profesional estable:\n- **Estabilidad laboral**: 5.5 años promedio por posición\n- **Progresión de carrera**: Ascenso constante desde roles junior hasta C-level\n- **Gaps de empleo**: None detected\n---\n### 📊 Brief Profile Summary\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Metric",
+                "Value",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Current Role",
+                  "cv_id": "",
+                  "columns": {
+                    "Value": "Chief Creative Officer at Netherlands Digital Futures"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Total Experience",
+                  "cv_id": "",
+                  "columns": {
+                    "Value": "16 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Avg Tenure",
+                  "cv_id": "",
+                  "columns": {
+                    "Value": "5.5 years per position"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Stability Score",
+                  "cv_id": "",
+                  "columns": {
+                    "Value": "Stable"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "**Assessment:** [📄](cv:cv_0c0a6bd3) **Carmen Rodriguez 3D** presents a stable and progressive career trajectory with no significant red flags detected. Her experience and career progression suggest a reliable and qualified candidate.",
+            "gap_analysis": {
+              "required_skills": [
+                "To Confirm This By Reviewing The Cv For Inconsistencies",
+                "No Significant Red Flags Detected"
+              ],
+              "skill_gaps": [
+                {
+                  "skill": "To Confirm This By Reviewing The Cv For Inconsistencies",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carmen Rodriguez  3D",
+                    " Imani Jones  Concept",
+                    " Carlos Mendoza  Junior VFX",
+                    " Carlos Mendoza  Lighting",
+                    " Rajiv Patel  Junior VFX",
+                    " Isabel Mendoza  3D",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "No Significant Red Flags Detected",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carmen Rodriguez  3D",
+                    " Imani Jones  Concept",
+                    " Carlos Mendoza  Junior VFX",
+                    " Carlos Mendoza  Lighting",
+                    " Rajiv Patel  Junior VFX",
+                    " Isabel Mendoza  3D",
+                    " Liam Chen  3D Artist"
+                  ],
+                  "candidates_have": []
+                }
+              ],
+              "coverage_score": 0.0,
+              "best_coverage_candidate": null,
+              "summary": "No significant skill gaps identified."
+            },
+            "red_flags": {
+              "flags": [
+                {
+                  "flag_type": "job_hopping",
+                  "severity": "medium",
+                  "description": "Moderate job mobility: 3 positions with avg tenure 1.3 years (score: 50%)",
+                  "candidate_name": " Imani Jones  Concept",
+                  "details": {
+                    "job_hopping_score": 0.5,
+                    "avg_tenure_years": 1.3333333333333333,
+                    "position_count": 3
+                  }
+                },
+                {
+                  "flag_type": "job_hopping",
+                  "severity": "high",
+                  "description": "High job mobility: 4 positions with avg tenure 1.0 years (score: 75%)",
+                  "candidate_name": " Carlos Mendoza  Lighting",
+                  "details": {
+                    "job_hopping_score": 0.75,
+                    "avg_tenure_years": 1.0,
+                    "position_count": 4
+                  }
+                },
+                {
+                  "flag_type": "job_hopping",
+                  "severity": "medium",
+                  "description": "Moderate job mobility: 4 positions with avg tenure 1.5 years (score: 50%)",
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "details": {
+                    "job_hopping_score": 0.5,
+                    "avg_tenure_years": 1.5,
+                    "position_count": 4
+                  }
+                }
+              ],
+              "candidates_with_flags": {
+                " Imani Jones  Concept": [
+                  "job_hopping"
+                ],
+                " Carlos Mendoza  Lighting": [
+                  "job_hopping"
+                ],
+                " Liam Chen  3D Artist": [
+                  "job_hopping"
+                ]
+              },
+              "high_risk_candidates": [
+                " Carlos Mendoza  Lighting"
+              ],
+              "clean_candidates": [
+                " Aisha Nkrumah  Junior 2D",
+                " Carmen Rodriguez  3D",
+                " Carlos Mendoza  Junior VFX",
+                " Rajiv Patel  Junior VFX",
+                " Isabel Mendoza  3D"
+              ],
+              "summary": "✓ 5 candidate(s) with no red flags | ⚠️ High-risk:  Carlos Mendoza  Lighting | Flags detected: 3 job_hopping"
+            },
+            "timeline": {
+              "timelines": [
+                {
+                  "candidate_name": " Carlos Mendoza  Junior VFX",
+                  "cv_id": "cv_878da37f",
+                  "entries": [
+                    {
+                      "year_start": 8765,
+                      "year_end": 4321,
+                      "title": " São Paulo",
+                      "company": "Brazil Contributed to an award‑winning commercial that",
+                      "is_current": true,
+                      "duration_years": 0,
+                      "transition_type": ""
+                    }
+                  ],
+                  "career_span_years": -4444,
+                  "total_companies": 1,
+                  "progression_score": 50.0,
+                  "current_role": " São Paulo"
+                },
+                {
+                  "candidate_name": " Rajiv Patel  Junior VFX",
+                  "cv_id": "cv_423f8ab4",
+                  "entries": [
+                    {
+                      "year_start": 2020,
+                      "year_end": 2022,
+                      "title": "high‑quality visual effects for film and broadcast.",
+                      "company": "Nova Animation",
+                      "is_current": true,
+                      "duration_years": 2,
+                      "transition_type": ""
+                    }
+                  ],
+                  "career_span_years": 2,
+                  "total_companies": 1,
+                  "progression_score": 50.0,
+                  "current_role": "high‑quality visual effects for film and broadcast."
+                },
+                {
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "cv_id": "cv_b1fad82d",
+                  "entries": [
+                    {
+                      "year_start": 2000,
+                      "year_end": 2010,
+                      "title": "2000",
+                      "company": "2010 | Immersive Creations",
+                      "is_current": false,
+                      "duration_years": 10,
+                      "transition_type": ""
+                    }
+                  ],
+                  "career_span_years": 10,
+                  "total_companies": 1,
+                  "progression_score": 50.0,
+                  "current_role": null
+                },
+                {
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "cv_id": "cv_9a2928bd",
+                  "entries": [
+                    {
+                      "year_start": 2020,
+                      "year_end": 2021,
+                      "title": "2020",
+                      "company": "2021 | ArtStart NL",
+                      "is_current": false,
+                      "duration_years": 1,
+                      "transition_type": ""
+                    },
+                    {
+                      "year_start": 2021,
+                      "year_end": 2023,
+                      "title": "2021",
+                      "company": "2023 | PixelCraft Studios",
+                      "is_current": false,
+                      "duration_years": 2,
+                      "transition_type": "company_change"
+                    },
+                    {
+                      "year_start": 2023,
+                      "year_end": null,
+                      "title": "E X P E R I E N C E",
+                      "company": "Supporting senior artists on upcoming AAA title",
+                      "is_current": true,
+                      "duration_years": 3,
+                      "transition_type": "company_change"
+                    }
+                  ],
+                  "career_span_years": 6,
+                  "total_companies": 3,
+                  "progression_score": 0.0,
+                  "current_role": "E X P E R I E N C E"
+                }
+              ],
+              "summary": "Longest career:  Isabel Mendoza  3D (10 years) | 3 candidate(s) currently employed"
+            },
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T22:53:39.778246"
+        },
+        {
+          "id": "0619e5de-6f2e-4896-a164-f5aca9fee9de",
+          "role": "user",
+          "content": "dame todo sobre dame carmen mendoza",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T22:54:44.374082"
         }
       ],
       "created_at": "2026-01-05T22:41:52.490324",
-      "updated_at": "2026-01-05T22:45:43.006670"
+      "updated_at": "2026-01-05T22:54:44.374082"
     }
   ]
 }

@@ -334,6 +334,37 @@ SINGLE_CANDIDATE_TEMPLATE = """## SINGLE CANDIDATE PROFILE ANALYSIS
 ## USER QUERY
 {question}
 
+## QUERY-SPECIFIC RESPONSE RULES
+
+### IF THE QUERY IS ABOUT RED FLAGS:
+When the user asks about "red flags", "problemas", "concerns", "issues", or "banderas rojas":
+
+1. **START YOUR RESPONSE BY DIRECTLY ADDRESSING RED FLAGS**
+   - If there ARE red flags: "⚠️ **Se detectaron las siguientes red flags para [Name]:**..."
+   - If there are NO red flags: "✅ **No se detectaron red flags significativas para [Name].** Su perfil muestra..."
+
+2. **ALWAYS reference the pre-calculated metrics** in the Red Flags Analysis section below
+3. **Focus your analysis on stability indicators**: job hopping score, average tenure, employment gaps
+4. **Only show the abbreviated CV profile AFTER addressing the red flags question**
+
+**Example response when NO red flags exist:**
+```
+:::thinking
+Analyzing red flags for Carmen Rodriguez...
+:::
+
+✅ **No se detectaron red flags significativas para Carmen Rodriguez.**
+
+Su perfil demuestra una trayectoria profesional estable:
+- **Estabilidad laboral**: 4 años promedio por posición (excelente)  
+- **Progresión de carrera**: Ascenso constante desde roles junior hasta C-level
+- **Sin gaps de empleo**: Historial continuo sin interrupciones
+
+[Brief profile summary - NOT the full CV]
+```
+
+---
+
 ## CRITICAL DATA EXTRACTION RULES (READ CAREFULLY)
 
 ### CURRENT ROLE DEFINITION
@@ -450,6 +481,87 @@ SINGLE_CANDIDATE_TEMPLATE = """## SINGLE CANDIDATE PROFILE ANALYSIS
  Red flags section addresses any job-hopping, gaps, or concerns
 
 Respond now:"""
+# =============================================================================
+
+# =============================================================================
+# RED FLAGS SPECIFIC TEMPLATE (Red flags analysis FIRST, profile SECOND)
+# =============================================================================
+
+RED_FLAGS_TEMPLATE = """## RED FLAGS ANALYSIS REQUEST
+**Target Candidate:** {candidate_name}
+**CV ID:** {cv_id}
+
+---
+{context}
+---
+
+## USER QUERY
+{question}
+
+## IMPORTANT: THIS IS A RED FLAGS QUERY
+The user is SPECIFICALLY asking about red flags, concerns, or issues for this candidate.
+Your response MUST START with the red flags analysis, NOT with the full CV profile.
+
+## PRE-CALCULATED RED FLAGS DATA (USE THIS DATA)
+{red_flags_section}
+
+## PRE-CALCULATED STABILITY METRICS (USE THIS DATA)
+{stability_metrics_section}
+
+---
+
+## MANDATORY RESPONSE FORMAT FOR RED FLAGS QUERIES
+
+:::thinking
+[Brief: Does this candidate have red flags based on the pre-calculated data above?]
+:::
+
+### 🚩 Red Flags Analysis for **[{candidate_name}](cv:{cv_id})**
+
+[START WITH ONE OF THESE TWO OPTIONS:]
+
+**IF NO RED FLAGS (use this format):**
+
+✅ **No se detectaron red flags significativas para {candidate_name}.**
+
+Su perfil demuestra una trayectoria profesional estable:
+- **Estabilidad laboral**: [X] años promedio por posición
+- **Progresión de carrera**: [Describe progression]
+- **Gaps de empleo**: [None detected / X gaps detected]
+
+**IF RED FLAGS EXIST (use this format):**
+
+⚠️ **Se detectaron las siguientes red flags para {candidate_name}:**
+
+| Red Flag | Severidad | Descripción |
+|----------|-----------|-------------|
+| [Type] | [High/Medium/Low] | [Description] |
+
+---
+
+### 📊 Brief Profile Summary
+
+| Metric | Value |
+|--------|-------|
+| **Current Role** | [Role at Company] |
+| **Total Experience** | [X years] |
+| **Avg Tenure** | [X years per position] |
+| **Stability Score** | [Stable/Moderate/Unstable] |
+
+---
+
+:::conclusion
+**Assessment:** [1-2 sentences summarizing the candidate's risk profile]
+:::
+
+## CRITICAL RULES
+1. RED FLAGS ANALYSIS MUST BE THE FIRST SECTION (after thinking)
+2. Use the pre-calculated data provided above - DO NOT ignore it
+3. Keep the profile summary BRIEF - this is NOT a full CV analysis
+4. If the pre-calculated data shows "No significant red flags", say that CLEARLY
+
+Respond now:"""
+
 # =============================================================================
 
 COMPARISON_TEMPLATE = """## COMPARISON REQUEST
@@ -1172,20 +1284,69 @@ class PromptBuilder:
                 history_section += f"{role_label}: {msg['content']}\n"
             history_section += "\n---\n\n"
         
-        formatted_prompt = SINGLE_CANDIDATE_TEMPLATE.format(
-            candidate_name=candidate_name,
-            cv_id=cv_id,
-            context=ctx.text,
-            question=question,
-            red_flags_section=red_flags_section,
-            stability_metrics_section=stability_section
-        )
+        # DETECT RED FLAGS QUERIES - Use specialized template
+        is_red_flags_query = self._is_red_flags_query(question)
+        
+        if is_red_flags_query:
+            # Use RED_FLAGS_TEMPLATE which puts red flags analysis FIRST
+            formatted_prompt = RED_FLAGS_TEMPLATE.format(
+                candidate_name=candidate_name,
+                cv_id=cv_id,
+                context=ctx.text,
+                question=question,
+                red_flags_section=red_flags_section,
+                stability_metrics_section=stability_section
+            )
+            log_event("TEMPLATE_SELECTION", {
+                "template": "RED_FLAGS_TEMPLATE",
+                "candidate_name": candidate_name,
+                "detection_method": "red_flags_query_detected"
+            })
+        else:
+            # Use standard SINGLE_CANDIDATE_TEMPLATE
+            formatted_prompt = SINGLE_CANDIDATE_TEMPLATE.format(
+                candidate_name=candidate_name,
+                cv_id=cv_id,
+                context=ctx.text,
+                question=question,
+                red_flags_section=red_flags_section,
+                stability_metrics_section=stability_section
+            )
         
         # Prepend history if available
         if history_section:
             formatted_prompt = history_section + formatted_prompt
         
         return formatted_prompt
+    
+    def _is_red_flags_query(self, question: str) -> bool:
+        """
+        Detect if the user's question is specifically about red flags.
+        
+        Returns True if the query is asking about:
+        - Red flags / banderas rojas
+        - Concerns / problemas / issues
+        - Stability / estabilidad
+        - Job hopping / gaps
+        """
+        question_lower = question.lower()
+        
+        red_flags_keywords = [
+            "red flag", "redflags", "red-flag",
+            "bandera roja", "banderas rojas",
+            "problema", "problemas", "concern", "concerns", "issue", "issues",
+            "warning", "warnings", "alert", "alertas",
+            "job hopping", "job-hopping", "cambio de trabajo",
+            "gap", "gaps", "hueco", "huecos",
+            "estabilidad", "stability", "inestabilidad", "unstable",
+            "riesgo", "risk", "risky"
+        ]
+        
+        for keyword in red_flags_keywords:
+            if keyword in question_lower:
+                return True
+        
+        return False
     
     def _extract_enriched_metadata(self, chunks: list[dict]) -> tuple[str, str]:
         """
