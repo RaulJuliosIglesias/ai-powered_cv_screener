@@ -1409,6 +1409,41 @@ Build in this order:
 
 ---
 
+## Maintenance Scripts (v5.1)
+
+### Re-index CVs with Smart Chunking
+
+When upgrading from v5.0 to v5.1, or if CV metadata seems outdated, use the re-indexing script:
+
+```bash
+cd backend
+python ../scripts/reindex_cvs.py
+```
+
+**What it does**:
+1. Finds all PDF files in `/storage/`
+2. Clears existing vector store embeddings
+3. Re-processes each PDF with `SmartChunkingService`
+4. Creates enriched chunks with metadata:
+   - `current_role`, `current_company`
+   - `total_experience_years` (calculated)
+   - `start_year`, `end_year`, `is_current` per position
+
+**When to use**:
+- After upgrading to v5.1
+- If "current role" or "years of experience" queries return wrong data
+- After modifying `SmartChunkingService` patterns
+
+### Utility Scripts
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `scripts/reindex_cvs.py` | Re-index all CVs with smart chunking | `python ../scripts/reindex_cvs.py` |
+| `scripts/demo_queries.py` | Test sample queries | `python scripts/demo_queries.py` |
+| `scripts/setup_supabase_complete.sql` | Supabase schema setup | Run in Supabase SQL editor |
+
+---
+
 ## Success Criteria
 
 The system is complete when:
@@ -1421,3 +1456,4 @@ The system is complete when:
 - [ ] No hallucinated information in responses
 - [ ] Response time < 5 seconds
 - [ ] Usage/cost is tracked
+- [ ] **v5.1**: Single-candidate queries return current role and total experience correctly

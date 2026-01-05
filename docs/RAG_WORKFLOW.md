@@ -2,24 +2,26 @@
 
 > **CV Screener AI - Complete RAG Pipeline Reference**
 > 
-> Version: 5.0.0 | Last Updated: January 2026
+> Version: 5.1.0 | Last Updated: January 2026
 
 ---
 
 ## Table of Contents
 
 1. [System Overview](#system-overview)
-2. [Architecture Diagram](#architecture-diagram)
-3. [Pipeline Stages](#pipeline-stages)
-4. [V5 Advanced Features](#v5-advanced-features)
-5. [Structured Output Processing](#structured-output-processing)
-6. [Core Scripts Reference](#core-scripts-reference)
-7. [Data Flow](#data-flow)
-8. [Configuration](#configuration)
-9. [Providers](#providers)
-10. [Error Handling](#error-handling)
-11. [Caching & Performance](#caching--performance)
-12. [Evaluation & Logging](#evaluation--logging)
+2. [Smart CV Chunking](#smart-cv-chunking) ← **NEW in v5.1**
+3. [Architecture Diagram](#architecture-diagram)
+4. [Pipeline Stages](#pipeline-stages)
+5. [Targeted Retrieval](#targeted-retrieval) ← **NEW in v5.1**
+6. [V5 Advanced Features](#v5-advanced-features)
+7. [Structured Output Processing](#structured-output-processing)
+8. [Core Scripts Reference](#core-scripts-reference)
+9. [Data Flow](#data-flow)
+10. [Configuration](#configuration)
+11. [Providers](#providers)
+12. [Error Handling](#error-handling)
+13. [Caching & Performance](#caching--performance)
+14. [Evaluation & Logging](#evaluation--logging)
 
 ---
 
@@ -46,6 +48,247 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
 - ✅ **Circuit Breaker**: Prevents cascading failures
 - ✅ **Response Caching**: LRU cache with TTL for embeddings and responses
 - ✅ **Graceful Degradation**: Auto-disable failing features to maintain service
+
+### Key Features (V5.1 - NEW)
+
+- ✅ **Smart CV Chunking**: Intelligent extraction of dates, roles, and experience years
+- ✅ **Enriched Metadata**: Pre-calculated `current_role`, `total_experience_years`, `is_current`
+- ✅ **Targeted Retrieval**: Fetch ALL chunks for a specific candidate (bypasses semantic search)
+- ✅ **Summary Chunks**: Pre-built profile summaries for instant candidate lookups
+
+---
+
+## Smart CV Chunking
+
+> **NEW in v5.1** - Intelligent document processing that extracts structured data from CVs
+
+### The Problem (v5.0 and before)
+
+The original `ChunkingService` divided CVs by generic sections (experience, education, skills) but:
+
+- ❌ **No date extraction** - Couldn't identify "current role" vs past roles
+- ❌ **No experience calculation** - Couldn't sum years across positions
+- ❌ **Basic metadata** - Only stored `section_type` and `candidate_name`
+- ❌ **Semantic search limitations** - Questions like "what's their current job?" failed
+
+### The Solution: SmartChunkingService
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           CV PDF UPLOAD                                      │
+└─────────────────────────────────┬───────────────────────────────────────────┘
+                                  │
+                                  ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  STEP 0: SMART CHUNKING (SmartChunkingService)                               │
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │ 1. EXTRACT STRUCTURED DATA:                                              ││
+│  │    • Parse dates: "2020-Present", "2018-2023", "Jan 2019 - Dec 2021"    ││
+│  │    • Identify current position (Present/Actual/Current indicators)       ││
+│  │    • Extract job titles and companies                                    ││
+│  │    • Calculate duration per position                                     ││
+│  │                                                                          ││
+│  │ 2. CALCULATE TOTALS:                                                     ││
+│  │    • Total years of experience (earliest start → latest end)             ││
+│  │    • Number of positions held                                            ││
+│  │    • Current role and company                                            ││
+│  │                                                                          ││
+│  │ 3. CREATE ENRICHED CHUNKS:                                               ││
+│  │    • Summary Chunk (pre-calculated profile)                              ││
+│  │    • Position Chunks (one per job, with dates)                           ││
+│  │    • Skills Chunk                                                        ││
+│  │    • Full CV Chunk (for comprehensive queries)                           ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+│  Script: smart_chunking_service.py                                           │
+└─────────────────────────────────┬───────────────────────────────────────────┘
+                                  │
+                                  ▼
+                         [Embedding & Indexing]
+```
+
+### Chunk Types Created
+
+| Chunk Type | Purpose | Key Metadata |
+|------------|---------|--------------|
+| **Summary** | Quick profile lookup | `current_role`, `current_company`, `total_experience_years`, `position_count` |
+| **Position** | Individual job details | `job_title`, `company`, `start_year`, `end_year`, `is_current`, `duration_years` |
+| **Skills** | Technical competencies | `skill_count` |
+| **Full CV** | Comprehensive queries | All metadata + first 4000 chars |
+
+### Enriched Metadata Schema
+
+```python
+# Summary Chunk Metadata
+{
+    "section_type": "summary",
+    "candidate_name": "Matteo Rossi",
+    "current_role": "Lead Merchandising Strategist",      # ← NEW
+    "current_company": "Global Fashion Retail Corp",      # ← NEW
+    "total_experience_years": 6.0,                        # ← NEW (calculated)
+    "is_summary": True,                                   # ← NEW
+    "position_count": 3                                   # ← NEW
+}
+
+# Position Chunk Metadata
+{
+    "section_type": "experience",
+    "candidate_name": "Matteo Rossi",
+    "job_title": "Lead Merchandising Strategist",         # ← NEW
+    "company": "Global Fashion Retail Corp",              # ← NEW
+    "start_year": 2023,                                   # ← NEW
+    "end_year": None,                                     # ← NEW (None = Present)
+    "is_current": True,                                   # ← NEW
+    "duration_years": 2.0,                                # ← NEW
+    "position_order": 1                                   # ← NEW (1 = most recent)
+}
+```
+
+### Date Extraction Patterns
+
+The service recognizes multiple date formats:
+
+```python
+YEAR_PATTERNS = [
+    r'(\d{4})\s*[-–—]\s*(Present|Presente|Actual|Current|Now)',  # 2020 - Present
+    r'(\d{4})\s*[-–—]\s*(\d{4})',                                 # 2018 - 2023
+    r'(?:Jan|Feb|...)\s*(\d{4})\s*[-–—]\s*(?:Jan|...)\s*(\d{4})', # Jan 2020 - Dec 2023
+    r'(?:\d{1,2}/)?(\d{4})\s*[-–—]\s*(?:\d{1,2}/)?(\d{4})',       # 01/2020 - 12/2023
+]
+
+CURRENT_INDICATORS = ['present', 'presente', 'actual', 'current', 'now', 'hoy', 'actualidad']
+```
+
+### Experience Calculation
+
+```python
+def _calculate_total_experience(positions: List[JobPosition]) -> float:
+    """
+    Calculate total years from career span.
+    
+    Method: max(end_years) - min(start_years)
+    
+    Example:
+        Position 1: 2023-Present (2 years)
+        Position 2: 2021-2023    (2 years)
+        Position 3: 2019-2021    (2 years)
+        
+        Total = 2025 - 2019 = 6 years
+    """
+```
+
+### Summary Chunk Content Example
+
+```
+===== CANDIDATE PROFILE: Matteo Rossi =====
+
+CURRENT POSITION: Lead Merchandising Strategist
+CURRENT COMPANY: Global Fashion Retail Corp
+TOTAL YEARS OF EXPERIENCE: 6 years
+NUMBER OF POSITIONS HELD: 3
+
+CAREER HISTORY (chronological, most recent first):
+  1. Lead Merchandising Strategist at Global Fashion Retail Corp (2023-Present, 2y) [CURRENT]
+  2. Inventory Planner at Fashion Dynamics Inc (2021-2023, 2y)
+  3. Junior Buyer at Style Co (2019-2021, 2y)
+
+KEY SKILLS: Python, Excel, SAP, Demand Forecasting, Inventory Management
+```
+
+---
+
+## Targeted Retrieval
+
+> **NEW in v5.1** - Retrieve ALL chunks for a specific candidate
+
+### The Problem
+
+When a user asks "tell me everything about Matteo Rossi":
+
+- ❌ **Semantic search** only returns chunks semantically similar to the query
+- ❌ May miss the most recent job if query doesn't mention specific terms
+- ❌ Cannot reliably answer "what's their current role?" or "how many years of experience?"
+
+### The Solution
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  QUERY: "damelo todo sobre Matteo Rossi"                                     │
+└─────────────────────────────────┬───────────────────────────────────────────┘
+                                  │
+                                  ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  STEP 1: CANDIDATE NAME EXTRACTION                                           │
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │ extract_candidate_name_from_query("damelo todo sobre Matteo Rossi")     ││
+│  │                                                                          ││
+│  │ Patterns recognized:                                                     ││
+│  │ • "damelo todo sobre X" / "tell me about X"                             ││
+│  │ • "información sobre X" / "profile of X"                                ││
+│  │ • Direct name queries                                                    ││
+│  │                                                                          ││
+│  │ Result: ctx.target_candidate_name = "Matteo Rossi"                      ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────┬───────────────────────────────────────────┘
+                                  │
+                                  ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  STEP 5: TARGETED RETRIEVAL (instead of semantic search)                     │
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │ IF ctx.target_candidate_name is set:                                     ││
+│  │                                                                          ││
+│  │   vector_store.get_all_chunks_by_candidate("Matteo Rossi")              ││
+│  │                                                                          ││
+│  │   Returns ALL chunks where metadata.candidate_name matches:              ││
+│  │   • Summary chunk (with pre-calculated totals)                           ││
+│  │   • All position chunks (with dates and durations)                       ││
+│  │   • Skills chunk                                                         ││
+│  │   • Full CV chunk                                                        ││
+│  │                                                                          ││
+│  │   Sorted by priority: summary → experience → skills → full_cv            ││
+│  │                                                                          ││
+│  │ ELSE:                                                                    ││
+│  │   Standard RRF fusion retrieval (semantic search)                        ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────┬───────────────────────────────────────────┘
+                                  │
+                                  ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  STEP 6: SKIP RERANKING (for targeted retrieval)                             │
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │ IF retrieval_strategy == "targeted_candidate":                           ││
+│  │   Skip reranking - we want ALL chunks, not filtered by relevance         ││
+│  │   Reason: "Skills" chunk may not be semantically similar to query        ││
+│  │           but we still want to include it for complete profile           ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Vector Store Method
+
+```python
+# SimpleVectorStore.get_all_chunks_by_candidate()
+
+def get_all_chunks_by_candidate(
+    self, 
+    candidate_name: str, 
+    cv_ids: Optional[List[str]] = None
+) -> List[Dict[str, Any]]:
+    """
+    Get ALL chunks for a specific candidate.
+    
+    - Case-insensitive partial match
+    - Returns chunks sorted by section priority
+    - Used for single-candidate queries
+    """
+```
+
+### Benefits
+
+| Query Type | Before (v5.0) | After (v5.1) |
+|------------|---------------|--------------|
+| "What's Matteo's current role?" | ❌ May miss if "current" not in chunk | ✅ Summary chunk has `current_role` |
+| "How many years of experience?" | ❌ Cannot calculate | ✅ `total_experience_years` pre-calculated |
+| "Tell me everything about X" | ⚠️ Only semantically similar chunks | ✅ ALL chunks for that candidate |
 
 ---
 

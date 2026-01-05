@@ -2,7 +2,7 @@
 
 > **CV Screener AI - Complete Structured Output Documentation**
 > 
-> Version: 5.0.0 | Last Updated: January 2026
+> Version: 5.1.0 | Last Updated: January 2026
 
 ---
 
@@ -611,24 +611,56 @@ TableData(
 
 ### Use Case 2: Single Candidate (Individual Details)
 
-**Query**: "Tell me more about Sofia Grijalva" or "What experience does cv_sofia_grijalva have?"
+> **Enhanced in v5.1** with Smart Chunking metadata
+
+**Query**: "Tell me more about Sofia Grijalva" or "damelo todo sobre Matteo Rossi"
+
+**How it Works (v5.1)**:
+
+1. **Targeted Retrieval**: System detects single-candidate query and fetches ALL chunks for that candidate
+2. **Enriched Metadata**: Chunks now include pre-calculated `current_role`, `total_experience_years`, `is_current`
+3. **Summary Chunk**: Contains pre-built profile with career trajectory
 
 **Output Structure**:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                   CANDIDATE DETAILS TABLE                            │
+│                   CANDIDATE PROFILE                                  │
 ├─────────────────┬───────────────────────────────────────────────────┤
-│ Candidate       │ Sofia Grijalva                                    │
+│ Current Role    │ Lead Merchandising Strategist (2023-Present)      │  ← From metadata
 ├─────────────────┼───────────────────────────────────────────────────┤
-│ Experience      │ 5 years in backend development                    │
+│ Current Company │ Global Fashion Retail Corp                        │  ← From metadata
 ├─────────────────┼───────────────────────────────────────────────────┤
-│ Key Skills      │ Python, Django, AWS, PostgreSQL                   │
+│ Experience      │ 6 years total                                     │  ← Pre-calculated
 ├─────────────────┼───────────────────────────────────────────────────┤
-│ Education       │ B.S. Computer Science, MIT                        │
+│ Key Skills      │ Python, Excel, SAP, Demand Forecasting            │
 ├─────────────────┼───────────────────────────────────────────────────┤
-│ Relevance       │ 95%                                               │
+│ Career Path     │ 3 positions (Junior → Mid → Lead)                 │  ← From position_count
 └─────────────────┴───────────────────────────────────────────────────┘
+```
+
+**Metadata Available for Single Candidate (v5.1)**:
+
+```python
+# From Summary Chunk
+{
+    "current_role": "Lead Merchandising Strategist",
+    "current_company": "Global Fashion Retail Corp",
+    "total_experience_years": 6.0,
+    "position_count": 3,
+    "is_summary": True
+}
+
+# From Position Chunks (one per job)
+{
+    "job_title": "Lead Merchandising Strategist",
+    "company": "Global Fashion Retail Corp",
+    "start_year": 2023,
+    "end_year": None,  # None = Present
+    "is_current": True,
+    "duration_years": 2.0,
+    "position_order": 1  # 1 = most recent
+}
 ```
 
 **TableData for Individual**:
