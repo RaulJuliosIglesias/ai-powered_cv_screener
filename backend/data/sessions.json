@@ -12301,10 +12301,416 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-05T16:43:47.721234"
+        },
+        {
+          "id": "2373f7e3-fce6-462b-9621-14501124529a",
+          "role": "user",
+          "content": "dame sobre el candidato Aisha Johnson toda la informacion disponible y respeusta en ingles, no lo comapres solo dame todo sorbe este candidato, su experiencai asm relante y porque deberia entrevistarlo para un role de software developer front end",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T17:14:16.926596"
+        },
+        {
+          "id": "2b31a9e0-e9c7-4393-a6f8-60735a434b17",
+          "role": "assistant",
+          "content": ":::thinking\nThe query asks for a summary of Aisha Okafor Business (cv_2a9de358)'s qualifications, highlighting relevant experience for a front-end software developer role, and a justification for an interview. However, Aisha Okafor Business (cv_2a9de358)'s CV does not list any front-end development skills. Therefore, I will summarize her qualifications and explain why she is not a suitable candidate for a front-end developer role based on the provided CV.\n:::\n\n[📄](cv:cv_2a9de358)**Aisha Okafor Business**'s background is in business analysis, and the CV does not demonstrate the skills required for a front-end software developer role.**Profile Summary:**|**Highlights**| Designed patient flow analysis, integrated machine-learning models, developed risk assessment framework, streamlined regulatory reporting, built automated Excel dashboards. |**Additional Details:**has experience as a Business Analyst at Banking Innovations PLC (2005-2010), FinTech Solutions Ltd.\n\n### Analysis\n\n| Aspect | Details | Match Score |\n|---|---|---|\n| Current Role | The CV does not explicitly state a current role. | 50% |\n| Experience | Business Analyst experience from 2001 to 2010 | 50% |\n| Key Skills | Data Modeling, SQL, Tableau, Process Mapping, Stakeholder Management | 50% |\n| Education | MSc in Business Analytics, BSc in Economics | 50% |\n| Highlights | Designed patient flow analysis, integrated machine-learning models, developed risk assessment framework, streamlined regulatory reporting, built automated Excel dashboards. | 25% |\n\n:::conclusion\n[📄](cv:cv_2a9de358)**Aisha Okafor Business**is not a suitable candidate for a front-end software developer role based on the information provided in the CV. The CV lacks any evidence of front-end development skills or experience. Therefore, an interview for a front-end software developer position is not recommended based solely on this CV.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_5c64fbcd",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_ea414ebe",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_2a9de358",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_1dc0ef87",
+              "filename": "388c469f__Rajiv_Patel__Editorial_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_f9769647",
+              "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf"
+            },
+            {
+              "cv_id": "cv_16ce0b4c",
+              "filename": "73be0a6e__Aisha_Johnson__Solidity_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_5463ea64",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_4d8a6bfc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_9fb0f971",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_b9dd75c5",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_86f2dc3f",
+              "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_933e3d69",
+              "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_5f249eef",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_fe4831ee",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_8a369e60",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_d1791bcc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_aafbc954",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_3b11c6a9",
+              "filename": "bd3c4450__Mateo_Fernandez__Music_Producer.pdf"
+            },
+            {
+              "cv_id": "cv_e72557d8",
+              "filename": "68148332__Kamal_Al-Mansoor__HR_Business_Partner.pdf"
+            },
+            {
+              "cv_id": "cv_66173b63",
+              "filename": "a6b7570f__Daniel_Müller__Editor.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1893.71,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 33.44,
+              "details": "Found 22 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 21540.91,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4311.17,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "[📄](cv:cv_2a9de358) **Aisha Okafor Business**'s background is in business analysis, and the CV does not demonstrate the skills required for a front-end software developer role. **Profile Summary:** | **Highlights** | Designed patient flow analysis, integrated machine-learning models, developed risk assessment framework, streamlined regulatory reporting, built automated Excel dashboards. | **Additional Details:** has experience as a Business Analyst at Banking Innovations PLC (2005-2010), FinTech Solutions Ltd.",
+            "raw_content": ":::thinking\nThe query asks for a summary of **[Aisha Okafor Business](cv:cv_2a9de358)**'s qualifications, highlighting relevant experience for a front-end software developer role, and a justification for an interview. However, **[Aisha Okafor Business](cv:cv_2a9de358)**'s CV does not list any front-end development skills. Therefore, I will summarize her qualifications and explain why she is not a suitable candidate for a front-end developer role based on the provided CV.\n:::\n\n**[Aisha Okafor Business](cv:cv_2a9de358)**'s background is in business analysis, and the CV does not demonstrate the skills required for a front-end software developer role.\n\n**Profile Summary:**\n\n| Aspect | Details |\n|---|---|\n| **Current Role** | The CV does not explicitly state a current role. |\n| **Experience** | Business Analyst experience from 2001 to 2010 |\n| **Key Skills** | Data Modeling, SQL, Tableau, Process Mapping, Stakeholder Management |\n| **Education** | MSc in Business Analytics, BSc in Economics |\n| **Highlights** | Designed patient flow analysis, integrated machine-learning models, developed risk assessment framework, streamlined regulatory reporting, built automated Excel dashboards. |\n\n**Additional Details:**\n\n**[Aisha Okafor Business](cv:cv_2a9de358)** has experience as a Business Analyst at Banking Innovations PLC (2005-2010), FinTech Solutions Ltd. (2001-2005), and Global Insights Ltd. (1999-2001). Her skills include data modeling, SQL, Tableau, process mapping, and stakeholder management. She holds an MSc in Business Analytics from the London School of Economics (2014) and a BSc in Economics from the University of Manchester (2009). She also has certifications as a Certified Business Analysis Professional (CBAP) and PMI Professional in Business Analysis.\n\n**Suitability for Front-End Software Developer Role:**\n\nThe CV does not explicitly mention any skills or experience related to front-end software development, such as HTML, CSS, JavaScript, or any front-end frameworks like React or Angular.\n\n:::conclusion\n**[Aisha Okafor Business](cv:cv_2a9de358)** is not a suitable candidate for a front-end software developer role based on the information provided in the CV. The CV lacks any evidence of front-end development skills or experience. Therefore, an interview for a front-end software developer position is not recommended based solely on this CV.\n:::",
+            "thinking": "The query asks for a summary of Aisha Okafor Business (cv_2a9de358)'s qualifications, highlighting relevant experience for a front-end software developer role, and a justification for an interview. However, Aisha Okafor Business (cv_2a9de358)'s CV does not list any front-end development skills. Therefore, I will summarize her qualifications and explain why she is not a suitable candidate for a front-end developer role based on the provided CV.",
+            "analysis": "[📄](cv:cv_2a9de358) **Aisha Okafor Business**'s background is in business analysis, and the CV does not demonstrate the skills required for a front-end software developer role.\n**Profile Summary:**\n| **Highlights** | Designed patient flow analysis, integrated machine-learning models, developed risk assessment framework, streamlined regulatory reporting, built automated Excel dashboards. |\n**Additional Details:**\n[📄](cv:cv_2a9de358) **Aisha Okafor Business** has experience as a Business Analyst at Banking Innovations PLC (2005-2010), FinTech Solutions Ltd. (2001-2005), and Global Insights Ltd. (1999-2001). Her skills include data modeling, SQL, Tableau, process mapping, and stakeholder management. She holds an MSc in Business Analytics from the London School of Economics (2014) and a BSc in Economics from the University of Manchester (2009). She also has certifications as a Certified Business Analysis Professional (CBAP) and PMI Professional in Business Analysis.\n**Suitability for Front-End Software Developer Role:**\nThe CV does not explicitly mention any skills or experience related to front-end software development, such as HTML, CSS, JavaScript, or any front-end frameworks like React or Angular.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Aspect",
+                "Details",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Current Role",
+                  "cv_id": "",
+                  "columns": {
+                    "Details": "The CV does not explicitly state a current role."
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Experience",
+                  "cv_id": "",
+                  "columns": {
+                    "Details": "Business Analyst experience from 2001 to 2010"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Key Skills",
+                  "cv_id": "",
+                  "columns": {
+                    "Details": "Data Modeling, SQL, Tableau, Process Mapping, Stakeholder Management"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Education",
+                  "cv_id": "",
+                  "columns": {
+                    "Details": "MSc in Business Analytics, BSc in Economics"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Highlights",
+                  "cv_id": "",
+                  "columns": {
+                    "Details": "Designed patient flow analysis, integrated machine-learning models, developed risk assessment framework, streamlined regulatory reporting, built automated Excel dashboards."
+                  },
+                  "match_score": 25
+                }
+              ]
+            },
+            "conclusion": "[📄](cv:cv_2a9de358) **Aisha Okafor Business** is not a suitable candidate for a front-end software developer role based on the information provided in the CV. The CV lacks any evidence of front-end development skills or experience. Therefore, an interview for a front-end software developer position is not recommended based solely on this CV.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T17:14:50.172825"
+        },
+        {
+          "id": "4e0d77ad-c667-4fdc-98b8-facb840c0612",
+          "role": "user",
+          "content": "y ahroa otro candidato dame los 3 mejroes candidatos para front end eladership",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T17:15:29.478735"
+        },
+        {
+          "id": "60fb7f6f-5a7c-40a0-8e06-0d52c6e27a9f",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the top 3 candidates for a Front End Leadership role, ranked by suitability. The key criteria are leadership experience, front-end skills (HTML, CSS, JavaScript, React, etc.), and team management. I need to scan the CVs for these skills and rank accordingly. If fewer than 3 candidates have relevant skills, I will return those that are closest.\n:::\n\nNone of the analyzed candidates have the required technical skills for a Front End Leadership role. Therefore, I am unable to provide a ranking of the top 3 candidates. ### Analysis\nNone of the CVs contain explicit mentions of front-end technologies like HTML, CSS, JavaScript, or relevant frameworks such as React or Angular.\n\n### Analysis\n\nNone of the CVs contain explicit mentions of front-end technologies like HTML, CSS, JavaScript, or relevant frameworks such as React or Angular. While some candidates possess leadership experience or data analytics skills, these are insufficient for a Front End Leadership role without the core technical skills.\n\n| Candidate | Key Skills | Match Score |\n|---|---|---|\n|  Aisha Patel  Postdoctoral | N/A | 80% |\n|  Aisha Patel  Postdoctoral | N/A | 80% |\n|  Lerato Nkosi  Blockchain Research | AWS | 80% |\n|  Lerato Nkosi  Blockchain Research | AWS | 80% |\n|  Isabel Mendoza  Pastry | N/A | 78% |\n|  Mei-Ling Chen  VP of | SQL | 77% |\n|  Mei-Ling Chen  VP of | SQL | 77% |\n|  Rajiv Patel  | AI | 61% |\n|  Ling Zhang  Director of | N/A | 61% |\n|  Ling Zhang  Director of | N/A | 61% |\n\n:::conclusion\nNo candidates match the specified criteria. I recommend expanding the search to include candidates with explicit mentions of front-end development skills and experience.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_fe4831ee",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_78b206ff",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_aafbc954",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_cf467081",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_05ddacb3",
+              "filename": "6b0a7d7d__Isabel_Mendoza__Pastry_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_5c64fbcd",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_ea414ebe",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_b85f594d",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_5f249eef",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_8a369e60",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_9fb0f971",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_5463ea64",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_4d8a6bfc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_fd34aa62",
+              "filename": "c4257bdc__Aisha_Müller__Producer.pdf"
+            },
+            {
+              "cv_id": "cv_b9dd75c5",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_d1791bcc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_f9769647",
+              "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf"
+            },
+            {
+              "cv_id": "cv_1dc0ef87",
+              "filename": "388c469f__Rajiv_Patel__Editorial_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_ffda47b5",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_86f2dc3f",
+              "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1676.99,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 29.21,
+              "details": "Found 25 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 17464.5,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 3965.39,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "None of the analyzed candidates have the required technical skills for a Front End Leadership role. Therefore, I am unable to provide a ranking of the top 3 candidates. ### Analysis\nNone of the CVs contain explicit mentions of front-end technologies like HTML, CSS, JavaScript, or relevant frameworks such as React or Angular.",
+            "raw_content": ":::thinking\nThe user is asking for the top 3 candidates for a Front End Leadership role, ranked by suitability. The key criteria are leadership experience, front-end skills (HTML, CSS, JavaScript, React, etc.), and team management. I need to scan the CVs for these skills and rank accordingly. If fewer than 3 candidates have relevant skills, I will return those that are closest.\n\n:::\n\nNone of the analyzed candidates have the required technical skills for a Front End Leadership role. Therefore, I am unable to provide a ranking of the top 3 candidates.\n\n### Analysis\nNone of the CVs contain explicit mentions of front-end technologies like HTML, CSS, JavaScript, or relevant frameworks such as React or Angular. While some candidates possess leadership experience or data analytics skills, these are insufficient for a Front End Leadership role without the core technical skills.\n\n:::conclusion\nNo candidates match the specified criteria. I recommend expanding the search to include candidates with explicit mentions of front-end development skills and experience.\n:::",
+            "thinking": "The user is asking for the top 3 candidates for a Front End Leadership role, ranked by suitability. The key criteria are leadership experience, front-end skills (HTML, CSS, JavaScript, React, etc.), and team management. I need to scan the CVs for these skills and rank accordingly. If fewer than 3 candidates have relevant skills, I will return those that are closest.",
+            "analysis": "None of the CVs contain explicit mentions of front-end technologies like HTML, CSS, JavaScript, or relevant frameworks such as React or Angular. While some candidates possess leadership experience or data analytics skills, these are insufficient for a Front End Leadership role without the core technical skills.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Key Skills",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": " Aisha Patel  Postdoctoral",
+                  "cv_id": "cv_fe4831ee",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": " Aisha Patel  Postdoctoral",
+                  "cv_id": "cv_aafbc954",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": " Lerato Nkosi  Blockchain Research",
+                  "cv_id": "cv_5c64fbcd",
+                  "columns": {
+                    "Key Skills": "AWS"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": " Lerato Nkosi  Blockchain Research",
+                  "cv_id": "cv_ea414ebe",
+                  "columns": {
+                    "Key Skills": "AWS"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": " Isabel Mendoza  Pastry",
+                  "cv_id": "cv_05ddacb3",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 78
+                },
+                {
+                  "candidate_name": " Mei-Ling Chen  VP of",
+                  "cv_id": "cv_78b206ff",
+                  "columns": {
+                    "Key Skills": "SQL"
+                  },
+                  "match_score": 77
+                },
+                {
+                  "candidate_name": " Mei-Ling Chen  VP of",
+                  "cv_id": "cv_cf467081",
+                  "columns": {
+                    "Key Skills": "SQL"
+                  },
+                  "match_score": 77
+                },
+                {
+                  "candidate_name": " Rajiv Patel ",
+                  "cv_id": "cv_b85f594d",
+                  "columns": {
+                    "Key Skills": "AI"
+                  },
+                  "match_score": 61
+                },
+                {
+                  "candidate_name": " Ling Zhang  Director of",
+                  "cv_id": "cv_5f249eef",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 61
+                },
+                {
+                  "candidate_name": " Ling Zhang  Director of",
+                  "cv_id": "cv_8a369e60",
+                  "columns": {
+                    "Key Skills": "N/A"
+                  },
+                  "match_score": 61
+                }
+              ]
+            },
+            "conclusion": "No candidates match the specified criteria. I recommend expanding the search to include candidates with explicit mentions of front-end development skills and experience.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T17:17:06.194385"
         }
       ],
       "created_at": "2026-01-05T02:15:22.786546",
-      "updated_at": "2026-01-05T16:43:47.721234"
+      "updated_at": "2026-01-05T17:17:06.194385"
     },
     {
       "id": "71cfaf4d-4258-40d8-98f7-e7c9d1a9bfd0",

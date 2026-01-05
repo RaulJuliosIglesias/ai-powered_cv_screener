@@ -1755,11 +1755,40 @@ class RAGServiceV5:
                 else ctx.question
             )
             
-            prompt = self._prompt_builder.build_query_prompt(
-                question=effective_question,
-                chunks=chunks,
-                total_cvs=ctx.total_cvs_in_session
+            # =================================================================
+            # TEMPLATE SELECTION: Single Candidate vs Multi-Candidate
+            # =================================================================
+            from app.prompts.templates import detect_single_candidate_query
+            
+            # Detect if this is a single candidate query
+            single_candidate_detection = detect_single_candidate_query(
+                question=ctx.question,  # Use original question for detection
+                chunks=chunks
             )
+            
+            if single_candidate_detection.is_single_candidate and single_candidate_detection.candidate_name:
+                # SINGLE CANDIDATE PATH - No comparisons
+                logger.info(
+                    f"[GENERATION] Using SINGLE_CANDIDATE_TEMPLATE for '{single_candidate_detection.candidate_name}' "
+                    f"(method: {single_candidate_detection.detection_method}, confidence: {single_candidate_detection.confidence})"
+                )
+                prompt = self._prompt_builder.build_single_candidate_prompt(
+                    question=effective_question,
+                    candidate_name=single_candidate_detection.candidate_name,
+                    cv_id=single_candidate_detection.cv_id or "",
+                    chunks=chunks
+                )
+            else:
+                # MULTI-CANDIDATE PATH - Standard comparison/search template
+                logger.info(
+                    f"[GENERATION] Using QUERY_TEMPLATE (multi-candidate) "
+                    f"(method: {single_candidate_detection.detection_method})"
+                )
+                prompt = self._prompt_builder.build_query_prompt(
+                    question=effective_question,
+                    chunks=chunks,
+                    total_cvs=ctx.total_cvs_in_session
+                )
             
             # Add requirements
             if ctx.query_understanding and ctx.query_understanding.requirements:

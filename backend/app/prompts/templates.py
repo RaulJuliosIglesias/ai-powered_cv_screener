@@ -32,7 +32,7 @@ class QueryType(Enum):
     VERIFY = "verify"              # Verify specific claim about candidate
     AGGREGATE = "aggregate"        # Statistics across all CVs
     MATCH = "match"                # Match job description to candidates
-
+    SINGLE_CANDIDATE = "single_candidate"  # Query about ONE specific candidate
 
 class ResponseFormat(Enum):
     """Output format preferences."""
@@ -298,11 +298,66 @@ Respond in this exact JSON structure:
   "confidence": "high|medium|low",
   "notes": "string - any caveats or additional context"
 }}
-```"""
+"""
 
 
 # =============================================================================
-# SPECIALIZED TEMPLATES
+# SINGLE CANDIDATE TEMPLATE (Individual Analysis - NO Comparisons)
+# =============================================================================
+
+SINGLE_CANDIDATE_TEMPLATE = """## SINGLE CANDIDATE ANALYSIS
+**Target Candidate:** {candidate_name}
+**CV ID:** {cv_id}
+
+---
+{context}
+---
+
+## USER QUERY
+{question}
+
+## RESPONSE FORMAT FOR SINGLE CANDIDATE
+You are answering a question about ONE SPECIFIC CANDIDATE. Do NOT compare with others.
+
+:::thinking
+[Your reasoning about this specific candidate only]
+- What is being asked about {candidate_name}?
+- What information is available in their CV?
+- How well does their profile answer the question?
+:::
+
+### About **[{candidate_name}](cv:{cv_id})**
+
+[Direct, detailed answer about THIS candidate. Focus entirely on their profile.]
+
+**Profile Summary:**
+| Aspect | Details |
+|--------|---------|
+| **Current Role** | [Their current/most recent position] |
+| **Experience** | [Years and relevant experience] |
+| **Key Skills** | [Skills relevant to the query] |
+| **Education** | [Highest qualification] |
+| **Highlights** | [Notable achievements or strengths] |
+
+[Additional details answering the specific question asked]
+
+:::conclusion
+[Specific assessment or recommendation for **[{candidate_name}](cv:{cv_id})**]
+:::
+
+## CRITICAL RULES FOR SINGLE CANDIDATE QUERIES
+- Focus EXCLUSIVELY on **[{candidate_name}](cv:{cv_id})**
+- Do NOT create comparison tables with other candidates
+- Do NOT mention, reference, or compare with ANY other candidates
+- Answer the specific question asked about THIS candidate
+- Use **[{candidate_name}](cv:{cv_id})** format for ALL references to this candidate
+- If information is not in the CV, state: "The CV does not mention..."
+
+Respond now:"""
+
+
+# =============================================================================
+# SPECIALIZED TEMPLATES (Multi-Candidate)
 # =============================================================================
 
 COMPARISON_TEMPLATE = """## COMPARISON REQUEST
@@ -929,6 +984,37 @@ class PromptBuilder:
             question=question,
             num_cvs=num_cvs
         )
+    
+    def build_single_candidate_prompt(
+        self,
+        question: str,
+        candidate_name: str,
+        cv_id: str,
+        chunks: list[dict]
+    ) -> str:
+        """
+        Build a prompt for analyzing a SINGLE specific candidate.
+        
+        This template is completely separate from comparison templates.
+        It focuses entirely on one candidate without any comparisons.
+        
+        Args:
+            question: User's question about the candidate
+            candidate_name: Name of the target candidate
+            cv_id: CV ID of the target candidate
+            chunks: Retrieved CV chunks (should be filtered to this candidate)
+            
+        Returns:
+            Formatted prompt string for single candidate analysis
+        """
+        ctx = format_context(chunks)
+        
+        return SINGLE_CANDIDATE_TEMPLATE.format(
+            candidate_name=candidate_name,
+            cv_id=cv_id,
+            context=ctx.text,
+            question=question
+        )
 
 
 # =============================================================================
@@ -1013,6 +1099,165 @@ def detect_off_topic(question: str) -> tuple[bool, str | None]:
 
 
 # =============================================================================
+# SINGLE CANDIDATE DETECTION
+# =============================================================================
+
+@dataclass
+class SingleCandidateDetection:
+    """Result of single candidate detection."""
+    is_single_candidate: bool
+    candidate_name: str | None = None
+    cv_id: str | None = None
+    confidence: float = 0.0
+    detection_method: str = "none"
+
+
+def detect_single_candidate_query(
+    question: str,
+    chunks: list[dict],
+    candidate_names: list[str] | None = None
+) -> SingleCandidateDetection:
+    """
+    Detect if a query is about a SINGLE specific candidate.
+    
+    This function determines whether to use SINGLE_CANDIDATE_TEMPLATE
+    or the standard QUERY_TEMPLATE (for comparisons/multiple candidates).
+    
+    Detection methods (in priority order):
+    1. Explicit name mention in query
+    2. Only one unique candidate in retrieved chunks
+    3. Query patterns indicating single focus
+    
+    Args:
+        question: User's question
+        chunks: Retrieved CV chunks
+        candidate_names: Optional list of known candidate names
+        
+    Returns:
+        SingleCandidateDetection with detection result
+    """
+    q_lower = question.lower()
+    
+    # First check: Is this explicitly a multi-candidate query?
+    if is_multi_candidate_query(question):
+        return SingleCandidateDetection(
+            is_single_candidate=False,
+            detection_method="explicit_multi_candidate_query"
+        )
+    
+    # Extract unique candidates from chunks
+    unique_candidates: dict[str, str] = {}  # name -> cv_id
+    for chunk in chunks:
+        metadata = chunk.get("metadata", {})
+        name = metadata.get("candidate_name", "")
+        cv_id = metadata.get("cv_id", "")
+        if name and name not in unique_candidates:
+            unique_candidates[name] = cv_id
+    
+    # Method 1: Check if query explicitly mentions a candidate name
+    if candidate_names:
+        for name in candidate_names:
+            name_lower = name.lower()
+            if name_lower in q_lower:
+                cv_id = unique_candidates.get(name, "")
+                return SingleCandidateDetection(
+                    is_single_candidate=True,
+                    candidate_name=name,
+                    cv_id=cv_id,
+                    confidence=0.95,
+                    detection_method="explicit_name_in_query"
+                )
+    
+    # Also check names from chunks
+    for name, cv_id in unique_candidates.items():
+        name_lower = name.lower()
+        if name_lower in q_lower:
+            return SingleCandidateDetection(
+                is_single_candidate=True,
+                candidate_name=name,
+                cv_id=cv_id,
+                confidence=0.95,
+                detection_method="explicit_name_in_query"
+            )
+        # Check first name only (if multi-word name)
+        name_parts = name.split()
+        if len(name_parts) > 1:
+            first_name = name_parts[0].lower()
+            if len(first_name) > 3 and first_name in q_lower:
+                return SingleCandidateDetection(
+                    is_single_candidate=True,
+                    candidate_name=name,
+                    cv_id=cv_id,
+                    confidence=0.85,
+                    detection_method="first_name_in_query"
+                )
+    
+    # Method 2: Only one candidate in retrieved chunks
+    if len(unique_candidates) == 1:
+        name, cv_id = list(unique_candidates.items())[0]
+        single_focus_patterns = [
+            r"\bhis\b", r"\bher\b", r"\btheir\b",
+            r"\bthis candidate\b", r"\beste candidato\b",
+            r"'s\b",
+        ]
+        
+        for pattern in single_focus_patterns:
+            if re.search(pattern, q_lower):
+                return SingleCandidateDetection(
+                    is_single_candidate=True,
+                    candidate_name=name,
+                    cv_id=cv_id,
+                    confidence=0.90,
+                    detection_method="single_chunk_with_focus_pattern"
+                )
+        
+        return SingleCandidateDetection(
+            is_single_candidate=True,
+            candidate_name=name,
+            cv_id=cv_id,
+            confidence=0.75,
+            detection_method="single_candidate_in_chunks"
+        )
+    
+    # Multiple candidates, no explicit single focus
+    return SingleCandidateDetection(
+        is_single_candidate=False,
+        candidate_name=None,
+        cv_id=None,
+        confidence=0.0,
+        detection_method="multiple_candidates"
+    )
+
+
+def is_multi_candidate_query(question: str) -> bool:
+    """
+    Detect if a query explicitly asks about MULTIPLE candidates.
+    These queries should ALWAYS use comparison templates.
+    """
+    q_lower = question.lower()
+    
+    multi_candidate_patterns = [
+        r"\ball\b.*\bcandidates?\b",
+        r"\beveryone\b",
+        r"\btodos\b.*\bcandidatos?\b",
+        r"\bcompare\b",
+        r"\brank\b",
+        r"\btop\s+\d+\b",
+        r"\bbest\b.*\bcandidates?\b",
+        r"\bmejores?\b",
+        r"\bvs\b",
+        r"\bversus\b",
+        r"\bwhich\s+candidate\b",
+        r"\bqué candidato\b",
+        r"\bcuál\b.*\bcandidato\b",
+        r"\border\b",
+        r"\blist\b.*\bcandidates?\b",
+    ]
+    
+    return any(re.search(pattern, q_lower) for pattern in multi_candidate_patterns)
+
+
+# =============================================================================
 # LEGACY COMPATIBILITY FUNCTIONS
 # =============================================================================
 
@@ -1048,6 +1293,7 @@ __all__ = [
     # Core prompts
     "SYSTEM_PROMPT",
     "QUERY_TEMPLATE",
+    "SINGLE_CANDIDATE_TEMPLATE",
     "COMPARISON_TEMPLATE",
     "RANKING_TEMPLATE",
     "VERIFICATION_TEMPLATE",
@@ -1071,6 +1317,7 @@ __all__ = [
     "PromptBuilder",
     "FormattedContext",
     "ChunkMetadata",
+    "SingleCandidateDetection",
     
     # Functions
     "format_context",
@@ -1078,6 +1325,8 @@ __all__ = [
     "classify_query",
     "is_technical_query",
     "detect_off_topic",
+    "detect_single_candidate_query",
+    "is_multi_candidate_query",
     
     # Legacy
     "build_query_prompt",
