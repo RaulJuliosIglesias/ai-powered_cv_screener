@@ -1,9 +1,10 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, CheckCircle, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy, Eye, ExternalLink, Sliders, BarChart3, RotateCcw, Info, Github, Linkedin } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import useMode from './hooks/useMode';
 import useTheme from './hooks/useTheme';
+import useToast from './hooks/useToast';
 import { useLanguage } from './contexts/LanguageContext';
 import SourceBadge from './components/SourceBadge';
 import ModelSelector from './components/ModelSelector';
@@ -12,6 +13,12 @@ import MetricsPanel, { saveMetricEntry } from './components/MetricsPanel';
 import PipelineProgressPanel from './components/PipelineProgressPanel';
 import ChatInputField from './components/ChatInputField';
 import { StructuredOutputRenderer } from './components/output';
+import Sidebar from './components/Sidebar';
+import Toast from './components/Toast';
+import { UploadProgressModal, AboutModal } from './components/modals';
+import { SessionSkeleton, MessageSkeleton } from './components/SkeletonLoader';
+import { MemoizedTable, MemoizedCodeBlock } from './components/MemoizedTable';
+import { preprocessContent, parseCVFilename } from './utils/contentProcessor';
 import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList, clearSessionCVs, deleteAllCVsFromDatabase, deleteCV, deleteMessage, deleteMessagesFrom } from './services/api';
 
 function App() {
@@ -41,7 +48,7 @@ function App() {
   const [cvPanelSession, setCvPanelSession] = useState(null);
   const cvPanelFileInputRef = useRef(null);
   const [isLoadingMode, setIsLoadingMode] = useState(false);
-  const [toast, setToast] = useState(null);
+  const [isLoadingSessions, setIsLoadingSessions] = useState(true);
   const [pdfViewerUrl, setPdfViewerUrl] = useState(null);
   const [pdfViewerTitle, setPdfViewerTitle] = useState('');
   const [showRAGSettings, setShowRAGSettings] = useState(false);
@@ -68,21 +75,6 @@ function App() {
   const [expandedSessions, setExpandedSessions] = useState({});
   const [loadedSessionCVs, setLoadedSessionCVs] = useState({}); // Cache loaded CVs per session
   
-  // Helper to parse CV filename into components
-  const parseCVFilename = (filename) => {
-    const name = filename.replace('.pdf', '').replace('.PDF', '');
-    const parts = name.split('_');
-    
-    if (parts.length >= 3) {
-      const fileId = parts[0];
-      const role = parts[parts.length - 1].replace(/-/g, ' ');
-      const candidateName = parts.slice(1, -1).join(' ');
-      return { fileId, candidateName, role };
-    } else if (parts.length === 2) {
-      return { fileId: parts[0], candidateName: parts[1], role: '' };
-    }
-    return { fileId: '', candidateName: name, role: '' };
-  };
   
   const toggleSessionExpand = async (sessionId) => {
     const willExpand = !expandedSessions[sessionId];
@@ -111,72 +103,7 @@ function App() {
     setPdfViewerTitle('');
   };
 
-  const showToast = (message, type = 'info') => {
-    setToast({ message, type });
-    setTimeout(() => setToast(null), 3000);
-  };
-
-  // Preprocess message content to handle special blocks and CV links
-  const preprocessContent = (content) => {
-    if (!content) return { mainContent: content || '', conclusionContent: null, thinkingContent: null };
-    
-    let text = content;
-    let thinkingContent = null;
-    let conclusionContent = null;
-    
-    // Extract thinking block - try with closing ::: first, then without
-    const thinkingMatch = text.match(/:::thinking\s*\n?([\s\S]*?):::/);
-    if (thinkingMatch) {
-      thinkingContent = thinkingMatch[1].trim();
-      text = text.replace(thinkingMatch[0], '');
-    }
-    
-    // Extract conclusion block - multiple patterns
-    // Pattern 1: :::conclusion ... ::: (with closing)
-    let conclusionMatch = text.match(/:::conclusion\s*\n?([\s\S]*?):::/);
-    if (conclusionMatch) {
-      conclusionContent = conclusionMatch[1].trim();
-      text = text.replace(conclusionMatch[0], '');
-    } else {
-      // Pattern 2: :::conclusion at start of line followed by content (no closing)
-      conclusionMatch = text.match(/:::conclusion\s+(.+)$/m);
-      if (conclusionMatch) {
-        conclusionContent = conclusionMatch[1].trim();
-        text = text.replace(conclusionMatch[0], '');
-      }
-    }
-    
-    // Also remove any remaining :::conclusion text that wasn't matched
-    text = text.replace(/:::conclusion\s*/g, '');
-    
-    // Convert various CV reference formats to: Name + icon link (no emoji, just link that renders as button)
-    // Format 1: [CV:cv_id] -> link only (renders as FileText icon button)
-    text = text.replace(/\[CV:(cv_[a-z0-9_-]+)\]/gi, '[$1]($1)');
-    
-    // Format 2: **[Name](cv:cv_id)** -> **Name** + icon link
-    text = text.replace(/\*\*\[([^\]]+)\]\(cv:(cv_[a-z0-9_-]+)\)\*\*/gi, '**$1** [$2]($2)');
-    
-    // Format 3: [Name](cv:cv_id) -> Name + icon link
-    text = text.replace(/\[([^\]]+)\]\(cv:(cv_[a-z0-9_-]+)\)/gi, '$1 [$2]($2)');
-    
-    // Format 4: **[Name](cv_id)** direct link -> **Name** + icon link
-    text = text.replace(/\*\*\[([^\]]+)\]\((cv_[a-z0-9_-]+)\)\*\*/gi, '**$1** [$2]($2)');
-    
-    // Format 5: [Name](cv_id) direct link -> Name + icon link (CRITICAL - prevents name as link)
-    text = text.replace(/\[([^\]]+)\]\((cv_[a-z0-9_-]+)\)/gi, '$1 [$2]($2)');
-    
-    // Format 6: (cv:cv_id) standalone -> icon link
-    text = text.replace(/\(cv:(cv_[a-z0-9_-]+)\)/gi, ' [$1]($1)');
-    
-    // Clean up multiple newlines
-    text = text.replace(/\n{3,}/g, '\n\n').trim();
-    
-    return { 
-      mainContent: text, 
-      conclusionContent,
-      thinkingContent 
-    };
-  };
+  const { toast: toastState, showToast: showToastMessage, hideToast } = useToast();
   
   const messagesEndRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -197,7 +124,15 @@ function App() {
   }, [isChatLoading]);
 
   const loadSessions = useCallback(async () => {
-    try { const data = await getSessions(mode); setSessions(data.sessions || []); } catch (e) { console.error(e); }
+    try { 
+      setIsLoadingSessions(true);
+      const data = await getSessions(mode); 
+      setSessions(data.sessions || []); 
+    } catch (e) { 
+      console.error(e); 
+    } finally {
+      setIsLoadingSessions(false);
+    }
   }, [mode]);
 
   const loadSession = useCallback(async (id) => {
@@ -218,7 +153,7 @@ function App() {
       setSuggestions([]);
       await loadSessions();
       setIsLoadingMode(false);
-      showToast(mode === 'cloud' ? (language === 'es' ? 'Modo Supabase activado' : 'Supabase mode activated') : (language === 'es' ? 'Modo Local activado' : 'Local mode activated'));
+      showToastMessage(mode === 'cloud' ? (language === 'es' ? 'Modo Supabase activado' : 'Supabase mode activated') : (language === 'es' ? 'Modo Local activado' : 'Local mode activated'));
     };
     switchMode();
   }, [mode]); // eslint-disable-line
@@ -549,7 +484,7 @@ function App() {
     await removeCVFromSession(currentSessionId, cvId, mode);
     await loadSession(currentSessionId);
     await loadSessions();
-    showToast(language === 'es' ? 'CV eliminado' : 'CV removed', 'success');
+    showToastMessage(language === 'es' ? 'CV eliminado' : 'CV removed', 'success');
   };
 
   const handleDeleteMessage = async (messageIndex) => {
@@ -564,16 +499,16 @@ function App() {
     try {
       await deleteMessage(currentSessionId, messageIndex, mode);
       await loadSession(currentSessionId);
-      showToast(language === 'es' ? 'Mensaje eliminado' : 'Message deleted', 'success');
+      showToastMessage(language === 'es' ? 'Mensaje eliminado' : 'Message deleted', 'success');
     } catch (e) {
       console.error(e);
-      showToast(language === 'es' ? 'Error al eliminar mensaje' : 'Error deleting message', 'error');
+      showToastMessage(language === 'es' ? 'Error al eliminar mensaje' : 'Error deleting message', 'error');
     }
   };
 
   const handleCopyMessage = (content) => {
     navigator.clipboard.writeText(content);
-    showToast(language === 'es' ? 'Mensaje copiado' : 'Message copied', 'success');
+    showToastMessage(language === 'es' ? 'Mensaje copiado' : 'Message copied', 'success');
   };
 
   const cancelDeleteMessage = () => {
@@ -590,7 +525,7 @@ function App() {
       handleSend(messageContent);
     } catch (e) {
       console.error(e);
-      showToast(language === 'es' ? 'Error al reintentar' : 'Error retrying', 'error');
+      showToastMessage(language === 'es' ? 'Error al reintentar' : 'Error retrying', 'error');
     }
   };
 
@@ -601,7 +536,7 @@ function App() {
     setCvPanelSession(data);
     await loadSessions();
     if (currentSessionId === sessionId) await loadSession(sessionId);
-    showToast(language === 'es' ? 'CV eliminado' : 'CV removed', 'success');
+    showToastMessage(language === 'es' ? 'CV eliminado' : 'CV removed', 'success');
   };
 
   const handleUploadToPanel = async (e) => {
@@ -701,8 +636,8 @@ function App() {
     try {
       await clearSessionCVs(currentSessionId, mode);
       await loadSession(currentSessionId);
-      showToast(language === 'es' ? 'Todos los CVs eliminados del chat' : 'All CVs removed from chat', 'success');
-    } catch (e) { console.error(e); showToast('Error', 'error'); }
+      showToastMessage(language === 'es' ? 'Todos los CVs eliminados del chat' : 'All CVs removed from chat', 'success');
+    } catch (e) { console.error(e); showToastMessage('Error', 'error'); }
   };
 
   const handleDeleteAllCVsFromDB = async () => {
@@ -763,8 +698,8 @@ function App() {
         const sessionData = await getSession(cvPanelSessionId, mode);
         setCvPanelSession(sessionData);
       }
-      showToast(language === 'es' ? 'CV eliminado de la base de datos' : 'CV deleted from database', 'success');
-    } catch (e) { console.error(e); showToast('Error', 'error'); }
+      showToastMessage(language === 'es' ? 'CV eliminado de la base de datos' : 'CV deleted from database', 'success');
+    } catch (e) { console.error(e); showToastMessage('Error', 'error'); }
   };
 
   return (
@@ -777,7 +712,9 @@ function App() {
           </button>
         </div>
         <div className="flex-1 overflow-y-auto px-2">
-          {sessions.map((s) => (
+          {isLoadingSessions ? (
+            <SessionSkeleton />
+          ) : sessions.map((s) => (
             <div key={s.id} className="mb-1">
               <div 
                 onClick={() => !deletingSessionId && setCurrentSessionId(s.id)} 
@@ -943,56 +880,14 @@ function App() {
                           <ReactMarkdown 
                             remarkPlugins={[remarkGfm]}
                             components={{
-                              table: ({node, ...props}) => {
-                                const tableRef = useRef(null);
-                                const [copied, setCopied] = useState(false);
-                                const copyTable = () => {
-                                  if (tableRef.current) {
-                                    const rows = tableRef.current.querySelectorAll('tr');
-                                    let text = '';
-                                    rows.forEach(row => {
-                                      const cells = row.querySelectorAll('th, td');
-                                      text += Array.from(cells).map(c => c.textContent).join('\t') + '\n';
-                                    });
-                                    navigator.clipboard.writeText(text);
-                                    setCopied(true);
-                                    setTimeout(() => setCopied(false), 2000);
-                                  }
-                                };
-                                return (
-                                  <div className="my-4 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-900">
-                                    <div className="flex items-center justify-between px-3 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-600">
-                                      <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Table</span>
-                                      <button onClick={copyTable} className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
-                                        {copied ? <><Check className="w-3.5 h-3.5" /> Copied!</> : <><Copy className="w-3.5 h-3.5" /> Copy table</>}
-                                      </button>
-                                    </div>
-                                    <div className="overflow-x-auto">
-                                      <table ref={tableRef} className="w-full text-sm" {...props} />
-                                    </div>
-                                  </div>
-                                );
-                              },
+                              table: ({node, ...props}) => <MemoizedTable {...props} />,
                               thead: ({node, ...props}) => <thead className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white" {...props} />,
                               th: ({node, ...props}) => <th className="px-4 py-3 text-left font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700" {...props} />,
                               td: ({node, ...props}) => <td className="px-4 py-3 text-gray-700 dark:text-gray-200 border-b border-gray-100 dark:border-gray-700/50" {...props} />,
                               tr: ({node, ...props}) => <tr className="hover:bg-gray-50 dark:hover:bg-gray-800/50" {...props} />,
-                              code: ({node, inline, className, children, ...props}) => {
-                                const [copied, setCopied] = useState(false);
-                                const codeText = String(children).replace(/\n$/, '');
-                                if (inline) return <code className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-pink-600 dark:text-pink-400 text-sm" {...props}>{children}</code>;
-                                return (
-                                  <div className="my-3 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-600 bg-gray-900">
-                                    <div className="flex items-center justify-between px-3 py-2 bg-gray-800 border-b border-gray-700">
-                                      <span className="text-xs text-gray-400">{className?.replace('language-', '') || 'code'}</span>
-                                      <button onClick={() => { navigator.clipboard.writeText(codeText); setCopied(true); setTimeout(() => setCopied(false), 2000); }} className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-white">
-                                        {copied ? <><Check className="w-3.5 h-3.5" /> Copied!</> : <><Copy className="w-3.5 h-3.5" /> Copy code</>}
-                                      </button>
-                                    </div>
-                                    <pre className="p-4 overflow-x-auto text-sm text-gray-100"><code {...props}>{children}</code></pre>
-                                  </div>
-                                );
-                              },
+                              code: ({node, inline, className, children, ...props}) => (
+                                <MemoizedCodeBlock inline={inline} className={className} {...props}>{children}</MemoizedCodeBlock>
+                              ),
                               a: ({node, href, children, ...props}) => {
                                 // Handle cv_id format (from preprocessed [📄](cv_xxx))
                                 if (href?.startsWith('cv_')) {
@@ -1310,19 +1205,13 @@ function App() {
       )}
 
       {/* Toast Notification */}
-      {toast && (
-        <div className="fixed bottom-4 right-4 z-50 animate-in slide-in-from-bottom-2">
-          <div className={`flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg ${
-            toast.type === 'error' ? 'bg-red-500 text-white' : 
-            toast.type === 'success' ? 'bg-emerald-500 text-white' : 
-            'bg-gray-800 text-white'
-          }`}>
-            {toast.type === 'success' ? <Check className="w-5 h-5" /> : 
-             toast.type === 'error' ? <X className="w-5 h-5" /> : 
-             <Sparkles className="w-5 h-5" />}
-            <span className="text-sm font-medium">{toast.message}</span>
-          </div>
-        </div>
+      {toastState && (
+        <Toast 
+          message={toastState.message} 
+          type={toastState.type} 
+          duration={toastState.duration}
+          onClose={hideToast} 
+        />
       )}
 
       {/* PDF Viewer Modal */}
@@ -1366,73 +1255,10 @@ function App() {
       )}
 
       {/* Upload Progress Modal */}
-      {uploadProgress && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[70]">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md p-6 shadow-2xl mx-4">
-            <div className="flex items-center gap-3 mb-4">
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                uploadProgress.status === 'completed' ? 'bg-emerald-100 dark:bg-emerald-900/30' :
-                uploadProgress.status === 'error' ? 'bg-red-100 dark:bg-red-900/30' :
-                'bg-blue-100 dark:bg-blue-900/30'
-              }`}>
-                {uploadProgress.status === 'completed' ? (
-                  <Check className="w-6 h-6 text-emerald-500" />
-                ) : uploadProgress.status === 'error' ? (
-                  <X className="w-6 h-6 text-red-500" />
-                ) : (
-                  <Loader className="w-6 h-6 text-blue-500 animate-spin" />
-                )}
-              </div>
-              <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white">
-                  {uploadProgress.status === 'uploading' ? (language === 'es' ? 'Subiendo CVs' : 'Uploading CVs') :
-                   uploadProgress.status === 'processing' ? (language === 'es' ? 'Procesando CVs' : 'Processing CVs') :
-                   uploadProgress.status === 'completed' ? (language === 'es' ? 'Completado' : 'Completed') :
-                   'Error'}
-                </h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {uploadProgress.current} / {uploadProgress.total} {language === 'es' ? 'archivos' : 'files'}
-                </p>
-              </div>
-            </div>
-            
-            {/* Progress bar */}
-            <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mb-4">
-              <div 
-                className={`h-full transition-all duration-300 ${
-                  uploadProgress.status === 'completed' ? 'bg-emerald-500' :
-                  uploadProgress.status === 'error' ? 'bg-red-500' :
-                  'bg-blue-500'
-                }`}
-                style={{ width: `${uploadProgress.percent || (uploadProgress.current / uploadProgress.total) * 100}%` }}
-              />
-            </div>
-            
-            {/* Log messages */}
-            <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3 max-h-32 overflow-y-auto">
-              {uploadProgress.logs.map((log, i) => (
-                <p key={i} className="text-xs text-gray-600 dark:text-gray-400 font-mono">
-                  {log}
-                </p>
-              ))}
-            </div>
-            
-            {/* File list */}
-            <div className="mt-3 flex flex-wrap gap-1">
-              {uploadProgress.files.slice(0, 5).map((file, i) => (
-                <span key={i} className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-gray-600 dark:text-gray-300">
-                  {file.length > 20 ? file.slice(0, 20) + '...' : file}
-                </span>
-              ))}
-              {uploadProgress.files.length > 5 && (
-                <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-gray-600 dark:text-gray-300">
-                  +{uploadProgress.files.length - 5} more
-                </span>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      <UploadProgressModal 
+        progress={uploadProgress} 
+        onClose={() => setUploadProgress(null)} 
+      />
 
       {/* Delete Progress Modal */}
       {deleteProgress && (
@@ -1494,7 +1320,7 @@ function App() {
         onClose={() => setShowRAGSettings(false)}
         onSave={(settings) => {
           setRagPipelineSettings(settings);
-          showToast(language === 'es' ? 'Configuración guardada' : 'Settings saved', 'success');
+          showToastMessage(language === 'es' ? 'Configuración guardada' : 'Settings saved', 'success');
         }}
       />
 
@@ -1525,79 +1351,7 @@ function App() {
       )}
 
       {/* About Modal */}
-      {showAbout && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md shadow-2xl">
-            <div className="p-6 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl">
-                  <Sparkles className="w-5 h-5 text-white" />
-                </div>
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  {language === 'es' ? 'Acerca de' : 'About'}
-                </h2>
-              </div>
-              <button 
-                onClick={() => setShowAbout(false)} 
-                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
-              >
-                <X className="w-5 h-5 text-gray-500" />
-              </button>
-            </div>
-            
-            <div className="p-6 space-y-5">
-              <div className="text-center">
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white">AI CV Screener</h3>
-                <div className="flex items-center justify-center gap-2 mt-2">
-                  <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm font-medium text-gray-600 dark:text-gray-300">v1.0.0</span>
-                  <span className="px-2 py-1 bg-gradient-to-r from-purple-500 to-emerald-500 text-white text-sm font-bold rounded">RAG V5</span>
-                </div>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
-                  {language === 'es' 
-                    ? 'Sistema inteligente de análisis de CVs con RAG Pipeline avanzado' 
-                    : 'Intelligent CV analysis system with advanced RAG Pipeline'}
-                </p>
-              </div>
-
-              <div className="border-t border-gray-200 dark:border-gray-700" />
-
-              <div>
-                <p className="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-2">
-                  {language === 'es' ? 'Creado por' : 'Created by'}
-                </p>
-                <p className="font-semibold text-gray-900 dark:text-white">Raúl Iglesias Julios</p>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <a
-                  href="https://github.com/RaulJuliosIglesias"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-colors group"
-                >
-                  <Github className="w-5 h-5 text-gray-700 dark:text-gray-300" />
-                  <span className="flex-1 text-sm font-medium text-gray-700 dark:text-gray-300">GitHub</span>
-                  <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-blue-500" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/rauliglesiasjulios/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-colors group"
-                >
-                  <Linkedin className="w-5 h-5 text-blue-600" />
-                  <span className="flex-1 text-sm font-medium text-gray-700 dark:text-gray-300">LinkedIn</span>
-                  <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-blue-500" />
-                </a>
-              </div>
-
-              <p className="text-xs text-center text-gray-400 dark:text-gray-500">
-                © 2026 - {language === 'es' ? 'Todos los derechos reservados' : 'All rights reserved'}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      <AboutModal isOpen={showAbout} onClose={() => setShowAbout(false)} />
     </div>
   );
 }
