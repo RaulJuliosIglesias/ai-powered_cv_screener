@@ -258,6 +258,9 @@ function App() {
     const targetSessionId = currentSessionId;
     const targetSessionName = currentSession?.name || (language === 'es' ? 'Chat actual' : 'Current chat');
     
+    // Check if this is the first upload (session has no CVs yet)
+    const isFirstUpload = !currentSession?.cvs || currentSession.cvs.length === 0;
+    
     // Start background upload task
     startUploadTask({
       sessionId: targetSessionId,
@@ -265,6 +268,7 @@ function App() {
       files,
       mode,
       language,
+      isFirstUpload,  // Only auto-name if this is the first upload
       onComplete: async ({ sessionId, filesCount }) => {
         // Reload session data when upload completes
         if (currentSessionIdRef.current === sessionId) {
@@ -568,6 +572,10 @@ function App() {
     const targetSession = sessions.find(s => s.id === targetSessionId);
     const targetSessionName = targetSession?.name || cvPanelSession?.name || (language === 'es' ? 'Sesión' : 'Session');
     
+    // Check if this is the first upload (session has no CVs yet)
+    const sessionCvCount = cvPanelSession?.cvs?.length || targetSession?.cv_count || 0;
+    const isFirstUpload = sessionCvCount === 0;
+    
     // Start background upload task
     startUploadTask({
       sessionId: targetSessionId,
@@ -575,6 +583,7 @@ function App() {
       files,
       mode,
       language,
+      isFirstUpload,  // Only auto-name if this is the first upload
       onComplete: async ({ sessionId, filesCount }) => {
         // Refresh panel session data
         const sessionData = await getSession(sessionId, mode);

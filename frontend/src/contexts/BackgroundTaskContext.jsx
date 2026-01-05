@@ -93,7 +93,8 @@ export function BackgroundTaskProvider({ children }) {
         phase: 'upload',
         logs: [language === 'es' ? `Subiendo ${filesArray.length} archivo(s)...` : `Uploading ${filesArray.length} file(s)...`],
         startTime: Date.now(),
-        language
+        language,
+        isFirstUpload  // Track if this is the first upload to decide on auto-naming
       }
     };
 
@@ -193,9 +194,10 @@ export function BackgroundTaskProvider({ children }) {
                 endTime: Date.now()
               }, true);
 
-              // Auto-naming: Generate name for the session if enabled
+              // Auto-naming: Only generate name if this is the FIRST upload to the session
+              const task = tasksRef.current[taskId];
               const settings = getSettings();
-              if (settings.autoNamingEnabled && totalFiles > 0) {
+              if (settings.autoNamingEnabled && totalFiles > 0 && task?.isFirstUpload) {
                 try {
                   updateTaskInternal(taskId, {
                     logs: [language === 'es' ? '🤖 Generando nombre...' : '🤖 Generating name...']
