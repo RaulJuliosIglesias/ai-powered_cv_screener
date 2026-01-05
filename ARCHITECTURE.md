@@ -170,24 +170,58 @@ $$;
 
 ## 📊 FLUJO ACTUAL vs FLUJO IDEAL
 
-### ACTUAL:
+### ACTUAL (v5.1.1):
 ```
-Pregunta → Embedding → Vector Search → LLM → Respuesta
-                                        ↓
-                              (Sin verificación)
+Pregunta → [GUARDRAIL] → Embedding → Vector Search → [Reranking] → LLM
+                                                                    ↓
+                                                        [Chain-of-Thought Reasoning]
+                                                                    ↓
+                                                        [Claim Verification]
+                                                                    ↓
+                                                    [Output Orchestrator]
+                                                    ┌───────────────────────┐
+                                                    │ Core Modules (5):     │
+                                                    │ - Thinking            │
+                                                    │ - DirectAnswer        │
+                                                    │ - Analysis            │
+                                                    │ - Table               │
+                                                    │ - Conclusion          │
+                                                    ├───────────────────────┤
+                                                    │ Enhanced Modules (3): │ ← NEW v5.1.1
+                                                    │ - GapAnalysis         │
+                                                    │ - RedFlags            │
+                                                    │ - Timeline            │
+                                                    └───────────────────────┘
+                                                                    ↓
+                                                          Respuesta Estructurada
 ```
 
-### IDEAL:
-```
-Pregunta → [GUARDRAIL: ¿Es sobre CVs?] → NO → Rechazar
-                    ↓ SÍ
-           Embedding → Vector Search → [¿Hay resultados?] → NO → "No hay candidatos"
-                                              ↓ SÍ
-                                             LLM
-                                              ↓
-                              [ANTI-ALUCINACIÓN: Verificar datos]
-                                              ↓
-                                          Respuesta
-                                              ↓
-                                      [EVAL: Logging]
-```
+### METADATA ENRIQUECIDA (v5.1.1)
+
+Durante la indexación de CVs, se extrae automáticamente:
+
+| Campo | Descripción |
+|-------|-------------|
+| `total_experience_years` | Años totales de experiencia |
+| `seniority_level` | junior/mid/senior/lead/executive |
+| `current_role` | Puesto actual |
+| `current_company` | Empresa actual |
+| `has_faang_experience` | Experiencia en Big Tech |
+| `job_hopping_score` | Índice de rotación (0-1) |
+| `avg_tenure_years` | Promedio de permanencia |
+| `employment_gaps` | Gaps de empleo detectados |
+
+### NUEVOS TIPOS DE PREGUNTAS (v5.1.1)
+
+**Gap Analysis:**
+- "¿Qué candidatos tienen todas las skills: Maya, Houdini y Python?"
+- "¿Cuál es el candidato con mejor cobertura para mis requisitos?"
+
+**Red Flags:**
+- "¿Hay candidatos con job hopping?"
+- "¿Cuáles son los candidatos más estables?"
+- "Dame los candidatos sin red flags"
+
+**Timeline:**
+- "¿Quién tiene la mejor progresión de carrera?"
+- "Compara las trayectorias de los 3 mejores candidatos"

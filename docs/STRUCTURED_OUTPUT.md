@@ -933,9 +933,341 @@ backend/app/models/
 
 ---
 
+---
+
+## Enhanced Modules (v5.1.1)
+
+> **NEW** - Three powerful analysis modules that provide deeper insights into candidate profiles.
+
+### Overview
+
+The v5.1.1 release introduces **3 new enhanced modules** that analyze CV metadata to provide actionable insights:
+
+| Module | Purpose | When Active |
+|--------|---------|-------------|
+| **GapAnalysisModule** | Skills gap detection vs job requirements | When query mentions required skills |
+| **RedFlagsModule** | Risk detection (job-hopping, gaps, etc.) | Always (if chunks have metadata) |
+| **TimelineModule** | Career trajectory visualization | Always (if position data available) |
+
+These modules work alongside the 5 core modules and are processed **after** the main LLM response.
+
+---
+
+### Gap Analysis Module
+
+**File**: `modules/gap_analysis_module.py`
+
+**Purpose**: Identifies what skills/requirements are missing from candidates relative to job requirements specified in the query.
+
+#### Data Structure
+
+```python
+@dataclass
+class SkillGap:
+    skill: str                      # Missing skill name
+    importance: str                 # "critical", "preferred", "nice_to_have"
+    candidates_missing: List[str]   # Candidates without this skill
+    candidates_have: List[str]      # Candidates with this skill
+
+@dataclass
+class GapAnalysisData:
+    required_skills: List[str]      # Skills extracted from query
+    skill_gaps: List[SkillGap]      # List of gaps found
+    coverage_score: float           # 0-100% of requirements covered
+    best_coverage_candidate: str    # Candidate with best coverage
+    summary: str                    # Human-readable summary
+```
+
+#### Output Format
+
+```json
+{
+  "gap_analysis": {
+    "required_skills": ["Maya", "Houdini", "Python", "Leadership"],
+    "skill_gaps": [
+      {
+        "skill": "Houdini",
+        "importance": "critical",
+        "candidates_missing": ["Juan García", "Ana López"],
+        "candidates_have": ["Marco Rossi"]
+      }
+    ],
+    "coverage_score": 75.0,
+    "best_coverage_candidate": "Marco Rossi",
+    "summary": "Best coverage: Marco Rossi (75%) | 2 critical gaps identified"
+  }
+}
+```
+
+#### Example Questions That Trigger Gap Analysis
+
+- "¿Qué candidatos tienen todas las skills: Maya, Houdini y Python?"
+- "Para el puesto de Lead 3D Artist, ¿qué gaps tienen los candidatos?"
+- "¿Quién le falta Houdini pero tiene el resto de skills?"
+- "¿Cuál es el candidato con mejor cobertura para mis requisitos?"
+
+---
+
+### Red Flags Module
+
+**File**: `modules/red_flags_module.py`
+
+**Purpose**: Detects potential risk indicators in candidate profiles.
+
+#### Flag Types
+
+| Flag Type | Severity | Description | Threshold |
+|-----------|----------|-------------|-----------|
+| `job_hopping` | High/Medium | Frequent job changes | avg tenure < 1.5 years |
+| `employment_gap` | Medium | Gaps in employment | > 1 year |
+| `short_tenure` | Low/Medium | Very short job stays | < 6 months |
+| `missing_experience` | High | No experience section | Section not found |
+| `missing_education` | Low | No education section | Section not found |
+
+#### Data Structure
+
+```python
+@dataclass
+class RedFlag:
+    flag_type: str          # Type of flag detected
+    severity: str           # "high", "medium", "low"
+    description: str        # Human-readable description
+    candidate_name: str     # Affected candidate
+    details: Dict[str, Any] # Additional context
+
+@dataclass
+class RedFlagsData:
+    flags: List[RedFlag]                        # All detected flags
+    candidates_with_flags: Dict[str, List[str]] # {candidate: [flag_types]}
+    high_risk_candidates: List[str]             # Candidates with high severity flags
+    clean_candidates: List[str]                 # Candidates with no flags
+    summary: str                                # Human-readable summary
+```
+
+#### Output Format
+
+```json
+{
+  "red_flags": {
+    "flags": [
+      {
+        "flag_type": "job_hopping",
+        "severity": "high",
+        "description": "Frequent job changes (avg tenure: 0.8 years, 6 positions)",
+        "candidate_name": "Juan García",
+        "details": {"job_hopping_score": 0.85, "position_count": 6}
+      }
+    ],
+    "candidates_with_flags": {"Juan García": ["job_hopping"]},
+    "high_risk_candidates": ["Juan García"],
+    "clean_candidates": ["Marco Rossi", "Ana López"],
+    "summary": "✓ 2 clean | ⚠️ High-risk: Juan García"
+  }
+}
+```
+
+#### Example Questions For Red Flags
+
+- "¿Hay candidatos con job hopping?"
+- "¿Quién tiene gaps de empleo?"
+- "¿Cuáles son los candidatos más estables?"
+- "Dame los candidatos sin red flags"
+- "¿Hay algún candidato de alto riesgo?"
+
+---
+
+### Timeline Module
+
+**File**: `modules/timeline_module.py`
+
+**Purpose**: Generates chronological career timelines showing progression and transitions.
+
+#### Transition Types
+
+| Type | Description | Icon |
+|------|-------------|------|
+| `promotion` | Moved to higher seniority | 📈 |
+| `lateral` | Same level, different role | • |
+| `company_change` | Changed company | • |
+
+#### Data Structure
+
+```python
+@dataclass
+class TimelineEntry:
+    year_start: int             # Start year
+    year_end: Optional[int]     # End year (None = Present)
+    title: str                  # Job title
+    company: str                # Company name
+    is_current: bool            # Currently employed here
+    duration_years: float       # Duration at position
+    transition_type: str        # Type of career move
+
+@dataclass
+class CandidateTimeline:
+    candidate_name: str                 # Candidate name
+    cv_id: str                          # CV identifier
+    entries: List[TimelineEntry]        # Career entries
+    career_span_years: float            # Total career length
+    total_companies: int                # Number of companies
+    progression_score: float            # 0-100 (higher = better progression)
+    current_role: Optional[str]         # Current position
+
+@dataclass
+class TimelineData:
+    timelines: List[CandidateTimeline]  # All candidate timelines
+    summary: str                         # Comparison summary
+```
+
+#### Output Format
+
+```json
+{
+  "timeline": {
+    "timelines": [
+      {
+        "candidate_name": "Marco Rossi",
+        "cv_id": "cv_abc123",
+        "career_span_years": 12,
+        "progression_score": 85.0,
+        "current_role": "Lead 3D Artist",
+        "total_companies": 4,
+        "entries": [
+          {"year_start": 2012, "year_end": 2015, "title": "Junior 3D Artist", "company": "StartupVFX", "transition_type": ""},
+          {"year_start": 2015, "year_end": 2018, "title": "3D Artist", "company": "ILM", "transition_type": "promotion"},
+          {"year_start": 2018, "year_end": 2021, "title": "Senior 3D Artist", "company": "Weta", "transition_type": "promotion"},
+          {"year_start": 2021, "year_end": null, "title": "Lead 3D Artist", "company": "Pixar", "transition_type": "promotion"}
+        ]
+      }
+    ],
+    "summary": "Best progression: Marco Rossi | Longest career: 12 years"
+  }
+}
+```
+
+#### Example Questions For Timeline
+
+- "¿Quién tiene la mejor progresión de carrera?"
+- "Muéstrame el timeline de Marco Rossi"
+- "¿Qué candidatos han tenido promociones consistentes?"
+- "Compara las trayectorias de los 3 mejores candidatos"
+- "¿Quién ha trabajado más tiempo en la misma empresa?"
+
+---
+
+### Enriched Metadata (Indexing)
+
+The enhanced modules rely on **enriched metadata** extracted during CV indexing:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `total_experience_years` | float | Total years of professional experience |
+| `seniority_level` | string | Detected level: junior/mid/senior/lead/executive |
+| `current_role` | string | Current job title |
+| `current_company` | string | Current employer |
+| `has_faang_experience` | bool | Worked at Big Tech (Google, Meta, etc.) |
+| `job_hopping_score` | float | 0-1 rotation index (higher = more changes) |
+| `avg_tenure_years` | float | Average time at each position |
+| `skills` | string[] | Extracted technical skills |
+| `companies_worked` | string[] | List of companies |
+| `employment_gaps` | tuple[] | Detected employment gaps |
+
+#### Summary Chunk
+
+Each CV gets a special **summary chunk** (index 0) containing:
+
+```
+CANDIDATE SUMMARY: Marco Rossi
+Experience: 12 years | Seniority: senior
+Current: Lead 3D Artist @ Pixar
+Top Skills: Maya, ZBrush, Houdini, Python
+Career Path: Junior Artist (2012) → 3D Artist (2015) → Senior (2018) → Lead (2021)
+Companies: ILM, Weta Digital, Pixar
+Red Flags: None | Job Hopping Score: 0.2 (stable)
+```
+
+---
+
+### Updated File Structure
+
+```
+backend/app/services/output_processor/
+├── __init__.py              # Exports OutputProcessor, OutputOrchestrator
+├── orchestrator.py          # Main entry point, coordinates all processing
+├── processor.py             # Invokes modules, builds StructuredOutput
+├── validators.py            # Output validation utilities
+└── modules/
+    ├── __init__.py          # Exports all 8 modules
+    ├── thinking_module.py   # :::thinking::: extraction
+    ├── direct_answer_module.py  # Direct answer extraction
+    ├── analysis_module.py   # Analysis section + fallback generation
+    ├── table_module.py      # Table parsing + fallback generation
+    ├── conclusion_module.py # :::conclusion::: extraction
+    ├── gap_analysis_module.py   # NEW: Skills gap detection
+    ├── red_flags_module.py      # NEW: Risk detection
+    └── timeline_module.py       # NEW: Career trajectory
+
+backend/app/models/
+└── structured_output.py     # StructuredOutput (now includes gap_analysis, red_flags, timeline)
+```
+
+---
+
+### Updated StructuredOutput Model
+
+```python
+@dataclass
+class StructuredOutput:
+    # Core components (always present)
+    direct_answer: str
+    raw_content: str
+    
+    # Optional core components
+    thinking: Optional[str] = None
+    analysis: Optional[str] = None
+    table_data: Optional[TableData] = None
+    conclusion: Optional[str] = None
+    
+    # Enhanced components (v5.1.1) - NEW
+    gap_analysis: Optional[Dict[str, Any]] = None
+    red_flags: Optional[Dict[str, Any]] = None
+    timeline: Optional[Dict[str, Any]] = None
+    
+    # Metadata
+    cv_references: List[CVReference] = field(default_factory=list)
+    parsing_warnings: List[str] = field(default_factory=list)
+    fallback_used: bool = False
+```
+
+---
+
+### Frontend Usage (Enhanced)
+
+```typescript
+// Core components
+<ThinkingDropdown content={response.structured_output.thinking} />
+<DirectAnswer content={response.structured_output.direct_answer} />
+<CandidateTable data={response.structured_output.table_data} />
+<Conclusion content={response.structured_output.conclusion} />
+
+// Enhanced components (v5.1.1)
+{response.structured_output.gap_analysis && (
+  <GapAnalysisCard data={response.structured_output.gap_analysis} />
+)}
+{response.structured_output.red_flags && (
+  <RedFlagsAlert data={response.structured_output.red_flags} />
+)}
+{response.structured_output.timeline && (
+  <CareerTimeline data={response.structured_output.timeline} />
+)}
+```
+
+---
+
 > **Version History**
 > 
 > | Version | Date | Changes |
 > |---------|------|---------|
 > | 5.0.0 | Jan 2026 | Initial modular architecture with 5 modules |
 > | 5.1.0 | Jan 2026 | Added candidate deduplication, fallback analysis |
+> | 5.1.1 | Jan 2026 | **NEW**: GapAnalysisModule, RedFlagsModule, TimelineModule, enriched metadata indexing |

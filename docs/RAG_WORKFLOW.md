@@ -56,6 +56,14 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
 - ✅ **Targeted Retrieval**: Fetch ALL chunks for a specific candidate (bypasses semantic search)
 - ✅ **Summary Chunks**: Pre-built profile summaries for instant candidate lookups
 
+### Key Features (V5.1.1 - Enhanced Modules)
+
+- ✅ **Gap Analysis Module**: Skills gap detection between job requirements and candidate profiles
+- ✅ **Red Flags Module**: Risk detection (job-hopping, employment gaps, short tenures)
+- ✅ **Timeline Module**: Career trajectory visualization with progression scoring
+- ✅ **Deep Enriched Metadata**: `seniority_level`, `job_hopping_score`, `avg_tenure_years`, `has_faang_experience`
+- ✅ **Summary Chunk with Career Path**: Pre-built career trajectory summary per CV
+
 ---
 
 ## Smart CV Chunking
@@ -1201,7 +1209,10 @@ backend/
 │   │           ├── analysis_module.py
 │   │           ├── table_module.py
 │   │           ├── conclusion_module.py
-│   │           └── direct_answer_module.py
+│   │           ├── direct_answer_module.py
+│   │           ├── gap_analysis_module.py   # NEW v5.1.1
+│   │           ├── red_flags_module.py      # NEW v5.1.1
+│   │           └── timeline_module.py       # NEW v5.1.1
 │   │
 │   ├── providers/
 │   │   ├── base.py                # Abstract interfaces
@@ -1242,7 +1253,9 @@ backend/
 | Version | Date | Commit | Changes |
 |---------|------|--------|---------|
 | **6.0.0** | **Upcoming** | - | HuggingFace NLI verification, Zero-shot classification, RAGAS evaluation framework ([Roadmap](./roadmap/RAG_V6.md)) |
-| **5.0.0** | **2026-01-03 21:38** | `b63a069` | **Current**: Multi-Query, HyDE, RRF, Chain-of-Thought Reasoning, Claim Verification, Iterative Refinement, Graceful Degradation |
+| **5.1.1** | **2026-01-05** | - | **Current**: GapAnalysisModule, RedFlagsModule, TimelineModule, Deep Enriched Metadata (seniority, job-hopping, FAANG detection) |
+| 5.1.0 | 2026-01-04 | - | Smart CV Chunking, Enriched Metadata, Targeted Retrieval, Summary Chunks |
+| 5.0.0 | 2026-01-03 21:38 | `b63a069` | Multi-Query, HyDE, RRF, Chain-of-Thought Reasoning, Claim Verification, Iterative Refinement, Graceful Degradation |
 | 4.0.0 | 2026-01-03 18:33 | `e785e61` | 4-step pipeline with Re-ranking and LLM Verification, circuit breaker, combined confidence scoring |
 | 3.0.0 | 2026-01-03 15:02 | `2870a05` | RAGServiceV3 with confidence scoring, guardrails, 2-step LLM with QueryUnderstanding |
 | 2.0.0 | 2026-01-02 17:15 | `dea6b07` | OpenRouter unified LLM provider, session-based chat architecture |
