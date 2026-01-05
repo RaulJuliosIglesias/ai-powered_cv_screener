@@ -1,50 +1,58 @@
-PROPRIETARY LICENSE - EDUCATIONAL REFERENCE ONLY
+Copyright (c) 2026 Raul Julios Iglesias
 
-Copyright (c) 2024-2025 Raul Julios Iglesias. All Rights Reserved.
+All Rights Reserved.
 
-================================================================================
-                              TERMS AND CONDITIONS
-================================================================================
+This source code is made available for viewing purposes only as part of a 
+professional portfolio demonstration.
 
-This software and associated documentation files (the "Software") are provided 
-EXCLUSIVELY for EDUCATIONAL and LEARNING REFERENCE purposes.
+1. GRANT OF LIMITED LICENSE
 
-PERMITTED USE:
-- Viewing the source code for personal educational study
-- Using as a reference for learning programming concepts and patterns
-- Academic review and analysis
+   Subject to the terms of this License, the copyright holder grants you a 
+   limited, non-exclusive, non-transferable, revocable license solely to:
+   
+   (a) View and read the source code in this repository for personal 
+       reference and evaluation purposes.
 
-STRICTLY PROHIBITED:
-- Copying, reproduction, or duplication of any part of this Software
-- Redistribution in any form (source code, compiled, or modified)
-- Commercial use of any kind, including but not limited to:
-  - Selling the Software or derivatives
-  - Using in commercial products or services
-  - Offering as part of paid consulting or services
-- Creating derivative works based on this Software
-- Sublicensing or transferring rights to any third party
-- Using this Software in production environments
-- Incorporating any portion into other projects
+2. RESTRICTIONS
 
-NO WARRANTY:
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+   You may NOT, under any circumstances:
+   
+   (a) Copy, reproduce, or duplicate any portion of this source code;
+   (b) Modify, adapt, translate, or create derivative works;
+   (c) Distribute, publish, sublicense, sell, lease, or transfer the source 
+       code or any portion thereof to any third party;
+   (d) Use the source code, in whole or in part, for any commercial purpose;
+   (e) Use the source code, in whole or in part, in any other software 
+       project, product, or service;
+   (f) Remove or alter any copyright notices or this license;
+   (g) Reverse engineer, decompile, or disassemble any compiled portions.
 
-LIMITATION OF LIABILITY:
-IN NO EVENT SHALL THE AUTHOR OR COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM,
-DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-USE OR OTHER DEALINGS IN THE SOFTWARE.
+3. OWNERSHIP
 
-ENFORCEMENT:
-Any violation of these terms will result in immediate termination of your
-right to view or reference this Software and may result in legal action.
+   The copyright holder retains all right, title, and interest in and to 
+   the source code, including all intellectual property rights therein. 
+   This License does not grant you any ownership rights.
 
-================================================================================
-                              CONTACT INFORMATION
-================================================================================
+4. NO WARRANTY
 
-For licensing inquiries or permission requests, contact the copyright holder.
+   THE SOURCE CODE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
+   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. 
+   IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES, 
+   OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, 
+   ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOURCE CODE OR THE USE 
+   OR OTHER DEALINGS IN THE SOURCE CODE.
 
-This license applies to all files in this repository unless otherwise specified.
+5. TERMINATION
+
+   This License is effective until terminated. Your rights under this 
+   License will terminate automatically without notice if you fail to 
+   comply with any term herein. Upon termination, you must cease all use 
+   and destroy any copies in your possession.
+
+6. GOVERNING LAW
+
+   This License shall be governed by and construed in accordance with the 
+   laws of Spain, without regard to its conflict of law provisions.
+
+For licensing inquiries or permission requests: Contact the copyright holder.

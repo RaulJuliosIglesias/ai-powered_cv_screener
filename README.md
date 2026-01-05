@@ -7,7 +7,7 @@
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)](https://fastapi.tiangolo.com)
 [![React](https://img.shields.io/badge/React-18+-61DAFB.svg)](https://reactjs.org)
-[![License](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-red.svg)](LICENSE)
 
 **A production-ready RAG pipeline for CV/Resume screening with dual-mode architecture, hallucination detection, and source-cited responses.**
 
