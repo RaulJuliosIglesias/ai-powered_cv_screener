@@ -13103,7 +13103,7 @@
     },
     {
       "id": "c56d4303-b386-4f44-96ee-232278a1eca9",
-      "name": "New chat",
+      "name": "Software Engineering 3520",
       "description": "",
       "cvs": [
         {
@@ -13147,21 +13147,219 @@
           "chunk_count": 2,
           "content_hash": "46c74efa05a7a55fc2516693107fa3124cd0b1f280df224cbf6fb1cf8b797e61",
           "uploaded_at": "2026-01-05T03:11:50.525259"
+        },
+        {
+          "id": "cv_03a21563",
+          "filename": "0a7a9a70__Thabo_Nkosi__Engineering_Lead.pdf",
+          "chunk_count": 3,
+          "content_hash": "6a52f08ad15cc785b88b080a9da4692c3f0ce8a88fbd1b5f4757565d8af106f8",
+          "uploaded_at": "2026-01-05T03:19:12.237995"
+        },
+        {
+          "id": "cv_10f10045",
+          "filename": "16d91ce8__Layla_Al-Mansoor__Flutter_Developer.pdf",
+          "chunk_count": 3,
+          "content_hash": "8717d6ac55151cac2f1494184910762a50643814d6ab025fa828a83c3c3f6798",
+          "uploaded_at": "2026-01-05T03:19:13.269537"
+        },
+        {
+          "id": "cv_7c253f5e",
+          "filename": "40a3a141__Isabel_Mendoza__Full_Stack_Developer.pdf",
+          "chunk_count": 5,
+          "content_hash": "167da3ed98d7d917f9e05f68c4eca068ea1dbf4b4c517dcf4ae38e2d3c978979",
+          "uploaded_at": "2026-01-05T03:19:14.389370"
+        },
+        {
+          "id": "cv_7d40f583",
+          "filename": "54ed6e12__Rajiv_Patel__React_Native_Developer.pdf",
+          "chunk_count": 4,
+          "content_hash": "7fdec5e7f62cf054e00b01a2393e8610ab5d08e50348ebddcc75b3d1b96a554c",
+          "uploaded_at": "2026-01-05T03:19:15.425626"
+        },
+        {
+          "id": "cv_76c9c7a4",
+          "filename": "65bace6d__Oliver_Whitmore__Engineering_Manager.pdf",
+          "chunk_count": 3,
+          "content_hash": "cea58fb09a17bbccd51184b0463967635c87dcd3b2279cc0689df3e937717824",
+          "uploaded_at": "2026-01-05T03:19:16.469634"
+        },
+        {
+          "id": "cv_625b3de8",
+          "filename": "625611ae__Aisha_Patel__Game_Developer.pdf",
+          "chunk_count": 3,
+          "content_hash": "8a76c43db795a1e7bac3b4841af0e1f0987acb0c4d130039e94100496ced576f",
+          "uploaded_at": "2026-01-05T03:23:14.537160"
+        },
+        {
+          "id": "cv_be0b8f5d",
+          "filename": "2502875c__Luca_Nguyen__Mastering_Engineer.pdf",
+          "chunk_count": 3,
+          "content_hash": "6c8150f70bc0c19d96d57cb3d3a150156799e272c5995d4fa12a68aa7edff39f",
+          "uploaded_at": "2026-01-05T03:23:15.579602"
+        },
+        {
+          "id": "cv_be920b95",
+          "filename": "47129175__Elin_Andersson__Automation_Engineer.pdf",
+          "chunk_count": 2,
+          "content_hash": "809f1653d97a81459ea1152f1be2bf766ee32b52f51e7a20a695151e35400a58",
+          "uploaded_at": "2026-01-05T03:23:16.638551"
+        },
+        {
+          "id": "cv_5792e5bc",
+          "filename": "56732273__Carlos_Mendoza__Junior_Game_Developer.pdf",
+          "chunk_count": 1,
+          "content_hash": "9e0f2275b0024e999506bf25a9cc40ed49399214ff9d6973d859186c3d1136d5",
+          "uploaded_at": "2026-01-05T03:23:17.699625"
+        },
+        {
+          "id": "cv_a7bffe67",
+          "filename": "a207b741__Priya_Patel__Kotlin_Developer.pdf",
+          "chunk_count": 3,
+          "content_hash": "e4511fdf40bc18458a1648dc2001d4c04307947863ac1a40fcb05214202afdfc",
+          "uploaded_at": "2026-01-05T03:23:18.716641"
+        },
+        {
+          "id": "cv_7888d9c3",
+          "filename": "ab734885__Layla_Al-Mansoori__Platform_Engineer.pdf",
+          "chunk_count": 1,
+          "content_hash": "d96d15a5831e54195378dd92aad1e14a9ce7bd12f5fae28b9f2810913770ef63",
+          "uploaded_at": "2026-01-05T03:23:19.851894"
+        },
+        {
+          "id": "cv_a32c4454",
+          "filename": "ad98e9dd__Carmen_Rodriguez__Unreal_Engine_Developer.pdf",
+          "chunk_count": 4,
+          "content_hash": "efe0a59043872769e95d32e7985c285143fff6a277c3530300bce2539b3e5208",
+          "uploaded_at": "2026-01-05T03:23:20.924475"
+        },
+        {
+          "id": "cv_1c2674cf",
+          "filename": "b38afdec__Marco_Bianchi__Junior_iOS_Developer.pdf",
+          "chunk_count": 2,
+          "content_hash": "4797cf8e5d8baa5e7af0023d6833d4ae5ba070ce7320fa0df2536f046aa3d1dd",
+          "uploaded_at": "2026-01-05T03:23:21.892500"
+        },
+        {
+          "id": "cv_106048cb",
+          "filename": "b519ac8c__Valeria_Mendoza__Protocol_Engineer.pdf",
+          "chunk_count": 4,
+          "content_hash": "6dc8e17f7ed49bdee055112c86c32c19498149ca063374145449a9ec57b3f9ab",
+          "uploaded_at": "2026-01-05T03:23:22.933223"
+        },
+        {
+          "id": "cv_dfc037f7",
+          "filename": "c1fcfa41__Priya_Patel__Engineering_Lead.pdf",
+          "chunk_count": 5,
+          "content_hash": "f7a386de1d31af8e0850ef9e4ec944d33a6d7e100249a3e0209d266ca9ec8369",
+          "uploaded_at": "2026-01-05T03:23:24.077473"
+        },
+        {
+          "id": "cv_988233a5",
+          "filename": "cb19c2fc__Rajiv_Patel__Sales_Engineer.pdf",
+          "chunk_count": 3,
+          "content_hash": "d145f1dcf08793e8337039868ab6debe084231a2af9ba9695502b6fd6a111430",
+          "uploaded_at": "2026-01-05T03:23:25.081640"
+        },
+        {
+          "id": "cv_105b544b",
+          "filename": "dcef762d__Alicia_Mendoza__Junior_Mobile_Developer.pdf",
+          "chunk_count": 2,
+          "content_hash": "c3f9055a440113691493c72c0341a7301840fc29a220a65925230c5483ba87ce",
+          "uploaded_at": "2026-01-05T03:23:26.084452"
+        },
+        {
+          "id": "cv_f2848eed",
+          "filename": "f283d769__Priya_Patel__AI_Engineer.pdf",
+          "chunk_count": 3,
+          "content_hash": "f2127d43a12fc3577f9dd9ffc7ba066d48adf55a28df4773ce486a58e654c081",
+          "uploaded_at": "2026-01-05T03:23:27.127222"
+        },
+        {
+          "id": "cv_15da05e6",
+          "filename": "fa1c2540__Priya_Patel__Software_Engineer.pdf",
+          "chunk_count": 2,
+          "content_hash": "89718e0eae852e79d959ff5bf2499a58fa29126ec201be7d6265acf429ef7724",
+          "uploaded_at": "2026-01-05T03:23:28.234158"
+        },
+        {
+          "id": "cv_2961dede",
+          "filename": "fd1f45b3__Liat_Cohen__Android_Developer.pdf",
+          "chunk_count": 3,
+          "content_hash": "1a700337100870a0ba0d55af03132034a8aedc3cc90f7d6117d44ffa43b94151",
+          "uploaded_at": "2026-01-05T03:23:29.315731"
+        },
+        {
+          "id": "cv_3003a12f",
+          "filename": "2a6dddd5__Aarohi_Patel__Physician_Assistant.pdf",
+          "chunk_count": 8,
+          "content_hash": "87ba16fd899692fe25a2774ebff8da5fa99ffde5cf856ea8ae58c3ecd17b6c6b",
+          "uploaded_at": "2026-01-05T03:25:09.866921"
+        },
+        {
+          "id": "cv_6708c8f7",
+          "filename": "3a183baa__Rajiv_Patel__Physical_Therapist.pdf",
+          "chunk_count": 6,
+          "content_hash": "3ab5b44134fea1dd1e078b142c3d378595c682eedb7c2314b08d0f0b95ea7047",
+          "uploaded_at": "2026-01-05T03:25:12.244295"
+        },
+        {
+          "id": "cv_e20ca1ea",
+          "filename": "35a54edb__Marco_Chen__Medical_Technologist.pdf",
+          "chunk_count": 5,
+          "content_hash": "bb819dd870618622a470bad184555983739469fd3999abce6451679de689c5e8",
+          "uploaded_at": "2026-01-05T03:25:14.083994"
+        },
+        {
+          "id": "cv_e35c01bb",
+          "filename": "638429ee__Rahul_Patel__RN.pdf",
+          "chunk_count": 4,
+          "content_hash": "5aa67e8370c658038e224e353551f4a467c32b29af9a990f945a0871e35af8d2",
+          "uploaded_at": "2026-01-05T03:25:15.220541"
+        },
+        {
+          "id": "cv_856d4677",
+          "filename": "a1366994__Arjun_Patel__Staff_Physician.pdf",
+          "chunk_count": 3,
+          "content_hash": "6ac6247477bb40205d013e28f73b9f141041099714ce881318acba274eab57b0",
+          "uploaded_at": "2026-01-05T03:25:16.302485"
+        },
+        {
+          "id": "cv_095bdba9",
+          "filename": "ea130c05__Layla_Hassan__Charge_Nurse.pdf",
+          "chunk_count": 4,
+          "content_hash": "12db9b06e18ae971e242426965150b75d283ccdbd5c1a414ae1a276e04345e86",
+          "uploaded_at": "2026-01-05T03:25:17.349985"
+        },
+        {
+          "id": "cv_8579dec1",
+          "filename": "f6586718__Leila_Hassan__Physical_Therapist.pdf",
+          "chunk_count": 4,
+          "content_hash": "e7b8a55aeb5114267291ecfe820f9ddeb3c6e711c11bfb6954451ba24d3b1f65",
+          "uploaded_at": "2026-01-05T03:25:18.508057"
         }
       ],
       "messages": [
         {
-          "id": "cba8161a-4bdd-4ad5-8aad-4cc57f030ac5",
+          "id": "c4aefa43-744f-4e0f-8a20-1b08299a3a24",
           "role": "user",
           "content": "Who is best for a leadership role?",
           "sources": [],
           "pipeline_steps": [],
           "structured_output": null,
-          "timestamp": "2026-01-05T03:17:08.661569"
+          "timestamp": "2026-01-05T03:18:43.824042"
+        },
+        {
+          "id": "02502f3f-1896-4f21-8fdd-da94e002e52b",
+          "role": "user",
+          "content": "Who is best for a leadership role?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T03:25:31.903353"
         }
       ],
       "created_at": "2026-01-05T03:11:02.932665",
-      "updated_at": "2026-01-05T03:17:08.661569"
+      "updated_at": "2026-01-05T03:25:31.903353"
     },
     {
       "id": "95377387-f7a7-4c8c-95f5-4a888cf2d3b7",
@@ -13444,10 +13642,503 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-05T03:17:15.420450"
+        },
+        {
+          "id": "b2323e71-d87e-4d58-88c2-559e52604084",
+          "role": "assistant",
+          "content": ":::thinking\nI need to identify candidates with experience at startup companies. I will scan the provided CVs for mentions of \"startup,\" \"StartUp,\" or similar terms, and extract the company name and the candidate's role/responsibilities if available. I will then present the findings in a table.\n:::\n\nSeveral candidates have experience working at startup companies. These candidates have held various roles, and their responsibilities are detailed in the analysis below. ### Analysis\nI reviewed all the provided CVs and identified the following candidates who have experience working at startup companies.\n\n### Analysis\n\nI reviewed all the provided CVs and identified the following candidates who have experience working at startup companies. The table below summarizes their experience, including the startup name and their role/responsibilities as mentioned in their CVs.\n\n| Candidate | Startup Name | Role/Responsibilities | Match Score |\n|---|---|---|---|\n| Layla Al-Mansoor | early‑stage startups | Built MVP mobile solutions for early‑stage startups, collaborating closely with product and design teams to iterate quickly. | 60% |\n| Carlos Mendoza | StartUp Solutions | Supported QA team in manual testing and bug reporting for early-stage SaaS product. | 60% |\n| Oliver Whitmore | ScaleUp Labs | Managed product development for a SaaS startup, focusing on rapid iteration and customer feedback. Launched MVP in 4 months, securing Series A funding of $12M. | 60% |\n| Thabo Nkosi | ScaleUp Labs | Managed product development for a SaaS startup, focusing on rapid iteration and customer feedback. Launched MVP in 4 months, securing Series A funding of $12M. | 60% |\n| Priya Patel | CryptoVentures Argentina | Supported blockchain research and prototype development. | 60% |\n| Priya Patel | StartUp Inc | Full‑stack development of SaaS product, contributing to product‑market fit. Built MVP in 4 months, securing Series A funding of $12M. | 60% |\n| Aisha Johnson | StartupX | Assisted senior developers with Xcode | 40% |\n\n:::conclusion\nThe following candidates have experience working at startup companies: [📄](cv:cv_bdb60f7a)**Layla Al-Mansoor**, [📄](cv:cv_a172eab0)**Carlos Mendoza**, [📄](cv:cv_1bc8389c)**Oliver Whitmore**, [📄](cv:cv_06eadacd)**Thabo Nkosi**, [📄](cv:cv_08eb88e2)**Priya Patel**, [📄](cv:cv_ffce3431)**Aisha Johnson**, and [📄](cv:cv_7c2ff148)**Priya Patel**.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_bdb60f7a",
+              "filename": "16d91ce8__Layla_Al-Mansoor__Flutter_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_3092b2a1",
+              "filename": "97e49604__Li_Wei_Chen__Audio_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_f8edce16",
+              "filename": "7b2a4fd8__Maria_Lopez__QA_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_a172eab0",
+              "filename": "69e9c6cf__Carlos_Mendoza__QA_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_1bc8389c",
+              "filename": "65bace6d__Oliver_Whitmore__Engineering_Manager.pdf"
+            },
+            {
+              "cv_id": "cv_03a3d7a0",
+              "filename": "54ed6e12__Rajiv_Patel__React_Native_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_06eadacd",
+              "filename": "0a7a9a70__Thabo_Nkosi__Engineering_Lead.pdf"
+            },
+            {
+              "cv_id": "cv_1fa77762",
+              "filename": "40a3a141__Isabel_Mendoza__Full_Stack_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_47366b6a",
+              "filename": "3ae58553__Carlos_Rodrigues__Distinguished_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_08eb88e2",
+              "filename": "82ca9c2d__Priya_Patel__DeFi_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_ffce3431",
+              "filename": "4af59964__Aisha_Johnson__iOS_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_ac3d2e61",
+              "filename": "84b510ad__Ling_Mei_Chen__Deep_Learning_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_7c2ff148",
+              "filename": "3c0d1141__Priya_Patel__Engineering_Lead.pdf"
+            },
+            {
+              "cv_id": "cv_346dec08",
+              "filename": "2ceae85e__Layla_Hassan__NLP_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_4eef5183",
+              "filename": "90deaa61__Rajiv_Patel__Deep_Learning_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_de45edbe",
+              "filename": "238ebc65__Priya_Patel__Infrastructure_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_665a5b81",
+              "filename": "67e29575__Kenji_Sato__Junior_Audio_Engineer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 12031.04,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 20.12,
+              "details": "Found 26 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 21214.71,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5190.04,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Several candidates have experience working at startup companies. These candidates have held various roles, and their responsibilities are detailed in the analysis below. ### Analysis\nI reviewed all the provided CVs and identified the following candidates who have experience working at startup companies.",
+            "raw_content": ":::thinking\nI need to identify candidates with experience at startup companies. I will scan the provided CVs for mentions of \"startup,\" \"StartUp,\" or similar terms, and extract the company name and the candidate's role/responsibilities if available. I will then present the findings in a table.\n:::\n\nSeveral candidates have experience working at startup companies. These candidates have held various roles, and their responsibilities are detailed in the analysis below.\n\n### Analysis\n\nI reviewed all the provided CVs and identified the following candidates who have experience working at startup companies. The table below summarizes their experience, including the startup name and their role/responsibilities as mentioned in their CVs.\n\n| Candidate | Startup Name | Role/Responsibilities | Match |\n|-----------|-------------|-------------|-------|\n| **[Layla Al-Mansoor](cv:cv_bdb60f7a)** | early‑stage startups | Built MVP mobile solutions for early‑stage startups, collaborating closely with product and design teams to iterate quickly. | ⭐⭐⭐ |\n| **[Carlos Mendoza](cv:cv_a172eab0)** | StartUp Solutions | Supported QA team in manual testing and bug reporting for early-stage SaaS product. | ⭐⭐⭐ |\n| **[Oliver Whitmore](cv:cv_1bc8389c)** | ScaleUp Labs | Managed product development for a SaaS startup, focusing on rapid iteration and customer feedback. Launched MVP in 4 months, securing Series A funding of $12M. | ⭐⭐⭐ |\n| **[Thabo Nkosi](cv:cv_06eadacd)** | ScaleUp Labs | Managed product development for a SaaS startup, focusing on rapid iteration and customer feedback. Launched MVP in 4 months, securing Series A funding of $12M. | ⭐⭐⭐ |\n| **[Priya Patel](cv:cv_08eb88e2)** | CryptoVentures Argentina | Supported blockchain research and prototype development. | ⭐⭐⭐ |\n| **[Aisha Johnson](cv:cv_ffce3431)** | StartupX | Assisted senior developers with Xcode | ⭐⭐ |\n| **[Priya Patel](cv:cv_7c2ff148)** | StartUp Inc | Full‑stack development of SaaS product, contributing to product‑market fit. Built MVP in 4 months, securing Series A funding of $12M. | ⭐⭐⭐ |\n\n:::conclusion\nThe following candidates have experience working at startup companies: **[Layla Al-Mansoor](cv:cv_bdb60f7a)**, **[Carlos Mendoza](cv:cv_a172eab0)**, **[Oliver Whitmore](cv:cv_1bc8389c)**, **[Thabo Nkosi](cv:cv_06eadacd)**, **[Priya Patel](cv:cv_08eb88e2)**, **[Aisha Johnson](cv:cv_ffce3431)**, and **[Priya Patel](cv:cv_7c2ff148)**.",
+            "thinking": "I need to identify candidates with experience at startup companies. I will scan the provided CVs for mentions of \"startup,\" \"StartUp,\" or similar terms, and extract the company name and the candidate's role/responsibilities if available. I will then present the findings in a table.",
+            "analysis": "I reviewed all the provided CVs and identified the following candidates who have experience working at startup companies. The table below summarizes their experience, including the startup name and their role/responsibilities as mentioned in their CVs.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Startup Name",
+                "Role/Responsibilities",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Layla Al-Mansoor",
+                  "cv_id": "cv_bdb60f7a",
+                  "columns": {
+                    "Startup Name": "early‑stage startups",
+                    "Role/Responsibilities": "Built MVP mobile solutions for early‑stage startups, collaborating closely with product and design teams to iterate quickly."
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Carlos Mendoza",
+                  "cv_id": "cv_a172eab0",
+                  "columns": {
+                    "Startup Name": "StartUp Solutions",
+                    "Role/Responsibilities": "Supported QA team in manual testing and bug reporting for early-stage SaaS product."
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Oliver Whitmore",
+                  "cv_id": "cv_1bc8389c",
+                  "columns": {
+                    "Startup Name": "ScaleUp Labs",
+                    "Role/Responsibilities": "Managed product development for a SaaS startup, focusing on rapid iteration and customer feedback. Launched MVP in 4 months, securing Series A funding of $12M."
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Thabo Nkosi",
+                  "cv_id": "cv_06eadacd",
+                  "columns": {
+                    "Startup Name": "ScaleUp Labs",
+                    "Role/Responsibilities": "Managed product development for a SaaS startup, focusing on rapid iteration and customer feedback. Launched MVP in 4 months, securing Series A funding of $12M."
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Priya Patel",
+                  "cv_id": "cv_08eb88e2",
+                  "columns": {
+                    "Startup Name": "CryptoVentures Argentina",
+                    "Role/Responsibilities": "Supported blockchain research and prototype development."
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Priya Patel",
+                  "cv_id": "cv_7c2ff148",
+                  "columns": {
+                    "Startup Name": "StartUp Inc",
+                    "Role/Responsibilities": "Full‑stack development of SaaS product, contributing to product‑market fit. Built MVP in 4 months, securing Series A funding of $12M."
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Aisha Johnson",
+                  "cv_id": "cv_ffce3431",
+                  "columns": {
+                    "Startup Name": "StartupX",
+                    "Role/Responsibilities": "Assisted senior developers with Xcode"
+                  },
+                  "match_score": 40
+                }
+              ]
+            },
+            "conclusion": "The following candidates have experience working at startup companies: [📄](cv:cv_bdb60f7a) **Layla Al-Mansoor**, [📄](cv:cv_a172eab0) **Carlos Mendoza**, [📄](cv:cv_1bc8389c) **Oliver Whitmore**, [📄](cv:cv_06eadacd) **Thabo Nkosi**, [📄](cv:cv_08eb88e2) **Priya Patel**, [📄](cv:cv_ffce3431) **Aisha Johnson**, and [📄](cv:cv_7c2ff148) **Priya Patel**.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T03:18:04.185323"
         }
       ],
       "created_at": "2026-01-05T03:15:22.560376",
-      "updated_at": "2026-01-05T03:17:35.190285"
+      "updated_at": "2026-01-05T03:18:04.185323"
+    },
+    {
+      "id": "598822fc-952a-41bd-955a-975f2113e2ca",
+      "name": "Software Engineering 3515",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_292c379a",
+          "filename": "47129175__Elin_Andersson__Automation_Engineer.pdf",
+          "chunk_count": 2,
+          "content_hash": "809f1653d97a81459ea1152f1be2bf766ee32b52f51e7a20a695151e35400a58",
+          "uploaded_at": "2026-01-05T03:19:35.729367"
+        },
+        {
+          "id": "cv_c0a0feeb",
+          "filename": "56732273__Carlos_Mendoza__Junior_Game_Developer.pdf",
+          "chunk_count": 1,
+          "content_hash": "9e0f2275b0024e999506bf25a9cc40ed49399214ff9d6973d859186c3d1136d5",
+          "uploaded_at": "2026-01-05T03:19:36.701834"
+        },
+        {
+          "id": "cv_a844e03a",
+          "filename": "a207b741__Priya_Patel__Kotlin_Developer.pdf",
+          "chunk_count": 3,
+          "content_hash": "e4511fdf40bc18458a1648dc2001d4c04307947863ac1a40fcb05214202afdfc",
+          "uploaded_at": "2026-01-05T03:19:37.700209"
+        },
+        {
+          "id": "cv_eaeab414",
+          "filename": "ab734885__Layla_Al-Mansoori__Platform_Engineer.pdf",
+          "chunk_count": 1,
+          "content_hash": "d96d15a5831e54195378dd92aad1e14a9ce7bd12f5fae28b9f2810913770ef63",
+          "uploaded_at": "2026-01-05T03:19:38.864024"
+        },
+        {
+          "id": "cv_ff7e4743",
+          "filename": "ad98e9dd__Carmen_Rodriguez__Unreal_Engine_Developer.pdf",
+          "chunk_count": 4,
+          "content_hash": "efe0a59043872769e95d32e7985c285143fff6a277c3530300bce2539b3e5208",
+          "uploaded_at": "2026-01-05T03:19:39.885587"
+        },
+        {
+          "id": "cv_6e0feab2",
+          "filename": "b38afdec__Marco_Bianchi__Junior_iOS_Developer.pdf",
+          "chunk_count": 2,
+          "content_hash": "4797cf8e5d8baa5e7af0023d6833d4ae5ba070ce7320fa0df2536f046aa3d1dd",
+          "uploaded_at": "2026-01-05T03:19:40.840800"
+        },
+        {
+          "id": "cv_1279bc97",
+          "filename": "b519ac8c__Valeria_Mendoza__Protocol_Engineer.pdf",
+          "chunk_count": 4,
+          "content_hash": "6dc8e17f7ed49bdee055112c86c32c19498149ca063374145449a9ec57b3f9ab",
+          "uploaded_at": "2026-01-05T03:19:41.941637"
+        },
+        {
+          "id": "cv_11dea801",
+          "filename": "c1fcfa41__Priya_Patel__Engineering_Lead.pdf",
+          "chunk_count": 5,
+          "content_hash": "f7a386de1d31af8e0850ef9e4ec944d33a6d7e100249a3e0209d266ca9ec8369",
+          "uploaded_at": "2026-01-05T03:19:43.017070"
+        },
+        {
+          "id": "cv_a58f1dcd",
+          "filename": "cb19c2fc__Rajiv_Patel__Sales_Engineer.pdf",
+          "chunk_count": 3,
+          "content_hash": "d145f1dcf08793e8337039868ab6debe084231a2af9ba9695502b6fd6a111430",
+          "uploaded_at": "2026-01-05T03:19:44.011618"
+        },
+        {
+          "id": "cv_668232ca",
+          "filename": "dcef762d__Alicia_Mendoza__Junior_Mobile_Developer.pdf",
+          "chunk_count": 2,
+          "content_hash": "c3f9055a440113691493c72c0341a7301840fc29a220a65925230c5483ba87ce",
+          "uploaded_at": "2026-01-05T03:19:45.018004"
+        },
+        {
+          "id": "cv_88ba2dd6",
+          "filename": "f283d769__Priya_Patel__AI_Engineer.pdf",
+          "chunk_count": 3,
+          "content_hash": "f2127d43a12fc3577f9dd9ffc7ba066d48adf55a28df4773ce486a58e654c081",
+          "uploaded_at": "2026-01-05T03:19:46.125514"
+        },
+        {
+          "id": "cv_af990cf2",
+          "filename": "fa1c2540__Priya_Patel__Software_Engineer.pdf",
+          "chunk_count": 2,
+          "content_hash": "89718e0eae852e79d959ff5bf2499a58fa29126ec201be7d6265acf429ef7724",
+          "uploaded_at": "2026-01-05T03:19:47.175634"
+        },
+        {
+          "id": "cv_9f34f3c5",
+          "filename": "fd1f45b3__Liat_Cohen__Android_Developer.pdf",
+          "chunk_count": 3,
+          "content_hash": "1a700337100870a0ba0d55af03132034a8aedc3cc90f7d6117d44ffa43b94151",
+          "uploaded_at": "2026-01-05T03:19:48.238313"
+        },
+        {
+          "id": "cv_56de519e",
+          "filename": "40a3a141__Isabel_Mendoza__Full_Stack_Developer.pdf",
+          "chunk_count": 5,
+          "content_hash": "167da3ed98d7d917f9e05f68c4eca068ea1dbf4b4c517dcf4ae38e2d3c978979",
+          "uploaded_at": "2026-01-05T03:24:05.509760"
+        },
+        {
+          "id": "cv_20030960",
+          "filename": "54ed6e12__Rajiv_Patel__React_Native_Developer.pdf",
+          "chunk_count": 4,
+          "content_hash": "7fdec5e7f62cf054e00b01a2393e8610ab5d08e50348ebddcc75b3d1b96a554c",
+          "uploaded_at": "2026-01-05T03:24:06.572024"
+        },
+        {
+          "id": "cv_aa1402e1",
+          "filename": "65bace6d__Oliver_Whitmore__Engineering_Manager.pdf",
+          "chunk_count": 3,
+          "content_hash": "cea58fb09a17bbccd51184b0463967635c87dcd3b2279cc0689df3e937717824",
+          "uploaded_at": "2026-01-05T03:24:07.596247"
+        },
+        {
+          "id": "cv_edc65d0b",
+          "filename": "67e29575__Kenji_Sato__Junior_Audio_Engineer.pdf",
+          "chunk_count": 4,
+          "content_hash": "4eda67043befc4c581138066de91c45ecaa063907d6c99dee7b98766aec09d84",
+          "uploaded_at": "2026-01-05T03:24:08.601622"
+        },
+        {
+          "id": "cv_73fb487d",
+          "filename": "69e9c6cf__Carlos_Mendoza__QA_Engineer.pdf",
+          "chunk_count": 2,
+          "content_hash": "07014602506104dfa674e891f0ebe7399a21835452e625af6bd1858111a1e089",
+          "uploaded_at": "2026-01-05T03:24:09.714591"
+        },
+        {
+          "id": "cv_1f0adf67",
+          "filename": "69e69497__Ravi_Patel__Junior_Structural_Engineer.pdf",
+          "chunk_count": 8,
+          "content_hash": "08b254e43968723a18dea7379067feb541f8f9afb9e2df78970d69e76de54723",
+          "uploaded_at": "2026-01-05T03:24:10.775913"
+        },
+        {
+          "id": "cv_abcc3d93",
+          "filename": "82ca9c2d__Priya_Patel__DeFi_Developer.pdf",
+          "chunk_count": 2,
+          "content_hash": "fe8678f2c257e9d5cfe7d6ab99c3bd60e6e5bde1bb8b0f3d1768410102f148cf",
+          "uploaded_at": "2026-01-05T03:24:11.810590"
+        },
+        {
+          "id": "cv_28215aa6",
+          "filename": "84b510ad__Ling_Mei_Chen__Deep_Learning_Engineer.pdf",
+          "chunk_count": 2,
+          "content_hash": "adea15b70085c102bda1a8e920885100cba5ab4bf25f661a6e02a24ad924d833",
+          "uploaded_at": "2026-01-05T03:24:12.892680"
+        },
+        {
+          "id": "cv_06cf5fef",
+          "filename": "90deaa61__Rajiv_Patel__Deep_Learning_Engineer.pdf",
+          "chunk_count": 5,
+          "content_hash": "8ac053ba1b5dab6362a1096d9ce8aa5c0b2b0fc8fb18b5156e4a60db10881009",
+          "uploaded_at": "2026-01-05T03:24:13.946455"
+        },
+        {
+          "id": "cv_abd97236",
+          "filename": "97e49604__Li_Wei_Chen__Audio_Engineer.pdf",
+          "chunk_count": 3,
+          "content_hash": "33f716249e4598ca00435fbd3d6d288fb8cb8fad1d1fe21e107a614ec451f80b",
+          "uploaded_at": "2026-01-05T03:24:14.985204"
+        },
+        {
+          "id": "cv_a67dc18f",
+          "filename": "238ebc65__Priya_Patel__Infrastructure_Engineer.pdf",
+          "chunk_count": 2,
+          "content_hash": "0b7d17934ccaad56c2b82b4fd3e57091c3ef41efa4d0cf0657b7ccaf9c301433",
+          "uploaded_at": "2026-01-05T03:24:16.154433"
+        },
+        {
+          "id": "cv_1b352c36",
+          "filename": "823ea1cb__Priya_Patel__Audio_Engineer.pdf",
+          "chunk_count": 5,
+          "content_hash": "c7877c1e5f21997bd48b9063d85f6fd0e5c37fffaa7c28b2df8ee5aa418c63de",
+          "uploaded_at": "2026-01-05T03:24:17.213540"
+        },
+        {
+          "id": "cv_e4bdfe53",
+          "filename": "9914b605__Rajiv_Patel__Software_Developer.pdf",
+          "chunk_count": 2,
+          "content_hash": "296ff70056a9125e7b0bc0a616c927458e252f9c267a52841aad788cb263c89b",
+          "uploaded_at": "2026-01-05T03:24:18.268598"
+        },
+        {
+          "id": "cv_f8843cac",
+          "filename": "48138a71__Wei_Zhang__Flutter_Developer.pdf",
+          "chunk_count": 3,
+          "content_hash": "53f571f0b847125d53c33045d6813aae33c3fcd4f55cc134ae9b92dd11650610",
+          "uploaded_at": "2026-01-05T03:24:19.374229"
+        },
+        {
+          "id": "cv_a242af95",
+          "filename": "95501c91__Karim_Al-Mansour__NLP_Engineer.pdf",
+          "chunk_count": 10,
+          "content_hash": "614983b223d1ff505da006130ee39be79918e75d787a9b17909bc037286a93bb",
+          "uploaded_at": "2026-01-05T03:24:20.436913"
+        },
+        {
+          "id": "cv_37ddfdf2",
+          "filename": "625611ae__Aisha_Patel__Game_Developer.pdf",
+          "chunk_count": 3,
+          "content_hash": "8a76c43db795a1e7bac3b4841af0e1f0987acb0c4d130039e94100496ced576f",
+          "uploaded_at": "2026-01-05T03:24:21.500733"
+        },
+        {
+          "id": "cv_fac8ad44",
+          "filename": "2502875c__Luca_Nguyen__Mastering_Engineer.pdf",
+          "chunk_count": 3,
+          "content_hash": "6c8150f70bc0c19d96d57cb3d3a150156799e272c5995d4fa12a68aa7edff39f",
+          "uploaded_at": "2026-01-05T03:24:22.566592"
+        },
+        {
+          "id": "cv_6e57cbac",
+          "filename": "69473753__Layla_Al-Mansoor__Head_of_Data_Science.pdf",
+          "chunk_count": 3,
+          "content_hash": "e12fb27aa4a8698a91ef538f8d4554a556ae7681c2776b16d5344984615062f3",
+          "uploaded_at": "2026-01-05T03:24:59.497486"
+        },
+        {
+          "id": "cv_27a77e6e",
+          "filename": "99231373__Sofia_Bianchi__Clinical_Research_Coordinator.pdf",
+          "chunk_count": 7,
+          "content_hash": "a7af7fa9a237a546e372b4d07205ef2999984d5ed76a7d5058e2b660176ef3dc",
+          "uploaded_at": "2026-01-05T03:25:00.594294"
+        },
+        {
+          "id": "cv_c3712bd0",
+          "filename": "a6efaf4b__Leila_Al-Mansoor__Learning__Development_Specialist.pdf",
+          "chunk_count": 5,
+          "content_hash": "cc3998c2c97b343fa46808bce190ab2c2cded3f89da215122f305459479fed33",
+          "uploaded_at": "2026-01-05T03:25:01.798406"
+        },
+        {
+          "id": "cv_76f479c2",
+          "filename": "acb0a31b__Wei_Liang_Tan__Contract_Manager.pdf",
+          "chunk_count": 6,
+          "content_hash": "e6736052983ad986b4416abe34bd110c72c16e18bec065bc7f363b0fdd3de0a0",
+          "uploaded_at": "2026-01-05T03:25:02.885244"
+        },
+        {
+          "id": "cv_25a5aa48",
+          "filename": "ae4945a4__Carlos_Mendoza__Program_Coordinator.pdf",
+          "chunk_count": 8,
+          "content_hash": "2bf3b73206cb585da22f0cd1a9c14061d6e22c4de5dc30b88ac289233b16810e",
+          "uploaded_at": "2026-01-05T03:25:03.928847"
+        },
+        {
+          "id": "cv_c5ebc99f",
+          "filename": "b6d6c053__Rafael_Oliveira__Delivery_Manager.pdf",
+          "chunk_count": 12,
+          "content_hash": "a17eb3c77323aacac9bc5047ecc26ac35904af52c5c0d51997f3a0c039401918",
+          "uploaded_at": "2026-01-05T03:25:05.060230"
+        },
+        {
+          "id": "cv_b6b047fd",
+          "filename": "b9cbea0d__Carmen_Alvarez__Marketing_Manager.pdf",
+          "chunk_count": 2,
+          "content_hash": "1db5744ab17bf202f096857d629815edb85db9f8a68ebe566d482d4fde9034dd",
+          "uploaded_at": "2026-01-05T03:25:06.125145"
+        },
+        {
+          "id": "cv_74365b01",
+          "filename": "b745ee30__Javier_Chen__Customer_Success_Manager.pdf",
+          "chunk_count": 4,
+          "content_hash": "1f7cde56c8fa69a21962d19925fc101efd4e1acdfac0f3671a652839d77dc2e5",
+          "uploaded_at": "2026-01-05T03:25:07.204919"
+        },
+        {
+          "id": "cv_92b8057f",
+          "filename": "c5dcb574__Valentina_Rojas__Contract_Manager.pdf",
+          "chunk_count": 2,
+          "content_hash": "4278935285373030027b091ad6e7e645f55ae6aa83ceb184b55e04f5b69cd375",
+          "uploaded_at": "2026-01-05T03:25:09.126258"
+        },
+        {
+          "id": "cv_4ea694eb",
+          "filename": "cb3a97ee__Javier_Mendoza__Contract_Manager.pdf",
+          "chunk_count": 4,
+          "content_hash": "feaff63257167de54950739683ef16b5fadca3690682b49c3f310d7810b54c3a",
+          "uploaded_at": "2026-01-05T03:25:11.458018"
+        },
+        {
+          "id": "cv_9035ce43",
+          "filename": "efc02986__Carlos_Mendoza__Scrum_Master.pdf",
+          "chunk_count": 7,
+          "content_hash": "582c87f55e99b4a126892edb1085bde117f95cd1fe1987cf2af6967bab311974",
+          "uploaded_at": "2026-01-05T03:25:13.733001"
+        }
+      ],
+      "messages": [
+        {
+          "id": "b743e0d7-a7e8-46a9-b656-c9c774c02cba",
+          "role": "user",
+          "content": "Rank all 41 candidates by experience",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T03:25:29.225325"
+        }
+      ],
+      "created_at": "2026-01-05T03:19:28.632434",
+      "updated_at": "2026-01-05T03:25:29.225325"
     }
   ]
 }

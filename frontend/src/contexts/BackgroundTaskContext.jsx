@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useCallback, useRef } from 'react';
-import { uploadCVsToSession, getSessionUploadStatus } from '../services/api';
+import { uploadCVsToSession, getSessionUploadStatus, generateSessionName, updateSession } from '../services/api';
+import { getSettings } from '../components/modals/SettingsModal';
 
 const BackgroundTaskContext = createContext(null);
 
@@ -190,6 +191,27 @@ export function BackgroundTaskProvider({ children }) {
                 logs: [finalLog],
                 endTime: Date.now()
               }, true);
+
+              // Auto-naming: Generate name for the session if enabled
+              const settings = getSettings();
+              if (settings.autoNamingEnabled && totalFiles > 0) {
+                try {
+                  updateTaskInternal(taskId, {
+                    logs: [language === 'es' ? '🤖 Generando nombre...' : '🤖 Generating name...']
+                  }, true);
+                  
+                  const nameResult = await generateSessionName(sessionId, settings.autoNamingModel, mode);
+                  if (nameResult && nameResult.full_name) {
+                    await updateSession(sessionId, { name: nameResult.full_name }, mode);
+                    updateTaskInternal(taskId, {
+                      logs: [language === 'es' ? `✓ Nombre: ${nameResult.full_name}` : `✓ Named: ${nameResult.full_name}`]
+                    }, true);
+                  }
+                } catch (nameError) {
+                  console.error('Auto-naming failed:', nameError);
+                  // Don't fail the whole upload if naming fails
+                }
+              }
 
               if (onCompleteCallbacks.current[taskId]) {
                 onCompleteCallbacks.current[taskId]({ taskId, sessionId, filesCount: totalFiles, duplicates });

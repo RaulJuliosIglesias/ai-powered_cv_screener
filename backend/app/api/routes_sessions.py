@@ -688,6 +688,119 @@ async def get_suggested_questions(
 
 
 # ============================================
+# AUTO-NAMING ENDPOINT
+# ============================================
+
+class GenerateNameRequest(BaseModel):
+    model: str = "google/gemini-2.0-flash-lite-001"
+
+
+class GenerateNameResponse(BaseModel):
+    name: str
+    suffix: str
+    full_name: str
+
+
+@router.post("/{session_id}/generate-name", response_model=GenerateNameResponse)
+async def generate_session_name(
+    session_id: str,
+    request: GenerateNameRequest,
+    mode: Mode = Query(default=settings.default_mode)
+):
+    """Generate a descriptive name for a session based on its CVs using a cheap AI model."""
+    import httpx
+    import random
+    
+    mgr = get_session_manager(mode)
+    session = mgr.get_session(session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    cvs = session.get("cvs", []) if isinstance(session, dict) else session.cvs
+    if not cvs:
+        raise HTTPException(status_code=400, detail="No CVs in session to analyze")
+    
+    # Extract filenames and any available text snippets
+    cv_info = []
+    for cv in cvs[:10]:  # Limit to first 10 CVs to keep it cheap
+        filename = cv.get("filename", "") if isinstance(cv, dict) else cv.filename
+        cv_info.append(filename)
+    
+    # Create a simple prompt for the AI
+    prompt = f"""Analyze these CV filenames and generate a 2-word category name that describes the type of professionals in this group.
+
+Filenames:
+{chr(10).join(cv_info)}
+
+Rules:
+- Return ONLY 2 words that describe the professional category (e.g., "Software Development", "Data Science", "Marketing Sales", "Finance Accounting")
+- If the CVs are mixed, combine the two main categories (e.g., "Tech Marketing")
+- Be concise and professional
+- Do NOT include any other text, just the 2 words
+
+Category name:"""
+
+    try:
+        # Call OpenRouter API
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.post(
+                "https://openrouter.ai/api/v1/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {settings.openrouter_api_key}",
+                    "HTTP-Referer": settings.http_referer,
+                    "X-Title": settings.app_title,
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "model": request.model,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "max_tokens": 20,
+                    "temperature": 0.3
+                }
+            )
+            
+            if response.status_code != 200:
+                logger.error(f"OpenRouter API error: {response.status_code} - {response.text}")
+                # Fallback to generic name
+                name = "CV Group"
+            else:
+                data = response.json()
+                name = data["choices"][0]["message"]["content"].strip()
+                # Clean up the response - take only first 2-3 words
+                words = name.replace('"', '').replace("'", '').split()[:3]
+                name = " ".join(words)
+                # Ensure it's title case
+                name = name.title()
+    except Exception as e:
+        logger.error(f"Failed to generate name via AI: {e}")
+        name = "CV Group"
+    
+    # Generate unique suffix (4 digits based on timestamp + random)
+    import time
+    suffix = f"{int(time.time()) % 10000:04d}"
+    
+    # Check for existing sessions with same base name and increment if needed
+    sessions = mgr.list_sessions()
+    existing_names = set()
+    for s in sessions:
+        s_name = s.get("name", "") if isinstance(s, dict) else s.name
+        existing_names.add(s_name)
+    
+    full_name = f"{name} {suffix}"
+    attempts = 0
+    while full_name in existing_names and attempts < 100:
+        suffix = f"{random.randint(0, 9999):04d}"
+        full_name = f"{name} {suffix}"
+        attempts += 1
+    
+    return GenerateNameResponse(
+        name=name,
+        suffix=suffix,
+        full_name=full_name
+    )
+
+
+# ============================================
 # MESSAGE MANAGEMENT ENDPOINTS
 # ============================================
 

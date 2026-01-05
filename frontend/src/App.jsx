@@ -17,7 +17,7 @@ import { StructuredOutputRenderer } from './components/output';
 import Sidebar from './components/Sidebar';
 import Toast from './components/Toast';
 import BackgroundUploadWidget from './components/BackgroundUploadWidget';
-import { AboutModal } from './components/modals';
+import { AboutModal, SettingsModal } from './components/modals';
 import { SessionSkeleton, MessageSkeleton } from './components/SkeletonLoader';
 import { MemoizedTable, MemoizedCodeBlock } from './components/MemoizedTable';
 import StreamingMessage from './components/StreamingMessage';
@@ -768,6 +768,13 @@ function App() {
           </div>
           <div className="flex items-center gap-3">
             <button 
+              onClick={() => setShowSettings(true)}
+              className="flex items-center gap-2 px-3 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors group"
+              title={language === 'es' ? 'Configuración' : 'Settings'}
+            >
+              <Settings className="w-4 h-4 text-slate-600 dark:text-slate-400" />
+            </button>
+            <button 
               onClick={() => setShowAbout(true)}
               className="flex items-center gap-2 px-3 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-purple-100 dark:hover:bg-purple-900/30 rounded-lg transition-colors group"
               title={language === 'es' ? 'Acerca de' : 'About'}
@@ -790,7 +797,7 @@ function App() {
               <Sliders className="w-4 h-4 text-purple-600 dark:text-purple-400" />
               <span className="text-xs font-medium text-slate-600 dark:text-slate-400 group-hover:text-purple-700 dark:group-hover:text-purple-300 hidden sm:inline">{language === 'es' ? 'Pipeline' : 'Pipeline'}</span>
             </button>
-            {currentSession && (<><input ref={fileInputRef} type="file" accept=".pdf" multiple onChange={handleUpload} className="hidden" /><button onClick={() => fileInputRef.current?.click()} disabled={hasActiveTasks} className="flex items-center gap-2 px-4 py-2 text-sm bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg disabled:opacity-50 font-medium transition-colors shadow-sm">{hasActiveTasks ? <Loader className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}<span>{language === 'es' ? 'Añadir CVs' : 'Add CVs'}</span></button></>)}
+            {currentSession && (<><input ref={fileInputRef} type="file" accept=".pdf" multiple onChange={handleUpload} className="hidden" /><button onClick={() => fileInputRef.current?.click()} disabled={isSessionProcessing(currentSessionId)} className="flex items-center gap-2 px-4 py-2 text-sm bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg disabled:opacity-50 font-medium transition-colors shadow-sm">{isSessionProcessing(currentSessionId) ? <Loader className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}<span>{language === 'es' ? 'Añadir CVs' : 'Add CVs'}</span></button></>)}
           </div>
         </div>
 
@@ -1332,6 +1339,15 @@ function App() {
 
       {/* About Modal */}
       <AboutModal isOpen={showAbout} onClose={() => setShowAbout(false)} />
+
+      {/* Settings Modal */}
+      <SettingsModal 
+        isOpen={showSettings} 
+        onClose={() => setShowSettings(false)}
+        onSave={() => {
+          showToastMessage(language === 'es' ? 'Configuración guardada' : 'Settings saved', 'success');
+        }}
+      />
 
       {/* Background Upload Widget - floating minimizable panel */}
       <BackgroundUploadWidget />

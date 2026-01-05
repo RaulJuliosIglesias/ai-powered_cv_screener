@@ -197,4 +197,9 @@ export const getSessionSuggestions = async (sessionId, mode = 'local') => {
   return response.data;
 };
 
+export const generateSessionName = async (sessionId, model = 'google/gemini-2.0-flash-lite-001', mode = 'local') => {
+  const response = await api.post(`/sessions/${sessionId}/generate-name?mode=${mode}`, { model });
+  return response.data;
+};
+
 export default api;
