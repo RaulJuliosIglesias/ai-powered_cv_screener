@@ -1,33 +1,81 @@
-# 🚀 Roadmap - Planes Futuros
+# 🚀 Roadmap - Future Plans
 
-Documentos de planificación para mejoras futuras del proyecto.
+> Planning documents for future improvements to the **AI-Powered CV Screener** project.
 
-## Prioridad Alta
+---
+
+## 📑 Table of Contents
+
+| Priority | Document | Description |
+|----------|----------|-------------|
+| 🔴 High | [RAG V6](./RAG_V6.md) | Next-generation RAG pipeline with advanced verification |
+| 🟡 Medium | [Confidence Improvements](./CONFIDENCE.md) | Answer confidence calibration system |
+| 🟢 Low | [Advanced Evaluation](./ADVANCED_EVAL.md) | Production-grade evaluation metrics |
+| 🟢 Low | [Security Improvements](./SECURITY_IMPROVEMENTS.md) | Security hardening and best practices |
+
+---
+
+## 🎯 Quick Navigation
+
+```
+docs/roadmap/
+├── README.md                    ← You are here
+├── RAG_V6.md                    ← HuggingFace NLI & RAGAS framework
+├── CONFIDENCE.md                ← LLM-as-Judge & calibration
+├── ADVANCED_EVAL.md             ← Token analysis & citations
+└── SECURITY_IMPROVEMENTS.md     ← Auth & rate limiting
+```
+
+---
+
+## 🔴 High Priority
 
 ### [RAG V6](./RAG_V6.md)
-- HuggingFace NLI para verificación semántica
-- Zero-shot classification
+- HuggingFace NLI for semantic verification
+- Zero-shot classification integration
 - RAGAS evaluation framework
-- Mejoras de precisión
+- Precision and recall improvements
 
-## Prioridad Media
+---
+
+## 🟡 Medium Priority
 
 ### [Confidence Improvements](./CONFIDENCE.md)
-- LLM-as-Judge evaluation
-- NLI models para verificación
+- LLM-as-Judge evaluation patterns
+- NLI models for answer verification
 - Self-Consistency checking
-- Calibración de scores
+- Score calibration system
 
-## Prioridad Baja
+---
+
+## 🟢 Low Priority
 
 ### [Advanced Evaluation](./ADVANCED_EVAL.md)
-- Token analysis avanzado
-- Citation verification
-- Sistema de calibración
-- Métricas de producción
+- Advanced token analysis
+- Citation verification system
+- Calibration framework
+- Production metrics dashboard
 
 ### [Security Improvements](./SECURITY_IMPROVEMENTS.md)
-- Mejoras de seguridad en autenticación
-- Rate limiting y protección contra abusos
-- Validación de inputs y sanitización
-- Hardening de la infraestructura
+- Authentication hardening
+- Rate limiting and abuse protection
+- Input validation and sanitization
+- Infrastructure security best practices
+
+---
+
+## 🔗 Related Documentation
+
+| Document | Description |
+|----------|-------------|
+| [RAG Workflow](../RAG_WORKFLOW.md) | Current RAG pipeline architecture |
+| [Architecture](../../ARCHITECTURE.md) | System architecture overview |
+| [Evaluation Criteria](../evaluation/) | Project evaluation documentation |
+
+---
+
+<div align="center">
+
+**[← Back to Docs](../README.md)** · **[← Back to Main README](../../README.md)**
+
+</div>
