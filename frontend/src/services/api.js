@@ -131,16 +131,22 @@ export const uploadCVsToSession = async (sessionId, files, mode = 'local', onPro
     formData.append('files', file);
   });
 
-  const response = await api.post(`/sessions/${sessionId}/cvs?mode=${mode}`, formData, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-    onUploadProgress: (progressEvent) => {
-      if (onProgress) {
-        const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-        onProgress(progress);
-      }
-    },
+  // Use fetch instead of axios - it's more efficient and less blocking
+  // Note: fetch doesn't support upload progress natively, so we simulate it
+  if (onProgress) onProgress(0);
+  
+  const response = await fetch(`/api/sessions/${sessionId}/cvs?mode=${mode}`, {
+    method: 'POST',
+    body: formData,
+    // Don't set Content-Type - browser will set it automatically with boundary
   });
-  return response.data;
+  
+  if (!response.ok) {
+    throw new Error(`Upload failed: ${response.status}`);
+  }
+  
+  if (onProgress) onProgress(100);
+  return response.json();
 };
 
 export const getSessionUploadStatus = async (sessionId, jobId) => {

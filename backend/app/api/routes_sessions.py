@@ -240,23 +240,43 @@ async def update_session(session_id: str, request: UpdateSessionRequest, mode: M
     )
 
 
+def _delete_session_cvs_sync(session_id: str, cv_ids: List[str], mode: Mode):
+    """Synchronous function to delete CVs - runs in background thread."""
+    import asyncio
+    
+    async def _delete_cvs():
+        rag_service = ProviderFactory.get_rag_service(mode=mode)
+        for cv_id in cv_ids:
+            await rag_service.vector_store.delete_cv(cv_id)
+        logger.info(f"Background deletion complete for session {session_id}: {len(cv_ids)} CVs deleted")
+    
+    # Run the async deletion in a new event loop
+    asyncio.run(_delete_cvs())
+
+
 @router.delete("/{session_id}")
-async def delete_session(session_id: str, mode: Mode = Query(default=settings.default_mode)):
+async def delete_session(
+    session_id: str, 
+    background_tasks: BackgroundTasks,
+    mode: Mode = Query(default=settings.default_mode)
+):
     """Delete a session and optionally its CVs from vector store."""
     mgr = get_session_manager(mode)
     session = mgr.get_session(session_id)
     if not session:
         raise HTTPException(status_code=404, detail="Session not found")
     
-    # Delete CVs from vector store
-    rag_service = ProviderFactory.get_rag_service(mode=mode)
+    # Collect CV IDs to delete
     cvs = session.get("cvs", []) if isinstance(session, dict) else session.cvs
-    for cv in cvs:
-        cv_id = cv.get("id") if isinstance(cv, dict) else cv.id
-        await rag_service.vector_store.delete_cv(cv_id)
+    cv_ids = [cv.get("id") if isinstance(cv, dict) else cv.id for cv in cvs]
     
-    # Delete session
+    # Delete session immediately (fast operation)
     mgr.delete_session(session_id)
+    
+    # Delete CVs from vector store in background (slow operation - don't block)
+    if cv_ids:
+        background_tasks.add_task(_delete_session_cvs_sync, session_id, cv_ids, mode)
+    
     return {"success": True, "message": f"Session {session_id} deleted"}
 
 

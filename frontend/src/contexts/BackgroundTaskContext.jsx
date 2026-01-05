@@ -12,37 +12,51 @@ export function useBackgroundTask() {
 }
 
 export function BackgroundTaskProvider({ children }) {
-  // Active upload tasks: { taskId: { sessionId, files, progress, status, logs, ... } }
-  const [tasks, setTasks] = useState({});
+  // Use ref for internal state to avoid re-renders, useState only for UI updates
+  const tasksRef = useRef({});
+  const [tasksVersion, setTasksVersion] = useState(0); // Increment to trigger re-render when needed
   const [isMinimized, setIsMinimized] = useState(false);
   const taskIdCounter = useRef(0);
-  
-  // Callbacks for task completion
   const onCompleteCallbacks = useRef({});
+  const updateScheduled = useRef(false);
+
+  // Get current tasks (from ref, not state)
+  const getTasks = useCallback(() => tasksRef.current, []);
+
+  // Schedule a UI update (batched)
+  const scheduleUIUpdate = useCallback(() => {
+    if (!updateScheduled.current) {
+      updateScheduled.current = true;
+      // Use requestIdleCallback if available, otherwise requestAnimationFrame
+      const schedule = window.requestIdleCallback || requestAnimationFrame;
+      schedule(() => {
+        updateScheduled.current = false;
+        setTasksVersion(v => v + 1);
+      });
+    }
+  }, []);
 
   const generateTaskId = useCallback(() => {
     taskIdCounter.current += 1;
     return `upload-${Date.now()}-${taskIdCounter.current}`;
   }, []);
 
-  const updateTask = useCallback((taskId, updates) => {
-    setTasks(prev => {
-      if (!prev[taskId]) return prev;
-      return {
-        ...prev,
-        [taskId]: { ...prev[taskId], ...updates }
-      };
-    });
-  }, []);
+  const updateTaskInternal = useCallback((taskId, updates, triggerUI = false) => {
+    if (!tasksRef.current[taskId]) return;
+    tasksRef.current = {
+      ...tasksRef.current,
+      [taskId]: { ...tasksRef.current[taskId], ...updates }
+    };
+    if (triggerUI) scheduleUIUpdate();
+  }, [scheduleUIUpdate]);
 
   const removeTask = useCallback((taskId) => {
-    setTasks(prev => {
-      const newTasks = { ...prev };
-      delete newTasks[taskId];
-      return newTasks;
-    });
+    const newTasks = { ...tasksRef.current };
+    delete newTasks[taskId];
+    tasksRef.current = newTasks;
     delete onCompleteCallbacks.current[taskId];
-  }, []);
+    scheduleUIUpdate();
+  }, [scheduleUIUpdate]);
 
   const startUploadTask = useCallback(({
     sessionId,
@@ -54,19 +68,17 @@ export function BackgroundTaskProvider({ children }) {
     onError
   }) => {
     const taskId = generateTaskId();
-    // Convert FileList to Array immediately to avoid issues
     const filesArray = Array.from(files);
     const fileNames = filesArray.map(f => f.name);
     
-    // Store callbacks
     if (onComplete) {
       onCompleteCallbacks.current[taskId] = onComplete;
     }
     const storedOnError = onError;
 
-    // Initialize task immediately (synchronous)
-    setTasks(prev => ({
-      ...prev,
+    // Initialize task in ref (no re-render yet)
+    tasksRef.current = {
+      ...tasksRef.current,
       [taskId]: {
         id: taskId,
         sessionId,
@@ -77,128 +89,70 @@ export function BackgroundTaskProvider({ children }) {
         percent: 0,
         status: 'uploading',
         phase: 'upload',
-        logs: [language === 'es' ? `Iniciando subida de ${filesArray.length} archivo(s)...` : `Starting upload of ${filesArray.length} file(s)...`],
+        logs: [language === 'es' ? `Subiendo ${filesArray.length} archivo(s)...` : `Uploading ${filesArray.length} file(s)...`],
         startTime: Date.now(),
         language
       }
-    }));
+    };
 
-    // Auto-expand when starting
+    // Now trigger UI update and expand
     setIsMinimized(false);
+    scheduleUIUpdate();
 
-    // Use a proper async IIFE that doesn't block - runs completely detached
-    // The key is to NOT await this, just fire and forget
-    const runUpload = async () => {
+    // Run upload completely detached using setTimeout(0)
+    setTimeout(async () => {
       try {
-        // Upload phase (0% to 50%)
-        const res = await uploadCVsToSession(sessionId, filesArray, mode, (uploadPercent) => {
-          const realPercent = Math.round(uploadPercent * 0.5);
-          updateTask(taskId, { 
-            percent: realPercent,
-            phase: 'upload'
-          });
-        });
+        // Upload phase - NO UI updates during upload to avoid blocking
+        const res = await uploadCVsToSession(sessionId, filesArray, mode);
 
-        // Processing phase - poll for real progress
-        const phaseNames = {
-          extracting: language === 'es' ? 'Extrayendo texto' : 'Extracting text',
-          saving: language === 'es' ? 'Guardando PDF' : 'Saving PDF',
-          chunking: language === 'es' ? 'Dividiendo en chunks' : 'Chunking',
-          embedding: language === 'es' ? 'Creando embeddings' : 'Creating embeddings',
-          indexing: language === 'es' ? 'Indexando' : 'Indexing',
-          done: language === 'es' ? 'Completado' : 'Done'
-        };
+        // Update to processing phase (single UI update)
+        updateTaskInternal(taskId, {
+          percent: 50,
+          status: 'processing',
+          phase: 'processing',
+          logs: [language === 'es' ? 'Procesando en servidor...' : 'Processing on server...']
+        }, true);
 
-        setTasks(prev => {
-          if (!prev[taskId]) return prev;
-          return {
-            ...prev,
-            [taskId]: {
-              ...prev[taskId],
-              percent: 50,
-              status: 'processing',
-              phase: 'processing',
-              logs: [...prev[taskId].logs, language === 'es' ? 'Procesando archivos...' : 'Processing files...']
-            }
-          };
-        });
-
-        let lastProcessed = 0;
-        let lastPhase = '';
         const totalFiles = filesArray.length;
+        let lastProcessed = 0;
 
+        // Poll with minimal UI updates
         const poll = async () => {
           try {
             const status = await getSessionUploadStatus(sessionId, res.job_id);
             const processed = status.processed_files || 0;
-            const currentFile = status.current_file;
-            const currentPhase = status.current_phase;
-
-            const phaseProgress = { extracting: 10, saving: 20, chunking: 40, embedding: 80, indexing: 95, done: 100 };
-            const fileProgress = processed / totalFiles;
-            const currentFileProgress = currentPhase ? (phaseProgress[currentPhase] || 0) / 100 / totalFiles : 0;
-            const totalProgress = 50 + ((fileProgress + currentFileProgress) * 50);
 
             if (status.status === 'processing') {
-              setTasks(prev => {
-                if (!prev[taskId]) return prev;
-                let newLogs = [...prev[taskId].logs];
-
-                if (currentFile && currentPhase && currentPhase !== lastPhase) {
-                  const phaseName = phaseNames[currentPhase] || currentPhase;
-                  const shortName = currentFile.length > 25 ? currentFile.slice(0, 22) + '...' : currentFile;
-                  newLogs.push(`${phaseName}: ${shortName}`);
-                  lastPhase = currentPhase;
-                }
-
-                if (processed > lastProcessed) {
-                  const completedFile = fileNames[processed - 1] || `CV ${processed}`;
-                  const shortName = completedFile.length > 25 ? completedFile.slice(0, 22) + '...' : completedFile;
-                  newLogs.push(language === 'es' ? `✓ Completado: ${shortName}` : `✓ Done: ${shortName}`);
-                  lastProcessed = processed;
-                }
-
-                return {
-                  ...prev,
-                  [taskId]: {
-                    ...prev[taskId],
-                    currentFile: processed,
-                    percent: Math.min(99, Math.round(totalProgress)),
-                    logs: newLogs.slice(-8)
-                  }
-                };
-              });
-              setTimeout(poll, 150);
+              // Only update UI when a file completes
+              if (processed > lastProcessed) {
+                const percent = 50 + Math.round((processed / totalFiles) * 50);
+                updateTaskInternal(taskId, {
+                  currentFile: processed,
+                  percent: Math.min(99, percent),
+                  logs: [language === 'es' ? `Procesado ${processed}/${totalFiles}` : `Processed ${processed}/${totalFiles}`]
+                }, true);
+                lastProcessed = processed;
+              }
+              setTimeout(poll, 1000); // Poll every 1 second
             } else {
-              // Completed
-              setTasks(prev => {
-                if (!prev[taskId]) return prev;
-                return {
-                  ...prev,
-                  [taskId]: {
-                    ...prev[taskId],
-                    status: 'completed',
-                    currentFile: totalFiles,
-                    percent: 100,
-                    logs: [...prev[taskId].logs.slice(-7), language === 'es' ? '✓ ¡Todo completado!' : '✓ All completed!'],
-                    endTime: Date.now()
-                  }
-                };
-              });
+              // Completed - final UI update
+              updateTaskInternal(taskId, {
+                status: 'completed',
+                currentFile: totalFiles,
+                percent: 100,
+                logs: [language === 'es' ? '✓ ¡Completado!' : '✓ Complete!'],
+                endTime: Date.now()
+              }, true);
 
-              // Execute completion callback
               if (onCompleteCallbacks.current[taskId]) {
                 onCompleteCallbacks.current[taskId]({ taskId, sessionId, filesCount: totalFiles });
               }
 
-              // Auto-remove completed task after delay
-              setTimeout(() => {
-                removeTask(taskId);
-              }, 5000);
+              setTimeout(() => removeTask(taskId), 5000);
             }
           } catch (pollError) {
             console.error('Polling error:', pollError);
-            setTimeout(poll, 500);
+            setTimeout(poll, 2000);
           }
         };
 
@@ -206,64 +160,43 @@ export function BackgroundTaskProvider({ children }) {
 
       } catch (error) {
         console.error('Upload error:', error);
-        setTasks(prev => {
-          if (!prev[taskId]) return prev;
-          return {
-            ...prev,
-            [taskId]: {
-              ...prev[taskId],
-              status: 'error',
-              error: error.message,
-              logs: [...prev[taskId].logs, `Error: ${error.message}`]
-            }
-          };
-        });
+        updateTaskInternal(taskId, {
+          status: 'error',
+          error: error.message,
+          logs: [`Error: ${error.message}`]
+        }, true);
 
-        if (storedOnError) {
-          storedOnError(error);
-        }
-
-        setTimeout(() => {
-          removeTask(taskId);
-        }, 10000);
+        if (storedOnError) storedOnError(error);
+        setTimeout(() => removeTask(taskId), 10000);
       }
-    };
+    }, 0);
 
-    // Fire and forget - don't await, don't block
-    // Using Promise.resolve().then() ensures it runs in the next microtask
-    Promise.resolve().then(() => runUpload());
-
-    // Return taskId immediately - upload runs in background
     return taskId;
-  }, [generateTaskId, updateTask, removeTask]);
+  }, [generateTaskId, updateTaskInternal, removeTask, scheduleUIUpdate]);
 
   const cancelTask = useCallback((taskId) => {
-    // Mark as cancelled and remove
-    setTasks(prev => {
-      if (!prev[taskId]) return prev;
-      return {
-        ...prev,
-        [taskId]: { ...prev[taskId], status: 'cancelled' }
-      };
-    });
+    updateTaskInternal(taskId, { status: 'cancelled' }, true);
     setTimeout(() => removeTask(taskId), 1000);
-  }, [removeTask]);
+  }, [updateTaskInternal, removeTask]);
 
   const minimize = useCallback(() => setIsMinimized(true), []);
   const maximize = useCallback(() => setIsMinimized(false), []);
   const toggleMinimize = useCallback(() => setIsMinimized(prev => !prev), []);
 
+  // Compute derived values from ref (re-computed when tasksVersion changes)
+  const tasks = tasksRef.current;
   const hasActiveTasks = Object.values(tasks).some(t => 
     t.status === 'uploading' || t.status === 'processing'
   );
-
   const activeTasksCount = Object.values(tasks).filter(t => 
     t.status === 'uploading' || t.status === 'processing'
   ).length;
-
   const completedTasksCount = Object.values(tasks).filter(t => 
     t.status === 'completed'
   ).length;
+
+  // tasksVersion is used to trigger re-renders - eslint-disable-next-line
+  void tasksVersion;
 
   return (
     <BackgroundTaskContext.Provider value={{

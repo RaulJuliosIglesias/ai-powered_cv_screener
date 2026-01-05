@@ -52,6 +52,7 @@ function App() {
   const cvPanelFileInputRef = useRef(null);
   const [isLoadingMode, setIsLoadingMode] = useState(false);
   const [isLoadingSessions, setIsLoadingSessions] = useState(true);
+  const [initialLoadDone, setInitialLoadDone] = useState(false);
   const [pdfViewerUrl, setPdfViewerUrl] = useState(null);
   const [pdfViewerTitle, setPdfViewerTitle] = useState('');
   const [showRAGSettings, setShowRAGSettings] = useState(false);
@@ -131,17 +132,19 @@ function App() {
     }
   }, [isChatLoading]);
 
-  const loadSessions = useCallback(async (showSkeleton = true) => {
+  const loadSessions = useCallback(async () => {
     try { 
-      if (showSkeleton) setIsLoadingSessions(true);
+      // Only show skeleton on initial load, never on updates
+      if (!initialLoadDone) setIsLoadingSessions(true);
       const data = await getSessions(mode); 
       setSessions(data.sessions || []); 
     } catch (e) { 
       console.error(e); 
     } finally {
-      if (showSkeleton) setIsLoadingSessions(false);
+      setIsLoadingSessions(false);
+      if (!initialLoadDone) setInitialLoadDone(true);
     }
-  }, [mode]);
+  }, [mode, initialLoadDone]);
 
   const loadSession = useCallback(async (id) => {
     try {
@@ -214,7 +217,7 @@ function App() {
     
     // Run deletion in background - completely non-blocking
     deleteSession(id, mode)
-      .then(() => loadSessions(false)) // Silent refresh - no skeleton
+      .then(() => loadSessions())
       .finally(() => setDeletingSessionId(null));
   };
 
@@ -667,7 +670,12 @@ function App() {
                 onClick={() => {
                   currentSessionIdRef.current = s.id;
                   setCurrentSessionId(s.id);
-                  loadSession(s.id);
+                  // Cargar la sesión directamente con getSession para evitar cualquier interferencia
+                  getSession(s.id, mode).then(data => {
+                    if (currentSessionIdRef.current === s.id) {
+                      setCurrentSession(data);
+                    }
+                  }).catch(console.error);
                 }} 
                 className={`group flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
                   deletingSessionId === s.id 
