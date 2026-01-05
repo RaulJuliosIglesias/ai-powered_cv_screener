@@ -10645,10 +10645,384 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-05T01:37:49.818605"
+        },
+        {
+          "id": "49832a46-9383-462f-a39a-e11851c278fe",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is looking for a front-end developer. I need to identify candidates with explicit front-end development skills (HTML, CSS, JavaScript, React, etc.). If no candidates have these skills, I will look for candidates with related technical skills.\n\nI will analyze the provided CVs for relevant skills and experience.\n:::\n\nNo candidates explicitly mention front-end development skills. However, I will identify the candidate with the most relevant technical skills. ### Analysis\nNone of the analyzed candidates have the required technical skills for a front-end developer role.\n\n### Analysis\n\nNone of the analyzed candidates have the required technical skills for a front-end developer role. The closest match is [📄](cv:cv_971cad77)**Mei-Ling Chen**, who has experience in Computer Science and mentions \"data-driven curriculum\" and \"open-source toolkit\".\n\n| Candidate | Skills | Experience | Match Score |\n|---|---|---|---|\n| Mei-Ling Chen | Data-driven curriculum, open-source toolkit | Full Professor, Computer Science | 20% |\n\n:::conclusion\nNo candidates match the specified criteria. The closest match is [📄](cv:cv_971cad77)**Mei-Ling Chen**, who has experience in Computer Science.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_11644fca",
+              "filename": "f40e009d__Aisha_Müller__Nurse_Practitioner.pdf"
+            },
+            {
+              "cv_id": "cv_971cad77",
+              "filename": "f9273af6__Mei-Ling_Chen__Full_Professor.pdf"
+            },
+            {
+              "cv_id": "cv_12cde282",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_301e072e",
+              "filename": "53721311__Adewale_Patel__VP_of_Design.pdf"
+            },
+            {
+              "cv_id": "cv_d07ecabd",
+              "filename": "20354788__Maria_Rodriguez__Online_Instructor.pdf"
+            },
+            {
+              "cv_id": "cv_a76623d4",
+              "filename": "fdcf90c3__Rajiv_Kapoor__Sales_Representative.pdf"
+            },
+            {
+              "cv_id": "cv_38f5543d",
+              "filename": "3e7ca555__Valeria_Morales__VP_of_AI.pdf"
+            },
+            {
+              "cv_id": "cv_4140aeeb",
+              "filename": "6ae1734e__Adam_Al-Mansoori__Professor.pdf"
+            },
+            {
+              "cv_id": "cv_931e0ef0",
+              "filename": "2eb14c66__Liam_Wei__Podcast_Producer.pdf"
+            },
+            {
+              "cv_id": "cv_25038baf",
+              "filename": "7893c58a__Carlos_Mendoza__Project_Architect.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 10332.57,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 5.14,
+              "details": "Found 10 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 12391.95,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 2313.67,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "No candidates explicitly mention front-end development skills. However, I will identify the candidate with the most relevant technical skills. ### Analysis\nNone of the analyzed candidates have the required technical skills for a front-end developer role.",
+            "raw_content": ":::thinking\nThe user is looking for a front-end developer. I need to identify candidates with explicit front-end development skills (HTML, CSS, JavaScript, React, etc.). If no candidates have these skills, I will look for candidates with related technical skills.\n\nI will analyze the provided CVs for relevant skills and experience.\n:::\n\nNo candidates explicitly mention front-end development skills. However, I will identify the candidate with the most relevant technical skills.\n\n### Analysis\n\nNone of the analyzed candidates have the required technical skills for a front-end developer role. The closest match is **[Mei-Ling Chen](cv:cv_971cad77)**, who has experience in Computer Science and mentions \"data-driven curriculum\" and \"open-source toolkit\".\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Mei-Ling Chen](cv:cv_971cad77)** | Data-driven curriculum, open-source toolkit | Full Professor, Computer Science | ⭐ |\n\n:::conclusion\nNo candidates match the specified criteria. The closest match is **[Mei-Ling Chen](cv:cv_971cad77)**, who has experience in Computer Science.\n:::",
+            "thinking": "The user is looking for a front-end developer. I need to identify candidates with explicit front-end development skills (HTML, CSS, JavaScript, React, etc.). If no candidates have these skills, I will look for candidates with related technical skills.\n\nI will analyze the provided CVs for relevant skills and experience.",
+            "analysis": "None of the analyzed candidates have the required technical skills for a front-end developer role. The closest match is [📄](cv:cv_971cad77) **Mei-Ling Chen**, who has experience in Computer Science and mentions \"data-driven curriculum\" and \"open-source toolkit\".",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Skills",
+                "Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Mei-Ling Chen",
+                  "cv_id": "cv_971cad77",
+                  "columns": {
+                    "Skills": "Data-driven curriculum, open-source toolkit",
+                    "Experience": "Full Professor, Computer Science"
+                  },
+                  "match_score": 20
+                }
+              ]
+            },
+            "conclusion": "No candidates match the specified criteria. The closest match is [📄](cv:cv_971cad77) **Mei-Ling Chen**, who has experience in Computer Science.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T01:38:45.384334"
+        },
+        {
+          "id": "87d63aa7-154f-46a6-989a-7257aa49ca67",
+          "role": "user",
+          "content": "Create a top 3 shortlist from 12 candidates",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T01:41:01.069746"
+        },
+        {
+          "id": "98fe6d1d-69eb-4da3-87c9-fe96ae6ba72d",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to shortlist the top 3 candidates from the provided CVs based on their qualifications and experience. I need to review all 12 CVs and identify the candidates with the most relevant experience and skills, without knowing the specific role. I will base my assessment on the information available in the provided CV excerpts.\n:::\n\nBased on the provided CV excerpts, the top 3 candidates are [📄](cv:cv_38f5543d)**Valeria Morales**, [📄](cv:cv_ae5adf9c)**Aisha Patel**, and [📄](cv:cv_301e072e)**Adewale Patel**. These candidates demonstrate strong experience and skills in their respective fields, as evidenced by their project accomplishments, technical skills, and leadership roles. ### Analysis\nI evaluated the candidates based on their experience, skills, and accomplishments as described in their CV excerpts.\n\n### Analysis\n\nI evaluated the candidates based on their experience, skills, and accomplishments as described in their CV excerpts. The following table summarizes the rationale for selecting the top 3 candidates:\n\n| Candidate | Criterion 1 (Experience) | Criterion 2 (Skills) | Match Score |\n|---|---|---|---|\n| Valeria Morales | VP of AI with experience in AI strategy, product development, and team leadership. | Strong skills in AI, machine learning, and data engineering. | 80% |\n| Aisha Patel | Postdoctoral Researcher with experience in computational biology, algorithm design, and grant writing. | Skills in machine learning, data analysis, and research. | 60% |\n| Adewale Patel | VP of Design with experience in design strategy, team leadership, and user-centric innovation. | Skills in UX design, visual design, and design systems. | 60% |\n\n:::conclusion\nThe top 3 candidates are [📄](cv:cv_38f5543d)**Valeria Morales**, [📄](cv:cv_ae5adf9c)**Aisha Patel**, and [📄](cv:cv_301e072e)**Adewale Patel**.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_ae5adf9c",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_d07ecabd",
+              "filename": "20354788__Maria_Rodriguez__Online_Instructor.pdf"
+            },
+            {
+              "cv_id": "cv_12cde282",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_971cad77",
+              "filename": "f9273af6__Mei-Ling_Chen__Full_Professor.pdf"
+            },
+            {
+              "cv_id": "cv_38f5543d",
+              "filename": "3e7ca555__Valeria_Morales__VP_of_AI.pdf"
+            },
+            {
+              "cv_id": "cv_931e0ef0",
+              "filename": "2eb14c66__Liam_Wei__Podcast_Producer.pdf"
+            },
+            {
+              "cv_id": "cv_301e072e",
+              "filename": "53721311__Adewale_Patel__VP_of_Design.pdf"
+            },
+            {
+              "cv_id": "cv_4140aeeb",
+              "filename": "6ae1734e__Adam_Al-Mansoori__Professor.pdf"
+            },
+            {
+              "cv_id": "cv_25038baf",
+              "filename": "7893c58a__Carlos_Mendoza__Project_Architect.pdf"
+            },
+            {
+              "cv_id": "cv_11644fca",
+              "filename": "f40e009d__Aisha_Müller__Nurse_Practitioner.pdf"
+            },
+            {
+              "cv_id": "cv_a76623d4",
+              "filename": "fdcf90c3__Rajiv_Kapoor__Sales_Representative.pdf"
+            },
+            {
+              "cv_id": "cv_b5d67d80",
+              "filename": "422a58d3__Chinedu_Okoro__Post-Production_Assistant.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 21555.19,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 17.26,
+              "details": "Found 23 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 18422.36,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4308.32,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Based on the provided CV excerpts, the top 3 candidates are [📄](cv:cv_38f5543d) **Valeria Morales**, [📄](cv:cv_ae5adf9c) **Aisha Patel**, and [📄](cv:cv_301e072e) **Adewale Patel**. These candidates demonstrate strong experience and skills in their respective fields, as evidenced by their project accomplishments, technical skills, and leadership roles. ### Analysis\nI evaluated the candidates based on their experience, skills, and accomplishments as described in their CV excerpts.",
+            "raw_content": ":::thinking\nThe user is asking to shortlist the top 3 candidates from the provided CVs based on their qualifications and experience. I need to review all 12 CVs and identify the candidates with the most relevant experience and skills, without knowing the specific role. I will base my assessment on the information available in the provided CV excerpts.\n:::\n\nBased on the provided CV excerpts, the top 3 candidates are **[Valeria Morales](cv:cv_38f5543d)**, **[Aisha Patel](cv:cv_ae5adf9c)**, and **[Adewale Patel](cv:cv_301e072e)**. These candidates demonstrate strong experience and skills in their respective fields, as evidenced by their project accomplishments, technical skills, and leadership roles.\n\n### Analysis\n\nI evaluated the candidates based on their experience, skills, and accomplishments as described in their CV excerpts. The following table summarizes the rationale for selecting the top 3 candidates:\n\n| Candidate | Criterion 1 (Experience) | Criterion 2 (Skills) | Match |\n|-----------|-------------|-------------|-------|\n| **[Valeria Morales](cv:cv_38f5543d)** | VP of AI with experience in AI strategy, product development, and team leadership. | Strong skills in AI, machine learning, and data engineering. | ⭐⭐⭐⭐ |\n| **[Aisha Patel](cv:cv_ae5adf9c)** | Postdoctoral Researcher with experience in computational biology, algorithm design, and grant writing. | Skills in machine learning, data analysis, and research. | ⭐⭐⭐ |\n| **[Adewale Patel](cv:cv_301e072e)** | VP of Design with experience in design strategy, team leadership, and user-centric innovation. | Skills in UX design, visual design, and design systems. | ⭐⭐⭐ |\n\n:::conclusion\nThe top 3 candidates are **[Valeria Morales](cv:cv_38f5543d)**, **[Aisha Patel](cv:cv_ae5adf9c)**, and **[Adewale Patel](cv:cv_301e072e)**.",
+            "thinking": "The user is asking to shortlist the top 3 candidates from the provided CVs based on their qualifications and experience. I need to review all 12 CVs and identify the candidates with the most relevant experience and skills, without knowing the specific role. I will base my assessment on the information available in the provided CV excerpts.",
+            "analysis": "I evaluated the candidates based on their experience, skills, and accomplishments as described in their CV excerpts. The following table summarizes the rationale for selecting the top 3 candidates:",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Criterion 1 (Experience)",
+                "Criterion 2 (Skills)",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Valeria Morales",
+                  "cv_id": "cv_38f5543d",
+                  "columns": {
+                    "Criterion 1 (Experience)": "VP of AI with experience in AI strategy, product development, and team leadership.",
+                    "Criterion 2 (Skills)": "Strong skills in AI, machine learning, and data engineering."
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Aisha Patel",
+                  "cv_id": "cv_ae5adf9c",
+                  "columns": {
+                    "Criterion 1 (Experience)": "Postdoctoral Researcher with experience in computational biology, algorithm design, and grant writing.",
+                    "Criterion 2 (Skills)": "Skills in machine learning, data analysis, and research."
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Adewale Patel",
+                  "cv_id": "cv_301e072e",
+                  "columns": {
+                    "Criterion 1 (Experience)": "VP of Design with experience in design strategy, team leadership, and user-centric innovation.",
+                    "Criterion 2 (Skills)": "Skills in UX design, visual design, and design systems."
+                  },
+                  "match_score": 60
+                }
+              ]
+            },
+            "conclusion": "The top 3 candidates are [📄](cv:cv_38f5543d) **Valeria Morales**, [📄](cv:cv_ae5adf9c) **Aisha Patel**, and [📄](cv:cv_301e072e) **Adewale Patel**.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T01:42:00.469176"
+        },
+        {
+          "id": "c508e9a1-e645-45cd-a8b2-f2fd3d115f7c",
+          "role": "user",
+          "content": "Who has the strongest technical skills?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T01:45:31.751719"
+        },
+        {
+          "id": "43d21a50-ef0b-45c2-9645-b14f5bc5af9f",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to identify the candidate with the strongest technical skills based on the provided CVs. I need to review each CV, identify any explicitly mentioned technical skills (programming languages, tools, frameworks), and then compare the candidates based on the breadth and depth of their technical skills. Candidates without explicit technical skills will be excluded.\n:::\n\nBased on the CVs,**Valeria Morales](cv:cv_38f5543d)**appears to have the strongest technical skills. She explicitly mentions skills in Computer Vision, Data Engineering, and AI Strategy, along with certifications in Google Cloud and AWS Machine Learning. ### Analysis\nI reviewed all the CVs and identified the following candidates with explicit technical skills:\n*   [📄](cv:cv_ae5adf9c)**Aisha Patel**: Mentions \"Applied machine-learning models\" and \"Developed a simulation framework\".\n\n### Analysis\n\nI reviewed all the CVs and identified the following candidates with explicit technical skills:\n\n*   [📄](cv:cv_ae5adf9c)**Aisha Patel**: Mentions \"Applied machine-learning models\" and \"Developed a simulation framework\".\n*   [📄](cv:cv_971cad77)**Mei-Ling Chen**: Mentions \"Deep Learning\", \"Statistical Analysis\", \"Cloud Computing\", and \"Programming (Python, R)\".\n*   [📄](cv:cv_38f5543d)**Valeria Morales**: Mentions \"Computer Vision\", \"Data Engineering\", \"AI Strategy\", and certifications in \"Google Cloud Professional Machine Learning Engineer\" and \"AWS Certified Machine Learning – Specialty\".\n\nI evaluated these candidates based on the breadth and depth of their technical skills. [📄](cv:cv_38f5543d)**Valeria Morales**has the most comprehensive technical skills, including specific AI-related skills and certifications. [📄](cv:cv_971cad77)**Mei-Ling Chen**has a good foundation in programming and cloud computing, but the skills are not as specialized as [📄](cv:cv_38f5543d)**Valeria Morales**. [📄](cv:cv_ae5adf9c)**Aisha Patel**has some technical skills, but they are not as explicitly defined as the other two candidates.\n\n| Candidate | Skills | Experience | Match Score |\n|---|---|---|---|\n| Valeria Morales | Computer Vision, Data Engineering, AI Strategy, Google Cloud, AWS | Junior AI Engineer | 100% |\n| Mei-Ling Chen | Deep Learning, Python, R, Cloud Computing | Lecturer | 60% |\n| Aisha Patel | Machine Learning, Simulation Framework | Research Scientist, Postdoctoral Researcher | 40% |\n\n:::conclusion\nBased on the analysis, [📄](cv:cv_38f5543d)**Valeria Morales**is the candidate with the strongest overall technical abilities.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_ae5adf9c",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_971cad77",
+              "filename": "f9273af6__Mei-Ling_Chen__Full_Professor.pdf"
+            },
+            {
+              "cv_id": "cv_b5d67d80",
+              "filename": "422a58d3__Chinedu_Okoro__Post-Production_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_38f5543d",
+              "filename": "3e7ca555__Valeria_Morales__VP_of_AI.pdf"
+            },
+            {
+              "cv_id": "cv_931e0ef0",
+              "filename": "2eb14c66__Liam_Wei__Podcast_Producer.pdf"
+            },
+            {
+              "cv_id": "cv_4140aeeb",
+              "filename": "6ae1734e__Adam_Al-Mansoori__Professor.pdf"
+            },
+            {
+              "cv_id": "cv_301e072e",
+              "filename": "53721311__Adewale_Patel__VP_of_Design.pdf"
+            },
+            {
+              "cv_id": "cv_a76623d4",
+              "filename": "fdcf90c3__Rajiv_Kapoor__Sales_Representative.pdf"
+            },
+            {
+              "cv_id": "cv_12cde282",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_d07ecabd",
+              "filename": "20354788__Maria_Rodriguez__Online_Instructor.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 15039.23,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 4.45,
+              "details": "Found 10 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 20104.67,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4777.14,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Based on the CVs, **Valeria Morales](cv:cv_38f5543d)** appears to have the strongest technical skills. She explicitly mentions skills in Computer Vision, Data Engineering, and AI Strategy, along with certifications in Google Cloud and AWS Machine Learning. ### Analysis\nI reviewed all the CVs and identified the following candidates with explicit technical skills:\n*   [📄](cv:cv_ae5adf9c) **Aisha Patel**: Mentions \"Applied machine-learning models\" and \"Developed a simulation framework\".",
+            "raw_content": ":::thinking\nThe user is asking to identify the candidate with the strongest technical skills based on the provided CVs. I need to review each CV, identify any explicitly mentioned technical skills (programming languages, tools, frameworks), and then compare the candidates based on the breadth and depth of their technical skills. Candidates without explicit technical skills will be excluded.\n:::\n\nBased on the CVs, **Valeria Morales](cv:cv_38f5543d)** appears to have the strongest technical skills. She explicitly mentions skills in Computer Vision, Data Engineering, and AI Strategy, along with certifications in Google Cloud and AWS Machine Learning.\n\n### Analysis\n\nI reviewed all the CVs and identified the following candidates with explicit technical skills:\n\n*   **[Aisha Patel](cv:cv_ae5adf9c)**: Mentions \"Applied machine-learning models\" and \"Developed a simulation framework\".\n*   **[Mei-Ling Chen](cv:cv_971cad77)**: Mentions \"Deep Learning\", \"Statistical Analysis\", \"Cloud Computing\", and \"Programming (Python, R)\".\n*   **[Valeria Morales](cv:cv_38f5543d)**: Mentions \"Computer Vision\", \"Data Engineering\", \"AI Strategy\", and certifications in \"Google Cloud Professional Machine Learning Engineer\" and \"AWS Certified Machine Learning – Specialty\".\n\nI evaluated these candidates based on the breadth and depth of their technical skills. **[Valeria Morales](cv:cv_38f5543d)** has the most comprehensive technical skills, including specific AI-related skills and certifications. **[Mei-Ling Chen](cv:cv_971cad77)** has a good foundation in programming and cloud computing, but the skills are not as specialized as **[Valeria Morales](cv:cv_38f5543d)**. **[Aisha Patel](cv:cv_ae5adf9c)** has some technical skills, but they are not as explicitly defined as the other two candidates.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Aisha Patel](cv:cv_ae5adf9c)** | Machine Learning, Simulation Framework | Research Scientist, Postdoctoral Researcher | ⭐⭐ |\n| **[Mei-Ling Chen](cv:cv_971cad77)** | Deep Learning, Python, R, Cloud Computing | Lecturer | ⭐⭐⭐ |\n| **[Valeria Morales](cv:cv_38f5543d)** | Computer Vision, Data Engineering, AI Strategy, Google Cloud, AWS | Junior AI Engineer | ⭐⭐⭐⭐⭐ |\n\n:::conclusion\nBased on the analysis, **[Valeria Morales](cv:cv_38f5543d)** is the candidate with the strongest overall technical abilities.",
+            "thinking": "The user is asking to identify the candidate with the strongest technical skills based on the provided CVs. I need to review each CV, identify any explicitly mentioned technical skills (programming languages, tools, frameworks), and then compare the candidates based on the breadth and depth of their technical skills. Candidates without explicit technical skills will be excluded.",
+            "analysis": "I reviewed all the CVs and identified the following candidates with explicit technical skills:\n\n*   [📄](cv:cv_ae5adf9c) **Aisha Patel**: Mentions \"Applied machine-learning models\" and \"Developed a simulation framework\".\n*   [📄](cv:cv_971cad77) **Mei-Ling Chen**: Mentions \"Deep Learning\", \"Statistical Analysis\", \"Cloud Computing\", and \"Programming (Python, R)\".\n*   [📄](cv:cv_38f5543d) **Valeria Morales**: Mentions \"Computer Vision\", \"Data Engineering\", \"AI Strategy\", and certifications in \"Google Cloud Professional Machine Learning Engineer\" and \"AWS Certified Machine Learning – Specialty\".\n\nI evaluated these candidates based on the breadth and depth of their technical skills. [📄](cv:cv_38f5543d) **Valeria Morales** has the most comprehensive technical skills, including specific AI-related skills and certifications. [📄](cv:cv_971cad77) **Mei-Ling Chen** has a good foundation in programming and cloud computing, but the skills are not as specialized as [📄](cv:cv_38f5543d) **Valeria Morales**. [📄](cv:cv_ae5adf9c) **Aisha Patel** has some technical skills, but they are not as explicitly defined as the other two candidates.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Skills",
+                "Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Valeria Morales",
+                  "cv_id": "cv_38f5543d",
+                  "columns": {
+                    "Skills": "Computer Vision, Data Engineering, AI Strategy, Google Cloud, AWS",
+                    "Experience": "Junior AI Engineer"
+                  },
+                  "match_score": 100
+                },
+                {
+                  "candidate_name": "Mei-Ling Chen",
+                  "cv_id": "cv_971cad77",
+                  "columns": {
+                    "Skills": "Deep Learning, Python, R, Cloud Computing",
+                    "Experience": "Lecturer"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Aisha Patel",
+                  "cv_id": "cv_ae5adf9c",
+                  "columns": {
+                    "Skills": "Machine Learning, Simulation Framework",
+                    "Experience": "Research Scientist, Postdoctoral Researcher"
+                  },
+                  "match_score": 40
+                }
+              ]
+            },
+            "conclusion": "Based on the analysis, [📄](cv:cv_38f5543d) **Valeria Morales** is the candidate with the strongest overall technical abilities.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T01:46:46.843099"
         }
       ],
       "created_at": "2026-01-05T00:22:18.815416",
-      "updated_at": "2026-01-05T01:37:49.818605"
+      "updated_at": "2026-01-05T01:46:46.843099"
     }
   ]
 }

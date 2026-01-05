@@ -37,12 +37,20 @@ const ContentWithCVLinks = ({ content, onOpenCV, cvMap = {} }) => {
   
   const contentStr = String(content);
   
+  // DEBUG: Log cvMap to see what we have
+  console.log('[CV_LINKS] cvMap received:', cvMap);
+  console.log('[CV_LINKS] Content to process:', contentStr.substring(0, 200));
+  
   // Múltiples patrones para capturar diferentes formatos de CV links
+  // Soporta nombres con guiones (Mei-Ling), apóstrofes (O'Brien), etc.
   const patterns = [
+    // Patrón principal: [📄](cv:xxx) **Name** - emoji en link, nombre fuera
+    { regex: /\[📄\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\s*\*\*([^*]+)\*\*/g, hasId: true, nameGroup: 2, idGroup: 1 },
+    // Alternativas
     { regex: /\*\*\[([^\]]+)\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\*\*/g, hasId: true },   // **[Name](cv:xxx)**
-    { regex: /\[([^\]]+)\]\(cv:(cv_[a-zA-Z0-9_-]+)\)/g, hasId: true },            // [Name](cv:xxx)
+    { regex: /\[([^\]]+)\]\(cv:(cv_[a-zA-Z0-9_-]+)\)/g, hasId: true },            // [Name](cv:xxx) donde nombre no es emoji
     { regex: /📄\s*\*\*([^*]+)\*\*/g, hasId: false },                              // 📄 **Name**
-    { regex: /📄\s*([A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+)+)/g, hasId: false },      // 📄 Name Surname
+    { regex: /📄\s*([A-Z][a-zA-Z'-]+(?:\s+[A-Z][a-zA-Z'-]+)+)/g, hasId: false },  // 📄 Name Surname (con guiones)
   ];
   
   // Normalizar nombre para buscar en cvMap
@@ -50,20 +58,24 @@ const ContentWithCVLinks = ({ content, onOpenCV, cvMap = {} }) => {
   
   // Extraer todos los CV refs con todos los patrones
   const refs = [];
-  for (const { regex, hasId } of patterns) {
+  for (const pattern of patterns) {
+    const { regex, hasId, nameGroup = 1, idGroup = 2 } = pattern;
     let match;
     while ((match = regex.exec(contentStr)) !== null) {
-      const name = match[1].trim();
-      let cvId = hasId ? match[2] : null;
+      // Extraer nombre y cvId según los grupos definidos
+      const name = match[nameGroup]?.trim();
+      let cvId = hasId ? match[idGroup] : null;
       
       // Si no tiene cv_id explícito, buscar en cvMap
       if (!cvId && cvMap) {
         const normalizedName = normalizeName(name);
         cvId = cvMap[normalizedName];
+        console.log(`[CV_LINKS] Looking for "${name}" -> normalized: "${normalizedName}" -> cvId: ${cvId}`);
       }
       
       // Validar que el nombre no sea un emoji solo y que tengamos cv_id
       if (name && name !== '📄' && cvId) {
+        console.log(`[CV_LINKS] ✓ Found valid CV ref: ${name} -> ${cvId}`);
         // Evitar duplicados en la misma posición
         const exists = refs.some(r => Math.abs(r.index - match.index) < 5);
         if (!exists) {
@@ -143,12 +155,12 @@ const ContentWithCVLinks = ({ content, onOpenCV, cvMap = {} }) => {
                   e.stopPropagation();
                   if (onOpenCV) onOpenCV(part.cvId, part.name);
                 }}
-                className="inline-flex items-center justify-center w-5 h-5 bg-emerald-600/30 text-emerald-400 hover:bg-emerald-600/50 rounded transition-colors cursor-pointer"
+                className="inline-flex items-center justify-center w-5 h-5 bg-blue-600/30 text-blue-400 hover:bg-blue-600/50 rounded transition-colors cursor-pointer"
                 title={`View CV: ${part.name}`}
               >
                 <FileText className="w-3 h-3" />
               </button>
-              <strong className="font-semibold text-emerald-300 hover:text-emerald-200 cursor-pointer" onClick={(e) => {
+              <strong className="font-semibold text-blue-300 hover:text-blue-200 cursor-pointer" onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 if (onOpenCV) onOpenCV(part.cvId, part.name);
@@ -348,15 +360,23 @@ const ConclusionSection = ({ content, onOpenCV, cvMap }) => {
 // Build cvMap from table data - maps normalized names to cv_ids
 const buildCvMapFromTable = (tableData) => {
   const cvMap = {};
-  if (!tableData?.rows) return cvMap;
+  console.log('[CV_MAP] Building cvMap from tableData:', tableData);
+  
+  if (!tableData?.rows) {
+    console.log('[CV_MAP] No rows in tableData');
+    return cvMap;
+  }
   
   for (const row of tableData.rows) {
+    console.log('[CV_MAP] Processing row:', row);
     if (row.candidate_name && row.cv_id) {
       // Normalize name: lowercase, trim, single spaces
       const normalizedName = row.candidate_name.toLowerCase().trim().replace(/\s+/g, ' ');
       cvMap[normalizedName] = row.cv_id;
+      console.log(`[CV_MAP] Added: "${normalizedName}" -> "${row.cv_id}"`);
     }
   }
+  console.log('[CV_MAP] Final cvMap:', cvMap);
   return cvMap;
 };
 
