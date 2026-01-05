@@ -63,7 +63,7 @@ const Sidebar = ({
         {sessions.map((session, index) => (
           <div key={session.id} className={`mb-1 stagger-item`} style={{ animationDelay: `${index * 30}ms` }}>
             <div 
-              onClick={() => !deletingSessionId && onSelectSession(session.id)} 
+              onClick={() => deletingSessionId !== session.id && onSelectSession(session.id)} 
               className={`group flex items-center gap-2 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
                 deletingSessionId === session.id 
                   ? 'bg-red-50 dark:bg-red-900/20 opacity-60 cursor-not-allowed' 

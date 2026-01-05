@@ -717,7 +717,7 @@ function App() {
           ) : sessions.map((s) => (
             <div key={s.id} className="mb-1">
               <div 
-                onClick={() => !deletingSessionId && setCurrentSessionId(s.id)} 
+                onClick={() => deletingSessionId !== s.id && setCurrentSessionId(s.id)} 
                 className={`group flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
                   deletingSessionId === s.id 
                     ? 'bg-red-50 dark:bg-red-900/20 opacity-60 cursor-not-allowed' 

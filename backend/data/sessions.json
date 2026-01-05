@@ -8275,6 +8275,168 @@
       ],
       "created_at": "2026-01-05T00:06:47.651923",
       "updated_at": "2026-01-05T00:07:42.685346"
+    },
+    {
+      "id": "4058d068-57bb-49c0-8f4b-821295bd30fd",
+      "name": "New chat",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_87124313",
+          "filename": "0ee419e6__Layla_Al-Mansour__DJ.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-05T00:13:49.983575"
+        },
+        {
+          "id": "cv_c444d838",
+          "filename": "b1782304__Aisha_Okafor__Marketing_Assistant.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T00:13:50.748537"
+        },
+        {
+          "id": "cv_23a04b68",
+          "filename": "900b8ced__Priya_Patel__Sommelier.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-05T00:13:51.539952"
+        },
+        {
+          "id": "cv_91dc4627",
+          "filename": "89bb1ba4__Javier_Kim__Physician_Assistant.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-05T00:13:52.346506"
+        },
+        {
+          "id": "cv_6edbb4a3",
+          "filename": "90346665__Valentina_Fernandez__CFO.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T00:13:53.233481"
+        },
+        {
+          "id": "cv_0a5c48e1",
+          "filename": "f971323b__Amir_Al-Farsi__CDO.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T00:13:54.086603"
+        }
+      ],
+      "messages": [
+        {
+          "id": "b6e38550-b9e4-4c8d-aef4-a53c29eed54e",
+          "role": "user",
+          "content": "Who shows the most career growth?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T00:13:56.955238"
+        },
+        {
+          "id": "056eb8b6-d151-46eb-81e3-2b1a7ef88d50",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking which candidate demonstrates the most career growth. This requires assessing the progression of each candidate's roles, responsibilities, and skills over time, as indicated by their experience sections. I will analyze the experience sections of each CV to determine the candidate with the most significant career advancement.\n:::\n\nBased on the provided CVs,**Amir Al-Farsi](cv:cv_0a5c48e1)**demonstrates the most significant career growth. His CV shows a clear progression from Data Scientist to Manager and then to Director, with increasing responsibilities and impact. ### Analysis\nI examined the experience sections of each CV to identify candidates with upward career mobility.\n\n### Analysis\n\nI examined the experience sections of each CV to identify candidates with upward career mobility.\n\n*   [📄](cv:cv_23a04b68)**Priya Patel**: Shows progression in the sommelier field, but the roles are similar in nature.\n*   [📄](cv:cv_0a5c48e1)**Amir Al-Farsi**: Exhibits clear career progression from Data Scientist to Manager, then to Director of Data Science.\n*   [📄](cv:cv_87124313)**Layla Al-Mansour**: Shows a career as a DJ, but the roles are similar in nature.\n*   [📄](cv:cv_6edbb4a3)**Valentina Fernandez**: Shows progression in the finance field, but the roles are similar in nature.\n*   [📄](cv:cv_c444d838)**Aisha Okafor**: Entry-level marketing roles.\n*   [📄](cv:cv_91dc4627)**Javier Kim**: Shows progression in the medical field, but the roles are similar in nature.\n\n| Candidate | Career Progression | Skills Growth | Match Score |\n|---|---|---|---|\n| Amir Al-Farsi | Data Scientist -> Manager -> Director | Data Science, Team Leadership, Strategic Planning | 100% |\n| Priya Patel | Sommelier -> Head Sommelier | Wine Expertise, Management | 60% |\n| Javier Kim | Physician Assistant -> Director | Clinical Leadership, Patient Care | 60% |\n\n:::conclusion\n[📄](cv:cv_0a5c48e1)**Amir Al-Farsi**demonstrates the most significant career growth based on the provided CVs.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_23a04b68",
+              "filename": "900b8ced__Priya_Patel__Sommelier.pdf"
+            },
+            {
+              "cv_id": "cv_0a5c48e1",
+              "filename": "f971323b__Amir_Al-Farsi__CDO.pdf"
+            },
+            {
+              "cv_id": "cv_87124313",
+              "filename": "0ee419e6__Layla_Al-Mansour__DJ.pdf"
+            },
+            {
+              "cv_id": "cv_6edbb4a3",
+              "filename": "90346665__Valentina_Fernandez__CFO.pdf"
+            },
+            {
+              "cv_id": "cv_c444d838",
+              "filename": "b1782304__Aisha_Okafor__Marketing_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_91dc4627",
+              "filename": "89bb1ba4__Javier_Kim__Physician_Assistant.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "error",
+              "duration_ms": 841.52,
+              "details": ""
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 2.16,
+              "details": "Found 6 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 19131.51,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4590.69,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Based on the provided CVs, **Amir Al-Farsi](cv:cv_0a5c48e1)** demonstrates the most significant career growth. His CV shows a clear progression from Data Scientist to Manager and then to Director, with increasing responsibilities and impact. ### Analysis\nI examined the experience sections of each CV to identify candidates with upward career mobility.",
+            "raw_content": ":::thinking\nThe user is asking which candidate demonstrates the most career growth. This requires assessing the progression of each candidate's roles, responsibilities, and skills over time, as indicated by their experience sections. I will analyze the experience sections of each CV to determine the candidate with the most significant career advancement.\n\n:::\nBased on the provided CVs, **Amir Al-Farsi](cv:cv_0a5c48e1)** demonstrates the most significant career growth. His CV shows a clear progression from Data Scientist to Manager and then to Director, with increasing responsibilities and impact.\n\n### Analysis\n\nI examined the experience sections of each CV to identify candidates with upward career mobility.\n\n*   **[Priya Patel](cv:cv_23a04b68)**: Shows progression in the sommelier field, but the roles are similar in nature.\n*   **[Amir Al-Farsi](cv:cv_0a5c48e1)**: Exhibits clear career progression from Data Scientist to Manager, then to Director of Data Science.\n*   **[Layla Al-Mansour](cv:cv_87124313)**: Shows a career as a DJ, but the roles are similar in nature.\n*   **[Valentina Fernandez](cv:cv_6edbb4a3)**: Shows progression in the finance field, but the roles are similar in nature.\n*   **[Aisha Okafor](cv:cv_c444d838)**: Entry-level marketing roles.\n*   **[Javier Kim](cv:cv_91dc4627)**: Shows progression in the medical field, but the roles are similar in nature.\n\n| Candidate | Career Progression | Skills Growth | Match |\n|-----------|--------------------|---------------|-------|\n| **[Amir Al-Farsi](cv:cv_0a5c48e1)** | Data Scientist -> Manager -> Director | Data Science, Team Leadership, Strategic Planning | ⭐⭐⭐⭐⭐ |\n| **[Priya Patel](cv:cv_23a04b68)** | Sommelier -> Head Sommelier | Wine Expertise, Management | ⭐⭐⭐ |\n| **[Javier Kim](cv:cv_91dc4627)** | Physician Assistant -> Director | Clinical Leadership, Patient Care | ⭐⭐⭐ |\n\n:::conclusion\n**[Amir Al-Farsi](cv:cv_0a5c48e1)** demonstrates the most significant career growth based on the provided CVs.",
+            "thinking": "The user is asking which candidate demonstrates the most career growth. This requires assessing the progression of each candidate's roles, responsibilities, and skills over time, as indicated by their experience sections. I will analyze the experience sections of each CV to determine the candidate with the most significant career advancement.",
+            "analysis": "I examined the experience sections of each CV to identify candidates with upward career mobility.\n\n*   [📄](cv:cv_23a04b68) **Priya Patel**: Shows progression in the sommelier field, but the roles are similar in nature.\n*   [📄](cv:cv_0a5c48e1) **Amir Al-Farsi**: Exhibits clear career progression from Data Scientist to Manager, then to Director of Data Science.\n*   [📄](cv:cv_87124313) **Layla Al-Mansour**: Shows a career as a DJ, but the roles are similar in nature.\n*   [📄](cv:cv_6edbb4a3) **Valentina Fernandez**: Shows progression in the finance field, but the roles are similar in nature.\n*   [📄](cv:cv_c444d838) **Aisha Okafor**: Entry-level marketing roles.\n*   [📄](cv:cv_91dc4627) **Javier Kim**: Shows progression in the medical field, but the roles are similar in nature.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Career Progression",
+                "Skills Growth",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Amir Al-Farsi",
+                  "cv_id": "cv_0a5c48e1",
+                  "columns": {
+                    "Career Progression": "Data Scientist -> Manager -> Director",
+                    "Skills Growth": "Data Science, Team Leadership, Strategic Planning"
+                  },
+                  "match_score": 100
+                },
+                {
+                  "candidate_name": "Priya Patel",
+                  "cv_id": "cv_23a04b68",
+                  "columns": {
+                    "Career Progression": "Sommelier -> Head Sommelier",
+                    "Skills Growth": "Wine Expertise, Management"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Javier Kim",
+                  "cv_id": "cv_91dc4627",
+                  "columns": {
+                    "Career Progression": "Physician Assistant -> Director",
+                    "Skills Growth": "Clinical Leadership, Patient Care"
+                  },
+                  "match_score": 60
+                }
+              ]
+            },
+            "conclusion": "[📄](cv:cv_0a5c48e1) **Amir Al-Farsi** demonstrates the most significant career growth based on the provided CVs.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T00:14:43.514201"
+        }
+      ],
+      "created_at": "2026-01-05T00:13:42.183919",
+      "updated_at": "2026-01-05T00:14:43.514201"
     }
   ]
 }
