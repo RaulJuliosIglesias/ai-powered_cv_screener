@@ -415,6 +415,18 @@ SINGLE_CANDIDATE_TEMPLATE = """## SINGLE CANDIDATE PROFILE ANALYSIS
 
 ---
 
+### Red Flags Analysis
+
+{red_flags_section}
+
+---
+
+### Career Stability Metrics
+
+{stability_metrics_section}
+
+---
+
 :::conclusion
 **Assessment:** [Summary based on their CURRENT role and full career trajectory]
 
@@ -422,14 +434,18 @@ SINGLE_CANDIDATE_TEMPLATE = """## SINGLE CANDIDATE PROFILE ANALYSIS
 - [Strength from CURRENT role]
 - [Strength from skills/achievements]
 - [Strength from experience breadth]
+
+**Potential Concerns:**
+[If red flags exist, list them. Otherwise: "No significant concerns identified."]
 :::
 
 ## VALIDATION CHECKLIST (Before responding)
-☑ Current Role shows the MOST RECENT position (with "Present" or latest year)
-☑ Total Experience calculated from OLDEST job to PRESENT
-☑ Career Trajectory includes ALL positions, not just one
-☑ Top Achievement is from senior/current role, not oldest role
-☑ Skills reflect highest proficiency levels mentioned
+ Current Role shows the MOST RECENT position (with "Present" or latest year)
+ Total Experience calculated from OLDEST job to PRESENT
+ Career Trajectory includes ALL positions, not just one
+ Top Achievement is from senior/current role, not oldest role
+ Skills reflect highest proficiency levels mentioned
+ Red flags section addresses any job-hopping, gaps, or concerns
 
 Respond now:"""
 # =============================================================================
@@ -1118,12 +1134,94 @@ class PromptBuilder:
         """
         ctx = format_context(chunks)
         
+        # Extract enriched metadata for red flags and stability analysis
+        red_flags_section, stability_section = self._extract_enriched_metadata(chunks)
+        
         return SINGLE_CANDIDATE_TEMPLATE.format(
             candidate_name=candidate_name,
             cv_id=cv_id,
             context=ctx.text,
-            question=question
+            question=question,
+            red_flags_section=red_flags_section,
+            stability_metrics_section=stability_section
         )
+    
+    def _extract_enriched_metadata(self, chunks: list[dict]) -> tuple[str, str]:
+        """
+        Extract enriched metadata from chunks for red flags and stability analysis.
+        
+        Returns:
+            Tuple of (red_flags_section, stability_metrics_section) as formatted strings
+        """
+        import logging
+        logger = logging.getLogger(__name__)
+        
+        # Default sections if no metadata found
+        red_flags_section = "Analyze the CV for potential red flags:\n- Job hopping (frequent changes < 2 years)\n- Employment gaps > 1 year\n- Inconsistent career progression\n- Missing critical information"
+        stability_section = "Calculate from CV data:\n- Average tenure per position\n- Career stability score\n- Progression pattern (upward/lateral/downward)"
+        
+        logger.info(f"[ENRICHED_METADATA] Processing {len(chunks)} chunks for metadata extraction")
+        
+        # Try to extract from chunk metadata
+        for i, chunk in enumerate(chunks):
+            meta = chunk.get("metadata", {})
+            
+            # Log all metadata keys for first chunk to debug
+            if i == 0:
+                logger.info(f"[ENRICHED_METADATA] First chunk metadata keys: {list(meta.keys())}")
+                logger.info(f"[ENRICHED_METADATA] First chunk metadata values: job_hopping_score={meta.get('job_hopping_score')}, total_exp={meta.get('total_experience_years')}")
+            
+            # Check for enriched metadata
+            job_hopping_score = meta.get("job_hopping_score")
+            total_exp = meta.get("total_experience_years")
+            avg_tenure = meta.get("avg_tenure_years")
+            seniority = meta.get("seniority_level")
+            position_count = meta.get("position_count")
+            has_faang = meta.get("has_faang")
+            
+            if job_hopping_score is not None or total_exp is not None:
+                # Build red flags section with actual data
+                flags = []
+                
+                if job_hopping_score and float(job_hopping_score) > 0.6:
+                    flags.append(f"⚠️ **High Job Hopping Score**: {float(job_hopping_score):.1%} - Indicates frequent job changes")
+                elif job_hopping_score and float(job_hopping_score) > 0.4:
+                    flags.append(f"⚡ **Moderate Job Hopping**: {float(job_hopping_score):.1%} - Some career instability")
+                
+                if avg_tenure and float(avg_tenure) < 1.5:
+                    flags.append(f"⚠️ **Short Average Tenure**: {float(avg_tenure):.1f} years per position")
+                
+                if position_count and int(position_count) > 6 and total_exp and float(total_exp) < 10:
+                    flags.append(f"⚠️ **Many Positions**: {position_count} positions in {float(total_exp):.0f} years")
+                
+                if flags:
+                    red_flags_section = "**Pre-calculated Red Flags from CV Analysis:**\n" + "\n".join(flags)
+                else:
+                    red_flags_section = "✅ **No significant red flags detected in pre-analysis.**\nReview CV for any additional concerns not captured automatically."
+                
+                # Build stability section with actual data
+                stability_parts = []
+                if total_exp:
+                    stability_parts.append(f"- **Total Experience**: {float(total_exp):.1f} years")
+                if avg_tenure:
+                    stability_parts.append(f"- **Average Tenure**: {float(avg_tenure):.1f} years per position")
+                if seniority:
+                    stability_parts.append(f"- **Seniority Level**: {seniority}")
+                if position_count:
+                    stability_parts.append(f"- **Positions Held**: {position_count}")
+                if job_hopping_score:
+                    score = float(job_hopping_score)
+                    stability = "Stable" if score < 0.3 else "Moderate" if score < 0.6 else "Unstable"
+                    stability_parts.append(f"- **Career Stability**: {stability} (score: {score:.1%})")
+                if has_faang:
+                    stability_parts.append("- **Big Tech Experience**: Yes ✓")
+                
+                if stability_parts:
+                    stability_section = "**Pre-calculated Metrics:**\n" + "\n".join(stability_parts)
+                
+                break  # Found metadata, stop looking
+        
+        return red_flags_section, stability_section
 
 
 # =============================================================================

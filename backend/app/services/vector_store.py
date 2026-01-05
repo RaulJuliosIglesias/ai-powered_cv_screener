@@ -97,6 +97,10 @@ class VectorStoreService:
                     meta["job_hopping_score"] = float(chunk_meta["job_hopping_score"])
                 if "position_count" in chunk_meta:
                     meta["position_count"] = int(chunk_meta["position_count"])
+                if "avg_tenure_years" in chunk_meta:
+                    meta["avg_tenure_years"] = float(chunk_meta["avg_tenure_years"])
+                if "employment_gaps_count" in chunk_meta:
+                    meta["employment_gaps_count"] = int(chunk_meta["employment_gaps_count"])
                 
                 # Experience-specific fields
                 if "job_title" in chunk_meta:

@@ -693,7 +693,7 @@ class PDFService:
             )
             
             for chunk_content in section_chunks:
-                # Build enriched chunk metadata
+                # Build enriched chunk metadata with ALL enriched fields
                 chunk_metadata = {
                     "skills": skills,
                     "section": section_type,
@@ -702,6 +702,11 @@ class PDFService:
                     "current_role": enriched_metadata.current_role,
                     "current_company": enriched_metadata.current_company,
                     "has_faang": enriched_metadata.has_faang_experience,
+                    # Red flags metadata - CRITICAL for enhanced modules
+                    "job_hopping_score": enriched_metadata.job_hopping_score,
+                    "avg_tenure_years": enriched_metadata.avg_tenure_years,
+                    "position_count": len(enriched_metadata.experiences),
+                    "employment_gaps_count": len(enriched_metadata.employment_gaps),
                 }
                 
                 # For experience sections, add position-specific metadata
