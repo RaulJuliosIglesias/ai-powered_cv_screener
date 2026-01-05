@@ -3,17 +3,16 @@ import { X, Settings, Sparkles, ChevronDown, Check } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 const CHEAP_MODELS = [
+  { id: 'google/gemini-2.0-flash-exp:free', name: 'Gemini 2.0 Flash (Free)', price: 'Free', recommended: true },
+  { id: 'meta-llama/llama-3.3-70b-instruct:free', name: 'Llama 3.3 70B (Free)', price: 'Free' },
+  { id: 'qwen/qwen-2.5-72b-instruct:free', name: 'Qwen 2.5 72B (Free)', price: 'Free' },
+  { id: 'microsoft/phi-3-mini-128k-instruct:free', name: 'Phi-3 Mini (Free)', price: 'Free' },
   { id: 'google/gemini-2.0-flash-lite-001', name: 'Gemini 2.0 Flash Lite', price: '$0.0375/M' },
-  { id: 'google/gemini-2.0-flash-exp:free', name: 'Gemini 2.0 Flash (Free)', price: 'Free' },
-  { id: 'google/gemma-3-1b-it:free', name: 'Gemma 3 1B (Free)', price: 'Free' },
-  { id: 'meta-llama/llama-3.2-1b-instruct:free', name: 'Llama 3.2 1B (Free)', price: 'Free' },
-  { id: 'qwen/qwen-2.5-7b-instruct:free', name: 'Qwen 2.5 7B (Free)', price: 'Free' },
-  { id: 'mistralai/mistral-small-24b-instruct-2501:free', name: 'Mistral Small 24B (Free)', price: 'Free' },
 ];
 
 const DEFAULT_SETTINGS = {
   autoNamingEnabled: true,
-  autoNamingModel: 'google/gemini-2.0-flash-lite-001',
+  autoNamingModel: 'google/gemini-2.0-flash-exp:free',
 };
 
 const STORAGE_KEY = 'cv_screener_settings';

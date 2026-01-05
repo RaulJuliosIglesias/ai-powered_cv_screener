@@ -10350,7 +10350,7 @@
     },
     {
       "id": "844b3828-efac-4e7b-bc92-230dfa6e7a82",
-      "name": "CV Group 4310",
+      "name": "CV Group 4958",
       "description": "",
       "cvs": [
         {
@@ -10625,6 +10625,286 @@
           "chunk_count": 5,
           "content_hash": "a4d6a519e12e2ebd89c23e596597bc450d880ca5caf3bfa1256c190f070db73e",
           "uploaded_at": "2026-01-05T03:38:29.625571"
+        },
+        {
+          "id": "cv_bcd0274f",
+          "filename": "0ed5d24f__Mateo_Alvarez__Lab_Technician.pdf",
+          "chunk_count": 4,
+          "content_hash": "e8c8a7d9fe2397d5ea4a1630e99382d907f335529896a11f07d7d099e5608b0e",
+          "uploaded_at": "2026-01-05T03:47:47.558534"
+        },
+        {
+          "id": "cv_ac99908c",
+          "filename": "1c45453c__Erik_Andersson__Research_Associate.pdf",
+          "chunk_count": 4,
+          "content_hash": "474cbed32f670be3d903eee5daa8216b8f0877001457a79e1ffbe822ee8b8011",
+          "uploaded_at": "2026-01-05T03:47:48.680590"
+        },
+        {
+          "id": "cv_e8b7cea6",
+          "filename": "1fff7969__Sofia_Ramirez__Postdoc.pdf",
+          "chunk_count": 2,
+          "content_hash": "d726169167b2279b7205b10f134b84ee57c75b3142b7d1d14cf68264f8125151",
+          "uploaded_at": "2026-01-05T03:47:49.925529"
+        },
+        {
+          "id": "cv_e1970818",
+          "filename": "03ddcb57__Priya_Naidoo__Research_Assistant.pdf",
+          "chunk_count": 4,
+          "content_hash": "d053df0713f15f53e3f85a4bbab7ca6daec64e5724dc621183dfd45101595b84",
+          "uploaded_at": "2026-01-05T03:47:51.072324"
+        },
+        {
+          "id": "cv_c3a0687a",
+          "filename": "6d81f047__Gabriel_Dubois__Research_Assistant.pdf",
+          "chunk_count": 4,
+          "content_hash": "94ee273bbb83e2ba65a5e64c04908b46966bd6bca3ad580a1bca36938fd14582",
+          "uploaded_at": "2026-01-05T03:47:52.279510"
+        },
+        {
+          "id": "cv_c10105eb",
+          "filename": "9b3715d6__Lena_Schmidt__Postdoc.pdf",
+          "chunk_count": 3,
+          "content_hash": "4ec29c69d0748ec0c665fd9fd2ce56b4d14b2927373c7253ac9f2e2290983e9e",
+          "uploaded_at": "2026-01-05T03:47:53.530939"
+        },
+        {
+          "id": "cv_bfc4261a",
+          "filename": "10b55aa7__Ji-Yeon_Kim__Researcher.pdf",
+          "chunk_count": 4,
+          "content_hash": "a41ba1bc4cbde29d94dd47d081494b4a6b8c0c8bb13ef5ee4ea7a02dbee7f0ce",
+          "uploaded_at": "2026-01-05T03:47:54.715611"
+        },
+        {
+          "id": "cv_8932f172",
+          "filename": "312feb56__Layla_Al-Mansoor__Lab_Technician.pdf",
+          "chunk_count": 3,
+          "content_hash": "53a3944fc171b4f29262bab21f72f9e44e508b9c5968efa0eaab194761ee1de1",
+          "uploaded_at": "2026-01-05T03:47:55.870507"
+        },
+        {
+          "id": "cv_49c2add9",
+          "filename": "c5d4a6de__Gabriela_Martinez__Research_Associate.pdf",
+          "chunk_count": 4,
+          "content_hash": "ec9b2ea38ca98b6aa57dc26502eaa9a45c34f17033f1dfe5cfaa28a216e10f3d",
+          "uploaded_at": "2026-01-05T03:47:57.047149"
+        },
+        {
+          "id": "cv_575e24b9",
+          "filename": "d2621eee__Khalid_Al-Mansoori__Research_Scientist.pdf",
+          "chunk_count": 5,
+          "content_hash": "030e8ed9e91d9c380e9ff2be136ab1cc67ac3a7ca2d90410b6d1ab9ad18bf614",
+          "uploaded_at": "2026-01-05T03:47:58.304370"
+        },
+        {
+          "id": "cv_cb39a65c",
+          "filename": "d2674dc3__Ji-Yeon_Kim__Research_Associate_I.pdf",
+          "chunk_count": 2,
+          "content_hash": "5a939af4c7b1c8a0f8762e0f208aed2b2b3a29ecfaec9688dacb08242a9ea9e4",
+          "uploaded_at": "2026-01-05T03:47:59.440623"
+        },
+        {
+          "id": "cv_cbfbe751",
+          "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf",
+          "chunk_count": 4,
+          "content_hash": "34e34e3e922b091c04ab0251473fe4533edc8c5caab5054ab60a90f7e598cf4e",
+          "uploaded_at": "2026-01-05T03:48:43.458636"
+        },
+        {
+          "id": "cv_0cadb740",
+          "filename": "0c185b57__Matteo_Rossi__Associate_Analyst.pdf",
+          "chunk_count": 4,
+          "content_hash": "afaedbee00cabea5665a22ae3a24904680263fafcf46a920873fcefbc741d3c1",
+          "uploaded_at": "2026-01-05T03:48:44.608082"
+        },
+        {
+          "id": "cv_62fa5fff",
+          "filename": "0cdcafca__Aisha_Al-Mansoori__Junior_Chef.pdf",
+          "chunk_count": 2,
+          "content_hash": "da4577fd1a8c6cc8af85bdd1fea909794d48d9153b919d54f6bd337ffe8554b5",
+          "uploaded_at": "2026-01-05T03:48:45.692289"
+        },
+        {
+          "id": "cv_63331267",
+          "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf",
+          "chunk_count": 7,
+          "content_hash": "ba592f983221200b97a3fbdf759a36ce291811b3979f18373691e64441ea9f71",
+          "uploaded_at": "2026-01-05T03:48:46.949106"
+        },
+        {
+          "id": "cv_cbc892af",
+          "filename": "01def3e4__Mei_Lin_Chen__Accessories_Designer.pdf",
+          "chunk_count": 2,
+          "content_hash": "cfa508e32087cf01536674432a9def733423ecfad30d95f408ec706a1b593f26",
+          "uploaded_at": "2026-01-05T03:48:48.110480"
+        },
+        {
+          "id": "cv_43e466ce",
+          "filename": "1b2a47e8__Amir_Hassan__Stylist.pdf",
+          "chunk_count": 4,
+          "content_hash": "261c11248808d9b2c54acd9a80d29c29e525bd11eabe4364023c6c5da6e83c89",
+          "uploaded_at": "2026-01-05T03:48:49.304071"
+        },
+        {
+          "id": "cv_c0a8d785",
+          "filename": "1b215ef8__Matteo_Rossi__Group_PM.pdf",
+          "chunk_count": 2,
+          "content_hash": "4b30c69eaa58407675964b552ee9f3f8416640d8a0f4026b442baedbae6cf444",
+          "uploaded_at": "2026-01-05T03:48:50.551950"
+        },
+        {
+          "id": "cv_74451597",
+          "filename": "1c261534__Priya_Kim__Sous_Chef.pdf",
+          "chunk_count": 4,
+          "content_hash": "f616c0310253294cea8e62820c55182df7d3b5ac732ff959d6f105958b4fb03f",
+          "uploaded_at": "2026-01-05T03:48:51.657441"
+        },
+        {
+          "id": "cv_de11f767",
+          "filename": "2a6972cc__Ji-eun_Kim__Business_Analyst.pdf",
+          "chunk_count": 7,
+          "content_hash": "4f7bb043aeb9024021c7ed5d1c454aa3a9eb5db80196aed6bb7a9dc0f0bd753e",
+          "uploaded_at": "2026-01-05T03:48:52.859029"
+        },
+        {
+          "id": "cv_58f73716",
+          "filename": "2aaf7352__Sofia_Rossi__Restaurant_Owner.pdf",
+          "chunk_count": 5,
+          "content_hash": "a96a7044391daa1e3e6afc4828e8e7077c74a5a88efdb174f207a0234fdd9225",
+          "uploaded_at": "2026-01-05T03:48:54.116244"
+        },
+        {
+          "id": "cv_69fb6e1b",
+          "filename": "2e55e31d__Sofia_Mendoza__Designer.pdf",
+          "chunk_count": 4,
+          "content_hash": "4130ae44249275e39c3e1b82efc669f8e12fb071b03144d0c4b8b71d5f321043",
+          "uploaded_at": "2026-01-05T03:48:55.257424"
+        },
+        {
+          "id": "cv_2622b3d1",
+          "filename": "2ee790a4__Lotte_van_der_Berg__Camera_Operator.pdf",
+          "chunk_count": 5,
+          "content_hash": "d506d6c9a92ad74c78c0e7be3f15348e852ebd2b5f4ed5efe2a05e479b464502",
+          "uploaded_at": "2026-01-05T03:48:56.422897"
+        },
+        {
+          "id": "cv_31c3aa01",
+          "filename": "2fd0d810__Kamran_Alizadeh__Law_Clerk.pdf",
+          "chunk_count": 3,
+          "content_hash": "549da989fc612abc15b9bcfe3347432cb96ef1558568a0602f5a95500dbf031d",
+          "uploaded_at": "2026-01-05T03:48:57.667145"
+        },
+        {
+          "id": "cv_c4dc5d49",
+          "filename": "3a963b30__Rahul_Patel__Junior_Digital_Marketer.pdf",
+          "chunk_count": 4,
+          "content_hash": "6e7dd37c76e4e8cf2c8a0925c27b3047e2cc349bef86d5ff33c7e8fefa87e523",
+          "uploaded_at": "2026-01-05T03:48:58.811858"
+        },
+        {
+          "id": "cv_561a8ff7",
+          "filename": "3baa7e58__Diego_Mendoza__Protocol_Engineer.pdf",
+          "chunk_count": 3,
+          "content_hash": "fac7be105f815d13f576d6c0bda3c9bf8ee5b65b95cd484db9d0d85f958f6e6b",
+          "uploaded_at": "2026-01-05T03:48:59.995352"
+        },
+        {
+          "id": "cv_71f1b794",
+          "filename": "3d0c9f5d__Lena_Schmidt__Pharmacy_Technician.pdf",
+          "chunk_count": 6,
+          "content_hash": "8293daf6df82647fbf1020c585b79f7b7f0d22649b62e510cff7cc76838897bd",
+          "uploaded_at": "2026-01-05T03:49:01.301987"
+        },
+        {
+          "id": "cv_9320ff21",
+          "filename": "3f2032af__Aisha_Chen__Junior_Smart_Contract_Developer.pdf",
+          "chunk_count": 2,
+          "content_hash": "5723fcfb502863855d8acd609e4239039bf6d0f72c36f07afcfdb5ccc4c1e74d",
+          "uploaded_at": "2026-01-05T03:49:02.412738"
+        },
+        {
+          "id": "cv_81e82180",
+          "filename": "4a8697d7__Aisha_Al_Mansoori__Postdoc.pdf",
+          "chunk_count": 4,
+          "content_hash": "eb2b0c900145c130f6ef58253f2349204df780d87445377dfc74c94b384d09e2",
+          "uploaded_at": "2026-01-05T03:49:03.552567"
+        },
+        {
+          "id": "cv_42705249",
+          "filename": "4bd4fa01__Lukas_Schneider__Stylist.pdf",
+          "chunk_count": 5,
+          "content_hash": "d4d93aa1c5cf9c0aa4b006e633de719dec62f7ceda66217ba4264cc63297b319",
+          "uploaded_at": "2026-01-05T03:49:04.809564"
+        },
+        {
+          "id": "cv_6ea9ecee",
+          "filename": "4ca041d0__Lucien_Moreau__Creature_Designer.pdf",
+          "chunk_count": 4,
+          "content_hash": "f616b3b70dbf3a653590b78d990796e6db28541cc2a5b0235e0d2b606629d279",
+          "uploaded_at": "2026-01-05T03:49:06.030633"
+        },
+        {
+          "id": "cv_96850076",
+          "filename": "4e4b81a6__Sofia_Rossi__Graduate_Developer.pdf",
+          "chunk_count": 3,
+          "content_hash": "4bfd5f519b960ef1a7aed4a04e5393db555dc79eea534f938e6ee8645b49d692",
+          "uploaded_at": "2026-01-05T03:49:07.235297"
+        },
+        {
+          "id": "cv_6de8bf1a",
+          "filename": "4ef2ef97__Aisha_Tan__Pizza_Chef.pdf",
+          "chunk_count": 3,
+          "content_hash": "88739b9a32ba32227d630d016c2a925f33bc3dfea51a28916bbeda1df88274d5",
+          "uploaded_at": "2026-01-05T03:49:08.485650"
+        },
+        {
+          "id": "cv_01911681",
+          "filename": "5d0b9a4c__Javier_Morales__Psychologist.pdf",
+          "chunk_count": 4,
+          "content_hash": "cf3f1195334e306b74928210c904d8c72653bfb55284b377a68d64c10ae1253a",
+          "uploaded_at": "2026-01-05T03:49:09.718606"
+        },
+        {
+          "id": "cv_bfe592a1",
+          "filename": "6af7b13a__Adewale_Patel__Junior_Graphic_Artist.pdf",
+          "chunk_count": 3,
+          "content_hash": "9e75645c2dcc29202baf55cd7440b394e120c8b883323bcd08e9e8d58bed60c4",
+          "uploaded_at": "2026-01-05T03:49:10.876604"
+        },
+        {
+          "id": "cv_5047435e",
+          "filename": "6b9204bf__Matteo_Romano__Brand_Ambassador.pdf",
+          "chunk_count": 3,
+          "content_hash": "cb5a89664575828ba097992fffd5601a00e5ce27b9ea3ebbac2aa7bb969b2aad",
+          "uploaded_at": "2026-01-05T03:49:12.138510"
+        },
+        {
+          "id": "cv_4424f0f8",
+          "filename": "6be44d4b__Rajiv_Patel__Growth_Officer.pdf",
+          "chunk_count": 2,
+          "content_hash": "f3ceac7daf2191d214c0584948ffa7acdbf997b35ab7861d09c6736d2870a930",
+          "uploaded_at": "2026-01-05T03:49:13.283222"
+        },
+        {
+          "id": "cv_b6955cad",
+          "filename": "07e9108d__Aisha_Okafor__CCO.pdf",
+          "chunk_count": 2,
+          "content_hash": "6a38e6c43631bacdfad2408c43e2ef7051457e49ce24f9ea4e9be937d9040a82",
+          "uploaded_at": "2026-01-05T03:49:14.513271"
+        },
+        {
+          "id": "cv_3579c3a2",
+          "filename": "7ceb10f6__Liam_van_der_Merwe__Business_Analyst.pdf",
+          "chunk_count": 6,
+          "content_hash": "40e591423765b8fbfe71f69f971fc08b2a3287333383bd712140815323ae4e8c",
+          "uploaded_at": "2026-01-05T03:49:15.846448"
+        },
+        {
+          "id": "cv_dc080a5c",
+          "filename": "7d40b1ab__Ingrid_Larsson__Consultant.pdf",
+          "chunk_count": 7,
+          "content_hash": "fa20867f1ec408687190cd4bc26b42078fda9350fbd00bf584dccbcdbf05293a",
+          "uploaded_at": "2026-01-05T03:49:17.052493"
         }
       ],
       "messages": [
@@ -10772,7 +11052,7 @@
         }
       ],
       "created_at": "2026-01-05T02:36:30.672588",
-      "updated_at": "2026-01-05T03:38:30.642224"
+      "updated_at": "2026-01-05T03:49:18.440345"
     },
     {
       "id": "84dcbb16-5344-446e-8d3e-5d4322b6583a",

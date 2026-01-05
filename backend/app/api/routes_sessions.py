@@ -692,7 +692,7 @@ async def get_suggested_questions(
 # ============================================
 
 class GenerateNameRequest(BaseModel):
-    model: str = "google/gemini-2.0-flash-lite-001"
+    model: str = "google/gemini-2.0-flash-exp:free"
 
 
 class GenerateNameResponse(BaseModel):
@@ -767,20 +767,29 @@ async def generate_session_name(
     
     logger.info(f"[AUTO-NAME] Extracted roles for session {session_id}: {roles}")
     
-    # Create a simple prompt for the AI with just roles
-    prompt = f"""Analyze these job roles and generate a 2-word category name that best describes this group of professionals.
+    # Create a clear prompt for the AI to identify the dominant category
+    prompt = f"""You are naming a group of CVs/resumes. Analyze these job roles and determine the DOMINANT professional category.
 
-Job Roles:
-{chr(10).join(roles)}
+Job Roles in this group:
+{chr(10).join(f"- {role}" for role in roles)}
 
-Rules:
-- Return ONLY 2 words that describe the professional category
-- Examples: "Software Development", "Data Science", "Marketing Sales", "Finance Accounting", "Engineering Leadership", "Mobile Development"
-- If roles are mixed, combine the two main areas (e.g., "Tech Sales", "Design Engineering")
-- Be concise and professional
-- Do NOT include any other text, just the 2 words
+INSTRUCTIONS:
+1. Identify which professional field appears MOST FREQUENTLY
+2. Name the group after the LARGEST category, even if it's only 30-40% of the total
+3. Use broad industry terms when roles are similar (e.g., multiple dev roles = "Software Development")
+4. Use specific terms when there's a clear specialization (e.g., all frontend = "Frontend Development")
 
-Category name:"""
+NAMING GUIDELINES:
+- Tech roles (Developer, Engineer, Programmer) → "Software Development" or "IT Engineering"
+- Design roles (Designer, UX, UI, Art Director) → "Creative Design"
+- Data roles (Data Scientist, Analyst, ML) → "Data Science"
+- Management roles (Manager, Director, Lead) → "Tech Leadership" or "[Field] Management"
+- Sales/Marketing → "Sales Marketing"
+- Audio/Video/Media → "Media Production"
+
+OUTPUT: Return ONLY 2 words. No quotes, no explanation, just the category name.
+
+Category:"""
 
     try:
         # Call OpenRouter API
