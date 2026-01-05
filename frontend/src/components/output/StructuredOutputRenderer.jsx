@@ -31,30 +31,41 @@ const getScoreColor = (score) => {
 
 // CV Reference Renderer - FUNCIÓN ÚNICA para renderizar contenido con CVs
 // Detecta múltiples patrones de CV links y los renderiza como botón clickeable + nombre
-const ContentWithCVLinks = ({ content, onOpenCV }) => {
+// cvMap: opcional, mapa de nombres normalizados a cv_ids para resolver "📄 Name" sin link explícito
+const ContentWithCVLinks = ({ content, onOpenCV, cvMap = {} }) => {
   if (!content) return null;
   
   const contentStr = String(content);
   
   // Múltiples patrones para capturar diferentes formatos de CV links
-  // cv_id puede tener letras, números y guiones
   const patterns = [
-    /\*\*\[([^\]]+)\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\*\*/g,  // **[Name](cv:xxx)**
-    /\[([^\]]+)\]\(cv:(cv_[a-zA-Z0-9_-]+)\)/g,          // [Name](cv:xxx)
+    { regex: /\*\*\[([^\]]+)\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\*\*/g, hasId: true },   // **[Name](cv:xxx)**
+    { regex: /\[([^\]]+)\]\(cv:(cv_[a-zA-Z0-9_-]+)\)/g, hasId: true },            // [Name](cv:xxx)
+    { regex: /📄\s*\*\*([^*]+)\*\*/g, hasId: false },                              // 📄 **Name**
+    { regex: /📄\s*([A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+)+)/g, hasId: false },      // 📄 Name Surname
   ];
+  
+  // Normalizar nombre para buscar en cvMap
+  const normalizeName = (name) => name.toLowerCase().trim().replace(/\s+/g, ' ');
   
   // Extraer todos los CV refs con todos los patrones
   const refs = [];
-  for (const pattern of patterns) {
+  for (const { regex, hasId } of patterns) {
     let match;
-    while ((match = pattern.exec(contentStr)) !== null) {
+    while ((match = regex.exec(contentStr)) !== null) {
       const name = match[1].trim();
-      const cvId = match[2];
+      let cvId = hasId ? match[2] : null;
       
-      // Validar que el nombre no sea un emoji solo
+      // Si no tiene cv_id explícito, buscar en cvMap
+      if (!cvId && cvMap) {
+        const normalizedName = normalizeName(name);
+        cvId = cvMap[normalizedName];
+      }
+      
+      // Validar que el nombre no sea un emoji solo y que tengamos cv_id
       if (name && name !== '📄' && cvId) {
         // Evitar duplicados en la misma posición
-        const exists = refs.some(r => r.index === match.index);
+        const exists = refs.some(r => Math.abs(r.index - match.index) < 5);
         if (!exists) {
           refs.push({ 
             index: match.index, 
@@ -205,7 +216,7 @@ const ThinkingSection = ({ content }) => {
 };
 
 // Section: Direct Answer (Yellow/Gold border)
-const DirectAnswerSection = ({ content, onOpenCV }) => {
+const DirectAnswerSection = ({ content, onOpenCV, cvMap }) => {
   if (!content) return null;
   
   return (
@@ -215,14 +226,14 @@ const DirectAnswerSection = ({ content, onOpenCV }) => {
         <span className="font-semibold text-amber-400">Direct Answer</span>
       </div>
       <div className="prose prose-sm max-w-none dark:prose-invert text-gray-200">
-        <ContentWithCVLinks content={content} onOpenCV={onOpenCV} />
+        <ContentWithCVLinks content={content} onOpenCV={onOpenCV} cvMap={cvMap} />
       </div>
     </div>
   );
 };
 
 // Section: Analysis (Cyan border)
-const AnalysisSection = ({ content, onOpenCV }) => {
+const AnalysisSection = ({ content, onOpenCV, cvMap }) => {
   if (!content) return null;
   
   return (
@@ -232,7 +243,7 @@ const AnalysisSection = ({ content, onOpenCV }) => {
         <span className="font-semibold text-cyan-400">Analysis</span>
       </div>
       <div className="prose prose-sm max-w-none dark:prose-invert text-gray-300">
-        <ContentWithCVLinks content={content} onOpenCV={onOpenCV} />
+        <ContentWithCVLinks content={content} onOpenCV={onOpenCV} cvMap={cvMap} />
       </div>
     </div>
   );
@@ -318,7 +329,7 @@ const CandidateTable = ({ tableData, onOpenCV }) => {
 };
 
 // Section: Conclusion (Green border)
-const ConclusionSection = ({ content, onOpenCV }) => {
+const ConclusionSection = ({ content, onOpenCV, cvMap }) => {
   if (!content) return null;
   
   return (
@@ -328,10 +339,25 @@ const ConclusionSection = ({ content, onOpenCV }) => {
         <span className="font-semibold text-emerald-400">Conclusion</span>
       </div>
       <div className="prose prose-sm max-w-none dark:prose-invert text-gray-200">
-        <ContentWithCVLinks content={content} onOpenCV={onOpenCV} />
+        <ContentWithCVLinks content={content} onOpenCV={onOpenCV} cvMap={cvMap} />
       </div>
     </div>
   );
+};
+
+// Build cvMap from table data - maps normalized names to cv_ids
+const buildCvMapFromTable = (tableData) => {
+  const cvMap = {};
+  if (!tableData?.rows) return cvMap;
+  
+  for (const row of tableData.rows) {
+    if (row.candidate_name && row.cv_id) {
+      // Normalize name: lowercase, trim, single spaces
+      const normalizedName = row.candidate_name.toLowerCase().trim().replace(/\s+/g, ' ');
+      cvMap[normalizedName] = row.cv_id;
+    }
+  }
+  return cvMap;
 };
 
 // Main Component
@@ -340,22 +366,25 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
   
   const { thinking, direct_answer, analysis, table_data, conclusion } = structuredOutput;
   
+  // Build cvMap from table to resolve "📄 Name" patterns without explicit cv_id
+  const cvMap = buildCvMapFromTable(table_data);
+  
   return (
     <div className="space-y-2">
       {/* 1. Thinking Process (collapsible) */}
       <ThinkingSection content={thinking} />
       
-      {/* 2. Direct Answer - usa ContentWithCVLinks */}
-      <DirectAnswerSection content={direct_answer} onOpenCV={onOpenCV} />
+      {/* 2. Direct Answer - usa ContentWithCVLinks con cvMap */}
+      <DirectAnswerSection content={direct_answer} onOpenCV={onOpenCV} cvMap={cvMap} />
       
-      {/* 3. Analysis - usa ContentWithCVLinks */}
-      <AnalysisSection content={analysis} onOpenCV={onOpenCV} />
+      {/* 3. Analysis - usa ContentWithCVLinks con cvMap */}
+      <AnalysisSection content={analysis} onOpenCV={onOpenCV} cvMap={cvMap} />
       
       {/* 4. Candidate Table - botones directos en JSX */}
       <CandidateTable tableData={table_data} onOpenCV={onOpenCV} />
       
-      {/* 5. Conclusion - usa ContentWithCVLinks */}
-      <ConclusionSection content={conclusion} onOpenCV={onOpenCV} />
+      {/* 5. Conclusion - usa ContentWithCVLinks con cvMap */}
+      <ConclusionSection content={conclusion} onOpenCV={onOpenCV} cvMap={cvMap} />
     </div>
   );
 };
