@@ -35,33 +35,33 @@ docs/evaluation/
 ## 🏆 Evaluation Summary
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                        EVALUATION CRITERIA MATRIX                            │
-├─────────────────────────────────────────────────────────────────────────────┤
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                         EVALUATION CRITERIA MATRIX                           │
+├──────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
-│  ┌─────────────────────┐  ┌─────────────────────┐  ┌─────────────────────┐  │
-│  │ 1. EXECUTION        │  │ 2. THOUGHT PROCESS  │  │ 3. CODE QUALITY     │  │
-│  │    ⭐⭐⭐⭐⭐        │  │    ⭐⭐⭐⭐⭐        │  │    ⭐⭐⭐⭐⭐        │  │
-│  │                     │  │                     │  │                     │  │
-│  │ • PDF extraction ✓  │  │ • Dual-mode arch ✓  │  │ • Type hints ✓      │  │
-│  │ • RAG pipeline ✓    │  │ • Factory pattern ✓ │  │ • Dataclasses ✓     │  │
-│  │ • Chat interface ✓  │  │ • Tech rationale ✓  │  │ • Async/await ✓     │  │
-│  │ • Source citations ✓│  │ • Trade-offs ✓      │  │ • Error handling ✓  │  │
-│  │ • Grounding ✓       │  │                     │  │ • Logging ✓         │  │
-│  └─────────────────────┘  └─────────────────────┘  └─────────────────────┘  │
+│  ┌────────────────────┐  ┌────────────────────┐  ┌────────────────────┐      │
+│  │ 1. EXECUTION       │  │ 2. THOUGHT PROCESS │  │ 3. CODE QUALITY    │      │
+│  │    ⭐⭐⭐⭐⭐    │  │    ⭐⭐⭐⭐⭐   │  │    ⭐⭐⭐⭐⭐    │      │
+│  │                    │  │                    │  │                    │      │
+│  │ • PDF extraction ✓ │  │ • Dual-mode arch ✓ │  │ • Type hints ✓     │     │
+│  │ • RAG pipeline ✓   │  │ • Factory pattern ✓│  │ • Dataclasses ✓    │     │
+│  │ • Chat interface ✓ │  │ • Tech rationale ✓ │  │ • Async/await ✓    │     │
+│  │ • Source citations✓│  │ • Trade-offs ✓     │  │ • Error handling ✓ │     │
+│  │ • Grounding ✓      │  │                    │  │ • Logging ✓        │     │
+│  └────────────────────┘  └────────────────────┘  └────────────────────┘     │
 │                                                                              │
-│  ┌─────────────────────┐  ┌─────────────────────┐  ┌─────────────────────┐  │
-│  │ 4. CREATIVITY       │  │ 5. AI LITERACY      │  │ 6. LEARN & ADAPT    │  │
-│  │    ⭐⭐⭐⭐⭐        │  │    ⭐⭐⭐⭐⭐        │  │    ⭐⭐⭐⭐⭐        │  │
-│  │                     │  │                     │  │                     │  │
-│  │ • 3-layer verify ✓  │  │ • Latest models ✓   │  │ • RAG mastery ✓     │  │
-│  │ • Adaptive k ✓      │  │ • OpenRouter ✓      │  │ • Iteration ✓       │  │
-│  │ • Multi-query ✓     │  │ • pgvector ✓        │  │ • Problem-solving ✓ │  │
-│  │ • HyDE ✓            │  │ • RAG patterns ✓    │  │ • Production ✓      │  │
-│  │ • SSE streaming ✓   │  │ • Eval metrics ✓    │  │ • Extensibility ✓   │  │
-│  └─────────────────────┘  └─────────────────────┘  └─────────────────────┘  │
+│  ┌────────────────────┐  ┌────────────────────┐  ┌────────────────────┐     │
+│  │ 4. CREATIVITY      │  │ 5. AI LITERACY     │  │ 6. LEARN & ADAPT   │     │
+│  │    ⭐⭐⭐⭐⭐    │  │    ⭐⭐⭐⭐⭐    │  │    ⭐⭐⭐⭐⭐    │     │
+│  │                    │  │                    │  │                    │     │
+│  │ • 3-layer verify ✓ │  │ • Latest models ✓  │  │ • RAG mastery ✓    │     │
+│  │ • Adaptive k ✓     │  │ • OpenRouter ✓     │  │ • Iteration ✓      │     │
+│  │ • Multi-query ✓    │  │ • pgvector ✓       │  │ • Problem-solving ✓│     │
+│  │ • HyDE ✓           │  │ • RAG patterns ✓   │  │ • Production ✓     │     │
+│  │ • SSE streaming ✓  │  │ • Eval metrics ✓   │  │ • Extensibility ✓  │     │
+│  └────────────────────┘  └────────────────────┘  └────────────────────┘     │
 │                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
+└──────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---

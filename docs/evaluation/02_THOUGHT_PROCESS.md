@@ -17,21 +17,21 @@
 ### The Solution: Factory Pattern with Mode Parameter
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    DUAL-MODE ARCHITECTURE                        │
-│                                                                  │
-│   ┌─────────────────┐              ┌─────────────────┐          │
-│   │   LOCAL MODE    │              │   CLOUD MODE    │          │
-│   │                 │              │                 │          │
-│   │  • JSON Storage │              │  • Supabase     │          │
-│   │  • sentence-    │   SAME API   │  • pgvector     │          │
-│   │    transformers │◀────────────▶│  • OpenRouter   │          │
-│   │  • File System  │              │  • Cloud Storage│          │
-│   │  • Zero Cost    │              │  • Scalable     │          │
-│   └─────────────────┘              └─────────────────┘          │
-│                                                                  │
-│            ?mode=local                    ?mode=cloud            │
-└─────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────────┐
+│                     DUAL-MODE ARCHITECTURE                        │
+│                                                                   │
+│   ┌────────────────┐               ┌────────────────┐            │
+│   │   LOCAL MODE   │               │   CLOUD MODE   │            │
+│   │                │               │                │            │
+│   │ • JSON Storage │               │ • Supabase     │            │
+│   │ • sentence-    │    SAME API   │ • pgvector     │            │
+│   │   transformers │◀─────────────▶│ • OpenRouter   │            │
+│   │ • File System  │               │ • Cloud Storage│            │
+│   │ • Zero Cost    │               │ • Scalable     │            │
+│   └────────────────┘               └────────────────┘            │
+│                                                                   │
+│           ?mode=local                    ?mode=cloud              │
+└───────────────────────────────────────────────────────────────────┘
 ```
 
 ### Why This Approach?
@@ -83,31 +83,31 @@ class ProviderFactory:
 ### Key Reasons for FastAPI
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    WHY FASTAPI?                                  │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  1. ASYNC/AWAIT NATIVE                                          │
-│     └── LLM calls take 2-10 seconds                             │
-│     └── Async prevents blocking other requests                  │
-│     └── Better resource utilization                             │
-│                                                                  │
-│  2. PYDANTIC VALIDATION                                         │
-│     └── Automatic request/response validation                   │
-│     └── Type errors caught at request time                      │
-│     └── Self-documenting schemas                                │
-│                                                                  │
-│  3. AUTOMATIC OPENAPI DOCS                                      │
-│     └── /docs endpoint auto-generated                           │
-│     └── Interactive API testing                                 │
-│     └── No manual documentation needed                          │
-│                                                                  │
-│  4. PYTHON ECOSYSTEM                                            │
-│     └── Direct access to sentence-transformers                  │
-│     └── Native pdfplumber integration                           │
-│     └── LangChain compatibility                                 │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────────┐
+│                       WHY FASTAPI?                                │
+├───────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  1. ASYNC/AWAIT NATIVE                                            │
+│     └── LLM calls take 2-10 seconds                               │
+│     └── Async prevents blocking other requests                    │
+│     └── Better resource utilization                               │
+│                                                                   │
+│  2. PYDANTIC VALIDATION                                           │
+│     └── Automatic request/response validation                     │
+│     └── Type errors caught at request time                        │
+│     └── Self-documenting schemas                                  │
+│                                                                   │
+│  3. AUTOMATIC OPENAPI DOCS                                        │
+│     └── /docs endpoint auto-generated                             │
+│     └── Interactive API testing                                   │
+│     └── No manual documentation needed                            │
+│                                                                   │
+│  4. PYTHON ECOSYSTEM                                              │
+│     └── Direct access to sentence-transformers                    │
+│     └── Native pdfplumber integration                             │
+│     └── LangChain compatibility                                   │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -128,31 +128,31 @@ Different deployment scenarios have different constraints:
 ### The Solution: Cascading Fallback System
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                 EMBEDDING FALLBACK CASCADE                       │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  PRIORITY 1: sentence-transformers (all-MiniLM-L6-v2)           │
-│  ├── Dimensions: 384                                            │
-│  ├── Speed: ~14,000 sentences/sec on CPU                        │
-│  ├── Size: 80MB                                                 │
-│  └── Status: ✅ Preferred for local                             │
-│       │                                                          │
-│       ▼ (if unavailable)                                        │
-│  PRIORITY 2: OpenRouter API (nomic-embed-text-v1.5)             │
-│  ├── Dimensions: 768                                            │
-│  ├── Quality: State-of-the-art                                  │
-│  ├── Cost: ~$0.02/1M tokens                                     │
-│  └── Status: ✅ Production quality                              │
-│       │                                                          │
-│       ▼ (if unavailable)                                        │
-│  PRIORITY 3: Hash-based fallback                                │
-│  ├── Dimensions: 384 (MD5-based)                                │
-│  ├── Quality: Poor (testing only)                               │
-│  ├── Speed: Instant                                             │
-│  └── Status: ⚠️ CI/CD fallback only                             │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────────┐
+│                  EMBEDDING FALLBACK CASCADE                       │
+├───────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  PRIORITY 1: sentence-transformers (all-MiniLM-L6-v2)             │
+│  ├── Dimensions: 384                                              │
+│  ├── Speed: ~14,000 sentences/sec on CPU                          │
+│  ├── Size: 80MB                                                   │
+│  └── Status: ✅ Preferred for local                               │
+│       │                                                           │
+│       ▼ (if unavailable)                                          │
+│  PRIORITY 2: OpenRouter API (nomic-embed-text-v1.5)               │
+│  ├── Dimensions: 768                                              │
+│  ├── Quality: State-of-the-art                                    │
+│  ├── Cost: ~$0.02/1M tokens                                       │
+│  └── Status: ✅ Production quality                                │
+│       │                                                           │
+│       ▼ (if unavailable)                                          │
+│  PRIORITY 3: Hash-based fallback                                  │
+│  ├── Dimensions: 384 (MD5-based)                                  │
+│  ├── Quality: Poor (testing only)                                 │
+│  ├── Speed: Instant                                               │
+│  └── Status: ⚠️ CI/CD fallback only                               │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
 ```
 
 ### Model Selection Rationale
@@ -170,28 +170,28 @@ Different deployment scenarios have different constraints:
 ### Why Two Different Stores?
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│              VECTOR STORE COMPARISON                             │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  ┌─────────────────────────┐  ┌─────────────────────────┐       │
-│  │   SimpleVectorStore     │  │   SupabaseVectorStore   │       │
-│  │   (Local Mode)          │  │   (Cloud Mode)          │       │
-│  ├─────────────────────────┤  ├─────────────────────────┤       │
-│  │ Storage: JSON file      │  │ Storage: PostgreSQL     │       │
-│  │ Search: Linear scan     │  │ Search: IVFFlat index   │       │
-│  │ Scale: <10K docs        │  │ Scale: Millions         │       │
-│  │ Setup: Zero config      │  │ Setup: Supabase project │       │
-│  │ Cost: Free              │  │ Cost: Supabase pricing  │       │
-│  │ Backup: Manual          │  │ Backup: Automatic       │       │
-│  └─────────────────────────┘  └─────────────────────────┘       │
-│                                                                  │
-│  USE CASE:                    USE CASE:                         │
-│  • Development               • Production                       │
-│  • Small deployments         • Multi-user apps                  │
-│  • Offline scenarios         • Persistent storage               │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────────┐
+│               VECTOR STORE COMPARISON                             │
+├───────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  ┌────────────────────────┐  ┌────────────────────────┐          │
+│  │  SimpleVectorStore     │  │  SupabaseVectorStore   │          │
+│  │  (Local Mode)          │  │  (Cloud Mode)          │          │
+│  ├────────────────────────┤  ├────────────────────────┤          │
+│  │ Storage: JSON file     │  │ Storage: PostgreSQL    │          │
+│  │ Search: Linear scan    │  │ Search: IVFFlat index  │          │
+│  │ Scale: <10K docs       │  │ Scale: Millions        │          │
+│  │ Setup: Zero config     │  │ Setup: Supabase project│          │
+│  │ Cost: Free             │  │ Cost: Supabase pricing │          │
+│  │ Backup: Manual         │  │ Backup: Automatic      │          │
+│  └────────────────────────┘  └────────────────────────┘          │
+│                                                                   │
+│  USE CASE:                   USE CASE:                            │
+│  • Development               • Production                         │
+│  • Small deployments         • Multi-user apps                    │
+│  • Offline scenarios         • Persistent storage                 │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
 ```
 
 ### Local Mode: SimpleVectorStore Design
@@ -245,59 +245,59 @@ CREATE FUNCTION match_cv_embeddings(
 ### Why OpenRouter vs Direct APIs?
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                  LLM INTEGRATION OPTIONS                         │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  ❌ Direct OpenAI API                                           │
-│     └── Vendor lock-in                                          │
-│     └── Single provider                                         │
-│     └── Price changes affect everything                         │
-│                                                                  │
-│  ❌ Direct Anthropic API                                        │
-│     └── Different API format                                    │
-│     └── Separate key management                                 │
-│     └── Can't easily compare models                             │
-│                                                                  │
-│  ❌ LangChain Abstraction                                       │
-│     └── Heavy dependency                                        │
-│     └── Abstraction complexity                                  │
-│     └── Overkill for direct calls                               │
-│                                                                  │
-│  ✅ OpenRouter                                                  │
-│     └── 100+ models, single API                                 │
-│     └── One API key for all providers                           │
-│     └── Easy model comparison                                   │
-│     └── Future-proof (new models available immediately)         │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────────┐
+│                   LLM INTEGRATION OPTIONS                         │
+├───────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  ❌ Direct OpenAI API                                             │
+│     └── Vendor lock-in                                            │
+│     └── Single provider                                           │
+│     └── Price changes affect everything                           │
+│                                                                   │
+│  ❌ Direct Anthropic API                                          │
+│     └── Different API format                                      │
+│     └── Separate key management                                   │
+│     └── Can't easily compare models                               │
+│                                                                   │
+│  ❌ LangChain Abstraction                                         │
+│     └── Heavy dependency                                          │
+│     └── Abstraction complexity                                    │
+│     └── Overkill for direct calls                                 │
+│                                                                   │
+│  ✅ OpenRouter                                                    │
+│     └── 100+ models, single API                                   │
+│     └── One API key for all providers                             │
+│     └── Easy model comparison                                     │
+│     └── Future-proof (new models available immediately)           │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
 ```
 
 ### 2-Step Model Strategy
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                  2-STEP MODEL STRATEGY                           │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  STEP 1: Query Understanding              Cost: ~$0.0001/query  │
-│  ┌─────────────────────────────────────────────────────────┐    │
-│  │ Model: Fast/Cheap (GPT-3.5, Gemini Flash, Llama 8B)     │    │
-│  │ Task: Parse intent, extract entities, reformulate       │    │
-│  │ Latency: 100-300ms                                      │    │
-│  └─────────────────────────────────────────────────────────┘    │
-│                           │                                      │
-│                           ▼                                      │
-│  STEP 2: Response Generation              Cost: ~$0.01/query    │
-│  ┌─────────────────────────────────────────────────────────┐    │
-│  │ Model: Powerful (GPT-4o, Claude 3.5 Sonnet, Gemini Pro) │    │
-│  │ Task: Generate comprehensive, cited response            │    │
-│  │ Latency: 1-5 seconds                                    │    │
-│  └─────────────────────────────────────────────────────────┘    │
-│                                                                  │
-│  TOTAL COST SAVINGS: ~40% vs using powerful model for both     │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────────┐
+│                   2-STEP MODEL STRATEGY                           │
+├───────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  STEP 1: Query Understanding             Cost: ~$0.0001/query     │
+│  ┌─────────────────────────────────────────────────────────────┐  │
+│  │ Model: Fast/Cheap (GPT-3.5, Gemini Flash, Llama 8B)         │  │
+│  │ Task: Parse intent, extract entities, reformulate           │  │
+│  │ Latency: 100-300ms                                          │  │
+│  └─────────────────────────────────────────────────────────────┘  │
+│                            │                                      │
+│                            ▼                                      │
+│  STEP 2: Response Generation             Cost: ~$0.01/query       │
+│  ┌─────────────────────────────────────────────────────────────┐  │
+│  │ Model: Powerful (GPT-4o, Claude 3.5 Sonnet, Gemini Pro)     │  │
+│  │ Task: Generate comprehensive, cited response                │  │
+│  │ Latency: 1-5 seconds                                        │  │
+│  └─────────────────────────────────────────────────────────────┘  │
+│                                                                   │
+│  TOTAL COST SAVINGS: ~40% vs using powerful model for both        │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -330,51 +330,51 @@ CREATE FUNCTION match_cv_embeddings(
 ### Evolution from Basic to Advanced
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                  PIPELINE EVOLUTION                              │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  BASIC RAG (Tutorial Level):                                    │
-│  Query → Embed → Search → Generate                              │
-│                                                                  │
-│  Problems:                                                       │
-│  ✗ Poor recall on ambiguous queries                             │
-│  ✗ No protection against off-topic questions                    │
-│  ✗ Hallucinations pass through unchecked                        │
-│  ✗ No visibility into failures                                  │
-│                                                                  │
-│  ─────────────────────────────────────────────────────────────  │
-│                                                                  │
-│  OUR PIPELINE (Production Level):                               │
-│                                                                  │
-│  ┌─────────────────────────────────────────────────────────┐    │
-│  │ UNDERSTANDING LAYER                                      │    │
-│  │ ├── Query Understanding (intent, entities)               │    │
-│  │ ├── Multi-Query Expansion (variations)                   │    │
-│  │ └── Guardrail Check (off-topic filter)                   │    │
-│  └─────────────────────────────────────────────────────────┘    │
-│                           ↓                                      │
-│  ┌─────────────────────────────────────────────────────────┐    │
-│  │ RETRIEVAL LAYER                                          │    │
-│  │ ├── Embedding (vectorize queries)                        │    │
-│  │ ├── Vector Search (find chunks)                          │    │
-│  │ └── Reranking (LLM-based relevance)                      │    │
-│  └─────────────────────────────────────────────────────────┘    │
-│                           ↓                                      │
-│  ┌─────────────────────────────────────────────────────────┐    │
-│  │ GENERATION LAYER                                         │    │
-│  │ ├── Reasoning (Chain-of-Thought)                         │    │
-│  │ └── Response Generation (with citations)                 │    │
-│  └─────────────────────────────────────────────────────────┘    │
-│                           ↓                                      │
-│  ┌─────────────────────────────────────────────────────────┐    │
-│  │ VERIFICATION LAYER                                       │    │
-│  │ ├── Claim Verification (fact-check)                      │    │
-│  │ ├── Hallucination Check (verify names/IDs)               │    │
-│  │ └── Eval Logging (metrics & debugging)                   │    │
-│  └─────────────────────────────────────────────────────────┘    │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────────┐
+│                    PIPELINE EVOLUTION                             │
+├───────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  BASIC RAG (Tutorial Level):                                      │
+│  Query → Embed → Search → Generate                                │
+│                                                                   │
+│  Problems:                                                        │
+│  ✗ Poor recall on ambiguous queries                               │
+│  ✗ No protection against off-topic questions                      │
+│  ✗ Hallucinations pass through unchecked                          │
+│  ✗ No visibility into failures                                    │
+│                                                                   │
+│  ─────────────────────────────────────────────────────────────    │
+│                                                                   │
+│  OUR PIPELINE (Production Level):                                 │
+│                                                                   │
+│  ┌─────────────────────────────────────────────────────────────┐  │
+│  │ UNDERSTANDING LAYER                                         │  │
+│  │ ├── Query Understanding (intent, entities)                  │  │
+│  │ ├── Multi-Query Expansion (variations)                      │  │
+│  │ └── Guardrail Check (off-topic filter)                      │  │
+│  └─────────────────────────────────────────────────────────────┘  │
+│                            ↓                                      │
+│  ┌─────────────────────────────────────────────────────────────┐  │
+│  │ RETRIEVAL LAYER                                             │  │
+│  │ ├── Embedding (vectorize queries)                           │  │
+│  │ ├── Vector Search (find chunks)                             │  │
+│  │ └── Reranking (LLM-based relevance)                         │  │
+│  └─────────────────────────────────────────────────────────────┘  │
+│                            ↓                                      │
+│  ┌─────────────────────────────────────────────────────────────┐  │
+│  │ GENERATION LAYER                                            │  │
+│  │ ├── Reasoning (Chain-of-Thought)                            │  │
+│  │ └── Response Generation (with citations)                    │  │
+│  └─────────────────────────────────────────────────────────────┘  │
+│                            ↓                                      │
+│  ┌─────────────────────────────────────────────────────────────┐  │
+│  │ VERIFICATION LAYER                                          │  │
+│  │ ├── Claim Verification (fact-check)                         │  │
+│  │ ├── Hallucination Check (verify names/IDs)                  │  │
+│  │ └── Eval Logging (metrics & debugging)                      │  │
+│  └─────────────────────────────────────────────────────────────┘  │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
 ```
 
 ### Service-Oriented Design

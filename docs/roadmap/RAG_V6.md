@@ -3,24 +3,24 @@
 ## Your Current Pipeline vs. Industry Best Practices
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                         TU PIPELINE ACTUAL (v5)                              │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│  1. Understanding ──► 2. Multi-Query ──► 3. Safety ──► 4. Embeddings        │
-│       [LLM]              [LLM]           [REGEX]        [OpenRouter]         │
-│                                            ⚠️                                │
-│                                                                              │
-│  ──► 5. Searching ──► 6. Re-ranking ──► 7. Analyzing ──► 8. Generating      │
-│       [pgvector]        [LLM]             [LLM]           [LLM]              │
-│                          ⚠️                                                  │
-│                                                                              │
-│  ──► 9. Verifying ──► 10. Refining                                          │
-│       [LLM+Regex]        [LLM]                                               │
-│          ⚠️                                                                  │
-│                                                                              │
-│  ⚠️ = Puntos débiles (hardcoded o ineficiente)                              │
-└─────────────────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────┐
+│                        TU PIPELINE ACTUAL (v5)                             │
+├────────────────────────────────────────────────────────────────────────────┤
+│                                                                            │
+│  1. Understanding ──► 2. Multi-Query ──► 3. Safety ──► 4. Embeddings       │
+│       [LLM]              [LLM]           [REGEX]        [OpenRouter]       │
+│                                            ⚠️                              │
+│                                                                            │
+│  ──► 5. Searching ──► 6. Re-ranking ──► 7. Analyzing ──► 8. Generating     │
+│       [pgvector]        [LLM]             [LLM]           [LLM]            │
+│                          ⚠️                                                │
+│                                                                            │
+│  ──► 9. Verifying ──► 10. Refining                                         │
+│       [LLM+Regex]        [LLM]                                             │
+│          ⚠️                                                                │
+│                                                                            │
+│  ⚠️ = Puntos débiles (hardcoded o ineficiente)                             │
+└────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---

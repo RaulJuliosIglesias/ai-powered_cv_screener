@@ -46,49 +46,49 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
 ## Architecture Diagram
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                              USER QUERY                                      │
-└─────────────────────────────────┬───────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────┐
+│                              USER QUERY                                    │
+└────────────────────────────────────┬───────────────────────────────────────┘
+                                     │
+                                     ▼
+┌────────────────────────────────────────────────────────────────────────────┐
+│  STEP 1: QUERY UNDERSTANDING                                               │
+│  ┌──────────────────────────────────────────────────────────────────────┐  │
+│  │ • Model: google/gemini-2.0-flash-001 (fast, cheap)                   │  │
+│  │ • Extracts: query_type, requirements, is_cv_related                  │  │
+│  │ • Reformulates query for better retrieval                            │  │
+│  │ • Output: QueryUnderstanding dataclass                               │  │
+│  └──────────────────────────────────────────────────────────────────────┘  │
+│  Script: query_understanding_service.py                                    │
+└────────────────────────────────────┬───────────────────────────────────────┘
                                   │
                                   ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│  STEP 1: QUERY UNDERSTANDING                                                 │
-│  ┌─────────────────────────────────────────────────────────────────────────┐│
-│  │ • Model: google/gemini-2.0-flash-001 (fast, cheap)                      ││
-│  │ • Extracts: query_type, requirements, is_cv_related                     ││
-│  │ • Reformulates query for better retrieval                               ││
-│  │ • Output: QueryUnderstanding dataclass                                  ││
-│  └─────────────────────────────────────────────────────────────────────────┘│
-│  Script: query_understanding_service.py                                      │
-└─────────────────────────────────┬───────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────┐
+│  STEP 2: GUARDRAIL CHECK                                                   │
+│  ┌──────────────────────────────────────────────────────────────────────┐  │
+│  │ • Keyword matching: CV_KEYWORDS set (100+ terms)                     │  │
+│  │ • Pattern matching: OFF_TOPIC_PATTERNS (recipes, weather, etc.)      │  │
+│  │ • Fast, no LLM call required                                         │  │
+│  │ • Output: GuardrailResult (is_allowed, rejection_message)            │  │
+│  └──────────────────────────────────────────────────────────────────────┘  │
+│  Script: guardrail_service.py                                              │
+│                                                                            │
+│  ❌ REJECTED → Return early with rejection message                         │
+│  ✅ PASSED → Continue to next step                                         │
+└────────────────────────────────────┬───────────────────────────────────────┘
                                   │
                                   ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│  STEP 2: GUARDRAIL CHECK                                                     │
-│  ┌─────────────────────────────────────────────────────────────────────────┐│
-│  │ • Keyword matching: CV_KEYWORDS set (100+ terms)                        ││
-│  │ • Pattern matching: OFF_TOPIC_PATTERNS (recipes, weather, etc.)         ││
-│  │ • Fast, no LLM call required                                            ││
-│  │ • Output: GuardrailResult (is_allowed, rejection_message)               ││
-│  └─────────────────────────────────────────────────────────────────────────┘│
-│  Script: guardrail_service.py                                                │
-│                                                                              │
-│  ❌ REJECTED → Return early with rejection message                          │
-│  ✅ PASSED → Continue to next step                                          │
-└─────────────────────────────────┬───────────────────────────────────────────┘
-                                  │
-                                  ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│  STEP 3: EMBEDDING GENERATION                                                │
-│  ┌─────────────────────────────────────────────────────────────────────────┐│
-│  │ • Model: text-embedding-3-small (1536 dimensions)                       ││
-│  │ • Cache: LRU with TTL (5 min default)                                   ││
-│  │ • Retry: 3 attempts with exponential backoff                            ││
-│  │ • Timeout: 10 seconds                                                   ││
-│  └─────────────────────────────────────────────────────────────────────────┘│
-│  Script: embedding_service.py                                                │
-│  Provider: OpenAI / LocalEmbeddingProvider                                   │
-└─────────────────────────────────┬───────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────┐
+│  STEP 3: EMBEDDING GENERATION                                              │
+│  ┌──────────────────────────────────────────────────────────────────────┐  │
+│  │ • Model: text-embedding-3-small (1536 dimensions)                    │  │
+│  │ • Cache: LRU with TTL (5 min default)                                │  │
+│  │ • Retry: 3 attempts with exponential backoff                         │  │
+│  │ • Timeout: 10 seconds                                                │  │
+│  └──────────────────────────────────────────────────────────────────────┘  │
+│  Script: embedding_service.py                                              │
+│  Provider: OpenAI / LocalEmbeddingProvider                                 │
+└────────────────────────────────────┬───────────────────────────────────────┘
                                   │
                                   ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -176,20 +176,20 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
 └─────────────────────────────────┬───────────────────────────────────────────┘
                                   │
                                   ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                              RAG RESPONSE                                    │
-│  ┌─────────────────────────────────────────────────────────────────────────┐│
-│  │ {                                                                       ││
-│  │   "answer": "Generated response text...",                               ││
-│  │   "sources": [{"cv_id": "cv_xxx", "filename": "John_Doe.pdf"}],         ││
-│  │   "metrics": {"total_ms": 1234, "stages": {...}},                       ││
-│  │   "confidence_score": 0.85,                                             ││
-│  │   "guardrail_passed": true,                                             ││
-│  │   "mode": "cloud",                                                      ││
-│  │   "request_id": "abc123"                                                ││
-│  │ }                                                                       ││
-│  └─────────────────────────────────────────────────────────────────────────┘│
-└─────────────────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────┐
+│                              RAG RESPONSE                                  │
+│  ┌──────────────────────────────────────────────────────────────────────┐  │
+│  │ {                                                                    │  │
+│  │   "answer": "Generated response text...",                            │  │
+│  │   "sources": [{"cv_id": "cv_xxx", "filename": "John_Doe.pdf"}],      │  │
+│  │   "metrics": {"total_ms": 1234, "stages": {...}},                    │  │
+│  │   "confidence_score": 0.85,                                          │  │
+│  │   "guardrail_passed": true,                                          │  │
+│  │   "mode": "cloud",                                                   │  │
+│  │   "request_id": "abc123"                                             │  │
+│  │ }                                                                    │  │
+│  └──────────────────────────────────────────────────────────────────────┘  │
+└────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
