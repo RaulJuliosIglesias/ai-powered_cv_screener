@@ -23,6 +23,7 @@ import { SessionSkeleton, MessageSkeleton } from './components/SkeletonLoader';
 import { MemoizedTable, MemoizedCodeBlock } from './components/MemoizedTable';
 import StreamingMessage from './components/StreamingMessage';
 import SuggestionsPanel from './components/SuggestionsPanel';
+import EmptySessionDropzone from './components/EmptySessionDropzone';
 import { preprocessContent, parseCVFilename } from './utils/contentProcessor';
 import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList, clearSessionCVs, deleteAllCVsFromDatabase, deleteCV, deleteMessage, deleteMessagesFrom, generateSessionName } from './services/api';
 import { getSettings } from './components/modals/SettingsModal';
@@ -301,6 +302,47 @@ function App() {
     
     e.target.value = '';
   };
+
+  // Handle files dropped from EmptySessionDropzone
+  const handleDropzoneFiles = useCallback((files) => {
+    if (!files.length || !currentSessionId) return;
+    
+    const targetSessionId = currentSessionId;
+    const targetSessionName = currentSession?.name || (language === 'es' ? 'Chat actual' : 'Current chat');
+    
+    // Check if this is the first upload (session has no CVs yet)
+    const isFirstUpload = !currentSession?.cvs || currentSession.cvs.length === 0;
+    
+    // Start background upload task
+    startUploadTask({
+      sessionId: targetSessionId,
+      sessionName: targetSessionName,
+      files,
+      mode,
+      language,
+      isFirstUpload,
+      onComplete: async ({ sessionId, filesCount }) => {
+        if (currentSessionIdRef.current === sessionId) {
+          await loadSession(sessionId);
+        }
+        await loadSessions();
+        showToastMessage(
+          language === 'es' 
+            ? `✅ ${filesCount} CV(s) procesados correctamente` 
+            : `✅ ${filesCount} CV(s) processed successfully`,
+          'success'
+        );
+      },
+      onError: (error) => {
+        showToastMessage(
+          language === 'es' 
+            ? `❌ Error al subir CVs: ${error.message}` 
+            : `❌ Error uploading CVs: ${error.message}`,
+          'error'
+        );
+      }
+    });
+  }, [currentSessionId, currentSession, mode, language, startUploadTask, loadSession, loadSessions, showToastMessage]);
 
   const handleSend = async (text) => {
     if (!text.trim() || !currentSessionId || isChatLoading || !currentSession?.cvs?.length) return;
@@ -851,9 +893,26 @@ function App() {
           {!currentSession ? (
             <div className="h-full flex items-center justify-center"><div className="text-center"><Sparkles className="w-12 h-12 text-blue-500 mx-auto mb-4" /><h2 className="text-2xl font-semibold text-slate-800 dark:text-white mb-2">CV Screener</h2><p className="text-slate-500 mb-6">{language === 'es' ? 'Crea un chat y sube CVs' : 'Create a chat and upload CVs'}</p><button onClick={handleNewChat} className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-xl transition-colors">{language === 'es' ? 'Nuevo chat' : 'New chat'}</button></div></div>
           ) : (currentSession.messages?.length === 0 && !pendingMessages[currentSessionId]) ? (
-            <div className="h-full flex flex-col items-center justify-center"><Sparkles className="w-10 h-10 text-blue-500 mb-4" /><h3 className="text-xl font-medium text-slate-800 dark:text-white mb-6">{currentSession.cvs?.length ? (language === 'es' ? '¿Qué quieres saber?' : 'What do you want to know?') : (language === 'es' ? 'Sube CVs para empezar' : 'Upload CVs to start')}</h3>
-              {suggestions.length > 0 && <div className="grid grid-cols-2 gap-3 max-w-2xl">{suggestions.map((s, i) => (<button key={i} onClick={() => handleSend(s)} className="p-4 text-left text-sm bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-colors">{s}</button>))}</div>}
-            </div>
+            currentSession.cvs?.length ? (
+              <div className="h-full flex flex-col items-center justify-center">
+                <Sparkles className="w-10 h-10 text-blue-500 mb-4" />
+                <h3 className="text-xl font-medium text-slate-800 dark:text-white mb-6">
+                  {language === 'es' ? '¿Qué quieres saber?' : 'What do you want to know?'}
+                </h3>
+                {suggestions.length > 0 && (
+                  <div className="grid grid-cols-2 gap-3 max-w-2xl">
+                    {suggestions.map((s, i) => (
+                      <button key={i} onClick={() => handleSend(s)} className="p-4 text-left text-sm bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-colors">{s}</button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <EmptySessionDropzone 
+                onFilesDropped={handleDropzoneFiles}
+                isUploading={isSessionProcessing(currentSessionId)}
+              />
+            )
           ) : (
             <div className="max-w-5xl mx-auto space-y-6">
               {/* Processing Banner - shown when CVs are being uploaded */}

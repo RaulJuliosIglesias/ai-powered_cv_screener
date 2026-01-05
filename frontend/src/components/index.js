@@ -21,3 +21,4 @@ export { default as PipelineProgressPanel } from './PipelineProgressPanel';
 export { default as RAGPipelineSettings } from './RAGPipelineSettings';
 export { default as SourceBadge } from './SourceBadge';
 export { default as UploadZone } from './UploadZone';
+export { default as EmptySessionDropzone } from './EmptySessionDropzone';
