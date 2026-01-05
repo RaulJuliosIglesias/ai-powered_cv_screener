@@ -2,7 +2,7 @@
 
 > **CV Screener AI - Complete RAG Pipeline Reference**
 > 
-> Version: 4.0.0 | Last Updated: January 2026
+> Version: 5.0.0 | Last Updated: January 2026
 
 ---
 
@@ -11,13 +11,14 @@
 1. [System Overview](#system-overview)
 2. [Architecture Diagram](#architecture-diagram)
 3. [Pipeline Stages](#pipeline-stages)
-4. [Core Scripts Reference](#core-scripts-reference)
-5. [Data Flow](#data-flow)
-6. [Configuration](#configuration)
-7. [Providers](#providers)
-8. [Error Handling](#error-handling)
-9. [Caching & Performance](#caching--performance)
-10. [Evaluation & Logging](#evaluation--logging)
+4. [V5 Advanced Features](#v5-advanced-features)
+5. [Core Scripts Reference](#core-scripts-reference)
+6. [Data Flow](#data-flow)
+7. [Configuration](#configuration)
+8. [Providers](#providers)
+9. [Error Handling](#error-handling)
+10. [Caching & Performance](#caching--performance)
+11. [Evaluation & Logging](#evaluation--logging)
 
 ---
 
@@ -30,16 +31,20 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
 | **LOCAL** | In-memory vector store, local embeddings |
 | **CLOUD** | Supabase pgvector, OpenAI embeddings, OpenRouter LLMs |
 
-### Key Features
+### Key Features (V5)
 
-- ✅ **2-Step LLM Architecture**: Fast model for query understanding + powerful model for generation
+- ✅ **Multi-Query Retrieval**: Generate query variations for better recall
+- ✅ **HyDE (Hypothetical Document Embeddings)**: Improved semantic matching
+- ✅ **Reciprocal Rank Fusion (RRF)**: Combine results from multiple queries
+- ✅ **Chain-of-Thought Reasoning**: Structured Self-Ask pattern for complex queries
+- ✅ **Claim-Level Verification**: Verify individual claims against source context
+- ✅ **Iterative Refinement**: Regenerate response if verification fails
 - ✅ **Guardrails**: Pre-LLM filtering to reject off-topic queries
-- ✅ **Hallucination Detection**: Post-LLM verification against context
 - ✅ **Adaptive Retrieval**: Strategy varies based on query type and session size
 - ✅ **LLM-based Reranking**: Re-orders chunks by semantic relevance
 - ✅ **Circuit Breaker**: Prevents cascading failures
 - ✅ **Response Caching**: LRU cache with TTL for embeddings and responses
-- ✅ **Evaluation Logging**: JSONL logs for continuous improvement
+- ✅ **Graceful Degradation**: Auto-disable failing features to maintain service
 
 ---
 
@@ -57,14 +62,26 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
 │  │ • Model: google/gemini-2.0-flash-001 (fast, cheap)                   │  │
 │  │ • Extracts: query_type, requirements, is_cv_related                  │  │
 │  │ • Reformulates query for better retrieval                            │  │
-│  │ • Output: QueryUnderstanding dataclass                               │  │
+│  │ • Output: QueryUnderstandingV5 dataclass                             │  │
 │  └──────────────────────────────────────────────────────────────────────┘  │
 │  Script: query_understanding_service.py                                    │
 └────────────────────────────────────┬───────────────────────────────────────┘
-                                  │
-                                  ▼
+                                     │
+                                     ▼
 ┌────────────────────────────────────────────────────────────────────────────┐
-│  STEP 2: GUARDRAIL CHECK                                                   │
+│  STEP 2: MULTI-QUERY GENERATION (V5 NEW)                                   │
+│  ┌──────────────────────────────────────────────────────────────────────┐  │
+│  │ • Generates 3-5 query variations for broader recall                  │  │
+│  │ • Extracts entities (skills, names, companies)                       │  │
+│  │ • HyDE: Generates hypothetical ideal CV excerpt                      │  │
+│  │ • Output: MultiQueryResult (variations, entities, hyde_document)     │  │
+│  └──────────────────────────────────────────────────────────────────────┘  │
+│  Script: multi_query_service.py                                            │
+└────────────────────────────────────┬───────────────────────────────────────┘
+                                     │
+                                     ▼
+┌────────────────────────────────────────────────────────────────────────────┐
+│  STEP 3: GUARDRAIL CHECK                                                   │
 │  ┌──────────────────────────────────────────────────────────────────────┐  │
 │  │ • Keyword matching: CV_KEYWORDS set (100+ terms)                     │  │
 │  │ • Pattern matching: OFF_TOPIC_PATTERNS (recipes, weather, etc.)      │  │
@@ -76,45 +93,42 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
 │  ❌ REJECTED → Return early with rejection message                         │
 │  ✅ PASSED → Continue to next step                                         │
 └────────────────────────────────────┬───────────────────────────────────────┘
-                                  │
-                                  ▼
+                                     │
+                                     ▼
 ┌────────────────────────────────────────────────────────────────────────────┐
-│  STEP 3: EMBEDDING GENERATION                                              │
+│  STEP 4: MULTI-EMBEDDING (V5 NEW)                                          │
 │  ┌──────────────────────────────────────────────────────────────────────┐  │
 │  │ • Model: text-embedding-3-small (1536 dimensions)                    │  │
+│  │ • Embeds: original query + variations + HyDE document                │  │
 │  │ • Cache: LRU with TTL (5 min default)                                │  │
-│  │ • Retry: 3 attempts with exponential backoff                         │  │
-│  │ • Timeout: 10 seconds                                                │  │
+│  │ • Parallel embedding generation                                      │  │
 │  └──────────────────────────────────────────────────────────────────────┘  │
 │  Script: embedding_service.py                                              │
 │  Provider: OpenAI / LocalEmbeddingProvider                                 │
 └────────────────────────────────────┬───────────────────────────────────────┘
-                                  │
-                                  ▼
+                                     │
+                                     ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  STEP 4: VECTOR SEARCH (Retrieval)                                           │
+│  STEP 5: FUSION RETRIEVAL (V5 NEW)                                          │
 │  ┌─────────────────────────────────────────────────────────────────────────┐│
-│  │ ADAPTIVE STRATEGY based on query_type and session size:                 ││
+│  │ MULTI-QUERY SEARCH:                                                     ││
+│  │ • Search with each embedding (original + variations + HyDE)             ││
+│  │ • k=10 per query variation                                              ││
 │  │                                                                         ││
-│  │ ┌─────────────────────────────────────────────────────────────────────┐ ││
-│  │ │ Query Type      │ Strategy           │ K Value                      │ ││
-│  │ ├─────────────────┼────────────────────┼──────────────────────────────┤ ││
-│  │ │ ranking         │ diversify_by_cv    │ min(num_cvs, 30-100)         │ ││
-│  │ │ comparison      │ diversify_by_cv    │ min(num_cvs, 30-100)         │ ││
-│  │ │ search (small)  │ diversify_by_cv    │ num_cvs                      │ ││
-│  │ │ search (large)  │ top-k precision    │ k (10 default)               │ ││
-│  │ └─────────────────────────────────────────────────────────────────────┘ ││
+│  │ RECIPROCAL RANK FUSION (RRF):                                           ││
+│  │ • Combines ranked lists from all queries                                ││
+│  │ • Formula: RRF(d) = Σ 1/(k + rank(d)) where k=60                        ││
+│  │ • Documents found by multiple queries ranked higher                     ││
 │  │                                                                         ││
-│  │ • Threshold: 0.3 default (lowered for large sessions)                   ││
-│  │ • Filters by session_id and optional cv_ids                             ││
-│  │ • Timeout: 15 seconds                                                   ││
+│  │ • Threshold: 0.25 default (lower for broader recall)                    ││
+│  │ • Timeout: 20 seconds                                                   ││
 │  └─────────────────────────────────────────────────────────────────────────┘│
-│  Script: vector_store.py (Cloud: Supabase pgvector, Local: in-memory)        │
+│  Script: vector_store.py + multi_query_service.py (RRF)                      │
 └─────────────────────────────────┬───────────────────────────────────────────┘
                                   │
                                   ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  STEP 5: RERANKING                                                           │
+│  STEP 6: RERANKING                                                           │
 │  ┌─────────────────────────────────────────────────────────────────────────┐│
 │  │ • Model: google/gemini-2.0-flash-001                                    ││
 │  │ • Scores each chunk 1-10 for relevance to query                         ││
@@ -127,7 +141,27 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
                                   │
                                   ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  STEP 6: RESPONSE GENERATION                                                 │
+│  STEP 7: CHAIN-OF-THOUGHT REASONING (V5 NEW)                                 │
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │ SELF-ASK PATTERN:                                                       ││
+│  │ • Deep query understanding with explicit reasoning                      ││
+│  │ • Comprehensive candidate inventory                                     ││
+│  │ • Systematic evidence gathering per candidate                           ││
+│  │ • Structured comparison and scoring                                     ││
+│  │                                                                         ││
+│  │ OUTPUT FORMAT:                                                          ││
+│  │ • :::thinking block with detailed analysis                              ││
+│  │ • :::answer block with final response                                   ││
+│  │                                                                         ││
+│  │ • Reflection: Can request more context if needed                        ││
+│  │ • Timeout: 120 seconds                                                  ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+│  Script: reasoning_service.py                                                │
+└─────────────────────────────────┬───────────────────────────────────────────┘
+                                  │
+                                  ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  STEP 8: RESPONSE GENERATION                                                 │
 │  ┌─────────────────────────────────────────────────────────────────────────┐│
 │  │ PROMPT CONSTRUCTION (templates.py):                                     ││
 │  │ ┌─────────────────────────────────────────────────────────────────────┐ ││
@@ -136,11 +170,13 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
 │  │ │ QUERY_TEMPLATE / COMPARISON_TEMPLATE / RANKING_TEMPLATE             │ ││
 │  │ │    +                                                                │ ││
 │  │ │ Formatted context (chunks with CV IDs and metadata)                 │ ││
+│  │ │    +                                                                │ ││
+│  │ │ Reasoning trace (from Step 7)                                       │ ││
 │  │ └─────────────────────────────────────────────────────────────────────┘ ││
 │  │                                                                         ││
-│  │ • Models: gemini-1.5-flash, gemini-1.5-pro, gpt-4o, claude-3           ││
+│  │ • Models: gemini-2.0-flash, gemini-1.5-pro, gpt-4o, claude-3           ││
 │  │ • Temperature: 0.1 (for accuracy)                                       ││
-│  │ • Max tokens: 2048-4096                                                 ││
+│  │ • Max tokens: 4096-8192                                                 ││
 │  │ • Timeout: 120 seconds                                                  ││
 │  └─────────────────────────────────────────────────────────────────────────┘│
 │  Script: llm.py (OpenRouterLLMProvider)                                      │
@@ -149,26 +185,46 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
                                   │
                                   ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  STEP 7: VERIFICATION & HALLUCINATION CHECK                                  │
+│  STEP 9: CLAIM-LEVEL VERIFICATION (V5 NEW)                                   │
 │  ┌─────────────────────────────────────────────────────────────────────────┐│
-│  │ 7a. LLM VERIFICATION (verification_service.py)                          ││
-│  │     • Uses LLM to check if response is grounded in context              ││
-│  │     • Returns: groundedness_score, verified_claims, ungrounded_claims   ││
+│  │ CLAIM EXTRACTION:                                                       ││
+│  │ • Extract individual factual claims from response                       ││
+│  │ • Each claim is a verifiable statement                                  ││
 │  │                                                                         ││
-│  │ 7b. HEURISTIC HALLUCINATION CHECK (hallucination_service.py)            ││
-│  │     • Regex-based verification (no LLM call)                            ││
-│  │     • Checks: CV IDs match context, names exist in CVs                  ││
-│  │     • Returns: confidence_score, verified_cv_ids, warnings              ││
+│  │ CLAIM VERIFICATION:                                                     ││
+│  │ • Check each claim against source context chunks                        ││
+│  │ • Classify as: VERIFIED, UNVERIFIED, or CONTRADICTED                    ││
+│  │                                                                         ││
+│  │ OUTPUT:                                                                 ││
+│  │ • overall_score: ratio of verified claims                               ││
+│  │ • needs_regeneration: true if too many unverified claims                ││
+│  │ • Min verified ratio: 0.7 (configurable)                                ││
 │  └─────────────────────────────────────────────────────────────────────────┘│
-│  If not grounded: Adds warning "⚠️ Some information could not be verified" │
+│  Script: claim_verifier_service.py                                           │
 └─────────────────────────────────┬───────────────────────────────────────────┘
                                   │
                                   ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  STEP 8: EVALUATION LOGGING                                                  │
+│  STEP 10: ITERATIVE REFINEMENT (V5 NEW)                                      │
+│  ┌─────────────────────────────────────────────────────────────────────────┐│
+│  │ IF needs_regeneration == true:                                          ││
+│  │   • Regenerate response with feedback about unverified claims           ││
+│  │   • Include list of contradicted claims to avoid                        ││
+│  │   • Max 1 refinement iteration to prevent loops                         ││
+│  │                                                                         ││
+│  │ ELSE:                                                                   ││
+│  │   • Pass through to final response                                      ││
+│  └─────────────────────────────────────────────────────────────────────────┘│
+│  Script: rag_service_v5.py (_step_refinement)                                │
+└─────────────────────────────────┬───────────────────────────────────────────┘
+                                  │
+                                  ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  STEP 11: EVALUATION LOGGING                                                 │
 │  ┌─────────────────────────────────────────────────────────────────────────┐│
 │  │ • Logs to: eval_logs/queries_YYYYMMDD.jsonl                             ││
-│  │ • Fields: query, response, sources, metrics, hallucination_check        ││
+│  │ • Fields: query, response, sources, metrics, claim_verification         ││
+│  │ • Tracks: verified/unverified/contradicted claims                       ││
 │  │ • Daily stats aggregation                                               ││
 │  │ • Low confidence tracking (threshold: 0.5)                              ││
 │  └─────────────────────────────────────────────────────────────────────────┘│
@@ -177,7 +233,7 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
                                   │
                                   ▼
 ┌────────────────────────────────────────────────────────────────────────────┐
-│                              RAG RESPONSE                                  │
+│                              RAG RESPONSE V5                               │
 │  ┌──────────────────────────────────────────────────────────────────────┐  │
 │  │ {                                                                    │  │
 │  │   "answer": "Generated response text...",                            │  │
@@ -185,6 +241,12 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
 │  │   "metrics": {"total_ms": 1234, "stages": {...}},                    │  │
 │  │   "confidence_score": 0.85,                                          │  │
 │  │   "guardrail_passed": true,                                          │  │
+│  │   "verification": {                                                  │  │
+│  │     "verified_claims": [...],                                        │  │
+│  │     "unverified_claims": [...],                                      │  │
+│  │     "claim_verification_score": 0.92                                 │  │
+│  │   },                                                                 │  │
+│  │   "reasoning_trace": "...",                                          │  │
 │  │   "mode": "cloud",                                                   │  │
 │  │   "request_id": "abc123"                                             │  │
 │  │ }                                                                    │  │
@@ -196,18 +258,21 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
 
 ## Pipeline Stages
 
-### Stage Enum Definition
+### Stage Enum Definition (V5)
 
 ```python
 class PipelineStage(Enum):
     QUERY_UNDERSTANDING = auto()  # Step 1
-    GUARDRAIL = auto()            # Step 2
-    EMBEDDING = auto()            # Step 3
-    SEARCH = auto()               # Step 4
-    RERANKING = auto()            # Step 5
-    GENERATION = auto()           # Step 6
-    VERIFICATION = auto()         # Step 7a
-    HALLUCINATION_CHECK = auto()  # Step 7b
+    MULTI_QUERY = auto()          # Step 2 (V5 NEW)
+    GUARDRAIL = auto()            # Step 3
+    EMBEDDING = auto()            # Step 4
+    SEARCH = auto()               # Step 5 (Fusion Retrieval)
+    RERANKING = auto()            # Step 6
+    REASONING = auto()            # Step 7 (V5 NEW)
+    GENERATION = auto()           # Step 8
+    VERIFICATION = auto()         # Step 9 (Legacy)
+    CLAIM_VERIFICATION = auto()   # Step 9 (V5 NEW)
+    REFINEMENT = auto()           # Step 10 (V5 NEW)
 ```
 
 ### Stage Metrics
@@ -216,7 +281,120 @@ Each stage tracks:
 - `duration_ms`: Execution time
 - `success`: Boolean status
 - `error`: Error message if failed
-- `metadata`: Stage-specific data
+- `metadata`: Stage-specific data (tokens, costs, etc.)
+
+---
+
+## V5 Advanced Features
+
+### Multi-Query Retrieval
+
+Generates multiple query variations to improve recall:
+
+```python
+@dataclass
+class MultiQueryResult:
+    original_query: str
+    variations: List[str]      # 3-5 query variations
+    hyde_document: str | None  # Hypothetical ideal CV excerpt
+    entities: Dict[str, List[str]]  # Extracted entities
+```
+
+**Benefits:**
+- Catches documents that match different phrasings
+- Entities enable hybrid keyword search
+- HyDE improves semantic matching for abstract queries
+
+### HyDE (Hypothetical Document Embeddings)
+
+Instead of just embedding the query, generates a hypothetical ideal answer:
+
+```
+Query: "Who has Python experience?"
+
+HyDE Document: "Senior Software Engineer with 5+ years of Python 
+development experience. Expert in Django, FastAPI, and data science 
+libraries including pandas, numpy, and scikit-learn..."
+```
+
+The HyDE embedding often matches relevant documents better than the raw query.
+
+### Reciprocal Rank Fusion (RRF)
+
+Combines results from multiple query embeddings:
+
+```python
+def reciprocal_rank_fusion(ranked_lists: List[List[str]], k: int = 60):
+    """
+    RRF Score = Σ 1/(k + rank(d))
+    
+    Documents found by multiple queries get higher scores.
+    k=60 is the standard smoothing constant.
+    """
+```
+
+### Chain-of-Thought Reasoning
+
+Structured Self-Ask pattern for complex queries:
+
+```
+:::thinking
+
+### STEP 1: DEEP QUERY UNDERSTANDING
+- What is the user's main objective?
+- What are explicit vs implicit requirements?
+
+### STEP 2: COMPREHENSIVE CANDIDATE INVENTORY
+- List all candidates with initial relevance assessment
+
+### STEP 3: DETAILED EVIDENCE GATHERING
+- For each relevant candidate, extract specific evidence
+
+### STEP 4: COMPARATIVE ANALYSIS
+- Score candidates against criteria
+- Identify gaps and strengths
+
+:::
+
+:::answer
+[Final structured response based on reasoning]
+:::
+```
+
+### Claim-Level Verification
+
+Verifies individual claims rather than the whole response:
+
+```python
+@dataclass
+class ClaimVerificationResult:
+    total_claims: int
+    verified_claims: List[VerifiedClaim]    # Found in context
+    unverified_claims: List[Claim]          # Not found
+    contradicted_claims: List[Claim]        # Conflicts with context
+    overall_score: float                    # verified / total
+    needs_regeneration: bool                # If score < 0.7
+```
+
+### Iterative Refinement
+
+If too many claims are unverified:
+1. Identifies problematic claims
+2. Regenerates response with explicit instructions to avoid those claims
+3. Maximum 1 refinement iteration to prevent loops
+
+### Graceful Degradation
+
+Features auto-disable on repeated failures:
+
+```python
+from app.utils.error_handling import degradation
+
+# If multi-query times out, disable for this request
+if timeout_error:
+    degradation.disable_feature('multi_query', 'Timeout')
+    # Pipeline continues without multi-query
+```
 
 ---
 
@@ -226,23 +404,24 @@ Each stage tracks:
 
 | Script | Class | Description |
 |--------|-------|-------------|
-| `rag_service_v3.py` | `RAGServiceV4` | Main orchestrator. Executes pipeline, manages caching, circuit breakers, retry logic. |
-| `rag_service_langchain.py` | `LangChainRAGService` | Alternative orchestrator using LangChain LCEL components. |
+| `rag_service_v5.py` | `RAGServiceV5` | **Main orchestrator (V5)**. Multi-query, reasoning, claim verification, iterative refinement. |
 | `factory.py` | `ProviderFactory` | Factory pattern for provider instantiation based on mode. |
 
 ### 📁 Pipeline Steps (in order)
 
 | # | Script | Class | Input → Output |
 |---|--------|-------|----------------|
-| 1 | `query_understanding_service.py` | `QueryUnderstandingService` | `str` → `QueryUnderstanding` |
-| 2 | `guardrail_service.py` | `GuardrailService` | `str` → `GuardrailResult` |
-| 3 | `embedding_service.py` | `EmbeddingService` | `str` → `List[float]` |
-| 4 | `vector_store.py` | `SupabaseVectorStore` / `SimpleVectorStore` | `List[float]` → `List[SearchResult]` |
-| 5 | `reranking_service.py` | `RerankingService` | `List[SearchResult]` → `RerankResult` |
-| 6 | `llm.py` | `OpenRouterLLMProvider` | `prompt: str` → `str` |
-| 7a | `verification_service.py` | `LLMVerificationService` | `response + context` → `VerificationResult` |
-| 7b | `hallucination_service.py` | `HallucinationService` | `response + context` → `HallucinationCheckResult` |
-| 8 | `eval_service.py` | `EvalService` | Logs query/response to JSONL |
+| 1 | `query_understanding_service.py` | `QueryUnderstandingService` | `str` → `QueryUnderstandingV5` |
+| 2 | `multi_query_service.py` | `MultiQueryService` | `str` → `MultiQueryResult` **(V5 NEW)** |
+| 3 | `guardrail_service.py` | `GuardrailService` | `str` → `GuardrailResult` |
+| 4 | `embedding_service.py` | `EmbeddingService` | `List[str]` → `Dict[str, List[float]]` |
+| 5 | `vector_store.py` | `SupabaseVectorStore` / `SimpleVectorStore` | `List[float]` → `List[SearchResult]` |
+| 6 | `reranking_service.py` | `RerankingService` | `List[SearchResult]` → `RerankResult` |
+| 7 | `reasoning_service.py` | `ReasoningService` | `query + context` → `ReasoningResult` **(V5 NEW)** |
+| 8 | `llm.py` | `OpenRouterLLMProvider` | `prompt: str` → `str` |
+| 9 | `claim_verifier_service.py` | `ClaimVerifierService` | `response + context` → `ClaimVerificationResult` **(V5 NEW)** |
+| 10 | `hallucination_service.py` | `HallucinationService` | `response + context` → `HallucinationCheckResult` |
+| 11 | `eval_service.py` | `EvalService` | Logs query/response to JSONL |
 
 ### 📁 Support Layer
 
@@ -251,7 +430,19 @@ Each stage tracks:
 | `templates.py` | `PromptBuilder` | All prompt templates and builder methods |
 | `chunking_service.py` | `ChunkingService` | CV text → semantic sections |
 | `pdf_service.py` | `PDFService` | PDF → text extraction |
+| `confidence_calculator.py` | `ConfidenceCalculator` | Calculate confidence scores |
+| `cost_tracker.py` | `CostTracker` | Track OpenRouter API costs |
 | `base.py` | `EmbeddingProvider`, `VectorStoreProvider`, `LLMProvider` | Abstract interfaces |
+
+### 📁 Output Processing (V5)
+
+| Script | Class | Description |
+|--------|-------|-------------|
+| `output_processor/orchestrator.py` | `OutputOrchestrator` | Coordinates output modules |
+| `output_processor/modules/thinking_module.py` | `ThinkingModule` | Extracts :::thinking blocks |
+| `output_processor/modules/analysis_module.py` | `AnalysisModule` | Processes analysis sections |
+| `output_processor/modules/table_module.py` | `TableModule` | Formats comparison tables |
+| `output_processor/modules/conclusion_module.py` | `ConclusionModule` | Extracts final conclusions |
 
 ---
 
@@ -328,35 +519,46 @@ User Question: "Who has Python experience?"
 
 ## Configuration
 
-### RAGConfig Dataclass
+### RAGConfigV5 Dataclass
 
 ```python
 @dataclass
-class RAGConfig:
+class RAGConfigV5:
     mode: Mode = Mode.LOCAL
     
     # Model configuration
     understanding_model: str | None = None      # Default: gemini-2.0-flash-001
     reranking_model: str | None = None          # Default: gemini-2.0-flash-001
-    generation_model: str | None = None         # Default: gemini-1.5-flash
+    generation_model: str | None = None         # Default: gemini-2.0-flash
+    reasoning_model: str | None = None          # Default: same as generation
     verification_model: str | None = None       # Default: gemini-2.0-flash-001
     
-    # Feature flags
+    # V5 Feature flags (NEW)
+    multi_query_enabled: bool = True            # Generate query variations
+    hyde_enabled: bool = True                   # Hypothetical document embeddings
+    reasoning_enabled: bool = True              # Chain-of-Thought reasoning
+    reflection_enabled: bool = True             # Self-reflection in reasoning
+    claim_verification_enabled: bool = True     # Claim-level verification
+    iterative_refinement_enabled: bool = True   # Regenerate if verification fails
+    
+    # Legacy feature flags
     reranking_enabled: bool = True
     verification_enabled: bool = True
     streaming_enabled: bool = False
     parallel_steps_enabled: bool = True
     
     # Retrieval settings
-    default_k: int = 10
-    default_threshold: float = 0.3
+    default_k: int = 15                         # Increased for multi-query fusion
+    default_threshold: float = 0.25             # Lower for broader recall
     max_context_tokens: int = 60000
+    multi_query_k: int = 10                     # k per query variation
     
     # Timeouts (seconds)
     embedding_timeout: float = 10.0
-    search_timeout: float = 15.0
+    search_timeout: float = 20.0                # Increased for multi-query
     llm_timeout: float = 120.0
-    total_timeout: float = 180.0
+    reasoning_timeout: float = 120.0            # For Chain-of-Thought
+    total_timeout: float = 240.0                # Increased for multi-step
 ```
 
 ### Environment Variables
@@ -616,9 +818,11 @@ backend/
 │   │   └── dependencies.py        # FastAPI dependencies
 │   │
 │   ├── services/
-│   │   ├── rag_service_v3.py      # Main RAG orchestrator (RAGServiceV4)
-│   │   ├── rag_service_langchain.py # LangChain alternative
+│   │   ├── rag_service_v5.py      # Main RAG orchestrator (V5) ⭐
 │   │   ├── query_understanding_service.py
+│   │   ├── multi_query_service.py # Query variations + HyDE (V5) ⭐
+│   │   ├── reasoning_service.py   # Chain-of-Thought (V5) ⭐
+│   │   ├── claim_verifier_service.py # Claim verification (V5) ⭐
 │   │   ├── guardrail_service.py
 │   │   ├── embedding_service.py
 │   │   ├── reranking_service.py
@@ -626,7 +830,19 @@ backend/
 │   │   ├── hallucination_service.py
 │   │   ├── chunking_service.py
 │   │   ├── pdf_service.py
-│   │   └── eval_service.py
+│   │   ├── confidence_calculator.py
+│   │   ├── cost_tracker.py
+│   │   ├── eval_service.py
+│   │   └── output_processor/      # Output processing (V5) ⭐
+│   │       ├── orchestrator.py
+│   │       ├── processor.py
+│   │       ├── validators.py
+│   │       └── modules/
+│   │           ├── thinking_module.py
+│   │           ├── analysis_module.py
+│   │           ├── table_module.py
+│   │           ├── conclusion_module.py
+│   │           └── direct_answer_module.py
 │   │
 │   ├── providers/
 │   │   ├── base.py                # Abstract interfaces
@@ -648,6 +864,10 @@ backend/
 │   │   ├── schemas.py             # Pydantic models
 │   │   └── sessions.py            # Session management
 │   │
+│   ├── utils/
+│   │   ├── error_handling.py      # Graceful degradation (V5) ⭐
+│   │   └── text_utils.py          # Text processing utilities
+│   │
 │   ├── config.py                  # Settings and configuration
 │   └── main.py                    # FastAPI app entry point
 │
@@ -660,24 +880,15 @@ backend/
 
 ## Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 4.0.0 | Jan 2026 | RAGServiceV4 with circuit breaker, LRU cache, pipeline metrics |
-| 3.0.0 | Dec 2025 | 2-step LLM, QueryUnderstanding, Reranking |
-| 2.0.0 | Nov 2025 | Guardrails, Hallucination detection |
-| 1.0.0 | Oct 2025 | Initial RAG pipeline |
+| Version | Date | Commit | Changes |
+|---------|------|--------|---------|
+| **6.0.0** | **Upcoming** | - | HuggingFace NLI verification, Zero-shot classification, RAGAS evaluation framework ([Roadmap](./roadmap/RAG_V6.md)) |
+| **5.0.0** | **2026-01-03 21:38** | `b63a069` | **Current**: Multi-Query, HyDE, RRF, Chain-of-Thought Reasoning, Claim Verification, Iterative Refinement, Graceful Degradation |
+| 4.0.0 | 2026-01-03 18:33 | `e785e61` | 4-step pipeline with Re-ranking and LLM Verification, circuit breaker, combined confidence scoring |
+| 3.0.0 | 2026-01-03 15:02 | `2870a05` | RAGServiceV3 with confidence scoring, guardrails, 2-step LLM with QueryUnderstanding |
+| 2.0.0 | 2026-01-02 17:15 | `dea6b07` | OpenRouter unified LLM provider, session-based chat architecture |
+| 1.0.0 | 2026-01-02 13:42 | `27ec7d7` | Initial RAG pipeline with dual-mode architecture (local/cloud) |
 
 ---
 
-## Backward Compatibility
-
-```python
-# In rag_service_v3.py
-RAGServiceV3 = RAGServiceV4  # Alias for backward compatibility
-```
-
-Routes and other modules importing `RAGServiceV3` will automatically use the latest `RAGServiceV4` implementation.
-
----
-
-> **Note**: This document reflects the current state of the RAG system as of January 2026. For updates, refer to the source code and CHANGELOG.
+> **Note**: This project was started on **January 2, 2026**. This document reflects the current state of the RAG system (V5). For future improvements, see the [roadmap documentation](./roadmap/).
