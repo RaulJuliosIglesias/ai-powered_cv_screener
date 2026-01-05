@@ -1,63 +1,63 @@
 # 📚 Documentation
 
-> Documentación completa del proyecto **AI-Powered CV Screener**
+> Complete documentation for the **AI-Powered CV Screener** project.
 
 ---
 
-## 📁 Estructura
+## 📁 Structure
 
 ```
 docs/
 ├── README.md                 ← You are here
-├── INSTRUCTIONS.md           ← Guía completa de configuración y uso
-├── RAG_WORKFLOW.md           ← Arquitectura del pipeline RAG
-├── evaluation/               ← Criterios de evaluación del proyecto
-├── roadmap/                  ← Planes y mejoras futuras
-└── archive/                  ← Documentación histórica
+├── INSTRUCTIONS.md           ← Complete setup and usage guide
+├── RAG_WORKFLOW.md           ← RAG pipeline architecture
+├── evaluation/               ← Project evaluation criteria
+├── roadmap/                  ← Future plans and improvements
+└── archive/                  ← Historical documentation
 ```
 
 ---
 
-## 📄 Documentos Principales
+## 📄 Main Documents
 
-| Documento | Descripción |
-|-----------|-------------|
-| [INSTRUCTIONS.md](./INSTRUCTIONS.md) | Guía completa de instalación, configuración y uso del proyecto |
-| [RAG_WORKFLOW.md](./RAG_WORKFLOW.md) | Documentación técnica del pipeline RAG, embeddings y flujo de datos |
+| Document | Description |
+|----------|-------------|
+| [INSTRUCTIONS.md](./INSTRUCTIONS.md) | Complete installation, configuration, and usage guide |
+| [RAG_WORKFLOW.md](./RAG_WORKFLOW.md) | Technical documentation of RAG pipeline, embeddings, and data flow |
 
 ---
 
-## 📂 Carpetas
+## 📂 Folders
 
 ### [📋 evaluation/](./evaluation/)
-Documentación que demuestra cómo el proyecto cumple con criterios de evaluación profesional:
-- **Execution & Functionality** - Demostración de funcionalidades
-- **Thought Process** - Decisiones de arquitectura
-- **Code Quality** - Estándares de código
-- **Creativity & Ingenuity** - Soluciones innovadoras
-- **AI Literacy** - Conocimiento de herramientas AI
-- **Learn & Adapt** - Capacidad de aprendizaje
+Documentation demonstrating how the project meets professional evaluation criteria:
+- **Execution & Functionality** - Working features demonstration
+- **Thought Process** - Architecture decisions
+- **Code Quality** - Code standards and patterns
+- **Creativity & Ingenuity** - Innovative solutions
+- **AI Literacy** - AI tools and industry knowledge
+- **Learn & Adapt** - Learning and growth capability
 
 ### [🚀 roadmap/](./roadmap/)
-Planes de desarrollo futuro y mejoras planificadas:
-- **RAG V6** - Mejoras del pipeline con HuggingFace NLI
-- **Confidence** - Sistema de calibración de confianza
-- **Advanced Evaluation** - Métricas avanzadas
-- **Security Improvements** - Mejoras de seguridad
+Future development plans and planned improvements:
+- **RAG V6** - Pipeline improvements with HuggingFace NLI
+- **Confidence** - Confidence calibration system
+- **Advanced Evaluation** - Advanced metrics
+- **Security Improvements** - Security hardening
 
 ### [📦 archive/](./archive/)
-Documentación histórica de planes ya implementados. Útil para entender la evolución del proyecto.
+Historical documentation of already implemented plans. Useful for understanding project evolution.
 
 ---
 
-## 🔗 Documentación Relacionada
+## 🔗 Related Documentation
 
-| Documento | Ubicación | Descripción |
-|-----------|-----------|-------------|
-| [Main README](../README.md) | Raíz del proyecto | Quick start y overview |
-| [ARCHITECTURE.md](../ARCHITECTURE.md) | Raíz del proyecto | Arquitectura técnica detallada |
-| [MODES_EXPLANATION.md](../MODES_EXPLANATION.md) | Raíz del proyecto | Explicación de modos Local vs Cloud |
-| [SECURITY.md](../SECURITY.md) | Raíz del proyecto | Consideraciones de seguridad |
+| Document | Location | Description |
+|----------|----------|-------------|
+| [Main README](../README.md) | Project root | Quick start and overview |
+| [ARCHITECTURE.md](../ARCHITECTURE.md) | Project root | Detailed technical architecture |
+| [MODES_EXPLANATION.md](../MODES_EXPLANATION.md) | Project root | Local vs Cloud mode explanation |
+| [SECURITY.md](../SECURITY.md) | Project root | Security considerations |
 
 ---
 
