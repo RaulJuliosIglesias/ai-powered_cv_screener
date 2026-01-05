@@ -11336,10 +11336,271 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-05T13:12:41.396908"
+        },
+        {
+          "id": "b33d0d26-57e1-4671-bfa1-1680d1428c08",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a comparison of the highest completed education levels of all candidates, including their majors. I need to scan all CVs for education sections and extract the highest degree obtained and the field of study. I will then present this information in a table.\n:::\n\nThe following candidates have education information in their CVs, and their highest degrees and majors are presented below. ### Analysis\nI reviewed all the provided CVs and extracted the education information. I included all candidates with education sections and their highest degree and major.\n\n### Analysis\n\nI reviewed all the provided CVs and extracted the education information. I included all candidates with education sections and their highest degree and major.\n\n| Candidate | Highest Degree | Major/Field of Study | Match Score |\n|---|---|---|---|\n| Adewale Ogunleye | Master of Nursing Science (MNS) | Nursing Science | 60% |\n| Margaret OConnor | Master of Arts | Interactive Entertainment | 60% |\n| Margaret OConnor | Master of Arts | Interactive Entertainment | 60% |\n| Isabel Mendoza | MSc | Artificial Intelligence | 60% |\n| Mei-Ling Chen | MSc | Marketing Communications | 60% |\n| Aisha Müller | Master of Arts | Film Production | 60% |\n| Rajiv Patel | MSc | Accounting | 60% |\n| Priya Kapoor | PhD | Computer Science | 60% |\n| Priya Kapoor | PhD | Computer Science | 60% |\n| Kamal Al-Mansoor | Master of Arts | Human Resources Management | 60% |\n| Ling Zhang |  |  | 20% |\n| Ling Zhang |  |  | 20% |\n| Aisha Johnson |  |  | 20% |\n\n:::conclusion\nThe candidates listed above have education information in their CVs. The table provides a comparison of their highest degrees and majors.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_fe4831ee",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_aafbc954",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_9fb0f971",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_05ddacb3",
+              "filename": "6b0a7d7d__Isabel_Mendoza__Pastry_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_1dc0ef87",
+              "filename": "388c469f__Rajiv_Patel__Editorial_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_5463ea64",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_b9dd75c5",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_3b11c6a9",
+              "filename": "bd3c4450__Mateo_Fernandez__Music_Producer.pdf"
+            },
+            {
+              "cv_id": "cv_3a4418da",
+              "filename": "a73ca65c__Isabel_Mendoza__Director_of_AI.pdf"
+            },
+            {
+              "cv_id": "cv_78b206ff",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_fd34aa62",
+              "filename": "c4257bdc__Aisha_Müller__Producer.pdf"
+            },
+            {
+              "cv_id": "cv_3ce7327e",
+              "filename": "a9d37405__Rajiv_Patel__Audit_Associate.pdf"
+            },
+            {
+              "cv_id": "cv_7e516bc6",
+              "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_ef75350d",
+              "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_f9769647",
+              "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf"
+            },
+            {
+              "cv_id": "cv_e72557d8",
+              "filename": "68148332__Kamal_Al-Mansoor__HR_Business_Partner.pdf"
+            },
+            {
+              "cv_id": "cv_5f249eef",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_8a369e60",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_16ce0b4c",
+              "filename": "73be0a6e__Aisha_Johnson__Solidity_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_66173b63",
+              "filename": "a6b7570f__Daniel_Müller__Editor.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 21603.92,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 29.66,
+              "details": "Found 23 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 17894.6,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4348.39,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "The following candidates have education information in their CVs, and their highest degrees and majors are presented below. ### Analysis\nI reviewed all the provided CVs and extracted the education information. I included all candidates with education sections and their highest degree and major.",
+            "raw_content": ":::thinking\nThe user is asking for a comparison of the highest completed education levels of all candidates, including their majors. I need to scan all CVs for education sections and extract the highest degree obtained and the field of study. I will then present this information in a table.\n:::\n\nThe following candidates have education information in their CVs, and their highest degrees and majors are presented below.\n\n### Analysis\n\nI reviewed all the provided CVs and extracted the education information. I included all candidates with education sections and their highest degree and major.\n\n| Candidate | Highest Degree | Major/Field of Study | Match |\n|---|---|---|---|\n| **[Adewale Ogunleye](cv:cv_9fb0f971)** | Master of Nursing Science (MNS) | Nursing Science | ⭐⭐⭐ |\n| **[Margaret OConnor](cv:cv_5463ea64)** | Master of Arts | Interactive Entertainment | ⭐⭐⭐ |\n| **[Margaret OConnor](cv:cv_b9dd75c5)** | Master of Arts | Interactive Entertainment | ⭐⭐⭐ |\n| **[Isabel Mendoza](cv:cv_3a4418da)** | MSc | Artificial Intelligence | ⭐⭐⭐ |\n| **[Mei-Ling Chen](cv:cv_78b206ff)** | MSc | Marketing Communications | ⭐⭐⭐ |\n| **[Aisha Müller](cv:cv_fd34aa62)** | Master of Arts | Film Production | ⭐⭐⭐ |\n| **[Rajiv Patel](cv:cv_3ce7327e)** | MSc | Accounting | ⭐⭐⭐ |\n| **[Priya Kapoor](cv:cv_7e516bc6)** | PhD | Computer Science | ⭐⭐⭐ |\n| **[Priya Kapoor](cv:cv_ef75350d)** | PhD | Computer Science | ⭐⭐⭐ |\n| **[Kamal Al-Mansoor](cv:cv_e72557d8)** | Master of Arts | Human Resources Management | ⭐⭐⭐ |\n| **[Ling Zhang](cv:cv_5f249eef)** |  |  | ⭐ |\n| **[Ling Zhang](cv:cv_8a369e60)** |  |  | ⭐ |\n| **[Aisha Johnson](cv:cv_16ce0b4c)** |  |  | ⭐ |\n\n:::conclusion\nThe candidates listed above have education information in their CVs. The table provides a comparison of their highest degrees and majors.",
+            "thinking": "The user is asking for a comparison of the highest completed education levels of all candidates, including their majors. I need to scan all CVs for education sections and extract the highest degree obtained and the field of study. I will then present this information in a table.",
+            "analysis": "I reviewed all the provided CVs and extracted the education information. I included all candidates with education sections and their highest degree and major.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Highest Degree",
+                "Major/Field of Study",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Adewale Ogunleye",
+                  "cv_id": "cv_9fb0f971",
+                  "columns": {
+                    "Highest Degree": "Master of Nursing Science (MNS)",
+                    "Major/Field of Study": "Nursing Science"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Margaret OConnor",
+                  "cv_id": "cv_5463ea64",
+                  "columns": {
+                    "Highest Degree": "Master of Arts",
+                    "Major/Field of Study": "Interactive Entertainment"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Margaret OConnor",
+                  "cv_id": "cv_b9dd75c5",
+                  "columns": {
+                    "Highest Degree": "Master of Arts",
+                    "Major/Field of Study": "Interactive Entertainment"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Isabel Mendoza",
+                  "cv_id": "cv_3a4418da",
+                  "columns": {
+                    "Highest Degree": "MSc",
+                    "Major/Field of Study": "Artificial Intelligence"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Mei-Ling Chen",
+                  "cv_id": "cv_78b206ff",
+                  "columns": {
+                    "Highest Degree": "MSc",
+                    "Major/Field of Study": "Marketing Communications"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Aisha Müller",
+                  "cv_id": "cv_fd34aa62",
+                  "columns": {
+                    "Highest Degree": "Master of Arts",
+                    "Major/Field of Study": "Film Production"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Rajiv Patel",
+                  "cv_id": "cv_3ce7327e",
+                  "columns": {
+                    "Highest Degree": "MSc",
+                    "Major/Field of Study": "Accounting"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Priya Kapoor",
+                  "cv_id": "cv_7e516bc6",
+                  "columns": {
+                    "Highest Degree": "PhD",
+                    "Major/Field of Study": "Computer Science"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Priya Kapoor",
+                  "cv_id": "cv_ef75350d",
+                  "columns": {
+                    "Highest Degree": "PhD",
+                    "Major/Field of Study": "Computer Science"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Kamal Al-Mansoor",
+                  "cv_id": "cv_e72557d8",
+                  "columns": {
+                    "Highest Degree": "Master of Arts",
+                    "Major/Field of Study": "Human Resources Management"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Ling Zhang",
+                  "cv_id": "cv_5f249eef",
+                  "columns": {
+                    "Highest Degree": "",
+                    "Major/Field of Study": ""
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Ling Zhang",
+                  "cv_id": "cv_8a369e60",
+                  "columns": {
+                    "Highest Degree": "",
+                    "Major/Field of Study": ""
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Aisha Johnson",
+                  "cv_id": "cv_16ce0b4c",
+                  "columns": {
+                    "Highest Degree": "",
+                    "Major/Field of Study": ""
+                  },
+                  "match_score": 20
+                }
+              ]
+            },
+            "conclusion": "The candidates listed above have education information in their CVs. The table provides a comparison of their highest degrees and majors.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T13:14:21.768156"
+        },
+        {
+          "id": "494874f5-c669-4c9b-949d-133d31aea20d",
+          "role": "user",
+          "content": "Who has startup experience?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T13:45:49.794087"
         }
       ],
       "created_at": "2026-01-05T02:15:22.786546",
-      "updated_at": "2026-01-05T13:12:41.396908"
+      "updated_at": "2026-01-05T13:45:49.794087"
     },
     {
       "id": "71cfaf4d-4258-40d8-98f7-e7c9d1a9bfd0",
@@ -12590,10 +12851,19 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-05T12:16:13.249311"
+        },
+        {
+          "id": "e759f7dc-e243-44b1-9cf7-04c9126b5329",
+          "role": "user",
+          "content": "Create a top 3 shortlist from 21 candidates",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T13:46:03.290445"
         }
       ],
       "created_at": "2026-01-05T02:21:17.464498",
-      "updated_at": "2026-01-05T12:16:13.249311"
+      "updated_at": "2026-01-05T13:46:03.290445"
     },
     {
       "id": "e47b6131-cc76-4ec9-9219-a87d5443dc72",
@@ -15377,10 +15647,234 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-05T13:12:52.834992"
+        },
+        {
+          "id": "8719f347-c8ae-49e0-8747-9f601e0eb48b",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to identify the candidate with the strongest technical skills based on the provided CVs. I need to analyze each CV, focusing on the \"skills\" and \"experience\" sections to identify technical proficiencies, experience levels, and relevance. I will then compare the candidates and select the one with the most impressive and relevant technical abilities.\n\nThe key criteria are:\n1. Specific technical skills and tools.\n2. Proficiency level in each skill.\n3. Years of experience applying those skills (inferred from the experience section).\n4. Relevance of skills to a general technical role (as the specific role is not defined).\n\nI will prioritize candidates with explicit technical skills like programming languages, frameworks, and technical tools.\n\nI will create a comparison table to highlight the relevant skills and experience of the selected candidates.\n:::\n\nBased on the CVs,**Chloé Dubois](cv:cv_fc1f46fe)**appears to have the most impressive and relevant technical skills. She demonstrates strong expertise in computer vision, deep learning, and related tools, which are highly sought-after in technical roles. ### Analysis\nI reviewed all the CVs and identified several candidates with technical skills.\n\n### Analysis\n\nI reviewed all the CVs and identified several candidates with technical skills. However, [📄](cv:cv_fc1f46fe)**Chloé Dubois**stands out due to the depth and breadth of her technical skills, particularly in computer vision and deep learning. Her experience section details her work in designing, implementing, and deploying deep learning models, along with her proficiency in relevant frameworks and tools. [📄](cv:cv_099faaf6)**Sofia Ramirez**and [📄](cv:cv_cfa0e5b1)**James Whitmore**also have strong technical skills, but their focus is more specific to mobile development and smart contracts, respectively. [📄](cv:cv_c10105eb)**Lena Schmidt**has strong bioinformatics skills, but they are not as directly applicable to a general technical role.\n\n| Candidate | Skills | Experience | Match Score |\n|---|---|---|---|\n| Chloé Dubois | Deep Learning (PyTorch/TensorFlow), Object Detection & Segmentation (YOLO, Mask R-CNN), 3D Vision & SLAM, Model Quantization & Pruning, OpenCV & C++, MLOps (Kubeflow, Docker, Triton) | Experience in designing, implementing, and deploying deep learning models for real-time perception systems. Re-implemented core image processing routines in optimized C++. Managed a curated dataset of over 500,000 labeled industrial defect images. | 100% |\n| Sofia Ramirez | iOS (Swift/Objective-C), Android (Kotlin/Java), React Native/Flutter, Mobile CI/CD (Fastlane, GitLab CI), Performance Tuning (Memory/CPU Profiling), Architecture (MVVM, Clean, VIPER), Security Implementation (KeyChain, Biometrics) | Experience architecting and scaling high-throughput native and cross-platform mobile solutions. Spearheaded the adoption of TDD practices. | 80% |\n| James Whitmore | Solidity, Rust, Vyper, Ethereum Architecture, Zero-Knowledge Proofs, CI/CD Pipeline Automation | Experience with smart contract development, including Solidity, Rust, and Vyper. | 60% |\n| Lena Schmidt | Python (Pandas, NumPy, Scanpy), R (Bioconductor, ggplot2), Next-Generation Sequencing (NGS) Pipelines, Statistical Modeling (Mixed-Effects), High-Performance Computing (HPC), Data Visualization & Reporting | Experience in bioinformatics, including single-cell RNA-seq analysis and NGS pipelines. | 60% |\n\n:::conclusion\nI recommend [📄](cv:cv_fc1f46fe)**Chloé Dubois**as the candidate with the most impressive and relevant technical skills based on the provided CVs.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_c10105eb",
+              "filename": "9b3715d6__Lena_Schmidt__Postdoc.pdf"
+            },
+            {
+              "cv_id": "cv_176b9c82",
+              "filename": "9c9af9ff__Amir_Al-Farsi__Instructional_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_13b3b09c",
+              "filename": "22ca62fd__Rajiv_Patel__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_621123af",
+              "filename": "83724102__Lien_Nguyen__Wine_Director.pdf"
+            },
+            {
+              "cv_id": "cv_cfa0e5b1",
+              "filename": "960c1e52__James_Whitmore__Smart_Contract_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_099faaf6",
+              "filename": "836e187a__Sofia_Ramirez__Mobile_Tech.pdf"
+            },
+            {
+              "cv_id": "cv_561a8ff7",
+              "filename": "3baa7e58__Diego_Mendoza__Protocol_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_a37a15e8",
+              "filename": "16c037be__Lotte_van_der_Berg__Camera_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_7c440a87",
+              "filename": "20354788__Maria_Rodriguez__Online_Instructor.pdf"
+            },
+            {
+              "cv_id": "cv_0a11e415",
+              "filename": "b560f23b__Rajiv_Patel__Sous_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_d5ae2a6e",
+              "filename": "173ee9f4__Antoine_Dubois__Brand_Ambassador.pdf"
+            },
+            {
+              "cv_id": "cv_de11f767",
+              "filename": "2a6972cc__Ji-eun_Kim__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_c7fa1481",
+              "filename": "49fcac19__Rajiv_Patel__CPO.pdf"
+            },
+            {
+              "cv_id": "cv_455aee06",
+              "filename": "071dc2e0__Ji-Yeon_Kim__Endowed_Chair.pdf"
+            },
+            {
+              "cv_id": "cv_9c5a5153",
+              "filename": "ed4d853a__Gabriela_Mendoza__Learning_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_2622b3d1",
+              "filename": "2ee790a4__Lotte_van_der_Berg__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_6fafeb95",
+              "filename": "e42cafdd__Carlos_Mendoza__Head_Bartender.pdf"
+            },
+            {
+              "cv_id": "cv_fc1f46fe",
+              "filename": "d306c0c3__Chloé_Dubois__Computer_Vision_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_bcd0274f",
+              "filename": "0ed5d24f__Mateo_Alvarez__Lab_Technician.pdf"
+            },
+            {
+              "cv_id": "cv_7c1f9a37",
+              "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf"
+            },
+            {
+              "cv_id": "cv_f15dd216",
+              "filename": "d13add8f__Lucas_Oliveira__Instructor.pdf"
+            },
+            {
+              "cv_id": "cv_43ab6912",
+              "filename": "b73fabea__Isabella_Nystrom__Junior_Blockchain_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_51e95bb2",
+              "filename": "03923cd7__Didier_Dubois__Product.pdf"
+            },
+            {
+              "cv_id": "cv_c48fce3d",
+              "filename": "d18bc369__Rafael_Oliveira__Production_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_8932f172",
+              "filename": "312feb56__Layla_Al-Mansoor__Lab_Technician.pdf"
+            },
+            {
+              "cv_id": "cv_a65ef383",
+              "filename": "95e7fe8f__Sofia_Morales__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_ddf5a842",
+              "filename": "014b47a1__Javier_Morales__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_e047ab10",
+              "filename": "39db3837__Layla_Kader__Game_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_9d42eac5",
+              "filename": "9cd768c8__Emily_Tan__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_2cc574d6",
+              "filename": "a5303ce5__Priya_Patel__VP_of_HR.pdf"
+            },
+            {
+              "cv_id": "cv_ac99908c",
+              "filename": "1c45453c__Erik_Andersson__Research_Associate.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 19039.57,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 173.28,
+              "details": "Found 32 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 32479.85,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 7080.19,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Based on the CVs, **Chloé Dubois](cv:cv_fc1f46fe)** appears to have the most impressive and relevant technical skills. She demonstrates strong expertise in computer vision, deep learning, and related tools, which are highly sought-after in technical roles. ### Analysis\nI reviewed all the CVs and identified several candidates with technical skills.",
+            "raw_content": ":::thinking\nThe user is asking to identify the candidate with the strongest technical skills based on the provided CVs. I need to analyze each CV, focusing on the \"skills\" and \"experience\" sections to identify technical proficiencies, experience levels, and relevance. I will then compare the candidates and select the one with the most impressive and relevant technical abilities.\n\nThe key criteria are:\n1.  Specific technical skills and tools.\n2.  Proficiency level in each skill.\n3.  Years of experience applying those skills (inferred from the experience section).\n4.  Relevance of skills to a general technical role (as the specific role is not defined).\n\nI will prioritize candidates with explicit technical skills like programming languages, frameworks, and technical tools.\n\nI will create a comparison table to highlight the relevant skills and experience of the selected candidates.\n:::\n\nBased on the CVs, **Chloé Dubois](cv:cv_fc1f46fe)** appears to have the most impressive and relevant technical skills. She demonstrates strong expertise in computer vision, deep learning, and related tools, which are highly sought-after in technical roles.\n\n### Analysis\n\nI reviewed all the CVs and identified several candidates with technical skills. However, **[Chloé Dubois](cv:cv_fc1f46fe)** stands out due to the depth and breadth of her technical skills, particularly in computer vision and deep learning. Her experience section details her work in designing, implementing, and deploying deep learning models, along with her proficiency in relevant frameworks and tools. **[Sofia Ramirez](cv:cv_099faaf6)** and **[James Whitmore](cv:cv_cfa0e5b1)** also have strong technical skills, but their focus is more specific to mobile development and smart contracts, respectively. **[Lena Schmidt](cv:cv_c10105eb)** has strong bioinformatics skills, but they are not as directly applicable to a general technical role.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Chloé Dubois](cv:cv_fc1f46fe)** | Deep Learning (PyTorch/TensorFlow), Object Detection & Segmentation (YOLO, Mask R-CNN), 3D Vision & SLAM, Model Quantization & Pruning, OpenCV & C++, MLOps (Kubeflow, Docker, Triton) | Experience in designing, implementing, and deploying deep learning models for real-time perception systems. Re-implemented core image processing routines in optimized C++. Managed a curated dataset of over 500,000 labeled industrial defect images. | ⭐⭐⭐⭐⭐ |\n| **[Sofia Ramirez](cv:cv_099faaf6)** | iOS (Swift/Objective-C), Android (Kotlin/Java), React Native/Flutter, Mobile CI/CD (Fastlane, GitLab CI), Performance Tuning (Memory/CPU Profiling), Architecture (MVVM, Clean, VIPER), Security Implementation (KeyChain, Biometrics) | Experience architecting and scaling high-throughput native and cross-platform mobile solutions. Spearheaded the adoption of TDD practices. | ⭐⭐⭐⭐ |\n| **[James Whitmore](cv:cv_cfa0e5b1)** | Solidity, Rust, Vyper, Ethereum Architecture, Zero-Knowledge Proofs, CI/CD Pipeline Automation | Experience with smart contract development, including Solidity, Rust, and Vyper. | ⭐⭐⭐ |\n| **[Lena Schmidt](cv:cv_c10105eb)** | Python (Pandas, NumPy, Scanpy), R (Bioconductor, ggplot2), Next-Generation Sequencing (NGS) Pipelines, Statistical Modeling (Mixed-Effects), High-Performance Computing (HPC), Data Visualization & Reporting | Experience in bioinformatics, including single-cell RNA-seq analysis and NGS pipelines. | ⭐⭐⭐ |\n\n:::conclusion\nI recommend **[Chloé Dubois](cv:cv_fc1f46fe)** as the candidate with the most impressive and relevant technical skills based on the provided CVs.\n:::",
+            "thinking": "The user is asking to identify the candidate with the strongest technical skills based on the provided CVs. I need to analyze each CV, focusing on the \"skills\" and \"experience\" sections to identify technical proficiencies, experience levels, and relevance. I will then compare the candidates and select the one with the most impressive and relevant technical abilities.\n\nThe key criteria are:\n1. Specific technical skills and tools.\n2. Proficiency level in each skill.\n3. Years of experience applying those skills (inferred from the experience section).\n4. Relevance of skills to a general technical role (as the specific role is not defined).\n\nI will prioritize candidates with explicit technical skills like programming languages, frameworks, and technical tools.\n\nI will create a comparison table to highlight the relevant skills and experience of the selected candidates.",
+            "analysis": "I reviewed all the CVs and identified several candidates with technical skills. However, [📄](cv:cv_fc1f46fe) **Chloé Dubois** stands out due to the depth and breadth of her technical skills, particularly in computer vision and deep learning. Her experience section details her work in designing, implementing, and deploying deep learning models, along with her proficiency in relevant frameworks and tools. [📄](cv:cv_099faaf6) **Sofia Ramirez** and [📄](cv:cv_cfa0e5b1) **James Whitmore** also have strong technical skills, but their focus is more specific to mobile development and smart contracts, respectively. [📄](cv:cv_c10105eb) **Lena Schmidt** has strong bioinformatics skills, but they are not as directly applicable to a general technical role.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Skills",
+                "Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Chloé Dubois",
+                  "cv_id": "cv_fc1f46fe",
+                  "columns": {
+                    "Skills": "Deep Learning (PyTorch/TensorFlow), Object Detection & Segmentation (YOLO, Mask R-CNN), 3D Vision & SLAM, Model Quantization & Pruning, OpenCV & C++, MLOps (Kubeflow, Docker, Triton)",
+                    "Experience": "Experience in designing, implementing, and deploying deep learning models for real-time perception systems. Re-implemented core image processing routines in optimized C++. Managed a curated dataset of over 500,000 labeled industrial defect images."
+                  },
+                  "match_score": 100
+                },
+                {
+                  "candidate_name": "Sofia Ramirez",
+                  "cv_id": "cv_099faaf6",
+                  "columns": {
+                    "Skills": "iOS (Swift/Objective-C), Android (Kotlin/Java), React Native/Flutter, Mobile CI/CD (Fastlane, GitLab CI), Performance Tuning (Memory/CPU Profiling), Architecture (MVVM, Clean, VIPER), Security Implementation (KeyChain, Biometrics)",
+                    "Experience": "Experience architecting and scaling high-throughput native and cross-platform mobile solutions. Spearheaded the adoption of TDD practices."
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "James Whitmore",
+                  "cv_id": "cv_cfa0e5b1",
+                  "columns": {
+                    "Skills": "Solidity, Rust, Vyper, Ethereum Architecture, Zero-Knowledge Proofs, CI/CD Pipeline Automation",
+                    "Experience": "Experience with smart contract development, including Solidity, Rust, and Vyper."
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Lena Schmidt",
+                  "cv_id": "cv_c10105eb",
+                  "columns": {
+                    "Skills": "Python (Pandas, NumPy, Scanpy), R (Bioconductor, ggplot2), Next-Generation Sequencing (NGS) Pipelines, Statistical Modeling (Mixed-Effects), High-Performance Computing (HPC), Data Visualization & Reporting",
+                    "Experience": "Experience in bioinformatics, including single-cell RNA-seq analysis and NGS pipelines."
+                  },
+                  "match_score": 60
+                }
+              ]
+            },
+            "conclusion": "I recommend [📄](cv:cv_fc1f46fe) **Chloé Dubois** as the candidate with the most impressive and relevant technical skills based on the provided CVs.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T13:14:42.682226"
+        },
+        {
+          "id": "198e74f2-150c-4702-99a6-2cbb62879259",
+          "role": "user",
+          "content": "Compare education levels",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T13:45:42.706737"
         }
       ],
       "created_at": "2026-01-05T02:36:30.672588",
-      "updated_at": "2026-01-05T13:12:52.834992"
+      "updated_at": "2026-01-05T13:45:42.706737"
     },
     {
       "id": "84dcbb16-5344-446e-8d3e-5d4322b6583a",
@@ -22036,10 +22530,353 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-05T13:12:44.047184"
+        },
+        {
+          "id": "06f8dd9e-bc3c-4d1b-8672-12a3806d0b03",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to compare the total years of professional experience for all candidates. I need to extract the work experience from each CV and calculate the total years. Then, I will create a table to compare the candidates based on their years of experience.\n:::\n\nI will analyze the provided CV excerpts to determine the total years of professional experience for each candidate. The candidates will be compared based on the total years of experience, and the results will be presented in a table. ### Analysis\nI reviewed all the provided CVs and extracted the work experience details.\n\n### Analysis\n\nI reviewed all the provided CVs and extracted the work experience details. I calculated the total years of experience for each candidate by summing the duration of their listed roles.\n\n| Candidate | Total Years of Experience | Match Score |\n|---|---|---|\n| Amir Al-Farsi | 3 years | 50% |\n| Sofia Mendoza | 3 years | 50% |\n| Sofia Rossi | 2 years | 50% |\n| Lotte van der Berg | 3 years | 50% |\n| Mei Lin Chen | 7 years | 50% |\n| Emily Tan | 4 years | 50% |\n| Aisha Okafor | No experience listed | 50% |\n| Lotte van der Berg | 5 years | 50% |\n| Layla Kader | No experience listed | 50% |\n| Lukas Schneider | 3 years | 50% |\n| Diego Mendoza | No experience listed | 50% |\n| Aisha Okafor | 10 years | 50% |\n| Liam van der Merwe | 15 years | 50% |\n| Rajiv Patel | 2 years | 50% |\n| Rajiv Patel | 2 years | 50% |\n| Aisha Al Mansoori | No experience listed | 50% |\n| Javier Morales | No experience listed | 50% |\n| Rajiv Patel | 1 year | 50% |\n| Javier Morales | No experience listed | 50% |\n| Matteo Romano | No experience listed | 50% |\n| Farid Al-Mansoor | 3 years | 50% |\n| Amir Hassan | No experience listed | 50% |\n| Lukas Schneider | 7 years | 50% |\n\n:::conclusion\nThe candidates with the most experience are [📄](cv:cv_b02a5c0c)**Liam van der Merwe**with 15 years, [📄](cv:cv_ac17bfa8)**Aisha Okafor**with 10 years, and [📄](cv:cv_1d703953)**Mei Lin Chen**and [📄](cv:cv_fbe1da0a)**Lukas Schneider**with 7 years.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_7aef282d",
+              "filename": "9c9af9ff__Amir_Al-Farsi__Instructional_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_b63b092f",
+              "filename": "4ca041d0__Lucien_Moreau__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_c4468050",
+              "filename": "2e55e31d__Sofia_Mendoza__Designer.pdf"
+            },
+            {
+              "cv_id": "cv_2462b1dc",
+              "filename": "4e4b81a6__Sofia_Rossi__Graduate_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_3bdba068",
+              "filename": "2ee790a4__Lotte_van_der_Berg__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_1d703953",
+              "filename": "01def3e4__Mei_Lin_Chen__Accessories_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_2b90bfc9",
+              "filename": "9cd768c8__Emily_Tan__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_2f6b5a6a",
+              "filename": "07e9108d__Aisha_Okafor__CCO.pdf"
+            },
+            {
+              "cv_id": "cv_b1d80241",
+              "filename": "16c037be__Lotte_van_der_Berg__Camera_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_e1ed0ce6",
+              "filename": "39db3837__Layla_Kader__Game_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_1fd34bb0",
+              "filename": "4bd4fa01__Lukas_Schneider__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_f2521121",
+              "filename": "3baa7e58__Diego_Mendoza__Protocol_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_ac17bfa8",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_b02a5c0c",
+              "filename": "7ceb10f6__Liam_van_der_Merwe__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_a12149e5",
+              "filename": "6be44d4b__Rajiv_Patel__Growth_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_032469e1",
+              "filename": "7e291026__Rajiv_Patel__Systems_Administrator.pdf"
+            },
+            {
+              "cv_id": "cv_b428bff4",
+              "filename": "4a8697d7__Aisha_Al_Mansoori__Postdoc.pdf"
+            },
+            {
+              "cv_id": "cv_f07420aa",
+              "filename": "014b47a1__Javier_Morales__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_32f01702",
+              "filename": "22ca62fd__Rajiv_Patel__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_8bd3aefd",
+              "filename": "5d0b9a4c__Javier_Morales__Psychologist.pdf"
+            },
+            {
+              "cv_id": "cv_8ecd7d95",
+              "filename": "6b9204bf__Matteo_Romano__Brand_Ambassador.pdf"
+            },
+            {
+              "cv_id": "cv_37db3173",
+              "filename": "9ffbf866__Farid_Al-Mansoor__Technical_Lead.pdf"
+            },
+            {
+              "cv_id": "cv_0e15237c",
+              "filename": "1b2a47e8__Amir_Hassan__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_fbe1da0a",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 20233.25,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 48.63,
+              "details": "Found 28 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 31515.83,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6387.73,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "I will analyze the provided CV excerpts to determine the total years of professional experience for each candidate. The candidates will be compared based on the total years of experience, and the results will be presented in a table. ### Analysis\nI reviewed all the provided CVs and extracted the work experience details.",
+            "raw_content": ":::thinking\nThe user is asking to compare the total years of professional experience for all candidates. I need to extract the work experience from each CV and calculate the total years. Then, I will create a table to compare the candidates based on their years of experience.\n:::\n\nI will analyze the provided CV excerpts to determine the total years of professional experience for each candidate. The candidates will be compared based on the total years of experience, and the results will be presented in a table.\n\n### Analysis\n\nI reviewed all the provided CVs and extracted the work experience details. I calculated the total years of experience for each candidate by summing the duration of their listed roles.\n\n| Candidate | Total Years of Experience |\n|-----------|---------------------------|\n| **[Amir Al-Farsi](cv:cv_7aef282d)** | 3 years |\n| **[Sofia Mendoza](cv:cv_c4468050)** | 3 years |\n| **[Sofia Rossi](cv:cv_2462b1dc)** | 2 years |\n| **[Lotte van der Berg](cv:cv_3bdba068)** | 3 years |\n| **[Mei Lin Chen](cv:cv_1d703953)** | 7 years |\n| **[Emily Tan](cv:cv_2b90bfc9)** | 4 years |\n| **[Aisha Okafor](cv:cv_2f6b5a6a)** | No experience listed |\n| **[Lotte van der Berg](cv:cv_b1d80241)** | 5 years |\n| **[Layla Kader](cv:cv_e1ed0ce6)** | No experience listed |\n| **[Lukas Schneider](cv:cv_1fd34bb0)** | 3 years |\n| **[Diego Mendoza](cv:cv_f2521121)** | No experience listed |\n| **[Aisha Okafor](cv:cv_ac17bfa8)** | 10 years |\n| **[Liam van der Merwe](cv:cv_b02a5c0c)** | 15 years |\n| **[Sofia Rossi](cv:cv_2462b1dc)** | 1 year |\n| **[Aisha Okafor](cv:cv_ac17bfa8)** | 10 years |\n| **[Rajiv Patel](cv:cv_a12149e5)** | 2 years |\n| **[Rajiv Patel](cv:cv_032469e1)** | 2 years |\n| **[Aisha Al Mansoori](cv:cv_b428bff4)** | No experience listed |\n| **[Javier Morales](cv:cv_f07420aa)** | No experience listed |\n| **[Rajiv Patel](cv:cv_32f01702)** | 1 year |\n| **[Lukas Schneider](cv:cv_1fd34bb0)** | 1 year |\n| **[Javier Morales](cv:cv_8bd3aefd)** | No experience listed |\n| **[Liam van der Merwe](cv:cv_b02a5c0c)** | 6 years |\n| **[Matteo Romano](cv:cv_8ecd7d95)** | No experience listed |\n| **[Farid Al-Mansoor](cv:cv_37db3173)** | 3 years |\n| **[Amir Hassan](cv:cv_0e15237c)** | No experience listed |\n| **[Lukas Schneider](cv:cv_fbe1da0a)** | 7 years |\n\n:::conclusion\nThe candidates with the most experience are **[Liam van der Merwe](cv:cv_b02a5c0c)** with 15 years, **[Aisha Okafor](cv:cv_ac17bfa8)** with 10 years, and **[Mei Lin Chen](cv:cv_1d703953)** and **[Lukas Schneider](cv:cv_fbe1da0a)** with 7 years.",
+            "thinking": "The user is asking to compare the total years of professional experience for all candidates. I need to extract the work experience from each CV and calculate the total years. Then, I will create a table to compare the candidates based on their years of experience.",
+            "analysis": "I reviewed all the provided CVs and extracted the work experience details. I calculated the total years of experience for each candidate by summing the duration of their listed roles.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Total Years of Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Amir Al-Farsi",
+                  "cv_id": "cv_7aef282d",
+                  "columns": {
+                    "Total Years of Experience": "3 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Sofia Mendoza",
+                  "cv_id": "cv_c4468050",
+                  "columns": {
+                    "Total Years of Experience": "3 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Sofia Rossi",
+                  "cv_id": "cv_2462b1dc",
+                  "columns": {
+                    "Total Years of Experience": "2 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Lotte van der Berg",
+                  "cv_id": "cv_3bdba068",
+                  "columns": {
+                    "Total Years of Experience": "3 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Mei Lin Chen",
+                  "cv_id": "cv_1d703953",
+                  "columns": {
+                    "Total Years of Experience": "7 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Emily Tan",
+                  "cv_id": "cv_2b90bfc9",
+                  "columns": {
+                    "Total Years of Experience": "4 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Aisha Okafor",
+                  "cv_id": "cv_2f6b5a6a",
+                  "columns": {
+                    "Total Years of Experience": "No experience listed"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Lotte van der Berg",
+                  "cv_id": "cv_b1d80241",
+                  "columns": {
+                    "Total Years of Experience": "5 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Layla Kader",
+                  "cv_id": "cv_e1ed0ce6",
+                  "columns": {
+                    "Total Years of Experience": "No experience listed"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Lukas Schneider",
+                  "cv_id": "cv_1fd34bb0",
+                  "columns": {
+                    "Total Years of Experience": "3 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Diego Mendoza",
+                  "cv_id": "cv_f2521121",
+                  "columns": {
+                    "Total Years of Experience": "No experience listed"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Aisha Okafor",
+                  "cv_id": "cv_ac17bfa8",
+                  "columns": {
+                    "Total Years of Experience": "10 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Liam van der Merwe",
+                  "cv_id": "cv_b02a5c0c",
+                  "columns": {
+                    "Total Years of Experience": "15 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Rajiv Patel",
+                  "cv_id": "cv_a12149e5",
+                  "columns": {
+                    "Total Years of Experience": "2 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Rajiv Patel",
+                  "cv_id": "cv_032469e1",
+                  "columns": {
+                    "Total Years of Experience": "2 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Aisha Al Mansoori",
+                  "cv_id": "cv_b428bff4",
+                  "columns": {
+                    "Total Years of Experience": "No experience listed"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Javier Morales",
+                  "cv_id": "cv_f07420aa",
+                  "columns": {
+                    "Total Years of Experience": "No experience listed"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Rajiv Patel",
+                  "cv_id": "cv_32f01702",
+                  "columns": {
+                    "Total Years of Experience": "1 year"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Javier Morales",
+                  "cv_id": "cv_8bd3aefd",
+                  "columns": {
+                    "Total Years of Experience": "No experience listed"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Matteo Romano",
+                  "cv_id": "cv_8ecd7d95",
+                  "columns": {
+                    "Total Years of Experience": "No experience listed"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Farid Al-Mansoor",
+                  "cv_id": "cv_37db3173",
+                  "columns": {
+                    "Total Years of Experience": "3 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Amir Hassan",
+                  "cv_id": "cv_0e15237c",
+                  "columns": {
+                    "Total Years of Experience": "No experience listed"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Lukas Schneider",
+                  "cv_id": "cv_fbe1da0a",
+                  "columns": {
+                    "Total Years of Experience": "7 years"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "The candidates with the most experience are [📄](cv:cv_b02a5c0c) **Liam van der Merwe** with 15 years, [📄](cv:cv_ac17bfa8) **Aisha Okafor** with 10 years, and [📄](cv:cv_1d703953) **Mei Lin Chen** and [📄](cv:cv_fbe1da0a) **Lukas Schneider** with 7 years.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T13:14:42.502080"
+        },
+        {
+          "id": "362cd6c5-fcb7-4767-860d-827b7ac86cf3",
+          "role": "user",
+          "content": "Who would fit a senior position?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T13:45:46.789401"
         }
       ],
       "created_at": "2026-01-05T04:02:44.497345",
-      "updated_at": "2026-01-05T13:12:44.047184"
+      "updated_at": "2026-01-05T13:45:46.789401"
     }
   ]
 }

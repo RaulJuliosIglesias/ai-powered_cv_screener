@@ -159,20 +159,25 @@ export function PipelineProvider({ children }) {
     
     if (isCurrentlyStreaming) {
       // Session is actively streaming - keep the real-time state
-      // Don't override with message-derived state
-      console.log(`[Pipeline] Session ${sessionId.slice(0,8)} is STREAMING - keeping real-time state`);
+      // FORCE update to ensure UI shows current state immediately
+      console.log(`[Pipeline] Session ${sessionId.slice(0,8)} is STREAMING - forcing UI update`);
+      triggerUpdate(); // Force re-render to show current pipeline state
     } else {
       // Session is NOT streaming - ALWAYS derive from saved messages
       // This ensures we show the correct final state or reset
       console.log(`[Pipeline] Session ${sessionId.slice(0,8)} is IDLE - deriving from messages`);
       derivePipelineFromMessages(sessionId, messages);
     }
-  }, [derivePipelineFromMessages]);
+  }, [derivePipelineFromMessages, triggerUpdate]);
 
   // Get pipeline for current active session
+  // Returns a fresh copy to ensure React detects changes
   const activePipeline = useMemo(() => {
     if (!activeSessionId) return null;
-    return pipelineBySessionRef.current[activeSessionId] || null;
+    const pipeline = pipelineBySessionRef.current[activeSessionId];
+    if (!pipeline) return null;
+    // Return a shallow copy to ensure React sees it as a new object
+    return { ...pipeline };
   }, [activeSessionId, version]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Is current session streaming? (using Set)

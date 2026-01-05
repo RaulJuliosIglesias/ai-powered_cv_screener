@@ -74,9 +74,12 @@ function App() {
   });
   // Pipeline state moved to PipelineContext for per-session tracking
   
-  // Streaming state for progressive message display
-  const [streamingState, setStreamingState] = useState(null);
-  // { currentStep: 'query_understanding', steps: {}, queryUnderstanding: null, candidates: [], partialAnswer: null }
+  // Streaming state for progressive message display - PER SESSION
+  const [streamingStateBySession, setStreamingStateBySession] = useState({});
+  // { sessionId: { currentStep: 'query_understanding', steps: {}, queryUnderstanding: null, candidates: [], partialAnswer: null } }
+  
+  // Get streaming state for current session
+  const streamingState = currentSessionId ? streamingStateBySession[currentSessionId] : null;
   
   // Delete progress modal state (for bulk deletion)
   const [deleteProgress, setDeleteProgress] = useState(null);
@@ -321,14 +324,17 @@ function App() {
     // Initialize pipeline progress for this specific session (via context)
     initPipeline(targetSessionId);
     
-    // Initialize streaming state for progressive display
-    setStreamingState({
-      currentStep: 'query_understanding',
-      steps: {},
-      queryUnderstanding: null,
-      candidates: [],
-      partialAnswer: null
-    });
+    // Initialize streaming state for progressive display - FOR THIS SESSION
+    setStreamingStateBySession(prev => ({
+      ...prev,
+      [targetSessionId]: {
+        currentStep: 'query_understanding',
+        steps: {},
+        queryUnderstanding: null,
+        candidates: [],
+        partialAnswer: null
+      }
+    }));
     
     setPendingMessages(prev => ({
       ...prev,
@@ -394,13 +400,14 @@ function App() {
               // Update pipeline for this specific session (via context)
               updateStep(targetSessionId, stepName, stepStatus, data.details);
               
-              // Update streaming state with progressive content
-              setStreamingState(prev => {
-                if (!prev) return prev;
+              // Update streaming state with progressive content - FOR THIS SESSION
+              setStreamingStateBySession(prev => {
+                const sessionState = prev[targetSessionId];
+                if (!sessionState) return prev;
                 const newState = { 
-                  ...prev, 
+                  ...sessionState, 
                   currentStep: stepName,
-                  steps: { ...prev.steps, [stepName]: { status: stepStatus, details: data.details, progress: data.progress } },
+                  steps: { ...sessionState.steps, [stepName]: { status: stepStatus, details: data.details, progress: data.progress } },
                   // Track progress state for retry/fallback visualization
                   currentProgress: data.progress || null
                 };
@@ -420,7 +427,7 @@ function App() {
                   newState.partialAnswer = data.partial_answer;
                 }
                 
-                return newState;
+                return { ...prev, [targetSessionId]: newState };
               });
             }
             
@@ -462,8 +469,12 @@ function App() {
       // Mark pipeline as complete for this session
       completePipeline(targetSessionId);
       
-      // Clear streaming state
-      setStreamingState(null);
+      // Clear streaming state for this session
+      setStreamingStateBySession(prev => {
+        const newState = { ...prev };
+        delete newState[targetSessionId];
+        return newState;
+      });
       
       // Clear pending message
       setPendingMessages(prev => {
@@ -489,8 +500,12 @@ function App() {
       console.error('❌ Stream error:', e);
       // Clear pipeline state on error
       clearPipeline(targetSessionId);
-      // Clear streaming state on error to prevent UI from being stuck
-      setStreamingState(null);
+      // Clear streaming state for this session on error to prevent UI from being stuck
+      setStreamingStateBySession(prev => {
+        const newState = { ...prev };
+        delete newState[targetSessionId];
+        return newState;
+      });
       setPendingMessages(prev => {
         const newState = { ...prev };
         delete newState[targetSessionId];
