@@ -11019,10 +11019,1986 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-05T01:46:46.843099"
+        },
+        {
+          "id": "cf14c910-965a-4aaa-9a4f-2c25f679cdca",
+          "role": "user",
+          "content": "Who is best for a leadership role?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T01:48:24.930540"
+        },
+        {
+          "id": "2f667fa9-8de3-458d-b5fe-be0a3709b357",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a ranking of candidates based on their leadership experience. I need to analyze each CV for leadership roles, team sizes, achievements, and other relevant experience. I will then create a ranked list based on the strength of their leadership qualifications.\n:::\n\nBased on the CVs provided, several candidates demonstrate experience in leadership roles. The following analysis ranks the candidates based on their leadership experience, including management positions, team sizes, and achievements. ### Analysis\nThe following candidates were selected based on their explicit leadership experience as detailed in their CVs.\n\n### Analysis\n\nThe following candidates were selected based on their explicit leadership experience as detailed in their CVs.\n\n| Candidate | Leadership Experience | Team Size/Scope | Match Score |\n|---|---|---|---|\n| Adewale Ogunleye | Nursing Manager, managed quality assurance initiatives, developed a budgeting framework, and coordinated a cross-regional training program. | Supervised two clinical departments. | 80% |\n| Rajiv Kapoor | Sales Representative, Sales Executive, Sales Manager, and Sales Intern. Mentored a cohort of 6 junior reps. | Managed high-value client portfolios, built a regional sales network from scratch, and grew the team from 2 to 15 professionals. | 60% |\n| Chinedu Okoro | No explicit leadership roles mentioned. |  | 50% |\n| Valeria Morales | No explicit leadership roles mentioned. | Integrated models into mobile apps, reaching 1M users. | 40% |\n| Adewale Patel | No explicit leadership roles mentioned. | Built collaborative teams. | 40% |\n| Maria Rodriguez | No explicit leadership roles mentioned. | No team size mentioned. | 20% |\n| Aisha Patel | Mentored 3 junior researchers. | No team size mentioned. | 20% |\n| Carlos Mendoza | No explicit leadership roles mentioned. | No team size mentioned. | 20% |\n| Adam Al-Mansoori | No explicit leadership roles mentioned. | No team size mentioned. | 20% |\n| Mei-Ling Chen | Facilitated industry internships for 40+ students. | No team size mentioned. | 20% |\n| Aisha Müller | No explicit leadership roles mentioned. | No team size mentioned. | 20% |\n| Liam Wei | No explicit leadership roles mentioned. | No team size mentioned. | 20% |\n\n:::conclusion\nThe top candidates for a leadership role are [📄](cv:cv_12cde282)**Adewale Ogunleye**and [📄](cv:cv_a76623d4)**Rajiv Kapoor**.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_ae5adf9c",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_b5d67d80",
+              "filename": "422a58d3__Chinedu_Okoro__Post-Production_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_971cad77",
+              "filename": "f9273af6__Mei-Ling_Chen__Full_Professor.pdf"
+            },
+            {
+              "cv_id": "cv_38f5543d",
+              "filename": "3e7ca555__Valeria_Morales__VP_of_AI.pdf"
+            },
+            {
+              "cv_id": "cv_12cde282",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_d07ecabd",
+              "filename": "20354788__Maria_Rodriguez__Online_Instructor.pdf"
+            },
+            {
+              "cv_id": "cv_11644fca",
+              "filename": "f40e009d__Aisha_Müller__Nurse_Practitioner.pdf"
+            },
+            {
+              "cv_id": "cv_4140aeeb",
+              "filename": "6ae1734e__Adam_Al-Mansoori__Professor.pdf"
+            },
+            {
+              "cv_id": "cv_931e0ef0",
+              "filename": "2eb14c66__Liam_Wei__Podcast_Producer.pdf"
+            },
+            {
+              "cv_id": "cv_25038baf",
+              "filename": "7893c58a__Carlos_Mendoza__Project_Architect.pdf"
+            },
+            {
+              "cv_id": "cv_301e072e",
+              "filename": "53721311__Adewale_Patel__VP_of_Design.pdf"
+            },
+            {
+              "cv_id": "cv_a76623d4",
+              "filename": "fdcf90c3__Rajiv_Kapoor__Sales_Representative.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 9413.92,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 17.59,
+              "details": "Found 20 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 26940.22,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5283.86,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Based on the CVs provided, several candidates demonstrate experience in leadership roles. The following analysis ranks the candidates based on their leadership experience, including management positions, team sizes, and achievements. ### Analysis\nThe following candidates were selected based on their explicit leadership experience as detailed in their CVs.",
+            "raw_content": ":::thinking\nThe user is asking for a ranking of candidates based on their leadership experience. I need to analyze each CV for leadership roles, team sizes, achievements, and other relevant experience. I will then create a ranked list based on the strength of their leadership qualifications.\n:::\n\nBased on the CVs provided, several candidates demonstrate experience in leadership roles. The following analysis ranks the candidates based on their leadership experience, including management positions, team sizes, and achievements.\n\n### Analysis\n\nThe following candidates were selected based on their explicit leadership experience as detailed in their CVs.\n\n| Candidate | Leadership Experience | Team Size/Scope | Match |\n|-----------|-------------|-------------|-------|\n| **[Adewale Ogunleye](cv:cv_12cde282)** | Nursing Manager, managed quality assurance initiatives, developed a budgeting framework, and coordinated a cross-regional training program. | Supervised two clinical departments. | ⭐⭐⭐⭐ |\n| **[Rajiv Kapoor](cv:cv_a76623d4)** | Sales Representative, Sales Executive, Sales Manager, and Sales Intern. Mentored a cohort of 6 junior reps. | Managed high-value client portfolios, built a regional sales network from scratch, and grew the team from 2 to 15 professionals. | ⭐⭐⭐ |\n| **[Valeria Morales](cv:cv_38f5543d)** | No explicit leadership roles mentioned. | Integrated models into mobile apps, reaching 1M users. | ⭐⭐ |\n| **[Adewale Patel](cv:cv_301e072e)** | No explicit leadership roles mentioned. | Built collaborative teams. | ⭐⭐ |\n| **[Maria Rodriguez](cv:cv_d07ecabd)** | No explicit leadership roles mentioned. | No team size mentioned. | ⭐ |\n| **[Aisha Patel](cv:cv_ae5adf9c)** | Mentored 3 junior researchers. | No team size mentioned. | ⭐ |\n| **[Carlos Mendoza](cv:cv_25038baf)** | No explicit leadership roles mentioned. | No team size mentioned. | ⭐ |\n| **[Adam Al-Mansoori](cv:cv_4140aeeb)** | No explicit leadership roles mentioned. | No team size mentioned. | ⭐ |\n| **[Mei-Ling Chen](cv:cv_971cad77)** | Facilitated industry internships for 40+ students. | No team size mentioned. | ⭐ |\n| **[Aisha Müller](cv:cv_11644fca)** | No explicit leadership roles mentioned. | No team size mentioned. | ⭐ |\n| **[Liam Wei](cv:cv_931e0ef0)** | No explicit leadership roles mentioned. | No team size mentioned. | ⭐ |\n| **[Chinedu Okoro](cv:cv_b5d67d80)** | No explicit leadership roles mentioned. | No team size mentioned. |  |\n\n:::conclusion\nThe top candidates for a leadership role are **[Adewale Ogunleye](cv:cv_12cde282)** and **[Rajiv Kapoor](cv:cv_a76623d4)**.",
+            "thinking": "The user is asking for a ranking of candidates based on their leadership experience. I need to analyze each CV for leadership roles, team sizes, achievements, and other relevant experience. I will then create a ranked list based on the strength of their leadership qualifications.",
+            "analysis": "The following candidates were selected based on their explicit leadership experience as detailed in their CVs.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Leadership Experience",
+                "Team Size/Scope",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Adewale Ogunleye",
+                  "cv_id": "cv_12cde282",
+                  "columns": {
+                    "Leadership Experience": "Nursing Manager, managed quality assurance initiatives, developed a budgeting framework, and coordinated a cross-regional training program.",
+                    "Team Size/Scope": "Supervised two clinical departments."
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Rajiv Kapoor",
+                  "cv_id": "cv_a76623d4",
+                  "columns": {
+                    "Leadership Experience": "Sales Representative, Sales Executive, Sales Manager, and Sales Intern. Mentored a cohort of 6 junior reps.",
+                    "Team Size/Scope": "Managed high-value client portfolios, built a regional sales network from scratch, and grew the team from 2 to 15 professionals."
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Chinedu Okoro",
+                  "cv_id": "cv_b5d67d80",
+                  "columns": {
+                    "Leadership Experience": "No explicit leadership roles mentioned.",
+                    "Team Size/Scope": ""
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Valeria Morales",
+                  "cv_id": "cv_38f5543d",
+                  "columns": {
+                    "Leadership Experience": "No explicit leadership roles mentioned.",
+                    "Team Size/Scope": "Integrated models into mobile apps, reaching 1M users."
+                  },
+                  "match_score": 40
+                },
+                {
+                  "candidate_name": "Adewale Patel",
+                  "cv_id": "cv_301e072e",
+                  "columns": {
+                    "Leadership Experience": "No explicit leadership roles mentioned.",
+                    "Team Size/Scope": "Built collaborative teams."
+                  },
+                  "match_score": 40
+                },
+                {
+                  "candidate_name": "Maria Rodriguez",
+                  "cv_id": "cv_d07ecabd",
+                  "columns": {
+                    "Leadership Experience": "No explicit leadership roles mentioned.",
+                    "Team Size/Scope": "No team size mentioned."
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Aisha Patel",
+                  "cv_id": "cv_ae5adf9c",
+                  "columns": {
+                    "Leadership Experience": "Mentored 3 junior researchers.",
+                    "Team Size/Scope": "No team size mentioned."
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Carlos Mendoza",
+                  "cv_id": "cv_25038baf",
+                  "columns": {
+                    "Leadership Experience": "No explicit leadership roles mentioned.",
+                    "Team Size/Scope": "No team size mentioned."
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Adam Al-Mansoori",
+                  "cv_id": "cv_4140aeeb",
+                  "columns": {
+                    "Leadership Experience": "No explicit leadership roles mentioned.",
+                    "Team Size/Scope": "No team size mentioned."
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Mei-Ling Chen",
+                  "cv_id": "cv_971cad77",
+                  "columns": {
+                    "Leadership Experience": "Facilitated industry internships for 40+ students.",
+                    "Team Size/Scope": "No team size mentioned."
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Aisha Müller",
+                  "cv_id": "cv_11644fca",
+                  "columns": {
+                    "Leadership Experience": "No explicit leadership roles mentioned.",
+                    "Team Size/Scope": "No team size mentioned."
+                  },
+                  "match_score": 20
+                },
+                {
+                  "candidate_name": "Liam Wei",
+                  "cv_id": "cv_931e0ef0",
+                  "columns": {
+                    "Leadership Experience": "No explicit leadership roles mentioned.",
+                    "Team Size/Scope": "No team size mentioned."
+                  },
+                  "match_score": 20
+                }
+              ]
+            },
+            "conclusion": "The top candidates for a leadership role are [📄](cv:cv_12cde282) **Adewale Ogunleye** and [📄](cv:cv_a76623d4) **Rajiv Kapoor**.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T01:49:49.574831"
+        },
+        {
+          "id": "3ca0bc62-765a-490a-8c1b-634aec7b44f6",
+          "role": "user",
+          "content": "Who is best for a leadership role?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T01:53:02.135512"
+        },
+        {
+          "id": "b8271864-e08c-41ec-adcb-e216b0445877",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a ranking of candidates based on their suitability for a leadership role. The key criteria are previous management roles, team size, and leadership achievements. I will analyze each CV, focusing on the experience sections to identify candidates with relevant leadership experience and then rank them accordingly.\n:::\n\nBased on the provided CVs, several candidates demonstrate leadership experience, with varying degrees of responsibility and impact. The candidates are ranked below based on their leadership experience, considering management roles, team size, and achievements. ### Analysis\nI have reviewed the CVs and identified candidates with leadership experience.\n\n### Analysis\n\nI have reviewed the CVs and identified candidates with leadership experience. The ranking is based on the scope and impact of their leadership roles, as evidenced by the size of teams managed, the achievements listed, and the level of responsibility held.\n\n| Candidate | Leadership Role | Team Size (if mentioned) | Leadership Achievements | Match Score |\n|---|---|---|---|---|\n| Valeria Morales | VP of AI, Director of Artificial Intelligence, AI Engineering Manager | 25 (built a team of), 10 (mentored) | Increased AI-driven revenue by 150%, Scaled AI portfolio, Implemented data-governance framework, Reduced time-to-insight by 25% | 100% |\n| Adewale Patel | VP of Design, Director of Design, Design Lead | 6 (mentored), multidisciplinary design squad | Scaled design team output by 150%, Pioneered AI-assisted design workflow, Launched cross-platform design system, Directed a rebrand that lifted brand recall by 35% | 80% |\n| Rajiv Kapoor | Sales Representative, Sales Executive, Sales Manager | 6 (mentored), 15 (built a team of) | Lifted annual revenue by 135%, Negotiated multi-million-dollar contracts, Launched a consultative selling approach that boosted average deal size by 50% | 60% |\n| Aisha Patel | Research Scientist | 3 (mentored) | Designed a novel algorithm that improved prediction accuracy by 25%, Mentored junior researchers | 25% |\n| Adewale Ogunleye | VP of Nursing, Nursing Manager | Not specified | Reduced medication errors by 25%, Developed a budgeting framework that saved $450K, Coordinated a cross-regional training program | 25% |\n\n:::conclusion\nThe most suitable candidates for a leadership role are [📄](cv:cv_38f5543d)**Valeria Morales**and [📄](cv:cv_301e072e)**Adewale Patel**due to their experience in VP/Director roles and demonstrated achievements. [📄](cv:cv_a76623d4)**Rajiv Kapoor**is also a strong candidate. [📄](cv:cv_ae5adf9c)**Aisha Patel**and [📄](cv:cv_12cde282)**Adewale Ogunleye**have some leadership experience but less impact.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_ae5adf9c",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_971cad77",
+              "filename": "f9273af6__Mei-Ling_Chen__Full_Professor.pdf"
+            },
+            {
+              "cv_id": "cv_12cde282",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_b5d67d80",
+              "filename": "422a58d3__Chinedu_Okoro__Post-Production_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_a76623d4",
+              "filename": "fdcf90c3__Rajiv_Kapoor__Sales_Representative.pdf"
+            },
+            {
+              "cv_id": "cv_931e0ef0",
+              "filename": "2eb14c66__Liam_Wei__Podcast_Producer.pdf"
+            },
+            {
+              "cv_id": "cv_11644fca",
+              "filename": "f40e009d__Aisha_Müller__Nurse_Practitioner.pdf"
+            },
+            {
+              "cv_id": "cv_4140aeeb",
+              "filename": "6ae1734e__Adam_Al-Mansoori__Professor.pdf"
+            },
+            {
+              "cv_id": "cv_38f5543d",
+              "filename": "3e7ca555__Valeria_Morales__VP_of_AI.pdf"
+            },
+            {
+              "cv_id": "cv_301e072e",
+              "filename": "53721311__Adewale_Patel__VP_of_Design.pdf"
+            },
+            {
+              "cv_id": "cv_d07ecabd",
+              "filename": "20354788__Maria_Rodriguez__Online_Instructor.pdf"
+            },
+            {
+              "cv_id": "cv_25038baf",
+              "filename": "7893c58a__Carlos_Mendoza__Project_Architect.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 15259.94,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 16.92,
+              "details": "Found 18 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 24644.37,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4954.11,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Based on the provided CVs, several candidates demonstrate leadership experience, with varying degrees of responsibility and impact. The candidates are ranked below based on their leadership experience, considering management roles, team size, and achievements. ### Analysis\nI have reviewed the CVs and identified candidates with leadership experience.",
+            "raw_content": ":::thinking\nThe user is asking for a ranking of candidates based on their suitability for a leadership role. The key criteria are previous management roles, team size, and leadership achievements. I will analyze each CV, focusing on the experience sections to identify candidates with relevant leadership experience and then rank them accordingly.\n:::\n\nBased on the provided CVs, several candidates demonstrate leadership experience, with varying degrees of responsibility and impact. The candidates are ranked below based on their leadership experience, considering management roles, team size, and achievements.\n\n### Analysis\n\nI have reviewed the CVs and identified candidates with leadership experience. The ranking is based on the scope and impact of their leadership roles, as evidenced by the size of teams managed, the achievements listed, and the level of responsibility held.\n\n| Candidate | Leadership Role | Team Size (if mentioned) | Leadership Achievements | Match |\n|---|---|---|---|---|\n| **[Valeria Morales](cv:cv_38f5543d)** | VP of AI, Director of Artificial Intelligence, AI Engineering Manager | 25 (built a team of), 10 (mentored) | Increased AI-driven revenue by 150%, Scaled AI portfolio, Implemented data-governance framework, Reduced time-to-insight by 25% | ⭐⭐⭐⭐⭐ |\n| **[Adewale Patel](cv:cv_301e072e)** | VP of Design, Director of Design, Design Lead | 6 (mentored), multidisciplinary design squad | Scaled design team output by 150%, Pioneered AI-assisted design workflow, Launched cross-platform design system, Directed a rebrand that lifted brand recall by 35% | ⭐⭐⭐⭐ |\n| **[Rajiv Kapoor](cv:cv_a76623d4)** | Sales Representative, Sales Executive, Sales Manager | 6 (mentored), 15 (built a team of) | Lifted annual revenue by 135%, Negotiated multi-million-dollar contracts, Launched a consultative selling approach that boosted average deal size by 50% | ⭐⭐⭐ |\n| **[Aisha Patel](cv:cv_ae5adf9c)** | Research Scientist | 3 (mentored) | Designed a novel algorithm that improved prediction accuracy by 25%, Mentored junior researchers | ⭐⭐ |\n| **[Adewale Ogunleye](cv:cv_12cde282)** | VP of Nursing, Nursing Manager | Not specified | Reduced medication errors by 25%, Developed a budgeting framework that saved $450K, Coordinated a cross-regional training program | ⭐⭐ |\n\n:::conclusion\nThe most suitable candidates for a leadership role are **[Valeria Morales](cv:cv_38f5543d)** and **[Adewale Patel](cv:cv_301e072e)** due to their experience in VP/Director roles and demonstrated achievements. **[Rajiv Kapoor](cv:cv_a76623d4)** is also a strong candidate. **[Aisha Patel](cv:cv_ae5adf9c)** and **[Adewale Ogunleye](cv:cv_12cde282)** have some leadership experience but less impact.",
+            "thinking": "The user is asking for a ranking of candidates based on their suitability for a leadership role. The key criteria are previous management roles, team size, and leadership achievements. I will analyze each CV, focusing on the experience sections to identify candidates with relevant leadership experience and then rank them accordingly.",
+            "analysis": "I have reviewed the CVs and identified candidates with leadership experience. The ranking is based on the scope and impact of their leadership roles, as evidenced by the size of teams managed, the achievements listed, and the level of responsibility held.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Leadership Role",
+                "Team Size (if mentioned)",
+                "Leadership Achievements",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Valeria Morales",
+                  "cv_id": "cv_38f5543d",
+                  "columns": {
+                    "Leadership Role": "VP of AI, Director of Artificial Intelligence, AI Engineering Manager",
+                    "Team Size (if mentioned)": "25 (built a team of), 10 (mentored)",
+                    "Leadership Achievements": "Increased AI-driven revenue by 150%, Scaled AI portfolio, Implemented data-governance framework, Reduced time-to-insight by 25%"
+                  },
+                  "match_score": 100
+                },
+                {
+                  "candidate_name": "Adewale Patel",
+                  "cv_id": "cv_301e072e",
+                  "columns": {
+                    "Leadership Role": "VP of Design, Director of Design, Design Lead",
+                    "Team Size (if mentioned)": "6 (mentored), multidisciplinary design squad",
+                    "Leadership Achievements": "Scaled design team output by 150%, Pioneered AI-assisted design workflow, Launched cross-platform design system, Directed a rebrand that lifted brand recall by 35%"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Rajiv Kapoor",
+                  "cv_id": "cv_a76623d4",
+                  "columns": {
+                    "Leadership Role": "Sales Representative, Sales Executive, Sales Manager",
+                    "Team Size (if mentioned)": "6 (mentored), 15 (built a team of)",
+                    "Leadership Achievements": "Lifted annual revenue by 135%, Negotiated multi-million-dollar contracts, Launched a consultative selling approach that boosted average deal size by 50%"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Aisha Patel",
+                  "cv_id": "cv_ae5adf9c",
+                  "columns": {
+                    "Leadership Role": "Research Scientist",
+                    "Team Size (if mentioned)": "3 (mentored)",
+                    "Leadership Achievements": "Designed a novel algorithm that improved prediction accuracy by 25%, Mentored junior researchers"
+                  },
+                  "match_score": 25
+                },
+                {
+                  "candidate_name": "Adewale Ogunleye",
+                  "cv_id": "cv_12cde282",
+                  "columns": {
+                    "Leadership Role": "VP of Nursing, Nursing Manager",
+                    "Team Size (if mentioned)": "Not specified",
+                    "Leadership Achievements": "Reduced medication errors by 25%, Developed a budgeting framework that saved $450K, Coordinated a cross-regional training program"
+                  },
+                  "match_score": 25
+                }
+              ]
+            },
+            "conclusion": "The most suitable candidates for a leadership role are [📄](cv:cv_38f5543d) **Valeria Morales** and [📄](cv:cv_301e072e) **Adewale Patel** due to their experience in VP/Director roles and demonstrated achievements. [📄](cv:cv_a76623d4) **Rajiv Kapoor** is also a strong candidate. [📄](cv:cv_ae5adf9c) **Aisha Patel** and [📄](cv:cv_12cde282) **Adewale Ogunleye** have some leadership experience but less impact.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T01:54:52.961924"
+        },
+        {
+          "id": "b5b3d7b7-910f-4fc2-a0a0-edfc1932a319",
+          "role": "user",
+          "content": "dime que candidatos deberiua entrevistar para una posicion creativa y liderazgo y porque? ivnestiga profuindamente",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T02:00:32.832461"
+        },
+        {
+          "id": "204504ed-df62-4487-86df-2772701cbc24",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to identify candidates with both creative skills and leadership experience, providing specific reasons for each candidate's suitability. I need to analyze the provided CV excerpts to find candidates who demonstrate both creativity and leadership qualities. I will look for keywords like \"design,\" \"creative,\" \"leadership,\" \"managed,\" \"team,\" \"mentored,\" and related terms. I will then create a table to compare the candidates and explain my reasoning.\n:::\n\nSeveral candidates demonstrate both creative skills and leadership experience. These candidates have held leadership positions and also possess skills related to design, content creation, or other creative fields. ### Analysis\nI have identified the following candidates based on the criteria of creativity and leadership:\n*   [📄](cv:cv_301e072e)**Adewale Patel**: This candidate's CV highlights leadership roles such as VP of Design and Director of Design, where he managed teams and drove design strategy.\n\n### Analysis\n\nI have identified the following candidates based on the criteria of creativity and leadership:\n\n*   [📄](cv:cv_301e072e)**Adewale Patel**: This candidate's CV highlights leadership roles such as VP of Design and Director of Design, where he managed teams and drove design strategy. His skills section explicitly mentions \"Visual & Brand Design,\" \"Design Systems,\" and \"Figma & Prototyping,\" indicating creative abilities.\n*   [📄](cv:cv_d07ecabd)**Maria Rodriguez**: This candidate's CV shows experience as an Online Instructor and Curriculum Developer, which requires creativity in designing and delivering engaging educational content. She also demonstrates leadership through mentoring and creating a cohort-based mentorship program.\n*   [📄](cv:cv_931e0ef0)**Liam Wei**: This candidate's CV shows experience as a Podcast Producer, which requires creativity in content strategy, audio editing, and interview coordination. He also demonstrates leadership through managing a team of junior editors.\n*   [📄](cv:cv_12cde282)**Adewale Ogunleye**: This candidate's CV shows experience as a VP of Nursing Services and Director of Nursing, which requires leadership skills. He also demonstrates creativity through the implementation of culturally-responsive care protocols.\n\n| Candidate | Creativity | Leadership | Match Score |\n|---|---|---|---|\n| Adewale Patel | Design, Visuals | VP of Design, Director of Design, Mentored | 80% |\n| Maria Rodriguez | Curriculum Design, Storytelling | Online Instructor, Mentored, Mentorship Program | 60% |\n| Liam Wei | Content Strategy, Audio Editing | Podcast Producer, Managed a team | 60% |\n| Adewale Ogunleye | Culturally-responsive care protocols | VP of Nursing Services, Director of Nursing, Mentored | 60% |\n\n:::conclusion\nI recommend interviewing [📄](cv:cv_301e072e)**Adewale Patel**, [📄](cv:cv_d07ecabd)**Maria Rodriguez**, [📄](cv:cv_931e0ef0)**Liam Wei**, and [📄](cv:cv_12cde282)**Adewale Ogunleye**. These candidates demonstrate both creative skills and leadership experience, making them potentially strong fits for roles requiring both.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_38f5543d",
+              "filename": "3e7ca555__Valeria_Morales__VP_of_AI.pdf"
+            },
+            {
+              "cv_id": "cv_25038baf",
+              "filename": "7893c58a__Carlos_Mendoza__Project_Architect.pdf"
+            },
+            {
+              "cv_id": "cv_971cad77",
+              "filename": "f9273af6__Mei-Ling_Chen__Full_Professor.pdf"
+            },
+            {
+              "cv_id": "cv_a76623d4",
+              "filename": "fdcf90c3__Rajiv_Kapoor__Sales_Representative.pdf"
+            },
+            {
+              "cv_id": "cv_12cde282",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_4140aeeb",
+              "filename": "6ae1734e__Adam_Al-Mansoori__Professor.pdf"
+            },
+            {
+              "cv_id": "cv_11644fca",
+              "filename": "f40e009d__Aisha_Müller__Nurse_Practitioner.pdf"
+            },
+            {
+              "cv_id": "cv_b5d67d80",
+              "filename": "422a58d3__Chinedu_Okoro__Post-Production_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_301e072e",
+              "filename": "53721311__Adewale_Patel__VP_of_Design.pdf"
+            },
+            {
+              "cv_id": "cv_931e0ef0",
+              "filename": "2eb14c66__Liam_Wei__Podcast_Producer.pdf"
+            },
+            {
+              "cv_id": "cv_d07ecabd",
+              "filename": "20354788__Maria_Rodriguez__Online_Instructor.pdf"
+            },
+            {
+              "cv_id": "cv_ae5adf9c",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 11605.3,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 16.15,
+              "details": "Found 24 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 22303.0,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5628.33,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Several candidates demonstrate both creative skills and leadership experience. These candidates have held leadership positions and also possess skills related to design, content creation, or other creative fields. ### Analysis\nI have identified the following candidates based on the criteria of creativity and leadership:\n*   [📄](cv:cv_301e072e) **Adewale Patel**: This candidate's CV highlights leadership roles such as VP of Design and Director of Design, where he managed teams and drove design strategy.",
+            "raw_content": ":::thinking\nThe user is asking to identify candidates with both creative skills and leadership experience, providing specific reasons for each candidate's suitability. I need to analyze the provided CV excerpts to find candidates who demonstrate both creativity and leadership qualities. I will look for keywords like \"design,\" \"creative,\" \"leadership,\" \"managed,\" \"team,\" \"mentored,\" and related terms. I will then create a table to compare the candidates and explain my reasoning.\n:::\n\nSeveral candidates demonstrate both creative skills and leadership experience. These candidates have held leadership positions and also possess skills related to design, content creation, or other creative fields.\n\n### Analysis\n\nI have identified the following candidates based on the criteria of creativity and leadership:\n\n*   **[Adewale Patel](cv:cv_301e072e)**: This candidate's CV highlights leadership roles such as VP of Design and Director of Design, where he managed teams and drove design strategy. His skills section explicitly mentions \"Visual & Brand Design,\" \"Design Systems,\" and \"Figma & Prototyping,\" indicating creative abilities.\n*   **[Maria Rodriguez](cv:cv_d07ecabd)**: This candidate's CV shows experience as an Online Instructor and Curriculum Developer, which requires creativity in designing and delivering engaging educational content. She also demonstrates leadership through mentoring and creating a cohort-based mentorship program.\n*   **[Liam Wei](cv:cv_931e0ef0)**: This candidate's CV shows experience as a Podcast Producer, which requires creativity in content strategy, audio editing, and interview coordination. He also demonstrates leadership through managing a team of junior editors.\n*   **[Adewale Ogunleye](cv:cv_12cde282)**: This candidate's CV shows experience as a VP of Nursing Services and Director of Nursing, which requires leadership skills. He also demonstrates creativity through the implementation of culturally-responsive care protocols.\n\n| Candidate | Creativity | Leadership | Match |\n|-----------|-------------|-------------|-------|\n| **[Adewale Patel](cv:cv_301e072e)** | Design, Visuals | VP of Design, Director of Design, Mentored | ⭐⭐⭐⭐ |\n| **[Maria Rodriguez](cv:cv_d07ecabd)** | Curriculum Design, Storytelling | Online Instructor, Mentored, Mentorship Program | ⭐⭐⭐ |\n| **[Liam Wei](cv:cv_931e0ef0)** | Content Strategy, Audio Editing | Podcast Producer, Managed a team | ⭐⭐⭐ |\n| **[Adewale Ogunleye](cv:cv_12cde282)** | Culturally-responsive care protocols | VP of Nursing Services, Director of Nursing, Mentored | ⭐⭐⭐ |\n\n:::conclusion\nI recommend interviewing **[Adewale Patel](cv:cv_301e072e)**, **[Maria Rodriguez](cv:cv_d07ecabd)**, **[Liam Wei](cv:cv_931e0ef0)**, and **[Adewale Ogunleye](cv:cv_12cde282)**. These candidates demonstrate both creative skills and leadership experience, making them potentially strong fits for roles requiring both.\n:::",
+            "thinking": "The user is asking to identify candidates with both creative skills and leadership experience, providing specific reasons for each candidate's suitability. I need to analyze the provided CV excerpts to find candidates who demonstrate both creativity and leadership qualities. I will look for keywords like \"design,\" \"creative,\" \"leadership,\" \"managed,\" \"team,\" \"mentored,\" and related terms. I will then create a table to compare the candidates and explain my reasoning.",
+            "analysis": "I have identified the following candidates based on the criteria of creativity and leadership:\n\n*   [📄](cv:cv_301e072e) **Adewale Patel**: This candidate's CV highlights leadership roles such as VP of Design and Director of Design, where he managed teams and drove design strategy. His skills section explicitly mentions \"Visual & Brand Design,\" \"Design Systems,\" and \"Figma & Prototyping,\" indicating creative abilities.\n*   [📄](cv:cv_d07ecabd) **Maria Rodriguez**: This candidate's CV shows experience as an Online Instructor and Curriculum Developer, which requires creativity in designing and delivering engaging educational content. She also demonstrates leadership through mentoring and creating a cohort-based mentorship program.\n*   [📄](cv:cv_931e0ef0) **Liam Wei**: This candidate's CV shows experience as a Podcast Producer, which requires creativity in content strategy, audio editing, and interview coordination. He also demonstrates leadership through managing a team of junior editors.\n*   [📄](cv:cv_12cde282) **Adewale Ogunleye**: This candidate's CV shows experience as a VP of Nursing Services and Director of Nursing, which requires leadership skills. He also demonstrates creativity through the implementation of culturally-responsive care protocols.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Creativity",
+                "Leadership",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Adewale Patel",
+                  "cv_id": "cv_301e072e",
+                  "columns": {
+                    "Creativity": "Design, Visuals",
+                    "Leadership": "VP of Design, Director of Design, Mentored"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Maria Rodriguez",
+                  "cv_id": "cv_d07ecabd",
+                  "columns": {
+                    "Creativity": "Curriculum Design, Storytelling",
+                    "Leadership": "Online Instructor, Mentored, Mentorship Program"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Liam Wei",
+                  "cv_id": "cv_931e0ef0",
+                  "columns": {
+                    "Creativity": "Content Strategy, Audio Editing",
+                    "Leadership": "Podcast Producer, Managed a team"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Adewale Ogunleye",
+                  "cv_id": "cv_12cde282",
+                  "columns": {
+                    "Creativity": "Culturally-responsive care protocols",
+                    "Leadership": "VP of Nursing Services, Director of Nursing, Mentored"
+                  },
+                  "match_score": 60
+                }
+              ]
+            },
+            "conclusion": "I recommend interviewing [📄](cv:cv_301e072e) **Adewale Patel**, [📄](cv:cv_d07ecabd) **Maria Rodriguez**, [📄](cv:cv_931e0ef0) **Liam Wei**, and [📄](cv:cv_12cde282) **Adewale Ogunleye**. These candidates demonstrate both creative skills and leadership experience, making them potentially strong fits for roles requiring both.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T02:02:30.781832"
         }
       ],
       "created_at": "2026-01-05T00:22:18.815416",
-      "updated_at": "2026-01-05T01:46:46.843099"
+      "updated_at": "2026-01-05T02:02:30.781832"
+    },
+    {
+      "id": "d8502678-905e-4fc6-9edb-10ac354a2d56",
+      "name": "New chat",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_e90bf8d5",
+          "filename": "0eb88e7d__Aarav_Patel__VP_of_Brand.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-05T02:03:27.475217"
+        },
+        {
+          "id": "cv_a808c832",
+          "filename": "2bcfd5f9__Priya_Patel__CMO.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:03:28.379465"
+        },
+        {
+          "id": "cv_a3f423f8",
+          "filename": "3e7ca555__Valeria_Morales__VP_of_AI.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:03:29.217127"
+        },
+        {
+          "id": "cv_0e651418",
+          "filename": "4d3c267f__Priya_Kapoor__Finance_Director.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-05T02:03:30.047329"
+        },
+        {
+          "id": "cv_156b5b4f",
+          "filename": "8e63c82e__Lars_Chen__CTO.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:03:30.935904"
+        },
+        {
+          "id": "cv_20cb3ff7",
+          "filename": "8fcdd802__Carlos_Mendoza__Chief_Executive_Officer.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-05T02:03:31.817973"
+        },
+        {
+          "id": "cv_6ca74a51",
+          "filename": "09f7ebf7__Layla_Al-Mansour__Founder.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-05T02:03:32.675599"
+        },
+        {
+          "id": "cv_b4d54fbf",
+          "filename": "34fe6c7c__Isabel_Mendoza__Course_Instructor.pdf",
+          "chunk_count": 8,
+          "uploaded_at": "2026-01-05T02:03:33.625508"
+        },
+        {
+          "id": "cv_2aa13ba7",
+          "filename": "74aa9455__Carlos_Mendoza__FB_Director.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-05T02:03:34.463318"
+        },
+        {
+          "id": "cv_ff417cad",
+          "filename": "94b5b5f1__Ran_Chen__CTO.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-05T02:03:35.404032"
+        },
+        {
+          "id": "cv_c18e23aa",
+          "filename": "271f6175__Jamal_Carter__Director.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-05T02:03:36.242395"
+        },
+        {
+          "id": "cv_3b6e6187",
+          "filename": "6012e3bb__Layla_Al-Mansouri__CMO.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-05T02:03:37.131326"
+        },
+        {
+          "id": "cv_301e9650",
+          "filename": "84764d6f__Aisha_Patel__Visual_Effects_Director.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-05T02:03:38.034440"
+        },
+        {
+          "id": "cv_b5e90b59",
+          "filename": "20354788__Maria_Rodriguez__Online_Instructor.pdf",
+          "chunk_count": 6,
+          "uploaded_at": "2026-01-05T02:03:38.896605"
+        },
+        {
+          "id": "cv_11da3f32",
+          "filename": "53721311__Adewale_Patel__VP_of_Design.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-05T02:03:39.749832"
+        },
+        {
+          "id": "cv_af20a839",
+          "filename": "83724102__Lien_Nguyen__Wine_Director.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-05T02:03:40.629731"
+        },
+        {
+          "id": "cv_f5fdac57",
+          "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-05T02:03:41.490365"
+        },
+        {
+          "id": "cv_c3d40b41",
+          "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:03:42.394700"
+        },
+        {
+          "id": "cv_6b86da9c",
+          "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:03:43.331637"
+        },
+        {
+          "id": "cv_c4663e05",
+          "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-05T02:03:44.226617"
+        },
+        {
+          "id": "cv_834affd7",
+          "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:03:45.056027"
+        },
+        {
+          "id": "cv_66fa4ac0",
+          "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:03:46.022827"
+        },
+        {
+          "id": "cv_f67f8d1c",
+          "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:03:46.932224"
+        },
+        {
+          "id": "cv_6259cbe2",
+          "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:03:47.783267"
+        },
+        {
+          "id": "cv_a6c2e254",
+          "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:03:48.765375"
+        },
+        {
+          "id": "cv_6bed5f6b",
+          "filename": "e6cb6422__Rajiv_Patel__CMO.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-05T02:03:49.634055"
+        },
+        {
+          "id": "cv_1d38795e",
+          "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-05T02:03:50.600010"
+        }
+      ],
+      "messages": [
+        {
+          "id": "dfca9b8f-f0b8-4cb3-93a1-5495b157583f",
+          "role": "user",
+          "content": "Who has the strongest technical skills?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T02:04:44.198516"
+        },
+        {
+          "id": "f17f15f5-b4df-438b-8785-5aaa2146582d",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to identify the candidate with the strongest technical skills based on the provided CVs. I need to review each CV, identify explicit technical skills (programming languages, tools, frameworks), and then compare the candidates based on the breadth and depth of their technical expertise. I will prioritize candidates with explicit technical job titles and demonstrable skills.\n:::\n\nBased on the CVs, [📄](cv:cv_c4663e05)**Ji-hoon Kim**appears to have the strongest overall technical abilities. He has a strong background in machine learning, deep learning, and data engineering, with experience in research and development roles. ### Analysis\nI reviewed all the CVs and identified candidates with explicit technical skills.\n\n### Analysis\n\nI reviewed all the CVs and identified candidates with explicit technical skills. The following candidates were considered:\n\n*   [📄](cv:cv_c18e23aa)**Jamal Carter**: Mentions \"Spearheaded AI‑driven analytics platform launch\" and \"Implemented real‑time notifications using WebSockets.\" Has \"AWS Certified Solutions Architect - Associate\" certification.\n*   [📄](cv:cv_156b5b4f)**Lars Chen**: Mentions \"Built and scaled micro‑services architecture\" and \"Architected payment gateway handling 2M transactions daily.\" Has \"AWS Certified Solutions Architect – Professional\" certification.\n*   [📄](cv:cv_ff417cad)**Ran Chen**: Mentions \"Implemented CI/CD pipeline\" and \"Engineered a distributed streaming framework.\"\n*   [📄](cv:cv_f67f8d1c)**Lerato Nkosi**: Mentions \"Engineered production-grade smart contract systems\" and \"Launched an ERC-20 token framework.\" Has \"Certified Ethereum Developer\" and \"AWS Certified Solutions Architect – Professional\" certifications.\n*   [📄](cv:cv_a3f423f8)**Valeria Morales**: Mentions \"Language Processing\" and \"Computer Vision.\" Has \"Google Cloud Professional Machine Learning Engineer\" and \"AWS Certified Machine Learning – Specialty\" certifications.\n*   [📄](cv:cv_c4663e05)**Ji-hoon Kim**: Has extensive experience in machine learning, deep learning, and data engineering. Mentions \"Scaled predictive model throughput,\" \"Engineered a distributed training pipeline,\" and \"Developed a reinforcement learning optimizer.\" Has \"Google Cloud Professional Data Engineer\" and \"AWS Certified Machine Learning – Specialty\" certifications.\n\nI selected [📄](cv:cv_c4663e05)**Ji-hoon Kim**because his CV demonstrates a deeper and broader range of technical skills and experience in machine learning, data engineering, and related areas compared to the other candidates.\n\n| Candidate | Skills | Experience | Match Score |\n|---|---|---|---|\n| Ji-hoon Kim | Machine Learning, Deep Learning, Data Engineering, AWS, Google Cloud | Research Director, Research Scientist, Research Analyst, Research Intern | 100% |\n| Lars Chen | Microservices, AWS | CTO, Engineer, Software Engineer, Junior Developer | 60% |\n| Ran Chen | CI/CD, Distributed Streaming | CTO, Engineer, DevOps & Developer | 60% |\n| Lerato Nkosi | Smart Contracts, ERC-20, AWS | Blockchain Researcher, Blockchain Engineer | 60% |\n| Valeria Morales | Machine Learning, Computer Vision, AWS | VP of AI, Junior AI Engineer | 60% |\n| Jamal Carter | AI, WebSockets, AWS | Director, Engineer, Intern | 40% |\n\n:::conclusion\nI recommend [📄](cv:cv_c4663e05)**Ji-hoon Kim**as the candidate with the strongest overall technical abilities based on the provided CVs.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_c18e23aa",
+              "filename": "271f6175__Jamal_Carter__Director.pdf"
+            },
+            {
+              "cv_id": "cv_156b5b4f",
+              "filename": "8e63c82e__Lars_Chen__CTO.pdf"
+            },
+            {
+              "cv_id": "cv_ff417cad",
+              "filename": "94b5b5f1__Ran_Chen__CTO.pdf"
+            },
+            {
+              "cv_id": "cv_f67f8d1c",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_c3d40b41",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_6259cbe2",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_b4d54fbf",
+              "filename": "34fe6c7c__Isabel_Mendoza__Course_Instructor.pdf"
+            },
+            {
+              "cv_id": "cv_c4663e05",
+              "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_a808c832",
+              "filename": "2bcfd5f9__Priya_Patel__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_6b86da9c",
+              "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_834affd7",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_af20a839",
+              "filename": "83724102__Lien_Nguyen__Wine_Director.pdf"
+            },
+            {
+              "cv_id": "cv_a6c2e254",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_a3f423f8",
+              "filename": "3e7ca555__Valeria_Morales__VP_of_AI.pdf"
+            },
+            {
+              "cv_id": "cv_66fa4ac0",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_20cb3ff7",
+              "filename": "8fcdd802__Carlos_Mendoza__Chief_Executive_Officer.pdf"
+            },
+            {
+              "cv_id": "cv_0e651418",
+              "filename": "4d3c267f__Priya_Kapoor__Finance_Director.pdf"
+            },
+            {
+              "cv_id": "cv_f5fdac57",
+              "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf"
+            },
+            {
+              "cv_id": "cv_3b6e6187",
+              "filename": "6012e3bb__Layla_Al-Mansouri__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_301e9650",
+              "filename": "84764d6f__Aisha_Patel__Visual_Effects_Director.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 7494.83,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 25.39,
+              "details": "Found 20 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 18863.12,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6328.83,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Based on the CVs, [📄](cv:cv_c4663e05) **Ji-hoon Kim** appears to have the strongest overall technical abilities. He has a strong background in machine learning, deep learning, and data engineering, with experience in research and development roles. ### Analysis\nI reviewed all the CVs and identified candidates with explicit technical skills.",
+            "raw_content": ":::thinking\nThe user is asking to identify the candidate with the strongest technical skills based on the provided CVs. I need to review each CV, identify explicit technical skills (programming languages, tools, frameworks), and then compare the candidates based on the breadth and depth of their technical expertise. I will prioritize candidates with explicit technical job titles and demonstrable skills.\n:::\n\nBased on the CVs, **[Ji-hoon Kim](cv:cv_c4663e05)** appears to have the strongest overall technical abilities. He has a strong background in machine learning, deep learning, and data engineering, with experience in research and development roles.\n\n### Analysis\n\nI reviewed all the CVs and identified candidates with explicit technical skills. The following candidates were considered:\n\n*   **[Jamal Carter](cv:cv_c18e23aa)**: Mentions \"Spearheaded AI‑driven analytics platform launch\" and \"Implemented real‑time notifications using WebSockets.\" Has \"AWS Certified Solutions Architect - Associate\" certification.\n*   **[Lars Chen](cv:cv_156b5b4f)**: Mentions \"Built and scaled micro‑services architecture\" and \"Architected payment gateway handling 2M transactions daily.\" Has \"AWS Certified Solutions Architect – Professional\" certification.\n*   **[Ran Chen](cv:cv_ff417cad)**: Mentions \"Implemented CI/CD pipeline\" and \"Engineered a distributed streaming framework.\"\n*   **[Lerato Nkosi](cv:cv_f67f8d1c)**: Mentions \"Engineered production-grade smart contract systems\" and \"Launched an ERC-20 token framework.\" Has \"Certified Ethereum Developer\" and \"AWS Certified Solutions Architect – Professional\" certifications.\n*   **[Valeria Morales](cv:cv_a3f423f8)**: Mentions \"Language Processing\" and \"Computer Vision.\" Has \"Google Cloud Professional Machine Learning Engineer\" and \"AWS Certified Machine Learning – Specialty\" certifications.\n*   **[Ji-hoon Kim](cv:cv_c4663e05)**: Has extensive experience in machine learning, deep learning, and data engineering. Mentions \"Scaled predictive model throughput,\" \"Engineered a distributed training pipeline,\" and \"Developed a reinforcement learning optimizer.\" Has \"Google Cloud Professional Data Engineer\" and \"AWS Certified Machine Learning – Specialty\" certifications.\n\nI selected **[Ji-hoon Kim](cv:cv_c4663e05)** because his CV demonstrates a deeper and broader range of technical skills and experience in machine learning, data engineering, and related areas compared to the other candidates.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Jamal Carter](cv:cv_c18e23aa)** | AI, WebSockets, AWS | Director, Engineer, Intern | ⭐⭐ |\n| **[Lars Chen](cv:cv_156b5b4f)** | Microservices, AWS | CTO, Engineer, Software Engineer, Junior Developer | ⭐⭐⭐ |\n| **[Ran Chen](cv:cv_ff417cad)** | CI/CD, Distributed Streaming | CTO, Engineer, DevOps & Developer | ⭐⭐⭐ |\n| **[Lerato Nkosi](cv:cv_f67f8d1c)** | Smart Contracts, ERC-20, AWS | Blockchain Researcher, Blockchain Engineer | ⭐⭐⭐ |\n| **[Valeria Morales](cv:cv_a3f423f8)** | Machine Learning, Computer Vision, AWS | VP of AI, Junior AI Engineer | ⭐⭐⭐ |\n| **[Ji-hoon Kim](cv:cv_c4663e05)** | Machine Learning, Deep Learning, Data Engineering, AWS, Google Cloud | Research Director, Research Scientist, Research Analyst, Research Intern | ⭐⭐⭐⭐⭐ |\n\n:::conclusion\nI recommend **[Ji-hoon Kim](cv:cv_c4663e05)** as the candidate with the strongest overall technical abilities based on the provided CVs.",
+            "thinking": "The user is asking to identify the candidate with the strongest technical skills based on the provided CVs. I need to review each CV, identify explicit technical skills (programming languages, tools, frameworks), and then compare the candidates based on the breadth and depth of their technical expertise. I will prioritize candidates with explicit technical job titles and demonstrable skills.",
+            "analysis": "I reviewed all the CVs and identified candidates with explicit technical skills. The following candidates were considered:\n\n*   [📄](cv:cv_c18e23aa) **Jamal Carter**: Mentions \"Spearheaded AI‑driven analytics platform launch\" and \"Implemented real‑time notifications using WebSockets.\" Has \"AWS Certified Solutions Architect - Associate\" certification.\n*   [📄](cv:cv_156b5b4f) **Lars Chen**: Mentions \"Built and scaled micro‑services architecture\" and \"Architected payment gateway handling 2M transactions daily.\" Has \"AWS Certified Solutions Architect – Professional\" certification.\n*   [📄](cv:cv_ff417cad) **Ran Chen**: Mentions \"Implemented CI/CD pipeline\" and \"Engineered a distributed streaming framework.\"\n*   [📄](cv:cv_f67f8d1c) **Lerato Nkosi**: Mentions \"Engineered production-grade smart contract systems\" and \"Launched an ERC-20 token framework.\" Has \"Certified Ethereum Developer\" and \"AWS Certified Solutions Architect – Professional\" certifications.\n*   [📄](cv:cv_a3f423f8) **Valeria Morales**: Mentions \"Language Processing\" and \"Computer Vision.\" Has \"Google Cloud Professional Machine Learning Engineer\" and \"AWS Certified Machine Learning – Specialty\" certifications.\n*   [📄](cv:cv_c4663e05) **Ji-hoon Kim**: Has extensive experience in machine learning, deep learning, and data engineering. Mentions \"Scaled predictive model throughput,\" \"Engineered a distributed training pipeline,\" and \"Developed a reinforcement learning optimizer.\" Has \"Google Cloud Professional Data Engineer\" and \"AWS Certified Machine Learning – Specialty\" certifications.\n\nI selected [📄](cv:cv_c4663e05) **Ji-hoon Kim** because his CV demonstrates a deeper and broader range of technical skills and experience in machine learning, data engineering, and related areas compared to the other candidates.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Skills",
+                "Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Ji-hoon Kim",
+                  "cv_id": "cv_c4663e05",
+                  "columns": {
+                    "Skills": "Machine Learning, Deep Learning, Data Engineering, AWS, Google Cloud",
+                    "Experience": "Research Director, Research Scientist, Research Analyst, Research Intern"
+                  },
+                  "match_score": 100
+                },
+                {
+                  "candidate_name": "Lars Chen",
+                  "cv_id": "cv_156b5b4f",
+                  "columns": {
+                    "Skills": "Microservices, AWS",
+                    "Experience": "CTO, Engineer, Software Engineer, Junior Developer"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Ran Chen",
+                  "cv_id": "cv_ff417cad",
+                  "columns": {
+                    "Skills": "CI/CD, Distributed Streaming",
+                    "Experience": "CTO, Engineer, DevOps & Developer"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Lerato Nkosi",
+                  "cv_id": "cv_f67f8d1c",
+                  "columns": {
+                    "Skills": "Smart Contracts, ERC-20, AWS",
+                    "Experience": "Blockchain Researcher, Blockchain Engineer"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Valeria Morales",
+                  "cv_id": "cv_a3f423f8",
+                  "columns": {
+                    "Skills": "Machine Learning, Computer Vision, AWS",
+                    "Experience": "VP of AI, Junior AI Engineer"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Jamal Carter",
+                  "cv_id": "cv_c18e23aa",
+                  "columns": {
+                    "Skills": "AI, WebSockets, AWS",
+                    "Experience": "Director, Engineer, Intern"
+                  },
+                  "match_score": 40
+                }
+              ]
+            },
+            "conclusion": "I recommend [📄](cv:cv_c4663e05) **Ji-hoon Kim** as the candidate with the strongest overall technical abilities based on the provided CVs.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T02:06:07.426139"
+        }
+      ],
+      "created_at": "2026-01-05T02:03:20.031633",
+      "updated_at": "2026-01-05T02:06:07.426139"
+    },
+    {
+      "id": "86fce112-a1fa-4693-ae92-133cfe774f14",
+      "name": "New chat",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_3a4418da",
+          "filename": "a73ca65c__Isabel_Mendoza__Director_of_AI.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:15:27.458686"
+        },
+        {
+          "id": "cv_f9769647",
+          "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-05T02:15:28.318298"
+        },
+        {
+          "id": "cv_9fb0f971",
+          "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:15:29.282925"
+        },
+        {
+          "id": "cv_7e516bc6",
+          "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:15:30.163667"
+        },
+        {
+          "id": "cv_86f2dc3f",
+          "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-05T02:15:31.063488"
+        },
+        {
+          "id": "cv_fe4831ee",
+          "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:15:31.953421"
+        },
+        {
+          "id": "cv_4d8a6bfc",
+          "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:15:32.830763"
+        },
+        {
+          "id": "cv_5c64fbcd",
+          "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:15:33.786438"
+        },
+        {
+          "id": "cv_78b206ff",
+          "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:15:34.637364"
+        },
+        {
+          "id": "cv_5463ea64",
+          "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:15:35.553846"
+        },
+        {
+          "id": "cv_b85f594d",
+          "filename": "e6cb6422__Rajiv_Patel__CMO.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-05T02:15:36.498203"
+        },
+        {
+          "id": "cv_5f249eef",
+          "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-05T02:15:37.368899"
+        },
+        {
+          "id": "cv_ef75350d",
+          "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:19:22.700717"
+        },
+        {
+          "id": "cv_933e3d69",
+          "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-05T02:19:23.694582"
+        },
+        {
+          "id": "cv_aafbc954",
+          "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:19:24.529322"
+        },
+        {
+          "id": "cv_d1791bcc",
+          "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:19:25.495677"
+        },
+        {
+          "id": "cv_ea414ebe",
+          "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:19:26.421528"
+        },
+        {
+          "id": "cv_cf467081",
+          "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:19:27.296693"
+        },
+        {
+          "id": "cv_b9dd75c5",
+          "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:19:28.279350"
+        },
+        {
+          "id": "cv_ffda47b5",
+          "filename": "e6cb6422__Rajiv_Patel__CMO.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-05T02:19:29.188247"
+        },
+        {
+          "id": "cv_8a369e60",
+          "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-05T02:19:30.068708"
+        }
+      ],
+      "messages": [
+        {
+          "id": "75ef3c7d-65a0-4d3d-8347-7118c3589075",
+          "role": "user",
+          "content": "Compare education levels",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T02:36:19.437197"
+        },
+        {
+          "id": "4bb84216-ffd6-4f20-aca1-eef5f3165240",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a comparison of all candidates' education levels, including their highest degree and major. I need to extract the education sections from each CV and create a table comparing the candidates based on their degrees and fields of study.\n:::\n\nHere's a comparison of the education levels for each candidate, including their highest degree and major. The table below summarizes the educational backgrounds extracted from the provided CVs. ### Analysis\nI reviewed all the provided CVs and extracted the education details.\n\n### Analysis\n\nI reviewed all the provided CVs and extracted the education details. I included all candidates in the table, as the prompt requested a comparison of all candidates.\n\n| Candidate | Highest Degree | Major/Field of Study | Match Score |\n|---|---|---|---|\n| Mei-Ling Chen | MSc | Marketing Communications | 60% |\n| Mei-Ling Chen | MSc | Marketing Communications | 60% |\n| Margaret OConnor | Master of Arts | Interactive Entertainment | 60% |\n| Margaret OConnor | Master of Arts | Interactive Entertainment | 60% |\n| Priya Patel | MBA | Hospitality Management | 60% |\n| Ling Zhang | MFA | Animation and Digital Media | 60% |\n| Ling Zhang | MFA | Animation and Digital Media | 60% |\n| Priya Kapoor | Ph.D. | Computer Science | 60% |\n| Adewale Ogunleye | Master of Nursing Science (MNS) | Not explicitly mentioned | 60% |\n| Lerato Nkosi | Ph.D. | Computer Science (Blockchain Systems) | 60% |\n| Lerato Nkosi | Ph.D. | Computer Science (Blockchain Systems) | 60% |\n| Isabel Mendoza | MSc | Artificial Intelligence | 60% |\n| Aisha Nkrumah | MBA | Not explicitly mentioned | 60% |\n| Aisha Nkrumah | MBA | Not explicitly mentioned | 60% |\n| Ji-hoon Kim | Bachelor of Science | Artificial Intelligence | 60% |\n| Ji-hoon Kim | Bachelor of Science | Artificial Intelligence | 60% |\n| Aisha Patel | Not explicitly mentioned | Not explicitly mentioned | 50% |\n| Aisha Patel | Not explicitly mentioned | Not explicitly mentioned | 50% |\n| Priya Kapoor | Not explicitly mentioned | Not explicitly mentioned | 50% |\n\n:::conclusion\nAll candidates have been included in the comparison table. The table provides a clear overview of each candidate's highest degree and field of study, as extracted from their respective CVs.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_fe4831ee",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_aafbc954",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_78b206ff",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_cf467081",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_5463ea64",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_b9dd75c5",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_f9769647",
+              "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf"
+            },
+            {
+              "cv_id": "cv_5f249eef",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_8a369e60",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            },
+            {
+              "cv_id": "cv_7e516bc6",
+              "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_9fb0f971",
+              "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf"
+            },
+            {
+              "cv_id": "cv_ef75350d",
+              "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf"
+            },
+            {
+              "cv_id": "cv_5c64fbcd",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_ea414ebe",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_3a4418da",
+              "filename": "a73ca65c__Isabel_Mendoza__Director_of_AI.pdf"
+            },
+            {
+              "cv_id": "cv_4d8a6bfc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_d1791bcc",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_86f2dc3f",
+              "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_933e3d69",
+              "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 7183.97,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 17.91,
+              "details": "Found 26 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 13404.09,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6662.59,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Here's a comparison of the education levels for each candidate, including their highest degree and major. The table below summarizes the educational backgrounds extracted from the provided CVs. ### Analysis\nI reviewed all the provided CVs and extracted the education details.",
+            "raw_content": ":::thinking\nThe user is asking for a comparison of all candidates' education levels, including their highest degree and major. I need to extract the education sections from each CV and create a table comparing the candidates based on their degrees and fields of study.\n:::\n\nHere's a comparison of the education levels for each candidate, including their highest degree and major. The table below summarizes the educational backgrounds extracted from the provided CVs.\n\n### Analysis\nI reviewed all the provided CVs and extracted the education details. I included all candidates in the table, as the prompt requested a comparison of all candidates.\n\n| Candidate | Highest Degree | Major/Field of Study | Match |\n|-----------|----------------|----------------------|-------|\n| **[Aisha Patel](cv:cv_fe4831ee)** | Not explicitly mentioned | Not explicitly mentioned | ❌ |\n| **[Aisha Patel](cv:cv_aafbc954)** | Not explicitly mentioned | Not explicitly mentioned | ❌ |\n| **[Mei-Ling Chen](cv:cv_78b206ff)** | MSc | Marketing Communications | ⭐⭐⭐ |\n| **[Mei-Ling Chen](cv:cv_cf467081)** | MSc | Marketing Communications | ⭐⭐⭐ |\n| **[Margaret OConnor](cv:cv_5463ea64)** | Master of Arts | Interactive Entertainment | ⭐⭐⭐ |\n| **[Margaret OConnor](cv:cv_b9dd75c5)** | Master of Arts | Interactive Entertainment | ⭐⭐⭐ |\n| **[Priya Patel](cv:cv_f9769647)** | MBA | Hospitality Management | ⭐⭐⭐ |\n| **[Ling Zhang](cv:cv_5f249eef)** | MFA | Animation and Digital Media | ⭐⭐⭐ |\n| **[Ling Zhang](cv:cv_8a369e60)** | MFA | Animation and Digital Media | ⭐⭐⭐ |\n| **[Priya Kapoor](cv:cv_7e516bc6)** | Ph.D. | Computer Science | ⭐⭐⭐ |\n| **[Adewale Ogunleye](cv:cv_9fb0f971)** | Master of Nursing Science (MNS) | Not explicitly mentioned | ⭐⭐⭐ |\n| **[Priya Kapoor](cv:cv_ef75350d)** | Not explicitly mentioned | Not explicitly mentioned | ❌ |\n| **[Adewale Ogunleye](cv:cv_9fb0f971)** | Master of Nursing Science (MNS) | Not explicitly mentioned | ⭐⭐⭐ |\n| **[Lerato Nkosi](cv:cv_5c64fbcd)** | Ph.D. | Computer Science (Blockchain Systems) | ⭐⭐⭐ |\n| **[Lerato Nkosi](cv:cv_ea414ebe)** | Ph.D. | Computer Science (Blockchain Systems) | ⭐⭐⭐ |\n| **[Priya Patel](cv:cv_f9769647)** | MBA | Hospitality Management | ⭐⭐⭐ |\n| **[Isabel Mendoza](cv:cv_3a4418da)** | MSc | Artificial Intelligence | ⭐⭐⭐ |\n| **[Margaret OConnor](cv:cv_5463ea64)** | Master of Arts | Interactive Entertainment | ⭐⭐⭐ |\n| **[Margaret OConnor](cv:cv_b9dd75c5)** | Master of Arts | Interactive Entertainment | ⭐⭐⭐ |\n| **[Aisha Nkrumah](cv:cv_4d8a6bfc)** | MBA | Not explicitly mentioned | ⭐⭐⭐ |\n| **[Aisha Nkrumah](cv:cv_d1791bcc)** | MBA | Not explicitly mentioned | ⭐⭐⭐ |\n| **[Ling Zhang](cv:cv_5f249eef)** | MFA | Animation and Digital Media | ⭐⭐⭐ |\n| **[Ling Zhang](cv:cv_8a369e60)** | MFA | Animation and Digital Media | ⭐⭐⭐ |\n| **[Ji-hoon Kim](cv:cv_86f2dc3f)** | Bachelor of Science | Artificial Intelligence | ⭐⭐⭐ |\n| **[Ji-hoon Kim](cv:cv_933e3d69)** | Bachelor of Science | Artificial Intelligence | ⭐⭐⭐ |\n\n:::conclusion\nAll candidates have been included in the comparison table. The table provides a clear overview of each candidate's highest degree and field of study, as extracted from their respective CVs.",
+            "thinking": "The user is asking for a comparison of all candidates' education levels, including their highest degree and major. I need to extract the education sections from each CV and create a table comparing the candidates based on their degrees and fields of study.",
+            "analysis": "I reviewed all the provided CVs and extracted the education details. I included all candidates in the table, as the prompt requested a comparison of all candidates.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Highest Degree",
+                "Major/Field of Study",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Mei-Ling Chen",
+                  "cv_id": "cv_78b206ff",
+                  "columns": {
+                    "Highest Degree": "MSc",
+                    "Major/Field of Study": "Marketing Communications"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Mei-Ling Chen",
+                  "cv_id": "cv_cf467081",
+                  "columns": {
+                    "Highest Degree": "MSc",
+                    "Major/Field of Study": "Marketing Communications"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Margaret OConnor",
+                  "cv_id": "cv_5463ea64",
+                  "columns": {
+                    "Highest Degree": "Master of Arts",
+                    "Major/Field of Study": "Interactive Entertainment"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Margaret OConnor",
+                  "cv_id": "cv_b9dd75c5",
+                  "columns": {
+                    "Highest Degree": "Master of Arts",
+                    "Major/Field of Study": "Interactive Entertainment"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Priya Patel",
+                  "cv_id": "cv_f9769647",
+                  "columns": {
+                    "Highest Degree": "MBA",
+                    "Major/Field of Study": "Hospitality Management"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Ling Zhang",
+                  "cv_id": "cv_5f249eef",
+                  "columns": {
+                    "Highest Degree": "MFA",
+                    "Major/Field of Study": "Animation and Digital Media"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Ling Zhang",
+                  "cv_id": "cv_8a369e60",
+                  "columns": {
+                    "Highest Degree": "MFA",
+                    "Major/Field of Study": "Animation and Digital Media"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Priya Kapoor",
+                  "cv_id": "cv_7e516bc6",
+                  "columns": {
+                    "Highest Degree": "Ph.D.",
+                    "Major/Field of Study": "Computer Science"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Adewale Ogunleye",
+                  "cv_id": "cv_9fb0f971",
+                  "columns": {
+                    "Highest Degree": "Master of Nursing Science (MNS)",
+                    "Major/Field of Study": "Not explicitly mentioned"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Lerato Nkosi",
+                  "cv_id": "cv_5c64fbcd",
+                  "columns": {
+                    "Highest Degree": "Ph.D.",
+                    "Major/Field of Study": "Computer Science (Blockchain Systems)"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Lerato Nkosi",
+                  "cv_id": "cv_ea414ebe",
+                  "columns": {
+                    "Highest Degree": "Ph.D.",
+                    "Major/Field of Study": "Computer Science (Blockchain Systems)"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Isabel Mendoza",
+                  "cv_id": "cv_3a4418da",
+                  "columns": {
+                    "Highest Degree": "MSc",
+                    "Major/Field of Study": "Artificial Intelligence"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Aisha Nkrumah",
+                  "cv_id": "cv_4d8a6bfc",
+                  "columns": {
+                    "Highest Degree": "MBA",
+                    "Major/Field of Study": "Not explicitly mentioned"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Aisha Nkrumah",
+                  "cv_id": "cv_d1791bcc",
+                  "columns": {
+                    "Highest Degree": "MBA",
+                    "Major/Field of Study": "Not explicitly mentioned"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Ji-hoon Kim",
+                  "cv_id": "cv_86f2dc3f",
+                  "columns": {
+                    "Highest Degree": "Bachelor of Science",
+                    "Major/Field of Study": "Artificial Intelligence"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Ji-hoon Kim",
+                  "cv_id": "cv_933e3d69",
+                  "columns": {
+                    "Highest Degree": "Bachelor of Science",
+                    "Major/Field of Study": "Artificial Intelligence"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Aisha Patel",
+                  "cv_id": "cv_fe4831ee",
+                  "columns": {
+                    "Highest Degree": "Not explicitly mentioned",
+                    "Major/Field of Study": "Not explicitly mentioned"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Aisha Patel",
+                  "cv_id": "cv_aafbc954",
+                  "columns": {
+                    "Highest Degree": "Not explicitly mentioned",
+                    "Major/Field of Study": "Not explicitly mentioned"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Priya Kapoor",
+                  "cv_id": "cv_ef75350d",
+                  "columns": {
+                    "Highest Degree": "Not explicitly mentioned",
+                    "Major/Field of Study": "Not explicitly mentioned"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "All candidates have been included in the comparison table. The table provides a clear overview of each candidate's highest degree and field of study, as extracted from their respective CVs.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T02:36:55.675476"
+        }
+      ],
+      "created_at": "2026-01-05T02:15:22.786546",
+      "updated_at": "2026-01-05T02:36:55.675476"
+    },
+    {
+      "id": "c0484181-de04-45c6-aa9a-ee420789f270",
+      "name": "New chat",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_48f46067",
+          "filename": "a73ca65c__Isabel_Mendoza__Director_of_AI.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:19:45.200601"
+        },
+        {
+          "id": "cv_946dd2c5",
+          "filename": "a6691f95__Priya_Patel__Beverage_Director.pdf",
+          "chunk_count": 3,
+          "uploaded_at": "2026-01-05T02:19:46.091339"
+        },
+        {
+          "id": "cv_3c2f7c2c",
+          "filename": "af4b16eb__Adewale_Ogunleye__VP_of_Nursing.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:19:47.012494"
+        },
+        {
+          "id": "cv_df5a8e44",
+          "filename": "bd6793f7__Priya_Kapoor__VP_of_Data_Science.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:19:47.985351"
+        },
+        {
+          "id": "cv_1115467e",
+          "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-05T02:19:48.905173"
+        },
+        {
+          "id": "cv_3563c0cc",
+          "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:19:49.783144"
+        },
+        {
+          "id": "cv_bdb4b94f",
+          "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:19:50.787677"
+        },
+        {
+          "id": "cv_8a9f7ded",
+          "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:19:51.709825"
+        },
+        {
+          "id": "cv_e5169dae",
+          "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:19:52.651637"
+        },
+        {
+          "id": "cv_e710f738",
+          "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:19:53.590262"
+        },
+        {
+          "id": "cv_e84822b6",
+          "filename": "e6cb6422__Rajiv_Patel__CMO.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-05T02:19:54.484990"
+        },
+        {
+          "id": "cv_970ed801",
+          "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-05T02:19:55.466207"
+        }
+      ],
+      "messages": [
+        {
+          "id": "afa770fd-0178-4bb7-8922-bba9ff5f8daa",
+          "role": "user",
+          "content": "Who is best for a leadership role?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T02:36:13.885329"
+        }
+      ],
+      "created_at": "2026-01-05T02:19:41.313691",
+      "updated_at": "2026-01-05T02:36:13.885329"
+    },
+    {
+      "id": "71cfaf4d-4258-40d8-98f7-e7c9d1a9bfd0",
+      "name": "New chat",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_0d870621",
+          "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-05T02:21:23.728968"
+        },
+        {
+          "id": "cv_a05290e1",
+          "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:21:24.573848"
+        },
+        {
+          "id": "cv_95fb46ca",
+          "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:21:25.534246"
+        },
+        {
+          "id": "cv_90dc9497",
+          "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:21:26.448694"
+        },
+        {
+          "id": "cv_f0eb38ae",
+          "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:21:27.309449"
+        },
+        {
+          "id": "cv_1b1dea70",
+          "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:21:28.311690"
+        },
+        {
+          "id": "cv_b31a2eb3",
+          "filename": "e6cb6422__Rajiv_Patel__CMO.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-05T02:21:29.195567"
+        },
+        {
+          "id": "cv_13802ebc",
+          "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-05T02:21:30.138805"
+        },
+        {
+          "id": "cv_03b46199",
+          "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:21:47.223214"
+        },
+        {
+          "id": "cv_10ccdb51",
+          "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:21:48.166001"
+        },
+        {
+          "id": "cv_b7687c15",
+          "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:21:49.120161"
+        },
+        {
+          "id": "cv_d17dfe23",
+          "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:21:50.070682"
+        },
+        {
+          "id": "cv_bc830bd9",
+          "filename": "e6cb6422__Rajiv_Patel__CMO.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-05T02:21:50.980305"
+        },
+        {
+          "id": "cv_5c00468f",
+          "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-05T02:21:51.947596"
+        }
+      ],
+      "messages": [
+        {
+          "id": "66594e37-b009-4ef8-863a-4426d321513a",
+          "role": "user",
+          "content": "Who has startup experience?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T02:24:24.857020"
+        },
+        {
+          "id": "15f6e559-145b-4d51-9b52-b6b353b981d3",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking which candidates have startup experience. I need to examine the provided CVs and identify candidates who have worked at startups or in roles that suggest startup environments (e.g., fast-paced, growth-focused). I will look for explicit mentions of \"startup,\" \"early-stage,\" or similar terms, or roles that imply such experience.\n\nI will analyze the experience sections of each CV.\n:::\n\nSeveral candidates have experience that aligns with startup environments. [📄](cv:cv_b31a2eb3)**Rajiv Patel**and [📄](cv:cv_bc830bd9)**Rajiv Patel**both have experience at \"StartUpX,\" which is explicitly mentioned. ### Analysis I identified because their CVs explicitly mention \"StartUpX,\" indicating direct startup experience.\n\n### Analysis\n\nI identified [📄](cv:cv_b31a2eb3)**Rajiv Patel**and [📄](cv:cv_bc830bd9)**Rajiv Patel**because their CVs explicitly mention \"StartUpX,\" indicating direct startup experience.\n\n| Candidate | Startup Experience | Relevant Skills | Match Score |\n|---|---|---|---|\n| Rajiv Patel | StartUpX (Marketing Manager) | Data Analytics, Marketing | 80% |\n| Rajiv Patel | StartUpX (Marketing Manager) | Data Analytics, Marketing | 80% |\n\n:::conclusion\n[📄](cv:cv_b31a2eb3)**Rajiv Patel**and [📄](cv:cv_bc830bd9)**Rajiv Patel**have direct startup experience.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_a05290e1",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_95fb46ca",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_03b46199",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_b31a2eb3",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_bc830bd9",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_1b1dea70",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_d17dfe23",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_0d870621",
+              "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_f0eb38ae",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_b7687c15",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "error",
+              "duration_ms": 714.6,
+              "details": ""
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 3.14,
+              "details": "Found 10 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 17005.44,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 3570.85,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Several candidates have experience that aligns with startup environments. [📄](cv:cv_b31a2eb3) **Rajiv Patel** and [📄](cv:cv_bc830bd9) **Rajiv Patel** both have experience at \"StartUpX,\" which is explicitly mentioned. ### Analysis I identified because their CVs explicitly mention \"StartUpX,\" indicating direct startup experience.",
+            "raw_content": ":::thinking\nThe user is asking which candidates have startup experience. I need to examine the provided CVs and identify candidates who have worked at startups or in roles that suggest startup environments (e.g., fast-paced, growth-focused). I will look for explicit mentions of \"startup,\" \"early-stage,\" or similar terms, or roles that imply such experience.\n\nI will analyze the experience sections of each CV.\n\n:::\n\nSeveral candidates have experience that aligns with startup environments. **[Rajiv Patel](cv:cv_b31a2eb3)** and **[Rajiv Patel](cv:cv_bc830bd9)** both have experience at \"StartUpX,\" which is explicitly mentioned.\n\n### Analysis\n\nI identified **[Rajiv Patel](cv:cv_b31a2eb3)** and **[Rajiv Patel](cv:cv_bc830bd9)** because their CVs explicitly mention \"StartUpX,\" indicating direct startup experience.\n\n| Candidate | Startup Experience | Relevant Skills | Match |\n|-----------|--------------------|-----------------|-------|\n| **[Rajiv Patel](cv:cv_b31a2eb3)** | StartUpX (Marketing Manager) | Data Analytics, Marketing | ⭐⭐⭐⭐ |\n| **[Rajiv Patel](cv:cv_bc830bd9)** | StartUpX (Marketing Manager) | Data Analytics, Marketing | ⭐⭐⭐⭐ |\n\n:::conclusion\n**[Rajiv Patel](cv:cv_b31a2eb3)** and **[Rajiv Patel](cv:cv_bc830bd9)** have direct startup experience.\n:::",
+            "thinking": "The user is asking which candidates have startup experience. I need to examine the provided CVs and identify candidates who have worked at startups or in roles that suggest startup environments (e.g., fast-paced, growth-focused). I will look for explicit mentions of \"startup,\" \"early-stage,\" or similar terms, or roles that imply such experience.\n\nI will analyze the experience sections of each CV.",
+            "analysis": "I identified [📄](cv:cv_b31a2eb3) **Rajiv Patel** and [📄](cv:cv_bc830bd9) **Rajiv Patel** because their CVs explicitly mention \"StartUpX,\" indicating direct startup experience.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Startup Experience",
+                "Relevant Skills",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Rajiv Patel",
+                  "cv_id": "cv_b31a2eb3",
+                  "columns": {
+                    "Startup Experience": "StartUpX (Marketing Manager)",
+                    "Relevant Skills": "Data Analytics, Marketing"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Rajiv Patel",
+                  "cv_id": "cv_bc830bd9",
+                  "columns": {
+                    "Startup Experience": "StartUpX (Marketing Manager)",
+                    "Relevant Skills": "Data Analytics, Marketing"
+                  },
+                  "match_score": 80
+                }
+              ]
+            },
+            "conclusion": "[📄](cv:cv_b31a2eb3) **Rajiv Patel** and [📄](cv:cv_bc830bd9) **Rajiv Patel** have direct startup experience.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T02:25:12.248390"
+        },
+        {
+          "id": "dda3fe34-be96-455b-b295-af50b4c79870",
+          "role": "user",
+          "content": "Who has startup experience?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T02:26:17.472180"
+        },
+        {
+          "id": "80efb8f8-5758-404b-adf5-907193127d23",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking which candidates have startup experience. I need to examine the provided CVs and identify those with experience at a startup. I will look for explicit mentions of \"startup\" or similar terms in the experience sections.\n:::\n\nOnly one candidate explicitly mentions startup experience. ### Analysis I reviewed the provided CVs and found that [📄](cv:cv_b31a2eb3)**Rajiv Patel**and [📄](cv:cv_bc830bd9)**Rajiv Patel**both have experience at \"StartUpX\". :::conclusion have startup experience.\n\n### Analysis\n\nI reviewed the provided CVs and found that [📄](cv:cv_b31a2eb3)**Rajiv Patel**and [📄](cv:cv_bc830bd9)**Rajiv Patel**both have experience at \"StartUpX\".\n\n| Candidate | Startup Experience | Match Score |\n|---|---|---|\n| Rajiv Patel | Led digital acquisition initiatives for a disruptive AI-Driven startup. | 50% |\n| Rajiv Patel | Led digital acquisition initiatives for a disruptive AI-Driven startup. | 50% |\n\n:::conclusion\n[📄](cv:cv_b31a2eb3)**Rajiv Patel**and [📄](cv:cv_bc830bd9)**Rajiv Patel**have startup experience.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_a05290e1",
+              "filename": "bfdbe712__Aisha_Patel__Postdoctoral_Researcher.pdf"
+            },
+            {
+              "cv_id": "cv_95fb46ca",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_03b46199",
+              "filename": "cd7eb24f__Aisha_Nkrumah__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_b31a2eb3",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_bc830bd9",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_1b1dea70",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_d17dfe23",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_0d870621",
+              "filename": "bde0296c__Ji-hoon_Kim__Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_f0eb38ae",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_b7687c15",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "error",
+              "duration_ms": 724.58,
+              "details": ""
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 4.33,
+              "details": "Found 10 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 11300.77,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 2749.81,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Only one candidate explicitly mentions startup experience. ### Analysis I reviewed the provided CVs and found that [📄](cv:cv_b31a2eb3) **Rajiv Patel** and [📄](cv:cv_bc830bd9) **Rajiv Patel** both have experience at \"StartUpX\". :::conclusion have startup experience.",
+            "raw_content": ":::thinking\nThe user is asking which candidates have startup experience. I need to examine the provided CVs and identify those with experience at a startup. I will look for explicit mentions of \"startup\" or similar terms in the experience sections.\n\n:::\n\nOnly one candidate explicitly mentions startup experience.\n\n### Analysis\n\nI reviewed the provided CVs and found that **[Rajiv Patel](cv:cv_b31a2eb3)** and **[Rajiv Patel](cv:cv_bc830bd9)** both have experience at \"StartUpX\".\n\n| Candidate | Startup Experience |\n|-----------|--------------------|\n| **[Rajiv Patel](cv:cv_b31a2eb3)** | Led digital acquisition initiatives for a disruptive AI-Driven startup. |\n| **[Rajiv Patel](cv:cv_bc830bd9)** | Led digital acquisition initiatives for a disruptive AI-Driven startup. |\n\n:::conclusion\n**[Rajiv Patel](cv:cv_b31a2eb3)** and **[Rajiv Patel](cv:cv_bc830bd9)** have startup experience.",
+            "thinking": "The user is asking which candidates have startup experience. I need to examine the provided CVs and identify those with experience at a startup. I will look for explicit mentions of \"startup\" or similar terms in the experience sections.",
+            "analysis": "I reviewed the provided CVs and found that [📄](cv:cv_b31a2eb3) **Rajiv Patel** and [📄](cv:cv_bc830bd9) **Rajiv Patel** both have experience at \"StartUpX\".",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Startup Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Rajiv Patel",
+                  "cv_id": "cv_b31a2eb3",
+                  "columns": {
+                    "Startup Experience": "Led digital acquisition initiatives for a disruptive AI-Driven startup."
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Rajiv Patel",
+                  "cv_id": "cv_bc830bd9",
+                  "columns": {
+                    "Startup Experience": "Led digital acquisition initiatives for a disruptive AI-Driven startup."
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "[📄](cv:cv_b31a2eb3) **Rajiv Patel** and [📄](cv:cv_bc830bd9) **Rajiv Patel** have startup experience.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T02:26:57.061211"
+        }
+      ],
+      "created_at": "2026-01-05T02:21:17.464498",
+      "updated_at": "2026-01-05T02:26:57.061211"
+    },
+    {
+      "id": "e47b6131-cc76-4ec9-9219-a87d5443dc72",
+      "name": "New chat",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_f7611c76",
+          "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:25:19.649900"
+        },
+        {
+          "id": "cv_11cbf651",
+          "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:25:20.595596"
+        },
+        {
+          "id": "cv_e51b4182",
+          "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:25:21.530793"
+        },
+        {
+          "id": "cv_4c65b0b3",
+          "filename": "e6cb6422__Rajiv_Patel__CMO.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-05T02:25:22.494919"
+        },
+        {
+          "id": "cv_9f5d5d0c",
+          "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-05T02:25:23.399114"
+        }
+      ],
+      "messages": [
+        {
+          "id": "c7b22347-a795-472d-948a-a26e68c83bca",
+          "role": "user",
+          "content": "Create a top 3 shortlist from 5 candidates",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-05T02:36:16.226537"
+        },
+        {
+          "id": "e531afde-da69-4724-9a69-aafeedd8a1e8",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to evaluate 5 candidates based on their CVs and create a ranked shortlist of the top 3 candidates. The evaluation should consider qualifications, experience, and fit for the role. I will analyze each CV, looking for relevant skills and experience, and then rank the candidates accordingly.\n:::\n\nI have reviewed the CVs and created a ranked shortlist of the top 3 candidates based on their qualifications and experience. The candidates are ranked based on their relevant experience and skills as demonstrated in their CVs. ### Analysis\nI evaluated the candidates based on their experience and skills.\n\n### Analysis\n\nI evaluated the candidates based on their experience and skills. The primary criteria were relevant experience, skills, and the ability to demonstrate leadership.\n\n| Candidate | Relevant Experience | Skills | Match Score |\n|---|---|---|---|\n| Margaret OConnor | Extensive experience in game direction and design. | Game Engine Architecture, Team Leadership | 80% |\n| Ling Zhang | Extensive experience in animation and production management. | 3D Animation, Pipeline Optimization, Team Leadership | 60% |\n| Mei-Ling Chen | Experience in marketing leadership and brand expansion. | Marketing, Data Analytics, Content Strategy | 60% |\n\n:::conclusion\nThe top 3 candidates for the shortlist are: [📄](cv:cv_e51b4182)**Margaret OConnor**, [📄](cv:cv_9f5d5d0c)**Ling Zhang**, and [📄](cv:cv_11cbf651)**Mei-Ling Chen**.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_f7611c76",
+              "filename": "ce3da6d7__Lerato_Nkosi__Blockchain_Research_Director.pdf"
+            },
+            {
+              "cv_id": "cv_4c65b0b3",
+              "filename": "e6cb6422__Rajiv_Patel__CMO.pdf"
+            },
+            {
+              "cv_id": "cv_11cbf651",
+              "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf"
+            },
+            {
+              "cv_id": "cv_e51b4182",
+              "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf"
+            },
+            {
+              "cv_id": "cv_9f5d5d0c",
+              "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 10627.57,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 5.11,
+              "details": "Found 10 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 18515.24,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4491.77,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "I have reviewed the CVs and created a ranked shortlist of the top 3 candidates based on their qualifications and experience. The candidates are ranked based on their relevant experience and skills as demonstrated in their CVs. ### Analysis\nI evaluated the candidates based on their experience and skills.",
+            "raw_content": ":::thinking\nThe user is asking to evaluate 5 candidates based on their CVs and create a ranked shortlist of the top 3 candidates. The evaluation should consider qualifications, experience, and fit for the role. I will analyze each CV, looking for relevant skills and experience, and then rank the candidates accordingly.\n:::\n\nI have reviewed the CVs and created a ranked shortlist of the top 3 candidates based on their qualifications and experience. The candidates are ranked based on their relevant experience and skills as demonstrated in their CVs.\n\n### Analysis\n\nI evaluated the candidates based on their experience and skills. The primary criteria were relevant experience, skills, and the ability to demonstrate leadership.\n\n| Candidate | Relevant Experience | Skills | Match |\n|-----------|---------------------|--------|-------|\n| **[Margaret OConnor](cv:cv_e51b4182)** | Extensive experience in game direction and design. | Game Engine Architecture, Team Leadership | ⭐⭐⭐⭐ |\n| **[Ling Zhang](cv:cv_9f5d5d0c)** | Extensive experience in animation and production management. | 3D Animation, Pipeline Optimization, Team Leadership | ⭐⭐⭐ |\n| **[Mei-Ling Chen](cv:cv_11cbf651)** | Experience in marketing leadership and brand expansion. | Marketing, Data Analytics, Content Strategy | ⭐⭐⭐ |\n\n**[Margaret OConnor](cv:cv_e51b4182)**: Possesses extensive experience in game direction and design, with a proven track record of delivering award-winning games. Her skills include game engine architecture and team leadership.\n\n**[Ling Zhang](cv:cv_9f5d5d0c)**: Demonstrates extensive experience in animation and production management. Her skills include 3D animation, pipeline optimization, and team leadership.\n\n**[Mei-Ling Chen](cv:cv_11cbf651)**: Has experience in marketing leadership and brand expansion. Her skills include marketing, data analytics, and content strategy.\n\n:::conclusion\nThe top 3 candidates for the shortlist are: **[Margaret OConnor](cv:cv_e51b4182)**, **[Ling Zhang](cv:cv_9f5d5d0c)**, and **[Mei-Ling Chen](cv:cv_11cbf651)**.",
+            "thinking": "The user is asking to evaluate 5 candidates based on their CVs and create a ranked shortlist of the top 3 candidates. The evaluation should consider qualifications, experience, and fit for the role. I will analyze each CV, looking for relevant skills and experience, and then rank the candidates accordingly.",
+            "analysis": "I evaluated the candidates based on their experience and skills. The primary criteria were relevant experience, skills, and the ability to demonstrate leadership.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Relevant Experience",
+                "Skills",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Margaret OConnor",
+                  "cv_id": "cv_e51b4182",
+                  "columns": {
+                    "Relevant Experience": "Extensive experience in game direction and design.",
+                    "Skills": "Game Engine Architecture, Team Leadership"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Ling Zhang",
+                  "cv_id": "cv_9f5d5d0c",
+                  "columns": {
+                    "Relevant Experience": "Extensive experience in animation and production management.",
+                    "Skills": "3D Animation, Pipeline Optimization, Team Leadership"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Mei-Ling Chen",
+                  "cv_id": "cv_11cbf651",
+                  "columns": {
+                    "Relevant Experience": "Experience in marketing leadership and brand expansion.",
+                    "Skills": "Marketing, Data Analytics, Content Strategy"
+                  },
+                  "match_score": 60
+                }
+              ]
+            },
+            "conclusion": "The top 3 candidates for the shortlist are: [📄](cv:cv_e51b4182) **Margaret OConnor**, [📄](cv:cv_9f5d5d0c) **Ling Zhang**, and [📄](cv:cv_11cbf651) **Mei-Ling Chen**.",
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-05T02:37:02.645387"
+        }
+      ],
+      "created_at": "2026-01-05T02:25:09.924396",
+      "updated_at": "2026-01-05T02:37:02.645387"
+    },
+    {
+      "id": "844b3828-efac-4e7b-bc92-230dfa6e7a82",
+      "name": "New chat",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_dc6eb8c3",
+          "filename": "d79b1dde__Mei-Ling_Chen__VP_of_Marketing.pdf",
+          "chunk_count": 2,
+          "uploaded_at": "2026-01-05T02:36:41.713221"
+        },
+        {
+          "id": "cv_6374622c",
+          "filename": "d9785747__Ethan_MacLeod__Technical_Director.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:36:42.651134"
+        },
+        {
+          "id": "cv_609cb050",
+          "filename": "d9929195__Layla_Hassan__CFO.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-05T02:36:43.561333"
+        },
+        {
+          "id": "cv_0eb6dffa",
+          "filename": "e3c6d178__Margaret_OConnor__Game_Director.pdf",
+          "chunk_count": 4,
+          "uploaded_at": "2026-01-05T02:36:44.506477"
+        },
+        {
+          "id": "cv_b6757686",
+          "filename": "e6cb6422__Rajiv_Patel__CMO.pdf",
+          "chunk_count": 1,
+          "uploaded_at": "2026-01-05T02:36:45.470376"
+        },
+        {
+          "id": "cv_d5aceee8",
+          "filename": "fc5f3b75__Ling_Zhang__Director_of_Animation.pdf",
+          "chunk_count": 5,
+          "uploaded_at": "2026-01-05T02:36:46.386196"
+        }
+      ],
+      "messages": [],
+      "created_at": "2026-01-05T02:36:30.672588",
+      "updated_at": "2026-01-05T02:36:46.386196"
     }
   ]
 }

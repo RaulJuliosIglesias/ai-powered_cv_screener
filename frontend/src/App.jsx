@@ -6,6 +6,7 @@ import useMode from './hooks/useMode';
 import useTheme from './hooks/useTheme';
 import useToast from './hooks/useToast';
 import { useLanguage } from './contexts/LanguageContext';
+import { useBackgroundTask } from './contexts/BackgroundTaskContext';
 import SourceBadge from './components/SourceBadge';
 import ModelSelector from './components/ModelSelector';
 import RAGPipelineSettings, { getRAGPipelineSettings } from './components/RAGPipelineSettings';
@@ -15,7 +16,8 @@ import ChatInputField from './components/ChatInputField';
 import { StructuredOutputRenderer } from './components/output';
 import Sidebar from './components/Sidebar';
 import Toast from './components/Toast';
-import { UploadProgressModal, AboutModal } from './components/modals';
+import BackgroundUploadWidget from './components/BackgroundUploadWidget';
+import { AboutModal } from './components/modals';
 import { SessionSkeleton, MessageSkeleton } from './components/SkeletonLoader';
 import { MemoizedTable, MemoizedCodeBlock } from './components/MemoizedTable';
 import StreamingMessage from './components/StreamingMessage';
@@ -37,8 +39,7 @@ function App() {
   useEffect(() => {
     currentSessionIdRef.current = currentSessionId;
   }, [currentSessionId]);
-  const [isUploading, setIsUploading] = useState(false);
-  const [editingId, setEditingId] = useState(null);
+    const [editingId, setEditingId] = useState(null);
   const [editName, setEditName] = useState('');
   const [deleteConfirm, setDeleteConfirm] = useState(null);
   const [deletingSessionId, setDeletingSessionId] = useState(null);
@@ -72,10 +73,6 @@ function App() {
   // Streaming state for progressive message display
   const [streamingState, setStreamingState] = useState(null);
   // { currentStep: 'query_understanding', steps: {}, queryUnderstanding: null, candidates: [], partialAnswer: null }
-  
-  // Upload progress modal state
-  const [uploadProgress, setUploadProgress] = useState(null);
-  // { files: ['file1.pdf', 'file2.pdf'], current: 1, total: 3, status: 'uploading' | 'processing' | 'completed', logs: ['Processing file1.pdf...'] }
   
   // Delete progress modal state (for bulk deletion)
   const [deleteProgress, setDeleteProgress] = useState(null);
@@ -114,6 +111,7 @@ function App() {
   };
 
   const { toast: toastState, showToast: showToastMessage, hideToast } = useToast();
+  const { startUploadTask, hasActiveTasks } = useBackgroundTask();
   
   const messagesEndRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -133,25 +131,33 @@ function App() {
     }
   }, [isChatLoading]);
 
-  const loadSessions = useCallback(async () => {
+  const loadSessions = useCallback(async (showSkeleton = true) => {
     try { 
-      setIsLoadingSessions(true);
+      if (showSkeleton) setIsLoadingSessions(true);
       const data = await getSessions(mode); 
       setSessions(data.sessions || []); 
     } catch (e) { 
       console.error(e); 
     } finally {
-      setIsLoadingSessions(false);
+      if (showSkeleton) setIsLoadingSessions(false);
     }
   }, [mode]);
 
   const loadSession = useCallback(async (id) => {
     try {
       const data = await getSession(id, mode);
-      setCurrentSession(data);
-      const sugg = await getSessionSuggestions(id, mode);
-      setSuggestions(sugg.suggestions || []);
-    } catch (e) { console.error(e); setCurrentSessionId(null); }
+      // Only update if this is still the selected session (avoid race conditions)
+      if (currentSessionIdRef.current === id) {
+        setCurrentSession(data);
+        const sugg = await getSessionSuggestions(id, mode);
+        if (currentSessionIdRef.current === id) {
+          setSuggestions(sugg.suggestions || []);
+        }
+      }
+    } catch (e) { 
+      console.error(e); 
+      if (currentSessionIdRef.current === id) setCurrentSessionId(null); 
+    }
   }, [mode]);
 
   // Reload sessions when mode changes
@@ -168,7 +174,10 @@ function App() {
     switchMode();
   }, [mode]); // eslint-disable-line
   
-  useEffect(() => { if (currentSessionId) loadSession(currentSessionId); else { setCurrentSession(null); setSuggestions([]); } }, [currentSessionId, loadSession]);
+  useEffect(() => { 
+    if (currentSessionId) loadSession(currentSessionId); 
+    else { setCurrentSession(null); setSuggestions([]); } 
+  }, [currentSessionId, loadSession]);
   
   // Auto-load CVs when panel opens
   useEffect(() => { 
@@ -193,16 +202,20 @@ function App() {
     setCurrentSessionId(session.id);
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = (id) => {
+    // If user is viewing the session being deleted, clear it immediately
+    if (currentSessionIdRef.current === id) {
+      currentSessionIdRef.current = null;
+      setCurrentSessionId(null);
+      setCurrentSession(null);
+    }
     setDeletingSessionId(id);
     setDeleteConfirm(null);
-    try {
-      await deleteSession(id, mode);
-      await loadSessions();
-      if (currentSessionId === id) setCurrentSessionId(null);
-    } finally {
-      setDeletingSessionId(null);
-    }
+    
+    // Run deletion in background - completely non-blocking
+    deleteSession(id, mode)
+      .then(() => loadSessions(false)) // Silent refresh - no skeleton
+      .finally(() => setDeletingSessionId(null));
   };
 
   const handleRename = async (id) => {
@@ -216,110 +229,40 @@ function App() {
   const handleUpload = async (e) => {
     const files = Array.from(e.target.files).filter(f => f.name.endsWith('.pdf'));
     if (!files.length || !currentSessionId) return;
-    setIsUploading(true);
     
-    // Initialize progress modal
-    const fileNames = files.map(f => f.name);
-    setUploadProgress({
-      files: fileNames,
-      current: 0,
-      total: files.length,
-      percent: 0,
-      status: 'uploading',
-      logs: [language === 'es' ? `Subiendo ${files.length} archivo(s)...` : `Uploading ${files.length} file(s)...`]
+    const targetSessionId = currentSessionId;
+    const targetSessionName = currentSession?.name || (language === 'es' ? 'Chat actual' : 'Current chat');
+    
+    // Start background upload task
+    startUploadTask({
+      sessionId: targetSessionId,
+      sessionName: targetSessionName,
+      files,
+      mode,
+      language,
+      onComplete: async ({ sessionId, filesCount }) => {
+        // Reload session data when upload completes
+        if (currentSessionIdRef.current === sessionId) {
+          await loadSession(sessionId);
+        }
+        await loadSessions();
+        showToastMessage(
+          language === 'es' 
+            ? `✅ ${filesCount} CV(s) procesados correctamente` 
+            : `✅ ${filesCount} CV(s) processed successfully`,
+          'success'
+        );
+      },
+      onError: (error) => {
+        showToastMessage(
+          language === 'es' 
+            ? `❌ Error al subir CVs: ${error.message}` 
+            : `❌ Error uploading CVs: ${error.message}`,
+          'error'
+        );
+      }
     });
     
-    try {
-      // Upload phase (0% to 50%) - REAL upload progress from HTTP
-      const res = await uploadCVsToSession(currentSessionId, files, mode, (uploadPercent) => {
-        // Upload is 0-50% of total progress
-        const realPercent = Math.round(uploadPercent * 0.5);
-        setUploadProgress(prev => prev ? { ...prev, percent: realPercent } : null);
-      });
-      
-      // Processing phase - poll for REAL progress from backend
-      let lastProcessed = 0;
-      let lastPhase = '';
-      const phaseNames = {
-        extracting: language === 'es' ? 'Extrayendo texto' : 'Extracting text',
-        saving: language === 'es' ? 'Guardando PDF' : 'Saving PDF',
-        chunking: language === 'es' ? 'Dividiendo en chunks' : 'Chunking',
-        embedding: language === 'es' ? 'Creando embeddings' : 'Creating embeddings',
-        indexing: language === 'es' ? 'Indexando' : 'Indexing',
-        done: language === 'es' ? 'Completado' : 'Done'
-      };
-      
-      const poll = async () => {
-        const status = await getSessionUploadStatus(currentSessionId, res.job_id);
-        const processed = status.processed_files || 0;
-        const currentFile = status.current_file;
-        const currentPhase = status.current_phase;
-        
-        // Calculate real progress: each file has 5 phases
-        // processed_files * 100 + current phase progress (0-100)
-        const phaseProgress = { extracting: 10, saving: 20, chunking: 40, embedding: 80, indexing: 95, done: 100 };
-        const fileProgress = processed / files.length;
-        const currentFileProgress = currentPhase ? (phaseProgress[currentPhase] || 0) / 100 / files.length : 0;
-        const totalProgress = 50 + ((fileProgress + currentFileProgress) * 50);
-        
-        if (status.status === 'processing') {
-          setUploadProgress(prev => {
-            let newLogs = [...prev.logs];
-            
-            // Log when a new file starts or phase changes
-            if (currentFile && currentPhase && currentPhase !== lastPhase) {
-              const phaseName = phaseNames[currentPhase] || currentPhase;
-              const shortName = currentFile.length > 25 ? currentFile.slice(0, 22) + '...' : currentFile;
-              newLogs.push(`${phaseName}: ${shortName}`);
-              lastPhase = currentPhase;
-            }
-            
-            // Log when a file completes
-            if (processed > lastProcessed) {
-              const completedFile = fileNames[processed - 1] || `CV ${processed}`;
-              const shortName = completedFile.length > 25 ? completedFile.slice(0, 22) + '...' : completedFile;
-              newLogs.push(language === 'es' ? `✓ Completado: ${shortName}` : `✓ Done: ${shortName}`);
-              lastProcessed = processed;
-            }
-            
-            return {
-              ...prev,
-              current: processed,
-              percent: Math.min(99, Math.round(totalProgress)),
-              status: 'processing',
-              logs: newLogs.slice(-6)
-            };
-          });
-          setTimeout(poll, 150); // Poll very fast to catch all phases
-        } else {
-          setUploadProgress(prev => ({
-            ...prev,
-            status: 'completed',
-            current: files.length,
-            percent: 100,
-            logs: [...prev.logs.slice(-5), language === 'es' ? '✓ ¡Todo completado!' : '✓ All completed!']
-          }));
-          setTimeout(() => setUploadProgress(null), 1200);
-          setIsUploading(false);
-          await loadSession(currentSessionId);
-          await loadSessions();
-        }
-      };
-      
-      // Start polling immediately
-      setUploadProgress(prev => ({
-        ...prev,
-        percent: 50,
-        status: 'processing',
-        logs: [...prev.logs, language === 'es' ? 'Procesando archivos...' : 'Processing files...']
-      }));
-      poll();
-    } catch (e) { 
-      console.error(e); 
-      setIsUploading(false); 
-      setUploadProgress(prev => prev ? {...prev, status: 'error', logs: [...prev.logs, `Error: ${e.message}`]} : null);
-      setTimeout(() => setUploadProgress(null), 3000);
-    }
     e.target.value = '';
   };
 
@@ -594,91 +537,43 @@ function App() {
     const files = Array.from(e.target.files).filter(f => f.name.endsWith('.pdf'));
     const targetSessionId = cvPanelSessionId || currentSessionId;
     if (!files.length || !targetSessionId) return;
-    setIsUploading(true);
     
-    const fileNames = files.map(f => f.name);
-    setUploadProgress({
-      files: fileNames,
-      current: 0,
-      total: files.length,
-      percent: 0,
-      status: 'uploading',
-      logs: [language === 'es' ? `Subiendo ${files.length} archivo(s)...` : `Uploading ${files.length} file(s)...`]
+    // Find session name for display
+    const targetSession = sessions.find(s => s.id === targetSessionId);
+    const targetSessionName = targetSession?.name || cvPanelSession?.name || (language === 'es' ? 'Sesión' : 'Session');
+    
+    // Start background upload task
+    startUploadTask({
+      sessionId: targetSessionId,
+      sessionName: targetSessionName,
+      files,
+      mode,
+      language,
+      onComplete: async ({ sessionId, filesCount }) => {
+        // Refresh panel session data
+        const sessionData = await getSession(sessionId, mode);
+        setCvPanelSession(sessionData);
+        await loadSessions();
+        if (currentSessionIdRef.current === sessionId) {
+          await loadSession(sessionId);
+        }
+        showToastMessage(
+          language === 'es' 
+            ? `✅ ${filesCount} CV(s) procesados correctamente` 
+            : `✅ ${filesCount} CV(s) processed successfully`,
+          'success'
+        );
+      },
+      onError: (error) => {
+        showToastMessage(
+          language === 'es' 
+            ? `❌ Error al subir CVs: ${error.message}` 
+            : `❌ Error uploading CVs: ${error.message}`,
+          'error'
+        );
+      }
     });
     
-    try {
-      // Upload phase (0% to 50%) - REAL upload progress
-      const res = await uploadCVsToSession(targetSessionId, files, mode, (uploadPercent) => {
-        const realPercent = Math.round(uploadPercent * 0.5);
-        setUploadProgress(prev => prev ? { ...prev, percent: realPercent } : null);
-      });
-      
-      // Processing phase - poll for REAL progress
-      let lastProcessed = 0;
-      let lastPhase = '';
-      const phaseNames = {
-        extracting: language === 'es' ? 'Extrayendo texto' : 'Extracting text',
-        saving: language === 'es' ? 'Guardando PDF' : 'Saving PDF',
-        chunking: language === 'es' ? 'Dividiendo en chunks' : 'Chunking',
-        embedding: language === 'es' ? 'Creando embeddings' : 'Creating embeddings',
-        indexing: language === 'es' ? 'Indexando' : 'Indexing',
-        done: language === 'es' ? 'Completado' : 'Done'
-      };
-      
-      const poll = async () => {
-        const status = await getSessionUploadStatus(targetSessionId, res.job_id);
-        const processed = status.processed_files || 0;
-        const currentFile = status.current_file;
-        const currentPhase = status.current_phase;
-        
-        const phaseProgress = { extracting: 10, saving: 20, chunking: 40, embedding: 80, indexing: 95, done: 100 };
-        const fileProgress = processed / files.length;
-        const currentFileProgress = currentPhase ? (phaseProgress[currentPhase] || 0) / 100 / files.length : 0;
-        const totalProgress = 50 + ((fileProgress + currentFileProgress) * 50);
-        
-        if (status.status === 'processing') {
-          setUploadProgress(prev => {
-            let newLogs = [...prev.logs];
-            if (currentFile && currentPhase && currentPhase !== lastPhase) {
-              const phaseName = phaseNames[currentPhase] || currentPhase;
-              const shortName = currentFile.length > 25 ? currentFile.slice(0, 22) + '...' : currentFile;
-              newLogs.push(`${phaseName}: ${shortName}`);
-              lastPhase = currentPhase;
-            }
-            if (processed > lastProcessed) {
-              const completedFile = fileNames[processed - 1] || `CV ${processed}`;
-              const shortName = completedFile.length > 25 ? completedFile.slice(0, 22) + '...' : completedFile;
-              newLogs.push(language === 'es' ? `✓ Completado: ${shortName}` : `✓ Done: ${shortName}`);
-              lastProcessed = processed;
-            }
-            return { ...prev, current: processed, percent: Math.min(99, Math.round(totalProgress)), logs: newLogs.slice(-6) };
-          });
-          setTimeout(poll, 150);
-        } else {
-          setUploadProgress(prev => ({
-            ...prev,
-            status: 'completed',
-            current: files.length,
-            percent: 100,
-            logs: [...prev.logs.slice(-5), language === 'es' ? '✓ ¡Todo completado!' : '✓ All completed!']
-          }));
-          setTimeout(() => setUploadProgress(null), 1200);
-          setIsUploading(false);
-          const sessionData = await getSession(targetSessionId, mode);
-          setCvPanelSession(sessionData);
-          await loadSessions();
-          if (currentSessionId === targetSessionId) await loadSession(targetSessionId);
-        }
-      };
-      
-      setUploadProgress(prev => ({
-        ...prev,
-        percent: 50,
-        status: 'processing',
-        logs: [...prev.logs, language === 'es' ? 'Procesando archivos...' : 'Processing files...']
-      }));
-      poll();
-    } catch (e) { console.error(e); setIsUploading(false); }
     e.target.value = '';
   };
 
@@ -768,7 +663,11 @@ function App() {
           ) : sessions.map((s) => (
             <div key={s.id} className="mb-1">
               <div 
-                onClick={() => deletingSessionId !== s.id && setCurrentSessionId(s.id)} 
+                onClick={() => {
+                  currentSessionIdRef.current = s.id;
+                  setCurrentSessionId(s.id);
+                  loadSession(s.id);
+                }} 
                 className={`group flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
                   deletingSessionId === s.id 
                     ? 'bg-red-50 dark:bg-red-900/20 opacity-60 cursor-not-allowed' 
@@ -874,7 +773,7 @@ function App() {
               <Sliders className="w-4 h-4 text-purple-600 dark:text-purple-400" />
               <span className="text-xs font-medium text-slate-600 dark:text-slate-400 group-hover:text-purple-700 dark:group-hover:text-purple-300 hidden sm:inline">{language === 'es' ? 'Pipeline' : 'Pipeline'}</span>
             </button>
-            {currentSession && (<><input ref={fileInputRef} type="file" accept=".pdf" multiple onChange={handleUpload} className="hidden" /><button onClick={() => fileInputRef.current?.click()} disabled={isUploading} className="flex items-center gap-2 px-4 py-2 text-sm bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg disabled:opacity-50 font-medium transition-colors shadow-sm">{isUploading ? <Loader className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}<span>{language === 'es' ? 'Añadir CVs' : 'Add CVs'}</span></button></>)}
+            {currentSession && (<><input ref={fileInputRef} type="file" accept=".pdf" multiple onChange={handleUpload} className="hidden" /><button onClick={() => fileInputRef.current?.click()} disabled={hasActiveTasks} className="flex items-center gap-2 px-4 py-2 text-sm bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg disabled:opacity-50 font-medium transition-colors shadow-sm">{hasActiveTasks ? <Loader className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}<span>{language === 'es' ? 'Añadir CVs' : 'Add CVs'}</span></button></>)}
           </div>
         </div>
 
@@ -1300,12 +1199,6 @@ function App() {
         </div>
       )}
 
-      {/* Upload Progress Modal */}
-      <UploadProgressModal 
-        progress={uploadProgress} 
-        onClose={() => setUploadProgress(null)} 
-      />
-
       {/* Delete Progress Modal */}
       {deleteProgress && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[70]">
@@ -1404,6 +1297,9 @@ function App() {
 
       {/* About Modal */}
       <AboutModal isOpen={showAbout} onClose={() => setShowAbout(false)} />
+
+      {/* Background Upload Widget - floating minimizable panel */}
+      <BackgroundUploadWidget />
     </div>
   );
 }

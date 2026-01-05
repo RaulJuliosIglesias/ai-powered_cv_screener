@@ -1,6 +1,7 @@
 // Main components
 export { default as Sidebar } from './Sidebar';
 export { default as Toast } from './Toast';
+export { default as BackgroundUploadWidget } from './BackgroundUploadWidget';
 export { default as MemoizedTable, MemoizedCodeBlock } from './MemoizedTable';
 export { SessionSkeleton, MessageSkeleton, CVCardSkeleton, MetricsSkeleton, TableSkeleton } from './SkeletonLoader';
 
