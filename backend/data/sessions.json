@@ -68343,10 +68343,2860 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-06T20:46:38.666989"
+        },
+        {
+          "id": "60580f2b-d110-400b-81b6-ffc73ef8bd7a",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the full profile of Priya Patel (cv_37489ff8).\n- Priya Patel (cv_37489ff8)'s CURRENT role is Vice President of Talent Development at Global Horizons Inc. (2022-Present).\n- Total experience is 17 years (from 2005 to Present).\n- I will list all positions from the CV in reverse chronological order.\n:::\n\nPriya Patel is currently the Vice President of Talent Development at Global Horizons Inc., where she leads strategic career transformation programs for a multinational workforce. With 17 years of experience, she is known for her collaborative, data-driven strategies and her ability to foster patient growth and measurable career advancement.\n\n\n:::conclusion\n**Overall Assessment:** **[Priya Patel](cv:cv_37489ff8)** is a highly experienced career coach with a strong track record of success in talent development and career services. Her career trajectory demonstrates consistent growth and increasing responsibility, culminating in her current role as Vice President of Talent Development.\n\n**Key Strengths:**\n- Proven ability to drive employee promotion rates and reduce turnover costs.\n- Extensive experience in coaching, mentoring, and developing career roadmaps.\n- Stable career history with no employment gaps.\n\n**Areas to Explore:**\nNo significant concerns identified. Candidate appears to have a stable career trajectory.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_dc239d26",
+              "filename": "76724e1a__Farid_Al-Mansoori__Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_6b20e01c",
+              "filename": "757becdd__Pierre_Dubois__Tutor.pdf"
+            },
+            {
+              "cv_id": "cv_0856582a",
+              "filename": "d7c4ea07__Layla_Al-Mansoor__Assistant_Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_b0c609e3",
+              "filename": "40b3d301__Hana_Park__Vice_Dean.pdf"
+            },
+            {
+              "cv_id": "cv_6bcc8c77",
+              "filename": "d5dbc68c__Sofia_Rodriguez__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_e00e97d4",
+              "filename": "ebf8ece3__Javier_Chen__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_37489ff8",
+              "filename": "d8a170db__Priya_Patel__Career_Coach.pdf"
+            },
+            {
+              "cv_id": "cv_1d56ed8d",
+              "filename": "972db8df__Rajesh_Kumar__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_6268602e",
+              "filename": "c5eb0518__Isabella_Vargas__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_f0447b07",
+              "filename": "19051168__Kwame_van_der_Berg__Academic_Advisor.pdf"
+            },
+            {
+              "cv_id": "cv_417c5872",
+              "filename": "f94b3d4f__Rajiv_Patel__Professor.pdf"
+            },
+            {
+              "cv_id": "cv_f7eee0fe",
+              "filename": "38726cfe__Erik_Johansson__Teacher_Aide.pdf"
+            },
+            {
+              "cv_id": "cv_caa08878",
+              "filename": "b58cdb31__Aisha_Hassan__Substitute_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_8e0ce868",
+              "filename": "549e73f9__María_López__Student_Teacher.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 0.47,
+              "details": "Query type: general"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 17.13,
+              "details": "Found 22 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 13765.21,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5782.74,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Priya Patel is currently the Vice President of Talent Development at Global Horizons Inc., where she leads strategic career transformation programs for a multinational workforce. With 17 years of experience, she is known for her collaborative, data-driven strategies and her ability to foster patient growth and measurable career advancement.",
+            "raw_content": ":::thinking\nThe user is asking for the full profile of **[Priya Patel](cv:cv_37489ff8)**.\n- **[Priya Patel](cv:cv_37489ff8)**'s CURRENT role is Vice President of Talent Development at Global Horizons Inc. (2022-Present).\n- Total experience is 17 years (from 2005 to Present).\n- I will list all positions from the CV in reverse chronological order.\n:::\n\n## 👤 **[Priya Patel](cv:cv_37489ff8)**\n\n**[Priya Patel](cv:cv_37489ff8)** is currently the Vice President of Talent Development at Global Horizons Inc., where she leads strategic career transformation programs for a multinational workforce. With 17 years of experience, she is known for her collaborative, data-driven strategies and her ability to foster patient growth and measurable career advancement.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Vice President of Talent Development at Global Horizons Inc. (2022-Present) |\n| **⏱️ Total Experience** | 17 years in Career Coaching and Talent Development |\n| **🏆 Top Achievement** | Increased employee promotion rates by 35% within two years through a career coaching initiative |\n| **💡 Core Expertise** | Interview Coaching, Resume Strategy, Career Assessment |\n| **🎓 Education** | Master of Arts in Counseling Psychology, University of Mumbai, 2005 |\n\n---\n\n### 💼 Career Trajectory\n\n**Vice President of Talent Development** — *Global Horizons Inc.* (2022-Present)\n→ Spearheaded a career coaching initiative that increased employee promotion rates by 35% within two years.\n\n**Director of Career Services** — *Synergy Consulting Group* (2018-2022)\n→ Launched a virtual coaching platform that served 5,000+ professionals globally.\n\n**Career Coach** — *Elevate Coaching Labs* (2015-2018)\n→ Coached 120+ clients, achieving an average career progression of 2.5 years to next role.\n\n**Career Coach** — *Future Pathways Ltd.* (2012-2015)\n→ Achieved a 92% placement rate for clients within three months of program completion.\n\n**Career Consultant** — *BrightFuture Services* (2009-2012)\n→ Guided over 200 clients through career changes, with 78% securing new roles within six months.\n\n**Career Development Intern** — *InspireWorks Non-Profit* (2005-2009)\n→ Co-created a community mentorship network linking 50+ industry mentors with youth.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **Coaching** | Interview Coaching | 9/10 |\n| **Strategy** | Resume Strategy | 9/10 |\n| **Assessment** | Career Assessment | 8/10 |\n| **Development** | Leadership Development | 9/10 |\n\n---\n\n### Credentials\n\n- Certified Professional Coach (CPC), International Coach Federation, 2021\n- Advanced Leadership Coaching, Harvard Business School Online, 2020\n\n---\n\n### Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| **🚩 Red Flags** | ✅ None Detected | Clean profile |\n| **🔄 Job Hopping** | ✅ Low | Score: 0%, Avg tenure: 3.0 yrs |\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n| **📊 Stability** | ✅ Stable | 7 positions over 17 years |\n| **🎯 Experience** | Experienced | Career coaching and talent development |\n\n---\n\n:::conclusion\n**Overall Assessment:** **[Priya Patel](cv:cv_37489ff8)** is a highly experienced career coach with a strong track record of success in talent development and career services. Her career trajectory demonstrates consistent growth and increasing responsibility, culminating in her current role as Vice President of Talent Development.\n\n**Key Strengths:**\n- Proven ability to drive employee promotion rates and reduce turnover costs.\n- Extensive experience in coaching, mentoring, and developing career roadmaps.\n- Stable career history with no employment gaps.\n\n**Areas to Explore:**\nNo significant concerns identified. Candidate appears to have a stable career trajectory.\n:::",
+            "thinking": "The user is asking for the full profile of Priya Patel (cv_37489ff8).\n- Priya Patel (cv_37489ff8)'s CURRENT role is Vice President of Talent Development at Global Horizons Inc. (2022-Present).\n- Total experience is 17 years (from 2005 to Present).\n- I will list all positions from the CV in reverse chronological order.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "**Overall Assessment:** **[Priya Patel](cv:cv_37489ff8)** is a highly experienced career coach with a strong track record of success in talent development and career services. Her career trajectory demonstrates consistent growth and increasing responsibility, culminating in her current role as Vice President of Talent Development.\n\n**Key Strengths:**\n- Proven ability to drive employee promotion rates and reduce turnover costs.\n- Extensive experience in coaching, mentoring, and developing career roadmaps.\n- Stable career history with no employment gaps.\n\n**Areas to Explore:**\nNo significant concerns identified. Candidate appears to have a stable career trajectory.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Priya Patel  Career",
+              "cv_id": "cv_dc239d26",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "⚠️ Issues Found",
+                  "details": "Moderate concerns",
+                  "status_icon": "⚠️",
+                  "status_text": "Issues Found"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "✅ Low",
+                  "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                  "status_icon": "✅",
+                  "status_text": "Low"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "✅ Stable",
+                  "details": "1 positions over 0 years",
+                  "status_icon": "✅",
+                  "status_text": "Stable"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Entry",
+                  "details": "development, publishing findings in high @ impact",
+                  "status_icon": "",
+                  "status_text": "Entry"
+                }
+              ],
+              "has_issues": true,
+              "overall_risk": "moderate",
+              "analysis_text": "**Priya Patel  Career** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+              "metrics": {
+                "job_hopping_score": 0.0,
+                "avg_tenure_years": 0.0,
+                "total_experience_years": 0.0,
+                "employment_gaps_count": 0,
+                "position_count": 1
+              }
+            },
+            "structure_type": "single_candidate",
+            "single_candidate_data": {
+              "candidate_name": " Priya Patel  Career",
+              "cv_id": "cv_dc239d26",
+              "summary": "Priya Patel is currently the Vice President of Talent Development at Global Horizons Inc., where she leads strategic career transformation programs for a multinational workforce. With 17 years of experience, she is known for her collaborative, data-driven strategies and her ability to foster patient growth and measurable career advancement.",
+              "highlights": [
+                {
+                  "category": "🎯 Current Role",
+                  "value": "Vice President of Talent Development at Global Horizons Inc. (2022-Present)"
+                },
+                {
+                  "category": "⏱️ Total Experience",
+                  "value": "17 years in Career Coaching and Talent Development"
+                },
+                {
+                  "category": "🏆 Top Achievement",
+                  "value": "Increased employee promotion rates by 35% within two years through a career coaching initiative"
+                },
+                {
+                  "category": "💡 Core Expertise",
+                  "value": "Interview Coaching, Resume Strategy, Career Assessment"
+                },
+                {
+                  "category": "🎓 Education",
+                  "value": "Master of Arts in Counseling Psychology, University of Mumbai, 2005"
+                }
+              ],
+              "career": [
+                {
+                  "title": "Vice President of Talent Development",
+                  "company": "Global Horizons Inc.",
+                  "dates": "2022-Present",
+                  "achievement": "Spearheaded a career coaching initiative that increased employee promotion rates by 35% within two years."
+                },
+                {
+                  "title": "Director of Career Services",
+                  "company": "Synergy Consulting Group",
+                  "dates": "2018-2022",
+                  "achievement": "Launched a virtual coaching platform that served 5,000+ professionals globally."
+                },
+                {
+                  "title": "Career Coach",
+                  "company": "Elevate Coaching Labs",
+                  "dates": "2015-2018",
+                  "achievement": "Coached 120+ clients, achieving an average career progression of 2.5 years to next role."
+                },
+                {
+                  "title": "Career Coach",
+                  "company": "Future Pathways Ltd.",
+                  "dates": "2012-2015",
+                  "achievement": "Achieved a 92% placement rate for clients within three months of program completion."
+                },
+                {
+                  "title": "Career Consultant",
+                  "company": "BrightFuture Services",
+                  "dates": "2009-2012",
+                  "achievement": "Guided over 200 clients through career changes, with 78% securing new roles within six months."
+                },
+                {
+                  "title": "Career Development Intern",
+                  "company": "InspireWorks Non-Profit",
+                  "dates": "2005-2009",
+                  "achievement": "Co-created a community mentorship network linking 50+ industry mentors with youth."
+                }
+              ],
+              "skills": [
+                {
+                  "area": "Coaching",
+                  "details": "Interview Coaching",
+                  "level": "9/10"
+                },
+                {
+                  "area": "Strategy",
+                  "details": "Resume Strategy",
+                  "level": "9/10"
+                },
+                {
+                  "area": "Assessment",
+                  "details": "Career Assessment",
+                  "level": "8/10"
+                },
+                {
+                  "area": "Development",
+                  "details": "Leadership Development",
+                  "level": "9/10"
+                }
+              ],
+              "credentials": [
+                "Certified Professional Coach (CPC), International Coach Federation, 2021",
+                "Advanced Leadership Coaching, Harvard Business School Online, 2020"
+              ],
+              "risk_table": {
+                "candidate_name": " Priya Patel  Career",
+                "cv_id": "cv_dc239d26",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "⚠️ Issues Found",
+                    "details": "Moderate concerns",
+                    "status_icon": "⚠️",
+                    "status_text": "Issues Found"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "✅ Low",
+                    "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                    "status_icon": "✅",
+                    "status_text": "Low"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "✅ Stable",
+                    "details": "1 positions over 0 years",
+                    "status_icon": "✅",
+                    "status_text": "Stable"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Entry",
+                    "details": "development, publishing findings in high @ impact",
+                    "status_icon": "",
+                    "status_text": "Entry"
+                  }
+                ],
+                "has_issues": true,
+                "overall_risk": "moderate",
+                "analysis_text": "**Priya Patel  Career** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+                "metrics": {
+                  "job_hopping_score": 0.0,
+                  "avg_tenure_years": 0.0,
+                  "total_experience_years": 0.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 1
+                }
+              },
+              "conclusion": "**Overall Assessment:** **[Priya Patel](cv:cv_37489ff8)** is a highly experienced career coach with a strong track record of success in talent development and career services. Her career trajectory demonstrates consistent growth and increasing responsibility, culminating in her current role as Vice President of Talent Development.\n\n**Key Strengths:**\n- Proven ability to drive employee promotion rates and reduce turnover costs.\n- Extensive experience in coaching, mentoring, and developing career roadmaps.\n- Stable career history with no employment gaps.\n\n**Areas to Explore:**\nNo significant concerns identified. Candidate appears to have a stable career trajectory."
+            },
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T20:47:02.744828"
+        },
+        {
+          "id": "9827419c-aeff-4bb5-a44b-0041d9a0103c",
+          "role": "user",
+          "content": "See full profile of Priya Patel",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T20:54:37.675989"
+        },
+        {
+          "id": "71222e7a-f0c1-41e4-bf39-c88e8ee0144f",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the full profile of Priya Patel (cv_37489ff8).\n- Priya Patel (cv_37489ff8)'s CURRENT role is Vice President of Talent Development at Global Horizons Inc. (2022-Present).\n- Total experience is 17 years (from 2005 to Present).\n- I will list all positions from the CV in reverse chronological order.\n:::\n\nPriya Patel is currently the Vice President of Talent Development at Global Horizons Inc., where she leads strategic career transformation programs for a multinational workforce. With 17 years of experience, she is known for her collaborative, data-driven strategies and her ability to foster patient growth and measurable career advancement.\n\n\n:::conclusion\n**Overall Assessment:** **[Priya Patel](cv:cv_37489ff8)** is a highly experienced career coach with a strong track record of success in talent development and career services. Her career trajectory demonstrates consistent growth and increasing responsibility, culminating in her current role as Vice President of Talent Development.\n\n**Key Strengths:**\n- Proven ability to drive employee promotion rates and reduce turnover costs.\n- Extensive experience in coaching, mentoring, and developing career roadmaps.\n- Stable career history with no employment gaps.\n\n**Areas to Explore:**\nNo significant concerns identified. Candidate appears to have a stable career trajectory.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_0856582a",
+              "filename": "d7c4ea07__Layla_Al-Mansoor__Assistant_Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_dc239d26",
+              "filename": "76724e1a__Farid_Al-Mansoori__Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_6b20e01c",
+              "filename": "757becdd__Pierre_Dubois__Tutor.pdf"
+            },
+            {
+              "cv_id": "cv_b0c609e3",
+              "filename": "40b3d301__Hana_Park__Vice_Dean.pdf"
+            },
+            {
+              "cv_id": "cv_6bcc8c77",
+              "filename": "d5dbc68c__Sofia_Rodriguez__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_37489ff8",
+              "filename": "d8a170db__Priya_Patel__Career_Coach.pdf"
+            },
+            {
+              "cv_id": "cv_1d56ed8d",
+              "filename": "972db8df__Rajesh_Kumar__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_6268602e",
+              "filename": "c5eb0518__Isabella_Vargas__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_f7eee0fe",
+              "filename": "38726cfe__Erik_Johansson__Teacher_Aide.pdf"
+            },
+            {
+              "cv_id": "cv_e00e97d4",
+              "filename": "ebf8ece3__Javier_Chen__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_8e0ce868",
+              "filename": "549e73f9__María_López__Student_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_caa08878",
+              "filename": "b58cdb31__Aisha_Hassan__Substitute_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_417c5872",
+              "filename": "f94b3d4f__Rajiv_Patel__Professor.pdf"
+            },
+            {
+              "cv_id": "cv_aa3cde72",
+              "filename": "bd63b116__Valentina_Fernandez__Teaching_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_f0447b07",
+              "filename": "19051168__Kwame_van_der_Berg__Academic_Advisor.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 0.43,
+              "details": "Query type: general"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 17.41,
+              "details": "Found 20 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 4183.15,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6871.16,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Priya Patel is currently the Vice President of Talent Development at Global Horizons Inc., where she leads strategic career transformation programs for a multinational workforce. With 17 years of experience, she is known for her collaborative, data-driven strategies and her ability to foster patient growth and measurable career advancement.",
+            "raw_content": ":::thinking\nThe user is asking for the full profile of Priya Patel (cv_37489ff8).\n- Priya Patel (cv_37489ff8)'s CURRENT role is Vice President of Talent Development at Global Horizons Inc. (2022-Present).\n- Total experience is 17 years (from 2005 to Present).\n- I will list all positions from the CV in reverse chronological order.\n:::\n\n## 👤 **[Priya Patel Career](cv:cv_37489ff8)**\n\nPriya Patel is currently the Vice President of Talent Development at Global Horizons Inc., where she leads strategic career transformation programs for a multinational workforce. With 17 years of experience, she is known for her collaborative, data-driven strategies and her ability to foster patient growth and measurable career advancement.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Vice President of Talent Development at Global Horizons Inc. (2022-Present) |\n| **⏱️ Total Experience** | 17 years in career coaching |\n| **🏆 Top Achievement** | Spearheaded a career coaching initiative that increased employee promotion rates by 35% within two years. |\n| **💡 Core Expertise** | Interview Coaching, Leadership Development, Career Assessment |\n| **🎓 Education** | Master of Arts in Counseling Psychology - University of Mumbai, 2005 |\n\n---\n\n### 💼 Career Trajectory\n\n**Vice President of Talent Development** — *Global Horizons Inc.* (2022-Present)\n→ Spearheaded a career coaching initiative that increased employee promotion rates by 35% within two years.\n\n**Director of Career Services** — *Synergy Consulting Group* (2018-2022)\n→ Launched a virtual coaching platform that served 5,000+ professionals globally.\n\n**Career Coach** — *Elevate Coaching Labs* (2015-2018)\n→ Coached 120+ clients, achieving an average career progression of 2.5 years to next role.\n\n**Career Coach** — *Future Pathways Ltd.* (2012-2015)\n→ Achieved a 92% placement rate for clients within three months of program completion.\n\n**Career Consultant** — *BrightFuture Services* (2009-2012)\n→ Guided over 200 clients through career changes, with 78% securing new roles within six months.\n\n**Career Development Intern** — *InspireWorks Non-Profit* (2005-2009)\n→ Co-created a community mentorship network linking 50+ industry mentors with youth.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **Career** | Career Assessment | 8/10 |\n| **Resume** | Resume Strategy | 9/10 |\n| **Interview** | Interview Coaching | 9/10 |\n| **Leadership** | Leadership Development | 9/10 |\n\n---\n\n### Credentials\n\n- Certified Professional Coach (CPC), 2021\n- Advanced Leadership Coaching, 2020\n\n---\n\n### Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| **🚩 Red Flags** | ✅ None Detected | Clean profile |\n| **🔄 Job Hopping** | ✅ Low | Score: 0%, Avg tenure: 0.0 yrs |\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n| **📊 Stability** | ✅ Stable | 1 positions over 0 years |\n| **🎯 Experience** | Entry | Synergy Consulting Group |\n\n---\n\n:::conclusion\n**Overall Assessment:** **[Priya Patel](cv:cv_37489ff8)** is a highly experienced career coach with a strong track record of success in talent development and career services. Her career trajectory demonstrates consistent growth and increasing responsibility, culminating in her current role as Vice President of Talent Development.\n\n**Key Strengths:**\n- Proven ability to drive employee promotion rates and reduce turnover costs.\n- Extensive experience in coaching, mentoring, and developing career roadmaps.\n- Stable career history with no employment gaps.\n\n**Areas to Explore:**\nNo significant concerns identified. Candidate appears to have a stable career trajectory.\n:::",
+            "thinking": "The user is asking for the full profile of Priya Patel (cv_37489ff8).\n- Priya Patel (cv_37489ff8)'s CURRENT role is Vice President of Talent Development at Global Horizons Inc. (2022-Present).\n- Total experience is 17 years (from 2005 to Present).\n- I will list all positions from the CV in reverse chronological order.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "**Overall Assessment:** **[Priya Patel](cv:cv_37489ff8)** is a highly experienced career coach with a strong track record of success in talent development and career services. Her career trajectory demonstrates consistent growth and increasing responsibility, culminating in her current role as Vice President of Talent Development.\n\n**Key Strengths:**\n- Proven ability to drive employee promotion rates and reduce turnover costs.\n- Extensive experience in coaching, mentoring, and developing career roadmaps.\n- Stable career history with no employment gaps.\n\n**Areas to Explore:**\nNo significant concerns identified. Candidate appears to have a stable career trajectory.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Priya Patel  Career",
+              "cv_id": "cv_0856582a",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "⚠️ Issues Found",
+                  "details": "Moderate concerns",
+                  "status_icon": "⚠️",
+                  "status_text": "Issues Found"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "✅ Low",
+                  "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                  "status_icon": "✅",
+                  "status_text": "Low"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "✅ Stable",
+                  "details": "1 positions over 0 years",
+                  "status_icon": "✅",
+                  "status_text": "Stable"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Entry",
+                  "details": "environments. Known for patience @ empathy, Compiled annotated bibliographies that informed",
+                  "status_icon": "",
+                  "status_text": "Entry"
+                }
+              ],
+              "has_issues": true,
+              "overall_risk": "moderate",
+              "analysis_text": "**Priya Patel  Career** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+              "metrics": {
+                "job_hopping_score": 0.0,
+                "avg_tenure_years": 0.0,
+                "total_experience_years": 0.0,
+                "employment_gaps_count": 0,
+                "position_count": 1
+              }
+            },
+            "structure_type": "single_candidate",
+            "single_candidate_data": {
+              "candidate_name": " Priya Patel  Career",
+              "cv_id": "cv_0856582a",
+              "summary": "Priya Patel is currently the Vice President of Talent Development at Global Horizons Inc., where she leads strategic career transformation programs for a multinational workforce. With 17 years of experience, she is known for her collaborative, data-driven strategies and her ability to foster patient growth and measurable career advancement.",
+              "highlights": [
+                {
+                  "category": "🎯 Current Role",
+                  "value": "Vice President of Talent Development at Global Horizons Inc. (2022-Present)"
+                },
+                {
+                  "category": "⏱️ Total Experience",
+                  "value": "17 years in career coaching"
+                },
+                {
+                  "category": "🏆 Top Achievement",
+                  "value": "Spearheaded a career coaching initiative that increased employee promotion rates by 35% within two years."
+                },
+                {
+                  "category": "💡 Core Expertise",
+                  "value": "Interview Coaching, Leadership Development, Career Assessment"
+                },
+                {
+                  "category": "🎓 Education",
+                  "value": "Master of Arts in Counseling Psychology - University of Mumbai, 2005"
+                }
+              ],
+              "career": [
+                {
+                  "title": "Vice President of Talent Development",
+                  "company": "Global Horizons Inc.",
+                  "dates": "2022-Present",
+                  "achievement": "Spearheaded a career coaching initiative that increased employee promotion rates by 35% within two years."
+                },
+                {
+                  "title": "Director of Career Services",
+                  "company": "Synergy Consulting Group",
+                  "dates": "2018-2022",
+                  "achievement": "Launched a virtual coaching platform that served 5,000+ professionals globally."
+                },
+                {
+                  "title": "Career Coach",
+                  "company": "Elevate Coaching Labs",
+                  "dates": "2015-2018",
+                  "achievement": "Coached 120+ clients, achieving an average career progression of 2.5 years to next role."
+                },
+                {
+                  "title": "Career Coach",
+                  "company": "Future Pathways Ltd.",
+                  "dates": "2012-2015",
+                  "achievement": "Achieved a 92% placement rate for clients within three months of program completion."
+                },
+                {
+                  "title": "Career Consultant",
+                  "company": "BrightFuture Services",
+                  "dates": "2009-2012",
+                  "achievement": "Guided over 200 clients through career changes, with 78% securing new roles within six months."
+                },
+                {
+                  "title": "Career Development Intern",
+                  "company": "InspireWorks Non-Profit",
+                  "dates": "2005-2009",
+                  "achievement": "Co-created a community mentorship network linking 50+ industry mentors with youth."
+                }
+              ],
+              "skills": [
+                {
+                  "area": "Career",
+                  "details": "Career Assessment",
+                  "level": "8/10"
+                },
+                {
+                  "area": "Resume",
+                  "details": "Resume Strategy",
+                  "level": "9/10"
+                },
+                {
+                  "area": "Interview",
+                  "details": "Interview Coaching",
+                  "level": "9/10"
+                },
+                {
+                  "area": "Leadership",
+                  "details": "Leadership Development",
+                  "level": "9/10"
+                }
+              ],
+              "credentials": [
+                "Certified Professional Coach (CPC), 2021",
+                "Advanced Leadership Coaching, 2020"
+              ],
+              "risk_table": {
+                "candidate_name": " Priya Patel  Career",
+                "cv_id": "cv_0856582a",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "⚠️ Issues Found",
+                    "details": "Moderate concerns",
+                    "status_icon": "⚠️",
+                    "status_text": "Issues Found"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "✅ Low",
+                    "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                    "status_icon": "✅",
+                    "status_text": "Low"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "✅ Stable",
+                    "details": "1 positions over 0 years",
+                    "status_icon": "✅",
+                    "status_text": "Stable"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Entry",
+                    "details": "environments. Known for patience @ empathy, Compiled annotated bibliographies that informed",
+                    "status_icon": "",
+                    "status_text": "Entry"
+                  }
+                ],
+                "has_issues": true,
+                "overall_risk": "moderate",
+                "analysis_text": "**Priya Patel  Career** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+                "metrics": {
+                  "job_hopping_score": 0.0,
+                  "avg_tenure_years": 0.0,
+                  "total_experience_years": 0.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 1
+                }
+              },
+              "conclusion": "**Overall Assessment:** **[Priya Patel](cv:cv_37489ff8)** is a highly experienced career coach with a strong track record of success in talent development and career services. Her career trajectory demonstrates consistent growth and increasing responsibility, culminating in her current role as Vice President of Talent Development.\n\n**Key Strengths:**\n- Proven ability to drive employee promotion rates and reduce turnover costs.\n- Extensive experience in coaching, mentoring, and developing career roadmaps.\n- Stable career history with no employment gaps.\n\n**Areas to Explore:**\nNo significant concerns identified. Candidate appears to have a stable career trajectory."
+            },
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T20:54:52.868022"
+        },
+        {
+          "id": "1ccfc1bb-65b5-479e-8816-219007f3831b",
+          "role": "user",
+          "content": "See full profile of Priya Patel",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T20:58:33.626218"
+        },
+        {
+          "id": "ae6dee62-82d3-4fd3-b4c1-bb427e552841",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the full profile of Priya Patel (cv_37489ff8).\n- Priya Patel (cv_37489ff8)'s CURRENT role is Vice President of Talent Development at Global Horizons Inc. (2022-Present).\n- Total experience is 17 years (from 2005 to Present).\n- I will list all positions from the CV in reverse chronological order.\n:::\n\nPriya Patel is currently the Vice President of Talent Development at Global Horizons Inc., where she leads strategic career transformation programs for a multinational workforce. With 17 years of experience, she is known for her collaborative, data-driven strategies and her ability to foster patient growth and measurable career advancement.\n\n\n:::conclusion\n**Overall Assessment:** **[Priya Patel](cv:cv_37489ff8)** is a highly experienced career coach with a strong track record of success in talent development and career services. Her career trajectory demonstrates consistent growth and increasing responsibility, culminating in her current role as Vice President of Talent Development.\n\n**Key Strengths:**\n- Proven ability to drive employee promotion rates and reduce turnover costs.\n- Extensive experience in coaching, mentoring, and developing career roadmaps.\n- Stable career history with no employment gaps.\n\n**Areas to Explore:**\nNo significant concerns identified. Candidate appears to have a stable career trajectory.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_dc239d26",
+              "filename": "76724e1a__Farid_Al-Mansoori__Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_37489ff8",
+              "filename": "d8a170db__Priya_Patel__Career_Coach.pdf"
+            },
+            {
+              "cv_id": "cv_0856582a",
+              "filename": "d7c4ea07__Layla_Al-Mansoor__Assistant_Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_b0c609e3",
+              "filename": "40b3d301__Hana_Park__Vice_Dean.pdf"
+            },
+            {
+              "cv_id": "cv_6b20e01c",
+              "filename": "757becdd__Pierre_Dubois__Tutor.pdf"
+            },
+            {
+              "cv_id": "cv_e00e97d4",
+              "filename": "ebf8ece3__Javier_Chen__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_6bcc8c77",
+              "filename": "d5dbc68c__Sofia_Rodriguez__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_1d56ed8d",
+              "filename": "972db8df__Rajesh_Kumar__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_6268602e",
+              "filename": "c5eb0518__Isabella_Vargas__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_f7eee0fe",
+              "filename": "38726cfe__Erik_Johansson__Teacher_Aide.pdf"
+            },
+            {
+              "cv_id": "cv_f0447b07",
+              "filename": "19051168__Kwame_van_der_Berg__Academic_Advisor.pdf"
+            },
+            {
+              "cv_id": "cv_417c5872",
+              "filename": "f94b3d4f__Rajiv_Patel__Professor.pdf"
+            },
+            {
+              "cv_id": "cv_caa08878",
+              "filename": "b58cdb31__Aisha_Hassan__Substitute_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_8e0ce868",
+              "filename": "549e73f9__María_López__Student_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_aa3cde72",
+              "filename": "bd63b116__Valentina_Fernandez__Teaching_Assistant.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 4.59,
+              "details": "Query type: general"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 18.66,
+              "details": "Found 21 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 7212.84,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5735.5,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Priya Patel is currently the Vice President of Talent Development at Global Horizons Inc., where she leads strategic career transformation programs for a multinational workforce. With 17 years of experience, she is known for her collaborative, data-driven strategies and her ability to foster patient growth and measurable career advancement.",
+            "raw_content": ":::thinking\nThe user is asking for the full profile of Priya Patel (cv_37489ff8).\n- Priya Patel (cv_37489ff8)'s CURRENT role is Vice President of Talent Development at Global Horizons Inc. (2022-Present).\n- Total experience is 17 years (from 2005 to Present).\n- I will list all positions from the CV in reverse chronological order.\n:::\n\n## 👤 **[Priya Patel Career](cv:cv_37489ff8)**\n\nPriya Patel is currently the Vice President of Talent Development at Global Horizons Inc., where she leads strategic career transformation programs for a multinational workforce. With 17 years of experience, she is known for her collaborative, data-driven strategies and her ability to foster patient growth and measurable career advancement.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Vice President of Talent Development at Global Horizons Inc. (2022-Present) |\n| **⏱️ Total Experience** | 17 years in career coaching |\n| **🏆 Top Achievement** | Spearheaded a career coaching initiative that increased employee promotion rates by 35% within two years. |\n| **💡 Core Expertise** | Career Assessment, Interview Coaching, Leadership Development |\n| **🎓 Education** | Master of Arts in Counseling Psychology, University of Mumbai, 2005 |\n\n---\n\n### 💼 Career Trajectory\n\n**Vice President of Talent Development** — *Global Horizons Inc.* (2022-Present)\n→ Spearheaded a career coaching initiative that increased employee promotion rates by 35% within two years.\n\n**Director of Career Services** — *Synergy Consulting Group* (2018-2022)\n→ Led a team of 15 coaches, delivering personalized career roadmaps and skill-building workshops.\n\n**Career Coach** — *Elevate Coaching Labs* (2015-2018)\n→ Coached 120+ clients, achieving an average career progression of 2.5 years to next role.\n\n**Career Coach** — *Future Pathways Ltd.* (2012-2015)\n→ Achieved a 92% placement rate for clients within three months of program completion.\n\n**Career Consultant** — *BrightFuture Services* (2009-2012)\n→ Guided over 200 clients through career changes, with 78% securing new roles within six months.\n\n**Career Development Intern** — *InspireWorks Non-Profit* (2005-2009)\n→ Co-created a community mentorship network linking 50+ industry mentors with youth.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **Career** | Assessment | 8/10 |\n| **Resume Strategy** |  | 9/10 |\n| **Interview** | Coaching | 9/10 |\n| **Leadership** | Development | 9/10 |\n\n---\n\n### Credentials\n\n- Certified Professional Coach (CPC), 2021\n- Advanced Leadership Coaching, 2020\n\n---\n\n### Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| **🚩 Red Flags** | ✅ None Detected | Clean profile |\n| **🔄 Job Hopping** | ✅ Low | Score: 0%, Avg tenure: 0.0 yrs |\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n| **📊 Stability** | ✅ Stable | 1 positions over 0 years |\n| **🎯 Experience** | Entry | development, publishing findings in high @ impact |\n\n---\n\n:::conclusion\n**Overall Assessment:** **[Priya Patel](cv:cv_37489ff8)** is a highly experienced career coach with a strong track record of success in talent development and career services. Her career trajectory demonstrates consistent growth and increasing responsibility, culminating in her current role as Vice President of Talent Development.\n\n**Key Strengths:**\n- Proven ability to drive employee promotion rates and reduce turnover costs.\n- Extensive experience in coaching, mentoring, and developing career roadmaps.\n- Stable career history with no employment gaps.\n\n**Areas to Explore:**\nNo significant concerns identified. Candidate appears to have a stable career trajectory.\n:::",
+            "thinking": "The user is asking for the full profile of Priya Patel (cv_37489ff8).\n- Priya Patel (cv_37489ff8)'s CURRENT role is Vice President of Talent Development at Global Horizons Inc. (2022-Present).\n- Total experience is 17 years (from 2005 to Present).\n- I will list all positions from the CV in reverse chronological order.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "**Overall Assessment:** **[Priya Patel](cv:cv_37489ff8)** is a highly experienced career coach with a strong track record of success in talent development and career services. Her career trajectory demonstrates consistent growth and increasing responsibility, culminating in her current role as Vice President of Talent Development.\n\n**Key Strengths:**\n- Proven ability to drive employee promotion rates and reduce turnover costs.\n- Extensive experience in coaching, mentoring, and developing career roadmaps.\n- Stable career history with no employment gaps.\n\n**Areas to Explore:**\nNo significant concerns identified. Candidate appears to have a stable career trajectory.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Priya Patel  Career",
+              "cv_id": "cv_dc239d26",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "⚠️ Issues Found",
+                  "details": "Moderate concerns",
+                  "status_icon": "⚠️",
+                  "status_text": "Issues Found"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "✅ Low",
+                  "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                  "status_icon": "✅",
+                  "status_text": "Low"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "✅ Stable",
+                  "details": "1 positions over 0 years",
+                  "status_icon": "✅",
+                  "status_text": "Stable"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Entry",
+                  "details": "development, publishing findings in high @ impact",
+                  "status_icon": "",
+                  "status_text": "Entry"
+                }
+              ],
+              "has_issues": true,
+              "overall_risk": "moderate",
+              "analysis_text": "**Priya Patel  Career** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+              "metrics": {
+                "job_hopping_score": 0.0,
+                "avg_tenure_years": 0.0,
+                "total_experience_years": 0.0,
+                "employment_gaps_count": 0,
+                "position_count": 1
+              }
+            },
+            "structure_type": "single_candidate",
+            "single_candidate_data": {
+              "candidate_name": " Priya Patel  Career",
+              "cv_id": "cv_dc239d26",
+              "summary": "Priya Patel is currently the Vice President of Talent Development at Global Horizons Inc., where she leads strategic career transformation programs for a multinational workforce. With 17 years of experience, she is known for her collaborative, data-driven strategies and her ability to foster patient growth and measurable career advancement.",
+              "highlights": [
+                {
+                  "category": "🎯 Current Role",
+                  "value": "Vice President of Talent Development at Global Horizons Inc. (2022-Present)"
+                },
+                {
+                  "category": "⏱️ Total Experience",
+                  "value": "17 years in career coaching"
+                },
+                {
+                  "category": "🏆 Top Achievement",
+                  "value": "Spearheaded a career coaching initiative that increased employee promotion rates by 35% within two years."
+                },
+                {
+                  "category": "💡 Core Expertise",
+                  "value": "Career Assessment, Interview Coaching, Leadership Development"
+                },
+                {
+                  "category": "🎓 Education",
+                  "value": "Master of Arts in Counseling Psychology, University of Mumbai, 2005"
+                }
+              ],
+              "career": [
+                {
+                  "title": "Vice President of Talent Development",
+                  "company": "Global Horizons Inc.",
+                  "dates": "2022-Present",
+                  "achievement": "Spearheaded a career coaching initiative that increased employee promotion rates by 35% within two years."
+                },
+                {
+                  "title": "Director of Career Services",
+                  "company": "Synergy Consulting Group",
+                  "dates": "2018-2022",
+                  "achievement": "Led a team of 15 coaches, delivering personalized career roadmaps and skill-building workshops."
+                },
+                {
+                  "title": "Career Coach",
+                  "company": "Elevate Coaching Labs",
+                  "dates": "2015-2018",
+                  "achievement": "Coached 120+ clients, achieving an average career progression of 2.5 years to next role."
+                },
+                {
+                  "title": "Career Coach",
+                  "company": "Future Pathways Ltd.",
+                  "dates": "2012-2015",
+                  "achievement": "Achieved a 92% placement rate for clients within three months of program completion."
+                },
+                {
+                  "title": "Career Consultant",
+                  "company": "BrightFuture Services",
+                  "dates": "2009-2012",
+                  "achievement": "Guided over 200 clients through career changes, with 78% securing new roles within six months."
+                },
+                {
+                  "title": "Career Development Intern",
+                  "company": "InspireWorks Non-Profit",
+                  "dates": "2005-2009",
+                  "achievement": "Co-created a community mentorship network linking 50+ industry mentors with youth."
+                }
+              ],
+              "skills": [
+                {
+                  "area": "Career",
+                  "details": "Assessment",
+                  "level": "8/10"
+                },
+                {
+                  "area": "Interview",
+                  "details": "Coaching",
+                  "level": "9/10"
+                },
+                {
+                  "area": "Leadership",
+                  "details": "Development",
+                  "level": "9/10"
+                }
+              ],
+              "credentials": [
+                "Certified Professional Coach (CPC), 2021",
+                "Advanced Leadership Coaching, 2020"
+              ],
+              "risk_table": {
+                "candidate_name": " Priya Patel  Career",
+                "cv_id": "cv_dc239d26",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "⚠️ Issues Found",
+                    "details": "Moderate concerns",
+                    "status_icon": "⚠️",
+                    "status_text": "Issues Found"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "✅ Low",
+                    "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                    "status_icon": "✅",
+                    "status_text": "Low"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "✅ Stable",
+                    "details": "1 positions over 0 years",
+                    "status_icon": "✅",
+                    "status_text": "Stable"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Entry",
+                    "details": "development, publishing findings in high @ impact",
+                    "status_icon": "",
+                    "status_text": "Entry"
+                  }
+                ],
+                "has_issues": true,
+                "overall_risk": "moderate",
+                "analysis_text": "**Priya Patel  Career** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+                "metrics": {
+                  "job_hopping_score": 0.0,
+                  "avg_tenure_years": 0.0,
+                  "total_experience_years": 0.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 1
+                }
+              },
+              "conclusion": "**Overall Assessment:** **[Priya Patel](cv:cv_37489ff8)** is a highly experienced career coach with a strong track record of success in talent development and career services. Her career trajectory demonstrates consistent growth and increasing responsibility, culminating in her current role as Vice President of Talent Development.\n\n**Key Strengths:**\n- Proven ability to drive employee promotion rates and reduce turnover costs.\n- Extensive experience in coaching, mentoring, and developing career roadmaps.\n- Stable career history with no employment gaps.\n\n**Areas to Explore:**\nNo significant concerns identified. Candidate appears to have a stable career trajectory."
+            },
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T20:58:50.268783"
         }
       ],
       "created_at": "2026-01-06T19:13:35.403051",
-      "updated_at": "2026-01-06T20:46:38.666989"
+      "updated_at": "2026-01-06T20:58:50.268783"
+    },
+    {
+      "id": "5dbf9f1f-d90a-489a-bfe0-311e672bbacb",
+      "name": "Business Management 2503",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_aaab8711",
+          "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf",
+          "chunk_count": 7,
+          "content_hash": "34e34e3e922b091c04ab0251473fe4533edc8c5caab5054ab60a90f7e598cf4e",
+          "uploaded_at": "2026-01-06T20:48:06.713991"
+        },
+        {
+          "id": "cv_3324a854",
+          "filename": "0c185b57__Matteo_Rossi__Associate_Analyst.pdf",
+          "chunk_count": 6,
+          "content_hash": "afaedbee00cabea5665a22ae3a24904680263fafcf46a920873fcefbc741d3c1",
+          "uploaded_at": "2026-01-06T20:48:07.347973"
+        },
+        {
+          "id": "cv_15ff1947",
+          "filename": "0cdcafca__Aisha_Al-Mansoori__Junior_Chef.pdf",
+          "chunk_count": 3,
+          "content_hash": "da4577fd1a8c6cc8af85bdd1fea909794d48d9153b919d54f6bd337ffe8554b5",
+          "uploaded_at": "2026-01-06T20:48:07.819097"
+        },
+        {
+          "id": "cv_759793b4",
+          "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf",
+          "chunk_count": 4,
+          "content_hash": "ba592f983221200b97a3fbdf759a36ce291811b3979f18373691e64441ea9f71",
+          "uploaded_at": "2026-01-06T20:48:08.414002"
+        },
+        {
+          "id": "cv_76b0a541",
+          "filename": "01def3e4__Mei_Lin_Chen__Accessories_Designer.pdf",
+          "chunk_count": 6,
+          "content_hash": "cfa508e32087cf01536674432a9def733423ecfad30d95f408ec706a1b593f26",
+          "uploaded_at": "2026-01-06T20:48:09.030178"
+        },
+        {
+          "id": "cv_f7341172",
+          "filename": "1b2a47e8__Amir_Hassan__Stylist.pdf",
+          "chunk_count": 5,
+          "content_hash": "261c11248808d9b2c54acd9a80d29c29e525bd11eabe4364023c6c5da6e83c89",
+          "uploaded_at": "2026-01-06T20:48:09.621161"
+        },
+        {
+          "id": "cv_d67dc743",
+          "filename": "1b215ef8__Matteo_Rossi__Group_PM.pdf",
+          "chunk_count": 5,
+          "content_hash": "4b30c69eaa58407675964b552ee9f3f8416640d8a0f4026b442baedbae6cf444",
+          "uploaded_at": "2026-01-06T20:48:10.266582"
+        },
+        {
+          "id": "cv_7d46c260",
+          "filename": "1c261534__Priya_Kim__Sous_Chef.pdf",
+          "chunk_count": 4,
+          "content_hash": "f616c0310253294cea8e62820c55182df7d3b5ac732ff959d6f105958b4fb03f",
+          "uploaded_at": "2026-01-06T20:48:10.766773"
+        },
+        {
+          "id": "cv_68d35a03",
+          "filename": "2a6972cc__Ji-eun_Kim__Business_Analyst.pdf",
+          "chunk_count": 7,
+          "content_hash": "4f7bb043aeb9024021c7ed5d1c454aa3a9eb5db80196aed6bb7a9dc0f0bd753e",
+          "uploaded_at": "2026-01-06T20:48:11.414901"
+        },
+        {
+          "id": "cv_f0558105",
+          "filename": "2aaf7352__Sofia_Rossi__Restaurant_Owner.pdf",
+          "chunk_count": 6,
+          "content_hash": "a96a7044391daa1e3e6afc4828e8e7077c74a5a88efdb174f207a0234fdd9225",
+          "uploaded_at": "2026-01-06T20:48:11.989717"
+        },
+        {
+          "id": "cv_fad41666",
+          "filename": "2e55e31d__Sofia_Mendoza__Designer.pdf",
+          "chunk_count": 5,
+          "content_hash": "4130ae44249275e39c3e1b82efc669f8e12fb071b03144d0c4b8b71d5f321043",
+          "uploaded_at": "2026-01-06T20:48:12.591013"
+        },
+        {
+          "id": "cv_b13e4051",
+          "filename": "2ee790a4__Lotte_van_der_Berg__Camera_Operator.pdf",
+          "chunk_count": 5,
+          "content_hash": "d506d6c9a92ad74c78c0e7be3f15348e852ebd2b5f4ed5efe2a05e479b464502",
+          "uploaded_at": "2026-01-06T20:48:13.147274"
+        },
+        {
+          "id": "cv_fac65cdd",
+          "filename": "2fd0d810__Kamran_Alizadeh__Law_Clerk.pdf",
+          "chunk_count": 6,
+          "content_hash": "549da989fc612abc15b9bcfe3347432cb96ef1558568a0602f5a95500dbf031d",
+          "uploaded_at": "2026-01-06T20:48:13.740888"
+        },
+        {
+          "id": "cv_d3df1efc",
+          "filename": "3a963b30__Rahul_Patel__Junior_Digital_Marketer.pdf",
+          "chunk_count": 3,
+          "content_hash": "6e7dd37c76e4e8cf2c8a0925c27b3047e2cc349bef86d5ff33c7e8fefa87e523",
+          "uploaded_at": "2026-01-06T20:48:14.268761"
+        },
+        {
+          "id": "cv_a800761c",
+          "filename": "3baa7e58__Diego_Mendoza__Protocol_Engineer.pdf",
+          "chunk_count": 4,
+          "content_hash": "fac7be105f815d13f576d6c0bda3c9bf8ee5b65b95cd484db9d0d85f958f6e6b",
+          "uploaded_at": "2026-01-06T20:48:14.890125"
+        },
+        {
+          "id": "cv_306e3cef",
+          "filename": "3d0c9f5d__Lena_Schmidt__Pharmacy_Technician.pdf",
+          "chunk_count": 6,
+          "content_hash": "8293daf6df82647fbf1020c585b79f7b7f0d22649b62e510cff7cc76838897bd",
+          "uploaded_at": "2026-01-06T20:48:15.458737"
+        },
+        {
+          "id": "cv_1247040b",
+          "filename": "3de2d6e3__Aisha_Adebayo__Junior_Marketer.pdf",
+          "chunk_count": 6,
+          "content_hash": "41e19261376e917e4ad1bf76c3b88eb5c82815e62a34d25015d79711b6a8c534",
+          "uploaded_at": "2026-01-06T20:48:15.976148"
+        },
+        {
+          "id": "cv_fc7b0e6c",
+          "filename": "3f2032af__Aisha_Chen__Junior_Smart_Contract_Developer.pdf",
+          "chunk_count": 3,
+          "content_hash": "5723fcfb502863855d8acd609e4239039bf6d0f72c36f07afcfdb5ccc4c1e74d",
+          "uploaded_at": "2026-01-06T20:48:16.546379"
+        },
+        {
+          "id": "cv_c9d88147",
+          "filename": "4a9a82d3__Kwame_Addo__Celebrity_Stylist.pdf",
+          "chunk_count": 4,
+          "content_hash": "2478cf4d32e982f7feded2992a762b2a161a5e5057246ef05b526aa940d04b92",
+          "uploaded_at": "2026-01-06T20:48:17.101856"
+        },
+        {
+          "id": "cv_649c0026",
+          "filename": "4a8697d7__Aisha_Al_Mansoori__Postdoc.pdf",
+          "chunk_count": 6,
+          "content_hash": "eb2b0c900145c130f6ef58253f2349204df780d87445377dfc74c94b384d09e2",
+          "uploaded_at": "2026-01-06T20:48:17.636079"
+        },
+        {
+          "id": "cv_97869ac0",
+          "filename": "4bd4fa01__Lukas_Schneider__Stylist.pdf",
+          "chunk_count": 4,
+          "content_hash": "d4d93aa1c5cf9c0aa4b006e633de719dec62f7ceda66217ba4264cc63297b319",
+          "uploaded_at": "2026-01-06T20:48:18.256337"
+        },
+        {
+          "id": "cv_ded91491",
+          "filename": "4ca041d0__Lucien_Moreau__Creature_Designer.pdf",
+          "chunk_count": 3,
+          "content_hash": "f616b3b70dbf3a653590b78d990796e6db28541cc2a5b0235e0d2b606629d279",
+          "uploaded_at": "2026-01-06T20:48:18.864822"
+        },
+        {
+          "id": "cv_6187c0aa",
+          "filename": "4e4b81a6__Sofia_Rossi__Graduate_Developer.pdf",
+          "chunk_count": 3,
+          "content_hash": "4bfd5f519b960ef1a7aed4a04e5393db555dc79eea534f938e6ee8645b49d692",
+          "uploaded_at": "2026-01-06T20:48:19.511946"
+        },
+        {
+          "id": "cv_3779b461",
+          "filename": "4ef2ef97__Aisha_Tan__Pizza_Chef.pdf",
+          "chunk_count": 5,
+          "content_hash": "88739b9a32ba32227d630d016c2a925f33bc3dfea51a28916bbeda1df88274d5",
+          "uploaded_at": "2026-01-06T20:48:20.085443"
+        }
+      ],
+      "messages": [
+        {
+          "id": "964c868f-84c3-4e67-ab5f-f3d765d5991b",
+          "role": "user",
+          "content": "What technologies do the candidates have?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T20:48:27.147246"
+        },
+        {
+          "id": "697f97bc-07e6-4b11-a58c-3da5a9dd50b2",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a summary of the technologies mentioned in the CVs of the candidates. I need to extract all the technologies listed in the CVs and present them in a structured format. I will prioritize candidates with more explicitly mentioned technologies.\n:::\n\n\n:::conclusion\n**[Sofia Rossi](cv:cv_6187c0aa)** and **[Aisha Chen](cv:cv_fc7b0e6c)** have the most explicit technical skills, followed by **[Matteo Rossi](cv:cv_3324a854)**, **[Aisha Al Mansoori](cv:cv_649c0026)**, **[Diego Mendoza](cv:cv_a800761c)**, **[Sofia Mendoza](cv:cv_fad41666)**, **[Lukas Schneider](cv:cv_759793b4)** and **[Ji-eun Kim](cv:cv_68d35a03)**.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_3324a854",
+              "filename": "0c185b57__Matteo_Rossi__Associate_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_6187c0aa",
+              "filename": "4e4b81a6__Sofia_Rossi__Graduate_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_7d46c260",
+              "filename": "1c261534__Priya_Kim__Sous_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_f0558105",
+              "filename": "2aaf7352__Sofia_Rossi__Restaurant_Owner.pdf"
+            },
+            {
+              "cv_id": "cv_f7341172",
+              "filename": "1b2a47e8__Amir_Hassan__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_68d35a03",
+              "filename": "2a6972cc__Ji-eun_Kim__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_1247040b",
+              "filename": "3de2d6e3__Aisha_Adebayo__Junior_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_759793b4",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_76b0a541",
+              "filename": "01def3e4__Mei_Lin_Chen__Accessories_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_306e3cef",
+              "filename": "3d0c9f5d__Lena_Schmidt__Pharmacy_Technician.pdf"
+            },
+            {
+              "cv_id": "cv_3779b461",
+              "filename": "4ef2ef97__Aisha_Tan__Pizza_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_aaab8711",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_fad41666",
+              "filename": "2e55e31d__Sofia_Mendoza__Designer.pdf"
+            },
+            {
+              "cv_id": "cv_d67dc743",
+              "filename": "1b215ef8__Matteo_Rossi__Group_PM.pdf"
+            },
+            {
+              "cv_id": "cv_a800761c",
+              "filename": "3baa7e58__Diego_Mendoza__Protocol_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_c9d88147",
+              "filename": "4a9a82d3__Kwame_Addo__Celebrity_Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_649c0026",
+              "filename": "4a8697d7__Aisha_Al_Mansoori__Postdoc.pdf"
+            },
+            {
+              "cv_id": "cv_97869ac0",
+              "filename": "4bd4fa01__Lukas_Schneider__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_fac65cdd",
+              "filename": "2fd0d810__Kamran_Alizadeh__Law_Clerk.pdf"
+            },
+            {
+              "cv_id": "cv_ded91491",
+              "filename": "4ca041d0__Lucien_Moreau__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_fc7b0e6c",
+              "filename": "3f2032af__Aisha_Chen__Junior_Smart_Contract_Developer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 0.31,
+              "details": "Query type: general"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 29.56,
+              "details": "Found 28 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 17872.78,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6128.54,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for a summary of the technologies mentioned in the CVs of the candidates. I need to extract all the technologies listed in the CVs and present them in a structured format. I will prioritize candidates with more explicitly mentioned technologies.\n:::\n\nThe analyzed candidates possess a range of technologies, including programming languages, frameworks, tools, and platforms relevant to their respective fields. These technologies span software development, data analysis, design, and audio engineering.\n\n### Analysis\n\n| Candidate | Technologies | Relevant Experience |\n|---|---|---|\n| **[Sofia Rossi](cv:cv_6187c0aa)** | Python (Flask/Django), JavaScript (React), SQL/PostgreSQL, Docker & Containerization, RESTful API Design, Unit Testing (Pytest), Git/Version Control | Junior Software Developer, Software Development Intern, University Research Assistant |\n| **[Aisha Chen](cv:cv_fc7b0e6c)** | Solidity, Ethereum, Rust, Truffle, OpenZeppelin | Junior Smart Contract Developer, Blockchain Engineer Intern |\n| **[Matteo Rossi](cv:cv_3324a854)** | Python, SQL, Excel | Data Intern |\n| **[Aisha Al Mansoori](cv:cv_649c0026)** | Machine Learning, Statistical Modeling, Data Engineering, Cloud Computing (AWS) | Postdoctoral Researcher |\n| **[Diego Mendoza](cv:cv_a800761c)** | Blockchain protocols | Protocol Engineer, Blockchain Developer |\n| **[Sofia Mendoza](cv:cv_fad41666)** | Adobe Creative Suite, Figma, HTML/CSS | Designer |\n| **[Lukas Schneider](cv:cv_759793b4)** | Dolby Atmos/DTS:X, Analog & Digital Console Operation (SSL/NEVE/Avid S6), Advanced Plugin Architecture (UAD, Waves, FabFilter), Spectral Analysis & Restoration (iZotope RX) | Lead Immersive Audio Mix Engineer, Broadcast Mix Engineer, Audio Post-Production Assistant Engineer |\n| **[Ji-eun Kim](cv:cv_68d35a03)** | SQL, Data Visualization (Tableau), Statistical Analysis (Python) | Director, Business Analytics, Manager, Business Analysis, Business Analyst |\n\n:::conclusion\n**[Sofia Rossi](cv:cv_6187c0aa)** and **[Aisha Chen](cv:cv_fc7b0e6c)** have the most explicit technical skills, followed by **[Matteo Rossi](cv:cv_3324a854)**, **[Aisha Al Mansoori](cv:cv_649c0026)**, **[Diego Mendoza](cv:cv_a800761c)**, **[Sofia Mendoza](cv:cv_fad41666)**, **[Lukas Schneider](cv:cv_759793b4)** and **[Ji-eun Kim](cv:cv_68d35a03)**.\n:::",
+            "thinking": "The user is asking for a summary of the technologies mentioned in the CVs of the candidates. I need to extract all the technologies listed in the CVs and present them in a structured format. I will prioritize candidates with more explicitly mentioned technologies.",
+            "analysis": "| Candidate | Technologies | Relevant Experience |",
+            "table_data": null,
+            "conclusion": "**[Sofia Rossi](cv:cv_6187c0aa)** and **[Aisha Chen](cv:cv_fc7b0e6c)** have the most explicit technical skills, followed by **[Matteo Rossi](cv:cv_3324a854)**, **[Aisha Al Mansoori](cv:cv_649c0026)**, **[Diego Mendoza](cv:cv_a800761c)**, **[Sofia Mendoza](cv:cv_fad41666)**, **[Lukas Schneider](cv:cv_759793b4)** and **[Ji-eun Kim](cv:cv_68d35a03)**.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "search",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": {
+              "results": [
+                {
+                  "candidate_name": " Lena Schmidt  Pharmacy",
+                  "cv_id": "cv_306e3cef",
+                  "match_score": 79.1,
+                  "matching_skills": [],
+                  "experience_years": 15.0,
+                  "current_role": "",
+                  "relevance_reason": "15+ years exp"
+                },
+                {
+                  "candidate_name": " Matteo Rossi  Associate",
+                  "cv_id": "cv_3324a854",
+                  "match_score": 78.5,
+                  "matching_skills": [],
+                  "experience_years": 9.0,
+                  "current_role": "",
+                  "relevance_reason": "9+ years exp"
+                },
+                {
+                  "candidate_name": " Sofia Rossi  Graduate",
+                  "cv_id": "cv_6187c0aa",
+                  "match_score": 78.5,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": " linkedin.com/in/sofiarossi",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Lukas Schneider  Mix",
+                  "cv_id": "cv_759793b4",
+                  "match_score": 78.0,
+                  "matching_skills": [],
+                  "experience_years": 14.0,
+                  "current_role": "revisions for commercial advertising and feature",
+                  "relevance_reason": "14+ years exp"
+                },
+                {
+                  "candidate_name": " Diego Mendoza  Protocol",
+                  "cv_id": "cv_a800761c",
+                  "match_score": 78.0,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Priya Kim  Sous",
+                  "cv_id": "cv_7d46c260",
+                  "match_score": 77.9,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "passion for innovative menu development and restaurant environment.",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Lukas Schneider ",
+                  "cv_id": "cv_97869ac0",
+                  "match_score": 76.9,
+                  "matching_skills": [],
+                  "experience_years": 1.0,
+                  "current_role": "and outfit assembly.",
+                  "relevance_reason": "1+ years exp"
+                },
+                {
+                  "candidate_name": " Sofia Rossi  Restaurant",
+                  "cv_id": "cv_f0558105",
+                  "match_score": 76.6,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "Oversaw nightly cash reconciliation and inventory",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Adebayo  Junior",
+                  "cv_id": "cv_1247040b",
+                  "match_score": 76.6,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Chen  Junior Smart Contract",
+                  "cv_id": "cv_fc7b0e6c",
+                  "match_score": 76.3,
+                  "matching_skills": [],
+                  "experience_years": 1.0,
+                  "current_role": "",
+                  "relevance_reason": "1+ years exp"
+                },
+                {
+                  "candidate_name": " Mei Lin Chen  Accessories",
+                  "cv_id": "cv_76b0a541",
+                  "match_score": 58.0,
+                  "matching_skills": [],
+                  "experience_years": 10.0,
+                  "current_role": "",
+                  "relevance_reason": "10+ years exp"
+                },
+                {
+                  "candidate_name": " Ji-eun Kim  Business",
+                  "cv_id": "cv_68d35a03",
+                  "match_score": 57.4,
+                  "matching_skills": [],
+                  "experience_years": 7.0,
+                  "current_role": "",
+                  "relevance_reason": "7+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Tan  Pizza",
+                  "cv_id": "cv_3779b461",
+                  "match_score": 57.0,
+                  "matching_skills": [],
+                  "experience_years": 10.0,
+                  "current_role": "",
+                  "relevance_reason": "10+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Okafor  Business",
+                  "cv_id": "cv_aaab8711",
+                  "match_score": 56.5,
+                  "matching_skills": [],
+                  "experience_years": 27.0,
+                  "current_role": "",
+                  "relevance_reason": "27+ years exp"
+                },
+                {
+                  "candidate_name": " Amir Hassan ",
+                  "cv_id": "cv_f7341172",
+                  "match_score": 56.2,
+                  "matching_skills": [],
+                  "experience_years": 6.0,
+                  "current_role": "1998",
+                  "relevance_reason": "6+ years exp"
+                },
+                {
+                  "candidate_name": " Kwame Addo  Celebrity",
+                  "cv_id": "cv_c9d88147",
+                  "match_score": 56.0,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Al Mansoori ",
+                  "cv_id": "cv_649c0026",
+                  "match_score": 55.9,
+                  "matching_skills": [],
+                  "experience_years": 6.0,
+                  "current_role": "",
+                  "relevance_reason": "6+ years exp"
+                },
+                {
+                  "candidate_name": " Sofia Mendoza ",
+                  "cv_id": "cv_fad41666",
+                  "match_score": 55.5,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Kamran Alizadeh  Law",
+                  "cv_id": "cv_fac65cdd",
+                  "match_score": 54.7,
+                  "matching_skills": [],
+                  "experience_years": 7.0,
+                  "current_role": "",
+                  "relevance_reason": "7+ years exp"
+                },
+                {
+                  "candidate_name": " Matteo Rossi  Group",
+                  "cv_id": "cv_d67dc743",
+                  "match_score": 52.8,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "cycle.",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Lucien Moreau  Creature",
+                  "cv_id": "cv_ded91491",
+                  "match_score": 51.7,
+                  "matching_skills": [],
+                  "experience_years": 26.0,
+                  "current_role": "English ⭐⭐⭐⭐⭐⭐",
+                  "relevance_reason": "26+ years exp"
+                }
+              ],
+              "query_terms": [
+                "what",
+                "technologies"
+              ],
+              "total_candidates": 21
+            },
+            "total_results": 21,
+            "query": "What technologies do the candidates have?",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T20:48:54.146175"
+        },
+        {
+          "id": "0ca49e8a-4b3b-497d-a524-5825e47447b9",
+          "role": "user",
+          "content": "What technologies do the candidates have?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T20:53:55.139417"
+        },
+        {
+          "id": "dffd071f-55f5-4517-b254-9175365977a7",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a summary of the technologies mentioned in the CVs of the candidates. I need to extract all the technologies listed in the CVs and present them in a structured format. I will prioritize candidates with more explicitly mentioned technologies.\n:::\n\n\n:::conclusion\n**[Sofia Rossi](cv:cv_6187c0aa)** and **[Aisha Al Mansoori](cv:cv_649c0026)** have the most explicit technical skills, followed by **[Matteo Rossi](cv:cv_3324a854)**.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_3324a854",
+              "filename": "0c185b57__Matteo_Rossi__Associate_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_6187c0aa",
+              "filename": "4e4b81a6__Sofia_Rossi__Graduate_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_f7341172",
+              "filename": "1b2a47e8__Amir_Hassan__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_7d46c260",
+              "filename": "1c261534__Priya_Kim__Sous_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_f0558105",
+              "filename": "2aaf7352__Sofia_Rossi__Restaurant_Owner.pdf"
+            },
+            {
+              "cv_id": "cv_68d35a03",
+              "filename": "2a6972cc__Ji-eun_Kim__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_759793b4",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_76b0a541",
+              "filename": "01def3e4__Mei_Lin_Chen__Accessories_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_a800761c",
+              "filename": "3baa7e58__Diego_Mendoza__Protocol_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_3779b461",
+              "filename": "4ef2ef97__Aisha_Tan__Pizza_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_aaab8711",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_fad41666",
+              "filename": "2e55e31d__Sofia_Mendoza__Designer.pdf"
+            },
+            {
+              "cv_id": "cv_d67dc743",
+              "filename": "1b215ef8__Matteo_Rossi__Group_PM.pdf"
+            },
+            {
+              "cv_id": "cv_306e3cef",
+              "filename": "3d0c9f5d__Lena_Schmidt__Pharmacy_Technician.pdf"
+            },
+            {
+              "cv_id": "cv_c9d88147",
+              "filename": "4a9a82d3__Kwame_Addo__Celebrity_Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_1247040b",
+              "filename": "3de2d6e3__Aisha_Adebayo__Junior_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_649c0026",
+              "filename": "4a8697d7__Aisha_Al_Mansoori__Postdoc.pdf"
+            },
+            {
+              "cv_id": "cv_fac65cdd",
+              "filename": "2fd0d810__Kamran_Alizadeh__Law_Clerk.pdf"
+            },
+            {
+              "cv_id": "cv_b13e4051",
+              "filename": "2ee790a4__Lotte_van_der_Berg__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_97869ac0",
+              "filename": "4bd4fa01__Lukas_Schneider__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_ded91491",
+              "filename": "4ca041d0__Lucien_Moreau__Creature_Designer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 5.13,
+              "details": "Query type: general"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 33.58,
+              "details": "Found 28 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 16775.06,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4297.81,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for a summary of the technologies mentioned in the CVs of the candidates. I need to extract all the technologies listed in the CVs and present them in a structured format. I will prioritize candidates with more explicitly mentioned technologies.\n:::\n\nThe analyzed candidates possess a range of technologies, with **[Sofia Rossi](cv:cv_6187c0aa)** showcasing proficiency in Python, JavaScript, SQL, Docker, and RESTful API design, while **[Aisha Al Mansoori](cv:cv_649c0026)** demonstrates expertise in Machine Learning, Statistical Modeling, Data Engineering, and Cloud Computing (AWS). Other candidates also mention various technologies, though with less detail.\n\n### Analysis\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Sofia Rossi](cv:cv_6187c0aa)** | Python (Flask/Django), JavaScript (React), SQL/PostgreSQL, Docker & Containerization, RESTful API Design, Unit Testing (Pytest), Git/Version Control | Refactored legacy data validation module using Python, debugged latency issues in API, implemented unit and integration tests, containerized staging environment using Dockerfiles | ⭐⭐⭐⭐⭐ |\n| **[Aisha Al Mansoori](cv:cv_649c0026)** | Machine Learning, Statistical Modeling, Data Engineering, Cloud Computing (AWS) | Supported faculty in data collection and preprocessing for machine learning projects, automated data pipeline handling 10TB of raw sensor data | ⭐⭐⭐⭐ |\n| **[Matteo Rossi](cv:cv_3324a854)** | Python, Excel, SQL | Cleaned and transformed data using Excel and Python scripts, investigated data anomalies through database queries | ⭐⭐⭐ |\n\nI chose these candidates because they explicitly mention technical skills and experience relevant to software development or data science. **[Sofia Rossi](cv:cv_6187c0aa)** stands out due to her hands-on experience with Python, JavaScript, SQL, Docker, and API design, making her a strong candidate for a developer role. **[Aisha Al Mansoori](cv:cv_649c0026)** is included due to her expertise in machine learning, data engineering, and cloud computing, which are valuable skills in data-driven projects. **[Matteo Rossi](cv:cv_3324a854)** is included as he mentions Python, SQL and Excel.\n\n:::conclusion\n**[Sofia Rossi](cv:cv_6187c0aa)** and **[Aisha Al Mansoori](cv:cv_649c0026)** have the most explicit technical skills, followed by **[Matteo Rossi](cv:cv_3324a854)**.\n:::",
+            "thinking": "The user is asking for a summary of the technologies mentioned in the CVs of the candidates. I need to extract all the technologies listed in the CVs and present them in a structured format. I will prioritize candidates with more explicitly mentioned technologies.",
+            "analysis": "| Candidate | Skills | Experience | Match |",
+            "table_data": null,
+            "conclusion": "**[Sofia Rossi](cv:cv_6187c0aa)** and **[Aisha Al Mansoori](cv:cv_649c0026)** have the most explicit technical skills, followed by **[Matteo Rossi](cv:cv_3324a854)**.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "search",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": {
+              "results": [
+                {
+                  "candidate_name": " Sofia Rossi  Graduate",
+                  "cv_id": "cv_6187c0aa",
+                  "match_score": 79.0,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": " linkedin.com/in/sofiarossi",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Diego Mendoza  Protocol",
+                  "cv_id": "cv_a800761c",
+                  "match_score": 78.9,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Priya Kim  Sous",
+                  "cv_id": "cv_7d46c260",
+                  "match_score": 78.5,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "passion for innovative menu development and restaurant environment.",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Lukas Schneider  Mix",
+                  "cv_id": "cv_759793b4",
+                  "match_score": 78.5,
+                  "matching_skills": [],
+                  "experience_years": 14.0,
+                  "current_role": "revisions for commercial advertising and feature",
+                  "relevance_reason": "14+ years exp"
+                },
+                {
+                  "candidate_name": " Lena Schmidt  Pharmacy",
+                  "cv_id": "cv_306e3cef",
+                  "match_score": 78.3,
+                  "matching_skills": [],
+                  "experience_years": 15.0,
+                  "current_role": "",
+                  "relevance_reason": "15+ years exp"
+                },
+                {
+                  "candidate_name": " Sofia Rossi  Restaurant",
+                  "cv_id": "cv_f0558105",
+                  "match_score": 78.2,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "Oversaw nightly cash reconciliation and inventory",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Matteo Rossi  Associate",
+                  "cv_id": "cv_3324a854",
+                  "match_score": 78.1,
+                  "matching_skills": [],
+                  "experience_years": 9.0,
+                  "current_role": "",
+                  "relevance_reason": "9+ years exp"
+                },
+                {
+                  "candidate_name": " Lotte van der Berg  Camera",
+                  "cv_id": "cv_b13e4051",
+                  "match_score": 77.9,
+                  "matching_skills": [],
+                  "experience_years": 5.0,
+                  "current_role": "sports programming.",
+                  "relevance_reason": "5+ years exp"
+                },
+                {
+                  "candidate_name": " Lukas Schneider ",
+                  "cv_id": "cv_97869ac0",
+                  "match_score": 77.8,
+                  "matching_skills": [],
+                  "experience_years": 1.0,
+                  "current_role": "and outfit assembly.",
+                  "relevance_reason": "1+ years exp"
+                },
+                {
+                  "candidate_name": " Amir Hassan ",
+                  "cv_id": "cv_f7341172",
+                  "match_score": 77.4,
+                  "matching_skills": [],
+                  "experience_years": 6.0,
+                  "current_role": "1998",
+                  "relevance_reason": "6+ years exp"
+                },
+                {
+                  "candidate_name": " Mei Lin Chen  Accessories",
+                  "cv_id": "cv_76b0a541",
+                  "match_score": 58.0,
+                  "matching_skills": [],
+                  "experience_years": 10.0,
+                  "current_role": "",
+                  "relevance_reason": "10+ years exp"
+                },
+                {
+                  "candidate_name": " Ji-eun Kim  Business",
+                  "cv_id": "cv_68d35a03",
+                  "match_score": 57.4,
+                  "matching_skills": [],
+                  "experience_years": 7.0,
+                  "current_role": "",
+                  "relevance_reason": "7+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Tan  Pizza",
+                  "cv_id": "cv_3779b461",
+                  "match_score": 57.0,
+                  "matching_skills": [],
+                  "experience_years": 10.0,
+                  "current_role": "",
+                  "relevance_reason": "10+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Okafor  Business",
+                  "cv_id": "cv_aaab8711",
+                  "match_score": 56.5,
+                  "matching_skills": [],
+                  "experience_years": 27.0,
+                  "current_role": "",
+                  "relevance_reason": "27+ years exp"
+                },
+                {
+                  "candidate_name": " Kwame Addo  Celebrity",
+                  "cv_id": "cv_c9d88147",
+                  "match_score": 56.0,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Al Mansoori ",
+                  "cv_id": "cv_649c0026",
+                  "match_score": 55.9,
+                  "matching_skills": [],
+                  "experience_years": 6.0,
+                  "current_role": "",
+                  "relevance_reason": "6+ years exp"
+                },
+                {
+                  "candidate_name": " Sofia Mendoza ",
+                  "cv_id": "cv_fad41666",
+                  "match_score": 55.5,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Adebayo  Junior",
+                  "cv_id": "cv_1247040b",
+                  "match_score": 54.7,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Kamran Alizadeh  Law",
+                  "cv_id": "cv_fac65cdd",
+                  "match_score": 54.7,
+                  "matching_skills": [],
+                  "experience_years": 7.0,
+                  "current_role": "",
+                  "relevance_reason": "7+ years exp"
+                },
+                {
+                  "candidate_name": " Matteo Rossi  Group",
+                  "cv_id": "cv_d67dc743",
+                  "match_score": 52.8,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "cycle.",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Lucien Moreau  Creature",
+                  "cv_id": "cv_ded91491",
+                  "match_score": 51.7,
+                  "matching_skills": [],
+                  "experience_years": 26.0,
+                  "current_role": "English ⭐⭐⭐⭐⭐⭐",
+                  "relevance_reason": "26+ years exp"
+                }
+              ],
+              "query_terms": [
+                "what",
+                "technologies"
+              ],
+              "total_candidates": 21
+            },
+            "total_results": 21,
+            "query": "What technologies do the candidates have?",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T20:54:21.003025"
+        },
+        {
+          "id": "f0c63176-c885-4a61-9413-5beafe5dd7da",
+          "role": "user",
+          "content": "What technologies do the candidates have?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T20:58:47.891008"
+        },
+        {
+          "id": "b20d9fd6-4c8c-4c0c-80db-50bf6bb2c1ff",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a summary of the technologies mentioned in the CVs of the candidates. I need to extract all the technologies listed in the CVs and present them in a structured format. I will prioritize candidates with more explicitly mentioned technologies. I will provide the top 3 candidates with the most relevant technologies.\n:::\n\n\n:::conclusion\nI recommend considering **[Sofia Rossi](cv:cv_6187c0aa)**, **[Aisha Chen](cv:cv_fc7b0e6c)**, and **[Matteo Rossi](cv:cv_3324a854)** as they possess the most relevant technical skills based on the provided CVs.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_6187c0aa",
+              "filename": "4e4b81a6__Sofia_Rossi__Graduate_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_3324a854",
+              "filename": "0c185b57__Matteo_Rossi__Associate_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_f0558105",
+              "filename": "2aaf7352__Sofia_Rossi__Restaurant_Owner.pdf"
+            },
+            {
+              "cv_id": "cv_7d46c260",
+              "filename": "1c261534__Priya_Kim__Sous_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_f7341172",
+              "filename": "1b2a47e8__Amir_Hassan__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_68d35a03",
+              "filename": "2a6972cc__Ji-eun_Kim__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_759793b4",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_76b0a541",
+              "filename": "01def3e4__Mei_Lin_Chen__Accessories_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_a800761c",
+              "filename": "3baa7e58__Diego_Mendoza__Protocol_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_3779b461",
+              "filename": "4ef2ef97__Aisha_Tan__Pizza_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_aaab8711",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_fc7b0e6c",
+              "filename": "3f2032af__Aisha_Chen__Junior_Smart_Contract_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_fad41666",
+              "filename": "2e55e31d__Sofia_Mendoza__Designer.pdf"
+            },
+            {
+              "cv_id": "cv_d67dc743",
+              "filename": "1b215ef8__Matteo_Rossi__Group_PM.pdf"
+            },
+            {
+              "cv_id": "cv_c9d88147",
+              "filename": "4a9a82d3__Kwame_Addo__Celebrity_Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_306e3cef",
+              "filename": "3d0c9f5d__Lena_Schmidt__Pharmacy_Technician.pdf"
+            },
+            {
+              "cv_id": "cv_1247040b",
+              "filename": "3de2d6e3__Aisha_Adebayo__Junior_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_649c0026",
+              "filename": "4a8697d7__Aisha_Al_Mansoori__Postdoc.pdf"
+            },
+            {
+              "cv_id": "cv_fac65cdd",
+              "filename": "2fd0d810__Kamran_Alizadeh__Law_Clerk.pdf"
+            },
+            {
+              "cv_id": "cv_97869ac0",
+              "filename": "4bd4fa01__Lukas_Schneider__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_b13e4051",
+              "filename": "2ee790a4__Lotte_van_der_Berg__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_ded91491",
+              "filename": "4ca041d0__Lucien_Moreau__Creature_Designer.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 3.53,
+              "details": "Query type: general"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 30.86,
+              "details": "Found 29 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 26416.66,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4256.37,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for a summary of the technologies mentioned in the CVs of the candidates. I need to extract all the technologies listed in the CVs and present them in a structured format. I will prioritize candidates with more explicitly mentioned technologies. I will provide the top 3 candidates with the most relevant technologies.\n:::\n\nHere's a summary of the technologies mentioned by the top 3 candidates. **[Sofia Rossi](cv:cv_6187c0aa)** and **[Aisha Chen](cv:cv_fc7b0e6c)** have the most explicit technical skills, followed by **[Matteo Rossi](cv:cv_3324a854)**.\n\n### Analysis\nI chose these candidates because they explicitly list technical skills relevant to software development or data analysis. **[Sofia Rossi](cv:cv_6187c0aa)** lists a variety of programming languages, frameworks, and tools. **[Aisha Chen](cv:cv_fc7b0e6c)** focuses on blockchain technologies. **[Matteo Rossi](cv:cv_3324a854)** mentions Python and Excel, indicating data analysis skills. Other candidates were considered but had less explicit or relevant technical skills.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Sofia Rossi](cv:cv_6187c0aa)** | Python (Flask/Django), JavaScript (React), SQL/PostgreSQL, Docker & Containerization, RESTful API Design, Unit Testing (Pytest), Git/Version Control | Junior Software Developer, Software Development Intern, University Research Assistant | ⭐⭐⭐⭐⭐ |\n| **[Aisha Chen](cv:cv_fc7b0e6c)** | Solidity, Ethereum, Rust, Truffle, OpenZeppelin | Junior Smart Contract Developer, Blockchain Engineer Intern | ⭐⭐⭐⭐⭐ |\n| **[Matteo Rossi](cv:cv_3324a854)** | Python, Excel | Data Intern | ⭐⭐⭐ |\n| **[Aisha Al Mansoori](cv:cv_649c0026)** | Machine Learning, Statistical Modeling, Data Engineering, Cloud Computing (AWS) | Postdoc | ⭐⭐⭐ |\n| **[Diego Mendoza](cv:cv_a800761c)** | Blockchain protocols | Protocol Engineer, Blockchain Developer | ⭐⭐ |\n| **[Ji-eun Kim](cv:cv_68d35a03)** | SQL, Statistical Analysis (Python) | Business Analyst | ⭐⭐ |\n\n:::conclusion\nI recommend considering **[Sofia Rossi](cv:cv_6187c0aa)**, **[Aisha Chen](cv:cv_fc7b0e6c)**, and **[Matteo Rossi](cv:cv_3324a854)** as they possess the most relevant technical skills based on the provided CVs.\n:::",
+            "thinking": "The user is asking for a summary of the technologies mentioned in the CVs of the candidates. I need to extract all the technologies listed in the CVs and present them in a structured format. I will prioritize candidates with more explicitly mentioned technologies. I will provide the top 3 candidates with the most relevant technologies.",
+            "analysis": "I chose these candidates because they explicitly list technical skills relevant to software development or data analysis. **[Sofia Rossi](cv:cv_6187c0aa)** lists a variety of programming languages, frameworks, and tools. **[Aisha Chen](cv:cv_fc7b0e6c)** focuses on blockchain technologies. **[Matteo Rossi](cv:cv_3324a854)** mentions Python and Excel, indicating data analysis skills. Other candidates were considered but had less explicit or relevant technical skills.",
+            "table_data": null,
+            "conclusion": "I recommend considering **[Sofia Rossi](cv:cv_6187c0aa)**, **[Aisha Chen](cv:cv_fc7b0e6c)**, and **[Matteo Rossi](cv:cv_3324a854)** as they possess the most relevant technical skills based on the provided CVs.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "search",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": {
+              "results": [
+                {
+                  "candidate_name": " Sofia Rossi  Graduate",
+                  "cv_id": "cv_6187c0aa",
+                  "match_score": 79.3,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": " linkedin.com/in/sofiarossi",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Diego Mendoza  Protocol",
+                  "cv_id": "cv_a800761c",
+                  "match_score": 79.2,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Lukas Schneider  Mix",
+                  "cv_id": "cv_759793b4",
+                  "match_score": 78.9,
+                  "matching_skills": [],
+                  "experience_years": 14.0,
+                  "current_role": "revisions for commercial advertising and feature",
+                  "relevance_reason": "14+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Chen  Junior Smart Contract",
+                  "cv_id": "cv_fc7b0e6c",
+                  "match_score": 78.7,
+                  "matching_skills": [],
+                  "experience_years": 1.0,
+                  "current_role": "",
+                  "relevance_reason": "1+ years exp"
+                },
+                {
+                  "candidate_name": " Sofia Rossi  Restaurant",
+                  "cv_id": "cv_f0558105",
+                  "match_score": 78.5,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "Oversaw nightly cash reconciliation and inventory",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Lena Schmidt  Pharmacy",
+                  "cv_id": "cv_306e3cef",
+                  "match_score": 78.4,
+                  "matching_skills": [],
+                  "experience_years": 15.0,
+                  "current_role": "",
+                  "relevance_reason": "15+ years exp"
+                },
+                {
+                  "candidate_name": " Priya Kim  Sous",
+                  "cv_id": "cv_7d46c260",
+                  "match_score": 78.3,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "passion for innovative menu development and restaurant environment.",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Lukas Schneider ",
+                  "cv_id": "cv_97869ac0",
+                  "match_score": 77.9,
+                  "matching_skills": [],
+                  "experience_years": 1.0,
+                  "current_role": "and outfit assembly.",
+                  "relevance_reason": "1+ years exp"
+                },
+                {
+                  "candidate_name": " Lotte van der Berg  Camera",
+                  "cv_id": "cv_b13e4051",
+                  "match_score": 77.7,
+                  "matching_skills": [],
+                  "experience_years": 5.0,
+                  "current_role": "sports programming.",
+                  "relevance_reason": "5+ years exp"
+                },
+                {
+                  "candidate_name": " Matteo Rossi  Associate",
+                  "cv_id": "cv_3324a854",
+                  "match_score": 77.4,
+                  "matching_skills": [],
+                  "experience_years": 9.0,
+                  "current_role": "",
+                  "relevance_reason": "9+ years exp"
+                },
+                {
+                  "candidate_name": " Mei Lin Chen  Accessories",
+                  "cv_id": "cv_76b0a541",
+                  "match_score": 58.0,
+                  "matching_skills": [],
+                  "experience_years": 10.0,
+                  "current_role": "",
+                  "relevance_reason": "10+ years exp"
+                },
+                {
+                  "candidate_name": " Ji-eun Kim  Business",
+                  "cv_id": "cv_68d35a03",
+                  "match_score": 57.4,
+                  "matching_skills": [],
+                  "experience_years": 7.0,
+                  "current_role": "",
+                  "relevance_reason": "7+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Tan  Pizza",
+                  "cv_id": "cv_3779b461",
+                  "match_score": 57.0,
+                  "matching_skills": [],
+                  "experience_years": 10.0,
+                  "current_role": "",
+                  "relevance_reason": "10+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Okafor  Business",
+                  "cv_id": "cv_aaab8711",
+                  "match_score": 56.5,
+                  "matching_skills": [],
+                  "experience_years": 27.0,
+                  "current_role": "",
+                  "relevance_reason": "27+ years exp"
+                },
+                {
+                  "candidate_name": " Amir Hassan ",
+                  "cv_id": "cv_f7341172",
+                  "match_score": 56.2,
+                  "matching_skills": [],
+                  "experience_years": 6.0,
+                  "current_role": "1998",
+                  "relevance_reason": "6+ years exp"
+                },
+                {
+                  "candidate_name": " Kwame Addo  Celebrity",
+                  "cv_id": "cv_c9d88147",
+                  "match_score": 56.0,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Al Mansoori ",
+                  "cv_id": "cv_649c0026",
+                  "match_score": 55.9,
+                  "matching_skills": [],
+                  "experience_years": 6.0,
+                  "current_role": "",
+                  "relevance_reason": "6+ years exp"
+                },
+                {
+                  "candidate_name": " Sofia Mendoza ",
+                  "cv_id": "cv_fad41666",
+                  "match_score": 55.5,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Adebayo  Junior",
+                  "cv_id": "cv_1247040b",
+                  "match_score": 54.7,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Kamran Alizadeh  Law",
+                  "cv_id": "cv_fac65cdd",
+                  "match_score": 54.7,
+                  "matching_skills": [],
+                  "experience_years": 7.0,
+                  "current_role": "",
+                  "relevance_reason": "7+ years exp"
+                },
+                {
+                  "candidate_name": " Matteo Rossi  Group",
+                  "cv_id": "cv_d67dc743",
+                  "match_score": 52.8,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "cycle.",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Lucien Moreau  Creature",
+                  "cv_id": "cv_ded91491",
+                  "match_score": 51.7,
+                  "matching_skills": [],
+                  "experience_years": 26.0,
+                  "current_role": "English ⭐⭐⭐⭐⭐⭐",
+                  "relevance_reason": "26+ years exp"
+                }
+              ],
+              "query_terms": [
+                "what",
+                "technologies"
+              ],
+              "total_candidates": 22
+            },
+            "total_results": 22,
+            "query": "What technologies do the candidates have?",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T20:59:21.688155"
+        },
+        {
+          "id": "7978b544-b8d7-4a6d-be16-c74b34105cd5",
+          "role": "user",
+          "content": "How many candidates have senior experience?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T22:12:05.282042"
+        },
+        {
+          "id": "b8eba8ce-0b0f-43a3-bc4b-e59eaca571ad",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to identify candidates with \"senior experience.\" This is subjective, so I need to define what constitutes \"senior\" based on job titles and years of experience. I will look for job titles like \"Senior,\" \"Director,\" \"Lead,\" or \"Manager\" and consider candidates with more than 5 years of experience in relevant roles. I will provide the top 3 candidates who best fit this definition, even if the match is not perfect.\n:::\n\n\n:::conclusion\nI recommend considering **[Lucien Moreau](cv:cv_ded91491)**, **[Ji-eun Kim](cv:cv_68d35a03)**, and **[Sofia Mendoza](cv:cv_fad41666)** as they hold senior positions and have relevant experience in their respective fields.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_3324a854",
+              "filename": "0c185b57__Matteo_Rossi__Associate_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_649c0026",
+              "filename": "4a8697d7__Aisha_Al_Mansoori__Postdoc.pdf"
+            },
+            {
+              "cv_id": "cv_1247040b",
+              "filename": "3de2d6e3__Aisha_Adebayo__Junior_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_76b0a541",
+              "filename": "01def3e4__Mei_Lin_Chen__Accessories_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_f0558105",
+              "filename": "2aaf7352__Sofia_Rossi__Restaurant_Owner.pdf"
+            },
+            {
+              "cv_id": "cv_6187c0aa",
+              "filename": "4e4b81a6__Sofia_Rossi__Graduate_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_759793b4",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_3779b461",
+              "filename": "4ef2ef97__Aisha_Tan__Pizza_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_fad41666",
+              "filename": "2e55e31d__Sofia_Mendoza__Designer.pdf"
+            },
+            {
+              "cv_id": "cv_aaab8711",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_306e3cef",
+              "filename": "3d0c9f5d__Lena_Schmidt__Pharmacy_Technician.pdf"
+            },
+            {
+              "cv_id": "cv_68d35a03",
+              "filename": "2a6972cc__Ji-eun_Kim__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_97869ac0",
+              "filename": "4bd4fa01__Lukas_Schneider__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_f7341172",
+              "filename": "1b2a47e8__Amir_Hassan__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_b13e4051",
+              "filename": "2ee790a4__Lotte_van_der_Berg__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_ded91491",
+              "filename": "4ca041d0__Lucien_Moreau__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_7d46c260",
+              "filename": "1c261534__Priya_Kim__Sous_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_c9d88147",
+              "filename": "4a9a82d3__Kwame_Addo__Celebrity_Stylist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 4.42,
+              "details": "Query type: general"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 33.77,
+              "details": "Found 30 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 15640.96,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 3578.7,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking to identify candidates with \"senior experience.\" This is subjective, so I need to define what constitutes \"senior\" based on job titles and years of experience. I will look for job titles like \"Senior,\" \"Director,\" \"Lead,\" or \"Manager\" and consider candidates with more than 5 years of experience in relevant roles. I will provide the top 3 candidates who best fit this definition, even if the match is not perfect.\n:::\n\nBased on the provided CVs, three candidates appear to have senior-level experience: **[Lucien Moreau](cv:cv_ded91491)**, **[Ji-eun Kim](cv:cv_68d35a03)**, and **[Sofia Mendoza](cv:cv_fad41666)**. These candidates hold positions such as \"Head of Creature Design,\" \"Director, Business Analytics,\" and \"Senior Designer,\" respectively, indicating a higher level of responsibility and experience.\n\n### Analysis\nThe following table summarizes the candidates with senior experience based on their job titles and years of experience. I chose these candidates because their job titles explicitly indicate a senior role, and they have several years of experience in their respective fields.\n\n| Candidate | Job Title | Years of Experience | Match |\n|-----------|-----------|---------------------|-------|\n| **[Lucien Moreau](cv:cv_ded91491)** | Head of Creature Design | 26 | ⭐⭐⭐⭐⭐ |\n| **[Ji-eun Kim](cv:cv_68d35a03)** | Director, Business Analytics | 7 | ⭐⭐⭐⭐ |\n| **[Sofia Mendoza](cv:cv_fad41666)** | Senior Designer | 2 | ⭐⭐⭐ |\n| **[Amir Hassan](cv:cv_f7341172)** | No Title | 6 | ⭐⭐ |\n| **[Aisha Okafor](cv:cv_aaab8711)** | CBAP | 2 | ⭐ |\n\n:::conclusion\nI recommend considering **[Lucien Moreau](cv:cv_ded91491)**, **[Ji-eun Kim](cv:cv_68d35a03)**, and **[Sofia Mendoza](cv:cv_fad41666)** as they hold senior positions and have relevant experience in their respective fields.\n:::",
+            "thinking": "The user is asking to identify candidates with \"senior experience.\" This is subjective, so I need to define what constitutes \"senior\" based on job titles and years of experience. I will look for job titles like \"Senior,\" \"Director,\" \"Lead,\" or \"Manager\" and consider candidates with more than 5 years of experience in relevant roles. I will provide the top 3 candidates who best fit this definition, even if the match is not perfect.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "I recommend considering **[Lucien Moreau](cv:cv_ded91491)**, **[Ji-eun Kim](cv:cv_68d35a03)**, and **[Sofia Mendoza](cv:cv_fad41666)** as they hold senior positions and have relevant experience in their respective fields.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "summary",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": {
+              "total_candidates": 18,
+              "experience_distribution": {
+                "0-2 years": 5,
+                "3-5 years": 3,
+                "6-10 years": 6,
+                "10+ years": 4
+              },
+              "location_distribution": {
+                "": 4,
+                "Berlin, Germany": 3,
+                "Milan, Italy": 2,
+                "London": 2,
+                "Rome, Italy": 1
+              },
+              "seniority_distribution": {
+                "senior": 3,
+                "mid": 6,
+                "junior": 3,
+                "entry": 2,
+                "principal": 4
+              }
+            },
+            "skill_distribution": {
+              "skills": [
+                {
+                  "skill": "P R O F I L E",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "500+ Skus With Zero Stock‑Out",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "Doximity.Com/Lena.Schmidt",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "Incidents.",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "Received ‘Pharmacy Staff Excellence’ Award For",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "And Patient Counseling.",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "Consistent Reliability.",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "Oriented And Empathetic Pharmacy",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "000 Patients Annually.",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "Managed Inventory Of 2",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "Detail",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "Inventory Control",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": ".Com/Lena Handled Complex Prescription Processing",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "Manager With Over 30 Years Of",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "Alignment With Brand Standards.",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "Local Fashion House (Early",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "Production 9/10 Quarterly Floor Set Changes",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "Specialized Stock.",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "Ensuring Aesthetic",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                },
+                {
+                  "skill": "9/10",
+                  "candidate_count": 1,
+                  "percentage": 5.6
+                }
+              ],
+              "total_candidates": 18,
+              "top_skills": [
+                "P R O F I L E",
+                "500+ Skus With Zero Stock‑Out",
+                "Doximity.Com/Lena.Schmidt",
+                "Incidents.",
+                "Received ‘Pharmacy Staff Excellence’ Award For"
+              ]
+            },
+            "experience_distribution": {
+              "junior": 5,
+              "mid": 3,
+              "senior": 6,
+              "principal": 4,
+              "average_years": 8.2,
+              "total_candidates": 18
+            },
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T22:12:28.711861"
+        },
+        {
+          "id": "68645b05-8c0b-4700-81ba-1d8b9d72e5b7",
+          "role": "user",
+          "content": "How many candidates have senior experience?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T22:19:58.190186"
+        },
+        {
+          "id": "c02a629c-f0b9-44a8-a9ea-7407451b7c7c",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to identify candidates with \"senior experience.\" This is subjective, so I need to define what constitutes \"senior\" based on job titles and years of experience. I will look for job titles like \"Senior,\" \"Director,\" \"Lead,\" or \"Manager\" and consider candidates with more than 5 years of experience in relevant roles. I will provide the top 3 candidates who best fit this definition, even if the match is not perfect.\n:::\n\n\n:::conclusion\nI recommend considering **[Lucien Moreau](cv:cv_ded91491)**, **[Ji-eun Kim](cv:cv_68d35a03)**, and **[Sofia Mendoza](cv:cv_fad41666)** as they hold senior positions and have relevant experience in their respective fields.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_76b0a541",
+              "filename": "01def3e4__Mei_Lin_Chen__Accessories_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_3324a854",
+              "filename": "0c185b57__Matteo_Rossi__Associate_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_1247040b",
+              "filename": "3de2d6e3__Aisha_Adebayo__Junior_Marketer.pdf"
+            },
+            {
+              "cv_id": "cv_649c0026",
+              "filename": "4a8697d7__Aisha_Al_Mansoori__Postdoc.pdf"
+            },
+            {
+              "cv_id": "cv_6187c0aa",
+              "filename": "4e4b81a6__Sofia_Rossi__Graduate_Developer.pdf"
+            },
+            {
+              "cv_id": "cv_f0558105",
+              "filename": "2aaf7352__Sofia_Rossi__Restaurant_Owner.pdf"
+            },
+            {
+              "cv_id": "cv_3779b461",
+              "filename": "4ef2ef97__Aisha_Tan__Pizza_Chef.pdf"
+            },
+            {
+              "cv_id": "cv_fad41666",
+              "filename": "2e55e31d__Sofia_Mendoza__Designer.pdf"
+            },
+            {
+              "cv_id": "cv_aaab8711",
+              "filename": "0bc847ae__Aisha_Okafor__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_306e3cef",
+              "filename": "3d0c9f5d__Lena_Schmidt__Pharmacy_Technician.pdf"
+            },
+            {
+              "cv_id": "cv_c9d88147",
+              "filename": "4a9a82d3__Kwame_Addo__Celebrity_Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_68d35a03",
+              "filename": "2a6972cc__Ji-eun_Kim__Business_Analyst.pdf"
+            },
+            {
+              "cv_id": "cv_a800761c",
+              "filename": "3baa7e58__Diego_Mendoza__Protocol_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_97869ac0",
+              "filename": "4bd4fa01__Lukas_Schneider__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_f7341172",
+              "filename": "1b2a47e8__Amir_Hassan__Stylist.pdf"
+            },
+            {
+              "cv_id": "cv_759793b4",
+              "filename": "01d4ff70__Lukas_Schneider__Mix_Engineer.pdf"
+            },
+            {
+              "cv_id": "cv_b13e4051",
+              "filename": "2ee790a4__Lotte_van_der_Berg__Camera_Operator.pdf"
+            },
+            {
+              "cv_id": "cv_ded91491",
+              "filename": "4ca041d0__Lucien_Moreau__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_7d46c260",
+              "filename": "1c261534__Priya_Kim__Sous_Chef.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 4.3,
+              "details": "Query type: general"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 33.83,
+              "details": "Found 31 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 24986.05,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4772.18,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking to identify candidates with \"senior experience.\" This is subjective, so I need to define what constitutes \"senior\" based on job titles and years of experience. I will look for job titles like \"Senior,\" \"Director,\" \"Lead,\" or \"Manager\" and consider candidates with more than 5 years of experience in relevant roles. I will provide the top 3 candidates who best fit this definition, even if the match is not perfect.\n:::\n\nThree candidates appear to have senior experience based on their job titles and years of experience: **[Lucien Moreau](cv:cv_ded91491)**, **[Ji-eun Kim](cv:cv_68d35a03)**, and **[Sofia Mendoza](cv:cv_fad41666)**. These candidates hold positions such as \"Head of Creature Design\", \"Director, Business Analytics\", and \"Senior Designer\" respectively.\n\n### Analysis\nI selected these candidates based on their job titles and the duration of their experience. \"Senior\" is a subjective term, but I interpreted it to mean holding a leadership or management role with several years of experience. **[Lucien Moreau](cv:cv_ded91491)** has been in the field for over 26 years and currently holds the position of \"Head of Creature Design\". **[Ji-eun Kim](cv:cv_68d35a03)** has 8 years of experience and is a \"Director, Business Analytics\". **[Sofia Mendoza](cv:cv_fad41666)** has over 3 years of professional design work and holds the title of \"Senior Designer\".\n\n| Candidate | Title | Experience | Match |\n|-----------|-------|------------|-------|\n| **[Lucien Moreau](cv:cv_ded91491)** | Head of Creature Design | 26 years | ⭐⭐⭐⭐⭐ |\n| **[Ji-eun Kim](cv:cv_68d35a03)** | Director, Business Analytics | 8 years | ⭐⭐⭐⭐ |\n| **[Sofia Mendoza](cv:cv_fad41666)** | Senior Designer | 3 years | ⭐⭐⭐ |\n| **[Aisha Tan](cv:cv_3779b461)** | Executive Chef & Brand Ambassador | 10 years | ⭐⭐ |\n| **[Aisha Okafor](cv:cv_aaab8711)** | CBAP | 4 years | ⭐ |\n\n:::conclusion\nI recommend considering **[Lucien Moreau](cv:cv_ded91491)**, **[Ji-eun Kim](cv:cv_68d35a03)**, and **[Sofia Mendoza](cv:cv_fad41666)** as they hold senior positions and have relevant experience in their respective fields.\n:::",
+            "thinking": "The user is asking to identify candidates with \"senior experience.\" This is subjective, so I need to define what constitutes \"senior\" based on job titles and years of experience. I will look for job titles like \"Senior,\" \"Director,\" \"Lead,\" or \"Manager\" and consider candidates with more than 5 years of experience in relevant roles. I will provide the top 3 candidates who best fit this definition, even if the match is not perfect.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "I recommend considering **[Lucien Moreau](cv:cv_ded91491)**, **[Ji-eun Kim](cv:cv_68d35a03)**, and **[Sofia Mendoza](cv:cv_fad41666)** as they hold senior positions and have relevant experience in their respective fields.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "summary",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": {
+              "total_candidates": 19,
+              "experience_distribution": {
+                "junior": 6,
+                "mid": 3,
+                "senior": 6,
+                "principal": 4
+              },
+              "location_distribution": {
+                "": 4,
+                "Berlin, Germany": 3,
+                "Milan, Italy": 2,
+                "London": 2,
+                "Rome, Italy": 1
+              },
+              "seniority_distribution": {
+                "senior": 3,
+                "mid": 6,
+                "entry": 3,
+                "junior": 3,
+                "principal": 4
+              }
+            },
+            "skill_distribution": {
+              "skills": [
+                {
+                  "skill": "Managed Inventory Of 2",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "Consistent Reliability.",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "Inventory Control",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "Detail",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "Blockchain Developer",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "2022",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "Protocol Engineer",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "Chain Communication Protocol",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "Solutions For Various Clients",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "2020",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "Enabling",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "Including",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "Based",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "Networks.",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": " Sydney",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "While Maintaining Security.",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "Designing",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "And Implementing Secure",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "Diego Mendoza",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                },
+                {
+                  "skill": "Decentralized Solutions",
+                  "candidate_count": 1,
+                  "percentage": 5.3
+                }
+              ],
+              "total_candidates": 19,
+              "top_skills": [
+                "Managed Inventory Of 2",
+                "Consistent Reliability.",
+                "Inventory Control",
+                "Detail",
+                "Blockchain Developer"
+              ]
+            },
+            "experience_distribution": {
+              "junior": 6,
+              "mid": 3,
+              "senior": 6,
+              "principal": 4,
+              "average_years": 7.8,
+              "total_candidates": 19
+            },
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T22:20:31.355106"
+        },
+        {
+          "id": "7e4b13c0-4dd7-4172-ba32-6f3d0061f648",
+          "role": "user",
+          "content": "Profile of the most experienced candidate",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T22:20:40.290655"
+        }
+      ],
+      "created_at": "2026-01-06T20:47:45.354227",
+      "updated_at": "2026-01-06T22:20:40.290655"
     }
   ]
 }

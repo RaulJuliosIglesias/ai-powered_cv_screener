@@ -1688,14 +1688,20 @@ def detect_single_candidate_query(
             detection_method="explicit_multi_candidate_query"
         )
     
-    # Extract unique candidates from chunks
-    unique_candidates: dict[str, str] = {}  # name -> cv_id
+    # Extract unique candidate names from chunks
+    unique_candidates = {}
     for chunk in chunks:
         metadata = chunk.get("metadata", {})
         name = metadata.get("candidate_name", "")
         cv_id = metadata.get("cv_id", "")
         if name and name not in unique_candidates:
             unique_candidates[name] = cv_id
+    
+    # Debug logging
+    import logging
+    logger = logging.getLogger(__name__)
+    logger.info(f"[SINGLE_CANDIDATE_DETECTION] Query: '{question}'")
+    logger.info(f"[SINGLE_CANDIDATE_DETECTION] Available candidates: {list(unique_candidates.keys())}")
     
     # Method 1: Check if query explicitly mentions a candidate name
     if candidate_names:
@@ -1853,6 +1859,7 @@ def extract_candidate_name_from_query(question: str) -> str | None:
         rf"{NAME_PATTERN}(?:'s)?\s+(?:profile|cv|resume|experience|skills|background)",
         rf"about\s+{NAME_PATTERN}\b",
         rf"information\s+(?:on|about)\s+{NAME_PATTERN}",
+        rf"(?:see|view)\s+(?:full\s+)?profile\s+(?:of|for)\s+{NAME_PATTERN}",
     ]
     
     for pattern in patterns:

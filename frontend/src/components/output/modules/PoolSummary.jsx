@@ -13,12 +13,12 @@ const PoolSummary = ({ data }) => {
     return total > 0 ? (count / total) * 100 : 0;
   };
 
-  // Colors for experience levels
+  // Colors and labels for experience levels
   const levelColors = {
-    junior: { bg: 'bg-blue-500', text: 'text-blue-400', fill: '#3b82f6' },
-    mid: { bg: 'bg-cyan-500', text: 'text-cyan-400', fill: '#06b6d4' },
-    senior: { bg: 'bg-emerald-500', text: 'text-emerald-400', fill: '#10b981' },
-    principal: { bg: 'bg-purple-500', text: 'text-purple-400', fill: '#8b5cf6' },
+    junior: { bg: 'bg-blue-500', text: 'text-blue-400', fill: '#3b82f6', label: '0-2 years' },
+    mid: { bg: 'bg-cyan-500', text: 'text-cyan-400', fill: '#06b6d4', label: '3-5 years' },
+    senior: { bg: 'bg-emerald-500', text: 'text-emerald-400', fill: '#10b981', label: '6-10 years' },
+    principal: { bg: 'bg-purple-500', text: 'text-purple-400', fill: '#8b5cf6', label: '10+ years' },
   };
 
   // Calculate donut chart segments
@@ -83,7 +83,7 @@ const PoolSummary = ({ data }) => {
             <div className="flex-1 ml-4">
               <div className="grid grid-cols-2 gap-2">
                 {Object.entries(talent_pool.experience_distribution || {}).map(([level, count]) => {
-                  const colors = levelColors[level.toLowerCase()] || { bg: 'bg-gray-500', text: 'text-gray-400' };
+                  const colors = levelColors[level.toLowerCase()] || { bg: 'bg-gray-500', text: 'text-gray-400', label: level };
                   const percentage = talent_pool.total_candidates > 0 
                     ? ((count / talent_pool.total_candidates) * 100).toFixed(0) 
                     : 0;
@@ -93,7 +93,7 @@ const PoolSummary = ({ data }) => {
                       <div className={`w-3 h-3 rounded-full ${colors.bg}`} />
                       <div className="text-sm">
                         <span className="text-white font-medium">{count}</span>
-                        <span className={`ml-1 ${colors.text}`}>{level}</span>
+                        <span className={`ml-1 ${colors.text}`}>{colors.label || level}</span>
                         <span className="text-gray-500 text-xs ml-1">({percentage}%)</span>
                       </div>
                     </div>

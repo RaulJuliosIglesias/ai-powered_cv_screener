@@ -52,18 +52,18 @@ class TalentPoolModule:
         
         total = len(candidates)
         
-        # Experience distribution
-        exp_dist = {"0-2 years": 0, "3-5 years": 0, "6-10 years": 0, "10+ years": 0}
+        # Experience distribution - using seniority labels for DonutChart colors
+        exp_dist = {"junior": 0, "mid": 0, "senior": 0, "principal": 0}
         for data in candidates.values():
             exp = data.get("experience", 0)
             if exp <= 2:
-                exp_dist["0-2 years"] += 1
+                exp_dist["junior"] += 1
             elif exp <= 5:
-                exp_dist["3-5 years"] += 1
+                exp_dist["mid"] += 1
             elif exp <= 10:
-                exp_dist["6-10 years"] += 1
+                exp_dist["senior"] += 1
             else:
-                exp_dist["10+ years"] += 1
+                exp_dist["principal"] += 1
         
         # Location distribution
         locations = [d.get("location", "Unknown") for d in candidates.values()]

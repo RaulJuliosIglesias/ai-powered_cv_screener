@@ -12,6 +12,36 @@ from collections import Counter
 
 logger = logging.getLogger(__name__)
 
+# Valid technical skills - filter out garbage text
+VALID_SKILLS = {
+    # Programming Languages
+    'python', 'javascript', 'typescript', 'java', 'c++', 'c#', 'ruby', 'go', 'rust', 'php', 'swift', 'kotlin', 'scala', 'r',
+    # Frontend
+    'react', 'vue', 'angular', 'svelte', 'html', 'css', 'sass', 'tailwind', 'bootstrap', 'jquery',
+    # Backend
+    'node', 'nodejs', 'express', 'django', 'flask', 'fastapi', 'spring', 'rails', 'laravel', '.net', 'asp.net',
+    # Databases
+    'sql', 'mysql', 'postgresql', 'mongodb', 'redis', 'elasticsearch', 'dynamodb', 'oracle', 'sqlite',
+    # Cloud & DevOps
+    'aws', 'azure', 'gcp', 'docker', 'kubernetes', 'terraform', 'jenkins', 'ci/cd', 'linux', 'git',
+    # Data & ML
+    'machine learning', 'deep learning', 'tensorflow', 'pytorch', 'pandas', 'numpy', 'spark', 'hadoop', 'data science',
+    # Design & Creative
+    '3d', 'maya', 'blender', 'zbrush', 'substance', 'photoshop', 'illustrator', 'figma', 'sketch', 'unity', 'unreal',
+    # Soft Skills
+    'leadership', 'management', 'communication', 'teamwork', 'agile', 'scrum', 'project management',
+    # Other Technical
+    'api', 'rest', 'graphql', 'microservices', 'blockchain', 'solidity', 'web3', 'security', 'networking',
+    # Languages
+    'english', 'spanish', 'french', 'german', 'chinese', 'japanese', 'portuguese',
+    # VFX & Animation
+    'vfx', 'animation', 'compositing', 'lighting', 'rigging', 'texturing', 'rendering', 'nuke', 'houdini', 'after effects',
+    # Finance & Business
+    'excel', 'financial analysis', 'accounting', 'budgeting', 'forecasting', 'sales', 'marketing',
+    # Education
+    'teaching', 'curriculum', 'training', 'mentoring', 'coaching',
+}
+
 
 @dataclass
 class SkillStats:
@@ -64,9 +94,10 @@ class SkillDistributionModule:
             skills_str = meta.get("skills", "")
             if skills_str:
                 for skill in skills_str.split(","):
-                    skill = skill.strip()
-                    if skill and len(skill) > 1:
-                        candidates[cv_id].add(skill.lower())
+                    skill = skill.strip().lower()
+                    # Filter: must be valid skill, not too long, not garbage
+                    if self._is_valid_skill(skill):
+                        candidates[cv_id].add(skill)
         
         # Count skill occurrences
         for candidate_skills in candidates.values():
@@ -94,6 +125,42 @@ class SkillDistributionModule:
             total_candidates=total,
             top_skills=top_skills
         )
+    
+    def _is_valid_skill(self, skill: str) -> bool:
+        """Check if a skill is valid and not garbage text."""
+        if not skill or len(skill) < 2:
+            return False
+        
+        # Too long - probably garbage
+        if len(skill) > 30:
+            return False
+        
+        # Contains URLs or emails
+        if any(x in skill for x in ['http', 'www', '.com', '.org', '@', '/']):
+            return False
+        
+        # Contains numbers that look like stats (e.g., "500+ skus")
+        if any(x in skill for x in ['%', '+', '500', '100', 'award', 'received']):
+            return False
+        
+        # Too many words - probably a sentence
+        if len(skill.split()) > 4:
+            return False
+        
+        # Check against valid skills list (fuzzy match)
+        skill_lower = skill.lower()
+        for valid in VALID_SKILLS:
+            if valid in skill_lower or skill_lower in valid:
+                return True
+        
+        # Also accept if it's a short technical-looking term
+        if len(skill.split()) <= 2 and len(skill) <= 20:
+            # Check it's not garbage patterns
+            garbage_patterns = ['profile', 'incidents', 'counseling', 'reliability', 'oriented', 'patient']
+            if not any(g in skill_lower for g in garbage_patterns):
+                return True
+        
+        return False
     
     def format(self, data: SkillDistributionData) -> str:
         """Format skill distribution into markdown."""

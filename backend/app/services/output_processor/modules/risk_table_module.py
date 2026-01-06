@@ -139,7 +139,7 @@ class RiskTableModule:
             RiskAssessmentData with factors, table, and analysis
         """
         data = RiskAssessmentData(
-            candidate_name=candidate_name,
+            candidate_name=self._clean_candidate_name(candidate_name),
             cv_id=cv_id
         )
         
@@ -224,7 +224,7 @@ class RiskTableModule:
         | 🚩 Red Flags | ✅ None | ... |
         """
         data = RiskAssessmentData(
-            candidate_name=candidate_name,
+            candidate_name=self._clean_candidate_name(candidate_name),
             cv_id=cv_id
         )
         
@@ -563,10 +563,30 @@ class RiskTableModule:
         
         return factors
     
+    def _clean_candidate_name(self, name: str) -> str:
+        """Clean candidate name by removing markdown asterisks, extra spaces, and suffixes."""
+        if not name:
+            return name
+        
+        # Remove markdown asterisks
+        name = name.strip('*').strip()
+        
+        # Remove common suffixes like "Career", "Profile", etc.
+        suffixes_to_remove = ['Career', 'Profile', 'CV', 'Resume']
+        for suffix in suffixes_to_remove:
+            if name.endswith(suffix):
+                name = name[:-len(suffix)].strip()
+        
+        # Remove extra spaces between words
+        words = name.split()
+        name = ' '.join(words)
+        
+        return name
+    
     def _generate_analysis(self, data: RiskAssessmentData) -> str:
         """Generate human-readable analysis text based on the metrics."""
-        # Clean candidate name by removing markdown asterisks
-        name = data.candidate_name.strip('*').strip()
+        # Clean candidate name
+        name = self._clean_candidate_name(data.candidate_name)
         score = data.job_hopping_score
         tenure = data.avg_tenure_years
         exp = data.total_experience_years

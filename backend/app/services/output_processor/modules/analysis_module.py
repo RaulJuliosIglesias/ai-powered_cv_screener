@@ -64,16 +64,19 @@ class AnalysisModule:
         if direct_answer and direct_answer in cleaned:
             cleaned = cleaned.replace(direct_answer, '', 1)
         
-        # Remove tables
-        cleaned = re.sub(r'\|[^\n]*\|[\s\S]*?\|[^\n]*\|', '', cleaned)
-        
-        # CRITICAL: Remove ALL code blocks that contain tables
-        def remove_table_code_blocks(match):
-            content = match.group(1)
-            if '|' in content and '---' in content:
-                return ''  # Remove entire block if it's a table
-            return match.group(0)  # Keep non-table code blocks
-        cleaned = re.sub(r'```(?:markdown|code|text|)?\s*\n?([\s\S]*?)\n?```', remove_table_code_blocks, cleaned, flags=re.IGNORECASE)
+        # Remove ONLY prompt-generated tables, preserve legitimate analysis tables
+        # Prompt tables usually have specific patterns like "Match Score Legend" or "COMPARISON TABLES"
+        if re.search(r'Match Score Legend|COMPARISON TABLES|SPECIAL CASES', cleaned, re.IGNORECASE):
+            # Remove tables that are part of prompt contamination
+            cleaned = re.sub(r'\|[^\n]*\|[\s\S]*?\|[^\n]*\|', '', cleaned)
+            
+            # Remove code blocks that contain prompt tables
+            def remove_table_code_blocks(match):
+                content = match.group(1)
+                if '|' in content and '---' in content and any(keyword in content for keyword in ['Match Score', 'Legend', 'COMPARISON', 'SPECIAL']):
+                    return ''  # Remove only prompt-related tables
+                return match.group(0)  # Keep legitimate analysis tables
+            cleaned = re.sub(r'```(?:markdown|code|text|)?\s*\n?([\s\S]*?)\n?```', remove_table_code_blocks, cleaned, flags=re.IGNORECASE)
         
         # Remove any remaining fenced code blocks
         cleaned = re.sub(r'```[\s\S]*?```', '', cleaned)

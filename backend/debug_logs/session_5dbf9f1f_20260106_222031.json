@@ -1,0 +1,260 @@
+{
+  "session_id": "5dbf9f1f-d90a-489a-bfe0-311e672bbacb",
+  "generated_at": "2026-01-06T22:20:31.458635",
+  "events": [
+    {
+      "timestamp": "2026-01-06T22:19:58.411767",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "5dbf9f1f-d90a-489a-bfe0-311e672bbacb"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T22:19:58.412766",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "How many candidates have senior experience?",
+        "cv_ids": [
+          "cv_aaab8711",
+          "cv_3324a854",
+          "cv_15ff1947",
+          "cv_759793b4",
+          "cv_76b0a541",
+          "cv_f7341172",
+          "cv_d67dc743",
+          "cv_7d46c260",
+          "cv_68d35a03",
+          "cv_f0558105",
+          "cv_fad41666",
+          "cv_b13e4051",
+          "cv_fac65cdd",
+          "cv_d3df1efc",
+          "cv_a800761c",
+          "cv_306e3cef",
+          "cv_1247040b",
+          "cv_fc7b0e6c",
+          "cv_c9d88147",
+          "cv_649c0026",
+          "cv_97869ac0",
+          "cv_ded91491",
+          "cv_6187c0aa",
+          "cv_3779b461"
+        ],
+        "cv_count": 24
+      }
+    },
+    {
+      "timestamp": "2026-01-06T22:20:01.141943",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 31,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_76b0a541",
+            "candidate_name": " Mei Lin Chen  Accessories",
+            "section_type": "experience",
+            "job_hopping_score": 0.3,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 10.0,
+            "score": 0.8003735859216207,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_3324a854",
+            "candidate_name": " Matteo Rossi  Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.21428571428571427,
+            "avg_tenure_years": 3.5,
+            "total_experience_years": 9.0,
+            "score": 0.8002850413857369,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_1247040b",
+            "candidate_name": " Aisha Adebayo  Junior",
+            "section_type": "experience",
+            "job_hopping_score": 0.42857142857142855,
+            "avg_tenure_years": 1.75,
+            "total_experience_years": 4.0,
+            "score": 0.8190570722722539,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_649c0026",
+            "candidate_name": " Aisha Al Mansoori ",
+            "section_type": "experience",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.25,
+            "total_experience_years": 6.0,
+            "score": 0.7952475610896786,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_3324a854",
+            "candidate_name": " Matteo Rossi  Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.21428571428571427,
+            "avg_tenure_years": 3.5,
+            "total_experience_years": 9.0,
+            "score": 0.538930463875972,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_649c0026",
+            "candidate_name": " Aisha Al Mansoori ",
+            "section_type": "experience",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.25,
+            "total_experience_years": 6.0,
+            "score": 0.550366220584702,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_6187c0aa",
+            "candidate_name": " Sofia Rossi  Graduate",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7865910451201329,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_1247040b",
+            "candidate_name": " Aisha Adebayo  Junior",
+            "section_type": "experience",
+            "job_hopping_score": 0.42857142857142855,
+            "avg_tenure_years": 1.75,
+            "total_experience_years": 4.0,
+            "score": 0.5457544304841437,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_f0558105",
+            "candidate_name": " Sofia Rossi  Restaurant",
+            "section_type": "experience",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 2.0,
+            "score": 0.7801428862620645,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_3779b461",
+            "candidate_name": " Aisha Tan  Pizza",
+            "section_type": "experience",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 3.3333333333333335,
+            "total_experience_years": 10.0,
+            "score": 0.5509453939109492,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "location",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T22:20:26.129787",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T22:20:31.350114",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "summary",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T22:20:31.457636",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 691,
+        "answer_preview": ":::thinking\nThe user is asking to identify candidates with \"senior experience.\" This is subjective, so I need to define what constitutes \"senior\" based on job titles and years of experience. I will look for job titles like \"Senior,\" \"Director,\" \"Lead,\" or \"Manager\" and consider candidates with more than 5 years of experience in relevant roles. I will provide the top 3 candidates who best fit this definition, even if the match is not perfect.\n:::\n\n\n:::conclusion\nI recommend considering **[Lucien ...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}
