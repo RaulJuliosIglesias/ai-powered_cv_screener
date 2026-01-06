@@ -1935,14 +1935,14 @@ class RAGServiceV5:
                 chunks=chunks
             )
             
+            # CRITICAL: Save detection in context for orchestrator routing
+            ctx.single_candidate_detection = single_candidate_detection
+            
             if single_candidate_detection.is_single_candidate:
                 logger.info(
                     f"[GENERATION] Single candidate detected: {single_candidate_detection.candidate_name} "
                     f"(method: {single_candidate_detection.detection_method}, confidence: {single_candidate_detection.confidence:.2f})"
                 )
-            
-            # Store in context for orchestrator to use later
-            ctx.single_candidate_detection = single_candidate_detection
             
             if single_candidate_detection.is_single_candidate and single_candidate_detection.candidate_name:
                 # SINGLE CANDIDATE PATH - No comparisons
@@ -2239,8 +2239,15 @@ Provide a corrected response:"""
         # =================================================================
         from app.prompts.templates import classify_query_for_structure
         
-        # First, use the new structure classification
-        query_type = classify_query_for_structure(ctx.question)
+        # Use reformulated prompt for structure classification (context-resolved)
+        effective_question_for_routing = (
+            ctx.query_understanding.reformulated_prompt
+            if ctx.query_understanding and ctx.query_understanding.reformulated_prompt
+            else ctx.question
+        )
+        
+        # First, use the new structure classification with context-resolved question
+        query_type = classify_query_for_structure(effective_question_for_routing)
         candidate_name = None
         
         # If single_candidate or red_flags, get the candidate name

@@ -938,18 +938,34 @@ function App() {
                 </div>
               )}
               {/* Combine actual messages with pending message for THIS session only */}
-              {/* ALWAYS check for duplicates to prevent showing user message twice */}
+              {/* FIX: ALWAYS show pending message during loading to prevent it from disappearing */}
               {(() => {
                 const sessionMsgs = currentSession.messages || [];
                 const pending = pendingMessages[currentSessionId];
                 
-                // ALWAYS check if pending message is already in session messages
-                // This prevents duplicate when backend saves message before streaming completes
+                // During loading (isChatLoading), ALWAYS show the pending message
+                // This prevents the user message from disappearing during streaming
+                if (isChatLoading && pending) {
+                  // Check if pending is already in session (to avoid duplicate)
+                  const alreadyInSession = sessionMsgs.some(
+                    m => m.role === 'user' && m.content === pending.userMsg
+                  );
+                  if (alreadyInSession) {
+                    // Already in session, just return session messages
+                    return sessionMsgs;
+                  }
+                  // Not in session yet, add pending message at the end
+                  return [
+                    ...sessionMsgs,
+                    { role: 'user', content: pending.userMsg, isPending: true }
+                  ];
+                }
+                
+                // Not loading: check for duplicates before adding pending
                 const pendingAlreadySaved = pending && sessionMsgs.some(
                   m => m.role === 'user' && m.content === pending.userMsg
                 );
                 
-                // Only add pending message if not already saved
                 return [
                   ...sessionMsgs,
                   ...(pending && !pendingAlreadySaved ? [{ role: 'user', content: pending.userMsg, isPending: true }] : [])

@@ -1,0 +1,254 @@
+{
+  "session_id": "c33d9753-ed16-40a0-adf4-bb1f25d702a1",
+  "generated_at": "2026-01-06T04:14:46.691435",
+  "events": [
+    {
+      "timestamp": "2026-01-06T04:14:16.186455",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "c33d9753-ed16-40a0-adf4-bb1f25d702a1"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T04:14:16.186455",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Who is best for a leadership role?",
+        "cv_ids": [
+          "cv_bbf34eec",
+          "cv_3f3b4500",
+          "cv_2ffc36e7",
+          "cv_2bdea80b",
+          "cv_b12be685",
+          "cv_47fae3db",
+          "cv_915bdbc1",
+          "cv_30ac22b4",
+          "cv_72a70af6",
+          "cv_8de7bda4",
+          "cv_4ecff391",
+          "cv_12d85364",
+          "cv_6f37af02",
+          "cv_87b6d247",
+          "cv_675bc529",
+          "cv_280319bf",
+          "cv_ca94c531",
+          "cv_b1ec23d7",
+          "cv_6a51f7f8",
+          "cv_7e5603eb",
+          "cv_7697ebd5",
+          "cv_65bfd7de",
+          "cv_c5541ada",
+          "cv_b867b4a6",
+          "cv_7399e149",
+          "cv_ca430a7b",
+          "cv_7a08225f",
+          "cv_7bb9187f",
+          "cv_38d18514",
+          "cv_1bb7c2ac"
+        ],
+        "cv_count": 30
+      }
+    },
+    {
+      "timestamp": "2026-01-06T04:14:21.190195",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 33,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_7a08225f",
+            "candidate_name": " Imani Jones  Concept",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.7797329208620991,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_915bdbc1",
+            "candidate_name": " Mateo Rodriguez ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "score": 0.6027435130478236,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_2bdea80b",
+            "candidate_name": " Thierry Dubois  Concept",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "score": 0.6075465530736929,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_ca430a7b",
+            "candidate_name": " Isabel Mendoza  3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "score": 0.7698130920995155,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_38d18514",
+            "candidate_name": " Aisha Nkrumah  Junior 2D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7915640433062594,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_7697ebd5",
+            "candidate_name": " Daan van Dijk  Hard Surface",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.09090909090909091,
+            "avg_tenure_years": 5.5,
+            "total_experience_years": 11.0,
+            "score": 0.5998085091589977,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_6a51f7f8",
+            "candidate_name": " Aisha Johnson ",
+            "section_type": "skills",
+            "job_hopping_score": 0.1,
+            "avg_tenure_years": 5.0,
+            "total_experience_years": 10.0,
+            "score": 0.760724228029714,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_30ac22b4",
+            "candidate_name": " Carlos Mendoza  Texture",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.08695652173913043,
+            "avg_tenure_years": 7.666666666666667,
+            "total_experience_years": 21.0,
+            "score": 0.5801535845772949,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_12d85364",
+            "candidate_name": " Ricardo De Vries ",
+            "section_type": "experience",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 7.0,
+            "total_experience_years": 7.0,
+            "score": 0.5984548853924101,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_ca94c531",
+            "candidate_name": " Priya Patel  3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 0.8125985733962081,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T04:14:40.060625",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "explicit_multi_candidate_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T04:14:46.690368",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 799,
+        "answer_preview": ":::thinking\nThe user is asking for a ranking of candidates based on their suitability for a leadership role, considering leadership experience, team size managed, project leadership roles, strategic planning experience, and evidence of leadership skills. I need to identify candidates who have demonstrated these qualities in their CVs and rank them accordingly. I must provide the top 3 candidates even if the match is not perfect.\n:::\n\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_ca430a7b)** is the mos...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}
