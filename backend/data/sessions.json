@@ -52928,10 +52928,372 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-06T00:19:38.175245"
+        },
+        {
+          "id": "e4ac226a-79ba-487a-93c2-42e0b7a26a54",
+          "role": "user",
+          "content": "Compare education levels",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T00:20:13.961589"
+        },
+        {
+          "id": "480b5f9e-26aa-47eb-9f84-113eaadf24b0",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a comparison of the education levels of all candidates. I need to extract the education details (degrees, certifications, institutions, dates) for each candidate and present them in a table. The table should include all candidates and their respective education information.\n:::\n\nHere's a comparison of the education levels of the analyzed candidates, highlighting their degrees, certifications, institutions, and dates of attendance. The table below summarizes the educational backgrounds of [📄](cv:cv_bfddae4c)**Imani Jones**, [📄](cv:cv_ef373562)**Thierry Dubois**, and [📄](cv:cv_76d5c7b3)**Clara Dubois**. ### Analysis\nI have included all three candidates in the table to provide a comprehensive comparison of their educational backgrounds.\n\n### Analysis\n\nI have included all three candidates in the table to provide a comprehensive comparison of their educational backgrounds. The table includes the degree, institution, and date of graduation for each candidate, allowing for a clear comparison of their educational qualifications.\n\n| Candidate | Degree | Institution | Match Score |\n|---|---|---|---|\n| Imani Jones | Bachelor of Fine Arts in Illustration | California Institute of the Arts | 50% |\n| Thierry Dubois | M | Unknown | 50% |\n| Clara Dubois | Bachelor of Fine Arts in Digital Arts | École Nationale Supérieure des Beaux-Arts de Lyon | 50% |\n\n:::conclusion\n[📄](cv:cv_bfddae4c)**Imani Jones**holds a Bachelor of Fine Arts in Illustration from the California Institute of the Arts (2018) and a Digital Painting Certificate from CG Spectrum (2019). [📄](cv:cv_ef373562)**Thierry Dubois**has an M degree from an unknown institution with unknown dates. [📄](cv:cv_76d5c7b3)**Clara Dubois**earned a Bachelor of Fine Arts in Digital Arts from École Nationale Supérieure des Beaux-Arts de Lyon (2022) and a Substance Painter Certified User certification from Adobe (2023).\n:::\n\n### Skills Gap Analysis\n\nNo significant skill gaps identified.**Overall Coverage:**0%\n\n### Red Flags Analysis\n\n⚠️ High-risk:  Clara Dubois  Junior 3D | Flags detected: 1 short_avg_tenure, 2 job_hopping**⚠️ High Priority:**-**Clara Dubois  Junior 3D**: High job mobility: 5 positions with avg tenure 0.4 years (score: 100%)**⚡ Attention:**-  Thierry Dubois  Concept: Short average tenure: 0.5 years across 2 positions\n-  Imani Jones  Concept: Moderate job mobility: 3 positions with avg tenure 1.3 years (score: 50%)\n\n### Career Timelines\n\nLongest career:  Imani Jones  Concept (1 years)**Imani Jones  Concept**(1y career)\n  • 2018-2019:  instagram.com/imanijonesart @ Indie Game Studios**Clara Dubois  Junior 3D**(1y career)\n  • 2022-2023: Paris @ France",
+          "sources": [
+            {
+              "cv_id": "cv_ef373562",
+              "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_bfddae4c",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_76d5c7b3",
+              "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 2607.66,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 4.52,
+              "details": "Found 8 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 16663.95,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5257.05,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Here's a comparison of the education levels of the analyzed candidates, highlighting their degrees, certifications, institutions, and dates of attendance. The table below summarizes the educational backgrounds of [📄](cv:cv_bfddae4c) **Imani Jones**, [📄](cv:cv_ef373562) **Thierry Dubois**, and [📄](cv:cv_76d5c7b3) **Clara Dubois**. ### Analysis\nI have included all three candidates in the table to provide a comprehensive comparison of their educational backgrounds.",
+            "raw_content": ":::thinking\nThe user is asking for a comparison of the education levels of all candidates. I need to extract the education details (degrees, certifications, institutions, dates) for each candidate and present them in a table. The table should include all candidates and their respective education information.\n:::\n\nHere's a comparison of the education levels of the analyzed candidates, highlighting their degrees, certifications, institutions, and dates of attendance. The table below summarizes the educational backgrounds of **[Imani Jones](cv:cv_bfddae4c)**, **[Thierry Dubois](cv:cv_ef373562)**, and **[Clara Dubois](cv:cv_76d5c7b3)**.\n\n### Analysis\nI have included all three candidates in the table to provide a comprehensive comparison of their educational backgrounds. The table includes the degree, institution, and date of graduation for each candidate, allowing for a clear comparison of their educational qualifications.\n\n| Candidate | Degree | Institution | Date |\n|-----------|-----------------------------------|-------------------------------------------------|-------|\n| **[Imani Jones](cv:cv_bfddae4c)** | Bachelor of Fine Arts in Illustration | California Institute of the Arts | 2018 |\n| **[Imani Jones](cv:cv_bfddae4c)** | Digital Painting Certificate | CG Spectrum | 2019 |\n| **[Thierry Dubois](cv:cv_ef373562)** | M | Unknown | Unknown |\n| **[Clara Dubois](cv:cv_76d5c7b3)** | Bachelor of Fine Arts in Digital Arts | École Nationale Supérieure des Beaux-Arts de Lyon | 2022 |\n| **[Clara Dubois](cv:cv_76d5c7b3)** | Substance Painter Certified User | Adobe | 2023 |\n\n:::conclusion\n**[Imani Jones](cv:cv_bfddae4c)** holds a Bachelor of Fine Arts in Illustration from the California Institute of the Arts (2018) and a Digital Painting Certificate from CG Spectrum (2019). **[Thierry Dubois](cv:cv_ef373562)** has an M degree from an unknown institution with unknown dates. **[Clara Dubois](cv:cv_76d5c7b3)** earned a Bachelor of Fine Arts in Digital Arts from École Nationale Supérieure des Beaux-Arts de Lyon (2022) and a Substance Painter Certified User certification from Adobe (2023).\n:::",
+            "thinking": "The user is asking for a comparison of the education levels of all candidates. I need to extract the education details (degrees, certifications, institutions, dates) for each candidate and present them in a table. The table should include all candidates and their respective education information.",
+            "analysis": "I have included all three candidates in the table to provide a comprehensive comparison of their educational backgrounds. The table includes the degree, institution, and date of graduation for each candidate, allowing for a clear comparison of their educational qualifications.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Degree",
+                "Institution",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Imani Jones",
+                  "cv_id": "cv_bfddae4c",
+                  "columns": {
+                    "Degree": "Bachelor of Fine Arts in Illustration",
+                    "Institution": "California Institute of the Arts"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Thierry Dubois",
+                  "cv_id": "cv_ef373562",
+                  "columns": {
+                    "Degree": "M",
+                    "Institution": "Unknown"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Clara Dubois",
+                  "cv_id": "cv_76d5c7b3",
+                  "columns": {
+                    "Degree": "Bachelor of Fine Arts in Digital Arts",
+                    "Institution": "École Nationale Supérieure des Beaux-Arts de Lyon"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "[📄](cv:cv_bfddae4c) **Imani Jones** holds a Bachelor of Fine Arts in Illustration from the California Institute of the Arts (2018) and a Digital Painting Certificate from CG Spectrum (2019). [📄](cv:cv_ef373562) **Thierry Dubois** has an M degree from an unknown institution with unknown dates. [📄](cv:cv_76d5c7b3) **Clara Dubois** earned a Bachelor of Fine Arts in Digital Arts from École Nationale Supérieure des Beaux-Arts de Lyon (2022) and a Substance Painter Certified User certification from Adobe (2023).",
+            "gap_analysis": {
+              "required_skills": [
+                "Unknown Dates"
+              ],
+              "skill_gaps": [
+                {
+                  "skill": "Unknown Dates",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Thierry Dubois  Concept",
+                    " Imani Jones  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                }
+              ],
+              "coverage_score": 0.0,
+              "best_coverage_candidate": null,
+              "summary": "No significant skill gaps identified."
+            },
+            "red_flags": {
+              "flags": [
+                {
+                  "flag_type": "short_avg_tenure",
+                  "severity": "medium",
+                  "description": "Short average tenure: 0.5 years across 2 positions",
+                  "candidate_name": " Thierry Dubois  Concept",
+                  "details": {
+                    "avg_tenure_years": 0.5,
+                    "position_count": 2
+                  }
+                },
+                {
+                  "flag_type": "job_hopping",
+                  "severity": "medium",
+                  "description": "Moderate job mobility: 3 positions with avg tenure 1.3 years (score: 50%)",
+                  "candidate_name": " Imani Jones  Concept",
+                  "details": {
+                    "job_hopping_score": 0.5,
+                    "avg_tenure_years": 1.3333333333333333,
+                    "position_count": 3
+                  }
+                },
+                {
+                  "flag_type": "job_hopping",
+                  "severity": "high",
+                  "description": "High job mobility: 5 positions with avg tenure 0.4 years (score: 100%)",
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "details": {
+                    "job_hopping_score": 1.0,
+                    "avg_tenure_years": 0.4,
+                    "position_count": 5
+                  }
+                }
+              ],
+              "candidates_with_flags": {
+                " Thierry Dubois  Concept": [
+                  "short_avg_tenure"
+                ],
+                " Imani Jones  Concept": [
+                  "job_hopping"
+                ],
+                " Clara Dubois  Junior 3D": [
+                  "job_hopping"
+                ]
+              },
+              "high_risk_candidates": [
+                " Clara Dubois  Junior 3D"
+              ],
+              "clean_candidates": [],
+              "summary": "⚠️ High-risk:  Clara Dubois  Junior 3D | Flags detected: 1 short_avg_tenure, 2 job_hopping"
+            },
+            "timeline": {
+              "timelines": [
+                {
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_bfddae4c",
+                  "entries": [
+                    {
+                      "year_start": 2018,
+                      "year_end": 2019,
+                      "title": " instagram.com/imanijonesart",
+                      "company": "Indie Game Studios",
+                      "is_current": false,
+                      "duration_years": 1,
+                      "transition_type": ""
+                    }
+                  ],
+                  "career_span_years": 1,
+                  "total_companies": 1,
+                  "progression_score": 50.0,
+                  "current_role": null
+                },
+                {
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "cv_id": "cv_76d5c7b3",
+                  "entries": [
+                    {
+                      "year_start": 2022,
+                      "year_end": 2023,
+                      "title": "Paris",
+                      "company": "France",
+                      "is_current": false,
+                      "duration_years": 1,
+                      "transition_type": ""
+                    }
+                  ],
+                  "career_span_years": 1,
+                  "total_companies": 1,
+                  "progression_score": 50.0,
+                  "current_role": null
+                }
+              ],
+              "summary": "Longest career:  Imani Jones  Concept (1 years)"
+            },
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T00:20:41.505585"
+        },
+        {
+          "id": "2bf672d2-78f1-40ae-bea6-697e626e16f0",
+          "role": "user",
+          "content": "give me risks about Imani Jones",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T00:28:59.224360"
+        },
+        {
+          "id": "caccb31a-8096-4eeb-92b7-5f1929a9c26f",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a risk/red flag analysis of Imani Jones Concept (cv_bfddae4c). The pre-calculated data indicates \"High mobility or gaps\" and an average tenure of \"0.0 yrs\". This suggests potential job-hopping, which needs to be highlighted. The response must start with the red flags analysis, followed by a brief profile summary, and a conclusion.\n:::\n\n⚠️**Risk factors identified for [📄](cv:cv_bfddae4c)**Imani Jones Concept**:**- High mobility or gaps, with an average tenure of 0.0 years. ---\n### ⚠️ Risk Assessment\n---.\n\n### Analysis\n\n⚠️**Risk factors identified for [📄](cv:cv_bfddae4c)**Imani Jones Concept**:**- High mobility or gaps, with an average tenure of 0.0 years.\n---\n### ⚠️ Risk Assessment\n---\n\n| Candidate | Status | Match Score |\n|---|---|---|\n| 🚩 Red Flags | ⚠️ Issues Found | 50% |\n| ⏸️ Employment Gaps | ✅ None | 50% |\n| 🎯 Experience | Mid | 50% |\n| 📊 Stability | ✅ Stable | 15% |\n| 🔄 Job Hopping | ✅ Low | 0% |\n\n:::conclusion**Assessment:**The candidate exhibits a high degree of job mobility, which is a potential red flag. While the overall experience is 4 years, the average tenure of 0.0 years raises concerns about job stability and retention.\n:::\n\n### Skills Gap Analysis\n\nNo significant skill gaps identified.**Overall Coverage:**0%\n\n### Red Flags Analysis\n\n✓ No red flags detected for 1 candidate(s).",
+          "sources": [
+            {
+              "cv_id": "cv_bfddae4c",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 2851.24,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 0.51,
+              "details": "Found 6 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 12597.24,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 2574.94,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "⚠️ **Risk factors identified for [📄](cv:cv_bfddae4c) ** Imani Jones Concept**:**\n- High mobility or gaps, with an average tenure of 0.0 years. ---\n### ⚠️ Risk Assessment\n---.",
+            "raw_content": ":::thinking\nThe user is asking for a risk/red flag analysis of **[ Imani Jones Concept](cv:cv_bfddae4c)**. The pre-calculated data indicates \"High mobility or gaps\" and an average tenure of \"0.0 yrs\". This suggests potential job-hopping, which needs to be highlighted. The response must start with the red flags analysis, followed by a brief profile summary, and a conclusion.\n:::\n\n⚠️ **Risk factors identified for [ Imani Jones Concept](cv:cv_bfddae4c):**\n- High mobility or gaps, with an average tenure of 0.0 years.\n\n---\n\n### ⚠️ Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| **🚩 Red Flags** | ⚠️ Issues Found | High mobility or gaps |\n| **🔄 Job Hopping** | ✅ Low | Score: 0%, Avg tenure: 0.0 yrs |\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n| **📊 Stability** | ✅ Stable | N/A positions over 4 years |\n| **🎯 Experience** | Mid | Los Angeles @ CA projects, including character designs, |\n\n---\n\n:::conclusion\n**Assessment:** The candidate exhibits a high degree of job mobility, which is a potential red flag. While the overall experience is 4 years, the average tenure of 0.0 years raises concerns about job stability and retention.\n:::",
+            "thinking": "The user is asking for a risk/red flag analysis of Imani Jones Concept (cv_bfddae4c). The pre-calculated data indicates \"High mobility or gaps\" and an average tenure of \"0.0 yrs\". This suggests potential job-hopping, which needs to be highlighted. The response must start with the red flags analysis, followed by a brief profile summary, and a conclusion.",
+            "analysis": "⚠️ **Risk factors identified for [📄](cv:cv_bfddae4c) ** Imani Jones Concept**:**\n- High mobility or gaps, with an average tenure of 0.0 years.\n---\n### ⚠️ Risk Assessment\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Status",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "🚩 Red Flags",
+                  "cv_id": "",
+                  "columns": {
+                    "Status": "⚠️ Issues Found"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "⏸️ Employment Gaps",
+                  "cv_id": "",
+                  "columns": {
+                    "Status": "✅ None"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "🎯 Experience",
+                  "cv_id": "",
+                  "columns": {
+                    "Status": "Mid"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "📊 Stability",
+                  "cv_id": "",
+                  "columns": {
+                    "Status": "✅ Stable"
+                  },
+                  "match_score": 15
+                },
+                {
+                  "candidate_name": "🔄 Job Hopping",
+                  "cv_id": "",
+                  "columns": {
+                    "Status": "✅ Low"
+                  },
+                  "match_score": 0
+                }
+              ]
+            },
+            "conclusion": "**Assessment:**The candidate exhibits a high degree of job mobility, which is a potential red flag. While the overall experience is 4 years, the average tenure of 0.0 years raises concerns about job stability and retention.",
+            "gap_analysis": {
+              "required_skills": [
+                "The Red Flags Analysis",
+                "An Average Tenure Of 0"
+              ],
+              "skill_gaps": [
+                {
+                  "skill": "The Red Flags Analysis",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "An Average Tenure Of 0",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept"
+                  ],
+                  "candidates_have": []
+                }
+              ],
+              "coverage_score": 0.0,
+              "best_coverage_candidate": null,
+              "summary": "No significant skill gaps identified."
+            },
+            "red_flags": {
+              "flags": [],
+              "candidates_with_flags": {},
+              "high_risk_candidates": [],
+              "clean_candidates": [
+                " Imani Jones  Concept"
+              ],
+              "summary": "✓ 1 candidate(s) with no red flags"
+            },
+            "timeline": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T00:29:21.191082"
         }
       ],
       "created_at": "2026-01-05T23:45:48.965659",
-      "updated_at": "2026-01-06T00:19:38.175245"
+      "updated_at": "2026-01-06T00:29:21.191082"
     }
   ]
 }

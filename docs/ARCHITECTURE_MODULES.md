@@ -364,6 +364,29 @@ else:
 
 ---
 
+## Issue Found: RED_FLAGS_TEMPLATE Bug
+
+### Problem
+Query "give me risks about Imani Jones" triggered `RED_FLAGS_TEMPLATE` instead of `SINGLE_CANDIDATE_TEMPLATE`.
+
+The old `RED_FLAGS_TEMPLATE` was using separate `{red_flags_section}` and `{stability_metrics_section}` placeholders, but those weren't proper Risk Assessment tables - just brief text summaries. This caused the LLM to generate broken/incomplete output like:
+
+```
+⚠️ **Se detectaron las siguientes red flags para Imani Jones Concept:** | Stability Score | Stable | ---.
+```
+
+### Root Cause
+1. **Detection**: `_is_red_flags_query()` detects keywords like "risk", "risks", "red flag"
+2. **Template mismatch**: `RED_FLAGS_TEMPLATE` expected different parameters than the unified `risk_assessment_section`
+3. **Incomplete data**: The LLM received fragmentary data and produced broken markdown
+
+### Fix Applied
+- Updated `RED_FLAGS_TEMPLATE` to use `{risk_assessment_section}` (the full 5-component table)
+- Updated template formatting in `build_single_candidate_prompt()` to pass correct parameter
+- Both templates now use the same unified Risk Assessment table
+
+---
+
 ## Duplicate Code to Remove
 
 The following code is now REDUNDANT and should be removed:

@@ -1,0 +1,97 @@
+{
+  "session_id": "89b1b406-a8ff-4483-9569-97bd61ea38c7",
+  "generated_at": "2026-01-06T00:29:21.267048",
+  "events": [
+    {
+      "timestamp": "2026-01-06T00:28:59.336411",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "89b1b406-a8ff-4483-9569-97bd61ea38c7"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T00:28:59.336411",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "give me risks about Imani Jones",
+        "cv_ids": [
+          "cv_ef373562",
+          "cv_76d5c7b3",
+          "cv_bfddae4c"
+        ],
+        "cv_count": 3
+      }
+    },
+    {
+      "timestamp": "2026-01-06T00:29:18.313598",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "SINGLE_CANDIDATE_TEMPLATE",
+        "candidate_name": " Imani Jones  Concept",
+        "detection_method": "first_name_in_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T00:29:21.186980",
+      "event_type": "RED_FLAGS_INPUT",
+      "level": "INFO",
+      "data": {
+        "chunk_count": 6,
+        "first_chunk_metadata_keys": [
+          "cv_id",
+          "filename",
+          "candidate_name",
+          "section_type",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "is_current",
+          "is_summary"
+        ],
+        "first_chunk_job_hopping_score": null,
+        "first_chunk_avg_tenure": null,
+        "first_chunk_total_exp": 4.0
+      }
+    },
+    {
+      "timestamp": "2026-01-06T00:29:21.187982",
+      "event_type": "RED_FLAGS_MODULE",
+      "level": "INFO",
+      "data": {
+        "total_flags": 0,
+        "high_risk_candidates": [],
+        "clean_candidates": [
+          " Imani Jones  Concept"
+        ],
+        "flag_details": []
+      }
+    },
+    {
+      "timestamp": "2026-01-06T00:29:21.266049",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1349,
+        "answer_preview": ":::thinking\nThe user is asking for a risk/red flag analysis of Imani Jones Concept (cv_bfddae4c). The pre-calculated data indicates \"High mobility or gaps\" and an average tenure of \"0.0 yrs\". This suggests potential job-hopping, which needs to be highlighted. The response must start with the red flags analysis, followed by a brief profile summary, and a conclusion.\n:::\n\n⚠️**Risk factors identified for [📄](cv:cv_bfddae4c)**Imani Jones Concept**:**- High mobility or gaps, with an average tenure of...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

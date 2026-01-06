@@ -476,7 +476,6 @@ Su perfil demuestra una trayectoria profesional estable:
 
 Respond now:"""
 # =============================================================================
-
 # =============================================================================
 # RED FLAGS SPECIFIC TEMPLATE (Red flags analysis FIRST, profile SECOND)
 # =============================================================================
@@ -492,70 +491,47 @@ RED_FLAGS_TEMPLATE = """## RED FLAGS ANALYSIS REQUEST
 ## USER QUERY
 {question}
 
-## IMPORTANT: THIS IS A RED FLAGS QUERY
-The user is SPECIFICALLY asking about red flags, concerns, or issues for this candidate.
-Your response MUST START with the red flags analysis, NOT with the full CV profile.
+## IMPORTANT: THIS IS A RED FLAGS / RISK ANALYSIS QUERY
+The user is asking about red flags, risks, concerns, or issues for this candidate.
 
-## PRE-CALCULATED RED FLAGS DATA (USE THIS DATA)
-{red_flags_section}
-
-## PRE-CALCULATED STABILITY METRICS (USE THIS DATA)
-{stability_metrics_section}
+## PRE-CALCULATED RISK ASSESSMENT DATA (COPY THIS TABLE EXACTLY)
+{risk_assessment_section}
 
 ---
 
-## MANDATORY RESPONSE FORMAT FOR RED FLAGS QUERIES
+## MANDATORY RESPONSE FORMAT
 
 :::thinking
-[Brief: Does this candidate have red flags based on the pre-calculated data above?]
+[Brief analysis of the pre-calculated data above - 2-3 lines max]
 :::
 
-### 🚩 Red Flags Analysis for **[{candidate_name}](cv:{cv_id})**
+### 🚩 Risk Analysis for **[{candidate_name}](cv:{cv_id})**
 
-[START WITH ONE OF THESE TWO OPTIONS:]
+[Based on the pre-calculated data, provide ONE of these assessments:]
 
-**IF NO RED FLAGS (use this format):**
+**IF CLEAN PROFILE:**
+✅ **No significant red flags detected for {candidate_name}.**
 
-✅ **No se detectaron red flags significativas para {candidate_name}.**
-
-Su perfil demuestra una trayectoria profesional estable:
-- **Estabilidad laboral**: [X] años promedio por posición
-- **Progresión de carrera**: [Describe progression]
-- **Gaps de empleo**: [None detected / X gaps detected]
-
-**IF RED FLAGS EXIST (use this format):**
-
-⚠️ **Se detectaron las siguientes red flags para {candidate_name}:**
-
-| Red Flag | Severidad | Descripción |
-|----------|-----------|-------------|
-| [Type] | [High/Medium/Low] | [Description] |
+**IF ISSUES FOUND:**
+⚠️ **Risk factors identified for {candidate_name}:**
+- [List specific concerns from the data]
 
 ---
 
-### 📊 Brief Profile Summary
+### ⚠️ Risk Assessment
 
-| Metric | Value |
-|--------|-------|
-| **Current Role** | [Role at Company] |
-| **Total Experience** | [X years] |
-| **Avg Tenure** | [X years per position] |
-| **Stability Score** | [Stable/Moderate/Unstable] |
+{risk_assessment_section}
 
 ---
 
 :::conclusion
-**Assessment:** [1-2 sentences summarizing the candidate's risk profile]
+**Assessment:** [1-2 sentences summarizing the risk profile based on the table above]
 :::
-
-## CRITICAL RULES
-1. RED FLAGS ANALYSIS MUST BE THE FIRST SECTION (after thinking)
-2. Use the pre-calculated data provided above - DO NOT ignore it
-3. Keep the profile summary BRIEF - this is NOT a full CV analysis
-4. If the pre-calculated data shows "No significant red flags", say that CLEARLY
 
 Respond now:"""
 
+# =============================================================================
+# COMPARISON TEMPLATE
 # =============================================================================
 
 COMPARISON_TEMPLATE = """## COMPARISON REQUEST
@@ -585,6 +561,9 @@ Format:
 Only include information explicitly stated in CVs. 
 Mark missing data as "Not specified" rather than inferring."""
 
+# =============================================================================
+# RANKING TEMPLATE
+# =============================================================================
 
 RANKING_TEMPLATE = """## RANKING REQUEST
 Role: {role}
@@ -1288,14 +1267,8 @@ class PromptBuilder:
                 cv_id=cv_id,
                 context=ctx.text,
                 question=question,
-                red_flags_section=sections["red_flags"],
-                stability_metrics_section=sections["stability_metrics"]
+                risk_assessment_section=sections["risk_assessment"]
             )
-            log_event("TEMPLATE_SELECTION", {
-                "template": "RED_FLAGS_TEMPLATE",
-                "candidate_name": candidate_name,
-                "detection_method": "red_flags_query_detected"
-            })
         else:
             # Use standard SINGLE_CANDIDATE_TEMPLATE with Risk Assessment data
             formatted_prompt = SINGLE_CANDIDATE_TEMPLATE.format(
