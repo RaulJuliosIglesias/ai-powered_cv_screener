@@ -62438,10 +62438,2775 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-06T18:26:54.570176"
+        },
+        {
+          "id": "531fa22d-883a-49ef-98ad-9b7e048d25fa",
+          "role": "user",
+          "content": "Compare #1 vs #2 in the ranking",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T18:30:26.899078"
+        },
+        {
+          "id": "40cdf33f-933a-4b95-ad6e-e4892dc4abd1",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a direct comparison between Isabel Mendoza (cv_0d9656b9) and Carmen Rodriguez (cv_c0d465f6), focusing on their experience, skills, and qualifications. I need to extract this information from their respective CVs and present it in a comparative table. I will then provide a conclusion based on the analysis.\n:::\n\n\n:::conclusion\n Carmen Rodriguez  3D is the recommended candidate with an overall score of 100%.  Carmen Rodriguez  3D emerges as the top choice with an overall score of 100%. Key strengths include: [Isabel Mendoza](cv:cv_0d9656b9) (100%), [Carmen Rodriguez](cv:cv_c0d465f6) (100%). Key strengths: [Isabel Mendoza](cv:cv_0d9656b9), [Carmen Rodriguez](cv:cv_c0d465f6). Runner-up:  Aisha Johnson .\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_459cc708",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_c0d465f6",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a702e7dd",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_931187c7",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_7003f1f1",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_cffcd7d5",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_fe6e9024",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_0d9656b9",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_306a8109",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d579e9d1",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_fd4d4ba8",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 2515.61,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 18.26,
+              "details": "Found 23 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 24949.6,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4444.81,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for a direct comparison between **[Isabel Mendoza](cv:cv_0d9656b9)** and **[Carmen Rodriguez](cv:cv_c0d465f6)**, focusing on their experience, skills, and qualifications. I need to extract this information from their respective CVs and present it in a comparative table. I will then provide a conclusion based on the analysis.\n:::\n\n**[Isabel Mendoza](cv:cv_0d9656b9)** has significantly more experience (47 years) compared to **[Carmen Rodriguez](cv:cv_c0d465f6)** (16 years). Both candidates possess strong skills in 3D art and have held leadership positions.\n\n### Analysis\nThe comparison focuses on experience, skills, and qualifications as requested by the user. The table highlights the key differences and similarities between the two candidates, allowing for a clear evaluation of their suitability.\n\n| Candidate | Experience | Skills | Qualifications | Match |\n|-----------|------------|--------|----------------|-------|\n| **[Isabel Mendoza](cv:cv_0d9656b9)** | 47 years | 3D Modeling, Texturing, Rigging, Substance Painter, Unreal Engine, Maya | Extensive experience in leadership roles, including Chief Creative Officer and VP of Creative Development. | ⭐⭐⭐⭐⭐ |\n| **[Carmen Rodriguez](cv:cv_c0d465f6)** | 16 years | 3D Modeling, Texturing, Lighting, Rendering, Animation, Pipeline Development | Experience in leadership roles, including Chief Creative Officer and VP of Visual Innovation. | ⭐⭐⭐⭐ |\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_0d9656b9)** appears to be the stronger candidate due to her extensive experience (47 years) compared to **[Carmen Rodriguez](cv:cv_c0d465f6)** (16 years). Both candidates have strong skills in 3D art and have held leadership positions.\n:::",
+            "thinking": "The user is asking for a direct comparison between Isabel Mendoza (cv_0d9656b9) and Carmen Rodriguez (cv_c0d465f6), focusing on their experience, skills, and qualifications. I need to extract this information from their respective CVs and present it in a comparative table. I will then provide a conclusion based on the analysis.",
+            "analysis": "Analyzed 11 candidates based on the specified criteria.  Carmen Rodriguez  3D emerges as the top choice with an overall score of 100%. Runner-up:  Aisha Johnson  with 89%. 3 candidates have high match scores (≥70%):  Carmen Rodriguez  3D,  Aisha Johnson ,  Isabel Mendoza  3D. 2 candidates have medium match scores (40-69%). 6 candidates have low match scores (<40%). Key strengths of the top candidate include: [Isabel Mendoza](cv:cv_0d9656b9), [Carmen Rodriguez](cv:cv_c0d465f6). Primary evaluation criteria: [Isabel Mendoza](cv:cv_0d9656b9), [Carmen Rodriguez](cv:cv_c0d465f6).",
+            "table_data": null,
+            "conclusion": " Carmen Rodriguez  3D is the recommended candidate with an overall score of 100%.  Carmen Rodriguez  3D emerges as the top choice with an overall score of 100%. Key strengths include: [Isabel Mendoza](cv:cv_0d9656b9) (100%), [Carmen Rodriguez](cv:cv_c0d465f6) (100%). Key strengths: [Isabel Mendoza](cv:cv_0d9656b9), [Carmen Rodriguez](cv:cv_c0d465f6). Runner-up:  Aisha Johnson .",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "ranking",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": {
+              "ranked": [
+                {
+                  "rank": 1,
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "cv_id": "cv_c0d465f6",
+                  "overall_score": 100.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 100,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 100
+                  },
+                  "strengths": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 2,
+                  "candidate_name": " Aisha Johnson ",
+                  "cv_id": "cv_cffcd7d5",
+                  "overall_score": 89.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 89.0,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 89.0
+                  },
+                  "strengths": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 3,
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "cv_id": "cv_0d9656b9",
+                  "overall_score": 70.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 70.0,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 70.0
+                  },
+                  "strengths": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 4,
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "cv_id": "cv_459cc708",
+                  "overall_score": 64.2,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 64.2,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 64.2
+                  },
+                  "strengths": [],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 5,
+                  "candidate_name": " Daan van Dijk  Hard Surface",
+                  "cv_id": "cv_fe6e9024",
+                  "overall_score": 62.2,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 62.2,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 62.2
+                  },
+                  "strengths": [],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 6,
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "cv_id": "cv_a702e7dd",
+                  "overall_score": 36.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 36.0,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 36.0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ]
+                },
+                {
+                  "rank": 7,
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_931187c7",
+                  "overall_score": 33.8,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 33.8,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 33.8
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ]
+                },
+                {
+                  "rank": 8,
+                  "candidate_name": " Carlos Mendoza  Lighting",
+                  "cv_id": "cv_d579e9d1",
+                  "overall_score": 30.8,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 30.8,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 30.8
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ]
+                },
+                {
+                  "rank": 9,
+                  "candidate_name": " Carlos Mendoza  Junior VFX",
+                  "cv_id": "cv_7003f1f1",
+                  "overall_score": 20.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 20,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 20
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ]
+                },
+                {
+                  "rank": 10,
+                  "candidate_name": " Rajiv Patel  Junior VFX",
+                  "cv_id": "cv_306a8109",
+                  "overall_score": 20.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 20,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 20
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ]
+                },
+                {
+                  "rank": 11,
+                  "candidate_name": " Kenji Tanaka  3D Artist",
+                  "cv_id": "cv_fd4d4ba8",
+                  "overall_score": 20.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 20,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 20
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ]
+                }
+              ],
+              "criteria_names": [
+                "[Isabel Mendoza](cv:cv_0d9656b9)",
+                "[Carmen Rodriguez](cv:cv_c0d465f6)"
+              ]
+            },
+            "top_pick": {
+              "candidate_name": " Carmen Rodriguez  3D",
+              "cv_id": "cv_c0d465f6",
+              "overall_score": 100.0,
+              "key_strengths": [
+                "[Isabel Mendoza](cv:cv_0d9656b9)",
+                "[Carmen Rodriguez](cv:cv_c0d465f6)"
+              ],
+              "justification": " Carmen Rodriguez  3D emerges as the top choice with an overall score of 100%. Key strengths include: [Isabel Mendoza](cv:cv_0d9656b9) (100%), [Carmen Rodriguez](cv:cv_c0d465f6) (100%).",
+              "runner_up": " Aisha Johnson ",
+              "runner_up_cv_id": "cv_cffcd7d5"
+            },
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T18:31:03.098838"
+        },
+        {
+          "id": "b72a9527-0dfe-47b3-9656-59336470d4c8",
+          "role": "user",
+          "content": "Compare #1 vs #2 in the ranking",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T18:41:39.888175"
+        },
+        {
+          "id": "75c9dd95-9e78-4a5e-bd21-4c2af221c645",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a comparison of the top two candidates from the previous ranking. The previous ranking was: Isabel Mendoza (cv_0d9656b9), Carmen Rodriguez (cv_c0d465f6), Rajesh Patel (cv_438a6b8e), Daan van Dijk (cv_fe6e9024), Aisha Johnson (cv_cffcd7d5), Imani Jones (cv_931187c7), Carlos Mendoza (cv_d579e9d1), Liam Chen (cv_459cc708), Kenji Tanaka (cv_fd4d4ba8), Aisha Nkrumah (cv_a702e7dd), and Carlos Mendoza (cv_7003f1f1). Therefore, the top two candidates are Isabel Mendoza (cv_0d9656b9) and Carmen Rodriguez (cv_c0d465f6). I will compare their skills and experience based on the information in their CVs.\n\nThe previous response is contradictory. It states that Carmen Rodriguez (cv_c0d465f6) is the recommended candidate with an overall score of 100%, and then states that both candidates have a score of 100%. This is illogical. I will ignore the previous conclusion and provide a new comparison based on the CV data.\n:::\n\n\n:::conclusion\n Aisha Johnson  is the recommended candidate with an overall score of 96%.  Aisha Johnson  emerges as the top choice with an overall score of 96%. Key strengths include: Experience (100%). Key strengths: Experience. Runner-up:  Carmen Rodriguez  3D.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_459cc708",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_fe6e9024",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_cffcd7d5",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_0d9656b9",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a702e7dd",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_7003f1f1",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_931187c7",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c0d465f6",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d579e9d1",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_306a8109",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_438a6b8e",
+              "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_fd4d4ba8",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 4.97,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 16.42,
+              "details": "Found 23 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 19000.78,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5042.1,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for a comparison of the top two candidates from the previous ranking. The previous ranking was: **[Isabel Mendoza](cv:cv_0d9656b9)**, **[Carmen Rodriguez](cv:cv_c0d465f6)**, **[Rajesh Patel](cv:cv_438a6b8e)**, **[Daan van Dijk](cv:cv_fe6e9024)**, **[Aisha Johnson](cv:cv_cffcd7d5)**, **[Imani Jones](cv:cv_931187c7)**, **[Carlos Mendoza](cv:cv_d579e9d1)**, **[Liam Chen](cv:cv_459cc708)**, **[Kenji Tanaka](cv:cv_fd4d4ba8)**, **[Aisha Nkrumah](cv:cv_a702e7dd)**, and **[Carlos Mendoza](cv:cv_7003f1f1)**. Therefore, the top two candidates are **[Isabel Mendoza](cv:cv_0d9656b9)** and **[Carmen Rodriguez](cv:cv_c0d465f6)**. I will compare their skills and experience based on the information in their CVs.\n\nThe previous response is contradictory. It states that **[Carmen Rodriguez](cv:cv_c0d465f6)** is the recommended candidate with an overall score of 100%, and then states that both candidates have a score of 100%. This is illogical. I will ignore the previous conclusion and provide a new comparison based on the CV data.\n:::\n\nHere's a comparison of the top two candidates, **[Isabel Mendoza](cv:cv_0d9656b9)** and **[Carmen Rodriguez](cv:cv_c0d465f6)**, focusing on their skills and experience. **[Isabel Mendoza](cv:cv_0d9656b9)** has significantly more experience, but **[Carmen Rodriguez](cv:cv_c0d465f6)** has more recent certifications.\n\n### Analysis\nI am comparing the top two candidates from the previous ranking based on their skills and experience. I am using the information explicitly stated in their CVs to make the comparison.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Isabel Mendoza](cv:cv_0d9656b9)** | 3D Modeling, Texturing, Rigging, Substance Painter, Unreal Engine, Maya | 47 years | ⭐⭐⭐⭐⭐ |\n| **[Carmen Rodriguez](cv:cv_c0d465f6)** | 3D Modeling, Texturing, Lighting, Rendering, Animation, Pipeline Development | 16 years | ⭐⭐⭐⭐ |\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_0d9656b9)** is the stronger candidate due to her extensive experience (47 years) in the field. While **[Carmen Rodriguez](cv:cv_c0d465f6)** has a solid 16 years of experience and recent certifications, **[Isabel Mendoza](cv:cv_0d9656b9)**'s long career provides a deeper understanding of the industry.\n:::",
+            "thinking": "The user is asking for a comparison of the top two candidates from the previous ranking. The previous ranking was: Isabel Mendoza (cv_0d9656b9), Carmen Rodriguez (cv_c0d465f6), Rajesh Patel (cv_438a6b8e), Daan van Dijk (cv_fe6e9024), Aisha Johnson (cv_cffcd7d5), Imani Jones (cv_931187c7), Carlos Mendoza (cv_d579e9d1), Liam Chen (cv_459cc708), Kenji Tanaka (cv_fd4d4ba8), Aisha Nkrumah (cv_a702e7dd), and Carlos Mendoza (cv_7003f1f1). Therefore, the top two candidates are Isabel Mendoza (cv_0d9656b9) and Carmen Rodriguez (cv_c0d465f6). I will compare their skills and experience based on the information in their CVs.\n\nThe previous response is contradictory. It states that Carmen Rodriguez (cv_c0d465f6) is the recommended candidate with an overall score of 100%, and then states that both candidates have a score of 100%. This is illogical. I will ignore the previous conclusion and provide a new comparison based on the CV data.",
+            "analysis": "Analyzed 12 candidates based on the specified criteria.  Aisha Johnson  emerges as the top choice with an overall score of 96%. Runner-up:  Carmen Rodriguez  3D with 96%. 3 candidates have high match scores (≥70%):  Aisha Johnson ,  Carmen Rodriguez  3D,  Liam Chen  3D Artist. 3 candidates have medium match scores (40-69%). 6 candidates have low match scores (<40%). Key strengths of the top candidate include: Experience. Primary evaluation criteria: Experience, Stability.",
+            "table_data": null,
+            "conclusion": " Aisha Johnson  is the recommended candidate with an overall score of 96%.  Aisha Johnson  emerges as the top choice with an overall score of 96%. Key strengths include: Experience (100%). Key strengths: Experience. Runner-up:  Carmen Rodriguez  3D.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "ranking",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": {
+              "ranked": [
+                {
+                  "rank": 1,
+                  "candidate_name": " Aisha Johnson ",
+                  "cv_id": "cv_cffcd7d5",
+                  "overall_score": 96.0,
+                  "criterion_scores": {
+                    "Experience": 100,
+                    "Technical Skills": 100,
+                    "Role Fit": 100,
+                    "Career Trajectory": 80.0,
+                    "Stability": 90.0
+                  },
+                  "strengths": [
+                    "Experience",
+                    "Technical Skills"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 2,
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "cv_id": "cv_c0d465f6",
+                  "overall_score": 95.9,
+                  "criterion_scores": {
+                    "Experience": 100,
+                    "Technical Skills": 100,
+                    "Role Fit": 100,
+                    "Career Trajectory": 85.0,
+                    "Stability": 81.2
+                  },
+                  "strengths": [
+                    "Experience",
+                    "Technical Skills"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 3,
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "cv_id": "cv_459cc708",
+                  "overall_score": 79.0,
+                  "criterion_scores": {
+                    "Experience": 60.0,
+                    "Technical Skills": 100,
+                    "Role Fit": 100,
+                    "Career Trajectory": 73.3,
+                    "Stability": 50.0
+                  },
+                  "strengths": [
+                    "Technical Skills",
+                    "Role Fit"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 4,
+                  "candidate_name": " Daan van Dijk  Hard Surface",
+                  "cv_id": "cv_fe6e9024",
+                  "overall_score": 60.8,
+                  "criterion_scores": {
+                    "Experience": 100,
+                    "Technical Skills": 0,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 78.2,
+                    "Stability": 90.9
+                  },
+                  "strengths": [
+                    "Experience",
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills"
+                  ]
+                },
+                {
+                  "rank": 5,
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "cv_id": "cv_0d9656b9",
+                  "overall_score": 60.0,
+                  "criterion_scores": {
+                    "Experience": 100,
+                    "Technical Skills": 0,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 79.1,
+                    "Stability": 81.0
+                  },
+                  "strengths": [
+                    "Experience",
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills"
+                  ]
+                },
+                {
+                  "rank": 6,
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "cv_id": "cv_a702e7dd",
+                  "overall_score": 52.5,
+                  "criterion_scores": {
+                    "Experience": 0.0,
+                    "Technical Skills": 100,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 50,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Technical Skills",
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 7,
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_931187c7",
+                  "overall_score": 39.8,
+                  "criterion_scores": {
+                    "Experience": 40.0,
+                    "Technical Skills": 12,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 65.0,
+                    "Stability": 50.0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 8,
+                  "candidate_name": " Rajiv Patel  Junior VFX",
+                  "cv_id": "cv_306a8109",
+                  "overall_score": 33.5,
+                  "criterion_scores": {
+                    "Experience": 20.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 20.0,
+                    "Career Trajectory": 90.0,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Stability",
+                    "Career Trajectory"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 9,
+                  "candidate_name": " Kenji Tanaka  3D Artist",
+                  "cv_id": "cv_fd4d4ba8",
+                  "overall_score": 33.5,
+                  "criterion_scores": {
+                    "Experience": 20.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 20.0,
+                    "Career Trajectory": 90.0,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Stability",
+                    "Career Trajectory"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 10,
+                  "candidate_name": " Carlos Mendoza  Lighting",
+                  "cv_id": "cv_d579e9d1",
+                  "overall_score": 28.5,
+                  "criterion_scores": {
+                    "Experience": 40.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 40.0,
+                    "Career Trajectory": 40.0,
+                    "Stability": 25.0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Stability"
+                  ]
+                },
+                {
+                  "rank": 11,
+                  "candidate_name": " Carlos Mendoza  Junior VFX",
+                  "cv_id": "cv_7003f1f1",
+                  "overall_score": 17.5,
+                  "criterion_scores": {
+                    "Experience": 0.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 0.0,
+                    "Career Trajectory": 50,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Experience",
+                    "Technical Skills"
+                  ]
+                },
+                {
+                  "rank": 12,
+                  "candidate_name": " Rajesh Patel  VFX",
+                  "cv_id": "cv_438a6b8e",
+                  "overall_score": 17.5,
+                  "criterion_scores": {
+                    "Experience": 0.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 0.0,
+                    "Career Trajectory": 50,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Experience",
+                    "Technical Skills"
+                  ]
+                }
+              ],
+              "criteria_names": [
+                "Experience",
+                "Technical Skills",
+                "Role Fit",
+                "Career Trajectory",
+                "Stability"
+              ]
+            },
+            "top_pick": {
+              "candidate_name": " Aisha Johnson ",
+              "cv_id": "cv_cffcd7d5",
+              "overall_score": 96.0,
+              "key_strengths": [
+                "Experience",
+                "Technical Skills"
+              ],
+              "justification": " Aisha Johnson  emerges as the top choice with an overall score of 96%. Key strengths include: Experience (100%).",
+              "runner_up": " Carmen Rodriguez  3D",
+              "runner_up_cv_id": "cv_c0d465f6"
+            },
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T18:42:07.751817"
+        },
+        {
+          "id": "cab3e252-51cd-41a9-a5fc-cc3a4ee1f86c",
+          "role": "user",
+          "content": "Compare #1 vs #2 in the ranking",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T18:43:55.271186"
+        },
+        {
+          "id": "f6260224-e1a4-4233-b529-f048604f60d0",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to compare the top two candidates from the previous ranking. The previous ranking was: Isabel Mendoza (cv_0d9656b9), Carmen Rodriguez (cv_c0d465f6), Rajesh Patel (cv_438a6b8e), Daan van Dijk (cv_fe6e9024), Aisha Johnson (cv_cffcd7d5), Imani Jones (cv_931187c7), Carlos Mendoza (cv_d579e9d1), Liam Chen (cv_459cc708), Kenji Tanaka (cv_fd4d4ba8), Aisha Nkrumah (cv_a702e7dd), and Carlos Mendoza (cv_7003f1f1). Therefore, the top two candidates are Isabel Mendoza (cv_0d9656b9) and Carmen Rodriguez (cv_c0d465f6). I will compare their skills and experience based on the information in their CVs.\n:::\n\n\n:::conclusion\n Carmen Rodriguez  3D is the recommended candidate with an overall score of 100%.  Carmen Rodriguez  3D emerges as the top choice with an overall score of 100%. Key strengths include: [Isabel Mendoza](cv:cv_0d9656b9) (100%), [Carmen Rodriguez](cv:cv_c0d465f6) (100%). Key strengths: [Isabel Mendoza](cv:cv_0d9656b9), [Carmen Rodriguez](cv:cv_c0d465f6). Runner-up:  Aisha Johnson .\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_459cc708",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_fe6e9024",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_cffcd7d5",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_0d9656b9",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c0d465f6",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_931187c7",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_7003f1f1",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_438a6b8e",
+              "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_306a8109",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a702e7dd",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d579e9d1",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_fd4d4ba8",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 0.37,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 16.11,
+              "details": "Found 25 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 25109.12,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4532.54,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking to compare the top two candidates from the previous ranking. The previous ranking was: Isabel Mendoza (cv_0d9656b9), Carmen Rodriguez (cv_c0d465f6), Rajesh Patel (cv_438a6b8e), Daan van Dijk (cv_fe6e9024), Aisha Johnson (cv_cffcd7d5), Imani Jones (cv_931187c7), Carlos Mendoza (cv_d579e9d1), Liam Chen (cv_459cc708), Kenji Tanaka (cv_fd4d4ba8), Aisha Nkrumah (cv_a702e7dd), and Carlos Mendoza (cv_7003f1f1). Therefore, the top two candidates are Isabel Mendoza (cv_0d9656b9) and Carmen Rodriguez (cv_c0d465f6). I will compare their skills and experience based on the information in their CVs.\n:::\n\nHere is a comparison of the top two candidates, **[Isabel Mendoza](cv:cv_0d9656b9)** and **[Carmen Rodriguez](cv:cv_c0d465f6)**, based on their skills and experience as 3D artists. **[Isabel Mendoza](cv:cv_0d9656b9)** has significantly more experience, but both candidates possess strong skills in 3D modeling, texturing, and leadership.\n\n### Analysis\nThe comparison focuses on the two highest-ranked candidates from the previous response. The key criteria for comparison are experience (total years and relevant roles), 3D skills (modeling, texturing, etc.), and leadership experience. This analysis aims to provide a clear distinction between the candidates based on the information available in their CVs.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Isabel Mendoza](cv:cv_0d9656b9)** | 3D Modeling, Texturing, Rigging, Substance Painter, Unreal Engine, Maya | 47 years, Chief Creative Officer, VP of Creative Development, Director of 3D Production, 3D Artist | ⭐⭐⭐⭐⭐ |\n| **[Carmen Rodriguez](cv:cv_c0d465f6)** | 3D Modeling, Texturing, Lighting, Rendering, Animation, Pipeline Development | 16 years, Chief Creative Officer, VP of Visual Innovation, Creative Director, Art Department Manager, 3D Artist | ⭐⭐⭐⭐ |\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_0d9656b9)** is the stronger candidate due to her extensive experience and proven track record in various leadership roles. While **[Carmen Rodriguez](cv:cv_c0d465f6)** also has significant experience and a strong skill set, **[Isabel Mendoza](cv:cv_0d9656b9)**'s longer career and diverse roles make her a more compelling choice.\n:::",
+            "thinking": "The user is asking to compare the top two candidates from the previous ranking. The previous ranking was: Isabel Mendoza (cv_0d9656b9), Carmen Rodriguez (cv_c0d465f6), Rajesh Patel (cv_438a6b8e), Daan van Dijk (cv_fe6e9024), Aisha Johnson (cv_cffcd7d5), Imani Jones (cv_931187c7), Carlos Mendoza (cv_d579e9d1), Liam Chen (cv_459cc708), Kenji Tanaka (cv_fd4d4ba8), Aisha Nkrumah (cv_a702e7dd), and Carlos Mendoza (cv_7003f1f1). Therefore, the top two candidates are Isabel Mendoza (cv_0d9656b9) and Carmen Rodriguez (cv_c0d465f6). I will compare their skills and experience based on the information in their CVs.",
+            "analysis": "Analyzed 12 candidates based on the specified criteria.  Carmen Rodriguez  3D emerges as the top choice with an overall score of 100%. Runner-up:  Aisha Johnson  with 89%. 3 candidates have high match scores (≥70%):  Carmen Rodriguez  3D,  Aisha Johnson ,  Isabel Mendoza  3D. 2 candidates have medium match scores (40-69%). 7 candidates have low match scores (<40%). Key strengths of the top candidate include: [Isabel Mendoza](cv:cv_0d9656b9), [Carmen Rodriguez](cv:cv_c0d465f6). Primary evaluation criteria: [Isabel Mendoza](cv:cv_0d9656b9), [Carmen Rodriguez](cv:cv_c0d465f6).",
+            "table_data": null,
+            "conclusion": " Carmen Rodriguez  3D is the recommended candidate with an overall score of 100%.  Carmen Rodriguez  3D emerges as the top choice with an overall score of 100%. Key strengths include: [Isabel Mendoza](cv:cv_0d9656b9) (100%), [Carmen Rodriguez](cv:cv_c0d465f6) (100%). Key strengths: [Isabel Mendoza](cv:cv_0d9656b9), [Carmen Rodriguez](cv:cv_c0d465f6). Runner-up:  Aisha Johnson .",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "ranking",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": {
+              "ranked": [
+                {
+                  "rank": 1,
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "cv_id": "cv_c0d465f6",
+                  "overall_score": 100.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 100,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 100
+                  },
+                  "strengths": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 2,
+                  "candidate_name": " Aisha Johnson ",
+                  "cv_id": "cv_cffcd7d5",
+                  "overall_score": 89.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 89.0,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 89.0
+                  },
+                  "strengths": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 3,
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "cv_id": "cv_0d9656b9",
+                  "overall_score": 70.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 70.0,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 70.0
+                  },
+                  "strengths": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 4,
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "cv_id": "cv_459cc708",
+                  "overall_score": 64.2,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 64.2,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 64.2
+                  },
+                  "strengths": [],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 5,
+                  "candidate_name": " Daan van Dijk  Hard Surface",
+                  "cv_id": "cv_fe6e9024",
+                  "overall_score": 62.2,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 62.2,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 62.2
+                  },
+                  "strengths": [],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 6,
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "cv_id": "cv_a702e7dd",
+                  "overall_score": 36.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 36.0,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 36.0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ]
+                },
+                {
+                  "rank": 7,
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_931187c7",
+                  "overall_score": 33.8,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 33.8,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 33.8
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ]
+                },
+                {
+                  "rank": 8,
+                  "candidate_name": " Carlos Mendoza  Lighting",
+                  "cv_id": "cv_d579e9d1",
+                  "overall_score": 30.8,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 30.8,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 30.8
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ]
+                },
+                {
+                  "rank": 9,
+                  "candidate_name": " Carlos Mendoza  Junior VFX",
+                  "cv_id": "cv_7003f1f1",
+                  "overall_score": 20.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 20,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 20
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ]
+                },
+                {
+                  "rank": 10,
+                  "candidate_name": " Rajesh Patel  VFX",
+                  "cv_id": "cv_438a6b8e",
+                  "overall_score": 20.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 20,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 20
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ]
+                },
+                {
+                  "rank": 11,
+                  "candidate_name": " Rajiv Patel  Junior VFX",
+                  "cv_id": "cv_306a8109",
+                  "overall_score": 20.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 20,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 20
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ]
+                },
+                {
+                  "rank": 12,
+                  "candidate_name": " Kenji Tanaka  3D Artist",
+                  "cv_id": "cv_fd4d4ba8",
+                  "overall_score": 20.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_0d9656b9)": 20,
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)": 20
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_0d9656b9)",
+                    "[Carmen Rodriguez](cv:cv_c0d465f6)"
+                  ]
+                }
+              ],
+              "criteria_names": [
+                "[Isabel Mendoza](cv:cv_0d9656b9)",
+                "[Carmen Rodriguez](cv:cv_c0d465f6)"
+              ]
+            },
+            "top_pick": {
+              "candidate_name": " Carmen Rodriguez  3D",
+              "cv_id": "cv_c0d465f6",
+              "overall_score": 100.0,
+              "key_strengths": [
+                "[Isabel Mendoza](cv:cv_0d9656b9)",
+                "[Carmen Rodriguez](cv:cv_c0d465f6)"
+              ],
+              "justification": " Carmen Rodriguez  3D emerges as the top choice with an overall score of 100%. Key strengths include: [Isabel Mendoza](cv:cv_0d9656b9) (100%), [Carmen Rodriguez](cv:cv_c0d465f6) (100%).",
+              "runner_up": " Aisha Johnson ",
+              "runner_up_cv_id": "cv_cffcd7d5"
+            },
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T18:44:29.090922"
+        },
+        {
+          "id": "e6b3b7dd-0ebb-4f85-90de-46497aab01e8",
+          "role": "user",
+          "content": "What technologies do the candidates have?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T18:44:45.622000"
+        },
+        {
+          "id": "18616c07-2b94-4b25-818c-ae257e5b0cf1",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a list of technologies that the candidates possess. I need to extract the technologies mentioned in each CV and present them in a structured format. Since the user did not specify a number of candidates, I will provide a table with all candidates who mention specific technologies.\n:::\n\n\n:::conclusion\nBased on the technologies listed in their CVs, **[Kenji Tanaka](cv:cv_fd4d4ba8)**, **[Isabel Mendoza](cv:cv_0d9656b9)**, **[Rajesh Patel](cv:cv_438a6b8e)**, **[Daan van Dijk](cv:cv_fe6e9024)**, and **[Carlos Mendoza](cv:cv_7003f1f1)** appear to have the most comprehensive skill sets.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_459cc708",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_c0d465f6",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_cffcd7d5",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_d579e9d1",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_931187c7",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_fd4d4ba8",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_0d9656b9",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_306a8109",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_fe6e9024",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_a702e7dd",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_438a6b8e",
+              "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_7003f1f1",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 0.35,
+              "details": "Query type: general"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 15.56,
+              "details": "Found 25 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 27125.08,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5505.98,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for a list of technologies that the candidates possess. I need to extract the technologies mentioned in each CV and present them in a structured format. Since the user did not specify a number of candidates, I will provide a table with all candidates who mention specific technologies.\n:::\n\nThe following candidates possess a variety of technologies, as detailed in their respective CVs. These technologies range from software and programming languages to specific tools and techniques used in their fields.\n\n### Analysis\nThe table below summarizes the technologies mentioned by each candidate in their CV. This information is extracted directly from the \"Skills\" and \"Certifications\" sections of the CVs. The technologies listed are specific and explicitly mentioned in the CVs, without any inference or assumption.\n\n| Candidate | Technologies | Match |\n|-----------|-------------|-------|\n| **[Liam Chen](cv:cv_459cc708)** | Blender, Maya, ZBrush, Substance Painter, Unity, Unreal Engine | ⭐⭐⭐⭐ |\n| **[Carmen Rodriguez](cv:cv_c0d465f6)** | Autodesk Maya, ZBrush, Unreal Engine | ⭐⭐⭐ |\n| **[Aisha Johnson](cv:cv_cffcd7d5)** | After Effects, Toon Boom Harmony | ⭐⭐ |\n| **[Carlos Mendoza](cv:cv_d579e9d1)** | No technologies mentioned |  |\n| **[Imani Jones](cv:cv_931187c7)** | Adobe Photoshop, Procreate, Blender, ZBrush | ⭐⭐⭐⭐ |\n| **[Kenji Tanaka](cv:cv_fd4d4ba8)** | Maya, ZBrush, Substance Painter, Unreal Engine, Photoshop, Marvelous Designer | ⭐⭐⭐⭐⭐ |\n| **[Isabel Mendoza](cv:cv_0d9656b9)** | 3D Modeling, Texturing, Rigging, Substance Painter, Unreal Engine, Maya | ⭐⭐⭐⭐⭐ |\n| **[Rajesh Patel](cv:cv_438a6b8e)** | Nuke, Houdini, Maya, After Effects, Python | ⭐⭐⭐⭐⭐ |\n| **[Daan van Dijk](cv:cv_fe6e9024)** | Fusion 360, Substance Academy, ZBrush, Maya, Blender, Substance Painter/Designer | ⭐⭐⭐⭐⭐ |\n| **[Aisha Nkrumah](cv:cv_a702e7dd)** | Adobe Photoshop, Adobe Illustrator, Clip Studio Paint | ⭐⭐⭐ |\n| **[Carlos Mendoza](cv:cv_7003f1f1)** | Maya, Nuke, Houdini, After Effects, Unity | ⭐⭐⭐⭐⭐ |\n| **[Rajiv Patel](cv:cv_306a8109)** | Nuke, Houdini, Maya, After Effects, Python | ⭐⭐⭐⭐⭐ |\n\n:::conclusion\nBased on the technologies listed in their CVs, **[Kenji Tanaka](cv:cv_fd4d4ba8)**, **[Isabel Mendoza](cv:cv_0d9656b9)**, **[Rajesh Patel](cv:cv_438a6b8e)**, **[Daan van Dijk](cv:cv_fe6e9024)**, and **[Carlos Mendoza](cv:cv_7003f1f1)** appear to have the most comprehensive skill sets.\n:::",
+            "thinking": "The user is asking for a list of technologies that the candidates possess. I need to extract the technologies mentioned in each CV and present them in a structured format. Since the user did not specify a number of candidates, I will provide a table with all candidates who mention specific technologies.",
+            "analysis": "The table below summarizes the technologies mentioned by each candidate in their CV. This information is extracted directly from the \"Skills\" and \"Certifications\" sections of the CVs. The technologies listed are specific and explicitly mentioned in the CVs, without any inference or assumption.",
+            "table_data": null,
+            "conclusion": "Based on the technologies listed in their CVs, **[Kenji Tanaka](cv:cv_fd4d4ba8)**, **[Isabel Mendoza](cv:cv_0d9656b9)**, **[Rajesh Patel](cv:cv_438a6b8e)**, **[Daan van Dijk](cv:cv_fe6e9024)**, and **[Carlos Mendoza](cv:cv_7003f1f1)** appear to have the most comprehensive skill sets.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "search",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": {
+              "results": [
+                {
+                  "candidate_name": " Aisha Johnson ",
+                  "cv_id": "cv_cffcd7d5",
+                  "match_score": 80.2,
+                  "matching_skills": [],
+                  "experience_years": 10.0,
+                  "current_role": "",
+                  "relevance_reason": "10+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "cv_id": "cv_a702e7dd",
+                  "match_score": 79.6,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "in various stages of the animation pipeline",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Kenji Tanaka  3D Artist",
+                  "cv_id": "cv_fd4d4ba8",
+                  "match_score": 79.2,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Rajiv Patel  Junior VFX",
+                  "cv_id": "cv_306a8109",
+                  "match_score": 79.0,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "cv_id": "cv_c0d465f6",
+                  "match_score": 78.6,
+                  "matching_skills": [],
+                  "experience_years": 16.0,
+                  "current_role": "Amsterdam",
+                  "relevance_reason": "16+ years exp"
+                },
+                {
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_931187c7",
+                  "match_score": 78.2,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Rajesh Patel  VFX",
+                  "cv_id": "cv_438a6b8e",
+                  "match_score": 77.2,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "composite shots for film and television projects.",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Daan van Dijk  Hard Surface",
+                  "cv_id": "cv_fe6e9024",
+                  "match_score": 76.5,
+                  "matching_skills": [],
+                  "experience_years": 11.0,
+                  "current_role": "",
+                  "relevance_reason": "11+ years exp"
+                },
+                {
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "cv_id": "cv_0d9656b9",
+                  "match_score": 76.4,
+                  "matching_skills": [],
+                  "experience_years": 47.0,
+                  "current_role": "2010",
+                  "relevance_reason": "47+ years exp"
+                },
+                {
+                  "candidate_name": " Carlos Mendoza  Lighting",
+                  "cv_id": "cv_d579e9d1",
+                  "match_score": 75.5,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "cv_id": "cv_459cc708",
+                  "match_score": 55.4,
+                  "matching_skills": [],
+                  "experience_years": 6.0,
+                  "current_role": "",
+                  "relevance_reason": "6+ years exp"
+                },
+                {
+                  "candidate_name": " Carlos Mendoza  Junior VFX",
+                  "cv_id": "cv_7003f1f1",
+                  "match_score": 55.0,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "",
+                  "relevance_reason": "Profile match"
+                }
+              ],
+              "query_terms": [
+                "what",
+                "technologies"
+              ],
+              "total_candidates": 12
+            },
+            "total_results": 12,
+            "query": "What technologies do the candidates have?",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T18:45:21.066599"
+        },
+        {
+          "id": "a1e8107d-451c-4e09-880a-fa288a011128",
+          "role": "user",
+          "content": "Who has similar experience but in a different stack?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T18:45:35.227901"
+        },
+        {
+          "id": "273df14f-80b4-47b3-a676-bc6628830dca",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to identify candidates who have similar experience to others but with a different technology stack. This requires identifying the core experiences described in the CVs and then finding candidates who have similar experiences but use different tools or technologies to achieve the same goals. Since the user did not specify a number of candidates, I will provide a table with all candidates who have similar experience but use a different stack.\n:::\n\n\n:::conclusion\n**[Kenji Tanaka](cv:cv_fd4d4ba8)**, **[Daan van Dijk](cv:cv_fe6e9024)**, and **[Carlos Mendoza](cv:cv_7003f1f1)** demonstrate the strongest combination of overlapping experience and distinct technical skills. These candidates could bring valuable perspectives and adaptability to a team, even if their primary toolsets differ from current standards.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_cffcd7d5",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_931187c7",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_0d9656b9",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c0d465f6",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_7003f1f1",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_438a6b8e",
+              "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_a702e7dd",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_fe6e9024",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_306a8109",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d579e9d1",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_459cc708",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_fd4d4ba8",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 0.34,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 15.91,
+              "details": "Found 20 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 36649.95,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5372.14,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking to identify candidates who have similar experience to others but with a different technology stack. This requires identifying the core experiences described in the CVs and then finding candidates who have similar experiences but use different tools or technologies to achieve the same goals. Since the user did not specify a number of candidates, I will provide a table with all candidates who have similar experience but use a different stack.\n:::\n\nSeveral candidates possess similar experience in roles such as 3D Artist, VFX Artist, and Lighting Artist, but utilize different software or techniques. These candidates demonstrate adaptability and a broad understanding of the creative process, making them potentially valuable assets despite differences in their primary toolsets.\n\n### Analysis\nTo identify candidates with similar experience but different stacks, I focused on the core responsibilities and achievements described in each CV. For example, multiple candidates have experience in 3D modeling, but some primarily use Maya while others use Blender or ZBrush. Similarly, VFX artists may specialize in different compositing or simulation software. The table below highlights candidates with overlapping experience but distinct technical skills.\n\n| Candidate | Similar Experience | Different Stack | Match |\n|-----------|--------------------|-----------------|-------|\n| **[Kenji Tanaka](cv:cv_fd4d4ba8)** | 3D Modeling, Texturing, Rendering | Maya, ZBrush, Substance Painter, Unreal Engine | Game Development, Digital Painting, Sci-Fi Movies, 3D Printing | ⭐⭐⭐⭐ |\n| **[Daan van Dijk](cv:cv_fe6e9024)** | Hard Surface Modeling, Asset Optimization | ZBrush, Maya/Blender, Substance Painter/Designer | Restoring vintage mechanical watches, Competitive cycling, Procedural generation theory | ⭐⭐⭐⭐ |\n| **[Carlos Mendoza](cv:cv_7003f1f1)** | VFX Artist, Compositing, Particle Systems | Maya, Nuke, Houdini, After Effects, Unity | Cinematic Storytelling, Brazilian Music, Rock Climbing | ⭐⭐⭐⭐ |\n| **[Isabel Mendoza](cv:cv_0d9656b9)** | 3D Modeling, Texturing, Rigging | Substance Painter, Unreal Engine, Maya |  | ⭐⭐⭐ |\n| **[Rajesh Patel](cv:cv_438a6b8e)** | VFX Supervisor, Compositing | Nuke, Houdini, Maya | Photography, Film, Travel | ⭐⭐⭐ |\n| **[Rajiv Patel](cv:cv_306a8109)** | VFX Artist, Compositing, Simulations | Nuke, Houdini, Maya, After Effects, Python | 3D Animation, Cinematic Storytelling, Indie Film | ⭐⭐⭐ |\n| **[Liam Chen](cv:cv_459cc708)** | 3D Artist | Blender, Maya, ZBrush, Substance Painter, Unity, Unreal Engine | Digital Illustration, 3D Printing, VR Art | ⭐⭐⭐ |\n| **[Carlos Mendoza](cv:cv_d579e9d1)** | Lighting Artist, 3D Rendering |  | Hiking, Cinematic Photography, Open Source Game Engines, Japanese Calligraphy | ⭐⭐⭐ |\n| **[Carmen Rodriguez](cv:cv_c0d465f6)** | 3D Artist | Autodesk Maya, ZBrush, Unreal Engine | Landscape Hiking, Open Source 3D Plug | ⭐⭐⭐ |\n\n:::conclusion\n**[Kenji Tanaka](cv:cv_fd4d4ba8)**, **[Daan van Dijk](cv:cv_fe6e9024)**, and **[Carlos Mendoza](cv:cv_7003f1f1)** demonstrate the strongest combination of overlapping experience and distinct technical skills. These candidates could bring valuable perspectives and adaptability to a team, even if their primary toolsets differ from current standards.\n:::",
+            "thinking": "The user is asking to identify candidates who have similar experience to others but with a different technology stack. This requires identifying the core experiences described in the CVs and then finding candidates who have similar experiences but use different tools or technologies to achieve the same goals. Since the user did not specify a number of candidates, I will provide a table with all candidates who have similar experience but use a different stack.",
+            "analysis": "To identify candidates with similar experience but different stacks, I focused on the core responsibilities and achievements described in each CV. For example, multiple candidates have experience in 3D modeling, but some primarily use Maya while others use Blender or ZBrush. Similarly, VFX artists may specialize in different compositing or simulation software. The table below highlights candidates with overlapping experience but distinct technical skills.",
+            "table_data": null,
+            "conclusion": "**[Kenji Tanaka](cv:cv_fd4d4ba8)**, **[Daan van Dijk](cv:cv_fe6e9024)**, and **[Carlos Mendoza](cv:cv_7003f1f1)** demonstrate the strongest combination of overlapping experience and distinct technical skills. These candidates could bring valuable perspectives and adaptability to a team, even if their primary toolsets differ from current standards.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "search",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": {
+              "results": [
+                {
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "cv_id": "cv_a702e7dd",
+                  "match_score": 82.5,
+                  "matching_skills": [
+                    "Designed a book cover that contributed to a 30%",
+                    "contribute artistic skills and a patient approach"
+                  ],
+                  "experience_years": 0.0,
+                  "current_role": "",
+                  "relevance_reason": "Skills: Designed a book cover that contributed to a 30%, contribute artistic skills and a patient approach"
+                },
+                {
+                  "candidate_name": " Daan van Dijk  Hard Surface",
+                  "cv_id": "cv_fe6e9024",
+                  "match_score": 81.7,
+                  "matching_skills": [],
+                  "experience_years": 11.0,
+                  "current_role": "High",
+                  "relevance_reason": "11+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Johnson ",
+                  "cv_id": "cv_cffcd7d5",
+                  "match_score": 81.0,
+                  "matching_skills": [
+                    "Contributed to the studio’s first animated short"
+                  ],
+                  "experience_years": 10.0,
+                  "current_role": "",
+                  "relevance_reason": "Skills: Contributed to the studio’s first animated short | 10+ years exp"
+                },
+                {
+                  "candidate_name": " Rajesh Patel  VFX",
+                  "cv_id": "cv_438a6b8e",
+                  "match_score": 81.0,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "composite shots for film and television projects.",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_931187c7",
+                  "match_score": 80.2,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "Los Angeles",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "cv_id": "cv_0d9656b9",
+                  "match_score": 80.2,
+                  "matching_skills": [],
+                  "experience_years": 47.0,
+                  "current_role": "2010",
+                  "relevance_reason": "47+ years exp"
+                },
+                {
+                  "candidate_name": " Kenji Tanaka  3D Artist",
+                  "cv_id": "cv_fd4d4ba8",
+                  "match_score": 79.6,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "cv_id": "cv_c0d465f6",
+                  "match_score": 79.4,
+                  "matching_skills": [],
+                  "experience_years": 16.0,
+                  "current_role": "Amsterdam",
+                  "relevance_reason": "16+ years exp"
+                },
+                {
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "cv_id": "cv_459cc708",
+                  "match_score": 79.3,
+                  "matching_skills": [],
+                  "experience_years": 6.0,
+                  "current_role": "",
+                  "relevance_reason": "6+ years exp"
+                },
+                {
+                  "candidate_name": " Carlos Mendoza  Junior VFX",
+                  "cv_id": "cv_7003f1f1",
+                  "match_score": 79.0,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": " São Paulo",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Rajiv Patel  Junior VFX",
+                  "cv_id": "cv_306a8109",
+                  "match_score": 57.8,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "high‑quality visual effects for film and broadcast.",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Carlos Mendoza  Lighting",
+                  "cv_id": "cv_d579e9d1",
+                  "match_score": 55.4,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "",
+                  "relevance_reason": "4+ years exp"
+                }
+              ],
+              "query_terms": [
+                "similar",
+                "but",
+                "different",
+                "stack"
+              ],
+              "total_candidates": 12
+            },
+            "total_results": 12,
+            "query": "Who has similar experience but in a different stack?",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T18:46:20.371174"
+        },
+        {
+          "id": "46b84ae3-7042-4402-b8e8-28449f0ab1d0",
+          "role": "user",
+          "content": "Who has the most diverse profile?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T18:52:12.331278"
+        },
+        {
+          "id": "2fb7a797-cd63-4501-9ec2-2411743c4dc5",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to identify the candidate with the most diverse profile. This requires assessing the breadth of skills, experience, and other qualifications mentioned in each CV. \"Diverse\" can refer to a wide range of skills (technical and non-technical), experience in different roles or industries, and potentially language skills or other unique attributes. Since the user did not specify a number of candidates, I will provide a table with the top 3 candidates who have the most diverse profiles.\n:::\n\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_0d9656b9)** and **[Carmen Rodriguez](cv:cv_c0d465f6)** stand out with their extensive experience in leadership roles and a broad range of 3D art skills. **[Daan van Dijk](cv:cv_fe6e9024)** also presents a diverse profile with experience in both AAA game development and film pipelines, along with a strong focus on hard surface modeling.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_a702e7dd",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_cffcd7d5",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_438a6b8e",
+              "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_0d9656b9",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c0d465f6",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_fd4d4ba8",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_fe6e9024",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_306a8109",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_931187c7",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_459cc708",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_7003f1f1",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d579e9d1",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 0.33,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 16.14,
+              "details": "Found 18 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 25031.68,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4818.48,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking to identify the candidate with the most diverse profile. This requires assessing the breadth of skills, experience, and other qualifications mentioned in each CV. \"Diverse\" can refer to a wide range of skills (technical and non-technical), experience in different roles or industries, and potentially language skills or other unique attributes. Since the user did not specify a number of candidates, I will provide a table with the top 3 candidates who have the most diverse profiles.\n:::\n\nBased on the breadth of skills and experience detailed in their CVs, **[Isabel Mendoza](cv:cv_0d9656b9)**, **[Carmen Rodriguez](cv:cv_c0d465f6)**, and **[Daan van Dijk](cv:cv_fe6e9024)** appear to have the most diverse profiles. These candidates demonstrate a wide range of skills and experience in different roles.\n\n### Analysis\nThe following candidates were selected because they exhibit a combination of technical skills, management experience, and other qualifications that contribute to a diverse profile. The evaluation criteria included the number of distinct skills listed, the variety of roles held, and any additional qualifications such as language proficiency or certifications.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Isabel Mendoza](cv:cv_0d9656b9)** | 3D Modeling, Texturing, Rigging, Substance Painter, Unreal Engine, Maya | Chief Creative Officer, VP of Creative Development, Director of 3D Production, 3D Artist | ⭐⭐⭐⭐⭐ |\n| **[Carmen Rodriguez](cv:cv_c0d465f6)** | 3D Modeling, Texturing, Lighting, Rendering, Animation, Pipeline Development | Chief Creative Officer, VP of Visual Innovation, Creative Director, Art Department Manager, 3D Artist | ⭐⭐⭐⭐⭐ |\n| **[Daan van Dijk](cv:cv_fe6e9024)** | High-Poly Sculpting, Hard Surface Polygonal Modeling, Retopology & UV Mapping, PBR Material Workflow, Substance Painter/Designer | Lead Hard Surface Modeler, Asset Modeler, Junior 3D Artist | ⭐⭐⭐⭐ |\n| **[Rajesh Patel](cv:cv_438a6b8e)** | Nuke, Houdini, Maya, Compositing, 3D Modeling, Texturing, Lighting, Rendering, VFX Pipeline Management, Budget Management, Team Leadership | VFX Supervisor, Compositor, Junior Compositor | ⭐⭐⭐ |\n| **[Carlos Mendoza](cv:cv_7003f1f1)** | Maya, Nuke, Houdini, After Effects, Unity | Junior VFX Artist, VFX Intern | ⭐⭐⭐ |\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_0d9656b9)** and **[Carmen Rodriguez](cv:cv_c0d465f6)** stand out with their extensive experience in leadership roles and a broad range of 3D art skills. **[Daan van Dijk](cv:cv_fe6e9024)** also presents a diverse profile with experience in both AAA game development and film pipelines, along with a strong focus on hard surface modeling.\n:::",
+            "thinking": "The user is asking to identify the candidate with the most diverse profile. This requires assessing the breadth of skills, experience, and other qualifications mentioned in each CV. \"Diverse\" can refer to a wide range of skills (technical and non-technical), experience in different roles or industries, and potentially language skills or other unique attributes. Since the user did not specify a number of candidates, I will provide a table with the top 3 candidates who have the most diverse profiles.",
+            "analysis": "The following candidates were selected because they exhibit a combination of technical skills, management experience, and other qualifications that contribute to a diverse profile. The evaluation criteria included the number of distinct skills listed, the variety of roles held, and any additional qualifications such as language proficiency or certifications.",
+            "table_data": null,
+            "conclusion": "**[Isabel Mendoza](cv:cv_0d9656b9)** and **[Carmen Rodriguez](cv:cv_c0d465f6)** stand out with their extensive experience in leadership roles and a broad range of 3D art skills. **[Daan van Dijk](cv:cv_fe6e9024)** also presents a diverse profile with experience in both AAA game development and film pipelines, along with a strong focus on hard surface modeling.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "search",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": {
+              "results": [
+                {
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "cv_id": "cv_a702e7dd",
+                  "match_score": 81.7,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Daan van Dijk  Hard Surface",
+                  "cv_id": "cv_fe6e9024",
+                  "match_score": 78.2,
+                  "matching_skills": [],
+                  "experience_years": 11.0,
+                  "current_role": "High",
+                  "relevance_reason": "11+ years exp"
+                },
+                {
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_931187c7",
+                  "match_score": 78.2,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "Los Angeles",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Kenji Tanaka  3D Artist",
+                  "cv_id": "cv_fd4d4ba8",
+                  "match_score": 78.1,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Rajesh Patel  VFX",
+                  "cv_id": "cv_438a6b8e",
+                  "match_score": 76.7,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "composite shots for film and television projects.",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "cv_id": "cv_c0d465f6",
+                  "match_score": 76.5,
+                  "matching_skills": [],
+                  "experience_years": 16.0,
+                  "current_role": "",
+                  "relevance_reason": "16+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Johnson ",
+                  "cv_id": "cv_cffcd7d5",
+                  "match_score": 76.3,
+                  "matching_skills": [],
+                  "experience_years": 10.0,
+                  "current_role": "",
+                  "relevance_reason": "10+ years exp"
+                },
+                {
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "cv_id": "cv_0d9656b9",
+                  "match_score": 76.1,
+                  "matching_skills": [],
+                  "experience_years": 47.0,
+                  "current_role": "2010",
+                  "relevance_reason": "47+ years exp"
+                },
+                {
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "cv_id": "cv_459cc708",
+                  "match_score": 75.6,
+                  "matching_skills": [],
+                  "experience_years": 6.0,
+                  "current_role": "",
+                  "relevance_reason": "6+ years exp"
+                },
+                {
+                  "candidate_name": " Rajiv Patel  Junior VFX",
+                  "cv_id": "cv_306a8109",
+                  "match_score": 75.0,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "high‑quality visual effects for film and broadcast.",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Carlos Mendoza  Lighting",
+                  "cv_id": "cv_d579e9d1",
+                  "match_score": 56.8,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "2019",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Carlos Mendoza  Junior VFX",
+                  "cv_id": "cv_7003f1f1",
+                  "match_score": 52.9,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": " São Paulo",
+                  "relevance_reason": "Profile match"
+                }
+              ],
+              "query_terms": [
+                "most",
+                "diverse",
+                "profile"
+              ],
+              "total_candidates": 12
+            },
+            "total_results": 12,
+            "query": "Who has the most diverse profile?",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T18:52:45.949791"
+        },
+        {
+          "id": "8022281b-42c9-4972-b624-29af954f0771",
+          "role": "user",
+          "content": "Compare #1 vs #2 in the ranking",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T18:52:58.351661"
+        },
+        {
+          "id": "830bf570-003a-4b50-9aae-3adfbfbbd646",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to compare the top two candidates from a previous ranking. Since the previous query asked for the most diverse profile, I will compare the top two candidates from that response: Isabel Mendoza (cv_0d9656b9) and Carmen Rodriguez (cv_c0d465f6). I will compare their skills and experience to determine which candidate has the more diverse profile.\n:::\n\n\n:::conclusion\n Aisha Johnson  is the recommended candidate with an overall score of 96%.  Aisha Johnson  emerges as the top choice with an overall score of 96%. Key strengths include: Experience (100%). Key strengths: Experience. Runner-up:  Carmen Rodriguez  3D.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_0d9656b9",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_fe6e9024",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_931187c7",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c0d465f6",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_cffcd7d5",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_459cc708",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_7003f1f1",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_fd4d4ba8",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_a702e7dd",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d579e9d1",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_306a8109",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_438a6b8e",
+              "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 0.32,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 15.95,
+              "details": "Found 21 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 18942.45,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4048.76,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking to compare the top two candidates from a previous ranking. Since the previous query asked for the most diverse profile, I will compare the top two candidates from that response: **[Isabel Mendoza](cv:cv_0d9656b9)** and **[Carmen Rodriguez](cv:cv_c0d465f6)**. I will compare their skills and experience to determine which candidate has the more diverse profile.\n:::\n\n**[Isabel Mendoza](cv:cv_0d9656b9)** and **[Carmen Rodriguez](cv:cv_c0d465f6)** both have extensive experience in leadership roles and a broad range of 3D art skills. **[Isabel Mendoza](cv:cv_0d9656b9)** has 47 years of experience, while **[Carmen Rodriguez](cv:cv_c0d465f6)** has 16 years of experience.\n\n### Analysis\nI am comparing **[Isabel Mendoza](cv:cv_0d9656b9)** and **[Carmen Rodriguez](cv:cv_c0d465f6)** based on their skills and experience. Both candidates have a diverse range of skills and experience, but **[Isabel Mendoza](cv:cv_0d9656b9)** has significantly more experience.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Isabel Mendoza](cv:cv_0d9656b9)** | 3D Modeling, Texturing, Rigging, Substance Painter, Unreal Engine, Maya | Chief Creative Officer, Vice President of Creative Development, Director of 3D Production, 3D Artist | ⭐⭐⭐⭐⭐ |\n| **[Carmen Rodriguez](cv:cv_c0d465f6)** | 3D Modeling, Texturing, Lighting, Rendering, Animation, Pipeline Development | Chief Creative Officer, VP of Visual Innovation, Creative Director, Art Department Manager, 3D Artist | ⭐⭐⭐⭐ |\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_0d9656b9)** has a more diverse profile due to her extensive experience and a wide range of 3D art skills. While **[Carmen Rodriguez](cv:cv_c0d465f6)** also has a strong profile, **[Isabel Mendoza](cv:cv_0d9656b9)**'s longer career and diverse roles give her a slight edge.\n:::",
+            "thinking": "The user is asking to compare the top two candidates from a previous ranking. Since the previous query asked for the most diverse profile, I will compare the top two candidates from that response: Isabel Mendoza (cv_0d9656b9) and Carmen Rodriguez (cv_c0d465f6). I will compare their skills and experience to determine which candidate has the more diverse profile.",
+            "analysis": "Analyzed 12 candidates based on the specified criteria.  Aisha Johnson  emerges as the top choice with an overall score of 96%. Runner-up:  Carmen Rodriguez  3D with 96%. 3 candidates have high match scores (≥70%):  Aisha Johnson ,  Carmen Rodriguez  3D,  Liam Chen  3D Artist. 3 candidates have medium match scores (40-69%). 6 candidates have low match scores (<40%). Key strengths of the top candidate include: Experience. Primary evaluation criteria: Experience, Stability.",
+            "table_data": null,
+            "conclusion": " Aisha Johnson  is the recommended candidate with an overall score of 96%.  Aisha Johnson  emerges as the top choice with an overall score of 96%. Key strengths include: Experience (100%). Key strengths: Experience. Runner-up:  Carmen Rodriguez  3D.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "ranking",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": {
+              "ranked": [
+                {
+                  "rank": 1,
+                  "candidate_name": " Aisha Johnson ",
+                  "cv_id": "cv_cffcd7d5",
+                  "overall_score": 96.0,
+                  "criterion_scores": {
+                    "Experience": 100,
+                    "Technical Skills": 100,
+                    "Role Fit": 100,
+                    "Career Trajectory": 80.0,
+                    "Stability": 90.0
+                  },
+                  "strengths": [
+                    "Experience",
+                    "Technical Skills"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 2,
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "cv_id": "cv_c0d465f6",
+                  "overall_score": 95.9,
+                  "criterion_scores": {
+                    "Experience": 100,
+                    "Technical Skills": 100,
+                    "Role Fit": 100,
+                    "Career Trajectory": 85.0,
+                    "Stability": 81.2
+                  },
+                  "strengths": [
+                    "Experience",
+                    "Technical Skills"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 3,
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "cv_id": "cv_459cc708",
+                  "overall_score": 79.0,
+                  "criterion_scores": {
+                    "Experience": 60.0,
+                    "Technical Skills": 100,
+                    "Role Fit": 100,
+                    "Career Trajectory": 73.3,
+                    "Stability": 50.0
+                  },
+                  "strengths": [
+                    "Technical Skills",
+                    "Role Fit"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 4,
+                  "candidate_name": " Daan van Dijk  Hard Surface",
+                  "cv_id": "cv_fe6e9024",
+                  "overall_score": 60.8,
+                  "criterion_scores": {
+                    "Experience": 100,
+                    "Technical Skills": 0,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 78.2,
+                    "Stability": 90.9
+                  },
+                  "strengths": [
+                    "Experience",
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills"
+                  ]
+                },
+                {
+                  "rank": 5,
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "cv_id": "cv_0d9656b9",
+                  "overall_score": 60.0,
+                  "criterion_scores": {
+                    "Experience": 100,
+                    "Technical Skills": 0,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 79.1,
+                    "Stability": 81.0
+                  },
+                  "strengths": [
+                    "Experience",
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills"
+                  ]
+                },
+                {
+                  "rank": 6,
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "cv_id": "cv_a702e7dd",
+                  "overall_score": 52.5,
+                  "criterion_scores": {
+                    "Experience": 0.0,
+                    "Technical Skills": 100,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 50,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Technical Skills",
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 7,
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_931187c7",
+                  "overall_score": 39.8,
+                  "criterion_scores": {
+                    "Experience": 40.0,
+                    "Technical Skills": 12,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 65.0,
+                    "Stability": 50.0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 8,
+                  "candidate_name": " Kenji Tanaka  3D Artist",
+                  "cv_id": "cv_fd4d4ba8",
+                  "overall_score": 33.5,
+                  "criterion_scores": {
+                    "Experience": 20.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 20.0,
+                    "Career Trajectory": 90.0,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Stability",
+                    "Career Trajectory"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 9,
+                  "candidate_name": " Rajiv Patel  Junior VFX",
+                  "cv_id": "cv_306a8109",
+                  "overall_score": 33.5,
+                  "criterion_scores": {
+                    "Experience": 20.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 20.0,
+                    "Career Trajectory": 90.0,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Stability",
+                    "Career Trajectory"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 10,
+                  "candidate_name": " Carlos Mendoza  Lighting",
+                  "cv_id": "cv_d579e9d1",
+                  "overall_score": 28.5,
+                  "criterion_scores": {
+                    "Experience": 40.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 40.0,
+                    "Career Trajectory": 40.0,
+                    "Stability": 25.0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Stability"
+                  ]
+                },
+                {
+                  "rank": 11,
+                  "candidate_name": " Carlos Mendoza  Junior VFX",
+                  "cv_id": "cv_7003f1f1",
+                  "overall_score": 17.5,
+                  "criterion_scores": {
+                    "Experience": 0.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 0.0,
+                    "Career Trajectory": 50,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Experience",
+                    "Technical Skills"
+                  ]
+                },
+                {
+                  "rank": 12,
+                  "candidate_name": " Rajesh Patel  VFX",
+                  "cv_id": "cv_438a6b8e",
+                  "overall_score": 17.5,
+                  "criterion_scores": {
+                    "Experience": 0.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 0.0,
+                    "Career Trajectory": 50,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Experience",
+                    "Technical Skills"
+                  ]
+                }
+              ],
+              "criteria_names": [
+                "Experience",
+                "Technical Skills",
+                "Role Fit",
+                "Career Trajectory",
+                "Stability"
+              ]
+            },
+            "top_pick": {
+              "candidate_name": " Aisha Johnson ",
+              "cv_id": "cv_cffcd7d5",
+              "overall_score": 96.0,
+              "key_strengths": [
+                "Experience",
+                "Technical Skills"
+              ],
+              "justification": " Aisha Johnson  emerges as the top choice with an overall score of 96%. Key strengths include: Experience (100%).",
+              "runner_up": " Carmen Rodriguez  3D",
+              "runner_up_cv_id": "cv_c0d465f6"
+            },
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T18:53:24.754127"
         }
       ],
       "created_at": "2026-01-06T04:57:36.166637",
-      "updated_at": "2026-01-06T18:26:54.570176"
+      "updated_at": "2026-01-06T18:53:24.754127"
+    },
+    {
+      "id": "31569ea0-46ff-4f5c-9f1e-ec97aaed91e0",
+      "name": "Education Professionals 5616",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_86d1c7f4",
+          "filename": "0dbc4ee3__Layla_Mansour__Assistant_Lecturer.pdf",
+          "chunk_count": 6,
+          "content_hash": "5c283f24fd37b6c5b965312f076cc63f4cce168c255230f600e32b6c96d21fd8",
+          "uploaded_at": "2026-01-06T18:53:24.377389"
+        },
+        {
+          "id": "cv_11354455",
+          "filename": "2d85e39f__Aisha_Patel__Coach.pdf",
+          "chunk_count": 7,
+          "content_hash": "0d736d3d265363a1c166fa650f2c855afc7075d65460109e4bbf66b148a8357c",
+          "uploaded_at": "2026-01-06T18:53:25.082317"
+        },
+        {
+          "id": "cv_a9749e41",
+          "filename": "3d4e5922__Naomi_Chen__High_School_Teacher.pdf",
+          "chunk_count": 3,
+          "content_hash": "009dc047947c1ed2e9c7431e3fb55f96c0b9f8fc4a98fac5f77c39ff4dea1bc3",
+          "uploaded_at": "2026-01-06T18:53:25.567860"
+        },
+        {
+          "id": "cv_f9c8cb08",
+          "filename": "40b3d301__Hana_Park__Vice_Dean.pdf",
+          "chunk_count": 3,
+          "content_hash": "9611f58ca67124e3b54fc194f2f6c79d8a499674da37d524c635804413ea35ba",
+          "uploaded_at": "2026-01-06T18:53:26.145080"
+        },
+        {
+          "id": "cv_1b3a03c6",
+          "filename": "549e73f9__María_López__Student_Teacher.pdf",
+          "chunk_count": 3,
+          "content_hash": "e9b089cf69e27fae1f0b6403e88c2d04a1c5eb209a9fd757a126b606cb673f9a",
+          "uploaded_at": "2026-01-06T18:53:26.623429"
+        },
+        {
+          "id": "cv_7f10e504",
+          "filename": "757becdd__Pierre_Dubois__Tutor.pdf",
+          "chunk_count": 4,
+          "content_hash": "3b34388880607237d5a674abb6669de75848d77a2898e35ab6937bf517215ff0",
+          "uploaded_at": "2026-01-06T18:53:27.120204"
+        },
+        {
+          "id": "cv_aa545c71",
+          "filename": "972db8df__Rajesh_Kumar__ESL_Teacher.pdf",
+          "chunk_count": 3,
+          "content_hash": "d2ea0bb7f0a468950d57b5f4a82258a0d8c17865b6410994b1e9de623e0be96d",
+          "uploaded_at": "2026-01-06T18:53:27.650365"
+        },
+        {
+          "id": "cv_b9cca8ae",
+          "filename": "38726cfe__Erik_Johansson__Teacher_Aide.pdf",
+          "chunk_count": 4,
+          "content_hash": "308903b5ed1226ad750c0256676be889e3f935eb19a4703517b0f0a7390041ff",
+          "uploaded_at": "2026-01-06T18:53:28.169974"
+        },
+        {
+          "id": "cv_9b93eae8",
+          "filename": "76724e1a__Farid_Al-Mansoori__Lecturer.pdf",
+          "chunk_count": 4,
+          "content_hash": "83d78e63afd15012bc67a8c50f80ff4a74e0f954ffabc79a2e077068b3568149",
+          "uploaded_at": "2026-01-06T18:53:28.755968"
+        },
+        {
+          "id": "cv_8c45006c",
+          "filename": "19051168__Kwame_van_der_Berg__Academic_Advisor.pdf",
+          "chunk_count": 3,
+          "content_hash": "48367ec088301f8432417f586ce9b14b84fafd90139a1a99a03fc60239ed9cd8",
+          "uploaded_at": "2026-01-06T18:53:29.260394"
+        },
+        {
+          "id": "cv_dff3433e",
+          "filename": "b58cdb31__Aisha_Hassan__Substitute_Teacher.pdf",
+          "chunk_count": 3,
+          "content_hash": "da4562582ac2e55ecb46eeccc6de3abae1a0cd56c969988957b8dc30ccca65d4",
+          "uploaded_at": "2026-01-06T18:53:29.787863"
+        },
+        {
+          "id": "cv_075db221",
+          "filename": "bd63b116__Valentina_Fernandez__Teaching_Assistant.pdf",
+          "chunk_count": 3,
+          "content_hash": "ed69851a6c4784f21774f8aa3491898685136a1a169db20e72b9415f9f8b6574",
+          "uploaded_at": "2026-01-06T18:53:30.327120"
+        },
+        {
+          "id": "cv_b6788908",
+          "filename": "c5eb0518__Isabella_Vargas__ESL_Teacher.pdf",
+          "chunk_count": 5,
+          "content_hash": "9ac0875ffd50320f0c7cf8a47ec47c2f7907f81d735b6d6f0f54c580207d698e",
+          "uploaded_at": "2026-01-06T18:53:30.893771"
+        },
+        {
+          "id": "cv_ed06362e",
+          "filename": "d5dbc68c__Sofia_Rodriguez__Coach.pdf",
+          "chunk_count": 5,
+          "content_hash": "3903cb2611971afbde8d68d4133c916acdeedb1741aeac97b8fa26361b728434",
+          "uploaded_at": "2026-01-06T18:53:31.437508"
+        },
+        {
+          "id": "cv_86424633",
+          "filename": "d7c4ea07__Layla_Al-Mansoor__Assistant_Lecturer.pdf",
+          "chunk_count": 3,
+          "content_hash": "a85d8deff19b1c0aa692c7f72756754c1a948ed26ee01f87898c1b51f60a6411",
+          "uploaded_at": "2026-01-06T18:53:31.980477"
+        },
+        {
+          "id": "cv_24ad947f",
+          "filename": "d8a170db__Priya_Patel__Career_Coach.pdf",
+          "chunk_count": 9,
+          "content_hash": "f4541630b1ac9b460fe5e5c23fd42ad16608226fb71469bcea6d4a51727390bd",
+          "uploaded_at": "2026-01-06T18:53:32.517230"
+        },
+        {
+          "id": "cv_379ef86f",
+          "filename": "ebf8ece3__Javier_Chen__Coach.pdf",
+          "chunk_count": 4,
+          "content_hash": "edbfde39e8cb5edfabb4c8cad5011bcbb39499cff1671ddd88d60df2a2b447bd",
+          "uploaded_at": "2026-01-06T18:53:32.968905"
+        },
+        {
+          "id": "cv_99eadb91",
+          "filename": "f94b3d4f__Rajiv_Patel__Professor.pdf",
+          "chunk_count": 7,
+          "content_hash": "47499ea21fbaeacd571770a5a7c7dccb1c094d25a06df6ac85c7cd751fa1ded8",
+          "uploaded_at": "2026-01-06T18:53:33.509802"
+        }
+      ],
+      "messages": [
+        {
+          "id": "bdfbfbbf-5e48-47c5-b4c2-7b6d87794738",
+          "role": "user",
+          "content": "Compare the two most experienced candidates",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T18:55:09.165683"
+        },
+        {
+          "id": "f8624e91-8f71-45b3-a945-04266528fe4b",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to compare the two most experienced candidates from the provided CVs. I need to identify the candidates with the most years of experience and then compare their skills and experience relevant to a general academic or teaching role, as no specific role is mentioned.\n:::\n\nI selected **[Kwame van der Berg](cv:cv_8c45006c)** and **[Valentina Fernandez](cv:cv_075db221)** because they have the most years of experience listed in their CVs. I then compared their skills and experience based on the information provided in their CVs, focusing on aspects relevant to academic and teaching roles such as curriculum design, student support, and academic leadership.\n\n\n:::conclusion\nBased on the provided CVs, the two most experienced candidates are **[Kwame van der Berg](cv:cv_8c45006c)** and **[Valentina Fernandez](cv:cv_075db221)**, both with extensive experience in academic and educational leadership roles.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_9b93eae8",
+              "filename": "76724e1a__Farid_Al-Mansoori__Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_f9c8cb08",
+              "filename": "40b3d301__Hana_Park__Vice_Dean.pdf"
+            },
+            {
+              "cv_id": "cv_86d1c7f4",
+              "filename": "0dbc4ee3__Layla_Mansour__Assistant_Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_7f10e504",
+              "filename": "757becdd__Pierre_Dubois__Tutor.pdf"
+            },
+            {
+              "cv_id": "cv_ed06362e",
+              "filename": "d5dbc68c__Sofia_Rodriguez__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_b9cca8ae",
+              "filename": "38726cfe__Erik_Johansson__Teacher_Aide.pdf"
+            },
+            {
+              "cv_id": "cv_b6788908",
+              "filename": "c5eb0518__Isabella_Vargas__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_8c45006c",
+              "filename": "19051168__Kwame_van_der_Berg__Academic_Advisor.pdf"
+            },
+            {
+              "cv_id": "cv_11354455",
+              "filename": "2d85e39f__Aisha_Patel__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_075db221",
+              "filename": "bd63b116__Valentina_Fernandez__Teaching_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_86424633",
+              "filename": "d7c4ea07__Layla_Al-Mansoor__Assistant_Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_aa545c71",
+              "filename": "972db8df__Rajesh_Kumar__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_379ef86f",
+              "filename": "ebf8ece3__Javier_Chen__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_dff3433e",
+              "filename": "b58cdb31__Aisha_Hassan__Substitute_Teacher.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 4.4,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 22.8,
+              "details": "Found 16 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 29352.24,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5047.25,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking to compare the two most experienced candidates from the provided CVs. I need to identify the candidates with the most years of experience and then compare their skills and experience relevant to a general academic or teaching role, as no specific role is mentioned.\n:::\n\nThe two most experienced candidates are **[Kwame van der Berg](cv:cv_8c45006c)** and **[Valentina Fernandez](cv:cv_075db221)**, with 45 and 25 years of experience, respectively. Both have extensive experience in academic and educational roles.\n\n### Analysis\nI selected **[Kwame van der Berg](cv:cv_8c45006c)** and **[Valentina Fernandez](cv:cv_075db221)** because they have the most years of experience listed in their CVs. I then compared their skills and experience based on the information provided in their CVs, focusing on aspects relevant to academic and teaching roles such as curriculum design, student support, and academic leadership.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Kwame van der Berg](cv:cv_8c45006c)** | Student Data Analysis, Curriculum Design, Policy Implementation, Conflict Resolution | Director of Student Success, Academic Advisor, Student Support Officer | ⭐⭐⭐⭐ |\n| **[Valentina Fernandez](cv:cv_075db221)** | Curriculum Development, Student Assessment & Feedback, Learning Management Systems, Conflict Resolution, Academic Advising | Senior Teaching Assistant, Manager, Academic Programs, Lecturer, Graduate Teaching Assistant | ⭐⭐⭐⭐ |\n| **[Pierre Dubois](cv:cv_7f10e504)** | Curriculum Design, Online Teaching Platforms, Student Assessment | Head of Tutoring Services, Director of Learning, Tutor | ⭐⭐⭐ |\n| **[Layla Al-Mansoor](cv:cv_86424633)** | Curriculum Development, Academic Research, Student Mentoring | Assistant Lecturer, Teaching Assistant, Research Assistant, Undergraduate Intern | ⭐⭐⭐ |\n\n:::conclusion\nBased on the provided CVs, the two most experienced candidates are **[Kwame van der Berg](cv:cv_8c45006c)** and **[Valentina Fernandez](cv:cv_075db221)**, both with extensive experience in academic and educational leadership roles.\n:::",
+            "thinking": "The user is asking to compare the two most experienced candidates from the provided CVs. I need to identify the candidates with the most years of experience and then compare their skills and experience relevant to a general academic or teaching role, as no specific role is mentioned.",
+            "analysis": "I selected **[Kwame van der Berg](cv:cv_8c45006c)** and **[Valentina Fernandez](cv:cv_075db221)** because they have the most years of experience listed in their CVs. I then compared their skills and experience based on the information provided in their CVs, focusing on aspects relevant to academic and teaching roles such as curriculum design, student support, and academic leadership.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Skills",
+                "Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Kwame van der Berg",
+                  "cv_id": "cv_8c45006c",
+                  "columns": {
+                    "Skills": "Student Data Analysis, Curriculum Design, Policy Implementation, Conflict Resolution",
+                    "Experience": "Director of Student Success, Academic Advisor, Student Support Officer"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Valentina Fernandez",
+                  "cv_id": "cv_075db221",
+                  "columns": {
+                    "Skills": "Curriculum Development, Student Assessment & Feedback, Learning Management Systems, Conflict Resolution, Academic Advising",
+                    "Experience": "Senior Teaching Assistant, Manager, Academic Programs, Lecturer, Graduate Teaching Assistant"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Pierre Dubois",
+                  "cv_id": "cv_7f10e504",
+                  "columns": {
+                    "Skills": "Curriculum Design, Online Teaching Platforms, Student Assessment",
+                    "Experience": "Head of Tutoring Services, Director of Learning, Tutor"
+                  },
+                  "match_score": 60
+                },
+                {
+                  "candidate_name": "Layla Al-Mansoor",
+                  "cv_id": "cv_86424633",
+                  "columns": {
+                    "Skills": "Curriculum Development, Academic Research, Student Mentoring",
+                    "Experience": "Assistant Lecturer, Teaching Assistant, Research Assistant, Undergraduate Intern"
+                  },
+                  "match_score": 60
+                }
+              ]
+            },
+            "conclusion": "Based on the provided CVs, the two most experienced candidates are **[Kwame van der Berg](cv:cv_8c45006c)** and **[Valentina Fernandez](cv:cv_075db221)**, both with extensive experience in academic and educational leadership roles.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "comparison",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T18:55:47.597910"
+        },
+        {
+          "id": "3e75b66d-ca95-4b39-bcc1-ea73c1eb4fc5",
+          "role": "user",
+          "content": "Add a third candidate to the comparison",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T18:55:58.182844"
+        },
+        {
+          "id": "2687485f-ee34-4fde-8cb7-af896bbc89cd",
+          "role": "assistant",
+          "content": ":::thinking\nThe user wants to add a third candidate to the existing comparison of the two most experienced candidates. I need to identify the candidate with the next highest amount of experience and compare them alongside the two previously selected candidates, Kwame van der Berg (cv_8c45006c) and Valentina Fernandez (cv_075db221). I will focus on experience relevant to academic or teaching roles.\n:::\n\n\n:::conclusion\nThe three most experienced candidates based on the provided CVs are **[Kwame van der Berg](cv:cv_8c45006c)**, **[Valentina Fernandez](cv:cv_075db221)**, and **[Layla Al-Mansoor](cv:cv_86424633)**, each bringing a wealth of experience in academic and educational leadership roles.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_ed06362e",
+              "filename": "d5dbc68c__Sofia_Rodriguez__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_b9cca8ae",
+              "filename": "38726cfe__Erik_Johansson__Teacher_Aide.pdf"
+            },
+            {
+              "cv_id": "cv_9b93eae8",
+              "filename": "76724e1a__Farid_Al-Mansoori__Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_f9c8cb08",
+              "filename": "40b3d301__Hana_Park__Vice_Dean.pdf"
+            },
+            {
+              "cv_id": "cv_7f10e504",
+              "filename": "757becdd__Pierre_Dubois__Tutor.pdf"
+            },
+            {
+              "cv_id": "cv_86d1c7f4",
+              "filename": "0dbc4ee3__Layla_Mansour__Assistant_Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_8c45006c",
+              "filename": "19051168__Kwame_van_der_Berg__Academic_Advisor.pdf"
+            },
+            {
+              "cv_id": "cv_075db221",
+              "filename": "bd63b116__Valentina_Fernandez__Teaching_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_b6788908",
+              "filename": "c5eb0518__Isabella_Vargas__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_11354455",
+              "filename": "2d85e39f__Aisha_Patel__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_379ef86f",
+              "filename": "ebf8ece3__Javier_Chen__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_aa545c71",
+              "filename": "972db8df__Rajesh_Kumar__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_86424633",
+              "filename": "d7c4ea07__Layla_Al-Mansoor__Assistant_Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_99eadb91",
+              "filename": "f94b3d4f__Rajiv_Patel__Professor.pdf"
+            },
+            {
+              "cv_id": "cv_24ad947f",
+              "filename": "d8a170db__Priya_Patel__Career_Coach.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1.46,
+              "details": "Query type: general"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 19.62,
+              "details": "Found 18 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 31702.21,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4630.47,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user wants to add a third candidate to the existing comparison of the two most experienced candidates. I need to identify the candidate with the next highest amount of experience and compare them alongside the two previously selected candidates, **[Kwame van der Berg](cv:cv_8c45006c)** and **[Valentina Fernandez](cv:cv_075db221)**. I will focus on experience relevant to academic or teaching roles.\n:::\n\nI have added **[Layla Al-Mansoor](cv:cv_86424633)** to the comparison as the candidate with the next most relevant experience in lecturing and academic research, making her the third most experienced candidate for an academic role based on the provided CVs.\n\n### Analysis\nThe comparison now includes **[Kwame van der Berg](cv:cv_8c45006c)**, **[Valentina Fernandez](cv:cv_075db221)**, and **[Layla Al-Mansoor](cv:cv_86424633)**. These candidates were selected based on their extensive experience in academic and educational roles. **[Kwame van der Berg](cv:cv_8c45006c)** has 45 years of experience in academic advising and student support. **[Valentina Fernandez](cv:cv_075db221)** has 25 years of experience in teaching and academic program management. **[Layla Al-Mansoor](cv:cv_86424633)** has over three decades of experience in fostering inclusive learning environments and curriculum design. The table below compares their skills and experience relevant to academic and teaching roles.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Kwame van der Berg](cv:cv_8c45006c)** | Student Data Analysis, Curriculum Design, Policy Implementation, Conflict Resolution | Director of Student Success, Academic Advisor, Student Support Officer | ⭐⭐⭐⭐ |\n| **[Valentina Fernandez](cv:cv_075db221)** | Curriculum Development, Student Assessment & Feedback, Learning Management Systems, Conflict Resolution, Academic Advising | Senior Teaching Assistant, Manager, Academic Programs, Lecturer, Graduate Teaching Assistant | ⭐⭐⭐⭐ |\n| **[Layla Al-Mansoor](cv:cv_86424633)** | Curriculum Development, Academic Research, Student Mentoring | Assistant Lecturer, Teaching Assistant, Research Assistant, Undergraduate Intern | ⭐⭐⭐ |\n\n:::conclusion\nThe three most experienced candidates based on the provided CVs are **[Kwame van der Berg](cv:cv_8c45006c)**, **[Valentina Fernandez](cv:cv_075db221)**, and **[Layla Al-Mansoor](cv:cv_86424633)**, each bringing a wealth of experience in academic and educational leadership roles.\n:::",
+            "thinking": "The user wants to add a third candidate to the existing comparison of the two most experienced candidates. I need to identify the candidate with the next highest amount of experience and compare them alongside the two previously selected candidates, Kwame van der Berg (cv_8c45006c) and Valentina Fernandez (cv_075db221). I will focus on experience relevant to academic or teaching roles.",
+            "analysis": "The comparison now includes **[Kwame van der Berg](cv:cv_8c45006c)**, **[Valentina Fernandez](cv:cv_075db221)**, and **[Layla Al-Mansoor](cv:cv_86424633)**. These candidates were selected based on their extensive experience in academic and educational roles. **[Kwame van der Berg](cv:cv_8c45006c)** has 45 years of experience in academic advising and student support. **[Valentina Fernandez](cv:cv_075db221)** has 25 years of experience in teaching and academic program management. **[Layla Al-Mansoor](cv:cv_86424633)** has over three decades of experience in fostering inclusive learning environments and curriculum design. The table below compares their skills and experience relevant to academic and teaching roles.",
+            "table_data": null,
+            "conclusion": "The three most experienced candidates based on the provided CVs are **[Kwame van der Berg](cv:cv_8c45006c)**, **[Valentina Fernandez](cv:cv_075db221)**, and **[Layla Al-Mansoor](cv:cv_86424633)**, each bringing a wealth of experience in academic and educational leadership roles.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "search",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": {
+              "results": [
+                {
+                  "candidate_name": " Isabella Vargas  ESL",
+                  "cv_id": "cv_b6788908",
+                  "match_score": 80.4,
+                  "matching_skills": [],
+                  "experience_years": 3.0,
+                  "current_role": "",
+                  "relevance_reason": "3+ years exp"
+                },
+                {
+                  "candidate_name": " Pierre Dubois ",
+                  "cv_id": "cv_7f10e504",
+                  "match_score": 80.3,
+                  "matching_skills": [],
+                  "experience_years": 3.0,
+                  "current_role": "Supported 200+ students in mathematics and literacy.",
+                  "relevance_reason": "3+ years exp"
+                },
+                {
+                  "candidate_name": " Sofia Rodriguez ",
+                  "cv_id": "cv_ed06362e",
+                  "match_score": 79.8,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "Summa Cum Laude",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Patel ",
+                  "cv_id": "cv_11354455",
+                  "match_score": 79.5,
+                  "matching_skills": [],
+                  "experience_years": 5.0,
+                  "current_role": "",
+                  "relevance_reason": "5+ years exp"
+                },
+                {
+                  "candidate_name": " Rajesh Kumar  ESL",
+                  "cv_id": "cv_aa545c71",
+                  "match_score": 78.6,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Erik Johansson  Teacher",
+                  "cv_id": "cv_b9cca8ae",
+                  "match_score": 78.0,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "providing one",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Layla Mansour  Assistant",
+                  "cv_id": "cv_86d1c7f4",
+                  "match_score": 77.8,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "Stockholm",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Rajiv Patel ",
+                  "cv_id": "cv_99eadb91",
+                  "match_score": 77.8,
+                  "matching_skills": [],
+                  "experience_years": 11.0,
+                  "current_role": "",
+                  "relevance_reason": "11+ years exp"
+                },
+                {
+                  "candidate_name": " Hana Park  Vice",
+                  "cv_id": "cv_f9c8cb08",
+                  "match_score": 77.7,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": " students.",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Farid Al-Mansoori ",
+                  "cv_id": "cv_9b93eae8",
+                  "match_score": 77.5,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "development, publishing findings in high",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Kwame van der Berg  Academic",
+                  "cv_id": "cv_8c45006c",
+                  "match_score": 61.9,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Valentina Fernandez  Teaching",
+                  "cv_id": "cv_075db221",
+                  "match_score": 61.3,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "Developed an innovative project‑based curriculum for",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Priya Patel  Career",
+                  "cv_id": "cv_24ad947f",
+                  "match_score": 59.7,
+                  "matching_skills": [],
+                  "experience_years": 17.0,
+                  "current_role": "S O C I A L",
+                  "relevance_reason": "17+ years exp"
+                },
+                {
+                  "candidate_name": " Javier Chen ",
+                  "cv_id": "cv_379ef86f",
+                  "match_score": 57.8,
+                  "matching_skills": [],
+                  "experience_years": 6.0,
+                  "current_role": "toward sustainable performance. Patient in",
+                  "relevance_reason": "6+ years exp"
+                },
+                {
+                  "candidate_name": " Layla Al-Mansoor  Assistant",
+                  "cv_id": "cv_86424633",
+                  "match_score": 55.3,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "environments. Known for patience",
+                  "relevance_reason": "Profile match"
+                }
+              ],
+              "query_terms": [
+                "add",
+                "third",
+                "candidate",
+                "comparison"
+              ],
+              "total_candidates": 15
+            },
+            "total_results": 15,
+            "query": "Add a third candidate to the comparison",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T18:56:38.423893"
+        }
+      ],
+      "created_at": "2026-01-06T18:53:01.735123",
+      "updated_at": "2026-01-06T18:56:38.423893"
+    },
+    {
+      "id": "ff02580b-7581-4eac-aff9-84079bcdd7a1",
+      "name": "Education Professionals 5839",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_c18715b0",
+          "filename": "d7c4ea07__Layla_Al-Mansoor__Assistant_Lecturer.pdf",
+          "chunk_count": 3,
+          "content_hash": "a85d8deff19b1c0aa692c7f72756754c1a948ed26ee01f87898c1b51f60a6411",
+          "uploaded_at": "2026-01-06T18:57:14.354227"
+        },
+        {
+          "id": "cv_24e1db67",
+          "filename": "d8a170db__Priya_Patel__Career_Coach.pdf",
+          "chunk_count": 9,
+          "content_hash": "f4541630b1ac9b460fe5e5c23fd42ad16608226fb71469bcea6d4a51727390bd",
+          "uploaded_at": "2026-01-06T18:57:14.881601"
+        },
+        {
+          "id": "cv_4f3b3252",
+          "filename": "ebf8ece3__Javier_Chen__Coach.pdf",
+          "chunk_count": 4,
+          "content_hash": "edbfde39e8cb5edfabb4c8cad5011bcbb39499cff1671ddd88d60df2a2b447bd",
+          "uploaded_at": "2026-01-06T18:57:15.385866"
+        },
+        {
+          "id": "cv_f7d2c538",
+          "filename": "f94b3d4f__Rajiv_Patel__Professor.pdf",
+          "chunk_count": 7,
+          "content_hash": "47499ea21fbaeacd571770a5a7c7dccb1c094d25a06df6ac85c7cd751fa1ded8",
+          "uploaded_at": "2026-01-06T18:57:15.870614"
+        }
+      ],
+      "messages": [],
+      "created_at": "2026-01-06T18:57:08.430081",
+      "updated_at": "2026-01-06T18:57:19.253576"
     }
   ]
 }

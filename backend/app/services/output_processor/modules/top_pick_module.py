@@ -72,7 +72,22 @@ class TopPickModule:
             # Derive from criterion scores
             scores = top.get("criterion_scores", {})
             sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
-            strengths = [name for name, score in sorted_scores[:3] if score >= 70]
+            
+            # FILTER: Skip candidate names, only keep real criteria
+            for name, score in sorted_scores[:10]:  # Check more items
+                if score < 70:
+                    continue
+                
+                # Skip if name looks like a person (2+ capitalized words)
+                words = name.split()
+                if len(words) >= 2 and all(w[0].isupper() for w in words if len(w) > 1):
+                    logger.debug(f"[TOP_PICK] Skipping likely person name in strengths: {name}")
+                    continue
+                
+                # Add valid criterion
+                strengths.append(name)
+                if len(strengths) >= 3:
+                    break
         
         # Generate justification
         justification = self._generate_justification(top, criteria, llm_output)

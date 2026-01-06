@@ -86,8 +86,21 @@ Respond in this EXACT JSON format (no markdown, just raw JSON):
 
 EXAMPLES:
 
+Query: "Compare #1 vs #2 in the ranking"
+{
+  "understood_query": "Compare the top two candidates from the previous ranking",
+  "query_type": "comparison",
+  "requirements": [
+    "Identify #1 and #2 candidates from previous ranking",
+    "Compare their experience, skills, and qualifications",
+    "Highlight differences and similarities"
+  ],
+  "is_cv_related": true,
+  "reformulated_prompt": "Create a detailed comparison between the #1 and #2 ranked candidates from the previous ranking. Compare their years of experience, technical skills, career progression, and key qualifications. Highlight what makes each candidate strong and where they differ."
+}
+
 Query: "Rank all 33 candidates by experience and show if they worked at Google or Microsoft"
-{{
+{
   "understood_query": "Rank ALL candidates by years of experience, and for each candidate, indicate if they have worked at major tech companies like Google or Microsoft",
   "query_type": "ranking",
   "requirements": [
@@ -98,10 +111,10 @@ Query: "Rank all 33 candidates by experience and show if they worked at Google o
   ],
   "is_cv_related": true,
   "reformulated_prompt": "Create a complete ranking of ALL candidates ordered by their total years of professional experience. For EACH candidate, include: 1) Their name, 2) Total years of experience, 3) Whether they have worked at major tech companies (Google, Microsoft, Amazon, Meta, Apple, etc.) and which ones. Do NOT filter out candidates - show ALL of them even if they haven't worked at major companies."
-}}
+}
 
 Query: "Who knows Python?"
-{{
+{
   "understood_query": "Find candidates who have Python programming experience",
   "query_type": "search",
   "requirements": [
@@ -358,6 +371,15 @@ class QueryUnderstandingService:
         query_type = parsed.get("query_type", "general")
         is_cv_related = parsed.get("is_cv_related", True)
         
+        # CRITICAL: Override query_type if strong comparison patterns detected
+        # This fixes cases where LLM incorrectly classifies "Compare #1 vs #2" as "ranking"
+        query_lower = query.lower()
+        comparison_keywords = ['compare', 'versus', 'vs', 'vs.', 'comparar', 'comparación', 'difference between']
+        if any(kw in query_lower for kw in comparison_keywords):
+            if query_type != "comparison":
+                logger.warning(f"[QUERY_UNDERSTANDING] Overriding query_type from '{query_type}' to 'comparison' due to comparison keywords")
+                query_type = "comparison"
+        
         # Force is_cv_related=True for CV-related query types
         cv_related_types = {"ranking", "comparison", "search", "filter"}
         if query_type in cv_related_types:
@@ -388,11 +410,13 @@ class QueryUnderstandingService:
         """
         query_lower = query.lower()
         
-        # Detect query type from keywords
-        if any(kw in query_lower for kw in ['rank', 'best', 'top', 'order', 'sort', 'mejor', 'ordenar']):
-            query_type = 'ranking'
-        elif any(kw in query_lower for kw in ['compare', 'versus', 'vs', 'difference', 'comparar']):
+        # Detect query type from keywords - PRIORITY ORDER MATTERS
+        # Check comparison FIRST since "Compare #1 vs #2 in the ranking" should be comparison, not ranking
+        if any(kw in query_lower for kw in ['compare', 'versus', 'vs', 'vs.', 'difference', 'comparar', 'comparación']):
             query_type = 'comparison'
+        elif any(kw in query_lower for kw in ['rank', 'best', 'top', 'order', 'sort', 'mejor', 'ordenar']) and 'compare' not in query_lower:
+            # Only ranking if no comparison keywords present
+            query_type = 'ranking'
         elif any(kw in query_lower for kw in ['filter', 'only', 'just', 'exclude', 'filtrar', 'solo']):
             query_type = 'filter'
         elif any(kw in query_lower for kw in ['who', 'which', 'find', 'search', 'has', 'know', 'quien', 'buscar']):
