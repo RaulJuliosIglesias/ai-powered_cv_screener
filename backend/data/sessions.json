@@ -50224,10 +50224,213 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-06T00:43:55.609297"
+        },
+        {
+          "id": "ede0d847-d45e-43c1-82c7-05525dac5cda",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for all information about Clara Dubois from the CV.\nThe current role is Junior 3D Modeler at Luminex Studios (2023-Present).\nThe total experience is 1 year in 3D Modeling.\nThe career trajectory includes all positions listed in the CV.\nThe red flags analysis shows a high job mobility.\n:::\n\n## 👤 [📄](cv:cv_b22c3c63)**Clara Dubois Junior 3D**⚠️**Se detectaron las siguientes red flags para [📄](cv:cv_b22c3c63)**Clara Dubois Junior 3D**:**-**Alta movilidad laboral**: 5 posiciones con una permanencia promedio de 0.4 años (riesgo alto)\n[📄](cv:cv_b22c3c63)**Clara Dubois Junior 3D**is a detail-oriented 3D modeler with a creative eye and patient work ethic. Currently, she is working as a Junior 3D Modeler at Luminex Studios, creating high-poly and low-poly assets for video games and VR experiences. She ensures artistic consistency and pipeline efficiency.\n\n## 👤 [📄](cv:cv_b22c3c63)**Clara Dubois Junior 3D**⚠️**Se detectaron las siguientes red flags para [📄](cv:cv_b22c3c63)**Clara Dubois Junior 3D**:**-**Alta movilidad laboral**: 5 posiciones con una permanencia promedio de 0.4 años (riesgo alto)\n[📄](cv:cv_b22c3c63)**Clara Dubois Junior 3D**is a detail-oriented 3D modeler with a creative eye and patient work ethic. Currently, she is working as a Junior 3D Modeler at Luminex Studios, creating high-poly and low-poly assets for video games and VR experiences. She ensures artistic consistency and pipeline efficiency.\n---\n### 📊 Candidate Highlights\n---\n### Credentials\n- Substance Painter Certified User, 2023\n- Adobe, 2023\n---\n### Risk Assessment\n---\n\n| Candidate | Key Skills | Match Score |\n|---|---|---|\n|  Clara Dubois  Junior 3D | N/A |  | 100% |\n\n:::conclusion**Overall Assessment:**[📄](cv:cv_b22c3c63)**Clara Dubois Junior 3D**is a Junior 3D Modeler with 1 year of experience. She has a Bachelor of Fine Arts in Digital Arts and is proficient in high-poly sculpting, low-poly modeling, and texture painting.**Key Strengths:**- Experience in creating high-poly and low-poly assets for video games and VR experiences.\n- Proficient in multiple 3D modeling skills, including sculpting, modeling, and texture painting.\n- Strong language skills in French, English, and German.**Areas to Explore:**High job mobility: 5 positions with avg tenure 0.4 years.\n:::\n\n### Skills Gap Analysis\n\nNo significant skill gaps identified.**Overall Coverage:**0%\n\n### Red Flags Analysis\n\n✓ No red flags detected for 1 candidate(s).",
+          "sources": [
+            {
+              "cv_id": "cv_b22c3c63",
+              "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1815.55,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 0.4,
+              "details": "Found 7 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 8264.83,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6798.73,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "## 👤 [📄](cv:cv_b22c3c63) **Clara Dubois Junior 3D**\n⚠️ **Se detectaron las siguientes red flags para [📄](cv:cv_b22c3c63) **Clara Dubois Junior 3D**:**\n- **Alta movilidad laboral**: 5 posiciones con una permanencia promedio de 0.4 años (riesgo alto)\n[📄](cv:cv_b22c3c63) **Clara Dubois Junior 3D** is a detail-oriented 3D modeler with a creative eye and patient work ethic. Currently, she is working as a Junior 3D Modeler at Luminex Studios, creating high-poly and low-poly assets for video games and VR experiences. She ensures artistic consistency and pipeline efficiency.",
+            "raw_content": ":::thinking\nThe user is asking for all information about Clara Dubois from the CV.\nThe current role is Junior 3D Modeler at Luminex Studios (2023-Present).\nThe total experience is 1 year in 3D Modeling.\nThe career trajectory includes all positions listed in the CV.\nThe red flags analysis shows a high job mobility.\n:::\n\n## 👤 **[Clara Dubois Junior 3D](cv:cv_b22c3c63)**\n\n⚠️ **Se detectaron las siguientes red flags para [Clara Dubois Junior 3D](cv:cv_b22c3c63):**\n- **Alta movilidad laboral**: 5 posiciones con una permanencia promedio de 0.4 años (riesgo alto)\n\n[Clara Dubois Junior 3D](cv:cv_b22c3c63) is a detail-oriented 3D modeler with a creative eye and patient work ethic. Currently, she is working as a Junior 3D Modeler at Luminex Studios, creating high-poly and low-poly assets for video games and VR experiences. She ensures artistic consistency and pipeline efficiency.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Junior 3D Modeler at Luminex Studios (2023-Present) |\n| **⏱️ Total Experience** | 1 year in 3D Modeling |\n| **🏆 Top Achievement** | Produced over 120 assets meeting strict deadlines for two concurrent game projects. |\n| **💡 Core Expertise** | High-Poly Sculpting, Low-Poly Modeling, Texture Painting |\n| **🎓 Education** | Bachelor of Fine Arts in Digital Arts, École Nationale Supérieure des Beaux-Arts de Lyon, 2022 |\n\n---\n\n### 💼 Career Trajectory\n\n**Junior 3D Modeler** — *Luminex Studios* (2023-Present)\n→ Produced over 120 assets meeting strict deadlines for two concurrent game projects.\n\n**3D Modeling Intern** — *PixelForge Productions* (2022-2023)\n→ Supported senior artists in asset creation, texture painting, and UV layout for stylized cartoon and realistic projects.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **Sculpting** | High-Poly | 9/10 |\n| **Modeling** | Low-Poly | 8/10 |\n| **Texture Painting** |  | 8/10 |\n| **UV Unwrapping** |  | 8/10 |\n| **Rendering** | Real-Time (Unity/Unreal) | 8/10 |\n\n---\n\n### Credentials\n\n- Substance Painter Certified User, 2023\n- Adobe, 2023\n\n---\n\n### Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| **🚩 Red Flags** | ⚠️ Issues Found | High mobility |\n| **🔄 Job Hopping** | ⚠️ High | Score: 100%, Avg tenure: 0.4 yrs |\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n| **📊 Stability** | ❌ Unstable | 0 positions over 1 years |\n| **🎯 Experience** | Entry | consistency and pipeline efficiency. @ Produced over 120 assets meeting strict deadlines for |\n\n---\n\n:::conclusion\n**Overall Assessment:** [Clara Dubois Junior 3D](cv:cv_b22c3c63) is a Junior 3D Modeler with 1 year of experience. She has a Bachelor of Fine Arts in Digital Arts and is proficient in high-poly sculpting, low-poly modeling, and texture painting.\n\n**Key Strengths:**\n- Experience in creating high-poly and low-poly assets for video games and VR experiences.\n- Proficient in multiple 3D modeling skills, including sculpting, modeling, and texture painting.\n- Strong language skills in French, English, and German.\n\n**Areas to Explore:**\nHigh job mobility: 5 positions with avg tenure 0.4 years.\n:::",
+            "thinking": "The user is asking for all information about Clara Dubois from the CV.\nThe current role is Junior 3D Modeler at Luminex Studios (2023-Present).\nThe total experience is 1 year in 3D Modeling.\nThe career trajectory includes all positions listed in the CV.\nThe red flags analysis shows a high job mobility.",
+            "analysis": "## 👤 [📄](cv:cv_b22c3c63) **Clara Dubois Junior 3D**\n⚠️ **Se detectaron las siguientes red flags para [📄](cv:cv_b22c3c63) **Clara Dubois Junior 3D**:**\n- **Alta movilidad laboral**: 5 posiciones con una permanencia promedio de 0.4 años (riesgo alto)\n[📄](cv:cv_b22c3c63) **Clara Dubois Junior 3D** is a detail-oriented 3D modeler with a creative eye and patient work ethic. Currently, she is working as a Junior 3D Modeler at Luminex Studios, creating high-poly and low-poly assets for video games and VR experiences. She ensures artistic consistency and pipeline efficiency.\n---\n### 📊 Candidate Highlights\n---\n### Credentials\n- Substance Painter Certified User, 2023\n- Adobe, 2023\n---\n### Risk Assessment\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Key Skills",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "cv_id": "cv_b22c3c63",
+                  "columns": {
+                    "Key Skills": "N/A",
+                    "_indexed_at": ""
+                  },
+                  "match_score": 100
+                }
+              ]
+            },
+            "conclusion": "**Overall Assessment:**[📄](cv:cv_b22c3c63) **Clara Dubois Junior 3D** is a Junior 3D Modeler with 1 year of experience. She has a Bachelor of Fine Arts in Digital Arts and is proficient in high-poly sculpting, low-poly modeling, and texture painting.\n\n**Key Strengths:**\n- Experience in creating high-poly and low-poly assets for video games and VR experiences.\n- Proficient in multiple 3D modeling skills, including sculpting, modeling, and texture painting.\n- Strong language skills in French, English, and German.\n\n**Areas to Explore:**\nHigh job mobility: 5 positions with avg tenure 0.4 years.",
+            "gap_analysis": {
+              "required_skills": [
+                "A Creative Eye",
+                "Patient Work Ethic",
+                "1 Year Of",
+                "Avg Tenure 0",
+                "Creating High-Poly",
+                "Low-Poly Assets For Video Games",
+                "Vr Experiences.\n- Proficient In Multiple 3D Modeling Skills",
+                "Including Sculpting",
+                "Modeling",
+                "Texture Painting.\n- Strong Language Skills In French",
+                "English",
+                "German.",
+                "Go"
+              ],
+              "skill_gaps": [
+                {
+                  "skill": "A Creative Eye",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Patient Work Ethic",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "1 Year Of",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Avg Tenure 0",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Creating High-Poly",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Low-Poly Assets For Video Games",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Vr Experiences.\n- Proficient In Multiple 3D Modeling Skills",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Including Sculpting",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Modeling",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Texture Painting.\n- Strong Language Skills In French",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "English",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "German.",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Go",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                }
+              ],
+              "coverage_score": 0.0,
+              "best_coverage_candidate": null,
+              "summary": "No significant skill gaps identified."
+            },
+            "red_flags": {
+              "flags": [],
+              "candidates_with_flags": {},
+              "high_risk_candidates": [],
+              "clean_candidates": [
+                " Clara Dubois  Junior 3D"
+              ],
+              "summary": "✓ 1 candidate(s) with no red flags"
+            },
+            "timeline": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T00:44:15.344421"
         }
       ],
       "created_at": "2026-01-05T23:34:35.248677",
-      "updated_at": "2026-01-06T00:43:55.609297"
+      "updated_at": "2026-01-06T00:44:15.344421"
     },
     {
       "id": "89b1b406-a8ff-4483-9569-97bd61ea38c7",
@@ -54010,10 +54213,2385 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-06T00:43:42.821218"
+        },
+        {
+          "id": "1db9d4ff-959b-49ac-875d-0b8b3c7c12d2",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a ranking of the candidates based on their career growth trajectory, considering promotions, increased responsibilities, movement to senior roles, leadership positions, and skill development. I need to evaluate each candidate's CV to identify these indicators and rank them accordingly. The size and impact of the companies where the growth occurred should also be considered. I need to provide a justification for each candidate's ranking.\n:::\n\nBased on the provided CVs, [📄](cv:cv_bfddae4c)**Imani Jones**shows the most significant career growth, followed by [📄](cv:cv_ef373562)**Thierry Dubois**, and then [📄](cv:cv_76d5c7b3)**Clara Dubois**. This ranking is based on promotions, increasing responsibilities, and the size/impact of the companies where they have worked. ### Analysis\nThe ranking is based on the following criteria:\n1.\n\n### Analysis\n\nThe ranking is based on the following criteria:\n1.**Promotions:**Movement to higher-level positions within a company or industry.\n2.**Increasing Responsibilities:**Taking on more complex or strategic tasks.\n3.**Leadership Positions:**Managing teams or projects.\n4.**Skill Development:**Acquiring new skills or certifications.\n5.**Company Size/Impact:**Growth at larger, more impactful companies is weighted higher.\n\n| Candidate | Promotions | Increasing Responsibilities | Company Size/Impact | Match Score |\n|---|---|---|---|---|\n| Imani Jones | Junior Concept Artist → Concept Artist → Senior Concept Artist | Mentoring junior artists, developing visual style guides | Chromatic Games, Nebula Entertainment | 100% |\n| Thierry Dubois | Junior Visual Development Intern → Concept Artist → Lead Concept Artist → Visual Development Director | Spearheading visual direction, instituting review pipelines, mentoring senior artists | Aether Interactive, Luminary Entertainment | 80% |\n| Clara Dubois | 3D Modeling Intern → Junior 3D Modeler | Optimizing mesh topology, collaborating with art director | Luminex Studios, PixelForge Productions | 60% |\n\n:::conclusion\n[📄](cv:cv_bfddae4c)**Imani Jones**demonstrates the strongest career growth, progressing from Junior Concept Artist to Senior Concept Artist with increasing responsibilities. [📄](cv:cv_ef373562)**Thierry Dubois**shows significant growth from Junior Visual Development Intern to Visual Development Director, taking on leadership roles. [📄](cv:cv_76d5c7b3)**Clara Dubois**has progressed from 3D Modeling Intern to Junior 3D Modeler, showing early career growth.\n:::\n\n### Skills Gap Analysis\n\nNo significant skill gaps identified.**Overall Coverage:**0%\n\n### Red Flags Analysis\n\n⚠️ High-risk:  Clara Dubois  Junior 3D | Flags detected: 1 short_avg_tenure, 2 job_hopping**⚠️ High Priority:**-**Clara Dubois  Junior 3D**: High job mobility: 5 positions with avg tenure 0.4 years (score: 100%)**⚡ Attention:**-  Thierry Dubois  Concept: Short average tenure: 0.5 years across 2 positions\n-  Imani Jones  Concept: Moderate job mobility: 3 positions with avg tenure 1.3 years (score: 50%)\n\n### Career Timelines\n\nLongest career:  Clara Dubois  Junior 3D (1 years)**Clara Dubois  Junior 3D**(1y career)\n  • 2022-2023: Paris @ France",
+          "sources": [
+            {
+              "cv_id": "cv_ef373562",
+              "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_76d5c7b3",
+              "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_bfddae4c",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 3256.09,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 4.63,
+              "details": "Found 7 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 13873.43,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5532.79,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Based on the provided CVs, [📄](cv:cv_bfddae4c) **Imani Jones** shows the most significant career growth, followed by [📄](cv:cv_ef373562) **Thierry Dubois**, and then [📄](cv:cv_76d5c7b3) **Clara Dubois**. This ranking is based on promotions, increasing responsibilities, and the size/impact of the companies where they have worked. ### Analysis\nThe ranking is based on the following criteria:\n1.",
+            "raw_content": ":::thinking\nThe user is asking for a ranking of the candidates based on their career growth trajectory, considering promotions, increased responsibilities, movement to senior roles, leadership positions, and skill development. I need to evaluate each candidate's CV to identify these indicators and rank them accordingly. The size and impact of the companies where the growth occurred should also be considered. I need to provide a justification for each candidate's ranking.\n:::\n\nBased on the provided CVs, **[Imani Jones](cv:cv_bfddae4c)** shows the most significant career growth, followed by **[Thierry Dubois](cv:cv_ef373562)**, and then **[Clara Dubois](cv:cv_76d5c7b3)**. This ranking is based on promotions, increasing responsibilities, and the size/impact of the companies where they have worked.\n\n### Analysis\n\nThe ranking is based on the following criteria:\n1.  **Promotions:** Movement to higher-level positions within a company or industry.\n2.  **Increasing Responsibilities:** Taking on more complex or strategic tasks.\n3.  **Leadership Positions:** Managing teams or projects.\n4.  **Skill Development:** Acquiring new skills or certifications.\n5.  **Company Size/Impact:** Growth at larger, more impactful companies is weighted higher.\n\n| Candidate | Promotions | Increasing Responsibilities | Company Size/Impact | Match |\n|---|---|---|---|---|\n| **[Imani Jones](cv:cv_bfddae4c)** | Junior Concept Artist → Concept Artist → Senior Concept Artist | Mentoring junior artists, developing visual style guides | Chromatic Games, Nebula Entertainment | ⭐⭐⭐⭐⭐ |\n| **[Thierry Dubois](cv:cv_ef373562)** | Junior Visual Development Intern → Concept Artist → Lead Concept Artist → Visual Development Director | Spearheading visual direction, instituting review pipelines, mentoring senior artists | Aether Interactive, Luminary Entertainment | ⭐⭐⭐⭐ |\n| **[Clara Dubois](cv:cv_76d5c7b3)** | 3D Modeling Intern → Junior 3D Modeler | Optimizing mesh topology, collaborating with art director | Luminex Studios, PixelForge Productions | ⭐⭐⭐ |\n\n:::conclusion\n**[Imani Jones](cv:cv_bfddae4c)** demonstrates the strongest career growth, progressing from Junior Concept Artist to Senior Concept Artist with increasing responsibilities. **[Thierry Dubois](cv:cv_ef373562)** shows significant growth from Junior Visual Development Intern to Visual Development Director, taking on leadership roles. **[Clara Dubois](cv:cv_76d5c7b3)** has progressed from 3D Modeling Intern to Junior 3D Modeler, showing early career growth.\n:::",
+            "thinking": "The user is asking for a ranking of the candidates based on their career growth trajectory, considering promotions, increased responsibilities, movement to senior roles, leadership positions, and skill development. I need to evaluate each candidate's CV to identify these indicators and rank them accordingly. The size and impact of the companies where the growth occurred should also be considered. I need to provide a justification for each candidate's ranking.",
+            "analysis": "The ranking is based on the following criteria:\n1.  **Promotions:** Movement to higher-level positions within a company or industry.\n2.  **Increasing Responsibilities:** Taking on more complex or strategic tasks.\n3.  **Leadership Positions:** Managing teams or projects.\n4.  **Skill Development:** Acquiring new skills or certifications.\n5.  **Company Size/Impact:** Growth at larger, more impactful companies is weighted higher.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Promotions",
+                "Increasing Responsibilities",
+                "Company Size/Impact",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Imani Jones",
+                  "cv_id": "cv_bfddae4c",
+                  "columns": {
+                    "Promotions": "Junior Concept Artist → Concept Artist → Senior Concept Artist",
+                    "Increasing Responsibilities": "Mentoring junior artists, developing visual style guides",
+                    "Company Size/Impact": "Chromatic Games, Nebula Entertainment"
+                  },
+                  "match_score": 100
+                },
+                {
+                  "candidate_name": "Thierry Dubois",
+                  "cv_id": "cv_ef373562",
+                  "columns": {
+                    "Promotions": "Junior Visual Development Intern → Concept Artist → Lead Concept Artist → Visual Development Director",
+                    "Increasing Responsibilities": "Spearheading visual direction, instituting review pipelines, mentoring senior artists",
+                    "Company Size/Impact": "Aether Interactive, Luminary Entertainment"
+                  },
+                  "match_score": 80
+                },
+                {
+                  "candidate_name": "Clara Dubois",
+                  "cv_id": "cv_76d5c7b3",
+                  "columns": {
+                    "Promotions": "3D Modeling Intern → Junior 3D Modeler",
+                    "Increasing Responsibilities": "Optimizing mesh topology, collaborating with art director",
+                    "Company Size/Impact": "Luminex Studios, PixelForge Productions"
+                  },
+                  "match_score": 60
+                }
+              ]
+            },
+            "conclusion": "[📄](cv:cv_bfddae4c) **Imani Jones** demonstrates the strongest career growth, progressing from Junior Concept Artist to Senior Concept Artist with increasing responsibilities. [📄](cv:cv_ef373562) **Thierry Dubois** shows significant growth from Junior Visual Development Intern to Visual Development Director, taking on leadership roles. [📄](cv:cv_76d5c7b3) **Clara Dubois** has progressed from 3D Modeling Intern to Junior 3D Modeler, showing early career growth.",
+            "gap_analysis": {
+              "required_skills": [
+                "Increasing Responsibilities",
+                "Leadership"
+              ],
+              "skill_gaps": [
+                {
+                  "skill": "Increasing Responsibilities",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D",
+                    " Imani Jones  Concept"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Leadership",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D",
+                    " Imani Jones  Concept"
+                  ],
+                  "candidates_have": []
+                }
+              ],
+              "coverage_score": 0.0,
+              "best_coverage_candidate": null,
+              "summary": "No significant skill gaps identified."
+            },
+            "red_flags": {
+              "flags": [
+                {
+                  "flag_type": "short_avg_tenure",
+                  "severity": "medium",
+                  "description": "Short average tenure: 0.5 years across 2 positions",
+                  "candidate_name": " Thierry Dubois  Concept",
+                  "details": {
+                    "avg_tenure_years": 0.5,
+                    "position_count": 2
+                  }
+                },
+                {
+                  "flag_type": "job_hopping",
+                  "severity": "high",
+                  "description": "High job mobility: 5 positions with avg tenure 0.4 years (score: 100%)",
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "details": {
+                    "job_hopping_score": 1.0,
+                    "avg_tenure_years": 0.4,
+                    "position_count": 5
+                  }
+                },
+                {
+                  "flag_type": "job_hopping",
+                  "severity": "medium",
+                  "description": "Moderate job mobility: 3 positions with avg tenure 1.3 years (score: 50%)",
+                  "candidate_name": " Imani Jones  Concept",
+                  "details": {
+                    "job_hopping_score": 0.5,
+                    "avg_tenure_years": 1.3333333333333333,
+                    "position_count": 3
+                  }
+                }
+              ],
+              "candidates_with_flags": {
+                " Thierry Dubois  Concept": [
+                  "short_avg_tenure"
+                ],
+                " Clara Dubois  Junior 3D": [
+                  "job_hopping"
+                ],
+                " Imani Jones  Concept": [
+                  "job_hopping"
+                ]
+              },
+              "high_risk_candidates": [
+                " Clara Dubois  Junior 3D"
+              ],
+              "clean_candidates": [],
+              "summary": "⚠️ High-risk:  Clara Dubois  Junior 3D | Flags detected: 1 short_avg_tenure, 2 job_hopping"
+            },
+            "timeline": {
+              "timelines": [
+                {
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "cv_id": "cv_76d5c7b3",
+                  "entries": [
+                    {
+                      "year_start": 2022,
+                      "year_end": 2023,
+                      "title": "Paris",
+                      "company": "France",
+                      "is_current": false,
+                      "duration_years": 1,
+                      "transition_type": ""
+                    }
+                  ],
+                  "career_span_years": 1,
+                  "total_companies": 1,
+                  "progression_score": 50.0,
+                  "current_role": null
+                }
+              ],
+              "summary": "Longest career:  Clara Dubois  Junior 3D (1 years)"
+            },
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T00:44:08.700862"
+        },
+        {
+          "id": "625b8327-2b1f-4c0b-9103-ce7a8b76aeeb",
+          "role": "user",
+          "content": "give me risks about Imani Jones",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T00:50:59.775738"
+        },
+        {
+          "id": "af1f0e21-c7b9-418f-b15e-e55d38d97def",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a risk analysis of Imani Jones (cv_bfddae4c). The pre-calculated data indicates \"Risk metrics not yet calculated for this CV\". This means I need to rely on the raw CV data to identify potential risks. Based on the CV, Imani Jones has held three positions in the last four years, which could indicate moderate job mobility. I will highlight this as a potential risk.\n:::\n\n⚠️**Risk factors identified for [📄](cv:cv_bfddae4c)**Imani Jones Concept**:**- Moderate job mobility, with three positions held in the last four years. ### ⚠️ Risk Assessment\n---.\n\n### Analysis\n\n⚠️**Risk factors identified for [📄](cv:cv_bfddae4c)**Imani Jones Concept**:**- Moderate job mobility, with three positions held in the last four years.\n### ⚠️ Risk Assessment\n---\n\n| Candidate | Key Skills | Match Score |\n|---|---|---|\n|  Imani Jones  Concept | N/A |  | 100% |\n\n:::conclusion**Assessment:**The candidate exhibits moderate job mobility, which is a potential area of concern. While the overall experience is 4 years, the fact that they have held three positions in that time may indicate a lack of job stability.\n:::\n\n### Skills Gap Analysis\n\nNo significant skill gaps identified.**Overall Coverage:**0%\n\n### Red Flags Analysis\n\n✓ No red flags detected for 1 candidate(s).",
+          "sources": [
+            {
+              "cv_id": "cv_bfddae4c",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1381.96,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 0.53,
+              "details": "Found 6 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 11703.45,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 2562.25,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "⚠️ **Risk factors identified for [📄](cv:cv_bfddae4c) **Imani Jones Concept**:**\n- Moderate job mobility, with three positions held in the last four years. ### ⚠️ Risk Assessment\n---.",
+            "raw_content": ":::thinking\nThe user is asking for a risk analysis of Imani Jones (cv_bfddae4c). The pre-calculated data indicates \"Risk metrics not yet calculated for this CV\". This means I need to rely on the raw CV data to identify potential risks. Based on the CV, Imani Jones has held three positions in the last four years, which could indicate moderate job mobility. I will highlight this as a potential risk.\n:::\n\n⚠️ **Risk factors identified for [Imani Jones Concept](cv:cv_bfddae4c):**\n- Moderate job mobility, with three positions held in the last four years.\n\n### ⚠️ Risk Assessment\n\n| Factor | Status | Details |\n|--------|--------|---------|\n| ℹ️ Data | Pending | Risk metrics not yet calculated for this CV |\n\n---\n\n:::conclusion\n**Assessment:** The candidate exhibits moderate job mobility, which is a potential area of concern. While the overall experience is 4 years, the fact that they have held three positions in that time may indicate a lack of job stability.\n:::",
+            "thinking": "The user is asking for a risk analysis of Imani Jones (cv_bfddae4c). The pre-calculated data indicates \"Risk metrics not yet calculated for this CV\". This means I need to rely on the raw CV data to identify potential risks. Based on the CV, Imani Jones has held three positions in the last four years, which could indicate moderate job mobility. I will highlight this as a potential risk.",
+            "analysis": "⚠️ **Risk factors identified for [📄](cv:cv_bfddae4c) **Imani Jones Concept**:**\n- Moderate job mobility, with three positions held in the last four years.\n### ⚠️ Risk Assessment\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Key Skills",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_bfddae4c",
+                  "columns": {
+                    "Key Skills": "N/A",
+                    "_indexed_at": ""
+                  },
+                  "match_score": 100
+                }
+              ]
+            },
+            "conclusion": "**Assessment:**The candidate exhibits moderate job mobility, which is a potential area of concern. While the overall experience is 4 years, the fact that they have held three positions in that time may indicate a lack of job stability.",
+            "gap_analysis": {
+              "required_skills": [
+                "To Rely On The Raw Cv Data To Identify Potential Risks",
+                "Three Positions Held In The Last Four Years"
+              ],
+              "skill_gaps": [
+                {
+                  "skill": "To Rely On The Raw Cv Data To Identify Potential Risks",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Three Positions Held In The Last Four Years",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept"
+                  ],
+                  "candidates_have": []
+                }
+              ],
+              "coverage_score": 0.0,
+              "best_coverage_candidate": null,
+              "summary": "No significant skill gaps identified."
+            },
+            "red_flags": {
+              "flags": [],
+              "candidates_with_flags": {},
+              "high_risk_candidates": [],
+              "clean_candidates": [
+                " Imani Jones  Concept"
+              ],
+              "summary": "✓ 1 candidate(s) with no red flags"
+            },
+            "timeline": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T00:51:19.863135"
+        },
+        {
+          "id": "6fe77d2e-994d-4df3-889e-b000b2306322",
+          "role": "user",
+          "content": "dame todo el perfila nalziado de Imani Jones",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T00:51:39.702148"
+        },
+        {
+          "id": "81acac29-a760-4025-9f01-e43cf034d5bb",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a complete profile analysis of Imani Jones (cv_bfddae4c). I need to extract all relevant information from the CV, including current role, total experience, skills, work experience, education, and any potential red flags. The current role is Senior Concept Artist at Chromatic Games. The total experience is 4+ years. There are three positions listed in the CV. The analysis should follow the specified format.\n:::\n\n## 👤 [📄](cv:cv_bfddae4c)**Imani Jones Concept**Imani Jones is a Senior Concept Artist at Chromatic Games, leading the visual development of characters, environments, and props for an unannounced AAA title. With over 4 years of experience in creating compelling visual designs for games and film, Imani excels at translating ideas into visually stunning concepts. Imani has a passion for storytelling through art and is driven to create innovative solutions that elevate projects and captivate audiences.\n\n| Candidate | Key Skills | Match Score |\n|---|---|---|\n|  Imani Jones  Concept | N/A |  | 78% |\n|  Thierry Dubois  Concept | N/A |  | 77% |\n|  Clara Dubois  Junior 3D | N/A |  | 76% |\n\n:::conclusion**Overall Assessment:**Imani Jones is a Senior Concept Artist with 4+ years of experience in the industry. They have a strong background in concept design, character design, and environment design. Imani has worked on a variety of projects, including AAA titles, film, and television.**Key Strengths:**- Strong experience in concept design and visual development\n- Proven ability to create visually stunning and immersive worlds\n- Experience mentoring junior artists**Areas to Explore:**Moderate job mobility with 3 positions in 4 years.\n:::\n\n### Skills Gap Analysis\n\nNo significant skill gaps identified.**Overall Coverage:**0%\n\n### Red Flags Analysis\n\n⚠️ High-risk:  Clara Dubois  Junior 3D | Flags detected: 2 job_hopping, 1 short_avg_tenure**⚠️ High Priority:**-**Clara Dubois  Junior 3D**: High job mobility: 5 positions with avg tenure 0.4 years (score: 100%)**⚡ Attention:**-  Imani Jones  Concept: Moderate job mobility: 3 positions with avg tenure 1.3 years (score: 50%)\n-  Thierry Dubois  Concept: Short average tenure: 0.5 years across 2 positions\n\n### Career Timelines\n\nLongest career:  Imani Jones  Concept (3 years)**Imani Jones  Concept**(3y career)\n  • 2019-2022: Imani Jones @ Senior Concept Artist Concept Artist**Clara Dubois  Junior 3D**(1y career)\n  • 2022-2023: Paris @ France",
+          "sources": [
+            {
+              "cv_id": "cv_bfddae4c",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_ef373562",
+              "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_76d5c7b3",
+              "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1407.21,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 4.74,
+              "details": "Found 8 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 21020.1,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 7543.06,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "## 👤 [📄](cv:cv_bfddae4c) **Imani Jones Concept**\nImani Jones is a Senior Concept Artist at Chromatic Games, leading the visual development of characters, environments, and props for an unannounced AAA title. With over 4 years of experience in creating compelling visual designs for games and film, Imani excels at translating ideas into visually stunning concepts. Imani has a passion for storytelling through art and is driven to create innovative solutions that elevate projects and captivate audiences.",
+            "raw_content": ":::thinking\nThe user is asking for a complete profile analysis of Imani Jones (cv_bfddae4c). I need to extract all relevant information from the CV, including current role, total experience, skills, work experience, education, and any potential red flags. The current role is Senior Concept Artist at Chromatic Games. The total experience is 4+ years. There are three positions listed in the CV. The analysis should follow the specified format.\n:::\n\n## 👤 **[Imani Jones Concept](cv:cv_bfddae4c)**\n\nImani Jones is a Senior Concept Artist at Chromatic Games, leading the visual development of characters, environments, and props for an unannounced AAA title. With over 4 years of experience in creating compelling visual designs for games and film, Imani excels at translating ideas into visually stunning concepts. Imani has a passion for storytelling through art and is driven to create innovative solutions that elevate projects and captivate audiences.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Senior Concept Artist at Chromatic Games (2022-Present) |\n| **⏱️ Total Experience** | 4+ years in concept art |\n| **🏆 Top Achievement** | Developed the visual style guide for a new game at Chromatic Games, resulting in a cohesive and visually appealing aesthetic that was praised by the creative director. |\n| **💡 Core Expertise** | Concept Design, Character Design, Environment Design |\n| **🎓 Education** | Bachelor of Fine Arts in Illustration - California Institute of the Arts, 2018 |\n\n---\n\n### 💼 Career Trajectory\n\n**Senior Concept Artist** — *Chromatic Games* (2022-Present)\n→ Leading the visual development of characters, environments, and props for an unannounced AAA title. Developed the visual style guide for a new game, resulting in a cohesive and visually appealing aesthetic that was praised by the creative director.\n\n**Concept Artist** — *Nebula Entertainment* (2019-2022)\n→ Created concept art for film and television projects, including character designs, environment concepts, and prop designs. Contributed to the visual design of a major science fiction film, resulting in a visually stunning and immersive world that was praised by critics.\n\n**Junior Concept Artist** — *Indie Game Studios* (2018-2019)\n→ Assisted senior concept artists with the creation of concept art for indie game projects. Created a series of environment concepts for an indie game, which were praised for their atmosphere and detail.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **Concept Design** | Concept Design | 10/10 |\n| **Character Design** | Character Design | 9/10 |\n| **Environment Design** | Environment Design | 9/10 |\n| **Prop Design** | Prop Design | 9/10 |\n| **Software** | Adobe Photoshop | 10/10 |\n| **Software** | Procreate | 9/10 |\n| **Software** | Blender | 8/10 |\n| **Software** | ZBrush | 8/10 |\n| **Artistic** | Storyboarding | 8/10 |\n| **Artistic** | Visual Development | 9/10 |\n\n---\n\n### Credentials\n\n- Digital Painting Certificate, CG Spectrum, 2019\n\n---\n\n### Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| **🚩 Red Flags** | ⚠️ Issues Found | High mobility or gaps |\n| **🔄 Job Hopping** | ⚠️ Moderate | Score: 50%, Avg tenure: 1.3 yrs |\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n| **📊 Stability** | ⚡ Moderate | 3 positions over 4 years |\n| **🎯 Experience** | Mid | Los Angeles @ CA projects, including character designs, |\n\n---\n\n:::conclusion\n**Overall Assessment:** Imani Jones is a Senior Concept Artist with 4+ years of experience in the industry. They have a strong background in concept design, character design, and environment design. Imani has worked on a variety of projects, including AAA titles, film, and television.\n\n**Key Strengths:**\n- Strong experience in concept design and visual development\n- Proven ability to create visually stunning and immersive worlds\n- Experience mentoring junior artists\n\n**Areas to Explore:**\nModerate job mobility with 3 positions in 4 years.\n:::",
+            "thinking": "The user is asking for a complete profile analysis of Imani Jones (cv_bfddae4c). I need to extract all relevant information from the CV, including current role, total experience, skills, work experience, education, and any potential red flags. The current role is Senior Concept Artist at Chromatic Games. The total experience is 4+ years. There are three positions listed in the CV. The analysis should follow the specified format.",
+            "analysis": "## 👤 [📄](cv:cv_bfddae4c) **Imani Jones Concept**\nImani Jones is a Senior Concept Artist at Chromatic Games, leading the visual development of characters, environments, and props for an unannounced AAA title. With over 4 years of experience in creating compelling visual designs for games and film, Imani excels at translating ideas into visually stunning concepts. Imani has a passion for storytelling through art and is driven to create innovative solutions that elevate projects and captivate audiences.\n---\n### 📊 Candidate Highlights\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Key Skills",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_bfddae4c",
+                  "columns": {
+                    "Key Skills": "N/A",
+                    "_indexed_at": ""
+                  },
+                  "match_score": 78
+                },
+                {
+                  "candidate_name": " Thierry Dubois  Concept",
+                  "cv_id": "cv_ef373562",
+                  "columns": {
+                    "Key Skills": "N/A",
+                    "_indexed_at": ""
+                  },
+                  "match_score": 77
+                },
+                {
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "cv_id": "cv_76d5c7b3",
+                  "columns": {
+                    "Key Skills": "N/A",
+                    "_indexed_at": ""
+                  },
+                  "match_score": 76
+                }
+              ]
+            },
+            "conclusion": "**Overall Assessment:**Imani Jones is a Senior Concept Artist with 4+ years of experience in the industry. They have a strong background in concept design, character design, and environment design. Imani has worked on a variety of projects, including AAA titles, film, and television.\n\n**Key Strengths:**\n- Strong experience in concept design and visual development\n- Proven ability to create visually stunning and immersive worlds\n- Experience mentoring junior artists\n\n**Areas to Explore:**\nModerate job mobility with 3 positions in 4 years.",
+            "gap_analysis": {
+              "required_skills": [
+                "To Extract All Relevant Information From The Cv",
+                "Over 4 Years Of",
+                "The Creation Of Concept Art For Indie Game Projects",
+                "4+ Years Of",
+                "3 Positions In 4 Years",
+                "Creating Compelling Visual Designs For Games",
+                "Film",
+                "Imani Excels At Translating Ideas Into Visually Stunning Concepts. Imani Has A Passion For Storytelling Through Art",
+                "Is Driven To Create Innovative Solutions That Elevate Projects",
+                "Captivate Audiences.\n\n---\n\n###",
+                "The Industry. They Have A Strong Background In Concept Design",
+                "Character Design",
+                "Environment Design. Imani Has Worked On A Variety Of Projects",
+                "Including Aaa Titles",
+                "Television."
+              ],
+              "skill_gaps": [
+                {
+                  "skill": "To Extract All Relevant Information From The Cv",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Over 4 Years Of",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "The Creation Of Concept Art For Indie Game Projects",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "4+ Years Of",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "3 Positions In 4 Years",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Creating Compelling Visual Designs For Games",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Film",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Imani Excels At Translating Ideas Into Visually Stunning Concepts. Imani Has A Passion For Storytelling Through Art",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Is Driven To Create Innovative Solutions That Elevate Projects",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Captivate Audiences.\n\n---\n\n###",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "The Industry. They Have A Strong Background In Concept Design",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Character Design",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Environment Design. Imani Has Worked On A Variety Of Projects",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Including Aaa Titles",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Television.",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                }
+              ],
+              "coverage_score": 0.0,
+              "best_coverage_candidate": null,
+              "summary": "No significant skill gaps identified."
+            },
+            "red_flags": {
+              "flags": [
+                {
+                  "flag_type": "job_hopping",
+                  "severity": "medium",
+                  "description": "Moderate job mobility: 3 positions with avg tenure 1.3 years (score: 50%)",
+                  "candidate_name": " Imani Jones  Concept",
+                  "details": {
+                    "job_hopping_score": 0.5,
+                    "avg_tenure_years": 1.3333333333333333,
+                    "position_count": 3
+                  }
+                },
+                {
+                  "flag_type": "short_avg_tenure",
+                  "severity": "medium",
+                  "description": "Short average tenure: 0.5 years across 2 positions",
+                  "candidate_name": " Thierry Dubois  Concept",
+                  "details": {
+                    "avg_tenure_years": 0.5,
+                    "position_count": 2
+                  }
+                },
+                {
+                  "flag_type": "job_hopping",
+                  "severity": "high",
+                  "description": "High job mobility: 5 positions with avg tenure 0.4 years (score: 100%)",
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "details": {
+                    "job_hopping_score": 1.0,
+                    "avg_tenure_years": 0.4,
+                    "position_count": 5
+                  }
+                }
+              ],
+              "candidates_with_flags": {
+                " Imani Jones  Concept": [
+                  "job_hopping"
+                ],
+                " Thierry Dubois  Concept": [
+                  "short_avg_tenure"
+                ],
+                " Clara Dubois  Junior 3D": [
+                  "job_hopping"
+                ]
+              },
+              "high_risk_candidates": [
+                " Clara Dubois  Junior 3D"
+              ],
+              "clean_candidates": [],
+              "summary": "⚠️ High-risk:  Clara Dubois  Junior 3D | Flags detected: 2 job_hopping, 1 short_avg_tenure"
+            },
+            "timeline": {
+              "timelines": [
+                {
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_bfddae4c",
+                  "entries": [
+                    {
+                      "year_start": 2019,
+                      "year_end": 2022,
+                      "title": "Imani Jones",
+                      "company": "Senior Concept Artist Concept Artist",
+                      "is_current": false,
+                      "duration_years": 3,
+                      "transition_type": ""
+                    }
+                  ],
+                  "career_span_years": 3,
+                  "total_companies": 1,
+                  "progression_score": 50.0,
+                  "current_role": null
+                },
+                {
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "cv_id": "cv_76d5c7b3",
+                  "entries": [
+                    {
+                      "year_start": 2022,
+                      "year_end": 2023,
+                      "title": "Paris",
+                      "company": "France",
+                      "is_current": false,
+                      "duration_years": 1,
+                      "transition_type": ""
+                    }
+                  ],
+                  "career_span_years": 1,
+                  "total_companies": 1,
+                  "progression_score": 50.0,
+                  "current_role": null
+                }
+              ],
+              "summary": "Longest career:  Imani Jones  Concept (3 years)"
+            },
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T00:52:13.549601"
+        },
+        {
+          "id": "d910ca4e-2060-4669-ab04-6d44dafa9ff3",
+          "role": "user",
+          "content": "dame todo el perfila nalziado de Imani Jones",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T00:57:06.338399"
+        },
+        {
+          "id": "67f8f035-e88f-4473-8310-41968f34f3bf",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a complete profile analysis of Imani Jones (cv_bfddae4c). I need to extract all relevant information from the CV, including current role, total experience, skills, work experience, education, and any potential red flags. The current role is Senior Concept Artist at Chromatic Games. The total experience is 4+ years. There are three positions listed in the CV. The analysis should follow the specified format.\n:::\n\n## 👤 [📄](cv:cv_bfddae4c)**Imani Jones Concept**Imani Jones is a Senior Concept Artist at Chromatic Games, where she leads the visual development of characters, environments, and props for an unannounced AAA title. With over 4 years of experience in creating compelling visual designs for games and film, Imani excels at translating ideas into visually stunning concepts. Imani has a passion for storytelling through art and is driven to create innovative solutions that elevate projects and captivate audiences.\n\n| Candidate | Key Skills | Match Score |\n|---|---|---|\n|  Imani Jones  Concept | N/A |  | 78% |\n|  Thierry Dubois  Concept | N/A |  | 78% |\n|  Clara Dubois  Junior 3D | N/A |  | 76% |\n\n:::conclusion**Overall Assessment:**Imani Jones is a Senior Concept Artist with 4+ years of experience in the industry. They have a strong background in concept design, character design, and environment design. Imani has worked on a variety of projects, including AAA titles, film, and television.**Key Strengths:**- Strong experience in concept design and visual development\n- Proven ability to create visually stunning and immersive worlds\n- Experience mentoring junior artists**Areas to Explore:**Moderate job mobility with 3 positions in 4 years.\n:::\n\n### Skills Gap Analysis\n\nNo significant skill gaps identified.**Overall Coverage:**0%\n\n### Red Flags Analysis\n\n⚠️ High-risk:  Clara Dubois  Junior 3D | Flags detected: 2 job_hopping, 1 short_avg_tenure**⚠️ High Priority:**-**Clara Dubois  Junior 3D**: High job mobility: 5 positions with avg tenure 0.4 years (score: 100%)**⚡ Attention:**-  Imani Jones  Concept: Moderate job mobility: 3 positions with avg tenure 1.3 years (score: 50%)\n-  Thierry Dubois  Concept: Short average tenure: 0.5 years across 2 positions\n\n### Career Timelines\n\nLongest career:  Imani Jones  Concept (3 years)**Imani Jones  Concept**(3y career)\n  • 2019-2022: Imani Jones @ Senior Concept Artist Concept Artist**Clara Dubois  Junior 3D**(1y career)\n  • 2022-2023: Paris @ France**Imani Jones  Concept**shows a**moderate risk profile**. The job hopping score of 50% with an average tenure of 1.3 years suggests some mobility in their career. With 3 positions over 4 years, there may be concerns about long-term retention that should be explored in interviews.\n\n### ⚠️ Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n|**🚩 Red Flags**| ⚠️ Issues Found | Moderate concerns |\n|**🔄 Job Hopping**| ⚠️ High | Score: 50%, Avg tenure: 1.3 yrs |\n|**⏸️ Employment Gaps**| ✅ None | Continuous history |\n|**📊 Stability**| ⚡ Moderate | 3 positions over 4 years |\n|**🎯 Experience**| Mid | Los Angeles @ CA projects, including character designs, |",
+          "sources": [
+            {
+              "cv_id": "cv_bfddae4c",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_ef373562",
+              "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_76d5c7b3",
+              "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1725.46,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 5.04,
+              "details": "Found 6 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 16145.64,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6141.6,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "## 👤 [📄](cv:cv_bfddae4c) ** Imani Jones Concept**\nImani Jones is a Senior Concept Artist at Chromatic Games, where she leads the visual development of characters, environments, and props for an unannounced AAA title. With over 4 years of experience in creating compelling visual designs for games and film, Imani excels at translating ideas into visually stunning concepts. Imani has a passion for storytelling through art and is driven to create innovative solutions that elevate projects and captivate audiences.",
+            "raw_content": ":::thinking\nThe user is asking for a complete profile analysis of Imani Jones (cv_bfddae4c). I need to extract all relevant information from the CV, including current role, total experience, skills, work experience, education, and any potential red flags. The current role is Senior Concept Artist at Chromatic Games. The total experience is 4+ years. There are three positions listed in the CV. The analysis should follow the specified format.\n:::\n\n## 👤 **[ Imani Jones Concept](cv:cv_bfddae4c)**\n\nImani Jones is a Senior Concept Artist at Chromatic Games, where she leads the visual development of characters, environments, and props for an unannounced AAA title. With over 4 years of experience in creating compelling visual designs for games and film, Imani excels at translating ideas into visually stunning concepts. Imani has a passion for storytelling through art and is driven to create innovative solutions that elevate projects and captivate audiences.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Senior Concept Artist at Chromatic Games (2022-Present) |\n| **⏱️ Total Experience** | 4+ years in concept art for games and film |\n| **🏆 Top Achievement** | Developed the visual style guide for a new game, resulting in a cohesive and visually appealing aesthetic that was praised by the creative director. |\n| **💡 Core Expertise** | Concept Design, Character Design, Environment Design |\n| **🎓 Education** | Bachelor of Fine Arts in Illustration - California Institute of the Arts, 2018 |\n\n---\n\n### 💼 Career Trajectory\n\n**Senior Concept Artist** — *Chromatic Games* (2022-Present)\n→ Leading the visual development of characters, environments, and props for an unannounced AAA title.\n\n**Concept Artist** — *Nebula Entertainment* (2019-2022)\n→ Contributed to the visual design of a major science fiction film, resulting in a visually stunning and immersive world that was praised by critics.\n\n**Junior Concept Artist** — *Indie Game Studios* (2018-2019)\n→ Created a series of environment concepts for an indie game, which were praised for their atmosphere and detail.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **Design** | Concept Design | 10/10 |\n| **Design** | Character Design | 9/10 |\n| **Design** | Environment Design | 9/10 |\n| **Design** | Prop Design | 9/10 |\n| **Software** | Adobe Photoshop | 10/10 |\n| **Software** | Procreate | 9/10 |\n| **Software** | Blender | 8/10 |\n| **Software** | ZBrush | 8/10 |\n| **Art** | Storyboarding | 8/10 |\n| **Art** | Visual Development | 9/10 |\n\n---\n\n### Credentials\n\n- Digital Painting Certificate, CG Spectrum, 2019\n\n---\n\n### Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| **🚩 Red Flags** | ⚡ Attention | Moderate job mobility |\n| **🔄 Job Hopping** | ⚡ Moderate | Score: 50%, Avg tenure: 1.3 yrs |\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n| **📊 Stability** | ⚡ Moderate | 3 positions over 4 years |\n| **🎯 Experience** | Mid | Los Angeles @ CA projects, including character designs, |\n\n---\n\n:::conclusion\n**Overall Assessment:** Imani Jones is a Senior Concept Artist with 4+ years of experience in the industry. They have a strong background in concept design, character design, and environment design. Imani has worked on a variety of projects, including AAA titles, film, and television.\n\n**Key Strengths:**\n- Strong experience in concept design and visual development\n- Proven ability to create visually stunning and immersive worlds\n- Experience mentoring junior artists\n\n**Areas to Explore:**\nModerate job mobility with 3 positions in 4 years.\n:::",
+            "thinking": "The user is asking for a complete profile analysis of Imani Jones (cv_bfddae4c). I need to extract all relevant information from the CV, including current role, total experience, skills, work experience, education, and any potential red flags. The current role is Senior Concept Artist at Chromatic Games. The total experience is 4+ years. There are three positions listed in the CV. The analysis should follow the specified format.",
+            "analysis": "## 👤 [📄](cv:cv_bfddae4c) ** Imani Jones Concept**\nImani Jones is a Senior Concept Artist at Chromatic Games, where she leads the visual development of characters, environments, and props for an unannounced AAA title. With over 4 years of experience in creating compelling visual designs for games and film, Imani excels at translating ideas into visually stunning concepts. Imani has a passion for storytelling through art and is driven to create innovative solutions that elevate projects and captivate audiences.\n---\n### 📊 Candidate Highlights\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Key Skills",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_bfddae4c",
+                  "columns": {
+                    "Key Skills": "N/A",
+                    "_indexed_at": ""
+                  },
+                  "match_score": 78
+                },
+                {
+                  "candidate_name": " Thierry Dubois  Concept",
+                  "cv_id": "cv_ef373562",
+                  "columns": {
+                    "Key Skills": "N/A",
+                    "_indexed_at": ""
+                  },
+                  "match_score": 78
+                },
+                {
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "cv_id": "cv_76d5c7b3",
+                  "columns": {
+                    "Key Skills": "N/A",
+                    "_indexed_at": ""
+                  },
+                  "match_score": 76
+                }
+              ]
+            },
+            "conclusion": "**Overall Assessment:**Imani Jones is a Senior Concept Artist with 4+ years of experience in the industry. They have a strong background in concept design, character design, and environment design. Imani has worked on a variety of projects, including AAA titles, film, and television.\n\n**Key Strengths:**\n- Strong experience in concept design and visual development\n- Proven ability to create visually stunning and immersive worlds\n- Experience mentoring junior artists\n\n**Areas to Explore:**\nModerate job mobility with 3 positions in 4 years.",
+            "gap_analysis": {
+              "required_skills": [
+                "To Extract All Relevant Information From The Cv",
+                "Over 4 Years Of",
+                "4+ Years Of",
+                "3 Positions In 4 Years",
+                "Creating Compelling Visual Designs For Games",
+                "Film",
+                "Imani Excels At Translating Ideas Into Visually Stunning Concepts. Imani Has A Passion For Storytelling Through Art",
+                "Is Driven To Create Innovative Solutions That Elevate Projects",
+                "Captivate Audiences.\n\n---\n\n###",
+                "The Industry. They Have A Strong Background In Concept Design",
+                "Character Design",
+                "Environment Design. Imani Has Worked On A Variety Of Projects",
+                "Including Aaa Titles",
+                "Television.",
+                "Concept Design"
+              ],
+              "skill_gaps": [
+                {
+                  "skill": "To Extract All Relevant Information From The Cv",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Over 4 Years Of",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "4+ Years Of",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "3 Positions In 4 Years",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Creating Compelling Visual Designs For Games",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Film",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Imani Excels At Translating Ideas Into Visually Stunning Concepts. Imani Has A Passion For Storytelling Through Art",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Is Driven To Create Innovative Solutions That Elevate Projects",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Captivate Audiences.\n\n---\n\n###",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "The Industry. They Have A Strong Background In Concept Design",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Character Design",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Environment Design. Imani Has Worked On A Variety Of Projects",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Including Aaa Titles",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Television.",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Concept Design",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                }
+              ],
+              "coverage_score": 0.0,
+              "best_coverage_candidate": null,
+              "summary": "No significant skill gaps identified."
+            },
+            "red_flags": {
+              "flags": [
+                {
+                  "flag_type": "job_hopping",
+                  "severity": "medium",
+                  "description": "Moderate job mobility: 3 positions with avg tenure 1.3 years (score: 50%)",
+                  "candidate_name": " Imani Jones  Concept",
+                  "details": {
+                    "job_hopping_score": 0.5,
+                    "avg_tenure_years": 1.3333333333333333,
+                    "position_count": 3
+                  }
+                },
+                {
+                  "flag_type": "short_avg_tenure",
+                  "severity": "medium",
+                  "description": "Short average tenure: 0.5 years across 2 positions",
+                  "candidate_name": " Thierry Dubois  Concept",
+                  "details": {
+                    "avg_tenure_years": 0.5,
+                    "position_count": 2
+                  }
+                },
+                {
+                  "flag_type": "job_hopping",
+                  "severity": "high",
+                  "description": "High job mobility: 5 positions with avg tenure 0.4 years (score: 100%)",
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "details": {
+                    "job_hopping_score": 1.0,
+                    "avg_tenure_years": 0.4,
+                    "position_count": 5
+                  }
+                }
+              ],
+              "candidates_with_flags": {
+                " Imani Jones  Concept": [
+                  "job_hopping"
+                ],
+                " Thierry Dubois  Concept": [
+                  "short_avg_tenure"
+                ],
+                " Clara Dubois  Junior 3D": [
+                  "job_hopping"
+                ]
+              },
+              "high_risk_candidates": [
+                " Clara Dubois  Junior 3D"
+              ],
+              "clean_candidates": [],
+              "summary": "⚠️ High-risk:  Clara Dubois  Junior 3D | Flags detected: 2 job_hopping, 1 short_avg_tenure"
+            },
+            "timeline": {
+              "timelines": [
+                {
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_bfddae4c",
+                  "entries": [
+                    {
+                      "year_start": 2019,
+                      "year_end": 2022,
+                      "title": "Imani Jones",
+                      "company": "Senior Concept Artist Concept Artist",
+                      "is_current": false,
+                      "duration_years": 3,
+                      "transition_type": ""
+                    }
+                  ],
+                  "career_span_years": 3,
+                  "total_companies": 1,
+                  "progression_score": 50.0,
+                  "current_role": null
+                },
+                {
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "cv_id": "cv_76d5c7b3",
+                  "entries": [
+                    {
+                      "year_start": 2022,
+                      "year_end": 2023,
+                      "title": "Paris",
+                      "company": "France",
+                      "is_current": false,
+                      "duration_years": 1,
+                      "transition_type": ""
+                    }
+                  ],
+                  "career_span_years": 1,
+                  "total_companies": 1,
+                  "progression_score": 50.0,
+                  "current_role": null
+                }
+              ],
+              "summary": "Longest career:  Imani Jones  Concept (3 years)"
+            },
+            "risk_assessment": {
+              "candidate_name": " Imani Jones  Concept",
+              "cv_id": "cv_bfddae4c",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "⚠️ Issues Found",
+                  "details": "Moderate concerns",
+                  "status_icon": "⚠️",
+                  "status_text": "Issues Found"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "⚠️ High",
+                  "details": "Score: 50%, Avg tenure: 1.3 yrs",
+                  "status_icon": "⚠️",
+                  "status_text": "High"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "⚡ Moderate",
+                  "details": "3 positions over 4 years",
+                  "status_icon": "⚡",
+                  "status_text": "Moderate"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Mid",
+                  "details": "Los Angeles @ CA projects, including character designs,",
+                  "status_icon": "",
+                  "status_text": "Mid"
+                }
+              ],
+              "has_issues": true,
+              "overall_risk": "moderate",
+              "analysis_text": "** Imani Jones  Concept** shows a **moderate risk profile**. The job hopping score of 50% with an average tenure of 1.3 years suggests some mobility in their career. With 3 positions over 4 years, there may be concerns about long-term retention that should be explored in interviews.",
+              "metrics": {
+                "job_hopping_score": 0.5,
+                "avg_tenure_years": 1.3333333333333333,
+                "total_experience_years": 4.0,
+                "employment_gaps_count": 0,
+                "position_count": 3
+              }
+            },
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T00:57:34.548607"
+        },
+        {
+          "id": "0aa45a6b-e95f-425f-9faa-86202d219bd8",
+          "role": "user",
+          "content": "give me risks about Imani Jones",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T00:58:01.075484"
+        },
+        {
+          "id": "662d3eff-e8da-4647-8bfe-3267c00de665",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a risk analysis of Imani Jones (cv_bfddae4c). The pre-calculated data indicates \"Risk metrics not yet calculated for this CV\". This means I need to rely on the raw CV data to identify potential risks. Based on the CV, Imani Jones has held three positions in the last four years, which could indicate moderate job mobility. I will highlight this as a potential risk.\n:::\n\n⚠️**Risk factors identified for [📄](cv:cv_bfddae4c)**Imani Jones Concept**:**- Moderate job mobility, with three positions held in the last four years. ---\n### ⚠️ Risk Assessment\n---.\n\n### Analysis\n\n⚠️**Risk factors identified for [📄](cv:cv_bfddae4c)**Imani Jones Concept**:**- Moderate job mobility, with three positions held in the last four years.\n---\n### ⚠️ Risk Assessment\n---\n\n| Candidate | Key Skills | Match Score |\n|---|---|---|\n|  Imani Jones  Concept | N/A |  | 100% |\n\n:::conclusion**Assessment:**The candidate exhibits moderate job mobility, which is a potential area of concern. While the overall experience is 4 years, the fact that they have held three positions in that time may indicate a lack of job stability. The job hopping score is 50% with an average tenure of 1.3 years. This suggests some mobility in their career. With 3 positions over 4 years, there may be concerns about long-term retention that should be explored in interviews.\n:::\n\n### Skills Gap Analysis\n\nNo significant skill gaps identified.**Overall Coverage:**0%\n\n### Red Flags Analysis\n\n✓ No red flags detected for 1 candidate(s).",
+          "sources": [
+            {
+              "cv_id": "cv_bfddae4c",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1362.92,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 0.38,
+              "details": "Found 6 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 12420.79,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 2919.64,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "⚠️ **Risk factors identified for [📄](cv:cv_bfddae4c) ** Imani Jones Concept**:**\n- Moderate job mobility, with three positions held in the last four years. ---\n### ⚠️ Risk Assessment\n---.",
+            "raw_content": ":::thinking\nThe user is asking for a risk analysis of Imani Jones (cv_bfddae4c). The pre-calculated data indicates \"Risk metrics not yet calculated for this CV\". This means I need to rely on the raw CV data to identify potential risks. Based on the CV, Imani Jones has held three positions in the last four years, which could indicate moderate job mobility. I will highlight this as a potential risk.\n:::\n\n⚠️ **Risk factors identified for [ Imani Jones Concept](cv:cv_bfddae4c):**\n- Moderate job mobility, with three positions held in the last four years.\n\n---\n\n### ⚠️ Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n|**🚩 Red Flags**| ⚠️ Issues Found | Moderate concerns |\n|**🔄 Job Hopping**| ⚠️ High | Score: 50%, Avg tenure: 1.3 yrs |\n|**⏸️ Employment Gaps**| ✅ None | Continuous history |\n|**📊 Stability**| ⚡ Moderate | 3 positions over 4 years |\n|**🎯 Experience**| Mid | Los Angeles @ CA projects, including character designs, |\n\n---\n\n:::conclusion\n**Assessment:** The candidate exhibits moderate job mobility, which is a potential area of concern. While the overall experience is 4 years, the fact that they have held three positions in that time may indicate a lack of job stability. The job hopping score is 50% with an average tenure of 1.3 years. This suggests some mobility in their career. With 3 positions over 4 years, there may be concerns about long-term retention that should be explored in interviews.\n:::",
+            "thinking": "The user is asking for a risk analysis of Imani Jones (cv_bfddae4c). The pre-calculated data indicates \"Risk metrics not yet calculated for this CV\". This means I need to rely on the raw CV data to identify potential risks. Based on the CV, Imani Jones has held three positions in the last four years, which could indicate moderate job mobility. I will highlight this as a potential risk.",
+            "analysis": "⚠️ **Risk factors identified for [📄](cv:cv_bfddae4c) ** Imani Jones Concept**:**\n- Moderate job mobility, with three positions held in the last four years.\n---\n### ⚠️ Risk Assessment\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Key Skills",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_bfddae4c",
+                  "columns": {
+                    "Key Skills": "N/A",
+                    "_indexed_at": ""
+                  },
+                  "match_score": 100
+                }
+              ]
+            },
+            "conclusion": "**Assessment:**The candidate exhibits moderate job mobility, which is a potential area of concern. While the overall experience is 4 years, the fact that they have held three positions in that time may indicate a lack of job stability. The job hopping score is 50% with an average tenure of 1.3 years. This suggests some mobility in their career. With 3 positions over 4 years, there may be concerns about long-term retention that should be explored in interviews.",
+            "gap_analysis": {
+              "required_skills": [
+                "To Rely On The Raw Cv Data To Identify Potential Risks",
+                "Three Positions Held In The Last Four Years",
+                "An Average Tenure Of 1",
+                "3 Positions Over 4 Years"
+              ],
+              "skill_gaps": [
+                {
+                  "skill": "To Rely On The Raw Cv Data To Identify Potential Risks",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Three Positions Held In The Last Four Years",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "An Average Tenure Of 1",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "3 Positions Over 4 Years",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept"
+                  ],
+                  "candidates_have": []
+                }
+              ],
+              "coverage_score": 0.0,
+              "best_coverage_candidate": null,
+              "summary": "No significant skill gaps identified."
+            },
+            "red_flags": {
+              "flags": [],
+              "candidates_with_flags": {},
+              "high_risk_candidates": [],
+              "clean_candidates": [
+                " Imani Jones  Concept"
+              ],
+              "summary": "✓ 1 candidate(s) with no red flags"
+            },
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Imani Jones  Concept",
+              "cv_id": "cv_bfddae4c",
+              "factors": [],
+              "has_issues": false,
+              "overall_risk": "low",
+              "analysis_text": "Risk metrics have not been calculated for  Imani Jones  Concept. Please re-index the CV to generate risk assessment data.",
+              "metrics": {
+                "job_hopping_score": 0.0,
+                "avg_tenure_years": 0.0,
+                "total_experience_years": 0.0,
+                "employment_gaps_count": 0,
+                "position_count": 0
+              }
+            },
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T00:58:22.102636"
+        },
+        {
+          "id": "654dfe9e-927a-4d40-9a76-c2b7bac41233",
+          "role": "user",
+          "content": "give me full profile de  Imani Jones",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T00:58:32.729434"
+        },
+        {
+          "id": "b5910415-9fe9-46d7-b283-e1055ecdeee6",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the full CV profile of Imani Jones (cv_bfddae4c). I need to extract all information from the CV, including current role, total experience, skills, work experience, education, and any potential red flags. The current role is Senior Concept Artist at Chromatic Games. The total experience is 4+ years. There are three positions listed in the CV. The analysis should follow the specified format.\n:::\n\n## 👤 [📄](cv:cv_bfddae4c)**Imani Jones  Concept**Imani Jones is currently a Senior Concept Artist at Chromatic Games, where she leads the visual development of characters, environments, and props for an unannounced AAA title. With over 4 years of experience in creating compelling visual designs for games and film, Imani has a strong background in concept design, character design, and environment design. Her career includes roles at Nebula Entertainment and Indie Game Studios, showcasing her progression and expertise in the field.\n\n| Candidate | Key Skills | Match Score |\n|---|---|---|\n|  Imani Jones  Concept | N/A |  | 75% |\n|  Clara Dubois  Junior 3D | N/A |  | 74% |\n|  Thierry Dubois  Concept | N/A |  | 74% |\n\n:::conclusion**Overall Assessment:**Imani Jones is a Senior Concept Artist with 4+ years of experience in the industry. They have a strong background in concept design, character design, and environment design. Imani has worked on a variety of projects, including AAA titles, film, and television.**Key Strengths:**- Strong experience in concept design and visual development\n- Proven ability to create visually stunning and immersive worlds\n- Experience mentoring junior artists**Areas to Explore:**Moderate job mobility with 3 positions in 4 years.\n:::\n\n### Skills Gap Analysis\n\nNo significant skill gaps identified.**Overall Coverage:**0%\n\n### Red Flags Analysis\n\n⚠️ High-risk:  Clara Dubois  Junior 3D | Flags detected: 2 job_hopping, 1 short_avg_tenure**⚠️ High Priority:**-**Clara Dubois  Junior 3D**: High job mobility: 5 positions with avg tenure 0.4 years (score: 100%)**⚡ Attention:**-  Imani Jones  Concept: Moderate job mobility: 3 positions with avg tenure 1.3 years (score: 50%)\n-  Thierry Dubois  Concept: Short average tenure: 0.5 years across 2 positions\n\n### Career Timelines\n\nLongest career:  Imani Jones  Concept (3 years)**Imani Jones  Concept**(3y career)\n  • 2019-2022: Imani Jones @ Senior Concept Artist Concept Artist**Clara Dubois  Junior 3D**(1y career)\n  • 2022-2023: Paris @ France**Imani Jones  Concept**shows a**moderate risk profile**. The job hopping score of 50% with an average tenure of 1.3 years suggests some mobility in their career. With 3 positions over 4 years, there may be concerns about long-term retention that should be explored in interviews.\n\n### ⚠️ Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n|**🚩 Red Flags**| ⚠️ Issues Found | Moderate concerns |\n|**🔄 Job Hopping**| ⚠️ High | Score: 50%, Avg tenure: 1.3 yrs |\n|**⏸️ Employment Gaps**| ✅ None | Continuous history |\n|**📊 Stability**| ⚡ Moderate | 3 positions over 4 years |\n|**🎯 Experience**| Mid | Los Angeles @ CA projects, including character designs, |",
+          "sources": [
+            {
+              "cv_id": "cv_bfddae4c",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_ef373562",
+              "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_76d5c7b3",
+              "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1259.36,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 4.83,
+              "details": "Found 6 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 7769.56,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 8272.83,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "## 👤 [📄](cv:cv_bfddae4c) ** Imani Jones  Concept**\nImani Jones is currently a Senior Concept Artist at Chromatic Games, where she leads the visual development of characters, environments, and props for an unannounced AAA title. With over 4 years of experience in creating compelling visual designs for games and film, Imani has a strong background in concept design, character design, and environment design. Her career includes roles at Nebula Entertainment and Indie Game Studios, showcasing her progression and expertise in the field.",
+            "raw_content": ":::thinking\nThe user is asking for the full CV profile of Imani Jones (cv_bfddae4c). I need to extract all information from the CV, including current role, total experience, skills, work experience, education, and any potential red flags. The current role is Senior Concept Artist at Chromatic Games. The total experience is 4+ years. There are three positions listed in the CV. The analysis should follow the specified format.\n:::\n\n## 👤 **[ Imani Jones  Concept](cv:cv_bfddae4c)**\n\nImani Jones is currently a Senior Concept Artist at Chromatic Games, where she leads the visual development of characters, environments, and props for an unannounced AAA title. With over 4 years of experience in creating compelling visual designs for games and film, Imani has a strong background in concept design, character design, and environment design. Her career includes roles at Nebula Entertainment and Indie Game Studios, showcasing her progression and expertise in the field.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Senior Concept Artist at Chromatic Games (2022-Present) |\n| **⏱️ Total Experience** | 4+ years in concept art for games and film |\n| **🏆 Top Achievement** | Developed the visual style guide for a new game, resulting in a cohesive and visually appealing aesthetic that was praised by the creative director. |\n| **💡 Core Expertise** | Concept Design, Character Design, Environment Design |\n| **🎓 Education** | Bachelor of Fine Arts in Illustration, California Institute of the Arts, 2018 |\n\n---\n\n### 💼 Career Trajectory\n\n**Senior Concept Artist** — *Chromatic Games* (2022-Present)\n→ Leading the visual development of characters, environments, and props for an unannounced AAA title.\n\n**Senior Concept Artist** — *Nebula Entertainment* (2019-2022)\n→ Created concept art for film and television projects, including character designs, environment concepts, and prop designs.\n\n**Junior Concept Artist** — *Indie Game Studios* (2018-2019)\n→ Assisted senior concept artists with the creation of concept art for indie game projects.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **Design** | Concept Design | 10/10 |\n| **Design** | Character Design | 9/10 |\n| **Design** | Environment Design | 9/10 |\n| **Design** | Prop Design | 9/10 |\n| **Software** | Adobe Photoshop | 10/10 |\n| **Software** | Procreate | 9/10 |\n| **Software** | Blender | 8/10 |\n| **Software** | ZBrush | 8/10 |\n| **Artistic** | Storyboarding | 8/10 |\n| **Artistic** | Visual Development | 9/10 |\n\n---\n\n### Credentials\n\n- Digital Painting Certificate, CG Spectrum, 2019\n\n---\n\n### Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| **🚩 Red Flags** | ⚠️ Issues Found | Moderate job mobility |\n| **🔄 Job Hopping** | ⚠️ High | Score: 50%, Avg tenure: 1.3 yrs |\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n| **📊 Stability** | ⚡ Moderate | 3 positions over 4 years |\n| **🎯 Experience** | Mid | Los Angeles @ CA projects, including character designs, |\n\n---\n\n:::conclusion\n**Overall Assessment:** Imani Jones is a Senior Concept Artist with 4+ years of experience in the industry. They have a strong background in concept design, character design, and environment design. Imani has worked on a variety of projects, including AAA titles, film, and television.\n\n**Key Strengths:**\n- Strong experience in concept design and visual development\n- Proven ability to create visually stunning and immersive worlds\n- Experience mentoring junior artists\n\n**Areas to Explore:**\nModerate job mobility with 3 positions in 4 years.\n:::",
+            "thinking": "The user is asking for the full CV profile of Imani Jones (cv_bfddae4c). I need to extract all information from the CV, including current role, total experience, skills, work experience, education, and any potential red flags. The current role is Senior Concept Artist at Chromatic Games. The total experience is 4+ years. There are three positions listed in the CV. The analysis should follow the specified format.",
+            "analysis": "## 👤 [📄](cv:cv_bfddae4c) ** Imani Jones  Concept**\nImani Jones is currently a Senior Concept Artist at Chromatic Games, where she leads the visual development of characters, environments, and props for an unannounced AAA title. With over 4 years of experience in creating compelling visual designs for games and film, Imani has a strong background in concept design, character design, and environment design. Her career includes roles at Nebula Entertainment and Indie Game Studios, showcasing her progression and expertise in the field.\n---\n### 📊 Candidate Highlights\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Key Skills",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_bfddae4c",
+                  "columns": {
+                    "Key Skills": "N/A",
+                    "_indexed_at": ""
+                  },
+                  "match_score": 75
+                },
+                {
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "cv_id": "cv_76d5c7b3",
+                  "columns": {
+                    "Key Skills": "N/A",
+                    "_indexed_at": ""
+                  },
+                  "match_score": 74
+                },
+                {
+                  "candidate_name": " Thierry Dubois  Concept",
+                  "cv_id": "cv_ef373562",
+                  "columns": {
+                    "Key Skills": "N/A",
+                    "_indexed_at": ""
+                  },
+                  "match_score": 74
+                }
+              ]
+            },
+            "conclusion": "**Overall Assessment:**Imani Jones is a Senior Concept Artist with 4+ years of experience in the industry. They have a strong background in concept design, character design, and environment design. Imani has worked on a variety of projects, including AAA titles, film, and television.\n\n**Key Strengths:**\n- Strong experience in concept design and visual development\n- Proven ability to create visually stunning and immersive worlds\n- Experience mentoring junior artists\n\n**Areas to Explore:**\nModerate job mobility with 3 positions in 4 years.",
+            "gap_analysis": {
+              "required_skills": [
+                "To Extract All Information From The Cv",
+                "Over 4 Years Of",
+                "The Creation Of Concept Art For Indie Game Projects",
+                "4+ Years Of",
+                "3 Positions In 4 Years",
+                "Creating Compelling Visual Designs For Games",
+                "Film",
+                "Imani Has A Strong Background In Concept Design",
+                "Character Design",
+                "Environment Design. Her Career Includes Roles At Nebula Entertainment",
+                "Indie Game Studios",
+                "Showcasing Her Progression",
+                "Expertise In The Field.\n\n---\n\n###",
+                "The Industry. They Have A Strong Background In Concept Design",
+                "Environment Design. Imani Has Worked On A Variety Of Projects"
+              ],
+              "skill_gaps": [
+                {
+                  "skill": "To Extract All Information From The Cv",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Over 4 Years Of",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "The Creation Of Concept Art For Indie Game Projects",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "4+ Years Of",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "3 Positions In 4 Years",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Creating Compelling Visual Designs For Games",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Film",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Imani Has A Strong Background In Concept Design",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Character Design",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Environment Design. Her Career Includes Roles At Nebula Entertainment",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Indie Game Studios",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Showcasing Her Progression",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Expertise In The Field.\n\n---\n\n###",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "The Industry. They Have A Strong Background In Concept Design",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Environment Design. Imani Has Worked On A Variety Of Projects",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept",
+                    " Thierry Dubois  Concept",
+                    " Clara Dubois  Junior 3D"
+                  ],
+                  "candidates_have": []
+                }
+              ],
+              "coverage_score": 0.0,
+              "best_coverage_candidate": null,
+              "summary": "No significant skill gaps identified."
+            },
+            "red_flags": {
+              "flags": [
+                {
+                  "flag_type": "job_hopping",
+                  "severity": "medium",
+                  "description": "Moderate job mobility: 3 positions with avg tenure 1.3 years (score: 50%)",
+                  "candidate_name": " Imani Jones  Concept",
+                  "details": {
+                    "job_hopping_score": 0.5,
+                    "avg_tenure_years": 1.3333333333333333,
+                    "position_count": 3
+                  }
+                },
+                {
+                  "flag_type": "short_avg_tenure",
+                  "severity": "medium",
+                  "description": "Short average tenure: 0.5 years across 2 positions",
+                  "candidate_name": " Thierry Dubois  Concept",
+                  "details": {
+                    "avg_tenure_years": 0.5,
+                    "position_count": 2
+                  }
+                },
+                {
+                  "flag_type": "job_hopping",
+                  "severity": "high",
+                  "description": "High job mobility: 5 positions with avg tenure 0.4 years (score: 100%)",
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "details": {
+                    "job_hopping_score": 1.0,
+                    "avg_tenure_years": 0.4,
+                    "position_count": 5
+                  }
+                }
+              ],
+              "candidates_with_flags": {
+                " Imani Jones  Concept": [
+                  "job_hopping"
+                ],
+                " Thierry Dubois  Concept": [
+                  "short_avg_tenure"
+                ],
+                " Clara Dubois  Junior 3D": [
+                  "job_hopping"
+                ]
+              },
+              "high_risk_candidates": [
+                " Clara Dubois  Junior 3D"
+              ],
+              "clean_candidates": [],
+              "summary": "⚠️ High-risk:  Clara Dubois  Junior 3D | Flags detected: 2 job_hopping, 1 short_avg_tenure"
+            },
+            "timeline": {
+              "timelines": [
+                {
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_bfddae4c",
+                  "entries": [
+                    {
+                      "year_start": 2019,
+                      "year_end": 2022,
+                      "title": "Imani Jones",
+                      "company": "Senior Concept Artist Concept Artist",
+                      "is_current": false,
+                      "duration_years": 3,
+                      "transition_type": ""
+                    }
+                  ],
+                  "career_span_years": 3,
+                  "total_companies": 1,
+                  "progression_score": 50.0,
+                  "current_role": null
+                },
+                {
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "cv_id": "cv_76d5c7b3",
+                  "entries": [
+                    {
+                      "year_start": 2022,
+                      "year_end": 2023,
+                      "title": "Paris",
+                      "company": "France",
+                      "is_current": false,
+                      "duration_years": 1,
+                      "transition_type": ""
+                    }
+                  ],
+                  "career_span_years": 1,
+                  "total_companies": 1,
+                  "progression_score": 50.0,
+                  "current_role": null
+                }
+              ],
+              "summary": "Longest career:  Imani Jones  Concept (3 years)"
+            },
+            "risk_assessment": {
+              "candidate_name": " Imani Jones  Concept",
+              "cv_id": "cv_bfddae4c",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "⚠️ Issues Found",
+                  "details": "Moderate concerns",
+                  "status_icon": "⚠️",
+                  "status_text": "Issues Found"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "⚠️ High",
+                  "details": "Score: 50%, Avg tenure: 1.3 yrs",
+                  "status_icon": "⚠️",
+                  "status_text": "High"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "⚡ Moderate",
+                  "details": "3 positions over 4 years",
+                  "status_icon": "⚡",
+                  "status_text": "Moderate"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Mid",
+                  "details": "Los Angeles @ CA projects, including character designs,",
+                  "status_icon": "",
+                  "status_text": "Mid"
+                }
+              ],
+              "has_issues": true,
+              "overall_risk": "moderate",
+              "analysis_text": "** Imani Jones  Concept** shows a **moderate risk profile**. The job hopping score of 50% with an average tenure of 1.3 years suggests some mobility in their career. With 3 positions over 4 years, there may be concerns about long-term retention that should be explored in interviews.",
+              "metrics": {
+                "job_hopping_score": 0.5,
+                "avg_tenure_years": 1.3333333333333333,
+                "total_experience_years": 4.0,
+                "employment_gaps_count": 0,
+                "position_count": 3
+              }
+            },
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T00:58:53.893752"
+        },
+        {
+          "id": "d2672baf-ae49-43ef-91fe-4cda48663a69",
+          "role": "user",
+          "content": "give me full profile de  Imani Jones",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T01:18:16.571406"
+        },
+        {
+          "id": "f8bd41fa-92b6-4c3d-89b2-cb46fb35f9bc",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the full CV profile of Imani Jones (cv_bfddae4c).\n- CURRENT role: Senior Concept Artist at Chromatic Games (2022-Present)\n- TOTAL experience: 4+ years (2018 to Present)\n- ALL positions: Junior Concept Artist, Concept Artist, Senior Concept Artist\n:::\n\nImani Jones is a Senior Concept Artist at Chromatic Games, leading the visual development of characters, environments, and props for an unannounced AAA title. With over 4 years of experience, Imani has progressed from Junior Concept Artist at Indie Game Studios to Concept Artist at Nebula Entertainment, showcasing expertise in creating compelling visual designs for games and film.\n\n\n:::conclusion\n**Overall Assessment:**Imani Jones is a Senior Concept Artist with 4+ years of experience in the industry. They have a strong background in concept design, character design, and environment design. Imani has worked on a variety of projects, including AAA titles, film, and television.\n\n**Key Strengths:**\n- Strong experience in concept design and visual development\n- Proven ability to create visually stunning and immersive worlds\n- Experience mentoring junior artists\n\n**Areas to Explore:**\nModerate job mobility with 3 positions in 4 years.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_bfddae4c",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_76d5c7b3",
+              "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_ef373562",
+              "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1661.96,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 5.08,
+              "details": "Found 6 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 13635.47,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6001.47,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Imani Jones is a Senior Concept Artist at Chromatic Games, leading the visual development of characters, environments, and props for an unannounced AAA title. With over 4 years of experience, Imani has progressed from Junior Concept Artist at Indie Game Studios to Concept Artist at Nebula Entertainment, showcasing expertise in creating compelling visual designs for games and film.",
+            "raw_content": ":::thinking\nThe user is asking for the full CV profile of Imani Jones (cv_bfddae4c).\n- CURRENT role: Senior Concept Artist at Chromatic Games (2022-Present)\n- TOTAL experience: 4+ years (2018 to Present)\n- ALL positions: Junior Concept Artist, Concept Artist, Senior Concept Artist\n:::\n\n## 👤 **[ Imani Jones Concept](cv:cv_bfddae4c)**\n\nImani Jones is a Senior Concept Artist at Chromatic Games, leading the visual development of characters, environments, and props for an unannounced AAA title. With over 4 years of experience, Imani has progressed from Junior Concept Artist at Indie Game Studios to Concept Artist at Nebula Entertainment, showcasing expertise in creating compelling visual designs for games and film.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Senior Concept Artist at Chromatic Games (2022-Present) |\n| **⏱️ Total Experience** | 4+ years in concept design |\n| **🏆 Top Achievement** | Developed the visual style guide for a new game, resulting in a cohesive and visually appealing aesthetic that was praised by the creative director. |\n| **💡 Core Expertise** | Concept Design, Character Design, Adobe Photoshop |\n| **🎓 Education** | Bachelor of Fine Arts in Illustration, California Institute of the Arts, 2018 |\n\n---\n\n### 💼 Career Trajectory\n\n**Senior Concept Artist** — *Chromatic Games* (2022-Present)\n→ Leading the visual development of characters, environments, and props for an unannounced AAA title. Developed the visual style guide for a new game, resulting in a cohesive and visually appealing aesthetic that was praised by the creative director.\n\n**Concept Artist** — *Nebula Entertainment* (2019-2022)\n→ Created concept art for film and television projects, including character designs, environment concepts, and prop designs. Contributed to the visual design of a major science fiction film, resulting in a visually stunning and immersive world that was praised by critics.\n\n**Junior Concept Artist** — *Indie Game Studios* (2018-2019)\n→ Assisted senior concept artists with the creation of concept art for indie game projects. Created a series of environment concepts for an indie game, which were praised for their atmosphere and detail.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **Design** | Concept Design | 10/10 |\n| **Design** | Character Design | 9/10 |\n| **Design** | Environment Design | 9/10 |\n| **Design** | Prop Design | 9/10 |\n| **Software** | Adobe Photoshop | 10/10 |\n| **Software** | Procreate | 9/10 |\n| **Software** | Blender | 8/10 |\n| **Software** | ZBrush | 8/10 |\n| **Creative** | Storyboarding | 8/10 |\n| **Creative** | Visual Development | 9/10 |\n\n---\n\n### Credentials\n\n- Digital Painting Certificate, CG Spectrum, 2019\n\n---\n\n### Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| **🚩 Red Flags** | ⚠️ Issues Found | Moderate concerns |\n| **🔄 Job Hopping** | ⚠️ High | Score: 50%, Avg tenure: 1.3 yrs |\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n| **📊 Stability** | ⚡ Moderate | 3 positions over 4 years |\n| **🎯 Experience** | Mid | Los Angeles @ CA projects, including character designs, |\n\n---\n\n:::conclusion\n**Overall Assessment:** Imani Jones is a Senior Concept Artist with 4+ years of experience in the industry. They have a strong background in concept design, character design, and environment design. Imani has worked on a variety of projects, including AAA titles, film, and television.\n\n**Key Strengths:**\n- Strong experience in concept design and visual development\n- Proven ability to create visually stunning and immersive worlds\n- Experience mentoring junior artists\n\n**Areas to Explore:**\nModerate job mobility with 3 positions in 4 years.\n:::",
+            "thinking": "The user is asking for the full CV profile of Imani Jones (cv_bfddae4c).\n- CURRENT role: Senior Concept Artist at Chromatic Games (2022-Present)\n- TOTAL experience: 4+ years (2018 to Present)\n- ALL positions: Junior Concept Artist, Concept Artist, Senior Concept Artist",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "**Overall Assessment:**Imani Jones is a Senior Concept Artist with 4+ years of experience in the industry. They have a strong background in concept design, character design, and environment design. Imani has worked on a variety of projects, including AAA titles, film, and television.\n\n**Key Strengths:**\n- Strong experience in concept design and visual development\n- Proven ability to create visually stunning and immersive worlds\n- Experience mentoring junior artists\n\n**Areas to Explore:**\nModerate job mobility with 3 positions in 4 years.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Imani Jones  Concept",
+              "cv_id": "cv_bfddae4c",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "⚠️ Issues Found",
+                  "details": "Moderate concerns",
+                  "status_icon": "⚠️",
+                  "status_text": "Issues Found"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "⚠️ High",
+                  "details": "Score: 50%, Avg tenure: 1.3 yrs",
+                  "status_icon": "⚠️",
+                  "status_text": "High"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "⚡ Moderate",
+                  "details": "3 positions over 4 years",
+                  "status_icon": "⚡",
+                  "status_text": "Moderate"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Mid",
+                  "details": "Los Angeles @ CA projects, including character designs,",
+                  "status_icon": "",
+                  "status_text": "Mid"
+                }
+              ],
+              "has_issues": true,
+              "overall_risk": "moderate",
+              "analysis_text": "** Imani Jones  Concept** shows a **moderate risk profile**. The job hopping score of 50% with an average tenure of 1.3 years suggests some mobility in their career. With 3 positions over 4 years, there may be concerns about long-term retention that should be explored in interviews.",
+              "metrics": {
+                "job_hopping_score": 0.5,
+                "avg_tenure_years": 1.3333333333333333,
+                "total_experience_years": 4.0,
+                "employment_gaps_count": 0,
+                "position_count": 3
+              }
+            },
+            "structure_type": "single_candidate",
+            "single_candidate_data": {
+              "candidate_name": " Imani Jones  Concept",
+              "cv_id": "cv_bfddae4c",
+              "summary": "Imani Jones is a Senior Concept Artist at Chromatic Games, leading the visual development of characters, environments, and props for an unannounced AAA title. With over 4 years of experience, Imani has progressed from Junior Concept Artist at Indie Game Studios to Concept Artist at Nebula Entertainment, showcasing expertise in creating compelling visual designs for games and film.",
+              "highlights": [
+                {
+                  "category": "🎯 Current Role",
+                  "info": "Senior Concept Artist at Chromatic Games (2022-Present)"
+                },
+                {
+                  "category": "⏱️ Total Experience",
+                  "info": "4+ years in concept design"
+                },
+                {
+                  "category": "🏆 Top Achievement",
+                  "info": "Developed the visual style guide for a new game, resulting in a cohesive and visually appealing aesthetic that was praised by the creative director."
+                },
+                {
+                  "category": "💡 Core Expertise",
+                  "info": "Concept Design, Character Design, Adobe Photoshop"
+                },
+                {
+                  "category": "🎓 Education",
+                  "info": "Bachelor of Fine Arts in Illustration, California Institute of the Arts, 2018"
+                }
+              ],
+              "career": [
+                {
+                  "title": "Senior Concept Artist",
+                  "company": "Chromatic Games",
+                  "dates": "2022-Present",
+                  "achievement": "Leading the visual development of characters, environments, and props for an unannounced AAA title. Developed the visual style guide for a new game, resulting in a cohesive and visually appealing aesthetic that was praised by the creative director."
+                },
+                {
+                  "title": "Concept Artist",
+                  "company": "Nebula Entertainment",
+                  "dates": "2019-2022",
+                  "achievement": "Created concept art for film and television projects, including character designs, environment concepts, and prop designs. Contributed to the visual design of a major science fiction film, resulting in a visually stunning and immersive world that was praised by critics."
+                },
+                {
+                  "title": "Junior Concept Artist",
+                  "company": "Indie Game Studios",
+                  "dates": "2018-2019",
+                  "achievement": "Assisted senior concept artists with the creation of concept art for indie game projects. Created a series of environment concepts for an indie game, which were praised for their atmosphere and detail."
+                }
+              ],
+              "skills": [
+                {
+                  "area": "Design",
+                  "details": "Concept Design",
+                  "level": "10/10"
+                },
+                {
+                  "area": "Design",
+                  "details": "Character Design",
+                  "level": "9/10"
+                },
+                {
+                  "area": "Design",
+                  "details": "Environment Design",
+                  "level": "9/10"
+                },
+                {
+                  "area": "Design",
+                  "details": "Prop Design",
+                  "level": "9/10"
+                },
+                {
+                  "area": "Software",
+                  "details": "Adobe Photoshop",
+                  "level": "10/10"
+                },
+                {
+                  "area": "Software",
+                  "details": "Procreate",
+                  "level": "9/10"
+                },
+                {
+                  "area": "Software",
+                  "details": "Blender",
+                  "level": "8/10"
+                },
+                {
+                  "area": "Software",
+                  "details": "ZBrush",
+                  "level": "8/10"
+                },
+                {
+                  "area": "Creative",
+                  "details": "Storyboarding",
+                  "level": "8/10"
+                },
+                {
+                  "area": "Creative",
+                  "details": "Visual Development",
+                  "level": "9/10"
+                }
+              ],
+              "credentials": [
+                "Digital Painting Certificate, CG Spectrum, 2019",
+                "--"
+              ],
+              "risk_table": {
+                "candidate_name": " Imani Jones  Concept",
+                "cv_id": "cv_bfddae4c",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "⚠️ Issues Found",
+                    "details": "Moderate concerns",
+                    "status_icon": "⚠️",
+                    "status_text": "Issues Found"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "⚠️ High",
+                    "details": "Score: 50%, Avg tenure: 1.3 yrs",
+                    "status_icon": "⚠️",
+                    "status_text": "High"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "⚡ Moderate",
+                    "details": "3 positions over 4 years",
+                    "status_icon": "⚡",
+                    "status_text": "Moderate"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Mid",
+                    "details": "Los Angeles @ CA projects, including character designs,",
+                    "status_icon": "",
+                    "status_text": "Mid"
+                  }
+                ],
+                "has_issues": true,
+                "overall_risk": "moderate",
+                "analysis_text": "** Imani Jones  Concept** shows a **moderate risk profile**. The job hopping score of 50% with an average tenure of 1.3 years suggests some mobility in their career. With 3 positions over 4 years, there may be concerns about long-term retention that should be explored in interviews.",
+                "metrics": {
+                  "job_hopping_score": 0.5,
+                  "avg_tenure_years": 1.3333333333333333,
+                  "total_experience_years": 4.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 3
+                }
+              },
+              "conclusion": "**Overall Assessment:**Imani Jones is a Senior Concept Artist with 4+ years of experience in the industry. They have a strong background in concept design, character design, and environment design. Imani has worked on a variety of projects, including AAA titles, film, and television.\n\n**Key Strengths:**\n- Strong experience in concept design and visual development\n- Proven ability to create visually stunning and immersive worlds\n- Experience mentoring junior artists\n\n**Areas to Explore:**\nModerate job mobility with 3 positions in 4 years."
+            },
+            "risk_assessment_data": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T01:18:42.130669"
+        },
+        {
+          "id": "c1e7f26b-7d8d-42a4-9494-8b772cf7ea55",
+          "role": "user",
+          "content": "give me risks about Imani Jones",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T01:18:55.942528"
+        },
+        {
+          "id": "0a518fae-2c76-43bf-a4ff-ddc33453f3cb",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a risk analysis of Imani Jones (cv_bfddae4c). The pre-calculated data indicates \"Risk metrics not yet calculated for this CV\". This means I need to rely on the raw CV data to identify potential risks. Based on the CV, Imani Jones has held three positions in the last four years, which could indicate moderate job mobility. I will highlight this as a potential risk.\n:::\n\nRisk metrics have not been calculated for  Imani Jones  Concept. Please re-index the CV to generate risk assessment data.\n\n\n:::conclusion\n**Assessment:**The candidate exhibits moderate job mobility, with three positions held in the last four years. This may indicate a lack of job stability that should be explored in interviews.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_bfddae4c",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1225.4,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 0.35,
+              "details": "Found 6 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 10696.65,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 2593.06,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Risk metrics have not been calculated for  Imani Jones  Concept. Please re-index the CV to generate risk assessment data.",
+            "raw_content": ":::thinking\nThe user is asking for a risk analysis of Imani Jones (cv_bfddae4c). The pre-calculated data indicates \"Risk metrics not yet calculated for this CV\". This means I need to rely on the raw CV data to identify potential risks. Based on the CV, Imani Jones has held three positions in the last four years, which could indicate moderate job mobility. I will highlight this as a potential risk.\n:::\n\n⚠️ **Risk factors identified for [ Imani Jones Concept](cv:cv_bfddae4c):**\n- Moderate job mobility, with three positions held in the last four years.\n\n---\n\n### ⚠️ Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| ℹ️ Data | Pending | Risk metrics not yet calculated for this CV |\n\n---\n\n:::conclusion\n**Assessment:** The candidate exhibits moderate job mobility, with three positions held in the last four years. This may indicate a lack of job stability that should be explored in interviews.\n:::",
+            "thinking": "The user is asking for a risk analysis of Imani Jones (cv_bfddae4c). The pre-calculated data indicates \"Risk metrics not yet calculated for this CV\". This means I need to rely on the raw CV data to identify potential risks. Based on the CV, Imani Jones has held three positions in the last four years, which could indicate moderate job mobility. I will highlight this as a potential risk.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "**Assessment:**The candidate exhibits moderate job mobility, with three positions held in the last four years. This may indicate a lack of job stability that should be explored in interviews.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Imani Jones  Concept",
+              "cv_id": "cv_bfddae4c",
+              "factors": [],
+              "has_issues": false,
+              "overall_risk": "low",
+              "analysis_text": "Risk metrics have not been calculated for  Imani Jones  Concept. Please re-index the CV to generate risk assessment data.",
+              "metrics": {
+                "job_hopping_score": 0.0,
+                "avg_tenure_years": 0.0,
+                "total_experience_years": 0.0,
+                "employment_gaps_count": 0,
+                "position_count": 0
+              }
+            },
+            "structure_type": "risk_assessment",
+            "single_candidate_data": null,
+            "risk_assessment_data": {
+              "candidate_name": " Imani Jones  Concept",
+              "cv_id": "cv_bfddae4c",
+              "risk_analysis": "Risk metrics have not been calculated for  Imani Jones  Concept. Please re-index the CV to generate risk assessment data.",
+              "risk_table": {
+                "candidate_name": " Imani Jones  Concept",
+                "cv_id": "cv_bfddae4c",
+                "factors": [],
+                "has_issues": false,
+                "overall_risk": "low",
+                "analysis_text": "Risk metrics have not been calculated for  Imani Jones  Concept. Please re-index the CV to generate risk assessment data.",
+                "metrics": {
+                  "job_hopping_score": 0.0,
+                  "avg_tenure_years": 0.0,
+                  "total_experience_years": 0.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 0
+                }
+              },
+              "assessment": "**Assessment:**The candidate exhibits moderate job mobility, with three positions held in the last four years. This may indicate a lack of job stability that should be explored in interviews."
+            },
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T01:19:13.924089"
         }
       ],
       "created_at": "2026-01-05T23:45:48.965659",
-      "updated_at": "2026-01-06T00:43:42.821218"
+      "updated_at": "2026-01-06T01:19:13.924089"
+    },
+    {
+      "id": "af4b6c26-2761-4b95-a0af-072a5da705ad",
+      "name": "Media Production 2391",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_59a6eb2e",
+          "filename": "0d1b1a1b__Aisha_Patel__Animator.pdf",
+          "chunk_count": 4,
+          "content_hash": "ca45c6173c9f80460346aa7b62214a360e6f7cd26a9dc2170052b3f3f446fa86",
+          "uploaded_at": "2026-01-06T01:19:37.738296"
+        },
+        {
+          "id": "cv_36798705",
+          "filename": "0ed822eb__Antoine_Dubois__Junior_Texture_Artist.pdf",
+          "chunk_count": 3,
+          "content_hash": "a9cb7a1c5ef94b4dd67d4173e415093c32b3a0e98a32c10709536faff7e1d025",
+          "uploaded_at": "2026-01-06T01:19:38.034778"
+        },
+        {
+          "id": "cv_985c89eb",
+          "filename": "02f9626b__Marco_Rossi__3D_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "dbf5a97b45d0f7f4b8713bf4bf6a3271d80e7fb269868a8aaa1b6e78a243f370",
+          "uploaded_at": "2026-01-06T01:19:38.445257"
+        },
+        {
+          "id": "cv_25cac1bd",
+          "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "7d4e53308fd3679d49fefec9229d3bd9507d495067e152e54b3c637dfaf95eae",
+          "uploaded_at": "2026-01-06T01:19:38.810478"
+        },
+        {
+          "id": "cv_c70e4e8e",
+          "filename": "5c2c5d6b__Arjun_Mehta__Junior_Concept_Artist.pdf",
+          "chunk_count": 3,
+          "content_hash": "045f3597c76b27df977bb0aca53cbc1741e53fd734f3deab732ee4991014fa14",
+          "uploaded_at": "2026-01-06T01:19:39.130057"
+        },
+        {
+          "id": "cv_2cdbf4d0",
+          "filename": "7ef319f7__Adrian_Morales__Junior_Animator.pdf",
+          "chunk_count": 3,
+          "content_hash": "58219c2a7c09e05918aa8f3454e63dd06869d536f02e13e2e32903ef45ddb1b8",
+          "uploaded_at": "2026-01-06T01:19:39.380588"
+        },
+        {
+          "id": "cv_da970a1a",
+          "filename": "8cf248e0__Mateo_Rodriguez__Rigger.pdf",
+          "chunk_count": 5,
+          "content_hash": "7c493207f06b04b41034d40f7b27594eed7d424083ce9a6bc0912a1c671ab1a9",
+          "uploaded_at": "2026-01-06T01:19:39.749433"
+        },
+        {
+          "id": "cv_00e9b4fe",
+          "filename": "9a484d82__Carlos_Mendoza__Texture_Artist.pdf",
+          "chunk_count": 5,
+          "content_hash": "d59c12f8f1ec080c249aded4ef2b6de4e5e62caf28483a047e7b1b408837f9ba",
+          "uploaded_at": "2026-01-06T01:19:40.093079"
+        },
+        {
+          "id": "cv_c9abe8ac",
+          "filename": "9e50441e__Matteo_Rossi__Creature_Designer.pdf",
+          "chunk_count": 4,
+          "content_hash": "290c912e27e91de516a503a49a538109c78222d647e5497246fa687f67b7f3ba",
+          "uploaded_at": "2026-01-06T01:19:40.464359"
+        },
+        {
+          "id": "cv_a5f22cc2",
+          "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf",
+          "chunk_count": 7,
+          "content_hash": "bd2da06d8d02512bab1b0606559fe14f7a7e881ec7ce85e4d4184b08b11512f2",
+          "uploaded_at": "2026-01-06T01:19:40.774124"
+        },
+        {
+          "id": "cv_99c7b5c8",
+          "filename": "53f55f6a__Mei_Rossi__3D_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "ab78cfe6bd794aa0676afa7afcdba3cb8558a397112bd52626894e92619be8b5",
+          "uploaded_at": "2026-01-06T01:19:41.063383"
+        },
+        {
+          "id": "cv_3ed3c124",
+          "filename": "55c0e841__Ricardo_De_Vries__Animator.pdf",
+          "chunk_count": 3,
+          "content_hash": "11c7fc5a4a6ff8bad820b895e07df84d6c15fabc0d1359171ecf07aec3547686",
+          "uploaded_at": "2026-01-06T01:19:41.439173"
+        },
+        {
+          "id": "cv_a8ca3c9f",
+          "filename": "63ce3a7c__Emma_Whitmore__Texture_Artist.pdf",
+          "chunk_count": 5,
+          "content_hash": "7050f253fc157464478bb25fd2a49375bb27d43ea38e6d5309be32fd93845047",
+          "uploaded_at": "2026-01-06T01:19:41.795179"
+        },
+        {
+          "id": "cv_fb649c3f",
+          "filename": "74a0c87c__Mei_Lin_Chen__VFX_Supervisor.pdf",
+          "chunk_count": 4,
+          "content_hash": "8730b34ef70065d5808c382297d9140637c3e68d190ebbf2878766c165fb93c9",
+          "uploaded_at": "2026-01-06T01:19:42.126367"
+        },
+        {
+          "id": "cv_98565ade",
+          "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "2eca2a371ef05eb6d0fbafb6c24712d4d3e8ec57df5eb93009bbd658f7372299",
+          "uploaded_at": "2026-01-06T01:19:42.492854"
+        },
+        {
+          "id": "cv_cbd49c6f",
+          "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf",
+          "chunk_count": 6,
+          "content_hash": "0808568a66aa77ab1d92f794af4d54628de5d9d5ab0a01b2d1ebde246bcd5072",
+          "uploaded_at": "2026-01-06T01:19:42.828290"
+        },
+        {
+          "id": "cv_8433c134",
+          "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf",
+          "chunk_count": 5,
+          "content_hash": "7e152a6737adb6072e1076864533574469521b899270ea7d65569dff310615a8",
+          "uploaded_at": "2026-01-06T01:19:43.229209"
+        },
+        {
+          "id": "cv_b7962ea0",
+          "filename": "8742ca7a__Sofia_Mendoza__Environment_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "f3d5b99f8d47cadfae597fd68f42a9d684c874fafbf952cabe5c661a220cf7da",
+          "uploaded_at": "2026-01-06T01:19:43.593075"
+        },
+        {
+          "id": "cv_516c637d",
+          "filename": "749745cf__Aisha_Johnson__Animator.pdf",
+          "chunk_count": 5,
+          "content_hash": "fc4df9844655dc53b8c437b423443383094ee61c744fad93112dd13114f86c2d",
+          "uploaded_at": "2026-01-06T01:19:43.967135"
+        },
+        {
+          "id": "cv_e200cfcf",
+          "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf",
+          "chunk_count": 3,
+          "content_hash": "fca8a83a0edadee1c4bbc2ca635a9c888e1d0e630e689ccbda81a8bfd5c77e5e",
+          "uploaded_at": "2026-01-06T01:19:44.285107"
+        },
+        {
+          "id": "cv_fd076617",
+          "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf",
+          "chunk_count": 4,
+          "content_hash": "9ed63ccc7f2f7c0cc81da35ff3453dcec31c300ead2b4f946d4db5d6048ac157",
+          "uploaded_at": "2026-01-06T01:19:44.711761"
+        },
+        {
+          "id": "cv_e5dd7161",
+          "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf",
+          "chunk_count": 3,
+          "content_hash": "6858a468a4cdf946a86d01fd652ea2c146f8409afbe9337d0f43ebbeb0e4104f",
+          "uploaded_at": "2026-01-06T01:19:45.069056"
+        },
+        {
+          "id": "cv_78a65d6b",
+          "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf",
+          "chunk_count": 7,
+          "content_hash": "61979aaf1446d8b5d11d28b9b65cdd95e6e8100ee8667c9ad52d4104796d51ef",
+          "uploaded_at": "2026-01-06T01:19:45.358492"
+        },
+        {
+          "id": "cv_e3982b00",
+          "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf",
+          "chunk_count": 3,
+          "content_hash": "13213d6ec70b08b54b753f691859eb562813f17ed272f4754ad12a5a4b19e370",
+          "uploaded_at": "2026-01-06T01:19:45.710500"
+        },
+        {
+          "id": "cv_1ba5b1f0",
+          "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf",
+          "chunk_count": 3,
+          "content_hash": "0e996b38a95c64aca7129e2554ee5a0e684da1c7f40a72e8c912ab14faad7f18",
+          "uploaded_at": "2026-01-06T01:19:46.006436"
+        },
+        {
+          "id": "cv_0fa36c2d",
+          "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf",
+          "chunk_count": 11,
+          "content_hash": "fb9a97f91218eb858e3c8647e40b5b25a35d25039dc923bfe0a4da640eb2a90f",
+          "uploaded_at": "2026-01-06T01:19:46.463032"
+        },
+        {
+          "id": "cv_800f94de",
+          "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf",
+          "chunk_count": 6,
+          "content_hash": "9ac96c226a0824b5a8df589c45c1a9886ffb2f05442986faa0a5e6491c6eba80",
+          "uploaded_at": "2026-01-06T01:19:46.818292"
+        },
+        {
+          "id": "cv_bf2a78ad",
+          "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf",
+          "chunk_count": 6,
+          "content_hash": "85d898ad89ecc8cb7267e5b49adba1f1cac5b408dd4c4fc2d71d14dc5bbd9786",
+          "uploaded_at": "2026-01-06T01:19:47.176153"
+        },
+        {
+          "id": "cv_9f03e54d",
+          "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "74f41b5728cefd055be7ae50f0cd92f821fc552c3f1623d099aafbc0f0110cf1",
+          "uploaded_at": "2026-01-06T01:19:47.590754"
+        },
+        {
+          "id": "cv_9c33b2da",
+          "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf",
+          "chunk_count": 7,
+          "content_hash": "b0ac973a41aa837f6956db83be7efc36c49d2569068d401372609dee2fb1805b",
+          "uploaded_at": "2026-01-06T01:19:47.993360"
+        }
+      ],
+      "messages": [
+        {
+          "id": "944d0615-ce66-4edf-a7a5-acd977020f56",
+          "role": "user",
+          "content": "give me risks about Imani Jones",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T01:19:54.602057"
+        },
+        {
+          "id": "6bcb0054-c598-4a00-b09f-85d62994e5e6",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a risk analysis of Imani Jones Concept (cv_800f94de) based on the provided CV data. The risk assessment table shows \"Pending\" status, meaning no pre-calculated risk metrics are available. Therefore, I must rely solely on the CV content to identify potential red flags. The CV mentions multiple roles, a mix of freelance and studio work, and a potential lack of explicit dates for the current role. I will focus on these aspects in my analysis.\n:::\n\nRisk metrics have not been calculated for  Imani Jones  Concept. Please re-index the CV to generate risk assessment data.\n\n\n:::conclusion\n**Assessment:**The risk assessment is incomplete due to the \"Pending\" status of the risk metrics. A more thorough evaluation would require calculating job stability, tenure, and other relevant risk indicators.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_800f94de",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1429.48,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 0.6,
+              "details": "Found 6 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 9567.52,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 3154.26,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Risk metrics have not been calculated for  Imani Jones  Concept. Please re-index the CV to generate risk assessment data.",
+            "raw_content": ":::thinking\nThe user is asking for a risk analysis of **[ Imani Jones Concept](cv:cv_800f94de)** based on the provided CV data. The risk assessment table shows \"Pending\" status, meaning no pre-calculated risk metrics are available. Therefore, I must rely solely on the CV content to identify potential red flags. The CV mentions multiple roles, a mix of freelance and studio work, and a potential lack of explicit dates for the current role. I will focus on these aspects in my analysis.\n:::\n\n### 🚩 Risk Analysis for **[ Imani Jones Concept](cv:cv_800f94de)**\n\n⚠️ **Risk factors identified for Imani Jones Concept:**\n- The \"Risk metrics not yet calculated for this CV\" indicates a lack of automated risk assessment data. This means a comprehensive risk evaluation is not possible based on pre-calculated metrics.\n\n### ⚠️ Risk Assessment\n\n| Factor | Status | Details |\n|--------|--------|---------|\n| ℹ️ Data | Pending | Risk metrics not yet calculated for this CV |\n\n:::conclusion\n**Assessment:** The risk assessment is incomplete due to the \"Pending\" status of the risk metrics. A more thorough evaluation would require calculating job stability, tenure, and other relevant risk indicators.\n:::",
+            "thinking": "The user is asking for a risk analysis of Imani Jones Concept (cv_800f94de) based on the provided CV data. The risk assessment table shows \"Pending\" status, meaning no pre-calculated risk metrics are available. Therefore, I must rely solely on the CV content to identify potential red flags. The CV mentions multiple roles, a mix of freelance and studio work, and a potential lack of explicit dates for the current role. I will focus on these aspects in my analysis.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "**Assessment:**The risk assessment is incomplete due to the \"Pending\" status of the risk metrics. A more thorough evaluation would require calculating job stability, tenure, and other relevant risk indicators.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Imani Jones  Concept",
+              "cv_id": "cv_800f94de",
+              "factors": [],
+              "has_issues": false,
+              "overall_risk": "low",
+              "analysis_text": "Risk metrics have not been calculated for  Imani Jones  Concept. Please re-index the CV to generate risk assessment data.",
+              "metrics": {
+                "job_hopping_score": 0.0,
+                "avg_tenure_years": 0.0,
+                "total_experience_years": 0.0,
+                "employment_gaps_count": 0,
+                "position_count": 0
+              }
+            },
+            "structure_type": "risk_assessment",
+            "single_candidate_data": null,
+            "risk_assessment_data": {
+              "candidate_name": " Imani Jones  Concept",
+              "cv_id": "cv_800f94de",
+              "risk_analysis": "Risk metrics have not been calculated for  Imani Jones  Concept. Please re-index the CV to generate risk assessment data.",
+              "risk_table": {
+                "candidate_name": " Imani Jones  Concept",
+                "cv_id": "cv_800f94de",
+                "factors": [],
+                "has_issues": false,
+                "overall_risk": "low",
+                "analysis_text": "Risk metrics have not been calculated for  Imani Jones  Concept. Please re-index the CV to generate risk assessment data.",
+                "metrics": {
+                  "job_hopping_score": 0.0,
+                  "avg_tenure_years": 0.0,
+                  "total_experience_years": 0.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 0
+                }
+              },
+              "assessment": "**Assessment:**The risk assessment is incomplete due to the \"Pending\" status of the risk metrics. A more thorough evaluation would require calculating job stability, tenure, and other relevant risk indicators."
+            },
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T01:20:12.397981"
+        }
+      ],
+      "created_at": "2026-01-06T01:19:27.911942",
+      "updated_at": "2026-01-06T01:20:12.397981"
     }
   ]
 }

@@ -2207,14 +2207,29 @@ Provide a corrected response:"""
         orchestrator = get_orchestrator()
         
         # Determine query type for output structure
-        query_type = "comparison"  # default
-        candidate_name = None
-        if ctx.single_candidate_detection is not None:
-            if ctx.single_candidate_detection.is_single_candidate:
-                query_type = "single_candidate"
-                candidate_name = ctx.single_candidate_detection.candidate_name
+        # =================================================================
+        # STRUCTURE-BASED ROUTING: Determine which structure to use
+        # Uses classify_query_for_structure for proper routing:
+        # - "single_candidate" → SingleCandidateStructure
+        # - "red_flags"        → RiskAssessmentStructure
+        # - "comparison"       → ComparisonStructure
+        # - "search"           → Standard response
+        # =================================================================
+        from app.prompts.templates import classify_query_for_structure
         
-        logger.info(f"[RAG] Calling orchestrator with query_type={query_type}, candidate_name={candidate_name}")
+        # First, use the new structure classification
+        query_type = classify_query_for_structure(ctx.question)
+        candidate_name = None
+        
+        # If single_candidate or red_flags, get the candidate name
+        if query_type in ("single_candidate", "red_flags"):
+            if ctx.single_candidate_detection and ctx.single_candidate_detection.candidate_name:
+                candidate_name = ctx.single_candidate_detection.candidate_name
+            elif ctx.effective_chunks:
+                # Fallback: get from chunks
+                candidate_name = ctx.effective_chunks[0].get("metadata", {}).get("candidate_name")
+        
+        logger.info(f"[RAG] STRUCTURE ROUTING: query_type={query_type}, candidate_name={candidate_name}")
         
         # Orchestrator returns both structured data and formatted answer
         # Pass query_type so orchestrator knows which output structure to use

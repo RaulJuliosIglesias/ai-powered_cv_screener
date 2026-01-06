@@ -11,6 +11,7 @@ import {
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import SingleCandidateProfile from './SingleCandidateProfile';
+import { RiskAssessmentTable } from './modules';
 import { 
   isSingleCandidateResponse, 
   parseSingleCandidateProfile,
@@ -419,34 +420,16 @@ const RiskAssessmentProfile = ({
         </div>
       )}
       
-      {/* Risk Assessment Table */}
-      {riskAssessment && riskAssessment.length > 0 && (
+      {/* Risk Assessment Table - USES SHARED MODULE */}
+      {riskAssessment && (Array.isArray(riskAssessment) ? riskAssessment.length > 0 : riskAssessment.factors?.length > 0) && (
         <div className="rounded-xl bg-slate-800/50 p-4">
           <div className="flex items-center gap-2 mb-4">
             <span className="text-lg">⚠️</span>
             <span className="font-semibold text-orange-300">Risk Assessment</span>
           </div>
           
-          <div className="overflow-x-auto rounded-lg border border-slate-700">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-slate-700/50 border-b border-slate-600">
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">Factor</th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">Status</th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">Details</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-700/50">
-                {riskAssessment.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-slate-700/30 transition-colors">
-                    <td className="px-4 py-3 text-sm text-slate-200 font-medium">{row.factor}</td>
-                    <td className="px-4 py-3 text-sm text-slate-300">{row.status}</td>
-                    <td className="px-4 py-3 text-sm text-slate-400">{row.details}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          {/* REUSABLE MODULE: Same component used in SingleCandidateProfile */}
+          <RiskAssessmentTable data={riskAssessment} />
         </div>
       )}
       
@@ -495,23 +478,94 @@ const buildCvMapFromTable = (tableData) => {
 const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
   if (!structuredOutput) return null;
   
-  const { thinking, direct_answer, analysis, table_data, conclusion, raw_content } = structuredOutput;
+  const { 
+    thinking, direct_answer, analysis, table_data, conclusion, raw_content, 
+    risk_assessment,
+    // NEW: Structure-based routing from backend
+    structure_type,
+    single_candidate_data,
+    risk_assessment_data: backend_risk_data
+  } = structuredOutput;
   
-  // PRIORITY 1: Detect standalone Risk Assessment response
+  // ==========================================================================
+  // PRIORITY 0: Use structure_type from backend for EXPLICIT routing
+  // This is the new architecture - backend tells frontend which structure to use
+  // ==========================================================================
+  
+  if (structure_type === 'single_candidate' && single_candidate_data) {
+    console.log('[STRUCTURED_OUTPUT] ROUTING: structure_type=single_candidate');
+    return (
+      <div className="space-y-2">
+        <ThinkingSection content={thinking} />
+        <SingleCandidateProfile
+          candidateName={single_candidate_data.candidate_name}
+          cvId={single_candidate_data.cv_id}
+          summary={single_candidate_data.summary}
+          highlights={single_candidate_data.highlights}
+          career={single_candidate_data.career}
+          skills={single_candidate_data.skills}
+          credentials={single_candidate_data.credentials}
+          assessment={single_candidate_data.conclusion}
+          riskAssessment={single_candidate_data.risk_table?.factors || []}
+          onOpenCV={onOpenCV}
+        />
+      </div>
+    );
+  }
+  
+  if (structure_type === 'risk_assessment' && backend_risk_data) {
+    console.log('[STRUCTURED_OUTPUT] ROUTING: structure_type=risk_assessment');
+    return (
+      <div className="space-y-2">
+        <ThinkingSection content={thinking} />
+        <RiskAssessmentProfile
+          candidateName={backend_risk_data.candidate_name}
+          cvId={backend_risk_data.cv_id}
+          riskAnalysis={backend_risk_data.risk_analysis}
+          riskAssessment={backend_risk_data.risk_table?.factors || []}
+          conclusion={backend_risk_data.assessment}
+          onOpenCV={onOpenCV}
+        />
+      </div>
+    );
+  }
+  
+  // ==========================================================================
+  // FALLBACK: Legacy detection for backwards compatibility
+  // ==========================================================================
+  
+  // PRIORITY 1: Use Risk Assessment data from backend MODULE (reusable component)
   const riskAssessmentData = useMemo(() => {
+    // First check if backend provided risk_assessment data (from RiskTableModule)
+    if (risk_assessment && risk_assessment.factors && risk_assessment.factors.length > 0) {
+      console.log('[STRUCTURED_OUTPUT] Using Risk Assessment from backend module:', risk_assessment.candidate_name);
+      return {
+        candidateName: risk_assessment.candidate_name || 'Unknown',
+        cvId: risk_assessment.cv_id || '',
+        riskAnalysis: risk_assessment.analysis_text || '',
+        riskAssessment: risk_assessment.factors.map(f => ({
+          factor: f.factor,
+          status: f.status,
+          details: f.details
+        })),
+        conclusion: risk_assessment.analysis_text || ''
+      };
+    }
+    
+    // Fallback: Parse from raw_content if backend didn't provide structured data
     if (raw_content && isRiskAssessmentResponse(raw_content)) {
       const parsed = parseRiskAssessmentResponse(raw_content);
       if (parsed) {
-        console.log('[STRUCTURED_OUTPUT] Detected Risk Assessment response for:', parsed.candidateName);
+        console.log('[STRUCTURED_OUTPUT] Fallback: Parsed Risk Assessment from raw_content:', parsed.candidateName);
         return parsed;
       }
     }
     return null;
-  }, [raw_content]);
+  }, [risk_assessment, raw_content]);
   
   // PRIORITY 2: Detect single candidate profile response
   const singleCandidateData = useMemo(() => {
-    // Skip if we already detected Risk Assessment
+    // Skip if we already detected Risk Assessment standalone query
     if (riskAssessmentData) return null;
     
     // Check raw_content for single candidate indicators
@@ -519,6 +573,18 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
       const parsed = parseSingleCandidateProfile(raw_content);
       if (parsed && parsed.candidateName !== 'Unknown Candidate') {
         console.log('[STRUCTURED_OUTPUT] Detected single candidate response:', parsed.candidateName);
+        
+        // IMPORTANT: Use risk_assessment from backend MODULE if available
+        // This ensures the SAME module is used for embedded Risk Assessment
+        if (risk_assessment && risk_assessment.factors && risk_assessment.factors.length > 0) {
+          parsed.riskAssessment = risk_assessment.factors.map(f => ({
+            factor: f.factor,
+            status: f.status,
+            details: f.details
+          }));
+          console.log('[STRUCTURED_OUTPUT] Injected risk_assessment from backend module into SingleCandidateProfile');
+        }
+        
         return parsed;
       }
     }
@@ -530,7 +596,7 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
     }
     
     return null;
-  }, [raw_content, table_data, riskAssessmentData]);
+  }, [raw_content, table_data, riskAssessmentData, risk_assessment]);
   
   // Build cvMap from table to resolve "📄 Name" patterns without explicit cv_id
   const cvMap = buildCvMapFromTable(table_data);

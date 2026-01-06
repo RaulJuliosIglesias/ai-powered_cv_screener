@@ -475,9 +475,10 @@ Su perfil demuestra una trayectoria profesional estable:
  Red flags section addresses any job-hopping, gaps, or concerns
 
 Respond now:"""
+
+
 # =============================================================================
-# =============================================================================
-# RED FLAGS SPECIFIC TEMPLATE (Red flags analysis FIRST, profile SECOND)
+# RED FLAGS / RISK ANALYSIS TEMPLATE
 # =============================================================================
 
 RED_FLAGS_TEMPLATE = """## RED FLAGS ANALYSIS REQUEST
@@ -494,7 +495,7 @@ RED_FLAGS_TEMPLATE = """## RED FLAGS ANALYSIS REQUEST
 ## IMPORTANT: THIS IS A RED FLAGS / RISK ANALYSIS QUERY
 The user is asking about red flags, risks, concerns, or issues for this candidate.
 
-## PRE-CALCULATED RISK ASSESSMENT DATA (COPY THIS TABLE EXACTLY)
+## PRE-CALCULATED RISK ASSESSMENT DATA
 {risk_assessment_section}
 
 ---
@@ -507,14 +508,17 @@ The user is asking about red flags, risks, concerns, or issues for this candidat
 
 ### 🚩 Risk Analysis for **[{candidate_name}](cv:{cv_id})**
 
-[Based on the pre-calculated data, provide ONE of these assessments:]
+[IMPORTANT: Read the table above carefully. Base your analysis on the Status column:]
 
-**IF CLEAN PROFILE:**
+**IF table shows mostly ✅ (green) statuses:**
 ✅ **No significant red flags detected for {candidate_name}.**
+- Job stability is adequate based on the metrics
+- No major concerns identified in the pre-calculated analysis
 
-**IF ISSUES FOUND:**
+**IF table shows ⚠️ or ⚡ (warning) statuses:**
 ⚠️ **Risk factors identified for {candidate_name}:**
-- [List specific concerns from the data]
+- [List the SPECIFIC issues from the Details column]
+- [Only mention concerns that appear in the table]
 
 ---
 
@@ -525,14 +529,11 @@ The user is asking about red flags, risks, concerns, or issues for this candidat
 ---
 
 :::conclusion
-**Assessment:** [1-2 sentences summarizing the risk profile based on the table above]
+**Assessment:** [CRITICAL: Your assessment MUST match the table above. If Job Hopping shows "Low" or "Moderate", do NOT say "high job mobility". Quote the actual Score and Avg tenure values from the table.]
 :::
 
 Respond now:"""
 
-# =============================================================================
-# COMPARISON TEMPLATE
-# =============================================================================
 
 COMPARISON_TEMPLATE = """## COMPARISON REQUEST
 Criteria: {criteria}
@@ -1304,71 +1305,87 @@ class PromptBuilder:
         return False
     
     def _extract_enriched_metadata(self, chunks: list[dict]) -> dict[str, str]:
-        """Extract enriched metadata from chunks for Risk Assessment module."""
+        """Extract enriched metadata from chunks for Risk Assessment module.
+        
+        CRITICAL: Only use chunks with ACTUAL enriched metadata (has_enriched_metadata=True)
+        to avoid generating tables with incorrect 0 values.
+        """
         import logging
         logger = logging.getLogger(__name__)
         
-        # Default values
+        # Default values - shown when no enriched metadata available
         sections = {
-            "risk_assessment": "| Factor | Status | Details |\n|--------|--------|---------||\n| Data | N/A | No pre-calculated metrics available |",
-            "red_flags": "**Status:** N/A",
-            "stability_metrics": "**Status:** N/A"
+            "risk_assessment": "| Factor | Status | Details |\n|--------|--------|---------|\n| ℹ️ Data | Pending | Risk metrics not yet calculated for this CV |",
+            "red_flags": "**Status:** Data pending",
+            "stability_metrics": "**Status:** Data pending"
         }
         
-        for i, chunk in enumerate(chunks):
+        # CRITICAL: Find chunk with ACTUAL enriched metadata (not just total_exp)
+        enriched_chunk = None
+        for chunk in chunks:
             meta = chunk.get("metadata", {})
-            if i == 0:
-                logger.info(f"[ENRICHED_METADATA] First chunk keys: {list(meta.keys())}")
+            # Require has_enriched_metadata flag OR actual job_hopping_score
+            if meta.get("has_enriched_metadata") or meta.get("job_hopping_score") is not None:
+                enriched_chunk = chunk
+                logger.info(f"[ENRICHED_METADATA] Found enriched chunk: job_hopping={meta.get('job_hopping_score')}, tenure={meta.get('avg_tenure_years')}")
+                break
+        
+        if not enriched_chunk:
+            logger.warning("[ENRICHED_METADATA] No chunk with enriched metadata found!")
+            if chunks:
+                logger.info(f"[ENRICHED_METADATA] First chunk keys: {list(chunks[0].get('metadata', {}).keys())}")
+            return sections
+        
+        meta = enriched_chunk.get("metadata", {})
+        job_hopping_score = meta.get("job_hopping_score")
+        total_exp = meta.get("total_experience_years")
+        avg_tenure = meta.get("avg_tenure_years")
+        position_count = meta.get("position_count")
+        employment_gaps = meta.get("employment_gaps_count", 0)
+        current_role = meta.get("current_role", "N/A")
+        current_company = meta.get("current_company", "N/A")
+        
+        # Only proceed if we have the ACTUAL job_hopping_score (not None)
+        if job_hopping_score is not None:
+            score = float(job_hopping_score) if job_hopping_score else 0
+            tenure = float(avg_tenure) if avg_tenure else 0
+            exp = float(total_exp) if total_exp else 0
+            gaps = int(employment_gaps) if employment_gaps else 0
             
-            job_hopping_score = meta.get("job_hopping_score")
-            total_exp = meta.get("total_experience_years")
-            avg_tenure = meta.get("avg_tenure_years")
-            position_count = meta.get("position_count")
-            employment_gaps = meta.get("employment_gaps_count", 0)
-            current_role = meta.get("current_role", "N/A")
-            current_company = meta.get("current_company", "N/A")
+            # Determine statuses
+            if score < 0.3:
+                jh_status, jh_icon = "Low", "✅"
+            elif score < 0.5:
+                jh_status, jh_icon = "Moderate", "⚡"
+            else:
+                jh_status, jh_icon = "High", "⚠️"
             
-            if job_hopping_score is not None or total_exp is not None:
-                score = float(job_hopping_score) if job_hopping_score else 0
-                tenure = float(avg_tenure) if avg_tenure else 0
-                exp = float(total_exp) if total_exp else 0
-                gaps = int(employment_gaps) if employment_gaps else 0
-                
-                # Determine statuses
-                if score < 0.3:
-                    jh_status, jh_icon = "Low", "✅"
-                elif score < 0.5:
-                    jh_status, jh_icon = "Moderate", "⚡"
-                else:
-                    jh_status, jh_icon = "High", "⚠️"
-                
-                gaps_status = "None" if gaps == 0 else f"{gaps} detected"
-                gaps_icon = "✅" if gaps == 0 else "⚠️"
-                
-                stability = "Stable" if score < 0.3 else "Moderate" if score < 0.6 else "Unstable"
-                stability_icon = "✅" if score < 0.3 else "⚡" if score < 0.6 else "⚠️"
-                
-                exp_level = "Entry" if exp < 3 else "Mid" if exp < 7 else "Senior" if exp < 15 else "Executive"
-                
-                has_flags = score > 0.5 or tenure < 1.5 or gaps > 0
-                rf_status = "Issues Found" if has_flags else "None Detected"
-                rf_icon = "⚠️" if has_flags else "✅"
-                
-                # Build unified Risk Assessment table
-                sections["risk_assessment"] = f"""| Factor | Status | Details |
+            gaps_status = "None" if gaps == 0 else f"{gaps} detected"
+            gaps_icon = "✅" if gaps == 0 else "⚠️"
+            
+            stability = "Stable" if score < 0.3 else "Moderate" if score < 0.6 else "Unstable"
+            stability_icon = "✅" if score < 0.3 else "⚡" if score < 0.6 else "⚠️"
+            
+            exp_level = "Entry" if exp < 3 else "Mid" if exp < 7 else "Senior" if exp < 15 else "Executive"
+            
+            has_flags = score > 0.5 or tenure < 1.5 or gaps > 0
+            rf_status = "Issues Found" if has_flags else "None Detected"
+            rf_icon = "⚠️" if has_flags else "✅"
+            
+            # Build unified Risk Assessment table
+            sections["risk_assessment"] = f"""| Factor | Status | Details |
 |:-------|:------:|:--------|
 | **🚩 Red Flags** | {rf_icon} {rf_status} | {"High mobility or gaps" if has_flags else "Clean profile"} |
 | **🔄 Job Hopping** | {jh_icon} {jh_status} | Score: {score:.0%}, Avg tenure: {tenure:.1f} yrs |
 | **⏸️ Employment Gaps** | {gaps_icon} {gaps_status} | {"Continuous history" if gaps == 0 else "Verify in interview"} |
 | **📊 Stability** | {stability_icon} {stability} | {position_count or 'N/A'} positions over {exp:.0f} years |
 | **🎯 Experience** | {exp_level} | {current_role} @ {current_company} |"""
-                
-                sections["red_flags"] = f"{rf_icon} **{rf_status}**" if not has_flags else f"{rf_icon} **Issues:** High mobility ({score:.0%})"
-                sections["stability_metrics"] = f"| Metric | Value |\n|--------|-------|\n| **Experience** | {exp:.1f} years |\n| **Avg Tenure** | {tenure:.1f} yrs |\n| **Stability** | {stability} |"
-                
-                break
+            
+            sections["red_flags"] = f"{rf_icon} **{rf_status}**" if not has_flags else f"{rf_icon} **Issues:** High mobility ({score:.0%})"
+            sections["stability_metrics"] = f"| Metric | Value |\n|--------|-------|\n| **Experience** | {exp:.1f} years |\n| **Avg Tenure** | {tenure:.1f} yrs |\n| **Stability** | {stability} |"
         
         return sections
+
 
 @lru_cache(maxsize=128)
 def classify_query(question: str) -> QueryType:
@@ -1409,6 +1426,62 @@ def classify_query(question: str) -> QueryType:
     
     # Default to search
     return QueryType.SEARCH
+
+
+def classify_query_for_structure(question: str) -> str:
+    """
+    Classify query to determine which STRUCTURE to use.
+    
+    ROUTING:
+    - "red_flags"        → RiskAssessmentStructure
+    - "single_candidate" → SingleCandidateStructure
+    - "comparison"       → ComparisonStructure
+    - "search"           → Standard response
+    
+    Args:
+        question: User's question
+        
+    Returns:
+        Structure type string: "red_flags", "single_candidate", "comparison", or "search"
+    """
+    q = question.lower()
+    
+    # 1. RED FLAGS / RISK queries → RiskAssessmentStructure
+    red_flags_patterns = [
+        r'\brisk', r'\briesgo', r'\bred.?flag', r'\bbandera.?roja',
+        r'\bconcern', r'\bissue', r'\bproblem', r'\bwarning',
+        r'\balerta', r'\bjob.?hopping', r'\bgap\b'
+    ]
+    if any(re.search(p, q) for p in red_flags_patterns):
+        return "red_flags"
+    
+    # 2. SINGLE CANDIDATE / FULL PROFILE queries → SingleCandidateStructure
+    single_candidate_patterns = [
+        r'dame\s+(todo|el\s+perfil|información)',
+        r'give\s+me\s+(full|complete|everything|all)',
+        r'(háblame|cuéntame|tell\s+me)\s+(de|about|sobre)',
+        r'(analiza|analyze)\s+',
+        r'perfil\s+(de|completo|analizado)',
+        r'full\s+profile',
+        r'everything\s+about',
+        r'all\s+about',
+        r'todo\s+(sobre|de|acerca)',
+        r'información\s+(de|sobre)',
+        r'profile\s+of',
+    ]
+    if any(re.search(p, q) for p in single_candidate_patterns):
+        return "single_candidate"
+    
+    # 3. COMPARISON queries → ComparisonStructure
+    comparison_patterns = [
+        r'\bcompara', r'\bcompare', r'\bvs\b', r'\bversus',
+        r'\bdifference', r'\bdiferencia', r'\bmejor\s+entre'
+    ]
+    if any(re.search(p, q) for p in comparison_patterns):
+        return "comparison"
+    
+    # 4. Default: search (standard response)
+    return "search"
 
 
 def is_technical_query(question: str) -> bool:

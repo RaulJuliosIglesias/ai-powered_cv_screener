@@ -1,10 +1,12 @@
 """
-Orchestrator - Assembles structured output using ONLY modular components.
+Orchestrator - Routes queries to appropriate STRUCTURES.
+
+ARCHITECTURE:
+- MODULES: Individual reusable components (in ./modules/)
+- STRUCTURES: Complete output assemblers that combine modules (in ./structures/)
+- ORCHESTRATOR: Routes query_type to correct structure
 
 This is the MAIN ENTRY POINT that RAG service calls.
-It coordinates processor and modules to build final output SEQUENTIALLY.
-
-DO NOT create parallel assembly logic - use modules parametrically.
 """
 
 import logging
@@ -14,13 +16,21 @@ from typing import List, Dict, Any
 from app.models.structured_output import StructuredOutput
 from app.utils.debug_logger import log_orchestrator_processing, log_red_flags_module, log_event
 from .processor import OutputProcessor
+
+# Import STRUCTURES (which internally use MODULES)
+from .structures import (
+    SingleCandidateStructure,
+    RiskAssessmentStructure,
+    ComparisonStructure,
+)
+
+# Import modules for legacy/fallback processing
 from .modules import (
     ThinkingModule,
     DirectAnswerModule,
     AnalysisModule,
     TableModule,
     ConclusionModule,
-    # Enhanced modules (v5.1)
     GapAnalysisModule,
     RedFlagsModule,
     TimelineModule,
@@ -31,75 +41,236 @@ logger = logging.getLogger(__name__)
 
 class OutputOrchestrator:
     """
-    Main orchestrator - RAG service calls this.
+    Main orchestrator - Routes queries to appropriate STRUCTURES.
     
-    Coordinates:
-    1. Extraction (via OutputProcessor using modules)
-    2. Sequential assembly (using each module's format method)
+    ROUTING:
+    - query_type="single_candidate" → SingleCandidateStructure
+    - query_type="red_flags"        → RiskAssessmentStructure
+    - query_type="comparison"       → ComparisonStructure
+    - query_type="search"           → Standard response (legacy)
     """
     
     def __init__(self):
-        """Initialize with processor and modules."""
+        """Initialize with structures and legacy processor."""
+        # STRUCTURES (combine modules internally)
+        self.single_candidate_structure = SingleCandidateStructure()
+        self.risk_assessment_structure = RiskAssessmentStructure()
+        self.comparison_structure = ComparisonStructure()
+        
+        # Legacy processor for standard responses
         self.processor = OutputProcessor()
         
-        # Core module instances for formatting
+        # Legacy module instances for fallback/standard responses
         self.thinking_module = ThinkingModule()
         self.direct_answer_module = DirectAnswerModule()
         self.analysis_module = AnalysisModule()
         self.table_module = TableModule()
         self.conclusion_module = ConclusionModule()
-        
-        # Enhanced modules (v5.1)
         self.gap_analysis_module = GapAnalysisModule()
         self.red_flags_module = RedFlagsModule()
         self.timeline_module = TimelineModule()
         
-        logger.info("[ORCHESTRATOR] Initialized with enhanced modules")
+        logger.info("[ORCHESTRATOR] Initialized with STRUCTURES architecture")
     
     def process(
         self,
         raw_llm_output: str,
         chunks: List[Dict[str, Any]] = None,
         query: str = "",
-        query_type: str = "comparison",  # "comparison", "single_candidate", "red_flags"
+        query_type: str = "comparison",  # "comparison", "single_candidate", "red_flags", "search"
         candidate_name: str = None
     ) -> tuple[StructuredOutput, str]:
         """
         Process LLM output into structured components and formatted answer.
         
-        This is the MAIN METHOD that RAG service calls.
+        ROUTING based on query_type:
+        - "single_candidate" → SingleCandidateStructure
+        - "red_flags"        → RiskAssessmentStructure
+        - "comparison"       → ComparisonStructure
+        - "search"           → Standard response (legacy)
         
         Args:
             raw_llm_output: Raw text from LLM
-            chunks: Retrieved CV chunks for fallback
-            query: Original user query for enhanced modules (gap analysis, etc.)
-            query_type: Type of query - determines output structure
-                - "comparison": Multi-candidate comparison (default)
-                - "single_candidate": Individual candidate profile
-                - "red_flags": Red flags specific query
-            candidate_name: Name of candidate for single_candidate queries
+            chunks: Retrieved CV chunks
+            query: Original user query
+            query_type: Type of query - determines which STRUCTURE to use
+            candidate_name: Name of candidate for single_candidate/red_flags queries
             
         Returns:
             Tuple of (StructuredOutput, formatted_answer_string)
         """
-        logger.info(f"[ORCHESTRATOR] Processing with query_type={query_type}")
-        logger.info("[ORCHESTRATOR] Starting processing")
+        logger.info(f"[ORCHESTRATOR] ROUTING query_type={query_type} to appropriate structure")
         
-        # STEP 0: PRE-PROCESS - Clean raw LLM output before any module processing
+        # STEP 0: PRE-PROCESS - Clean raw LLM output
         cleaned_llm_output = self._pre_clean_llm_output(raw_llm_output)
         
-        # STEP 1: Extract all components using processor (which uses modules)
+        # Get cv_id from chunks if available
+        cv_id = ""
+        if chunks:
+            cv_id = chunks[0].get("metadata", {}).get("cv_id", "")
+        
+        # =================================================================
+        # ROUTING: Use appropriate STRUCTURE based on query_type
+        # =================================================================
+        
+        if query_type == "single_candidate" and candidate_name:
+            # SINGLE CANDIDATE STRUCTURE
+            logger.info(f"[ORCHESTRATOR] Using SingleCandidateStructure for {candidate_name}")
+            structure_data = self.single_candidate_structure.assemble(
+                llm_output=cleaned_llm_output,
+                chunks=chunks or [],
+                candidate_name=candidate_name,
+                cv_id=cv_id
+            )
+            return self._build_structured_output(structure_data, cleaned_llm_output)
+        
+        elif query_type == "red_flags" and candidate_name:
+            # RISK ASSESSMENT STRUCTURE
+            logger.info(f"[ORCHESTRATOR] Using RiskAssessmentStructure for {candidate_name}")
+            structure_data = self.risk_assessment_structure.assemble(
+                llm_output=cleaned_llm_output,
+                chunks=chunks or [],
+                candidate_name=candidate_name,
+                cv_id=cv_id
+            )
+            return self._build_structured_output(structure_data, cleaned_llm_output)
+        
+        elif query_type == "comparison":
+            # COMPARISON STRUCTURE
+            logger.info("[ORCHESTRATOR] Using ComparisonStructure")
+            structure_data = self.comparison_structure.assemble(
+                llm_output=cleaned_llm_output,
+                chunks=chunks or []
+            )
+            return self._build_structured_output(structure_data, cleaned_llm_output)
+        
+        else:
+            # LEGACY: Standard search response
+            logger.info("[ORCHESTRATOR] Using legacy standard response")
+            return self._process_standard_response(cleaned_llm_output, chunks, query)
+    
+    def _build_structured_output(
+        self, 
+        structure_data: Dict[str, Any], 
+        raw_content: str
+    ) -> tuple[StructuredOutput, str]:
+        """
+        Build StructuredOutput from structure data.
+        
+        Args:
+            structure_data: Dict from a structure's assemble() method
+            raw_content: Original LLM output
+            
+        Returns:
+            Tuple of (StructuredOutput, formatted_answer_string)
+        """
+        # Create StructuredOutput with structure data
+        structured = StructuredOutput(
+            direct_answer=structure_data.get("summary", "") or structure_data.get("risk_analysis", ""),
+            raw_content=raw_content,
+            thinking=structure_data.get("thinking"),
+            analysis=structure_data.get("analysis"),
+            table_data=None,  # Structures handle their own tables
+            conclusion=structure_data.get("conclusion") or structure_data.get("assessment"),
+        )
+        
+        # Add structure-specific data
+        structured.structure_type = structure_data.get("structure_type")
+        structured.risk_assessment = structure_data.get("risk_table")
+        
+        # For single candidate, add all profile components
+        if structure_data.get("structure_type") == "single_candidate":
+            structured.single_candidate_data = {
+                "candidate_name": structure_data.get("candidate_name"),
+                "cv_id": structure_data.get("cv_id"),
+                "summary": structure_data.get("summary"),
+                "highlights": structure_data.get("highlights"),
+                "career": structure_data.get("career"),
+                "skills": structure_data.get("skills"),
+                "credentials": structure_data.get("credentials"),
+                "risk_table": structure_data.get("risk_table"),
+                "conclusion": structure_data.get("conclusion"),
+            }
+        
+        # For risk assessment, add specific components
+        elif structure_data.get("structure_type") == "risk_assessment":
+            structured.risk_assessment_data = {
+                "candidate_name": structure_data.get("candidate_name"),
+                "cv_id": structure_data.get("cv_id"),
+                "risk_analysis": structure_data.get("risk_analysis"),
+                "risk_table": structure_data.get("risk_table"),
+                "assessment": structure_data.get("assessment"),
+            }
+        
+        # Build formatted answer (for legacy compatibility)
+        formatted_answer = self._format_structure_output(structure_data)
+        
+        logger.info(f"[ORCHESTRATOR] Built output for structure_type={structure_data.get('structure_type')}")
+        
+        return structured, formatted_answer
+    
+    def _format_structure_output(self, structure_data: Dict[str, Any]) -> str:
+        """Format structure data into markdown string."""
+        parts = []
+        
+        # Thinking
+        if structure_data.get("thinking"):
+            parts.append(f":::thinking\n{structure_data['thinking']}\n:::")
+        
+        # Structure-specific content
+        structure_type = structure_data.get("structure_type")
+        
+        if structure_type == "single_candidate":
+            # Format single candidate profile
+            if structure_data.get("summary"):
+                parts.append(structure_data["summary"])
+            # Other sections formatted by frontend
+        
+        elif structure_type == "risk_assessment":
+            # Format risk assessment
+            if structure_data.get("risk_analysis"):
+                parts.append(structure_data["risk_analysis"])
+            if structure_data.get("risk_table"):
+                risk_table = structure_data["risk_table"]
+                if isinstance(risk_table, dict) and risk_table.get("factors"):
+                    parts.append("\n### ⚠️ Risk Assessment\n")
+                    parts.append("| Factor | Status | Details |")
+                    parts.append("|:-------|:------:|:--------|")
+                    for f in risk_table["factors"]:
+                        parts.append(f"| **{f['factor']}** | {f['status']} | {f['details']} |")
+        
+        elif structure_type == "comparison":
+            # Format comparison
+            if structure_data.get("analysis"):
+                parts.append(structure_data["analysis"])
+        
+        # Conclusion
+        if structure_data.get("conclusion") or structure_data.get("assessment"):
+            conclusion = structure_data.get("conclusion") or structure_data.get("assessment")
+            parts.append(f"\n:::conclusion\n{conclusion}\n:::")
+        
+        return "\n\n".join(parts)
+    
+    def _process_standard_response(
+        self,
+        cleaned_llm_output: str,
+        chunks: List[Dict[str, Any]],
+        query: str
+    ) -> tuple[StructuredOutput, str]:
+        """
+        Legacy processing for standard search responses.
+        """
+        # Use legacy processor
         structured = self.processor.process(cleaned_llm_output, chunks)
         
         logger.info(
-            f"[ORCHESTRATOR] Components extracted: "
+            f"[ORCHESTRATOR] Legacy components extracted: "
             f"thinking={bool(structured.thinking)}, "
             f"table={bool(structured.table_data)}, "
-            f"conclusion={bool(structured.conclusion)}, "
-            f"analysis={bool(structured.analysis)}"
+            f"conclusion={bool(structured.conclusion)}"
         )
         
-        # STEP 1.5: Generate fallback analysis if none was extracted
+        # Generate fallback analysis if needed
         if not structured.analysis:
             fallback_analysis = self.analysis_module.generate_fallback(
                 structured.direct_answer,
@@ -108,18 +279,14 @@ class OutputOrchestrator:
             )
             if fallback_analysis:
                 structured.analysis = fallback_analysis
-                logger.info(f"[ORCHESTRATOR] Generated fallback analysis: {len(fallback_analysis)} chars")
         
-        # STEP 1.6: CRITICAL - Format candidate references with ÚNICO formato
-        # Primero extraer nombres de candidatos de la tabla para detectarlos en texto
-        candidate_map = {}  # {nombre: cv_id}
+        # Format candidate references
+        candidate_map = {}
         if structured.table_data and hasattr(structured.table_data, 'rows'):
             for row in structured.table_data.rows:
                 if hasattr(row, 'candidate_name') and hasattr(row, 'cv_id'):
                     candidate_map[row.candidate_name] = row.cv_id
         
-        # Convierte [Nombre](cv_xxx) -> [📄](cv:cv_xxx) **Nombre**
-        # Y también detecta nombres en texto plano y los convierte
         if structured.direct_answer:
             structured.direct_answer = self._format_candidate_references(structured.direct_answer, candidate_map)
         if structured.analysis:
@@ -127,69 +294,20 @@ class OutputOrchestrator:
         if structured.conclusion:
             structured.conclusion = self._format_candidate_references(structured.conclusion, candidate_map)
         
-        # STEP 1.7: Extract enhanced modules (v5.1) from chunks
+        # Extract enhanced modules if chunks available
         if chunks:
-            # Gap Analysis - uses query for requirement extraction
-            gap_data = self.gap_analysis_module.extract(
-                llm_output=cleaned_llm_output,
-                chunks=chunks,
-                query=query
-            )
-            if gap_data:
-                structured.gap_analysis = gap_data.to_dict()
-                logger.info(f"[ORCHESTRATOR] Gap analysis: {len(gap_data.skill_gaps)} gaps detected")
-            
-            # Red Flags
-            # DEBUG LOGGING: Log chunk metadata before red flags extraction
-            if chunks:
-                first_meta = chunks[0].get("metadata", {})
-                log_event("RED_FLAGS_INPUT", {
-                    "chunk_count": len(chunks),
-                    "first_chunk_metadata_keys": list(first_meta.keys()),
-                    "first_chunk_job_hopping_score": first_meta.get("job_hopping_score"),
-                    "first_chunk_avg_tenure": first_meta.get("avg_tenure_years"),
-                    "first_chunk_total_exp": first_meta.get("total_experience_years"),
-                })
-            
-            red_flags_data = self.red_flags_module.extract(
-                chunks=chunks,
-                llm_output=cleaned_llm_output
-            )
-            # Store the original object for later formatting (avoid reconstruction issues)
-            self._last_red_flags_data = red_flags_data
-            if red_flags_data:
-                structured.red_flags = red_flags_data.to_dict()
-                logger.info(f"[ORCHESTRATOR] Red flags: {len(red_flags_data.flags)} flags detected")
-                
-                # DEBUG LOGGING: Log red flags results
-                log_red_flags_module(
-                    red_flags_data.flags,
-                    red_flags_data.high_risk_candidates,
-                    red_flags_data.clean_candidates
-                )
-            
-            # Timeline
-            timeline_data = self.timeline_module.extract(
-                chunks=chunks,
-                llm_output=cleaned_llm_output
-            )
-            if timeline_data:
-                structured.timeline = timeline_data.to_dict()
-                logger.info(f"[ORCHESTRATOR] Timeline: {len(timeline_data.timelines)} candidates")
+            self._extract_enhanced_modules(structured, cleaned_llm_output, chunks, query)
         
-        # STEP 2: Assemble output SEQUENTIALLY using module format methods
+        # Assemble output
         parts = []
         
-        # 1. Thinking block (collapsible dropdown)
         if structured.thinking:
             formatted_thinking = self.thinking_module.format(structured.thinking)
             parts.append(formatted_thinking)
         
-        # 2. Direct answer (no label)
         formatted_answer = self.direct_answer_module.format(structured.direct_answer)
         parts.append(formatted_answer)
         
-        # 3. Analysis (ALWAYS present - fallback generated if needed)
         if structured.analysis:
             formatted_analysis = self.analysis_module.format(structured.analysis)
             parts.append(formatted_analysis)
@@ -230,9 +348,14 @@ class OutputOrchestrator:
                 if formatted_timeline:
                     parts.append(formatted_timeline)
         
-        # NOTE: Risk Assessment is now generated by LLM template (templates.py)
-        # and parsed by frontend (singleCandidateParser.js)
-        # No longer added here to avoid duplication
+        # RISK ASSESSMENT MODULE - Format and add for single_candidate and red_flags queries
+        if query_type in ("single_candidate", "red_flags") and hasattr(self, '_last_risk_assessment_data'):
+            risk_data = self._last_risk_assessment_data
+            if risk_data and risk_data.factors:
+                formatted_risk = self.risk_assessment_module.format(risk_data)
+                if formatted_risk:
+                    parts.append(formatted_risk)
+                    logger.info(f"[ORCHESTRATOR] Risk Assessment section ADDED ({len(formatted_risk)} chars)")
         
         # Join with double newlines for readability
         final_answer = "\n\n".join(parts)
@@ -471,6 +594,47 @@ class OutputOrchestrator:
     # =========================================================================
     # HELPER METHODS FOR ENHANCED MODULES
     # =========================================================================
+    
+    def _extract_enhanced_modules(
+        self,
+        structured: StructuredOutput,
+        llm_output: str,
+        chunks: List[Dict[str, Any]],
+        query: str
+    ):
+        """Extract enhanced module data from chunks (for legacy standard responses)."""
+        # Gap Analysis
+        gap_data = self.gap_analysis_module.extract(
+            llm_output=llm_output,
+            chunks=chunks,
+            query=query
+        )
+        if gap_data:
+            structured.gap_analysis = gap_data.to_dict()
+        
+        # Red Flags
+        if chunks:
+            first_meta = chunks[0].get("metadata", {})
+            log_event("RED_FLAGS_INPUT", {
+                "chunk_count": len(chunks),
+                "first_chunk_metadata_keys": list(first_meta.keys()),
+            })
+        
+        red_flags_data = self.red_flags_module.extract(
+            chunks=chunks,
+            llm_output=llm_output
+        )
+        self._last_red_flags_data = red_flags_data
+        if red_flags_data:
+            structured.red_flags = red_flags_data.to_dict()
+        
+        # Timeline
+        timeline_data = self.timeline_module.extract(
+            chunks=chunks,
+            llm_output=llm_output
+        )
+        if timeline_data:
+            structured.timeline = timeline_data.to_dict()
     
     def _format_red_flags_section(self, structured: StructuredOutput, query_type: str) -> str:
         """

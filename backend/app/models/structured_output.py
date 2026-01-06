@@ -102,6 +102,12 @@ class StructuredOutput:
     gap_analysis: Optional[Dict[str, Any]] = None  # GapAnalysisData.to_dict()
     red_flags: Optional[Dict[str, Any]] = None     # RedFlagsData.to_dict()
     timeline: Optional[Dict[str, Any]] = None      # TimelineData.to_dict()
+    risk_assessment: Optional[Dict[str, Any]] = None  # RiskTableModule.to_dict() - REUSABLE MODULE
+    
+    # NEW: Structure-based routing (v6.0)
+    structure_type: Optional[str] = None  # "single_candidate", "risk_assessment", "comparison"
+    single_candidate_data: Optional[Dict[str, Any]] = None  # SingleCandidateStructure data
+    risk_assessment_data: Optional[Dict[str, Any]] = None   # RiskAssessmentStructure data
     
     # Metadata
     cv_references: List[CVReference] = field(default_factory=list)
@@ -121,6 +127,11 @@ class StructuredOutput:
             "gap_analysis": self.gap_analysis,
             "red_flags": self.red_flags,
             "timeline": self.timeline,
+            "risk_assessment": self.risk_assessment,
+            # Structure-based routing (v6.0)
+            "structure_type": self.structure_type,
+            "single_candidate_data": self.single_candidate_data,
+            "risk_assessment_data": self.risk_assessment_data,
             # Metadata
             "cv_references": [
                 {"cv_id": ref.cv_id, "name": ref.name, "context": ref.context}
@@ -153,6 +164,11 @@ class StructuredOutput:
             gap_analysis=data.get("gap_analysis"),
             red_flags=data.get("red_flags"),
             timeline=data.get("timeline"),
+            risk_assessment=data.get("risk_assessment"),
+            # Structure-based routing (v6.0)
+            structure_type=data.get("structure_type"),
+            single_candidate_data=data.get("single_candidate_data"),
+            risk_assessment_data=data.get("risk_assessment_data"),
             # Metadata
             cv_references=cv_refs,
             parsing_warnings=data.get("parsing_warnings", []),

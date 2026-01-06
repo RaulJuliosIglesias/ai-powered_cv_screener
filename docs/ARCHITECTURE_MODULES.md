@@ -1,4 +1,67 @@
-# CV Screener Architecture & Module System
+# CV Screener Architecture & Module System (v6.0)
+
+## Architecture Overview: MODULES vs STRUCTURES
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           NIVEL 1: MÓDULOS                                  │
+│  (Componentes reutilizables - scripts en /modules/)                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐            │
+│  │ ThinkingModule  │  │ ConclusionModule│  │ DirectAnswerMod │            │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘            │
+│                                                                             │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐            │
+│  │ RiskTableModule │  │ TableModule     │  │ AnalysisModule  │            │
+│  │ (5-factor table)│  │ (comparison)    │  │                 │            │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        NIVEL 2: ESTRUCTURAS                                 │
+│  (Plantillas completas que combinan múltiples módulos)                      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  ┌──────────────────────────────────────────────────────────────────────┐  │
+│  │              SINGLE CANDIDATE STRUCTURE                              │  │
+│  │  Thinking + Summary + Highlights + Career + Skills + RiskTable +     │  │
+│  │  Conclusion                                                          │  │
+│  └──────────────────────────────────────────────────────────────────────┘  │
+│                                                                             │
+│  ┌──────────────────────────────────────────────────────────────────────┐  │
+│  │              RISK ASSESSMENT STRUCTURE                               │  │
+│  │  Thinking + Risk Analysis + RiskTable (SAME MODULE!) + Assessment    │  │
+│  └──────────────────────────────────────────────────────────────────────┘  │
+│                                                                             │
+│  ┌──────────────────────────────────────────────────────────────────────┐  │
+│  │              COMPARISON STRUCTURE                                    │  │
+│  │  Thinking + Analysis + CandidateTable + Conclusion                   │  │
+│  └──────────────────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Key Concept: Module Reuse
+
+The **RiskTableModule** is used by BOTH:
+- `SingleCandidateStructure` (embedded in full profile)
+- `RiskAssessmentStructure` (standalone risk view)
+
+Same module, same output, different context.
+
+---
+
+## Query → Structure Routing
+
+```
+User Query → classify_query_for_structure() → Structure → Frontend Render
+
+"dame todo el perfil de X"    → single_candidate → SingleCandidateProfile.jsx
+"give me risks about X"       → red_flags        → RiskAssessmentProfile.jsx
+"compare X and Y"             → comparison       → Standard multi-candidate view
+"who has Python?"             → search           → Standard search response
+```
+
+---
 
 ## Post-Mortem: Risk Assessment Implementation
 
