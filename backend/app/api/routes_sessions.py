@@ -169,6 +169,11 @@ async def list_sessions(mode: Mode = Query(default=settings.default_mode)):
 @router.post("", response_model=SessionDetailResponse)
 async def create_session(request: CreateSessionRequest, mode: Mode = Query(default=settings.default_mode)):
     """Create a new session."""
+    # Reset suggestion engine for fresh session
+    from app.services.suggestion_engine import get_suggestion_engine
+    suggestion_engine = get_suggestion_engine()
+    suggestion_engine.reset()
+    
     mgr = get_session_manager(mode)
     session = mgr.create_session(request.name, request.description)
     

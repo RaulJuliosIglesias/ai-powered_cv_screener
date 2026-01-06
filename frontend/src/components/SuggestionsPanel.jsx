@@ -56,6 +56,16 @@ const SuggestionsPanel = memo(({
       }))
     : defaultSuggestions;
   
+  // Debug logging
+  console.log('[SuggestionsPanel] Debug:', {
+    suggestionsCount: suggestions.length,
+    cvCount,
+    hasResponse,
+    displaySuggestionsCount: displaySuggestions.length,
+    suggestions: suggestions,
+    displaySuggestions: displaySuggestions.map(d => ({ id: d.id, labelEs: d.labelEs }))
+  });
+  
   return (
     <div className="mt-4 slide-up-fade">
       <div className="flex items-center gap-2 mb-2">

@@ -1177,12 +1177,13 @@ function App() {
                 />
               )}
               
-              {/* Suggestions Panel - appears after response */}
-              {!isChatLoading && currentSession?.messages?.length > 0 && currentSession.cvs?.length > 0 && (
+              {/* Suggestions Panel - appears when CVs are uploaded */}
+              {!isChatLoading && currentSession.cvs?.length > 0 && (
                 <SuggestionsPanel 
                   suggestions={suggestions}
                   onSelectSuggestion={handleSend}
                   cvCount={currentSession.cvs?.length || 0}
+                  hasResponse={currentSession?.messages?.length > 0}
                 />
               )}
               

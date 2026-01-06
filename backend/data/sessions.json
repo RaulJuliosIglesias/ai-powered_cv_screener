@@ -65207,6 +65207,1592 @@
       "messages": [],
       "created_at": "2026-01-06T18:57:08.430081",
       "updated_at": "2026-01-06T18:57:19.253576"
+    },
+    {
+      "id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e",
+      "name": "Education Professionals 6863",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_b0c609e3",
+          "filename": "40b3d301__Hana_Park__Vice_Dean.pdf",
+          "chunk_count": 3,
+          "content_hash": "9611f58ca67124e3b54fc194f2f6c79d8a499674da37d524c635804413ea35ba",
+          "uploaded_at": "2026-01-06T19:13:41.361850"
+        },
+        {
+          "id": "cv_8e0ce868",
+          "filename": "549e73f9__María_López__Student_Teacher.pdf",
+          "chunk_count": 3,
+          "content_hash": "e9b089cf69e27fae1f0b6403e88c2d04a1c5eb209a9fd757a126b606cb673f9a",
+          "uploaded_at": "2026-01-06T19:13:41.942397"
+        },
+        {
+          "id": "cv_6b20e01c",
+          "filename": "757becdd__Pierre_Dubois__Tutor.pdf",
+          "chunk_count": 4,
+          "content_hash": "3b34388880607237d5a674abb6669de75848d77a2898e35ab6937bf517215ff0",
+          "uploaded_at": "2026-01-06T19:13:42.464031"
+        },
+        {
+          "id": "cv_1d56ed8d",
+          "filename": "972db8df__Rajesh_Kumar__ESL_Teacher.pdf",
+          "chunk_count": 3,
+          "content_hash": "d2ea0bb7f0a468950d57b5f4a82258a0d8c17865b6410994b1e9de623e0be96d",
+          "uploaded_at": "2026-01-06T19:13:42.972900"
+        },
+        {
+          "id": "cv_f7eee0fe",
+          "filename": "38726cfe__Erik_Johansson__Teacher_Aide.pdf",
+          "chunk_count": 4,
+          "content_hash": "308903b5ed1226ad750c0256676be889e3f935eb19a4703517b0f0a7390041ff",
+          "uploaded_at": "2026-01-06T19:13:43.593137"
+        },
+        {
+          "id": "cv_dc239d26",
+          "filename": "76724e1a__Farid_Al-Mansoori__Lecturer.pdf",
+          "chunk_count": 4,
+          "content_hash": "83d78e63afd15012bc67a8c50f80ff4a74e0f954ffabc79a2e077068b3568149",
+          "uploaded_at": "2026-01-06T19:13:44.146515"
+        },
+        {
+          "id": "cv_f0447b07",
+          "filename": "19051168__Kwame_van_der_Berg__Academic_Advisor.pdf",
+          "chunk_count": 3,
+          "content_hash": "48367ec088301f8432417f586ce9b14b84fafd90139a1a99a03fc60239ed9cd8",
+          "uploaded_at": "2026-01-06T19:13:44.723414"
+        },
+        {
+          "id": "cv_caa08878",
+          "filename": "b58cdb31__Aisha_Hassan__Substitute_Teacher.pdf",
+          "chunk_count": 3,
+          "content_hash": "da4562582ac2e55ecb46eeccc6de3abae1a0cd56c969988957b8dc30ccca65d4",
+          "uploaded_at": "2026-01-06T19:13:45.224477"
+        },
+        {
+          "id": "cv_aa3cde72",
+          "filename": "bd63b116__Valentina_Fernandez__Teaching_Assistant.pdf",
+          "chunk_count": 3,
+          "content_hash": "ed69851a6c4784f21774f8aa3491898685136a1a169db20e72b9415f9f8b6574",
+          "uploaded_at": "2026-01-06T19:13:45.858927"
+        },
+        {
+          "id": "cv_6268602e",
+          "filename": "c5eb0518__Isabella_Vargas__ESL_Teacher.pdf",
+          "chunk_count": 5,
+          "content_hash": "9ac0875ffd50320f0c7cf8a47ec47c2f7907f81d735b6d6f0f54c580207d698e",
+          "uploaded_at": "2026-01-06T19:13:46.398542"
+        },
+        {
+          "id": "cv_6bcc8c77",
+          "filename": "d5dbc68c__Sofia_Rodriguez__Coach.pdf",
+          "chunk_count": 5,
+          "content_hash": "3903cb2611971afbde8d68d4133c916acdeedb1741aeac97b8fa26361b728434",
+          "uploaded_at": "2026-01-06T19:13:47.050388"
+        },
+        {
+          "id": "cv_0856582a",
+          "filename": "d7c4ea07__Layla_Al-Mansoor__Assistant_Lecturer.pdf",
+          "chunk_count": 3,
+          "content_hash": "a85d8deff19b1c0aa692c7f72756754c1a948ed26ee01f87898c1b51f60a6411",
+          "uploaded_at": "2026-01-06T19:13:47.568784"
+        },
+        {
+          "id": "cv_37489ff8",
+          "filename": "d8a170db__Priya_Patel__Career_Coach.pdf",
+          "chunk_count": 9,
+          "content_hash": "f4541630b1ac9b460fe5e5c23fd42ad16608226fb71469bcea6d4a51727390bd",
+          "uploaded_at": "2026-01-06T19:13:48.188765"
+        },
+        {
+          "id": "cv_e00e97d4",
+          "filename": "ebf8ece3__Javier_Chen__Coach.pdf",
+          "chunk_count": 4,
+          "content_hash": "edbfde39e8cb5edfabb4c8cad5011bcbb39499cff1671ddd88d60df2a2b447bd",
+          "uploaded_at": "2026-01-06T19:13:48.671438"
+        },
+        {
+          "id": "cv_417c5872",
+          "filename": "f94b3d4f__Rajiv_Patel__Professor.pdf",
+          "chunk_count": 7,
+          "content_hash": "47499ea21fbaeacd571770a5a7c7dccb1c094d25a06df6ac85c7cd751fa1ded8",
+          "uploaded_at": "2026-01-06T19:13:49.189956"
+        }
+      ],
+      "messages": [
+        {
+          "id": "99ae40b1-41b1-4c1f-aab1-7ad335d226cd",
+          "role": "user",
+          "content": "Who has experience with Python?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T19:14:39.810696"
+        },
+        {
+          "id": "830fb0d4-5765-4de9-9645-fa591aeead94",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for candidates with Python experience. I need to scan the CVs for explicit mentions of \"Python\" and rank candidates based on the context of its use (e.g., programming, scripting, data analysis). I will provide the top 3 candidates.\n:::\n\n\n:::conclusion\nI recommend **[Rajiv Patel](cv:cv_417c5872)** as the only candidate with explicitly stated Python experience.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_f7eee0fe",
+              "filename": "38726cfe__Erik_Johansson__Teacher_Aide.pdf"
+            },
+            {
+              "cv_id": "cv_e00e97d4",
+              "filename": "ebf8ece3__Javier_Chen__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_b0c609e3",
+              "filename": "40b3d301__Hana_Park__Vice_Dean.pdf"
+            },
+            {
+              "cv_id": "cv_6268602e",
+              "filename": "c5eb0518__Isabella_Vargas__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_6bcc8c77",
+              "filename": "d5dbc68c__Sofia_Rodriguez__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_dc239d26",
+              "filename": "76724e1a__Farid_Al-Mansoori__Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_37489ff8",
+              "filename": "d8a170db__Priya_Patel__Career_Coach.pdf"
+            },
+            {
+              "cv_id": "cv_f0447b07",
+              "filename": "19051168__Kwame_van_der_Berg__Academic_Advisor.pdf"
+            },
+            {
+              "cv_id": "cv_6b20e01c",
+              "filename": "757becdd__Pierre_Dubois__Tutor.pdf"
+            },
+            {
+              "cv_id": "cv_0856582a",
+              "filename": "d7c4ea07__Layla_Al-Mansoor__Assistant_Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_417c5872",
+              "filename": "f94b3d4f__Rajiv_Patel__Professor.pdf"
+            },
+            {
+              "cv_id": "cv_aa3cde72",
+              "filename": "bd63b116__Valentina_Fernandez__Teaching_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_1d56ed8d",
+              "filename": "972db8df__Rajesh_Kumar__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_8e0ce868",
+              "filename": "549e73f9__María_López__Student_Teacher.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 4.69,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 17.32,
+              "details": "Found 22 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 15418.26,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 2778.53,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for candidates with Python experience. I need to scan the CVs for explicit mentions of \"Python\" and rank candidates based on the context of its use (e.g., programming, scripting, data analysis). I will provide the top 3 candidates.\n:::\n\nThe following candidates have experience with Python: **[Rajiv Patel](cv:cv_417c5872)** explicitly mentions \"Python Programming\" as a skill. No other candidates mention Python explicitly.\n\n### Analysis\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Rajiv Patel](cv:cv_417c5872)** | Python Programming 9/10 | Delivered courses in Computer Science | ⭐⭐⭐⭐⭐ |\n\nI chose **[Rajiv Patel](cv:cv_417c5872)** because the CV explicitly lists \"Python Programming\" as a skill with a rating of 9/10. The experience section also mentions delivering courses in Computer Science, which aligns with the use of Python. No other candidates mention Python.\n\n:::conclusion\nI recommend **[Rajiv Patel](cv:cv_417c5872)** as the only candidate with explicitly stated Python experience.\n:::",
+            "thinking": "The user is asking for candidates with Python experience. I need to scan the CVs for explicit mentions of \"Python\" and rank candidates based on the context of its use (e.g., programming, scripting, data analysis). I will provide the top 3 candidates.",
+            "analysis": "| Candidate | Skills | Experience | Match |",
+            "table_data": null,
+            "conclusion": "I recommend **[Rajiv Patel](cv:cv_417c5872)** as the only candidate with explicitly stated Python experience.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "search",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": {
+              "results": [
+                {
+                  "candidate_name": " Javier Chen ",
+                  "cv_id": "cv_e00e97d4",
+                  "match_score": 78.2,
+                  "matching_skills": [],
+                  "experience_years": 6.0,
+                  "current_role": "toward sustainable performance. Patient in",
+                  "relevance_reason": "6+ years exp"
+                },
+                {
+                  "candidate_name": " Sofia Rodriguez ",
+                  "cv_id": "cv_6bcc8c77",
+                  "match_score": 77.9,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "Summa Cum Laude",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Erik Johansson  Teacher",
+                  "cv_id": "cv_f7eee0fe",
+                  "match_score": 77.6,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "providing one",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Pierre Dubois ",
+                  "cv_id": "cv_6b20e01c",
+                  "match_score": 77.1,
+                  "matching_skills": [],
+                  "experience_years": 3.0,
+                  "current_role": "Supported 200+ students in mathematics and literacy.",
+                  "relevance_reason": "3+ years exp"
+                },
+                {
+                  "candidate_name": " Farid Al-Mansoori ",
+                  "cv_id": "cv_dc239d26",
+                  "match_score": 76.9,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Rajesh Kumar  ESL",
+                  "cv_id": "cv_1d56ed8d",
+                  "match_score": 76.9,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Valentina Fernandez  Teaching",
+                  "cv_id": "cv_aa3cde72",
+                  "match_score": 76.5,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Isabella Vargas  ESL",
+                  "cv_id": "cv_6268602e",
+                  "match_score": 76.1,
+                  "matching_skills": [],
+                  "experience_years": 3.0,
+                  "current_role": "",
+                  "relevance_reason": "3+ years exp"
+                },
+                {
+                  "candidate_name": " Hana Park  Vice",
+                  "cv_id": "cv_b0c609e3",
+                  "match_score": 75.4,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": " students.",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " María López  Student",
+                  "cv_id": "cv_8e0ce868",
+                  "match_score": 75.3,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "environments. Organized and collaborative, I",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Kwame van der Berg  Academic",
+                  "cv_id": "cv_f0447b07",
+                  "match_score": 49.6,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Priya Patel  Career",
+                  "cv_id": "cv_37489ff8",
+                  "match_score": 49.3,
+                  "matching_skills": [],
+                  "experience_years": 17.0,
+                  "current_role": "",
+                  "relevance_reason": "17+ years exp"
+                },
+                {
+                  "candidate_name": " Layla Al-Mansoor  Assistant",
+                  "cv_id": "cv_0856582a",
+                  "match_score": 49.0,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "environments. Known for patience",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Rajiv Patel ",
+                  "cv_id": "cv_417c5872",
+                  "match_score": 48.1,
+                  "matching_skills": [],
+                  "experience_years": 11.0,
+                  "current_role": "",
+                  "relevance_reason": "11+ years exp"
+                }
+              ],
+              "query_terms": [
+                "python"
+              ],
+              "total_candidates": 14
+            },
+            "total_results": 14,
+            "query": "Who has experience with Python?",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T19:15:01.593994"
+        },
+        {
+          "id": "8c25efd7-649f-44d2-90d0-8abc901b0467",
+          "role": "user",
+          "content": "Give me the full profile of Pierre Dubois Tutor",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T19:17:04.772963"
+        },
+        {
+          "id": "551caf82-609e-493f-b417-660b667545de",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the full profile of Pierre Dubois (cv_6b20e01c). I need to extract the current role, total experience, career trajectory, skills, credentials, and risk assessment from the provided CV.\n:::\n\nPierre Dubois is currently the Head of Tutoring Services at Global Learning Hub (2020-Present), where he strategically leads a multinational tutoring network. With over 25 years of experience in education, he has consistently demonstrated his ability to enhance student performance and satisfaction through personalized learning pathways and effective team management.\n\n\n:::conclusion\n**Overall Assessment:** **[Pierre Dubois](cv:cv_6b20e01c)** is a seasoned educator with over 25 years of experience, currently leading a multinational tutoring network. His career trajectory shows consistent progression and a strong focus on improving student outcomes. **Key Strengths:** - Current role as Head of Tutoring Services, demonstrating leadership and strategic skills. - Proven ability to scale student enrollment and maintain high satisfaction ratings. - Extensive experience in curriculum design, online teaching platforms, and student assessment. **Areas to Explore:** No significant concerns identified. appears to have a stable career trajectory.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_6b20e01c",
+              "filename": "757becdd__Pierre_Dubois__Tutor.pdf"
+            },
+            {
+              "cv_id": "cv_b0c609e3",
+              "filename": "40b3d301__Hana_Park__Vice_Dean.pdf"
+            },
+            {
+              "cv_id": "cv_dc239d26",
+              "filename": "76724e1a__Farid_Al-Mansoori__Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_f7eee0fe",
+              "filename": "38726cfe__Erik_Johansson__Teacher_Aide.pdf"
+            },
+            {
+              "cv_id": "cv_f0447b07",
+              "filename": "19051168__Kwame_van_der_Berg__Academic_Advisor.pdf"
+            },
+            {
+              "cv_id": "cv_6bcc8c77",
+              "filename": "d5dbc68c__Sofia_Rodriguez__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_417c5872",
+              "filename": "f94b3d4f__Rajiv_Patel__Professor.pdf"
+            },
+            {
+              "cv_id": "cv_0856582a",
+              "filename": "d7c4ea07__Layla_Al-Mansoor__Assistant_Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_37489ff8",
+              "filename": "d8a170db__Priya_Patel__Career_Coach.pdf"
+            },
+            {
+              "cv_id": "cv_e00e97d4",
+              "filename": "ebf8ece3__Javier_Chen__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_1d56ed8d",
+              "filename": "972db8df__Rajesh_Kumar__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_6268602e",
+              "filename": "c5eb0518__Isabella_Vargas__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_8e0ce868",
+              "filename": "549e73f9__María_López__Student_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_aa3cde72",
+              "filename": "bd63b116__Valentina_Fernandez__Teaching_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_caa08878",
+              "filename": "b58cdb31__Aisha_Hassan__Substitute_Teacher.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 0.63,
+              "details": "Query type: general"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 17.73,
+              "details": "Found 27 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 23844.65,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6091.38,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Pierre Dubois is currently the Head of Tutoring Services at Global Learning Hub (2020-Present), where he strategically leads a multinational tutoring network. With over 25 years of experience in education, he has consistently demonstrated his ability to enhance student performance and satisfaction through personalized learning pathways and effective team management.",
+            "raw_content": ":::thinking\nThe user is asking for the full profile of **[Pierre Dubois](cv:cv_6b20e01c)**. I need to extract the current role, total experience, career trajectory, skills, credentials, and risk assessment from the provided CV.\n:::\n\n## 👤 **[Pierre Dubois](cv:cv_6b20e01c)**\n\n**[Pierre Dubois](cv:cv_6b20e01c)** is currently the Head of Tutoring Services at Global Learning Hub (2020-Present), where he strategically leads a multinational tutoring network. With over 25 years of experience in education, he has consistently demonstrated his ability to enhance student performance and satisfaction through personalized learning pathways and effective team management.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Head of Tutoring Services at Global Learning Hub (2020-Present) |\n| **⏱️ Total Experience** | 25+ years in education |\n| **🏆 Top Achievement** | Scaled student enrollment by 150% while maintaining a 95% satisfaction rating. |\n| **💡 Core Expertise** | Curriculum Design, Online Teaching Platforms, Student Assessment |\n| **🎓 Education** | Master of Education, Sorbonne University, 2015 |\n\n---\n\n### 💼 Career Trajectory\n\n**Head of Tutoring Services** — *Global Learning Hub* (2020 - Present)\n→ Scaled student enrollment by 150% while maintaining a 95% satisfaction rating.\n\n**Director of Learning** — *EducateFirst Academy* (2015 - 2020)\n→ Launched a hybrid tutoring model that combined in-person and virtual sessions, boosting retention by 35%.\n\n**Tutor** — *BrightMinds Tutoring* (2010 - 2015)\n→ Achieved a 98% pass rate for exam preparation programs.\n\n**Tutor** — *Learn&Grow Center* (2005 - 2010)\n→ Developed customized study plans that improved student grades by an average of 1.5 letters.\n\n**Junior Tutor** — *Community Youth Center* (1998 - 2005)\n→ Supported 200+ students in mathematics and literacy.\n\n**Classroom Assistant** — *École Primaire Saint-Louis* (1995 - 1998)\n→ Assisted teachers with classroom management and instructional support.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **Curriculum** | Design | 8/10 |\n| **Online Teaching** | Platforms | 8/10 |\n| **Student** | Assessment | 9/10 |\n\n---\n\n### Credentials\n\n- Certified Teacher (TEFL), International TEFL Academy, 2012\n- Instructional Design Certificate, eLearning Guild, 2018\n- Educational Psychology, University of Paris, 2004\n\n---\n\n### Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| **🚩 Red Flags** | ✅ None Detected | Clean profile |\n| **🔄 Job Hopping** | ⚡ Moderate | Score: 33%, Avg tenure: 4.17 yrs |\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n| **📊 Stability** | ⚡ Moderate | 6 positions over 25 years |\n| **🎯 Experience** | High | Supported 200+ students in mathematics and literacy. @ across diverse subjects. Known for patience, |\n\n---\n\n:::conclusion\n**Overall Assessment:** **[Pierre Dubois](cv:cv_6b20e01c)** is a seasoned educator with over 25 years of experience, currently leading a multinational tutoring network. His career trajectory shows consistent progression and a strong focus on improving student outcomes.\n\n**Key Strengths:**\n- Current role as Head of Tutoring Services, demonstrating leadership and strategic skills.\n- Proven ability to scale student enrollment and maintain high satisfaction ratings.\n- Extensive experience in curriculum design, online teaching platforms, and student assessment.\n\n**Areas to Explore:**\nNo significant concerns identified. **[Pierre Dubois](cv:cv_6b20e01c)** appears to have a stable career trajectory.\n:::",
+            "thinking": "The user is asking for the full profile of Pierre Dubois (cv_6b20e01c). I need to extract the current role, total experience, career trajectory, skills, credentials, and risk assessment from the provided CV.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "**Overall Assessment:** **[Pierre Dubois](cv:cv_6b20e01c)** is a seasoned educator with over 25 years of experience, currently leading a multinational tutoring network. His career trajectory shows consistent progression and a strong focus on improving student outcomes. **Key Strengths:** - Current role as Head of Tutoring Services, demonstrating leadership and strategic skills. - Proven ability to scale student enrollment and maintain high satisfaction ratings. - Extensive experience in curriculum design, online teaching platforms, and student assessment. **Areas to Explore:** No significant concerns identified. appears to have a stable career trajectory.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Pierre Dubois ",
+              "cv_id": "cv_6b20e01c",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "✅ None Detected",
+                  "details": "Clean profile",
+                  "status_icon": "✅",
+                  "status_text": "None Detected"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "⚡ Moderate",
+                  "details": "Score: 33%, Avg tenure: 1.5 yrs",
+                  "status_icon": "⚡",
+                  "status_text": "Moderate"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "⚡ Moderate",
+                  "details": "2 positions over 3 years",
+                  "status_icon": "⚡",
+                  "status_text": "Moderate"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Mid",
+                  "details": "Supported 200+ students in mathematics and literacy. @ across diverse subjects. Known for patience,",
+                  "status_icon": "",
+                  "status_text": "Mid"
+                }
+              ],
+              "has_issues": false,
+              "overall_risk": "moderate",
+              "analysis_text": "** Pierre Dubois ** shows a **moderate risk profile**. The job hopping score of 33% with an average tenure of 1.5 years suggests some mobility in their career. With 2 positions over 3 years, there may be concerns about long-term retention that should be explored in interviews.",
+              "metrics": {
+                "job_hopping_score": 0.3333333333333333,
+                "avg_tenure_years": 1.5,
+                "total_experience_years": 3.0,
+                "employment_gaps_count": 0,
+                "position_count": 2
+              }
+            },
+            "structure_type": "single_candidate",
+            "single_candidate_data": {
+              "candidate_name": " Pierre Dubois ",
+              "cv_id": "cv_6b20e01c",
+              "summary": "Pierre Dubois is currently the Head of Tutoring Services at Global Learning Hub (2020-Present), where he strategically leads a multinational tutoring network. With over 25 years of experience in education, he has consistently demonstrated his ability to enhance student performance and satisfaction through personalized learning pathways and effective team management.",
+              "highlights": [
+                {
+                  "category": "🎯 Current Role",
+                  "value": "Head of Tutoring Services at Global Learning Hub (2020-Present)"
+                },
+                {
+                  "category": "⏱️ Total Experience",
+                  "value": "25+ years in education"
+                },
+                {
+                  "category": "🏆 Top Achievement",
+                  "value": "Scaled student enrollment by 150% while maintaining a 95% satisfaction rating."
+                },
+                {
+                  "category": "💡 Core Expertise",
+                  "value": "Curriculum Design, Online Teaching Platforms, Student Assessment"
+                },
+                {
+                  "category": "🎓 Education",
+                  "value": "Master of Education, Sorbonne University, 2015"
+                }
+              ],
+              "career": [
+                {
+                  "title": "Head of Tutoring Services",
+                  "company": "Global Learning Hub",
+                  "dates": "2020 - Present",
+                  "achievement": "Scaled student enrollment by 150% while maintaining a 95% satisfaction rating."
+                },
+                {
+                  "title": "Director of Learning",
+                  "company": "EducateFirst Academy",
+                  "dates": "2015 - 2020",
+                  "achievement": "Launched a hybrid tutoring model that combined in-person and virtual sessions, boosting retention by 35%."
+                },
+                {
+                  "title": "Tutor",
+                  "company": "BrightMinds Tutoring",
+                  "dates": "2010 - 2015",
+                  "achievement": "Achieved a 98% pass rate for exam preparation programs."
+                },
+                {
+                  "title": "Tutor",
+                  "company": "Learn&Grow Center",
+                  "dates": "2005 - 2010",
+                  "achievement": "Developed customized study plans that improved student grades by an average of 1.5 letters."
+                },
+                {
+                  "title": "Junior Tutor",
+                  "company": "Community Youth Center",
+                  "dates": "1998 - 2005",
+                  "achievement": "Supported 200+ students in mathematics and literacy."
+                },
+                {
+                  "title": "Classroom Assistant",
+                  "company": "École Primaire Saint-Louis",
+                  "dates": "1995 - 1998",
+                  "achievement": "Assisted teachers with classroom management and instructional support."
+                }
+              ],
+              "skills": [
+                {
+                  "area": "Curriculum",
+                  "details": "Design",
+                  "level": "8/10"
+                },
+                {
+                  "area": "Online Teaching",
+                  "details": "Platforms",
+                  "level": "8/10"
+                },
+                {
+                  "area": "Student",
+                  "details": "Assessment",
+                  "level": "9/10"
+                }
+              ],
+              "credentials": [
+                "Certified Teacher (TEFL), International TEFL Academy, 2012",
+                "Instructional Design Certificate, eLearning Guild, 2018",
+                "Educational Psychology, University of Paris, 2004"
+              ],
+              "risk_table": {
+                "candidate_name": " Pierre Dubois ",
+                "cv_id": "cv_6b20e01c",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "✅ None Detected",
+                    "details": "Clean profile",
+                    "status_icon": "✅",
+                    "status_text": "None Detected"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "⚡ Moderate",
+                    "details": "Score: 33%, Avg tenure: 1.5 yrs",
+                    "status_icon": "⚡",
+                    "status_text": "Moderate"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "⚡ Moderate",
+                    "details": "2 positions over 3 years",
+                    "status_icon": "⚡",
+                    "status_text": "Moderate"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Mid",
+                    "details": "Supported 200+ students in mathematics and literacy. @ across diverse subjects. Known for patience,",
+                    "status_icon": "",
+                    "status_text": "Mid"
+                  }
+                ],
+                "has_issues": false,
+                "overall_risk": "moderate",
+                "analysis_text": "** Pierre Dubois ** shows a **moderate risk profile**. The job hopping score of 33% with an average tenure of 1.5 years suggests some mobility in their career. With 2 positions over 3 years, there may be concerns about long-term retention that should be explored in interviews.",
+                "metrics": {
+                  "job_hopping_score": 0.3333333333333333,
+                  "avg_tenure_years": 1.5,
+                  "total_experience_years": 3.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 2
+                }
+              },
+              "conclusion": "**Overall Assessment:** **[Pierre Dubois](cv:cv_6b20e01c)** is a seasoned educator with over 25 years of experience, currently leading a multinational tutoring network. His career trajectory shows consistent progression and a strong focus on improving student outcomes. **Key Strengths:** - Current role as Head of Tutoring Services, demonstrating leadership and strategic skills. - Proven ability to scale student enrollment and maintain high satisfaction ratings. - Extensive experience in curriculum design, online teaching platforms, and student assessment. **Areas to Explore:** No significant concerns identified. appears to have a stable career trajectory."
+            },
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T19:17:38.031409"
+        },
+        {
+          "id": "f6456dbf-1c68-484f-a8fa-be1ee312f7ff",
+          "role": "user",
+          "content": "Job stability analysis for Pierre Dubois Tutor",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T20:36:01.785588"
+        },
+        {
+          "id": "4bc374b3-131c-432b-b05a-267f80c70a42",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a job stability analysis of Pierre Dubois (cv_6b20e01c). I need to extract his current role, total experience, career trajectory, skills, credentials, and risk assessment from the provided CVs. I will focus on job hopping, employment gaps, and overall stability.\n:::\n\nPierre Dubois is currently the Head of Tutoring Services at Global Learning Hub (2020-Present), where he strategically leads a multinational tutoring network. With over 25 years of experience in education, he has consistently demonstrated his ability to enhance student performance and satisfaction through personalized learning pathways and effective team management.\n\n\n:::conclusion\n**Overall Assessment:** **[Pierre Dubois](cv:cv_6b20e01c)** is a seasoned educator with over 25 years of experience, currently leading a multinational tutoring network. His career trajectory shows consistent progression and a strong focus on improving student outcomes. **Key Strengths:** - Current role as Head of Tutoring Services, demonstrating leadership and strategic skills. - Proven ability to scale student enrollment and maintain high satisfaction ratings. - Extensive experience in curriculum design, online teaching platforms, and student assessment. **Areas to Explore:** No significant concerns identified. appears to have a stable career trajectory.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_b0c609e3",
+              "filename": "40b3d301__Hana_Park__Vice_Dean.pdf"
+            },
+            {
+              "cv_id": "cv_f0447b07",
+              "filename": "19051168__Kwame_van_der_Berg__Academic_Advisor.pdf"
+            },
+            {
+              "cv_id": "cv_aa3cde72",
+              "filename": "bd63b116__Valentina_Fernandez__Teaching_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_6b20e01c",
+              "filename": "757becdd__Pierre_Dubois__Tutor.pdf"
+            },
+            {
+              "cv_id": "cv_e00e97d4",
+              "filename": "ebf8ece3__Javier_Chen__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_dc239d26",
+              "filename": "76724e1a__Farid_Al-Mansoori__Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_6bcc8c77",
+              "filename": "d5dbc68c__Sofia_Rodriguez__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_f7eee0fe",
+              "filename": "38726cfe__Erik_Johansson__Teacher_Aide.pdf"
+            },
+            {
+              "cv_id": "cv_0856582a",
+              "filename": "d7c4ea07__Layla_Al-Mansoor__Assistant_Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_8e0ce868",
+              "filename": "549e73f9__María_López__Student_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_6268602e",
+              "filename": "c5eb0518__Isabella_Vargas__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_417c5872",
+              "filename": "f94b3d4f__Rajiv_Patel__Professor.pdf"
+            },
+            {
+              "cv_id": "cv_37489ff8",
+              "filename": "d8a170db__Priya_Patel__Career_Coach.pdf"
+            },
+            {
+              "cv_id": "cv_1d56ed8d",
+              "filename": "972db8df__Rajesh_Kumar__ESL_Teacher.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 5.13,
+              "details": "Query type: general"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 23.48,
+              "details": "Found 27 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 13760.18,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5487.35,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Pierre Dubois is currently the Head of Tutoring Services at Global Learning Hub (2020-Present), where he strategically leads a multinational tutoring network. With over 25 years of experience in education, he has consistently demonstrated his ability to enhance student performance and satisfaction through personalized learning pathways and effective team management.",
+            "raw_content": ":::thinking\nThe user is asking for a job stability analysis of **[Pierre Dubois](cv:cv_6b20e01c)**. I need to extract his current role, total experience, career trajectory, skills, credentials, and risk assessment from the provided CVs. I will focus on job hopping, employment gaps, and overall stability.\n:::\n\n## 👤 **[Pierre Dubois](cv:cv_6b20e01c)**\n\n**[Pierre Dubois](cv:cv_6b20e01c)** is currently the Head of Tutoring Services at Global Learning Hub (2020-Present), where he strategically leads a multinational tutoring network. With over 25 years of experience in education, he has consistently demonstrated his ability to enhance student performance and satisfaction through personalized learning pathways and effective team management.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Head of Tutoring Services at Global Learning Hub (2020-Present) |\n| **⏱️ Total Experience** | 28+ years in education |\n| **🏆 Top Achievement** | Scaled student enrollment by 150% while maintaining a 95% satisfaction rating. |\n| **💡 Core Expertise** | Student Assessment, Online Teaching Platforms, Curriculum Design |\n| **🎓 Education** | Master of Education, Sorbonne University, 2015 |\n\n---\n\n### 💼 Career Trajectory\n\n**Head of Tutoring Services** — *Global Learning Hub* (2020-Present)\n→ Scaled student enrollment by 150% while maintaining a 95% satisfaction rating.\n\n**Director of Learning** — *EducateFirst Academy* (2015-2020)\n→ Launched a hybrid tutoring model that combined in-person and virtual sessions, boosting retention by 35%.\n\n**Tutor** — *BrightMinds Tutoring* (2010-2015)\n→ Achieved a 98% pass rate for exam preparation programs.\n\n**Tutor** — *Learn&Grow Center* (2005-2010)\n→ Developed customized study plans that improved student grades by an average of 1.5 letters.\n\n**Junior Tutor** — *Community Youth Center* (1998-2005)\n→ Supported 200+ students in mathematics and literacy.\n\n**Classroom Assistant** — *École Primaire Saint-Louis* (1995-1998)\n→ Assisted teachers with classroom management and instructional support.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **Curriculum** | Curriculum Design | 8/10 |\n| **Online Teaching** | Online Teaching Platforms | 8/10 |\n| **Student** | Student Assessment | 9/10 |\n\n---\n\n### Credentials\n\n- Certified Teacher (TEFL), 2012\n- Instructional Design Certificate, 2018\n- Educational Psychology, 2004\n\n---\n\n### Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| **🚩 Red Flags** | ✅ None Detected | Clean profile |\n| **🔄 Job Hopping** | ✅ Low | Score: 0%, Avg tenure: 5.0 yrs |\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n| **📊 Stability** | ✅ Stable | 7 positions over 28 years |\n| **🎯 Experience** | Senior | Head of Tutoring Services @ Global Learning Hub |\n\n---\n\n:::conclusion\n**Overall Assessment:** **[Pierre Dubois](cv:cv_6b20e01c)** is a seasoned educator with over 25 years of experience, currently leading a multinational tutoring network. His career trajectory shows consistent progression and a strong focus on improving student outcomes.\n\n**Key Strengths:**\n- Current role as Head of Tutoring Services, demonstrating leadership and strategic skills.\n- Proven ability to scale student enrollment and maintain high satisfaction ratings.\n- Extensive experience in curriculum design, online teaching platforms, and student assessment.\n\n**Areas to Explore:**\nNo significant concerns identified. **[Pierre Dubois](cv:cv_6b20e01c)** appears to have a stable career trajectory.\n:::",
+            "thinking": "The user is asking for a job stability analysis of Pierre Dubois (cv_6b20e01c). I need to extract his current role, total experience, career trajectory, skills, credentials, and risk assessment from the provided CVs. I will focus on job hopping, employment gaps, and overall stability.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "**Overall Assessment:** **[Pierre Dubois](cv:cv_6b20e01c)** is a seasoned educator with over 25 years of experience, currently leading a multinational tutoring network. His career trajectory shows consistent progression and a strong focus on improving student outcomes. **Key Strengths:** - Current role as Head of Tutoring Services, demonstrating leadership and strategic skills. - Proven ability to scale student enrollment and maintain high satisfaction ratings. - Extensive experience in curriculum design, online teaching platforms, and student assessment. **Areas to Explore:** No significant concerns identified. appears to have a stable career trajectory.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Pierre Dubois ",
+              "cv_id": "cv_b0c609e3",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "⚠️ Issues Found",
+                  "details": "Moderate concerns",
+                  "status_icon": "⚠️",
+                  "status_text": "Issues Found"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "✅ Low",
+                  "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                  "status_icon": "✅",
+                  "status_text": "Low"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "✅ Stable",
+                  "details": "1 positions over 0 years",
+                  "status_icon": "✅",
+                  "status_text": "Stable"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Entry",
+                  "details": " students. @ udemy.com/user/hanapark",
+                  "status_icon": "",
+                  "status_text": "Entry"
+                }
+              ],
+              "has_issues": true,
+              "overall_risk": "moderate",
+              "analysis_text": "** Pierre Dubois ** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+              "metrics": {
+                "job_hopping_score": 0.0,
+                "avg_tenure_years": 0.0,
+                "total_experience_years": 0.0,
+                "employment_gaps_count": 0,
+                "position_count": 1
+              }
+            },
+            "structure_type": "single_candidate",
+            "single_candidate_data": {
+              "candidate_name": " Pierre Dubois ",
+              "cv_id": "cv_b0c609e3",
+              "summary": "Pierre Dubois is currently the Head of Tutoring Services at Global Learning Hub (2020-Present), where he strategically leads a multinational tutoring network. With over 25 years of experience in education, he has consistently demonstrated his ability to enhance student performance and satisfaction through personalized learning pathways and effective team management.",
+              "highlights": [
+                {
+                  "category": "🎯 Current Role",
+                  "value": "Head of Tutoring Services at Global Learning Hub (2020-Present)"
+                },
+                {
+                  "category": "⏱️ Total Experience",
+                  "value": "28+ years in education"
+                },
+                {
+                  "category": "🏆 Top Achievement",
+                  "value": "Scaled student enrollment by 150% while maintaining a 95% satisfaction rating."
+                },
+                {
+                  "category": "💡 Core Expertise",
+                  "value": "Student Assessment, Online Teaching Platforms, Curriculum Design"
+                },
+                {
+                  "category": "🎓 Education",
+                  "value": "Master of Education, Sorbonne University, 2015"
+                }
+              ],
+              "career": [
+                {
+                  "title": "Head of Tutoring Services",
+                  "company": "Global Learning Hub",
+                  "dates": "2020-Present",
+                  "achievement": "Scaled student enrollment by 150% while maintaining a 95% satisfaction rating."
+                },
+                {
+                  "title": "Director of Learning",
+                  "company": "EducateFirst Academy",
+                  "dates": "2015-2020",
+                  "achievement": "Launched a hybrid tutoring model that combined in-person and virtual sessions, boosting retention by 35%."
+                },
+                {
+                  "title": "Tutor",
+                  "company": "BrightMinds Tutoring",
+                  "dates": "2010-2015",
+                  "achievement": "Achieved a 98% pass rate for exam preparation programs."
+                },
+                {
+                  "title": "Tutor",
+                  "company": "Learn&Grow Center",
+                  "dates": "2005-2010",
+                  "achievement": "Developed customized study plans that improved student grades by an average of 1.5 letters."
+                },
+                {
+                  "title": "Junior Tutor",
+                  "company": "Community Youth Center",
+                  "dates": "1998-2005",
+                  "achievement": "Supported 200+ students in mathematics and literacy."
+                },
+                {
+                  "title": "Classroom Assistant",
+                  "company": "École Primaire Saint-Louis",
+                  "dates": "1995-1998",
+                  "achievement": "Assisted teachers with classroom management and instructional support."
+                }
+              ],
+              "skills": [
+                {
+                  "area": "Curriculum",
+                  "details": "Curriculum Design",
+                  "level": "8/10"
+                },
+                {
+                  "area": "Online Teaching",
+                  "details": "Online Teaching Platforms",
+                  "level": "8/10"
+                },
+                {
+                  "area": "Student",
+                  "details": "Student Assessment",
+                  "level": "9/10"
+                }
+              ],
+              "credentials": [
+                "Certified Teacher (TEFL), 2012",
+                "Instructional Design Certificate, 2018",
+                "Educational Psychology, 2004"
+              ],
+              "risk_table": {
+                "candidate_name": " Pierre Dubois ",
+                "cv_id": "cv_b0c609e3",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "⚠️ Issues Found",
+                    "details": "Moderate concerns",
+                    "status_icon": "⚠️",
+                    "status_text": "Issues Found"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "✅ Low",
+                    "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                    "status_icon": "✅",
+                    "status_text": "Low"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "✅ Stable",
+                    "details": "1 positions over 0 years",
+                    "status_icon": "✅",
+                    "status_text": "Stable"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Entry",
+                    "details": " students. @ udemy.com/user/hanapark",
+                    "status_icon": "",
+                    "status_text": "Entry"
+                  }
+                ],
+                "has_issues": true,
+                "overall_risk": "moderate",
+                "analysis_text": "** Pierre Dubois ** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+                "metrics": {
+                  "job_hopping_score": 0.0,
+                  "avg_tenure_years": 0.0,
+                  "total_experience_years": 0.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 1
+                }
+              },
+              "conclusion": "**Overall Assessment:** **[Pierre Dubois](cv:cv_6b20e01c)** is a seasoned educator with over 25 years of experience, currently leading a multinational tutoring network. His career trajectory shows consistent progression and a strong focus on improving student outcomes. **Key Strengths:** - Current role as Head of Tutoring Services, demonstrating leadership and strategic skills. - Proven ability to scale student enrollment and maintain high satisfaction ratings. - Extensive experience in curriculum design, online teaching platforms, and student assessment. **Areas to Explore:** No significant concerns identified. appears to have a stable career trajectory."
+            },
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T20:36:25.752300"
+        },
+        {
+          "id": "f3728546-ed4d-48fe-a632-0251ab2d0e8b",
+          "role": "user",
+          "content": "Who has experience with Python?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T20:36:58.328793"
+        },
+        {
+          "id": "15a97d97-c96f-4b98-99fd-b6a0cc216349",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for candidates with Python experience. I need to scan the CVs for explicit mentions of \"Python\" and rank candidates based on the context of its use (e.g., programming, scripting, data analysis). I will provide the top 3 candidates.\n:::\n\n\n:::conclusion\nI recommend **[Rajiv Patel](cv:cv_417c5872)** as the only candidate with explicitly stated Python experience.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_f7eee0fe",
+              "filename": "38726cfe__Erik_Johansson__Teacher_Aide.pdf"
+            },
+            {
+              "cv_id": "cv_e00e97d4",
+              "filename": "ebf8ece3__Javier_Chen__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_b0c609e3",
+              "filename": "40b3d301__Hana_Park__Vice_Dean.pdf"
+            },
+            {
+              "cv_id": "cv_6268602e",
+              "filename": "c5eb0518__Isabella_Vargas__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_0856582a",
+              "filename": "d7c4ea07__Layla_Al-Mansoor__Assistant_Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_dc239d26",
+              "filename": "76724e1a__Farid_Al-Mansoori__Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_37489ff8",
+              "filename": "d8a170db__Priya_Patel__Career_Coach.pdf"
+            },
+            {
+              "cv_id": "cv_f0447b07",
+              "filename": "19051168__Kwame_van_der_Berg__Academic_Advisor.pdf"
+            },
+            {
+              "cv_id": "cv_6bcc8c77",
+              "filename": "d5dbc68c__Sofia_Rodriguez__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_6b20e01c",
+              "filename": "757becdd__Pierre_Dubois__Tutor.pdf"
+            },
+            {
+              "cv_id": "cv_417c5872",
+              "filename": "f94b3d4f__Rajiv_Patel__Professor.pdf"
+            },
+            {
+              "cv_id": "cv_aa3cde72",
+              "filename": "bd63b116__Valentina_Fernandez__Teaching_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_1d56ed8d",
+              "filename": "972db8df__Rajesh_Kumar__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_caa08878",
+              "filename": "b58cdb31__Aisha_Hassan__Substitute_Teacher.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 0.42,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 17.13,
+              "details": "Found 21 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 20796.6,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 2462.85,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for candidates with Python experience. I need to scan the CVs for explicit mentions of \"Python\" and rank candidates based on the context of its use (e.g., programming, scripting, data analysis). I will provide the top 3 candidates.\n:::\n\nOnly one candidate, **[Rajiv Patel](cv:cv_417c5872)**, explicitly mentions Python. Therefore, I will present **[Rajiv Patel](cv:cv_417c5872)** as the sole candidate with Python experience.\n\n### Analysis\nThe analysis focuses on identifying candidates with explicit mentions of \"Python.\" **[Rajiv Patel](cv:cv_417c5872)** is the only candidate whose CV explicitly mentions \"Python Programming,\" making him the sole match.\n\n| Candidate | Skills | Experience | Match |\n|-----------|--------|------------|-------|\n| **[Rajiv Patel](cv:cv_417c5872)** | Python Programming | Delivered foundational courses in Computer Science | ⭐⭐⭐⭐⭐ |\n\n:::conclusion\nI recommend **[Rajiv Patel](cv:cv_417c5872)** as the only candidate with explicitly stated Python experience.\n:::",
+            "thinking": "The user is asking for candidates with Python experience. I need to scan the CVs for explicit mentions of \"Python\" and rank candidates based on the context of its use (e.g., programming, scripting, data analysis). I will provide the top 3 candidates.",
+            "analysis": "The analysis focuses on identifying candidates with explicit mentions of \"Python.\" **[Rajiv Patel](cv:cv_417c5872)** is the only candidate whose CV explicitly mentions \"Python Programming,\" making him the sole match.",
+            "table_data": null,
+            "conclusion": "I recommend **[Rajiv Patel](cv:cv_417c5872)** as the only candidate with explicitly stated Python experience.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "search",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": {
+              "results": [
+                {
+                  "candidate_name": " Javier Chen ",
+                  "cv_id": "cv_e00e97d4",
+                  "match_score": 77.3,
+                  "matching_skills": [],
+                  "experience_years": 6.0,
+                  "current_role": "toward sustainable performance. Patient in",
+                  "relevance_reason": "6+ years exp"
+                },
+                {
+                  "candidate_name": " Pierre Dubois ",
+                  "cv_id": "cv_6b20e01c",
+                  "match_score": 76.6,
+                  "matching_skills": [],
+                  "experience_years": 3.0,
+                  "current_role": "Supported 200+ students in mathematics and literacy.",
+                  "relevance_reason": "3+ years exp"
+                },
+                {
+                  "candidate_name": " Erik Johansson  Teacher",
+                  "cv_id": "cv_f7eee0fe",
+                  "match_score": 76.0,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "providing one",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Farid Al-Mansoori ",
+                  "cv_id": "cv_dc239d26",
+                  "match_score": 75.7,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "development, publishing findings in high",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Valentina Fernandez  Teaching",
+                  "cv_id": "cv_aa3cde72",
+                  "match_score": 75.2,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Sofia Rodriguez ",
+                  "cv_id": "cv_6bcc8c77",
+                  "match_score": 75.1,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "Summa Cum Laude",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Isabella Vargas  ESL",
+                  "cv_id": "cv_6268602e",
+                  "match_score": 74.0,
+                  "matching_skills": [],
+                  "experience_years": 3.0,
+                  "current_role": "",
+                  "relevance_reason": "3+ years exp"
+                },
+                {
+                  "candidate_name": " Hana Park  Vice",
+                  "cv_id": "cv_b0c609e3",
+                  "match_score": 73.9,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": " students.",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Aisha Hassan  Substitute",
+                  "cv_id": "cv_caa08878",
+                  "match_score": 73.4,
+                  "matching_skills": [],
+                  "experience_years": 1.0,
+                  "current_role": "delivering engaging instruction across diverse",
+                  "relevance_reason": "1+ years exp"
+                },
+                {
+                  "candidate_name": " Layla Al-Mansoor  Assistant",
+                  "cv_id": "cv_0856582a",
+                  "match_score": 73.3,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "environments. Known for patience",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Kwame van der Berg  Academic",
+                  "cv_id": "cv_f0447b07",
+                  "match_score": 49.6,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Priya Patel  Career",
+                  "cv_id": "cv_37489ff8",
+                  "match_score": 49.3,
+                  "matching_skills": [],
+                  "experience_years": 17.0,
+                  "current_role": "",
+                  "relevance_reason": "17+ years exp"
+                },
+                {
+                  "candidate_name": " Rajiv Patel ",
+                  "cv_id": "cv_417c5872",
+                  "match_score": 48.1,
+                  "matching_skills": [],
+                  "experience_years": 11.0,
+                  "current_role": "",
+                  "relevance_reason": "11+ years exp"
+                },
+                {
+                  "candidate_name": " Rajesh Kumar  ESL",
+                  "cv_id": "cv_1d56ed8d",
+                  "match_score": 43.5,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "",
+                  "relevance_reason": "Profile match"
+                }
+              ],
+              "query_terms": [
+                "python"
+              ],
+              "total_candidates": 14
+            },
+            "total_results": 14,
+            "query": "Who has experience with Python?",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T20:37:24.397194"
+        },
+        {
+          "id": "b69dc806-c9ab-417e-a2bb-ce4dae95e23d",
+          "role": "user",
+          "content": "How many years of experience do they have with Python?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T20:37:46.530919"
+        },
+        {
+          "id": "5909f929-25e0-4f88-933f-99bedf84728a",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking how many years of experience the candidates have with Python. I need to scan the CVs for explicit mentions of \"Python\" and the duration of that experience. If the duration isn't explicitly stated, I'll look for project durations or job tenures where Python was used.\n:::\n\n\n:::conclusion\nI recommend **[Rajiv Patel](cv:cv_417c5872)** as the only candidate with explicitly stated Python experience, within the context of a 2-year role.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_6bcc8c77",
+              "filename": "d5dbc68c__Sofia_Rodriguez__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_417c5872",
+              "filename": "f94b3d4f__Rajiv_Patel__Professor.pdf"
+            },
+            {
+              "cv_id": "cv_f0447b07",
+              "filename": "19051168__Kwame_van_der_Berg__Academic_Advisor.pdf"
+            },
+            {
+              "cv_id": "cv_dc239d26",
+              "filename": "76724e1a__Farid_Al-Mansoori__Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_0856582a",
+              "filename": "d7c4ea07__Layla_Al-Mansoor__Assistant_Lecturer.pdf"
+            },
+            {
+              "cv_id": "cv_f7eee0fe",
+              "filename": "38726cfe__Erik_Johansson__Teacher_Aide.pdf"
+            },
+            {
+              "cv_id": "cv_e00e97d4",
+              "filename": "ebf8ece3__Javier_Chen__Coach.pdf"
+            },
+            {
+              "cv_id": "cv_37489ff8",
+              "filename": "d8a170db__Priya_Patel__Career_Coach.pdf"
+            },
+            {
+              "cv_id": "cv_6b20e01c",
+              "filename": "757becdd__Pierre_Dubois__Tutor.pdf"
+            },
+            {
+              "cv_id": "cv_aa3cde72",
+              "filename": "bd63b116__Valentina_Fernandez__Teaching_Assistant.pdf"
+            },
+            {
+              "cv_id": "cv_1d56ed8d",
+              "filename": "972db8df__Rajesh_Kumar__ESL_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_b0c609e3",
+              "filename": "40b3d301__Hana_Park__Vice_Dean.pdf"
+            },
+            {
+              "cv_id": "cv_8e0ce868",
+              "filename": "549e73f9__María_López__Student_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_caa08878",
+              "filename": "b58cdb31__Aisha_Hassan__Substitute_Teacher.pdf"
+            },
+            {
+              "cv_id": "cv_6268602e",
+              "filename": "c5eb0518__Isabella_Vargas__ESL_Teacher.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 0.36,
+              "details": "Query type: general"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 17.39,
+              "details": "Found 24 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 11884.35,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 2746.05,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking how many years of experience the candidates have with Python. I need to scan the CVs for explicit mentions of \"Python\" and the duration of that experience. If the duration isn't explicitly stated, I'll look for project durations or job tenures where Python was used.\n:::\n\nOnly one candidate, Rajiv Patel, explicitly mentions Python. The CV does not specify the exact number of years of experience with Python, but it is mentioned within the context of a job held for 2 years.\n\n### Analysis\nI am including only **[Rajiv Patel](cv:cv_417c5872)** in the table because he is the only candidate who explicitly mentions Python. While the CV doesn't state the exact years of experience with Python, it is mentioned in the context of a role held for two years.\n\n| Candidate | Python Mention | Experience Duration | Match |\n|-----------|----------------|---------------------|-------|\n| **[Rajiv Patel](cv:cv_417c5872)** | Explicitly mentioned | 2 years (job duration) | ⭐⭐⭐ |\n\n:::conclusion\nI recommend **[Rajiv Patel](cv:cv_417c5872)** as the only candidate with explicitly stated Python experience, within the context of a 2-year role.\n:::",
+            "thinking": "The user is asking how many years of experience the candidates have with Python. I need to scan the CVs for explicit mentions of \"Python\" and the duration of that experience. If the duration isn't explicitly stated, I'll look for project durations or job tenures where Python was used.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "I recommend **[Rajiv Patel](cv:cv_417c5872)** as the only candidate with explicitly stated Python experience, within the context of a 2-year role.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "summary",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": {
+              "total_candidates": 15,
+              "experience_distribution": {
+                "0-2 years": 10,
+                "3-5 years": 2,
+                "6-10 years": 1,
+                "10+ years": 2
+              },
+              "location_distribution": {
+                "": 7,
+                "Amsterdam": 2,
+                "London": 2,
+                "Barcelona, Spain": 1,
+                "Paris, France": 1
+              },
+              "seniority_distribution": {
+                "junior": 4,
+                "senior": 1,
+                "entry": 8,
+                "mid": 1,
+                "principal": 1
+              }
+            },
+            "skill_distribution": {
+              "skills": [
+                {
+                  "skill": "L A N G U A G E S",
+                  "candidate_count": 2,
+                  "percentage": 13.3
+                },
+                {
+                  "skill": "9/10",
+                  "candidate_count": 2,
+                  "percentage": 13.3
+                },
+                {
+                  "skill": "2016",
+                  "candidate_count": 2,
+                  "percentage": 13.3
+                },
+                {
+                  "skill": "8/10",
+                  "candidate_count": 2,
+                  "percentage": 13.3
+                },
+                {
+                  "skill": "Focusing On",
+                  "candidate_count": 2,
+                  "percentage": 13.3
+                },
+                {
+                  "skill": "Strategic",
+                  "candidate_count": 1,
+                  "percentage": 6.7
+                },
+                {
+                  "skill": "Planning",
+                  "candidate_count": 1,
+                  "percentage": 6.7
+                },
+                {
+                  "skill": "Training",
+                  "candidate_count": 1,
+                  "percentage": 6.7
+                },
+                {
+                  "skill": "Hogan Assessment",
+                  "candidate_count": 1,
+                  "percentage": 6.7
+                },
+                {
+                  "skill": "Emotional",
+                  "candidate_count": 1,
+                  "percentage": 6.7
+                },
+                {
+                  "skill": "2012",
+                  "candidate_count": 1,
+                  "percentage": 6.7
+                },
+                {
+                  "skill": "Change",
+                  "candidate_count": 1,
+                  "percentage": 6.7
+                },
+                {
+                  "skill": "Dean'S List",
+                  "candidate_count": 1,
+                  "percentage": 6.7
+                },
+                {
+                  "skill": "2003",
+                  "candidate_count": 1,
+                  "percentage": 6.7
+                },
+                {
+                  "skill": "Management C E R T I F I C A T E S",
+                  "candidate_count": 1,
+                  "percentage": 6.7
+                },
+                {
+                  "skill": "Intelligence (Eq) Certified Executive Coach (Cec)",
+                  "candidate_count": 1,
+                  "percentage": 6.7
+                },
+                {
+                  "skill": "Gaining Hands",
+                  "candidate_count": 1,
+                  "percentage": 6.7
+                },
+                {
+                  "skill": "Outcomes.",
+                  "candidate_count": 1,
+                  "percentage": 6.7
+                },
+                {
+                  "skill": "Research Assistant",
+                  "candidate_count": 1,
+                  "percentage": 6.7
+                },
+                {
+                  "skill": "University Of Edinburgh",
+                  "candidate_count": 1,
+                  "percentage": 6.7
+                }
+              ],
+              "total_candidates": 15,
+              "top_skills": [
+                "L A N G U A G E S",
+                "9/10",
+                "2016",
+                "8/10",
+                "Focusing On"
+              ]
+            },
+            "experience_distribution": {
+              "junior": 10,
+              "mid": 2,
+              "senior": 1,
+              "principal": 2,
+              "average_years": 2.9,
+              "total_candidates": 15
+            },
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T20:38:04.869667"
+        }
+      ],
+      "created_at": "2026-01-06T19:13:35.403051",
+      "updated_at": "2026-01-06T20:38:04.869667"
     }
   ]
 }

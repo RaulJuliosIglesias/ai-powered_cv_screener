@@ -145,10 +145,15 @@ class ContextExtractor:
                     if r not in context.mentioned_roles:
                         context.mentioned_roles.append(r)
         
-        # Also check cv_names as potential candidates
-        for name in cv_names:
-            if name not in context.mentioned_candidates:
-                context.mentioned_candidates.append(name)
+        # For initial queries, add all CV names as mentioned candidates
+        # This enables candidate-specific suggestions even in new chats
+        if context.is_first_query:
+            context.mentioned_candidates.extend(cv_names)
+        else:
+            # For ongoing conversations, only add new names
+            for name in cv_names:
+                if name not in context.mentioned_candidates:
+                    context.mentioned_candidates.append(name)
         
         # Limit lists to most recent/relevant
         context.mentioned_candidates = context.mentioned_candidates[:5]

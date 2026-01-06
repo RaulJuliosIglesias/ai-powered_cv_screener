@@ -84,26 +84,41 @@ class SuggestionSelector:
         
         # Filter applicable suggestions
         applicable = []
+        filtered_count = 0
         for s in bank:
             # Check min_cvs
             if s.min_cvs > context.num_cvs:
+                filtered_count += 1
+                logger.debug(f"[SUGGESTION_SELECTOR] Filtered {s.text[:30]}... - min_cvs={s.min_cvs}, num_cvs={context.num_cvs}")
                 continue
             if s.requires_multiple_cvs and context.num_cvs < 2:
+                filtered_count += 1
+                logger.debug(f"[SUGGESTION_SELECTOR] Filtered {s.text[:30]}... - requires_multiple_cvs, num_cvs={context.num_cvs}")
                 continue
             
             # Check placeholder requirements
             if s.requires_candidate and not has_candidate:
+                filtered_count += 1
+                logger.debug(f"[SUGGESTION_SELECTOR] Filtered {s.text[:30]}... - requires_candidate, has_candidate={has_candidate}")
                 continue
             if s.requires_skill and not has_skill:
+                filtered_count += 1
+                logger.debug(f"[SUGGESTION_SELECTOR] Filtered {s.text[:30]}... - requires_skill, has_skill={has_skill}")
                 continue
             if s.requires_role and not has_role:
+                filtered_count += 1
+                logger.debug(f"[SUGGESTION_SELECTOR] Filtered {s.text[:30]}... - requires_role, has_role={has_role}")
                 continue
             
             # Check not already used
             if s.id in self._used_ids:
+                filtered_count += 1
+                logger.debug(f"[SUGGESTION_SELECTOR] Filtered {s.text[:30]}... - already used")
                 continue
             
             applicable.append(s)
+        
+        logger.info(f"[SUGGESTION_SELECTOR] Filtered {filtered_count}/{len(bank)} suggestions, {len(applicable)} remain")
         
         # Sort by priority (lower = higher priority)
         applicable.sort(key=lambda x: x.priority)

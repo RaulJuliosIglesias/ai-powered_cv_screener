@@ -1,0 +1,1472 @@
+{
+  "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e",
+  "generated_at": "2026-01-06T19:17:38.141992",
+  "events": [
+    {
+      "timestamp": "2026-01-06T19:13:40.648046",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:40.648046",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_b0c609e3",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Hana Park  Vice",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Hana Park  Vice =====\n\nCURRENT POSITION:  students.\nCURRENT COMPANY: udem"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Hana Park  Vice",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE:  students.\nCOMPANY: udemy.com/user/hanapark\nPE"
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": " Hana Park  Vice",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Hana Park  Vice\n\nCURRENT ROLE:  students.\nCOMPANY: udemy.com/user/hanapark\nTOTAL E"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:41.686114",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:41.686114",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_8e0ce868",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " María López  Student",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  María López  Student =====\n\nCURRENT POSITION: environments. Organized and "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " María López  Student",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: environments. Organized and collaborative, I\nCO"
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": " María López  Student",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  María López  Student\n\nCURRENT ROLE: environments. Organized and collaborative, I\nCO"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:42.202109",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:42.202109",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_6b20e01c",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Pierre Dubois ",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Pierre Dubois  =====\n\nCURRENT POSITION: Supported 200+ students in mathema"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Pierre Dubois ",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2\n\nTITLE: 1995\nCOMPANY: 1998 | École Primaire Saint-Louis\nPERIOD: 1995 - 1998\nDURA"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Pierre Dubois ",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2 === CURRENT POSITION ===\n\nTITLE: Supported 200+ students in mathematics and lite"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Pierre Dubois ",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Pierre Dubois \n\nCURRENT ROLE: Supported 200+ students in mathematics and literacy.\n"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:42.707270",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:42.708264",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_1d56ed8d",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Rajesh Kumar  ESL",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 0,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Rajesh Kumar  ESL =====\n\nCURRENT POSITION: Not specified\nCURRENT COMPANY: "
+          },
+          {
+            "index": 1,
+            "section_type": "skills",
+            "candidate_name": " Rajesh Kumar  ESL",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 0,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Rajesh Kumar  ESL:\n\nand personalized learning plans., ESL Teacher, Raje"
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": " Rajesh Kumar  ESL",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 0,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Rajesh Kumar  ESL\n\nCURRENT ROLE: Not specified\nCOMPANY: Not specified\nTOTAL EXPERIE"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:43.329939",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:43.329939",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_f7eee0fe",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Erik Johansson  Teacher",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Erik Johansson  Teacher =====\n\nCURRENT POSITION: providing one\nCURRENT COM"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Erik Johansson  Teacher",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: providing one\nCOMPANY: on-one assistance to stu"
+          },
+          {
+            "index": 2,
+            "section_type": "skills",
+            "candidate_name": " Erik Johansson  Teacher",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Erik Johansson  Teacher:\n\nfor three students with specific, learning di"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Erik Johansson  Teacher",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Erik Johansson  Teacher\n\nCURRENT ROLE: providing one\nCOMPANY: on-one assistance to "
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:43.887847",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:43.887847",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_dc239d26",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Farid Al-Mansoori ",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Farid Al-Mansoori  =====\n\nCURRENT POSITION: development, publishing findin"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Farid Al-Mansoori ",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: development, publishing findings in high\nCOMPAN"
+          },
+          {
+            "index": 2,
+            "section_type": "skills",
+            "candidate_name": " Farid Al-Mansoori ",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Farid Al-Mansoori :\n\nsubject, matter knowledge with a hands, on Mentore"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Farid Al-Mansoori ",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Farid Al-Mansoori \n\nCURRENT ROLE: development, publishing findings in high\nCOMPANY:"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:44.466821",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:44.466821",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_f0447b07",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Kwame van der Berg  Academic",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Kwame van der Berg  Academic =====\n\nCURRENT POSITION: \nCURRENT COMPANY: k"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Kwame van der Berg  Academic",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: \nCOMPANY: kvanderbergacademics.com pathways.\nP"
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": " Kwame van der Berg  Academic",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Kwame van der Berg  Academic\n\nCURRENT ROLE: \nCOMPANY: kvanderbergacademics.com pat"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:44.963956",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:44.963956",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_caa08878",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Aisha Hassan  Substitute",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 1.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Aisha Hassan  Substitute =====\n\nCURRENT POSITION: delivering engaging inst"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Aisha Hassan  Substitute",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 1.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: delivering engaging instruction across diverse\n"
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": " Aisha Hassan  Substitute",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 1.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Aisha Hassan  Substitute\n\nCURRENT ROLE: delivering engaging instruction across dive"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:45.581227",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:45.581227",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_aa3cde72",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Valentina Fernandez  Teaching",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Valentina Fernandez  Teaching =====\n\nCURRENT POSITION: Developed an innova"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Valentina Fernandez  Teaching",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: Developed an innovative project‑based curriculu"
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": " Valentina Fernandez  Teaching",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Valentina Fernandez  Teaching\n\nCURRENT ROLE: Developed an innovative project‑based "
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:46.133609",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:46.133609",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_6268602e",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Isabella Vargas  ESL",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Isabella Vargas  ESL =====\n\nCURRENT POSITION: 2023\nCURRENT COMPANY: Presen"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Isabella Vargas  ESL",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2 === CURRENT POSITION ===\n\nTITLE: 2023\nCOMPANY: Present | Global Connect Tutoring"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Isabella Vargas  ESL",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2\n\nTITLE: learning modules for diverse student\nCOMPANY: populations. Committed to "
+          },
+          {
+            "index": 3,
+            "section_type": "skills",
+            "candidate_name": " Isabella Vargas  ESL",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Isabella Vargas  ESL:\n\nWhiteboard Netherlands., 9/10, Software, Impleme"
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": " Isabella Vargas  ESL",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Isabella Vargas  ESL\n\nCURRENT ROLE: 2023\nCOMPANY: Present | Global Connect Tutoring"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:46.782826",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:46.782826",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_6bcc8c77",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Sofia Rodriguez ",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Sofia Rodriguez  =====\n\nCURRENT POSITION: Summa Cum Laude\nCURRENT COMPANY:"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Sofia Rodriguez ",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2\n\nTITLE: Leadership Development Specialist\nCOMPANY: P R O F I L E\nPERIOD: 2008 - "
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Sofia Rodriguez ",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2 === CURRENT POSITION ===\n\nTITLE: Summa Cum Laude\nCOMPANY: Focus on Leadership & "
+          },
+          {
+            "index": 3,
+            "section_type": "skills",
+            "candidate_name": " Sofia Rodriguez ",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Sofia Rodriguez :\n\nTraining, 2003, Strategic, Dean's List, 8/10, Planni"
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": " Sofia Rodriguez ",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Sofia Rodriguez \n\nCURRENT ROLE: Summa Cum Laude\nCOMPANY: Focus on Leadership & Moti"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:47.304905",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:47.304905",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_0856582a",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Layla Al-Mansoor  Assistant",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Layla Al-Mansoor  Assistant =====\n\nCURRENT POSITION: environments. Known f"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansoor  Assistant",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: environments. Known for patience\nCOMPANY: empat"
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": " Layla Al-Mansoor  Assistant",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Layla Al-Mansoor  Assistant\n\nCURRENT ROLE: environments. Known for patience\nCOMPANY"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:47.916760",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:47.916760",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_37489ff8",
+        "total_chunks": 9,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Priya Patel  Career",
+            "job_hopping_score": 0.35294117647058826,
+            "avg_tenure_years": 2.4285714285714284,
+            "total_experience_years": 17.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Priya Patel  Career =====\n\nCURRENT POSITION: S O C I A L\nCURRENT COMPANY: "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Priya Patel  Career",
+            "job_hopping_score": 0.35294117647058826,
+            "avg_tenure_years": 2.4285714285714284,
+            "total_experience_years": 17.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 7 === CURRENT POSITION ===\n\nTITLE: S O C I A L\nCOMPANY: Synergy Consulting Group\nP"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Priya Patel  Career",
+            "job_hopping_score": 0.35294117647058826,
+            "avg_tenure_years": 2.4285714285714284,
+            "total_experience_years": 17.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 7\n\nTITLE: 2015\nCOMPANY: 2018 | Elevate Coaching Labs\nPERIOD: 2015 - 2018\nDURATION:"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Priya Patel  Career",
+            "job_hopping_score": 0.35294117647058826,
+            "avg_tenure_years": 2.4285714285714284,
+            "total_experience_years": 17.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 7\n\nTITLE: 2012\nCOMPANY: 2015 | Future Pathways Ltd.\nPERIOD: 2012 - 2015\nDURATION: "
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Priya Patel  Career",
+            "job_hopping_score": 0.35294117647058826,
+            "avg_tenure_years": 2.4285714285714284,
+            "total_experience_years": 17.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 7\n\nTITLE: 2009\nCOMPANY: 2012 | BrightFuture Services\nPERIOD: 2009 - 2012\nDURATION:"
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Priya Patel  Career",
+            "job_hopping_score": 0.35294117647058826,
+            "avg_tenure_years": 2.4285714285714284,
+            "total_experience_years": 17.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 5 of 7\n\nTITLE: 2005\nCOMPANY: 2009 | InspireWorks Non-Profit\nPERIOD: 2005 - 2009\nDURATIO"
+          },
+          {
+            "index": 6,
+            "section_type": "experience",
+            "candidate_name": " Priya Patel  Career",
+            "job_hopping_score": 0.35294117647058826,
+            "avg_tenure_years": 2.4285714285714284,
+            "total_experience_years": 17.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 6 of 7\n\nTITLE: multinational workforce of 12\nCOMPANY: 000 employees.\nPERIOD: Unknown da"
+          },
+          {
+            "index": 7,
+            "section_type": "experience",
+            "candidate_name": " Priya Patel  Career",
+            "job_hopping_score": 0.35294117647058826,
+            "avg_tenure_years": 2.4285714285714284,
+            "total_experience_years": 17.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 7 of 7\n\nTITLE: Bangalore\nCOMPANY: India\nPERIOD: Unknown dates\nDURATION: 0 years\n\nJOB DE"
+          },
+          {
+            "index": 8,
+            "section_type": "full_cv",
+            "candidate_name": " Priya Patel  Career",
+            "job_hopping_score": 0.35294117647058826,
+            "avg_tenure_years": 2.4285714285714284,
+            "total_experience_years": 17.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Priya Patel  Career\n\nCURRENT ROLE: S O C I A L\nCOMPANY: Synergy Consulting Group\nTO"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:48.401625",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:48.401625",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_e00e97d4",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Javier Chen ",
+            "job_hopping_score": 0.09090909090909091,
+            "avg_tenure_years": 5.5,
+            "total_experience_years": 6.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Javier Chen  =====\n\nCURRENT POSITION: toward sustainable performance. Pati"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Javier Chen ",
+            "job_hopping_score": 0.09090909090909091,
+            "avg_tenure_years": 5.5,
+            "total_experience_years": 6.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2 === CURRENT POSITION ===\n\nTITLE: toward sustainable performance. Patient in\nCOMP"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Javier Chen ",
+            "job_hopping_score": 0.09090909090909091,
+            "avg_tenure_years": 5.5,
+            "total_experience_years": 6.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2\n\nTITLE: Data\nCOMPANY: Driven\nPERIOD: 2020 - ?\nDURATION: 6 years\n\nJOB DESCRIPTION"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Javier Chen ",
+            "job_hopping_score": 0.09090909090909091,
+            "avg_tenure_years": 5.5,
+            "total_experience_years": 6.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Javier Chen \n\nCURRENT ROLE: toward sustainable performance. Patient in\nCOMPANY: fos"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:48.916684",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:13:48.916684",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_417c5872",
+        "total_chunks": 7,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Rajiv Patel ",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 11.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Rajiv Patel  =====\n\nCURRENT POSITION: E X P E R I E N C E\nCURRENT COMPANY:"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Rajiv Patel ",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 11.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 5 === CURRENT POSITION ===\n\nTITLE: E X P E R I E N C E\nCOMPANY: Professor\nPERIOD: "
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Rajiv Patel ",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 11.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 5\n\nTITLE: 2020\nCOMPANY: 2023 | State University of Engineering\nPERIOD: 2020 - 2023"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Rajiv Patel ",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 11.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 5\n\nTITLE:  2017\nCOMPANY: 2020 | University College of Technology\nPERIOD: 2017 - 2"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Rajiv Patel ",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 11.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 5\n\nTITLE: 2015\nCOMPANY: 2017 | Regional College\nPERIOD: 2015 - 2017\nDURATION: 2 ye"
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Rajiv Patel ",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 11.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 5 of 5\n\nTITLE: Bangalore\nCOMPANY: India\nPERIOD: Unknown dates\nDURATION: 0 years\n\nJOB DE"
+          },
+          {
+            "index": 6,
+            "section_type": "full_cv",
+            "candidate_name": " Rajiv Patel ",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 11.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Rajiv Patel \n\nCURRENT ROLE: E X P E R I E N C E\nCOMPANY: Professor\nTOTAL EXPERIENCE"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:14:39.906001",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:14:39.906001",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Who has experience with Python?",
+        "cv_ids": [
+          "cv_b0c609e3",
+          "cv_8e0ce868",
+          "cv_6b20e01c",
+          "cv_1d56ed8d",
+          "cv_f7eee0fe",
+          "cv_dc239d26",
+          "cv_f0447b07",
+          "cv_caa08878",
+          "cv_aa3cde72",
+          "cv_6268602e",
+          "cv_6bcc8c77",
+          "cv_0856582a",
+          "cv_37489ff8",
+          "cv_e00e97d4",
+          "cv_417c5872"
+        ],
+        "cv_count": 15
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:14:42.948922",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 22,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_f7eee0fe",
+            "candidate_name": " Erik Johansson  Teacher",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7758166600050557,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_e00e97d4",
+            "candidate_name": " Javier Chen ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.09090909090909091,
+            "avg_tenure_years": 5.5,
+            "total_experience_years": 6.0,
+            "score": 0.7818067458516156,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_b0c609e3",
+            "candidate_name": " Hana Park  Vice",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7542261227998603,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_6268602e",
+            "candidate_name": " Isabella Vargas  ESL",
+            "section_type": "skills",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.7609502021196682,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_6bcc8c77",
+            "candidate_name": " Sofia Rodriguez ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "score": 0.7794650084964478,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_dc239d26",
+            "candidate_name": " Farid Al-Mansoori ",
+            "section_type": "skills",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5424589267381773,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_dc239d26",
+            "candidate_name": " Farid Al-Mansoori ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7687119642115106,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_37489ff8",
+            "candidate_name": " Priya Patel  Career",
+            "section_type": "experience",
+            "job_hopping_score": 0.35294117647058826,
+            "avg_tenure_years": 2.4285714285714284,
+            "total_experience_years": 17.0,
+            "score": 0.4704919364315309,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_f0447b07",
+            "candidate_name": " Kwame van der Berg  Academic",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.4963008533968835,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_6b20e01c",
+            "candidate_name": " Pierre Dubois ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.7712873081452827,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:14:58.368964",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:15:01.585994",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "search",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:15:01.691528",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 396,
+        "answer_preview": ":::thinking\nThe user is asking for candidates with Python experience. I need to scan the CVs for explicit mentions of \"Python\" and rank candidates based on the context of its use (e.g., programming, scripting, data analysis). I will provide the top 3 candidates.\n:::\n\n\n:::conclusion\nI recommend **[Rajiv Patel](cv:cv_417c5872)** as the only candidate with explicitly stated Python experience.\n:::",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:17:04.911299",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:17:04.911299",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Give me the full profile of Pierre Dubois Tutor",
+        "cv_ids": [
+          "cv_b0c609e3",
+          "cv_8e0ce868",
+          "cv_6b20e01c",
+          "cv_1d56ed8d",
+          "cv_f7eee0fe",
+          "cv_dc239d26",
+          "cv_f0447b07",
+          "cv_caa08878",
+          "cv_aa3cde72",
+          "cv_6268602e",
+          "cv_6bcc8c77",
+          "cv_0856582a",
+          "cv_37489ff8",
+          "cv_e00e97d4",
+          "cv_417c5872"
+        ],
+        "cv_count": 15
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:17:07.796087",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 27,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_6b20e01c",
+            "candidate_name": " Pierre Dubois ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.8349614381747337,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_b0c609e3",
+            "candidate_name": " Hana Park  Vice",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.8337228554810168,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_dc239d26",
+            "candidate_name": " Farid Al-Mansoori ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.8207353775102847,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_f7eee0fe",
+            "candidate_name": " Erik Johansson  Teacher",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.81147881712648,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_f0447b07",
+            "candidate_name": " Kwame van der Berg  Academic",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5792348967962141,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_6bcc8c77",
+            "candidate_name": " Sofia Rodriguez ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "score": 0.8280948359961191,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_417c5872",
+            "candidate_name": " Rajiv Patel ",
+            "section_type": "experience",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 11.0,
+            "score": 0.6010757579368092,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_0856582a",
+            "candidate_name": " Layla Al-Mansoor  Assistant",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5506591706852482,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_37489ff8",
+            "candidate_name": " Priya Patel  Career",
+            "section_type": "experience",
+            "job_hopping_score": 0.35294117647058826,
+            "avg_tenure_years": 2.4285714285714284,
+            "total_experience_years": 17.0,
+            "score": 0.5901351983196663,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_417c5872",
+            "candidate_name": " Rajiv Patel ",
+            "section_type": "experience",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 11.0,
+            "score": 0.5896012626229882,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:17:31.640793",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "SINGLE_CANDIDATE_TEMPLATE",
+        "candidate_name": " Pierre Dubois ",
+        "detection_method": "explicit_name_in_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:17:38.028712",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "single_candidate",
+        "candidate_name": " Pierre Dubois ",
+        "detection_source": "single_candidate_detection",
+        "detection_method": "explicit_name_in_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T19:17:38.138102",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1277,
+        "answer_preview": ":::thinking\nThe user is asking for the full profile of Pierre Dubois (cv_6b20e01c). I need to extract the current role, total experience, career trajectory, skills, credentials, and risk assessment from the provided CV.\n:::\n\nPierre Dubois is currently the Head of Tutoring Services at Global Learning Hub (2020-Present), where he strategically leads a multinational tutoring network. With over 25 years of experience in education, he has consistently demonstrated his ability to enhance student perfo...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}
