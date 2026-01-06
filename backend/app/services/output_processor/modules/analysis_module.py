@@ -140,6 +140,18 @@ class AnalysisModule:
             logger.warning("[ANALYSIS] Contaminated content detected, discarding")
             return None
         
+        # Detect incomplete markdown tables (just header row with no data)
+        # Pattern: | Header1 | Header2 | ... | with no subsequent data rows
+        incomplete_table_pattern = r'^\s*\|[^|]+\|[^|]*\|[^|]*\|?\s*$'
+        if re.match(incomplete_table_pattern, cleaned.strip()):
+            logger.warning("[ANALYSIS] Detected incomplete table header only, discarding")
+            return None
+        
+        # Also reject if it's just a table header line
+        if cleaned.strip().startswith('|') and cleaned.strip().count('\n') == 0:
+            logger.warning("[ANALYSIS] Single table header line detected, discarding")
+            return None
+        
         # Only return if substantial content (> 50 chars)
         if len(cleaned) > 50:
             logger.debug(f"[ANALYSIS] Extracted: {len(cleaned)} chars")

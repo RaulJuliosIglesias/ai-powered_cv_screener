@@ -76,6 +76,16 @@ class SearchStructure:
         # Extract analysis (between direct answer and conclusion)
         analysis = self.analysis_module.extract(llm_output, direct_answer or "", conclusion or "")
         
+        # If no analysis extracted, generate fallback from results data
+        if not analysis and results_data:
+            analysis = self.analysis_module.generate_fallback(
+                direct_answer or "",
+                results_data,
+                conclusion or ""
+            )
+            if analysis:
+                logger.info(f"[SEARCH_STRUCTURE] Using fallback analysis: {len(analysis)} chars")
+        
         return {
             "structure_type": "search",
             "query": query,

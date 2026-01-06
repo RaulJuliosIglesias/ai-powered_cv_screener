@@ -161,6 +161,30 @@ def extract_candidate_from_history(
             cv_id = _extract_cv_id_for_name(content, name)
             logger.info(f"[CONTEXT_RESOLVER] Found in conclusion: {name}")
             return {"name": name, "cv_id": cv_id}
+        
+        # Pattern 6: "emerges as the top choice" or "is the recommended candidate"
+        top_choice_match = re.search(
+            r'\[📄\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\s*\*\*([^*]+)\*\*[^.]*(?:emerges as the top|is the recommended|top choice|overall score of 100)',
+            content,
+            re.IGNORECASE
+        )
+        if top_choice_match:
+            cv_id = top_choice_match.group(1).strip()
+            name = top_choice_match.group(2).strip()
+            logger.info(f"[CONTEXT_RESOLVER] Found top choice: {name} ({cv_id})")
+            return {"name": name, "cv_id": cv_id}
+        
+        # Pattern 7: First CV link in ranking response (the #1 candidate is typically listed first)
+        # Look for pattern like [📄](cv:cv_xxx) **Name** with score
+        first_cv_link = re.search(
+            r'\[📄\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\s*\*\*([^*]+)\*\*',
+            content
+        )
+        if first_cv_link:
+            cv_id = first_cv_link.group(1).strip()
+            name = first_cv_link.group(2).strip()
+            logger.info(f"[CONTEXT_RESOLVER] Found first CV link (likely #1): {name} ({cv_id})")
+            return {"name": name, "cv_id": cv_id}
     
     logger.warning("[CONTEXT_RESOLVER] Could not find candidate in history")
     return None
@@ -168,21 +192,44 @@ def extract_candidate_from_history(
 
 def _extract_cv_id_for_name(content: str, name: str) -> Optional[str]:
     """Extract cv_id for a given candidate name from content."""
-    # Look for **[Name](cv:cv_xxx)** pattern
-    pattern = rf'\*\*\[{re.escape(name)}[^\]]*\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\*\*'
-    match = re.search(pattern, content, re.IGNORECASE)
+    # Clean the name for matching (remove extra suffixes like "Business", "Graduate", etc.)
+    name_parts = name.split()
+    # Use first two parts as core name (first + last name)
+    core_name = ' '.join(name_parts[:2]) if len(name_parts) >= 2 else name
+    
+    # Pattern 1: **[Name](cv:cv_xxx)** - exact markdown link format
+    pattern1 = rf'\*\*\[{re.escape(name)}[^\]]*\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\*\*'
+    match = re.search(pattern1, content, re.IGNORECASE)
     if match:
+        logger.info(f"[CONTEXT_RESOLVER] Found cv_id via exact link: {match.group(1)}")
         return match.group(1)
     
-    # Look for any cv_id near the name
-    name_pos = content.lower().find(name.lower())
-    if name_pos != -1:
-        # Search within 200 chars around the name
-        search_area = content[max(0, name_pos-100):min(len(content), name_pos+100)]
-        cv_match = re.search(r'cv_([\w-]+)', search_area)
-        if cv_match:
-            return f"cv_{cv_match.group(1)}"
+    # Pattern 2: Try with core name (first + last only)
+    if core_name != name:
+        pattern2 = rf'\*\*\[{re.escape(core_name)}[^\]]*\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\*\*'
+        match = re.search(pattern2, content, re.IGNORECASE)
+        if match:
+            logger.info(f"[CONTEXT_RESOLVER] Found cv_id via core name link: {match.group(1)}")
+            return match.group(1)
     
+    # Pattern 3: [📄](cv:cv_xxx) **Name** - icon link format
+    pattern3 = rf'\[📄\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\s*\*\*{re.escape(core_name)}'
+    match = re.search(pattern3, content, re.IGNORECASE)
+    if match:
+        logger.info(f"[CONTEXT_RESOLVER] Found cv_id via icon link: {match.group(1)}")
+        return match.group(1)
+    
+    # Pattern 4: Look for cv_id immediately before or after the name (within 50 chars)
+    name_pos = content.lower().find(core_name.lower())
+    if name_pos != -1:
+        # Search within 50 chars (tighter range to avoid wrong candidate)
+        search_area = content[max(0, name_pos-50):min(len(content), name_pos+len(core_name)+50)]
+        cv_match = re.search(r'cv:(cv_[a-zA-Z0-9_-]+)', search_area)
+        if cv_match:
+            logger.info(f"[CONTEXT_RESOLVER] Found cv_id near name: {cv_match.group(1)}")
+            return cv_match.group(1)
+    
+    logger.warning(f"[CONTEXT_RESOLVER] Could not find cv_id for: {name}")
     return None
 
 

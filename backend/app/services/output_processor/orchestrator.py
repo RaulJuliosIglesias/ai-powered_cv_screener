@@ -100,6 +100,7 @@ class OutputOrchestrator:
         query: str = "",
         query_type: str = "search",  # "search", "comparison", "single_candidate", "red_flags", etc.
         candidate_name: str = None,
+        cv_id: str = None,  # Explicit cv_id from context resolver
         conversation_history: List[Dict[str, str]] = None
     ) -> tuple[StructuredOutput, str]:
         """
@@ -117,6 +118,7 @@ class OutputOrchestrator:
             query: Original user query
             query_type: Type of query - determines which STRUCTURE to use
             candidate_name: Name of candidate for single_candidate/red_flags queries
+            cv_id: Explicit cv_id (from context resolver) - takes priority over chunks
             
         Returns:
             Tuple of (StructuredOutput, formatted_answer_string)
@@ -131,10 +133,13 @@ class OutputOrchestrator:
         # STEP 0: PRE-PROCESS - Clean raw LLM output
         cleaned_llm_output = self._pre_clean_llm_output(raw_llm_output)
         
-        # Get cv_id from chunks if available
-        cv_id = ""
-        if chunks:
-            cv_id = chunks[0].get("metadata", {}).get("cv_id", "")
+        # Use explicit cv_id if provided (from context resolver), otherwise extract from chunks
+        effective_cv_id = cv_id
+        if not effective_cv_id and chunks:
+            effective_cv_id = chunks[0].get("metadata", {}).get("cv_id", "")
+        
+        if cv_id:
+            logger.info(f"[ORCHESTRATOR] Using explicit cv_id from context resolver: {cv_id}")
         
         # =================================================================
         # ROUTING: Use appropriate STRUCTURE based on query_type
@@ -142,24 +147,24 @@ class OutputOrchestrator:
         
         if query_type == "single_candidate" and candidate_name:
             # SINGLE CANDIDATE STRUCTURE
-            logger.info(f"[ORCHESTRATOR] Using SingleCandidateStructure for {candidate_name}")
+            logger.info(f"[ORCHESTRATOR] Using SingleCandidateStructure for {candidate_name} (cv_id={effective_cv_id})")
             structure_data = self.single_candidate_structure.assemble(
                 llm_output=cleaned_llm_output,
                 chunks=chunks or [],
                 candidate_name=candidate_name,
-                cv_id=cv_id,
+                cv_id=effective_cv_id,
                 conversation_history=conversation_history or []
             )
             return self._build_structured_output(structure_data, cleaned_llm_output)
         
         elif query_type == "red_flags" and candidate_name:
             # RISK ASSESSMENT STRUCTURE
-            logger.info(f"[ORCHESTRATOR] Using RiskAssessmentStructure for {candidate_name}")
+            logger.info(f"[ORCHESTRATOR] Using RiskAssessmentStructure for {candidate_name} (cv_id={effective_cv_id})")
             structure_data = self.risk_assessment_structure.assemble(
                 llm_output=cleaned_llm_output,
                 chunks=chunks or [],
                 candidate_name=candidate_name,
-                cv_id=cv_id,
+                cv_id=effective_cv_id,
                 conversation_history=conversation_history or []
             )
             return self._build_structured_output(structure_data, cleaned_llm_output)

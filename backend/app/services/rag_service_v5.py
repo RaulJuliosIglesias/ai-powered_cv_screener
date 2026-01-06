@@ -1941,15 +1941,26 @@ class RAGServiceV5:
             # =================================================================
             # TEMPLATE SELECTION: Single Candidate vs Multi-Candidate
             # =================================================================
-            from app.prompts.templates import detect_single_candidate_query
+            from app.prompts.templates import detect_single_candidate_query, SingleCandidateDetection
             
-            # Detect if this is a single candidate query
-            # CRITICAL: Use reformulated_prompt (LLM-resolved) not original question
-            # This allows "el winner" → "Isabel Mendoza" resolution to work
-            single_candidate_detection = detect_single_candidate_query(
-                question=effective_question,  # Use LLM-resolved question (may have resolved references)
-                chunks=chunks
-            )
+            # HIGHEST PRIORITY: Use context-resolved candidate (from "#1 candidate", "top candidate")
+            if ctx.resolved_candidate_name:
+                logger.info(f"[GENERATION] Using CONTEXT-RESOLVED candidate: {ctx.resolved_candidate_name} ({ctx.resolved_cv_id})")
+                single_candidate_detection = SingleCandidateDetection(
+                    is_single_candidate=True,
+                    candidate_name=ctx.resolved_candidate_name,
+                    cv_id=ctx.resolved_cv_id,
+                    confidence=0.95,
+                    detection_method="context_resolver"
+                )
+            else:
+                # Detect if this is a single candidate query
+                # CRITICAL: Use reformulated_prompt (LLM-resolved) not original question
+                # This allows "el winner" → "Isabel Mendoza" resolution to work
+                single_candidate_detection = detect_single_candidate_query(
+                    question=effective_question,  # Use LLM-resolved question (may have resolved references)
+                    chunks=chunks
+                )
             
             # CRITICAL: Save detection in context for orchestrator routing
             ctx.single_candidate_detection = single_candidate_detection
@@ -2311,12 +2322,15 @@ Provide a corrected response:"""
         # Orchestrator returns both structured data and formatted answer
         # Pass query_type so orchestrator knows which output structure to use
         # Pass conversation_history for context-aware processing
+        # Pass resolved_cv_id for context-resolved candidates (#1 candidate, top candidate, etc.)
+        resolved_cv_id = ctx.resolved_cv_id if hasattr(ctx, 'resolved_cv_id') else None
         structured_output, formatted_answer = orchestrator.process(
             raw_llm_output=ctx.generated_response or "",
             chunks=ctx.effective_chunks,
             query=ctx.question,
             query_type=query_type,
             candidate_name=candidate_name,
+            cv_id=resolved_cv_id,
             conversation_history=ctx.conversation_history
         )
         

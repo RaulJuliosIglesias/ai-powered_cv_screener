@@ -228,7 +228,7 @@ const SingleCandidateProfile = ({
         <div className="p-4 bg-emerald-900/20 rounded-xl border border-emerald-500/30">
           <SectionHeader icon={Award} title="Assessment" color="emerald" />
           {assessment && (
-            <div className="mb-3 text-slate-200">
+            <div className="mb-3 prose prose-sm max-w-none dark:prose-invert text-slate-200">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>{assessment}</ReactMarkdown>
             </div>
           )}
