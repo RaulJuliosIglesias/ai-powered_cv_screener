@@ -80,7 +80,13 @@ class SingleCandidateStructure:
         credentials = self._extract_credentials(llm_output)
         
         # Use RiskTableModule to generate risk assessment table
-        risk_table_data = self.risk_table_module.extract(chunks, candidate_name, cv_id)
+        # Pass llm_output for fallback parsing when metadata is not available
+        risk_table_data = self.risk_table_module.extract(
+            chunks=chunks, 
+            candidate_name=candidate_name, 
+            cv_id=cv_id,
+            llm_output=llm_output  # Fallback: parse from LLM response
+        )
         
         # Extract conclusion
         conclusion = self.conclusion_module.extract(llm_output)

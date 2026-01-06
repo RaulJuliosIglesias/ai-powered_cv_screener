@@ -61,7 +61,13 @@ class RiskAssessmentStructure:
         thinking = self.thinking_module.extract(llm_output)
         
         # Use RiskTableModule to generate risk assessment table and analysis
-        risk_table_data = self.risk_table_module.extract(chunks, candidate_name, cv_id)
+        # Pass llm_output for fallback parsing when metadata is not available
+        risk_table_data = self.risk_table_module.extract(
+            chunks=chunks, 
+            candidate_name=candidate_name, 
+            cv_id=cv_id,
+            llm_output=llm_output  # Fallback: parse from LLM response
+        )
         
         # The risk analysis text comes from the module
         risk_analysis = ""

@@ -56274,238 +56274,238 @@
       "updated_at": "2026-01-06T01:19:13.924089"
     },
     {
-      "id": "af4b6c26-2761-4b95-a0af-072a5da705ad",
-      "name": "Media Production 2391",
+      "id": "84db24e0-4d60-476f-938f-8f30e271299f",
+      "name": "Media Production 2684",
       "description": "",
       "cvs": [
         {
-          "id": "cv_59a6eb2e",
+          "id": "cv_27f3821b",
           "filename": "0d1b1a1b__Aisha_Patel__Animator.pdf",
           "chunk_count": 4,
           "content_hash": "ca45c6173c9f80460346aa7b62214a360e6f7cd26a9dc2170052b3f3f446fa86",
-          "uploaded_at": "2026-01-06T01:19:37.738296"
+          "uploaded_at": "2026-01-06T01:24:30.855655"
         },
         {
-          "id": "cv_36798705",
+          "id": "cv_d5c35911",
           "filename": "0ed822eb__Antoine_Dubois__Junior_Texture_Artist.pdf",
           "chunk_count": 3,
           "content_hash": "a9cb7a1c5ef94b4dd67d4173e415093c32b3a0e98a32c10709536faff7e1d025",
-          "uploaded_at": "2026-01-06T01:19:38.034778"
+          "uploaded_at": "2026-01-06T01:24:31.149094"
         },
         {
-          "id": "cv_985c89eb",
+          "id": "cv_33b45f22",
           "filename": "02f9626b__Marco_Rossi__3D_Artist.pdf",
           "chunk_count": 4,
           "content_hash": "dbf5a97b45d0f7f4b8713bf4bf6a3271d80e7fb269868a8aaa1b6e78a243f370",
-          "uploaded_at": "2026-01-06T01:19:38.445257"
+          "uploaded_at": "2026-01-06T01:24:31.557232"
         },
         {
-          "id": "cv_25cac1bd",
+          "id": "cv_d41e935d",
           "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf",
           "chunk_count": 4,
           "content_hash": "7d4e53308fd3679d49fefec9229d3bd9507d495067e152e54b3c637dfaf95eae",
-          "uploaded_at": "2026-01-06T01:19:38.810478"
+          "uploaded_at": "2026-01-06T01:24:31.925684"
         },
         {
-          "id": "cv_c70e4e8e",
+          "id": "cv_7fb15825",
           "filename": "5c2c5d6b__Arjun_Mehta__Junior_Concept_Artist.pdf",
           "chunk_count": 3,
           "content_hash": "045f3597c76b27df977bb0aca53cbc1741e53fd734f3deab732ee4991014fa14",
-          "uploaded_at": "2026-01-06T01:19:39.130057"
+          "uploaded_at": "2026-01-06T01:24:32.199913"
         },
         {
-          "id": "cv_2cdbf4d0",
+          "id": "cv_35bd59f7",
           "filename": "7ef319f7__Adrian_Morales__Junior_Animator.pdf",
           "chunk_count": 3,
           "content_hash": "58219c2a7c09e05918aa8f3454e63dd06869d536f02e13e2e32903ef45ddb1b8",
-          "uploaded_at": "2026-01-06T01:19:39.380588"
+          "uploaded_at": "2026-01-06T01:24:32.505427"
         },
         {
-          "id": "cv_da970a1a",
+          "id": "cv_6f9ed923",
           "filename": "8cf248e0__Mateo_Rodriguez__Rigger.pdf",
           "chunk_count": 5,
           "content_hash": "7c493207f06b04b41034d40f7b27594eed7d424083ce9a6bc0912a1c671ab1a9",
-          "uploaded_at": "2026-01-06T01:19:39.749433"
+          "uploaded_at": "2026-01-06T01:24:32.875329"
         },
         {
-          "id": "cv_00e9b4fe",
+          "id": "cv_500f35a6",
           "filename": "9a484d82__Carlos_Mendoza__Texture_Artist.pdf",
           "chunk_count": 5,
           "content_hash": "d59c12f8f1ec080c249aded4ef2b6de4e5e62caf28483a047e7b1b408837f9ba",
-          "uploaded_at": "2026-01-06T01:19:40.093079"
+          "uploaded_at": "2026-01-06T01:24:33.237297"
         },
         {
-          "id": "cv_c9abe8ac",
+          "id": "cv_10a08da4",
           "filename": "9e50441e__Matteo_Rossi__Creature_Designer.pdf",
           "chunk_count": 4,
           "content_hash": "290c912e27e91de516a503a49a538109c78222d647e5497246fa687f67b7f3ba",
-          "uploaded_at": "2026-01-06T01:19:40.464359"
+          "uploaded_at": "2026-01-06T01:24:33.617385"
         },
         {
-          "id": "cv_a5f22cc2",
+          "id": "cv_6026f3a1",
           "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf",
           "chunk_count": 7,
           "content_hash": "bd2da06d8d02512bab1b0606559fe14f7a7e881ec7ce85e4d4184b08b11512f2",
-          "uploaded_at": "2026-01-06T01:19:40.774124"
+          "uploaded_at": "2026-01-06T01:24:33.929872"
         },
         {
-          "id": "cv_99c7b5c8",
+          "id": "cv_8de9c005",
           "filename": "53f55f6a__Mei_Rossi__3D_Artist.pdf",
           "chunk_count": 4,
           "content_hash": "ab78cfe6bd794aa0676afa7afcdba3cb8558a397112bd52626894e92619be8b5",
-          "uploaded_at": "2026-01-06T01:19:41.063383"
+          "uploaded_at": "2026-01-06T01:24:34.224606"
         },
         {
-          "id": "cv_3ed3c124",
+          "id": "cv_350c7106",
           "filename": "55c0e841__Ricardo_De_Vries__Animator.pdf",
           "chunk_count": 3,
           "content_hash": "11c7fc5a4a6ff8bad820b895e07df84d6c15fabc0d1359171ecf07aec3547686",
-          "uploaded_at": "2026-01-06T01:19:41.439173"
+          "uploaded_at": "2026-01-06T01:24:34.569403"
         },
         {
-          "id": "cv_a8ca3c9f",
+          "id": "cv_a4f8dc7d",
           "filename": "63ce3a7c__Emma_Whitmore__Texture_Artist.pdf",
           "chunk_count": 5,
           "content_hash": "7050f253fc157464478bb25fd2a49375bb27d43ea38e6d5309be32fd93845047",
-          "uploaded_at": "2026-01-06T01:19:41.795179"
+          "uploaded_at": "2026-01-06T01:24:34.983738"
         },
         {
-          "id": "cv_fb649c3f",
+          "id": "cv_204db782",
           "filename": "74a0c87c__Mei_Lin_Chen__VFX_Supervisor.pdf",
           "chunk_count": 4,
           "content_hash": "8730b34ef70065d5808c382297d9140637c3e68d190ebbf2878766c165fb93c9",
-          "uploaded_at": "2026-01-06T01:19:42.126367"
+          "uploaded_at": "2026-01-06T01:24:35.314540"
         },
         {
-          "id": "cv_98565ade",
+          "id": "cv_cc328b28",
           "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf",
           "chunk_count": 4,
           "content_hash": "2eca2a371ef05eb6d0fbafb6c24712d4d3e8ec57df5eb93009bbd658f7372299",
-          "uploaded_at": "2026-01-06T01:19:42.492854"
+          "uploaded_at": "2026-01-06T01:24:35.666086"
         },
         {
-          "id": "cv_cbd49c6f",
+          "id": "cv_be24d70b",
           "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf",
           "chunk_count": 6,
           "content_hash": "0808568a66aa77ab1d92f794af4d54628de5d9d5ab0a01b2d1ebde246bcd5072",
-          "uploaded_at": "2026-01-06T01:19:42.828290"
+          "uploaded_at": "2026-01-06T01:24:36.000661"
         },
         {
-          "id": "cv_8433c134",
+          "id": "cv_021841af",
           "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf",
           "chunk_count": 5,
           "content_hash": "7e152a6737adb6072e1076864533574469521b899270ea7d65569dff310615a8",
-          "uploaded_at": "2026-01-06T01:19:43.229209"
+          "uploaded_at": "2026-01-06T01:24:36.405685"
         },
         {
-          "id": "cv_b7962ea0",
+          "id": "cv_846dbbd2",
           "filename": "8742ca7a__Sofia_Mendoza__Environment_Artist.pdf",
           "chunk_count": 4,
           "content_hash": "f3d5b99f8d47cadfae597fd68f42a9d684c874fafbf952cabe5c661a220cf7da",
-          "uploaded_at": "2026-01-06T01:19:43.593075"
+          "uploaded_at": "2026-01-06T01:24:36.766460"
         },
         {
-          "id": "cv_516c637d",
+          "id": "cv_04bb44ab",
           "filename": "749745cf__Aisha_Johnson__Animator.pdf",
           "chunk_count": 5,
           "content_hash": "fc4df9844655dc53b8c437b423443383094ee61c744fad93112dd13114f86c2d",
-          "uploaded_at": "2026-01-06T01:19:43.967135"
+          "uploaded_at": "2026-01-06T01:24:37.146671"
         },
         {
-          "id": "cv_e200cfcf",
+          "id": "cv_d2589a6a",
           "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf",
           "chunk_count": 3,
           "content_hash": "fca8a83a0edadee1c4bbc2ca635a9c888e1d0e630e689ccbda81a8bfd5c77e5e",
-          "uploaded_at": "2026-01-06T01:19:44.285107"
+          "uploaded_at": "2026-01-06T01:24:37.469482"
         },
         {
-          "id": "cv_fd076617",
+          "id": "cv_6a7ba388",
           "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf",
           "chunk_count": 4,
           "content_hash": "9ed63ccc7f2f7c0cc81da35ff3453dcec31c300ead2b4f946d4db5d6048ac157",
-          "uploaded_at": "2026-01-06T01:19:44.711761"
+          "uploaded_at": "2026-01-06T01:24:37.851107"
         },
         {
-          "id": "cv_e5dd7161",
+          "id": "cv_2174442c",
           "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf",
           "chunk_count": 3,
           "content_hash": "6858a468a4cdf946a86d01fd652ea2c146f8409afbe9337d0f43ebbeb0e4104f",
-          "uploaded_at": "2026-01-06T01:19:45.069056"
+          "uploaded_at": "2026-01-06T01:24:38.256303"
         },
         {
-          "id": "cv_78a65d6b",
+          "id": "cv_89b19fbf",
           "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf",
           "chunk_count": 7,
           "content_hash": "61979aaf1446d8b5d11d28b9b65cdd95e6e8100ee8667c9ad52d4104796d51ef",
-          "uploaded_at": "2026-01-06T01:19:45.358492"
+          "uploaded_at": "2026-01-06T01:24:38.549406"
         },
         {
-          "id": "cv_e3982b00",
+          "id": "cv_2a90e825",
           "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf",
           "chunk_count": 3,
           "content_hash": "13213d6ec70b08b54b753f691859eb562813f17ed272f4754ad12a5a4b19e370",
-          "uploaded_at": "2026-01-06T01:19:45.710500"
+          "uploaded_at": "2026-01-06T01:24:38.882955"
         },
         {
-          "id": "cv_1ba5b1f0",
+          "id": "cv_b9bc3136",
           "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf",
           "chunk_count": 3,
           "content_hash": "0e996b38a95c64aca7129e2554ee5a0e684da1c7f40a72e8c912ab14faad7f18",
-          "uploaded_at": "2026-01-06T01:19:46.006436"
+          "uploaded_at": "2026-01-06T01:24:39.174354"
         },
         {
-          "id": "cv_0fa36c2d",
+          "id": "cv_d59e0784",
           "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf",
           "chunk_count": 11,
           "content_hash": "fb9a97f91218eb858e3c8647e40b5b25a35d25039dc923bfe0a4da640eb2a90f",
-          "uploaded_at": "2026-01-06T01:19:46.463032"
+          "uploaded_at": "2026-01-06T01:24:39.586585"
         },
         {
-          "id": "cv_800f94de",
+          "id": "cv_85d83bc9",
           "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf",
           "chunk_count": 6,
           "content_hash": "9ac96c226a0824b5a8df589c45c1a9886ffb2f05442986faa0a5e6491c6eba80",
-          "uploaded_at": "2026-01-06T01:19:46.818292"
+          "uploaded_at": "2026-01-06T01:24:39.980011"
         },
         {
-          "id": "cv_bf2a78ad",
+          "id": "cv_c6a61209",
           "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf",
           "chunk_count": 6,
           "content_hash": "85d898ad89ecc8cb7267e5b49adba1f1cac5b408dd4c4fc2d71d14dc5bbd9786",
-          "uploaded_at": "2026-01-06T01:19:47.176153"
+          "uploaded_at": "2026-01-06T01:24:40.333022"
         },
         {
-          "id": "cv_9f03e54d",
+          "id": "cv_f19c2196",
           "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf",
           "chunk_count": 4,
           "content_hash": "74f41b5728cefd055be7ae50f0cd92f821fc552c3f1623d099aafbc0f0110cf1",
-          "uploaded_at": "2026-01-06T01:19:47.590754"
+          "uploaded_at": "2026-01-06T01:24:40.706442"
         },
         {
-          "id": "cv_9c33b2da",
+          "id": "cv_6973bc24",
           "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf",
           "chunk_count": 7,
           "content_hash": "b0ac973a41aa837f6956db83be7efc36c49d2569068d401372609dee2fb1805b",
-          "uploaded_at": "2026-01-06T01:19:47.993360"
+          "uploaded_at": "2026-01-06T01:24:41.099228"
         }
       ],
       "messages": [
         {
-          "id": "944d0615-ce66-4edf-a7a5-acd977020f56",
+          "id": "832cb2cc-429f-4804-97e3-e1225be95fa4",
           "role": "user",
           "content": "give me risks about Imani Jones",
           "sources": [],
           "pipeline_steps": [],
           "structured_output": null,
-          "timestamp": "2026-01-06T01:19:54.602057"
+          "timestamp": "2026-01-06T01:24:42.972737"
         },
         {
-          "id": "6bcb0054-c598-4a00-b09f-85d62994e5e6",
+          "id": "21e04346-86ad-4d8c-823f-ee4da1242143",
           "role": "assistant",
-          "content": ":::thinking\nThe user is asking for a risk analysis of Imani Jones Concept (cv_800f94de) based on the provided CV data. The risk assessment table shows \"Pending\" status, meaning no pre-calculated risk metrics are available. Therefore, I must rely solely on the CV content to identify potential red flags. The CV mentions multiple roles, a mix of freelance and studio work, and a potential lack of explicit dates for the current role. I will focus on these aspects in my analysis.\n:::\n\nRisk metrics have not been calculated for  Imani Jones  Concept. Please re-index the CV to generate risk assessment data.\n\n\n:::conclusion\n**Assessment:**The risk assessment is incomplete due to the \"Pending\" status of the risk metrics. A more thorough evaluation would require calculating job stability, tenure, and other relevant risk indicators.\n:::",
+          "content": ":::thinking\nThe user is asking for a risk analysis of Imani Jones Concept (cv_85d83bc9) based on the provided CV data. The pre-calculated risk assessment data table shows that the risk metrics are still pending. Therefore, I cannot provide a detailed risk analysis based on that table. I will state that the risk metrics are not yet calculated.\n:::\n\nRisk assessment details for  Imani Jones  Concept were not found in the response.\n\n\n:::conclusion\n**Assessment:**Risk metrics have not yet been calculated for this CV, so a detailed risk assessment cannot be provided at this time.\n:::",
           "sources": [
             {
-              "cv_id": "cv_800f94de",
+              "cv_id": "cv_85d83bc9",
               "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
             }
           ],
@@ -56513,45 +56513,45 @@
             {
               "name": "query_understanding",
               "status": "completed",
-              "duration_ms": 1429.48,
+              "duration_ms": 1236.24,
               "details": "Query type: search"
             },
             {
               "name": "retrieval",
               "status": "completed",
-              "duration_ms": 0.6,
+              "duration_ms": 0.59,
               "details": "Found 6 relevant chunks"
             },
             {
               "name": "analysis",
               "status": "error",
-              "duration_ms": 9567.52,
+              "duration_ms": 8236.06,
               "details": "Analyzed candidates and generated ranking"
             },
             {
               "name": "generation",
               "status": "completed",
-              "duration_ms": 3154.26,
+              "duration_ms": 2636.39,
               "details": "Generated structured response"
             }
           ],
           "structured_output": {
-            "direct_answer": "Risk metrics have not been calculated for  Imani Jones  Concept. Please re-index the CV to generate risk assessment data.",
-            "raw_content": ":::thinking\nThe user is asking for a risk analysis of **[ Imani Jones Concept](cv:cv_800f94de)** based on the provided CV data. The risk assessment table shows \"Pending\" status, meaning no pre-calculated risk metrics are available. Therefore, I must rely solely on the CV content to identify potential red flags. The CV mentions multiple roles, a mix of freelance and studio work, and a potential lack of explicit dates for the current role. I will focus on these aspects in my analysis.\n:::\n\n### 🚩 Risk Analysis for **[ Imani Jones Concept](cv:cv_800f94de)**\n\n⚠️ **Risk factors identified for Imani Jones Concept:**\n- The \"Risk metrics not yet calculated for this CV\" indicates a lack of automated risk assessment data. This means a comprehensive risk evaluation is not possible based on pre-calculated metrics.\n\n### ⚠️ Risk Assessment\n\n| Factor | Status | Details |\n|--------|--------|---------|\n| ℹ️ Data | Pending | Risk metrics not yet calculated for this CV |\n\n:::conclusion\n**Assessment:** The risk assessment is incomplete due to the \"Pending\" status of the risk metrics. A more thorough evaluation would require calculating job stability, tenure, and other relevant risk indicators.\n:::",
-            "thinking": "The user is asking for a risk analysis of Imani Jones Concept (cv_800f94de) based on the provided CV data. The risk assessment table shows \"Pending\" status, meaning no pre-calculated risk metrics are available. Therefore, I must rely solely on the CV content to identify potential red flags. The CV mentions multiple roles, a mix of freelance and studio work, and a potential lack of explicit dates for the current role. I will focus on these aspects in my analysis.",
+            "direct_answer": "Risk assessment details for  Imani Jones  Concept were not found in the response.",
+            "raw_content": ":::thinking\nThe user is asking for a risk analysis of **[Imani Jones Concept](cv:cv_85d83bc9)** based on the provided CV data. The pre-calculated risk assessment data table shows that the risk metrics are still pending. Therefore, I cannot provide a detailed risk analysis based on that table. I will state that the risk metrics are not yet calculated.\n:::\n\n### 🚩 Risk Analysis for **[Imani Jones Concept](cv:cv_85d83bc9)**\n\n⚠️ **Risk factors identified for Imani Jones Concept:**\n- Risk metrics not yet calculated for this CV\n\n---\n\n### ⚠️ Risk Assessment\n\n| Factor | Status | Details |\n|--------|--------|---------|\n| ℹ️ Data | Pending | Risk metrics not yet calculated for this CV |\n\n---\n\n:::conclusion\n**Assessment:** Risk metrics have not yet been calculated for this CV, so a detailed risk assessment cannot be provided at this time.\n:::",
+            "thinking": "The user is asking for a risk analysis of Imani Jones Concept (cv_85d83bc9) based on the provided CV data. The pre-calculated risk assessment data table shows that the risk metrics are still pending. Therefore, I cannot provide a detailed risk analysis based on that table. I will state that the risk metrics are not yet calculated.",
             "analysis": null,
             "table_data": null,
-            "conclusion": "**Assessment:**The risk assessment is incomplete due to the \"Pending\" status of the risk metrics. A more thorough evaluation would require calculating job stability, tenure, and other relevant risk indicators.",
+            "conclusion": "**Assessment:**Risk metrics have not yet been calculated for this CV, so a detailed risk assessment cannot be provided at this time.",
             "gap_analysis": null,
             "red_flags": null,
             "timeline": null,
             "risk_assessment": {
               "candidate_name": " Imani Jones  Concept",
-              "cv_id": "cv_800f94de",
+              "cv_id": "cv_85d83bc9",
               "factors": [],
               "has_issues": false,
               "overall_risk": "low",
-              "analysis_text": "Risk metrics have not been calculated for  Imani Jones  Concept. Please re-index the CV to generate risk assessment data.",
+              "analysis_text": "Risk assessment details for  Imani Jones  Concept were not found in the response.",
               "metrics": {
                 "job_hopping_score": 0.0,
                 "avg_tenure_years": 0.0,
@@ -56564,15 +56564,15 @@
             "single_candidate_data": null,
             "risk_assessment_data": {
               "candidate_name": " Imani Jones  Concept",
-              "cv_id": "cv_800f94de",
-              "risk_analysis": "Risk metrics have not been calculated for  Imani Jones  Concept. Please re-index the CV to generate risk assessment data.",
+              "cv_id": "cv_85d83bc9",
+              "risk_analysis": "Risk assessment details for  Imani Jones  Concept were not found in the response.",
               "risk_table": {
                 "candidate_name": " Imani Jones  Concept",
-                "cv_id": "cv_800f94de",
+                "cv_id": "cv_85d83bc9",
                 "factors": [],
                 "has_issues": false,
                 "overall_risk": "low",
-                "analysis_text": "Risk metrics have not been calculated for  Imani Jones  Concept. Please re-index the CV to generate risk assessment data.",
+                "analysis_text": "Risk assessment details for  Imani Jones  Concept were not found in the response.",
                 "metrics": {
                   "job_hopping_score": 0.0,
                   "avg_tenure_years": 0.0,
@@ -56581,17 +56581,188 @@
                   "position_count": 0
                 }
               },
-              "assessment": "**Assessment:**The risk assessment is incomplete due to the \"Pending\" status of the risk metrics. A more thorough evaluation would require calculating job stability, tenure, and other relevant risk indicators."
+              "assessment": "**Assessment:**Risk metrics have not yet been calculated for this CV, so a detailed risk assessment cannot be provided at this time."
             },
             "cv_references": [],
             "parsing_warnings": [],
             "fallback_used": false
           },
-          "timestamp": "2026-01-06T01:20:12.397981"
+          "timestamp": "2026-01-06T01:24:58.669256"
+        },
+        {
+          "id": "a230c35c-1f89-4d49-88c7-446c608dfa04",
+          "role": "user",
+          "content": "give me risks about Imani Jones",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T01:37:45.347313"
+        },
+        {
+          "id": "52510adc-a19b-46eb-b8f1-e1c8f4364ba2",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a risk analysis of Imani Jones Concept (cv_85d83bc9) based on the provided CV data. I need to create a risk assessment table based on the CV content, looking for red flags, job hopping, employment gaps, stability, and experience level. The analysis should be based solely on the provided CV data.\n:::\n\n**Assessment:** The CV for **[ Imani Jones Concept](cv:cv_85d83bc9)** presents a potential issue with the listed skills, as \"and\" is not a valid skill. However, the candidate demonstrates low job hopping, no employment gaps, and reasonable stability based on their work history. The candidate's experience level appears to be mid-level, based on their previous role as a Senior Concept Artist.\n\n\n### ⚠️ Risk Assessment\n\n\n| Factor | Status | Details |\n\n|:-------|:------:|:--------|\n\n| **🚩 Red Flags** | ⚠️ Issues Found | See analysis for details |\n\n| **🔄 Job Hopping** | ✅ Low | Stable employment history |\n\n| **⏸️ Employment Gaps** | ✅ None | Continuous employment history |\n\n| **📊 Stability** | ✅ Stable | 3 positions over 4 years |\n\n| **🎯 Experience** | Mid | Mid-level experience |\n\n\n:::conclusion\n**Assessment:** The CV for **[ Imani Jones Concept](cv:cv_85d83bc9)** presents a potential issue with the listed skills, as \"and\" is not a valid skill. However, the candidate demonstrates low job hopping, no employment gaps, and reasonable stability based on their work history. The candidate's experience level appears to be mid-level, based on their previous role as a Senior Concept Artist.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_85d83bc9",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1382.07,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 0.87,
+              "details": "Found 6 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 12160.25,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 3616.24,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "**Assessment:** The CV for **[ Imani Jones Concept](cv:cv_85d83bc9)** presents a potential issue with the listed skills, as \"and\" is not a valid skill. However, the candidate demonstrates low job hopping, no employment gaps, and reasonable stability based on their work history. The candidate's experience level appears to be mid-level, based on their previous role as a Senior Concept Artist.",
+            "raw_content": ":::thinking\nThe user is asking for a risk analysis of **[ Imani Jones Concept](cv:cv_85d83bc9)** based on the provided CV data. I need to create a risk assessment table based on the CV content, looking for red flags, job hopping, employment gaps, stability, and experience level. The analysis should be based solely on the provided CV data.\n:::\n\n### 🚩 Risk Analysis for **[ Imani Jones Concept](cv:cv_85d83bc9)**\n\n⚠️ **Risk factors identified for  Imani Jones Concept:**\n- The CV lists \"and\" as key skills. This is not a valid skill and suggests incomplete or inaccurate information.\n\n---\n\n### ⚠️ Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| **🚩 Red Flags** | ⚠️ Potential Issue | The CV lists \"and\" as key skills, which is not a valid skill and suggests incomplete or inaccurate information. |\n| **🔄 Job Hopping** | ✅ Low | Three positions in 4 years suggests low job hopping. |\n| **⏸️ Employment Gaps** | ✅ None | No employment gaps detected. |\n| **📊 Stability** | ✅ Stable | 3 positions in 4 years indicates reasonable stability. |\n| **🎯 Experience** | Mid | Senior Concept Artist (2019-2022) |\n\n---\n\n:::conclusion\n**Assessment:** The CV for **[ Imani Jones Concept](cv:cv_85d83bc9)** presents a potential issue with the listed skills, as \"and\" is not a valid skill. However, the candidate demonstrates low job hopping, no employment gaps, and reasonable stability based on their work history. The candidate's experience level appears to be mid-level, based on their previous role as a Senior Concept Artist.\n:::",
+            "thinking": "The user is asking for a risk analysis of Imani Jones Concept (cv_85d83bc9) based on the provided CV data. I need to create a risk assessment table based on the CV content, looking for red flags, job hopping, employment gaps, stability, and experience level. The analysis should be based solely on the provided CV data.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "**Assessment:** The CV for **[ Imani Jones Concept](cv:cv_85d83bc9)** presents a potential issue with the listed skills, as \"and\" is not a valid skill. However, the candidate demonstrates low job hopping, no employment gaps, and reasonable stability based on their work history. The candidate's experience level appears to be mid-level, based on their previous role as a Senior Concept Artist.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Imani Jones  Concept",
+              "cv_id": "cv_85d83bc9",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "⚠️ Issues Found",
+                  "details": "See analysis for details",
+                  "status_icon": "⚠️",
+                  "status_text": "Issues Found"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "✅ Low",
+                  "details": "Stable employment history",
+                  "status_icon": "✅",
+                  "status_text": "Low"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous employment history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "✅ Stable",
+                  "details": "3 positions over 4 years",
+                  "status_icon": "✅",
+                  "status_text": "Stable"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Mid",
+                  "details": "Mid-level experience",
+                  "status_icon": "",
+                  "status_text": "Mid"
+                }
+              ],
+              "has_issues": true,
+              "overall_risk": "low",
+              "analysis_text": "**Assessment:** The CV for **[ Imani Jones Concept](cv:cv_85d83bc9)** presents a potential issue with the listed skills, as \"and\" is not a valid skill. However, the candidate demonstrates low job hopping, no employment gaps, and reasonable stability based on their work history. The candidate's experience level appears to be mid-level, based on their previous role as a Senior Concept Artist.",
+              "metrics": {
+                "job_hopping_score": 0.0,
+                "avg_tenure_years": 0.0,
+                "total_experience_years": 0.0,
+                "employment_gaps_count": 0,
+                "position_count": 0
+              }
+            },
+            "structure_type": "risk_assessment",
+            "single_candidate_data": null,
+            "risk_assessment_data": {
+              "candidate_name": " Imani Jones  Concept",
+              "cv_id": "cv_85d83bc9",
+              "risk_analysis": "**Assessment:** The CV for **[ Imani Jones Concept](cv:cv_85d83bc9)** presents a potential issue with the listed skills, as \"and\" is not a valid skill. However, the candidate demonstrates low job hopping, no employment gaps, and reasonable stability based on their work history. The candidate's experience level appears to be mid-level, based on their previous role as a Senior Concept Artist.",
+              "risk_table": {
+                "candidate_name": " Imani Jones  Concept",
+                "cv_id": "cv_85d83bc9",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "⚠️ Issues Found",
+                    "details": "See analysis for details",
+                    "status_icon": "⚠️",
+                    "status_text": "Issues Found"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "✅ Low",
+                    "details": "Stable employment history",
+                    "status_icon": "✅",
+                    "status_text": "Low"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous employment history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "✅ Stable",
+                    "details": "3 positions over 4 years",
+                    "status_icon": "✅",
+                    "status_text": "Stable"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Mid",
+                    "details": "Mid-level experience",
+                    "status_icon": "",
+                    "status_text": "Mid"
+                  }
+                ],
+                "has_issues": true,
+                "overall_risk": "low",
+                "analysis_text": "**Assessment:** The CV for **[ Imani Jones Concept](cv:cv_85d83bc9)** presents a potential issue with the listed skills, as \"and\" is not a valid skill. However, the candidate demonstrates low job hopping, no employment gaps, and reasonable stability based on their work history. The candidate's experience level appears to be mid-level, based on their previous role as a Senior Concept Artist.",
+                "metrics": {
+                  "job_hopping_score": 0.0,
+                  "avg_tenure_years": 0.0,
+                  "total_experience_years": 0.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 0
+                }
+              },
+              "assessment": "**Assessment:** The CV for **[ Imani Jones Concept](cv:cv_85d83bc9)** presents a potential issue with the listed skills, as \"and\" is not a valid skill. However, the candidate demonstrates low job hopping, no employment gaps, and reasonable stability based on their work history. The candidate's experience level appears to be mid-level, based on their previous role as a Senior Concept Artist."
+            },
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T01:38:06.970299"
         }
       ],
-      "created_at": "2026-01-06T01:19:27.911942",
-      "updated_at": "2026-01-06T01:20:12.397981"
+      "created_at": "2026-01-06T01:24:24.424832",
+      "updated_at": "2026-01-06T01:38:06.970299"
     }
   ]
 }

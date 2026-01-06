@@ -14,6 +14,7 @@ DO NOT duplicate this functionality. Import and use this module.
 """
 
 import logging
+import re
 from typing import Optional, List, Dict, Any
 from dataclasses import dataclass, field
 
@@ -118,15 +119,21 @@ class RiskTableModule:
         self,
         chunks: List[Dict[str, Any]],
         candidate_name: str = "Unknown",
-        cv_id: str = ""
+        cv_id: str = "",
+        llm_output: str = ""
     ) -> RiskAssessmentData:
         """
-        Extract risk assessment from chunk metadata.
+        Extract risk assessment from chunk metadata OR LLM output.
+        
+        Priority:
+        1. Try to extract from chunk enriched metadata (pre-calculated)
+        2. Fallback: Parse from LLM output (LLM-generated table)
         
         Args:
             chunks: CV chunks with enriched metadata
             candidate_name: Name of the candidate
             cv_id: CV identifier
+            llm_output: Raw LLM response (optional, for fallback parsing)
             
         Returns:
             RiskAssessmentData with factors, table, and analysis
@@ -138,6 +145,9 @@ class RiskTableModule:
         
         if not chunks:
             logger.warning(f"[RISK_ASSESSMENT] No chunks provided for {candidate_name}")
+            # Try LLM output fallback
+            if llm_output:
+                return self._extract_from_llm_output(llm_output, candidate_name, cv_id)
             return data
         
         # Find chunk with enriched metadata
@@ -145,6 +155,10 @@ class RiskTableModule:
         
         if not enriched_meta:
             logger.warning(f"[RISK_ASSESSMENT] No enriched metadata found for {candidate_name}")
+            # FALLBACK: Try to parse from LLM output
+            if llm_output:
+                logger.info(f"[RISK_ASSESSMENT] Attempting fallback: parsing from LLM output")
+                return self._extract_from_llm_output(llm_output, candidate_name, cv_id)
             data.analysis_text = f"Risk metrics have not been calculated for {candidate_name}. Please re-index the CV to generate risk assessment data."
             return data
         
@@ -190,6 +204,264 @@ class RiskTableModule:
             if meta.get("has_enriched_metadata") or meta.get("job_hopping_score") is not None:
                 return meta
         return None
+    
+    def _extract_from_llm_output(
+        self,
+        llm_output: str,
+        candidate_name: str,
+        cv_id: str
+    ) -> RiskAssessmentData:
+        """
+        FALLBACK: Parse risk assessment table from LLM markdown output.
+        
+        This is used when:
+        1. CV metadata doesn't have enriched risk metrics
+        2. LLM generated a risk assessment in its response
+        
+        Parses markdown tables with format:
+        | Factor | Status | Details |
+        |--------|--------|---------|
+        | 🚩 Red Flags | ✅ None | ... |
+        """
+        data = RiskAssessmentData(
+            candidate_name=candidate_name,
+            cv_id=cv_id
+        )
+        
+        if not llm_output:
+            return data
+        
+        logger.info(f"[RISK_TABLE] Parsing LLM output for risk assessment table")
+        
+        # Find Risk Assessment section
+        risk_section_patterns = [
+            r'(?:###?\s*)?(?:⚠️\s*)?Risk Assessment.*?(?=\n#{1,3}\s|\n\*\*[A-Z]|\Z)',
+            r'(?:###?\s*)?Risk (?:Analysis|Evaluation).*?(?=\n#{1,3}\s|\n\*\*[A-Z]|\Z)',
+        ]
+        
+        risk_section = ""
+        for pattern in risk_section_patterns:
+            match = re.search(pattern, llm_output, re.IGNORECASE | re.DOTALL)
+            if match:
+                risk_section = match.group(0)
+                break
+        
+        if not risk_section:
+            # Try to find any table with risk-related content
+            risk_section = llm_output
+        
+        # Parse markdown table rows
+        # Pattern: | Factor | Status | Details |
+        table_row_pattern = r'\|\s*\*?\*?([^|]+)\*?\*?\s*\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|'
+        
+        rows = re.findall(table_row_pattern, risk_section)
+        
+        factors = []
+        for row in rows:
+            factor = row[0].strip()
+            status = row[1].strip()
+            details = row[2].strip()
+            
+            # Skip header rows
+            if factor.lower() in ('factor', '-----', ':---', '---'):
+                continue
+            if 'factor' in factor.lower() and 'status' in status.lower():
+                continue
+            
+            # Determine status icon
+            status_icon = ""
+            status_text = status
+            if "✅" in status:
+                status_icon = "✅"
+                status_text = status.replace("✅", "").strip()
+            elif "⚠️" in status:
+                status_icon = "⚠️"
+                status_text = status.replace("⚠️", "").strip()
+            elif "⚡" in status:
+                status_icon = "⚡"
+                status_text = status.replace("⚡", "").strip()
+            
+            factors.append(RiskFactor(
+                factor=factor,
+                status=status,
+                details=details,
+                status_icon=status_icon,
+                status_text=status_text
+            ))
+        
+        if factors:
+            logger.info(f"[RISK_TABLE] Parsed {len(factors)} factors from LLM output")
+            data.factors = factors
+            data.has_issues = any("⚠️" in f.status or "High" in f.status for f in factors)
+            
+            # Extract analysis text (paragraph before or after the table)
+            analysis_patterns = [
+                r'\*\*[^*]+\*\*\s+(?:presents?|shows?|exhibits?|has)\s+[^.]+(?:risk|profile)[^.]*\.',
+                r'(?:Based on|According to|The analysis shows)[^.]+\.',
+            ]
+            for pattern in analysis_patterns:
+                match = re.search(pattern, llm_output, re.IGNORECASE)
+                if match:
+                    data.analysis_text = match.group(0)
+                    break
+            
+            if not data.analysis_text:
+                data.analysis_text = f"Risk assessment for {candidate_name} based on available data."
+        else:
+            # FALLBACK: No table found - try to extract from text analysis
+            logger.info(f"[RISK_TABLE] No table found, attempting text extraction")
+            data = self._extract_from_text_analysis(llm_output, candidate_name, cv_id)
+        
+        return data
+    
+    def _extract_from_text_analysis(
+        self,
+        llm_output: str,
+        candidate_name: str,
+        cv_id: str
+    ) -> RiskAssessmentData:
+        """
+        FALLBACK 2: Extract risk data from LLM text analysis (no table format).
+        
+        Parses text like:
+        - "low job hopping" / "high job mobility"
+        - "three positions in four years"
+        - "no employment gaps"
+        """
+        data = RiskAssessmentData(
+            candidate_name=candidate_name,
+            cv_id=cv_id
+        )
+        
+        text_lower = llm_output.lower()
+        factors = []
+        has_issues = False
+        
+        # 1. RED FLAGS
+        if "no significant red flag" in text_lower or "no red flag" in text_lower or "no major concern" in text_lower:
+            factors.append(RiskFactor(
+                factor="🚩 Red Flags",
+                status="✅ None Detected",
+                details="Clean profile based on analysis",
+                status_icon="✅",
+                status_text="None Detected"
+            ))
+        elif "red flag" in text_lower or "concern" in text_lower or "issue" in text_lower:
+            factors.append(RiskFactor(
+                factor="🚩 Red Flags",
+                status="⚠️ Issues Found",
+                details="See analysis for details",
+                status_icon="⚠️",
+                status_text="Issues Found"
+            ))
+            has_issues = True
+        
+        # 2. JOB HOPPING
+        if "low job hopping" in text_lower or "low job-hopping" in text_lower:
+            factors.append(RiskFactor(
+                factor="🔄 Job Hopping",
+                status="✅ Low",
+                details="Stable employment history",
+                status_icon="✅",
+                status_text="Low"
+            ))
+        elif "moderate job" in text_lower or "some job" in text_lower:
+            factors.append(RiskFactor(
+                factor="🔄 Job Hopping",
+                status="⚡ Moderate",
+                details="Some position changes",
+                status_icon="⚡",
+                status_text="Moderate"
+            ))
+        elif "high job" in text_lower or "frequent job" in text_lower or "high mobility" in text_lower:
+            factors.append(RiskFactor(
+                factor="🔄 Job Hopping",
+                status="⚠️ High",
+                details="Frequent position changes",
+                status_icon="⚠️",
+                status_text="High"
+            ))
+            has_issues = True
+        
+        # 3. EMPLOYMENT GAPS
+        if "no employment gap" in text_lower or "no gap" in text_lower or "continuous" in text_lower:
+            factors.append(RiskFactor(
+                factor="⏸️ Employment Gaps",
+                status="✅ None",
+                details="Continuous employment history",
+                status_icon="✅",
+                status_text="None"
+            ))
+        elif "gap" in text_lower:
+            factors.append(RiskFactor(
+                factor="⏸️ Employment Gaps",
+                status="⚠️ Detected",
+                details="Employment gaps found",
+                status_icon="⚠️",
+                status_text="Detected"
+            ))
+            has_issues = True
+        
+        # 4. STABILITY - extract positions/years
+        positions_match = re.search(r'(\d+)\s*positions?\s*(?:in|over)\s*(\d+)\s*years?', text_lower)
+        if positions_match:
+            positions = positions_match.group(1)
+            years = positions_match.group(2)
+            factors.append(RiskFactor(
+                factor="📊 Stability",
+                status="✅ Stable" if int(positions) <= int(years) else "⚡ Moderate",
+                details=f"{positions} positions over {years} years",
+                status_icon="✅" if int(positions) <= int(years) else "⚡",
+                status_text="Stable" if int(positions) <= int(years) else "Moderate"
+            ))
+        
+        # 5. EXPERIENCE LEVEL
+        if "entry" in text_lower or "junior" in text_lower:
+            factors.append(RiskFactor(
+                factor="🎯 Experience",
+                status="Entry",
+                details="Entry-level position",
+                status_icon="",
+                status_text="Entry"
+            ))
+        elif "mid" in text_lower or "intermediate" in text_lower:
+            factors.append(RiskFactor(
+                factor="🎯 Experience",
+                status="Mid",
+                details="Mid-level experience",
+                status_icon="",
+                status_text="Mid"
+            ))
+        elif "senior" in text_lower or "lead" in text_lower:
+            factors.append(RiskFactor(
+                factor="🎯 Experience",
+                status="Senior",
+                details="Senior-level experience",
+                status_icon="",
+                status_text="Senior"
+            ))
+        
+        if factors:
+            logger.info(f"[RISK_TABLE] Extracted {len(factors)} factors from text analysis")
+            data.factors = factors
+            data.has_issues = has_issues
+            
+            # Use conclusion or assessment text as analysis
+            conclusion_match = re.search(r':::conclusion\s*(.*?):::', llm_output, re.DOTALL | re.IGNORECASE)
+            if conclusion_match:
+                data.analysis_text = conclusion_match.group(1).strip()
+            else:
+                # Look for Assessment: text
+                assessment_match = re.search(r'\*?\*?Assessment:?\*?\*?\s*(.+?)(?:\n\n|\Z)', llm_output, re.DOTALL | re.IGNORECASE)
+                if assessment_match:
+                    data.analysis_text = assessment_match.group(1).strip()
+                else:
+                    data.analysis_text = f"Risk assessment for {candidate_name} extracted from analysis."
+        else:
+            logger.warning(f"[RISK_TABLE] Could not extract risk factors from text")
+            data.analysis_text = f"Risk assessment for {candidate_name} - see details above."
+        
+        return data
     
     def _generate_factors(
         self, 

@@ -934,25 +934,18 @@ function App() {
                 </div>
               )}
               {/* Combine actual messages with pending message for THIS session only */}
-              {/* CRITICAL: During streaming (isChatLoading), ALWAYS show pending message */}
-              {/* Only skip duplicate check AFTER streaming completes */}
+              {/* ALWAYS check for duplicates to prevent showing user message twice */}
               {(() => {
                 const sessionMsgs = currentSession.messages || [];
                 const pending = pendingMessages[currentSessionId];
                 
-                // During streaming, ALWAYS show pending message (no duplicate check)
-                // This prevents the message from disappearing during the streaming process
-                if (isChatLoading && pending) {
-                  return [
-                    ...sessionMsgs,
-                    { role: 'user', content: pending.userMsg, isPending: true }
-                  ];
-                }
-                
-                // After streaming: Check if pending message is already saved (avoid duplicate)
+                // ALWAYS check if pending message is already in session messages
+                // This prevents duplicate when backend saves message before streaming completes
                 const pendingAlreadySaved = pending && sessionMsgs.some(
                   m => m.role === 'user' && m.content === pending.userMsg
                 );
+                
+                // Only add pending message if not already saved
                 return [
                   ...sessionMsgs,
                   ...(pending && !pendingAlreadySaved ? [{ role: 'user', content: pending.userMsg, isPending: true }] : [])

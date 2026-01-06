@@ -1313,11 +1313,22 @@ class PromptBuilder:
         import logging
         logger = logging.getLogger(__name__)
         
-        # Default values - shown when no enriched metadata available
+        # Default values - when no enriched metadata, instruct LLM to analyze CV content
+        # IMPORTANT: Do NOT show "Pending" - instead prompt LLM to generate analysis
         sections = {
-            "risk_assessment": "| Factor | Status | Details |\n|--------|--------|---------|\n| ℹ️ Data | Pending | Risk metrics not yet calculated for this CV |",
-            "red_flags": "**Status:** Data pending",
-            "stability_metrics": "**Status:** Data pending"
+            "risk_assessment": """**ANALYZE THE CV CONTENT** to generate a risk assessment table with this exact format:
+
+| Factor | Status | Details |
+|:-------|:------:|:--------|
+| **🚩 Red Flags** | [✅/⚠️] [Status] | [Your analysis from CV] |
+| **🔄 Job Hopping** | [✅/⚡/⚠️] [Low/Moderate/High] | [Analyze job changes] |
+| **⏸️ Employment Gaps** | [✅/⚠️] [None/X detected] | [Check for gaps] |
+| **📊 Stability** | [✅/⚡/⚠️] [Stable/Moderate/Unstable] | [Position count and tenure] |
+| **🎯 Experience** | [Entry/Mid/Senior/Executive] | [Current role] |
+
+Base your analysis on the actual CV content provided.""",
+            "red_flags": "**Analyze CV for potential red flags**",
+            "stability_metrics": "**Analyze CV for stability metrics**"
         }
         
         # CRITICAL: Find chunk with ACTUAL enriched metadata (not just total_exp)
