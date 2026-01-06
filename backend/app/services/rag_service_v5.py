@@ -1298,7 +1298,7 @@ class RAGServiceV5:
         """Step 1: Understand the query."""
         start = time.perf_counter()
         try:
-            result = await self._query_understanding.understand(ctx.question)
+            result = await self._query_understanding.understand(ctx.question, ctx.conversation_history)
             
             ctx.query_understanding = result
             
@@ -1349,7 +1349,7 @@ class RAGServiceV5:
         start = time.perf_counter()
         try:
             # Pass the progress callback to understand() for retry/fallback progress updates
-            result = await self._query_understanding.understand(ctx.question, progress_callback)
+            result = await self._query_understanding.understand(ctx.question, ctx.conversation_history, progress_callback)
             
             ctx.query_understanding = result
             

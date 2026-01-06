@@ -60203,10 +60203,543 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-06T02:54:20.932972"
+        },
+        {
+          "id": "35f31bc4-694b-4415-af9f-ff932471aade",
+          "role": "user",
+          "content": "Compare years of experience",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T03:21:24.880965"
+        },
+        {
+          "id": "087a2152-49a5-4c21-931a-a955ce527c77",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to extract and compare the total years of professional experience for each candidate. I need to identify the \"TOTAL EXPERIENCE\" field in each CV, extract the numerical value, and present it in a table. The table should include the candidate's name and their total years of experience, ordered from most to least experienced. I will include all candidates for whom the \"TOTAL EXPERIENCE\" field is explicitly stated in the CV.\n:::\n\nThe table below presents a comparison of the total years of experience for each candidate, based on the \"TOTAL EXPERIENCE\" field in their respective CVs. This allows for a direct comparison of their experience levels as presented in their CVs. I have included all candidates for whom this field is explicitly stated to provide a comprehensive overview.\n\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_ad302d28)** has the most experience with 47 years, while **[Aisha Nkrumah](cv:cv_f89bcd3a)** and **[Carlos Mendoza](cv:cv_95a9640e)** have the least with 0 years.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_15bf5ccf",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_f89bcd3a",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_ad302d28",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_9652dd1b",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_326dd908",
+              "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_fe460c95",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_7d645942",
+              "filename": "8742ca7a__Sofia_Mendoza__Environment_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a6ab5b03",
+              "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_95a9640e",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_87c83f0b",
+              "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_76a139cd",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_0ede58a9",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a05f1836",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_afc93cd9",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_3fbba6fd",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 2212.75,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 21.74,
+              "details": "Found 29 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 29358.4,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5142.03,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking to extract and compare the total years of professional experience for each candidate. I need to identify the \"TOTAL EXPERIENCE\" field in each CV, extract the numerical value, and present it in a table. The table should include the candidate's name and their total years of experience, ordered from most to least experienced. I will include all candidates for whom the \"TOTAL EXPERIENCE\" field is explicitly stated in the CV.\n:::\n\nThe following table compares the total years of professional experience for each candidate, as explicitly stated in their CVs. The candidates are ordered by years of experience, descending, to easily identify the most experienced individuals.\n\n### Analysis\nThe table below presents a comparison of the total years of experience for each candidate, based on the \"TOTAL EXPERIENCE\" field in their respective CVs. This allows for a direct comparison of their experience levels as presented in their CVs. I have included all candidates for whom this field is explicitly stated to provide a comprehensive overview.\n\n| Candidate | Total Years of Experience |\n|-----------|---------------------------|\n| **[Isabel Mendoza](cv:cv_ad302d28)** | 47 years |\n| **[Carmen Rodriguez](cv:cv_15bf5ccf)** | 16 years |\n| **[Rajiv Kapoor](cv:cv_a6ab5b03)** | 13 years |\n| **[Daan van Dijk](cv:cv_fe460c95)** | 11 years |\n| **[Aisha Johnson](cv:cv_3fbba6fd)** | 10 years |\n| **[Karim El Amrani](cv:cv_326dd908)** | 8 years |\n| **[Priya Patel](cv:cv_87c83f0b)** | 6 years |\n| **[Imani Jones](cv:cv_0ede58a9)** | 4 years |\n| **[Carlos Mendoza](cv:cv_76a139cd)** | 4 years |\n| **[Kenji Tanaka](cv:cv_9652dd1b)** | 2 years |\n| **[Rajiv Patel](cv:cv_afc93cd9)** | 2 years |\n| **[Aisha Nkrumah](cv:cv_f89bcd3a)** | 0 years |\n| **[Carlos Mendoza](cv:cv_95a9640e)** | 0 years |\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_ad302d28)** has the most experience with 47 years, while **[Aisha Nkrumah](cv:cv_f89bcd3a)** and **[Carlos Mendoza](cv:cv_95a9640e)** have the least with 0 years.\n:::",
+            "thinking": "The user is asking to extract and compare the total years of professional experience for each candidate. I need to identify the \"TOTAL EXPERIENCE\" field in each CV, extract the numerical value, and present it in a table. The table should include the candidate's name and their total years of experience, ordered from most to least experienced. I will include all candidates for whom the \"TOTAL EXPERIENCE\" field is explicitly stated in the CV.",
+            "analysis": "The table below presents a comparison of the total years of experience for each candidate, based on the \"TOTAL EXPERIENCE\" field in their respective CVs. This allows for a direct comparison of their experience levels as presented in their CVs. I have included all candidates for whom this field is explicitly stated to provide a comprehensive overview.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Total Years of Experience",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Isabel Mendoza",
+                  "cv_id": "cv_ad302d28",
+                  "columns": {
+                    "Total Years of Experience": "47 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Carmen Rodriguez",
+                  "cv_id": "cv_15bf5ccf",
+                  "columns": {
+                    "Total Years of Experience": "16 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Rajiv Kapoor",
+                  "cv_id": "cv_a6ab5b03",
+                  "columns": {
+                    "Total Years of Experience": "13 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Daan van Dijk",
+                  "cv_id": "cv_fe460c95",
+                  "columns": {
+                    "Total Years of Experience": "11 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Aisha Johnson",
+                  "cv_id": "cv_3fbba6fd",
+                  "columns": {
+                    "Total Years of Experience": "10 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Karim El Amrani",
+                  "cv_id": "cv_326dd908",
+                  "columns": {
+                    "Total Years of Experience": "8 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Priya Patel",
+                  "cv_id": "cv_87c83f0b",
+                  "columns": {
+                    "Total Years of Experience": "6 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Imani Jones",
+                  "cv_id": "cv_0ede58a9",
+                  "columns": {
+                    "Total Years of Experience": "4 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Carlos Mendoza",
+                  "cv_id": "cv_76a139cd",
+                  "columns": {
+                    "Total Years of Experience": "4 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Kenji Tanaka",
+                  "cv_id": "cv_9652dd1b",
+                  "columns": {
+                    "Total Years of Experience": "2 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Rajiv Patel",
+                  "cv_id": "cv_afc93cd9",
+                  "columns": {
+                    "Total Years of Experience": "2 years"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Aisha Nkrumah",
+                  "cv_id": "cv_f89bcd3a",
+                  "columns": {
+                    "Total Years of Experience": "0 years"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "**[Isabel Mendoza](cv:cv_ad302d28)** has the most experience with 47 years, while **[Aisha Nkrumah](cv:cv_f89bcd3a)** and **[Carlos Mendoza](cv:cv_95a9640e)** have the least with 0 years.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "comparison",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T03:22:04.623303"
+        },
+        {
+          "id": "5ea558e6-7c39-4cd3-9c56-53135a2dd636",
+          "role": "user",
+          "content": "dime mas sobre el winner",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T03:22:16.741419"
+        },
+        {
+          "id": "f57f3f45-3845-422c-a1ad-3639315a776c",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking to identify the candidate with the most years of experience from the previous comparison and then extract all available information from that candidate's CV. The previous comparison identified Isabel Mendoza (cv_ad302d28) as having the most experience with 47 years. Therefore, I need to extract all information from Isabel Mendoza (cv_ad302d28)'s CV and present it in a comprehensive format.\n:::\n\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_ad302d28)** is the candidate with the most experience. The extracted information above provides a comprehensive overview of her skills, experience, and background.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_f89bcd3a",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_0ede58a9",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_fe460c95",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_6b910c2e",
+              "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_15bf5ccf",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_87c83f0b",
+              "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_326dd908",
+              "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_3fbba6fd",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_7d645942",
+              "filename": "8742ca7a__Sofia_Mendoza__Environment_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a6ab5b03",
+              "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_ad302d28",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_76a139cd",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a05f1836",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_afc93cd9",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_95a9640e",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 3210.91,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 22.86,
+              "details": "Found 25 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 18208.1,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6100.12,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking to identify the candidate with the most years of experience from the previous comparison and then extract all available information from that candidate's CV. The previous comparison identified **[Isabel Mendoza](cv:cv_ad302d28)** as having the most experience with 47 years. Therefore, I need to extract all information from **[Isabel Mendoza](cv:cv_ad302d28)**'s CV and present it in a comprehensive format.\n:::\n\n**[Isabel Mendoza](cv:cv_ad302d28)** has the highest number of years of experience at 47 years. The following information is extracted from her CV, including personal details, education, work experience, and skills.\n\n### Analysis\nThe user requested all available information for the candidate with the most experience, which was determined to be **[Isabel Mendoza](cv:cv_ad302d28)** based on the previous turn. The information below is a direct extraction from the provided CV excerpts for **[Isabel Mendoza](cv:cv_ad302d28)**.\n\n**[Isabel Mendoza](cv:cv_ad302d28)**\n\n*   **Current Role:** 2010\n*   **Company:** 2020 | Global Render Studios\n*   **Total Experience:** 47 years\n\n**Experience:**\n\n*   **Chief Creative Officer** (2023 - Present | FutureFrame Studios): Oversees the end‑to‑end creative vision for multi‑platform projects, guiding a global team of artists to deliver high‑fidelity 3D assets that captivate audiences. Spearheaded a visual overhaul that increased user engagement by 45% across VR experiences. Introduced a streamlined asset pipeline that cut production time by 30% while maintaining artistic integrity. Mentored emerging talent, fostering a culture of patience and meticulous craftsmanship.\n*   **Vice President of Creative Development** (2020 - 2023 | Nova Media): Directed strategic creative initiatives across advertising, gaming, and simulation divisions, aligning artistic output with business goals. Delivered a $12M campaign that earned a Cannes Lion award for visual storytelling. Negotiated vendor contracts that reduced render costs by 20% without compromising quality. Championed inclusive design practices, expanding the studio’s artistic diversity.\n*   **Director of 3D Production** (2010 - 2020 | Global Render Studios): Managed large‑scale production pipelines for AAA titles, ensuring seamless integration of art and technology. Led a team of 25 artists to launch a flagship game that sold 5 million copies in its first week. Implemented procedural texturing workflows that improved texture variety by 50%. Maintained a 99% on‑time delivery rate across 12 concurrent projects.\n*   **3D** (2000 - 2010 | Immersive Creations): Supervised all 3D asset creation, from concept to final rendering, for film and broadcast projects. Produced award‑winning visual effects for a prime‑time series, winning a BAFTA for Best Visual Effects. Developed a library of reusable shaders that accelerated the art pipeline by 25%. Cultivated a patient, detail‑oriented team culture that earned internal excellence awards.\n*   **3D Artist** (1990 - 1995 | Creative Lab): Created high‑quality 3D models and animations for architectural visualizations and product renderings. Modeled over 200 complex structures, praised for anatomical precision and realistic textures. Collaborated closely with clients to translate briefs into compelling visual narratives. Optimized models for performance, reducing render times by 15%.\n*   **3D Artist** (1984 - 1990 | EuroGraphics): Contributed to diverse projects ranging from motion graphics to virtual tours. Designed immersive virtual tours that increased client conversion rates by 18%. Executed intricate character rigs that brought story elements to life. Maintained meticulous documentation, ensuring smooth hand‑offs across departments.\n*   **Junior 3D Artist** (1979 - 1984 | Pixel Dynamics): Assisted senior artists in modeling, texturing, and basic animation tasks. Learned industry‑standard software quickly, delivering clean geometry on tight deadlines. Supported the creation of a short animated short that won a student award. Demonstrated patience and attention to detail in repetitive modeling tasks.\n*   **Intern 3D Artist** (1976 - 1979 | Studio L'Atelier): Observed an\n\n**Skills:**\n\n*   3D Modeling 10/10\n*   Texturing 9/10\n*   Rigging 8/10\n*   Substance Painter 9/10\n*   Unreal Engine 9/10\n*   Maya 9/10\n\n**Languages:**\n\n*   French ⭐⭐⭐⭐⭐⭐ C2 (Native)\n*   English ⭐⭐⭐⭐⭐⭐ C1 (Professional)\n*   Spanish ⭐⭐⭐⭐⭐⭐ C1 (Professional)\n\n**Social Links:**\n\n*   linkedin.com/in/isabel-mendoza\n*   isabelmendoza-art.com\n*   artstation.com/isabelmendoza\n*   behance.net/isabelmendoza\n*   vimeo.com/isabelmendoza\n*   instagram.com/isabelmendoza\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_ad302d28)** is the candidate with the most experience. The extracted information above provides a comprehensive overview of her skills, experience, and background.\n:::",
+            "thinking": "The user is asking to identify the candidate with the most years of experience from the previous comparison and then extract all available information from that candidate's CV. The previous comparison identified Isabel Mendoza (cv_ad302d28) as having the most experience with 47 years. Therefore, I need to extract all information from Isabel Mendoza (cv_ad302d28)'s CV and present it in a comprehensive format.",
+            "analysis": "The user requested all available information for the candidate with the most experience, which was determined to be **[Isabel Mendoza](cv:cv_ad302d28)** based on the previous turn. The information below is a direct extraction from the provided CV excerpts for **[Isabel Mendoza](cv:cv_ad302d28)**.\n\n**[Isabel Mendoza](cv:cv_ad302d28)**\n\n*   **Current Role:** 2010\n*   **Company:** 2020 | Global Render Studios\n*   **Total Experience:** 47 years\n\n**Experience:**\n\n*   **Chief Creative Officer** (2023 - Present | FutureFrame Studios): Oversees the end‑to‑end creative vision for multi‑platform projects, guiding a global team of artists to deliver high‑fidelity 3D assets that captivate audiences. Spearheaded a visual overhaul that increased user engagement by 45% across VR experiences. Introduced a streamlined asset pipeline that cut production time by 30% while maintaining artistic integrity. Mentored emerging talent, fostering a culture of patience and meticulous craftsmanship.\n*   **Vice President of Creative Development** (2020 - 2023 | Nova Media): Directed strategic creative initiatives across advertising, gaming, and simulation divisions, aligning artistic output with business goals. Delivered a $12M campaign that earned a Cannes Lion award for visual storytelling. Negotiated vendor contracts that reduced render costs by 20% without compromising quality. Championed inclusive design practices, expanding the studio’s artistic diversity.\n*   **Director of 3D Production** (2010 - 2020 | Global Render Studios): Managed large‑scale production pipelines for AAA titles, ensuring seamless integration of art and technology. Led a team of 25 artists to launch a flagship game that sold 5 million copies in its first week. Implemented procedural texturing workflows that improved texture variety by 50%. Maintained a 99% on‑time delivery rate across 12 concurrent projects.\n*   **3D** (2000 - 2010 | Immersive Creations): Supervised all 3D asset creation, from concept to final rendering, for film and broadcast projects. Produced award‑winning visual effects for a prime‑time series, winning a BAFTA for Best Visual Effects. Developed a library of reusable shaders that accelerated the art pipeline by 25%. Cultivated a patient, detail‑oriented team culture that earned internal excellence awards.\n*   **3D Artist** (1990 - 1995 | Creative Lab): Created high‑quality 3D models and animations for architectural visualizations and product renderings. Modeled over 200 complex structures, praised for anatomical precision and realistic textures. Collaborated closely with clients to translate briefs into compelling visual narratives. Optimized models for performance, reducing render times by 15%.\n*   **3D Artist** (1984 - 1990 | EuroGraphics): Contributed to diverse projects ranging from motion graphics to virtual tours. Designed immersive virtual tours that increased client conversion rates by 18%. Executed intricate character rigs that brought story elements to life. Maintained meticulous documentation, ensuring smooth hand‑offs across departments.\n*   **Junior 3D Artist** (1979 - 1984 | Pixel Dynamics): Assisted senior artists in modeling, texturing, and basic animation tasks. Learned industry‑standard software quickly, delivering clean geometry on tight deadlines. Supported the creation of a short animated short that won a student award. Demonstrated patience and attention to detail in repetitive modeling tasks.\n*   **Intern 3D Artist** (1976 - 1979 | Studio L'Atelier): Observed an\n\n**Skills:**\n\n*   3D Modeling 10/10\n*   Texturing 9/10\n*   Rigging 8/10\n*   Substance Painter 9/10\n*   Unreal Engine 9/10\n*   Maya 9/10\n\n**Languages:**\n\n*   French ⭐⭐⭐⭐⭐⭐ C2 (Native)\n*   English ⭐⭐⭐⭐⭐⭐ C1 (Professional)\n*   Spanish ⭐⭐⭐⭐⭐⭐ C1 (Professional)\n\n**Social Links:**\n\n*   linkedin.com/in/isabel-mendoza\n*   isabelmendoza-art.com\n*   artstation.com/isabelmendoza\n*   behance.net/isabelmendoza\n*   vimeo.com/isabelmendoza\n*   instagram.com/isabelmendoza",
+            "table_data": null,
+            "conclusion": "**[Isabel Mendoza](cv:cv_ad302d28)** is the candidate with the most experience. The extracted information above provides a comprehensive overview of her skills, experience, and background.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "search",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": {
+              "results": [
+                {
+                  "candidate_name": " Priya Patel  3D",
+                  "cv_id": "cv_87c83f0b",
+                  "match_score": 83.4,
+                  "matching_skills": [],
+                  "experience_years": 6.0,
+                  "current_role": "",
+                  "relevance_reason": "6+ years exp"
+                },
+                {
+                  "candidate_name": " Rajiv Kapoor  Technical",
+                  "cv_id": "cv_a6ab5b03",
+                  "match_score": 82.3,
+                  "matching_skills": [],
+                  "experience_years": 13.0,
+                  "current_role": "2000",
+                  "relevance_reason": "13+ years exp"
+                },
+                {
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "cv_id": "cv_15bf5ccf",
+                  "match_score": 82.1,
+                  "matching_skills": [
+                    "three‑dimensional storytelling.",
+                    "Master of Fine Arts in Visual Arts"
+                  ],
+                  "experience_years": 16.0,
+                  "current_role": "",
+                  "relevance_reason": "Skills: three‑dimensional storytelling., Master of Fine Arts in Visual Arts | 16+ years exp"
+                },
+                {
+                  "candidate_name": " Daan van Dijk  Hard Surface",
+                  "cv_id": "cv_fe460c95",
+                  "match_score": 81.8,
+                  "matching_skills": [],
+                  "experience_years": 11.0,
+                  "current_role": "High",
+                  "relevance_reason": "11+ years exp"
+                },
+                {
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "cv_id": "cv_ad302d28",
+                  "match_score": 81.4,
+                  "matching_skills": [],
+                  "experience_years": 47.0,
+                  "current_role": "2010",
+                  "relevance_reason": "47+ years exp"
+                },
+                {
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_0ede58a9",
+                  "match_score": 81.3,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "Los Angeles",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "cv_id": "cv_f89bcd3a",
+                  "match_score": 81.1,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "in various stages of the animation pipeline",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Karim El Amrani  3D",
+                  "cv_id": "cv_326dd908",
+                  "match_score": 81.1,
+                  "matching_skills": [],
+                  "experience_years": 8.0,
+                  "current_role": "Summa Cum Laude",
+                  "relevance_reason": "8+ years exp"
+                },
+                {
+                  "candidate_name": " Rajesh Patel  VFX",
+                  "cv_id": "cv_6b910c2e",
+                  "match_score": 80.8,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "composite shots for film and television projects.",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Aisha Johnson ",
+                  "cv_id": "cv_3fbba6fd",
+                  "match_score": 80.4,
+                  "matching_skills": [],
+                  "experience_years": 10.0,
+                  "current_role": "reached over 10",
+                  "relevance_reason": "10+ years exp"
+                },
+                {
+                  "candidate_name": " Sofia Mendoza  Environment",
+                  "cv_id": "cv_7d645942",
+                  "match_score": 53.6,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "Junior Environment Artist",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Carlos Mendoza  Lighting",
+                  "cv_id": "cv_76a139cd",
+                  "match_score": 51.3,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Rajiv Patel  Junior VFX",
+                  "cv_id": "cv_afc93cd9",
+                  "match_score": 48.3,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "high‑quality visual effects for film and broadcast.",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Carlos Mendoza  Junior VFX",
+                  "cv_id": "cv_95a9640e",
+                  "match_score": 48.1,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": " São Paulo",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "cv_id": "cv_a05f1836",
+                  "match_score": 46.5,
+                  "matching_skills": [],
+                  "experience_years": 6.0,
+                  "current_role": "",
+                  "relevance_reason": "6+ years exp"
+                }
+              ],
+              "query_terms": [
+                "dime",
+                "mas",
+                "sobre",
+                "winner"
+              ],
+              "total_candidates": 15
+            },
+            "total_results": 15,
+            "query": "dime mas sobre el winner",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T03:22:47.003610"
         }
       ],
       "created_at": "2026-01-06T02:09:13.165606",
-      "updated_at": "2026-01-06T02:54:20.932972"
+      "updated_at": "2026-01-06T03:22:47.003610"
     },
     {
       "id": "bcbe4524-a078-4750-bc4c-c2842b66fc8c",
@@ -61826,10 +62359,228 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-06T03:14:02.438272"
+        },
+        {
+          "id": "a9bb41f0-605c-4dfa-a56f-092766cb051f",
+          "role": "user",
+          "content": "dame riska ssesment de Carlos Mendoza Junior VFX",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T03:21:14.327608"
+        },
+        {
+          "id": "0d478d6d-d545-4e00-8136-0a48b61f5b0b",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a risk assessment of Carlos Mendoza Junior VFX (cv_35077109), focusing on job stability, employment gaps, and overall experience. The pre-calculated data indicates potential issues with high mobility or gaps, but also shows low job hopping, no employment gaps, and stable employment. I need to reconcile these conflicting signals and determine the overall risk level.\n:::\n\n** Carlos Mendoza  Junior VFX** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.\n\n\n### ⚠️ Risk Assessment\n\n\n| Factor | Status | Details |\n\n|:-------|:------:|:--------|\n\n| **🚩 Red Flags** | ⚠️ Issues Found | Moderate concerns |\n\n| **🔄 Job Hopping** | ✅ Low | Score: 0%, Avg tenure: 0.0 yrs |\n\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n\n| **📊 Stability** | ✅ Stable | 1 positions over 0 years |\n\n| **🎯 Experience** | Entry |  São Paulo @ Brazil Contributed to an award‑winning commercial that |\n\n\n:::conclusion\n**Assessment:**The pre-calculated data indicates \"High mobility or gaps\" as a potential red flag, but also shows \"Low\" job hopping (Score: 0%, Avg tenure: 0.0 yrs), \"None\" for employment gaps, and \"Stable\" employment. This suggests a possible inconsistency in the data or a misinterpretation of the candidate's employment history.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_35077109",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_10a396b6",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c6e80813",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_21feef5e",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_85cd3954",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_59d15f5d",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_be43f511",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c0bce16c",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 2524.35,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 12.1,
+              "details": "Found 13 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 29753.77,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 3147.82,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "** Carlos Mendoza  Junior VFX** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+            "raw_content": ":::thinking\nThe user is asking for a risk assessment of **[Carlos Mendoza Junior VFX](cv:cv_35077109)**, focusing on job stability, employment gaps, and overall experience. The pre-calculated data indicates potential issues with high mobility or gaps, but also shows low job hopping, no employment gaps, and stable employment. I need to reconcile these conflicting signals and determine the overall risk level.\n:::\n\n⚠️ **Risk factors identified for [Carlos Mendoza Junior VFX](cv:cv_35077109):**\n- High mobility or gaps\n\n### ⚠️ Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| **🚩 Red Flags** | ⚠️ Issues Found | High mobility or gaps |\n| **🔄 Job Hopping** | ✅ Low | Score: 0%, Avg tenure: 0.0 yrs |\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n| **📊 Stability** | ✅ Stable | 1 positions over 0 years |\n| **🎯 Experience** | Entry |  São Paulo @ Brazil Contributed to an award‑winning commercial that |\n\n:::conclusion\n**Assessment:** The pre-calculated data indicates \"High mobility or gaps\" as a potential red flag, but also shows \"Low\" job hopping (Score: 0%, Avg tenure: 0.0 yrs), \"None\" for employment gaps, and \"Stable\" employment. This suggests a possible inconsistency in the data or a misinterpretation of the candidate's employment history.\n:::",
+            "thinking": "The user is asking for a risk assessment of Carlos Mendoza Junior VFX (cv_35077109), focusing on job stability, employment gaps, and overall experience. The pre-calculated data indicates potential issues with high mobility or gaps, but also shows low job hopping, no employment gaps, and stable employment. I need to reconcile these conflicting signals and determine the overall risk level.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "**Assessment:**The pre-calculated data indicates \"High mobility or gaps\" as a potential red flag, but also shows \"Low\" job hopping (Score: 0%, Avg tenure: 0.0 yrs), \"None\" for employment gaps, and \"Stable\" employment. This suggests a possible inconsistency in the data or a misinterpretation of the candidate's employment history.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Carlos Mendoza  Junior VFX",
+              "cv_id": "cv_35077109",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "⚠️ Issues Found",
+                  "details": "Moderate concerns",
+                  "status_icon": "⚠️",
+                  "status_text": "Issues Found"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "✅ Low",
+                  "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                  "status_icon": "✅",
+                  "status_text": "Low"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "✅ Stable",
+                  "details": "1 positions over 0 years",
+                  "status_icon": "✅",
+                  "status_text": "Stable"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Entry",
+                  "details": " São Paulo @ Brazil Contributed to an award‑winning commercial that",
+                  "status_icon": "",
+                  "status_text": "Entry"
+                }
+              ],
+              "has_issues": true,
+              "overall_risk": "moderate",
+              "analysis_text": "** Carlos Mendoza  Junior VFX** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+              "metrics": {
+                "job_hopping_score": 0.0,
+                "avg_tenure_years": 0.0,
+                "total_experience_years": 0.0,
+                "employment_gaps_count": 0,
+                "position_count": 1
+              }
+            },
+            "structure_type": "risk_assessment",
+            "single_candidate_data": null,
+            "risk_assessment_data": {
+              "candidate_name": " Carlos Mendoza  Junior VFX",
+              "cv_id": "cv_35077109",
+              "risk_analysis": "** Carlos Mendoza  Junior VFX** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+              "risk_table": {
+                "candidate_name": " Carlos Mendoza  Junior VFX",
+                "cv_id": "cv_35077109",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "⚠️ Issues Found",
+                    "details": "Moderate concerns",
+                    "status_icon": "⚠️",
+                    "status_text": "Issues Found"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "✅ Low",
+                    "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                    "status_icon": "✅",
+                    "status_text": "Low"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "✅ Stable",
+                    "details": "1 positions over 0 years",
+                    "status_icon": "✅",
+                    "status_text": "Stable"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Entry",
+                    "details": " São Paulo @ Brazil Contributed to an award‑winning commercial that",
+                    "status_icon": "",
+                    "status_text": "Entry"
+                  }
+                ],
+                "has_issues": true,
+                "overall_risk": "moderate",
+                "analysis_text": "** Carlos Mendoza  Junior VFX** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+                "metrics": {
+                  "job_hopping_score": 0.0,
+                  "avg_tenure_years": 0.0,
+                  "total_experience_years": 0.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 1
+                }
+              },
+              "assessment": "**Assessment:**The pre-calculated data indicates \"High mobility or gaps\" as a potential red flag, but also shows \"Low\" job hopping (Score: 0%, Avg tenure: 0.0 yrs), \"None\" for employment gaps, and \"Stable\" employment. This suggests a possible inconsistency in the data or a misinterpretation of the candidate's employment history."
+            },
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T03:21:53.338339"
         }
       ],
       "created_at": "2026-01-06T03:09:47.540119",
-      "updated_at": "2026-01-06T03:14:02.438272"
+      "updated_at": "2026-01-06T03:21:53.338339"
     }
   ]
 }

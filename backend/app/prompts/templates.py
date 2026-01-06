@@ -1484,6 +1484,10 @@ def classify_query_for_structure(question: str) -> str:
         r'todo\s+(sobre|de|acerca)',
         r'información\s+(de|sobre)',
         r'profile\s+of',
+        # NEW: Handle "top candidate" queries asking for full profile
+        r'todo\s+sobre\s+(el\s+)?(top|mejor|best)',
+        r'everything\s+(about|on)\s+(the\s+)?(top|best)',
+        r'(full|complete)\s+profile\s+(of\s+)?(the\s+)?(top|best)',
     ]
     if any(re.search(p, q) for p in single_candidate_patterns):
         return "single_candidate"

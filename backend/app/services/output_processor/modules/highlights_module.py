@@ -36,7 +36,7 @@ class HighlightsData:
         }
     
     def to_list(self) -> List[Dict[str, str]]:
-        return [{"category": h.category, "info": h.info} for h in self.items]
+        return [{"category": h.category, "value": h.info} for h in self.items]
 
 
 class HighlightsModule:

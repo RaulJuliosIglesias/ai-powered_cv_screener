@@ -60,23 +60,28 @@ class QueryUnderstanding:
 
 QUERY_UNDERSTANDING_PROMPT = """You are a query understanding assistant for a CV screening system.
 
+{conversation_context}
+
 Analyze the user's question and extract:
 1. What they're actually asking for
-2. Break down complex queries into clear requirements
-3. Identify if this is CV-related
+2. Resolve any references to previous messages (e.g., "el top candidate", "this person", "he", "she")
+3. Break down complex queries into clear requirements
+4. Identify if this is CV-related
 
 USER QUERY: {query}
 
+IMPORTANT: If the query contains references like "el top candidate", "the best one", "this person", "he/she", look at the conversation history above to identify WHO is being referred to, and include their FULL NAME in your reformulated prompt.
+
 Respond in this EXACT JSON format (no markdown, just raw JSON):
 {{
-  "understood_query": "Clear restatement of what user wants",
+  "understood_query": "Clear restatement of what user wants (with resolved names)",
   "query_type": "ranking|comparison|search|filter|general",
   "requirements": [
     "requirement 1",
     "requirement 2"
   ],
   "is_cv_related": true,
-  "reformulated_prompt": "A clear, structured prompt to send to the CV analysis model"
+  "reformulated_prompt": "A clear, structured prompt to send to the CV analysis model (with ALL names resolved)"
 }}
 
 EXAMPLES:
@@ -158,7 +163,7 @@ class QueryUnderstandingService:
         
         return models
     
-    async def understand(self, query: str, progress_callback=None) -> QueryUnderstanding:
+    async def understand(self, query: str, conversation_history: List[Dict[str, str]] = None, progress_callback=None) -> QueryUnderstanding:
         """
         Analyze and understand the user's query with 3-level fallback.
         
@@ -198,7 +203,7 @@ class QueryUnderstandingService:
             
             for attempt in range(MAX_RETRIES_PER_MODEL):
                 try:
-                    result = await self._call_llm(query, model)
+                    result = await self._call_llm(query, model, conversation_history)
                     
                     # Success!
                     if is_fallback:
@@ -254,7 +259,7 @@ class QueryUnderstandingService:
         await report_progress("fallback", "Using heuristic analysis")
         return self._create_heuristic_fallback(query, str(last_error))
     
-    async def _call_llm(self, query: str, model: str) -> QueryUnderstanding:
+    async def _call_llm(self, query: str, model: str, conversation_history: List[Dict[str, str]] = None) -> QueryUnderstanding:
         """
         Make a single LLM call for query understanding.
         
@@ -262,7 +267,23 @@ class QueryUnderstandingService:
         """
         from app.providers.base import get_openrouter_url
         
-        prompt = QUERY_UNDERSTANDING_PROMPT.format(query=query)
+        # Build conversation context section
+        conversation_context = ""
+        if conversation_history and len(conversation_history) > 0:
+            conversation_context = "## CONVERSATION HISTORY (for reference resolution):\n"
+            for msg in conversation_history:
+                role_label = "Usuario" if msg.get("role") == "user" else "Asistente"
+                content = msg.get("content", "")
+                # Limit each message to 300 chars to avoid overwhelming the prompt
+                if len(content) > 300:
+                    content = content[:300] + "..."
+                conversation_context += f"{role_label}: {content}\n"
+            conversation_context += "\n---\n"
+        
+        prompt = QUERY_UNDERSTANDING_PROMPT.format(
+            query=query,
+            conversation_context=conversation_context
+        )
         
         async with httpx.AsyncClient(timeout=timeouts.HTTP_MEDIUM) as client:
             response = await client.post(
