@@ -60375,6 +60375,1461 @@
       ],
       "created_at": "2026-01-06T02:33:20.571326",
       "updated_at": "2026-01-06T02:33:41.675772"
+    },
+    {
+      "id": "76ad3b51-7784-4ce6-a6e2-37b21f38f1bc",
+      "name": "Media Production 9003",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_c0bce16c",
+          "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf",
+          "chunk_count": 7,
+          "content_hash": "61979aaf1446d8b5d11d28b9b65cdd95e6e8100ee8667c9ad52d4104796d51ef",
+          "uploaded_at": "2026-01-06T03:09:53.212552"
+        },
+        {
+          "id": "cv_10a396b6",
+          "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf",
+          "chunk_count": 3,
+          "content_hash": "13213d6ec70b08b54b753f691859eb562813f17ed272f4754ad12a5a4b19e370",
+          "uploaded_at": "2026-01-06T03:09:53.568291"
+        },
+        {
+          "id": "cv_35077109",
+          "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf",
+          "chunk_count": 3,
+          "content_hash": "0e996b38a95c64aca7129e2554ee5a0e684da1c7f40a72e8c912ab14faad7f18",
+          "uploaded_at": "2026-01-06T03:09:53.962407"
+        },
+        {
+          "id": "cv_c6e80813",
+          "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf",
+          "chunk_count": 11,
+          "content_hash": "fb9a97f91218eb858e3c8647e40b5b25a35d25039dc923bfe0a4da640eb2a90f",
+          "uploaded_at": "2026-01-06T03:09:54.424334"
+        },
+        {
+          "id": "cv_21feef5e",
+          "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf",
+          "chunk_count": 6,
+          "content_hash": "9ac96c226a0824b5a8df589c45c1a9886ffb2f05442986faa0a5e6491c6eba80",
+          "uploaded_at": "2026-01-06T03:09:54.870716"
+        },
+        {
+          "id": "cv_85cd3954",
+          "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf",
+          "chunk_count": 6,
+          "content_hash": "85d898ad89ecc8cb7267e5b49adba1f1cac5b408dd4c4fc2d71d14dc5bbd9786",
+          "uploaded_at": "2026-01-06T03:09:55.278591"
+        },
+        {
+          "id": "cv_be43f511",
+          "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "74f41b5728cefd055be7ae50f0cd92f821fc552c3f1623d099aafbc0f0110cf1",
+          "uploaded_at": "2026-01-06T03:09:55.708823"
+        },
+        {
+          "id": "cv_59d15f5d",
+          "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf",
+          "chunk_count": 7,
+          "content_hash": "b0ac973a41aa837f6956db83be7efc36c49d2569068d401372609dee2fb1805b",
+          "uploaded_at": "2026-01-06T03:09:56.155710"
+        }
+      ],
+      "messages": [
+        {
+          "id": "c8b13ce1-5854-4817-9ad5-6fa40acf8bdf",
+          "role": "user",
+          "content": "Rank all 8 candidates by experience",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T03:10:05.816535"
+        },
+        {
+          "id": "e423a491-19da-478d-8751-55f650b19cf4",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a ranking of all 8 candidates based on their total years of professional experience, from most to least. I need to extract the total years of experience for each candidate from the provided CV excerpts and then rank them accordingly. If the total experience is not explicitly stated, I will look for start and end dates of employment to calculate the duration.\n:::\n\n\n:::conclusion\nBased on the analysis, **[Isabel Mendoza](cv:cv_c6e80813)** has the most experience (47 years), followed by **[Carmen Rodriguez](cv:cv_59d15f5d)** (16 years), **[Imani Jones](cv:cv_21feef5e)** (6 years), **[Liam Chen](cv:cv_c0bce16c)** (6 years), **[Rajiv Patel](cv:cv_10a396b6)** (5 years), **[Carlos Mendoza](cv:cv_85cd3954)** (4 years), **[Carlos Mendoza](cv:cv_35077109)** (0 years), and **[Aisha Nkrumah](cv:cv_be43f511)** (0 years).\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_21feef5e",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_59d15f5d",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_be43f511",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c6e80813",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_35077109",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c0bce16c",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_85cd3954",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_10a396b6",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1739.74,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 12.23,
+              "details": "Found 20 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 27123.83,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 3866.11,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for a ranking of all 8 candidates based on their total years of professional experience, from most to least. I need to extract the total years of experience for each candidate from the provided CV excerpts and then rank them accordingly. If the total experience is not explicitly stated, I will look for start and end dates of employment to calculate the duration.\n:::\n\nHere is the ranking of all 8 candidates by their total years of professional experience, from most to least, based on the provided CV data. Note that some experience durations are based on date ranges and may not be exact.\n\n### Analysis\n\n| Candidate | Total Experience | Details |\n|---|---|---|\n| **[Isabel Mendoza](cv:cv_c6e80813)** | 47 years | Stated \"TOTAL EXPERIENCE: 47 years\" |\n| **[Carmen Rodriguez](cv:cv_59d15f5d)** | 16 years | Stated \"TOTAL EXPERIENCE: 16 years\" |\n| **[Imani Jones](cv:cv_21feef5e)** | 6 years | Calculated from job dates (2018-Present) |\n| **[Liam Chen](cv:cv_c0bce16c)** | 6 years | Stated \"TOTAL EXPERIENCE: 6 years\" |\n| **[Rajiv Patel](cv:cv_10a396b6)** | 5 years | Calculated from job dates (2020-Present) |\n| **[Carlos Mendoza](cv:cv_85cd3954)** | 4 years | Calculated from job dates (2017-Present) |\n| **[Carlos Mendoza](cv:cv_35077109)** | 0 years | Stated \"TOTAL EXPERIENCE: 0 years\" |\n| **[Aisha Nkrumah](cv:cv_be43f511)** | 0 years | Stated \"TOTAL EXPERIENCE: 0 years\" |\n\n:::conclusion\nBased on the analysis, **[Isabel Mendoza](cv:cv_c6e80813)** has the most experience (47 years), followed by **[Carmen Rodriguez](cv:cv_59d15f5d)** (16 years), **[Imani Jones](cv:cv_21feef5e)** (6 years), **[Liam Chen](cv:cv_c0bce16c)** (6 years), **[Rajiv Patel](cv:cv_10a396b6)** (5 years), **[Carlos Mendoza](cv:cv_85cd3954)** (4 years), **[Carlos Mendoza](cv:cv_35077109)** (0 years), and **[Aisha Nkrumah](cv:cv_be43f511)** (0 years).\n:::",
+            "thinking": "The user is asking for a ranking of all 8 candidates based on their total years of professional experience, from most to least. I need to extract the total years of experience for each candidate from the provided CV excerpts and then rank them accordingly. If the total experience is not explicitly stated, I will look for start and end dates of employment to calculate the duration.",
+            "analysis": "| Candidate | Total Experience | Details |",
+            "table_data": null,
+            "conclusion": "Based on the analysis, **[Isabel Mendoza](cv:cv_c6e80813)** has the most experience (47 years), followed by **[Carmen Rodriguez](cv:cv_59d15f5d)** (16 years), **[Imani Jones](cv:cv_21feef5e)** (6 years), **[Liam Chen](cv:cv_c0bce16c)** (6 years), **[Rajiv Patel](cv:cv_10a396b6)** (5 years), **[Carlos Mendoza](cv:cv_85cd3954)** (4 years), **[Carlos Mendoza](cv:cv_35077109)** (0 years), and **[Aisha Nkrumah](cv:cv_be43f511)** (0 years).",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "ranking",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": {
+              "ranked": [
+                {
+                  "rank": 1,
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "cv_id": "cv_59d15f5d",
+                  "overall_score": 95.9,
+                  "criterion_scores": {
+                    "Experience": 100,
+                    "Technical Skills": 100,
+                    "Role Fit": 100,
+                    "Career Trajectory": 85.0,
+                    "Stability": 81.2
+                  },
+                  "strengths": [
+                    "Experience",
+                    "Technical Skills"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 2,
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "cv_id": "cv_c0bce16c",
+                  "overall_score": 79.0,
+                  "criterion_scores": {
+                    "Experience": 60.0,
+                    "Technical Skills": 100,
+                    "Role Fit": 100,
+                    "Career Trajectory": 73.3,
+                    "Stability": 50.0
+                  },
+                  "strengths": [
+                    "Technical Skills",
+                    "Role Fit"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 3,
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "cv_id": "cv_c6e80813",
+                  "overall_score": 60.0,
+                  "criterion_scores": {
+                    "Experience": 100,
+                    "Technical Skills": 0,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 79.1,
+                    "Stability": 81.0
+                  },
+                  "strengths": [
+                    "Experience",
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills"
+                  ]
+                },
+                {
+                  "rank": 4,
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "cv_id": "cv_be43f511",
+                  "overall_score": 52.5,
+                  "criterion_scores": {
+                    "Experience": 0.0,
+                    "Technical Skills": 100,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 50,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Technical Skills",
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 5,
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_21feef5e",
+                  "overall_score": 39.8,
+                  "criterion_scores": {
+                    "Experience": 40.0,
+                    "Technical Skills": 12,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 65.0,
+                    "Stability": 50.0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 6,
+                  "candidate_name": " Rajiv Patel  Junior VFX",
+                  "cv_id": "cv_10a396b6",
+                  "overall_score": 33.5,
+                  "criterion_scores": {
+                    "Experience": 20.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 20.0,
+                    "Career Trajectory": 90.0,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Stability",
+                    "Career Trajectory"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 7,
+                  "candidate_name": " Carlos Mendoza  Lighting",
+                  "cv_id": "cv_85cd3954",
+                  "overall_score": 28.5,
+                  "criterion_scores": {
+                    "Experience": 40.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 40.0,
+                    "Career Trajectory": 40.0,
+                    "Stability": 25.0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Stability"
+                  ]
+                },
+                {
+                  "rank": 8,
+                  "candidate_name": " Carlos Mendoza  Junior VFX",
+                  "cv_id": "cv_35077109",
+                  "overall_score": 17.5,
+                  "criterion_scores": {
+                    "Experience": 0.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 0.0,
+                    "Career Trajectory": 50,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Experience",
+                    "Technical Skills"
+                  ]
+                }
+              ],
+              "criteria_names": [
+                "Experience",
+                "Technical Skills",
+                "Role Fit",
+                "Career Trajectory",
+                "Stability"
+              ]
+            },
+            "top_pick": {
+              "candidate_name": " Carmen Rodriguez  3D",
+              "cv_id": "cv_59d15f5d",
+              "overall_score": 95.9,
+              "key_strengths": [
+                "Experience",
+                "Technical Skills"
+              ],
+              "justification": " Carmen Rodriguez  3D emerges as the top choice with an overall score of 96%. Key strengths include: Experience (100%), Technical Skills (100%), Role Fit (100%).",
+              "runner_up": " Liam Chen  3D Artist",
+              "runner_up_cv_id": "cv_c0bce16c"
+            },
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T03:10:42.481997"
+        },
+        {
+          "id": "1e1cb4ae-8936-4036-aeaf-2b88f45fbe8a",
+          "role": "user",
+          "content": "vale ahrao dame todo sobre el top candidate",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T03:11:07.271251"
+        },
+        {
+          "id": "48db9682-3bc5-4461-81c3-7d3e385e1b7c",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the top-ranked candidate based on the system's internal ranking and all available information about that candidate. Since the internal ranking algorithm is unspecified, I will assume that the candidate with the most relevant experience and skills for a general 3D/VFX artist role is the top-ranked candidate. I will extract all available information about this candidate from their CV, including skills, experience, education, and other relevant details.\n:::\n\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_c6e80813)** is the top-ranked candidate due to her extensive experience and diverse skill set. Her CV showcases a long and successful career in the 3D art and visual effects industry, making her a highly qualified candidate.\n\n**Candidate Details: [Isabel Mendoza](cv:cv_c6e80813)**\n\n**Skills:**\n*   3D Modeling 10/10\n*   Texturing 9/10\n*   Rigging 8/10\n*   Substance Painter 9/10\n*   Unreal Engine 9/10\n*   Maya 9/10\n\n**Languages:**\n*   French ⭐⭐⭐⭐⭐⭐ C2 (Native)\n*   English ⭐⭐⭐⭐⭐⭐ C1 (Professional)\n*   Spanish ⭐⭐⭐⭐⭐⭐ C1 (Professional)\n\n**Experience:**\n*   **Chief Creative Officer** (2023 - Present) | FutureFrame Studios\n    *   Oversees the end‑to-end creative vision for multi‑platform projects, guiding a global team of artists to deliver high‑fidelity 3D assets that captivate audiences.\n    *   Spearheaded a visual overhaul that increased user engagement by 45% across VR experiences.\n    *   Introduced a streamlined asset pipeline that cut production time by 30% while maintaining artistic integrity.\n    *   Mentored emerging talent, fostering a culture of patience and meticulous craftsmanship.\n*   **Vice President of Creative Development** (2020 - 2023) | Nova Media\n    *   Directed strategic creative initiatives across advertising, gaming, and simulation divisions, aligning artistic output with business goals.\n    *   Delivered a $12M campaign that earned a Cannes Lion award for visual storytelling.\n    *   Negotiated vendor contracts that reduced render costs by 20% without compromising quality.\n    *   Championed inclusive design practices, expanding the studio’s artistic diversity.\n*   **Director of 3D Production** (2010 - 2020) | Global Render Studios\n    *   Managed large‑scale production pipelines for AAA titles, ensuring seamless integration of art and technology.\n    *   Led a team of 25 artists to launch a flagship game that sold 5 million copies in its first week.\n    *   Implemented procedural texturing workflows that improved texture variety by 50%.\n    *   Maintained a 99% on‑time delivery rate across 12 concurrent projects.\n*   **3D** (2000 - 2010) | Immersive Creations\n    *   Supervised all 3D asset creation, from concept to final rendering, for film and broadcast projects.\n    *   Produced award‑winning visual effects for a prime‑time series, winning a BAFTA for Best Visual Effects.\n    *   Developed a library of reusable shaders that accelerated the art pipeline by 25%.\n    *   Cultivated a patient, detail‑oriented team culture that earned internal excellence awards.\n*   **3D Artist** (1990 - 1995) | Creative Lab\n    *   Created high‑quality 3D models and animations for architectural visualizations and product renderings.\n    *   Modeled over 200 complex structures, praised for anatomical precision and realistic textures.\n    *   Collaborated closely with clients to translate briefs into compelling visual narratives.\n    *   Optimized models for performance, reducing render times by 15%.\n*   **3D Artist** (1984 - 1990) | EuroGraphics\n    *   Contributed to diverse projects ranging from motion graphics to virtual tours.\n    *   Designed immersive virtual tours that increased client conversion rates by 18%.\n    *   Executed intricate character rigs that brought story elements to life.\n    *   Maintained meticulous documentation, ensuring smooth hand‑offs across departments.\n*   **Junior 3D Artist** (1979 - 1984) | Pixel Dynamics\n    *   Assisted senior artists in modeling, texturing, and basic animation tasks.\n    *   Learned industry‑standard software quickly, delivering clean geometry on tight deadlines.\n    *   Supported the creation of a short animated short that won a student award.\n    *   Demonstrated patience and attention to detail in repetitive modeling tasks.\n*   **Intern 3D Artist** (1976 - 1979) | Studio L'Atelier\n    *   Observed an\n\n**Education:** The CV does not explicitly mention Isabel Mendoza's education.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_35077109",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_21feef5e",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_be43f511",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c6e80813",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_10a396b6",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_59d15f5d",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_85cd3954",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c0bce16c",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1306.99,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 12.45,
+              "details": "Found 19 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 33280.88,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 7276.3,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for the top-ranked candidate based on the system's internal ranking and all available information about that candidate. Since the internal ranking algorithm is unspecified, I will assume that the candidate with the most relevant experience and skills for a general 3D/VFX artist role is the top-ranked candidate. I will extract all available information about this candidate from their CV, including skills, experience, education, and other relevant details.\n:::\n\nThe top-ranked candidate is **[Isabel Mendoza](cv:cv_c6e80813)** based on her extensive experience and diverse skill set in 3D art and visual effects. All available information about **[Isabel Mendoza](cv:cv_c6e80813)**, including skills, experience, and education, is provided below.\n\n### Analysis\n**[Isabel Mendoza](cv:cv_c6e80813)** is selected as the top-ranked candidate due to her extensive 47 years of experience in the 3D art and visual effects industry. Her career progression, from an intern to a Chief Creative Officer, demonstrates her expertise and leadership capabilities. Her skills in 3D modeling, texturing, rigging, and proficiency in software like Substance Painter, Unreal Engine, and Maya make her a strong candidate.\n\n| Candidate | Experience | Skills | Match |\n|-----------|------------|--------|-------|\n| **[Isabel Mendoza](cv:cv_c6e80813)** | 47 years | 3D Modeling, Texturing, Rigging, Substance Painter, Unreal Engine, Maya | ⭐⭐⭐⭐⭐ |\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_c6e80813)** is the top-ranked candidate due to her extensive experience and diverse skill set. Her CV showcases a long and successful career in the 3D art and visual effects industry, making her a highly qualified candidate.\n\n**Candidate Details: [Isabel Mendoza](cv:cv_c6e80813)**\n\n**Skills:**\n*   3D Modeling 10/10\n*   Texturing 9/10\n*   Rigging 8/10\n*   Substance Painter 9/10\n*   Unreal Engine 9/10\n*   Maya 9/10\n\n**Languages:**\n*   French ⭐⭐⭐⭐⭐⭐ C2 (Native)\n*   English ⭐⭐⭐⭐⭐⭐ C1 (Professional)\n*   Spanish ⭐⭐⭐⭐⭐⭐ C1 (Professional)\n\n**Experience:**\n*   **Chief Creative Officer** (2023 - Present) | FutureFrame Studios\n    *   Oversees the end‑to-end creative vision for multi‑platform projects, guiding a global team of artists to deliver high‑fidelity 3D assets that captivate audiences.\n    *   Spearheaded a visual overhaul that increased user engagement by 45% across VR experiences.\n    *   Introduced a streamlined asset pipeline that cut production time by 30% while maintaining artistic integrity.\n    *   Mentored emerging talent, fostering a culture of patience and meticulous craftsmanship.\n*   **Vice President of Creative Development** (2020 - 2023) | Nova Media\n    *   Directed strategic creative initiatives across advertising, gaming, and simulation divisions, aligning artistic output with business goals.\n    *   Delivered a $12M campaign that earned a Cannes Lion award for visual storytelling.\n    *   Negotiated vendor contracts that reduced render costs by 20% without compromising quality.\n    *   Championed inclusive design practices, expanding the studio’s artistic diversity.\n*   **Director of 3D Production** (2010 - 2020) | Global Render Studios\n    *   Managed large‑scale production pipelines for AAA titles, ensuring seamless integration of art and technology.\n    *   Led a team of 25 artists to launch a flagship game that sold 5 million copies in its first week.\n    *   Implemented procedural texturing workflows that improved texture variety by 50%.\n    *   Maintained a 99% on‑time delivery rate across 12 concurrent projects.\n*   **3D** (2000 - 2010) | Immersive Creations\n    *   Supervised all 3D asset creation, from concept to final rendering, for film and broadcast projects.\n    *   Produced award‑winning visual effects for a prime‑time series, winning a BAFTA for Best Visual Effects.\n    *   Developed a library of reusable shaders that accelerated the art pipeline by 25%.\n    *   Cultivated a patient, detail‑oriented team culture that earned internal excellence awards.\n*   **3D Artist** (1990 - 1995) | Creative Lab\n    *   Created high‑quality 3D models and animations for architectural visualizations and product renderings.\n    *   Modeled over 200 complex structures, praised for anatomical precision and realistic textures.\n    *   Collaborated closely with clients to translate briefs into compelling visual narratives.\n    *   Optimized models for performance, reducing render times by 15%.\n*   **3D Artist** (1984 - 1990) | EuroGraphics\n    *   Contributed to diverse projects ranging from motion graphics to virtual tours.\n    *   Designed immersive virtual tours that increased client conversion rates by 18%.\n    *   Executed intricate character rigs that brought story elements to life.\n    *   Maintained meticulous documentation, ensuring smooth hand‑offs across departments.\n*   **Junior 3D Artist** (1979 - 1984) | Pixel Dynamics\n    *   Assisted senior artists in modeling, texturing, and basic animation tasks.\n    *   Learned industry‑standard software quickly, delivering clean geometry on tight deadlines.\n    *   Supported the creation of a short animated short that won a student award.\n    *   Demonstrated patience and attention to detail in repetitive modeling tasks.\n*   **Intern 3D Artist** (1976 - 1979) | Studio L'Atelier\n    *   Observed an\n\n**Education:** The CV does not explicitly mention Isabel Mendoza's education.\n:::",
+            "thinking": "The user is asking for the top-ranked candidate based on the system's internal ranking and all available information about that candidate. Since the internal ranking algorithm is unspecified, I will assume that the candidate with the most relevant experience and skills for a general 3D/VFX artist role is the top-ranked candidate. I will extract all available information about this candidate from their CV, including skills, experience, education, and other relevant details.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "**[Isabel Mendoza](cv:cv_c6e80813)** is the top-ranked candidate due to her extensive experience and diverse skill set. Her CV showcases a long and successful career in the 3D art and visual effects industry, making her a highly qualified candidate.\n\n**Candidate Details: [Isabel Mendoza](cv:cv_c6e80813)**\n\n**Skills:**\n*   3D Modeling 10/10\n*   Texturing 9/10\n*   Rigging 8/10\n*   Substance Painter 9/10\n*   Unreal Engine 9/10\n*   Maya 9/10\n\n**Languages:**\n*   French ⭐⭐⭐⭐⭐⭐ C2 (Native)\n*   English ⭐⭐⭐⭐⭐⭐ C1 (Professional)\n*   Spanish ⭐⭐⭐⭐⭐⭐ C1 (Professional)\n\n**Experience:**\n*   **Chief Creative Officer** (2023 - Present) | FutureFrame Studios\n    *   Oversees the end‑to-end creative vision for multi‑platform projects, guiding a global team of artists to deliver high‑fidelity 3D assets that captivate audiences.\n    *   Spearheaded a visual overhaul that increased user engagement by 45% across VR experiences.\n    *   Introduced a streamlined asset pipeline that cut production time by 30% while maintaining artistic integrity.\n    *   Mentored emerging talent, fostering a culture of patience and meticulous craftsmanship.\n*   **Vice President of Creative Development** (2020 - 2023) | Nova Media\n    *   Directed strategic creative initiatives across advertising, gaming, and simulation divisions, aligning artistic output with business goals.\n    *   Delivered a $12M campaign that earned a Cannes Lion award for visual storytelling.\n    *   Negotiated vendor contracts that reduced render costs by 20% without compromising quality.\n    *   Championed inclusive design practices, expanding the studio’s artistic diversity.\n*   **Director of 3D Production** (2010 - 2020) | Global Render Studios\n    *   Managed large‑scale production pipelines for AAA titles, ensuring seamless integration of art and technology.\n    *   Led a team of 25 artists to launch a flagship game that sold 5 million copies in its first week.\n    *   Implemented procedural texturing workflows that improved texture variety by 50%.\n    *   Maintained a 99% on‑time delivery rate across 12 concurrent projects.\n*   **3D** (2000 - 2010) | Immersive Creations\n    *   Supervised all 3D asset creation, from concept to final rendering, for film and broadcast projects.\n    *   Produced award‑winning visual effects for a prime‑time series, winning a BAFTA for Best Visual Effects.\n    *   Developed a library of reusable shaders that accelerated the art pipeline by 25%.\n    *   Cultivated a patient, detail‑oriented team culture that earned internal excellence awards.\n*   **3D Artist** (1990 - 1995) | Creative Lab\n    *   Created high‑quality 3D models and animations for architectural visualizations and product renderings.\n    *   Modeled over 200 complex structures, praised for anatomical precision and realistic textures.\n    *   Collaborated closely with clients to translate briefs into compelling visual narratives.\n    *   Optimized models for performance, reducing render times by 15%.\n*   **3D Artist** (1984 - 1990) | EuroGraphics\n    *   Contributed to diverse projects ranging from motion graphics to virtual tours.\n    *   Designed immersive virtual tours that increased client conversion rates by 18%.\n    *   Executed intricate character rigs that brought story elements to life.\n    *   Maintained meticulous documentation, ensuring smooth hand‑offs across departments.\n*   **Junior 3D Artist** (1979 - 1984) | Pixel Dynamics\n    *   Assisted senior artists in modeling, texturing, and basic animation tasks.\n    *   Learned industry‑standard software quickly, delivering clean geometry on tight deadlines.\n    *   Supported the creation of a short animated short that won a student award.\n    *   Demonstrated patience and attention to detail in repetitive modeling tasks.\n*   **Intern 3D Artist** (1976 - 1979) | Studio L'Atelier\n    *   Observed an\n\n**Education:** The CV does not explicitly mention Isabel Mendoza's education.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Carlos Mendoza  Junior VFX",
+              "cv_id": "cv_35077109",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "⚠️ Issues Found",
+                  "details": "Moderate concerns",
+                  "status_icon": "⚠️",
+                  "status_text": "Issues Found"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "✅ Low",
+                  "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                  "status_icon": "✅",
+                  "status_text": "Low"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "✅ Stable",
+                  "details": "1 positions over 0 years",
+                  "status_icon": "✅",
+                  "status_text": "Stable"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Entry",
+                  "details": " São Paulo @ Brazil Contributed to an award‑winning commercial that",
+                  "status_icon": "",
+                  "status_text": "Entry"
+                }
+              ],
+              "has_issues": true,
+              "overall_risk": "moderate",
+              "analysis_text": "** Carlos Mendoza  Junior VFX** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+              "metrics": {
+                "job_hopping_score": 0.0,
+                "avg_tenure_years": 0.0,
+                "total_experience_years": 0.0,
+                "employment_gaps_count": 0,
+                "position_count": 1
+              }
+            },
+            "structure_type": "single_candidate",
+            "single_candidate_data": {
+              "candidate_name": " Carlos Mendoza  Junior VFX",
+              "cv_id": "cv_35077109",
+              "summary": "",
+              "highlights": [],
+              "career": [],
+              "skills": [],
+              "credentials": [],
+              "risk_table": {
+                "candidate_name": " Carlos Mendoza  Junior VFX",
+                "cv_id": "cv_35077109",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "⚠️ Issues Found",
+                    "details": "Moderate concerns",
+                    "status_icon": "⚠️",
+                    "status_text": "Issues Found"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "✅ Low",
+                    "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                    "status_icon": "✅",
+                    "status_text": "Low"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "✅ Stable",
+                    "details": "1 positions over 0 years",
+                    "status_icon": "✅",
+                    "status_text": "Stable"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Entry",
+                    "details": " São Paulo @ Brazil Contributed to an award‑winning commercial that",
+                    "status_icon": "",
+                    "status_text": "Entry"
+                  }
+                ],
+                "has_issues": true,
+                "overall_risk": "moderate",
+                "analysis_text": "** Carlos Mendoza  Junior VFX** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+                "metrics": {
+                  "job_hopping_score": 0.0,
+                  "avg_tenure_years": 0.0,
+                  "total_experience_years": 0.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 1
+                }
+              },
+              "conclusion": "**[Isabel Mendoza](cv:cv_c6e80813)** is the top-ranked candidate due to her extensive experience and diverse skill set. Her CV showcases a long and successful career in the 3D art and visual effects industry, making her a highly qualified candidate.\n\n**Candidate Details: [Isabel Mendoza](cv:cv_c6e80813)**\n\n**Skills:**\n*   3D Modeling 10/10\n*   Texturing 9/10\n*   Rigging 8/10\n*   Substance Painter 9/10\n*   Unreal Engine 9/10\n*   Maya 9/10\n\n**Languages:**\n*   French ⭐⭐⭐⭐⭐⭐ C2 (Native)\n*   English ⭐⭐⭐⭐⭐⭐ C1 (Professional)\n*   Spanish ⭐⭐⭐⭐⭐⭐ C1 (Professional)\n\n**Experience:**\n*   **Chief Creative Officer** (2023 - Present) | FutureFrame Studios\n    *   Oversees the end‑to-end creative vision for multi‑platform projects, guiding a global team of artists to deliver high‑fidelity 3D assets that captivate audiences.\n    *   Spearheaded a visual overhaul that increased user engagement by 45% across VR experiences.\n    *   Introduced a streamlined asset pipeline that cut production time by 30% while maintaining artistic integrity.\n    *   Mentored emerging talent, fostering a culture of patience and meticulous craftsmanship.\n*   **Vice President of Creative Development** (2020 - 2023) | Nova Media\n    *   Directed strategic creative initiatives across advertising, gaming, and simulation divisions, aligning artistic output with business goals.\n    *   Delivered a $12M campaign that earned a Cannes Lion award for visual storytelling.\n    *   Negotiated vendor contracts that reduced render costs by 20% without compromising quality.\n    *   Championed inclusive design practices, expanding the studio’s artistic diversity.\n*   **Director of 3D Production** (2010 - 2020) | Global Render Studios\n    *   Managed large‑scale production pipelines for AAA titles, ensuring seamless integration of art and technology.\n    *   Led a team of 25 artists to launch a flagship game that sold 5 million copies in its first week.\n    *   Implemented procedural texturing workflows that improved texture variety by 50%.\n    *   Maintained a 99% on‑time delivery rate across 12 concurrent projects.\n*   **3D** (2000 - 2010) | Immersive Creations\n    *   Supervised all 3D asset creation, from concept to final rendering, for film and broadcast projects.\n    *   Produced award‑winning visual effects for a prime‑time series, winning a BAFTA for Best Visual Effects.\n    *   Developed a library of reusable shaders that accelerated the art pipeline by 25%.\n    *   Cultivated a patient, detail‑oriented team culture that earned internal excellence awards.\n*   **3D Artist** (1990 - 1995) | Creative Lab\n    *   Created high‑quality 3D models and animations for architectural visualizations and product renderings.\n    *   Modeled over 200 complex structures, praised for anatomical precision and realistic textures.\n    *   Collaborated closely with clients to translate briefs into compelling visual narratives.\n    *   Optimized models for performance, reducing render times by 15%.\n*   **3D Artist** (1984 - 1990) | EuroGraphics\n    *   Contributed to diverse projects ranging from motion graphics to virtual tours.\n    *   Designed immersive virtual tours that increased client conversion rates by 18%.\n    *   Executed intricate character rigs that brought story elements to life.\n    *   Maintained meticulous documentation, ensuring smooth hand‑offs across departments.\n*   **Junior 3D Artist** (1979 - 1984) | Pixel Dynamics\n    *   Assisted senior artists in modeling, texturing, and basic animation tasks.\n    *   Learned industry‑standard software quickly, delivering clean geometry on tight deadlines.\n    *   Supported the creation of a short animated short that won a student award.\n    *   Demonstrated patience and attention to detail in repetitive modeling tasks.\n*   **Intern 3D Artist** (1976 - 1979) | Studio L'Atelier\n    *   Observed an\n\n**Education:** The CV does not explicitly mention Isabel Mendoza's education."
+            },
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T03:11:52.992889"
+        },
+        {
+          "id": "56c999a6-9394-4168-866c-d36c5d67d13c",
+          "role": "user",
+          "content": "Who would fit a senior position?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T03:12:24.859402"
+        },
+        {
+          "id": "f2f1ac28-5487-4502-a832-306671dd91e0",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a list of candidates suitable for a senior-level position, based on their experience, skills, and career progression. I need to identify candidates who have a significant amount of experience, relevant skills for a senior role (leadership, strategic thinking, etc.), and a history of increasing responsibilities in their previous positions. I will rank the candidates based on how well they meet these criteria.\n:::\n\n\n:::conclusion\nI recommend considering **[Isabel Mendoza](cv:cv_c6e80813)**, **[Carmen Rodriguez](cv:cv_59d15f5d)**, and **[Carlos Mendoza](cv:cv_85cd3954)** for senior-level positions. Their CVs demonstrate the necessary experience, skills, and leadership qualities.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_c6e80813",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c0bce16c",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_10a396b6",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_35077109",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_21feef5e",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_85cd3954",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_be43f511",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_59d15f5d",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 2302.56,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 12.62,
+              "details": "Found 12 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 15747.56,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6425.72,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for a list of candidates suitable for a senior-level position, based on their experience, skills, and career progression. I need to identify candidates who have a significant amount of experience, relevant skills for a senior role (leadership, strategic thinking, etc.), and a history of increasing responsibilities in their previous positions. I will rank the candidates based on how well they meet these criteria.\n:::\n\nBased on the provided CVs, **[Isabel Mendoza](cv:cv_c6e80813)**, **[Carmen Rodriguez](cv:cv_59d15f5d)**, and **[Carlos Mendoza](cv:cv_85cd3954)** appear to be the best fits for a senior-level position due to their extensive experience and demonstrated leadership roles. These candidates have held positions with increasing responsibility and possess skills relevant to senior roles.\n\n### Analysis\nThe following table summarizes the qualifications of the top candidates for a senior-level position. The evaluation is based on the candidate's experience, skills, and the level of responsibility they held in their previous roles.\n\n| Candidate | Experience | Leadership Roles | Match |\n|-----------|------------|------------------|-------|\n| **[Isabel Mendoza](cv:cv_c6e80813)** | 47 years | Chief Creative Officer, VP of Creative Development, Director of 3D Production | ⭐⭐⭐⭐⭐ |\n| **[Carmen Rodriguez](cv:cv_59d15f5d)** | 16 years | Chief Creative Officer, VP of Visual Innovation, Creative Director, Art Department Manager | ⭐⭐⭐⭐ |\n| **[Carlos Mendoza](cv:cv_85cd3954)** | 4 years | Lead Lighting Artist | ⭐⭐⭐ |\n| **[Imani Jones](cv:cv_21feef5e)** | 6 years | Senior Concept Artist | ⭐⭐ |\n| **[Rajiv Patel](cv:cv_10a396b6)** | 5 years | Junior VFX Artist | ⭐ |\n\n**[Isabel Mendoza](cv:cv_c6e80813)** stands out with 47 years of experience and a clear progression to leadership roles such as Chief Creative Officer and VP of Creative Development. **[Carmen Rodriguez](cv:cv_59d15f5d)** also demonstrates a strong career trajectory with roles like Chief Creative Officer and Creative Director, spanning 16 years. **[Carlos Mendoza](cv:cv_85cd3954)**, while having less overall experience (4 years), has already achieved a Lead Lighting Artist position, indicating potential for senior roles. **[Imani Jones](cv:cv_21feef5e)** and **[Rajiv Patel](cv:cv_10a396b6)** are included for context, but their experience and roles are more junior compared to the top three candidates.\n\n:::conclusion\nI recommend considering **[Isabel Mendoza](cv:cv_c6e80813)**, **[Carmen Rodriguez](cv:cv_59d15f5d)**, and **[Carlos Mendoza](cv:cv_85cd3954)** for senior-level positions. Their CVs demonstrate the necessary experience, skills, and leadership qualities.\n:::",
+            "thinking": "The user is asking for a list of candidates suitable for a senior-level position, based on their experience, skills, and career progression. I need to identify candidates who have a significant amount of experience, relevant skills for a senior role (leadership, strategic thinking, etc.), and a history of increasing responsibilities in their previous positions. I will rank the candidates based on how well they meet these criteria.",
+            "analysis": "The following table summarizes the qualifications of the top candidates for a senior-level position. The evaluation is based on the candidate's experience, skills, and the level of responsibility they held in their previous roles.",
+            "table_data": null,
+            "conclusion": "I recommend considering **[Isabel Mendoza](cv:cv_c6e80813)**, **[Carmen Rodriguez](cv:cv_59d15f5d)**, and **[Carlos Mendoza](cv:cv_85cd3954)** for senior-level positions. Their CVs demonstrate the necessary experience, skills, and leadership qualities.",
+            "gap_analysis": {
+              "required_skills": [
+                "To Identify Candidates Who Have A Significant Amount Of",
+                "Increasing Responsibility",
+                "Possess",
+                "47 Years Of",
+                "Roles Like Chief Creative Officer",
+                "Creative Director",
+                "Leadership"
+              ],
+              "skill_gaps": [
+                {
+                  "skill": "To Identify Candidates Who Have A Significant Amount Of",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Isabel Mendoza  3D",
+                    " Liam Chen  3D Artist",
+                    " Rajiv Patel  Junior VFX",
+                    " Carlos Mendoza  Junior VFX",
+                    " Carlos Mendoza  Lighting",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carmen Rodriguez  3D"
+                  ],
+                  "candidates_have": [
+                    " Imani Jones  Concept"
+                  ]
+                },
+                {
+                  "skill": "Increasing Responsibility",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Isabel Mendoza  3D",
+                    " Liam Chen  3D Artist",
+                    " Rajiv Patel  Junior VFX",
+                    " Carlos Mendoza  Junior VFX",
+                    " Imani Jones  Concept",
+                    " Carlos Mendoza  Lighting",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carmen Rodriguez  3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Possess",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Isabel Mendoza  3D",
+                    " Liam Chen  3D Artist",
+                    " Rajiv Patel  Junior VFX",
+                    " Carlos Mendoza  Junior VFX",
+                    " Imani Jones  Concept",
+                    " Carlos Mendoza  Lighting",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carmen Rodriguez  3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "47 Years Of",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Isabel Mendoza  3D",
+                    " Liam Chen  3D Artist",
+                    " Rajiv Patel  Junior VFX",
+                    " Carlos Mendoza  Junior VFX",
+                    " Imani Jones  Concept",
+                    " Carlos Mendoza  Lighting",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carmen Rodriguez  3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Roles Like Chief Creative Officer",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Isabel Mendoza  3D",
+                    " Liam Chen  3D Artist",
+                    " Rajiv Patel  Junior VFX",
+                    " Carlos Mendoza  Junior VFX",
+                    " Imani Jones  Concept",
+                    " Carlos Mendoza  Lighting",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carmen Rodriguez  3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Creative Director",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Isabel Mendoza  3D",
+                    " Liam Chen  3D Artist",
+                    " Rajiv Patel  Junior VFX",
+                    " Carlos Mendoza  Junior VFX",
+                    " Imani Jones  Concept",
+                    " Carlos Mendoza  Lighting",
+                    " Aisha Nkrumah  Junior 2D",
+                    " Carmen Rodriguez  3D"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "Leadership",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Isabel Mendoza  3D",
+                    " Liam Chen  3D Artist",
+                    " Rajiv Patel  Junior VFX",
+                    " Carlos Mendoza  Junior VFX",
+                    " Imani Jones  Concept",
+                    " Carlos Mendoza  Lighting",
+                    " Aisha Nkrumah  Junior 2D"
+                  ],
+                  "candidates_have": [
+                    " Carmen Rodriguez  3D"
+                  ]
+                }
+              ],
+              "coverage_score": 3.571428571428571,
+              "best_coverage_candidate": " Imani Jones  Concept",
+              "summary": "Best match:  Imani Jones  Concept covers 14% of requirements"
+            },
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "job_match",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": {
+              "matches": [
+                {
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "cv_id": "cv_c6e80813",
+                  "overall_match": 100.0,
+                  "met_requirements": [
+                    "5+ years experience"
+                  ],
+                  "missing_requirements": [],
+                  "partial_requirements": [],
+                  "strengths": [
+                    "Senior-level experience (47 years)"
+                  ]
+                },
+                {
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "cv_id": "cv_c0bce16c",
+                  "overall_match": 100.0,
+                  "met_requirements": [
+                    "5+ years experience"
+                  ],
+                  "missing_requirements": [],
+                  "partial_requirements": [],
+                  "strengths": [
+                    "Mid-senior experience (6 years)"
+                  ]
+                },
+                {
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "cv_id": "cv_59d15f5d",
+                  "overall_match": 100.0,
+                  "met_requirements": [
+                    "5+ years experience"
+                  ],
+                  "missing_requirements": [],
+                  "partial_requirements": [],
+                  "strengths": [
+                    "Senior-level experience (16 years)",
+                    "Diverse skill set (27 skills)"
+                  ]
+                },
+                {
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_21feef5e",
+                  "overall_match": 50.0,
+                  "met_requirements": [],
+                  "missing_requirements": [],
+                  "partial_requirements": [
+                    "5+ years experience"
+                  ],
+                  "strengths": []
+                },
+                {
+                  "candidate_name": " Carlos Mendoza  Lighting",
+                  "cv_id": "cv_85cd3954",
+                  "overall_match": 50.0,
+                  "met_requirements": [],
+                  "missing_requirements": [],
+                  "partial_requirements": [
+                    "5+ years experience"
+                  ],
+                  "strengths": []
+                },
+                {
+                  "candidate_name": " Rajiv Patel  Junior VFX",
+                  "cv_id": "cv_10a396b6",
+                  "overall_match": 0.0,
+                  "met_requirements": [],
+                  "missing_requirements": [
+                    "5+ years experience"
+                  ],
+                  "partial_requirements": [],
+                  "strengths": []
+                },
+                {
+                  "candidate_name": " Carlos Mendoza  Junior VFX",
+                  "cv_id": "cv_35077109",
+                  "overall_match": 0.0,
+                  "met_requirements": [],
+                  "missing_requirements": [
+                    "5+ years experience"
+                  ],
+                  "partial_requirements": [],
+                  "strengths": []
+                },
+                {
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "cv_id": "cv_be43f511",
+                  "overall_match": 0.0,
+                  "met_requirements": [],
+                  "missing_requirements": [
+                    "5+ years experience"
+                  ],
+                  "partial_requirements": [],
+                  "strengths": [
+                    "Diverse skill set (30 skills)"
+                  ]
+                }
+              ],
+              "total_requirements": 1
+            },
+            "requirements": {
+              "requirements": [
+                {
+                  "name": "5+ years experience",
+                  "category": "required",
+                  "type": "experience",
+                  "years": 5
+                }
+              ],
+              "job_title": "Senior",
+              "total_required": 1,
+              "total_preferred": 0
+            },
+            "best_match": {
+              "candidate_name": " Isabel Mendoza  3D",
+              "cv_id": "cv_c6e80813",
+              "overall_score": 100.0,
+              "overall_match": 100.0,
+              "key_strengths": [
+                "Senior-level experience (47 years)"
+              ],
+              "strengths": [
+                "Senior-level experience (47 years)"
+              ],
+              "justification": "Meets 1 requirements. Senior-level experience (47 years)",
+              "met_requirements": [
+                "5+ years experience"
+              ],
+              "missing_requirements": []
+            },
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T03:12:53.079549"
+        },
+        {
+          "id": "a0fb95d1-5cd6-4643-961f-eded1b87fd38",
+          "role": "user",
+          "content": "dame todo el perfil de Carlos Mendoza Junior VFX",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T03:12:58.879432"
+        },
+        {
+          "id": "774bbbe5-c74b-4ff9-8ce7-7d9ff16de126",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for the complete CV profile of Carlos Mendoza (cv_35077109), who specializes in Visual Effects (VFX). I need to extract all information from the CV, including contact information, work experience, education, skills, and any other relevant information. I will then present this information in the specified format.\n:::\n\nCarlos Mendoza is a detail-oriented and passionate Junior VFX Artist at PixelFx Studios, where he delivers high-quality visual effects for advertising and short-form content. He has a knack for turning complex visual concepts into compelling motion and has honed his skills across Maya, Nuke, and Houdini.\n\n\n:::conclusion\n**Overall Assessment:** **[Carlos Mendoza](cv:cv_35077109)** is a promising Junior VFX Artist with a strong foundation in industry-standard software and a proven ability to deliver high-quality visual effects. His experience as a VFX Intern and his current role as a Junior VFX Artist demonstrate his commitment to the field and his eagerness to learn and grow.\n\n**Key Strengths:**\n- Strong skills in Maya, Nuke, and Houdini\n- Proven ability to increase client satisfaction\n- Certified Houdini FX Artist\n\n**Areas to Explore:**\nNo significant concerns identified. Candidate appears to have a stable career trajectory.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_35077109",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_10a396b6",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_85cd3954",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c6e80813",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_21feef5e",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c0bce16c",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_be43f511",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_59d15f5d",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1803.46,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 15.35,
+              "details": "Found 17 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 8932.54,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6802.27,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "Carlos Mendoza is a detail-oriented and passionate Junior VFX Artist at PixelFx Studios, where he delivers high-quality visual effects for advertising and short-form content. He has a knack for turning complex visual concepts into compelling motion and has honed his skills across Maya, Nuke, and Houdini.",
+            "raw_content": ":::thinking\nThe user is asking for the complete CV profile of **[Carlos Mendoza](cv:cv_35077109)**, who specializes in Visual Effects (VFX). I need to extract all information from the CV, including contact information, work experience, education, skills, and any other relevant information. I will then present this information in the specified format.\n:::\n\n## 👤 **[Carlos Mendoza](cv:cv_35077109)**\n\n**[Carlos Mendoza](cv:cv_35077109)** is a detail-oriented and passionate Junior VFX Artist at PixelFx Studios, where he delivers high-quality visual effects for advertising and short-form content. He has a knack for turning complex visual concepts into compelling motion and has honed his skills across Maya, Nuke, and Houdini.\n\n---\n\n### 📊 Candidate Highlights\n\n| Category | Key Information |\n|:---------|:----------------|\n| **🎯 Current Role** | Junior VFX Artist at PixelFx Studios (2023-Present) |\n| **⏱️ Total Experience** | 0 years in VFX |\n| **🏆 Top Achievement** | Created over 120 VFX shots that increased client satisfaction scores by 35%. |\n| **💡 Core Expertise** | Maya, Nuke, Houdini |\n| **🎓 Education** | Bachelor of Fine Arts in Digital Arts, Universidade de São Paulo (USP), 2009 |\n\n---\n\n### 💼 Career Trajectory\n\n**Junior VFX Artist** — *PixelFx Studios* (2023 - Present)\n→ Created over 120 VFX shots that increased client satisfaction scores by 35%.\n\n**VFX Intern** — *Creative VFX Lab* (2020 - 2023)\n→ Contributed to an award-winning commercial that earned a Cannes Lions nomination.\n\n---\n\n### 🛠️ Skills Snapshot\n\n| Skill Area | Details | Level |\n|:-----------|:--------|:------|\n| **Software** | Maya | 10/10 |\n| **Software** | Nuke | 9/10 |\n| **Software** | Houdini | 8/10 |\n| **Software** | After Effects | 8/10 |\n| **Software** | Unity | 7/10 |\n| **Languages** | Portuguese | C2 (Native) |\n| **Languages** | English | C1 (Professional) |\n| **Languages** | Spanish | B1 (Intermediate) |\n\n---\n\n### Credentials\n\n- Certified Houdini FX Artist, SideFX, 2022\n\n---\n\n### Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| **🚩 Red Flags** | ✅ None | No issues found |\n| **🔄 Job Hopping** | ✅ Low | Score: 0%, Avg tenure: 0.0 yrs |\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n| **📊 Stability** | ✅ Stable | 1 positions over 0 years |\n| **🎯 Experience** | Entry |  São Paulo @ Brazil Contributed to an award‑winning commercial that |\n\n---\n\n:::conclusion\n**Overall Assessment:** **[Carlos Mendoza](cv:cv_35077109)** is a promising Junior VFX Artist with a strong foundation in industry-standard software and a proven ability to deliver high-quality visual effects. His experience as a VFX Intern and his current role as a Junior VFX Artist demonstrate his commitment to the field and his eagerness to learn and grow.\n\n**Key Strengths:**\n- Strong skills in Maya, Nuke, and Houdini\n- Proven ability to increase client satisfaction\n- Certified Houdini FX Artist\n\n**Areas to Explore:**\nNo significant concerns identified. Candidate appears to have a stable career trajectory.\n:::",
+            "thinking": "The user is asking for the complete CV profile of Carlos Mendoza (cv_35077109), who specializes in Visual Effects (VFX). I need to extract all information from the CV, including contact information, work experience, education, skills, and any other relevant information. I will then present this information in the specified format.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "**Overall Assessment:** **[Carlos Mendoza](cv:cv_35077109)** is a promising Junior VFX Artist with a strong foundation in industry-standard software and a proven ability to deliver high-quality visual effects. His experience as a VFX Intern and his current role as a Junior VFX Artist demonstrate his commitment to the field and his eagerness to learn and grow.\n\n**Key Strengths:**\n- Strong skills in Maya, Nuke, and Houdini\n- Proven ability to increase client satisfaction\n- Certified Houdini FX Artist\n\n**Areas to Explore:**\nNo significant concerns identified. Candidate appears to have a stable career trajectory.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Carlos Mendoza  Junior VFX",
+              "cv_id": "cv_35077109",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "⚠️ Issues Found",
+                  "details": "Moderate concerns",
+                  "status_icon": "⚠️",
+                  "status_text": "Issues Found"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "✅ Low",
+                  "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                  "status_icon": "✅",
+                  "status_text": "Low"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "✅ Stable",
+                  "details": "1 positions over 0 years",
+                  "status_icon": "✅",
+                  "status_text": "Stable"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Entry",
+                  "details": " São Paulo @ Brazil Contributed to an award‑winning commercial that",
+                  "status_icon": "",
+                  "status_text": "Entry"
+                }
+              ],
+              "has_issues": true,
+              "overall_risk": "moderate",
+              "analysis_text": "** Carlos Mendoza  Junior VFX** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+              "metrics": {
+                "job_hopping_score": 0.0,
+                "avg_tenure_years": 0.0,
+                "total_experience_years": 0.0,
+                "employment_gaps_count": 0,
+                "position_count": 1
+              }
+            },
+            "structure_type": "single_candidate",
+            "single_candidate_data": {
+              "candidate_name": " Carlos Mendoza  Junior VFX",
+              "cv_id": "cv_35077109",
+              "summary": "Carlos Mendoza is a detail-oriented and passionate Junior VFX Artist at PixelFx Studios, where he delivers high-quality visual effects for advertising and short-form content. He has a knack for turning complex visual concepts into compelling motion and has honed his skills across Maya, Nuke, and Houdini.",
+              "highlights": [
+                {
+                  "category": "🎯 Current Role",
+                  "info": "Junior VFX Artist at PixelFx Studios (2023-Present)"
+                },
+                {
+                  "category": "⏱️ Total Experience",
+                  "info": "0 years in VFX"
+                },
+                {
+                  "category": "🏆 Top Achievement",
+                  "info": "Created over 120 VFX shots that increased client satisfaction scores by 35%."
+                },
+                {
+                  "category": "💡 Core Expertise",
+                  "info": "Maya, Nuke, Houdini"
+                },
+                {
+                  "category": "🎓 Education",
+                  "info": "Bachelor of Fine Arts in Digital Arts, Universidade de São Paulo (USP), 2009"
+                }
+              ],
+              "career": [
+                {
+                  "title": "Junior VFX Artist",
+                  "company": "PixelFx Studios",
+                  "dates": "2023 - Present",
+                  "achievement": "Created over 120 VFX shots that increased client satisfaction scores by 35%."
+                },
+                {
+                  "title": "VFX Intern",
+                  "company": "Creative VFX Lab",
+                  "dates": "2020 - 2023",
+                  "achievement": "Contributed to an award-winning commercial that earned a Cannes Lions nomination."
+                }
+              ],
+              "skills": [
+                {
+                  "area": "Software",
+                  "details": "Maya",
+                  "level": "10/10"
+                },
+                {
+                  "area": "Software",
+                  "details": "Nuke",
+                  "level": "9/10"
+                },
+                {
+                  "area": "Software",
+                  "details": "Houdini",
+                  "level": "8/10"
+                },
+                {
+                  "area": "Software",
+                  "details": "After Effects",
+                  "level": "8/10"
+                },
+                {
+                  "area": "Software",
+                  "details": "Unity",
+                  "level": "7/10"
+                },
+                {
+                  "area": "Languages",
+                  "details": "Portuguese",
+                  "level": "C2 (Native)"
+                },
+                {
+                  "area": "Languages",
+                  "details": "English",
+                  "level": "C1 (Professional)"
+                },
+                {
+                  "area": "Languages",
+                  "details": "Spanish",
+                  "level": "B1 (Intermediate)"
+                }
+              ],
+              "credentials": [
+                "Certified Houdini FX Artist, SideFX, 2022"
+              ],
+              "risk_table": {
+                "candidate_name": " Carlos Mendoza  Junior VFX",
+                "cv_id": "cv_35077109",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "⚠️ Issues Found",
+                    "details": "Moderate concerns",
+                    "status_icon": "⚠️",
+                    "status_text": "Issues Found"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "✅ Low",
+                    "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                    "status_icon": "✅",
+                    "status_text": "Low"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "✅ Stable",
+                    "details": "1 positions over 0 years",
+                    "status_icon": "✅",
+                    "status_text": "Stable"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Entry",
+                    "details": " São Paulo @ Brazil Contributed to an award‑winning commercial that",
+                    "status_icon": "",
+                    "status_text": "Entry"
+                  }
+                ],
+                "has_issues": true,
+                "overall_risk": "moderate",
+                "analysis_text": "** Carlos Mendoza  Junior VFX** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+                "metrics": {
+                  "job_hopping_score": 0.0,
+                  "avg_tenure_years": 0.0,
+                  "total_experience_years": 0.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 1
+                }
+              },
+              "conclusion": "**Overall Assessment:** **[Carlos Mendoza](cv:cv_35077109)** is a promising Junior VFX Artist with a strong foundation in industry-standard software and a proven ability to deliver high-quality visual effects. His experience as a VFX Intern and his current role as a Junior VFX Artist demonstrate his commitment to the field and his eagerness to learn and grow.\n\n**Key Strengths:**\n- Strong skills in Maya, Nuke, and Houdini\n- Proven ability to increase client satisfaction\n- Certified Houdini FX Artist\n\n**Areas to Explore:**\nNo significant concerns identified. Candidate appears to have a stable career trajectory."
+            },
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T03:13:19.837918"
+        },
+        {
+          "id": "3a6921a3-5634-4810-acac-5ca300ef6647",
+          "role": "user",
+          "content": "dame riska ssesment de Carlos Mendoza Junior VFX",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T03:13:29.795447"
+        },
+        {
+          "id": "8064eb4a-83c1-4132-8312-a7380ddc7171",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a risk assessment of Carlos Mendoza Junior VFX (cv_35077109), focusing on potential red flags related to job stability, employment gaps, and overall experience. The user specifically wants to know if the candidate has experience in VFX and Risk Assessment. The pre-calculated data indicates potential issues with high mobility or gaps, but also shows low job hopping, no employment gaps, and stable employment. I need to reconcile these conflicting signals and determine the overall risk level. Additionally, I need to verify if the candidate has experience in VFX and Risk Assessment based on the provided CV.\n:::\n\n** Carlos Mendoza  Junior VFX** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.\n\n\n### ⚠️ Risk Assessment\n\n\n| Factor | Status | Details |\n\n|:-------|:------:|:--------|\n\n| **🚩 Red Flags** | ⚠️ Issues Found | Moderate concerns |\n\n| **🔄 Job Hopping** | ✅ Low | Score: 0%, Avg tenure: 0.0 yrs |\n\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n\n| **📊 Stability** | ✅ Stable | 1 positions over 0 years |\n\n| **🎯 Experience** | Entry |  São Paulo @ Brazil Contributed to an award‑winning commercial that |\n\n\n:::conclusion\n**Assessment:**The pre-calculated data indicates \"High mobility or gaps\" as a potential red flag, but also shows \"Low\" job hopping (Score: 0%, Avg tenure: 0.0 yrs), \"None\" for employment gaps, and \"Stable\" employment. This suggests a possible inconsistency in the data or a misinterpretation of the candidate's employment history. The CV does not explicitly mention experience in Risk Assessment.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_35077109",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_10a396b6",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c6e80813",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_21feef5e",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_85cd3954",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_be43f511",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_59d15f5d",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c0bce16c",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1271.83,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 11.6,
+              "details": "Found 16 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 23635.08,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4224.86,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "** Carlos Mendoza  Junior VFX** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+            "raw_content": ":::thinking\nThe user is asking for a risk assessment of **[Carlos Mendoza Junior VFX](cv:cv_35077109)**, focusing on potential red flags related to job stability, employment gaps, and overall experience. The user specifically wants to know if the candidate has experience in VFX and Risk Assessment. The pre-calculated data indicates potential issues with high mobility or gaps, but also shows low job hopping, no employment gaps, and stable employment. I need to reconcile these conflicting signals and determine the overall risk level. Additionally, I need to verify if the candidate has experience in VFX and Risk Assessment based on the provided CV.\n:::\n\n⚠️ **Risk factors identified for [Carlos Mendoza Junior VFX](cv:cv_35077109):**\n- High mobility or gaps\n\n---\n\n### ⚠️ Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| **🚩 Red Flags** | ⚠️ Issues Found | High mobility or gaps |\n| **🔄 Job Hopping** | ✅ Low | Score: 0%, Avg tenure: 0.0 yrs |\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n| **📊 Stability** | ✅ Stable | 1 positions over 0 years |\n| **🎯 Experience** | Entry |  São Paulo @ Brazil Contributed to an award‑winning commercial that |\n\n---\n\n:::conclusion\n**Assessment:** The pre-calculated data indicates \"High mobility or gaps\" as a potential red flag, but also shows \"Low\" job hopping (Score: 0%, Avg tenure: 0.0 yrs), \"None\" for employment gaps, and \"Stable\" employment. This suggests a possible inconsistency in the data or a misinterpretation of the candidate's employment history. The CV does not explicitly mention experience in Risk Assessment.\n:::",
+            "thinking": "The user is asking for a risk assessment of Carlos Mendoza Junior VFX (cv_35077109), focusing on potential red flags related to job stability, employment gaps, and overall experience. The user specifically wants to know if the candidate has experience in VFX and Risk Assessment. The pre-calculated data indicates potential issues with high mobility or gaps, but also shows low job hopping, no employment gaps, and stable employment. I need to reconcile these conflicting signals and determine the overall risk level. Additionally, I need to verify if the candidate has experience in VFX and Risk Assessment based on the provided CV.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "**Assessment:**The pre-calculated data indicates \"High mobility or gaps\" as a potential red flag, but also shows \"Low\" job hopping (Score: 0%, Avg tenure: 0.0 yrs), \"None\" for employment gaps, and \"Stable\" employment. This suggests a possible inconsistency in the data or a misinterpretation of the candidate's employment history. The CV does not explicitly mention experience in Risk Assessment.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Carlos Mendoza  Junior VFX",
+              "cv_id": "cv_35077109",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "⚠️ Issues Found",
+                  "details": "Moderate concerns",
+                  "status_icon": "⚠️",
+                  "status_text": "Issues Found"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "✅ Low",
+                  "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                  "status_icon": "✅",
+                  "status_text": "Low"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "✅ Stable",
+                  "details": "1 positions over 0 years",
+                  "status_icon": "✅",
+                  "status_text": "Stable"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Entry",
+                  "details": " São Paulo @ Brazil Contributed to an award‑winning commercial that",
+                  "status_icon": "",
+                  "status_text": "Entry"
+                }
+              ],
+              "has_issues": true,
+              "overall_risk": "moderate",
+              "analysis_text": "** Carlos Mendoza  Junior VFX** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+              "metrics": {
+                "job_hopping_score": 0.0,
+                "avg_tenure_years": 0.0,
+                "total_experience_years": 0.0,
+                "employment_gaps_count": 0,
+                "position_count": 1
+              }
+            },
+            "structure_type": "risk_assessment",
+            "single_candidate_data": null,
+            "risk_assessment_data": {
+              "candidate_name": " Carlos Mendoza  Junior VFX",
+              "cv_id": "cv_35077109",
+              "risk_analysis": "** Carlos Mendoza  Junior VFX** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+              "risk_table": {
+                "candidate_name": " Carlos Mendoza  Junior VFX",
+                "cv_id": "cv_35077109",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "⚠️ Issues Found",
+                    "details": "Moderate concerns",
+                    "status_icon": "⚠️",
+                    "status_text": "Issues Found"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "✅ Low",
+                    "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                    "status_icon": "✅",
+                    "status_text": "Low"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "✅ Stable",
+                    "details": "1 positions over 0 years",
+                    "status_icon": "✅",
+                    "status_text": "Stable"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Entry",
+                    "details": " São Paulo @ Brazil Contributed to an award‑winning commercial that",
+                    "status_icon": "",
+                    "status_text": "Entry"
+                  }
+                ],
+                "has_issues": true,
+                "overall_risk": "moderate",
+                "analysis_text": "** Carlos Mendoza  Junior VFX** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+                "metrics": {
+                  "job_hopping_score": 0.0,
+                  "avg_tenure_years": 0.0,
+                  "total_experience_years": 0.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 1
+                }
+              },
+              "assessment": "**Assessment:**The pre-calculated data indicates \"High mobility or gaps\" as a potential red flag, but also shows \"Low\" job hopping (Score: 0%, Avg tenure: 0.0 yrs), \"None\" for employment gaps, and \"Stable\" employment. This suggests a possible inconsistency in the data or a misinterpretation of the candidate's employment history. The CV does not explicitly mention experience in Risk Assessment."
+            },
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T03:14:02.438272"
+        }
+      ],
+      "created_at": "2026-01-06T03:09:47.540119",
+      "updated_at": "2026-01-06T03:14:02.438272"
     }
   ]
 }

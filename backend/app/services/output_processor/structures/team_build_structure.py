@@ -46,7 +46,8 @@ class TeamBuildStructure:
         self,
         llm_output: str,
         chunks: List[Dict[str, Any]],
-        query: str = ""
+        query: str = "",
+        conversation_history: List[Dict[str, str]] = None
     ) -> Dict[str, Any]:
         """Assemble all components of Team Build Structure."""
         logger.info("[TEAM_BUILD_STRUCTURE] Assembling team composition")

@@ -45,7 +45,8 @@ class JobMatchStructure:
         llm_output: str,
         chunks: List[Dict[str, Any]],
         query: str = "",
-        job_description: str = ""
+        job_description: str = "",
+        conversation_history: List[Dict[str, str]] = None
     ) -> Dict[str, Any]:
         """
         Assemble all components of Job Match Structure.

@@ -38,7 +38,8 @@ class ComparisonStructure:
     def assemble(
         self,
         llm_output: str,
-        chunks: List[Dict[str, Any]]
+        chunks: List[Dict[str, Any]],
+        conversation_history: List[Dict[str, str]] = None
     ) -> Dict[str, Any]:
         """
         Assemble Comparison Structure.

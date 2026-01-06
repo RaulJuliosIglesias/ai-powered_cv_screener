@@ -1,0 +1,1580 @@
+{
+  "session_id": "76ad3b51-7784-4ce6-a6e2-37b21f38f1bc",
+  "generated_at": "2026-01-06T03:13:19.927812",
+  "events": [
+    {
+      "timestamp": "2026-01-06T03:09:52.621758",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "76ad3b51-7784-4ce6-a6e2-37b21f38f1bc"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:09:52.621758",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_c0bce16c",
+        "total_chunks": 7,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Liam Chen  3D Artist",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Liam Chen  3D Artist =====\n\nCURRENT POSITION: E X P E R I E N C E\nCURRENT "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Liam Chen  3D Artist",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 4 === CURRENT POSITION ===\n\nTITLE: E X P E R I E N C E\nCOMPANY: Supporting senior "
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Liam Chen  3D Artist",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 4\n\nTITLE: 2021\nCOMPANY: 2023 | PixelCraft Studios\nPERIOD: 2021 - 2023\nDURATION: 2 "
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Liam Chen  3D Artist",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 4\n\nTITLE: 2020\nCOMPANY: 2021 | ArtStart NL\nPERIOD: 2020 - 2021\nDURATION: 1 years\n\n"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Liam Chen  3D Artist",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 4\n\nTITLE: Amsterdam\nCOMPANY: Netherlands\nPERIOD: Unknown dates\nDURATION: 0 years\n\n"
+          },
+          {
+            "index": 5,
+            "section_type": "skills",
+            "candidate_name": " Liam Chen  3D Artist",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Liam Chen  3D Artist:\n\nL A N G U A G E S, I N T E R E S T S, Dutch ⭐⭐⭐⭐"
+          },
+          {
+            "index": 6,
+            "section_type": "full_cv",
+            "candidate_name": " Liam Chen  3D Artist",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Liam Chen  3D Artist\n\nCURRENT ROLE: E X P E R I E N C E\nCOMPANY: Supporting senior "
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:09:53.433309",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "76ad3b51-7784-4ce6-a6e2-37b21f38f1bc"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:09:53.433934",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_10a396b6",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Rajiv Patel  Junior VFX",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Rajiv Patel  Junior VFX =====\n\nCURRENT POSITION: high‑quality visual effec"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Rajiv Patel  Junior VFX",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: high‑quality visual effects for film and broadc"
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": " Rajiv Patel  Junior VFX",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Rajiv Patel  Junior VFX\n\nCURRENT ROLE: high‑quality visual effects for film and bro"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:09:53.829469",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "76ad3b51-7784-4ce6-a6e2-37b21f38f1bc"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:09:53.830008",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_35077109",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Carlos Mendoza  Junior VFX",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Carlos Mendoza  Junior VFX =====\n\nCURRENT POSITION:  São Paulo\nCURRENT CO"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Carlos Mendoza  Junior VFX",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE:  São Paulo\nCOMPANY: Brazil Contributed to an a"
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": " Carlos Mendoza  Junior VFX",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Carlos Mendoza  Junior VFX\n\nCURRENT ROLE:  São Paulo\nCOMPANY: Brazil Contributed t"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:09:54.276026",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "76ad3b51-7784-4ce6-a6e2-37b21f38f1bc"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:09:54.276026",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_c6e80813",
+        "total_chunks": 11,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Isabel Mendoza  3D",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "position_count": 9,
+            "employment_gaps_count": 1,
+            "content_preview": "===== CANDIDATE PROFILE:  Isabel Mendoza  3D =====\n\nCURRENT POSITION: 2010\nCURRENT COMPANY: 2020 | G"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Isabel Mendoza  3D",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "position_count": 9,
+            "employment_gaps_count": 1,
+            "content_preview": "JOB POSITION 1 of 9\n\nTITLE: 2020\nCOMPANY: 2023 | Nova Media\nPERIOD: 2020 - 2023\nDURATION: 3 years\n\nJ"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Isabel Mendoza  3D",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "position_count": 9,
+            "employment_gaps_count": 1,
+            "content_preview": "JOB POSITION 2 of 9 === CURRENT POSITION ===\n\nTITLE: 2010\nCOMPANY: 2020 | Global Render Studios\nPERI"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Isabel Mendoza  3D",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "position_count": 9,
+            "employment_gaps_count": 1,
+            "content_preview": "JOB POSITION 3 of 9\n\nTITLE: 2000\nCOMPANY: 2010 | Immersive Creations\nPERIOD: 2000 - 2010\nDURATION: 1"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Isabel Mendoza  3D",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "position_count": 9,
+            "employment_gaps_count": 1,
+            "content_preview": "JOB POSITION 4 of 9\n\nTITLE: 1990\nCOMPANY: 1995 | Creative Lab\nPERIOD: 1990 - 1995\nDURATION: 5 years\n"
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Isabel Mendoza  3D",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "position_count": 9,
+            "employment_gaps_count": 1,
+            "content_preview": "JOB POSITION 5 of 9\n\nTITLE: 1984\nCOMPANY: 1990 | EuroGraphics\nPERIOD: 1984 - 1990\nDURATION: 6 years\n"
+          },
+          {
+            "index": 6,
+            "section_type": "experience",
+            "candidate_name": " Isabel Mendoza  3D",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "position_count": 9,
+            "employment_gaps_count": 1,
+            "content_preview": "JOB POSITION 6 of 9\n\nTITLE: 1979\nCOMPANY: 1984 | Pixel Dynamics\nPERIOD: 1979 - 1984\nDURATION: 5 year"
+          },
+          {
+            "index": 7,
+            "section_type": "experience",
+            "candidate_name": " Isabel Mendoza  3D",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "position_count": 9,
+            "employment_gaps_count": 1,
+            "content_preview": "JOB POSITION 7 of 9 === CURRENT POSITION ===\n\nTITLE: 1976\nCOMPANY: 1979 | Studio L'Atelier\nPERIOD: 1"
+          },
+          {
+            "index": 8,
+            "section_type": "experience",
+            "candidate_name": " Isabel Mendoza  3D",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "position_count": 9,
+            "employment_gaps_count": 1,
+            "content_preview": "JOB POSITION 8 of 9\n\nTITLE: Introduced a streamlined asset pipeline that cut\nCOMPANY: production tim"
+          },
+          {
+            "index": 9,
+            "section_type": "experience",
+            "candidate_name": " Isabel Mendoza  3D",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "position_count": 9,
+            "employment_gaps_count": 1,
+            "content_preview": "JOB POSITION 9 of 9\n\nTITLE: Paris\nCOMPANY: France Delivered a $12M campaign that earned a Cannes Lio"
+          },
+          {
+            "index": 10,
+            "section_type": "full_cv",
+            "candidate_name": " Isabel Mendoza  3D",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "position_count": 9,
+            "employment_gaps_count": 1,
+            "content_preview": "COMPLETE CV for  Isabel Mendoza  3D\n\nCURRENT ROLE: 2010\nCOMPANY: 2020 | Global Render Studios\nTOTAL "
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:09:54.730093",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "76ad3b51-7784-4ce6-a6e2-37b21f38f1bc"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:09:54.730093",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_21feef5e",
+        "total_chunks": 6,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Imani Jones  Concept",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Imani Jones  Concept =====\n\nCURRENT POSITION: Los Angeles\nCURRENT COMPANY:"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Imani Jones  Concept",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3\n\nTITLE: Imani Jones\nCOMPANY: Senior Concept Artist Concept Artist\nPERIOD: 2019 -"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Imani Jones  Concept",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3\n\nTITLE:  instagram.com/imanijonesart\nCOMPANY: Indie Game Studios\nPERIOD: 2018 -"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Imani Jones  Concept",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3 === CURRENT POSITION ===\n\nTITLE: Los Angeles\nCOMPANY: CA projects, including cha"
+          },
+          {
+            "index": 4,
+            "section_type": "skills",
+            "candidate_name": " Imani Jones  Concept",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Imani Jones  Concept:\n\nand"
+          },
+          {
+            "index": 5,
+            "section_type": "full_cv",
+            "candidate_name": " Imani Jones  Concept",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Imani Jones  Concept\n\nCURRENT ROLE: Los Angeles\nCOMPANY: CA projects, including cha"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:09:55.133302",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "76ad3b51-7784-4ce6-a6e2-37b21f38f1bc"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:09:55.134302",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_85cd3954",
+        "total_chunks": 6,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Carlos Mendoza  Lighting",
+            "job_hopping_score": 0.75,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 4.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Carlos Mendoza  Lighting =====\n\nCURRENT POSITION: 2019\nCURRENT COMPANY: 20"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Carlos Mendoza  Lighting",
+            "job_hopping_score": 0.75,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 4.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 4 === CURRENT POSITION ===\n\nTITLE: 2019\nCOMPANY: 2021 | Sunset Production\nPERIOD: "
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Carlos Mendoza  Lighting",
+            "job_hopping_score": 0.75,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 4.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 4\n\nTITLE: 2018\nCOMPANY: 2019 | BrightWave Studios\nPERIOD: 2018 - 2019\nDURATION: 1 "
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Carlos Mendoza  Lighting",
+            "job_hopping_score": 0.75,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 4.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 4\n\nTITLE: 2017\nCOMPANY: 2018 | Tokyo Animation House\nPERIOD: 2017 - 2018\nDURATION:"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Carlos Mendoza  Lighting",
+            "job_hopping_score": 0.75,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 4.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 4\n\nTITLE: \nCOMPANY: artstation.com/carlosmendoza visuals under tight deadlines.\nP"
+          },
+          {
+            "index": 5,
+            "section_type": "full_cv",
+            "candidate_name": " Carlos Mendoza  Lighting",
+            "job_hopping_score": 0.75,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 4.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Carlos Mendoza  Lighting\n\nCURRENT ROLE: 2019\nCOMPANY: 2021 | Sunset Production\nTOTA"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:09:55.564550",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "76ad3b51-7784-4ce6-a6e2-37b21f38f1bc"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:09:55.564550",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_be43f511",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Aisha Nkrumah  Junior 2D",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Aisha Nkrumah  Junior 2D =====\n\nCURRENT POSITION: in various stages of the"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Aisha Nkrumah  Junior 2D",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: in various stages of the animation pipeline\nCOM"
+          },
+          {
+            "index": 2,
+            "section_type": "skills",
+            "candidate_name": " Aisha Nkrumah  Junior 2D",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Aisha Nkrumah  Junior 2D:\n\nin digital painting and character design., +"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Aisha Nkrumah  Junior 2D",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Aisha Nkrumah  Junior 2D\n\nCURRENT ROLE: in various stages of the animation pipeline"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:09:56.008051",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "76ad3b51-7784-4ce6-a6e2-37b21f38f1bc"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:09:56.008051",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_59d15f5d",
+        "total_chunks": 7,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Carmen Rodriguez  3D",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 16.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Carmen Rodriguez  3D =====\n\nCURRENT POSITION: Amsterdam\nCURRENT COMPANY: N"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Carmen Rodriguez  3D",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 16.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 4\n\nTITLE: 2010\nCOMPANY: 2018 | Rotterdam Visual Arts Group\nPERIOD: 2010 - 2018\nDUR"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Carmen Rodriguez  3D",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 16.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 4\n\nTITLE: 2002\nCOMPANY: 2010 | Amsterdam Creative Agency\nPERIOD: 2002 - 2010\nDURAT"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Carmen Rodriguez  3D",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 16.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 4\n\nTITLE: Chief Creative Officer\nCOMPANY: Global Innovation Award.\nPERIOD: Unknown"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Carmen Rodriguez  3D",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 16.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 4 === CURRENT POSITION ===\n\nTITLE: Amsterdam\nCOMPANY: Netherlands representation b"
+          },
+          {
+            "index": 5,
+            "section_type": "skills",
+            "candidate_name": " Carmen Rodriguez  3D",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 16.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Carmen Rodriguez  3D:\n\nleading to rapid, Dutch ⭐⭐⭐⭐⭐⭐ C2 (Native) promo"
+          },
+          {
+            "index": 6,
+            "section_type": "full_cv",
+            "candidate_name": " Carmen Rodriguez  3D",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 16.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Carmen Rodriguez  3D\n\nCURRENT ROLE: Amsterdam\nCOMPANY: Netherlands representation b"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:10:05.905493",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "76ad3b51-7784-4ce6-a6e2-37b21f38f1bc"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:10:05.905493",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Rank all 8 candidates by experience",
+        "cv_ids": [
+          "cv_c0bce16c",
+          "cv_10a396b6",
+          "cv_35077109",
+          "cv_c6e80813",
+          "cv_21feef5e",
+          "cv_85cd3954",
+          "cv_be43f511",
+          "cv_59d15f5d"
+        ],
+        "cv_count": 8
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:10:11.171293",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 20,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_21feef5e",
+            "candidate_name": " Imani Jones  Concept",
+            "section_type": "experience",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.5481558942563921,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_59d15f5d",
+            "candidate_name": " Carmen Rodriguez  3D",
+            "section_type": "skills",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 16.0,
+            "score": 0.7713393088905156,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_be43f511",
+            "candidate_name": " Aisha Nkrumah  Junior 2D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7893438195539149,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_59d15f5d",
+            "candidate_name": " Carmen Rodriguez  3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 16.0,
+            "score": 0.5308899440381606,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_c6e80813",
+            "candidate_name": " Isabel Mendoza  3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "score": 0.7471777016819793,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_21feef5e",
+            "candidate_name": " Imani Jones  Concept",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.7699070738946225,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_35077109",
+            "candidate_name": " Carlos Mendoza  Junior VFX",
+            "section_type": "experience",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5211926532368757,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_c0bce16c",
+            "candidate_name": " Liam Chen  3D Artist",
+            "section_type": "experience",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "score": 0.7376913986121704,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_85cd3954",
+            "candidate_name": " Carlos Mendoza  Lighting",
+            "section_type": "experience",
+            "job_hopping_score": 0.75,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 4.0,
+            "score": 0.5254950294846928,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_10a396b6",
+            "candidate_name": " Rajiv Patel  Junior VFX",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "score": 0.7269464300969058,
+            "has_enriched_metadata": false
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "location",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:10:38.295136",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "explicit_multi_candidate_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:10:42.566521",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 858,
+        "answer_preview": ":::thinking\nThe user is asking for a ranking of all 8 candidates based on their total years of professional experience, from most to least. I need to extract the total years of experience for each candidate from the provided CV excerpts and then rank them accordingly. If the total experience is not explicitly stated, I will look for start and end dates of employment to calculate the duration.\n:::\n\n\n:::conclusion\nBased on the analysis, **[Isabel Mendoza](cv:cv_c6e80813)** has the most experience ...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:11:07.356082",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "76ad3b51-7784-4ce6-a6e2-37b21f38f1bc"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:11:07.357083",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "vale ahrao dame todo sobre el top candidate",
+        "cv_ids": [
+          "cv_c0bce16c",
+          "cv_10a396b6",
+          "cv_35077109",
+          "cv_c6e80813",
+          "cv_21feef5e",
+          "cv_85cd3954",
+          "cv_be43f511",
+          "cv_59d15f5d"
+        ],
+        "cv_count": 8
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:11:12.083095",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 19,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_35077109",
+            "candidate_name": " Carlos Mendoza  Junior VFX",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7826494661426692,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_21feef5e",
+            "candidate_name": " Imani Jones  Concept",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.8121808446523516,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_be43f511",
+            "candidate_name": " Aisha Nkrumah  Junior 2D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.8465711924742682,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_be43f511",
+            "candidate_name": " Aisha Nkrumah  Junior 2D",
+            "section_type": "summary",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.44827147724818545,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_c6e80813",
+            "candidate_name": " Isabel Mendoza  3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "score": 0.7877342048493279,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_10a396b6",
+            "candidate_name": " Rajiv Patel  Junior VFX",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "score": 0.7925854243765277,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_59d15f5d",
+            "candidate_name": " Carmen Rodriguez  3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 16.0,
+            "score": 0.7900949285557162,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_85cd3954",
+            "candidate_name": " Carlos Mendoza  Lighting",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.75,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 4.0,
+            "score": 0.7720168152373903,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_10a396b6",
+            "candidate_name": " Rajiv Patel  Junior VFX",
+            "section_type": "experience",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "score": 0.530249564913345,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_c0bce16c",
+            "candidate_name": " Liam Chen  3D Artist",
+            "section_type": "experience",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "score": 0.5126363995824661,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:11:45.364646",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:11:53.079708",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 4448,
+        "answer_preview": ":::thinking\nThe user is asking for the top-ranked candidate based on the system's internal ranking and all available information about that candidate. Since the internal ranking algorithm is unspecified, I will assume that the candidate with the most relevant experience and skills for a general 3D/VFX artist role is the top-ranked candidate. I will extract all available information about this candidate from their CV, including skills, experience, education, and other relevant details.\n:::\n\n\n:::c...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:12:24.947942",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "76ad3b51-7784-4ce6-a6e2-37b21f38f1bc"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:12:24.947942",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Who would fit a senior position?",
+        "cv_ids": [
+          "cv_c0bce16c",
+          "cv_10a396b6",
+          "cv_35077109",
+          "cv_c6e80813",
+          "cv_21feef5e",
+          "cv_85cd3954",
+          "cv_be43f511",
+          "cv_59d15f5d"
+        ],
+        "cv_count": 8
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:12:30.452073",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 12,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_c6e80813",
+            "candidate_name": " Isabel Mendoza  3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "score": 0.8003931605148735,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_c0bce16c",
+            "candidate_name": " Liam Chen  3D Artist",
+            "section_type": "experience",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "score": 0.7763911667379944,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_10a396b6",
+            "candidate_name": " Rajiv Patel  Junior VFX",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "score": 0.7244464169492312,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_35077109",
+            "candidate_name": " Carlos Mendoza  Junior VFX",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7486265078526655,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_21feef5e",
+            "candidate_name": " Imani Jones  Concept",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.7832218988790084,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_85cd3954",
+            "candidate_name": " Carlos Mendoza  Lighting",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.75,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 4.0,
+            "score": 0.5275980374990752,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_be43f511",
+            "candidate_name": " Aisha Nkrumah  Junior 2D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7898897561708812,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_59d15f5d",
+            "candidate_name": " Carmen Rodriguez  3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 16.0,
+            "score": 0.7951429233349228,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_59d15f5d",
+            "candidate_name": " Carmen Rodriguez  3D",
+            "section_type": "skills",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 16.0,
+            "score": 0.5351396049681784,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_21feef5e",
+            "candidate_name": " Imani Jones  Concept",
+            "section_type": "experience",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.5185209236663298,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:12:46.200155",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:12:53.166524",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 723,
+        "answer_preview": ":::thinking\nThe user is asking for a list of candidates suitable for a senior-level position, based on their experience, skills, and career progression. I need to identify candidates who have a significant amount of experience, relevant skills for a senior role (leadership, strategic thinking, etc.), and a history of increasing responsibilities in their previous positions. I will rank the candidates based on how well they meet these criteria.\n:::\n\n\n:::conclusion\nI recommend considering **[Isabel...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:12:59.005237",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "76ad3b51-7784-4ce6-a6e2-37b21f38f1bc"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:12:59.005237",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "dame todo el perfil de Carlos Mendoza Junior VFX",
+        "cv_ids": [
+          "cv_c0bce16c",
+          "cv_10a396b6",
+          "cv_35077109",
+          "cv_c6e80813",
+          "cv_21feef5e",
+          "cv_85cd3954",
+          "cv_be43f511",
+          "cv_59d15f5d"
+        ],
+        "cv_count": 8
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:13:03.837936",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 17,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_35077109",
+            "candidate_name": " Carlos Mendoza  Junior VFX",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.8510975705450985,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_10a396b6",
+            "candidate_name": " Rajiv Patel  Junior VFX",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "score": 0.848986188661952,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_85cd3954",
+            "candidate_name": " Carlos Mendoza  Lighting",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.75,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 4.0,
+            "score": 0.8132785466168148,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_c6e80813",
+            "candidate_name": " Isabel Mendoza  3D",
+            "section_type": "experience",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "score": 0.6144146533037462,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_c6e80813",
+            "candidate_name": " Isabel Mendoza  3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "score": 0.8290053401196844,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_21feef5e",
+            "candidate_name": " Imani Jones  Concept",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.8196141576990512,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_c0bce16c",
+            "candidate_name": " Liam Chen  3D Artist",
+            "section_type": "experience",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "score": 0.5912919728820741,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_21feef5e",
+            "candidate_name": " Imani Jones  Concept",
+            "section_type": "experience",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.5783933954610767,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_be43f511",
+            "candidate_name": " Aisha Nkrumah  Junior 2D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5835382406738056,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_c0bce16c",
+            "candidate_name": " Liam Chen  3D Artist",
+            "section_type": "experience",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "score": 0.7917500955239539,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:13:12.771344",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "SINGLE_CANDIDATE_TEMPLATE",
+        "candidate_name": " Carlos Mendoza  Junior VFX",
+        "detection_method": "first_name_in_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T03:13:19.925724",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1292,
+        "answer_preview": ":::thinking\nThe user is asking for the complete CV profile of Carlos Mendoza (cv_35077109), who specializes in Visual Effects (VFX). I need to extract all information from the CV, including contact information, work experience, education, skills, and any other relevant information. I will then present this information in the specified format.\n:::\n\nCarlos Mendoza is a detail-oriented and passionate Junior VFX Artist at PixelFx Studios, where he delivers high-quality visual effects for advertising...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

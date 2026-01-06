@@ -2,26 +2,27 @@
 
 > **CV Screener AI - Complete RAG Pipeline Reference**
 > 
-> Version: 5.1.0 | Last Updated: January 2026
+> Version: 6.0 | Last Updated: January 2026
 
 ---
 
 ## Table of Contents
 
 1. [System Overview](#system-overview)
-2. [Smart CV Chunking](#smart-cv-chunking) ← **NEW in v5.1**
-3. [Architecture Diagram](#architecture-diagram)
-4. [Pipeline Stages](#pipeline-stages)
-5. [Targeted Retrieval](#targeted-retrieval) ← **NEW in v5.1**
-6. [V5 Advanced Features](#v5-advanced-features)
-7. [Structured Output Processing](#structured-output-processing)
-8. [Core Scripts Reference](#core-scripts-reference)
-9. [Data Flow](#data-flow)
-10. [Configuration](#configuration)
-11. [Providers](#providers)
-12. [Error Handling](#error-handling)
-13. [Caching & Performance](#caching--performance)
-14. [Evaluation & Logging](#evaluation--logging)
+2. [V6 Architecture: Orchestration System](#v6-architecture-orchestration-system) ← **NEW in v6.0**
+3. [Smart CV Chunking](#smart-cv-chunking)
+4. [Architecture Diagram](#architecture-diagram)
+5. [Pipeline Stages](#pipeline-stages)
+6. [Targeted Retrieval](#targeted-retrieval)
+7. [V5 Advanced Features](#v5-advanced-features)
+8. [Structured Output Processing](#structured-output-processing)
+9. [Core Scripts Reference](#core-scripts-reference)
+10. [Data Flow](#data-flow)
+11. [Configuration](#configuration)
+12. [Providers](#providers)
+13. [Error Handling](#error-handling)
+14. [Caching & Performance](#caching--performance)
+15. [Evaluation & Logging](#evaluation--logging)
 
 ---
 
@@ -34,35 +35,78 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
 | **LOCAL** | In-memory vector store, local embeddings |
 | **CLOUD** | Supabase pgvector, OpenAI embeddings, OpenRouter LLMs |
 
-### Key Features (V5)
+### Key Features (V6.0 - Current)
+
+- ✅ **Orchestrator → Structures → Modules**: Complete output processing architecture
+- ✅ **9 Structures**: SingleCandidate, RiskAssessment, Comparison, Search, Ranking, JobMatch, TeamBuild, Verification, Summary
+- ✅ **25+ Modules**: Reusable components (Thinking, Analysis, RiskTable, MatchScore, etc.)
+- ✅ **Conversational Context**: `conversation_history` propagated through entire pipeline
+- ✅ **Query Type Routing**: Intelligent routing based on query classification
+
+### Key Features (V5.x - Foundation)
 
 - ✅ **Multi-Query Retrieval**: Generate query variations for better recall
 - ✅ **HyDE (Hypothetical Document Embeddings)**: Improved semantic matching
 - ✅ **Reciprocal Rank Fusion (RRF)**: Combine results from multiple queries
 - ✅ **Chain-of-Thought Reasoning**: Structured Self-Ask pattern for complex queries
 - ✅ **Claim-Level Verification**: Verify individual claims against source context
-- ✅ **Iterative Refinement**: Regenerate response if verification fails
-- ✅ **Guardrails**: Pre-LLM filtering to reject off-topic queries
-- ✅ **Adaptive Retrieval**: Strategy varies based on query type and session size
-- ✅ **LLM-based Reranking**: Re-orders chunks by semantic relevance
-- ✅ **Circuit Breaker**: Prevents cascading failures
-- ✅ **Response Caching**: LRU cache with TTL for embeddings and responses
-- ✅ **Graceful Degradation**: Auto-disable failing features to maintain service
-
-### Key Features (V5.1 - NEW)
-
 - ✅ **Smart CV Chunking**: Intelligent extraction of dates, roles, and experience years
-- ✅ **Enriched Metadata**: Pre-calculated `current_role`, `total_experience_years`, `is_current`
-- ✅ **Targeted Retrieval**: Fetch ALL chunks for a specific candidate (bypasses semantic search)
-- ✅ **Summary Chunks**: Pre-built profile summaries for instant candidate lookups
+- ✅ **Enriched Metadata**: Pre-calculated `current_role`, `total_experience_years`, `seniority_level`
+- ✅ **Targeted Retrieval**: Fetch ALL chunks for a specific candidate
+- ✅ **Circuit Breaker & Graceful Degradation**: Resilient architecture
 
-### Key Features (V5.1.1 - Enhanced Modules)
+---
 
-- ✅ **Gap Analysis Module**: Skills gap detection between job requirements and candidate profiles
-- ✅ **Red Flags Module**: Risk detection (job-hopping, employment gaps, short tenures)
-- ✅ **Timeline Module**: Career trajectory visualization with progression scoring
-- ✅ **Deep Enriched Metadata**: `seniority_level`, `job_hopping_score`, `avg_tenure_years`, `has_faang_experience`
-- ✅ **Summary Chunk with Career Path**: Pre-built career trajectory summary per CV
+## V6 Architecture: Orchestration System
+
+> **NEW in v6.0** - Complete Orchestrator → Structures → Modules architecture
+
+### High-Level Flow
+
+```
+User Query → RAG Pipeline → LLM Response → ORCHESTRATOR → Frontend
+                                               │
+                    ┌──────────────────────────┼──────────────────────────┐
+                    ▼                          ▼                          ▼
+              query_type=              query_type=                query_type=
+              single_candidate         comparison                 job_match
+                    │                          │                          │
+                    ▼                          ▼                          ▼
+           SingleCandidateStructure  ComparisonStructure      JobMatchStructure
+                    │                          │                          │
+                    ▼                          ▼                          ▼
+             [Modules...]              [Modules...]              [Modules...]
+```
+
+### 9 Structures Implemented
+
+| Structure | Query Type | Modules Used |
+|-----------|------------|--------------|
+| SingleCandidateStructure | `single_candidate` | Thinking, Highlights, Career, Skills, Credentials, RiskTable, Conclusion |
+| RiskAssessmentStructure | `red_flags` | Thinking, Analysis, RiskTable, Conclusion |
+| ComparisonStructure | `comparison` | Thinking, Analysis, TableModule, Conclusion |
+| SearchStructure | `search` | Thinking, DirectAnswer, ResultsTable, Analysis, Conclusion |
+| RankingStructure | `ranking` | Thinking, RankingCriteria, RankingTable, TopPick, Conclusion |
+| JobMatchStructure | `job_match` | Thinking, Requirements, MatchScore, GapAnalysis, Conclusion |
+| TeamBuildStructure | `team_build` | Thinking, TeamRequirements, TeamComposition, SkillCoverage, TeamRisk |
+| VerificationStructure | `verification` | Thinking, Claim, Evidence, Verdict, Conclusion |
+| SummaryStructure | `summary` | Thinking, TalentPool, SkillDistribution, ExperienceDistribution |
+
+### Conversational Context Flow
+
+All Structures receive `conversation_history` for context-aware responses:
+
+```python
+# Orchestrator.process()
+structure_data = self.job_match_structure.assemble(
+    llm_output=cleaned_llm_output,
+    chunks=chunks or [],
+    query=query,
+    conversation_history=conversation_history or []  # ← Propagated
+)
+```
+
+For complete architecture details, see [ARCHITECTURE_MODULES.md](./ARCHITECTURE_MODULES.md).
 
 ---
 

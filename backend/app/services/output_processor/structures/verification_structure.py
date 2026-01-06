@@ -40,7 +40,8 @@ class VerificationStructure:
         self,
         llm_output: str,
         chunks: List[Dict[str, Any]],
-        query: str = ""
+        query: str = "",
+        conversation_history: List[Dict[str, str]] = None
     ) -> Dict[str, Any]:
         """Assemble all components of Verification Structure."""
         logger.info("[VERIFICATION_STRUCTURE] Assembling verification analysis")

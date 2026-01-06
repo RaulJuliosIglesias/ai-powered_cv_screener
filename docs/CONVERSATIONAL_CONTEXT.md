@@ -1,29 +1,26 @@
 # Sistema de Contexto Conversacional
 
-## Problema Actual
+> **Estado: ✅ IMPLEMENTADO** | Versión 6.0 | Enero 2026
 
-El sistema actual **no mantiene contexto** entre mensajes:
-- Usuario: "¿Cuál es el mejor candidato para Frontend?"
-- Sistema: "Juan Pérez es el mejor candidato..."
-- Usuario: "Dime los problemas con este candidato"
-- Sistema: ❌ No sabe de quién hablas
+## Resumen
 
-## Solución Propuesta
+El sistema de **contexto conversacional** está completamente implementado y propagado a través de todo el pipeline:
 
-Implementar un sistema de **contexto conversacional limitado** que:
-1. Recupera los últimos N mensajes del chat (configurable, por defecto 4-6 mensajes = 2-3 turnos)
-2. Los pasa al servicio RAG como contexto
-3. Los incluye en el prompt de generación
+```
+Endpoint → RAG Service → Orchestrator → Structures → Modules
+                    ↓
+            conversation_history: List[Dict[str, str]]
+```
 
-### Ventajas
-- ✅ Simple de implementar
-- ✅ No requiere cambios en base de datos (ya está preparada)
-- ✅ Control de costos (número limitado de mensajes)
-- ✅ Mantiene referencias inmediatas
+### Capacidades Actuales
+- ✅ `conversation_history` fluye a través de todo el sistema
+- ✅ Todas las 9 Structures reciben contexto conversacional
+- ✅ Referencias pronominales ("este candidato", "él", "ella")
+- ✅ Follow-up queries mantienen contexto
 
-### Limitaciones
-- ⚠️ No mantiene contexto de toda la conversación (por costos y complejidad)
-- ⚠️ Ideal para referencias inmediatas (2-3 turnos previos)
+### Limitaciones Conocidas
+- ⚠️ Contexto limitado a últimos N mensajes (por costos)
+- ⚠️ No hay resolución semántica avanzada de pronombres (roadmap)
 
 ---
 
@@ -351,26 +348,59 @@ relevant_messages = search_similar_messages(
 
 ---
 
-## Estimación de Implementación
+## Estado de Implementación
 
-| Componente | Tiempo | Complejidad |
-|------------|--------|-------------|
-| SessionManager.get_conversation_history() | 30 min | Baja |
-| RAGServiceV5 modificaciones | 1 hora | Media |
-| Prompt Builder actualización | 30 min | Baja |
-| Endpoints actualización | 1 hora | Media |
-| Testing | 1 hora | Media |
-| **TOTAL** | **4 horas** | **Media** |
+| Componente | Estado | Archivo |
+|------------|--------|---------|
+| SessionManager.get_conversation_history() | ✅ Implementado | `sessions.py` |
+| RAGServiceV5 conversation_history param | ✅ Implementado | `rag_service_v5.py` |
+| Orchestrator conversation_history param | ✅ Implementado | `orchestrator.py` |
+| Todas las Structures con param | ✅ Implementado | `structures/*.py` |
+| Endpoints con historial | ✅ Implementado | `routes_sessions_stream.py` |
 
 ---
 
-## Conclusión
+## Propagación en Structures (v6.0)
 
-La solución propuesta:
-- ✅ Resuelve el problema inmediato de referencias al mensaje anterior
-- ✅ Es simple y eficiente
-- ✅ No requiere cambios en base de datos
-- ✅ Mantiene bajo el costo de tokens
-- ✅ Se puede implementar en unas horas
+Todas las 9 Structures ahora reciben `conversation_history`:
 
-**Siguiente paso:** Implementar los cambios empezando por el SessionManager.
+```python
+# Ejemplo: JobMatchStructure.assemble()
+def assemble(
+    self,
+    llm_output: str,
+    chunks: List[Dict[str, Any]],
+    query: str = "",
+    job_description: str = "",
+    conversation_history: List[Dict[str, str]] = None  # ← IMPLEMENTADO
+) -> Dict[str, Any]:
+```
+
+| Structure | conversation_history |
+|-----------|---------------------|
+| SingleCandidateStructure | ✅ |
+| RiskAssessmentStructure | ✅ |
+| ComparisonStructure | ✅ |
+| SearchStructure | ✅ |
+| RankingStructure | ✅ |
+| JobMatchStructure | ✅ |
+| TeamBuildStructure | ✅ |
+| VerificationStructure | ✅ |
+| SummaryStructure | ✅ |
+
+---
+
+## Roadmap: Mejoras Futuras
+
+### Fase 1: Context Resolution (Pendiente)
+- [ ] `ContextResolver` para resolver referencias pronominales automáticamente
+- [ ] Detectar "él", "ella", "este candidato" y resolver a nombre real
+
+### Fase 2: Context-Aware Structures (Pendiente)
+- [ ] Structures adaptan comportamiento según historial
+- [ ] Comparison mantiene criterios entre queries
+- [ ] RiskAssessment prioriza según preocupaciones previas
+
+### Fase 3: Smart Context Management (Pendiente)
+- [ ] Selección inteligente de mensajes relevantes
+- [ ] Scoring de relevancia por query

@@ -2,41 +2,56 @@
 
 > **CV Screener AI - Complete Structured Output Documentation**
 > 
-> Version: 5.1.0 | Last Updated: January 2026
+> Version: 6.0 | Last Updated: January 2026
 
 ---
 
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [Architecture](#architecture)
-3. [Data Models](#data-models)
-4. [Output Modules](#output-modules)
-5. [Orchestration Flow](#orchestration-flow)
-6. [Table Module: Comparison vs Individual](#table-module-comparison-vs-individual)
-7. [Candidate Reference Formatting](#candidate-reference-formatting)
-8. [Visual Output Structure](#visual-output-structure)
-9. [API Response Format](#api-response-format)
+2. [Architecture (v6.0)](#architecture-v60)
+3. [Query Type → Structure Routing](#query-type--structure-routing)
+4. [9 Structures Reference](#9-structures-reference)
+5. [25+ Modules Reference](#25-modules-reference)
+6. [Data Models](#data-models)
+7. [Orchestration Flow](#orchestration-flow)
+8. [Conversational Context](#conversational-context)
+9. [Legacy: Table Module Details](#legacy-table-module-details)
+10. [API Response Format](#api-response-format)
 
 ---
 
 ## Overview
 
-The Structured Output system transforms raw LLM responses into consistent, type-safe data structures that the frontend can reliably render. This ensures:
+The Structured Output system in **v6.0** implements a complete **Orchestrator → Structures → Modules** architecture that:
 
-- **Consistency**: Every response follows the same structure regardless of LLM output quality
-- **Type Safety**: All components are validated through Python dataclasses
-- **Modularity**: Each output component is handled by a dedicated module
-- **Resilience**: Fallback generation when LLM output is incomplete
+- **Routes queries** to the appropriate Structure based on `query_type`
+- **Assembles outputs** using reusable Modules
+- **Supports context** via `conversation_history` parameter
+- **Ensures consistency** through type-safe dataclasses
 
-### Key Components
+### Key Components (v6.0)
 
-| Component | Purpose |
-|-----------|---------|
-| **StructuredOutput** | Main data model containing all response components |
-| **OutputOrchestrator** | Coordinates extraction and assembly of components |
-| **OutputProcessor** | Invokes modules to extract each component |
-| **5 Modules** | Each module handles one specific component |
+| Component | Count | Purpose |
+|-----------|-------|---------|
+| **Orchestrator** | 1 | Routes queries and coordinates Structures |
+| **Structures** | 9 | Complete output assemblers for each query type |
+| **Modules** | 25+ | Reusable extraction/formatting components |
+| **StructuredOutput** | 1 | Main data model for all response types |
+
+### Query Types Supported
+
+| Query Type | Structure | Example |
+|------------|-----------|---------|
+| `single_candidate` | SingleCandidateStructure | "Dame el perfil de Juan" |
+| `red_flags` | RiskAssessmentStructure | "Qué red flags tiene María?" |
+| `comparison` | ComparisonStructure | "Compara Juan y María" |
+| `search` | SearchStructure | "Busca developers Python" |
+| `ranking` | RankingStructure | "Top 5 para backend" |
+| `job_match` | JobMatchStructure | "Quién encaja para senior?" |
+| `team_build` | TeamBuildStructure | "Build a team of 3" |
+| `verification` | VerificationStructure | "Verify AWS certification" |
+| `summary` | SummaryStructure | "Overview of candidates" |
 
 ---
 

@@ -46,7 +46,8 @@ class RankingStructure:
         llm_output: str,
         chunks: List[Dict[str, Any]],
         query: str = "",
-        job_context: str = ""
+        job_context: str = "",
+        conversation_history: List[Dict[str, str]] = None
     ) -> Dict[str, Any]:
         """
         Assemble all components of Ranking Structure.

@@ -56,7 +56,8 @@ class SingleCandidateStructure:
         llm_output: str,
         chunks: List[Dict[str, Any]],
         candidate_name: str,
-        cv_id: str
+        cv_id: str,
+        conversation_history: List[Dict[str, str]] = None
     ) -> Dict[str, Any]:
         """
         Assemble all components of Single Candidate Structure.

@@ -40,7 +40,8 @@ class SummaryStructure:
         self,
         llm_output: str,
         chunks: List[Dict[str, Any]],
-        query: str = ""
+        query: str = "",
+        conversation_history: List[Dict[str, str]] = None
     ) -> Dict[str, Any]:
         """Assemble all components of Summary Structure."""
         logger.info("[SUMMARY_STRUCTURE] Assembling talent pool summary")

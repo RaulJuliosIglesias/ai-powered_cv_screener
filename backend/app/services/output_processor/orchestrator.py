@@ -99,7 +99,8 @@ class OutputOrchestrator:
         chunks: List[Dict[str, Any]] = None,
         query: str = "",
         query_type: str = "search",  # "search", "comparison", "single_candidate", "red_flags", etc.
-        candidate_name: str = None
+        candidate_name: str = None,
+        conversation_history: List[Dict[str, str]] = None
     ) -> tuple[StructuredOutput, str]:
         """
         Process LLM output into structured components and formatted answer.
@@ -120,7 +121,12 @@ class OutputOrchestrator:
         Returns:
             Tuple of (StructuredOutput, formatted_answer_string)
         """
-        logger.info(f"[ORCHESTRATOR] ROUTING query_type={query_type} to appropriate structure")
+        # Log conversation context availability
+        context_info = "no context"
+        if conversation_history:
+            context_info = f"{len(conversation_history)} messages ({sum(1 for m in conversation_history if m.get('role') == 'user')} user turns)"
+        logger.info(f"[ORCHESTRATOR] ROUTING query_type={query_type} | conversation_context={context_info}")
+        logger.info(f"[ORCHESTRATOR] Using appropriate structure for {query_type}")
         
         # STEP 0: PRE-PROCESS - Clean raw LLM output
         cleaned_llm_output = self._pre_clean_llm_output(raw_llm_output)
@@ -141,7 +147,8 @@ class OutputOrchestrator:
                 llm_output=cleaned_llm_output,
                 chunks=chunks or [],
                 candidate_name=candidate_name,
-                cv_id=cv_id
+                cv_id=cv_id,
+                conversation_history=conversation_history or []
             )
             return self._build_structured_output(structure_data, cleaned_llm_output)
         
@@ -152,7 +159,8 @@ class OutputOrchestrator:
                 llm_output=cleaned_llm_output,
                 chunks=chunks or [],
                 candidate_name=candidate_name,
-                cv_id=cv_id
+                cv_id=cv_id,
+                conversation_history=conversation_history or []
             )
             return self._build_structured_output(structure_data, cleaned_llm_output)
         
@@ -161,7 +169,8 @@ class OutputOrchestrator:
             logger.info("[ORCHESTRATOR] Using ComparisonStructure")
             structure_data = self.comparison_structure.assemble(
                 llm_output=cleaned_llm_output,
-                chunks=chunks or []
+                chunks=chunks or [],
+                conversation_history=conversation_history or []
             )
             return self._build_structured_output(structure_data, cleaned_llm_output)
         
@@ -171,7 +180,8 @@ class OutputOrchestrator:
             structure_data = self.search_structure.assemble(
                 llm_output=cleaned_llm_output,
                 chunks=chunks or [],
-                query=query
+                query=query,
+                conversation_history=conversation_history or []
             )
             return self._build_structured_output(structure_data, cleaned_llm_output)
         
@@ -181,7 +191,8 @@ class OutputOrchestrator:
             structure_data = self.ranking_structure.assemble(
                 llm_output=cleaned_llm_output,
                 chunks=chunks or [],
-                query=query
+                query=query,
+                conversation_history=conversation_history or []
             )
             return self._build_structured_output(structure_data, cleaned_llm_output)
         
@@ -191,7 +202,8 @@ class OutputOrchestrator:
             structure_data = self.job_match_structure.assemble(
                 llm_output=cleaned_llm_output,
                 chunks=chunks or [],
-                query=query
+                query=query,
+                conversation_history=conversation_history or []
             )
             return self._build_structured_output(structure_data, cleaned_llm_output)
         
@@ -201,7 +213,8 @@ class OutputOrchestrator:
             structure_data = self.team_build_structure.assemble(
                 llm_output=cleaned_llm_output,
                 chunks=chunks or [],
-                query=query
+                query=query,
+                conversation_history=conversation_history or []
             )
             return self._build_structured_output(structure_data, cleaned_llm_output)
         
@@ -211,7 +224,8 @@ class OutputOrchestrator:
             structure_data = self.verification_structure.assemble(
                 llm_output=cleaned_llm_output,
                 chunks=chunks or [],
-                query=query
+                query=query,
+                conversation_history=conversation_history or []
             )
             return self._build_structured_output(structure_data, cleaned_llm_output)
         
@@ -221,7 +235,8 @@ class OutputOrchestrator:
             structure_data = self.summary_structure.assemble(
                 llm_output=cleaned_llm_output,
                 chunks=chunks or [],
-                query=query
+                query=query,
+                conversation_history=conversation_history or []
             )
             return self._build_structured_output(structure_data, cleaned_llm_output)
         
