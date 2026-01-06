@@ -147,7 +147,7 @@ class OutputOrchestrator:
         else:
             # LEGACY: Standard search response
             logger.info("[ORCHESTRATOR] Using legacy standard response")
-            return self._process_standard_response(cleaned_llm_output, chunks, query)
+            return self._process_standard_response(cleaned_llm_output, chunks, query, query_type)
     
     def _build_structured_output(
         self, 
@@ -255,7 +255,8 @@ class OutputOrchestrator:
         self,
         cleaned_llm_output: str,
         chunks: List[Dict[str, Any]],
-        query: str
+        query: str,
+        query_type: str = "search"
     ) -> tuple[StructuredOutput, str]:
         """
         Legacy processing for standard search responses.
