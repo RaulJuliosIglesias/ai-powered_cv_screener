@@ -1471,6 +1471,18 @@ function App() {
             setShowStreamingPreview(newValue);
             localStorage.setItem('showStreamingPreview', JSON.stringify(newValue));
           }}
+          enabledSteps={[
+            'query_understanding',
+            'multi_query',
+            'guardrail',
+            'embedding', 
+            'retrieval',
+            ...(ragPipelineSettings.reranking_enabled ? ['reranking'] : []),
+            'reasoning',
+            'generation',
+            ...(ragPipelineSettings.verification_enabled ? ['verification'] : []),
+            'refinement'
+          ]}
         />
       )}
 

@@ -613,6 +613,9 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
   // This is the new architecture - backend tells frontend which structure to use
   // ==========================================================================
   
+  // DEBUG: Log structure_type to understand routing
+  console.log('[STRUCTURED_OUTPUT] Received structure_type:', structure_type, 'Keys:', Object.keys(structuredOutput));
+  
   if (structure_type === 'single_candidate' && single_candidate_data) {
     console.log('[STRUCTURED_OUTPUT] ROUTING: structure_type=single_candidate');
     return (

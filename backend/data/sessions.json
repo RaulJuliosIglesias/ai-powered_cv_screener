@@ -59024,10 +59024,1705 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-06T04:21:30.460895"
+        },
+        {
+          "id": "50926030-fe19-46ec-be60-302a333f74fb",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a ranking of candidates based on the diversity of their skill sets, measured by the number of unique skills listed in their CVs. I need to extract all listed skills from each CV, count the unique skills per candidate, and then rank the candidates from highest to lowest skill count. The user did not specify a number of candidates, so I will provide the top 3 and a few more for context.\n:::\n\n\n:::conclusion\n**[Carmen Rodriguez](cv:cv_c0167ca9)**, **[Isabel Mendoza](cv:cv_adfd3a26)**, and **[Priya Patel](cv:cv_4030244e)** are the top three candidates based on the diversity of their skill sets, each having 10 unique skills listed in their CVs.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_f0b938a8",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_9d48b158",
+              "filename": "8cf248e0__Mateo_Rodriguez__Rigger.pdf"
+            },
+            {
+              "cv_id": "cv_6219ae68",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_13fc8e4c",
+              "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_4030244e",
+              "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_cae9463b",
+              "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a151cd62",
+              "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_16814325",
+              "filename": "9e50441e__Matteo_Rossi__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_92a8beac",
+              "filename": "55c0e841__Ricardo_De_Vries__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_adfd3a26",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_0a381ffb",
+              "filename": "74a0c87c__Mei_Lin_Chen__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_e4fe6808",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_cecc18ee",
+              "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_4ab2fbaa",
+              "filename": "7ef319f7__Adrian_Morales__Junior_Animator.pdf"
+            },
+            {
+              "cv_id": "cv_ded37996",
+              "filename": "53f55f6a__Mei_Rossi__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c41734f7",
+              "filename": "5c2c5d6b__Arjun_Mehta__Junior_Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c0167ca9",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_9d28f6cd",
+              "filename": "63ce3a7c__Emma_Whitmore__Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_5fc76c07",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_ad8afd67",
+              "filename": "0ed822eb__Antoine_Dubois__Junior_Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_4b060aae",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d959b630",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_12e15d5d",
+              "filename": "8742ca7a__Sofia_Mendoza__Environment_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1991.38,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 44.06,
+              "details": "Found 27 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 0,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 7443.77,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for a ranking of candidates based on the diversity of their skill sets, measured by the number of unique skills listed in their CVs. I need to extract all listed skills from each CV, count the unique skills per candidate, and then rank the candidates from highest to lowest skill count. The user did not specify a number of candidates, so I will provide the top 3 and a few more for context.\n:::\n\nHere are the top 3 candidates ranked by the diversity of their skill sets, based on the number of unique skills listed in their CVs, along with a few more for context.\n\n### Analysis\nI have analyzed all CVs and extracted the skills listed for each candidate. I then counted the number of unique skills for each candidate and ranked them in descending order based on this count. The table below shows the top candidates with the highest number of unique skills. I am including more than 3 candidates in the table to provide a broader context of the skill diversity across the candidate pool.\n\n| Candidate | Unique Skills Count | Skills |\n|-----------|----------------------|--------|\n| **[Carmen Rodriguez](cv:cv_c0167ca9)** | 10 | 3D Modeling, Texturing, Lighting, Rendering, Animation, Pipeline Development, Dutch, English, German, Art Department Management |\n| **[Isabel Mendoza](cv:cv_adfd3a26)** | 10 | 3D Modeling, Texturing, Rigging, Substance Painter, Unreal Engine, Maya, French, English, Spanish, 3D |\n| **[Priya Patel](cv:cv_4030244e)** | 10 | Maya, Substance Painter, Unreal Engine, 3ds Max, Photoshop, Marvelous Designer, Houdini, Motion Capture, Arabic, English, Hindi |\n| **[Daan van Dijk](cv:cv_5fc76c07)** | 10 | High-Poly Sculpting (ZBrush), Hard Surface Polygonal Modeling (Maya/Blender), Retopology & UV Mapping (Efficient), PBR Material Workflow, Substance Painter/Designer (Procedural), High, Poly, Utrecht, Netherlands, Restoring vintage mechanical watches (Patience, training) |\n| **[Rajiv Kapoor](cv:cv_cae9463b)** | 9 | Unity Engine, Shader Development, Procedural Modeling, Pipeline Optimization, Hindi, English, German, VP of Creative Technology, Technical Artist |\n| **[Karim El Amrani](cv:cv_a151cd62)** | 9 | Maya, ZBrush, Substance Painter, Unreal Engine, Unity, Photoshop, 3ds Max, Houdini, Motion Capture |\n| **[Mei Lin Chen](cv:cv_0a381ffb)** | 9 | VFX Supervision, Nuke, Houdini, Maya, Compositing, Lighting, Rendering, Project Management, Team Leadership, Budget Management |\n| **[Ricardo De Vries](cv:cv_92a8beac)** | 9 | Maya, MotionBuilder/Mocap Cleanup, Unreal Engine, Substance Painter/Designer, Python Scripting, Facial Performance Capture Integration, Shot Composition & Staging, Dutch, English, Spanish |\n| **[Sofia Mendoza](cv:cv_12e15d5d)** | 9 | Maya, ZBrush, Substance Designer, Photogrammetry, World Machine, SpeedTree, Shader Development, Swedish, English, Spanish |\n| **[Antoine Dubois](cv:cv_ad8afd67)** | 9 | Substance 3D Painter, Substance 3D Designer, Mari, Unreal Engine 5 (Material Editor), Photoshop (Texture Cleanup/ID Maps), Blender/Maya (UV Mapping/Modelling Support), PBR Workflow Implementation, Procedural Material Authoring, French, English |\n| **[Aisha Johnson](cv:cv_f0b938a8)** | 9 | 2D Animation, 3D Animation, Storyboarding, Character Design, Motion Graphics, English, Spanish, French, Animation Mentorship |\n| **[Imani Jones](cv:cv_4b060aae)** | 9 | Concept Design, Character Design, Environment Design, Prop Design, Adobe Photoshop, Procreate, Blender, ZBrush, Storyboarding, Visual Development |\n\n:::conclusion\n**[Carmen Rodriguez](cv:cv_c0167ca9)**, **[Isabel Mendoza](cv:cv_adfd3a26)**, and **[Priya Patel](cv:cv_4030244e)** are the top three candidates based on the diversity of their skill sets, each having 10 unique skills listed in their CVs.\n:::",
+            "thinking": "The user is asking for a ranking of candidates based on the diversity of their skill sets, measured by the number of unique skills listed in their CVs. I need to extract all listed skills from each CV, count the unique skills per candidate, and then rank the candidates from highest to lowest skill count. The user did not specify a number of candidates, so I will provide the top 3 and a few more for context.",
+            "analysis": "I have analyzed all CVs and extracted the skills listed for each candidate. I then counted the number of unique skills for each candidate and ranked them in descending order based on this count. The table below shows the top candidates with the highest number of unique skills. I am including more than 3 candidates in the table to provide a broader context of the skill diversity across the candidate pool.",
+            "table_data": null,
+            "conclusion": "**[Carmen Rodriguez](cv:cv_c0167ca9)**, **[Isabel Mendoza](cv:cv_adfd3a26)**, and **[Priya Patel](cv:cv_4030244e)** are the top three candidates based on the diversity of their skill sets, each having 10 unique skills listed in their CVs.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "ranking",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": {
+              "ranked": [
+                {
+                  "rank": 1,
+                  "candidate_name": " Aisha Johnson ",
+                  "cv_id": "cv_f0b938a8",
+                  "overall_score": 96.0,
+                  "criterion_scores": {
+                    "Experience": 100,
+                    "Technical Skills": 100,
+                    "Role Fit": 100,
+                    "Career Trajectory": 80.0,
+                    "Stability": 90.0
+                  },
+                  "strengths": [
+                    "Experience",
+                    "Technical Skills"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 2,
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "cv_id": "cv_c0167ca9",
+                  "overall_score": 95.9,
+                  "criterion_scores": {
+                    "Experience": 100,
+                    "Technical Skills": 100,
+                    "Role Fit": 100,
+                    "Career Trajectory": 85.0,
+                    "Stability": 81.2
+                  },
+                  "strengths": [
+                    "Experience",
+                    "Technical Skills"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 3,
+                  "candidate_name": " Matteo Rossi  Creature",
+                  "cv_id": "cv_16814325",
+                  "overall_score": 95.2,
+                  "criterion_scores": {
+                    "Experience": 100,
+                    "Technical Skills": 100,
+                    "Role Fit": 100,
+                    "Career Trajectory": 67.7,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Experience",
+                    "Technical Skills"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 4,
+                  "candidate_name": " Priya Patel  3D",
+                  "cv_id": "cv_4030244e",
+                  "overall_score": 85.3,
+                  "criterion_scores": {
+                    "Experience": 60.0,
+                    "Technical Skills": 100,
+                    "Role Fit": 100,
+                    "Career Trajectory": 93.3,
+                    "Stability": 83.3
+                  },
+                  "strengths": [
+                    "Technical Skills",
+                    "Role Fit"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 5,
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "cv_id": "cv_e4fe6808",
+                  "overall_score": 79.0,
+                  "criterion_scores": {
+                    "Experience": 60.0,
+                    "Technical Skills": 100,
+                    "Role Fit": 100,
+                    "Career Trajectory": 73.3,
+                    "Stability": 50.0
+                  },
+                  "strengths": [
+                    "Technical Skills",
+                    "Role Fit"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 6,
+                  "candidate_name": " Emma Whitmore  Texture",
+                  "cv_id": "cv_9d28f6cd",
+                  "overall_score": 76.0,
+                  "criterion_scores": {
+                    "Experience": 40.0,
+                    "Technical Skills": 100,
+                    "Role Fit": 90.0,
+                    "Career Trajectory": 90.0,
+                    "Stability": 75.0
+                  },
+                  "strengths": [
+                    "Technical Skills",
+                    "Role Fit"
+                  ],
+                  "weaknesses": [
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 7,
+                  "candidate_name": " Sofia Mendoza  Environment",
+                  "cv_id": "cv_12e15d5d",
+                  "overall_score": 68.5,
+                  "criterion_scores": {
+                    "Experience": 20.0,
+                    "Technical Skills": 100,
+                    "Role Fit": 70.0,
+                    "Career Trajectory": 90.0,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Technical Skills",
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 8,
+                  "candidate_name": " Rajiv Kapoor  Technical",
+                  "cv_id": "cv_cae9463b",
+                  "overall_score": 61.3,
+                  "criterion_scores": {
+                    "Experience": 100,
+                    "Technical Skills": 0,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 90.8,
+                    "Stability": 76.9
+                  },
+                  "strengths": [
+                    "Experience",
+                    "Career Trajectory"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills"
+                  ]
+                },
+                {
+                  "rank": 9,
+                  "candidate_name": " Daan van Dijk  Hard Surface",
+                  "cv_id": "cv_5fc76c07",
+                  "overall_score": 60.8,
+                  "criterion_scores": {
+                    "Experience": 100,
+                    "Technical Skills": 0,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 78.2,
+                    "Stability": 90.9
+                  },
+                  "strengths": [
+                    "Experience",
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills"
+                  ]
+                },
+                {
+                  "rank": 10,
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "cv_id": "cv_adfd3a26",
+                  "overall_score": 60.0,
+                  "criterion_scores": {
+                    "Experience": 100,
+                    "Technical Skills": 0,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 79.1,
+                    "Stability": 81.0
+                  },
+                  "strengths": [
+                    "Experience",
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills"
+                  ]
+                },
+                {
+                  "rank": 11,
+                  "candidate_name": " Karim El Amrani  3D",
+                  "cv_id": "cv_a151cd62",
+                  "overall_score": 55.8,
+                  "criterion_scores": {
+                    "Experience": 80.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 85.0,
+                    "Stability": 90.9
+                  },
+                  "strengths": [
+                    "Stability",
+                    "Career Trajectory"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills"
+                  ]
+                },
+                {
+                  "rank": 12,
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "cv_id": "cv_6219ae68",
+                  "overall_score": 52.5,
+                  "criterion_scores": {
+                    "Experience": 0.0,
+                    "Technical Skills": 100,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 50,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Technical Skills",
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 13,
+                  "candidate_name": " Mei Lin Chen  VFX",
+                  "cv_id": "cv_0a381ffb",
+                  "overall_score": 52.5,
+                  "criterion_scores": {
+                    "Experience": 0.0,
+                    "Technical Skills": 100,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 50,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Technical Skills",
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 14,
+                  "candidate_name": " Mei Rossi  3D",
+                  "cv_id": "cv_ded37996",
+                  "overall_score": 52.5,
+                  "criterion_scores": {
+                    "Experience": 0.0,
+                    "Technical Skills": 100,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 50,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Technical Skills",
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 15,
+                  "candidate_name": " Ricardo De Vries ",
+                  "cv_id": "cv_92a8beac",
+                  "overall_score": 52.1,
+                  "criterion_scores": {
+                    "Experience": 70.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 74.3,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Stability",
+                    "Career Trajectory"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills"
+                  ]
+                },
+                {
+                  "rank": 16,
+                  "candidate_name": " Mateo Rodriguez ",
+                  "cv_id": "cv_9d48b158",
+                  "overall_score": 48.2,
+                  "criterion_scores": {
+                    "Experience": 60.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 90.0,
+                    "Stability": 66.7
+                  },
+                  "strengths": [
+                    "Career Trajectory"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills"
+                  ]
+                },
+                {
+                  "rank": 17,
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_4b060aae",
+                  "overall_score": 39.8,
+                  "criterion_scores": {
+                    "Experience": 40.0,
+                    "Technical Skills": 12,
+                    "Role Fit": 50.0,
+                    "Career Trajectory": 65.0,
+                    "Stability": 50.0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 18,
+                  "candidate_name": " Arjun Mehta  Junior Concept",
+                  "cv_id": "cv_c41734f7",
+                  "overall_score": 33.5,
+                  "criterion_scores": {
+                    "Experience": 20.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 20.0,
+                    "Career Trajectory": 90.0,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Stability",
+                    "Career Trajectory"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 19,
+                  "candidate_name": " Antoine Dubois  Junior Texture",
+                  "cv_id": "cv_ad8afd67",
+                  "overall_score": 21.0,
+                  "criterion_scores": {
+                    "Experience": 10.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 10.0,
+                    "Career Trajectory": 40.0,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 20,
+                  "candidate_name": " Adrian Morales  Junior",
+                  "cv_id": "cv_4ab2fbaa",
+                  "overall_score": 17.5,
+                  "criterion_scores": {
+                    "Experience": 0.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 0.0,
+                    "Career Trajectory": 50,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Experience",
+                    "Technical Skills"
+                  ]
+                },
+                {
+                  "rank": 21,
+                  "candidate_name": " Carlos Mendoza  Junior VFX",
+                  "cv_id": "cv_d959b630",
+                  "overall_score": 17.5,
+                  "criterion_scores": {
+                    "Experience": 0.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 0.0,
+                    "Career Trajectory": 50,
+                    "Stability": 100.0
+                  },
+                  "strengths": [
+                    "Stability"
+                  ],
+                  "weaknesses": [
+                    "Experience",
+                    "Technical Skills"
+                  ]
+                },
+                {
+                  "rank": 22,
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "cv_id": "cv_13fc8e4c",
+                  "overall_score": 9.5,
+                  "criterion_scores": {
+                    "Experience": 10.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 10.0,
+                    "Career Trajectory": 30,
+                    "Stability": 0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Stability"
+                  ]
+                },
+                {
+                  "rank": 23,
+                  "candidate_name": " Thierry Dubois  Concept",
+                  "cv_id": "cv_cecc18ee",
+                  "overall_score": 9.5,
+                  "criterion_scores": {
+                    "Experience": 10.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 10.0,
+                    "Career Trajectory": 30,
+                    "Stability": 0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Stability"
+                  ]
+                }
+              ],
+              "criteria_names": [
+                "Experience",
+                "Technical Skills",
+                "Role Fit",
+                "Career Trajectory",
+                "Stability"
+              ]
+            },
+            "top_pick": {
+              "candidate_name": " Aisha Johnson ",
+              "cv_id": "cv_f0b938a8",
+              "overall_score": 96.0,
+              "key_strengths": [
+                "Experience",
+                "Technical Skills"
+              ],
+              "justification": " Aisha Johnson  emerges as the top choice with an overall score of 96%. Key strengths include: Experience (100%).",
+              "runner_up": " Carmen Rodriguez  3D",
+              "runner_up_cv_id": "cv_c0167ca9"
+            },
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T04:21:44.258230"
+        },
+        {
+          "id": "ec3f855f-20c2-41c4-916e-210dd2ab6953",
+          "role": "user",
+          "content": "Who is best for a leadership role?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T04:21:52.346534"
+        },
+        {
+          "id": "ed6cc2d1-ffcf-4ed9-b93b-fc9ec3938c1c",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a ranking of candidates based on their suitability for a leadership role, considering leadership experience, team management skills, project leadership experience, strategic planning abilities, and communication skills. I need to extract this information from the provided CV excerpts and rank the candidates accordingly. The user did not specify a number of candidates, so I will provide the top 3 and a few more for context.\n:::\n\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_adfd3a26)** is the strongest candidate due to her extensive experience in leadership roles and strategic initiatives. **[Carlos Mendoza](cv:cv_d0e07879)** is also a strong candidate with experience in directing lighting strategy and mentoring a team. **[Emma Whitmore](cv:cv_9d28f6cd)** demonstrates leadership potential as Head of Texturing, with experience in optimizing workflows and mentoring artists.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_75d85c4e",
+              "filename": "9a484d82__Carlos_Mendoza__Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a151cd62",
+              "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_9d48b158",
+              "filename": "8cf248e0__Mateo_Rodriguez__Rigger.pdf"
+            },
+            {
+              "cv_id": "cv_62e084d8",
+              "filename": "02f9626b__Marco_Rossi__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_5fc76c07",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_ad8afd67",
+              "filename": "0ed822eb__Antoine_Dubois__Junior_Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_d0e07879",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_16814325",
+              "filename": "9e50441e__Matteo_Rossi__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_4030244e",
+              "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_12e15d5d",
+              "filename": "8742ca7a__Sofia_Mendoza__Environment_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_cae9463b",
+              "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_6219ae68",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c0167ca9",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_adfd3a26",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_f0b938a8",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_4b060aae",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c41734f7",
+              "filename": "5c2c5d6b__Arjun_Mehta__Junior_Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_13fc8e4c",
+              "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_93bb8cbd",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_92a8beac",
+              "filename": "55c0e841__Ricardo_De_Vries__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_9d28f6cd",
+              "filename": "63ce3a7c__Emma_Whitmore__Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_4ab2fbaa",
+              "filename": "7ef319f7__Adrian_Morales__Junior_Animator.pdf"
+            },
+            {
+              "cv_id": "cv_e4fe6808",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_0a381ffb",
+              "filename": "74a0c87c__Mei_Lin_Chen__VFX_Supervisor.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 2715.67,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 39.13,
+              "details": "Found 34 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 26313.84,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4887.32,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for a ranking of candidates based on their suitability for a leadership role, considering leadership experience, team management skills, project leadership experience, strategic planning abilities, and communication skills. I need to extract this information from the provided CV excerpts and rank the candidates accordingly. The user did not specify a number of candidates, so I will provide the top 3 and a few more for context.\n:::\n\nBased on the provided CVs, **[Isabel Mendoza](cv:cv_adfd3a26)**, **[Carlos Mendoza](cv:cv_d0e07879)**, and **[Emma Whitmore](cv:cv_9d28f6cd)** are the top three candidates for a leadership role. **[Isabel Mendoza](cv:cv_adfd3a26)** stands out due to her extensive experience as Chief Creative Officer and Director of 3D Production. **[Carlos Mendoza](cv:cv_d0e07879)** demonstrates leadership potential as a Lead Lighting Artist. **[Emma Whitmore](cv:cv_9d28f6cd)** has experience as Head of Texturing, leading a team and optimizing workflows.\n\n### Analysis\nThe following table compares the candidates based on the specified criteria:\n\n| Candidate | Leadership Experience | Team Management Skills | Project Leadership | Strategic Planning | Communication Skills | Match |\n|-----------|-----------------------|------------------------|--------------------|--------------------|----------------------|-------|\n| **[Isabel Mendoza](cv:cv_adfd3a26)** | Chief Creative Officer, Director of 3D Production | Mentored talent, built teams | Directed large-scale projects | Increased user engagement, streamlined asset pipeline | Negotiated contracts, championed inclusive design | ⭐⭐⭐⭐⭐ |\n| **[Carlos Mendoza](cv:cv_d0e07879)** | Lead Lighting Artist | Mentored a team of 8 artists | Directed lighting strategy for AAA titles | Cut render times, elevated atmospheric depth | Collaborated with design and animation leads | ⭐⭐⭐⭐ |\n| **[Emma Whitmore](cv:cv_9d28f6cd)** | Head of Texturing | Led a team of 8 texture artists, mentored junior artists | Scaled texture asset pipeline efficiency | Integrated texture streaming solutions | Championed iterative review processes | ⭐⭐⭐⭐ |\n| **[Priya Patel](cv:cv_4030244e)** | Lead 3D Artist | Led a team of 10 artists, mentored junior artists | Created immersive VR environments | Pioneered photogrammetry techniques, developed a standardized 3D asset pipeline |  | ⭐⭐⭐ |\n| **[Mateo Rodriguez ](cv:cv_9d48b158)** | Lead Rigging Supervisor | Managed a team of 10+ riggers and technical directors | Spearheaded the standardization of internal rigging tools using Python | Designed and deployed a novel biomechanical skeleton system | Managed cross-departmental integration points | ⭐⭐⭐ |\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_adfd3a26)** is the strongest candidate due to her extensive experience in leadership roles and strategic initiatives. **[Carlos Mendoza](cv:cv_d0e07879)** is also a strong candidate with experience in directing lighting strategy and mentoring a team. **[Emma Whitmore](cv:cv_9d28f6cd)** demonstrates leadership potential as Head of Texturing, with experience in optimizing workflows and mentoring artists.\n:::",
+            "thinking": "The user is asking for a ranking of candidates based on their suitability for a leadership role, considering leadership experience, team management skills, project leadership experience, strategic planning abilities, and communication skills. I need to extract this information from the provided CV excerpts and rank the candidates accordingly. The user did not specify a number of candidates, so I will provide the top 3 and a few more for context.",
+            "analysis": "The following table compares the candidates based on the specified criteria:",
+            "table_data": null,
+            "conclusion": "**[Isabel Mendoza](cv:cv_adfd3a26)** is the strongest candidate due to her extensive experience in leadership roles and strategic initiatives. **[Carlos Mendoza](cv:cv_d0e07879)** is also a strong candidate with experience in directing lighting strategy and mentoring a team. **[Emma Whitmore](cv:cv_9d28f6cd)** demonstrates leadership potential as Head of Texturing, with experience in optimizing workflows and mentoring artists.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "ranking",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": {
+              "ranked": [
+                {
+                  "rank": 1,
+                  "candidate_name": " Matteo Rossi  Creature",
+                  "cv_id": "cv_16814325",
+                  "overall_score": 100.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 100,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 100,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 100,
+                    "[Priya Patel](cv:cv_4030244e)": 100,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 100
+                  },
+                  "strengths": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 2,
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "cv_id": "cv_c0167ca9",
+                  "overall_score": 100.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 100,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 100,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 100,
+                    "[Priya Patel](cv:cv_4030244e)": 100,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 100
+                  },
+                  "strengths": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 3,
+                  "candidate_name": " Aisha Johnson ",
+                  "cv_id": "cv_f0b938a8",
+                  "overall_score": 89.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 89.0,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 89.0,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 89.0,
+                    "[Priya Patel](cv:cv_4030244e)": 89.0,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 89.0
+                  },
+                  "strengths": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 4,
+                  "candidate_name": " Carlos Mendoza  Texture",
+                  "cv_id": "cv_75d85c4e",
+                  "overall_score": 70.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 70.0,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 70.0,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 70.0,
+                    "[Priya Patel](cv:cv_4030244e)": 70.0,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 70.0
+                  },
+                  "strengths": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 5,
+                  "candidate_name": " Rajiv Kapoor  Technical",
+                  "cv_id": "cv_cae9463b",
+                  "overall_score": 70.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 70.0,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 70.0,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 70.0,
+                    "[Priya Patel](cv:cv_4030244e)": 70.0,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 70.0
+                  },
+                  "strengths": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 6,
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "cv_id": "cv_adfd3a26",
+                  "overall_score": 70.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 70.0,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 70.0,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 70.0,
+                    "[Priya Patel](cv:cv_4030244e)": 70.0,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 70.0
+                  },
+                  "strengths": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 7,
+                  "candidate_name": " Marco Rossi  3D",
+                  "cv_id": "cv_62e084d8",
+                  "overall_score": 68.4,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 68.4,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 68.4,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 68.4,
+                    "[Priya Patel](cv:cv_4030244e)": 68.4,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 68.4
+                  },
+                  "strengths": [],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 8,
+                  "candidate_name": " Priya Patel  3D",
+                  "cv_id": "cv_4030244e",
+                  "overall_score": 67.2,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 67.2,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 67.2,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 67.2,
+                    "[Priya Patel](cv:cv_4030244e)": 67.2,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 67.2
+                  },
+                  "strengths": [],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 9,
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "cv_id": "cv_e4fe6808",
+                  "overall_score": 64.2,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 64.2,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 64.2,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 64.2,
+                    "[Priya Patel](cv:cv_4030244e)": 64.2,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 64.2
+                  },
+                  "strengths": [],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 10,
+                  "candidate_name": " Daan van Dijk  Hard Surface",
+                  "cv_id": "cv_5fc76c07",
+                  "overall_score": 62.2,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 62.2,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 62.2,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 62.2,
+                    "[Priya Patel](cv:cv_4030244e)": 62.2,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 62.2
+                  },
+                  "strengths": [],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 11,
+                  "candidate_name": " Emma Whitmore  Texture",
+                  "cv_id": "cv_9d28f6cd",
+                  "overall_score": 60.8,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 60.8,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 60.8,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 60.8,
+                    "[Priya Patel](cv:cv_4030244e)": 60.8,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 60.8
+                  },
+                  "strengths": [],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 12,
+                  "candidate_name": " Karim El Amrani  3D",
+                  "cv_id": "cv_a151cd62",
+                  "overall_score": 52.6,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 52.6,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 52.6,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 52.6,
+                    "[Priya Patel](cv:cv_4030244e)": 52.6,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 52.6
+                  },
+                  "strengths": [],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 13,
+                  "candidate_name": " Sofia Mendoza  Environment",
+                  "cv_id": "cv_12e15d5d",
+                  "overall_score": 45.4,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 45.4,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 45.4,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 45.4,
+                    "[Priya Patel](cv:cv_4030244e)": 45.4,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 45.4
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ]
+                },
+                {
+                  "rank": 14,
+                  "candidate_name": " Ricardo De Vries ",
+                  "cv_id": "cv_92a8beac",
+                  "overall_score": 40.4,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 40.4,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 40.4,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 40.4,
+                    "[Priya Patel](cv:cv_4030244e)": 40.4,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 40.4
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ]
+                },
+                {
+                  "rank": 15,
+                  "candidate_name": " Mateo Rodriguez ",
+                  "cv_id": "cv_9d48b158",
+                  "overall_score": 37.2,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 37.2,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 37.2,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 37.2,
+                    "[Priya Patel](cv:cv_4030244e)": 37.2,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 37.2
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ]
+                },
+                {
+                  "rank": 16,
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "cv_id": "cv_6219ae68",
+                  "overall_score": 36.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 36.0,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 36.0,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 36.0,
+                    "[Priya Patel](cv:cv_4030244e)": 36.0,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 36.0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ]
+                },
+                {
+                  "rank": 17,
+                  "candidate_name": " Mei Lin Chen  VFX",
+                  "cv_id": "cv_0a381ffb",
+                  "overall_score": 36.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 36.0,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 36.0,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 36.0,
+                    "[Priya Patel](cv:cv_4030244e)": 36.0,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 36.0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ]
+                },
+                {
+                  "rank": 18,
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_4b060aae",
+                  "overall_score": 33.8,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 33.8,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 33.8,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 33.8,
+                    "[Priya Patel](cv:cv_4030244e)": 33.8,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 33.8
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ]
+                },
+                {
+                  "rank": 19,
+                  "candidate_name": " Carlos Mendoza  Lighting",
+                  "cv_id": "cv_d0e07879",
+                  "overall_score": 30.8,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 30.8,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 30.8,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 30.8,
+                    "[Priya Patel](cv:cv_4030244e)": 30.8,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 30.8
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ]
+                },
+                {
+                  "rank": 20,
+                  "candidate_name": " Antoine Dubois  Junior Texture",
+                  "cv_id": "cv_ad8afd67",
+                  "overall_score": 20.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 20,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 20,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 20,
+                    "[Priya Patel](cv:cv_4030244e)": 20,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 20
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ]
+                },
+                {
+                  "rank": 21,
+                  "candidate_name": " Arjun Mehta  Junior Concept",
+                  "cv_id": "cv_c41734f7",
+                  "overall_score": 20.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 20,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 20,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 20,
+                    "[Priya Patel](cv:cv_4030244e)": 20,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 20
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ]
+                },
+                {
+                  "rank": 22,
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "cv_id": "cv_13fc8e4c",
+                  "overall_score": 20.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 20,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 20,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 20,
+                    "[Priya Patel](cv:cv_4030244e)": 20,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 20
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ]
+                },
+                {
+                  "rank": 23,
+                  "candidate_name": " Kenji Tanaka  3D Artist",
+                  "cv_id": "cv_93bb8cbd",
+                  "overall_score": 20.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 20,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 20,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 20,
+                    "[Priya Patel](cv:cv_4030244e)": 20,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 20
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ]
+                },
+                {
+                  "rank": 24,
+                  "candidate_name": " Adrian Morales  Junior",
+                  "cv_id": "cv_4ab2fbaa",
+                  "overall_score": 20.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 20,
+                    "[Carlos Mendoza](cv:cv_d0e07879)": 20,
+                    "[Emma Whitmore](cv:cv_9d28f6cd)": 20,
+                    "[Priya Patel](cv:cv_4030244e)": 20,
+                    "[Mateo Rodriguez ](cv:cv_9d48b158)": 20
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)",
+                    "[Carlos Mendoza](cv:cv_d0e07879)"
+                  ]
+                }
+              ],
+              "criteria_names": [
+                "[Isabel Mendoza](cv:cv_adfd3a26)",
+                "[Carlos Mendoza](cv:cv_d0e07879)",
+                "[Emma Whitmore](cv:cv_9d28f6cd)",
+                "[Priya Patel](cv:cv_4030244e)",
+                "[Mateo Rodriguez ](cv:cv_9d48b158)"
+              ]
+            },
+            "top_pick": {
+              "candidate_name": " Matteo Rossi  Creature",
+              "cv_id": "cv_16814325",
+              "overall_score": 100.0,
+              "key_strengths": [
+                "[Isabel Mendoza](cv:cv_adfd3a26)",
+                "[Carlos Mendoza](cv:cv_d0e07879)"
+              ],
+              "justification": " Matteo Rossi  Creature emerges as the top choice with an overall score of 100%. Key strengths include: [Isabel Mendoza](cv:cv_adfd3a26) (100%), [Carlos Mendoza](cv:cv_d0e07879) (100%), [Emma Whitmore](cv:cv_9d28f6cd) (100%).",
+              "runner_up": " Carmen Rodriguez  3D",
+              "runner_up_cv_id": "cv_c0167ca9"
+            },
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T04:22:29.140618"
+        },
+        {
+          "id": "d2eaf803-0a14-458e-9481-8a389e063804",
+          "role": "user",
+          "content": "dame mas solbre el top",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T04:22:38.712548"
+        },
+        {
+          "id": "12dd9024-b3cd-4092-a20e-eff594aa2446",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a comprehensive profile and detailed analysis of the top candidate identified in the previous query regarding leadership roles. The key criteria are leadership experience, team management roles, strategic accomplishments, skills, and career trajectory. The top candidate from the previous query was Isabel Mendoza (cv_adfd3a26). I need to extract all relevant information from the provided CV excerpts for Isabel Mendoza (cv_adfd3a26) and present it in a structured format.\n:::\n\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_adfd3a26)** is highly recommended for a leadership role based on her proven experience as Chief Creative Officer, her ability to cultivate positive team environments, her success in directing large-scale projects, and her strategic planning abilities.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_cecc18ee",
+              "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a151cd62",
+              "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_93bb8cbd",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_ded37996",
+              "filename": "53f55f6a__Mei_Rossi__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_f0b938a8",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_4b060aae",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c0167ca9",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_4ab2fbaa",
+              "filename": "7ef319f7__Adrian_Morales__Junior_Animator.pdf"
+            },
+            {
+              "cv_id": "cv_4030244e",
+              "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_9d48b158",
+              "filename": "8cf248e0__Mateo_Rodriguez__Rigger.pdf"
+            },
+            {
+              "cv_id": "cv_62e084d8",
+              "filename": "02f9626b__Marco_Rossi__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c41734f7",
+              "filename": "5c2c5d6b__Arjun_Mehta__Junior_Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_6219ae68",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_5fc76c07",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_86fd2ce4",
+              "filename": "0d1b1a1b__Aisha_Patel__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_adfd3a26",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_0a381ffb",
+              "filename": "74a0c87c__Mei_Lin_Chen__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_9d28f6cd",
+              "filename": "63ce3a7c__Emma_Whitmore__Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_cae9463b",
+              "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_e4fe6808",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_92a8beac",
+              "filename": "55c0e841__Ricardo_De_Vries__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_13fc8e4c",
+              "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1934.36,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 35.16,
+              "details": "Found 36 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 16547.01,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 3854.75,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for a comprehensive profile and detailed analysis of the top candidate identified in the previous query regarding leadership roles. The key criteria are leadership experience, team management roles, strategic accomplishments, skills, and career trajectory. The top candidate from the previous query was **[Isabel Mendoza](cv:cv_adfd3a26)**. I need to extract all relevant information from the provided CV excerpts for **[Isabel Mendoza](cv:cv_adfd3a26)** and present it in a structured format.\n:::\n\n**[Isabel Mendoza](cv:cv_adfd3a26)** is the top candidate for a leadership role, demonstrating extensive experience in creative direction, team management, and strategic initiatives across various media domains. Her career trajectory showcases a consistent progression into leadership positions, marked by significant achievements in enhancing creative output and aligning artistic vision with business objectives.\n\n### Analysis\n\nThe following table provides a detailed overview of **[Isabel Mendoza](cv:cv_adfd3a26)**'s profile, focusing on her leadership experience, team management roles, strategic accomplishments, skills, and career trajectory. This information is extracted directly from the provided CV excerpts.\n\n| Candidate | Leadership Experience | Team Management | Strategic Accomplishments | Skills | Career Trajectory |\n|-----------|-----------------------|-----------------|--------------------------|--------|------------------|\n| **[Isabel Mendoza](cv:cv_adfd3a26)** | Chief Creative Officer (2020-2023): Directed strategic creative initiatives across advertising, gaming, and simulation divisions, aligning artistic output with business goals. Supervised all 3D asset creation, from concept to final rendering, for film and broadcast projects (2000-2010). | Cultivated a patient, detail-oriented team culture that earned internal excellence awards (2000-2010). | Produced award‑winning visual effects for a prime‑time series, winning a BAFTA for Best Visual Effects (2000-2010). Developed a library of reusable shaders that accelerated the art pipeline by 25% (2000-2010). | 3D Modeling, Texturing, Rigging, Substance Painter, Unreal Engine, Maya | 3D Artist (1990-1995), 3D Artist (2000-2010), Chief Creative Officer (2020-2023) |\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_adfd3a26)** is highly recommended for a leadership role based on her proven experience as Chief Creative Officer, her ability to cultivate positive team environments, her success in directing large-scale projects, and her strategic planning abilities.\n:::",
+            "thinking": "The user is asking for a comprehensive profile and detailed analysis of the top candidate identified in the previous query regarding leadership roles. The key criteria are leadership experience, team management roles, strategic accomplishments, skills, and career trajectory. The top candidate from the previous query was Isabel Mendoza (cv_adfd3a26). I need to extract all relevant information from the provided CV excerpts for Isabel Mendoza (cv_adfd3a26) and present it in a structured format.",
+            "analysis": "The following table provides a detailed overview of **[Isabel Mendoza](cv:cv_adfd3a26)**'s profile, focusing on her leadership experience, team management roles, strategic accomplishments, skills, and career trajectory. This information is extracted directly from the provided CV excerpts.",
+            "table_data": null,
+            "conclusion": "**[Isabel Mendoza](cv:cv_adfd3a26)** is highly recommended for a leadership role based on her proven experience as Chief Creative Officer, her ability to cultivate positive team environments, her success in directing large-scale projects, and her strategic planning abilities.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "ranking",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": {
+              "ranked": [
+                {
+                  "rank": 1,
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "cv_id": "cv_c0167ca9",
+                  "overall_score": 100.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 100
+                  },
+                  "strengths": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 2,
+                  "candidate_name": " Aisha Johnson ",
+                  "cv_id": "cv_f0b938a8",
+                  "overall_score": 89.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 89.0
+                  },
+                  "strengths": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 3,
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "cv_id": "cv_adfd3a26",
+                  "overall_score": 70.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 70.0
+                  },
+                  "strengths": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 4,
+                  "candidate_name": " Rajiv Kapoor  Technical",
+                  "cv_id": "cv_cae9463b",
+                  "overall_score": 70.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 70.0
+                  },
+                  "strengths": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)"
+                  ],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 5,
+                  "candidate_name": " Marco Rossi  3D",
+                  "cv_id": "cv_62e084d8",
+                  "overall_score": 68.4,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 68.4
+                  },
+                  "strengths": [],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 6,
+                  "candidate_name": " Priya Patel  3D",
+                  "cv_id": "cv_4030244e",
+                  "overall_score": 67.2,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 67.2
+                  },
+                  "strengths": [],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 7,
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "cv_id": "cv_e4fe6808",
+                  "overall_score": 64.2,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 64.2
+                  },
+                  "strengths": [],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 8,
+                  "candidate_name": " Daan van Dijk  Hard Surface",
+                  "cv_id": "cv_5fc76c07",
+                  "overall_score": 62.2,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 62.2
+                  },
+                  "strengths": [],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 9,
+                  "candidate_name": " Emma Whitmore  Texture",
+                  "cv_id": "cv_9d28f6cd",
+                  "overall_score": 60.8,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 60.8
+                  },
+                  "strengths": [],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 10,
+                  "candidate_name": " Aisha Patel ",
+                  "cv_id": "cv_86fd2ce4",
+                  "overall_score": 59.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 59.0
+                  },
+                  "strengths": [],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 11,
+                  "candidate_name": " Karim El Amrani  3D",
+                  "cv_id": "cv_a151cd62",
+                  "overall_score": 52.6,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 52.6
+                  },
+                  "strengths": [],
+                  "weaknesses": []
+                },
+                {
+                  "rank": 12,
+                  "candidate_name": " Ricardo De Vries ",
+                  "cv_id": "cv_92a8beac",
+                  "overall_score": 40.4,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 40.4
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)"
+                  ]
+                },
+                {
+                  "rank": 13,
+                  "candidate_name": " Mateo Rodriguez ",
+                  "cv_id": "cv_9d48b158",
+                  "overall_score": 37.2,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 37.2
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)"
+                  ]
+                },
+                {
+                  "rank": 14,
+                  "candidate_name": " Mei Rossi  3D",
+                  "cv_id": "cv_ded37996",
+                  "overall_score": 36.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 36.0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)"
+                  ]
+                },
+                {
+                  "rank": 15,
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "cv_id": "cv_6219ae68",
+                  "overall_score": 36.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 36.0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)"
+                  ]
+                },
+                {
+                  "rank": 16,
+                  "candidate_name": " Mei Lin Chen  VFX",
+                  "cv_id": "cv_0a381ffb",
+                  "overall_score": 36.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 36.0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)"
+                  ]
+                },
+                {
+                  "rank": 17,
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_4b060aae",
+                  "overall_score": 33.8,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 33.8
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)"
+                  ]
+                },
+                {
+                  "rank": 18,
+                  "candidate_name": " Thierry Dubois  Concept",
+                  "cv_id": "cv_cecc18ee",
+                  "overall_score": 31.7,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 31.7
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)"
+                  ]
+                },
+                {
+                  "rank": 19,
+                  "candidate_name": " Kenji Tanaka  3D Artist",
+                  "cv_id": "cv_93bb8cbd",
+                  "overall_score": 20.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 20
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)"
+                  ]
+                },
+                {
+                  "rank": 20,
+                  "candidate_name": " Adrian Morales  Junior",
+                  "cv_id": "cv_4ab2fbaa",
+                  "overall_score": 20.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 20
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)"
+                  ]
+                },
+                {
+                  "rank": 21,
+                  "candidate_name": " Arjun Mehta  Junior Concept",
+                  "cv_id": "cv_c41734f7",
+                  "overall_score": 20.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 20
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)"
+                  ]
+                },
+                {
+                  "rank": 22,
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "cv_id": "cv_13fc8e4c",
+                  "overall_score": 20.0,
+                  "criterion_scores": {
+                    "[Isabel Mendoza](cv:cv_adfd3a26)": 20
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "[Isabel Mendoza](cv:cv_adfd3a26)"
+                  ]
+                }
+              ],
+              "criteria_names": [
+                "[Isabel Mendoza](cv:cv_adfd3a26)"
+              ]
+            },
+            "top_pick": {
+              "candidate_name": " Carmen Rodriguez  3D",
+              "cv_id": "cv_c0167ca9",
+              "overall_score": 100.0,
+              "key_strengths": [
+                "[Isabel Mendoza](cv:cv_adfd3a26)"
+              ],
+              "justification": " Carmen Rodriguez  3D emerges as the top choice with an overall score of 100%. Key strengths include: [Isabel Mendoza](cv:cv_adfd3a26) (100%).",
+              "runner_up": " Aisha Johnson ",
+              "runner_up_cv_id": "cv_f0b938a8"
+            },
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T04:23:05.469446"
         }
       ],
       "created_at": "2026-01-06T04:01:44.028587",
-      "updated_at": "2026-01-06T04:21:30.460895"
+      "updated_at": "2026-01-06T04:23:05.469446"
     },
     {
       "id": "c33d9753-ed16-40a0-adf4-bb1f25d702a1",
@@ -61346,10 +63041,1142 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-06T04:20:51.564546"
+        },
+        {
+          "id": "6c1f26e8-f3eb-40b8-888f-391cdf99d6ad",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a ranked list of candidates suitable for a leadership role, based on leadership experience, team size managed, project leadership, strategic planning, and leadership skills. I need to identify candidates who have demonstrated these qualities in their CVs and rank them accordingly. I must provide the top 3 candidates even if the match is not perfect.\n:::\n\n** Carlos Mendoza  Texture** presents a **low-risk profile**. With 21 years of experience and an average tenure of 7.7 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.\n\n\n### ⚠️ Risk Assessment\n\n\n| Factor | Status | Details |\n\n|:-------|:------:|:--------|\n\n| **🚩 Red Flags** | ✅ None Detected | Clean profile |\n\n| **🔄 Job Hopping** | ✅ Low | Score: 9%, Avg tenure: 7.7 yrs |\n\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n\n| **📊 Stability** | ✅ Stable | 3 positions over 21 years |\n\n| **🎯 Experience** | Executive | installations. @ surfaces for interactive media. Known for artistic |\n\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_ca430a7b)** is the most suitable candidate due to her extensive experience in creative leadership roles and strategic planning abilities. **[Rajiv Kapoor](cv:cv_280319bf)** is a strong second choice, with experience leading technical art teams and implementing pipeline improvements. **[Emma Whitmore](cv:cv_6f37af02)** also demonstrates leadership skills in the texture art domain, making her a valuable candidate for a leadership position.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_30ac22b4",
+              "filename": "9a484d82__Carlos_Mendoza__Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_915bdbc1",
+              "filename": "8cf248e0__Mateo_Rodriguez__Rigger.pdf"
+            },
+            {
+              "cv_id": "cv_2ffc36e7",
+              "filename": "02f9626b__Marco_Rossi__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_ca430a7b",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_7697ebd5",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_675bc529",
+              "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_3f3b4500",
+              "filename": "0ed822eb__Antoine_Dubois__Junior_Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_c5541ada",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_7bb9187f",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_72a70af6",
+              "filename": "9e50441e__Matteo_Rossi__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_ca94c531",
+              "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_b1ec23d7",
+              "filename": "8742ca7a__Sofia_Mendoza__Environment_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_280319bf",
+              "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_38d18514",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_1bb7c2ac",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_6a51f7f8",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_87b6d247",
+              "filename": "74a0c87c__Mei_Lin_Chen__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_7a08225f",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_b12be685",
+              "filename": "5c2c5d6b__Arjun_Mehta__Junior_Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_8de7bda4",
+              "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_12d85364",
+              "filename": "55c0e841__Ricardo_De_Vries__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_6f37af02",
+              "filename": "63ce3a7c__Emma_Whitmore__Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_47fae3db",
+              "filename": "7ef319f7__Adrian_Morales__Junior_Animator.pdf"
+            },
+            {
+              "cv_id": "cv_7e5603eb",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 2087.33,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 38.79,
+              "details": "Found 32 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 35452.24,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5559.49,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "** Carlos Mendoza  Texture** presents a **low-risk profile**. With 21 years of experience and an average tenure of 7.7 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+            "raw_content": ":::thinking\nThe user is asking for a ranked list of candidates suitable for a leadership role, based on leadership experience, team size managed, project leadership, strategic planning, and leadership skills. I need to identify candidates who have demonstrated these qualities in their CVs and rank them accordingly. I must provide the top 3 candidates even if the match is not perfect.\n:::\n\nHere are the top three candidates ranked by their suitability for a leadership role, based on their experience, skills, and accomplishments as detailed in their CVs. **[Isabel Mendoza](cv:cv_ca430a7b)** stands out due to her extensive experience in creative leadership roles, followed by **[Rajiv Kapoor](cv:cv_280319bf)** and **[Emma Whitmore](cv:cv_6f37af02)**, who have demonstrated leadership in technical and artistic domains, respectively.\n\n### Analysis\nThe ranking is based on the following criteria:\n1.  **Leadership Experience:** Years in leadership roles and the progression of responsibilities.\n2.  **Team Size Managed:** The number of individuals the candidate has directly managed or influenced.\n3.  **Project Leadership:** Scope and impact of projects led, including quantifiable results.\n4.  **Strategic Planning:** Evidence of contributing to strategic initiatives and achieving business goals.\n5.  **Leadership Skills:** Demonstrated abilities in communication, decision-making, problem-solving, and mentorship.\n\nThe table below summarizes the assessment of each candidate against these criteria. I am including more than 3 candidates in the table to provide context, but the conclusion will focus on the top 3.\n\n| Candidate | Leadership Experience | Team Size Managed | Project Leadership | Strategic Planning | Match |\n|-----------|-----------------------|--------------------|--------------------|--------------------|-------|\n| **[Isabel Mendoza](cv:cv_ca430a7b)** | Extensive experience as Chief Creative Officer and VP of Creative Development. | Managed a team of 25 artists. | Led a team to launch a flagship game that sold 5 million copies. Delivered a $12M campaign that earned a Cannes Lion award. | Introduced a streamlined asset pipeline that cut production time by 30%. Championed inclusive design practices. | ⭐⭐⭐⭐⭐ |\n| **[Rajiv Kapoor](cv:cv_280319bf)** | VP of Creative Technology and Director of Technical Art. | Directed a cross-functional team of 15 artists and engineers. | Delivered a title that boosted player engagement by 45%. | Introduced data-driven pipeline metrics that cut iteration cycles by 30%. Championed accessibility standards. | ⭐⭐⭐⭐ |\n| **[Emma Whitmore](cv:cv_6f37af02)** | Head of Texturing | Leads a team of 8 texture artists. | Scaled texture asset pipeline efficiency by 35% through automated workflow tools. | Collaborated with engineers to integrate texture streaming solutions, reducing load times by 15%. | ⭐⭐⭐ |\n| **[Carlos Mendoza](cv:cv_7bb9187f)** | Lead Lighting Artist | Mentored a diverse team of 8 artists. | Spearheaded a lighting pipeline that cut render times by 35%. | Collaborated cross-functionally with design and animation leads to translate narrative concepts into luminous storytelling. | ⭐⭐ |\n| **[Priya Patel](cv:cv_ca94c531)** | Lead 3D Artist | Led a team of 10 artists. | Led the creation of immersive VR environments, resulting in a 30% increase in positive user reviews. | Pioneered the use of photogrammetry techniques for asset creation, reducing production time by 20%. | ⭐⭐ |\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_ca430a7b)** is the most suitable candidate due to her extensive experience in creative leadership roles and strategic planning abilities. **[Rajiv Kapoor](cv:cv_280319bf)** is a strong second choice, with experience leading technical art teams and implementing pipeline improvements. **[Emma Whitmore](cv:cv_6f37af02)** also demonstrates leadership skills in the texture art domain, making her a valuable candidate for a leadership position.\n:::",
+            "thinking": "The user is asking for a ranked list of candidates suitable for a leadership role, based on leadership experience, team size managed, project leadership, strategic planning, and leadership skills. I need to identify candidates who have demonstrated these qualities in their CVs and rank them accordingly. I must provide the top 3 candidates even if the match is not perfect.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "**[Isabel Mendoza](cv:cv_ca430a7b)** is the most suitable candidate due to her extensive experience in creative leadership roles and strategic planning abilities. **[Rajiv Kapoor](cv:cv_280319bf)** is a strong second choice, with experience leading technical art teams and implementing pipeline improvements. **[Emma Whitmore](cv:cv_6f37af02)** also demonstrates leadership skills in the texture art domain, making her a valuable candidate for a leadership position.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Carlos Mendoza  Texture",
+              "cv_id": "cv_30ac22b4",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "✅ None Detected",
+                  "details": "Clean profile",
+                  "status_icon": "✅",
+                  "status_text": "None Detected"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "✅ Low",
+                  "details": "Score: 9%, Avg tenure: 7.7 yrs",
+                  "status_icon": "✅",
+                  "status_text": "Low"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "✅ Stable",
+                  "details": "3 positions over 21 years",
+                  "status_icon": "✅",
+                  "status_text": "Stable"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Executive",
+                  "details": "installations. @ surfaces for interactive media. Known for artistic",
+                  "status_icon": "",
+                  "status_text": "Executive"
+                }
+              ],
+              "has_issues": false,
+              "overall_risk": "low",
+              "analysis_text": "** Carlos Mendoza  Texture** presents a **low-risk profile**. With 21 years of experience and an average tenure of 7.7 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+              "metrics": {
+                "job_hopping_score": 0.08695652173913043,
+                "avg_tenure_years": 7.666666666666667,
+                "total_experience_years": 21.0,
+                "employment_gaps_count": 0,
+                "position_count": 3
+              }
+            },
+            "structure_type": "risk_assessment",
+            "single_candidate_data": null,
+            "risk_assessment_data": {
+              "candidate_name": " Carlos Mendoza  Texture",
+              "cv_id": "cv_30ac22b4",
+              "risk_analysis": "** Carlos Mendoza  Texture** presents a **low-risk profile**. With 21 years of experience and an average tenure of 7.7 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+              "risk_table": {
+                "candidate_name": " Carlos Mendoza  Texture",
+                "cv_id": "cv_30ac22b4",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "✅ None Detected",
+                    "details": "Clean profile",
+                    "status_icon": "✅",
+                    "status_text": "None Detected"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "✅ Low",
+                    "details": "Score: 9%, Avg tenure: 7.7 yrs",
+                    "status_icon": "✅",
+                    "status_text": "Low"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "✅ Stable",
+                    "details": "3 positions over 21 years",
+                    "status_icon": "✅",
+                    "status_text": "Stable"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Executive",
+                    "details": "installations. @ surfaces for interactive media. Known for artistic",
+                    "status_icon": "",
+                    "status_text": "Executive"
+                  }
+                ],
+                "has_issues": false,
+                "overall_risk": "low",
+                "analysis_text": "** Carlos Mendoza  Texture** presents a **low-risk profile**. With 21 years of experience and an average tenure of 7.7 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+                "metrics": {
+                  "job_hopping_score": 0.08695652173913043,
+                  "avg_tenure_years": 7.666666666666667,
+                  "total_experience_years": 21.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 3
+                }
+              },
+              "assessment": "**[Isabel Mendoza](cv:cv_ca430a7b)** is the most suitable candidate due to her extensive experience in creative leadership roles and strategic planning abilities. **[Rajiv Kapoor](cv:cv_280319bf)** is a strong second choice, with experience leading technical art teams and implementing pipeline improvements. **[Emma Whitmore](cv:cv_6f37af02)** also demonstrates leadership skills in the texture art domain, making her a valuable candidate for a leadership position."
+            },
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T04:21:38.197778"
         }
       ],
       "created_at": "2026-01-06T04:08:35.764621",
-      "updated_at": "2026-01-06T04:20:51.564546"
+      "updated_at": "2026-01-06T04:21:38.197778"
+    },
+    {
+      "id": "e5149929-9132-4747-8038-4ab5964f337a",
+      "name": "Media Production 3473",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_7df1a3b0",
+          "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf",
+          "chunk_count": 6,
+          "content_hash": "9ac96c226a0824b5a8df589c45c1a9886ffb2f05442986faa0a5e6491c6eba80",
+          "uploaded_at": "2026-01-06T04:24:28.154778"
+        },
+        {
+          "id": "cv_e2e753cb",
+          "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf",
+          "chunk_count": 6,
+          "content_hash": "85d898ad89ecc8cb7267e5b49adba1f1cac5b408dd4c4fc2d71d14dc5bbd9786",
+          "uploaded_at": "2026-01-06T04:24:28.710941"
+        },
+        {
+          "id": "cv_f071fab2",
+          "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "74f41b5728cefd055be7ae50f0cd92f821fc552c3f1623d099aafbc0f0110cf1",
+          "uploaded_at": "2026-01-06T04:24:29.186778"
+        },
+        {
+          "id": "cv_5d7a0181",
+          "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf",
+          "chunk_count": 7,
+          "content_hash": "b0ac973a41aa837f6956db83be7efc36c49d2569068d401372609dee2fb1805b",
+          "uploaded_at": "2026-01-06T04:24:29.762903"
+        }
+      ],
+      "messages": [
+        {
+          "id": "89a8ca84-bccb-4f36-a8d4-b8f143eef927",
+          "role": "user",
+          "content": "Who shows the most career growth?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T04:24:35.540252"
+        },
+        {
+          "id": "dc2e6f63-3512-4695-9302-22d96c26a6dc",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for an analysis of career growth trajectories for the provided candidates. I need to evaluate each candidate's CV, identify evidence of career growth (promotions, increased responsibilities, skill development), and then rank them based on the degree of growth. I must provide a justification for each candidate's ranking. The user did not specify a number of candidates, so I will provide an analysis of all candidates.\n:::\n\n\n:::conclusion\nBased on the analysis of career growth trajectories, I recommend prioritizing **[Carmen Rodriguez](cv:cv_5d7a0181)** and **[Carlos Mendoza](cv:cv_e2e753cb)**, followed by **[Imani Jones](cv:cv_7df1a3b0)**. **[Aisha Nkrumah](cv:cv_f071fab2)** shows the least career growth among the candidates.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_5d7a0181",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_f071fab2",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_e2e753cb",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_7df1a3b0",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1988.54,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 6.42,
+              "details": "Found 11 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 18362.26,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4105.64,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for an analysis of career growth trajectories for the provided candidates. I need to evaluate each candidate's CV, identify evidence of career growth (promotions, increased responsibilities, skill development), and then rank them based on the degree of growth. I must provide a justification for each candidate's ranking. The user did not specify a number of candidates, so I will provide an analysis of all candidates.\n:::\n\nBased on the provided CVs, the candidates can be ranked by career growth trajectory as follows: **[Carmen Rodriguez](cv:cv_5d7a0181)**, **[Carlos Mendoza](cv:cv_e2e753cb)**, **[Imani Jones](cv:cv_7df1a3b0)**, and **[Aisha Nkrumah](cv:cv_f071fab2)**, with **[Carmen Rodriguez](cv:cv_5d7a0181)** demonstrating the most significant career growth.\n\n### Analysis\n\nThe ranking is based on the progression of job titles, expansion of responsibilities, and evidence of skill development throughout their careers. **[Carmen Rodriguez](cv:cv_5d7a0181)** shows the most significant growth, starting as a Junior 3D Artist and progressing to Chief Creative Officer. **[Carlos Mendoza](cv:cv_e2e753cb)** demonstrates solid growth from Lighting Intern to Lead Lighting Artist. **[Imani Jones](cv:cv_7df1a3b0)** has progressed from Junior Concept Artist to Senior Concept Artist. **[Aisha Nkrumah](cv:cv_f071fab2)**, as a Junior 2D Artist with limited experience, shows the least career growth among the candidates.\n\n| Candidate | Job Title Progression | Increased Responsibilities | Match |\n|-----------|-----------------------|---------------------------|-------|\n| **[Carmen Rodriguez](cv:cv_5d7a0181)** | Junior 3D Artist -> Art Department Manager -> Creative Director -> VP of Visual Innovation -> Chief Creative Officer | Managing teams, overseeing visual strategy, leading innovation, spearheading rebrands | ⭐⭐⭐⭐⭐ |\n| **[Carlos Mendoza](cv:cv_e2e753cb)** | Lighting Intern -> Junior Lighting Artist -> Lighting Artist -> Lead Lighting Artist | Designing lighting, enhancing pipelines, mentoring artists | ⭐⭐⭐⭐ |\n| **[Imani Jones](cv:cv_7df1a3b0)** | Junior Concept Artist -> Concept Artist -> Senior Concept Artist | Creating concept art, developing visual styles, mentoring junior artists | ⭐⭐⭐ |\n| **[Aisha Nkrumah](cv:cv_f071fab2)** | 2D Artist Intern -> Junior 2D Artist -> Freelance Illustrator | Creating character designs, backgrounds, and assets | ⭐⭐ |\n\n:::conclusion\nBased on the analysis of career growth trajectories, I recommend prioritizing **[Carmen Rodriguez](cv:cv_5d7a0181)** and **[Carlos Mendoza](cv:cv_e2e753cb)**, followed by **[Imani Jones](cv:cv_7df1a3b0)**. **[Aisha Nkrumah](cv:cv_f071fab2)** shows the least career growth among the candidates.\n:::",
+            "thinking": "The user is asking for an analysis of career growth trajectories for the provided candidates. I need to evaluate each candidate's CV, identify evidence of career growth (promotions, increased responsibilities, skill development), and then rank them based on the degree of growth. I must provide a justification for each candidate's ranking. The user did not specify a number of candidates, so I will provide an analysis of all candidates.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "Based on the analysis of career growth trajectories, I recommend prioritizing **[Carmen Rodriguez](cv:cv_5d7a0181)** and **[Carlos Mendoza](cv:cv_e2e753cb)**, followed by **[Imani Jones](cv:cv_7df1a3b0)**. **[Aisha Nkrumah](cv:cv_f071fab2)** shows the least career growth among the candidates.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Carmen Rodriguez  3D",
+              "cv_id": "cv_5d7a0181",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "✅ None Detected",
+                  "details": "Clean profile",
+                  "status_icon": "✅",
+                  "status_text": "None Detected"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "✅ Low",
+                  "details": "Score: 19%, Avg tenure: 4.0 yrs",
+                  "status_icon": "✅",
+                  "status_text": "Low"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "✅ Stable",
+                  "details": "4 positions over 16 years",
+                  "status_icon": "✅",
+                  "status_text": "Stable"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Executive",
+                  "details": "Amsterdam @ Netherlands representation by 40%.",
+                  "status_icon": "",
+                  "status_text": "Executive"
+                }
+              ],
+              "has_issues": false,
+              "overall_risk": "low",
+              "analysis_text": "** Carmen Rodriguez  3D** presents a **low-risk profile**. With 16 years of experience and an average tenure of 4.0 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+              "metrics": {
+                "job_hopping_score": 0.1875,
+                "avg_tenure_years": 4.0,
+                "total_experience_years": 16.0,
+                "employment_gaps_count": 0,
+                "position_count": 4
+              }
+            },
+            "structure_type": "single_candidate",
+            "single_candidate_data": {
+              "candidate_name": " Carmen Rodriguez  3D",
+              "cv_id": "cv_5d7a0181",
+              "summary": "",
+              "highlights": [],
+              "career": [],
+              "skills": [],
+              "credentials": [],
+              "risk_table": {
+                "candidate_name": " Carmen Rodriguez  3D",
+                "cv_id": "cv_5d7a0181",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "✅ None Detected",
+                    "details": "Clean profile",
+                    "status_icon": "✅",
+                    "status_text": "None Detected"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "✅ Low",
+                    "details": "Score: 19%, Avg tenure: 4.0 yrs",
+                    "status_icon": "✅",
+                    "status_text": "Low"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "✅ Stable",
+                    "details": "4 positions over 16 years",
+                    "status_icon": "✅",
+                    "status_text": "Stable"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Executive",
+                    "details": "Amsterdam @ Netherlands representation by 40%.",
+                    "status_icon": "",
+                    "status_text": "Executive"
+                  }
+                ],
+                "has_issues": false,
+                "overall_risk": "low",
+                "analysis_text": "** Carmen Rodriguez  3D** presents a **low-risk profile**. With 16 years of experience and an average tenure of 4.0 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+                "metrics": {
+                  "job_hopping_score": 0.1875,
+                  "avg_tenure_years": 4.0,
+                  "total_experience_years": 16.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 4
+                }
+              },
+              "conclusion": "Based on the analysis of career growth trajectories, I recommend prioritizing **[Carmen Rodriguez](cv:cv_5d7a0181)** and **[Carlos Mendoza](cv:cv_e2e753cb)**, followed by **[Imani Jones](cv:cv_7df1a3b0)**. **[Aisha Nkrumah](cv:cv_f071fab2)** shows the least career growth among the candidates."
+            },
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T04:25:03.530871"
+        },
+        {
+          "id": "644f6f72-756a-4062-a6af-7c3ced6d08dc",
+          "role": "user",
+          "content": "Who has the strongest technical skills?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T04:25:12.404454"
+        },
+        {
+          "id": "da269bba-77d5-4883-96f0-7ef8e4621680",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a ranking of candidates based on their technical skills. I need to identify the technical skills listed in each CV, assess their relevance and depth, and then rank the candidates accordingly. The user did not specify a number of candidates, so I will provide an analysis of all candidates. I will focus on programming languages, software, and other technical proficiencies.\n:::\n\n\n:::conclusion\nI recommend prioritizing **[Carlos Mendoza](cv:cv_e2e753cb)** and **[Carmen Rodriguez](cv:cv_5d7a0181)** due to their stronger technical skill sets. **[Imani Jones](cv:cv_7df1a3b0)** and **[Aisha Nkrumah](cv:cv_f071fab2)** have less technical depth based on the information provided in their CVs.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_7df1a3b0",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_f071fab2",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_5d7a0181",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_e2e753cb",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1880.22,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 7.0,
+              "details": "Found 11 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 20628.61,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5175.84,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for a ranking of candidates based on their technical skills. I need to identify the technical skills listed in each CV, assess their relevance and depth, and then rank the candidates accordingly. The user did not specify a number of candidates, so I will provide an analysis of all candidates. I will focus on programming languages, software, and other technical proficiencies.\n:::\n\nBased on the analysis of technical skills, the candidates are ranked as follows: **[Carlos Mendoza](cv:cv_e2e753cb)**, **[Carmen Rodriguez](cv:cv_5d7a0181)**, **[Imani Jones](cv:cv_7df1a3b0)**, and **[Aisha Nkrumah](cv:cv_f071fab2)**. This ranking prioritizes candidates with explicit mentions of technical skills relevant to art and design.\n\n### Analysis\nThe ranking is based on the presence and depth of technical skills mentioned in each CV. **[Carlos Mendoza](cv:cv_e2e753cb)** is ranked highest due to his explicit mention of 3D rendering, shader development, compositing, and Python scripting. **[Carmen Rodriguez](cv:cv_5d7a0181)** is ranked second due to her mention of 3D modeling, texturing, lighting, rendering, and pipeline development. **[Imani Jones](cv:cv_7df1a3b0)** is ranked third because of the mention of Blender and ZBrush. **[Aisha Nkrumah](cv:cv_f071fab2)** is ranked last as her CV primarily lists design software and lacks programming or more advanced technical skills.\n\n| Candidate | Technical Skills | Software Proficiency | Ranking |\n|-----------|------------------|----------------------|---------|\n| **[Carlos Mendoza](cv:cv_e2e753cb)** | 3D Rendering, Shader Development, Python Scripting |  | ⭐⭐⭐⭐ |\n| **[Carmen Rodriguez](cv:cv_5d7a0181)** | 3D Modeling, Texturing, Lighting, Rendering, Pipeline Development | Autodesk Maya, ZBrush, Unreal Engine | ⭐⭐⭐ |\n| **[Imani Jones](cv:cv_7df1a3b0)** | Concept Design, Character Design, Environment Design, Prop Design, Storyboarding, Visual Development | Adobe Photoshop, Procreate, Blender, ZBrush | ⭐⭐ |\n| **[Aisha Nkrumah](cv:cv_f071fab2)** | Digital Painting, Character Design, Background Design, Storyboarding, Concept Art, Animation Principles | Adobe Photoshop, Adobe Illustrator, Clip Studio Paint | ⭐ |\n\n:::conclusion\nI recommend prioritizing **[Carlos Mendoza](cv:cv_e2e753cb)** and **[Carmen Rodriguez](cv:cv_5d7a0181)** due to their stronger technical skill sets. **[Imani Jones](cv:cv_7df1a3b0)** and **[Aisha Nkrumah](cv:cv_f071fab2)** have less technical depth based on the information provided in their CVs.\n:::",
+            "thinking": "The user is asking for a ranking of candidates based on their technical skills. I need to identify the technical skills listed in each CV, assess their relevance and depth, and then rank the candidates accordingly. The user did not specify a number of candidates, so I will provide an analysis of all candidates. I will focus on programming languages, software, and other technical proficiencies.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "I recommend prioritizing **[Carlos Mendoza](cv:cv_e2e753cb)** and **[Carmen Rodriguez](cv:cv_5d7a0181)** due to their stronger technical skill sets. **[Imani Jones](cv:cv_7df1a3b0)** and **[Aisha Nkrumah](cv:cv_f071fab2)** have less technical depth based on the information provided in their CVs.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Imani Jones  Concept",
+              "cv_id": "cv_7df1a3b0",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "⚠️ Issues Found",
+                  "details": "Moderate concerns",
+                  "status_icon": "⚠️",
+                  "status_text": "Issues Found"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "⚠️ High",
+                  "details": "Score: 50%, Avg tenure: 1.3 yrs",
+                  "status_icon": "⚠️",
+                  "status_text": "High"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "⚡ Moderate",
+                  "details": "3 positions over 4 years",
+                  "status_icon": "⚡",
+                  "status_text": "Moderate"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Mid",
+                  "details": "Los Angeles @ CA projects, including character designs,",
+                  "status_icon": "",
+                  "status_text": "Mid"
+                }
+              ],
+              "has_issues": true,
+              "overall_risk": "moderate",
+              "analysis_text": "** Imani Jones  Concept** shows a **moderate risk profile**. The job hopping score of 50% with an average tenure of 1.3 years suggests some mobility in their career. With 3 positions over 4 years, there may be concerns about long-term retention that should be explored in interviews.",
+              "metrics": {
+                "job_hopping_score": 0.5,
+                "avg_tenure_years": 1.3333333333333333,
+                "total_experience_years": 4.0,
+                "employment_gaps_count": 0,
+                "position_count": 3
+              }
+            },
+            "structure_type": "single_candidate",
+            "single_candidate_data": {
+              "candidate_name": " Imani Jones  Concept",
+              "cv_id": "cv_7df1a3b0",
+              "summary": "",
+              "highlights": [],
+              "career": [],
+              "skills": [],
+              "credentials": [],
+              "risk_table": {
+                "candidate_name": " Imani Jones  Concept",
+                "cv_id": "cv_7df1a3b0",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "⚠️ Issues Found",
+                    "details": "Moderate concerns",
+                    "status_icon": "⚠️",
+                    "status_text": "Issues Found"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "⚠️ High",
+                    "details": "Score: 50%, Avg tenure: 1.3 yrs",
+                    "status_icon": "⚠️",
+                    "status_text": "High"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "⚡ Moderate",
+                    "details": "3 positions over 4 years",
+                    "status_icon": "⚡",
+                    "status_text": "Moderate"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Mid",
+                    "details": "Los Angeles @ CA projects, including character designs,",
+                    "status_icon": "",
+                    "status_text": "Mid"
+                  }
+                ],
+                "has_issues": true,
+                "overall_risk": "moderate",
+                "analysis_text": "** Imani Jones  Concept** shows a **moderate risk profile**. The job hopping score of 50% with an average tenure of 1.3 years suggests some mobility in their career. With 3 positions over 4 years, there may be concerns about long-term retention that should be explored in interviews.",
+                "metrics": {
+                  "job_hopping_score": 0.5,
+                  "avg_tenure_years": 1.3333333333333333,
+                  "total_experience_years": 4.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 3
+                }
+              },
+              "conclusion": "I recommend prioritizing **[Carlos Mendoza](cv:cv_e2e753cb)** and **[Carmen Rodriguez](cv:cv_5d7a0181)** due to their stronger technical skill sets. **[Imani Jones](cv:cv_7df1a3b0)** and **[Aisha Nkrumah](cv:cv_f071fab2)** have less technical depth based on the information provided in their CVs."
+            },
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T04:25:44.021823"
+        },
+        {
+          "id": "3b89683c-2898-46f4-8667-3c74283c950c",
+          "role": "user",
+          "content": "Who is best for a leadership role?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T04:25:56.333352"
+        },
+        {
+          "id": "87b2c4f0-fc19-402c-8912-26e9242b997b",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a ranking of the candidates based on their suitability for a leadership role. I need to evaluate each candidate's CV for evidence of leadership skills, team management experience, strategic thinking, problem-solving abilities, communication skills, and interpersonal skills. I will then rank the candidates from best to worst fit for a leadership position, based on the information in their CVs. The user did not specify a number of candidates, so I will provide an analysis of all candidates.\n:::\n\n** Carmen Rodriguez  3D** presents a **low-risk profile**. With 16 years of experience and an average tenure of 4.0 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.\n\n\n### ⚠️ Risk Assessment\n\n\n| Factor | Status | Details |\n\n|:-------|:------:|:--------|\n\n| **🚩 Red Flags** | ✅ None Detected | Clean profile |\n\n| **🔄 Job Hopping** | ✅ Low | Score: 19%, Avg tenure: 4.0 yrs |\n\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n\n| **📊 Stability** | ✅ Stable | 4 positions over 16 years |\n\n| **🎯 Experience** | Executive | Amsterdam @ Netherlands representation by 40%. |\n\n\n:::conclusion\nI recommend prioritizing **[Carmen Rodriguez](cv:cv_5d7a0181)** and **[Carlos Mendoza](cv:cv_e2e753cb)** for leadership roles due to their extensive experience in leadership positions and demonstrated ability to manage teams and implement strategic initiatives. **[Imani Jones](cv:cv_7df1a3b0)** could be considered for a team lead role, while **[Aisha Nkrumah](cv:cv_f071fab2)** would benefit from further experience before being considered for leadership positions.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_5d7a0181",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_7df1a3b0",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_f071fab2",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_e2e753cb",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 2303.01,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 6.79,
+              "details": "Found 7 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 21099.06,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5547.04,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "** Carmen Rodriguez  3D** presents a **low-risk profile**. With 16 years of experience and an average tenure of 4.0 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+            "raw_content": ":::thinking\nThe user is asking for a ranking of the candidates based on their suitability for a leadership role. I need to evaluate each candidate's CV for evidence of leadership skills, team management experience, strategic thinking, problem-solving abilities, communication skills, and interpersonal skills. I will then rank the candidates from best to worst fit for a leadership position, based on the information in their CVs. The user did not specify a number of candidates, so I will provide an analysis of all candidates.\n:::\n\nBased on the analysis of leadership skills and experience, I recommend prioritizing **[Carmen Rodriguez](cv:cv_5d7a0181)** and **[Carlos Mendoza](cv:cv_e2e753cb)**, followed by **[Imani Jones](cv:cv_7df1a3b0)**. **[Aisha Nkrumah](cv:cv_f071fab2)** shows the least evidence of leadership experience among the candidates.\n\n### Analysis\nThe ranking is based on the presence and depth of leadership experience, team management, strategic thinking, and problem-solving skills demonstrated in their respective roles. **[Carmen Rodriguez](cv:cv_5d7a0181)** and **[Carlos Mendoza](cv:cv_e2e753cb)** have held leadership positions with clear responsibilities for strategy, team management, and innovation. **[Imani Jones](cv:cv_7df1a3b0)** has some experience mentoring junior artists, but less explicit leadership experience. **[Aisha Nkrumah](cv:cv_f071fab2)**, as a Junior 2D Artist, has the least experience in leadership roles.\n\n| Candidate | Leadership Experience | Team Management | Strategic Thinking/Problem Solving | Match |\n|-----------|-----------------------|-----------------|------------------------------------|-------|\n| **[Carmen Rodriguez](cv:cv_5d7a0181)** | Chief Creative Officer, VP of Visual Innovation, Creative Director | Mentored artists, led teams of 25 | Spearheaded rebrand, built creative lab, pipeline automation | ⭐⭐⭐⭐⭐ |\n| **[Carlos Mendoza](cv:cv_e2e753cb)** | Lead Lighting Artist | Mentored a team of 8 artists | Spearheaded lighting pipeline, implemented dynamic light rigs | ⭐⭐⭐⭐ |\n| **[Imani Jones](cv:cv_7df1a3b0)** | Senior Concept Artist | Mentored junior concept artists | Streamlined concept art pipeline | ⭐⭐⭐ |\n| **[Aisha Nkrumah](cv:cv_f071fab2)** | Junior 2D Artist | None explicitly mentioned | Improved workflow efficiency by creating reusable asset templates | ⭐⭐ |\n\n:::conclusion\nI recommend prioritizing **[Carmen Rodriguez](cv:cv_5d7a0181)** and **[Carlos Mendoza](cv:cv_e2e753cb)** for leadership roles due to their extensive experience in leadership positions and demonstrated ability to manage teams and implement strategic initiatives. **[Imani Jones](cv:cv_7df1a3b0)** could be considered for a team lead role, while **[Aisha Nkrumah](cv:cv_f071fab2)** would benefit from further experience before being considered for leadership positions.\n:::",
+            "thinking": "The user is asking for a ranking of the candidates based on their suitability for a leadership role. I need to evaluate each candidate's CV for evidence of leadership skills, team management experience, strategic thinking, problem-solving abilities, communication skills, and interpersonal skills. I will then rank the candidates from best to worst fit for a leadership position, based on the information in their CVs. The user did not specify a number of candidates, so I will provide an analysis of all candidates.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "I recommend prioritizing **[Carmen Rodriguez](cv:cv_5d7a0181)** and **[Carlos Mendoza](cv:cv_e2e753cb)** for leadership roles due to their extensive experience in leadership positions and demonstrated ability to manage teams and implement strategic initiatives. **[Imani Jones](cv:cv_7df1a3b0)** could be considered for a team lead role, while **[Aisha Nkrumah](cv:cv_f071fab2)** would benefit from further experience before being considered for leadership positions.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Carmen Rodriguez  3D",
+              "cv_id": "cv_5d7a0181",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "✅ None Detected",
+                  "details": "Clean profile",
+                  "status_icon": "✅",
+                  "status_text": "None Detected"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "✅ Low",
+                  "details": "Score: 19%, Avg tenure: 4.0 yrs",
+                  "status_icon": "✅",
+                  "status_text": "Low"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "✅ Stable",
+                  "details": "4 positions over 16 years",
+                  "status_icon": "✅",
+                  "status_text": "Stable"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Executive",
+                  "details": "Amsterdam @ Netherlands representation by 40%.",
+                  "status_icon": "",
+                  "status_text": "Executive"
+                }
+              ],
+              "has_issues": false,
+              "overall_risk": "low",
+              "analysis_text": "** Carmen Rodriguez  3D** presents a **low-risk profile**. With 16 years of experience and an average tenure of 4.0 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+              "metrics": {
+                "job_hopping_score": 0.1875,
+                "avg_tenure_years": 4.0,
+                "total_experience_years": 16.0,
+                "employment_gaps_count": 0,
+                "position_count": 4
+              }
+            },
+            "structure_type": "risk_assessment",
+            "single_candidate_data": null,
+            "risk_assessment_data": {
+              "candidate_name": " Carmen Rodriguez  3D",
+              "cv_id": "cv_5d7a0181",
+              "risk_analysis": "** Carmen Rodriguez  3D** presents a **low-risk profile**. With 16 years of experience and an average tenure of 4.0 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+              "risk_table": {
+                "candidate_name": " Carmen Rodriguez  3D",
+                "cv_id": "cv_5d7a0181",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "✅ None Detected",
+                    "details": "Clean profile",
+                    "status_icon": "✅",
+                    "status_text": "None Detected"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "✅ Low",
+                    "details": "Score: 19%, Avg tenure: 4.0 yrs",
+                    "status_icon": "✅",
+                    "status_text": "Low"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "✅ Stable",
+                    "details": "4 positions over 16 years",
+                    "status_icon": "✅",
+                    "status_text": "Stable"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Executive",
+                    "details": "Amsterdam @ Netherlands representation by 40%.",
+                    "status_icon": "",
+                    "status_text": "Executive"
+                  }
+                ],
+                "has_issues": false,
+                "overall_risk": "low",
+                "analysis_text": "** Carmen Rodriguez  3D** presents a **low-risk profile**. With 16 years of experience and an average tenure of 4.0 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+                "metrics": {
+                  "job_hopping_score": 0.1875,
+                  "avg_tenure_years": 4.0,
+                  "total_experience_years": 16.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 4
+                }
+              },
+              "assessment": "I recommend prioritizing **[Carmen Rodriguez](cv:cv_5d7a0181)** and **[Carlos Mendoza](cv:cv_e2e753cb)** for leadership roles due to their extensive experience in leadership positions and demonstrated ability to manage teams and implement strategic initiatives. **[Imani Jones](cv:cv_7df1a3b0)** could be considered for a team lead role, while **[Aisha Nkrumah](cv:cv_f071fab2)** would benefit from further experience before being considered for leadership positions."
+            },
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T04:26:28.501511"
+        },
+        {
+          "id": "57375614-16da-444b-ba79-13ca8a22b16d",
+          "role": "user",
+          "content": "Who shows the most career growth?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T04:32:03.834309"
+        },
+        {
+          "id": "8fa71d0a-23fc-4d61-9c41-18307b9d58c9",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a ranking of candidates based on their career growth trajectory. I need to evaluate each candidate's CV, identify evidence of career growth (promotions, increased responsibilities, skill development), and then rank them based on the degree of growth. I must provide a justification for each candidate's ranking. The user asked for all candidates to be ranked, so I will provide an analysis of all candidates.\n:::\n\n\n:::conclusion\nI recommend prioritizing **[Carmen Rodriguez](cv:cv_5d7a0181)** and **[Carlos Mendoza](cv:cv_e2e753cb)**, followed by **[Imani Jones](cv:cv_7df1a3b0)**, based on their demonstrated career growth. **[Aisha Nkrumah](cv:cv_f071fab2)** shows the least career growth among the candidates.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_e2e753cb",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_5d7a0181",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_f071fab2",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_7df1a3b0",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1984.82,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 6.77,
+              "details": "Found 10 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 18619.44,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5419.29,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for a ranking of candidates based on their career growth trajectory. I need to evaluate each candidate's CV, identify evidence of career growth (promotions, increased responsibilities, skill development), and then rank them based on the degree of growth. I must provide a justification for each candidate's ranking. The user asked for all candidates to be ranked, so I will provide an analysis of all candidates.\n:::\n\nBased on the analysis of career growth trajectories, **[Carmen Rodriguez](cv:cv_5d7a0181)** and **[Carlos Mendoza](cv:cv_e2e753cb)** show the most significant career growth, followed by **[Imani Jones](cv:cv_7df1a3b0)**. **[Aisha Nkrumah](cv:cv_f071fab2)** demonstrates the least career growth among the candidates.\n\n### Analysis\n\nThe ranking is based on the progression of roles, increased responsibilities, and the scope of experience demonstrated in each CV. **[Carmen Rodriguez](cv:cv_5d7a0181)** shows the most significant upward trajectory, starting as an Intern and progressing to Chief Creative Officer. **[Carlos Mendoza](cv:cv_e2e753cb)** also demonstrates career growth, moving through multiple positions in the lighting field. **[Imani Jones](cv:cv_7df1a3b0)** has progressed from Junior Concept Artist to Senior Concept Artist. **[Aisha Nkrumah](cv:cv_f071fab2)**, with fewer years of experience, shows the least career growth, having progressed from intern to Junior 2D Artist.\n\n| Candidate | Promotions & Role Changes | Increased Responsibilities | Match |\n|-----------|-----------------------------|---------------------------|-------|\n| **[Carmen Rodriguez](cv:cv_5d7a0181)** | Intern → 3D Artist → Art Dept Manager → Creative Director → VP → CCO | Managed teams, oversaw projects, strategic leadership | ⭐⭐⭐⭐⭐ |\n| **[Carlos Mendoza](cv:cv_e2e753cb)** | Multiple roles in lighting | Designed lighting, collaborated with teams, streamlined asset reuse | ⭐⭐⭐⭐ |\n| **[Imani Jones](cv:cv_7df1a3b0)** | Junior Concept Artist → Senior Concept Artist | Visual development, mentoring junior artists | ⭐⭐⭐ |\n| **[Aisha Nkrumah](cv:cv_f071fab2)** | 2D Artist Intern → Junior 2D Artist | Asset creation, collaboration, workflow improvements | ⭐⭐ |\n\n:::conclusion\nI recommend prioritizing **[Carmen Rodriguez](cv:cv_5d7a0181)** and **[Carlos Mendoza](cv:cv_e2e753cb)**, followed by **[Imani Jones](cv:cv_7df1a3b0)**, based on their demonstrated career growth. **[Aisha Nkrumah](cv:cv_f071fab2)** shows the least career growth among the candidates.\n:::",
+            "thinking": "The user is asking for a ranking of candidates based on their career growth trajectory. I need to evaluate each candidate's CV, identify evidence of career growth (promotions, increased responsibilities, skill development), and then rank them based on the degree of growth. I must provide a justification for each candidate's ranking. The user asked for all candidates to be ranked, so I will provide an analysis of all candidates.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "I recommend prioritizing **[Carmen Rodriguez](cv:cv_5d7a0181)** and **[Carlos Mendoza](cv:cv_e2e753cb)**, followed by **[Imani Jones](cv:cv_7df1a3b0)**, based on their demonstrated career growth. **[Aisha Nkrumah](cv:cv_f071fab2)** shows the least career growth among the candidates.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Carlos Mendoza  Lighting",
+              "cv_id": "cv_e2e753cb",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "⚠️ Issues Found",
+                  "details": "High mobility or gaps",
+                  "status_icon": "⚠️",
+                  "status_text": "Issues Found"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "⚠️ High",
+                  "details": "Score: 75%, Avg tenure: 1.0 yrs",
+                  "status_icon": "⚠️",
+                  "status_text": "High"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "⚠️ Unstable",
+                  "details": "4 positions over 4 years",
+                  "status_icon": "⚠️",
+                  "status_text": "Unstable"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Mid",
+                  "details": "N/A @ N/A",
+                  "status_icon": "",
+                  "status_text": "Mid"
+                }
+              ],
+              "has_issues": true,
+              "overall_risk": "high",
+              "analysis_text": "** Carlos Mendoza  Lighting** exhibits a **higher risk profile**. The job hopping score of 75% and average tenure of only 1.0 years indicate frequent job changes. With 4 positions in 4 years, retention may be a significant concern.  Recommend thorough discussion of career motivations during interview.",
+              "metrics": {
+                "job_hopping_score": 0.75,
+                "avg_tenure_years": 1.0,
+                "total_experience_years": 4.0,
+                "employment_gaps_count": 0,
+                "position_count": 4
+              }
+            },
+            "structure_type": "single_candidate",
+            "single_candidate_data": {
+              "candidate_name": " Carlos Mendoza  Lighting",
+              "cv_id": "cv_e2e753cb",
+              "summary": "",
+              "highlights": [],
+              "career": [],
+              "skills": [],
+              "credentials": [],
+              "risk_table": {
+                "candidate_name": " Carlos Mendoza  Lighting",
+                "cv_id": "cv_e2e753cb",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "⚠️ Issues Found",
+                    "details": "High mobility or gaps",
+                    "status_icon": "⚠️",
+                    "status_text": "Issues Found"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "⚠️ High",
+                    "details": "Score: 75%, Avg tenure: 1.0 yrs",
+                    "status_icon": "⚠️",
+                    "status_text": "High"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "⚠️ Unstable",
+                    "details": "4 positions over 4 years",
+                    "status_icon": "⚠️",
+                    "status_text": "Unstable"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Mid",
+                    "details": "N/A @ N/A",
+                    "status_icon": "",
+                    "status_text": "Mid"
+                  }
+                ],
+                "has_issues": true,
+                "overall_risk": "high",
+                "analysis_text": "** Carlos Mendoza  Lighting** exhibits a **higher risk profile**. The job hopping score of 75% and average tenure of only 1.0 years indicate frequent job changes. With 4 positions in 4 years, retention may be a significant concern.  Recommend thorough discussion of career motivations during interview.",
+                "metrics": {
+                  "job_hopping_score": 0.75,
+                  "avg_tenure_years": 1.0,
+                  "total_experience_years": 4.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 4
+                }
+              },
+              "conclusion": "I recommend prioritizing **[Carmen Rodriguez](cv:cv_5d7a0181)** and **[Carlos Mendoza](cv:cv_e2e753cb)**, followed by **[Imani Jones](cv:cv_7df1a3b0)**, based on their demonstrated career growth. **[Aisha Nkrumah](cv:cv_f071fab2)** shows the least career growth among the candidates."
+            },
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T04:32:32.853756"
+        }
+      ],
+      "created_at": "2026-01-06T04:24:23.675906",
+      "updated_at": "2026-01-06T04:32:32.853756"
     }
   ]
 }

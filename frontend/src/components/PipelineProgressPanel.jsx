@@ -111,7 +111,7 @@ const STEP_CONFIG = {
   }
 };
 
-const PipelineProgressPanel = ({ isExpanded, onToggleExpand, autoExpand, onToggleAutoExpand, showPreview, onTogglePreview }) => {
+const PipelineProgressPanel = ({ isExpanded, onToggleExpand, autoExpand, onToggleAutoExpand, showPreview, onTogglePreview, enabledSteps }) => {
   const { language } = useLanguage();
   const { activePipeline, isActiveStreaming, activeSessionId } = usePipeline();
   const [toast, setToast] = useState(null);
@@ -166,7 +166,9 @@ const PipelineProgressPanel = ({ isExpanded, onToggleExpand, autoExpand, onToggl
     return progress[stepName].status || 'pending';
   };
 
-  const steps = Object.keys(STEP_CONFIG);
+  // Filter steps based on enabledSteps prop (if provided)
+  const allSteps = Object.keys(STEP_CONFIG);
+  const steps = enabledSteps ? allSteps.filter(s => enabledSteps.includes(s)) : allSteps;
   const completedCount = steps.filter(s => getStepStatus(s) === 'completed').length;
   const currentStep = steps.find(s => getStepStatus(s) === 'running');
 
