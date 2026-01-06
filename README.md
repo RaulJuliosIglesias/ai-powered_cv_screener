@@ -374,7 +374,7 @@ npm test
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+**All Rights Reserved** - This source code is provided for viewing purposes only as part of a professional portfolio demonstration. See [LICENSE](LICENSE) for full terms.
 
 ---
 

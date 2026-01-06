@@ -712,17 +712,17 @@ async def get_suggested_questions(
         if num_cvs == 1:
             name = cv_names[0]
             suggestions = [
-                f"Dame el perfil completo de {name}",
-                f"¿Qué skills tiene {name}?",
-                f"¿Hay red flags para {name}?",
-                f"¿{name} es suitable para un rol senior?"
+                f"Give me the full profile of {name}",
+                f"What skills does {name} have?",
+                f"Are there red flags for {name}?",
+                f"Is {name} suitable for a senior role?"
             ]
         else:
             generic = [
-                f"Ranking de los {num_cvs} candidatos por experiencia",
-                "¿Quién tiene más experiencia técnica?",
-                "Comparar los dos mejores candidatos",
-                "Resumen del talent pool",
+                f"Rank all {num_cvs} candidates by experience",
+                "Who has the strongest technical skills?",
+                "Compare the two best candidates",
+                "Give me an overview of the talent pool",
             ]
             random.shuffle(generic)
             suggestions = generic[:4]

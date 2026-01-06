@@ -6,31 +6,31 @@ from .base import Suggestion, SuggestionCategory
 SUMMARY_SUGGESTIONS = [
     # Drill down - Priority 1
     Suggestion(
-        text="Ver candidatos con {skill}",
+        text="Show candidates with {skill}",
         category=SuggestionCategory.SUMMARY,
         requires_skill=True,
         priority=1
     ),
     Suggestion(
-        text="Listar solo candidatos senior",
+        text="List only senior candidates",
         category=SuggestionCategory.SUMMARY,
         priority=1
     ),
     Suggestion(
-        text="¿Quiénes tienen más de 5 años de experiencia?",
+        text="Who has more than 5 years of experience?",
         category=SuggestionCategory.SUMMARY,
         priority=1
     ),
     
     # Ranking - Priority 1
     Suggestion(
-        text="Ranking de los mejores candidatos",
+        text="Rank the best candidates",
         category=SuggestionCategory.SUMMARY,
         min_cvs=2,
         priority=1
     ),
     Suggestion(
-        text="Top 3 para rol de {role}",
+        text="Top 3 for {role} role",
         category=SuggestionCategory.SUMMARY,
         requires_role=True,
         min_cvs=3,
@@ -39,7 +39,7 @@ SUMMARY_SUGGESTIONS = [
     
     # Team - Priority 2
     Suggestion(
-        text="¿Puedo armar un equipo completo?",
+        text="Can I build a complete team?",
         category=SuggestionCategory.SUMMARY,
         min_cvs=3,
         priority=2
@@ -47,31 +47,31 @@ SUMMARY_SUGGESTIONS = [
     
     # Individual - Priority 2
     Suggestion(
-        text="Perfil del candidato más experimentado",
+        text="Profile of the most experienced candidate",
         category=SuggestionCategory.SUMMARY,
         priority=2
     ),
     Suggestion(
-        text="¿Quién tiene el perfil más único?",
+        text="Who has the most unique profile?",
         category=SuggestionCategory.SUMMARY,
         priority=2
     ),
     
     # Skills analysis - Priority 2
     Suggestion(
-        text="¿Qué skills están más representados?",
+        text="What skills are most represented?",
         category=SuggestionCategory.SUMMARY,
         priority=2
     ),
     Suggestion(
-        text="¿Hay gaps de skills en el pool?",
+        text="Are there skill gaps in the pool?",
         category=SuggestionCategory.SUMMARY,
         priority=2
     ),
     
     # Comparison - Priority 3
     Suggestion(
-        text="Comparar los dos mejores perfiles",
+        text="Compare the two best profiles",
         category=SuggestionCategory.SUMMARY,
         min_cvs=2,
         priority=3

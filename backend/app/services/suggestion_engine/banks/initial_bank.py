@@ -6,19 +6,19 @@ from .base import Suggestion, SuggestionCategory
 INITIAL_SUGGESTIONS = [
     # Overview - Priority 1
     Suggestion(
-        text="Resumen general del talent pool",
+        text="Give me an overview of the talent pool",
         category=SuggestionCategory.INITIAL,
         min_cvs=2,
         priority=1
     ),
     Suggestion(
-        text="¿Qué tecnologías dominan los candidatos?",
+        text="What technologies do the candidates have?",
         category=SuggestionCategory.INITIAL,
         min_cvs=2,
         priority=1
     ),
     Suggestion(
-        text="¿Cuántos candidatos tienen experiencia senior?",
+        text="How many candidates have senior experience?",
         category=SuggestionCategory.INITIAL,
         min_cvs=2,
         priority=1
@@ -26,7 +26,7 @@ INITIAL_SUGGESTIONS = [
     
     # Single candidate - Priority 1
     Suggestion(
-        text="Dame el perfil completo de {candidate_name}",
+        text="Give me the full profile of {candidate_name}",
         category=SuggestionCategory.INITIAL,
         requires_candidate=True,
         priority=1
@@ -34,14 +34,14 @@ INITIAL_SUGGESTIONS = [
     
     # Ranking - Priority 1
     Suggestion(
-        text="Ranking de candidatos por experiencia",
+        text="Rank candidates by experience",
         category=SuggestionCategory.INITIAL,
         min_cvs=3,
         requires_multiple_cvs=True,
         priority=1
     ),
     Suggestion(
-        text="¿Quién tiene más experiencia total?",
+        text="Who has the most total experience?",
         category=SuggestionCategory.INITIAL,
         min_cvs=2,
         priority=1
@@ -49,25 +49,25 @@ INITIAL_SUGGESTIONS = [
     
     # Search - Priority 2
     Suggestion(
-        text="¿Quién tiene experiencia con Python?",
+        text="Who has experience with Python?",
         category=SuggestionCategory.INITIAL,
         min_cvs=1,
         priority=2
     ),
     Suggestion(
-        text="¿Hay candidatos con experiencia en startups?",
+        text="Are there candidates with startup experience?",
         category=SuggestionCategory.INITIAL,
         min_cvs=2,
         priority=2
     ),
     Suggestion(
-        text="Buscar candidatos con experiencia en liderazgo",
+        text="Find candidates with leadership experience",
         category=SuggestionCategory.INITIAL,
         min_cvs=2,
         priority=2
     ),
     Suggestion(
-        text="¿Quién tiene experiencia con React o frontend?",
+        text="Who has experience with React or frontend?",
         category=SuggestionCategory.INITIAL,
         min_cvs=2,
         priority=2
@@ -75,7 +75,7 @@ INITIAL_SUGGESTIONS = [
     
     # Comparison - Priority 2
     Suggestion(
-        text="Comparar los dos candidatos más experimentados",
+        text="Compare the two most experienced candidates",
         category=SuggestionCategory.INITIAL,
         min_cvs=2,
         requires_multiple_cvs=True,
@@ -84,7 +84,7 @@ INITIAL_SUGGESTIONS = [
     
     # Risk - Priority 3
     Suggestion(
-        text="¿Hay candidatos con red flags de estabilidad?",
+        text="Are there candidates with stability red flags?",
         category=SuggestionCategory.INITIAL,
         min_cvs=2,
         priority=3
@@ -92,13 +92,13 @@ INITIAL_SUGGESTIONS = [
     
     # Skills - Priority 2
     Suggestion(
-        text="¿Cuáles son los skills más comunes?",
+        text="What are the most common skills?",
         category=SuggestionCategory.INITIAL,
         min_cvs=2,
         priority=2
     ),
     Suggestion(
-        text="¿Quién tiene el perfil más diverso?",
+        text="Who has the most diverse profile?",
         category=SuggestionCategory.INITIAL,
         min_cvs=2,
         priority=3
@@ -106,7 +106,7 @@ INITIAL_SUGGESTIONS = [
     
     # Education - Priority 3
     Suggestion(
-        text="¿Qué nivel educativo tienen los candidatos?",
+        text="What education level do the candidates have?",
         category=SuggestionCategory.INITIAL,
         min_cvs=2,
         priority=3

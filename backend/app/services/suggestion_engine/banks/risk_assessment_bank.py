@@ -6,26 +6,26 @@ from .base import Suggestion, SuggestionCategory
 RISK_ASSESSMENT_SUGGESTIONS = [
     # Mitigation - Priority 1
     Suggestion(
-        text="¿Cómo mitigar los riesgos identificados?",
+        text="How can we mitigate the identified risks?",
         category=SuggestionCategory.RISK_ASSESSMENT,
         priority=1
     ),
     Suggestion(
-        text="¿Son críticos estos red flags para el rol?",
+        text="Are these red flags critical for the role?",
         category=SuggestionCategory.RISK_ASSESSMENT,
         priority=1
     ),
     
     # Comparison - Priority 1
     Suggestion(
-        text="Comparar riesgos de {candidate_name} vs otros candidatos",
+        text="Compare {candidate_name}'s risks vs other candidates",
         category=SuggestionCategory.RISK_ASSESSMENT,
         requires_candidate=True,
         min_cvs=2,
         priority=1
     ),
     Suggestion(
-        text="¿Quién tiene menos red flags?",
+        text="Who has fewer red flags?",
         category=SuggestionCategory.RISK_ASSESSMENT,
         min_cvs=2,
         priority=1
@@ -33,30 +33,30 @@ RISK_ASSESSMENT_SUGGESTIONS = [
     
     # Deep dive - Priority 2
     Suggestion(
-        text="Investigar el gap de empleo en detalle",
+        text="Investigate the employment gap in detail",
         category=SuggestionCategory.RISK_ASSESSMENT,
         priority=2
     ),
     Suggestion(
-        text="¿El job hopping tiene explicación en el CV?",
+        text="Is there an explanation for the job hopping in the CV?",
         category=SuggestionCategory.RISK_ASSESSMENT,
         priority=2
     ),
     Suggestion(
-        text="Verificar las credenciales declaradas",
+        text="Verify the declared credentials",
         category=SuggestionCategory.RISK_ASSESSMENT,
         priority=2
     ),
     
     # Alternatives - Priority 1
     Suggestion(
-        text="Buscar candidatos sin estos red flags",
+        text="Find candidates without these red flags",
         category=SuggestionCategory.RISK_ASSESSMENT,
         min_cvs=2,
         priority=1
     ),
     Suggestion(
-        text="¿Otros candidatos con perfil similar pero más estable?",
+        text="Other candidates with similar profile but more stable?",
         category=SuggestionCategory.RISK_ASSESSMENT,
         min_cvs=2,
         priority=1
@@ -64,13 +64,13 @@ RISK_ASSESSMENT_SUGGESTIONS = [
     
     # Positive aspects - Priority 2
     Suggestion(
-        text="¿Qué aspectos positivos tiene {candidate_name}?",
+        text="What positive aspects does {candidate_name} have?",
         category=SuggestionCategory.RISK_ASSESSMENT,
         requires_candidate=True,
         priority=2
     ),
     Suggestion(
-        text="Ver perfil completo de {candidate_name}",
+        text="See full profile of {candidate_name}",
         category=SuggestionCategory.RISK_ASSESSMENT,
         requires_candidate=True,
         priority=2
@@ -78,7 +78,7 @@ RISK_ASSESSMENT_SUGGESTIONS = [
     
     # Context - Priority 3
     Suggestion(
-        text="¿Qué tan común es este patrón en la industria?",
+        text="How common is this pattern in the industry?",
         category=SuggestionCategory.RISK_ASSESSMENT,
         priority=3
     ),

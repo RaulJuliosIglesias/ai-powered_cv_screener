@@ -60719,10 +60719,272 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-06T04:23:05.469446"
+        },
+        {
+          "id": "525c2261-c1d8-4d9c-9ef0-05c5789e2b83",
+          "role": "user",
+          "content": "Risk analysis for the #1 candidate",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T04:47:13.012057"
+        },
+        {
+          "id": "7cbe100d-91cb-4e7f-8136-ec04d1557c34",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a risk analysis of Isabel Mendoza (cv_adfd3a26) for a leadership role, focusing on potential red flags, job hopping, employment gaps, stability, and experience. The pre-calculated data indicates no significant red flags, low job hopping, no employment gaps, stable employment history, and senior-level experience. Therefore, the risk analysis should reflect these positive findings.\n:::\n\n** Isabel Mendoza  3D** presents a **low-risk profile**. With 12 years of experience and an average tenure of 6.0 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.\n\n\n### ⚠️ Risk Assessment\n\n\n| Factor | Status | Details |\n\n|:-------|:------:|:--------|\n\n| **🚩 Red Flags** | ✅ None Detected | Clean profile |\n\n| **🔄 Job Hopping** | ✅ Low | Score: 8%, Avg tenure: 6.0 yrs |\n\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n\n| **📊 Stability** | ✅ Stable | 2 positions over 12 years |\n\n| **🎯 Experience** | Senior | creation for feature film VFX sequences @ primarily |\n\n\n:::conclusion\n**Assessment:** The risk assessment indicates that there are no significant red flags associated with hiring **[Isabel Mendoza 3D](cv:cv_adfd3a26)** for a leadership role. Her job hopping score is low at 8%, with an average tenure of 6.0 years, indicating reasonable job stability. There are no employment gaps, and her experience is at a senior level.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_62e084d8",
+              "filename": "02f9626b__Marco_Rossi__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_0a381ffb",
+              "filename": "74a0c87c__Mei_Lin_Chen__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_f0b938a8",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_c0167ca9",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_16814325",
+              "filename": "9e50441e__Matteo_Rossi__Creature_Designer.pdf"
+            },
+            {
+              "cv_id": "cv_6219ae68",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_9d28f6cd",
+              "filename": "63ce3a7c__Emma_Whitmore__Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_9d48b158",
+              "filename": "8cf248e0__Mateo_Rodriguez__Rigger.pdf"
+            },
+            {
+              "cv_id": "cv_86fd2ce4",
+              "filename": "0d1b1a1b__Aisha_Patel__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_cae9463b",
+              "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_92a8beac",
+              "filename": "55c0e841__Ricardo_De_Vries__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_93bb8cbd",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_e4fe6808",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_12e15d5d",
+              "filename": "8742ca7a__Sofia_Mendoza__Environment_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_4030244e",
+              "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_4ab2fbaa",
+              "filename": "7ef319f7__Adrian_Morales__Junior_Animator.pdf"
+            },
+            {
+              "cv_id": "cv_4b060aae",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_ded37996",
+              "filename": "53f55f6a__Mei_Rossi__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_adfd3a26",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1364.35,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 35.51,
+              "details": "Found 23 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 16343.05,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 3773.15,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "** Isabel Mendoza  3D** presents a **low-risk profile**. With 12 years of experience and an average tenure of 6.0 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+            "raw_content": ":::thinking\nThe user is asking for a risk analysis of Isabel Mendoza (cv_adfd3a26) for a leadership role, focusing on potential red flags, job hopping, employment gaps, stability, and experience. The pre-calculated data indicates no significant red flags, low job hopping, no employment gaps, stable employment history, and senior-level experience. Therefore, the risk analysis should reflect these positive findings.\n:::\n\n### 🚩 Risk Analysis for **[Isabel Mendoza 3D](cv:cv_adfd3a26)**\n\n✅ **No significant red flags detected for Isabel Mendoza 3D.**\n- Job stability is adequate based on the metrics\n- No major concerns identified in the pre-calculated analysis\n\n### ⚠️ Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| **🚩 Red Flags** | ✅ None Detected | Clean profile |\n| **🔄 Job Hopping** | ✅ Low | Score: 8%, Avg tenure: 6.0 yrs |\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n| **📊 Stability** | ✅ Stable | 2 positions over 12 years |\n| **🎯 Experience** | Senior | creation for feature film VFX sequences @ primarily |\n\n:::conclusion\n**Assessment:** The risk assessment indicates that there are no significant red flags associated with hiring **[Isabel Mendoza 3D](cv:cv_adfd3a26)** for a leadership role. Her job hopping score is low at 8%, with an average tenure of 6.0 years, indicating reasonable job stability. There are no employment gaps, and her experience is at a senior level.\n:::",
+            "thinking": "The user is asking for a risk analysis of Isabel Mendoza (cv_adfd3a26) for a leadership role, focusing on potential red flags, job hopping, employment gaps, stability, and experience. The pre-calculated data indicates no significant red flags, low job hopping, no employment gaps, stable employment history, and senior-level experience. Therefore, the risk analysis should reflect these positive findings.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "**Assessment:** The risk assessment indicates that there are no significant red flags associated with hiring **[Isabel Mendoza 3D](cv:cv_adfd3a26)** for a leadership role. Her job hopping score is low at 8%, with an average tenure of 6.0 years, indicating reasonable job stability. There are no employment gaps, and her experience is at a senior level.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Isabel Mendoza  3D",
+              "cv_id": "cv_62e084d8",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "✅ None Detected",
+                  "details": "Clean profile",
+                  "status_icon": "✅",
+                  "status_text": "None Detected"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "✅ Low",
+                  "details": "Score: 8%, Avg tenure: 6.0 yrs",
+                  "status_icon": "✅",
+                  "status_text": "Low"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "✅ Stable",
+                  "details": "2 positions over 12 years",
+                  "status_icon": "✅",
+                  "status_text": "Stable"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Senior",
+                  "details": "creation for feature film VFX sequences @ primarily",
+                  "status_icon": "",
+                  "status_text": "Senior"
+                }
+              ],
+              "has_issues": false,
+              "overall_risk": "low",
+              "analysis_text": "** Isabel Mendoza  3D** presents a **low-risk profile**. With 12 years of experience and an average tenure of 6.0 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+              "metrics": {
+                "job_hopping_score": 0.08333333333333333,
+                "avg_tenure_years": 6.0,
+                "total_experience_years": 12.0,
+                "employment_gaps_count": 0,
+                "position_count": 2
+              }
+            },
+            "structure_type": "risk_assessment",
+            "single_candidate_data": null,
+            "risk_assessment_data": {
+              "candidate_name": " Isabel Mendoza  3D",
+              "cv_id": "cv_62e084d8",
+              "risk_analysis": "** Isabel Mendoza  3D** presents a **low-risk profile**. With 12 years of experience and an average tenure of 6.0 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+              "risk_table": {
+                "candidate_name": " Isabel Mendoza  3D",
+                "cv_id": "cv_62e084d8",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "✅ None Detected",
+                    "details": "Clean profile",
+                    "status_icon": "✅",
+                    "status_text": "None Detected"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "✅ Low",
+                    "details": "Score: 8%, Avg tenure: 6.0 yrs",
+                    "status_icon": "✅",
+                    "status_text": "Low"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "✅ Stable",
+                    "details": "2 positions over 12 years",
+                    "status_icon": "✅",
+                    "status_text": "Stable"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Senior",
+                    "details": "creation for feature film VFX sequences @ primarily",
+                    "status_icon": "",
+                    "status_text": "Senior"
+                  }
+                ],
+                "has_issues": false,
+                "overall_risk": "low",
+                "analysis_text": "** Isabel Mendoza  3D** presents a **low-risk profile**. With 12 years of experience and an average tenure of 6.0 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+                "metrics": {
+                  "job_hopping_score": 0.08333333333333333,
+                  "avg_tenure_years": 6.0,
+                  "total_experience_years": 12.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 2
+                }
+              },
+              "assessment": "**Assessment:** The risk assessment indicates that there are no significant red flags associated with hiring **[Isabel Mendoza 3D](cv:cv_adfd3a26)** for a leadership role. Her job hopping score is low at 8%, with an average tenure of 6.0 years, indicating reasonable job stability. There are no employment gaps, and her experience is at a senior level."
+            },
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T04:47:37.583384"
         }
       ],
       "created_at": "2026-01-06T04:01:44.028587",
-      "updated_at": "2026-01-06T04:23:05.469446"
+      "updated_at": "2026-01-06T04:47:37.583384"
     },
     {
       "id": "c33d9753-ed16-40a0-adf4-bb1f25d702a1",
@@ -64173,128 +64435,516 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-06T04:32:32.853756"
+        },
+        {
+          "id": "207d7171-e1d8-4208-a713-16e148ac0783",
+          "role": "user",
+          "content": "Are there red flags for Aisha Nkrumah?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T04:47:06.799075"
+        },
+        {
+          "id": "322a8feb-a8fa-4433-b5f9-2973520df543",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a red flag analysis of Aisha Nkrumah Junior 2D (cv_f071fab2)'s CV. I need to analyze the CV for potential red flags such as employment gaps, job hopping, inconsistencies, negative feedback, or lack of skills. The pre-calculated risk assessment data indicates a clean profile with no significant red flags detected. The job hopping score is low (0%), and there are no employment gaps. The candidate has held one position over 0 years, indicating stability. The experience level is entry-level.\n:::\n\n** Aisha Nkrumah  Junior 2D** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.\n\n\n### ⚠️ Risk Assessment\n\n\n| Factor | Status | Details |\n\n|:-------|:------:|:--------|\n\n| **🚩 Red Flags** | ⚠️ Issues Found | Moderate concerns |\n\n| **🔄 Job Hopping** | ✅ Low | Score: 0%, Avg tenure: 0.0 yrs |\n\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n\n| **📊 Stability** | ✅ Stable | 1 positions over 0 years |\n\n| **🎯 Experience** | Entry | in various stages of the animation pipeline @ from |\n\n\n:::conclusion\n**Assessment:** No significant red flags were detected in **[Aisha Nkrumah Junior 2D](cv:cv_f071fab2)**'s CV. The candidate shows low job hopping (0% score, 0.0 years average tenure), no employment gaps, and stable employment history with one position held. The candidate is at an entry-level experience.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_f071fab2",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_7df1a3b0",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_5d7a0181",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_e2e753cb",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 2314.1,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 6.29,
+              "details": "Found 8 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 11568.88,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 3094.43,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "** Aisha Nkrumah  Junior 2D** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+            "raw_content": ":::thinking\nThe user is asking for a red flag analysis of **[Aisha Nkrumah Junior 2D](cv:cv_f071fab2)**'s CV. I need to analyze the CV for potential red flags such as employment gaps, job hopping, inconsistencies, negative feedback, or lack of skills. The pre-calculated risk assessment data indicates a clean profile with no significant red flags detected. The job hopping score is low (0%), and there are no employment gaps. The candidate has held one position over 0 years, indicating stability. The experience level is entry-level.\n:::\n\n✅ **No significant red flags detected for [Aisha Nkrumah Junior 2D](cv:cv_f071fab2).**\n- Job stability is adequate based on the metrics\n- No major concerns identified in the pre-calculated analysis\n\n### ⚠️ Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n| **🚩 Red Flags** | ✅ None Detected | Clean profile |\n| **🔄 Job Hopping** | ✅ Low | Score: 0%, Avg tenure: 0.0 yrs |\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n| **📊 Stability** | ✅ Stable | 1 positions over 0 years |\n| **🎯 Experience** | Entry | in various stages of the animation pipeline @ from |\n\n:::conclusion\n**Assessment:** No significant red flags were detected in **[Aisha Nkrumah Junior 2D](cv:cv_f071fab2)**'s CV. The candidate shows low job hopping (0% score, 0.0 years average tenure), no employment gaps, and stable employment history with one position held. The candidate is at an entry-level experience.\n:::",
+            "thinking": "The user is asking for a red flag analysis of Aisha Nkrumah Junior 2D (cv_f071fab2)'s CV. I need to analyze the CV for potential red flags such as employment gaps, job hopping, inconsistencies, negative feedback, or lack of skills. The pre-calculated risk assessment data indicates a clean profile with no significant red flags detected. The job hopping score is low (0%), and there are no employment gaps. The candidate has held one position over 0 years, indicating stability. The experience level is entry-level.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "**Assessment:** No significant red flags were detected in **[Aisha Nkrumah Junior 2D](cv:cv_f071fab2)**'s CV. The candidate shows low job hopping (0% score, 0.0 years average tenure), no employment gaps, and stable employment history with one position held. The candidate is at an entry-level experience.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Aisha Nkrumah  Junior 2D",
+              "cv_id": "cv_f071fab2",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "⚠️ Issues Found",
+                  "details": "Moderate concerns",
+                  "status_icon": "⚠️",
+                  "status_text": "Issues Found"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "✅ Low",
+                  "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                  "status_icon": "✅",
+                  "status_text": "Low"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "✅ Stable",
+                  "details": "1 positions over 0 years",
+                  "status_icon": "✅",
+                  "status_text": "Stable"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Entry",
+                  "details": "in various stages of the animation pipeline @ from",
+                  "status_icon": "",
+                  "status_text": "Entry"
+                }
+              ],
+              "has_issues": true,
+              "overall_risk": "moderate",
+              "analysis_text": "** Aisha Nkrumah  Junior 2D** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+              "metrics": {
+                "job_hopping_score": 0.0,
+                "avg_tenure_years": 0.0,
+                "total_experience_years": 0.0,
+                "employment_gaps_count": 0,
+                "position_count": 1
+              }
+            },
+            "structure_type": "risk_assessment",
+            "single_candidate_data": null,
+            "risk_assessment_data": {
+              "candidate_name": " Aisha Nkrumah  Junior 2D",
+              "cv_id": "cv_f071fab2",
+              "risk_analysis": "** Aisha Nkrumah  Junior 2D** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+              "risk_table": {
+                "candidate_name": " Aisha Nkrumah  Junior 2D",
+                "cv_id": "cv_f071fab2",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "⚠️ Issues Found",
+                    "details": "Moderate concerns",
+                    "status_icon": "⚠️",
+                    "status_text": "Issues Found"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "✅ Low",
+                    "details": "Score: 0%, Avg tenure: 0.0 yrs",
+                    "status_icon": "✅",
+                    "status_text": "Low"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "✅ Stable",
+                    "details": "1 positions over 0 years",
+                    "status_icon": "✅",
+                    "status_text": "Stable"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Entry",
+                    "details": "in various stages of the animation pipeline @ from",
+                    "status_icon": "",
+                    "status_text": "Entry"
+                  }
+                ],
+                "has_issues": true,
+                "overall_risk": "moderate",
+                "analysis_text": "** Aisha Nkrumah  Junior 2D** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests some mobility in their career. With 1 positions over 0 years, the pattern is within acceptable ranges but should be discussed.",
+                "metrics": {
+                  "job_hopping_score": 0.0,
+                  "avg_tenure_years": 0.0,
+                  "total_experience_years": 0.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 1
+                }
+              },
+              "assessment": "**Assessment:** No significant red flags were detected in **[Aisha Nkrumah Junior 2D](cv:cv_f071fab2)**'s CV. The candidate shows low job hopping (0% score, 0.0 years average tenure), no employment gaps, and stable employment history with one position held. The candidate is at an entry-level experience."
+            },
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T04:47:27.638344"
         }
       ],
       "created_at": "2026-01-06T04:24:23.675906",
-      "updated_at": "2026-01-06T04:32:32.853756"
+      "updated_at": "2026-01-06T04:47:27.638344"
     },
     {
-      "id": "c0146523-3aa6-418b-8569-a1c0251864b4",
-      "name": "New chat",
+      "id": "b86d34a6-7619-4607-96d5-b644ed58e0ae",
+      "name": "Media Production 4817",
       "description": "",
       "cvs": [
         {
-          "id": "cv_243fb61f",
-          "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf",
-          "chunk_count": 5,
-          "content_hash": "7e152a6737adb6072e1076864533574469521b899270ea7d65569dff310615a8",
-          "uploaded_at": "2026-01-06T04:35:35.400672"
-        },
-        {
-          "id": "cv_da725a5e",
-          "filename": "8742ca7a__Sofia_Mendoza__Environment_Artist.pdf",
-          "chunk_count": 4,
-          "content_hash": "f3d5b99f8d47cadfae597fd68f42a9d684c874fafbf952cabe5c661a220cf7da",
-          "uploaded_at": "2026-01-06T04:35:36.004488"
-        },
-        {
-          "id": "cv_8ef914d2",
-          "filename": "749745cf__Aisha_Johnson__Animator.pdf",
-          "chunk_count": 5,
-          "content_hash": "fc4df9844655dc53b8c437b423443383094ee61c744fad93112dd13114f86c2d",
-          "uploaded_at": "2026-01-06T04:35:36.503353"
-        },
-        {
-          "id": "cv_d66b94ab",
-          "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf",
-          "chunk_count": 3,
-          "content_hash": "fca8a83a0edadee1c4bbc2ca635a9c888e1d0e630e689ccbda81a8bfd5c77e5e",
-          "uploaded_at": "2026-01-06T04:35:37.041590"
-        },
-        {
-          "id": "cv_0cf5b472",
+          "id": "cv_8a8d11fd",
           "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf",
           "chunk_count": 4,
           "content_hash": "9ed63ccc7f2f7c0cc81da35ff3453dcec31c300ead2b4f946d4db5d6048ac157",
-          "uploaded_at": "2026-01-06T04:35:37.664673"
+          "uploaded_at": "2026-01-06T04:46:49.792278"
         },
         {
-          "id": "cv_981cc004",
+          "id": "cv_914b6fc0",
           "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf",
           "chunk_count": 3,
           "content_hash": "6858a468a4cdf946a86d01fd652ea2c146f8409afbe9337d0f43ebbeb0e4104f",
-          "uploaded_at": "2026-01-06T04:35:38.233954"
+          "uploaded_at": "2026-01-06T04:46:50.355482"
         },
         {
-          "id": "cv_05adf842",
+          "id": "cv_2c374416",
           "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf",
           "chunk_count": 7,
           "content_hash": "61979aaf1446d8b5d11d28b9b65cdd95e6e8100ee8667c9ad52d4104796d51ef",
-          "uploaded_at": "2026-01-06T04:35:38.754316"
+          "uploaded_at": "2026-01-06T04:46:50.803099"
         },
         {
-          "id": "cv_9abd91cf",
+          "id": "cv_2d0b5e53",
           "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf",
           "chunk_count": 3,
           "content_hash": "13213d6ec70b08b54b753f691859eb562813f17ed272f4754ad12a5a4b19e370",
-          "uploaded_at": "2026-01-06T04:35:39.231618"
+          "uploaded_at": "2026-01-06T04:46:51.258099"
         },
         {
-          "id": "cv_a22e01af",
+          "id": "cv_e45a66ed",
           "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf",
           "chunk_count": 3,
           "content_hash": "0e996b38a95c64aca7129e2554ee5a0e684da1c7f40a72e8c912ab14faad7f18",
-          "uploaded_at": "2026-01-06T04:35:39.743248"
+          "uploaded_at": "2026-01-06T04:46:51.753268"
         },
         {
-          "id": "cv_f8e8d272",
+          "id": "cv_b46199b0",
           "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf",
           "chunk_count": 11,
           "content_hash": "fb9a97f91218eb858e3c8647e40b5b25a35d25039dc923bfe0a4da640eb2a90f",
-          "uploaded_at": "2026-01-06T04:35:40.320458"
+          "uploaded_at": "2026-01-06T04:46:52.317533"
         },
         {
-          "id": "cv_0a78da01",
+          "id": "cv_82c4f380",
           "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf",
           "chunk_count": 6,
           "content_hash": "9ac96c226a0824b5a8df589c45c1a9886ffb2f05442986faa0a5e6491c6eba80",
-          "uploaded_at": "2026-01-06T04:35:40.876802"
+          "uploaded_at": "2026-01-06T04:46:52.886199"
         },
         {
-          "id": "cv_1d8d7394",
+          "id": "cv_beefc90e",
           "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf",
           "chunk_count": 6,
           "content_hash": "85d898ad89ecc8cb7267e5b49adba1f1cac5b408dd4c4fc2d71d14dc5bbd9786",
-          "uploaded_at": "2026-01-06T04:35:41.394751"
+          "uploaded_at": "2026-01-06T04:46:53.398166"
         },
         {
-          "id": "cv_4f73d8b5",
+          "id": "cv_1b021a74",
           "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf",
           "chunk_count": 4,
           "content_hash": "74f41b5728cefd055be7ae50f0cd92f821fc552c3f1623d099aafbc0f0110cf1",
-          "uploaded_at": "2026-01-06T04:35:41.945688"
+          "uploaded_at": "2026-01-06T04:46:53.953321"
         },
         {
-          "id": "cv_1964cb0a",
+          "id": "cv_e77cf1e4",
           "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf",
           "chunk_count": 7,
           "content_hash": "b0ac973a41aa837f6956db83be7efc36c49d2569068d401372609dee2fb1805b",
-          "uploaded_at": "2026-01-06T04:35:42.531297"
+          "uploaded_at": "2026-01-06T04:46:54.508565"
         }
       ],
       "messages": [
         {
-          "id": "875bdaf7-0649-4a3d-b084-239deeef5ab6",
+          "id": "b08feb14-abb6-407b-a025-2f417d57883f",
           "role": "user",
-          "content": "Who shows the most career growth?",
+          "content": "How many candidates have senior experience?",
           "sources": [],
           "pipeline_steps": [],
           "structured_output": null,
-          "timestamp": "2026-01-06T04:40:11.067639"
+          "timestamp": "2026-01-06T04:46:58.405455"
+        },
+        {
+          "id": "70b3fd67-a91c-4982-878c-0348292497c2",
+          "role": "assistant",
+          "content": ":::thinking\nThe user wants to know how many candidates have senior-level experience, defined by job titles (Senior, Lead, Principal, Director, VP) or 8+ years of experience. I need to scan the CVs for these keywords in job titles and calculate years of experience based on provided dates. I will then provide a count of the candidates who meet these criteria.\n:::\n\n\n:::conclusion\nFive candidates, **[Rajesh Patel](cv:cv_914b6fc0)**, **[Daan van Dijk](cv:cv_8a8d11fd)**, **[Carmen Rodriguez](cv:cv_e77cf1e4)**, **[Isabel Mendoza](cv:cv_b46199b0)**, and **[Imani Jones](cv:cv_82c4f380)**, meet the criteria for senior-level experience based on their job titles and/or years of experience.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_2d0b5e53",
+              "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_914b6fc0",
+              "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf"
+            },
+            {
+              "cv_id": "cv_2c374416",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_8a8d11fd",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_1b021a74",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_b46199b0",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_e77cf1e4",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_beefc90e",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_82c4f380",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_e45a66ed",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 2398.65,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 14.66,
+              "details": "Found 22 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 27233.46,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4570.4,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user wants to know how many candidates have senior-level experience, defined by job titles (Senior, Lead, Principal, Director, VP) or 8+ years of experience. I need to scan the CVs for these keywords in job titles and calculate years of experience based on provided dates. I will then provide a count of the candidates who meet these criteria.\n:::\n\nBased on the provided CVs, 5 candidates appear to have senior-level experience either through their job titles or years of experience. This conclusion is based on a review of job titles and durations specified in the experience sections of the CVs.\n\n### Analysis\nThe following candidates were identified as potentially having senior-level experience based on their job titles and/or years of experience. The table summarizes the findings and provides a match score based on the criteria.\n\n| Candidate | Senior Title | Years of Experience | Match |\n|-----------|-------------|-------------|-------|\n| **[Rajesh Patel](cv:cv_914b6fc0)** | VFX Supervisor, Compositor | 15+ | ⭐⭐⭐⭐⭐ |\n| **[Daan van Dijk](cv:cv_8a8d11fd)** | Lead Hard Surface Modeler | 11 | ⭐⭐⭐⭐⭐ |\n| **[Carmen Rodriguez](cv:cv_e77cf1e4)** | Chief Creative Officer, VP of Visual Innovation, Creative Director, Art Department Manager | 16 | ⭐⭐⭐⭐⭐ |\n| **[Isabel Mendoza](cv:cv_b46199b0)** | Chief Creative Officer, Vice President of Creative Development | 23 | ⭐⭐⭐⭐⭐ |\n| **[Imani Jones](cv:cv_82c4f380)** | Senior Concept Artist | 6 | ⭐⭐⭐⭐ |\n\n**Explanation of selections:**\n\n*   **[Rajesh Patel](cv:cv_914b6fc0)**: Has held positions such as VFX Supervisor and Compositor with 15+ years of experience, clearly indicating a senior level.\n*   **[Daan van Dijk](cv:cv_8a8d11fd)**: Currently a \"Lead Hard Surface Modeler\" with 11 years of experience, fitting the senior-level criteria.\n*   **[Carmen Rodriguez](cv:cv_e77cf1e4)**: Has held multiple senior roles such as \"Chief Creative Officer\" and \"VP of Visual Innovation\" with 16 years of experience.\n*   **[Isabel Mendoza](cv:cv_b46199b0)**: Held positions such as \"Chief Creative Officer\" and \"Vice President of Creative Development\" and has 23 years of experience.\n*   **[Imani Jones](cv:cv_82c4f380)**: Currently a \"Senior Concept Artist\" with 6 years of experience. While the experience is less than 8 years, the \"Senior\" title qualifies.\n\n:::conclusion\nFive candidates, **[Rajesh Patel](cv:cv_914b6fc0)**, **[Daan van Dijk](cv:cv_8a8d11fd)**, **[Carmen Rodriguez](cv:cv_e77cf1e4)**, **[Isabel Mendoza](cv:cv_b46199b0)**, and **[Imani Jones](cv:cv_82c4f380)**, meet the criteria for senior-level experience based on their job titles and/or years of experience.\n:::",
+            "thinking": "The user wants to know how many candidates have senior-level experience, defined by job titles (Senior, Lead, Principal, Director, VP) or 8+ years of experience. I need to scan the CVs for these keywords in job titles and calculate years of experience based on provided dates. I will then provide a count of the candidates who meet these criteria.",
+            "analysis": "The following candidates were identified as potentially having senior-level experience based on their job titles and/or years of experience. The table summarizes the findings and provides a match score based on the criteria.",
+            "table_data": null,
+            "conclusion": "Five candidates, **[Rajesh Patel](cv:cv_914b6fc0)**, **[Daan van Dijk](cv:cv_8a8d11fd)**, **[Carmen Rodriguez](cv:cv_e77cf1e4)**, **[Isabel Mendoza](cv:cv_b46199b0)**, and **[Imani Jones](cv:cv_82c4f380)**, meet the criteria for senior-level experience based on their job titles and/or years of experience.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "search",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": {
+              "results": [
+                {
+                  "candidate_name": " Carmen Rodriguez  3D",
+                  "cv_id": "cv_e77cf1e4",
+                  "match_score": 78.9,
+                  "matching_skills": [
+                    "Showed early talent in detail‑oriented workflows."
+                  ],
+                  "experience_years": 16.0,
+                  "current_role": "",
+                  "relevance_reason": "Skills: Showed early talent in detail‑oriented workflows. | 16+ years exp"
+                },
+                {
+                  "candidate_name": " Daan van Dijk  Hard Surface",
+                  "cv_id": "cv_8a8d11fd",
+                  "match_score": 78.7,
+                  "matching_skills": [],
+                  "experience_years": 11.0,
+                  "current_role": "",
+                  "relevance_reason": "11+ years exp"
+                },
+                {
+                  "candidate_name": " Aisha Nkrumah  Junior 2D",
+                  "cv_id": "cv_1b021a74",
+                  "match_score": 78.7,
+                  "matching_skills": [
+                    "elements for an animated children's show."
+                  ],
+                  "experience_years": 0.0,
+                  "current_role": "in various stages of the animation pipeline",
+                  "relevance_reason": "Skills: elements for an animated children's show."
+                },
+                {
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_82c4f380",
+                  "match_score": 77.0,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Liam Chen  3D Artist",
+                  "cv_id": "cv_2c374416",
+                  "match_score": 76.7,
+                  "matching_skills": [],
+                  "experience_years": 6.0,
+                  "current_role": "",
+                  "relevance_reason": "6+ years exp"
+                },
+                {
+                  "candidate_name": " Carlos Mendoza  Lighting",
+                  "cv_id": "cv_beefc90e",
+                  "match_score": 76.6,
+                  "matching_skills": [],
+                  "experience_years": 4.0,
+                  "current_role": "",
+                  "relevance_reason": "4+ years exp"
+                },
+                {
+                  "candidate_name": " Isabel Mendoza  3D",
+                  "cv_id": "cv_b46199b0",
+                  "match_score": 76.4,
+                  "matching_skills": [],
+                  "experience_years": 47.0,
+                  "current_role": "",
+                  "relevance_reason": "47+ years exp"
+                },
+                {
+                  "candidate_name": " Rajesh Patel  VFX",
+                  "cv_id": "cv_914b6fc0",
+                  "match_score": 73.7,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "composite shots for film and television projects.",
+                  "relevance_reason": "Profile match"
+                },
+                {
+                  "candidate_name": " Rajiv Patel  Junior VFX",
+                  "cv_id": "cv_2d0b5e53",
+                  "match_score": 72.2,
+                  "matching_skills": [],
+                  "experience_years": 2.0,
+                  "current_role": "",
+                  "relevance_reason": "2+ years exp"
+                },
+                {
+                  "candidate_name": " Carlos Mendoza  Junior VFX",
+                  "cv_id": "cv_e45a66ed",
+                  "match_score": 72.0,
+                  "matching_skills": [],
+                  "experience_years": 0.0,
+                  "current_role": "",
+                  "relevance_reason": "Profile match"
+                }
+              ],
+              "query_terms": [
+                "how",
+                "many",
+                "senior"
+              ],
+              "total_candidates": 10
+            },
+            "total_results": 10,
+            "query": "How many candidates have senior experience?",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T04:47:35.996597"
         }
       ],
-      "created_at": "2026-01-06T04:35:31.802508",
-      "updated_at": "2026-01-06T04:40:11.067639"
+      "created_at": "2026-01-06T04:45:13.950972",
+      "updated_at": "2026-01-06T04:47:35.996597"
     }
   ]
 }

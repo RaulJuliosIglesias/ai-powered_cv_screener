@@ -6,37 +6,37 @@ from .base import Suggestion, SuggestionCategory
 VERIFICATION_SUGGESTIONS = [
     # More verification - Priority 1
     Suggestion(
-        text="Verificar otra claim de {candidate_name}",
+        text="Verify another claim from {candidate_name}",
         category=SuggestionCategory.VERIFICATION,
         requires_candidate=True,
         priority=1
     ),
     Suggestion(
-        text="¿Las fechas de experiencia son coherentes?",
+        text="Are the experience dates consistent?",
         category=SuggestionCategory.VERIFICATION,
         priority=1
     ),
     Suggestion(
-        text="Verificar nivel de educación declarado",
+        text="Verify the declared education level",
         category=SuggestionCategory.VERIFICATION,
         priority=1
     ),
     
     # Risk - Priority 1
     Suggestion(
-        text="¿Hay otras inconsistencias en el CV?",
+        text="Are there other inconsistencies in the CV?",
         category=SuggestionCategory.VERIFICATION,
         priority=1
     ),
     Suggestion(
-        text="Análisis completo de red flags",
+        text="Full red flags analysis",
         category=SuggestionCategory.VERIFICATION,
         priority=1
     ),
     
     # Compare - Priority 2
     Suggestion(
-        text="Comparar credenciales con otros candidatos",
+        text="Compare credentials with other candidates",
         category=SuggestionCategory.VERIFICATION,
         min_cvs=2,
         priority=2
@@ -44,7 +44,7 @@ VERIFICATION_SUGGESTIONS = [
     
     # Profile - Priority 2
     Suggestion(
-        text="Ver perfil completo de {candidate_name}",
+        text="See full profile of {candidate_name}",
         category=SuggestionCategory.VERIFICATION,
         requires_candidate=True,
         priority=2
@@ -52,19 +52,19 @@ VERIFICATION_SUGGESTIONS = [
     
     # Skills verification - Priority 2
     Suggestion(
-        text="¿Tiene evidencia de los skills declarados?",
+        text="Is there evidence of the declared skills?",
         category=SuggestionCategory.VERIFICATION,
         priority=2
     ),
     
     # Experience verification - Priority 3
     Suggestion(
-        text="Verificar años de experiencia totales",
+        text="Verify total years of experience",
         category=SuggestionCategory.VERIFICATION,
         priority=3
     ),
     Suggestion(
-        text="¿Los títulos de puesto son consistentes con las responsabilidades?",
+        text="Are job titles consistent with responsibilities?",
         category=SuggestionCategory.VERIFICATION,
         priority=3
     ),

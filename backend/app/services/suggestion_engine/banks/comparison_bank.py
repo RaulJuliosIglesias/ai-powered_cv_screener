@@ -6,18 +6,18 @@ from .base import Suggestion, SuggestionCategory
 COMPARISON_SUGGESTIONS = [
     # Deep dive on winner - Priority 1
     Suggestion(
-        text="Dame más detalles del ganador de la comparación",
+        text="Give me more details about the comparison winner",
         category=SuggestionCategory.COMPARISON,
         priority=1
     ),
     Suggestion(
-        text="¿Qué red flags tiene {candidate_name}?",
+        text="What red flags does {candidate_name} have?",
         category=SuggestionCategory.COMPARISON,
         requires_candidate=True,
         priority=1
     ),
     Suggestion(
-        text="Perfil completo de {candidate_name}",
+        text="Full profile of {candidate_name}",
         category=SuggestionCategory.COMPARISON,
         requires_candidate=True,
         priority=1
@@ -25,68 +25,68 @@ COMPARISON_SUGGESTIONS = [
     
     # Expand comparison - Priority 1
     Suggestion(
-        text="Añadir un tercer candidato a la comparación",
+        text="Add a third candidate to the comparison",
         category=SuggestionCategory.COMPARISON,
         min_cvs=3,
         priority=1
     ),
     Suggestion(
-        text="Comparar enfocándose solo en {skill}",
+        text="Compare focusing only on {skill}",
         category=SuggestionCategory.COMPARISON,
         requires_skill=True,
         priority=1
     ),
     Suggestion(
-        text="¿Quién tiene mejor trayectoria profesional?",
+        text="Who has a better career trajectory?",
         category=SuggestionCategory.COMPARISON,
         priority=1
     ),
     
     # Verification - Priority 2
     Suggestion(
-        text="Verificar las certificaciones de ambos",
+        text="Verify the certifications of both candidates",
         category=SuggestionCategory.COMPARISON,
         priority=2
     ),
     Suggestion(
-        text="¿Coincide la experiencia declarada con las fechas?",
+        text="Does the declared experience match the dates?",
         category=SuggestionCategory.COMPARISON,
         priority=2
     ),
     
     # Decision support - Priority 1
     Suggestion(
-        text="¿Cuál contratarías para {role}?",
+        text="Which one would you hire for {role}?",
         category=SuggestionCategory.COMPARISON,
         requires_role=True,
         priority=1
     ),
     Suggestion(
-        text="Resumen ejecutivo de la comparación",
+        text="Executive summary of the comparison",
         category=SuggestionCategory.COMPARISON,
         priority=2
     ),
     Suggestion(
-        text="Pros y contras de cada candidato",
+        text="Pros and cons of each candidate",
         category=SuggestionCategory.COMPARISON,
         priority=1
     ),
     
     # Risk analysis - Priority 2
     Suggestion(
-        text="¿Quién tiene menos red flags?",
+        text="Who has fewer red flags?",
         category=SuggestionCategory.COMPARISON,
         priority=2
     ),
     Suggestion(
-        text="Análisis de estabilidad laboral de ambos",
+        text="Job stability analysis for both candidates",
         category=SuggestionCategory.COMPARISON,
         priority=2
     ),
     
     # Skills - Priority 3
     Suggestion(
-        text="¿Quién tiene skills más actualizados?",
+        text="Who has more up-to-date skills?",
         category=SuggestionCategory.COMPARISON,
         priority=3
     ),

@@ -6,46 +6,46 @@ from .base import Suggestion, SuggestionCategory
 SINGLE_CANDIDATE_SUGGESTIONS = [
     # Risk assessment - Priority 1
     Suggestion(
-        text="¿Hay red flags para {candidate_name}?",
+        text="Are there red flags for {candidate_name}?",
         category=SuggestionCategory.SINGLE_CANDIDATE,
         requires_candidate=True,
         priority=1
     ),
     Suggestion(
-        text="Análisis de estabilidad laboral de {candidate_name}",
+        text="Job stability analysis for {candidate_name}",
         category=SuggestionCategory.SINGLE_CANDIDATE,
         requires_candidate=True,
         priority=1
     ),
     Suggestion(
-        text="¿Tiene gaps de empleo significativos?",
+        text="Does this candidate have significant employment gaps?",
         category=SuggestionCategory.SINGLE_CANDIDATE,
         priority=1
     ),
     
     # Verification - Priority 2
     Suggestion(
-        text="Verificar certificaciones de {candidate_name}",
+        text="Verify {candidate_name}'s certifications",
         category=SuggestionCategory.SINGLE_CANDIDATE,
         requires_candidate=True,
         priority=2
     ),
     Suggestion(
-        text="¿La experiencia declarada es coherente?",
+        text="Is the declared experience consistent?",
         category=SuggestionCategory.SINGLE_CANDIDATE,
         priority=2
     ),
     
     # Comparison - Priority 1
     Suggestion(
-        text="Comparar {candidate_name} con otro candidato similar",
+        text="Compare {candidate_name} with a similar candidate",
         category=SuggestionCategory.SINGLE_CANDIDATE,
         requires_candidate=True,
         min_cvs=2,
         priority=1
     ),
     Suggestion(
-        text="¿Quién más tiene un perfil similar?",
+        text="Who else has a similar profile?",
         category=SuggestionCategory.SINGLE_CANDIDATE,
         min_cvs=2,
         priority=1
@@ -53,13 +53,13 @@ SINGLE_CANDIDATE_SUGGESTIONS = [
     
     # Job matching - Priority 1
     Suggestion(
-        text="¿Para qué roles sería ideal {candidate_name}?",
+        text="What roles would be ideal for {candidate_name}?",
         category=SuggestionCategory.SINGLE_CANDIDATE,
         requires_candidate=True,
         priority=1
     ),
     Suggestion(
-        text="Match de {candidate_name} para rol de {role}",
+        text="Match {candidate_name} for {role} role",
         category=SuggestionCategory.SINGLE_CANDIDATE,
         requires_candidate=True,
         requires_role=True,
@@ -68,19 +68,19 @@ SINGLE_CANDIDATE_SUGGESTIONS = [
     
     # Explore further - Priority 2
     Suggestion(
-        text="¿Qué skills únicos tiene {candidate_name}?",
+        text="What unique skills does {candidate_name} have?",
         category=SuggestionCategory.SINGLE_CANDIDATE,
         requires_candidate=True,
         priority=2
     ),
     Suggestion(
-        text="Trayectoria de carrera de {candidate_name}",
+        text="Career trajectory of {candidate_name}",
         category=SuggestionCategory.SINGLE_CANDIDATE,
         requires_candidate=True,
         priority=2
     ),
     Suggestion(
-        text="¿{candidate_name} podría crecer en la empresa?",
+        text="Could {candidate_name} grow within the company?",
         category=SuggestionCategory.SINGLE_CANDIDATE,
         requires_candidate=True,
         priority=2
@@ -88,7 +88,7 @@ SINGLE_CANDIDATE_SUGGESTIONS = [
     
     # Ranking context - Priority 2
     Suggestion(
-        text="¿Dónde rankea {candidate_name} vs los demás?",
+        text="Where does {candidate_name} rank vs the others?",
         category=SuggestionCategory.SINGLE_CANDIDATE,
         requires_candidate=True,
         min_cvs=2,
@@ -97,7 +97,7 @@ SINGLE_CANDIDATE_SUGGESTIONS = [
     
     # Technical - Priority 3
     Suggestion(
-        text="¿Qué proyectos destacados tiene en su experiencia?",
+        text="What notable projects are in their experience?",
         category=SuggestionCategory.SINGLE_CANDIDATE,
         priority=3
     ),

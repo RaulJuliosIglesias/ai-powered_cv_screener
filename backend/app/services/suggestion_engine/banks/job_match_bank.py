@@ -6,18 +6,18 @@ from .base import Suggestion, SuggestionCategory
 JOB_MATCH_SUGGESTIONS = [
     # Explore matches - Priority 1
     Suggestion(
-        text="¿Por qué {candidate_name} tiene el mejor match?",
+        text="Why does {candidate_name} have the best match?",
         category=SuggestionCategory.JOB_MATCH,
         requires_candidate=True,
         priority=1
     ),
     Suggestion(
-        text="¿Qué le falta al candidato con mejor match?",
+        text="What is the best match candidate missing?",
         category=SuggestionCategory.JOB_MATCH,
         priority=1
     ),
     Suggestion(
-        text="Detalle del gap analysis para {candidate_name}",
+        text="Gap analysis details for {candidate_name}",
         category=SuggestionCategory.JOB_MATCH,
         requires_candidate=True,
         priority=1
@@ -25,56 +25,56 @@ JOB_MATCH_SUGGESTIONS = [
     
     # Modify requirements - Priority 1
     Suggestion(
-        text="¿Cómo cambia el match si quitamos el requisito de {skill}?",
+        text="How does the match change if we remove the {skill} requirement?",
         category=SuggestionCategory.JOB_MATCH,
         requires_skill=True,
         priority=1
     ),
     Suggestion(
-        text="Match considerando skills nice-to-have",
+        text="Match considering nice-to-have skills",
         category=SuggestionCategory.JOB_MATCH,
         priority=2
     ),
     Suggestion(
-        text="Buscar candidatos que puedan crecer hacia el rol",
+        text="Find candidates who can grow into the role",
         category=SuggestionCategory.JOB_MATCH,
         priority=2
     ),
     
     # Risk assessment - Priority 2
     Suggestion(
-        text="Red flags de los candidatos con mejor match",
+        text="Red flags for candidates with best match",
         category=SuggestionCategory.JOB_MATCH,
         priority=2
     ),
     Suggestion(
-        text="¿Algún candidato tiene experiencia muy corta?",
+        text="Does any candidate have very short experience?",
         category=SuggestionCategory.JOB_MATCH,
         priority=2
     ),
     
     # Shortlist - Priority 1
     Suggestion(
-        text="Crear shortlist de 3 candidatos",
+        text="Create a shortlist of 3 candidates",
         category=SuggestionCategory.JOB_MATCH,
         min_cvs=3,
         priority=1
     ),
     Suggestion(
-        text="Comparar los top 2 matches",
+        text="Compare the top 2 matches",
         category=SuggestionCategory.JOB_MATCH,
         min_cvs=2,
         priority=1
     ),
     Suggestion(
-        text="¿Quién puede empezar más rápido?",
+        text="Who can start the soonest?",
         category=SuggestionCategory.JOB_MATCH,
         priority=3
     ),
     
     # Deep dive - Priority 2
     Suggestion(
-        text="Perfil completo del mejor match",
+        text="Full profile of the best match",
         category=SuggestionCategory.JOB_MATCH,
         priority=2
     ),

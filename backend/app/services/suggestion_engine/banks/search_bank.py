@@ -6,19 +6,19 @@ from .base import Suggestion, SuggestionCategory
 SEARCH_SUGGESTIONS = [
     # Refine search - Priority 1
     Suggestion(
-        text="¿Cuántos años de experiencia tienen con {skill}?",
+        text="How many years of experience do they have with {skill}?",
         category=SuggestionCategory.SEARCH,
         requires_skill=True,
         priority=1
     ),
     Suggestion(
-        text="¿Quién tiene nivel senior en {skill}?",
+        text="Who has senior-level {skill} experience?",
         category=SuggestionCategory.SEARCH,
         requires_skill=True,
         priority=1
     ),
     Suggestion(
-        text="Buscar candidatos con {skill} y experiencia en liderazgo",
+        text="Find candidates with {skill} and leadership experience",
         category=SuggestionCategory.SEARCH,
         requires_skill=True,
         priority=1
@@ -26,7 +26,7 @@ SEARCH_SUGGESTIONS = [
     
     # Pivot to ranking - Priority 1
     Suggestion(
-        text="Rankear los que tienen {skill} por experiencia total",
+        text="Rank candidates with {skill} by total experience",
         category=SuggestionCategory.SEARCH,
         requires_skill=True,
         min_cvs=2,
@@ -35,7 +35,7 @@ SEARCH_SUGGESTIONS = [
     
     # Pivot to comparison - Priority 1
     Suggestion(
-        text="Comparar los dos mejores candidatos con {skill}",
+        text="Compare the top two candidates with {skill}",
         category=SuggestionCategory.SEARCH,
         requires_skill=True,
         min_cvs=2,
@@ -44,13 +44,13 @@ SEARCH_SUGGESTIONS = [
     
     # Deep dive - Priority 1
     Suggestion(
-        text="Dame el perfil completo de {candidate_name}",
+        text="Give me the full profile of {candidate_name}",
         category=SuggestionCategory.SEARCH,
         requires_candidate=True,
         priority=1
     ),
     Suggestion(
-        text="¿Qué otras tecnologías domina {candidate_name}?",
+        text="What other technologies does {candidate_name} know?",
         category=SuggestionCategory.SEARCH,
         requires_candidate=True,
         priority=2
@@ -58,7 +58,7 @@ SEARCH_SUGGESTIONS = [
     
     # Certifications - Priority 2
     Suggestion(
-        text="¿Alguno tiene certificaciones en {skill}?",
+        text="Does anyone have certifications in {skill}?",
         category=SuggestionCategory.SEARCH,
         requires_skill=True,
         priority=2
@@ -66,18 +66,18 @@ SEARCH_SUGGESTIONS = [
     
     # Expand - Priority 2
     Suggestion(
-        text="¿Qué otras tecnologías conocen estos candidatos?",
+        text="What other technologies do these candidates know?",
         category=SuggestionCategory.SEARCH,
         priority=2
     ),
     Suggestion(
-        text="¿Quién tiene experiencia similar pero en otro stack?",
+        text="Who has similar experience but in a different stack?",
         category=SuggestionCategory.SEARCH,
         min_cvs=2,
         priority=2
     ),
     Suggestion(
-        text="Buscar candidatos con skills complementarios a {skill}",
+        text="Find candidates with skills complementary to {skill}",
         category=SuggestionCategory.SEARCH,
         requires_skill=True,
         min_cvs=2,
@@ -86,7 +86,7 @@ SEARCH_SUGGESTIONS = [
     
     # Risk analysis - Priority 2
     Suggestion(
-        text="¿Hay red flags en los candidatos con {skill}?",
+        text="Are there red flags for candidates with {skill}?",
         category=SuggestionCategory.SEARCH,
         requires_skill=True,
         min_cvs=2,
@@ -95,14 +95,14 @@ SEARCH_SUGGESTIONS = [
     
     # Alternatives - Priority 3
     Suggestion(
-        text="¿Hay candidatos que podrían aprender {skill} rápido?",
+        text="Are there candidates who could learn {skill} quickly?",
         category=SuggestionCategory.SEARCH,
         requires_skill=True,
         min_cvs=2,
         priority=3
     ),
     Suggestion(
-        text="Candidatos con tecnologías alternativas a {skill}",
+        text="Candidates with alternative technologies to {skill}",
         category=SuggestionCategory.SEARCH,
         requires_skill=True,
         priority=3

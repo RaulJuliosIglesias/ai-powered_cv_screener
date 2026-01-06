@@ -6,72 +6,72 @@ from .base import Suggestion, SuggestionCategory
 TEAM_BUILD_SUGGESTIONS = [
     # Team analysis - Priority 1
     Suggestion(
-        text="¿Qué skills le faltan al equipo propuesto?",
+        text="What skills is the proposed team missing?",
         category=SuggestionCategory.TEAM_BUILD,
         priority=1
     ),
     Suggestion(
-        text="¿Hay riesgo de single point of failure?",
+        text="Is there a risk of single point of failure?",
         category=SuggestionCategory.TEAM_BUILD,
         priority=1
     ),
     Suggestion(
-        text="¿El equipo está balanceado en seniority?",
+        text="Is the team balanced in seniority?",
         category=SuggestionCategory.TEAM_BUILD,
         priority=1
     ),
     
     # Alternatives - Priority 1
     Suggestion(
-        text="Proponer un equipo alternativo",
+        text="Propose an alternative team",
         category=SuggestionCategory.TEAM_BUILD,
         min_cvs=4,
         priority=1
     ),
     Suggestion(
-        text="¿Quién podría reemplazar a {candidate_name}?",
+        text="Who could replace {candidate_name}?",
         category=SuggestionCategory.TEAM_BUILD,
         requires_candidate=True,
         priority=1
     ),
     Suggestion(
-        text="Agregar un miembro más al equipo",
+        text="Add one more member to the team",
         category=SuggestionCategory.TEAM_BUILD,
         priority=2
     ),
     
     # Deep dive - Priority 2
     Suggestion(
-        text="¿Cómo trabajarían juntos en un proyecto real?",
+        text="How would they work together on a real project?",
         category=SuggestionCategory.TEAM_BUILD,
         priority=2
     ),
     Suggestion(
-        text="Análisis de cultura/soft skills para team fit",
+        text="Culture/soft skills analysis for team fit",
         category=SuggestionCategory.TEAM_BUILD,
         priority=2
     ),
     Suggestion(
-        text="¿Hay conflictos potenciales de skills overlap?",
+        text="Are there potential skills overlap conflicts?",
         category=SuggestionCategory.TEAM_BUILD,
         priority=2
     ),
     
     # Individual profiles - Priority 2
     Suggestion(
-        text="Perfil detallado del líder propuesto",
+        text="Detailed profile of the proposed leader",
         category=SuggestionCategory.TEAM_BUILD,
         priority=2
     ),
     Suggestion(
-        text="Red flags de los miembros del equipo",
+        text="Red flags for team members",
         category=SuggestionCategory.TEAM_BUILD,
         priority=2
     ),
     
     # Coverage - Priority 3
     Suggestion(
-        text="¿Cubren todas las tecnologías necesarias?",
+        text="Do they cover all the required technologies?",
         category=SuggestionCategory.TEAM_BUILD,
         priority=3
     ),

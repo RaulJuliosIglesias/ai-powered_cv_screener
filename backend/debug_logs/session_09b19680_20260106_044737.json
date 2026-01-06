@@ -1,0 +1,368 @@
+{
+  "session_id": "09b19680-30d2-418f-af13-9bd86724b3a4",
+  "generated_at": "2026-01-06T04:47:37.720386",
+  "events": [
+    {
+      "timestamp": "2026-01-06T04:47:13.105021",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "09b19680-30d2-418f-af13-9bd86724b3a4"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T04:47:13.105021",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Risk analysis for the #1 candidate",
+        "cv_ids": [
+          "cv_86fd2ce4",
+          "cv_ad8afd67",
+          "cv_62e084d8",
+          "cv_cecc18ee",
+          "cv_c41734f7",
+          "cv_4ab2fbaa",
+          "cv_9d48b158",
+          "cv_75d85c4e",
+          "cv_16814325",
+          "cv_13fc8e4c",
+          "cv_ded37996",
+          "cv_92a8beac",
+          "cv_9d28f6cd",
+          "cv_0a381ffb",
+          "cv_a151cd62",
+          "cv_cae9463b",
+          "cv_4030244e",
+          "cv_12e15d5d",
+          "cv_f0b938a8",
+          "cv_93bb8cbd",
+          "cv_5fc76c07",
+          "cv_fb688db1",
+          "cv_e4fe6808",
+          "cv_c7c9d763",
+          "cv_d959b630",
+          "cv_adfd3a26",
+          "cv_4b060aae",
+          "cv_d0e07879",
+          "cv_6219ae68",
+          "cv_c0167ca9"
+        ],
+        "cv_count": 30
+      }
+    },
+    {
+      "timestamp": "2026-01-06T04:47:17.201175",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 23,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_62e084d8",
+            "candidate_name": " Marco Rossi  3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.08333333333333333,
+            "avg_tenure_years": 6.0,
+            "total_experience_years": 12.0,
+            "score": 0.7965166950904409,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_0a381ffb",
+            "candidate_name": " Mei Lin Chen  VFX",
+            "section_type": "skills",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.6101967960587507,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_f0b938a8",
+            "candidate_name": " Aisha Johnson ",
+            "section_type": "skills",
+            "job_hopping_score": 0.1,
+            "avg_tenure_years": 5.0,
+            "total_experience_years": 10.0,
+            "score": 0.582031953556847,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_c0167ca9",
+            "candidate_name": " Carmen Rodriguez  3D",
+            "section_type": "skills",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 16.0,
+            "score": 0.584424019264559,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_16814325",
+            "candidate_name": " Matteo Rossi  Creature",
+            "section_type": "skills",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 13.0,
+            "total_experience_years": 13.0,
+            "score": 0.6372584901366047,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_6219ae68",
+            "candidate_name": " Aisha Nkrumah  Junior 2D",
+            "section_type": "skills",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.6166725931151198,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_9d28f6cd",
+            "candidate_name": " Emma Whitmore  Texture",
+            "section_type": "skills",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 4.0,
+            "score": 0.5730440127979849,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_9d48b158",
+            "candidate_name": " Mateo Rodriguez ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "score": 0.7991674671058276,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_86fd2ce4",
+            "candidate_name": " Aisha Patel ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.1,
+            "avg_tenure_years": 5.0,
+            "total_experience_years": 10.0,
+            "score": 0.8046371856429111,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_cae9463b",
+            "candidate_name": " Rajiv Kapoor  Technical",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.23076923076923078,
+            "avg_tenure_years": 3.25,
+            "total_experience_years": 13.0,
+            "score": 0.802719875683036,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T04:47:24.244844",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "SINGLE_CANDIDATE_TEMPLATE",
+        "candidate_name": " Aisha Nkrumah  Junior 2D",
+        "detection_method": "first_name_in_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T04:47:27.726356",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1533,
+        "answer_preview": ":::thinking\nThe user is asking for a red flag analysis of Aisha Nkrumah Junior 2D (cv_f071fab2)'s CV. I need to analyze the CV for potential red flags such as employment gaps, job hopping, inconsistencies, negative feedback, or lack of skills. The pre-calculated risk assessment data indicates a clean profile with no significant red flags detected. The job hopping score is low (0%), and there are no employment gaps. The candidate has held one position over 0 years, indicating stability. The exper...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T04:47:31.153055",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T04:47:33.545408",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "SINGLE_CANDIDATE_TEMPLATE",
+        "candidate_name": " Isabel Mendoza  3D",
+        "detection_method": "first_name_in_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T04:47:36.085949",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 690,
+        "answer_preview": ":::thinking\nThe user wants to know how many candidates have senior-level experience, defined by job titles (Senior, Lead, Principal, Director, VP) or 8+ years of experience. I need to scan the CVs for these keywords in job titles and calculate years of experience based on provided dates. I will then provide a count of the candidates who meet these criteria.\n:::\n\n\n:::conclusion\nFive candidates, **[Rajesh Patel](cv:cv_914b6fc0)**, **[Daan van Dijk](cv:cv_8a8d11fd)**, **[Carmen Rodriguez](cv:cv_e77...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T04:47:37.719741",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1467,
+        "answer_preview": ":::thinking\nThe user is asking for a risk analysis of Isabel Mendoza (cv_adfd3a26) for a leadership role, focusing on potential red flags, job hopping, employment gaps, stability, and experience. The pre-calculated data indicates no significant red flags, low job hopping, no employment gaps, stable employment history, and senior-level experience. Therefore, the risk analysis should reflect these positive findings.\n:::\n\n** Isabel Mendoza  3D** presents a **low-risk profile**. With 12 years of exp...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

@@ -6,18 +6,18 @@ from .base import Suggestion, SuggestionCategory
 RANKING_SUGGESTIONS = [
     # Explore top picks - Priority 1
     Suggestion(
-        text="¿Por qué {candidate_name} está en el top del ranking?",
+        text="Why is {candidate_name} at the top of the ranking?",
         category=SuggestionCategory.RANKING,
         requires_candidate=True,
         priority=1
     ),
     Suggestion(
-        text="Dame el perfil completo del candidato #1",
+        text="Give me the full profile of the #1 candidate",
         category=SuggestionCategory.RANKING,
         priority=1
     ),
     Suggestion(
-        text="Compara el #1 vs #2 del ranking",
+        text="Compare #1 vs #2 in the ranking",
         category=SuggestionCategory.RANKING,
         min_cvs=2,
         priority=1
@@ -25,14 +25,14 @@ RANKING_SUGGESTIONS = [
     
     # Refine ranking - Priority 1
     Suggestion(
-        text="¿Cómo cambia el ranking si priorizamos {skill}?",
+        text="How does the ranking change if we prioritize {skill}?",
         category=SuggestionCategory.RANKING,
         requires_skill=True,
         min_cvs=2,
         priority=1
     ),
     Suggestion(
-        text="Ranking excluyendo candidatos sin experiencia senior",
+        text="Ranking excluding candidates without senior experience",
         category=SuggestionCategory.RANKING,
         min_cvs=3,
         priority=2
@@ -40,18 +40,18 @@ RANKING_SUGGESTIONS = [
     
     # Risk assessment - Priority 1
     Suggestion(
-        text="¿Hay red flags en el top 3?",
+        text="Are there red flags in the top 3?",
         category=SuggestionCategory.RANKING,
         min_cvs=3,
         priority=1
     ),
     Suggestion(
-        text="Análisis de riesgos del candidato #1",
+        text="Risk analysis for the #1 candidate",
         category=SuggestionCategory.RANKING,
         priority=1
     ),
     Suggestion(
-        text="¿Qué gaps tienen los candidatos top?",
+        text="What gaps do the top candidates have?",
         category=SuggestionCategory.RANKING,
         min_cvs=2,
         priority=2
@@ -59,13 +59,13 @@ RANKING_SUGGESTIONS = [
     
     # Team building - Priority 2
     Suggestion(
-        text="¿Puedo armar un equipo con el top 3?",
+        text="Can I build a team with the top 3?",
         category=SuggestionCategory.RANKING,
         min_cvs=3,
         priority=2
     ),
     Suggestion(
-        text="¿Son complementarios los top candidatos?",
+        text="Are the top candidates complementary?",
         category=SuggestionCategory.RANKING,
         min_cvs=2,
         priority=2
@@ -73,13 +73,13 @@ RANKING_SUGGESTIONS = [
     
     # Job match - Priority 2
     Suggestion(
-        text="Match del #1 con rol de {role}",
+        text="Match #1 against the {role} role",
         category=SuggestionCategory.RANKING,
         requires_role=True,
         priority=2
     ),
     Suggestion(
-        text="¿Quién del top 3 encaja mejor para {role}?",
+        text="Who in the top 3 fits best for {role}?",
         category=SuggestionCategory.RANKING,
         requires_role=True,
         min_cvs=3,
@@ -88,13 +88,13 @@ RANKING_SUGGESTIONS = [
     
     # Deep dive - Priority 2
     Suggestion(
-        text="¿Cuál es la trayectoria de carrera de {candidate_name}?",
+        text="What is {candidate_name}'s career trajectory?",
         category=SuggestionCategory.RANKING,
         requires_candidate=True,
         priority=2
     ),
     Suggestion(
-        text="¿Qué certificaciones tiene el top pick?",
+        text="What certifications does the top pick have?",
         category=SuggestionCategory.RANKING,
         priority=3
     ),
