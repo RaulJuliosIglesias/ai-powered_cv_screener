@@ -1362,6 +1362,7 @@ Base your analysis on the actual CV content provided.""",
             tenure = float(avg_tenure) if avg_tenure else 0
             exp = float(total_exp) if total_exp else 0
             gaps = int(employment_gaps) if employment_gaps else 0
+            positions = int(position_count) if position_count else 1
             
             # Determine statuses
             if score < 0.3:
@@ -1379,14 +1380,34 @@ Base your analysis on the actual CV content provided.""",
             
             exp_level = "Entry" if exp < 3 else "Mid" if exp < 7 else "Senior" if exp < 15 else "Executive"
             
-            has_flags = score > 0.5 or tenure < 1.5 or gaps > 0
+            # FIXED: Better logic for red flags detection
+            # For junior candidates (Entry level with few positions), don't flag low tenure as issue
+            is_junior = exp_level == "Entry" and positions <= 2
+            
+            # Only flag tenure issues for non-juniors
+            tenure_issue = tenure < 1.5 and not is_junior and positions > 2
+            has_flags = score > 0.5 or tenure_issue or gaps > 0
+            
             rf_status = "Issues Found" if has_flags else "None Detected"
             rf_icon = "⚠️" if has_flags else "✅"
+            
+            # FIXED: Consistent red flags details message
+            if has_flags:
+                flag_reasons = []
+                if score > 0.5:
+                    flag_reasons.append(f"high mobility ({score:.0%})")
+                if tenure_issue:
+                    flag_reasons.append(f"short tenure ({tenure:.1f} yrs)")
+                if gaps > 0:
+                    flag_reasons.append(f"{gaps} employment gap(s)")
+                rf_details = ", ".join(flag_reasons).capitalize()
+            else:
+                rf_details = "Clean profile"
             
             # Build unified Risk Assessment table
             sections["risk_assessment"] = f"""| Factor | Status | Details |
 |:-------|:------:|:--------|
-| **🚩 Red Flags** | {rf_icon} {rf_status} | {"High mobility or gaps" if has_flags else "Clean profile"} |
+| **🚩 Red Flags** | {rf_icon} {rf_status} | {rf_details} |
 | **🔄 Job Hopping** | {jh_icon} {jh_status} | Score: {score:.0%}, Avg tenure: {tenure:.1f} yrs |
 | **⏸️ Employment Gaps** | {gaps_icon} {gaps_status} | {"Continuous history" if gaps == 0 else "Verify in interview"} |
 | **📊 Stability** | {stability_icon} {stability} | {position_count or 'N/A'} positions over {exp:.0f} years |

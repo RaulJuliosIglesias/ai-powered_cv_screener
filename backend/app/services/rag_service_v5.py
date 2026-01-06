@@ -1914,10 +1914,18 @@ class RAGServiceV5:
             from app.prompts.templates import detect_single_candidate_query
             
             # Detect if this is a single candidate query
+            # CRITICAL: Use reformulated_prompt (LLM-resolved) not original question
+            # This allows "el winner" → "Isabel Mendoza" resolution to work
             single_candidate_detection = detect_single_candidate_query(
-                question=ctx.question,  # Use original question for detection
+                question=effective_question,  # Use LLM-resolved question (may have resolved references)
                 chunks=chunks
             )
+            
+            if single_candidate_detection.is_single_candidate:
+                logger.info(
+                    f"[GENERATION] Single candidate detected: {single_candidate_detection.candidate_name} "
+                    f"(method: {single_candidate_detection.detection_method}, confidence: {single_candidate_detection.confidence:.2f})"
+                )
             
             # Store in context for orchestrator to use later
             ctx.single_candidate_detection = single_candidate_detection
