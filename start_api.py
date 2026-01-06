@@ -34,8 +34,7 @@ if __name__ == "__main__":
             sys.executable, "-m", "uvicorn",
             "app.main:app",
             "--host", "127.0.0.1",
-            "--port", str(port),
-            "--reload"
+            "--port", str(port)
         ], cwd="backend")
     except KeyboardInterrupt:
         print("\n[API] Stopped")

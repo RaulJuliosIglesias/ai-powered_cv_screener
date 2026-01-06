@@ -1,0 +1,179 @@
+{
+  "session_id": "9d5916ce-c80e-4f39-a12f-5068203a1349",
+  "generated_at": "2026-01-06T23:38:44.284112",
+  "events": [
+    {
+      "timestamp": "2026-01-06T23:38:00.985839",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "9d5916ce-c80e-4f39-a12f-5068203a1349"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:38:00.985839",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Who else has a similar profile?",
+        "cv_ids": [
+          "cv_87e48364",
+          "cv_15a2823e",
+          "cv_4a30477e",
+          "cv_ea0523c1",
+          "cv_701d596a",
+          "cv_815386ae",
+          "cv_4418bf37",
+          "cv_2b219492",
+          "cv_dfaa69b5",
+          "cv_2bbc8b4b",
+          "cv_1e96a74a",
+          "cv_2fc87021"
+        ],
+        "cv_count": 12
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:38:15.509738",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 10,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_1e96a74a",
+            "candidate_name": " Sofia Mendoza ",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.3333333333333333,
+            "total_experience_years": 2.0,
+            "score": 0.5220630047481215,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_701d596a",
+            "candidate_name": " Mei Lin Chen  Accessories",
+            "section_type": "experience",
+            "job_hopping_score": 0.3,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 10.0,
+            "score": 0.5202904734588373,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_dfaa69b5",
+            "candidate_name": " Ji-eun Kim  Business",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5714285714285714,
+            "avg_tenure_years": 1.4,
+            "total_experience_years": 7.0,
+            "score": 0.5187690364750221,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_2bbc8b4b",
+            "candidate_name": " Sofia Rossi  Restaurant",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 2.0,
+            "score": 0.518666815167062,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_2fc87021",
+            "candidate_name": " Lotte van der Berg  Camera",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 5.0,
+            "score": 0.5177016158063779,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_4418bf37",
+            "candidate_name": " Matteo Rossi  Group",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.5164187577291466,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_15a2823e",
+            "candidate_name": " Matteo Rossi  Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.21428571428571427,
+            "avg_tenure_years": 3.5,
+            "total_experience_years": 9.0,
+            "score": 0.5077396301387479,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_815386ae",
+            "candidate_name": " Amir Hassan ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 0.5071483977108725,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_ea0523c1",
+            "candidate_name": " Lukas Schneider  Mix",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 9.5,
+            "total_experience_years": 14.0,
+            "score": 0.5054554228487709,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_2b219492",
+            "candidate_name": " Priya Kim  Sous",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5038217893705456,
+            "has_enriched_metadata": false
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    }
+  ]
+}

@@ -41,7 +41,8 @@ REFERENCE_PATTERNS = [
     (r'\b(the\s+)?first\s+candidate\b', "top_candidate"),
     (r'\bfull\s+profile\s+of\s+(the\s+)?#\d+\b', "top_candidate"),
     (r'\bprofile\s+of\s+(the\s+)?#\d+\b', "top_candidate"),
-    (r'\b#\d+\s*(candidato?|candidate)?\b', "top_candidate"),
+    (r'\b(compare|comparar|compare\s+the\s+two\s+best)\b.*?(?:top\s+candidate|candidato|candidate)', "top_candidates"),
+    (r'\b(compare|comparar)\s+(?:the\s+)?two\s+(?:best|top)\s+(?:candidates|candidatos)\b', "top_candidates"),
     
     # This/That candidate references
     (r'\b(this|that|ese|este|esta)\s+(candidato|candidate|person|persona)\b', "this_candidate"),
@@ -75,7 +76,7 @@ def has_reference_pattern(query: str) -> tuple[bool, str]:
 def extract_candidate_from_history(
     conversation_history: List[Dict[str, str]],
     reference_type: str = "top_candidate"
-) -> Optional[Dict[str, str]]:
+) -> Optional[Dict[str, str] | List[Dict[str, str]]]:
     """
     Extract candidate information from conversation history.
     
@@ -83,6 +84,7 @@ def extract_candidate_from_history(
     - Ranking responses (to find #1 candidate)
     - Single candidate responses (last mentioned candidate)
     - Comparison responses (winner)
+    - Multiple top candidates (for "compare the two best" queries)
     
     Args:
         conversation_history: List of {"role": "user"|"assistant", "content": "..."}
@@ -90,12 +92,17 @@ def extract_candidate_from_history(
         
     Returns:
         Dict with "name" and "cv_id" if found, None otherwise
+        For "top_candidates": returns List[Dict] with top 2 candidates
     """
     if not conversation_history:
         logger.warning("[CONTEXT_RESOLVER] extract_candidate_from_history: No history provided")
         return None
     
     logger.info(f"[CONTEXT_RESOLVER] Searching {len(conversation_history)} messages for {reference_type}")
+    
+    # Special handling for "top_candidates" - return top 2 from ranking
+    if reference_type == "top_candidates":
+        return _extract_top_candidates_from_history(conversation_history)
     
     # Look through history from most recent to oldest
     for idx, msg in enumerate(reversed(conversation_history)):
@@ -193,7 +200,36 @@ def extract_candidate_from_history(
             logger.info(f"[CONTEXT_RESOLVER] Found #1 candidate by score: {name} ({cv_id}) with {score}%")
             return {"name": name, "cv_id": cv_id}
         
-        # Pattern 8: Fallback - First CV link in ranking response (the #1 candidate is typically listed first)
+        # Pattern 7.5: Look for "Top Recommendation:" format with scores
+        top_rec_matches = re.findall(
+            r'Top\s+Recommendation:\s*\[📄\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\s*\*\*([^*]+)\*\*[^0-9]*([0-9]+)%',
+            content,
+            re.IGNORECASE
+        )
+        if top_rec_matches:
+            cv_id = top_rec_matches[0][0].strip()
+            name = top_rec_matches[0][1].strip()
+            score = top_rec_matches[0][2]
+            logger.info(f"[CONTEXT_RESOLVER] Found #1 via Top Recommendation: {name} ({cv_id}) with {score}%")
+            return {"name": name, "cv_id": cv_id}
+        
+        # Pattern 8: Look for comparison winner patterns
+        # "X emerges as the clear winner" or "X is the stronger candidate"
+        winner_patterns = [
+            r'\*\*([^*]+)\*\*[^.]*(?:emerges as the (?:clear )?winner|is the (?:stronger|better) candidate|wins the comparison)',
+            r'(?:the\s+)?winner\s+is\s+\*\*([^*]+)\*\*',
+            r'\*\*([^*]+)\*\*[^.]*(?:has the edge|comes out on top|is the winner)'
+        ]
+        for pattern in winner_patterns:
+            winner_match = re.search(pattern, content, re.IGNORECASE)
+            if winner_match:
+                name = winner_match.group(1).strip()
+                cv_id = _extract_cv_id_for_name(content, name)
+                if cv_id:
+                    logger.info(f"[CONTEXT_RESOLVER] Found comparison winner: {name} ({cv_id})")
+                    return {"name": name, "cv_id": cv_id}
+        
+        # Pattern 9: Fallback - First CV link in ranking response (the #1 candidate is typically listed first)
         # Look for pattern like [📄](cv:cv_xxx) **Name** with score
         first_cv_link = re.search(
             r'\[📄\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\s*\*\*([^*]+)\*\*',
@@ -206,6 +242,53 @@ def extract_candidate_from_history(
             return {"name": name, "cv_id": cv_id}
     
     logger.warning("[CONTEXT_RESOLVER] Could not find candidate in history")
+    return None
+
+
+def _extract_top_candidates_from_history(
+    conversation_history: List[Dict[str, str]]
+) -> Optional[List[Dict[str, str]]]:
+    """
+    Extract top 2 candidates from ranking history.
+    
+    Used for "compare the two best" queries.
+    
+    Args:
+        conversation_history: Previous messages
+        
+    Returns:
+        List of 2 dicts with "name" and "cv_id" if found, None otherwise
+    """
+    logger.info("[CONTEXT_RESOLVER] Extracting top 2 candidates for comparison")
+    
+    # Look through history from most recent to oldest
+    for idx, msg in enumerate(reversed(conversation_history)):
+        if msg.get("role") != "assistant":
+            continue
+        
+        content = msg.get("content", "")
+        
+        # Look for ranking with scores
+        ranking_matches = re.findall(
+            r'\[📄\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\s*\*\*([^*]+)\*\*[^0-9]*([0-9]+)%',
+            content
+        )
+        if ranking_matches and len(ranking_matches) >= 2:
+            # Sort by score descending and take top 2
+            sorted_matches = sorted(ranking_matches, key=lambda x: int(x[2]), reverse=True)[:2]
+            
+            top_candidates = []
+            for cv_id, name, score in sorted_matches:
+                top_candidates.append({
+                    "name": name.strip(),
+                    "cv_id": cv_id.strip(),
+                    "score": int(score)
+                })
+            
+            logger.info(f"[CONTEXT_RESOLVER] Found top 2: {[c['name'] for c in top_candidates]}")
+            return top_candidates
+    
+    logger.warning("[CONTEXT_RESOLVER] Could not find 2 candidates in history")
     return None
 
 
@@ -278,13 +361,23 @@ def resolve_reference(
     candidate = extract_candidate_from_history(conversation_history, ref_type)
     
     if candidate:
-        return ResolvedReference(
-            resolved=True,
-            candidate_name=candidate.get("name"),
-            cv_id=candidate.get("cv_id"),
-            reference_type=ref_type,
-            confidence=0.85
-        )
+        # Handle multiple candidates case
+        if ref_type == "top_candidates" and isinstance(candidate, list):
+            return ResolvedReference(
+                resolved=True,
+                candidate_name=f"Top 2: {', '.join([c['name'] for c in candidate])}",
+                cv_id=candidate[0].get("cv_id") if candidate else None,  # Primary candidate
+                reference_type=ref_type,
+                confidence=0.85
+            )
+        else:
+            return ResolvedReference(
+                resolved=True,
+                candidate_name=candidate.get("name"),
+                cv_id=candidate.get("cv_id"),
+                reference_type=ref_type,
+                confidence=0.85
+            )
     
     return ResolvedReference(
         resolved=False,

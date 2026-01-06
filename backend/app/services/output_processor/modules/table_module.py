@@ -102,6 +102,7 @@ class TableModule:
                 break
         
         if len(table_lines) < 2:
+            logger.debug(f"[TABLE] Not enough table lines: {len(table_lines)}")
             return None
         
         # Parse header
@@ -109,7 +110,10 @@ class TableModule:
         raw_headers = [cell.strip() for cell in header_line.split('|') if cell.strip()]
         
         if not raw_headers:
+            logger.debug("[TABLE] No headers found")
             return None
+        
+        logger.info(f"[TABLE] Found headers: {raw_headers}")
         
         # CRITICAL: Detect Risk Assessment tables and SKIP them
         # Risk Assessment tables have headers like: Factor, Status, Details

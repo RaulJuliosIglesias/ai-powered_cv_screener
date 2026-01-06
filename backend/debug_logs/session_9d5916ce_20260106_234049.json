@@ -1,0 +1,247 @@
+{
+  "session_id": "9d5916ce-c80e-4f39-a12f-5068203a1349",
+  "generated_at": "2026-01-06T23:40:49.766835",
+  "events": [
+    {
+      "timestamp": "2026-01-06T23:40:20.743989",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "9d5916ce-c80e-4f39-a12f-5068203a1349"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:40:20.743989",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Who has experience with Python?",
+        "cv_ids": [
+          "cv_87e48364",
+          "cv_15a2823e",
+          "cv_4a30477e",
+          "cv_ea0523c1",
+          "cv_701d596a",
+          "cv_815386ae",
+          "cv_4418bf37",
+          "cv_2b219492",
+          "cv_dfaa69b5",
+          "cv_2bbc8b4b",
+          "cv_1e96a74a",
+          "cv_2fc87021"
+        ],
+        "cv_count": 12
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:40:35.706974",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 10,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_815386ae",
+            "candidate_name": " Amir Hassan ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 0.49314039386598324,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_1e96a74a",
+            "candidate_name": " Sofia Mendoza ",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.3333333333333333,
+            "total_experience_years": 2.0,
+            "score": 0.491873690253115,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_2fc87021",
+            "candidate_name": " Lotte van der Berg  Camera",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 5.0,
+            "score": 0.48608982510979526,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_4418bf37",
+            "candidate_name": " Matteo Rossi  Group",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.48449769226547906,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_2b219492",
+            "candidate_name": " Priya Kim  Sous",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.47966021892672217,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_ea0523c1",
+            "candidate_name": " Lukas Schneider  Mix",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 9.5,
+            "total_experience_years": 14.0,
+            "score": 0.478919782018629,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_2bbc8b4b",
+            "candidate_name": " Sofia Rossi  Restaurant",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 2.0,
+            "score": 0.47722961116268,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_dfaa69b5",
+            "candidate_name": " Ji-eun Kim  Business",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5714285714285714,
+            "avg_tenure_years": 1.4,
+            "total_experience_years": 7.0,
+            "score": 0.47532728111378136,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_15a2823e",
+            "candidate_name": " Matteo Rossi  Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.21428571428571427,
+            "avg_tenure_years": 3.5,
+            "total_experience_years": 9.0,
+            "score": 0.4696602101946449,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_4a30477e",
+            "candidate_name": " Aisha Al-Mansoori  Junior",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.4596935579430512,
+            "has_enriched_metadata": false
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:40:46.733036",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:40:49.651515",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "search",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:40:49.766835",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 356,
+        "answer_preview": ":::thinking\nThe user is asking for candidates with experience in Python. I need to identify candidates whose CVs explicitly mention Python as a skill. I will then rank them based on the relevance of their experience.\n:::\n\n\n:::conclusion\nThe candidates with Python experience are: **[Matteo Rossi](cv:cv_15a2823e)** and **[Ji-eun Kim](cv:cv_dfaa69b5)**.\n:::",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

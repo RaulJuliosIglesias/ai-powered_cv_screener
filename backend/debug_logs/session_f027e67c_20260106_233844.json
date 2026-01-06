@@ -1,0 +1,328 @@
+{
+  "session_id": "f027e67c-3a99-4e4c-b883-71cc062deb88",
+  "generated_at": "2026-01-06T23:38:44.283132",
+  "events": [
+    {
+      "timestamp": "2026-01-06T23:38:20.452813",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f027e67c-3a99-4e4c-b883-71cc062deb88"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:38:20.452813",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "give me the ebst 3 for front end",
+        "cv_ids": [
+          "cv_7b585b65",
+          "cv_89633750",
+          "cv_60a4ce44",
+          "cv_aad95907",
+          "cv_abb4caaa",
+          "cv_69194145",
+          "cv_7ea2bbfa",
+          "cv_6b3d0e7b",
+          "cv_3c19faae",
+          "cv_a2e94da1",
+          "cv_e02c7e30",
+          "cv_2e4b5c55",
+          "cv_9fe6102d",
+          "cv_279472f6",
+          "cv_e6bb8619",
+          "cv_8adfe3c5",
+          "cv_52c5cd7a",
+          "cv_de731e48",
+          "cv_4859e46a",
+          "cv_91d67b8f",
+          "cv_d417f982",
+          "cv_86dcc2a7",
+          "cv_98cf0ec5",
+          "cv_d799bbd4"
+        ],
+        "cv_count": 24
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:38:31.787989",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:38:34.764064",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 10,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_52c5cd7a",
+            "candidate_name": " Aisha Adebayo  Junior",
+            "section_type": "experience",
+            "job_hopping_score": 0.42857142857142855,
+            "avg_tenure_years": 1.75,
+            "total_experience_years": 4.0,
+            "score": 0.6529538797319696,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_8adfe3c5",
+            "candidate_name": " Lena Schmidt  Pharmacy",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 3.3333333333333335,
+            "total_experience_years": 15.0,
+            "score": 0.6281992352646962,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_e02c7e30",
+            "candidate_name": " Sofia Mendoza ",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.3333333333333333,
+            "total_experience_years": 2.0,
+            "score": 0.6263791153043038,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_86dcc2a7",
+            "candidate_name": " Lucien Moreau  Creature",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 26.0,
+            "total_experience_years": 26.0,
+            "score": 0.6178160920375898,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_3c19faae",
+            "candidate_name": " Ji-eun Kim  Business",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5714285714285714,
+            "avg_tenure_years": 1.4,
+            "total_experience_years": 7.0,
+            "score": 0.6127084286539174,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_7ea2bbfa",
+            "candidate_name": " Matteo Rossi  Group",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.611826289538469,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_2e4b5c55",
+            "candidate_name": " Lotte van der Berg  Camera",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 5.0,
+            "score": 0.6105499887810919,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_69194145",
+            "candidate_name": " Amir Hassan ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 0.6078238306865261,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_98cf0ec5",
+            "candidate_name": " Sofia Rossi  Graduate",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.6076706263070496,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_abb4caaa",
+            "candidate_name": " Mei Lin Chen  Accessories",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 10.0,
+            "score": 0.607056073035625,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "location",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:38:34.764064",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:38:39.913538",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "search",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:38:40.025421",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 946,
+        "answer_preview": ":::thinking\nThe user is asking for the best 3 candidates for a front-end role. This requires identifying candidates with skills and experience in front-end technologies such as HTML, CSS, JavaScript, and relevant frameworks like React or Angular. I will analyze the CVs to identify candidates with these skills and rank them based on their experience and the depth of their front-end skills. If fewer than 3 candidates have explicit front-end skills, I will include candidates with related design or ...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:38:44.123042",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "search",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:38:44.283132",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 452,
+        "answer_preview": ":::thinking\nThe user is asking for candidates with similar profiles to Lotte van der Berg (cv_2fc87021), who has experience in camera operations and cinematography. I need to identify other candidates who have experience in similar roles, such as camera operators, cinematographers, or those in related fields within the film and television industry. I will prioritize candidates with experience in camera operations, lighting, and film production.\n:::",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}
