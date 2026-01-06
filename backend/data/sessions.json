@@ -56805,10 +56805,156 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-06T01:50:56.532112"
+        },
+        {
+          "id": "f9138302-18aa-482d-ae82-71e79cd50e36",
+          "role": "user",
+          "content": "Who would fit a senior position?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T02:33:14.746700"
+        },
+        {
+          "id": "2aa7430d-a325-48e4-bfac-5333fdb7a216",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for candidates suitable for a senior-level position. I need to evaluate the candidates based on their experience, skills, and qualifications, focusing on aspects that indicate suitability for a senior role, such as years of experience, leadership experience, and relevant skills. I need to provide a list of candidates and a brief summary of why they are considered suitable. The user did not specify a number of candidates, so I will provide all candidates and rank them by suitability.\n:::\n\n\n:::conclusion\n**[Thierry Dubois](cv:cv_ef373562)** is the strongest candidate due to extensive experience and leadership roles. **[Imani Jones](cv:cv_bfddae4c)** is also suitable, with experience as a Senior Concept Artist and mentoring experience. **[Clara Dubois](cv:cv_76d5c7b3)** is less suitable for a senior role due to limited experience.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_ef373562",
+              "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_76d5c7b3",
+              "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_bfddae4c",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 2275.0,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 4.96,
+              "details": "Found 4 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 12886.77,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 5172.5,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for candidates suitable for a senior-level position. I need to evaluate the candidates based on their experience, skills, and qualifications, focusing on aspects that indicate suitability for a senior role, such as years of experience, leadership experience, and relevant skills. I need to provide a list of candidates and a brief summary of why they are considered suitable. The user did not specify a number of candidates, so I will provide all candidates and rank them by suitability.\n:::\n\nHere are the candidates who appear suitable for a senior-level position based on their experience and skills. **[Thierry Dubois](cv:cv_ef373562)** and **[Imani Jones](cv:cv_bfddae4c)** show the most promise, while **[Clara Dubois](cv:cv_76d5c7b3)** appears less suitable due to limited experience.\n\n### Analysis\n\nThe selection is based on the candidates' experience, skills, and roles held. **[Thierry Dubois](cv:cv_ef373562)** and **[Imani Jones](cv:cv_bfddae4c)** have more extensive experience and have held positions that indicate leadership or senior responsibilities. **[Clara Dubois](cv:cv_76d5c7b3)**, on the other hand, has a shorter work history and a more junior role.\n\n| Candidate | Experience | Leadership | Skills | Match |\n|-----------|------------|------------|--------|-------|\n| **[Thierry Dubois](cv:cv_ef373562)** | 14 years | Visual Development Director, leading a team of 8 | Photoshop, Blender/ZBrush, Procreate/iPad, KeyShot, Visual Storytelling & Composition | ⭐⭐⭐⭐ |\n| **[Imani Jones](cv:cv_bfddae4c)** | 4 years | Senior Concept Artist, mentoring junior artists | Concept Design, Character Design, Environment Design, Prop Design, Adobe Photoshop, Procreate, Blender, ZBrush | ⭐⭐⭐ |\n| **[Clara Dubois](cv:cv_76d5c7b3)** | 1 year | None explicitly mentioned | High-Poly Sculpting, Low-Poly Modeling, Texture Painting, UV Unwrapping, Real-Time Rendering | ⭐⭐ |\n\n:::conclusion\n**[Thierry Dubois](cv:cv_ef373562)** is the strongest candidate due to extensive experience and leadership roles. **[Imani Jones](cv:cv_bfddae4c)** is also suitable, with experience as a Senior Concept Artist and mentoring experience. **[Clara Dubois](cv:cv_76d5c7b3)** is less suitable for a senior role due to limited experience.\n:::",
+            "thinking": "The user is asking for candidates suitable for a senior-level position. I need to evaluate the candidates based on their experience, skills, and qualifications, focusing on aspects that indicate suitability for a senior role, such as years of experience, leadership experience, and relevant skills. I need to provide a list of candidates and a brief summary of why they are considered suitable. The user did not specify a number of candidates, so I will provide all candidates and rank them by suitability.",
+            "analysis": "The selection is based on the candidates' experience, skills, and roles held. **[Thierry Dubois](cv:cv_ef373562)** and **[Imani Jones](cv:cv_bfddae4c)** have more extensive experience and have held positions that indicate leadership or senior responsibilities. **[Clara Dubois](cv:cv_76d5c7b3)**, on the other hand, has a shorter work history and a more junior role.",
+            "table_data": null,
+            "conclusion": "**[Thierry Dubois](cv:cv_ef373562)** is the strongest candidate due to extensive experience and leadership roles. **[Imani Jones](cv:cv_bfddae4c)** is also suitable, with experience as a Senior Concept Artist and mentoring experience. **[Clara Dubois](cv:cv_76d5c7b3)** is less suitable for a senior role due to limited experience.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "job_match",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": {
+              "matches": [
+                {
+                  "candidate_name": " Thierry Dubois  Concept",
+                  "cv_id": "cv_ef373562",
+                  "overall_match": 0.0,
+                  "met_requirements": [],
+                  "missing_requirements": [
+                    "Who would fit a senior position?"
+                  ],
+                  "partial_requirements": [],
+                  "strengths": []
+                },
+                {
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "cv_id": "cv_76d5c7b3",
+                  "overall_match": 0.0,
+                  "met_requirements": [],
+                  "missing_requirements": [
+                    "Who would fit a senior position?"
+                  ],
+                  "partial_requirements": [],
+                  "strengths": []
+                },
+                {
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_bfddae4c",
+                  "overall_match": 0.0,
+                  "met_requirements": [],
+                  "missing_requirements": [
+                    "Who would fit a senior position?"
+                  ],
+                  "partial_requirements": [],
+                  "strengths": []
+                }
+              ],
+              "total_requirements": 1
+            },
+            "requirements": {
+              "requirements": [
+                {
+                  "name": "Who would fit a senior position?",
+                  "category": "preferred",
+                  "type": "skill",
+                  "years": null
+                }
+              ],
+              "job_title": "",
+              "total_required": 0,
+              "total_preferred": 1
+            },
+            "best_match": {
+              "candidate_name": " Thierry Dubois  Concept",
+              "cv_id": "cv_ef373562",
+              "overall_match": 0.0,
+              "strengths": []
+            },
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T02:33:39.493494"
         }
       ],
       "created_at": "2026-01-05T23:45:48.965659",
-      "updated_at": "2026-01-06T01:50:56.532112"
+      "updated_at": "2026-01-06T02:33:39.493494"
     },
     {
       "id": "84db24e0-4d60-476f-938f-8f30e271299f",
@@ -58992,10 +59138,314 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-06T02:25:03.101678"
+        },
+        {
+          "id": "f289914e-598e-4466-be7d-5ac29293aaff",
+          "role": "user",
+          "content": "Compare years of experience",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T02:33:17.493088"
+        },
+        {
+          "id": "4dc8e4b2-a04f-424e-979b-9a994b16881c",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a comparison of the total years of experience for specific candidates. I need to extract the total years of experience from each candidate's CV and present them in a table. The user has not specified which candidates to compare, so I will compare all candidates for whom the total experience is explicitly stated in the CV. I will then present the data in a table and highlight the differences in experience.\n:::\n\nI have included all candidates for whom the \"TOTAL EXPERIENCE\" field is explicitly stated in the CV. This allows for a direct comparison of their experience levels as presented in their respective CVs.\n\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_ad302d28)** has the most experience with 47 years, while **[Carlos Mendoza](cv:cv_95a9640e)** and **[Aisha Nkrumah](cv:cv_f89bcd3a)** have the least with 0 years. The other candidates have experience ranging from 2 to 16 years: **[Carmen Rodriguez](cv:cv_15bf5ccf)** (16 years), **[Rajiv Kapoor](cv:cv_a6ab5b03)** (13 years), **[Daan van Dijk](cv:cv_fe460c95)** (11 years), **[Aisha Johnson](cv:cv_3fbba6fd)** (10 years), **[Karim El Amrani](cv:cv_326dd908)** (8 years), **[Priya Patel](cv:cv_87c83f0b)** (6 years), **[Imani Jones](cv:cv_0ede58a9)** (4 years), **[Carlos Mendoza](cv:cv_76a139cd)** (4 years), and **[Kenji Tanaka](cv:cv_9652dd1b)** (2 years).\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_87c83f0b",
+              "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_15bf5ccf",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_f89bcd3a",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_7d645942",
+              "filename": "8742ca7a__Sofia_Mendoza__Environment_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a6ab5b03",
+              "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_3fbba6fd",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_9652dd1b",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_ad302d28",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_326dd908",
+              "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_0ede58a9",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_fe460c95",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_95a9640e",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a05f1836",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_76a139cd",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1377.02,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 20.48,
+              "details": "Found 29 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 21629.18,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6485.86,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for a comparison of the total years of experience for specific candidates. I need to extract the total years of experience from each candidate's CV and present them in a table. The user has not specified which candidates to compare, so I will compare all candidates for whom the total experience is explicitly stated in the CV. I will then present the data in a table and highlight the differences in experience.\n:::\n\nHere's a comparison of the total years of experience for the candidates for whom this information is explicitly stated in their CVs. The table highlights the differences in their experience levels.\n\n### Analysis\nI have included all candidates for whom the \"TOTAL EXPERIENCE\" field is explicitly stated in the CV. This allows for a direct comparison of their experience levels as presented in their respective CVs.\n\n| Candidate | Total Experience | Match |\n|-----------|------------------|-------|\n| **[Isabel Mendoza](cv:cv_ad302d28)** | 47 years | ⭐⭐⭐⭐⭐ |\n| **[Carmen Rodriguez](cv:cv_15bf5ccf)** | 16 years | ⭐⭐⭐⭐ |\n| **[Rajiv Kapoor](cv:cv_a6ab5b03)** | 13 years | ⭐⭐⭐ |\n| **[Daan van Dijk](cv:cv_fe460c95)** | 11 years | ⭐⭐⭐ |\n| **[Aisha Johnson](cv:cv_3fbba6fd)** | 10 years | ⭐⭐⭐ |\n| **[Karim El Amrani](cv:cv_326dd908)** | 8 years | ⭐⭐ |\n| **[Priya Patel](cv:cv_87c83f0b)** | 6 years | ⭐⭐ |\n| **[Imani Jones](cv:cv_0ede58a9)** | 4 years | ⭐ |\n| **[Carlos Mendoza](cv:cv_76a139cd)** | 4 years | ⭐ |\n| **[Kenji Tanaka](cv:cv_9652dd1b)** | 2 years | ⭐ |\n| **[Carlos Mendoza](cv:cv_95a9640e)** | 0 years | ⭐ |\n| **[Aisha Nkrumah](cv:cv_f89bcd3a)** | 0 years | ⭐ |\n\n:::conclusion\n**[Isabel Mendoza](cv:cv_ad302d28)** has the most experience with 47 years, while **[Carlos Mendoza](cv:cv_95a9640e)** and **[Aisha Nkrumah](cv:cv_f89bcd3a)** have the least with 0 years. The other candidates have experience ranging from 2 to 16 years: **[Carmen Rodriguez](cv:cv_15bf5ccf)** (16 years), **[Rajiv Kapoor](cv:cv_a6ab5b03)** (13 years), **[Daan van Dijk](cv:cv_fe460c95)** (11 years), **[Aisha Johnson](cv:cv_3fbba6fd)** (10 years), **[Karim El Amrani](cv:cv_326dd908)** (8 years), **[Priya Patel](cv:cv_87c83f0b)** (6 years), **[Imani Jones](cv:cv_0ede58a9)** (4 years), **[Carlos Mendoza](cv:cv_76a139cd)** (4 years), and **[Kenji Tanaka](cv:cv_9652dd1b)** (2 years).\n:::",
+            "thinking": "The user is asking for a comparison of the total years of experience for specific candidates. I need to extract the total years of experience from each candidate's CV and present them in a table. The user has not specified which candidates to compare, so I will compare all candidates for whom the total experience is explicitly stated in the CV. I will then present the data in a table and highlight the differences in experience.",
+            "analysis": "I have included all candidates for whom the \"TOTAL EXPERIENCE\" field is explicitly stated in the CV. This allows for a direct comparison of their experience levels as presented in their respective CVs.",
+            "table_data": null,
+            "conclusion": "**[Isabel Mendoza](cv:cv_ad302d28)** has the most experience with 47 years, while **[Carlos Mendoza](cv:cv_95a9640e)** and **[Aisha Nkrumah](cv:cv_f89bcd3a)** have the least with 0 years. The other candidates have experience ranging from 2 to 16 years: **[Carmen Rodriguez](cv:cv_15bf5ccf)** (16 years), **[Rajiv Kapoor](cv:cv_a6ab5b03)** (13 years), **[Daan van Dijk](cv:cv_fe460c95)** (11 years), **[Aisha Johnson](cv:cv_3fbba6fd)** (10 years), **[Karim El Amrani](cv:cv_326dd908)** (8 years), **[Priya Patel](cv:cv_87c83f0b)** (6 years), **[Imani Jones](cv:cv_0ede58a9)** (4 years), **[Carlos Mendoza](cv:cv_76a139cd)** (4 years), and **[Kenji Tanaka](cv:cv_9652dd1b)** (2 years).",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "comparison",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T02:33:49.996074"
         }
       ],
       "created_at": "2026-01-06T02:09:13.165606",
-      "updated_at": "2026-01-06T02:25:03.101678"
+      "updated_at": "2026-01-06T02:33:49.996074"
+    },
+    {
+      "id": "bcbe4524-a078-4750-bc4c-c2842b66fc8c",
+      "name": "Media Production 6811",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_fdc3bd4b",
+          "filename": "0d1b1a1b__Aisha_Patel__Animator.pdf",
+          "chunk_count": 4,
+          "content_hash": "ca45c6173c9f80460346aa7b62214a360e6f7cd26a9dc2170052b3f3f446fa86",
+          "uploaded_at": "2026-01-06T02:33:26.196606"
+        },
+        {
+          "id": "cv_a812512f",
+          "filename": "0ed822eb__Antoine_Dubois__Junior_Texture_Artist.pdf",
+          "chunk_count": 3,
+          "content_hash": "a9cb7a1c5ef94b4dd67d4173e415093c32b3a0e98a32c10709536faff7e1d025",
+          "uploaded_at": "2026-01-06T02:33:26.556324"
+        },
+        {
+          "id": "cv_eeb0c224",
+          "filename": "02f9626b__Marco_Rossi__3D_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "dbf5a97b45d0f7f4b8713bf4bf6a3271d80e7fb269868a8aaa1b6e78a243f370",
+          "uploaded_at": "2026-01-06T02:33:27.031921"
+        },
+        {
+          "id": "cv_f42e1a0b",
+          "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "7d4e53308fd3679d49fefec9229d3bd9507d495067e152e54b3c637dfaf95eae",
+          "uploaded_at": "2026-01-06T02:33:27.456631"
+        },
+        {
+          "id": "cv_931531c2",
+          "filename": "5c2c5d6b__Arjun_Mehta__Junior_Concept_Artist.pdf",
+          "chunk_count": 3,
+          "content_hash": "045f3597c76b27df977bb0aca53cbc1741e53fd734f3deab732ee4991014fa14",
+          "uploaded_at": "2026-01-06T02:33:27.829464"
+        },
+        {
+          "id": "cv_5e59115b",
+          "filename": "7ef319f7__Adrian_Morales__Junior_Animator.pdf",
+          "chunk_count": 3,
+          "content_hash": "58219c2a7c09e05918aa8f3454e63dd06869d536f02e13e2e32903ef45ddb1b8",
+          "uploaded_at": "2026-01-06T02:33:28.146167"
+        },
+        {
+          "id": "cv_8ddc81bd",
+          "filename": "8cf248e0__Mateo_Rodriguez__Rigger.pdf",
+          "chunk_count": 5,
+          "content_hash": "7c493207f06b04b41034d40f7b27594eed7d424083ce9a6bc0912a1c671ab1a9",
+          "uploaded_at": "2026-01-06T02:33:28.571435"
+        }
+      ],
+      "messages": [
+        {
+          "id": "bbcdf31c-e1d5-4762-9a5d-6fb049ed4611",
+          "role": "user",
+          "content": "Compare education levels",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T02:33:33.417507"
+        },
+        {
+          "id": "f572a36f-74a2-4a26-b601-ccc4f8dc101e",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a comparison of the education levels of all candidates. I need to extract the highest education level, institution, and field of study for each candidate from the provided CV data. I will then present this information in a table for easy comparison. All candidates are relevant for this task.\n:::\n\nThe table below summarizes the education details for each candidate, including the highest degree obtained, the institution attended, and the field of study. This information is extracted directly from the provided CV excerpts. This allows for a clear comparison of the academic qualifications of each candidate.\n\n\n:::conclusion\nBased on the analysis, here's a summary of the candidates' education: **[Marco Rossi](cv:cv_eeb0c224)** holds a Diploma of Advanced Studies, **[Antoine Dubois](cv:cv_a812512f)**, **[Adrian Morales](cv:cv_5e59115b)**, **[Arjun Mehta](cv:cv_931531c2)**, and **[Aisha Patel](cv:cv_fdc3bd4b)** each have Bachelor's degrees, **[Thierry Dubois](cv:cv_f42e1a0b)** has an M, and **[Mateo Rodriguez](cv:cv_8ddc81bd)** has a Technical Degree.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_eeb0c224",
+              "filename": "02f9626b__Marco_Rossi__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a812512f",
+              "filename": "0ed822eb__Antoine_Dubois__Junior_Texture_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_5e59115b",
+              "filename": "7ef319f7__Adrian_Morales__Junior_Animator.pdf"
+            },
+            {
+              "cv_id": "cv_931531c2",
+              "filename": "5c2c5d6b__Arjun_Mehta__Junior_Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_f42e1a0b",
+              "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_8ddc81bd",
+              "filename": "8cf248e0__Mateo_Rodriguez__Rigger.pdf"
+            },
+            {
+              "cv_id": "cv_fdc3bd4b",
+              "filename": "0d1b1a1b__Aisha_Patel__Animator.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1344.76,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 7.12,
+              "details": "Found 16 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 0,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 3690.47,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for a comparison of the education levels of all candidates. I need to extract the highest education level, institution, and field of study for each candidate from the provided CV data. I will then present this information in a table for easy comparison. All candidates are relevant for this task.\n:::\n\nHere's a comparison of the education levels of all candidates, including the institution and field of study, based on the provided CV data. This allows for a direct comparison of their academic backgrounds.\n\n### Analysis\n\nThe table below summarizes the education details for each candidate, including the highest degree obtained, the institution attended, and the field of study. This information is extracted directly from the provided CV excerpts. This allows for a clear comparison of the academic qualifications of each candidate.\n\n| Candidate | Education Level | Institution | Field of Study |\n|-----------|-----------------|-------------|----------------|\n| **[Marco Rossi](cv:cv_eeb0c224)** | Diploma of Advanced Studies | Istituto Europeo di Design (IED) | Digital Arts |\n| **[Antoine Dubois](cv:cv_a812512f)** | B.A. | GOBELINS, l'école de l'image | Digital Arts and Animation (Specialization in Texturing) |\n| **[Adrian Morales](cv:cv_5e59115b)** | Bachelor of Fine Arts | Universitat de Barcelona | Animation |\n| **[Arjun Mehta](cv:cv_931531c2)** | Bachelor of Fine Arts | National Institute of Design | Visual Arts |\n| **[Thierry Dubois](cv:cv_f42e1a0b)** | M | Unknown | Unknown |\n| **[Mateo Rodriguez](cv:cv_8ddc81bd)** | Technical Degree | Universidad de Buenos Aires (UBA) | Computer Animation |\n| **[Aisha Patel](cv:cv_fdc3bd4b)** | Bachelor of Arts | University of Lagos | Fine Arts (Animation) |\n\n:::conclusion\nBased on the analysis, here's a summary of the candidates' education: **[Marco Rossi](cv:cv_eeb0c224)** holds a Diploma of Advanced Studies, **[Antoine Dubois](cv:cv_a812512f)**, **[Adrian Morales](cv:cv_5e59115b)**, **[Arjun Mehta](cv:cv_931531c2)**, and **[Aisha Patel](cv:cv_fdc3bd4b)** each have Bachelor's degrees, **[Thierry Dubois](cv:cv_f42e1a0b)** has an M, and **[Mateo Rodriguez](cv:cv_8ddc81bd)** has a Technical Degree.\n:::",
+            "thinking": "The user is asking for a comparison of the education levels of all candidates. I need to extract the highest education level, institution, and field of study for each candidate from the provided CV data. I will then present this information in a table for easy comparison. All candidates are relevant for this task.",
+            "analysis": "The table below summarizes the education details for each candidate, including the highest degree obtained, the institution attended, and the field of study. This information is extracted directly from the provided CV excerpts. This allows for a clear comparison of the academic qualifications of each candidate.",
+            "table_data": null,
+            "conclusion": "Based on the analysis, here's a summary of the candidates' education: **[Marco Rossi](cv:cv_eeb0c224)** holds a Diploma of Advanced Studies, **[Antoine Dubois](cv:cv_a812512f)**, **[Adrian Morales](cv:cv_5e59115b)**, **[Arjun Mehta](cv:cv_931531c2)**, and **[Aisha Patel](cv:cv_fdc3bd4b)** each have Bachelor's degrees, **[Thierry Dubois](cv:cv_f42e1a0b)** has an M, and **[Mateo Rodriguez](cv:cv_8ddc81bd)** has a Technical Degree.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "comparison",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T02:33:41.675772"
+        }
+      ],
+      "created_at": "2026-01-06T02:33:20.571326",
+      "updated_at": "2026-01-06T02:33:41.675772"
     }
   ]
 }

@@ -1,0 +1,707 @@
+{
+  "session_id": "bcbe4524-a078-4750-bc4c-c2842b66fc8c",
+  "generated_at": "2026-01-06T02:33:41.760260",
+  "events": [
+    {
+      "timestamp": "2026-01-06T02:33:26.068642",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "bcbe4524-a078-4750-bc4c-c2842b66fc8c"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:26.069183",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_fdc3bd4b",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Aisha Patel ",
+            "job_hopping_score": 0.1,
+            "avg_tenure_years": 5.0,
+            "total_experience_years": 10.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Aisha Patel  =====\n\nCURRENT POSITION: generation and asset management.\nCUR"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Aisha Patel ",
+            "job_hopping_score": 0.1,
+            "avg_tenure_years": 5.0,
+            "total_experience_years": 10.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2 === CURRENT POSITION ===\n\nTITLE: generation and asset management.\nCOMPANY: \nPER"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Aisha Patel ",
+            "job_hopping_score": 0.1,
+            "avg_tenure_years": 5.0,
+            "total_experience_years": 10.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2\n\nTITLE: Adobe Certified Expert\nCOMPANY: After Effects\nPERIOD: Unknown dates\nDURA"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Aisha Patel ",
+            "job_hopping_score": 0.1,
+            "avg_tenure_years": 5.0,
+            "total_experience_years": 10.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Aisha Patel \n\nCURRENT ROLE: generation and asset management.\nCOMPANY: \nTOTAL EXPER"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:26.429655",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "bcbe4524-a078-4750-bc4c-c2842b66fc8c"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:26.429655",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_a812512f",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Antoine Dubois  Junior Texture",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 1.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Antoine Dubois  Junior Texture =====\n\nCURRENT POSITION: repetitive tasks u"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Antoine Dubois  Junior Texture",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 1.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: repetitive tasks using basic Python scripting w"
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": " Antoine Dubois  Junior Texture",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 1.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Antoine Dubois  Junior Texture\n\nCURRENT ROLE: repetitive tasks using basic Python s"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:26.900077",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "bcbe4524-a078-4750-bc4c-c2842b66fc8c"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:26.900077",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_eeb0c224",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Marco Rossi  3D",
+            "job_hopping_score": 0.08333333333333333,
+            "avg_tenure_years": 6.0,
+            "total_experience_years": 12.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Marco Rossi  3D =====\n\nCURRENT POSITION: creation for feature film VFX seq"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Marco Rossi  3D",
+            "job_hopping_score": 0.08333333333333333,
+            "avg_tenure_years": 6.0,
+            "total_experience_years": 12.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2\n\nTITLE: Substance Suite\nCOMPANY: Local Animation Studio\nPERIOD: 1978 - 1990\nDURA"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Marco Rossi  3D",
+            "job_hopping_score": 0.08333333333333333,
+            "avg_tenure_years": 6.0,
+            "total_experience_years": 12.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2 === CURRENT POSITION ===\n\nTITLE: creation for feature film VFX sequences\nCOMPANY"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Marco Rossi  3D",
+            "job_hopping_score": 0.08333333333333333,
+            "avg_tenure_years": 6.0,
+            "total_experience_years": 12.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Marco Rossi  3D\n\nCURRENT ROLE: creation for feature film VFX sequences\nCOMPANY: pri"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:27.327436",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "bcbe4524-a078-4750-bc4c-c2842b66fc8c"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:27.327436",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_f42e1a0b",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Thierry Dubois  Concept",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Thierry Dubois  Concept =====\n\nCURRENT POSITION: and meticulous Lead Conce"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Thierry Dubois  Concept",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2\n\nTITLE: Blender/ZBrush\nCOMPANY: Paris Animation Collective\nPERIOD: 2010 - 2011\nD"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Thierry Dubois  Concept",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2 === CURRENT POSITION ===\n\nTITLE: and meticulous Lead Concept Artist with over 14"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Thierry Dubois  Concept",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Thierry Dubois  Concept\n\nCURRENT ROLE: and meticulous Lead Concept Artist with over"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:27.700238",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "bcbe4524-a078-4750-bc4c-c2842b66fc8c"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:27.700238",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_931531c2",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Arjun Mehta  Junior Concept",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Arjun Mehta  Junior Concept =====\n\nCURRENT POSITION: Completed commissione"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Arjun Mehta  Junior Concept",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: Completed commissioned concept packs for indie\n"
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": " Arjun Mehta  Junior Concept",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Arjun Mehta  Junior Concept\n\nCURRENT ROLE: Completed commissioned concept packs for"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:28.016808",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "bcbe4524-a078-4750-bc4c-c2842b66fc8c"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:28.016808",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_5e59115b",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Adrian Morales  Junior",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Adrian Morales  Junior =====\n\nCURRENT POSITION: engaging 2D and 3D animati"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Adrian Morales  Junior",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: engaging 2D and 3D animations. Adaptable I N T "
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": " Adrian Morales  Junior",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Adrian Morales  Junior\n\nCURRENT ROLE: engaging 2D and 3D animations. Adaptable I N "
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:28.439044",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "bcbe4524-a078-4750-bc4c-c2842b66fc8c"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:28.439044",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_8ddc81bd",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Mateo Rodriguez ",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Mateo Rodriguez  =====\n\nCURRENT POSITION: Authored comprehensive technical"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Mateo Rodriguez ",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3\n\nTITLE: 2008\nCOMPANY: 2012 | Creative Latin Software\nPERIOD: 2008 - 2012\nDURATIO"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Mateo Rodriguez ",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3\n\nTITLE: 2006\nCOMPANY: 2008 | Cine-Post Production House\nPERIOD: 2006 - 2008\nDURA"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Mateo Rodriguez ",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3 === CURRENT POSITION ===\n\nTITLE: Authored comprehensive technical documentation "
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": " Mateo Rodriguez ",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Mateo Rodriguez \n\nCURRENT ROLE: Authored comprehensive technical documentation for\n"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:33.499173",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "bcbe4524-a078-4750-bc4c-c2842b66fc8c"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:33.499173",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Compare education levels",
+        "cv_ids": [
+          "cv_fdc3bd4b",
+          "cv_a812512f",
+          "cv_eeb0c224",
+          "cv_f42e1a0b",
+          "cv_931531c2",
+          "cv_5e59115b",
+          "cv_8ddc81bd"
+        ],
+        "cv_count": 7
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:33.990642",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:37.712819",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 16,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_eeb0c224",
+            "candidate_name": " Marco Rossi  3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.08333333333333333,
+            "avg_tenure_years": 6.0,
+            "total_experience_years": 12.0,
+            "score": 0.750328830638169,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_a812512f",
+            "candidate_name": " Antoine Dubois  Junior Texture",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 1.0,
+            "score": 0.7782852491159523,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_5e59115b",
+            "candidate_name": " Adrian Morales  Junior",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7619920913753839,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_931531c2",
+            "candidate_name": " Arjun Mehta  Junior Concept",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "score": 0.7697914356127588,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_f42e1a0b",
+            "candidate_name": " Thierry Dubois  Concept",
+            "section_type": "experience",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "score": 0.5411366598164246,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_8ddc81bd",
+            "candidate_name": " Mateo Rodriguez ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "score": 0.7336395672668264,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_5e59115b",
+            "candidate_name": " Adrian Morales  Junior",
+            "section_type": "experience",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5303469692758286,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_fdc3bd4b",
+            "candidate_name": " Aisha Patel ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.1,
+            "avg_tenure_years": 5.0,
+            "total_experience_years": 10.0,
+            "score": 0.7409953377987145,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_931531c2",
+            "candidate_name": " Arjun Mehta  Junior Concept",
+            "section_type": "experience",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "score": 0.5270902695336993,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_a812512f",
+            "candidate_name": " Antoine Dubois  Junior Texture",
+            "section_type": "experience",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 1.0,
+            "score": 0.504207168441327,
+            "has_enriched_metadata": false
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:37.713329",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "explicit_multi_candidate_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:39.573428",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 874,
+        "answer_preview": ":::thinking\nThe user is asking for candidates suitable for a senior-level position. I need to evaluate the candidates based on their experience, skills, and qualifications, focusing on aspects that indicate suitability for a senior role, such as years of experience, leadership experience, and relevant skills. I need to provide a list of candidates and a brief summary of why they are considered suitable. The user did not specify a number of candidates, so I will provide all candidates and rank th...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:41.758750",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1098,
+        "answer_preview": ":::thinking\nThe user is asking for a comparison of the education levels of all candidates. I need to extract the highest education level, institution, and field of study for each candidate from the provided CV data. I will then present this information in a table for easy comparison. All candidates are relevant for this task.\n:::\n\nThe table below summarizes the education details for each candidate, including the highest degree obtained, the institution attended, and the field of study. This info...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

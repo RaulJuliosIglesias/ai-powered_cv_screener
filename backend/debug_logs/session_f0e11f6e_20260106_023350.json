@@ -1,0 +1,251 @@
+{
+  "session_id": "f0e11f6e-4b10-4f51-86dc-457267e33888",
+  "generated_at": "2026-01-06T02:33:50.082468",
+  "events": [
+    {
+      "timestamp": "2026-01-06T02:33:17.572892",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f0e11f6e-4b10-4f51-86dc-457267e33888"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:17.572892",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Compare years of experience",
+        "cv_ids": [
+          "cv_326dd908",
+          "cv_a6ab5b03",
+          "cv_87c83f0b",
+          "cv_7d645942",
+          "cv_3fbba6fd",
+          "cv_9652dd1b",
+          "cv_fe460c95",
+          "cv_6b910c2e",
+          "cv_a05f1836",
+          "cv_afc93cd9",
+          "cv_95a9640e",
+          "cv_ad302d28",
+          "cv_0ede58a9",
+          "cv_76a139cd",
+          "cv_f89bcd3a",
+          "cv_15bf5ccf"
+        ],
+        "cv_count": 16
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:21.102690",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 4,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_ef373562",
+            "candidate_name": " Thierry Dubois  Concept",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "score": 0.77737490840287,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_76d5c7b3",
+            "candidate_name": " Clara Dubois  Junior 3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.4,
+            "total_experience_years": 1.0,
+            "score": 0.7736858083945506,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_bfddae4c",
+            "candidate_name": " Imani Jones  Concept",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.7984898025353031,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_bfddae4c",
+            "candidate_name": " Imani Jones  Concept",
+            "section_type": "experience",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.5185209236663298,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:21.600392",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 29,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_87c83f0b",
+            "candidate_name": " Priya Patel  3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 0.8316835126773374,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_15bf5ccf",
+            "candidate_name": " Carmen Rodriguez  3D",
+            "section_type": "skills",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 16.0,
+            "score": 0.811627048603531,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_f89bcd3a",
+            "candidate_name": " Aisha Nkrumah  Junior 2D",
+            "section_type": "skills",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.8227591547454349,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_7d645942",
+            "candidate_name": " Sofia Mendoza  Environment",
+            "section_type": "skills",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "score": 0.5297861447217603,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_a6ab5b03",
+            "candidate_name": " Rajiv Kapoor  Technical",
+            "section_type": "experience",
+            "job_hopping_score": 0.23076923076923078,
+            "avg_tenure_years": 3.25,
+            "total_experience_years": 13.0,
+            "score": 0.5015579027285113,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_3fbba6fd",
+            "candidate_name": " Aisha Johnson ",
+            "section_type": "skills",
+            "job_hopping_score": 0.1,
+            "avg_tenure_years": 5.0,
+            "total_experience_years": 10.0,
+            "score": 0.8005543550556258,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_9652dd1b",
+            "candidate_name": " Kenji Tanaka  3D Artist",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "score": 0.7971139964246726,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_ad302d28",
+            "candidate_name": " Isabel Mendoza  3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.19047619047619047,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 47.0,
+            "score": 0.7855699614605068,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_15bf5ccf",
+            "candidate_name": " Carmen Rodriguez  3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 16.0,
+            "score": 0.5109109290956009,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_326dd908",
+            "candidate_name": " Karim El Amrani  3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.09090909090909091,
+            "avg_tenure_years": 5.5,
+            "total_experience_years": 8.0,
+            "score": 0.8122267220404213,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    }
+  ]
+}

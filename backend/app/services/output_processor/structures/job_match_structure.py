@@ -18,7 +18,7 @@ This structure is used when user asks for job matching:
 import logging
 from typing import Dict, Any, List, Optional
 
-from ..modules import ThinkingModule, ConclusionModule, GapAnalysisModule
+from ..modules import ThinkingModule, ConclusionModule, GapAnalysisModule, AnalysisModule
 from ..modules.requirements_module import RequirementsModule
 from ..modules.match_score_module import MatchScoreModule
 
@@ -34,6 +34,7 @@ class JobMatchStructure:
     
     def __init__(self):
         self.thinking_module = ThinkingModule()
+        self.analysis_module = AnalysisModule()
         self.requirements_module = RequirementsModule()
         self.match_score_module = MatchScoreModule()
         self.gap_analysis_module = GapAnalysisModule()
@@ -88,6 +89,9 @@ class JobMatchStructure:
         # Extract conclusion
         conclusion = self.conclusion_module.extract(llm_output)
         
+        # Extract analysis
+        analysis = self.analysis_module.extract(llm_output, "", conclusion or "")
+        
         # Get best match
         best_match = None
         if match_data and match_data.matches:
@@ -103,6 +107,7 @@ class JobMatchStructure:
             "structure_type": "job_match",
             "query": query,
             "thinking": thinking,
+            "analysis": analysis,
             "requirements": requirements_data.to_dict() if requirements_data else None,
             "match_scores": match_data.to_dict() if match_data else None,
             "gap_analysis": gap_data.to_dict() if gap_data else None,

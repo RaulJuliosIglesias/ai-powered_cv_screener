@@ -18,7 +18,7 @@ This structure is used when user asks for ranking:
 import logging
 from typing import Dict, Any, List, Optional
 
-from ..modules import ThinkingModule, ConclusionModule
+from ..modules import ThinkingModule, ConclusionModule, AnalysisModule
 from ..modules.ranking_criteria_module import RankingCriteriaModule
 from ..modules.ranking_table_module import RankingTableModule
 from ..modules.top_pick_module import TopPickModule
@@ -35,6 +35,7 @@ class RankingStructure:
     
     def __init__(self):
         self.thinking_module = ThinkingModule()
+        self.analysis_module = AnalysisModule()
         self.ranking_criteria_module = RankingCriteriaModule()
         self.ranking_table_module = RankingTableModule()
         self.top_pick_module = TopPickModule()
@@ -90,10 +91,14 @@ class RankingStructure:
         # Extract conclusion
         conclusion = self.conclusion_module.extract(llm_output)
         
+        # Extract analysis (between thinking and conclusion)
+        analysis = self.analysis_module.extract(llm_output, "", conclusion or "")
+        
         return {
             "structure_type": "ranking",
             "query": query,
             "thinking": thinking,
+            "analysis": analysis,
             "criteria": criteria_data.to_dict() if criteria_data else None,
             "ranking_table": ranking_data.to_dict() if ranking_data else None,
             "top_pick": {

@@ -1,0 +1,28 @@
+{
+  "session_id": "89b1b406-a8ff-4483-9569-97bd61ea38c7",
+  "generated_at": "2026-01-06T02:33:39.575173",
+  "events": [
+    {
+      "timestamp": "2026-01-06T02:33:14.893423",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "89b1b406-a8ff-4483-9569-97bd61ea38c7"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:33:14.893423",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Who would fit a senior position?",
+        "cv_ids": [
+          "cv_ef373562",
+          "cv_76d5c7b3",
+          "cv_bfddae4c"
+        ],
+        "cv_count": 3
+      }
+    }
+  ]
+}

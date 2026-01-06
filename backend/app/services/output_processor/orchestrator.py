@@ -279,30 +279,34 @@ class OutputOrchestrator:
                 "assessment": structure_data.get("assessment"),
             }
         
-        # For search, add results table
+        # For search, add results table and analysis
         elif structure_data.get("structure_type") == "search":
             structured.results_table = structure_data.get("results_table")
             structured.total_results = structure_data.get("total_results", 0)
             structured.query = structure_data.get("query", "")
+            structured.analysis = structure_data.get("analysis")
         
-        # For ranking, add ranking table and top pick
+        # For ranking, add ranking table, top pick and analysis
         elif structure_data.get("structure_type") == "ranking":
             structured.ranking_table = structure_data.get("ranking_table")
             structured.top_pick = structure_data.get("top_pick")
             structured.ranking_criteria = structure_data.get("ranking_criteria")
+            structured.analysis = structure_data.get("analysis")
         
-        # For job match, add match scores
+        # For job match, add match scores and analysis
         elif structure_data.get("structure_type") == "job_match":
             structured.match_scores = structure_data.get("match_scores")
             structured.requirements = structure_data.get("requirements")
             structured.best_match = structure_data.get("best_match")
+            structured.analysis = structure_data.get("analysis")
         
-        # For team build, add team composition
+        # For team build, add team composition and analysis
         elif structure_data.get("structure_type") == "team_build":
             structured.team_composition = structure_data.get("team_composition")
             structured.skill_coverage = structure_data.get("skill_coverage")
             structured.team_risks = structure_data.get("team_risks")
             structured.team_requirements = structure_data.get("team_requirements")
+            structured.analysis = structure_data.get("analysis")
         
         # For verification, add claim/evidence/verdict
         elif structure_data.get("structure_type") == "verification":

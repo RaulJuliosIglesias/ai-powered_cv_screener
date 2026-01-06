@@ -19,7 +19,7 @@ This structure is used when user asks for team building:
 import logging
 from typing import Dict, Any, List, Optional
 
-from ..modules import ThinkingModule, ConclusionModule
+from ..modules import ThinkingModule, ConclusionModule, AnalysisModule
 from ..modules.team_requirements_module import TeamRequirementsModule
 from ..modules.team_composition_module import TeamCompositionModule
 from ..modules.skill_coverage_module import SkillCoverageModule
@@ -35,6 +35,7 @@ class TeamBuildStructure:
     
     def __init__(self):
         self.thinking_module = ThinkingModule()
+        self.analysis_module = AnalysisModule()
         self.team_requirements_module = TeamRequirementsModule()
         self.team_composition_module = TeamCompositionModule()
         self.skill_coverage_module = SkillCoverageModule()
@@ -87,10 +88,14 @@ class TeamBuildStructure:
         # Extract conclusion
         conclusion = self.conclusion_module.extract(llm_output)
         
+        # Extract analysis
+        analysis = self.analysis_module.extract(llm_output, "", conclusion or "")
+        
         return {
             "structure_type": "team_build",
             "query": query,
             "thinking": thinking,
+            "analysis": analysis,
             "team_requirements": requirements_data.to_dict() if requirements_data else None,
             "team_composition": composition_data.to_dict() if composition_data else None,
             "skill_coverage": coverage_data.to_dict() if coverage_data else None,

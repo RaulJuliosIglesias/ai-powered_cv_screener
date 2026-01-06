@@ -555,6 +555,7 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
         <ThinkingSection content={thinking} />
         {direct_answer && <DirectAnswerSection content={direct_answer} onOpenCV={onOpenCV} cvMap={searchCvMap} />}
         <SearchResultsTable data={structuredOutput.results_table} onOpenCV={onOpenCV} />
+        {analysis && <AnalysisSection content={analysis} onOpenCV={onOpenCV} cvMap={searchCvMap} />}
         {conclusion && <ConclusionSection content={conclusion} onOpenCV={onOpenCV} cvMap={searchCvMap} />}
       </div>
     );
@@ -573,6 +574,7 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
         <ThinkingSection content={thinking} />
         {structuredOutput.top_pick && <TopPickCard data={structuredOutput.top_pick} onOpenCV={onOpenCV} />}
         <RankingTable data={structuredOutput.ranking_table} onOpenCV={onOpenCV} />
+        {analysis && <AnalysisSection content={analysis} onOpenCV={onOpenCV} cvMap={rankCvMap} />}
         {conclusion && <ConclusionSection content={conclusion} onOpenCV={onOpenCV} cvMap={rankCvMap} />}
       </div>
     );
@@ -591,6 +593,7 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
         <ThinkingSection content={thinking} />
         {structuredOutput.best_match && <TopPickCard data={structuredOutput.best_match} onOpenCV={onOpenCV} />}
         <MatchScoreCard data={structuredOutput.match_scores} onOpenCV={onOpenCV} />
+        {analysis && <AnalysisSection content={analysis} onOpenCV={onOpenCV} cvMap={matchCvMap} />}
         {conclusion && <ConclusionSection content={conclusion} onOpenCV={onOpenCV} cvMap={matchCvMap} />}
       </div>
     );
@@ -608,6 +611,7 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
       <div className="space-y-3">
         <ThinkingSection content={thinking} />
         <TeamCompositionView data={structuredOutput} onOpenCV={onOpenCV} />
+        {analysis && <AnalysisSection content={analysis} onOpenCV={onOpenCV} cvMap={teamCvMap} />}
         {conclusion && <ConclusionSection content={conclusion} onOpenCV={onOpenCV} cvMap={teamCvMap} />}
       </div>
     );

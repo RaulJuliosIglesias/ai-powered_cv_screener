@@ -17,7 +17,7 @@ This structure is used when user searches for candidates:
 import logging
 from typing import Dict, Any, List, Optional
 
-from ..modules import ThinkingModule, DirectAnswerModule, ConclusionModule
+from ..modules import ThinkingModule, DirectAnswerModule, ConclusionModule, AnalysisModule
 from ..modules.results_table_module import ResultsTableModule
 
 logger = logging.getLogger(__name__)
@@ -33,6 +33,7 @@ class SearchStructure:
     def __init__(self):
         self.thinking_module = ThinkingModule()
         self.direct_answer_module = DirectAnswerModule()
+        self.analysis_module = AnalysisModule()
         self.results_table_module = ResultsTableModule()
         self.conclusion_module = ConclusionModule()
     
@@ -71,11 +72,15 @@ class SearchStructure:
         # Extract conclusion
         conclusion = self.conclusion_module.extract(llm_output)
         
+        # Extract analysis (between direct answer and conclusion)
+        analysis = self.analysis_module.extract(llm_output, direct_answer or "", conclusion or "")
+        
         return {
             "structure_type": "search",
             "query": query,
             "thinking": thinking,
             "direct_answer": direct_answer,
+            "analysis": analysis,
             "results_table": results_data.to_dict() if results_data else None,
             "total_results": results_data.total_candidates if results_data else 0,
             "conclusion": conclusion,
