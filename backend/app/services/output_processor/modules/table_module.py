@@ -80,7 +80,11 @@ class TableModule:
         return "\n".join(lines)
     
     def _parse_markdown_table(self, text: str) -> Optional[TableData]:
-        """Parse markdown table and extract TableRow objects with match scores."""
+        """Parse markdown table and extract TableRow objects with match scores.
+        
+        IMPORTANT: This only parses CANDIDATE COMPARISON tables.
+        Risk Assessment tables are handled separately by the frontend.
+        """
         # Find table region
         lines = text.split('\n')
         table_lines = []
@@ -106,6 +110,27 @@ class TableModule:
         
         if not raw_headers:
             return None
+        
+        # CRITICAL: Detect Risk Assessment tables and SKIP them
+        # Risk Assessment tables have headers like: Factor, Status, Details
+        # Or first column contains risk indicators
+        first_header_lower = raw_headers[0].lower() if raw_headers else ""
+        risk_table_indicators = ['factor', 'risk', 'metric', 'indicator', 'category', 'skill area', 'area']
+        
+        if any(indicator in first_header_lower for indicator in risk_table_indicators):
+            logger.info(f"[TABLE] SKIPPING Risk Assessment table (header: {raw_headers[0]})")
+            return None
+        
+        # Also check if first data row contains risk factors (not candidate names)
+        if len(table_lines) > 2:
+            first_data_row = table_lines[2] if len(table_lines) > 2 else ""
+            first_cells = [cell.strip() for cell in first_data_row.split('|') if cell.strip()]
+            if first_cells:
+                first_cell_lower = first_cells[0].lower()
+                risk_row_indicators = ['red flag', 'job hopping', 'employment gap', 'stability', 'experience', '🚩', '🔄', '⏸️', '📊', '🎯']
+                if any(indicator in first_cell_lower for indicator in risk_row_indicators):
+                    logger.info(f"[TABLE] SKIPPING Risk Assessment table (first row: {first_cells[0][:30]})")
+                    return None
         
         # Find separator
         separator_idx = None

@@ -11,7 +11,12 @@ import {
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import SingleCandidateProfile from './SingleCandidateProfile';
-import { isSingleCandidateResponse, parseSingleCandidateProfile } from './singleCandidateParser';
+import { 
+  isSingleCandidateResponse, 
+  parseSingleCandidateProfile,
+  isRiskAssessmentResponse,
+  parseRiskAssessmentResponse
+} from './singleCandidateParser';
 
 /**
  * StructuredOutputRenderer - Visual structured output component
@@ -361,6 +366,108 @@ const ConclusionSection = ({ content, onOpenCV, cvMap }) => {
   );
 };
 
+// =============================================================================
+// RISK ASSESSMENT STANDALONE COMPONENT
+// =============================================================================
+
+/**
+ * RiskAssessmentProfile - Renders standalone Risk Assessment queries
+ * Used when user asks "give me risks about X" without full profile
+ */
+const RiskAssessmentProfile = ({ 
+  candidateName, 
+  cvId, 
+  riskAnalysis, 
+  riskAssessment, 
+  conclusion,
+  onOpenCV 
+}) => {
+  return (
+    <div className="space-y-4">
+      {/* Header with candidate name */}
+      <div className="rounded-xl bg-gradient-to-r from-orange-900/30 to-red-900/30 border border-orange-700/50 p-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-orange-600/30 flex items-center justify-center">
+            <span className="text-xl">🚩</span>
+          </div>
+          <div>
+            <h2 className="text-xl font-bold text-orange-300">Risk Analysis</h2>
+            <div className="flex items-center gap-2 text-sm text-gray-400">
+              {cvId && onOpenCV && (
+                <button
+                  onClick={() => onOpenCV(cvId, candidateName)}
+                  className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  <FileText className="w-3.5 h-3.5" />
+                  <span>{candidateName}</span>
+                </button>
+              )}
+              {!onOpenCV && <span>{candidateName}</span>}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Risk Analysis Text */}
+      {riskAnalysis && (
+        <div className="rounded-xl border-l-4 border-orange-500 bg-slate-800/50 p-4">
+          <div className="prose prose-sm max-w-none dark:prose-invert text-gray-200">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {riskAnalysis}
+            </ReactMarkdown>
+          </div>
+        </div>
+      )}
+      
+      {/* Risk Assessment Table */}
+      {riskAssessment && riskAssessment.length > 0 && (
+        <div className="rounded-xl bg-slate-800/50 p-4">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-lg">⚠️</span>
+            <span className="font-semibold text-orange-300">Risk Assessment</span>
+          </div>
+          
+          <div className="overflow-x-auto rounded-lg border border-slate-700">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-slate-700/50 border-b border-slate-600">
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">Factor</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">Status</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">Details</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-700/50">
+                {riskAssessment.map((row, idx) => (
+                  <tr key={idx} className="hover:bg-slate-700/30 transition-colors">
+                    <td className="px-4 py-3 text-sm text-slate-200 font-medium">{row.factor}</td>
+                    <td className="px-4 py-3 text-sm text-slate-300">{row.status}</td>
+                    <td className="px-4 py-3 text-sm text-slate-400">{row.details}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+      
+      {/* Conclusion */}
+      {conclusion && (
+        <div className="rounded-xl border border-emerald-700/50 bg-emerald-900/20 p-4">
+          <div className="flex items-center gap-2 mb-3">
+            <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+            <span className="font-semibold text-emerald-400">Assessment</span>
+          </div>
+          <div className="prose prose-sm max-w-none dark:prose-invert text-gray-200">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {conclusion}
+            </ReactMarkdown>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 // Build cvMap from table data - maps normalized names to cv_ids
 const buildCvMapFromTable = (tableData) => {
   const cvMap = {};
@@ -390,8 +497,23 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
   
   const { thinking, direct_answer, analysis, table_data, conclusion, raw_content } = structuredOutput;
   
-  // Detect if this is a single candidate response
+  // PRIORITY 1: Detect standalone Risk Assessment response
+  const riskAssessmentData = useMemo(() => {
+    if (raw_content && isRiskAssessmentResponse(raw_content)) {
+      const parsed = parseRiskAssessmentResponse(raw_content);
+      if (parsed) {
+        console.log('[STRUCTURED_OUTPUT] Detected Risk Assessment response for:', parsed.candidateName);
+        return parsed;
+      }
+    }
+    return null;
+  }, [raw_content]);
+  
+  // PRIORITY 2: Detect single candidate profile response
   const singleCandidateData = useMemo(() => {
+    // Skip if we already detected Risk Assessment
+    if (riskAssessmentData) return null;
+    
     // Check raw_content for single candidate indicators
     if (raw_content && isSingleCandidateResponse(raw_content)) {
       const parsed = parseSingleCandidateProfile(raw_content);
@@ -408,12 +530,32 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
     }
     
     return null;
-  }, [raw_content, table_data]);
+  }, [raw_content, table_data, riskAssessmentData]);
   
   // Build cvMap from table to resolve "📄 Name" patterns without explicit cv_id
   const cvMap = buildCvMapFromTable(table_data);
   
-  // If single candidate with parsed profile, render SingleCandidateProfile
+  // RENDER: Risk Assessment standalone profile
+  if (riskAssessmentData) {
+    return (
+      <div className="space-y-2">
+        {/* 1. Thinking Process (collapsible) */}
+        <ThinkingSection content={thinking} />
+        
+        {/* 2. Risk Assessment Profile - specialized for risk queries */}
+        <RiskAssessmentProfile
+          candidateName={riskAssessmentData.candidateName}
+          cvId={riskAssessmentData.cvId}
+          riskAnalysis={riskAssessmentData.riskAnalysis}
+          riskAssessment={riskAssessmentData.riskAssessment}
+          conclusion={riskAssessmentData.conclusion}
+          onOpenCV={onOpenCV}
+        />
+      </div>
+    );
+  }
+  
+  // RENDER: Single candidate with full profile
   if (singleCandidateData) {
     return (
       <div className="space-y-2">
@@ -438,7 +580,7 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
     );
   }
   
-  // Standard multi-candidate rendering
+  // RENDER: Standard multi-candidate response
   // Detect if we should hide comparison table (single candidate via table detection)
   const isSingleCandidateTable = table_data?.rows?.length === 1;
   

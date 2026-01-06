@@ -364,6 +364,40 @@ else:
 
 ---
 
+## MODULAR ARCHITECTURE EXPLAINED
+
+### User's Vision
+Risk Assessment is **ONE reusable module** that gets inserted into different contexts:
+
+| Query Type | Template Used | Risk Assessment Location |
+|------------|---------------|-------------------------|
+| "give me all about X" | `SINGLE_CANDIDATE_TEMPLATE` | Embedded in SingleCandidateProfile |
+| "give me risks about X" | `RED_FLAGS_TEMPLATE` | Standalone RiskAssessmentProfile |
+| "compare X and Y" | `COMPARISON_TEMPLATE` | (future: per-candidate) |
+
+### How It Works
+
+1. **Backend (`templates.py`)**: 
+   - `_extract_enriched_metadata()` builds the Risk Assessment table from chunk metadata
+   - Both `SINGLE_CANDIDATE_TEMPLATE` and `RED_FLAGS_TEMPLATE` use `{risk_assessment_section}`
+   - The same pre-calculated data feeds both templates
+
+2. **Frontend Detection (`singleCandidateParser.js`)**:
+   - `isSingleCandidateResponse()` → detects full profile queries
+   - `isRiskAssessmentResponse()` → detects standalone risk queries
+   - `extractRiskAssessment()` → parses Risk Assessment table from markdown
+
+3. **Frontend Rendering (`StructuredOutputRenderer.jsx`)**:
+   - Priority 1: Check for Risk Assessment response → render `RiskAssessmentProfile`
+   - Priority 2: Check for Single Candidate response → render `SingleCandidateProfile`
+   - Priority 3: Standard multi-candidate rendering
+
+4. **Table Parsing (`table_module.py`)**:
+   - Now SKIPS Risk Assessment tables (detects by header "Factor" or risk indicators)
+   - Only parses actual Candidate Comparison tables
+
+---
+
 ## Issue Found: RED_FLAGS_TEMPLATE Bug
 
 ### Problem

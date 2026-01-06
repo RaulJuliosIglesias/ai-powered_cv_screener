@@ -27,6 +27,80 @@ export const isSingleCandidateResponse = (content) => {
 };
 
 /**
+ * Detect if this is a standalone Risk Assessment response
+ * (not embedded in SingleCandidateProfile)
+ * @param {string} content - Raw LLM output
+ * @returns {boolean}
+ */
+export const isRiskAssessmentResponse = (content) => {
+  if (!content) return false;
+  
+  // Risk Assessment indicators
+  const riskIndicators = [
+    /### 🚩 Risk Analysis/,                    // Risk Analysis header
+    /RED FLAGS ANALYSIS/i,                      // Template marker
+    /Risk factors identified for/i,             // Risk statement
+    /No significant red flags detected/i,       // Clean profile statement
+    /### ⚠️ Risk Assessment/,                  // Risk Assessment section
+  ];
+  
+  const hasRiskIndicators = riskIndicators.filter(pattern => pattern.test(content)).length >= 2;
+  
+  // Make sure it's NOT a full SingleCandidateProfile
+  const isNotFullProfile = !isSingleCandidateResponse(content);
+  
+  return hasRiskIndicators && isNotFullProfile;
+};
+
+/**
+ * Parse Risk Assessment standalone response
+ * @param {string} content - Raw LLM output
+ * @returns {{ candidateName: string, cvId: string, riskAnalysis: string, riskAssessment: Array, conclusion: string }}
+ */
+export const parseRiskAssessmentResponse = (content) => {
+  if (!content) return null;
+  
+  // Extract candidate info from risk analysis header
+  // Pattern: ### 🚩 Risk Analysis for **[Name](cv:cv_xxx)**
+  const headerPattern = /### 🚩 Risk Analysis for \*\*\[([^\]]+)\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\*\*/;
+  const headerMatch = content.match(headerPattern);
+  
+  let candidateName = 'Unknown Candidate';
+  let cvId = '';
+  
+  if (headerMatch) {
+    candidateName = headerMatch[1].trim();
+    cvId = headerMatch[2].trim();
+  }
+  
+  // Extract risk analysis text (between header and Risk Assessment table)
+  let riskAnalysis = '';
+  const analysisStart = content.indexOf('### 🚩 Risk Analysis');
+  if (analysisStart !== -1) {
+    const analysisEnd = content.indexOf('### ⚠️ Risk Assessment', analysisStart);
+    if (analysisEnd !== -1) {
+      riskAnalysis = content.substring(analysisStart, analysisEnd).trim();
+      // Remove the header itself
+      riskAnalysis = riskAnalysis.replace(/### 🚩 Risk Analysis[^\n]*\n/, '').trim();
+    }
+  }
+  
+  // Extract Risk Assessment table using existing function
+  const riskAssessment = extractRiskAssessment(content);
+  
+  // Extract conclusion
+  const { assessment } = extractAssessment(content);
+  
+  return {
+    candidateName,
+    cvId,
+    riskAnalysis,
+    riskAssessment,
+    conclusion: assessment
+  };
+};
+
+/**
  * Extract candidate name and CV ID from header
  * @param {string} content 
  * @returns {{ name: string, cvId: string } | null}
