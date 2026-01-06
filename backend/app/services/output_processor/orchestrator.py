@@ -393,6 +393,31 @@ class OutputOrchestrator:
             if structure_data.get("analysis"):
                 parts.append(structure_data["analysis"])
         
+        elif structure_type == "ranking":
+            # Format ranking - CRITICAL: Include top_pick info for context resolver
+            top_pick = structure_data.get("top_pick")
+            if top_pick:
+                name = top_pick.get("candidate_name", "")
+                cv_id = top_pick.get("cv_id", "")
+                score = top_pick.get("overall_score", 0)
+                # Include in format that context_resolver can parse: [📄](cv:cv_xxx) **Name**
+                parts.append(f"Top Recommendation: [📄](cv:{cv_id}) **{name}** ({score:.0f}%)")
+                if top_pick.get("justification"):
+                    parts.append(top_pick["justification"])
+            if structure_data.get("analysis"):
+                parts.append(structure_data["analysis"])
+        
+        elif structure_type == "job_match":
+            # Format job match - Include best match info for context resolver
+            best_match = structure_data.get("best_match")
+            if best_match and isinstance(best_match, dict):
+                name = best_match.get("candidate_name", "")
+                cv_id = best_match.get("cv_id", "")
+                score = best_match.get("score", 0)
+                parts.append(f"Top Recommendation: [📄](cv:{cv_id}) **{name}** ({score:.0f}%)")
+            if structure_data.get("analysis"):
+                parts.append(structure_data["analysis"])
+        
         # Conclusion
         if structure_data.get("conclusion") or structure_data.get("assessment"):
             conclusion = structure_data.get("conclusion") or structure_data.get("assessment")

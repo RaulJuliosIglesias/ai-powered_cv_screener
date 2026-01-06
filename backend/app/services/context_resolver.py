@@ -92,14 +92,18 @@ def extract_candidate_from_history(
         Dict with "name" and "cv_id" if found, None otherwise
     """
     if not conversation_history:
+        logger.warning("[CONTEXT_RESOLVER] extract_candidate_from_history: No history provided")
         return None
     
+    logger.info(f"[CONTEXT_RESOLVER] Searching {len(conversation_history)} messages for {reference_type}")
+    
     # Look through history from most recent to oldest
-    for msg in reversed(conversation_history):
+    for idx, msg in enumerate(reversed(conversation_history)):
         if msg.get("role") != "assistant":
             continue
         
         content = msg.get("content", "")
+        logger.info(f"[CONTEXT_RESOLVER] Checking assistant message {idx}, length={len(content)}")
         
         # Pattern 1: Top Recommendation section (from ranking/job_match responses)
         # "Top Recommendation\n\nCarmen Rodriguez 3D\n96%"
@@ -288,9 +292,20 @@ def resolve_query_with_context(
     Returns:
         Tuple of (resolved_query, candidate_name, cv_id)
     """
+    # Debug: Log conversation history summary
+    if conversation_history:
+        logger.info(f"[CONTEXT_RESOLVER] Conversation history has {len(conversation_history)} messages")
+        for i, msg in enumerate(conversation_history[-4:]):  # Last 4 messages
+            role = msg.get("role", "?")
+            content = msg.get("content", "")[:200]
+            logger.info(f"[CONTEXT_RESOLVER] History[{i}] {role}: {content}...")
+    else:
+        logger.warning("[CONTEXT_RESOLVER] No conversation history provided!")
+    
     resolution = resolve_reference(query, conversation_history)
     
     if not resolution.resolved or not resolution.candidate_name:
+        logger.info(f"[CONTEXT_RESOLVER] No resolution found for query: {query}")
         return query, None, None
     
     # Replace reference patterns with the actual name
@@ -298,16 +313,26 @@ def resolve_query_with_context(
     name = resolution.candidate_name
     
     replacements = [
+        # #1 candidate patterns
+        (r'#1\s*candidate', name),
+        (r'#1\s*candidato', name),
+        (r'(the\s+)?#1\b', name),
+        (r'full\s+profile\s+of\s+(the\s+)?#\d+\s*(candidate)?', f'full profile of {name}'),
+        (r'profile\s+of\s+(the\s+)?#\d+', f'profile of {name}'),
+        # Top/best candidate patterns
         (r'\b(the\s+)?top\s+candidate\b', name),
         (r'\b(el\s+)?top\s+candidate\b', name),
         (r'\b(el\s+)?(mejor|best)\s+(candidato|candidate)\b', name),
         (r'\b(the\s+)?best\s+one\b', name),
+        (r'\b(the\s+)?first\s+candidate\b', name),
+        (r'\b(the\s+)?first\s+one\b', name),
+        # This/that patterns
         (r'\b(this|that|ese|este|esta)\s+(candidato|candidate|person|persona)\b', name),
     ]
     
     for pattern, replacement in replacements:
         resolved_query = re.sub(pattern, replacement, resolved_query, flags=re.IGNORECASE)
     
-    logger.info(f"[CONTEXT_RESOLVER] Resolved '{query}' -> '{resolved_query}'")
+    logger.info(f"[CONTEXT_RESOLVER] Resolved '{query}' -> '{resolved_query}' (candidate: {name})")
     
     return resolved_query, resolution.candidate_name, resolution.cv_id

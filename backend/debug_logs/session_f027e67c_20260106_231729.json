@@ -1,0 +1,513 @@
+{
+  "session_id": "f027e67c-3a99-4e4c-b883-71cc062deb88",
+  "generated_at": "2026-01-06T23:17:29.957975",
+  "events": [
+    {
+      "timestamp": "2026-01-06T23:16:16.194852",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f027e67c-3a99-4e4c-b883-71cc062deb88"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:16:16.194852",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Rank candidates by experience",
+        "cv_ids": [
+          "cv_7b585b65",
+          "cv_89633750",
+          "cv_60a4ce44",
+          "cv_aad95907",
+          "cv_abb4caaa",
+          "cv_69194145",
+          "cv_7ea2bbfa",
+          "cv_6b3d0e7b",
+          "cv_3c19faae",
+          "cv_a2e94da1",
+          "cv_e02c7e30",
+          "cv_2e4b5c55",
+          "cv_9fe6102d",
+          "cv_279472f6",
+          "cv_e6bb8619",
+          "cv_8adfe3c5",
+          "cv_52c5cd7a",
+          "cv_de731e48",
+          "cv_4859e46a",
+          "cv_91d67b8f",
+          "cv_d417f982",
+          "cv_86dcc2a7",
+          "cv_98cf0ec5",
+          "cv_d799bbd4"
+        ],
+        "cv_count": 24
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:16:19.746743",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 29,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_91d67b8f",
+            "candidate_name": " Aisha Al Mansoori ",
+            "section_type": "experience",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.25,
+            "total_experience_years": 6.0,
+            "score": 0.8257023319037596,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_89633750",
+            "candidate_name": " Matteo Rossi  Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.21428571428571427,
+            "avg_tenure_years": 3.5,
+            "total_experience_years": 9.0,
+            "score": 0.6254635763760772,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_8adfe3c5",
+            "candidate_name": " Lena Schmidt  Pharmacy",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 3.3333333333333335,
+            "total_experience_years": 15.0,
+            "score": 0.7947766603307009,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_aad95907",
+            "candidate_name": " Lukas Schneider  Mix",
+            "section_type": "experience",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 9.5,
+            "total_experience_years": 14.0,
+            "score": 0.7977532033955456,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_e6bb8619",
+            "candidate_name": " Diego Mendoza  Protocol",
+            "section_type": "skills",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.6292614493567301,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_d417f982",
+            "candidate_name": " Lukas Schneider ",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "score": 0.5704185297095191,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_52c5cd7a",
+            "candidate_name": " Aisha Adebayo  Junior",
+            "section_type": "experience",
+            "job_hopping_score": 0.42857142857142855,
+            "avg_tenure_years": 1.75,
+            "total_experience_years": 4.0,
+            "score": 0.5256595214729577,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_3c19faae",
+            "candidate_name": " Ji-eun Kim  Business",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5714285714285714,
+            "avg_tenure_years": 1.4,
+            "total_experience_years": 7.0,
+            "score": 0.559397555866293,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_e02c7e30",
+            "candidate_name": " Sofia Mendoza ",
+            "section_type": "experience",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.3333333333333333,
+            "total_experience_years": 2.0,
+            "score": 0.5678537575943101,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_4859e46a",
+            "candidate_name": " Kwame Addo  Celebrity",
+            "section_type": "experience",
+            "job_hopping_score": 0.125,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 4.0,
+            "score": 0.52717366345397,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "location",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:16:45.664392",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "explicit_multi_candidate_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:16:49.801115",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "ranking",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "explicit_multi_candidate_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:16:49.917354",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1251,
+        "answer_preview": ":::thinking\nThe user is asking to rank the candidates by experience. I need to extract the total years of experience for each candidate from the provided CV data and rank them accordingly. I will present the top 3 candidates with the most experience in a table, along with a brief analysis of my selection criteria.\n:::\n\nTop Recommendation: [📄](cv:cv_8adfe3c5) ** Lena Schmidt  Pharmacy** (95%)\n\n Lena Schmidt  Pharmacy emerges as the top choice with an overall score of 95%. Key strengths include: E...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:16:56.221374",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f027e67c-3a99-4e4c-b883-71cc062deb88"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:16:56.221374",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Give me the full profile of the #1 candidate",
+        "cv_ids": [
+          "cv_7b585b65",
+          "cv_89633750",
+          "cv_60a4ce44",
+          "cv_aad95907",
+          "cv_abb4caaa",
+          "cv_69194145",
+          "cv_7ea2bbfa",
+          "cv_6b3d0e7b",
+          "cv_3c19faae",
+          "cv_a2e94da1",
+          "cv_e02c7e30",
+          "cv_2e4b5c55",
+          "cv_9fe6102d",
+          "cv_279472f6",
+          "cv_e6bb8619",
+          "cv_8adfe3c5",
+          "cv_52c5cd7a",
+          "cv_de731e48",
+          "cv_4859e46a",
+          "cv_91d67b8f",
+          "cv_d417f982",
+          "cv_86dcc2a7",
+          "cv_98cf0ec5",
+          "cv_d799bbd4"
+        ],
+        "cv_count": 24
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:16:59.337780",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 26,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_7ea2bbfa",
+            "candidate_name": " Matteo Rossi  Group",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.7975734721568387,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_2e4b5c55",
+            "candidate_name": " Lotte van der Berg  Camera",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 5.0,
+            "score": 0.7954458589821393,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_279472f6",
+            "candidate_name": " Rahul Patel  Junior Digital",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 4.0,
+            "score": 0.791182496870133,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_d417f982",
+            "candidate_name": " Lukas Schneider ",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "score": 0.7935304108616972,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_e6bb8619",
+            "candidate_name": " Diego Mendoza  Protocol",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.792462169531199,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_e02c7e30",
+            "candidate_name": " Sofia Mendoza ",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.3333333333333333,
+            "total_experience_years": 2.0,
+            "score": 0.5906830631099331,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_8adfe3c5",
+            "candidate_name": " Lena Schmidt  Pharmacy",
+            "section_type": "summary",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 3.3333333333333335,
+            "total_experience_years": 15.0,
+            "score": 0.562180341745211,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_8adfe3c5",
+            "candidate_name": " Lena Schmidt  Pharmacy",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 3.3333333333333335,
+            "total_experience_years": 15.0,
+            "score": 0.7912560671410781,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_e6bb8619",
+            "candidate_name": " Diego Mendoza  Protocol",
+            "section_type": "summary",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.599741765100263,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_a2e94da1",
+            "candidate_name": " Sofia Rossi  Restaurant",
+            "section_type": "experience",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 2.0,
+            "score": 0.5526610698873289,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:17:24.050461",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "SINGLE_CANDIDATE_TEMPLATE",
+        "candidate_name": "Amir",
+        "detection_method": "context_resolver"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:17:29.795998",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "single_candidate",
+        "candidate_name": "Amir",
+        "detection_source": "single_candidate_detection",
+        "detection_method": "context_resolver"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:17:29.955975",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1549,
+        "answer_preview": ":::thinking\nThe user is asking for the full profile of the #1 candidate. Based on the previous conversation, the #1 candidate is Lena Schmidt Pharmacy. I need to extract all the information from the provided CV data for Lena Schmidt Pharmacy and present it in the specified format, including the current role, total experience, career trajectory, skills, credentials, and risk assessment.\n:::\n\nLena Schmidt Pharmacy is currently a Pharmacy Manager at Munich Central Pharmacy (2020-Present), overseein...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

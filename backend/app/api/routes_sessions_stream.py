@@ -32,8 +32,13 @@ class ChatStreamRequest(BaseModel):
     verification_enabled: bool = True
 
 
-async def event_generator(rag_service, question: str, session_id: str, cv_ids: list, total_cvs: int, mgr, conversation_history: list = None):
-    """Generate SSE events from RAG pipeline execution."""
+async def event_generator(rag_service, question: str, session_id: str, cv_ids: list, total_cvs: int, mgr, conversation_history: list = None, context_history: list = None):
+    """Generate SSE events from RAG pipeline execution.
+    
+    Args:
+        conversation_history: Short history (2 msgs) for LLM prompt
+        context_history: Long history (10 msgs) for context resolution
+    """
     final_response = None
     
     # DEBUG LOGGING: Log query start
@@ -43,6 +48,7 @@ async def event_generator(rag_service, question: str, session_id: str, cv_ids: l
         async for event in rag_service.query_stream(
             question=question,
             conversation_history=conversation_history,
+            context_history=context_history,  # Pass long history for context resolution
             session_id=session_id,
             cv_ids=cv_ids,
             total_cvs_in_session=total_cvs
@@ -107,17 +113,27 @@ async def chat_stream(
     if not session:
         raise HTTPException(status_code=404, detail="Session not found")
     
-    # Get conversation history for context (last 6 messages = 3 turns)
-    history = mgr.get_conversation_history(session_id, limit=6)
+    # Get TWO different history lengths:
+    # 1. LONG history (10 messages) for context resolution - to find ranking candidates
+    # 2. SHORT history (2 messages) for LLM prompt - to save tokens
     
-    # Convert to simple format for RAG service
+    # Long history for context resolver to find ranking results
+    long_history = mgr.get_conversation_history(session_id, limit=10)
+    context_history = [
+        {"role": msg.role if hasattr(msg, 'role') else msg.get('role'), 
+         "content": msg.content if hasattr(msg, 'content') else msg.get('content')}
+        for msg in long_history
+    ]
+    
+    # Short history for LLM prompt (last 2 messages only)
+    short_history = mgr.get_conversation_history(session_id, limit=2)
     conversation_history = [
         {"role": msg.role if hasattr(msg, 'role') else msg.get('role'), 
          "content": msg.content if hasattr(msg, 'content') else msg.get('content')}
-        for msg in history
+        for msg in short_history
     ]
     
-    logger.info(f"[STREAM] Retrieved {len(conversation_history)} messages for context")
+    logger.info(f"[STREAM] Retrieved {len(context_history)} messages for context resolution, {len(conversation_history)} for LLM")
     
     # Save user message
     mgr.add_message(session_id, "user", request.message)
@@ -156,7 +172,7 @@ async def chat_stream(
         raise HTTPException(status_code=500, detail=f"Failed to initialize RAG service: {str(e)}")
     
     return StreamingResponse(
-        event_generator(rag_service, request.message, session_id, cv_ids, total_cvs, mgr, conversation_history),
+        event_generator(rag_service, request.message, session_id, cv_ids, total_cvs, mgr, conversation_history, context_history),
         media_type="text/event-stream",
         headers={
             "Cache-Control": "no-cache",

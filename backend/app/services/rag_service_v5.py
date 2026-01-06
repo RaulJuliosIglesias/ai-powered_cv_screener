@@ -551,7 +551,8 @@ class PipelineContextV5:
     """Enhanced pipeline context for v5."""
     # Input
     question: str
-    conversation_history: list[dict[str, str]] = field(default_factory=list)  # Recent chat history for context
+    conversation_history: list[dict[str, str]] = field(default_factory=list)  # Short history (2 msgs) for LLM
+    context_history: list[dict[str, str]] = field(default_factory=list)  # Long history (10 msgs) for context resolution
     session_id: str | None = None
     cv_ids: list[str] | None = None
     k: int = 15
@@ -901,6 +902,7 @@ class RAGServiceV5:
         self,
         question: str,
         conversation_history: list[dict[str, str]] | None = None,
+        context_history: list[dict[str, str]] | None = None,
         session_id: str | None = None,
         cv_ids: list[str] | None = None,
         k: int | None = None,
@@ -909,6 +911,10 @@ class RAGServiceV5:
     ):
         """
         Execute RAG pipeline with streaming progress events.
+        
+        Args:
+            conversation_history: Short history (2 msgs) for LLM prompt - saves tokens
+            context_history: Long history (10 msgs) for context resolution - finds ranking candidates
         
         Yields SSE events as the pipeline executes.
         """
@@ -928,6 +934,7 @@ class RAGServiceV5:
         ctx = PipelineContextV5(
             question=question,
             conversation_history=conversation_history or [],
+            context_history=context_history or conversation_history or [],  # Long history for context resolution
             session_id=session_id,
             cv_ids=cv_ids,
             k=k or self.config.default_k,
@@ -952,10 +959,11 @@ class RAGServiceV5:
         import time
         from app.services.context_resolver import resolve_query_with_context
         
-        # STEP 0: Resolve references like "#1 candidate", "top candidate" from conversation history
-        if ctx.conversation_history:
+        # STEP 0: Resolve references like "#1 candidate", "top candidate" from context history
+        # Use context_history (long, 10 msgs) to find ranking candidates, not conversation_history (short, 2 msgs)
+        if ctx.context_history:
             resolved_query, resolved_name, resolved_cv_id = resolve_query_with_context(
-                ctx.question, ctx.conversation_history
+                ctx.question, ctx.context_history
             )
             if resolved_name:
                 logger.info(f"[CONTEXT_RESOLVER] Resolved reference to: {resolved_name} ({resolved_cv_id})")
