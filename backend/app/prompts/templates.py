@@ -1447,13 +1447,18 @@ def classify_query_for_structure(question: str) -> str:
     - "red_flags"        → RiskAssessmentStructure
     - "single_candidate" → SingleCandidateStructure
     - "comparison"       → ComparisonStructure
-    - "search"           → Standard response
+    - "ranking"          → RankingStructure
+    - "job_match"        → JobMatchStructure
+    - "team_build"       → TeamBuildStructure
+    - "verification"     → VerificationStructure
+    - "summary"          → SummaryStructure
+    - "search"           → SearchStructure (default)
     
     Args:
         question: User's question
         
     Returns:
-        Structure type string: "red_flags", "single_candidate", "comparison", or "search"
+        Structure type string for routing to appropriate structure
     """
     q = question.lower()
     
@@ -1483,7 +1488,18 @@ def classify_query_for_structure(question: str) -> str:
     if any(re.search(p, q) for p in single_candidate_patterns):
         return "single_candidate"
     
-    # 3. COMPARISON queries → ComparisonStructure
+    # 3. RANKING queries → RankingStructure
+    ranking_patterns = [
+        r'\brank\b', r'\branking\b', r'\bbest\s+(for|candidate)',
+        r'\btop\s+\d*', r'\bwho\s+is\s+best',
+        r'\bquién\s+es\s+(el\s+)?mejor', r'\bmejor\s+(para|candidato)',
+        r'\border\s+by', r'\bsort\s+by', r'\bordenar',
+        r'\bleader', r'\bliderazgo', r'\bleadership'
+    ]
+    if any(re.search(p, q) for p in ranking_patterns):
+        return "ranking"
+    
+    # 4. COMPARISON queries → ComparisonStructure
     comparison_patterns = [
         r'\bcompara', r'\bcompare', r'\bvs\b', r'\bversus',
         r'\bdifference', r'\bdiferencia', r'\bmejor\s+entre'
@@ -1491,7 +1507,44 @@ def classify_query_for_structure(question: str) -> str:
     if any(re.search(p, q) for p in comparison_patterns):
         return "comparison"
     
-    # 4. Default: search (standard response)
+    # 5. JOB MATCH queries → JobMatchStructure
+    job_match_patterns = [
+        r'\bmatch\b', r'\bfit\s+for', r'\bsuitable\s+for',
+        r'\brequirements?\b', r'\bjob\s+(description|posting)',
+        r'\bposition\b', r'\brol\b', r'\bpuesto\b',
+        r'\bcumple\s+(con|los)\s+requisitos'
+    ]
+    if any(re.search(p, q) for p in job_match_patterns):
+        return "job_match"
+    
+    # 6. TEAM BUILD queries → TeamBuildStructure
+    team_build_patterns = [
+        r'\bteam\b', r'\bequipo\b', r'\bgroup\b', r'\bgrupo\b',
+        r'\bbuild\s+a\s+team', r'\bform\s+a\s+team',
+        r'\bcomplementary', r'\bcomplementar'
+    ]
+    if any(re.search(p, q) for p in team_build_patterns):
+        return "team_build"
+    
+    # 7. VERIFICATION queries → VerificationStructure
+    verification_patterns = [
+        r'\bverif', r'\bconfirm', r'\bcheck\s+if', r'\bvalidate',
+        r'\btrue\s+that', r'\bcierto\s+que', r'\bverificar',
+        r'\bdid\s+\w+\s+work\s+at', r'\bworked?\s+at\b'
+    ]
+    if any(re.search(p, q) for p in verification_patterns):
+        return "verification"
+    
+    # 8. SUMMARY queries → SummaryStructure
+    summary_patterns = [
+        r'\bsummar', r'\boverview', r'\bstats?\b', r'\bstatistics',
+        r'\bresumen', r'\bgeneral\s+view', r'\bpool\s+overview',
+        r'\bhow\s+many\b', r'\bcuántos\b', r'\bdistribution'
+    ]
+    if any(re.search(p, q) for p in summary_patterns):
+        return "summary"
+    
+    # 9. Default: search (SearchStructure)
     return "search"
 
 

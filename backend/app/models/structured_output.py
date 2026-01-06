@@ -105,9 +105,40 @@ class StructuredOutput:
     risk_assessment: Optional[Dict[str, Any]] = None  # RiskTableModule.to_dict() - REUSABLE MODULE
     
     # NEW: Structure-based routing (v6.0)
-    structure_type: Optional[str] = None  # "single_candidate", "risk_assessment", "comparison"
+    structure_type: Optional[str] = None  # "single_candidate", "risk_assessment", "comparison", "search", "ranking", etc.
     single_candidate_data: Optional[Dict[str, Any]] = None  # SingleCandidateStructure data
     risk_assessment_data: Optional[Dict[str, Any]] = None   # RiskAssessmentStructure data
+    
+    # Search structure data
+    results_table: Optional[Dict[str, Any]] = None
+    total_results: int = 0
+    query: str = ""
+    
+    # Ranking structure data
+    ranking_table: Optional[Dict[str, Any]] = None
+    top_pick: Optional[Dict[str, Any]] = None
+    ranking_criteria: Optional[Dict[str, Any]] = None
+    
+    # Job match structure data
+    match_scores: Optional[Dict[str, Any]] = None
+    requirements: Optional[Dict[str, Any]] = None
+    best_match: Optional[Dict[str, Any]] = None
+    
+    # Team build structure data
+    team_composition: Optional[Dict[str, Any]] = None
+    skill_coverage: Optional[Dict[str, Any]] = None
+    team_risks: Optional[Dict[str, Any]] = None
+    team_requirements: Optional[Dict[str, Any]] = None
+    
+    # Verification structure data
+    claim: Optional[Dict[str, Any]] = None
+    evidence: Optional[Dict[str, Any]] = None
+    verdict: Optional[Dict[str, Any]] = None
+    
+    # Summary structure data
+    talent_pool: Optional[Dict[str, Any]] = None
+    skill_distribution: Optional[Dict[str, Any]] = None
+    experience_distribution: Optional[Dict[str, Any]] = None
     
     # Metadata
     cv_references: List[CVReference] = field(default_factory=list)
@@ -132,6 +163,31 @@ class StructuredOutput:
             "structure_type": self.structure_type,
             "single_candidate_data": self.single_candidate_data,
             "risk_assessment_data": self.risk_assessment_data,
+            # Search structure data
+            "results_table": self.results_table,
+            "total_results": self.total_results,
+            "query": self.query,
+            # Ranking structure data
+            "ranking_table": self.ranking_table,
+            "top_pick": self.top_pick,
+            "ranking_criteria": self.ranking_criteria,
+            # Job match structure data
+            "match_scores": self.match_scores,
+            "requirements": self.requirements,
+            "best_match": self.best_match,
+            # Team build structure data
+            "team_composition": self.team_composition,
+            "skill_coverage": self.skill_coverage,
+            "team_risks": self.team_risks,
+            "team_requirements": self.team_requirements,
+            # Verification structure data
+            "claim": self.claim,
+            "evidence": self.evidence,
+            "verdict": self.verdict,
+            # Summary structure data
+            "talent_pool": self.talent_pool,
+            "skill_distribution": self.skill_distribution,
+            "experience_distribution": self.experience_distribution,
             # Metadata
             "cv_references": [
                 {"cv_id": ref.cv_id, "name": ref.name, "context": ref.context}

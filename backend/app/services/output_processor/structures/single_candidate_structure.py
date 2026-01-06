@@ -5,10 +5,10 @@ Complete structure for displaying a FULL candidate profile.
 Combines multiple MODULES:
 - ThinkingModule
 - Summary (text extracted from LLM)
-- Highlights (key info table)
-- Career trajectory
-- Skills snapshot
-- Credentials
+- HighlightsModule (key info table)
+- CareerModule (career trajectory)
+- SkillsModule (skills snapshot)
+- CredentialsModule (certifications/education)
 - RiskTableModule  ← REUSABLE MODULE (same as in RiskAssessmentStructure)
 - ConclusionModule
 
@@ -22,7 +22,14 @@ import logging
 import re
 from typing import Dict, Any, List, Optional
 
-from ..modules import ThinkingModule, ConclusionModule
+from ..modules import (
+    ThinkingModule,
+    ConclusionModule,
+    HighlightsModule,
+    CareerModule,
+    SkillsModule,
+    CredentialsModule,
+)
 from ..modules.risk_table_module import RiskTableModule
 
 logger = logging.getLogger(__name__)
@@ -37,6 +44,10 @@ class SingleCandidateStructure:
     
     def __init__(self):
         self.thinking_module = ThinkingModule()
+        self.highlights_module = HighlightsModule()
+        self.career_module = CareerModule()
+        self.skills_module = SkillsModule()
+        self.credentials_module = CredentialsModule()
         self.risk_table_module = RiskTableModule()  # REUSABLE MODULE
         self.conclusion_module = ConclusionModule()
     
@@ -67,17 +78,21 @@ class SingleCandidateStructure:
         # Extract summary paragraph
         summary = self._extract_summary(llm_output, candidate_name)
         
-        # Extract highlights table
-        highlights = self._extract_highlights(llm_output)
+        # Extract highlights table using module
+        highlights_data = self.highlights_module.extract(llm_output)
+        highlights = highlights_data.to_list() if highlights_data else []
         
-        # Extract career trajectory
-        career = self._extract_career(llm_output)
+        # Extract career trajectory using module
+        career_data = self.career_module.extract(llm_output)
+        career = career_data.to_list() if career_data else []
         
-        # Extract skills snapshot
-        skills = self._extract_skills(llm_output)
+        # Extract skills snapshot using module
+        skills_data = self.skills_module.extract(llm_output)
+        skills = skills_data.to_list() if skills_data else []
         
-        # Extract credentials
-        credentials = self._extract_credentials(llm_output)
+        # Extract credentials using module
+        credentials_data = self.credentials_module.extract(llm_output)
+        credentials = credentials_data.to_list() if credentials_data else []
         
         # Use RiskTableModule to generate risk assessment table
         # Pass llm_output for fallback parsing when metadata is not available
@@ -129,125 +144,3 @@ class SingleCandidateStructure:
         
         return ""
     
-    def _extract_highlights(self, content: str) -> List[Dict[str, str]]:
-        """Extract highlights table (Category | Key Information)."""
-        highlights = []
-        
-        # Find Candidate Highlights section
-        highlights_match = re.search(
-            r'###\s*📊\s*Candidate Highlights([\s\S]*?)(?=###|:::|\Z)',
-            content
-        )
-        
-        if not highlights_match:
-            return highlights
-        
-        section = highlights_match.group(1)
-        
-        # Parse table rows
-        row_pattern = r'\|\s*\*\*([^|*]+)\*\*\s*\|\s*([^|]+)\|'
-        for match in re.finditer(row_pattern, section):
-            category = match.group(1).strip()
-            info = match.group(2).strip()
-            
-            # Skip header rows
-            if 'Category' in category or '---' in category:
-                continue
-            
-            if category and info:
-                highlights.append({
-                    "category": category,
-                    "info": info
-                })
-        
-        return highlights
-    
-    def _extract_career(self, content: str) -> List[Dict[str, str]]:
-        """Extract career trajectory."""
-        career = []
-        
-        # Find Career Trajectory section
-        career_match = re.search(
-            r'###\s*💼\s*Career Trajectory([\s\S]*?)(?=###|:::|\Z)',
-            content
-        )
-        
-        if not career_match:
-            return career
-        
-        section = career_match.group(1)
-        
-        # Parse job entries: **Title** — *Company* (dates)
-        job_pattern = r'\*\*([^*]+)\*\*\s*[—–-]\s*\*([^*]+)\*\s*\(([^)]+)\)\s*\n?→?\s*([^\n]*)'
-        for match in re.finditer(job_pattern, section):
-            title = match.group(1).strip()
-            company = match.group(2).strip()
-            dates = match.group(3).strip()
-            achievement = match.group(4).strip() if match.group(4) else ""
-            
-            career.append({
-                "title": title,
-                "company": company,
-                "dates": dates,
-                "achievement": achievement
-            })
-        
-        return career
-    
-    def _extract_skills(self, content: str) -> List[Dict[str, str]]:
-        """Extract skills snapshot table."""
-        skills = []
-        
-        # Find Skills Snapshot section
-        skills_match = re.search(
-            r'###\s*🛠️\s*Skills Snapshot([\s\S]*?)(?=###|:::|\Z)',
-            content
-        )
-        
-        if not skills_match:
-            return skills
-        
-        section = skills_match.group(1)
-        
-        # Parse table rows
-        row_pattern = r'\|\s*\*\*([^|*]+)\*\*\s*\|\s*([^|]+)\|\s*([^|]*)\|'
-        for match in re.finditer(row_pattern, section):
-            area = match.group(1).strip()
-            details = match.group(2).strip()
-            level = match.group(3).strip() if match.group(3) else ""
-            
-            # Skip header rows
-            if 'Skill Area' in area or '---' in area:
-                continue
-            
-            if area and details:
-                skills.append({
-                    "area": area,
-                    "details": details,
-                    "level": level
-                })
-        
-        return skills
-    
-    def _extract_credentials(self, content: str) -> List[str]:
-        """Extract credentials list."""
-        credentials = []
-        
-        # Find Credentials section
-        cred_match = re.search(
-            r'###\s*Credentials([\s\S]*?)(?=###|:::|\Z)',
-            content
-        )
-        
-        if not cred_match:
-            return credentials
-        
-        section = cred_match.group(1)
-        
-        # Parse list items
-        for match in re.finditer(r'-\s*([^\n]+)', section):
-            item = match.group(1).strip()
-            if item and not item.startswith('['):
-                credentials.append(item)
-        
-        return credentials

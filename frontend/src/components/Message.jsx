@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import SourceBadge from './SourceBadge';
 import PipelineStepsPanel from './PipelineStepsPanel';
-import { DirectAnswerSection, TableComponent } from './output';
+import { DirectAnswerSection, TableComponent, StructuredOutputRenderer } from './output';
 import { User, Sparkles, ChevronDown, ChevronRight, Brain, Lightbulb, FileText, ExternalLink, CheckCircle, Search, BarChart3, Zap, Copy } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -403,37 +403,12 @@ const Message = memo(({ message, onViewCV }) => {
               />
             )}
 
-            {/* STRUCTURED OUTPUT (New modular system) */}
+            {/* STRUCTURED OUTPUT (New modular system) - Routes to appropriate structure view */}
             {hasStructuredOutput ? (
-              <>
-                {/* Thinking from structured output */}
-                {structured_output.thinking && (
-                  <ReasoningPanel 
-                    content={structured_output.thinking}
-                    isExpanded={isReasoningExpanded}
-                    onToggle={() => setIsReasoningExpanded(!isReasoningExpanded)}
-                  />
-                )}
-
-                {/* Direct Answer - Always exists */}
-                <DirectAnswerSection 
-                  content={structured_output.direct_answer}
-                  cvLinkRenderer={CVLink}
-                />
-
-                {/* Table - Only if exists */}
-                {structured_output.table_data && (
-                  <TableComponent 
-                    tableData={structured_output.table_data}
-                    cvLinkRenderer={CVLink}
-                  />
-                )}
-
-                {/* Conclusion from structured output */}
-                {structured_output.conclusion && (
-                  <ConclusionPanel content={structured_output.conclusion} />
-                )}
-              </>
+              <StructuredOutputRenderer 
+                structuredOutput={structured_output}
+                onOpenCV={onViewCV}
+              />
             ) : (
               <>
                 {/* LEGACY RENDERING (Old messages) */}

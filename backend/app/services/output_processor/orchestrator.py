@@ -22,6 +22,12 @@ from .structures import (
     SingleCandidateStructure,
     RiskAssessmentStructure,
     ComparisonStructure,
+    SearchStructure,
+    RankingStructure,
+    JobMatchStructure,
+    TeamBuildStructure,
+    VerificationStructure,
+    SummaryStructure,
 )
 
 # Import modules for legacy/fallback processing
@@ -47,7 +53,12 @@ class OutputOrchestrator:
     - query_type="single_candidate" → SingleCandidateStructure
     - query_type="red_flags"        → RiskAssessmentStructure
     - query_type="comparison"       → ComparisonStructure
-    - query_type="search"           → Standard response (legacy)
+    - query_type="search"           → SearchStructure
+    - query_type="ranking"          → RankingStructure
+    - query_type="job_match"        → JobMatchStructure
+    - query_type="team_build"       → TeamBuildStructure
+    - query_type="verification"     → VerificationStructure
+    - query_type="summary"          → SummaryStructure
     """
     
     def __init__(self):
@@ -56,6 +67,12 @@ class OutputOrchestrator:
         self.single_candidate_structure = SingleCandidateStructure()
         self.risk_assessment_structure = RiskAssessmentStructure()
         self.comparison_structure = ComparisonStructure()
+        self.search_structure = SearchStructure()
+        self.ranking_structure = RankingStructure()
+        self.job_match_structure = JobMatchStructure()
+        self.team_build_structure = TeamBuildStructure()
+        self.verification_structure = VerificationStructure()
+        self.summary_structure = SummaryStructure()
         
         # Legacy processor for standard responses
         self.processor = OutputProcessor()
@@ -144,9 +161,69 @@ class OutputOrchestrator:
             )
             return self._build_structured_output(structure_data, cleaned_llm_output)
         
+        elif query_type == "search":
+            # SEARCH STRUCTURE
+            logger.info("[ORCHESTRATOR] Using SearchStructure")
+            structure_data = self.search_structure.assemble(
+                llm_output=cleaned_llm_output,
+                chunks=chunks or [],
+                query=query
+            )
+            return self._build_structured_output(structure_data, cleaned_llm_output)
+        
+        elif query_type == "ranking":
+            # RANKING STRUCTURE
+            logger.info("[ORCHESTRATOR] Using RankingStructure")
+            structure_data = self.ranking_structure.assemble(
+                llm_output=cleaned_llm_output,
+                chunks=chunks or [],
+                query=query
+            )
+            return self._build_structured_output(structure_data, cleaned_llm_output)
+        
+        elif query_type == "job_match":
+            # JOB MATCH STRUCTURE
+            logger.info("[ORCHESTRATOR] Using JobMatchStructure")
+            structure_data = self.job_match_structure.assemble(
+                llm_output=cleaned_llm_output,
+                chunks=chunks or [],
+                query=query
+            )
+            return self._build_structured_output(structure_data, cleaned_llm_output)
+        
+        elif query_type == "team_build":
+            # TEAM BUILD STRUCTURE
+            logger.info("[ORCHESTRATOR] Using TeamBuildStructure")
+            structure_data = self.team_build_structure.assemble(
+                llm_output=cleaned_llm_output,
+                chunks=chunks or [],
+                query=query
+            )
+            return self._build_structured_output(structure_data, cleaned_llm_output)
+        
+        elif query_type == "verification":
+            # VERIFICATION STRUCTURE
+            logger.info("[ORCHESTRATOR] Using VerificationStructure")
+            structure_data = self.verification_structure.assemble(
+                llm_output=cleaned_llm_output,
+                chunks=chunks or [],
+                query=query
+            )
+            return self._build_structured_output(structure_data, cleaned_llm_output)
+        
+        elif query_type == "summary":
+            # SUMMARY STRUCTURE
+            logger.info("[ORCHESTRATOR] Using SummaryStructure")
+            structure_data = self.summary_structure.assemble(
+                llm_output=cleaned_llm_output,
+                chunks=chunks or [],
+                query=query
+            )
+            return self._build_structured_output(structure_data, cleaned_llm_output)
+        
         else:
-            # LEGACY: Standard search response
-            logger.info("[ORCHESTRATOR] Using legacy standard response")
+            # LEGACY: Standard response for unmatched query types
+            logger.info(f"[ORCHESTRATOR] Using legacy standard response for query_type={query_type}")
             return self._process_standard_response(cleaned_llm_output, chunks, query, query_type)
     
     def _build_structured_output(
@@ -201,6 +278,43 @@ class OutputOrchestrator:
                 "risk_table": structure_data.get("risk_table"),
                 "assessment": structure_data.get("assessment"),
             }
+        
+        # For search, add results table
+        elif structure_data.get("structure_type") == "search":
+            structured.results_table = structure_data.get("results_table")
+            structured.total_results = structure_data.get("total_results", 0)
+            structured.query = structure_data.get("query", "")
+        
+        # For ranking, add ranking table and top pick
+        elif structure_data.get("structure_type") == "ranking":
+            structured.ranking_table = structure_data.get("ranking_table")
+            structured.top_pick = structure_data.get("top_pick")
+            structured.ranking_criteria = structure_data.get("ranking_criteria")
+        
+        # For job match, add match scores
+        elif structure_data.get("structure_type") == "job_match":
+            structured.match_scores = structure_data.get("match_scores")
+            structured.requirements = structure_data.get("requirements")
+            structured.best_match = structure_data.get("best_match")
+        
+        # For team build, add team composition
+        elif structure_data.get("structure_type") == "team_build":
+            structured.team_composition = structure_data.get("team_composition")
+            structured.skill_coverage = structure_data.get("skill_coverage")
+            structured.team_risks = structure_data.get("team_risks")
+            structured.team_requirements = structure_data.get("team_requirements")
+        
+        # For verification, add claim/evidence/verdict
+        elif structure_data.get("structure_type") == "verification":
+            structured.claim = structure_data.get("claim")
+            structured.evidence = structure_data.get("evidence")
+            structured.verdict = structure_data.get("verdict")
+        
+        # For summary, add pool stats
+        elif structure_data.get("structure_type") == "summary":
+            structured.talent_pool = structure_data.get("talent_pool")
+            structured.skill_distribution = structure_data.get("skill_distribution")
+            structured.experience_distribution = structure_data.get("experience_distribution")
         
         # Build formatted answer (for legacy compatibility)
         formatted_answer = self._format_structure_output(structure_data)

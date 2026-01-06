@@ -11,7 +11,16 @@ import {
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import SingleCandidateProfile from './SingleCandidateProfile';
-import { RiskAssessmentTable } from './modules';
+import { 
+  RiskAssessmentTable,
+  RankingTable,
+  MatchScoreCard,
+  TeamCompositionView,
+  VerificationResult,
+  PoolSummary,
+  SearchResultsTable,
+  TopPickCard
+} from './modules';
 import { 
   isSingleCandidateResponse, 
   parseSingleCandidateProfile,
@@ -526,6 +535,102 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
           conclusion={backend_risk_data.assessment}
           onOpenCV={onOpenCV}
         />
+      </div>
+    );
+  }
+  
+  // NEW STRUCTURE TYPES (Phase 3-6)
+  
+  if (structure_type === 'search') {
+    console.log('[STRUCTURED_OUTPUT] ROUTING: structure_type=search');
+    // Build cvMap from results_table for CV link resolution
+    const searchCvMap = structuredOutput.results_table?.results?.reduce((acc, r) => {
+      if (r.candidate_name && r.cv_id) {
+        acc[r.candidate_name.toLowerCase().trim()] = r.cv_id;
+      }
+      return acc;
+    }, {}) || {};
+    return (
+      <div className="space-y-3">
+        <ThinkingSection content={thinking} />
+        {direct_answer && <DirectAnswerSection content={direct_answer} onOpenCV={onOpenCV} cvMap={searchCvMap} />}
+        <SearchResultsTable data={structuredOutput.results_table} onOpenCV={onOpenCV} />
+        {conclusion && <ConclusionSection content={conclusion} onOpenCV={onOpenCV} cvMap={searchCvMap} />}
+      </div>
+    );
+  }
+  
+  if (structure_type === 'ranking') {
+    console.log('[STRUCTURED_OUTPUT] ROUTING: structure_type=ranking');
+    const rankCvMap = structuredOutput.ranking_table?.ranked?.reduce((acc, r) => {
+      if (r.candidate_name && r.cv_id) {
+        acc[r.candidate_name.toLowerCase().trim()] = r.cv_id;
+      }
+      return acc;
+    }, {}) || {};
+    return (
+      <div className="space-y-3">
+        <ThinkingSection content={thinking} />
+        {structuredOutput.top_pick && <TopPickCard data={structuredOutput.top_pick} onOpenCV={onOpenCV} />}
+        <RankingTable data={structuredOutput.ranking_table} onOpenCV={onOpenCV} />
+        {conclusion && <ConclusionSection content={conclusion} onOpenCV={onOpenCV} cvMap={rankCvMap} />}
+      </div>
+    );
+  }
+  
+  if (structure_type === 'job_match') {
+    console.log('[STRUCTURED_OUTPUT] ROUTING: structure_type=job_match');
+    const matchCvMap = structuredOutput.match_scores?.matches?.reduce((acc, m) => {
+      if (m.candidate_name && m.cv_id) {
+        acc[m.candidate_name.toLowerCase().trim()] = m.cv_id;
+      }
+      return acc;
+    }, {}) || {};
+    return (
+      <div className="space-y-3">
+        <ThinkingSection content={thinking} />
+        {structuredOutput.best_match && <TopPickCard data={structuredOutput.best_match} onOpenCV={onOpenCV} />}
+        <MatchScoreCard data={structuredOutput.match_scores} onOpenCV={onOpenCV} />
+        {conclusion && <ConclusionSection content={conclusion} onOpenCV={onOpenCV} cvMap={matchCvMap} />}
+      </div>
+    );
+  }
+  
+  if (structure_type === 'team_build') {
+    console.log('[STRUCTURED_OUTPUT] ROUTING: structure_type=team_build');
+    const teamCvMap = structuredOutput.team_composition?.assignments?.reduce((acc, a) => {
+      if (a.candidate_name && a.cv_id) {
+        acc[a.candidate_name.toLowerCase().trim()] = a.cv_id;
+      }
+      return acc;
+    }, {}) || {};
+    return (
+      <div className="space-y-3">
+        <ThinkingSection content={thinking} />
+        <TeamCompositionView data={structuredOutput} onOpenCV={onOpenCV} />
+        {conclusion && <ConclusionSection content={conclusion} onOpenCV={onOpenCV} cvMap={teamCvMap} />}
+      </div>
+    );
+  }
+  
+  if (structure_type === 'verification') {
+    console.log('[STRUCTURED_OUTPUT] ROUTING: structure_type=verification');
+    return (
+      <div className="space-y-3">
+        <ThinkingSection content={thinking} />
+        <VerificationResult data={structuredOutput} />
+        {conclusion && <ConclusionSection content={conclusion} onOpenCV={onOpenCV} />}
+      </div>
+    );
+  }
+  
+  if (structure_type === 'summary') {
+    console.log('[STRUCTURED_OUTPUT] ROUTING: structure_type=summary');
+    return (
+      <div className="space-y-3">
+        <ThinkingSection content={thinking} />
+        <PoolSummary data={structuredOutput} />
+        {conclusion && <ConclusionSection content={conclusion} onOpenCV={onOpenCV} />}
       </div>
     );
   }

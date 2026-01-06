@@ -55,14 +55,15 @@ class ComparisonStructure:
         # Extract thinking from LLM output
         thinking = self.thinking_module.extract(llm_output)
         
-        # Extract analysis section
-        analysis = self.analysis_module.extract(llm_output)
+        # Extract conclusion first (needed for analysis extraction)
+        conclusion = self.conclusion_module.extract(llm_output)
         
         # Extract comparison table
         table_data = self.table_module.extract(llm_output, chunks)
         
-        # Extract conclusion
-        conclusion = self.conclusion_module.extract(llm_output)
+        # Extract analysis section (requires direct_answer and conclusion)
+        # For comparison, we don't have a separate direct_answer, so pass empty string
+        analysis = self.analysis_module.extract(llm_output, "", conclusion)
         
         return {
             "structure_type": "comparison",

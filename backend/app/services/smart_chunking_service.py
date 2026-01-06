@@ -468,6 +468,19 @@ class SmartChunkingService:
         job_hopping_score, avg_tenure_years = self._calculate_job_hopping_metrics(structured.positions)
         employment_gaps_count = self._detect_employment_gaps(structured.positions)
         
+        # Phase 2: Enhanced metadata extraction
+        languages, language_primary = self._extract_languages(text)
+        education = self._extract_education(text)
+        certifications = self._extract_certifications(text)
+        location = self._extract_location(text)
+        urls = self._extract_urls(text)
+        hobbies = self._extract_hobbies(text)
+        seniority_level = self._infer_seniority_level(
+            structured.total_experience_years,
+            structured.current_role
+        )
+        skills_str = ",".join(structured.skills) if structured.skills else ""
+        
         # ============================================================
         # CHUNK 0: SUMMARY CHUNK (most important for quick lookups)
         # ============================================================
@@ -490,6 +503,21 @@ class SmartChunkingService:
                 "job_hopping_score": job_hopping_score,
                 "avg_tenure_years": avg_tenure_years,
                 "employment_gaps_count": employment_gaps_count,
+                # Phase 2: New metadata fields
+                "skills": skills_str,
+                "seniority_level": seniority_level,
+                "languages": languages,
+                "language_primary": language_primary,
+                "education_level": education["level"],
+                "education_field": education["field"],
+                "education_institution": education["institution"],
+                "graduation_year": education["graduation_year"],
+                "certifications": certifications,
+                "location": location,
+                "linkedin_url": urls["linkedin"],
+                "github_url": urls["github"],
+                "portfolio_url": urls["portfolio"],
+                "hobbies": hobbies,
             }
         })
         chunk_index += 1
@@ -521,6 +549,11 @@ class SmartChunkingService:
                     "avg_tenure_years": avg_tenure_years,
                     "employment_gaps_count": employment_gaps_count,
                     "position_count": len(structured.positions),
+                    # Phase 2: New metadata fields
+                    "skills": skills_str,
+                    "seniority_level": seniority_level,
+                    "certifications": certifications,
+                    "location": location,
                 }
             })
             chunk_index += 1
@@ -547,6 +580,10 @@ class SmartChunkingService:
                     "avg_tenure_years": avg_tenure_years,
                     "employment_gaps_count": employment_gaps_count,
                     "position_count": len(structured.positions),
+                    # Phase 2: New metadata fields
+                    "skills": skills_str,
+                    "seniority_level": seniority_level,
+                    "certifications": certifications,
                 }
             })
             chunk_index += 1
@@ -578,6 +615,15 @@ class SmartChunkingService:
                 "avg_tenure_years": avg_tenure_years,
                 "employment_gaps_count": employment_gaps_count,
                 "position_count": len(structured.positions),
+                # Phase 2: New metadata fields
+                "skills": skills_str,
+                "seniority_level": seniority_level,
+                "languages": languages,
+                "education_level": education["level"],
+                "certifications": certifications,
+                "location": location,
+                "linkedin_url": urls["linkedin"],
+                "github_url": urls["github"],
             }
         })
         
@@ -682,3 +728,242 @@ class SmartChunkingService:
                     gaps += 1
         
         return gaps
+    
+    # ================================================================
+    # ENHANCED METADATA EXTRACTION (Phase 2)
+    # ================================================================
+    
+    def _extract_languages(self, text: str) -> Tuple[str, str]:
+        """
+        Extract languages and primary language from CV.
+        Returns: (comma-separated languages, primary language)
+        """
+        languages = []
+        
+        # Language patterns
+        language_names = [
+            'English', 'Spanish', 'French', 'German', 'Chinese', 'Mandarin',
+            'Japanese', 'Portuguese', 'Italian', 'Russian', 'Arabic', 'Hindi',
+            'Korean', 'Dutch', 'Swedish', 'Polish', 'Turkish', 'Vietnamese',
+            'Thai', 'Indonesian', 'Malay', 'Hebrew', 'Greek', 'Czech',
+            'Inglés', 'Español', 'Francés', 'Alemán', 'Italiano', 'Portugués'
+        ]
+        
+        # Find languages section or scan full text
+        lang_section = re.search(
+            r'(?:languages?|idiomas?)[:\s]*([\s\S]{0,300}?)(?=\n\n|\n[A-Z]|$)',
+            text, re.IGNORECASE
+        )
+        
+        search_text = lang_section.group(1) if lang_section else text
+        
+        for lang in language_names:
+            if re.search(rf'\b{lang}\b', search_text, re.IGNORECASE):
+                languages.append(lang)
+        
+        # Determine primary (usually first or marked as native)
+        primary = languages[0] if languages else ""
+        for lang in languages:
+            if re.search(rf'{lang}\s*[\(\[]?\s*(?:native|nativo|mother|materna)', 
+                        search_text, re.IGNORECASE):
+                primary = lang
+                break
+        
+        return ",".join(languages[:5]), primary
+    
+    def _extract_education(self, text: str) -> Dict[str, str]:
+        """Extract education details from CV."""
+        education = {
+            "level": "",
+            "field": "",
+            "institution": "",
+            "graduation_year": ""
+        }
+        
+        # Find education section
+        edu_match = re.search(self.SECTION_PATTERNS['education'], text, re.IGNORECASE)
+        if not edu_match:
+            return education
+        
+        edu_start = edu_match.start()
+        edu_end = len(text)
+        
+        for name, pattern in self.SECTION_PATTERNS.items():
+            if name == 'education':
+                continue
+            match = re.search(pattern, text[edu_start + 50:], re.IGNORECASE)
+            if match:
+                potential_end = edu_start + 50 + match.start()
+                if potential_end < edu_end:
+                    edu_end = potential_end
+        
+        edu_text = text[edu_start:edu_end]
+        
+        # Extract degree level
+        degree_patterns = [
+            (r'\b(Ph\.?D|Doctorate|Doctorado)\b', 'PhD'),
+            (r'\b(Master|Masters|MSc|MBA|M\.S\.|Maestría)\b', 'Master'),
+            (r'\b(Bachelor|BSc|B\.S\.|BA|B\.A\.|Licenciatura|Grado)\b', 'Bachelor'),
+            (r'\b(Associate|Técnico)\b', 'Associate'),
+        ]
+        
+        for pattern, level in degree_patterns:
+            if re.search(pattern, edu_text, re.IGNORECASE):
+                education["level"] = level
+                break
+        
+        # Extract field of study
+        field_patterns = [
+            r'(?:in|of|en)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,3})',
+            r'(?:degree|grado)\s+(?:in|en)\s+([^\n,]+)',
+        ]
+        
+        for pattern in field_patterns:
+            match = re.search(pattern, edu_text)
+            if match:
+                education["field"] = match.group(1).strip()[:50]
+                break
+        
+        # Extract institution
+        uni_patterns = [
+            r'(University\s+of\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)',
+            r'([A-Z][a-z]+\s+University)',
+            r'(Universidad\s+[A-Za-z\s]+)',
+            r'(MIT|Stanford|Harvard|Berkeley|Oxford|Cambridge)',
+        ]
+        
+        for pattern in uni_patterns:
+            match = re.search(pattern, edu_text)
+            if match:
+                education["institution"] = match.group(1).strip()[:60]
+                break
+        
+        # Extract graduation year
+        year_match = re.search(r'\b(19|20)\d{2}\b', edu_text)
+        if year_match:
+            education["graduation_year"] = year_match.group(0)
+        
+        return education
+    
+    def _extract_certifications(self, text: str) -> str:
+        """Extract certifications from CV."""
+        certs = []
+        
+        cert_patterns = [
+            r'(AWS\s+(?:Solutions?\s+)?Architect|AWS\s+(?:Certified\s+)?[\w\s]+)',
+            r'(Azure\s+[\w\s]+(?:Certified)?)',
+            r'(GCP\s+[\w\s]+)',
+            r'(PMP|Project\s+Management\s+Professional)',
+            r'(CISSP|CISM|CEH)',
+            r'(Scrum\s+Master|PSM|CSM)',
+            r'(CCNA|CCNP|CCIE)',
+            r'(CPA|CFA|FRM)',
+            r'(Six\s+Sigma)',
+            r'(Certified\s+[\w\s]+)',
+        ]
+        
+        for pattern in cert_patterns:
+            matches = re.findall(pattern, text, re.IGNORECASE)
+            certs.extend(matches)
+        
+        # Clean and deduplicate
+        clean_certs = []
+        seen = set()
+        for cert in certs:
+            cert_clean = cert.strip()[:50]
+            cert_lower = cert_clean.lower()
+            if cert_lower not in seen and len(cert_clean) > 2:
+                seen.add(cert_lower)
+                clean_certs.append(cert_clean)
+        
+        return ",".join(clean_certs[:10])
+    
+    def _extract_location(self, text: str) -> str:
+        """Extract location from CV."""
+        # Common location patterns
+        patterns = [
+            r'(?:Location|Ubicación|City|Ciudad)[:\s]+([A-Z][a-z]+(?:[\s,]+[A-Z][a-z]+){0,2})',
+            r'([A-Z][a-z]+,\s*(?:CA|NY|TX|FL|WA|MA|IL|PA|OH|GA|NC|MI|NJ|VA|AZ|CO|TN|MO|MD|WI|MN|IN|OR))',
+            r'([A-Z][a-z]+,\s*(?:USA|UK|Spain|Germany|France|Italy|Canada|Australia))',
+            r'(San\s+Francisco|New\s+York|Los\s+Angeles|Seattle|Boston|Chicago|Austin|Denver|Miami)',
+            r'(London|Berlin|Paris|Madrid|Barcelona|Amsterdam|Dublin|Toronto|Sydney|Singapore)',
+        ]
+        
+        for pattern in patterns:
+            match = re.search(pattern, text)
+            if match:
+                return match.group(1).strip()[:50]
+        
+        return ""
+    
+    def _extract_urls(self, text: str) -> Dict[str, str]:
+        """Extract URLs (LinkedIn, GitHub, Portfolio) from CV."""
+        urls = {
+            "linkedin": "",
+            "github": "",
+            "portfolio": ""
+        }
+        
+        # LinkedIn
+        linkedin = re.search(r'((?:https?://)?(?:www\.)?linkedin\.com/in/[\w\-]+)', text, re.IGNORECASE)
+        if linkedin:
+            urls["linkedin"] = linkedin.group(1)
+        
+        # GitHub
+        github = re.search(r'((?:https?://)?(?:www\.)?github\.com/[\w\-]+)', text, re.IGNORECASE)
+        if github:
+            urls["github"] = github.group(1)
+        
+        # Portfolio (generic URL that's not LinkedIn/GitHub)
+        portfolio = re.search(r'(?:portfolio|website|web)[:\s]*(https?://[^\s]+)', text, re.IGNORECASE)
+        if portfolio:
+            urls["portfolio"] = portfolio.group(1)[:100]
+        
+        return urls
+    
+    def _extract_hobbies(self, text: str) -> str:
+        """Extract hobbies/interests from CV."""
+        hobbies = []
+        
+        # Find hobbies section
+        hobby_match = re.search(
+            r'(?:hobbies?|interests?|activities|personal)[:\s]*([\s\S]{0,500}?)(?=\n\n|\n[A-Z][a-z]+:|\Z)',
+            text, re.IGNORECASE
+        )
+        
+        if hobby_match:
+            hobby_text = hobby_match.group(1)
+            # Split by common separators
+            items = re.split(r'[,•\-\n;]', hobby_text)
+            for item in items:
+                item = item.strip()
+                if 3 < len(item) < 30 and not re.match(r'^[A-Z][a-z]+:', item):
+                    hobbies.append(item)
+        
+        return ",".join(hobbies[:8])
+    
+    def _infer_seniority_level(self, experience_years: float, current_role: str) -> str:
+        """Infer seniority level from experience and role."""
+        role_lower = (current_role or "").lower()
+        
+        # Check for explicit seniority in title
+        if any(kw in role_lower for kw in ['principal', 'staff', 'distinguished', 'director']):
+            return "principal"
+        if any(kw in role_lower for kw in ['lead', 'head', 'manager', 'architect']):
+            return "lead"
+        if any(kw in role_lower for kw in ['senior', 'sr.', 'sr ']):
+            return "senior"
+        if any(kw in role_lower for kw in ['junior', 'jr.', 'jr ', 'entry', 'trainee', 'intern']):
+            return "junior"
+        
+        # Infer from years of experience
+        if experience_years >= 12:
+            return "principal"
+        elif experience_years >= 8:
+            return "senior"
+        elif experience_years >= 4:
+            return "mid"
+        elif experience_years >= 1:
+            return "junior"
+        else:
+            return "entry"
