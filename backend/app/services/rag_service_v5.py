@@ -28,7 +28,7 @@ from app.config import settings
 from app.utils.error_handling import degradation
 from app.utils.debug_logger import (
     log_retrieval, log_template_selection, log_query_understanding,
-    log_llm_response, log_orchestrator_processing, log_event
+    log_llm_response, log_orchestrator_processing, log_event, log_structure_routing
 )
 from typing import (
     Any,
@@ -2231,34 +2231,57 @@ Provide a corrected response:"""
         # Determine query type for output structure
         # =================================================================
         # STRUCTURE-BASED ROUTING: Determine which structure to use
-        # Uses classify_query_for_structure for proper routing:
-        # - "single_candidate" → SingleCandidateStructure
-        # - "red_flags"        → RiskAssessmentStructure
-        # - "comparison"       → ComparisonStructure
-        # - "search"           → Standard response
+        # 
+        # CRITICAL FIX: Use single_candidate_detection as PRIMARY source
+        # because it correctly detects single candidate queries using:
+        # - Original question (not reformulated)
+        # - Retrieved chunks (actual candidate data)
+        # - Name matching in query
+        #
+        # classify_query_for_structure is SECONDARY - only used when
+        # single_candidate_detection is not available or not single candidate.
         # =================================================================
         from app.prompts.templates import classify_query_for_structure
         
-        # Use reformulated prompt for structure classification (context-resolved)
-        effective_question_for_routing = (
-            ctx.query_understanding.reformulated_prompt
-            if ctx.query_understanding and ctx.query_understanding.reformulated_prompt
-            else ctx.question
-        )
-        
-        # First, use the new structure classification with context-resolved question
-        query_type = classify_query_for_structure(effective_question_for_routing)
         candidate_name = None
+        query_type = None
         
-        # If single_candidate or red_flags, get the candidate name
-        if query_type in ("single_candidate", "red_flags"):
-            if ctx.single_candidate_detection and ctx.single_candidate_detection.candidate_name:
-                candidate_name = ctx.single_candidate_detection.candidate_name
-            elif ctx.effective_chunks:
-                # Fallback: get from chunks
-                candidate_name = ctx.effective_chunks[0].get("metadata", {}).get("candidate_name")
+        # PRIMARY: Use single_candidate_detection from generation step
+        # This is more reliable because it uses original question + chunks
+        if ctx.single_candidate_detection and ctx.single_candidate_detection.is_single_candidate:
+            query_type = "single_candidate"
+            candidate_name = ctx.single_candidate_detection.candidate_name
+            logger.info(
+                f"[RAG] STRUCTURE ROUTING: Using single_candidate_detection -> "
+                f"query_type={query_type}, candidate={candidate_name}, "
+                f"method={ctx.single_candidate_detection.detection_method}"
+            )
+        
+        # SECONDARY: Fall back to classify_query_for_structure for other types
+        if query_type is None:
+            # Use ORIGINAL question for classification, not reformulated prompt
+            # Reformulated prompts often lose patterns like "everything about"
+            effective_question_for_routing = ctx.question
+            query_type = classify_query_for_structure(effective_question_for_routing)
+            
+            # For red_flags detected by classifier, get candidate from detection or chunks
+            if query_type == "red_flags":
+                if ctx.single_candidate_detection and ctx.single_candidate_detection.candidate_name:
+                    candidate_name = ctx.single_candidate_detection.candidate_name
+                elif ctx.effective_chunks:
+                    candidate_name = ctx.effective_chunks[0].get("metadata", {}).get("candidate_name")
         
         logger.info(f"[RAG] STRUCTURE ROUTING: query_type={query_type}, candidate_name={candidate_name}")
+        
+        # Debug log for tracing structure routing decisions
+        detection_source = "single_candidate_detection" if ctx.single_candidate_detection and ctx.single_candidate_detection.is_single_candidate else "classify_query_for_structure"
+        detection_method = ctx.single_candidate_detection.detection_method if ctx.single_candidate_detection else None
+        log_structure_routing(
+            query_type=query_type,
+            candidate_name=candidate_name,
+            detection_source=detection_source,
+            detection_method=detection_method
+        )
         
         # Orchestrator returns both structured data and formatted answer
         # Pass query_type so orchestrator knows which output structure to use

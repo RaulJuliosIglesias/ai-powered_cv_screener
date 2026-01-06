@@ -187,7 +187,19 @@ export const extractSummary = (content) => {
     }
   }
   
-  return summaryLines.length > 0 ? summaryLines.join(' ') : null;
+  if (summaryLines.length === 0) return null;
+  
+  let summary = summaryLines.join(' ');
+  
+  // FIX: Clean up broken markdown links caused by line breaks
+  // Pattern: **[Name](cv: cv_xxx)** -> **[Name](cv:cv_xxx)**
+  // The space after "cv:" breaks the link
+  summary = summary.replace(/\]\(cv:\s+(cv_[a-f0-9]+)\)/gi, '](cv:$1)');
+  
+  // Also fix any other whitespace issues in cv links
+  summary = summary.replace(/\]\(\s*cv:\s*/gi, '](cv:');
+  
+  return summary;
 };
 
 /**

@@ -242,6 +242,21 @@ def log_llm_response(response: str, tokens: Dict[str, int] = None) -> None:
     })
 
 
+def log_structure_routing(
+    query_type: str,
+    candidate_name: str = None,
+    detection_source: str = None,
+    detection_method: str = None
+) -> None:
+    """Log structure routing decision for debugging."""
+    log_event("STRUCTURE_ROUTING", {
+        "query_type": query_type,
+        "candidate_name": candidate_name,
+        "detection_source": detection_source,
+        "detection_method": detection_method
+    })
+
+
 def log_orchestrator_processing(
     thinking: bool,
     table: bool,

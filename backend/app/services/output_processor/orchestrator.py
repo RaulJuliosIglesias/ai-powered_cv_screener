@@ -626,6 +626,12 @@ class OutputOrchestrator:
         text = re.sub(r'\*\*\s+', '**', text)  # Remove space after **
         text = re.sub(r'\s+\*\*', '**', text)  # Remove space before **
         
+        # 1.5 FIX: Clean up broken markdown links caused by LLM line breaks
+        # Pattern: [Name](cv: cv_xxx) or [Name](cv:\ncv_xxx) -> [Name](cv:cv_xxx)
+        # The whitespace/newline after "cv:" breaks the link
+        text = re.sub(r'\]\(cv:\s+(cv_[a-f0-9_-]+)\)', r'](cv:\1)', text, flags=re.IGNORECASE)
+        text = re.sub(r'\]\(\s*cv:\s*', r'](cv:', text, flags=re.IGNORECASE)
+        
         # 2. CRITICAL: Ensure ALL cv_id links have cv: prefix for frontend detection
         # Convert [Name](cv_xxx) -> [Name](cv:cv_xxx)
         text = re.sub(

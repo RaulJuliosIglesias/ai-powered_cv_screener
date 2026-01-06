@@ -1,0 +1,35 @@
+{
+  "session_id": "b86d34a6-7619-4607-96d5-b644ed58e0ae",
+  "generated_at": "2026-01-06T04:57:53.679647",
+  "events": [
+    {
+      "timestamp": "2026-01-06T04:57:33.430577",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "b86d34a6-7619-4607-96d5-b644ed58e0ae"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T04:57:33.430577",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "tell me everything about Carmen Rodriguez 3D",
+        "cv_ids": [
+          "cv_8a8d11fd",
+          "cv_914b6fc0",
+          "cv_2c374416",
+          "cv_2d0b5e53",
+          "cv_e45a66ed",
+          "cv_b46199b0",
+          "cv_82c4f380",
+          "cv_beefc90e",
+          "cv_1b021a74",
+          "cv_e77cf1e4"
+        ],
+        "cv_count": 10
+      }
+    }
+  ]
+}
