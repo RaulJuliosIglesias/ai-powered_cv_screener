@@ -27,8 +27,8 @@ export const isSingleCandidateResponse = (content) => {
 };
 
 /**
- * Detect if this is a standalone Risk Assessment response
- * (not embedded in SingleCandidateProfile)
+ * Detect if this is a standalone Risk Assessment response for a SINGLE candidate
+ * (not embedded in SingleCandidateProfile, and not a multi-candidate query)
  * @param {string} content - Raw LLM output
  * @returns {boolean}
  */
@@ -49,7 +49,25 @@ export const isRiskAssessmentResponse = (content) => {
   // Make sure it's NOT a full SingleCandidateProfile
   const isNotFullProfile = !isSingleCandidateResponse(content);
   
-  return hasRiskIndicators && isNotFullProfile;
+  // CRITICAL: Check if this is a MULTI-CANDIDATE response
+  // If multiple candidates are mentioned, this is NOT a single-candidate risk assessment
+  const multiCandidateIndicators = [
+    /all candidates/i,
+    /multiple candidates/i,
+    /each candidate/i,
+    /todos los candidatos/i,
+    // Count candidate name patterns - if more than one cv: link, it's multi-candidate
+  ];
+  
+  const isMultiCandidate = multiCandidateIndicators.some(pattern => pattern.test(content));
+  
+  // Also check: if there are multiple cv: links, it's likely multi-candidate
+  const cvLinkMatches = content.match(/\(cv:cv_[a-zA-Z0-9_-]+\)/g) || [];
+  const uniqueCvIds = [...new Set(cvLinkMatches)];
+  const hasMultipleCandidates = uniqueCvIds.length > 1;
+  
+  // Only return true for SINGLE candidate risk assessments
+  return hasRiskIndicators && isNotFullProfile && !isMultiCandidate && !hasMultipleCandidates;
 };
 
 /**

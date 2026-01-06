@@ -57596,6 +57596,217 @@
       ],
       "created_at": "2026-01-06T01:24:24.424832",
       "updated_at": "2026-01-06T01:47:35.655598"
+    },
+    {
+      "id": "4ed6fe01-7eb5-489e-b2c9-3b8862da98d0",
+      "name": "Media Production 4152",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_e89b8154",
+          "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf",
+          "chunk_count": 6,
+          "content_hash": "85d898ad89ecc8cb7267e5b49adba1f1cac5b408dd4c4fc2d71d14dc5bbd9786",
+          "uploaded_at": "2026-01-06T01:49:07.738316"
+        },
+        {
+          "id": "cv_28300c69",
+          "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "74f41b5728cefd055be7ae50f0cd92f821fc552c3f1623d099aafbc0f0110cf1",
+          "uploaded_at": "2026-01-06T01:49:08.086237"
+        },
+        {
+          "id": "cv_d3f26cb8",
+          "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf",
+          "chunk_count": 7,
+          "content_hash": "b0ac973a41aa837f6956db83be7efc36c49d2569068d401372609dee2fb1805b",
+          "uploaded_at": "2026-01-06T01:49:08.550372"
+        }
+      ],
+      "messages": [
+        {
+          "id": "893f4a76-3ace-4e7e-99db-e36b4641df2c",
+          "role": "user",
+          "content": "dame risk de un candidato cualquiera",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T01:49:24.862858"
+        },
+        {
+          "id": "6d097528-9faf-413c-9117-0fef59e2e561",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for an analysis of the provided CVs to assess the potential hiring risk associated with each candidate. The risk factors include frequent job changes, lack of essential skills, significant gaps in employment history, or any other indicators of potential instability or poor performance. I need to evaluate each CV based on these risk factors and provide an overall risk assessment (low, medium, or high). I will analyze all three CVs and present the findings in a table, then provide a conclusion with actionable recommendations.\n:::\n\n** Carmen Rodriguez  3D** presents a **low-risk profile**. With 16 years of experience and an average tenure of 4.0 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.\n\n\n### ⚠️ Risk Assessment\n\n\n| Factor | Status | Details |\n\n|:-------|:------:|:--------|\n\n| **🚩 Red Flags** | ✅ None Detected | Clean profile |\n\n| **🔄 Job Hopping** | ✅ Low | Score: 19%, Avg tenure: 4.0 yrs |\n\n| **⏸️ Employment Gaps** | ✅ None | Continuous history |\n\n| **📊 Stability** | ✅ Stable | 4 positions over 16 years |\n\n| **🎯 Experience** | Executive | Amsterdam @ Netherlands representation by 40%. |\n\n\n:::conclusion\nBased on the analysis, **[Carlos Mendoza](cv:cv_e89b8154)** represents the lowest hiring risk due to a stable career, strong skills match, and detailed experience. **[Carmen Rodriguez](cv:cv_d3f26cb8)** presents a medium risk, primarily due to potentially higher salary expectations associated with extensive experience. **[Aisha Nkrumah](cv:cv_28300c69)** is the highest risk due to limited experience and vague skill descriptions.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_d3f26cb8",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_28300c69",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_e89b8154",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1778.48,
+              "details": "Query type: general"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 4.77,
+              "details": "Found 8 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 33267.85,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6755.35,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "** Carmen Rodriguez  3D** presents a **low-risk profile**. With 16 years of experience and an average tenure of 4.0 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+            "raw_content": ":::thinking\nThe user is asking for an analysis of the provided CVs to assess the potential hiring risk associated with each candidate. The risk factors include frequent job changes, lack of essential skills, significant gaps in employment history, or any other indicators of potential instability or poor performance. I need to evaluate each CV based on these risk factors and provide an overall risk assessment (low, medium, or high). I will analyze all three CVs and present the findings in a table, then provide a conclusion with actionable recommendations.\n\n:::\n\nBased on the provided CVs, **[Aisha Nkrumah](cv:cv_28300c69)** presents the highest hiring risk due to limited experience and vague skill descriptions, while **[Carlos Mendoza](cv:cv_e89b8154)** appears to be the lowest risk. **[Carmen Rodriguez](cv:cv_d3f26cb8)** presents a moderate risk due to a long career history that could indicate higher salary expectations.\n\n### Analysis\n\nThe following table summarizes the risk factors associated with each candidate:\n\n| Candidate | Job Stability | Skills Match | Experience Gaps | Overall Risk |\n|-----------|----------------|--------------|-----------------|--------------|\n| **[Aisha Nkrumah](cv:cv_28300c69)** | Stable, but short work history | Vague skills, limited detail | None | High |\n| **[Carmen Rodriguez](cv:cv_d3f26cb8)** | Stable, long career | Good skills match | None | Medium |\n| **[Carlos Mendoza](cv:cv_e89b8154)** | Stable, progressive roles | Strong skills match | None | Low |\n\n**[Aisha Nkrumah](cv:cv_28300c69)**: This candidate has a short work history, which, while stable, provides limited insight into long-term performance. The skills listed are somewhat vague (\"in digital painting and character design\"), making it difficult to assess the depth of expertise. The lack of detailed project descriptions also contributes to a higher risk assessment.\n\n**[Carmen Rodriguez](cv:cv_d3f26cb8)**: This candidate has a long and stable career history, which is generally positive. However, the extensive experience might translate to higher salary expectations, which could be a risk if the budget is limited. The skills listed are relevant, and the experience is substantial, leading to a moderate risk assessment.\n\n**[Carlos Mendoza](cv:cv_e89b8154)**: This candidate demonstrates a stable and progressive career path with clear skill development. The skills listed align well with the role, and the experience descriptions are detailed and quantifiable. There are no apparent gaps in employment, resulting in a low-risk assessment.\n\n:::conclusion\nBased on the analysis, **[Carlos Mendoza](cv:cv_e89b8154)** represents the lowest hiring risk due to a stable career, strong skills match, and detailed experience. **[Carmen Rodriguez](cv:cv_d3f26cb8)** presents a medium risk, primarily due to potentially higher salary expectations associated with extensive experience. **[Aisha Nkrumah](cv:cv_28300c69)** is the highest risk due to limited experience and vague skill descriptions.\n:::",
+            "thinking": "The user is asking for an analysis of the provided CVs to assess the potential hiring risk associated with each candidate. The risk factors include frequent job changes, lack of essential skills, significant gaps in employment history, or any other indicators of potential instability or poor performance. I need to evaluate each CV based on these risk factors and provide an overall risk assessment (low, medium, or high). I will analyze all three CVs and present the findings in a table, then provide a conclusion with actionable recommendations.",
+            "analysis": null,
+            "table_data": null,
+            "conclusion": "Based on the analysis, **[Carlos Mendoza](cv:cv_e89b8154)** represents the lowest hiring risk due to a stable career, strong skills match, and detailed experience. **[Carmen Rodriguez](cv:cv_d3f26cb8)** presents a medium risk, primarily due to potentially higher salary expectations associated with extensive experience. **[Aisha Nkrumah](cv:cv_28300c69)** is the highest risk due to limited experience and vague skill descriptions.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": {
+              "candidate_name": " Carmen Rodriguez  3D",
+              "cv_id": "cv_d3f26cb8",
+              "factors": [
+                {
+                  "factor": "🚩 Red Flags",
+                  "status": "✅ None Detected",
+                  "details": "Clean profile",
+                  "status_icon": "✅",
+                  "status_text": "None Detected"
+                },
+                {
+                  "factor": "🔄 Job Hopping",
+                  "status": "✅ Low",
+                  "details": "Score: 19%, Avg tenure: 4.0 yrs",
+                  "status_icon": "✅",
+                  "status_text": "Low"
+                },
+                {
+                  "factor": "⏸️ Employment Gaps",
+                  "status": "✅ None",
+                  "details": "Continuous history",
+                  "status_icon": "✅",
+                  "status_text": "None"
+                },
+                {
+                  "factor": "📊 Stability",
+                  "status": "✅ Stable",
+                  "details": "4 positions over 16 years",
+                  "status_icon": "✅",
+                  "status_text": "Stable"
+                },
+                {
+                  "factor": "🎯 Experience",
+                  "status": "Executive",
+                  "details": "Amsterdam @ Netherlands representation by 40%.",
+                  "status_icon": "",
+                  "status_text": "Executive"
+                }
+              ],
+              "has_issues": false,
+              "overall_risk": "low",
+              "analysis_text": "** Carmen Rodriguez  3D** presents a **low-risk profile**. With 16 years of experience and an average tenure of 4.0 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+              "metrics": {
+                "job_hopping_score": 0.1875,
+                "avg_tenure_years": 4.0,
+                "total_experience_years": 16.0,
+                "employment_gaps_count": 0,
+                "position_count": 4
+              }
+            },
+            "structure_type": "risk_assessment",
+            "single_candidate_data": null,
+            "risk_assessment_data": {
+              "candidate_name": " Carmen Rodriguez  3D",
+              "cv_id": "cv_d3f26cb8",
+              "risk_analysis": "** Carmen Rodriguez  3D** presents a **low-risk profile**. With 16 years of experience and an average tenure of 4.0 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+              "risk_table": {
+                "candidate_name": " Carmen Rodriguez  3D",
+                "cv_id": "cv_d3f26cb8",
+                "factors": [
+                  {
+                    "factor": "🚩 Red Flags",
+                    "status": "✅ None Detected",
+                    "details": "Clean profile",
+                    "status_icon": "✅",
+                    "status_text": "None Detected"
+                  },
+                  {
+                    "factor": "🔄 Job Hopping",
+                    "status": "✅ Low",
+                    "details": "Score: 19%, Avg tenure: 4.0 yrs",
+                    "status_icon": "✅",
+                    "status_text": "Low"
+                  },
+                  {
+                    "factor": "⏸️ Employment Gaps",
+                    "status": "✅ None",
+                    "details": "Continuous history",
+                    "status_icon": "✅",
+                    "status_text": "None"
+                  },
+                  {
+                    "factor": "📊 Stability",
+                    "status": "✅ Stable",
+                    "details": "4 positions over 16 years",
+                    "status_icon": "✅",
+                    "status_text": "Stable"
+                  },
+                  {
+                    "factor": "🎯 Experience",
+                    "status": "Executive",
+                    "details": "Amsterdam @ Netherlands representation by 40%.",
+                    "status_icon": "",
+                    "status_text": "Executive"
+                  }
+                ],
+                "has_issues": false,
+                "overall_risk": "low",
+                "analysis_text": "** Carmen Rodriguez  3D** presents a **low-risk profile**. With 16 years of experience and an average tenure of 4.0 years per position, the candidate demonstrates good job stability. No employment gaps were detected, indicating continuous professional engagement.",
+                "metrics": {
+                  "job_hopping_score": 0.1875,
+                  "avg_tenure_years": 4.0,
+                  "total_experience_years": 16.0,
+                  "employment_gaps_count": 0,
+                  "position_count": 4
+                }
+              },
+              "assessment": "Based on the analysis, **[Carlos Mendoza](cv:cv_e89b8154)** represents the lowest hiring risk due to a stable career, strong skills match, and detailed experience. **[Carmen Rodriguez](cv:cv_d3f26cb8)** presents a medium risk, primarily due to potentially higher salary expectations associated with extensive experience. **[Aisha Nkrumah](cv:cv_28300c69)** is the highest risk due to limited experience and vague skill descriptions."
+            },
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T01:50:10.351507"
+        }
+      ],
+      "created_at": "2026-01-06T01:49:02.618095",
+      "updated_at": "2026-01-06T01:50:10.351507"
     }
   ]
 }
