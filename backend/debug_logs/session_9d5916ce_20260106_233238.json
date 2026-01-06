@@ -1,0 +1,616 @@
+{
+  "session_id": "9d5916ce-c80e-4f39-a12f-5068203a1349",
+  "generated_at": "2026-01-06T23:32:38.137495",
+  "events": [
+    {
+      "timestamp": "2026-01-06T23:29:12.161912",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "9d5916ce-c80e-4f39-a12f-5068203a1349"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:29:12.161912",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Give me full profile of #1 candidate",
+        "cv_ids": [
+          "cv_87e48364",
+          "cv_15a2823e",
+          "cv_4a30477e",
+          "cv_ea0523c1",
+          "cv_701d596a",
+          "cv_815386ae",
+          "cv_4418bf37",
+          "cv_2b219492",
+          "cv_dfaa69b5",
+          "cv_2bbc8b4b",
+          "cv_1e96a74a",
+          "cv_2fc87021"
+        ],
+        "cv_count": 12
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:29:13.784290",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 10,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_2fc87021",
+            "candidate_name": " Lotte van der Berg  Camera",
+            "section_type": "experience",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 5.0,
+            "score": 0.5710284891360419,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_2bbc8b4b",
+            "candidate_name": " Sofia Rossi  Restaurant",
+            "section_type": "experience",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 2.0,
+            "score": 0.5538064881104874,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_87e48364",
+            "candidate_name": " Aisha Okafor  Business",
+            "section_type": "experience",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 27.0,
+            "score": 0.5530296824333216,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_1e96a74a",
+            "candidate_name": " Sofia Mendoza ",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.3333333333333333,
+            "total_experience_years": 2.0,
+            "score": 0.5523676436591493,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_4418bf37",
+            "candidate_name": " Matteo Rossi  Group",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.5442101103520662,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_ea0523c1",
+            "candidate_name": " Lukas Schneider  Mix",
+            "section_type": "summary",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 9.5,
+            "total_experience_years": 14.0,
+            "score": 0.5438696436320614,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_dfaa69b5",
+            "candidate_name": " Ji-eun Kim  Business",
+            "section_type": "experience",
+            "job_hopping_score": 0.5714285714285714,
+            "avg_tenure_years": 1.4,
+            "total_experience_years": 7.0,
+            "score": 0.5424855247082649,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_701d596a",
+            "candidate_name": " Mei Lin Chen  Accessories",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 10.0,
+            "score": 0.535090406895298,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_815386ae",
+            "candidate_name": " Amir Hassan ",
+            "section_type": "summary",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 0.533404623637913,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_15a2823e",
+            "candidate_name": " Matteo Rossi  Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.21428571428571427,
+            "avg_tenure_years": 3.5,
+            "total_experience_years": 9.0,
+            "score": 0.5307050689601488,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "location",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:29:14.828406",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "SINGLE_CANDIDATE_TEMPLATE",
+        "candidate_name": "Lotte van der Berg",
+        "detection_method": "context_resolver"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:30:07.121047",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "9d5916ce-c80e-4f39-a12f-5068203a1349"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:30:07.121047",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Give me full profile of #1 candidate",
+        "cv_ids": [
+          "cv_87e48364",
+          "cv_15a2823e",
+          "cv_4a30477e",
+          "cv_ea0523c1",
+          "cv_701d596a",
+          "cv_815386ae",
+          "cv_4418bf37",
+          "cv_2b219492",
+          "cv_dfaa69b5",
+          "cv_2bbc8b4b",
+          "cv_1e96a74a",
+          "cv_2fc87021"
+        ],
+        "cv_count": 12
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:30:19.346633",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 10,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_2fc87021",
+            "candidate_name": " Lotte van der Berg  Camera",
+            "section_type": "experience",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 5.0,
+            "score": 0.5710284891360419,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_2bbc8b4b",
+            "candidate_name": " Sofia Rossi  Restaurant",
+            "section_type": "experience",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 2.0,
+            "score": 0.5538064881104874,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_87e48364",
+            "candidate_name": " Aisha Okafor  Business",
+            "section_type": "experience",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 27.0,
+            "score": 0.5530296824333216,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_1e96a74a",
+            "candidate_name": " Sofia Mendoza ",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.3333333333333333,
+            "total_experience_years": 2.0,
+            "score": 0.5523676436591493,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_4418bf37",
+            "candidate_name": " Matteo Rossi  Group",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.5442101103520662,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_ea0523c1",
+            "candidate_name": " Lukas Schneider  Mix",
+            "section_type": "summary",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 9.5,
+            "total_experience_years": 14.0,
+            "score": 0.5438696436320614,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_dfaa69b5",
+            "candidate_name": " Ji-eun Kim  Business",
+            "section_type": "experience",
+            "job_hopping_score": 0.5714285714285714,
+            "avg_tenure_years": 1.4,
+            "total_experience_years": 7.0,
+            "score": 0.5424855247082649,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_701d596a",
+            "candidate_name": " Mei Lin Chen  Accessories",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 10.0,
+            "score": 0.535090406895298,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_815386ae",
+            "candidate_name": " Amir Hassan ",
+            "section_type": "summary",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 0.533404623637913,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_15a2823e",
+            "candidate_name": " Matteo Rossi  Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.21428571428571427,
+            "avg_tenure_years": 3.5,
+            "total_experience_years": 9.0,
+            "score": 0.5307050689601488,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "location",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:31:52.089929",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "SINGLE_CANDIDATE_TEMPLATE",
+        "candidate_name": "Lotte van der Berg",
+        "detection_method": "context_resolver"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:32:13.999154",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "9d5916ce-c80e-4f39-a12f-5068203a1349"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:32:14.000154",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Give me full profile of #1 candidate",
+        "cv_ids": [
+          "cv_87e48364",
+          "cv_15a2823e",
+          "cv_4a30477e",
+          "cv_ea0523c1",
+          "cv_701d596a",
+          "cv_815386ae",
+          "cv_4418bf37",
+          "cv_2b219492",
+          "cv_dfaa69b5",
+          "cv_2bbc8b4b",
+          "cv_1e96a74a",
+          "cv_2fc87021"
+        ],
+        "cv_count": 12
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:32:27.629114",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 10,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_2fc87021",
+            "candidate_name": " Lotte van der Berg  Camera",
+            "section_type": "experience",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 5.0,
+            "score": 0.5710284891360419,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_2bbc8b4b",
+            "candidate_name": " Sofia Rossi  Restaurant",
+            "section_type": "experience",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 2.0,
+            "score": 0.5538064881104874,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_87e48364",
+            "candidate_name": " Aisha Okafor  Business",
+            "section_type": "experience",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 27.0,
+            "score": 0.5530296824333216,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_1e96a74a",
+            "candidate_name": " Sofia Mendoza ",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.3333333333333333,
+            "total_experience_years": 2.0,
+            "score": 0.5523676436591493,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_4418bf37",
+            "candidate_name": " Matteo Rossi  Group",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.5442101103520662,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_ea0523c1",
+            "candidate_name": " Lukas Schneider  Mix",
+            "section_type": "summary",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 9.5,
+            "total_experience_years": 14.0,
+            "score": 0.5438696436320614,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_dfaa69b5",
+            "candidate_name": " Ji-eun Kim  Business",
+            "section_type": "experience",
+            "job_hopping_score": 0.5714285714285714,
+            "avg_tenure_years": 1.4,
+            "total_experience_years": 7.0,
+            "score": 0.5424855247082649,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_701d596a",
+            "candidate_name": " Mei Lin Chen  Accessories",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 10.0,
+            "score": 0.535090406895298,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_815386ae",
+            "candidate_name": " Amir Hassan ",
+            "section_type": "summary",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 0.533404623637913,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_15a2823e",
+            "candidate_name": " Matteo Rossi  Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.21428571428571427,
+            "avg_tenure_years": 3.5,
+            "total_experience_years": 9.0,
+            "score": 0.5307050689601488,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "location",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:32:29.153131",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "SINGLE_CANDIDATE_TEMPLATE",
+        "candidate_name": "Lotte van der Berg",
+        "detection_method": "context_resolver"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:32:38.026703",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "single_candidate",
+        "candidate_name": "Lotte van der Berg",
+        "detection_source": "single_candidate_detection",
+        "detection_method": "context_resolver"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T23:32:38.136495",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1124,
+        "answer_preview": ":::thinking\nThe user is asking for the full profile of the first candidate, which is Lotte van der Berg (cv_2fc87021). I need to extract all relevant information from the provided CV data, including current role, total experience, career trajectory, skills, and any potential red flags.\n:::\n\nLotte van der Berg is a Cinematographer with 3 years of experience at Rotterdam TV Productions (2002-2005). During this time, she supported senior operators on commercial shoots and series, assisted in the se...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

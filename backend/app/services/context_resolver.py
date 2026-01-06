@@ -178,7 +178,22 @@ def extract_candidate_from_history(
             logger.info(f"[CONTEXT_RESOLVER] Found top choice: {name} ({cv_id})")
             return {"name": name, "cv_id": cv_id}
         
-        # Pattern 7: First CV link in ranking response (the #1 candidate is typically listed first)
+        # Pattern 7: Look for actual ranking with scores to find the real #1 candidate
+        # Pattern: [📄](cv:cv_xxx) **Name** Score% - find the one with highest score
+        ranking_matches = re.findall(
+            r'\[📄\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\s*\*\*([^*]+)\*\*[^0-9]*([0-9]+)%',
+            content
+        )
+        if ranking_matches:
+            # Find the candidate with the highest score
+            best_match = max(ranking_matches, key=lambda x: int(x[2]))
+            cv_id = best_match[0].strip()
+            name = best_match[1].strip()
+            score = best_match[2]
+            logger.info(f"[CONTEXT_RESOLVER] Found #1 candidate by score: {name} ({cv_id}) with {score}%")
+            return {"name": name, "cv_id": cv_id}
+        
+        # Pattern 8: Fallback - First CV link in ranking response (the #1 candidate is typically listed first)
         # Look for pattern like [📄](cv:cv_xxx) **Name** with score
         first_cv_link = re.search(
             r'\[📄\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\s*\*\*([^*]+)\*\*',

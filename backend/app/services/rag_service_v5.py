@@ -2481,6 +2481,9 @@ Provide a corrected response:"""
         # Post-process: Add CV links to candidate names
         answer = self._add_cv_links_to_text(answer, candidate_map)
         
+        # Fix formatting issues: Ensure proper spacing after colons in bold text
+        answer = self._fix_bold_colon_spacing(answer)
+        
         # Ensure conclusion section is properly formatted
         answer = self._format_conclusion_section(answer)
         
@@ -2679,6 +2682,19 @@ Provide a corrected response:"""
                 if ':::conclusion' in text and not text.strip().endswith(':::'):
                     text = text.strip() + '\n:::'
                 break
+        
+        return text
+    
+    def _fix_bold_colon_spacing(self, text: str) -> str:
+        """Fix formatting issues: Ensure proper spacing after colons in bold text."""
+        import re
+        
+        # Fix pattern: "**Bold Text:**Content" -> "**Bold Text:** Content"
+        # This catches cases where there's no space after the colon in bold text
+        text = re.sub(r'\*\*([^*]+):\*\*([^\s])', r'**\1:** \2', text)
+        
+        # Also fix pattern: "**Bold Text:** *[link]*Content" -> "**Bold Text:** *[link]* Content"
+        text = re.sub(r'\*\*([^*]+):\*\*(\s*\[[^\]]+\]\([^\)]+\))([^\s])', r'**\1:** \2\3', text)
         
         return text
     
