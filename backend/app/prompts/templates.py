@@ -1287,22 +1287,35 @@ class PromptBuilder:
         return formatted_prompt
     
     def _is_red_flags_query(self, question: str) -> bool:
-        """Detect if the user's question is specifically about red flags."""
-        question_lower = question.lower()
-        red_flags_keywords = [
-            "red flag", "redflags", "red-flag",
-            "bandera roja", "banderas rojas",
-            "problema", "problemas", "concern", "concerns", "issue", "issues",
-            "warning", "warnings", "alert", "alertas",
-            "job hopping", "job-hopping", "cambio de trabajo",
-            "gap", "gaps", "hueco", "huecos",
-            "estabilidad", "stability", "inestabilidad", "unstable",
-            "riesgo", "risk", "risky"
+        """Detect if the user's question is specifically about red flags.
+        
+        IMPORTANT: Uses specific patterns to avoid false positives.
+        Generic words like 'problem', 'issue', 'risk' are NOT matched alone.
+        """
+        import re
+        q = question.lower()
+        
+        # Specific patterns that indicate actual red flags queries
+        red_flags_patterns = [
+            # Explicit red flag queries
+            r'red.?flag', r'bandera.?roja',
+            # Job hopping / stability concerns
+            r'job.?hopping', r'job\s+hopper',
+            r'employment\s+gap', r'career\s+gap', r'gaps?\s+in\s+(cv|resume|employment|career)',
+            # Stability queries about candidates
+            r'(in)?stability\b.*candidate', r'candidate.*\b(in)?stability',
+            r'estabilidad\b.*candidato', r'candidato.*\bestabilidad',
+            # Explicit risk assessment requests
+            r'risk\s+(assessment|analysis|evaluation)',
+            r'evalua(r|ción)\s+riesgo', r'riesgo\s+de\s+',
+            # Warning signs specific to hiring
+            r'warning\s+sign', r'señal\s+de\s+alerta',
+            # Concerns about a specific candidate
+            r'concern(s|ed)?\s+(about|with|regarding)\s+',
+            r'preocupa(do|ción)\s+(por|sobre)\s+',
         ]
-        for keyword in red_flags_keywords:
-            if keyword in question_lower:
-                return True
-        return False
+        
+        return any(re.search(p, q) for p in red_flags_patterns)
     
     def _extract_enriched_metadata(self, chunks: list[dict]) -> dict[str, str]:
         """Extract enriched metadata from chunks for Risk Assessment module.
@@ -1484,10 +1497,29 @@ def classify_query_for_structure(question: str) -> str:
     q = question.lower()
     
     # 1. RED FLAGS / RISK queries → RiskAssessmentStructure
+    # IMPORTANT: These patterns must be SPECIFIC to avoid false positives
+    # Words like "problem", "issue", "risk" are too generic (e.g., "problem solving skills")
     red_flags_patterns = [
-        r'\brisk', r'\briesgo', r'\bred.?flag', r'\bbandera.?roja',
-        r'\bconcern', r'\bissue', r'\bproblem', r'\bwarning',
-        r'\balerta', r'\bjob.?hopping', r'\bgap\b'
+        # Explicit red flag queries
+        r'\bred.?flag', r'\bbandera.?roja',
+        # Job hopping / stability concerns
+        r'\bjob.?hopping', r'\bjob\s+hopper',
+        r'\bemployment\s+gap', r'\bcareer\s+gap', r'\bgaps?\s+in\s+(cv|resume|employment|career)',
+        # Stability/instability queries about candidates
+        r'\b(in)?stability\b.*candidate', r'\bcandidate.*\b(in)?stability',
+        r'\bestabilidad\b.*candidato', r'\bcandidato.*\bestabilidad',
+        # Explicit risk assessment requests
+        r'\brisk\s+(assessment|analysis|evaluation|factor)',
+        r'\bevalua(r|ción)\s+riesgo', r'\briesgo\s+de\s+',
+        r'\banalyze\s+(the\s+)?risk', r'\banalizar\s+riesgo',
+        # Warning signs specific to hiring
+        r'\bwarning\s+sign', r'\bseñal\s+de\s+alerta',
+        # Concerns about a specific candidate
+        r'\bconcern(s|ed)?\s+(about|with|regarding)\s+', 
+        r'\bpreocupa(do|ción)\s+(por|sobre)\s+',
+        # Problems with a candidate (not "problem solving")
+        r'\bproblem(s)?\s+(with|about)\s+(this|the|that)\s+(candidate|person)',
+        r'\bproblema(s)?\s+(con|de)\s+(este|el|ese)\s+candidato',
     ]
     if any(re.search(p, q) for p in red_flags_patterns):
         return "red_flags"

@@ -631,26 +631,27 @@ async def get_suggested_questions(
     session_id: str,
     mode: Mode = Query(default=settings.default_mode)
 ):
-    """Generate suggested questions based on session's CVs."""
-    import random
+    """
+    Generate contextual suggestions based on conversation history.
+    
+    NEW v6.0: Uses SuggestionEngine with:
+    - 10 query type banks (~120 suggestions total)
+    - Context extraction from conversation history
+    - Template filling with mentioned entities (candidates, skills, roles)
+    - Deduplication to avoid repeating suggestions
+    """
     import re
     
     def extract_name(filename: str) -> str:
         """Extract readable name from filename like '8b292e4e_Ethan_James_Carter_...'"""
-        # Remove .pdf extension
         name = filename.replace('.pdf', '')
-        # Remove leading hash/ID (8 hex chars followed by underscore)
         name = re.sub(r'^[a-f0-9]{8}_', '', name)
-        # Replace underscores with spaces
         name = name.replace('_', ' ')
-        # Take only first 2-3 words (the person's name, not the job title)
         parts = name.split()
-        if len(parts) >= 3:
-            # Check if 3rd word looks like a name (capitalized, not a job word)
-            job_words = {'Senior', 'Junior', 'Lead', 'Head', 'Chief', 'Manager', 'Director', 'Specialist', 'Engineer', 'Developer', 'Designer', 'Analyst'}
-            if parts[2] not in job_words and parts[2][0].isupper():
-                return ' '.join(parts[:3])
-            return ' '.join(parts[:2])
+        job_words = {'Senior', 'Junior', 'Lead', 'Head', 'Chief', 'Manager', 
+                     'Director', 'Specialist', 'Engineer', 'Developer', 'Designer', 'Analyst'}
+        if len(parts) >= 3 and parts[2] not in job_words and parts[2][0].isupper():
+            return ' '.join(parts[:3])
         return ' '.join(parts[:2]) if len(parts) >= 2 else name[:20]
     
     mgr = get_session_manager(mode)
@@ -662,35 +663,69 @@ async def get_suggested_questions(
     if not cvs:
         return {"suggestions": []}
     
-    # Extract clean names from filenames
-    cv_names = [extract_name(cv.get("filename", "") if isinstance(cv, dict) else cv.filename) for cv in cvs]
+    # Extract CV names
+    cv_names = [
+        extract_name(cv.get("filename", "") if isinstance(cv, dict) else cv.filename) 
+        for cv in cvs
+    ]
     num_cvs = len(cvs)
     
-    if num_cvs == 1:
-        name = cv_names[0]
-        suggestions = [
-            f"What are {name}'s main skills?",
-            f"Summarize {name}'s experience",
-            f"Is {name} suitable for a senior role?",
-            f"What are {name}'s qualifications?"
-        ]
-    else:
-        # Generic strategic questions only
-        generic_questions = [
-            f"Rank all {num_cvs} candidates by experience",
-            "Who is best for a leadership role?",
-            "Who has the strongest technical skills?",
-            "Compare education levels",
-            "Who shows the most career growth?",
-            "Who has startup experience?",
-            f"Create a top 3 shortlist from {num_cvs} candidates",
-            "Who has the most diverse skill set?",
-            "Compare years of experience",
-            "Who would fit a senior position?",
-        ]
+    # Get conversation history (REUTILIZAR infraestructura existente)
+    try:
+        messages = mgr.get_conversation_history(session_id, limit=10)
+    except Exception as e:
+        logger.warning(f"[SUGGESTIONS] Could not get conversation history: {e}")
+        messages = []
+    
+    # Convert ChatMessage to dict if needed
+    history = []
+    for msg in messages:
+        if isinstance(msg, dict):
+            history.append(msg)
+        else:
+            history.append({
+                "role": msg.role if hasattr(msg, 'role') else "user",
+                "content": msg.content if hasattr(msg, 'content') else str(msg),
+                "structured_output": msg.structured_output if hasattr(msg, 'structured_output') else None
+            })
+    
+    # Use SuggestionEngine for contextual suggestions
+    try:
+        from app.services.suggestion_engine import get_suggestion_engine
+        engine = get_suggestion_engine()
         
-        random.shuffle(generic_questions)
-        suggestions = generic_questions[:4]
+        suggestions = engine.get_suggestions(
+            messages=history,
+            cv_names=cv_names,
+            num_cvs=num_cvs,
+            count=4
+        )
+        
+        logger.info(
+            f"[SUGGESTIONS] Generated {len(suggestions)} contextual suggestions "
+            f"for session {session_id} ({num_cvs} CVs, {len(history)} messages)"
+        )
+    except Exception as e:
+        # Fallback to simple suggestions if engine fails
+        logger.error(f"[SUGGESTIONS] SuggestionEngine error: {e}, falling back to simple suggestions")
+        import random
+        if num_cvs == 1:
+            name = cv_names[0]
+            suggestions = [
+                f"Dame el perfil completo de {name}",
+                f"¿Qué skills tiene {name}?",
+                f"¿Hay red flags para {name}?",
+                f"¿{name} es suitable para un rol senior?"
+            ]
+        else:
+            generic = [
+                f"Ranking de los {num_cvs} candidatos por experiencia",
+                "¿Quién tiene más experiencia técnica?",
+                "Comparar los dos mejores candidatos",
+                "Resumen del talent pool",
+            ]
+            random.shuffle(generic)
+            suggestions = generic[:4]
     
     return {"suggestions": suggestions}
 

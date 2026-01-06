@@ -64177,6 +64177,124 @@
       ],
       "created_at": "2026-01-06T04:24:23.675906",
       "updated_at": "2026-01-06T04:32:32.853756"
+    },
+    {
+      "id": "c0146523-3aa6-418b-8569-a1c0251864b4",
+      "name": "New chat",
+      "description": "",
+      "cvs": [
+        {
+          "id": "cv_243fb61f",
+          "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf",
+          "chunk_count": 5,
+          "content_hash": "7e152a6737adb6072e1076864533574469521b899270ea7d65569dff310615a8",
+          "uploaded_at": "2026-01-06T04:35:35.400672"
+        },
+        {
+          "id": "cv_da725a5e",
+          "filename": "8742ca7a__Sofia_Mendoza__Environment_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "f3d5b99f8d47cadfae597fd68f42a9d684c874fafbf952cabe5c661a220cf7da",
+          "uploaded_at": "2026-01-06T04:35:36.004488"
+        },
+        {
+          "id": "cv_8ef914d2",
+          "filename": "749745cf__Aisha_Johnson__Animator.pdf",
+          "chunk_count": 5,
+          "content_hash": "fc4df9844655dc53b8c437b423443383094ee61c744fad93112dd13114f86c2d",
+          "uploaded_at": "2026-01-06T04:35:36.503353"
+        },
+        {
+          "id": "cv_d66b94ab",
+          "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf",
+          "chunk_count": 3,
+          "content_hash": "fca8a83a0edadee1c4bbc2ca635a9c888e1d0e630e689ccbda81a8bfd5c77e5e",
+          "uploaded_at": "2026-01-06T04:35:37.041590"
+        },
+        {
+          "id": "cv_0cf5b472",
+          "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf",
+          "chunk_count": 4,
+          "content_hash": "9ed63ccc7f2f7c0cc81da35ff3453dcec31c300ead2b4f946d4db5d6048ac157",
+          "uploaded_at": "2026-01-06T04:35:37.664673"
+        },
+        {
+          "id": "cv_981cc004",
+          "filename": "a86437b9__Rajesh_Patel__VFX_Supervisor.pdf",
+          "chunk_count": 3,
+          "content_hash": "6858a468a4cdf946a86d01fd652ea2c146f8409afbe9337d0f43ebbeb0e4104f",
+          "uploaded_at": "2026-01-06T04:35:38.233954"
+        },
+        {
+          "id": "cv_05adf842",
+          "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf",
+          "chunk_count": 7,
+          "content_hash": "61979aaf1446d8b5d11d28b9b65cdd95e6e8100ee8667c9ad52d4104796d51ef",
+          "uploaded_at": "2026-01-06T04:35:38.754316"
+        },
+        {
+          "id": "cv_9abd91cf",
+          "filename": "c940481c__Rajiv_Patel__Junior_VFX_Artist.pdf",
+          "chunk_count": 3,
+          "content_hash": "13213d6ec70b08b54b753f691859eb562813f17ed272f4754ad12a5a4b19e370",
+          "uploaded_at": "2026-01-06T04:35:39.231618"
+        },
+        {
+          "id": "cv_a22e01af",
+          "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf",
+          "chunk_count": 3,
+          "content_hash": "0e996b38a95c64aca7129e2554ee5a0e684da1c7f40a72e8c912ab14faad7f18",
+          "uploaded_at": "2026-01-06T04:35:39.743248"
+        },
+        {
+          "id": "cv_f8e8d272",
+          "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf",
+          "chunk_count": 11,
+          "content_hash": "fb9a97f91218eb858e3c8647e40b5b25a35d25039dc923bfe0a4da640eb2a90f",
+          "uploaded_at": "2026-01-06T04:35:40.320458"
+        },
+        {
+          "id": "cv_0a78da01",
+          "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf",
+          "chunk_count": 6,
+          "content_hash": "9ac96c226a0824b5a8df589c45c1a9886ffb2f05442986faa0a5e6491c6eba80",
+          "uploaded_at": "2026-01-06T04:35:40.876802"
+        },
+        {
+          "id": "cv_1d8d7394",
+          "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf",
+          "chunk_count": 6,
+          "content_hash": "85d898ad89ecc8cb7267e5b49adba1f1cac5b408dd4c4fc2d71d14dc5bbd9786",
+          "uploaded_at": "2026-01-06T04:35:41.394751"
+        },
+        {
+          "id": "cv_4f73d8b5",
+          "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf",
+          "chunk_count": 4,
+          "content_hash": "74f41b5728cefd055be7ae50f0cd92f821fc552c3f1623d099aafbc0f0110cf1",
+          "uploaded_at": "2026-01-06T04:35:41.945688"
+        },
+        {
+          "id": "cv_1964cb0a",
+          "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf",
+          "chunk_count": 7,
+          "content_hash": "b0ac973a41aa837f6956db83be7efc36c49d2569068d401372609dee2fb1805b",
+          "uploaded_at": "2026-01-06T04:35:42.531297"
+        }
+      ],
+      "messages": [
+        {
+          "id": "875bdaf7-0649-4a3d-b084-239deeef5ab6",
+          "role": "user",
+          "content": "Who shows the most career growth?",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T04:40:11.067639"
+        }
+      ],
+      "created_at": "2026-01-06T04:35:31.802508",
+      "updated_at": "2026-01-06T04:40:11.067639"
     }
   ]
 }

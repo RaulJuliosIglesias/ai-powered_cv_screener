@@ -790,10 +790,22 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
   
   // ==========================================================================
   // FALLBACK: Legacy detection for backwards compatibility
+  // IMPORTANT: Only use fallback if backend didn't provide a known structure_type
   // ==========================================================================
   
+  // Known structure types from backend - if we have one of these, DON'T use fallback
+  const knownStructureTypes = ['single_candidate', 'risk_assessment', 'comparison', 'search', 'ranking', 'job_match', 'team_build', 'verification', 'summary'];
+  const hasKnownStructureType = structure_type && knownStructureTypes.includes(structure_type);
+  
   // PRIORITY 1: Use Risk Assessment data from backend MODULE (reusable component)
+  // BUT ONLY if we don't have a known structure_type (fallback for legacy messages)
   const riskAssessmentData = useMemo(() => {
+    // SKIP FALLBACK if backend provided a known structure_type
+    if (hasKnownStructureType) {
+      console.log('[STRUCTURED_OUTPUT] Skipping fallback - using structure_type:', structure_type);
+      return null;
+    }
+    
     // First check if backend provided risk_assessment data (from RiskTableModule)
     if (risk_assessment && risk_assessment.factors && risk_assessment.factors.length > 0) {
       console.log('[STRUCTURED_OUTPUT] Using Risk Assessment from backend module:', risk_assessment.candidate_name);
@@ -819,10 +831,14 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
       }
     }
     return null;
-  }, [risk_assessment, raw_content]);
+  }, [risk_assessment, raw_content, hasKnownStructureType, structure_type]);
   
   // PRIORITY 2: Detect single candidate profile response
+  // ALSO skip if we have a known structure_type from backend
   const singleCandidateData = useMemo(() => {
+    // Skip if backend provided a known structure_type
+    if (hasKnownStructureType) return null;
+    
     // Skip if we already detected Risk Assessment standalone query
     if (riskAssessmentData) return null;
     
