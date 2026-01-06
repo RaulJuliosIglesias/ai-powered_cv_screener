@@ -85,7 +85,12 @@ class MatchScoreModule:
         # Calculate match for each candidate
         matches = []
         for cv_id, data in candidates.items():
-            match = self._calculate_candidate_match(data, requirements)
+            if requirements:
+                # Requirements-based matching
+                match = self._calculate_candidate_match(data, requirements)
+            else:
+                # No requirements - use similarity-based scoring from chunks
+                match = self._calculate_similarity_match(data, chunks)
             matches.append(match)
         
         # Sort by overall match descending
@@ -95,7 +100,7 @@ class MatchScoreModule:
         
         return MatchScoreData(
             matches=matches,
-            total_requirements=len(requirements)
+            total_requirements=len(requirements) if requirements else 1
         )
     
     def _group_by_candidate(
@@ -220,6 +225,42 @@ class MatchScoreModule:
             met_requirements=met,
             missing_requirements=missing,
             partial_requirements=partial,
+            strengths=strengths
+        )
+    
+    def _calculate_similarity_match(
+        self,
+        candidate_data: Dict,
+        chunks: List[Dict[str, Any]]
+    ) -> CandidateMatch:
+        """
+        Calculate match score based on chunk similarity scores when no requirements provided.
+        Used for generic queries like "who fits a senior position".
+        """
+        cv_id = candidate_data.get("cv_id", "")
+        
+        # Get similarity scores for this candidate's chunks
+        scores = []
+        for chunk in chunks:
+            chunk_cv_id = chunk.get("cv_id", "") or chunk.get("metadata", {}).get("cv_id", "")
+            if chunk_cv_id == cv_id:
+                score = chunk.get("score", 0.5)
+                scores.append(score)
+        
+        # Average similarity score, converted to percentage
+        avg_score = sum(scores) / len(scores) if scores else 0.5
+        overall_match = round(min(100, avg_score * 100), 1)
+        
+        # Identify strengths based on candidate data
+        strengths = self._identify_strengths(candidate_data, [])
+        
+        return CandidateMatch(
+            candidate_name=candidate_data.get("name", "Unknown"),
+            cv_id=cv_id,
+            overall_match=overall_match,
+            met_requirements=[],
+            missing_requirements=[],
+            partial_requirements=[],
             strengths=strengths
         )
     

@@ -279,6 +279,11 @@ class OutputOrchestrator:
                 "assessment": structure_data.get("assessment"),
             }
         
+        # For comparison, add table_data for comparison table
+        elif structure_data.get("structure_type") == "comparison":
+            structured.table_data = structure_data.get("table_data")
+            structured.analysis = structure_data.get("analysis")
+        
         # For search, add results table and analysis
         elif structure_data.get("structure_type") == "search":
             structured.results_table = structure_data.get("results_table")

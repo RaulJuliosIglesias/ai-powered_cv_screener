@@ -617,3 +617,33 @@
 .animate-pulse-subtle {
   animation: pulseSubtle 2s ease-in-out infinite;
 }
+
+/* Quick fade in for hover cards */
+@keyframes fadeInQuick {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeInQuick 0.15s ease-out;
+}
+
+/* Glow pulse for winner cards */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(234, 179, 8, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(234, 179, 8, 0.5);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 2s ease-in-out infinite;
+}

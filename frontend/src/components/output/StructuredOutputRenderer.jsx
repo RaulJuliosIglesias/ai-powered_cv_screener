@@ -19,7 +19,11 @@ import {
   VerificationResult,
   PoolSummary,
   SearchResultsTable,
-  TopPickCard
+  TopPickCard,
+  WinnerCard,
+  ComparisonMatrix,
+  ConfidenceIndicator,
+  QuickActions
 } from './modules';
 import { 
   isSingleCandidateResponse, 
@@ -540,6 +544,40 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
   }
   
   // NEW STRUCTURE TYPES (Phase 3-6)
+  
+  if (structure_type === 'comparison') {
+    console.log('[STRUCTURED_OUTPUT] ROUTING: structure_type=comparison');
+    console.log('[STRUCTURED_OUTPUT] table_data:', table_data);
+    
+    // Build cvMap from table_data for CV link resolution
+    const compCvMap = table_data?.rows?.reduce((acc, r) => {
+      if (r.candidate_name && r.cv_id) {
+        acc[r.candidate_name.toLowerCase().trim()] = r.cv_id;
+      }
+      return acc;
+    }, {}) || {};
+    
+    // Determine winner (highest score candidate)
+    const candidates = table_data?.rows || [];
+    const sortedCandidates = [...candidates].sort((a, b) => (b.match_score || b.score || 0) - (a.match_score || a.score || 0));
+    const winner = sortedCandidates[0];
+    const runnerUp = sortedCandidates[1];
+    
+    return (
+      <div className="space-y-3">
+        <ThinkingSection content={thinking} />
+        {direct_answer && <DirectAnswerSection content={direct_answer} onOpenCV={onOpenCV} cvMap={compCvMap} />}
+        {/* Show comparison table - this is critical for comparison queries */}
+        {table_data?.rows?.length > 0 && (
+          <CandidateTable tableData={table_data} onOpenCV={onOpenCV} />
+        )}
+        {/* Show winner card if we have candidates */}
+        {winner && candidates.length >= 2 && <WinnerCard winner={{...winner, score: winner.match_score || winner.score}} runnerUp={runnerUp ? {...runnerUp, score: runnerUp.match_score || runnerUp.score} : null} onOpenCV={onOpenCV} />}
+        {analysis && <AnalysisSection content={analysis} onOpenCV={onOpenCV} cvMap={compCvMap} />}
+        {conclusion && <ConclusionSection content={conclusion} onOpenCV={onOpenCV} cvMap={compCvMap} />}
+      </div>
+    );
+  }
   
   if (structure_type === 'search') {
     console.log('[STRUCTURED_OUTPUT] ROUTING: structure_type=search');

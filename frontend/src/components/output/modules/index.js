@@ -8,6 +8,7 @@
  * The same module can be used by multiple structures.
  */
 
+// Core display modules
 export { default as RiskAssessmentTable } from './RiskAssessmentTable';
 export { default as RankingTable } from './RankingTable';
 export { default as MatchScoreCard } from './MatchScoreCard';
@@ -16,3 +17,11 @@ export { default as VerificationResult } from './VerificationResult';
 export { default as PoolSummary } from './PoolSummary';
 export { default as SearchResultsTable } from './SearchResultsTable';
 export { default as TopPickCard } from './TopPickCard';
+
+// NEW: Enhanced comparison modules
+export { default as WinnerCard } from './WinnerCard';
+export { default as ComparisonMatrix } from './ComparisonMatrix';
+
+// NEW: Utility modules
+export { default as ConfidenceIndicator } from './ConfidenceIndicator';
+export { default as QuickActions } from './QuickActions';
