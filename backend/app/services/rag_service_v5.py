@@ -947,6 +947,11 @@ class RAGServiceV5:
         """Execute pipeline with streaming progress events."""
         import time
         
+        # CRITICAL DEBUG: Check if _query_understanding is initialized
+        logger.info(f"[PIPELINE_STREAM] Starting pipeline, _query_understanding={self._query_understanding is not None}")
+        if self._query_understanding is None:
+            logger.error("[PIPELINE_STREAM] CRITICAL: _query_understanding is None! Query Understanding will NOT execute!")
+        
         # Stage 1: Query Understanding with progress updates
         yield {"event": "step", "data": {"step": "query_understanding", "status": "running"}}
         start = time.perf_counter()
@@ -1298,9 +1303,14 @@ class RAGServiceV5:
         """Step 1: Understand the query."""
         start = time.perf_counter()
         try:
+            logger.info(f"[QUERY_UNDERSTANDING] Starting with {len(ctx.conversation_history) if ctx.conversation_history else 0} history messages")
             result = await self._query_understanding.understand(ctx.question, ctx.conversation_history)
             
             ctx.query_understanding = result
+            
+            # LOG the query understanding result
+            log_query_understanding(result)
+            logger.info(f"[QUERY_UNDERSTANDING] Result: type={result.query_type}, reformulated={result.reformulated_prompt[:100] if result.reformulated_prompt else 'None'}...")
             
             # Early detection of single candidate queries for targeted retrieval
             from app.prompts.templates import extract_candidate_name_from_query
@@ -1346,10 +1356,14 @@ class RAGServiceV5:
         progress_callback
     ) -> None:
         """Step 1: Understand the query with progress callback for streaming."""
+        logger.info(f"[QUERY_UNDERSTANDING_CALLBACK] METHOD STARTED - question={ctx.question[:50]}...")
+        logger.info(f"[QUERY_UNDERSTANDING_CALLBACK] conversation_history={len(ctx.conversation_history) if ctx.conversation_history else 0} messages")
         start = time.perf_counter()
         try:
             # Pass the progress callback to understand() for retry/fallback progress updates
+            logger.info(f"[QUERY_UNDERSTANDING_CALLBACK] Calling understand() with {len(ctx.conversation_history) if ctx.conversation_history else 0} history messages")
             result = await self._query_understanding.understand(ctx.question, ctx.conversation_history, progress_callback)
+            logger.info(f"[QUERY_UNDERSTANDING_CALLBACK] understand() returned: type={result.query_type}, reformulated={result.reformulated_prompt[:50] if result.reformulated_prompt else 'None'}...")
             
             ctx.query_understanding = result
             

@@ -273,6 +273,13 @@ const AnalysisSection = ({ content, onOpenCV, cvMap }) => {
   const contentLength = contentStr.length;
   const isLargeContent = contentLength > 500;
   
+  // Helper: Check if content is empty/placeholder
+  const isEmptyContent = (text) => {
+    if (!text) return true;
+    const cleaned = text.replace(/^[-•*\s]+/, '').trim();
+    return cleaned === '' || cleaned === '--' || cleaned === '-' || cleaned === 'N/A' || cleaned === 'n/a';
+  };
+  
   // Parse content to detect sections for large content
   const parseContentSections = (text) => {
     const sections = [];
@@ -285,21 +292,28 @@ const AnalysisSection = ({ content, onOpenCV, cvMap }) => {
       const colonHeaderMatch = line.match(/^([A-Z][^:]{2,30}):\s*$/);
       
       if (headerMatch || colonHeaderMatch) {
-        // Save previous section if it has content
-        if (currentSection.content.length > 0 || currentSection.title) {
-          sections.push(currentSection);
+        // Save previous section if it has VALID content (not just "--")
+        const hasValidContent = currentSection.content.some(c => !isEmptyContent(c));
+        if (hasValidContent || (currentSection.title && currentSection.content.length > 0)) {
+          // Filter out empty lines from content
+          currentSection.content = currentSection.content.filter(c => !isEmptyContent(c));
+          if (currentSection.content.length > 0) {
+            sections.push(currentSection);
+          }
         }
         currentSection = { 
           title: headerMatch ? headerMatch[1].trim() : colonHeaderMatch[1].trim(), 
           content: [] 
         };
-      } else if (line.trim()) {
+      } else if (line.trim() && !isEmptyContent(line)) {
+        // Only add non-empty, non-placeholder lines
         currentSection.content.push(line);
       }
     }
     
-    // Push last section
-    if (currentSection.content.length > 0 || currentSection.title) {
+    // Push last section if it has valid content
+    currentSection.content = currentSection.content.filter(c => !isEmptyContent(c));
+    if (currentSection.content.length > 0) {
       sections.push(currentSection);
     }
     

@@ -1730,6 +1730,47 @@ def detect_single_candidate_query(
             detection_method="single_candidate_in_chunks"
         )
     
+    # Method 3: Query patterns that indicate single candidate intent (even without name)
+    # These are queries like "analiza completamente este candidato" or "analyze this candidate"
+    single_candidate_intent_patterns = [
+        r"\b(?:analiza|analyze|examina|examine)\s+(?:completamente|fully|en detalle|in detail)?\s*(?:a\s+)?(?:este|this|el)\s+(?:candidato|candidate)\b",
+        r"\b(?:este|this)\s+(?:candidato|candidate)\b",
+        r"\b(?:el|the)\s+(?:candidato|candidate)\s+(?:anterior|previous|seleccionado|selected)\b",
+        r"\b(?:profile|perfil)\s+(?:completo|complete|full)\b",
+        r"\b(?:dame|give me)\s+(?:todo|everything)\s+(?:sobre|about)\s+(?:él|ella|him|her|this)\b",
+    ]
+    
+    for pattern in single_candidate_intent_patterns:
+        if re.search(pattern, q_lower):
+            # Single candidate intent detected but no specific name
+            # If there's a top candidate from chunks (highest score), use that
+            if unique_candidates:
+                # Sort chunks by score and get top candidate
+                scored_candidates = []
+                for chunk in chunks:
+                    meta = chunk.get("metadata", {})
+                    name = meta.get("candidate_name", "")
+                    cv_id = meta.get("cv_id", "")
+                    score = chunk.get("score", 0)
+                    if name:
+                        scored_candidates.append((name, cv_id, score))
+                
+                if scored_candidates:
+                    # Get candidate with highest score
+                    scored_candidates.sort(key=lambda x: x[2], reverse=True)
+                    top_name, top_cv_id, _ = scored_candidates[0]
+                    return SingleCandidateDetection(
+                        is_single_candidate=True,
+                        candidate_name=top_name,
+                        cv_id=top_cv_id,
+                        confidence=0.70,
+                        detection_method="single_intent_pattern_top_chunk"
+                    )
+            
+            # Intent detected but couldn't determine candidate
+            logger.info(f"[DETECT] Single candidate intent detected but no candidate resolved")
+            break
+    
     # Multiple candidates, no explicit single focus
     return SingleCandidateDetection(
         is_single_candidate=False,

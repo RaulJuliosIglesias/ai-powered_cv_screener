@@ -103,24 +103,31 @@ class TopPickModule:
         
         parts.append(f"{name} emerges as the top choice with an overall score of {score:.0f}%.")
         
-        # Add criterion-specific justifications
+        # Add criterion-specific justifications (only if valid criteria, not candidate names)
         criterion_scores = candidate.get("criterion_scores", {})
-        top_criteria = sorted(
-            criterion_scores.items(),
-            key=lambda x: x[1],
-            reverse=True
-        )[:3]
-        
-        if top_criteria:
+        if criterion_scores:
+            top_criteria = sorted(
+                criterion_scores.items(),
+                key=lambda x: x[1],
+                reverse=True
+            )[:3]
+            
             strengths_text = []
             for crit_name, crit_score in top_criteria:
+                # FILTER: Skip if criterion name looks like a candidate name (contains spaces + capitalized)
+                # Valid criteria: "Leadership", "Experience", "Technical Skills"
+                # Invalid: "Isabel Mendoza", "Rajiv Kapoor"
+                words = crit_name.split()
+                if len(words) >= 2 and all(w[0].isupper() for w in words if len(w) > 1):
+                    # Looks like a person's name, skip
+                    continue
                 if crit_score >= 70:
                     strengths_text.append(f"{crit_name} ({crit_score:.0f}%)")
             
             if strengths_text:
                 parts.append(f"Key strengths include: {', '.join(strengths_text)}.")
         
-        # Try to extract LLM justification
+        # Try to extract LLM justification for this specific candidate
         if llm_output:
             llm_justification = self._extract_llm_justification(llm_output, name)
             if llm_justification:

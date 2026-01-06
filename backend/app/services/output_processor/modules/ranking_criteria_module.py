@@ -159,6 +159,20 @@ class RankingCriteriaModule:
                 desc = match.group(2).strip() if match.lastindex > 1 else ""
                 
                 if name and len(name) > 2:
+                    # FILTER: Skip if name looks like a candidate name (2+ capitalized words)
+                    # Valid criteria: "Leadership", "Experience", "Technical Skills"
+                    # Invalid: "Isabel Mendoza", "Rajiv Kapoor"
+                    words = name.split()
+                    if len(words) >= 2 and all(w[0].isupper() for w in words if len(w) > 2):
+                        # Likely a person's name, skip
+                        logger.debug(f"[RANKING_CRITERIA] Skipping likely person name: {name}")
+                        continue
+                    
+                    # Also skip common non-criteria patterns
+                    skip_words = {'was', 'is', 'are', 'were', 'has', 'have', 'the', 'and', 'for'}
+                    if name.lower() in skip_words:
+                        continue
+                    
                     criteria.append(RankingCriterion(
                         name=name,
                         weight=0.2,  # Default weight, will be normalized

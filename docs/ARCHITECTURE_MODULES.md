@@ -75,6 +75,37 @@ USER QUERY → ORCHESTRATOR → STRUCTURE → MODULES → OUTPUT
 
 ---
 
+## 🔍 Structure Identification Guide (Visual Elements)
+
+Use this table to identify which structure is being rendered based on the visual modules displayed:
+
+| Visual Elements You See | Structure Type | Frontend Component |
+|------------------------|----------------|-------------------|
+| **Profile Header + Highlights Table + Career + Skills + Risk Assessment** | `single_candidate` | `SingleCandidateProfile.jsx` |
+| **Risk Assessment Table (5 factors) + Analysis** | `risk_assessment` | `RiskAssessmentStructure` in renderer |
+| **Candidate Comparison Table + Winner Card** | `comparison` | `CandidateTable` + `WinnerCard` |
+| **"X top matches" + Results Table** | `search` | `SearchResultsTable` |
+| **Ranking Table + Top Pick Card + Criteria** | `ranking` | `RankingTable` + `TopPickCard` |
+| **Match Score Cards + Requirements + Gap Analysis** | `job_match` | `MatchScoreCard` + `RequirementsList` |
+| **Team Composition + Skill Coverage** | `team_build` | `TeamCompositionView` |
+| **Verification Result (✓/✗/?) + Evidence** | `verification` | `VerificationResult` |
+| **Pool Summary + Skill Distribution** | `summary` | `PoolSummary` |
+| **Only Analysis + Conclusion (no specific modules)** | `fallback/legacy` | Standard markdown render |
+
+### Quick Identification by Header Elements:
+
+```
+"☆ X top matches | Avg: XX%"     → SEARCH structure
+"🏆 Top Pick" or "Winner" card   → RANKING or COMPARISON
+"📊 Candidate Highlights" table  → SINGLE_CANDIDATE
+"Risk Assessment" table (5 rows) → SINGLE_CANDIDATE or RISK_ASSESSMENT
+"Match Score: XX%"               → JOB_MATCH
+"Team Composition"               → TEAM_BUILD
+"Verification Result"            → VERIFICATION
+```
+
+---
+
 ## Structure Details
 
 ### 1. SingleCandidateStructure

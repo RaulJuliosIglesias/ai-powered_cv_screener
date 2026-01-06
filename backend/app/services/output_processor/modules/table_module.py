@@ -186,6 +186,14 @@ class TableModule:
         if not table_rows:
             return None
         
+        # CRITICAL FIX: If all rows have the same default score (50),
+        # try to calculate relative scores from numeric columns
+        all_same_score = len(set(row.match_score for row in table_rows)) == 1
+        logger.info(f"[TABLE] Score distribution: {[row.match_score for row in table_rows[:3]]}, all_same={all_same_score}")
+        if all_same_score and table_rows[0].match_score == 50:
+            logger.info(f"[TABLE] All rows have default 50% score, calculating relative scores from headers: {raw_headers}")
+            table_rows = self._calculate_relative_scores(table_rows, raw_headers)
+        
         # Deduplicate rows by cv_id (keep first occurrence with highest score)
         table_rows = self._deduplicate_rows(table_rows)
         
@@ -277,6 +285,109 @@ class TableModule:
                 return 15
         
         return 50  # Default when no indicator found
+    
+    def _calculate_relative_scores(self, rows: List[TableRow], headers: List[str]) -> List[TableRow]:
+        """
+        Calculate relative match scores based on numeric column values.
+        
+        When comparing candidates by a specific metric (e.g., years of experience),
+        the LLM may not provide percentage scores. This method:
+        1. Finds numeric columns (experience, years, etc.)
+        2. Extracts numeric values from each row
+        3. Calculates relative scores (highest value = 100%, others scaled proportionally)
+        
+        Args:
+            rows: List of TableRow objects with default 50% scores
+            headers: Table headers to identify comparison columns
+            
+        Returns:
+            Updated rows with calculated relative scores
+        """
+        if not rows:
+            return rows
+        
+        # Find columns that might contain comparison metrics
+        comparison_keywords = ['experience', 'years', 'year', 'exp', 'tenure', 'score', 'rating', 'level']
+        numeric_column = None
+        
+        for header in headers[1:]:  # Skip first column (candidate name)
+            header_lower = header.lower()
+            if any(kw in header_lower for kw in comparison_keywords):
+                numeric_column = header
+                break
+        
+        if not numeric_column:
+            # Try to find any column with numeric values
+            for row in rows:
+                for col_name, col_value in row.columns.items():
+                    if self._extract_numeric_value(col_value) is not None:
+                        numeric_column = col_name
+                        break
+                if numeric_column:
+                    break
+        
+        if not numeric_column:
+            logger.info("[TABLE] No numeric column found for relative scoring")
+            return rows
+        
+        logger.info(f"[TABLE] Calculating relative scores from column: {numeric_column}")
+        
+        # Extract numeric values from the comparison column
+        values = []
+        for row in rows:
+            col_value = row.columns.get(numeric_column, "")
+            numeric_val = self._extract_numeric_value(col_value)
+            values.append(numeric_val if numeric_val is not None else 0)
+        
+        # Calculate relative scores
+        max_val = max(values) if values else 0
+        min_val = min(v for v in values if v > 0) if any(v > 0 for v in values) else 0
+        
+        if max_val == 0:
+            logger.info("[TABLE] All values are 0, keeping default scores")
+            return rows
+        
+        # Calculate scores: highest = 100%, scale others proportionally
+        # Use a minimum of 20% for candidates with data
+        updated_rows = []
+        for row, val in zip(rows, values):
+            if val == 0:
+                # No data = low score
+                new_score = 20
+            elif max_val == min_val:
+                # All same value = all get same score
+                new_score = 85
+            else:
+                # Scale: val/max * 80 + 20 (range 20-100)
+                new_score = int((val / max_val) * 80 + 20)
+            
+            logger.debug(f"[TABLE] {row.candidate_name}: {val} -> {new_score}%")
+            
+            updated_rows.append(TableRow(
+                candidate_name=row.candidate_name,
+                cv_id=row.cv_id,
+                columns=row.columns,
+                match_score=new_score
+            ))
+        
+        # Sort by score descending
+        updated_rows.sort(key=lambda r: r.match_score, reverse=True)
+        
+        logger.info(f"[TABLE] Calculated relative scores for {len(updated_rows)} candidates (max: {max_val}, winner score: {updated_rows[0].match_score if updated_rows else 0}%)")
+        
+        return updated_rows
+    
+    def _extract_numeric_value(self, text: str) -> Optional[float]:
+        """Extract numeric value from text (e.g., '47 years' -> 47)."""
+        if not text:
+            return None
+        
+        # Try to extract number
+        match = re.search(r'(\d+(?:\.\d+)?)', str(text))
+        if match:
+            return float(match.group(1))
+        
+        return None
     
     def _deduplicate_rows(self, rows: List[TableRow]) -> List[TableRow]:
         """

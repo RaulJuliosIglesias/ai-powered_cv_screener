@@ -70,6 +70,9 @@ class RankingTableModule:
         """
         Generate ranking table from chunks and criteria.
         
+        PRIORITY: Extract ranking from LLM output first (it analyzed actual CV content).
+        FALLBACK: Calculate from metadata if LLM extraction fails.
+        
         Args:
             chunks: Retrieved CV chunks with metadata
             criteria: List of ranking criteria with weights
@@ -81,12 +84,24 @@ class RankingTableModule:
         if not chunks:
             return None
         
-        # Group chunks by candidate
+        # Group chunks by candidate for name/cv_id lookup
         candidates = self._group_by_candidate(chunks)
-        
-        # Calculate scores for each candidate
-        ranked_candidates = []
         criteria_names = [c.get("name", f"C{i}") for i, c in enumerate(criteria)]
+        
+        # PRIORITY 1: Try to extract ranking from LLM output
+        # The LLM has actually analyzed the CV content and knows who is best
+        if llm_output:
+            llm_ranking = self._extract_ranking_from_llm(llm_output, candidates)
+            if llm_ranking and len(llm_ranking) >= 3:
+                logger.info(f"[RANKING_TABLE_MODULE] Using LLM-extracted ranking ({len(llm_ranking)} candidates)")
+                return RankingTableData(
+                    ranked=llm_ranking,
+                    criteria_names=criteria_names
+                )
+        
+        # FALLBACK: Calculate scores from metadata
+        logger.info(f"[RANKING_TABLE_MODULE] Using metadata-based ranking (LLM extraction failed)")
+        ranked_candidates = []
         
         for cv_id, data in candidates.items():
             scores = self._calculate_scores(data, criteria)
@@ -118,6 +133,130 @@ class RankingTableModule:
             ranked=ranked_candidates,
             criteria_names=criteria_names
         )
+    
+    def _extract_ranking_from_llm(
+        self,
+        llm_output: str,
+        candidates: Dict[str, Dict]
+    ) -> List[RankedCandidate]:
+        """
+        Extract candidate ranking from LLM output.
+        
+        The LLM analyzes actual CV content and identifies best candidates.
+        This is more accurate than metadata-based scoring for subjective criteria
+        like "leadership" or "strategic thinking".
+        
+        Args:
+            llm_output: LLM response text
+            candidates: Dict of cv_id -> candidate data for lookup
+            
+        Returns:
+            List of RankedCandidate extracted from LLM, or empty list if extraction fails
+        """
+        ranked = []
+        
+        # Build name to cv_id mapping
+        name_to_cvid = {}
+        for cv_id, data in candidates.items():
+            name = data.get("name", "")
+            if name:
+                name_to_cvid[name.lower()] = cv_id
+                # Also map partial names (first name, last name)
+                parts = name.split()
+                for part in parts:
+                    if len(part) > 3:
+                        name_to_cvid[part.lower()] = cv_id
+        
+        # Patterns to extract ranked candidates from LLM output
+        # Look for: "1. **Name**", "**Name** is the most suitable", etc.
+        patterns = [
+            # Numbered list: "1. **Isabel Mendoza**" or "1. Isabel Mendoza"
+            r'(?:^|\n)\s*(\d+)[.)\]]\s*\*?\*?\[?([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,3})',
+            # "**Name** is the most/best/top"
+            r'\*\*([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,3})\*\*\s+(?:is\s+the\s+(?:most|best|top)|emerges|stands\s+out)',
+            # "Name is the most suitable"
+            r'([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,3})\s+is\s+the\s+most\s+suitable',
+            # Conclusion pattern: "Name is highly suitable"
+            r'([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,3})\s+is\s+(?:also\s+)?highly\s+suitable',
+        ]
+        
+        found_names = []
+        found_set = set()
+        
+        # First pattern: numbered list (gives explicit order)
+        numbered_pattern = r'(?:^|\n)\s*(\d+)[.)\]]\s*\*?\*?\[?([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,3})'
+        for match in re.finditer(numbered_pattern, llm_output, re.MULTILINE):
+            rank_num = int(match.group(1))
+            name = match.group(2).strip()
+            name_lower = name.lower()
+            
+            # Find cv_id for this name
+            cv_id = None
+            for known_name, cid in name_to_cvid.items():
+                if known_name in name_lower or name_lower in known_name:
+                    cv_id = cid
+                    break
+            
+            if cv_id and name_lower not in found_set:
+                found_names.append((rank_num, name, cv_id))
+                found_set.add(name_lower)
+        
+        # Sort by rank number and create candidates
+        found_names.sort(key=lambda x: x[0])
+        
+        if found_names:
+            for i, (_, name, cv_id) in enumerate(found_names[:10]):  # Limit to top 10
+                ranked.append(RankedCandidate(
+                    rank=i + 1,
+                    candidate_name=name,
+                    cv_id=cv_id,
+                    overall_score=max(20, 100 - i * 10),  # 100, 90, 80, ...
+                    criterion_scores={},
+                    strengths=[],
+                    weaknesses=[]
+                ))
+            return ranked
+        
+        # Second approach: Extract from conclusion/analysis
+        # Look for "Name is the most suitable" patterns
+        conclusion_patterns = [
+            r'([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,3})\s+is\s+the\s+most\s+suitable',
+            r'([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,3})\s+is\s+(?:also\s+)?highly\s+suitable',
+            r'([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,3})\s+demonstrates\s+leadership',
+        ]
+        
+        for pattern in conclusion_patterns:
+            for match in re.finditer(pattern, llm_output, re.IGNORECASE):
+                name = match.group(1).strip()
+                name_lower = name.lower()
+                
+                # Skip common words
+                if name_lower in {'the', 'this', 'that', 'they', 'their', 'candidate'}:
+                    continue
+                
+                cv_id = None
+                for known_name, cid in name_to_cvid.items():
+                    if known_name in name_lower or name_lower in known_name:
+                        cv_id = cid
+                        break
+                
+                if cv_id and name_lower not in found_set:
+                    found_names.append((len(found_names), name, cv_id))
+                    found_set.add(name_lower)
+        
+        # Create ranked candidates from found names
+        for i, (_, name, cv_id) in enumerate(found_names[:10]):
+            ranked.append(RankedCandidate(
+                rank=i + 1,
+                candidate_name=name,
+                cv_id=cv_id,
+                overall_score=max(20, 100 - i * 10),
+                criterion_scores={},
+                strengths=[],
+                weaknesses=[]
+            ))
+        
+        return ranked
     
     def _group_by_candidate(
         self,
@@ -161,60 +300,91 @@ class RankingTableModule:
         candidate_data: Dict,
         criteria: List[Dict[str, Any]]
     ) -> Dict[str, float]:
-        """Calculate score for each criterion."""
+        """Calculate score for each criterion based on candidate metadata."""
         scores = {}
+        
+        # Pre-calculate base factors from candidate data
+        years = candidate_data.get("experience_years", 0)
+        skill_count = len(candidate_data.get("skills", set()))
+        hop_score = candidate_data.get("job_hopping_score", 0.5)
+        tenure = candidate_data.get("avg_tenure", 2.0)
+        positions = candidate_data.get("position_count", 1)
+        seniority = candidate_data.get("seniority", "").lower()
+        
+        # Seniority mapping
+        seniority_score = {
+            "principal": 100, "director": 100, "lead": 95, "senior": 90,
+            "staff": 85, "mid": 60, "junior": 30, "entry": 20, "intern": 10
+        }.get(seniority, 50)
         
         for criterion in criteria:
             name = criterion.get("name", "")
             name_lower = name.lower()
             
-            if "experience" in name_lower:
-                # Score based on years of experience
-                years = candidate_data.get("experience_years", 0)
+            # EXPERIENCE-based criteria
+            if any(kw in name_lower for kw in ["experience", "years", "exp"]):
                 scores[name] = min(100, years * 10)  # 10 years = 100%
                 
-            elif "skill" in name_lower or "technical" in name_lower:
-                # Score based on skill count
-                skill_count = len(candidate_data.get("skills", set()))
+            # SKILL-based criteria
+            elif any(kw in name_lower for kw in ["skill", "technical", "competenc"]):
                 scores[name] = min(100, skill_count * 12)  # ~8 skills = 100%
                 
-            elif "stability" in name_lower:
-                # Score based on job hopping (lower is better)
-                hop_score = candidate_data.get("job_hopping_score", 0.5)
+            # STABILITY criteria
+            elif any(kw in name_lower for kw in ["stability", "reliable", "consistent"]):
                 scores[name] = max(0, 100 - hop_score * 100)
                 
+            # TENURE criteria
             elif "tenure" in name_lower:
-                # Score based on average tenure
-                tenure = candidate_data.get("avg_tenure", 2.0)
                 scores[name] = min(100, tenure * 25)  # 4 years = 100%
                 
-            elif "seniority" in name_lower or "level" in name_lower:
-                # Score based on seniority level
-                seniority = candidate_data.get("seniority", "").lower()
-                seniority_scores = {
-                    "senior": 90, "lead": 95, "principal": 100,
-                    "mid": 60, "junior": 30, "entry": 20
-                }
-                scores[name] = seniority_scores.get(seniority, 50)
+            # SENIORITY/LEVEL criteria
+            elif any(kw in name_lower for kw in ["seniority", "level", "rank"]):
+                scores[name] = seniority_score
                 
-            elif "fit" in name_lower or "role" in name_lower:
-                # General fit score based on multiple factors
-                exp_factor = min(1, candidate_data.get("experience_years", 0) / 5)
-                skill_factor = min(1, len(candidate_data.get("skills", set())) / 5)
+            # LEADERSHIP criteria - KEY ADDITION
+            elif any(kw in name_lower for kw in ["leadership", "leader", "lead", "management", "managing", "team"]):
+                # Score based on seniority + experience + positions held
+                leadership_score = (
+                    seniority_score * 0.5 +  # 50% from seniority
+                    min(100, years * 8) * 0.3 +  # 30% from experience
+                    min(100, positions * 20) * 0.2  # 20% from positions held
+                )
+                scores[name] = min(100, leadership_score)
+                
+            # FIT/ROLE criteria
+            elif any(kw in name_lower for kw in ["fit", "role", "match", "suitable"]):
+                exp_factor = min(1, years / 5)
+                skill_factor = min(1, skill_count / 5)
                 scores[name] = (exp_factor * 50 + skill_factor * 50)
                 
-            elif "career" in name_lower or "trajectory" in name_lower:
-                # Score based on career progression
-                positions = candidate_data.get("position_count", 1)
-                years = candidate_data.get("experience_years", 1)
+            # CAREER/TRAJECTORY criteria
+            elif any(kw in name_lower for kw in ["career", "trajectory", "progress", "growth"]):
                 if years > 0:
                     progression = positions / years
                     scores[name] = min(100, max(30, 100 - abs(progression - 0.4) * 100))
                 else:
                     scores[name] = 50
+                    
+            # COMMUNICATION criteria
+            elif any(kw in name_lower for kw in ["communication", "interpersonal", "soft skill"]):
+                # Approximate from seniority (senior = better communication assumed)
+                scores[name] = seniority_score
+                
+            # STRATEGIC criteria
+            elif any(kw in name_lower for kw in ["strategic", "vision", "planning"]):
+                # Higher seniority + more experience = more strategic
+                scores[name] = min(100, seniority_score * 0.6 + min(100, years * 8) * 0.4)
+                
             else:
-                # Default score
-                scores[name] = 50
+                # DEFAULT: Use composite score instead of flat 50
+                # This ensures some differentiation even for unknown criteria
+                composite = (
+                    min(100, years * 8) * 0.4 +  # Experience weight
+                    seniority_score * 0.3 +  # Seniority weight
+                    min(100, skill_count * 10) * 0.3  # Skills weight
+                )
+                scores[name] = max(20, min(100, composite))
+                logger.debug(f"[RANKING] Unknown criterion '{name}' - using composite score: {scores[name]:.1f}")
         
         return scores
     
