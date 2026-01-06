@@ -1,0 +1,379 @@
+{
+  "session_id": "89b1b406-a8ff-4483-9569-97bd61ea38c7",
+  "generated_at": "2026-01-06T02:54:21.015330",
+  "events": [
+    {
+      "timestamp": "2026-01-06T02:53:36.253023",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "89b1b406-a8ff-4483-9569-97bd61ea38c7"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:53:36.253023",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Create a top 3 shortlist from 3 candidates",
+        "cv_ids": [
+          "cv_ef373562",
+          "cv_76d5c7b3",
+          "cv_bfddae4c"
+        ],
+        "cv_count": 3
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:53:40.205181",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 34,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_f89bcd3a",
+            "candidate_name": " Aisha Nkrumah  Junior 2D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7447889000652782,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_fe460c95",
+            "candidate_name": " Daan van Dijk  Hard Surface",
+            "section_type": "experience",
+            "job_hopping_score": 0.09090909090909091,
+            "avg_tenure_years": 5.5,
+            "total_experience_years": 11.0,
+            "score": 0.7197034729819768,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_a6ab5b03",
+            "candidate_name": " Rajiv Kapoor  Technical",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.23076923076923078,
+            "avg_tenure_years": 3.25,
+            "total_experience_years": 13.0,
+            "score": 0.716343009214902,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_a05f1836",
+            "candidate_name": " Liam Chen  3D Artist",
+            "section_type": "experience",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "score": 0.7259594562422075,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_326dd908",
+            "candidate_name": " Karim El Amrani  3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.09090909090909091,
+            "avg_tenure_years": 5.5,
+            "total_experience_years": 8.0,
+            "score": 0.7307141666107331,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_0ede58a9",
+            "candidate_name": " Imani Jones  Concept",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.7344056494476854,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_76a139cd",
+            "candidate_name": " Carlos Mendoza  Lighting",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.75,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 4.0,
+            "score": 0.3565454835852597,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_15bf5ccf",
+            "candidate_name": " Carmen Rodriguez  3D",
+            "section_type": "summary",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 16.0,
+            "score": 0.5496145508068329,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_a6ab5b03",
+            "candidate_name": " Rajiv Kapoor  Technical",
+            "section_type": "experience",
+            "job_hopping_score": 0.23076923076923078,
+            "avg_tenure_years": 3.25,
+            "total_experience_years": 13.0,
+            "score": 0.40164777103138455,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_0ede58a9",
+            "candidate_name": " Imani Jones  Concept",
+            "section_type": "summary",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.5402977866718544,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:53:40.815958",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 6,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_bfddae4c",
+            "candidate_name": " Imani Jones  Concept",
+            "section_type": "experience",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.6789841935921678,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_ef373562",
+            "candidate_name": " Thierry Dubois  Concept",
+            "section_type": "experience",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "score": 0.5784992253056,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_76d5c7b3",
+            "candidate_name": " Clara Dubois  Junior 3D",
+            "section_type": "experience",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.4,
+            "total_experience_years": 1.0,
+            "score": 0.5757288715533345,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_bfddae4c",
+            "candidate_name": " Imani Jones  Concept",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.826496091411651,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_ef373562",
+            "candidate_name": " Thierry Dubois  Concept",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "score": 0.7819795959098973,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_76d5c7b3",
+            "candidate_name": " Clara Dubois  Junior 3D",
+            "section_type": "experience",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.4,
+            "total_experience_years": 1.0,
+            "score": 0.7582751409606824,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:53:55.891116",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "explicit_multi_candidate_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:54:00.960315",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 679,
+        "answer_preview": ":::thinking\nThe user is asking for a ranked shortlist of the top 3 candidates based on overall suitability for a role, without specifying the role. I will rank the candidates based on my assessment of their experience, skills, and career progression, as indicated in their CVs. I will prioritize candidates with more relevant experience, stronger skill sets, and a clear upward trajectory in their careers. Since the role is unspecified, I will assume a general creative/artistic role.\n:::\n\n\n:::concl...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:54:13.779867",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "explicit_multi_candidate_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T02:54:21.015330",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1041,
+        "answer_preview": ":::thinking\nThe user is asking for a comparison of the education history of all candidates. I need to extract the degrees, institutions, and graduation dates from each CV and present them in a table format. I will then compare the education levels of the candidates, highlighting any differences in degrees, institutions, and fields of study. I will include all candidates for whom education information is available. The user is not specifying the number of candidates. I will provide the top 3 cand...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

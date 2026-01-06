@@ -152,7 +152,7 @@ class StructuredOutput:
             "raw_content": self.raw_content,
             "thinking": self.thinking,
             "analysis": self.analysis,
-            "table_data": self.table_data.to_dict() if self.table_data else None,
+            "table_data": self.table_data.to_dict() if self.table_data and hasattr(self.table_data, 'to_dict') else self.table_data,
             "conclusion": self.conclusion,
             # Enhanced components (v5.1)
             "gap_analysis": self.gap_analysis,

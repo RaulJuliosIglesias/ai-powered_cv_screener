@@ -87,6 +87,10 @@ class OutputOrchestrator:
         self.red_flags_module = RedFlagsModule()
         self.timeline_module = TimelineModule()
         
+        # Risk table module (used by legacy processing)
+        from .modules import RiskTableModule
+        self.risk_assessment_module = RiskTableModule()
+        
         logger.info("[ORCHESTRATOR] Initialized with STRUCTURES architecture")
     
     def process(
@@ -94,7 +98,7 @@ class OutputOrchestrator:
         raw_llm_output: str,
         chunks: List[Dict[str, Any]] = None,
         query: str = "",
-        query_type: str = "comparison",  # "comparison", "single_candidate", "red_flags", "search"
+        query_type: str = "search",  # "search", "comparison", "single_candidate", "red_flags", etc.
         candidate_name: str = None
     ) -> tuple[StructuredOutput, str]:
         """
@@ -298,11 +302,13 @@ class OutputOrchestrator:
             structured.ranking_criteria = structure_data.get("ranking_criteria")
             structured.analysis = structure_data.get("analysis")
         
-        # For job match, add match scores and analysis
+        # For job match, add match scores, requirements, gap analysis
         elif structure_data.get("structure_type") == "job_match":
             structured.match_scores = structure_data.get("match_scores")
             structured.requirements = structure_data.get("requirements")
             structured.best_match = structure_data.get("best_match")
+            structured.gap_analysis = structure_data.get("gap_analysis")
+            structured.total_candidates = structure_data.get("total_candidates", 0)
             structured.analysis = structure_data.get("analysis")
         
         # For team build, add team composition and analysis

@@ -101,13 +101,24 @@ class JobMatchStructure:
         best_match = None
         if match_data and match_data.matches:
             top = match_data.matches[0]
+            # Build justification from met requirements and strengths
+            justification_parts = []
+            if top.met_requirements:
+                justification_parts.append(f"Meets {len(top.met_requirements)} requirements")
+            if top.strengths:
+                justification_parts.append("; ".join(top.strengths[:2]))
+            justification = ". ".join(justification_parts) if justification_parts else "Best match based on overall profile"
+            
             best_match = {
                 "candidate_name": top.candidate_name,
                 "cv_id": top.cv_id,
                 "overall_score": top.overall_match,  # Frontend expects overall_score
                 "overall_match": top.overall_match,  # Keep for compatibility
                 "key_strengths": top.strengths,  # Frontend expects key_strengths
-                "strengths": top.strengths
+                "strengths": top.strengths,
+                "justification": justification,  # Frontend TopPickCard needs this
+                "met_requirements": top.met_requirements,
+                "missing_requirements": top.missing_requirements
             }
         
         return {

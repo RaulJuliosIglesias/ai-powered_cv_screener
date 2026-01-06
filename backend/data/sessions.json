@@ -57462,10 +57462,174 @@
             "fallback_used": false
           },
           "timestamp": "2026-01-06T02:49:39.186887"
+        },
+        {
+          "id": "629c4970-bd40-4e0e-8e61-697d1e099f57",
+          "role": "user",
+          "content": "Create a top 3 shortlist from 3 candidates",
+          "sources": [],
+          "pipeline_steps": [],
+          "structured_output": null,
+          "timestamp": "2026-01-06T02:53:36.170109"
+        },
+        {
+          "id": "ed12e41d-273d-4e7a-ace3-51ea1dd7bd2e",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a ranked shortlist of the top 3 candidates based on overall suitability for a role, without specifying the role. I will rank the candidates based on my assessment of their experience, skills, and career progression, as indicated in their CVs. I will prioritize candidates with more relevant experience, stronger skill sets, and a clear upward trajectory in their careers. Since the role is unspecified, I will assume a general creative/artistic role.\n:::\n\n\n:::conclusion\nThe top 3 candidates, ranked by overall suitability, are **[Thierry Dubois](cv:cv_ef373562)**, **[Imani Jones](cv:cv_bfddae4c)**, and **[Clara Dubois](cv:cv_76d5c7b3)**.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_bfddae4c",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_ef373562",
+              "filename": "2dc7737e__Thierry_Dubois__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_76d5c7b3",
+              "filename": "9eff6b8c__Clara_Dubois__Junior_3D_Modeler.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1910.75,
+              "details": "Query type: ranking"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 4.86,
+              "details": "Found 6 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 15073.75,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 4549.54,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for a ranked shortlist of the top 3 candidates based on overall suitability for a role, without specifying the role. I will rank the candidates based on my assessment of their experience, skills, and career progression, as indicated in their CVs. I will prioritize candidates with more relevant experience, stronger skill sets, and a clear upward trajectory in their careers. Since the role is unspecified, I will assume a general creative/artistic role.\n:::\n\nHere is a ranked shortlist of the top 3 candidates, ordered by overall suitability based on the information provided in their CVs. I have considered their experience, skills, and career progression in determining this ranking.\n\n### Analysis\nThe ranking is based on a holistic assessment of each candidate's CV. **[Thierry Dubois](cv:cv_ef373562)** is ranked first due to his extensive experience as a Lead Concept Artist and Visual Development Director, demonstrating a strong career progression and a wide range of skills. **[Imani Jones](cv:cv_bfddae4c)** is ranked second due to her experience as a Senior Concept Artist and her skills in character and environment design. **[Clara Dubois](cv:cv_76d5c7b3)** is ranked third due to her experience as a 3D modeler, which, while valuable, is less directly related to concept art and visual development compared to the other two candidates.\n\n| Candidate | Experience | Skills | Career Growth | Match |\n|-----------|------------|--------|---------------|-------|\n| **[Thierry Dubois](cv:cv_ef373562)** | Lead Concept Artist, Visual Development Director | Photoshop, Blender/ZBrush, Visual Storytelling | Strong | ⭐⭐⭐⭐⭐ |\n| **[Imani Jones](cv:cv_bfddae4c)** | Senior Concept Artist | Concept Design, Character Design, Environment Design | Moderate | ⭐⭐⭐⭐ |\n| **[Clara Dubois](cv:cv_76d5c7b3)** | 3D Modeler | 3D Modeling, Texturing | Limited | ⭐⭐⭐ |\n\n:::conclusion\nThe top 3 candidates, ranked by overall suitability, are **[Thierry Dubois](cv:cv_ef373562)**, **[Imani Jones](cv:cv_bfddae4c)**, and **[Clara Dubois](cv:cv_76d5c7b3)**.\n:::",
+            "thinking": "The user is asking for a ranked shortlist of the top 3 candidates based on overall suitability for a role, without specifying the role. I will rank the candidates based on my assessment of their experience, skills, and career progression, as indicated in their CVs. I will prioritize candidates with more relevant experience, stronger skill sets, and a clear upward trajectory in their careers. Since the role is unspecified, I will assume a general creative/artistic role.",
+            "analysis": "The ranking is based on a holistic assessment of each candidate's CV. **[Thierry Dubois](cv:cv_ef373562)** is ranked first due to his extensive experience as a Lead Concept Artist and Visual Development Director, demonstrating a strong career progression and a wide range of skills. **[Imani Jones](cv:cv_bfddae4c)** is ranked second due to her experience as a Senior Concept Artist and her skills in character and environment design. **[Clara Dubois](cv:cv_76d5c7b3)** is ranked third due to her experience as a 3D modeler, which, while valuable, is less directly related to concept art and visual development compared to the other two candidates.",
+            "table_data": null,
+            "conclusion": "The top 3 candidates, ranked by overall suitability, are **[Thierry Dubois](cv:cv_ef373562)**, **[Imani Jones](cv:cv_bfddae4c)**, and **[Clara Dubois](cv:cv_76d5c7b3)**.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "ranking",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": {
+              "ranked": [
+                {
+                  "rank": 1,
+                  "candidate_name": " Imani Jones  Concept",
+                  "cv_id": "cv_bfddae4c",
+                  "overall_score": 34.8,
+                  "criterion_scores": {
+                    "Experience": 40.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 40.0,
+                    "Career Trajectory": 65.0,
+                    "Stability": 50.0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Experience"
+                  ]
+                },
+                {
+                  "rank": 2,
+                  "candidate_name": " Thierry Dubois  Concept",
+                  "cv_id": "cv_ef373562",
+                  "overall_score": 9.5,
+                  "criterion_scores": {
+                    "Experience": 10.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 10.0,
+                    "Career Trajectory": 30,
+                    "Stability": 0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Stability"
+                  ]
+                },
+                {
+                  "rank": 3,
+                  "candidate_name": " Clara Dubois  Junior 3D",
+                  "cv_id": "cv_76d5c7b3",
+                  "overall_score": 9.5,
+                  "criterion_scores": {
+                    "Experience": 10.0,
+                    "Technical Skills": 0,
+                    "Role Fit": 10.0,
+                    "Career Trajectory": 30,
+                    "Stability": 0
+                  },
+                  "strengths": [],
+                  "weaknesses": [
+                    "Technical Skills",
+                    "Stability"
+                  ]
+                }
+              ],
+              "criteria_names": [
+                "Experience",
+                "Technical Skills",
+                "Role Fit",
+                "Career Trajectory",
+                "Stability"
+              ]
+            },
+            "top_pick": {
+              "candidate_name": " Imani Jones  Concept",
+              "cv_id": "cv_bfddae4c",
+              "overall_score": 34.8,
+              "key_strengths": [],
+              "justification": " Imani Jones  Concept emerges as the top choice with an overall score of 35%.",
+              "runner_up": " Thierry Dubois  Concept",
+              "runner_up_cv_id": "cv_ef373562"
+            },
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T02:54:00.839472"
         }
       ],
       "created_at": "2026-01-05T23:45:48.965659",
-      "updated_at": "2026-01-06T02:49:39.186887"
+      "updated_at": "2026-01-06T02:54:00.839472"
     },
     {
       "id": "84db24e0-4d60-476f-938f-8f30e271299f",
@@ -59787,17 +59951,262 @@
           "timestamp": "2026-01-06T02:33:49.996074"
         },
         {
-          "id": "39487319-7c51-428b-99cd-2efe57654cbb",
+          "id": "e7c0cc2e-d8be-474c-99e3-ad0b5a67ec41",
           "role": "user",
           "content": "Compare education levels",
           "sources": [],
           "pipeline_steps": [],
           "structured_output": null,
-          "timestamp": "2026-01-06T02:49:12.728508"
+          "timestamp": "2026-01-06T02:53:33.232280"
+        },
+        {
+          "id": "55198107-4d6e-432d-a786-3a1dface4fa0",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a comparison of the education history of all candidates. I need to extract the degrees, institutions, and graduation dates from each CV and present them in a table format. I will then compare the education levels of the candidates, highlighting any differences in degrees, institutions, and fields of study. I will include all candidates for whom education information is available. The user is not specifying the number of candidates. I will provide the top 3 candidates.\n:::\n\nThe table below compares the education history of the candidates. I have included the top 3 candidates based on the completeness and relevance of their education details. The table includes the degree, institution, and graduation year for each candidate, allowing for a direct comparison of their educational backgrounds.\n\n\n:::conclusion\n**[Priya Patel](cv:cv_87c83f0b)**, **[Karim El Amrani](cv:cv_326dd908)**, and **[Rajiv Kapoor](cv:cv_a6ab5b03)** have the most advanced degrees, with master's degrees in relevant fields.\n:::",
+          "sources": [
+            {
+              "cv_id": "cv_f89bcd3a",
+              "filename": "fbb646d4__Aisha_Nkrumah__Junior_2D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_fe460c95",
+              "filename": "a501a799__Daan_van_Dijk__Hard_Surface_Modeler.pdf"
+            },
+            {
+              "cv_id": "cv_a6ab5b03",
+              "filename": "319ca06d__Rajiv_Kapoor__Technical_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_a05f1836",
+              "filename": "b6c004a0__Liam_Chen__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_326dd908",
+              "filename": "81c98261__Karim_El_Amrani__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_0ede58a9",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_76a139cd",
+              "filename": "ddea2e75__Carlos_Mendoza__Lighting_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_15bf5ccf",
+              "filename": "fbcee704__Carmen_Rodriguez__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_ad302d28",
+              "filename": "d41c0a72__Isabel_Mendoza__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_3fbba6fd",
+              "filename": "749745cf__Aisha_Johnson__Animator.pdf"
+            },
+            {
+              "cv_id": "cv_9652dd1b",
+              "filename": "a3d4c752__Kenji_Tanaka__3D_Artist_Intern.pdf"
+            },
+            {
+              "cv_id": "cv_95a9640e",
+              "filename": "d1cabb92__Carlos_Mendoza__Junior_VFX_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_87c83f0b",
+              "filename": "6283b5a0__Priya_Patel__3D_Artist.pdf"
+            },
+            {
+              "cv_id": "cv_7d645942",
+              "filename": "8742ca7a__Sofia_Mendoza__Environment_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 2414.49,
+              "details": "Query type: comparison"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 21.89,
+              "details": "Found 34 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 33573.89,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 6887.42,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "",
+            "raw_content": ":::thinking\nThe user is asking for a comparison of the education history of all candidates. I need to extract the degrees, institutions, and graduation dates from each CV and present them in a table format. I will then compare the education levels of the candidates, highlighting any differences in degrees, institutions, and fields of study. I will include all candidates for whom education information is available. The user is not specifying the number of candidates. I will provide the top 3 candidates.\n:::\n\nHere is a comparison of the education history of the top 3 candidates, including their degrees, institutions, and graduation dates, highlighting differences in their education levels and fields of study.\n\n### Analysis\nThe table below compares the education history of the candidates. I have included the top 3 candidates based on the completeness and relevance of their education details. The table includes the degree, institution, and graduation year for each candidate, allowing for a direct comparison of their educational backgrounds.\n\n| Candidate | Degree | Institution | Graduation Year |\n|-----------|--------|------------|-----------------|\n| **[Priya Patel](cv:cv_87c83f0b)** | Master of Fine Arts in 3D Animation | American University in Dubai | 2004 |\n| **[Priya Patel](cv:cv_87c83f0b)** | Bachelor of Arts in Visual Communication | Zayed University | 2002 |\n| **[Karim El Amrani](cv:cv_326dd908)** | Master of Arts in 3D Animation and Visual Effects | École Nationale Supérieure des Arts Décoratifs | 2018 |\n| **[Rajiv Kapoor](cv:cv_a6ab5b03)** | Master of Fine Arts in Digital Arts | University of Mumbai | 2015 |\n| **[Carlos Mendoza](cv:cv_76a139cd)** | Bachelor of Fine Arts in Animation | University of Tokyo | 2018 |\n| **[Liam Chen](cv:cv_a05f1836)** | Bachelor of Arts in 3D Animation | Academy of Art University | 2022 |\n| **[Sofia Mendoza](cv:cv_7d645942)** | Master of Fine Arts in Game Development | Royal Institute of Art, Stockholm | 2016 |\n| **[Kenji Tanaka](cv:cv_9652dd1b)** | Bachelor of Arts in Game Art | University of the Arts London | 2018 |\n| **[Imani Jones](cv:cv_0ede58a9)** | Bachelor of Fine Arts in Illustration | California Institute of the Arts | 2018 |\n| **[Daan van Dijk](cv:cv_fe460c95)** | Bachelor of Arts in Digital Media & Visualization | Utrecht School of the Arts (HKU) | 2010 |\n| **[Aisha Johnson](cv:cv_3fbba6fd)** | Bachelor of Fine Arts in Animation | Rhode Island School of Design | Unknown |\n| **[Carlos Mendoza](cv:cv_95a9640e)** | Bachelor of Fine Arts in Digital Arts | Universidade de São Paulo (USP) | 2009 |\n| **[Carmen Rodriguez](cv:cv_15bf5ccf)** | Master of Fine Arts in Visual Arts | Academy of Art University | 2000 |\n| **[Aisha Nkrumah](cv:cv_f89bcd3a)** | Bachelor of Fine Arts in Digital Arts | Konstfack University College of Arts, Crafts and Design | 2018 |\n\n:::conclusion\n**[Priya Patel](cv:cv_87c83f0b)**, **[Karim El Amrani](cv:cv_326dd908)**, and **[Rajiv Kapoor](cv:cv_a6ab5b03)** have the most advanced degrees, with master's degrees in relevant fields.\n:::",
+            "thinking": "The user is asking for a comparison of the education history of all candidates. I need to extract the degrees, institutions, and graduation dates from each CV and present them in a table format. I will then compare the education levels of the candidates, highlighting any differences in degrees, institutions, and fields of study. I will include all candidates for whom education information is available. The user is not specifying the number of candidates. I will provide the top 3 candidates.",
+            "analysis": "The table below compares the education history of the candidates. I have included the top 3 candidates based on the completeness and relevance of their education details. The table includes the degree, institution, and graduation year for each candidate, allowing for a direct comparison of their educational backgrounds.",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Degree",
+                "Institution",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "Priya Patel",
+                  "cv_id": "cv_87c83f0b",
+                  "columns": {
+                    "Degree": "Master of Fine Arts in 3D Animation",
+                    "Institution": "American University in Dubai"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Karim El Amrani",
+                  "cv_id": "cv_326dd908",
+                  "columns": {
+                    "Degree": "Master of Arts in 3D Animation and Visual Effects",
+                    "Institution": "École Nationale Supérieure des Arts Décoratifs"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Rajiv Kapoor",
+                  "cv_id": "cv_a6ab5b03",
+                  "columns": {
+                    "Degree": "Master of Fine Arts in Digital Arts",
+                    "Institution": "University of Mumbai"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Carlos Mendoza",
+                  "cv_id": "cv_76a139cd",
+                  "columns": {
+                    "Degree": "Bachelor of Fine Arts in Animation",
+                    "Institution": "University of Tokyo"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Liam Chen",
+                  "cv_id": "cv_a05f1836",
+                  "columns": {
+                    "Degree": "Bachelor of Arts in 3D Animation",
+                    "Institution": "Academy of Art University"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Sofia Mendoza",
+                  "cv_id": "cv_7d645942",
+                  "columns": {
+                    "Degree": "Master of Fine Arts in Game Development",
+                    "Institution": "Royal Institute of Art, Stockholm"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Kenji Tanaka",
+                  "cv_id": "cv_9652dd1b",
+                  "columns": {
+                    "Degree": "Bachelor of Arts in Game Art",
+                    "Institution": "University of the Arts London"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Imani Jones",
+                  "cv_id": "cv_0ede58a9",
+                  "columns": {
+                    "Degree": "Bachelor of Fine Arts in Illustration",
+                    "Institution": "California Institute of the Arts"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Daan van Dijk",
+                  "cv_id": "cv_fe460c95",
+                  "columns": {
+                    "Degree": "Bachelor of Arts in Digital Media & Visualization",
+                    "Institution": "Utrecht School of the Arts (HKU)"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Aisha Johnson",
+                  "cv_id": "cv_3fbba6fd",
+                  "columns": {
+                    "Degree": "Bachelor of Fine Arts in Animation",
+                    "Institution": "Rhode Island School of Design"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Carmen Rodriguez",
+                  "cv_id": "cv_15bf5ccf",
+                  "columns": {
+                    "Degree": "Master of Fine Arts in Visual Arts",
+                    "Institution": "Academy of Art University"
+                  },
+                  "match_score": 50
+                },
+                {
+                  "candidate_name": "Aisha Nkrumah",
+                  "cv_id": "cv_f89bcd3a",
+                  "columns": {
+                    "Degree": "Bachelor of Fine Arts in Digital Arts",
+                    "Institution": "Konstfack University College of Arts, Crafts and Design"
+                  },
+                  "match_score": 50
+                }
+              ]
+            },
+            "conclusion": "**[Priya Patel](cv:cv_87c83f0b)**, **[Karim El Amrani](cv:cv_326dd908)**, and **[Rajiv Kapoor](cv:cv_a6ab5b03)** have the most advanced degrees, with master's degrees in relevant fields.",
+            "gap_analysis": null,
+            "red_flags": null,
+            "timeline": null,
+            "risk_assessment": null,
+            "structure_type": "comparison",
+            "single_candidate_data": null,
+            "risk_assessment_data": null,
+            "results_table": null,
+            "total_results": 0,
+            "query": "",
+            "ranking_table": null,
+            "top_pick": null,
+            "ranking_criteria": null,
+            "match_scores": null,
+            "requirements": null,
+            "best_match": null,
+            "team_composition": null,
+            "skill_coverage": null,
+            "team_risks": null,
+            "team_requirements": null,
+            "claim": null,
+            "evidence": null,
+            "verdict": null,
+            "talent_pool": null,
+            "skill_distribution": null,
+            "experience_distribution": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T02:54:20.932972"
         }
       ],
       "created_at": "2026-01-06T02:09:13.165606",
-      "updated_at": "2026-01-06T02:49:12.728508"
+      "updated_at": "2026-01-06T02:54:20.932972"
     },
     {
       "id": "bcbe4524-a078-4750-bc4c-c2842b66fc8c",
