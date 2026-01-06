@@ -503,7 +503,7 @@ function App() {
         window.dispatchEvent(new Event('metrics-updated'));
       }
       
-      console.log('🔄 Clearing pending messages and reloading session...');
+      console.log('🔄 Reloading session and clearing pending messages...');
       
       // Small delay to let user see final pipeline step before clearing
       await new Promise(resolve => setTimeout(resolve, 500));
@@ -518,14 +518,8 @@ function App() {
         return newState;
       });
       
-      // Clear pending message
-      setPendingMessages(prev => {
-        const newState = { ...prev };
-        delete newState[targetSessionId];
-        return newState;
-      });
-      
-      // Reload session to show final result
+      // IMPORTANT: Reload session FIRST to get new messages from server
+      // This prevents the user message from disappearing during the transition
       console.log('🔄 Current session ID:', currentSessionIdRef.current, 'Target:', targetSessionId);
       if (currentSessionIdRef.current === targetSessionId) {
         console.log('🔄 Reloading session to fetch new messages...');
@@ -534,6 +528,14 @@ function App() {
       } else {
         console.log('⚠️ Session IDs do not match, skipping reload');
       }
+      
+      // Clear pending message AFTER session is reloaded
+      // This ensures no gap where the user message disappears
+      setPendingMessages(prev => {
+        const newState = { ...prev };
+        delete newState[targetSessionId];
+        return newState;
+      });
       
       // Reload sessions list to reorder by last activity
       await loadSessions();
@@ -548,14 +550,16 @@ function App() {
         delete newState[targetSessionId];
         return newState;
       });
+      // Reload session FIRST before clearing pending message
+      if (currentSessionIdRef.current === targetSessionId) {
+        await loadSession(targetSessionId);
+      }
+      // Clear pending message AFTER session reload
       setPendingMessages(prev => {
         const newState = { ...prev };
         delete newState[targetSessionId];
         return newState;
       });
-      if (currentSessionIdRef.current === targetSessionId) {
-        await loadSession(targetSessionId);
-      }
     }
     
     setChatLoadingStates(prev => ({ ...prev, [targetSessionId]: false }));

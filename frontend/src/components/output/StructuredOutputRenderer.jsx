@@ -265,10 +265,104 @@ const DirectAnswerSection = ({ content, onOpenCV, cvMap }) => {
   );
 };
 
-// Section: Analysis (Cyan border)
+// Section: Analysis (Cyan border) - ENHANCED for large content
 const AnalysisSection = ({ content, onOpenCV, cvMap }) => {
   if (!content) return null;
   
+  const contentStr = String(content);
+  const contentLength = contentStr.length;
+  const isLargeContent = contentLength > 500;
+  
+  // Parse content to detect sections for large content
+  const parseContentSections = (text) => {
+    const sections = [];
+    const lines = text.split('\n');
+    let currentSection = { title: null, content: [] };
+    
+    for (const line of lines) {
+      // Detect section headers (bold text followed by colon or standalone)
+      const headerMatch = line.match(/^\*\*([^*:]+):?\*\*:?\s*$/);
+      const colonHeaderMatch = line.match(/^([A-Z][^:]{2,30}):\s*$/);
+      
+      if (headerMatch || colonHeaderMatch) {
+        // Save previous section if it has content
+        if (currentSection.content.length > 0 || currentSection.title) {
+          sections.push(currentSection);
+        }
+        currentSection = { 
+          title: headerMatch ? headerMatch[1].trim() : colonHeaderMatch[1].trim(), 
+          content: [] 
+        };
+      } else if (line.trim()) {
+        currentSection.content.push(line);
+      }
+    }
+    
+    // Push last section
+    if (currentSection.content.length > 0 || currentSection.title) {
+      sections.push(currentSection);
+    }
+    
+    return sections;
+  };
+  
+  // For large content, render with structured sections
+  if (isLargeContent) {
+    const sections = parseContentSections(contentStr);
+    
+    return (
+      <div className="mb-4 rounded-xl border-l-4 border-cyan-500 bg-slate-800/50 p-4">
+        <div className="flex items-center gap-2 mb-4">
+          <BarChart3 className="w-5 h-5 text-cyan-400" />
+          <span className="font-semibold text-cyan-400">Analysis</span>
+        </div>
+        
+        <div className="space-y-4">
+          {sections.map((section, idx) => (
+            <div key={idx} className={section.title ? "bg-slate-700/30 rounded-lg p-3" : ""}>
+              {section.title && (
+                <h4 className="text-sm font-semibold text-cyan-300 mb-2 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
+                  {section.title}
+                </h4>
+              )}
+              <div className="text-sm text-gray-300 space-y-1">
+                {section.content.map((line, lineIdx) => {
+                  // Detect list items
+                  if (line.trim().startsWith('-') || line.trim().startsWith('•')) {
+                    return (
+                      <div key={lineIdx} className="flex items-start gap-2 pl-2">
+                        <span className="text-cyan-400 mt-1">•</span>
+                        <span><ContentWithCVLinks content={line.replace(/^[-•]\s*/, '')} onOpenCV={onOpenCV} cvMap={cvMap} /></span>
+                      </div>
+                    );
+                  }
+                  // Detect key-value pairs (Key: Value)
+                  const kvMatch = line.match(/^([^:]{2,25}):\s*(.+)$/);
+                  if (kvMatch && !line.includes('http')) {
+                    return (
+                      <div key={lineIdx} className="flex items-start gap-2">
+                        <span className="text-gray-400 font-medium min-w-[120px]">{kvMatch[1]}:</span>
+                        <span className="text-gray-200"><ContentWithCVLinks content={kvMatch[2]} onOpenCV={onOpenCV} cvMap={cvMap} /></span>
+                      </div>
+                    );
+                  }
+                  // Regular line
+                  return (
+                    <div key={lineIdx}>
+                      <ContentWithCVLinks content={line} onOpenCV={onOpenCV} cvMap={cvMap} />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+  
+  // For small content, keep simple rendering
   return (
     <div className="mb-4 rounded-xl border-l-4 border-cyan-500 bg-slate-800/50 p-4">
       <div className="flex items-center gap-2 mb-3">
