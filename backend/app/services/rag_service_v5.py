@@ -574,6 +574,10 @@ class PipelineContextV5:
     target_cv_id: str | None = None
     single_candidate_detection: Any = None  # Stored for orchestrator
     
+    # Context-resolved candidate (from conversation history references like "#1 candidate")
+    resolved_candidate_name: str | None = None
+    resolved_cv_id: str | None = None
+    
     # V5: Multi-query embeddings
     query_embeddings: dict[str, list[float]] = field(default_factory=dict)
     hyde_embedding: list[float] | None = None
@@ -946,6 +950,18 @@ class RAGServiceV5:
     async def _execute_pipeline_stream(self, ctx: PipelineContextV5):
         """Execute pipeline with streaming progress events."""
         import time
+        from app.services.context_resolver import resolve_query_with_context
+        
+        # STEP 0: Resolve references like "#1 candidate", "top candidate" from conversation history
+        if ctx.conversation_history:
+            resolved_query, resolved_name, resolved_cv_id = resolve_query_with_context(
+                ctx.question, ctx.conversation_history
+            )
+            if resolved_name:
+                logger.info(f"[CONTEXT_RESOLVER] Resolved reference to: {resolved_name} ({resolved_cv_id})")
+                # Store resolved candidate info for later use in structure routing
+                ctx.resolved_candidate_name = resolved_name
+                ctx.resolved_cv_id = resolved_cv_id
         
         # CRITICAL DEBUG: Check if _query_understanding is initialized
         logger.info(f"[PIPELINE_STREAM] Starting pipeline, _query_understanding={self._query_understanding is not None}")
@@ -2246,9 +2262,18 @@ Provide a corrected response:"""
         candidate_name = None
         query_type = None
         
+        # HIGHEST PRIORITY: Use context-resolved candidate (from "#1 candidate", "top candidate" references)
+        if ctx.resolved_candidate_name:
+            query_type = "single_candidate"
+            candidate_name = ctx.resolved_candidate_name
+            logger.info(
+                f"[RAG] STRUCTURE ROUTING: Using context-resolved candidate -> "
+                f"query_type={query_type}, candidate={candidate_name}"
+            )
+        
         # PRIMARY: Use single_candidate_detection from generation step
         # This is more reliable because it uses original question + chunks
-        if ctx.single_candidate_detection and ctx.single_candidate_detection.is_single_candidate:
+        elif ctx.single_candidate_detection and ctx.single_candidate_detection.is_single_candidate:
             query_type = "single_candidate"
             candidate_name = ctx.single_candidate_detection.candidate_name
             logger.info(

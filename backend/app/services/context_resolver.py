@@ -36,7 +36,12 @@ REFERENCE_PATTERNS = [
     (r'\b(the\s+)?best\s+one\b', "top_candidate"),
     (r'\b(el\s+)?número\s+uno\b', "top_candidate"),
     (r'\b(the\s+)?#1\b', "top_candidate"),
+    (r'\b#1\s*candidate\b', "top_candidate"),
     (r'\b(the\s+)?first\s+one\b', "top_candidate"),
+    (r'\b(the\s+)?first\s+candidate\b', "top_candidate"),
+    (r'\bfull\s+profile\s+of\s+(the\s+)?#\d+\b', "top_candidate"),
+    (r'\bprofile\s+of\s+(the\s+)?#\d+\b', "top_candidate"),
+    (r'\b#\d+\s*(candidato?|candidate)?\b', "top_candidate"),
     
     # This/That candidate references
     (r'\b(this|that|ese|este|esta)\s+(candidato|candidate|person|persona)\b', "this_candidate"),
