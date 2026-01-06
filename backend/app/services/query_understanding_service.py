@@ -121,6 +121,26 @@ Query: "Give me a recipe for chocolate cake"
   "reformulated_prompt": ""
 }}
 
+CONTEXT RESOLUTION EXAMPLE (VERY IMPORTANT):
+
+Conversation History:
+Usuario: Who is best for a leadership role?
+Asistente: Isabel Mendoza is the top choice with 100% score for leadership...
+
+USER QUERY: "dime mas sobre el top candidate"
+
+{{
+  "understood_query": "Provide detailed information about Isabel Mendoza (the top candidate from the previous ranking)",
+  "query_type": "search",
+  "requirements": [
+    "Extract full profile for Isabel Mendoza",
+    "Include leadership experience details",
+    "Show comprehensive candidate information"
+  ],
+  "is_cv_related": true,
+  "reformulated_prompt": "Provide a comprehensive profile and detailed analysis of Isabel Mendoza, including all leadership experience, team management roles, strategic accomplishments, skills, and career trajectory."
+}}
+
 Now analyze the user's query and respond with JSON only:"""
 
 

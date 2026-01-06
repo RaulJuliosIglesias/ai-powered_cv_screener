@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Screener Architecture - Interactive Visualization</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #e4e4e4;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: 300;
+            margin-bottom: 8px;
+        }
+        
+        .header .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 14px;
+            color: #888;
+        }
+        
+        .header .stats span {
+            color: #00d9ff;
+            font-weight: 600;
+        }
+        
+        #visualization {
+            width: 100%;
+            height: calc(100vh - 100px);
+        }
+        
+        .node-orchestrator {
+            fill: #ff6b6b;
+        }
+        
+        .node-structure {
+            fill: #4ecdc4;
+        }
+        
+        .node-module {
+            fill: #45b7d1;
+        }
+        
+        .node-shared {
+            fill: #f9ca24;
+        }
+        
+        .link {
+            stroke: rgba(255,255,255,0.2);
+            stroke-width: 1.5px;
+        }
+        
+        .link-shared {
+            stroke: #f9ca24;
+            stroke-width: 2px;
+            stroke-dasharray: 5,3;
+        }
+        
+        .node-label {
+            font-size: 11px;
+            fill: #fff;
+            text-anchor: middle;
+            pointer-events: none;
+            font-weight: 500;
+        }
+        
+        .tooltip {
+            position: absolute;
+            background: rgba(0,0,0,0.9);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 13px;
+            pointer-events: none;
+            max-width: 300px;
+            z-index: 1000;
+        }
+        
+        .tooltip h3 {
+            color: #00d9ff;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .tooltip p {
+            color: #aaa;
+            line-height: 1.5;
+        }
+        
+        .tooltip .modules-list {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .tooltip .module-tag {
+            display: inline-block;
+            background: rgba(78, 205, 196, 0.2);
+            color: #4ecdc4;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin: 2px;
+        }
+        
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.5);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        
+        .controls {
+            position: absolute;
+            top: 100px;
+            right: 20px;
+            background: rgba(0,0,0,0.5);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .controls button {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        
+        .controls button:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .controls button.active {
+            background: #4ecdc4;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏗️ CV Screener Architecture Visualization</h1>
+        <div class="stats">
+            <div><span>9</span> Structures</div>
+            <div><span>29</span> Modules</div>
+            <div><span>6</span> Shared Modules</div>
+        </div>
+    </div>
+    
+    <div id="visualization"></div>
+    
+    <div class="legend">
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ff6b6b;"></div>
+            <span>Orchestrator</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #4ecdc4;"></div>
+            <span>Structures</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #45b7d1;"></div>
+            <span>Modules</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #f9ca24;"></div>
+            <span>Shared Modules</span>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <button onclick="filterView('all')" class="active" id="btn-all">Show All</button>
+        <button onclick="filterView('single_candidate')" id="btn-single">Single Candidate</button>
+        <button onclick="filterView('ranking')" id="btn-ranking">Ranking</button>
+        <button onclick="filterView('job_match')" id="btn-job">Job Match</button>
+        <button onclick="filterView('team_build')" id="btn-team">Team Build</button>
+        <button onclick="filterView('shared')" id="btn-shared">Shared Modules</button>
+    </div>
+    
+    <div class="tooltip" style="display: none;"></div>
+
+    <script>
+        // Architecture Data
+        const data = {
+            nodes: [
+                // Orchestrator
+                { id: "orchestrator", name: "Orchestrator", type: "orchestrator", description: "Routes queries to appropriate structures based on query_type" },
+                
+                // Structures
+                { id: "single_candidate", name: "SingleCandidate", type: "structure", description: "Complete candidate profile with all sections", modules: ["thinking", "highlights", "career", "skills", "credentials", "risk_table", "conclusion"] },
+                { id: "risk_assessment", name: "RiskAssessment", type: "structure", description: "Risk-focused analysis with 5-factor table", modules: ["thinking", "risk_table", "conclusion"] },
+                { id: "comparison", name: "Comparison", type: "structure", description: "Side-by-side comparison table + winner card", modules: ["thinking", "analysis", "table", "conclusion"] },
+                { id: "search", name: "Search", type: "structure", description: "Search results with match scores", modules: ["thinking", "direct_answer", "analysis", "results_table", "conclusion"] },
+                { id: "ranking", name: "Ranking", type: "structure", description: "Ordered ranking with #1 highlighted", modules: ["thinking", "analysis", "ranking_criteria", "ranking_table", "top_pick", "conclusion"] },
+                { id: "job_match", name: "JobMatch", type: "structure", description: "Match percentages + requirements breakdown", modules: ["thinking", "analysis", "requirements", "match_score", "gap_analysis", "conclusion"] },
+                { id: "team_build", name: "TeamBuild", type: "structure", description: "Team assignments + skill coverage + risks", modules: ["thinking", "analysis", "team_requirements", "team_composition", "skill_coverage", "team_risk", "conclusion"] },
+                { id: "verification", name: "Verification", type: "structure", description: "Verification result (CONFIRMED/PARTIAL/NOT_FOUND)", modules: ["thinking", "claim", "evidence", "verdict", "conclusion"] },
+                { id: "summary", name: "Summary", type: "structure", description: "Pool statistics + distributions", modules: ["thinking", "talent_pool", "skill_distribution", "experience_distribution", "conclusion"] },
+                
+                // Core Modules (shared)
+                { id: "thinking", name: "Thinking", type: "module", shared: true, description: "Extract :::thinking reasoning blocks", usedBy: 9 },
+                { id: "conclusion", name: "Conclusion", type: "module", shared: true, description: "Extract :::conclusion final assessment", usedBy: 9 },
+                { id: "analysis", name: "Analysis", type: "module", shared: true, description: "Extract analysis text between sections", usedBy: 6 },
+                { id: "risk_table", name: "RiskTable", type: "module", shared: true, description: "5-factor risk assessment table", usedBy: 2 },
+                
+                // Profile Modules
+                { id: "highlights", name: "Highlights", type: "module", description: "Key candidate info table" },
+                { id: "career", name: "Career", type: "module", description: "Career trajectory timeline" },
+                { id: "skills", name: "Skills", type: "module", description: "Categorized skills snapshot" },
+                { id: "credentials", name: "Credentials", type: "module", description: "Certifications & education" },
+                
+                // Table Modules
+                { id: "table", name: "Table", type: "module", description: "Candidate comparison table" },
+                { id: "results_table", name: "ResultsTable", type: "module", description: "Search results table" },
+                { id: "direct_answer", name: "DirectAnswer", type: "module", description: "Direct response to query" },
+                
+                // Ranking Modules
+                { id: "ranking_criteria", name: "RankingCriteria", type: "module", description: "Extract/define ranking criteria" },
+                { id: "ranking_table", name: "RankingTable", type: "module", description: "Ranked candidates table" },
+                { id: "top_pick", name: "TopPick", type: "module", description: "#1 candidate recommendation" },
+                
+                // Job Match Modules
+                { id: "requirements", name: "Requirements", type: "module", description: "Parse job description requirements" },
+                { id: "match_score", name: "MatchScore", type: "module", description: "Calculate match percentages" },
+                { id: "gap_analysis", name: "GapAnalysis", type: "module", description: "Identify skill/experience gaps" },
+                
+                // Team Modules
+                { id: "team_requirements", name: "TeamReqs", type: "module", description: "Define team role requirements" },
+                { id: "team_composition", name: "TeamComp", type: "module", description: "Assign candidates to roles" },
+                { id: "skill_coverage", name: "SkillCoverage", type: "module", description: "Analyze team skill coverage" },
+                { id: "team_risk", name: "TeamRisk", type: "module", description: "Identify team risks" },
+                
+                // Verification Modules
+                { id: "claim", name: "Claim", type: "module", description: "Parse verification claim" },
+                { id: "evidence", name: "Evidence", type: "module", description: "Find supporting/contradicting evidence" },
+                { id: "verdict", name: "Verdict", type: "module", description: "Issue CONFIRMED/PARTIAL/NOT_FOUND" },
+                
+                // Summary Modules
+                { id: "talent_pool", name: "TalentPool", type: "module", description: "Pool statistics" },
+                { id: "skill_distribution", name: "SkillDist", type: "module", description: "Skill frequency analysis" },
+                { id: "experience_distribution", name: "ExpDist", type: "module", description: "Experience level distribution" }
+            ],
+            links: [
+                // Orchestrator to Structures
+                { source: "orchestrator", target: "single_candidate" },
+                { source: "orchestrator", target: "risk_assessment" },
+                { source: "orchestrator", target: "comparison" },
+                { source: "orchestrator", target: "search" },
+                { source: "orchestrator", target: "ranking" },
+                { source: "orchestrator", target: "job_match" },
+                { source: "orchestrator", target: "team_build" },
+                { source: "orchestrator", target: "verification" },
+                { source: "orchestrator", target: "summary" },
+                
+                // SingleCandidate to Modules
+                { source: "single_candidate", target: "thinking", shared: true },
+                { source: "single_candidate", target: "highlights" },
+                { source: "single_candidate", target: "career" },
+                { source: "single_candidate", target: "skills" },
+                { source: "single_candidate", target: "credentials" },
+                { source: "single_candidate", target: "risk_table", shared: true },
+                { source: "single_candidate", target: "conclusion", shared: true },
+                
+                // RiskAssessment to Modules
+                { source: "risk_assessment", target: "thinking", shared: true },
+                { source: "risk_assessment", target: "risk_table", shared: true },
+                { source: "risk_assessment", target: "conclusion", shared: true },
+                
+                // Comparison to Modules
+                { source: "comparison", target: "thinking", shared: true },
+                { source: "comparison", target: "analysis", shared: true },
+                { source: "comparison", target: "table" },
+                { source: "comparison", target: "conclusion", shared: true },
+                
+                // Search to Modules
+                { source: "search", target: "thinking", shared: true },
+                { source: "search", target: "direct_answer" },
+                { source: "search", target: "analysis", shared: true },
+                { source: "search", target: "results_table" },
+                { source: "search", target: "conclusion", shared: true },
+                
+                // Ranking to Modules
+                { source: "ranking", target: "thinking", shared: true },
+                { source: "ranking", target: "analysis", shared: true },
+                { source: "ranking", target: "ranking_criteria" },
+                { source: "ranking", target: "ranking_table" },
+                { source: "ranking", target: "top_pick" },
+                { source: "ranking", target: "conclusion", shared: true },
+                
+                // JobMatch to Modules
+                { source: "job_match", target: "thinking", shared: true },
+                { source: "job_match", target: "analysis", shared: true },
+                { source: "job_match", target: "requirements" },
+                { source: "job_match", target: "match_score" },
+                { source: "job_match", target: "gap_analysis" },
+                { source: "job_match", target: "conclusion", shared: true },
+                
+                // TeamBuild to Modules
+                { source: "team_build", target: "thinking", shared: true },
+                { source: "team_build", target: "analysis", shared: true },
+                { source: "team_build", target: "team_requirements" },
+                { source: "team_build", target: "team_composition" },
+                { source: "team_build", target: "skill_coverage" },
+                { source: "team_build", target: "team_risk" },
+                { source: "team_build", target: "conclusion", shared: true },
+                
+                // Verification to Modules
+                { source: "verification", target: "thinking", shared: true },
+                { source: "verification", target: "claim" },
+                { source: "verification", target: "evidence" },
+                { source: "verification", target: "verdict" },
+                { source: "verification", target: "conclusion", shared: true },
+                
+                // Summary to Modules
+                { source: "summary", target: "thinking", shared: true },
+                { source: "summary", target: "talent_pool" },
+                { source: "summary", target: "skill_distribution" },
+                { source: "summary", target: "experience_distribution" },
+                { source: "summary", target: "conclusion", shared: true }
+            ]
+        };
+
+        // Setup SVG
+        const width = window.innerWidth;
+        const height = window.innerHeight - 100;
+        
+        const svg = d3.select("#visualization")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+        
+        const g = svg.append("g");
+        
+        // Zoom behavior
+        const zoom = d3.zoom()
+            .scaleExtent([0.3, 3])
+            .on("zoom", (event) => {
+                g.attr("transform", event.transform);
+            });
+        
+        svg.call(zoom);
+        
+        // Tooltip
+        const tooltip = d3.select(".tooltip");
+        
+        // Force simulation
+        const simulation = d3.forceSimulation(data.nodes)
+            .force("link", d3.forceLink(data.links).id(d => d.id).distance(d => {
+                if (d.source.type === "orchestrator") return 150;
+                return 80;
+            }))
+            .force("charge", d3.forceManyBody().strength(d => {
+                if (d.type === "orchestrator") return -800;
+                if (d.type === "structure") return -400;
+                return -200;
+            }))
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("y", d3.forceY(d => {
+                if (d.type === "orchestrator") return height * 0.15;
+                if (d.type === "structure") return height * 0.45;
+                return height * 0.75;
+            }).strength(0.3))
+            .force("collision", d3.forceCollide().radius(d => {
+                if (d.type === "orchestrator") return 50;
+                if (d.type === "structure") return 40;
+                return 25;
+            }));
+        
+        // Draw links
+        const link = g.append("g")
+            .selectAll("line")
+            .data(data.links)
+            .join("line")
+            .attr("class", d => d.shared ? "link link-shared" : "link");
+        
+        // Draw nodes
+        const node = g.append("g")
+            .selectAll("g")
+            .data(data.nodes)
+            .join("g")
+            .call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended));
+        
+        // Node circles
+        node.append("rect")
+            .attr("width", d => {
+                if (d.type === "orchestrator") return 120;
+                if (d.type === "structure") return 100;
+                return 80;
+            })
+            .attr("height", d => {
+                if (d.type === "orchestrator") return 40;
+                if (d.type === "structure") return 32;
+                return 24;
+            })
+            .attr("x", d => {
+                if (d.type === "orchestrator") return -60;
+                if (d.type === "structure") return -50;
+                return -40;
+            })
+            .attr("y", d => {
+                if (d.type === "orchestrator") return -20;
+                if (d.type === "structure") return -16;
+                return -12;
+            })
+            .attr("rx", 6)
+            .attr("fill", d => {
+                if (d.type === "orchestrator") return "#ff6b6b";
+                if (d.type === "structure") return "#4ecdc4";
+                if (d.shared) return "#f9ca24";
+                return "#45b7d1";
+            })
+            .attr("stroke", "rgba(255,255,255,0.3)")
+            .attr("stroke-width", 2)
+            .on("mouseover", showTooltip)
+            .on("mouseout", hideTooltip);
+        
+        // Node labels
+        node.append("text")
+            .attr("class", "node-label")
+            .attr("dy", 4)
+            .text(d => d.name);
+        
+        // Simulation tick
+        simulation.on("tick", () => {
+            link
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+            
+            node.attr("transform", d => `translate(${d.x},${d.y})`);
+        });
+        
+        // Drag functions
+        function dragstarted(event) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            event.subject.fx = event.subject.x;
+            event.subject.fy = event.subject.y;
+        }
+        
+        function dragged(event) {
+            event.subject.fx = event.x;
+            event.subject.fy = event.y;
+        }
+        
+        function dragended(event) {
+            if (!event.active) simulation.alphaTarget(0);
+            event.subject.fx = null;
+            event.subject.fy = null;
+        }
+        
+        // Tooltip functions
+        function showTooltip(event, d) {
+            let html = `<h3>${d.name}</h3><p>${d.description}</p>`;
+            
+            if (d.type === "structure" && d.modules) {
+                html += `<div class="modules-list"><strong>Modules:</strong><br>`;
+                d.modules.forEach(m => {
+                    const moduleNode = data.nodes.find(n => n.id === m);
+                    const isShared = moduleNode && moduleNode.shared;
+                    html += `<span class="module-tag" style="${isShared ? 'background: rgba(249, 202, 36, 0.3); color: #f9ca24;' : ''}">${m}</span>`;
+                });
+                html += `</div>`;
+            }
+            
+            if (d.shared) {
+                html += `<p style="color: #f9ca24; margin-top: 8px;">🔄 Shared across ${d.usedBy} structures</p>`;
+            }
+            
+            tooltip
+                .style("display", "block")
+                .style("left", (event.pageX + 15) + "px")
+                .style("top", (event.pageY - 10) + "px")
+                .html(html);
+        }
+        
+        function hideTooltip() {
+            tooltip.style("display", "none");
+        }
+        
+        // Filter view function
+        function filterView(filter) {
+            // Update button states
+            document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + (filter === 'all' ? 'all' : filter.replace('_', '-').split('_')[0])).classList.add('active');
+            
+            if (filter === 'all') {
+                node.style("opacity", 1);
+                link.style("opacity", 1);
+                return;
+            }
+            
+            if (filter === 'shared') {
+                node.style("opacity", d => d.shared || d.type === "orchestrator" ? 1 : 0.15);
+                link.style("opacity", d => d.shared ? 1 : 0.05);
+                return;
+            }
+            
+            // Filter by structure
+            const structure = data.nodes.find(n => n.id === filter);
+            if (!structure) return;
+            
+            const relevantModules = structure.modules || [];
+            
+            node.style("opacity", d => {
+                if (d.id === "orchestrator") return 1;
+                if (d.id === filter) return 1;
+                if (relevantModules.includes(d.id)) return 1;
+                return 0.15;
+            });
+            
+            link.style("opacity", d => {
+                if (d.source.id === "orchestrator" && d.target.id === filter) return 1;
+                if (d.source.id === filter) return 1;
+                return 0.05;
+            });
+        }
+        
+        // Initial zoom to fit
+        svg.call(zoom.transform, d3.zoomIdentity.translate(0, 0).scale(0.9));
+    </script>
+</body>
+</html>

@@ -1,6 +1,29 @@
 # CV Screener Architecture - Orchestration, Structures & Modules
 
-> **Last Updated:** January 2026 - Full implementation complete with 9 Structures + Conversational Context (v6.0)
+> **Last Updated:** January 2026 - Full implementation complete with **9 Structures** + **29 Modules** + Conversational Context (v6.0)
+
+---
+
+## 🎨 Interactive Visualization
+
+**Open [`architecture-visualization.html`](./architecture-visualization.html) in a browser** to see an interactive D3.js visualization of the complete architecture with:
+- Drag & zoom functionality
+- Click nodes to see module details
+- Filter buttons to focus on specific structures
+- Visual distinction for shared modules
+
+---
+
+## 📊 Quick Stats
+
+| Component | Count | Description |
+|-----------|-------|-------------|
+| **Structures** | 9 | Output assemblers that combine modules |
+| **Modules** | 29 | Reusable extraction/formatting components |
+| **Query Types** | 9 | Classification types for routing |
+| **Reusable Modules** | 6 | Shared across multiple structures |
+
+---
 
 ## Architecture Overview
 
@@ -16,45 +39,48 @@ USER QUERY → ORCHESTRATOR → STRUCTURE → MODULES → OUTPUT
 
 ---
 
-## Complete Architecture Diagram
+## 🗺️ Complete Architecture Map
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                              ORCHESTRATOR                                    │
-│                         (orchestrator.py)                                   │
-│  Receives: raw_llm_output, chunks, query, query_type, conversation_history  │
-│  Returns:  StructuredOutput + formatted_answer                              │
-└────────────────────────────────────┬────────────────────────────────────────┘
-                                     │
-    ┌────────────────────────────────┼────────────────────────────────────────┐
-    │         │         │            │           │           │          │     │
-    ▼         ▼         ▼            ▼           ▼           ▼          ▼     ▼
-┌───────┐┌───────┐┌──────────┐┌─────────┐┌─────────┐┌────────┐┌────────┐┌─────┐
-│single_││risk_  ││comparison││ search  ││ ranking ││job_    ││team_   ││...  │
-│candid.││assess.││          ││         ││         ││match   ││build   ││     │
-└───┬───┘└───┬───┘└────┬─────┘└────┬────┘└────┬────┘└───┬────┘└───┬────┘└──┬──┘
-    │        │         │           │          │         │         │        │
-    ▼        ▼         ▼           ▼          ▼         ▼         ▼        ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                              STRUCTURES (9)                                  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ SingleCandidateStructure │ RiskAssessmentStructure │ ComparisonStructure    │
-│ SearchStructure          │ RankingStructure        │ JobMatchStructure      │
-│ TeamBuildStructure       │ VerificationStructure   │ SummaryStructure       │
-└─────────────────────────────────────────────────────────────────────────────┘
-                                     │
-                                     ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                              MODULES (25+)                                   │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ CORE:    ThinkingModule, ConclusionModule, AnalysisModule, DirectAnswerMod  │
-│ PROFILE: HighlightsModule, CareerModule, SkillsModule, CredentialsModule    │
-│ TABLES:  RiskTableModule, TableModule, ResultsTableModule, RankingTableMod  │
-│ MATCH:   RequirementsModule, MatchScoreModule, GapAnalysisModule, TopPick   │
-│ TEAM:    TeamRequirementsModule, TeamCompositionMod, SkillCoverageMod       │
-│ VERIFY:  ClaimModule, EvidenceModule, VerdictModule                         │
-│ SUMMARY: TalentPoolModule, SkillDistributionMod, ExperienceDistributionMod  │
-└─────────────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                                    ORCHESTRATOR                                       │
+│                               (orchestrator.py)                                      │
+│     Receives: raw_llm_output, chunks, query, query_type, conversation_history        │
+│     Returns:  StructuredOutput + formatted_answer                                    │
+└────────────────────────────────────────┬────────────────────────────────────────────┘
+                                         │
+         ┌───────────┬───────────┬───────┼───────┬───────────┬───────────┬───────────┐
+         │           │           │       │       │           │           │           │
+         ▼           ▼           ▼       ▼       ▼           ▼           ▼           ▼
+    ┌─────────┐┌─────────┐┌──────────┐┌──────┐┌───────┐┌─────────┐┌──────┐┌──────┐┌───────┐
+    │ single  ││  risk   ││comparison││search││ranking││job_match││ team ││verify││summary│
+    │candidate││ assess  ││          ││      ││       ││         ││build ││      ││       │
+    └────┬────┘└────┬────┘└────┬─────┘└──┬───┘└───┬───┘└────┬────┘└──┬───┘└──┬───┘└───┬───┘
+         │          │          │         │        │         │        │       │        │
+         ▼          ▼          ▼         ▼        ▼         ▼        ▼       ▼        ▼
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                                   STRUCTURES (9)                                         │
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+│ 1. SingleCandidateStructure  │ 2. RiskAssessmentStructure  │ 3. ComparisonStructure     │
+│ 4. SearchStructure           │ 5. RankingStructure         │ 6. JobMatchStructure       │
+│ 7. TeamBuildStructure        │ 8. VerificationStructure    │ 9. SummaryStructure        │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+                                         │
+                                         ▼
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                                   MODULES (29)                                           │
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+│  CORE (4):     ThinkingModule, ConclusionModule, AnalysisModule, DirectAnswerModule     │
+│  PROFILE (4):  HighlightsModule, CareerModule, SkillsModule, CredentialsModule          │
+│  TABLES (6):   RiskTableModule, TableModule, ResultsTableModule, RankingTableModule,    │
+│                RankingCriteriaModule, TopPickModule                                     │
+│  RISK (2):     RedFlagsModule, TimelineModule                                           │
+│  MATCH (3):    RequirementsModule, MatchScoreModule, GapAnalysisModule                  │
+│  TEAM (4):     TeamRequirementsModule, TeamCompositionModule, SkillCoverageModule,      │
+│                TeamRiskModule                                                           │
+│  VERIFY (3):   ClaimModule, EvidenceModule, VerdictModule                               │
+│  SUMMARY (3):  TalentPoolModule, SkillDistributionModule, ExperienceDistributionModule  │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -106,92 +132,418 @@ Use this table to identify which structure is being rendered based on the visual
 
 ---
 
-## Structure Details
+## 🏗️ Complete Structure Details
 
 ### 1. SingleCandidateStructure
+**File:** `structures/single_candidate_structure.py`  
+**Query Examples:** "dame todo el perfil de X", "full profile of X", "tell me everything about X"
+
 ```
-Modules: Thinking + Highlights + Career + Skills + Credentials + RiskTable + Conclusion
-Output:  Complete candidate profile with all sections
+┌─────────────────────────────────────────────────────────────────┐
+│                   SingleCandidateStructure                       │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌──────────────┐  ┌─────────────┐            │
+│  │  Thinking   │  │  Highlights  │  │   Career    │            │
+│  │   Module    │  │    Module    │  │   Module    │            │
+│  └─────────────┘  └──────────────┘  └─────────────┘            │
+│  ┌─────────────┐  ┌──────────────┐  ┌─────────────┐            │
+│  │   Skills    │  │ Credentials  │  │  RiskTable  │ ◄─ SHARED  │
+│  │   Module    │  │    Module    │  │   Module    │            │
+│  └─────────────┘  └──────────────┘  └─────────────┘            │
+│  ┌─────────────┐                                               │
+│  │ Conclusion  │                                               │
+│  │   Module    │                                               │
+│  └─────────────┘                                               │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-### 2. RiskAssessmentStructure
-```
-Modules: Thinking + Analysis + RiskTable (SHARED!) + Conclusion
-Output:  Risk-focused analysis with 5-factor table
-```
-
-### 3. ComparisonStructure
-```
-Modules: Thinking + Analysis + TableModule + Conclusion
-Output:  Side-by-side comparison table + winner card
-```
-
-### 4. SearchStructure
-```
-Modules: Thinking + DirectAnswer + ResultsTable + Analysis + Conclusion
-Output:  Search results with match scores
-```
-
-### 5. RankingStructure
-```
-Modules: Thinking + RankingCriteria + RankingTable + TopPick + Conclusion
-Output:  Ordered ranking with #1 highlighted
-```
-
-### 6. JobMatchStructure
-```
-Modules: Thinking + Requirements + MatchScore + GapAnalysis + Conclusion
-Output:  Match percentages + requirements breakdown
-```
-
-### 7. TeamBuildStructure
-```
-Modules: Thinking + TeamRequirements + TeamComposition + SkillCoverage + TeamRisk + Conclusion
-Output:  Team assignments + skill coverage + risks
-```
-
-### 8. VerificationStructure
-```
-Modules: Thinking + Claim + Evidence + Verdict + Conclusion
-Output:  Verification result (CONFIRMED/PARTIAL/NOT_FOUND)
-```
-
-### 9. SummaryStructure
-```
-Modules: Thinking + TalentPool + SkillDistribution + ExperienceDistribution + Conclusion
-Output:  Pool statistics + distributions
-```
+**Modules Used (7):**
+| Module | Purpose | Output |
+|--------|---------|--------|
+| ThinkingModule | Extract reasoning | `:::thinking` block |
+| HighlightsModule | Key candidate info | Table with category/value |
+| CareerModule | Career trajectory | Timeline of positions |
+| SkillsModule | Skills snapshot | Categorized skills table |
+| CredentialsModule | Certifications/education | Credentials list |
+| RiskTableModule | Risk assessment | 5-factor risk table |
+| ConclusionModule | Final assessment | `:::conclusion` block |
 
 ---
 
-## Module Reusability Map
+### 2. RiskAssessmentStructure
+**File:** `structures/risk_assessment_structure.py`  
+**Query Examples:** "give me risks about X", "red flags for X", "any concerns about X"
 
 ```
-                        ┌─────────────────┐
-                        │ ThinkingModule  │──────► ALL 9 STRUCTURES
-                        └─────────────────┘
-
-                        ┌─────────────────┐
-                        │ConclusionModule │──────► ALL 9 STRUCTURES
-                        └─────────────────┘
-
-                        ┌─────────────────┐
-                        │ RiskTableModule │
-                        └────────┬────────┘
-              ┌──────────────────┴──────────────────┐
-              │                                     │
-              ▼                                     ▼
-       SingleCandidate                      RiskAssessment
-          Structure                           Structure
-
-                        ┌─────────────────┐
-                        │ AnalysisModule  │
-                        └────────┬────────┘
-    ┌────────────┬───────────────┼───────────────┬────────────┐
-    │            │               │               │            │
-    ▼            ▼               ▼               ▼            ▼
- Search      Ranking         JobMatch       TeamBuild    Comparison
+┌─────────────────────────────────────────────────────────────────┐
+│                   RiskAssessmentStructure                        │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌──────────────┐  ┌─────────────┐            │
+│  │  Thinking   │  │  RiskTable   │ ◄─ SHARED     │ Conclusion  │
+│  │   Module    │  │    Module    │  MODULE       │   Module    │
+│  └─────────────┘  └──────────────┘  └─────────────┘            │
+└─────────────────────────────────────────────────────────────────┘
 ```
+
+**Modules Used (3):**
+| Module | Purpose | Output |
+|--------|---------|--------|
+| ThinkingModule | Extract reasoning | `:::thinking` block |
+| RiskTableModule | Risk assessment | 5-factor risk table (REUSED) |
+| ConclusionModule | Final assessment | Assessment text |
+
+---
+
+### 3. ComparisonStructure
+**File:** `structures/comparison_structure.py`  
+**Query Examples:** "compare X and Y", "X vs Y", "difference between X and Y"
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                     ComparisonStructure                          │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌──────────────┐  ┌─────────────┐            │
+│  │  Thinking   │  │   Analysis   │ ◄─ SHARED     │   Table     │
+│  │   Module    │  │    Module    │  MODULE       │   Module    │
+│  └─────────────┘  └──────────────┘  └─────────────┘            │
+│  ┌─────────────┐                                               │
+│  │ Conclusion  │ ◄─ SHARED MODULE                              │
+│  │   Module    │                                               │
+│  └─────────────┘                                               │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Modules Used (4):**
+| Module | Purpose | Output |
+|--------|---------|--------|
+| ThinkingModule | Extract reasoning | `:::thinking` block |
+| AnalysisModule | Comparison analysis | Analysis text (REUSED) |
+| TableModule | Candidate comparison table | Side-by-side table |
+| ConclusionModule | Winner recommendation | `:::conclusion` block |
+
+---
+
+### 4. SearchStructure
+**File:** `structures/search_structure.py`  
+**Query Examples:** "who has Python experience", "find candidates with React", "show me backend developers"
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                       SearchStructure                            │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌──────────────┐  ┌──────────────┐           │
+│  │  Thinking   │  │DirectAnswer  │  │   Analysis   │ ◄─ SHARED │
+│  │   Module    │  │   Module     │  │    Module    │           │
+│  └─────────────┘  └──────────────┘  └──────────────┘           │
+│  ┌──────────────┐ ┌─────────────┐                              │
+│  │ ResultsTable │ │ Conclusion  │ ◄─ SHARED MODULE             │
+│  │    Module    │ │   Module    │                              │
+│  └──────────────┘ └─────────────┘                              │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Modules Used (5):**
+| Module | Purpose | Output |
+|--------|---------|--------|
+| ThinkingModule | Extract reasoning | `:::thinking` block |
+| DirectAnswerModule | Quick answer | Direct response text |
+| AnalysisModule | Search analysis | Analysis text (REUSED) |
+| ResultsTableModule | Search results | Results with scores |
+| ConclusionModule | Summary | `:::conclusion` block |
+
+---
+
+### 5. RankingStructure
+**File:** `structures/ranking_structure.py`  
+**Query Examples:** "top 5 candidates for backend", "rank candidates for leadership", "best candidates for senior developer"
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                       RankingStructure                           │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌──────────────┐  ┌──────────────┐           │
+│  │  Thinking   │  │   Analysis   │ ◄─ SHARED      │ Ranking    │
+│  │   Module    │  │    Module    │  MODULE        │ Criteria   │
+│  └─────────────┘  └──────────────┘  └──────────────┘           │
+│  ┌──────────────┐ ┌──────────────┐ ┌─────────────┐             │
+│  │ RankingTable │ │   TopPick    │ │ Conclusion  │ ◄─ SHARED   │
+│  │    Module    │ │    Module    │ │   Module    │             │
+│  └──────────────┘ └──────────────┘ └─────────────┘             │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Modules Used (6):**
+| Module | Purpose | Output |
+|--------|---------|--------|
+| ThinkingModule | Extract reasoning | `:::thinking` block |
+| AnalysisModule | Ranking analysis | Analysis text (REUSED) |
+| RankingCriteriaModule | Define criteria | Criteria with weights |
+| RankingTableModule | Ranked candidates | Ordered table with scores |
+| TopPickModule | #1 recommendation | Top pick card with justification |
+| ConclusionModule | Final recommendation | `:::conclusion` block |
+
+---
+
+### 6. JobMatchStructure
+**File:** `structures/job_match_structure.py`  
+**Query Examples:** "match candidates to this JD", "who fits this role", "evaluate against these requirements"
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                       JobMatchStructure                          │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌──────────────┐  ┌──────────────┐           │
+│  │  Thinking   │  │   Analysis   │ ◄─ SHARED      │Requirements│
+│  │   Module    │  │    Module    │  MODULE        │  Module    │
+│  └─────────────┘  └──────────────┘  └──────────────┘           │
+│  ┌──────────────┐ ┌──────────────┐ ┌─────────────┐             │
+│  │ MatchScore   │ │ GapAnalysis  │ │ Conclusion  │ ◄─ SHARED   │
+│  │    Module    │ │    Module    │ │   Module    │             │
+│  └──────────────┘ └──────────────┘ └─────────────┘             │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Modules Used (6):**
+| Module | Purpose | Output |
+|--------|---------|--------|
+| ThinkingModule | Extract reasoning | `:::thinking` block |
+| AnalysisModule | Match analysis | Analysis text (REUSED) |
+| RequirementsModule | JD requirements | Parsed requirements list |
+| MatchScoreModule | Calculate match % | Match scores per candidate |
+| GapAnalysisModule | Identify gaps | Skills/experience gaps |
+| ConclusionModule | Best match | `:::conclusion` block |
+
+---
+
+### 7. TeamBuildStructure
+**File:** `structures/team_build_structure.py`  
+**Query Examples:** "build a team of 3 developers", "form a project team", "assemble a team for this project"
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                       TeamBuildStructure                         │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌──────────────┐  ┌───────────────┐          │
+│  │  Thinking   │  │   Analysis   │ ◄─ SHARED       │   Team    │
+│  │   Module    │  │    Module    │  MODULE         │Requirements│
+│  └─────────────┘  └──────────────┘  └───────────────┘          │
+│  ┌───────────────┐ ┌──────────────┐ ┌──────────────┐           │
+│  │    Team       │ │    Skill     │ │   TeamRisk   │           │
+│  │  Composition  │ │   Coverage   │ │    Module    │           │
+│  └───────────────┘ └──────────────┘ └──────────────┘           │
+│  ┌─────────────┐                                               │
+│  │ Conclusion  │ ◄─ SHARED MODULE                              │
+│  │   Module    │                                               │
+│  └─────────────┘                                               │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Modules Used (7):**
+| Module | Purpose | Output |
+|--------|---------|--------|
+| ThinkingModule | Extract reasoning | `:::thinking` block |
+| AnalysisModule | Team analysis | Analysis text (REUSED) |
+| TeamRequirementsModule | Define team roles | Role definitions |
+| TeamCompositionModule | Assign candidates | Role → Candidate mapping |
+| SkillCoverageModule | Coverage analysis | Team skill coverage % |
+| TeamRiskModule | Team risks | Potential team issues |
+| ConclusionModule | Team recommendation | `:::conclusion` block |
+
+---
+
+### 8. VerificationStructure
+**File:** `structures/verification_structure.py`  
+**Query Examples:** "verify if X has AWS certification", "confirm X worked at Google", "check if X has 5 years experience"
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                     VerificationStructure                        │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌──────────────┐  ┌──────────────┐           │
+│  │  Thinking   │  │    Claim     │  │   Evidence   │           │
+│  │   Module    │  │    Module    │  │    Module    │           │
+│  └─────────────┘  └──────────────┘  └──────────────┘           │
+│  ┌──────────────┐ ┌─────────────┐                              │
+│  │   Verdict    │ │ Conclusion  │ ◄─ SHARED MODULE             │
+│  │    Module    │ │   Module    │                              │
+│  └──────────────┘ └─────────────┘                              │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Modules Used (5):**
+| Module | Purpose | Output |
+|--------|---------|--------|
+| ThinkingModule | Extract reasoning | `:::thinking` block |
+| ClaimModule | Parse claim | Claim subject/predicate |
+| EvidenceModule | Find evidence | Supporting/contradicting evidence |
+| VerdictModule | Issue verdict | CONFIRMED/PARTIAL/NOT_FOUND |
+| ConclusionModule | Final verdict | `:::conclusion` block |
+
+---
+
+### 9. SummaryStructure
+**File:** `structures/summary_structure.py`  
+**Query Examples:** "overview of all candidates", "talent pool summary", "summarize the candidates"
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                       SummaryStructure                           │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌──────────────┐  ┌───────────────┐          │
+│  │  Thinking   │  │  TalentPool  │  │    Skill      │          │
+│  │   Module    │  │    Module    │  │ Distribution  │          │
+│  └─────────────┘  └──────────────┘  └───────────────┘          │
+│  ┌───────────────┐ ┌─────────────┐                             │
+│  │  Experience   │ │ Conclusion  │ ◄─ SHARED MODULE            │
+│  │ Distribution  │ │   Module    │                             │
+│  └───────────────┘ └─────────────┘                             │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Modules Used (5):**
+| Module | Purpose | Output |
+|--------|---------|--------|
+| ThinkingModule | Extract reasoning | `:::thinking` block |
+| TalentPoolModule | Pool statistics | Total, avg experience, etc. |
+| SkillDistributionModule | Skill breakdown | Skills by frequency |
+| ExperienceDistributionModule | Experience breakdown | Experience levels |
+| ConclusionModule | Pool assessment | `:::conclusion` block |
+
+---
+
+## 📦 Complete Module Inventory (29 Modules)
+
+### Core Modules (Used by Most Structures)
+
+| # | Module | File | Used By | Purpose |
+|---|--------|------|---------|---------|
+| 1 | **ThinkingModule** | `thinking_module.py` | ALL 9 | Extract `:::thinking` reasoning blocks |
+| 2 | **ConclusionModule** | `conclusion_module.py` | ALL 9 | Extract `:::conclusion` final assessment |
+| 3 | **AnalysisModule** | `analysis_module.py` | 6 structures | Extract analysis text between sections |
+| 4 | **DirectAnswerModule** | `direct_answer_module.py` | Search | Extract direct response to query |
+
+### Profile Modules (SingleCandidateStructure)
+
+| # | Module | File | Purpose |
+|---|--------|------|---------|
+| 5 | **HighlightsModule** | `highlights_module.py` | Key candidate info table |
+| 6 | **CareerModule** | `career_module.py` | Career trajectory timeline |
+| 7 | **SkillsModule** | `skills_module.py` | Categorized skills snapshot |
+| 8 | **CredentialsModule** | `credentials_module.py` | Certifications & education |
+
+### Table/Ranking Modules
+
+| # | Module | File | Used By | Purpose |
+|---|--------|------|---------|---------|
+| 9 | **TableModule** | `table_module.py` | Comparison | Candidate comparison table |
+| 10 | **ResultsTableModule** | `results_table_module.py` | Search | Search results table |
+| 11 | **RankingTableModule** | `ranking_table_module.py` | Ranking | Ranked candidates table |
+| 12 | **RankingCriteriaModule** | `ranking_criteria_module.py` | Ranking | Extract/define ranking criteria |
+| 13 | **TopPickModule** | `top_pick_module.py` | Ranking | #1 candidate recommendation |
+
+### Risk Modules
+
+| # | Module | File | Used By | Purpose |
+|---|--------|------|---------|---------|
+| 14 | **RiskTableModule** | `risk_table_module.py` | SingleCandidate, RiskAssessment | 5-factor risk assessment table |
+| 15 | **RedFlagsModule** | `red_flags_module.py` | Legacy/Fallback | Red flags detection |
+| 16 | **TimelineModule** | `timeline_module.py` | Legacy/Fallback | Career timeline analysis |
+
+### Job Match Modules
+
+| # | Module | File | Purpose |
+|---|--------|------|---------|
+| 17 | **RequirementsModule** | `requirements_module.py` | Parse job description requirements |
+| 18 | **MatchScoreModule** | `match_score_module.py` | Calculate match percentages |
+| 19 | **GapAnalysisModule** | `gap_analysis_module.py` | Identify skill/experience gaps |
+
+### Team Build Modules
+
+| # | Module | File | Purpose |
+|---|--------|------|---------|
+| 20 | **TeamRequirementsModule** | `team_requirements_module.py` | Define team role requirements |
+| 21 | **TeamCompositionModule** | `team_composition_module.py` | Assign candidates to roles |
+| 22 | **SkillCoverageModule** | `skill_coverage_module.py` | Analyze team skill coverage |
+| 23 | **TeamRiskModule** | `team_risk_module.py` | Identify team risks |
+
+### Verification Modules
+
+| # | Module | File | Purpose |
+|---|--------|------|---------|
+| 24 | **ClaimModule** | `claim_module.py` | Parse verification claim |
+| 25 | **EvidenceModule** | `evidence_module.py` | Find supporting/contradicting evidence |
+| 26 | **VerdictModule** | `verdict_module.py` | Issue CONFIRMED/PARTIAL/NOT_FOUND |
+
+### Summary Modules
+
+| # | Module | File | Purpose |
+|---|--------|------|---------|
+| 27 | **TalentPoolModule** | `talent_pool_module.py` | Pool statistics |
+| 28 | **SkillDistributionModule** | `skill_distribution_module.py` | Skill frequency analysis |
+| 29 | **ExperienceDistributionModule** | `experience_distribution_module.py` | Experience level distribution |
+
+---
+
+## 🔄 Module Reusability Map
+
+```
+                           ┌─────────────────┐
+                           │ ThinkingModule  │──────────────► ALL 9 STRUCTURES
+                           └─────────────────┘
+
+                           ┌─────────────────┐
+                           │ConclusionModule │──────────────► ALL 9 STRUCTURES
+                           └─────────────────┘
+
+                           ┌─────────────────┐
+                           │ AnalysisModule  │
+                           └────────┬────────┘
+    ┌────────────┬─────────────────┼─────────────────┬────────────┐
+    │            │                 │                 │            │
+    ▼            ▼                 ▼                 ▼            ▼
+ Search      Ranking           JobMatch         TeamBuild    Comparison
+Structure   Structure         Structure        Structure    Structure
+
+                           ┌─────────────────┐
+                           │ RiskTableModule │
+                           └────────┬────────┘
+              ┌─────────────────────┴─────────────────────┐
+              │                                           │
+              ▼                                           ▼
+    SingleCandidateStructure                   RiskAssessmentStructure
+```
+
+### Module Usage Matrix
+
+| Module | Single | Risk | Compare | Search | Rank | JobMatch | Team | Verify | Summary |
+|--------|:------:|:----:|:-------:|:------:|:----:|:--------:|:----:|:------:|:-------:|
+| ThinkingModule | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| ConclusionModule | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| AnalysisModule | - | - | ✅ | ✅ | ✅ | ✅ | ✅ | - | - |
+| RiskTableModule | ✅ | ✅ | - | - | - | - | - | - | - |
+| HighlightsModule | ✅ | - | - | - | - | - | - | - | - |
+| CareerModule | ✅ | - | - | - | - | - | - | - | - |
+| SkillsModule | ✅ | - | - | - | - | - | - | - | - |
+| CredentialsModule | ✅ | - | - | - | - | - | - | - | - |
+| TableModule | - | - | ✅ | - | - | - | - | - | - |
+| ResultsTableModule | - | - | - | ✅ | - | - | - | - | - |
+| DirectAnswerModule | - | - | - | ✅ | - | - | - | - | - |
+| RankingTableModule | - | - | - | - | ✅ | - | - | - | - |
+| RankingCriteriaModule | - | - | - | - | ✅ | - | - | - | - |
+| TopPickModule | - | - | - | - | ✅ | - | - | - | - |
+| RequirementsModule | - | - | - | - | - | ✅ | - | - | - |
+| MatchScoreModule | - | - | - | - | - | ✅ | - | - | - |
+| GapAnalysisModule | - | - | - | - | - | ✅ | - | - | - |
+| TeamRequirementsModule | - | - | - | - | - | - | ✅ | - | - |
+| TeamCompositionModule | - | - | - | - | - | - | ✅ | - | - |
+| SkillCoverageModule | - | - | - | - | - | - | ✅ | - | - |
+| TeamRiskModule | - | - | - | - | - | - | ✅ | - | - |
+| ClaimModule | - | - | - | - | - | - | - | ✅ | - |
+| EvidenceModule | - | - | - | - | - | - | - | ✅ | - |
+| VerdictModule | - | - | - | - | - | - | - | ✅ | - |
+| TalentPoolModule | - | - | - | - | - | - | - | - | ✅ |
+| SkillDistributionModule | - | - | - | - | - | - | - | - | ✅ |
+| ExperienceDistributionModule | - | - | - | - | - | - | - | - | ✅ |
 
 ### Key Concept: Module Reuse
 
