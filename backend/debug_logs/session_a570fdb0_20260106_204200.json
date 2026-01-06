@@ -1,0 +1,1960 @@
+{
+  "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e",
+  "generated_at": "2026-01-06T20:42:00.057724",
+  "events": [
+    {
+      "timestamp": "2026-01-06T20:36:01.991798",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:36:01.991798",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Job stability analysis for Pierre Dubois Tutor",
+        "cv_ids": [
+          "cv_b0c609e3",
+          "cv_8e0ce868",
+          "cv_6b20e01c",
+          "cv_1d56ed8d",
+          "cv_f7eee0fe",
+          "cv_dc239d26",
+          "cv_f0447b07",
+          "cv_caa08878",
+          "cv_aa3cde72",
+          "cv_6268602e",
+          "cv_6bcc8c77",
+          "cv_0856582a",
+          "cv_37489ff8",
+          "cv_e00e97d4",
+          "cv_417c5872"
+        ],
+        "cv_count": 15
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:36:06.179080",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 27,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_b0c609e3",
+            "candidate_name": " Hana Park  Vice",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.811124214918077,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_f0447b07",
+            "candidate_name": " Kwame van der Berg  Academic",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7967605335890413,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_aa3cde72",
+            "candidate_name": " Valentina Fernandez  Teaching",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7907505610834432,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_6b20e01c",
+            "candidate_name": " Pierre Dubois ",
+            "section_type": "summary",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.6642504528527883,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_e00e97d4",
+            "candidate_name": " Javier Chen ",
+            "section_type": "experience",
+            "job_hopping_score": 0.09090909090909091,
+            "avg_tenure_years": 5.5,
+            "total_experience_years": 6.0,
+            "score": 0.5973406069377905,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_dc239d26",
+            "candidate_name": " Farid Al-Mansoori ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7927195917542949,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_6b20e01c",
+            "candidate_name": " Pierre Dubois ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.7855715734721177,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_6bcc8c77",
+            "candidate_name": " Sofia Rodriguez ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "score": 0.7908158549498505,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_f7eee0fe",
+            "candidate_name": " Erik Johansson  Teacher",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7872768018464694,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_0856582a",
+            "candidate_name": " Layla Al-Mansoor  Assistant",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7792604919895995,
+            "has_enriched_metadata": false
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:36:19.940895",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "SINGLE_CANDIDATE_TEMPLATE",
+        "candidate_name": " Pierre Dubois ",
+        "detection_method": "explicit_name_in_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:36:25.744784",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "single_candidate",
+        "candidate_name": " Pierre Dubois ",
+        "detection_source": "single_candidate_detection",
+        "detection_method": "explicit_name_in_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:36:25.849051",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1355,
+        "answer_preview": ":::thinking\nThe user is asking for a job stability analysis of Pierre Dubois (cv_6b20e01c). I need to extract his current role, total experience, career trajectory, skills, credentials, and risk assessment from the provided CVs. I will focus on job hopping, employment gaps, and overall stability.\n:::\n\nPierre Dubois is currently the Head of Tutoring Services at Global Learning Hub (2020-Present), where he strategically leads a multinational tutoring network. With over 25 years of experience in ed...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:36:58.422831",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:36:58.422831",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Who has experience with Python?",
+        "cv_ids": [
+          "cv_b0c609e3",
+          "cv_8e0ce868",
+          "cv_6b20e01c",
+          "cv_1d56ed8d",
+          "cv_f7eee0fe",
+          "cv_dc239d26",
+          "cv_f0447b07",
+          "cv_caa08878",
+          "cv_aa3cde72",
+          "cv_6268602e",
+          "cv_6bcc8c77",
+          "cv_0856582a",
+          "cv_37489ff8",
+          "cv_e00e97d4",
+          "cv_417c5872"
+        ],
+        "cv_count": 15
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:37:00.680222",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 21,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_f7eee0fe",
+            "candidate_name": " Erik Johansson  Teacher",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7602201002854173,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_e00e97d4",
+            "candidate_name": " Javier Chen ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.09090909090909091,
+            "avg_tenure_years": 5.5,
+            "total_experience_years": 6.0,
+            "score": 0.7727686849443178,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_b0c609e3",
+            "candidate_name": " Hana Park  Vice",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7387737464260087,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_6268602e",
+            "candidate_name": " Isabella Vargas  ESL",
+            "section_type": "skills",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.7398844889963336,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_0856582a",
+            "candidate_name": " Layla Al-Mansoor  Assistant",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7330315054942701,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_dc239d26",
+            "candidate_name": " Farid Al-Mansoori ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7568110206744125,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_dc239d26",
+            "candidate_name": " Farid Al-Mansoori ",
+            "section_type": "skills",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5424589267381773,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_37489ff8",
+            "candidate_name": " Priya Patel  Career",
+            "section_type": "experience",
+            "job_hopping_score": 0.35294117647058826,
+            "avg_tenure_years": 2.4285714285714284,
+            "total_experience_years": 17.0,
+            "score": 0.4704919364315309,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_f0447b07",
+            "candidate_name": " Kwame van der Berg  Academic",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.4963008533968835,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_6bcc8c77",
+            "candidate_name": " Sofia Rodriguez ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "score": 0.7510899633905112,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:37:21.478858",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:37:24.393158",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "search",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:37:24.571562",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 396,
+        "answer_preview": ":::thinking\nThe user is asking for candidates with Python experience. I need to scan the CVs for explicit mentions of \"Python\" and rank candidates based on the context of its use (e.g., programming, scripting, data analysis). I will provide the top 3 candidates.\n:::\n\n\n:::conclusion\nI recommend **[Rajiv Patel](cv:cv_417c5872)** as the only candidate with explicitly stated Python experience.\n:::",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:37:46.630815",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:37:46.630815",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "How many years of experience do they have with Python?",
+        "cv_ids": [
+          "cv_b0c609e3",
+          "cv_8e0ce868",
+          "cv_6b20e01c",
+          "cv_1d56ed8d",
+          "cv_f7eee0fe",
+          "cv_dc239d26",
+          "cv_f0447b07",
+          "cv_caa08878",
+          "cv_aa3cde72",
+          "cv_6268602e",
+          "cv_6bcc8c77",
+          "cv_0856582a",
+          "cv_37489ff8",
+          "cv_e00e97d4",
+          "cv_417c5872"
+        ],
+        "cv_count": 15
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:37:49.934187",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 24,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_6bcc8c77",
+            "candidate_name": " Sofia Rodriguez ",
+            "section_type": "experience",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "score": 0.628097075942083,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_417c5872",
+            "candidate_name": " Rajiv Patel ",
+            "section_type": "experience",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 11.0,
+            "score": 0.761731880807587,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_f0447b07",
+            "candidate_name": " Kwame van der Berg  Academic",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5865677385474731,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_dc239d26",
+            "candidate_name": " Farid Al-Mansoori ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7741049636948676,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_0856582a",
+            "candidate_name": " Layla Al-Mansoor  Assistant",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7552398415106804,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_f7eee0fe",
+            "candidate_name": " Erik Johansson  Teacher",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7662379214472973,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_e00e97d4",
+            "candidate_name": " Javier Chen ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.09090909090909091,
+            "avg_tenure_years": 5.5,
+            "total_experience_years": 6.0,
+            "score": 0.7860209682012598,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_37489ff8",
+            "candidate_name": " Priya Patel  Career",
+            "section_type": "experience",
+            "job_hopping_score": 0.35294117647058826,
+            "avg_tenure_years": 2.4285714285714284,
+            "total_experience_years": 17.0,
+            "score": 0.7521526203116309,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_6b20e01c",
+            "candidate_name": " Pierre Dubois ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.7704844772371626,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_aa3cde72",
+            "candidate_name": " Valentina Fernandez  Teaching",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.761028878325418,
+            "has_enriched_metadata": false
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "location",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:38:01.819633",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:38:04.868667",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "summary",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:38:04.964261",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 468,
+        "answer_preview": ":::thinking\nThe user is asking how many years of experience the candidates have with Python. I need to scan the CVs for explicit mentions of \"Python\" and the duration of that experience. If the duration isn't explicitly stated, I'll look for project durations or job tenures where Python was used.\n:::\n\n\n:::conclusion\nI recommend **[Rajiv Patel](cv:cv_417c5872)** as the only candidate with explicitly stated Python experience, within the context of a 2-year role.\n:::",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:38:31.298425",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:38:31.298425",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Show candidates with Python",
+        "cv_ids": [
+          "cv_b0c609e3",
+          "cv_8e0ce868",
+          "cv_6b20e01c",
+          "cv_1d56ed8d",
+          "cv_f7eee0fe",
+          "cv_dc239d26",
+          "cv_f0447b07",
+          "cv_caa08878",
+          "cv_aa3cde72",
+          "cv_6268602e",
+          "cv_6bcc8c77",
+          "cv_0856582a",
+          "cv_37489ff8",
+          "cv_e00e97d4",
+          "cv_417c5872"
+        ],
+        "cv_count": 15
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:38:33.928033",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 24,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_dc239d26",
+            "candidate_name": " Farid Al-Mansoori ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.8048795734783627,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_f7eee0fe",
+            "candidate_name": " Erik Johansson  Teacher",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.8138893350266162,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_6268602e",
+            "candidate_name": " Isabella Vargas  ESL",
+            "section_type": "skills",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.4607790526574817,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_b0c609e3",
+            "candidate_name": " Hana Park  Vice",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7842456353484626,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_e00e97d4",
+            "candidate_name": " Javier Chen ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.09090909090909091,
+            "avg_tenure_years": 5.5,
+            "total_experience_years": 6.0,
+            "score": 0.8232384442084343,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_37489ff8",
+            "candidate_name": " Priya Patel  Career",
+            "section_type": "experience",
+            "job_hopping_score": 0.35294117647058826,
+            "avg_tenure_years": 2.4285714285714284,
+            "total_experience_years": 17.0,
+            "score": 0.4647499186160661,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_6bcc8c77",
+            "candidate_name": " Sofia Rodriguez ",
+            "section_type": "experience",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "score": 0.45640470396651117,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_1d56ed8d",
+            "candidate_name": " Rajesh Kumar  ESL",
+            "section_type": "skills",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.45320358016599127,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_417c5872",
+            "candidate_name": " Rajiv Patel ",
+            "section_type": "experience",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 11.0,
+            "score": 0.4582847189154183,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_aa3cde72",
+            "candidate_name": " Valentina Fernandez  Teaching",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.8100493173944585,
+            "has_enriched_metadata": false
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:38:42.323881",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:38:47.009540",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "search",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:38:47.104440",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 579,
+        "answer_preview": ":::thinking\nThe user is asking for candidates with Python experience. I need to scan the CVs for explicit mentions of \"Python\" and rank candidates based on the context of its use (e.g., programming, scripting, data analysis). I will provide the top 3 candidates.\n:::\n\n\n:::conclusion\nI recommend **[Rajiv Patel](cv:cv_417c5872)** as the only candidate with explicitly stated Python experience. **[Farid Al-Mansoori](cv:cv_dc239d26)** and **[Erik Johansson Teacher](cv:cv_f7eee0fe)** are included to fu...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:38:55.574937",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:38:55.574937",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Does anyone have certifications in Python?",
+        "cv_ids": [
+          "cv_b0c609e3",
+          "cv_8e0ce868",
+          "cv_6b20e01c",
+          "cv_1d56ed8d",
+          "cv_f7eee0fe",
+          "cv_dc239d26",
+          "cv_f0447b07",
+          "cv_caa08878",
+          "cv_aa3cde72",
+          "cv_6268602e",
+          "cv_6bcc8c77",
+          "cv_0856582a",
+          "cv_37489ff8",
+          "cv_e00e97d4",
+          "cv_417c5872"
+        ],
+        "cv_count": 15
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:38:58.698745",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 23,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_e00e97d4",
+            "candidate_name": " Javier Chen ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.09090909090909091,
+            "avg_tenure_years": 5.5,
+            "total_experience_years": 6.0,
+            "score": 0.8059268669936444,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_417c5872",
+            "candidate_name": " Rajiv Patel ",
+            "section_type": "experience",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 11.0,
+            "score": 0.5161709920199667,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_dc239d26",
+            "candidate_name": " Farid Al-Mansoori ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7970551464800001,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_aa3cde72",
+            "candidate_name": " Valentina Fernandez  Teaching",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7946115373401655,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_6bcc8c77",
+            "candidate_name": " Sofia Rodriguez ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "score": 0.7876265257941931,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_b0c609e3",
+            "candidate_name": " Hana Park  Vice",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7790939524058318,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_37489ff8",
+            "candidate_name": " Priya Patel  Career",
+            "section_type": "experience",
+            "job_hopping_score": 0.35294117647058826,
+            "avg_tenure_years": 2.4285714285714284,
+            "total_experience_years": 17.0,
+            "score": 0.5466191950096594,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_f7eee0fe",
+            "candidate_name": " Erik Johansson  Teacher",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7929864947447566,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_f0447b07",
+            "candidate_name": " Kwame van der Berg  Academic",
+            "section_type": "experience",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.491308521738167,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_0856582a",
+            "candidate_name": " Layla Al-Mansoor  Assistant",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7854415657981926,
+            "has_enriched_metadata": false
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:39:10.076210",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:39:13.174300",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "search",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:39:13.273450",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 571,
+        "answer_preview": ":::thinking\nThe user is asking for candidates with certifications in Python. I need to scan the CVs for explicit mentions of \"Python\" and \"certification\". I will provide the top 3 candidates.\n:::\n\n\n:::conclusion\nI recommend **[Rajiv Patel](cv:cv_417c5872)** as the only candidate with explicitly stated Python experience, but they do not have a Python certification. **[Farid Al-Mansoori](cv:cv_dc239d26)** and **[Erik Johansson Teacher](cv:cv_f7eee0fe)** are included to fulfill the request for 3 ca...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:39:24.743744",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:39:24.743744",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Are there candidates with startup experience?",
+        "cv_ids": [
+          "cv_b0c609e3",
+          "cv_8e0ce868",
+          "cv_6b20e01c",
+          "cv_1d56ed8d",
+          "cv_f7eee0fe",
+          "cv_dc239d26",
+          "cv_f0447b07",
+          "cv_caa08878",
+          "cv_aa3cde72",
+          "cv_6268602e",
+          "cv_6bcc8c77",
+          "cv_0856582a",
+          "cv_37489ff8",
+          "cv_e00e97d4",
+          "cv_417c5872"
+        ],
+        "cv_count": 15
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:39:28.146178",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 16,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_37489ff8",
+            "candidate_name": " Priya Patel  Career",
+            "section_type": "experience",
+            "job_hopping_score": 0.35294117647058826,
+            "avg_tenure_years": 2.4285714285714284,
+            "total_experience_years": 17.0,
+            "score": 0.7892823770546421,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_6b20e01c",
+            "candidate_name": " Pierre Dubois ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.8227361361807106,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_aa3cde72",
+            "candidate_name": " Valentina Fernandez  Teaching",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.786655963478176,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_dc239d26",
+            "candidate_name": " Farid Al-Mansoori ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7715054380602341,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_417c5872",
+            "candidate_name": " Rajiv Patel ",
+            "section_type": "experience",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 11.0,
+            "score": 0.7823450935354014,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_b0c609e3",
+            "candidate_name": " Hana Park  Vice",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7945950532155063,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_6268602e",
+            "candidate_name": " Isabella Vargas  ESL",
+            "section_type": "skills",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.772139314231858,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_f0447b07",
+            "candidate_name": " Kwame van der Berg  Academic",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5210096739338226,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_f7eee0fe",
+            "candidate_name": " Erik Johansson  Teacher",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5513736226861098,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_e00e97d4",
+            "candidate_name": " Javier Chen ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.09090909090909091,
+            "avg_tenure_years": 5.5,
+            "total_experience_years": 6.0,
+            "score": 0.5359263565954443,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "location",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:39:45.136686",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:39:50.364225",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "search",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:39:50.462375",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 529,
+        "answer_preview": ":::thinking\nThe user is asking for candidates with startup experience. I need to scan the CVs for mentions of \"startup\" or descriptions of roles at companies that are likely startups (e.g., newly founded, small team, rapid growth). I will provide the top 3 candidates.\n:::\n\n\n:::conclusion\nI recommend **[Priya Patel](cv:cv_37489ff8)**, **[Javier Chen](cv:cv_e00e97d4)**, and **[Aisha Hassan](cv:cv_caa08878)** as candidates whose experience in smaller or newer organizations suggests involvement in s...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:40:31.471811",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:40:31.471811",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Are there candidates with stability red flags?",
+        "cv_ids": [
+          "cv_b0c609e3",
+          "cv_8e0ce868",
+          "cv_6b20e01c",
+          "cv_1d56ed8d",
+          "cv_f7eee0fe",
+          "cv_dc239d26",
+          "cv_f0447b07",
+          "cv_caa08878",
+          "cv_aa3cde72",
+          "cv_6268602e",
+          "cv_6bcc8c77",
+          "cv_0856582a",
+          "cv_37489ff8",
+          "cv_e00e97d4",
+          "cv_417c5872"
+        ],
+        "cv_count": 15
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:40:34.790788",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 22,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_f0447b07",
+            "candidate_name": " Kwame van der Berg  Academic",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7928597469205995,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_b0c609e3",
+            "candidate_name": " Hana Park  Vice",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7835737391718255,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_6b20e01c",
+            "candidate_name": " Pierre Dubois ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.7907095480539241,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_f7eee0fe",
+            "candidate_name": " Erik Johansson  Teacher",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7900914845377291,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_dc239d26",
+            "candidate_name": " Farid Al-Mansoori ",
+            "section_type": "skills",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5772222741360817,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_caa08878",
+            "candidate_name": " Aisha Hassan  Substitute",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 1.0,
+            "score": 0.7638868658689458,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_6bcc8c77",
+            "candidate_name": " Sofia Rodriguez ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "score": 0.8078440167149352,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_aa3cde72",
+            "candidate_name": " Valentina Fernandez  Teaching",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7854982995796236,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_0856582a",
+            "candidate_name": " Layla Al-Mansoor  Assistant",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7792811860975498,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_417c5872",
+            "candidate_name": " Rajiv Patel ",
+            "section_type": "experience",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 11.0,
+            "score": 0.6239313142169223,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:40:58.241001",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:41:02.829043",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "red_flags",
+        "candidate_name": " Kwame van der Berg  Academic",
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:41:02.947219",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1273,
+        "answer_preview": ":::thinking\nThe user is asking for candidates with \"stability red flags.\" This is subjective, but in the context of a CV, it likely refers to frequent job changes or short tenures at previous positions. I will look for candidates with multiple jobs held for less than 2 years each. I will provide the top 3 candidates with the most frequent job changes.\n:::\n\n** Kwame van der Berg  Academic** shows a **moderate risk profile**. The job hopping score of 0% with an average tenure of 0.0 years suggests...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:41:27.530334",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:41:27.530868",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Who has fewer red flags?",
+        "cv_ids": [
+          "cv_b0c609e3",
+          "cv_8e0ce868",
+          "cv_6b20e01c",
+          "cv_1d56ed8d",
+          "cv_f7eee0fe",
+          "cv_dc239d26",
+          "cv_f0447b07",
+          "cv_caa08878",
+          "cv_aa3cde72",
+          "cv_6268602e",
+          "cv_6bcc8c77",
+          "cv_0856582a",
+          "cv_37489ff8",
+          "cv_e00e97d4",
+          "cv_417c5872"
+        ],
+        "cv_count": 15
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:41:30.191881",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 19,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_f7eee0fe",
+            "candidate_name": " Erik Johansson  Teacher",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.804315469866688,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_6bcc8c77",
+            "candidate_name": " Sofia Rodriguez ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "score": 0.8134258685714242,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_6b20e01c",
+            "candidate_name": " Pierre Dubois ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.7933433445918232,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_b0c609e3",
+            "candidate_name": " Hana Park  Vice",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7992040265142405,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_caa08878",
+            "candidate_name": " Aisha Hassan  Substitute",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 1.0,
+            "score": 0.7986335079062491,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_f0447b07",
+            "candidate_name": " Kwame van der Berg  Academic",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5001985239417289,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_6268602e",
+            "candidate_name": " Isabella Vargas  ESL",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.7740117726036055,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_aa3cde72",
+            "candidate_name": " Valentina Fernandez  Teaching",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7892612673667995,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_dc239d26",
+            "candidate_name": " Farid Al-Mansoori ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7909937512090456,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_e00e97d4",
+            "candidate_name": " Javier Chen ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.09090909090909091,
+            "avg_tenure_years": 5.5,
+            "total_experience_years": 6.0,
+            "score": 0.7781237270330769,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:41:55.288444",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:41:59.946571",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "red_flags",
+        "candidate_name": " Erik Johansson  Teacher",
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:42:00.055208",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1415,
+        "answer_preview": ":::thinking\nThe user is asking for candidates with fewer \"red flags\" related to job stability. This means I need to identify candidates with the most stable employment history, indicated by longer tenures at previous jobs and fewer instances of short-term employment. I will compare the candidates previously flagged for stability concerns and rank them based on the length of their employment at each position. I will provide the top 3 candidates with the fewest red flags.\n:::\n\n** Erik Johansson  T...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

@@ -565,7 +565,8 @@ class RiskTableModule:
     
     def _generate_analysis(self, data: RiskAssessmentData) -> str:
         """Generate human-readable analysis text based on the metrics."""
-        name = data.candidate_name
+        # Clean candidate name by removing markdown asterisks
+        name = data.candidate_name.strip('*').strip()
         score = data.job_hopping_score
         tenure = data.avg_tenure_years
         exp = data.total_experience_years

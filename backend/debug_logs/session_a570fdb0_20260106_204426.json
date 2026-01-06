@@ -1,0 +1,250 @@
+{
+  "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e",
+  "generated_at": "2026-01-06T20:44:26.067966",
+  "events": [
+    {
+      "timestamp": "2026-01-06T20:43:52.946889",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a570fdb0-fd14-4766-a26f-da4d2b3c278e"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:43:52.946889",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Who has fewer red flags?",
+        "cv_ids": [
+          "cv_b0c609e3",
+          "cv_8e0ce868",
+          "cv_6b20e01c",
+          "cv_1d56ed8d",
+          "cv_f7eee0fe",
+          "cv_dc239d26",
+          "cv_f0447b07",
+          "cv_caa08878",
+          "cv_aa3cde72",
+          "cv_6268602e",
+          "cv_6bcc8c77",
+          "cv_0856582a",
+          "cv_37489ff8",
+          "cv_e00e97d4",
+          "cv_417c5872"
+        ],
+        "cv_count": 15
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:43:55.930568",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 21,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_f7eee0fe",
+            "candidate_name": " Erik Johansson  Teacher",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7800926023757078,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_f0447b07",
+            "candidate_name": " Kwame van der Berg  Academic",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7836982948325969,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_b0c609e3",
+            "candidate_name": " Hana Park  Vice",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7889699507650708,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_caa08878",
+            "candidate_name": " Aisha Hassan  Substitute",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 1.0,
+            "score": 0.8035096039289655,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_6bcc8c77",
+            "candidate_name": " Sofia Rodriguez ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "score": 0.7944419745284259,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_6b20e01c",
+            "candidate_name": " Pierre Dubois ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.8072506172925354,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_dc239d26",
+            "candidate_name": " Farid Al-Mansoori ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7881934448265037,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_e00e97d4",
+            "candidate_name": " Javier Chen ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.09090909090909091,
+            "avg_tenure_years": 5.5,
+            "total_experience_years": 6.0,
+            "score": 0.788258964160763,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_0856582a",
+            "candidate_name": " Layla Al-Mansoor  Assistant",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7727132705305146,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_6268602e",
+            "candidate_name": " Isabella Vargas  ESL",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.49143086311910666,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:44:20.094986",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:44:25.963270",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "red_flags",
+        "candidate_name": " Erik Johansson  Teacher",
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-06T20:44:26.066924",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1495,
+        "answer_preview": ":::thinking\nThe user is asking for candidates with the fewest \"red flags\" related to job stability, following up on a previous query about candidates with stability red flags. This means I need to identify candidates with the most stable employment history, indicated by longer tenures at previous jobs and fewer instances of short-term employment. I will compare the candidates previously flagged for stability concerns and rank them based on the length of their employment at each position. I will ...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}
