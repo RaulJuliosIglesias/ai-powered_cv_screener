@@ -431,6 +431,7 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
           credentials={singleCandidateData.credentials}
           assessment={singleCandidateData.assessment}
           strengths={singleCandidateData.strengths}
+          riskAssessment={singleCandidateData.riskAssessment}
           onOpenCV={onOpenCV}
         />
       </div>

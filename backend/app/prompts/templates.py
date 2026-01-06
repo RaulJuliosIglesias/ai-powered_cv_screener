@@ -439,7 +439,7 @@ Su perfil demuestra una trayectoria profesional estable:
 
 ---
 
-### 📜 Credentials
+### Credentials
 
 [Only if present in CV]
 
@@ -448,28 +448,22 @@ Su perfil demuestra una trayectoria profesional estable:
 
 ---
 
-### Red Flags Analysis
+### Risk Assessment
 
-{red_flags_section}
-
----
-
-### Career Stability Metrics
-
-{stability_metrics_section}
+{risk_assessment_section}
 
 ---
 
 :::conclusion
-**Assessment:** [Summary based on their CURRENT role and full career trajectory]
+**Overall Assessment:** [Summary based on CURRENT role, career trajectory, and analysis modules above]
 
 **Key Strengths:**
 - [Strength from CURRENT role]
 - [Strength from skills/achievements]
-- [Strength from experience breadth]
+- [Strength from analysis modules - e.g., stable career, no gaps]
 
-**Potential Concerns:**
-[If red flags exist, list them. Otherwise: "No significant concerns identified."]
+**Areas to Explore:**
+[Based on analysis modules - if red flags exist, list them. Otherwise: "No significant concerns identified. Candidate appears to have a stable career trajectory."]
 :::
 
 ## VALIDATION CHECKLIST (Before responding)
@@ -1272,8 +1266,8 @@ class PromptBuilder:
         """
         ctx = format_context(chunks)
         
-        # Extract enriched metadata for red flags and stability analysis
-        red_flags_section, stability_section = self._extract_enriched_metadata(chunks)
+        # Extract enriched metadata for modular analysis sections
+        sections = self._extract_enriched_metadata(chunks)
         
         # Build conversation history section if available
         history_section = ""
@@ -1294,8 +1288,8 @@ class PromptBuilder:
                 cv_id=cv_id,
                 context=ctx.text,
                 question=question,
-                red_flags_section=red_flags_section,
-                stability_metrics_section=stability_section
+                red_flags_section=sections["red_flags"],
+                stability_metrics_section=sections["stability_metrics"]
             )
             log_event("TEMPLATE_SELECTION", {
                 "template": "RED_FLAGS_TEMPLATE",
@@ -1303,14 +1297,13 @@ class PromptBuilder:
                 "detection_method": "red_flags_query_detected"
             })
         else:
-            # Use standard SINGLE_CANDIDATE_TEMPLATE
+            # Use standard SINGLE_CANDIDATE_TEMPLATE with Risk Assessment data
             formatted_prompt = SINGLE_CANDIDATE_TEMPLATE.format(
                 candidate_name=candidate_name,
                 cv_id=cv_id,
                 context=ctx.text,
                 question=question,
-                red_flags_section=red_flags_section,
-                stability_metrics_section=stability_section
+                risk_assessment_section=sections["risk_assessment"]
             )
         
         # Prepend history if available
@@ -1320,17 +1313,8 @@ class PromptBuilder:
         return formatted_prompt
     
     def _is_red_flags_query(self, question: str) -> bool:
-        """
-        Detect if the user's question is specifically about red flags.
-        
-        Returns True if the query is asking about:
-        - Red flags / banderas rojas
-        - Concerns / problemas / issues
-        - Stability / estabilidad
-        - Job hopping / gaps
-        """
+        """Detect if the user's question is specifically about red flags."""
         question_lower = question.lower()
-        
         red_flags_keywords = [
             "red flag", "redflags", "red-flag",
             "bandera roja", "banderas rojas",
@@ -1341,133 +1325,77 @@ class PromptBuilder:
             "estabilidad", "stability", "inestabilidad", "unstable",
             "riesgo", "risk", "risky"
         ]
-        
         for keyword in red_flags_keywords:
             if keyword in question_lower:
                 return True
-        
         return False
     
-    def _extract_enriched_metadata(self, chunks: list[dict]) -> tuple[str, str]:
-        """
-        Extract enriched metadata from chunks for red flags and stability analysis.
-        
-        ================================================================
-        METADATA EXTRACTION POINT (READ BEFORE MODIFYING)
-        ================================================================
-        
-        This is where metadata from SmartChunkingService gets formatted
-        for the LLM prompt. The flow is:
-        
-        SmartChunkingService.chunk_cv() → metadata dict
-            ↓
-        rag_service_v5.py:_step_fusion_retrieval() → preserves ALL metadata
-            ↓
-        This function → extracts and formats for LLM
-        
-        TO ADD A NEW METADATA FIELD FOR LLM ANALYSIS:
-        ──────────────────────────────────────────────
-        1. First add it in SmartChunkingService.chunk_cv() metadata dict
-        2. Then extract it here with: new_field = meta.get("new_field")
-        3. Format it into red_flags_section or stability_section strings
-        4. Test: logs should show [ENRICHED_METADATA] with your field
-        
-        AVAILABLE FIELDS FROM SmartChunkingService:
-        ────────────────────────────────────────────
-        - job_hopping_score (float 0-1): Higher = more job changes
-        - avg_tenure_years (float): Average years per position
-        - total_experience_years (float): Total career experience
-        - position_count (int): Number of positions held
-        - employment_gaps_count (int): Gaps > 1 year between jobs
-        - current_role (str): Current job title
-        - current_company (str): Current employer
-        - section_type (str): Type of CV section
-        - candidate_name (str): Candidate's name
-        
-        ================================================================
-        
-        Returns:
-            Tuple of (red_flags_section, stability_metrics_section) as formatted strings
-        """
+    def _extract_enriched_metadata(self, chunks: list[dict]) -> dict[str, str]:
+        """Extract enriched metadata from chunks for Risk Assessment module."""
         import logging
         logger = logging.getLogger(__name__)
         
-        # Default sections if no metadata found
-        red_flags_section = "Analyze the CV for potential red flags:\n- Job hopping (frequent changes < 2 years)\n- Employment gaps > 1 year\n- Inconsistent career progression\n- Missing critical information"
-        stability_section = "Calculate from CV data:\n- Average tenure per position\n- Career stability score\n- Progression pattern (upward/lateral/downward)"
+        # Default values
+        sections = {
+            "risk_assessment": "| Factor | Status | Details |\n|--------|--------|---------||\n| Data | N/A | No pre-calculated metrics available |",
+            "red_flags": "**Status:** N/A",
+            "stability_metrics": "**Status:** N/A"
+        }
         
-        logger.info(f"[ENRICHED_METADATA] Processing {len(chunks)} chunks for metadata extraction")
-        
-        # Try to extract from chunk metadata
         for i, chunk in enumerate(chunks):
             meta = chunk.get("metadata", {})
-            
-            # Log all metadata keys for first chunk to debug
             if i == 0:
-                logger.info(f"[ENRICHED_METADATA] First chunk metadata keys: {list(meta.keys())}")
-                logger.info(f"[ENRICHED_METADATA] First chunk metadata values: job_hopping_score={meta.get('job_hopping_score')}, total_exp={meta.get('total_experience_years')}")
+                logger.info(f"[ENRICHED_METADATA] First chunk keys: {list(meta.keys())}")
             
-            # Check for enriched metadata
             job_hopping_score = meta.get("job_hopping_score")
             total_exp = meta.get("total_experience_years")
             avg_tenure = meta.get("avg_tenure_years")
-            seniority = meta.get("seniority_level")
             position_count = meta.get("position_count")
-            has_faang = meta.get("has_faang")
+            employment_gaps = meta.get("employment_gaps_count", 0)
+            current_role = meta.get("current_role", "N/A")
+            current_company = meta.get("current_company", "N/A")
             
             if job_hopping_score is not None or total_exp is not None:
-                # Build red flags section with actual data
-                flags = []
+                score = float(job_hopping_score) if job_hopping_score else 0
+                tenure = float(avg_tenure) if avg_tenure else 0
+                exp = float(total_exp) if total_exp else 0
+                gaps = int(employment_gaps) if employment_gaps else 0
                 
-                if job_hopping_score and float(job_hopping_score) > 0.6:
-                    flags.append(f"⚠️ **High Job Hopping Score**: {float(job_hopping_score):.1%} - Indicates frequent job changes")
-                elif job_hopping_score and float(job_hopping_score) > 0.4:
-                    flags.append(f"⚡ **Moderate Job Hopping**: {float(job_hopping_score):.1%} - Some career instability")
-                
-                if avg_tenure and float(avg_tenure) < 1.5:
-                    flags.append(f"⚠️ **Short Average Tenure**: {float(avg_tenure):.1f} years per position")
-                
-                if position_count and int(position_count) > 6 and total_exp and float(total_exp) < 10:
-                    flags.append(f"⚠️ **Many Positions**: {position_count} positions in {float(total_exp):.0f} years")
-                
-                if flags:
-                    red_flags_section = "**Pre-calculated Red Flags from CV Analysis:**\n" + "\n".join(flags)
+                # Determine statuses
+                if score < 0.3:
+                    jh_status, jh_icon = "Low", "✅"
+                elif score < 0.5:
+                    jh_status, jh_icon = "Moderate", "⚡"
                 else:
-                    red_flags_section = "✅ **No significant red flags detected in pre-analysis.**\nReview CV for any additional concerns not captured automatically."
+                    jh_status, jh_icon = "High", "⚠️"
                 
-                # Build stability section with actual data
-                stability_parts = []
-                if total_exp:
-                    stability_parts.append(f"- **Total Experience**: {float(total_exp):.1f} years")
-                if avg_tenure:
-                    stability_parts.append(f"- **Average Tenure**: {float(avg_tenure):.1f} years per position")
-                if seniority:
-                    stability_parts.append(f"- **Seniority Level**: {seniority}")
-                if position_count:
-                    stability_parts.append(f"- **Positions Held**: {position_count}")
-                if job_hopping_score:
-                    score = float(job_hopping_score)
-                    stability = "Stable" if score < 0.3 else "Moderate" if score < 0.6 else "Unstable"
-                    stability_parts.append(f"- **Career Stability**: {stability} (score: {score:.1%})")
-                if has_faang:
-                    stability_parts.append("- **Big Tech Experience**: Yes ✓")
+                gaps_status = "None" if gaps == 0 else f"{gaps} detected"
+                gaps_icon = "✅" if gaps == 0 else "⚠️"
                 
-                if stability_parts:
-                    stability_section = "**Pre-calculated Metrics:**\n" + "\n".join(stability_parts)
+                stability = "Stable" if score < 0.3 else "Moderate" if score < 0.6 else "Unstable"
+                stability_icon = "✅" if score < 0.3 else "⚡" if score < 0.6 else "⚠️"
                 
-                break  # Found metadata, stop looking
+                exp_level = "Entry" if exp < 3 else "Mid" if exp < 7 else "Senior" if exp < 15 else "Executive"
+                
+                has_flags = score > 0.5 or tenure < 1.5 or gaps > 0
+                rf_status = "Issues Found" if has_flags else "None Detected"
+                rf_icon = "⚠️" if has_flags else "✅"
+                
+                # Build unified Risk Assessment table
+                sections["risk_assessment"] = f"""| Factor | Status | Details |
+|:-------|:------:|:--------|
+| **🚩 Red Flags** | {rf_icon} {rf_status} | {"High mobility or gaps" if has_flags else "Clean profile"} |
+| **🔄 Job Hopping** | {jh_icon} {jh_status} | Score: {score:.0%}, Avg tenure: {tenure:.1f} yrs |
+| **⏸️ Employment Gaps** | {gaps_icon} {gaps_status} | {"Continuous history" if gaps == 0 else "Verify in interview"} |
+| **📊 Stability** | {stability_icon} {stability} | {position_count or 'N/A'} positions over {exp:.0f} years |
+| **🎯 Experience** | {exp_level} | {current_role} @ {current_company} |"""
+                
+                sections["red_flags"] = f"{rf_icon} **{rf_status}**" if not has_flags else f"{rf_icon} **Issues:** High mobility ({score:.0%})"
+                sections["stability_metrics"] = f"| Metric | Value |\n|--------|-------|\n| **Experience** | {exp:.1f} years |\n| **Avg Tenure** | {tenure:.1f} yrs |\n| **Stability** | {stability} |"
+                
+                break
         
-        logger.info(f"[ENRICHED_METADATA] Final red_flags_section: {red_flags_section[:200]}...")
-        logger.info(f"[ENRICHED_METADATA] Final stability_section: {stability_section[:200]}...")
-        
-        # DEBUG LOGGING: Log enriched metadata extraction details
-        log_enriched_metadata_extraction(chunks, red_flags_section, stability_section)
-        
-        return red_flags_section, stability_section
-
-# =============================================================================
-# CLASSIFICATION
-# =============================================================================
+        return sections
 
 @lru_cache(maxsize=128)
 def classify_query(question: str) -> QueryType:

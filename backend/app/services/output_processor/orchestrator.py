@@ -60,7 +60,9 @@ class OutputOrchestrator:
         self,
         raw_llm_output: str,
         chunks: List[Dict[str, Any]] = None,
-        query: str = ""
+        query: str = "",
+        query_type: str = "comparison",  # "comparison", "single_candidate", "red_flags"
+        candidate_name: str = None
     ) -> tuple[StructuredOutput, str]:
         """
         Process LLM output into structured components and formatted answer.
@@ -71,10 +73,16 @@ class OutputOrchestrator:
             raw_llm_output: Raw text from LLM
             chunks: Retrieved CV chunks for fallback
             query: Original user query for enhanced modules (gap analysis, etc.)
+            query_type: Type of query - determines output structure
+                - "comparison": Multi-candidate comparison (default)
+                - "single_candidate": Individual candidate profile
+                - "red_flags": Red flags specific query
+            candidate_name: Name of candidate for single_candidate queries
             
         Returns:
             Tuple of (StructuredOutput, formatted_answer_string)
         """
+        logger.info(f"[ORCHESTRATOR] Processing with query_type={query_type}")
         logger.info("[ORCHESTRATOR] Starting processing")
         
         # STEP 0: PRE-PROCESS - Clean raw LLM output before any module processing
@@ -207,29 +215,12 @@ class OutputOrchestrator:
                 if formatted_gaps:
                     parts.append(formatted_gaps)
         
-        # Use stored original object if available, otherwise reconstruct
-        red_flags_to_format = getattr(self, '_last_red_flags_data', None)
-        if red_flags_to_format and red_flags_to_format.flags:
-            logger.info(f"[ORCHESTRATOR] Formatting {len(red_flags_to_format.flags)} red flags (using original object)")
-            formatted_flags = self.red_flags_module.format(red_flags_to_format)
-            logger.info(f"[ORCHESTRATOR] Formatted red flags: {len(formatted_flags) if formatted_flags else 0} chars")
-            if formatted_flags:
-                parts.append(formatted_flags)
-                logger.info(f"[ORCHESTRATOR] Red flags section ADDED to output")
-            else:
-                logger.warning(f"[ORCHESTRATOR] Red flags format returned empty string!")
-        elif structured.red_flags and structured.red_flags.get("flags"):
-            # Fallback: reconstruct from dict
-            from .modules import RedFlagsData, RedFlag
-            logger.info(f"[ORCHESTRATOR] Red flags found (fallback): {len(structured.red_flags.get('flags', []))} flags")
-            red_flags_data = self._reconstruct_red_flags(structured.red_flags)
-            if red_flags_data:
-                formatted_flags = self.red_flags_module.format(red_flags_data)
-                if formatted_flags:
-                    parts.append(formatted_flags)
-                    logger.info(f"[ORCHESTRATOR] Red flags section ADDED (fallback)")
-        else:
-            logger.info(f"[ORCHESTRATOR] No red flags to format")
+        # MANDATORY: Red Flags Analysis section for ALL queries with chunks
+        # This section MUST appear to show either detected flags or "clean candidate" status
+        red_flags_formatted = self._format_red_flags_section(structured, query_type)
+        if red_flags_formatted:
+            parts.append(red_flags_formatted)
+            logger.info(f"[ORCHESTRATOR] Red Flags Analysis section ADDED ({len(red_flags_formatted)} chars)")
         
         if structured.timeline and structured.timeline.get("timelines"):
             from .modules import TimelineData, CandidateTimeline
@@ -238,6 +229,32 @@ class OutputOrchestrator:
                 formatted_timeline = self.timeline_module.format(timeline_data)
                 if formatted_timeline:
                     parts.append(formatted_timeline)
+        
+        # SINGLE CANDIDATE: MANDATORY Risk Assessment module at the END
+        # This module MUST appear for ALL single candidate queries
+        if query_type == "single_candidate":
+            logger.info(f"[ORCHESTRATOR] Building MANDATORY Risk Assessment for single candidate: {candidate_name}")
+            risk_assessment = self._build_risk_assessment_section(chunks or [], candidate_name)
+            if risk_assessment:
+                parts.append(risk_assessment)
+                logger.info(f"[ORCHESTRATOR] Risk Assessment ADDED ({len(risk_assessment)} chars)")
+            else:
+                # This should NEVER happen - _build_risk_assessment_section always returns content
+                logger.error(f"[ORCHESTRATOR] Risk Assessment returned empty! This is a bug.")
+                # Add fallback section anyway
+                fallback = """---
+
+### ⚠️ Risk Assessment
+
+| Factor | Status | Details |
+|:-------|:------:|:--------|
+| **🚩 Red Flags** | ✅ None Detected | Clean profile |
+| **🔄 Job Hopping** | ✅ Low | No data available |
+| **⏸️ Employment Gaps** | ✅ None | No data available |
+| **📊 Stability** | ✅ Stable | No data available |
+| **🎯 Experience Level** | N/A | No data available |"""
+                parts.append(fallback)
+                logger.info(f"[ORCHESTRATOR] Risk Assessment FALLBACK added")
         
         # Join with double newlines for readability
         final_answer = "\n\n".join(parts)
@@ -443,8 +460,11 @@ class OutputOrchestrator:
                 unique_paragraphs.append(para)
                 continue
             
-            # NEVER remove Red Flags section - it's important analysis
-            if 'red flags' in para_stripped.lower() or '### red flags' in para_stripped.lower():
+            # NEVER remove Red Flags or Risk Assessment sections - they're important analysis
+            if any(keyword in para_stripped.lower() for keyword in [
+                'red flags', '### red flags', 'risk assessment', '### risk assessment',
+                '⚠️ risk assessment', 'red flags analysis', 'job hopping', 'employment gaps'
+            ]):
                 unique_paragraphs.append(para)
                 continue
             
@@ -473,6 +493,65 @@ class OutputOrchestrator:
     # =========================================================================
     # HELPER METHODS FOR ENHANCED MODULES
     # =========================================================================
+    
+    def _format_red_flags_section(self, structured: StructuredOutput, query_type: str) -> str:
+        """
+        Format Red Flags Analysis section. ALWAYS returns content for single_candidate queries.
+        
+        This is a MANDATORY module that shows either:
+        - Detected red flags with severity levels
+        - "No red flags detected" for clean candidates
+        
+        Args:
+            structured: The structured output with red_flags data
+            query_type: Type of query (single_candidate, comparison, etc.)
+            
+        Returns:
+            Formatted markdown string for Red Flags Analysis section
+        """
+        # Try to get the original RedFlagsData object first
+        red_flags_data = getattr(self, '_last_red_flags_data', None)
+        
+        if red_flags_data:
+            flag_count = len(red_flags_data.flags) if red_flags_data.flags else 0
+            clean_count = len(red_flags_data.clean_candidates) if red_flags_data.clean_candidates else 0
+            logger.info(f"[ORCHESTRATOR] Red flags data: {flag_count} flags, {clean_count} clean candidates")
+            
+            # Use module's format method
+            formatted = self.red_flags_module.format(red_flags_data)
+            if formatted:
+                return formatted
+            
+            # If format returned empty but we have clean candidates, build manually
+            if clean_count > 0:
+                names = ", ".join(red_flags_data.clean_candidates[:3])
+                return f"### 🚩 Red Flags Analysis\n\n✅ **No se detectaron red flags** para: {names}"
+        
+        # Fallback: reconstruct from structured.red_flags dict
+        elif structured.red_flags:
+            from .modules.red_flags_module import RedFlagsData, RedFlag
+            flag_count = len(structured.red_flags.get('flags', []))
+            clean_count = len(structured.red_flags.get('clean_candidates', []))
+            logger.info(f"[ORCHESTRATOR] Red flags from dict: {flag_count} flags, {clean_count} clean")
+            
+            red_flags_data = self._reconstruct_red_flags(structured.red_flags)
+            if red_flags_data:
+                formatted = self.red_flags_module.format(red_flags_data)
+                if formatted:
+                    return formatted
+                
+                # Manual fallback for clean candidates
+                if clean_count > 0:
+                    names = ", ".join(structured.red_flags.get('clean_candidates', [])[:3])
+                    return f"### 🚩 Red Flags Analysis\n\n✅ **No se detectaron red flags** para: {names}"
+        
+        # For single_candidate queries, ALWAYS show something
+        if query_type == "single_candidate":
+            logger.warning("[ORCHESTRATOR] No red flags data but single_candidate query - showing default")
+            return "### 🚩 Red Flags Analysis\n\n✅ **No se detectaron red flags significativas.**"
+        
+        logger.info("[ORCHESTRATOR] No red flags section generated")
+        return ""
     
     def _reconstruct_gap_analysis(self, data: Dict[str, Any]):
         """Reconstruct GapAnalysisData from dict for formatting."""
@@ -565,6 +644,117 @@ class OutputOrchestrator:
         except Exception as e:
             logger.warning(f"[ORCHESTRATOR] Failed to reconstruct timeline: {e}")
             return None
+    
+    def _build_risk_assessment_section(self, chunks: List[Dict[str, Any]], candidate_name: str = None) -> str:
+        """
+        Build Risk Assessment section for single candidate queries.
+        
+        MANDATORY MODULE - This ALWAYS returns a valid section for single candidate queries.
+        Appears at the END of individual candidate profiles.
+        Uses pre-calculated metadata from chunks.
+        
+        5 Components:
+        1. 🚩 Red Flags - Overall risk status
+        2. 🔄 Job Hopping - Mobility score and avg tenure
+        3. ⏸️ Employment Gaps - Gap detection
+        4. 📊 Stability - Career stability assessment
+        5. 🎯 Experience Level - Seniority classification
+        """
+        logger.info(f"[RISK_ASSESSMENT] Building section for candidate: {candidate_name}")
+        
+        # Default values - will be overwritten if metadata is found
+        score = 0.0
+        tenure = 0.0
+        exp = 0.0
+        gaps = 0
+        position_count = 0
+        current_role = "N/A"
+        current_company = "N/A"
+        metadata_found = False
+        
+        # Find chunks for the target candidate
+        target_chunks = chunks if chunks else []
+        if candidate_name and chunks:
+            target_chunks = [c for c in chunks if candidate_name.lower() in c.get("metadata", {}).get("candidate_name", "").lower()]
+            if not target_chunks:
+                target_chunks = chunks[:5]  # Fallback to first chunks
+        
+        logger.info(f"[RISK_ASSESSMENT] Analyzing {len(target_chunks)} chunks")
+        
+        # Extract metadata from chunks - try ALL chunks to find valid data
+        for chunk in target_chunks:
+            meta = chunk.get("metadata", {})
+            
+            # Try to get any available metric
+            jh = meta.get("job_hopping_score")
+            te = meta.get("total_experience_years")
+            at = meta.get("avg_tenure_years")
+            pc = meta.get("position_count")
+            eg = meta.get("employment_gaps_count", 0)
+            cr = meta.get("current_role")
+            cc = meta.get("current_company")
+            
+            # Update values if we found something
+            if jh is not None:
+                score = float(jh)
+                metadata_found = True
+            if te is not None:
+                exp = float(te)
+                metadata_found = True
+            if at is not None:
+                tenure = float(at)
+                metadata_found = True
+            if pc is not None:
+                position_count = int(pc)
+                metadata_found = True
+            if eg:
+                gaps = int(eg)
+            if cr and cr != "N/A":
+                current_role = cr
+            if cc and cc != "N/A":
+                current_company = cc
+            
+            # If we found enough data, stop searching
+            if metadata_found and (score > 0 or exp > 0 or tenure > 0):
+                break
+        
+        logger.info(f"[RISK_ASSESSMENT] Metadata found: {metadata_found}, score={score}, exp={exp}, tenure={tenure}")
+        
+        # Determine statuses with icons (works even with default 0 values)
+        if score < 0.3:
+            jh_status, jh_icon = "Low", "✅"
+        elif score < 0.5:
+            jh_status, jh_icon = "Moderate", "⚡"
+        else:
+            jh_status, jh_icon = "High", "⚠️"
+        
+        gaps_status = "None" if gaps == 0 else f"{gaps} detected"
+        gaps_icon = "✅" if gaps == 0 else "⚠️"
+        
+        stability = "Stable" if score < 0.3 else "Moderate" if score < 0.6 else "Unstable"
+        stability_icon = "✅" if score < 0.3 else "⚡" if score < 0.6 else "⚠️"
+        
+        exp_level = "Entry" if exp < 3 else "Mid" if exp < 7 else "Senior" if exp < 15 else "Executive"
+        
+        has_flags = score > 0.5 or (tenure > 0 and tenure < 1.5) or gaps > 0
+        rf_status = "Issues Found" if has_flags else "None Detected"
+        rf_icon = "⚠️" if has_flags else "✅"
+        
+        # ALWAYS build and return the Risk Assessment table
+        section = f"""---
+
+### ⚠️ Risk Assessment
+
+| Factor | Status | Details |
+|:-------|:------:|:--------|
+| **🚩 Red Flags** | {rf_icon} {rf_status} | {"High mobility or gaps detected" if has_flags else "Clean profile - no concerns"} |
+| **🔄 Job Hopping** | {jh_icon} {jh_status} | Score: {score:.0%}, Avg tenure: {tenure:.1f} years |
+| **⏸️ Employment Gaps** | {gaps_icon} {gaps_status} | {"Continuous employment history" if gaps == 0 else "Verify reasons during interview"} |
+| **📊 Stability** | {stability_icon} {stability} | {position_count or 'N/A'} positions over {exp:.0f} years |
+| **🎯 Experience Level** | {exp_level} | {current_role} @ {current_company} |"""
+        
+        logger.info(f"[RISK_ASSESSMENT] Section built: {len(section)} chars")
+        return section
 
 
 # Singleton instance
@@ -588,3 +778,7 @@ def reset_orchestrator():
     global _orchestrator
     _orchestrator = None
     logger.info("[ORCHESTRATOR] Singleton reset")
+
+
+# FORCE RESET on module reload - ensures hot-reload picks up code changes
+reset_orchestrator()

@@ -1,4 +1,4 @@
-import { FileText, User, Briefcase, GraduationCap, Award, Wrench, Target } from 'lucide-react';
+import { FileText, User, Briefcase, GraduationCap, Award, Wrench, Target, AlertTriangle } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -133,6 +133,50 @@ const CredentialsList = ({ credentials }) => {
   );
 };
 
+/**
+ * Risk Assessment Table - 5 components
+ * Shows: Red Flags, Job Hopping, Employment Gaps, Stability, Experience Level
+ */
+const RiskAssessmentTable = ({ data }) => {
+  if (!data || data.length === 0) return null;
+  
+  return (
+    <div className="overflow-x-auto rounded-lg border border-orange-500/30">
+      <table className="w-full">
+        <thead>
+          <tr className="bg-orange-900/30 border-b border-orange-500/30">
+            <th className="px-4 py-2 text-left text-xs font-semibold text-orange-300 uppercase">Factor</th>
+            <th className="px-4 py-2 text-center text-xs font-semibold text-orange-300 uppercase">Status</th>
+            <th className="px-4 py-2 text-left text-xs font-semibold text-orange-300 uppercase">Details</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-slate-700/50">
+          {data.map((row, idx) => (
+            <tr key={idx} className="hover:bg-slate-700/20 transition-colors">
+              <td className="px-4 py-3 text-sm font-medium text-slate-200">
+                {row.factor}
+              </td>
+              <td className="px-4 py-3 text-sm text-center">
+                <span className={`inline-flex px-2 py-1 rounded text-xs font-medium ${
+                  row.status.includes('✅') ? 'bg-emerald-500/20 text-emerald-300' :
+                  row.status.includes('⚠️') ? 'bg-orange-500/20 text-orange-300' :
+                  row.status.includes('⚡') ? 'bg-amber-500/20 text-amber-300' :
+                  'bg-slate-500/20 text-slate-300'
+                }`}>
+                  {row.status}
+                </span>
+              </td>
+              <td className="px-4 py-3 text-sm text-slate-400">
+                {row.details}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
 const SingleCandidateProfile = ({ 
   candidateName, 
   cvId, 
@@ -143,6 +187,7 @@ const SingleCandidateProfile = ({
   credentials,
   assessment,
   strengths,
+  riskAssessment,
   onOpenCV 
 }) => {
   return (
@@ -234,6 +279,14 @@ const SingleCandidateProfile = ({
               </ul>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Risk Assessment - MANDATORY for single candidate */}
+      {riskAssessment && riskAssessment.length > 0 && (
+        <div className="p-4 bg-slate-800/50 rounded-xl border border-orange-500/30">
+          <SectionHeader icon={AlertTriangle} title="Risk Assessment" color="amber" />
+          <RiskAssessmentTable data={riskAssessment} />
         </div>
       )}
     </div>

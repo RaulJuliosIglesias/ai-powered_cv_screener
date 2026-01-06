@@ -112,14 +112,27 @@ export const extractHighlights = (content) => {
   const highlightsStart = content.indexOf('### 📊 Candidate Highlights');
   if (highlightsStart === -1) return [];
   
-  const afterHighlights = content.substring(highlightsStart);
+  // CRITICAL: Find boundary - stop at next section (--- or ###)
+  // This prevents capturing rows from Skills Snapshot table
+  const afterStart = content.substring(highlightsStart);
+  const nextSeparator = afterStart.indexOf('\n---\n');
+  const nextSection = afterStart.indexOf('\n###');
   
-  // Find the table rows
+  let boundary = afterStart.length;
+  if (nextSeparator !== -1 && nextSeparator < boundary) boundary = nextSeparator;
+  if (nextSection !== -1 && nextSection < boundary) boundary = nextSection;
+  
+  const highlightsSection = afterStart.substring(0, boundary);
+  
+  // Find the table rows - ONLY within Highlights section
   // Pattern: | **emoji Category** | Value |
   const rowPattern = /\|\s*\*\*([^|]+)\*\*\s*\|\s*([^|]+)\|/g;
   let match;
   
-  while ((match = rowPattern.exec(afterHighlights)) !== null) {
+  // Only extract the 5 expected highlight categories
+  const validCategories = ['current role', 'total experience', 'top achievement', 'core expertise', 'education'];
+  
+  while ((match = rowPattern.exec(highlightsSection)) !== null) {
     const category = match[1].trim();
     const value = match[2].trim();
     
@@ -133,7 +146,11 @@ export const extractHighlights = (content) => {
       continue;
     }
     
-    if (category && value && value !== '[' && !value.startsWith('[')) {
+    // Only include valid highlight categories (ignore skill rows that might slip through)
+    const categoryLower = category.toLowerCase();
+    const isValidHighlight = validCategories.some(vc => categoryLower.includes(vc.split(' ')[0]));
+    
+    if (category && value && value !== '[' && !value.startsWith('[') && isValidHighlight) {
       highlights.push({ category, value });
     }
   }
@@ -291,6 +308,49 @@ export const extractCredentials = (content) => {
 };
 
 /**
+ * Extract Risk Assessment table (5 components)
+ * @param {string} content 
+ * @returns {Array<{ factor: string, status: string, details: string }>}
+ */
+export const extractRiskAssessment = (content) => {
+  if (!content) return [];
+  
+  const riskData = [];
+  
+  // Find Risk Assessment section (with or without emoji)
+  let riskStart = content.indexOf('### ⚠️ Risk Assessment');
+  if (riskStart === -1) riskStart = content.indexOf('### Risk Assessment');
+  if (riskStart === -1) return [];
+  
+  // Find end of section
+  let riskEnd = content.indexOf('###', riskStart + 25);
+  if (riskEnd === -1) riskEnd = content.indexOf(':::', riskStart + 25);
+  if (riskEnd === -1) riskEnd = content.length;
+  
+  const riskSection = content.substring(riskStart, riskEnd);
+  
+  // Parse table rows: | **🚩 Red Flags** | ✅ None Detected | Clean profile |
+  const rowPattern = /\|\s*\*\*([^|*]+)\*\*\s*\|\s*([^|]+)\|\s*([^|]+)\|/g;
+  let match;
+  
+  while ((match = rowPattern.exec(riskSection)) !== null) {
+    const factor = match[1].trim();
+    const status = match[2].trim();
+    const details = match[3].trim();
+    
+    // Skip header rows
+    if (factor.toLowerCase().includes('factor') || status.toLowerCase().includes('status')) continue;
+    if (factor.includes('---')) continue;
+    
+    if (factor && status) {
+      riskData.push({ factor, status, details });
+    }
+  }
+  
+  return riskData;
+};
+
+/**
  * Extract assessment and strengths from conclusion
  * @param {string} content 
  * @returns {{ assessment: string, strengths: string[] }}
@@ -342,17 +402,47 @@ export const parseSingleCandidateProfile = (content) => {
   const candidateInfo = extractCandidateInfo(content);
   const { assessment, strengths } = extractAssessment(content);
   
+  // Group skills by category for efficient display
+  const rawSkills = extractSkills(content);
+  const groupedSkills = groupSkillsByCategory(rawSkills);
+  
   return {
     candidateName: candidateInfo?.name || 'Unknown Candidate',
     cvId: candidateInfo?.cvId || '',
     summary: extractSummary(content),
     highlights: extractHighlights(content),
     career: extractCareer(content),
-    skills: extractSkills(content),
+    skills: groupedSkills,
     credentials: extractCredentials(content),
     assessment,
-    strengths
+    strengths,
+    riskAssessment: extractRiskAssessment(content)
   };
+};
+
+/**
+ * Group skills by category for efficient display
+ * Input: [{ area: 'Design', details: 'X' }, { area: 'Design', details: 'Y' }]
+ * Output: [{ area: 'Design', details: 'X, Y' }]
+ */
+const groupSkillsByCategory = (skills) => {
+  if (!skills || skills.length === 0) return [];
+  
+  const grouped = {};
+  
+  for (const skill of skills) {
+    const area = skill.area;
+    if (!grouped[area]) {
+      grouped[area] = [];
+    }
+    grouped[area].push(skill.details);
+  }
+  
+  // Convert to array format with combined details
+  return Object.entries(grouped).map(([area, details]) => ({
+    area,
+    details: details.join(', ')
+  }));
 };
 
 export default parseSingleCandidateProfile;

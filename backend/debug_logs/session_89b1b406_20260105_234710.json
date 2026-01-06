@@ -1,0 +1,430 @@
+{
+  "session_id": "89b1b406-a8ff-4483-9569-97bd61ea38c7",
+  "generated_at": "2026-01-05T23:47:10.745662",
+  "events": [
+    {
+      "timestamp": "2026-01-05T23:46:40.097589",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "89b1b406-a8ff-4483-9569-97bd61ea38c7"
+      }
+    },
+    {
+      "timestamp": "2026-01-05T23:46:40.097589",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_ef373562",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Thierry Dubois  Concept",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Thierry Dubois  Concept =====\n\nCURRENT POSITION: and meticulous Lead Conce"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Thierry Dubois  Concept",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2\n\nTITLE: Blender/ZBrush\nCOMPANY: Paris Animation Collective\nPERIOD: 2010 - 2011\nD"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Thierry Dubois  Concept",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2 === CURRENT POSITION ===\n\nTITLE: and meticulous Lead Concept Artist with over 14"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Thierry Dubois  Concept",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Thierry Dubois  Concept\n\nCURRENT ROLE: and meticulous Lead Concept Artist with over"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-05T23:46:40.334093",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "89b1b406-a8ff-4483-9569-97bd61ea38c7"
+      }
+    },
+    {
+      "timestamp": "2026-01-05T23:46:40.334093",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_76d5c7b3",
+        "total_chunks": 7,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Clara Dubois  Junior 3D",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.4,
+            "total_experience_years": 1.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Clara Dubois  Junior 3D =====\n\nCURRENT POSITION: consistency and pipeline "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Clara Dubois  Junior 3D",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.4,
+            "total_experience_years": 1.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 5\n\nTITLE: 2022\nCOMPANY: 2023 | PixelForge Productions\nPERIOD: 2022 - 2023\nDURATION"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Clara Dubois  Junior 3D",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.4,
+            "total_experience_years": 1.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 5\n\nTITLE: Paris\nCOMPANY: France\nPERIOD: 2022 - 2023\nDURATION: 1 years\n\nJOB DESCRIP"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Clara Dubois  Junior 3D",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.4,
+            "total_experience_years": 1.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 5 === CURRENT POSITION ===\n\nTITLE: consistency and pipeline efficiency.\nCOMPANY: P"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Clara Dubois  Junior 3D",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.4,
+            "total_experience_years": 1.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 5\n\nTITLE: High\nCOMPANY: Poly\nPERIOD: Unknown dates\nDURATION: 0 years\n\nJOB DESCRIPT"
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Clara Dubois  Junior 3D",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.4,
+            "total_experience_years": 1.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 5 of 5\n\nTITLE: Real\nCOMPANY: Time\nPERIOD: Unknown dates\nDURATION: 0 years\n\nJOB DESCRIPT"
+          },
+          {
+            "index": 6,
+            "section_type": "full_cv",
+            "candidate_name": " Clara Dubois  Junior 3D",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.4,
+            "total_experience_years": 1.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Clara Dubois  Junior 3D\n\nCURRENT ROLE: consistency and pipeline efficiency.\nCOMPANY"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-05T23:46:40.626420",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "89b1b406-a8ff-4483-9569-97bd61ea38c7"
+      }
+    },
+    {
+      "timestamp": "2026-01-05T23:46:40.626420",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_bfddae4c",
+        "total_chunks": 6,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Imani Jones  Concept",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Imani Jones  Concept =====\n\nCURRENT POSITION: Los Angeles\nCURRENT COMPANY:"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Imani Jones  Concept",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3\n\nTITLE: Imani Jones\nCOMPANY: Senior Concept Artist Concept Artist\nPERIOD: 2019 -"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Imani Jones  Concept",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3\n\nTITLE:  instagram.com/imanijonesart\nCOMPANY: Indie Game Studios\nPERIOD: 2018 -"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Imani Jones  Concept",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3 === CURRENT POSITION ===\n\nTITLE: Los Angeles\nCOMPANY: CA projects, including cha"
+          },
+          {
+            "index": 4,
+            "section_type": "skills",
+            "candidate_name": " Imani Jones  Concept",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Imani Jones  Concept:\n\nand"
+          },
+          {
+            "index": 5,
+            "section_type": "full_cv",
+            "candidate_name": " Imani Jones  Concept",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Imani Jones  Concept\n\nCURRENT ROLE: Los Angeles\nCOMPANY: CA projects, including cha"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-05T23:46:53.688111",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "89b1b406-a8ff-4483-9569-97bd61ea38c7"
+      }
+    },
+    {
+      "timestamp": "2026-01-05T23:46:53.688111",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "give me all aboiut ima",
+        "cv_ids": [
+          "cv_ef373562",
+          "cv_76d5c7b3",
+          "cv_bfddae4c"
+        ],
+        "cv_count": 3
+      }
+    },
+    {
+      "timestamp": "2026-01-05T23:46:57.682564",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 4,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_bfddae4c",
+            "candidate_name": " Imani Jones  Concept",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.746226489016606,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_ef373562",
+            "candidate_name": " Thierry Dubois  Concept",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "score": 0.7302842055567162,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_76d5c7b3",
+            "candidate_name": " Clara Dubois  Junior 3D",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.4,
+            "total_experience_years": 1.0,
+            "score": 0.745199709069282,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_76d5c7b3",
+            "candidate_name": " Clara Dubois  Junior 3D",
+            "section_type": "summary",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.4,
+            "total_experience_years": 1.0,
+            "score": 0.45482738913328236,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-05T23:47:06.033837",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-05T23:47:10.672168",
+      "event_type": "RED_FLAGS_INPUT",
+      "level": "INFO",
+      "data": {
+        "chunk_count": 4,
+        "first_chunk_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "filename",
+          "cv_id"
+        ],
+        "first_chunk_job_hopping_score": 0.5,
+        "first_chunk_avg_tenure": 1.3333333333333333,
+        "first_chunk_total_exp": 4.0
+      }
+    },
+    {
+      "timestamp": "2026-01-05T23:47:10.672168",
+      "event_type": "RED_FLAGS_MODULE",
+      "level": "INFO",
+      "data": {
+        "total_flags": 3,
+        "high_risk_candidates": [
+          " Clara Dubois  Junior 3D"
+        ],
+        "clean_candidates": [],
+        "flag_details": [
+          {
+            "flag_type": "job_hopping",
+            "severity": "medium",
+            "candidate_name": " Imani Jones  Concept",
+            "description": "Moderate job mobility: 3 positions with avg tenure 1.3 years (score: 50%)"
+          },
+          {
+            "flag_type": "short_avg_tenure",
+            "severity": "medium",
+            "candidate_name": " Thierry Dubois  Concept",
+            "description": "Short average tenure: 0.5 years across 2 positions"
+          },
+          {
+            "flag_type": "job_hopping",
+            "severity": "high",
+            "candidate_name": " Clara Dubois  Junior 3D",
+            "description": "High job mobility: 5 positions with avg tenure 0.4 years (score: 100%)"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-05T23:47:10.744654",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1518,
+        "answer_preview": ":::thinking\nThe user is asking to identify all CVs that contain the substring \"Ima\" and to extract all information associated with that name from the identified CVs. I will scan the provided CVs for the presence of \"Ima\" and then present the relevant information.\n:::\n\nThe name \"Ima\" appears in the CV of [📄](cv:cv_bfddae4c)**Imani Jones**. The information associated with this name, as extracted from the CV, is presented below. ### Analysis The table below presents the information extracted from t...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}
