@@ -52371,10 +52371,113 @@
           "pipeline_steps": [],
           "structured_output": null,
           "timestamp": "2026-01-06T00:12:37.055469"
+        },
+        {
+          "id": "318007f8-2f6e-485d-a066-f9fcde21df9e",
+          "role": "assistant",
+          "content": ":::thinking\nThe user is asking for a red flag analysis of Imani Jones Concept (cv_bfddae4c). The pre-calculated data indicates \"High mobility (0%)\" and an average tenure of \"0.0 yrs\". This suggests potential job-hopping, which needs to be highlighted. The response must start with the red flags analysis, followed by a brief profile summary, and a conclusion.\n:::\n\n⚠️**Se detectaron las siguientes red flags para [📄](cv:cv_bfddae4c)**Imani Jones Concept**:**|**Stability Score**| Stable |\n---.\n\n### Analysis\n\n⚠️**Se detectaron las siguientes red flags para [📄](cv:cv_bfddae4c)**Imani Jones Concept**:**|**Stability Score**| Stable |\n---\n\n| Candidate | Severidad | Match Score |\n|---|---|---|\n| High Mobility | High | 0% |\n\n:::conclusion**Assessment:**The candidate exhibits a high degree of job mobility, which is a significant red flag. While the overall experience is 4 years, the average tenure of 0.0 years raises concerns about job stability and retention.\n:::\n\n### Skills Gap Analysis\n\nNo significant skill gaps identified.**Overall Coverage:**0%\n\n### Red Flags Analysis\n\n✓ No red flags detected for 1 candidate(s).\n\n---\n\n### ⚠️ Risk Assessment\n\n| Factor | Status | Details |\n|:-------|:------:|:--------|\n|**🚩 Red Flags**| ✅ None Detected | Clean profile - no concerns |\n|**🔄 Job Hopping**| ✅ Low | Score: 0%, Avg tenure: 0.0 years |\n|**⏸️ Employment Gaps**| ✅ None | Continuous employment history |\n|**📊 Stability**| ✅ Stable | N/A positions over 4 years |\n|**🎯 Experience Level**| Mid | Los Angeles @ CA projects, including character designs, |",
+          "sources": [
+            {
+              "cv_id": "cv_bfddae4c",
+              "filename": "dd6e0828__Imani_Jones__Concept_Artist.pdf"
+            }
+          ],
+          "pipeline_steps": [
+            {
+              "name": "query_understanding",
+              "status": "completed",
+              "duration_ms": 1293.7,
+              "details": "Query type: search"
+            },
+            {
+              "name": "retrieval",
+              "status": "completed",
+              "duration_ms": 0.37,
+              "details": "Found 6 relevant chunks"
+            },
+            {
+              "name": "analysis",
+              "status": "error",
+              "duration_ms": 15025.31,
+              "details": "Analyzed candidates and generated ranking"
+            },
+            {
+              "name": "generation",
+              "status": "completed",
+              "duration_ms": 3528.59,
+              "details": "Generated structured response"
+            }
+          ],
+          "structured_output": {
+            "direct_answer": "⚠️ **Se detectaron las siguientes red flags para [📄](cv:cv_bfddae4c) ** Imani Jones Concept**:**\n| **Stability Score** | Stable |\n---.",
+            "raw_content": ":::thinking\nThe user is asking for a red flag analysis of **[ Imani Jones Concept](cv:cv_bfddae4c)**. The pre-calculated data indicates \"High mobility (0%)\" and an average tenure of \"0.0 yrs\". This suggests potential job-hopping, which needs to be highlighted. The response must start with the red flags analysis, followed by a brief profile summary, and a conclusion.\n:::\n\n⚠️ **Se detectaron las siguientes red flags para [ Imani Jones Concept](cv:cv_bfddae4c):**\n\n| Red Flag | Severidad | Descripción |\n|----------|-----------|-------------|\n| High Mobility | High | The candidate has a high job mobility score of 0%, with an average tenure of 0.0 years per position, suggesting potential job-hopping. |\n\n---\n\n### 📊 Brief Profile Summary\n\n| Metric | Value |\n|--------|-------|\n| **Current Role** | CA projects, including character designs |\n| **Total Experience** | 4.0 years |\n| **Avg Tenure** | 0.0 yrs |\n| **Stability Score** | Stable |\n\n---\n\n:::conclusion\n**Assessment:** The candidate exhibits a high degree of job mobility, which is a significant red flag. While the overall experience is 4 years, the average tenure of 0.0 years raises concerns about job stability and retention.\n:::",
+            "thinking": "The user is asking for a red flag analysis of Imani Jones Concept (cv_bfddae4c). The pre-calculated data indicates \"High mobility (0%)\" and an average tenure of \"0.0 yrs\". This suggests potential job-hopping, which needs to be highlighted. The response must start with the red flags analysis, followed by a brief profile summary, and a conclusion.",
+            "analysis": "⚠️ **Se detectaron las siguientes red flags para [📄](cv:cv_bfddae4c) ** Imani Jones Concept**:**\n| **Stability Score** | Stable |\n---",
+            "table_data": {
+              "title": "Candidate Comparison Table",
+              "headers": [
+                "Candidate",
+                "Severidad",
+                "Match Score"
+              ],
+              "rows": [
+                {
+                  "candidate_name": "High Mobility",
+                  "cv_id": "",
+                  "columns": {
+                    "Severidad": "High"
+                  },
+                  "match_score": 0
+                }
+              ]
+            },
+            "conclusion": "**Assessment:**The candidate exhibits a high degree of job mobility, which is a significant red flag. While the overall experience is 4 years, the average tenure of 0.0 years raises concerns about job stability and retention.",
+            "gap_analysis": {
+              "required_skills": [
+                "The Red Flags Analysis",
+                "An Average Tenure Of 0"
+              ],
+              "skill_gaps": [
+                {
+                  "skill": "The Red Flags Analysis",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept"
+                  ],
+                  "candidates_have": []
+                },
+                {
+                  "skill": "An Average Tenure Of 0",
+                  "importance": "nice_to_have",
+                  "candidates_missing": [
+                    " Imani Jones  Concept"
+                  ],
+                  "candidates_have": []
+                }
+              ],
+              "coverage_score": 0.0,
+              "best_coverage_candidate": null,
+              "summary": "No significant skill gaps identified."
+            },
+            "red_flags": {
+              "flags": [],
+              "candidates_with_flags": {},
+              "high_risk_candidates": [],
+              "clean_candidates": [
+                " Imani Jones  Concept"
+              ],
+              "summary": "✓ 1 candidate(s) with no red flags"
+            },
+            "timeline": null,
+            "cv_references": [],
+            "parsing_warnings": [],
+            "fallback_used": false
+          },
+          "timestamp": "2026-01-06T00:13:00.585795"
         }
       ],
       "created_at": "2026-01-05T23:45:48.965659",
-      "updated_at": "2026-01-06T00:12:37.055469"
+      "updated_at": "2026-01-06T00:13:00.585795"
     }
   ]
 }
