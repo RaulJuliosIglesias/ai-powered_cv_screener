@@ -1508,10 +1508,13 @@ def classify_query_for_structure(question: str) -> str:
         # Stability/instability queries about candidates
         r'\b(in)?stability\b.*candidate', r'\bcandidate.*\b(in)?stability',
         r'\bestabilidad\b.*candidato', r'\bcandidato.*\bestabilidad',
-        # Explicit risk assessment requests
-        r'\brisk\s+(assessment|analysis|evaluation|factor)',
+        # Explicit risk assessment requests (including typos like "assesment")
+        r'\brisk\s+(assess?ment|analysis|evaluation|factor)',
         r'\bevalua(r|ción)\s+riesgo', r'\briesgo\s+de\s+',
         r'\banalyze\s+(the\s+)?risk', r'\banalizar\s+riesgo',
+        r'\bmake\s+(a\s+)?risk\s+assess?ment',
+        r'\bdo\s+(a\s+)?risk\s+assess?ment',
+        r'\b(give|show|provide)\s+(me\s+)?(a\s+)?risk\s+assess?ment',
         # Warning signs specific to hiring
         r'\bwarning\s+sign', r'\bseñal\s+de\s+alerta',
         # Concerns about a specific candidate

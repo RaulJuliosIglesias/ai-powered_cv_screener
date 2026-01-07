@@ -62,7 +62,8 @@ def reciprocal_rank_fusion(
 
 def reciprocal_rank_fusion_with_scores(
     results_per_query: List[List[tuple[str, float]]],
-    k: int = RRF_K
+    k: int = RRF_K,
+    candidate_name_boost: dict[str, float] | None = None
 ) -> List[tuple[str, float, float]]:
     """
     Fuse multiple ranked result lists using RRF, preserving original scores.
@@ -70,6 +71,7 @@ def reciprocal_rank_fusion_with_scores(
     Args:
         results_per_query: List of ranked result lists, each containing (doc_id, score) tuples
         k: RRF constant
+        candidate_name_boost: Dict mapping chunk_id to boost multiplier for exact candidate name matches
         
     Returns:
         List of (doc_id, rrf_score, max_original_score) tuples sorted by RRF score descending
@@ -87,6 +89,12 @@ def reciprocal_rank_fusion_with_scores(
             rrf_scores[doc_id] += 1.0 / (k + rank + 1)
             # Track max original score for reference
             max_scores[doc_id] = max(max_scores[doc_id], original_score)
+    
+    # Apply candidate name boost if provided
+    if candidate_name_boost:
+        for doc_id, boost in candidate_name_boost.items():
+            if doc_id in rrf_scores:
+                rrf_scores[doc_id] *= boost
     
     # Combine and sort
     combined = [

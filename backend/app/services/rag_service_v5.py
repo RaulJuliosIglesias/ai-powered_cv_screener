@@ -1701,7 +1701,24 @@ class RAGServiceV5:
             
             # Apply Reciprocal Rank Fusion (RRF) to combine results
             if results_per_query:
-                fused_results = reciprocal_rank_fusion_with_scores(results_per_query, k=RRF_K)
+                # Calculate candidate name boost for single-candidate queries
+                candidate_name_boost = None
+                if ctx.target_candidate_name:
+                    # Boost chunks from the target candidate (2.5x multiplier)
+                    candidate_name_boost = {}
+                    target_name_normalized = ctx.target_candidate_name.lower().strip()
+                    for chunk_id, chunk_data in all_chunks.items():
+                        chunk_name = chunk_data["metadata"].get("candidate_name", "").lower().strip()
+                        # Exact or fuzzy match
+                        if target_name_normalized in chunk_name or chunk_name in target_name_normalized:
+                            candidate_name_boost[chunk_id] = 2.5
+                            logger.info(f"[RRF_BOOST] Boosting chunk {chunk_id[:16]}... for candidate '{chunk_name}'")
+                
+                fused_results = reciprocal_rank_fusion_with_scores(
+                    results_per_query, 
+                    k=RRF_K,
+                    candidate_name_boost=candidate_name_boost
+                )
                 
                 # Build sorted chunks list from RRF results
                 sorted_chunks = []

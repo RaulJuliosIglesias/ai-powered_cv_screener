@@ -478,14 +478,22 @@ class RiskTableModule:
         gaps = data.employment_gaps_count
         positions = data.position_count
         
-        # 1. Red Flags summary
+        # 1. Red Flags summary with detailed explanation
         has_flags = score > self.JOB_HOPPING_MODERATE or tenure < self.TENURE_CONCERN or gaps > 0
         if has_flags:
             rf_icon, rf_status = "⚠️", "Issues Found"
-            rf_details = "High mobility or gaps" if score > self.JOB_HOPPING_MODERATE else "Moderate concerns"
+            # Build detailed explanation of WHY there are flags
+            flag_reasons = []
+            if score > self.JOB_HOPPING_MODERATE:
+                flag_reasons.append(f"high job mobility ({score:.0%} score)")
+            if tenure < self.TENURE_CONCERN:
+                flag_reasons.append(f"short avg tenure ({tenure:.1f} yrs)")
+            if gaps > 0:
+                flag_reasons.append(f"{gaps} employment gap(s)")
+            rf_details = "Issues: " + ", ".join(flag_reasons)
         else:
             rf_icon, rf_status = "✅", "None Detected"
-            rf_details = "Clean profile"
+            rf_details = f"Clean profile: {positions} positions, {tenure:.1f} yrs avg tenure, no gaps"
         
         factors.append(RiskFactor(
             factor="🚩 Red Flags",
@@ -495,29 +503,32 @@ class RiskTableModule:
             status_text=rf_status
         ))
         
-        # 2. Job Hopping
+        # 2. Job Hopping with explanation of what the score means
         if score < self.JOB_HOPPING_LOW:
             jh_icon, jh_status = "✅", "Low"
+            jh_explanation = f"Stable career: {positions} positions over {exp:.0f} yrs, avg {tenure:.1f} yrs/position"
         elif score < self.JOB_HOPPING_MODERATE:
             jh_icon, jh_status = "⚡", "Moderate"
+            jh_explanation = f"Some mobility: {positions} positions over {exp:.0f} yrs, avg {tenure:.1f} yrs/position"
         else:
             jh_icon, jh_status = "⚠️", "High"
+            jh_explanation = f"Frequent changes: {positions} positions over {exp:.0f} yrs, avg {tenure:.1f} yrs/position"
         
         factors.append(RiskFactor(
             factor="🔄 Job Hopping",
             status=f"{jh_icon} {jh_status}",
-            details=f"Score: {score:.0%}, Avg tenure: {tenure:.1f} yrs",
+            details=jh_explanation,
             status_icon=jh_icon,
             status_text=jh_status
         ))
         
-        # 3. Employment Gaps
+        # 3. Employment Gaps with WHY explanation
         if gaps == 0:
             gaps_icon, gaps_status = "✅", "None"
-            gaps_details = "Continuous history"
+            gaps_details = f"Continuous employment history across {positions} positions"
         else:
             gaps_icon, gaps_status = "⚠️", f"{gaps} detected"
-            gaps_details = "Verify in interview"
+            gaps_details = f"{gaps} gap(s) detected between positions - recommend verifying reasons in interview"
         
         factors.append(RiskFactor(
             factor="⏸️ Employment Gaps",
@@ -527,36 +538,46 @@ class RiskTableModule:
             status_text=gaps_status
         ))
         
-        # 4. Stability
+        # 4. Stability with WHY explanation
         if score < self.JOB_HOPPING_LOW:
             stab_icon, stab_status = "✅", "Stable"
+            stab_explanation = f"Good stability: {positions} positions over {exp:.0f} yrs indicates commitment"
         elif score < 0.6:
             stab_icon, stab_status = "⚡", "Moderate"
+            stab_explanation = f"Moderate stability: {positions} positions over {exp:.0f} yrs, some movement"
         else:
             stab_icon, stab_status = "⚠️", "Unstable"
+            stab_explanation = f"Unstable pattern: {positions} positions over {exp:.0f} yrs raises retention concerns"
         
         factors.append(RiskFactor(
             factor="📊 Stability",
             status=f"{stab_icon} {stab_status}",
-            details=f"{positions or 'N/A'} positions over {exp:.0f} years",
+            details=stab_explanation,
             status_icon=stab_icon,
             status_text=stab_status
         ))
         
-        # 5. Experience Level
+        # 5. Experience Level with WHY explanation
         if exp < 3:
             exp_level = "Entry"
+            exp_reason = f"<3 years experience"
         elif exp < 7:
             exp_level = "Mid"
+            exp_reason = f"3-7 years experience"
         elif exp < 15:
             exp_level = "Senior"
+            exp_reason = f"7-15 years experience"
         else:
             exp_level = "Executive"
+            exp_reason = f"15+ years experience"
+        
+        # Format current role details
+        role_details = f"{current_role} @ {current_company}" if current_role != "N/A" else f"{exp:.0f} yrs total experience"
         
         factors.append(RiskFactor(
             factor="🎯 Experience",
             status=exp_level,
-            details=f"{current_role} @ {current_company}",
+            details=f"{exp_reason}: {role_details}",
             status_icon="",
             status_text=exp_level
         ))

@@ -1,0 +1,55 @@
+{
+  "session_id": "944b73a8-15c8-4e16-932f-a67b41ac1f45",
+  "generated_at": "2026-01-07T17:03:44.454424",
+  "events": [
+    {
+      "timestamp": "2026-01-07T17:03:12.372775",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "944b73a8-15c8-4e16-932f-a67b41ac1f45"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T17:03:12.372775",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Are there red flags for Marco Rossi?",
+        "cv_ids": [
+          "cv_219d1db4",
+          "cv_83f31de4",
+          "cv_4b127ec0",
+          "cv_dc2c5e14",
+          "cv_8b432c37",
+          "cv_59f4b495",
+          "cv_c87a325a",
+          "cv_bf033ce3",
+          "cv_49abba9a",
+          "cv_d0c4b786",
+          "cv_d37f07bc",
+          "cv_5883053e",
+          "cv_3f6e9aab",
+          "cv_0b48b1f3",
+          "cv_a64f7588",
+          "cv_afe82774",
+          "cv_c4e7856c",
+          "cv_a023ca71",
+          "cv_c98e8d58",
+          "cv_0e3931b8",
+          "cv_9522a760",
+          "cv_bcd762fe",
+          "cv_a08bf21c",
+          "cv_2eb7666d",
+          "cv_7d4967af",
+          "cv_f9b59c80",
+          "cv_bb9be28d",
+          "cv_2df62378",
+          "cv_a8b5462a",
+          "cv_fcbf739e"
+        ],
+        "cv_count": 30
+      }
+    }
+  ]
+}
