@@ -1,19 +1,19 @@
-# Plan de Implementación: Mejoras al Pipeline RAG
+# Implementation Plan: RAG Pipeline Improvements
 
-## 📊 Resumen Ejecutivo
+## 📊 Executive Summary
 
-Este plan detalla la implementación de **2 nuevos pasos** en el pipeline RAG, la actualización del **panel de métricas** para incluir estos pasos, y la extensión del **selector de modelos** para permitir elegir modelos para cada etapa.
+This plan details the implementation of **2 new steps** in the RAG pipeline, updating the **metrics panel** to include these steps, and extending the **model selector** to allow choosing models for each stage.
 
 ---
 
-## 🏗️ Estado Actual del Pipeline
+## 🏗️ Current Pipeline State
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                         PIPELINE RAG ACTUAL (v3)                            │
+│                         CURRENT RAG PIPELINE (v3)                            │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
-│  Query → [1] Query Understanding (Gemini Flash)   ← Modelo configurable ✅  │
+│  Query → [1] Query Understanding (Gemini Flash)   ← Configurable model ✅  │
 │            ↓                                                                │
 │        [2] Guardrails (regex + query understanding)                         │
 │            ↓                                                                │
@@ -21,16 +21,16 @@ Este plan detalla la implementación de **2 nuevos pasos** en el pipeline RAG, l
 │            ↓                                                                │
 │        [4] Vector Search (ChromaDB/pgVector)                                │
 │            ↓                                                                │
-│        [5] LLM Generation                         ← Modelo configurable ✅  │
+│        [5] LLM Generation                         ← Configurable model ✅  │
 │            ↓                                                                │
-│        [6] Hallucination Check (heurísticas)      ← Solo regex/heurísticas │
+│        [6] Hallucination Check (heuristics)      ← Only regex/heuristics │
 │            ↓                                                                │
 │        [7] Eval Logging                                                     │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Archivos Clave Actuales:
+### Key Current Files:
 - **Backend Pipeline:** `backend/app/services/rag_service_v3.py`
 - **Query Understanding:** `backend/app/services/query_understanding_service.py`
 - **Hallucination (heurístico):** `backend/app/services/hallucination_service.py`
@@ -39,14 +39,14 @@ Este plan detalla la implementación de **2 nuevos pasos** en el pipeline RAG, l
 
 ---
 
-## 🎯 Pipeline Mejorado Propuesto
+## 🎯 Proposed Improved Pipeline
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                       PIPELINE RAG MEJORADO (v4)                            │
+│                       IMPROVED RAG PIPELINE (v4)                            │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
-│  Query → [1] Query Understanding        ← Modelo seleccionable             │
+│  Query → [1] Query Understanding        ← Selectable model             │
 │            ↓                                                                │
 │        [2] Guardrails                                                       │
 │            ↓                                                                │
@@ -54,11 +54,11 @@ Este plan detalla la implementación de **2 nuevos pasos** en el pipeline RAG, l
 │            ↓                                                                │
 │        [4] Vector Search                                                    │
 │            ↓                                                                │
-│        [5] Re-ranking (NUEVO) ⭐         ← Modelo seleccionable             │
+│        [5] Re-ranking (NEW) ⭐         ← Selectable model             │
 │            ↓                                                                │
-│        [6] LLM Generation               ← Modelo seleccionable             │
+│        [6] LLM Generation               ← Selectable model             │
 │            ↓                                                                │
-│        [7] LLM Verification (NUEVO) ⭐   ← Modelo seleccionable             │
+│        [7] LLM Verification (NEW) ⭐   ← Selectable model             │
 │            ↓                                                                │
 │        [8] Eval Logging                                                     │
 │                                                                             │
@@ -67,22 +67,22 @@ Este plan detalla la implementación de **2 nuevos pasos** en el pipeline RAG, l
 
 ---
 
-## 📋 Fases de Implementación
+## 📋 Implementation Phases
 
-### FASE 1: Backend - Nuevo Servicio de Re-ranking
-**Prioridad:** Alta | **Estimación:** 2-3 horas
+### PHASE 1: Backend - New Re-ranking Service
+**Priority:** High | **Estimation:** 2-3 hours
 
-#### 1.1 Crear `reranking_service.py`
+#### 1.1 Create `reranking_service.py`
 ```
 backend/app/services/reranking_service.py
 ```
 
-**Funcionalidad:**
-- Re-ordenar resultados de búsqueda usando un modelo LLM rápido
-- Puntuar relevancia de cada chunk (0-10) contra la query
-- Devolver top-k chunks reordenados
+**Functionality:**
+- Reorder search results using a fast LLM model
+- Score relevance of each chunk (0-10) against the query
+- Return top-k reordered chunks
 
-**Estructura del servicio:**
+**Service structure:**
 ```python
 @dataclass
 class RerankResult:

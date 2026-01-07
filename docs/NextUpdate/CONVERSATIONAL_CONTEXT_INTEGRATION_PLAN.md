@@ -873,17 +873,17 @@ async def debug_conversation_context(
     mode: Mode = Query(default=settings.default_mode)
 ):
     """
-    Endpoint para visualizar el estado del contexto conversacional.
+    Endpoint to visualize conversational context state.
     
-    Útil para:
-    - Ver qué mensajes están en la ventana de contexto
-    - Debugging de resolución de referencias
-    - Análisis de relevancia de mensajes
+    Useful for:
+    - Seeing which messages are in the context window
+    - Debugging reference resolution
+    - Message relevance analysis
     """
     mgr = get_session_manager(mode)
     full_history = mgr.get_conversation_history(session_id, limit=50)
     
-    # Si hay un SmartContextManager, simular selección
+    # If there's a SmartContextManager, simulate selection
     from app.services.smart_context_manager import SmartContextManager
     context_mgr = SmartContextManager()
     

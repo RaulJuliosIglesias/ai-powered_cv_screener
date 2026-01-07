@@ -1,78 +1,78 @@
-# PLAN DE IMPLEMENTACIÓN: PANEL DE MÉTRICAS COMPLETO
+# IMPLEMENTATION PLAN: COMPLETE METRICS PANEL
 
-## PROBLEMAS IDENTIFICADOS
+## IDENTIFIED PROBLEMS
 
-### 1. CONFIDENCE SCORE - DATO INVENTADO
-**Problema actual:**
+### 1. CONFIDENCE SCORE - INVENTED DATA
+**Current problem:**
 ```python
 # rag_service_v5.py:1643-1645
-confidence = 0.8  # ❌ VALOR HARDCODEADO (INVENTADO)
+confidence = 0.8  # ❌ HARDCODED VALUE (INVENTED)
 if ctx.verification_result:
     confidence = ctx.verification_result.groundedness_score
 ```
 
-**Problema:**
-- Default hardcoded a 0.8 cuando NO hay verificación
-- En `_build_no_results_response`: hardcoded 0.8
-- NO explica de dónde viene el valor
-- NO documenta la lógica
+**Problem:**
+- Default hardcoded to 0.8 when there is NO verification
+- In `_build_no_results_response`: hardcoded 0.8
+- Does NOT explain where the value comes from
+- Does NOT document the logic
 
-**Lógica REAL (cuando existe):**
-- Si `claim_verification` está activado → usa `groundedness_score` de verificación
-- `groundedness_score` viene de `ClaimVerificationService`
-- Se calcula comparando claims del LLM con chunks de contexto
-- Valor entre 0.0 y 1.0 basado en evidencia
+**REAL logic (when it exists):**
+- If `claim_verification` is activated → uses verification `groundedness_score`
+- `groundedness_score` comes from `ClaimVerificationService`
+- Calculated by comparing LLM claims with context chunks
+- Value between 0.0 and 1.0 based on evidence
 
-### 2. COSTES - SOLO GENERATION, FALTAN OTROS COMPONENTES
-**Problema actual:**
-- Solo captura coste de GENERATION stage
-- NO captura costes de:
-  - Query Understanding (usa LLM)
-  - Reasoning (usa LLM)
-  - Claim Verification (usa LLM)
-  - Multi-query (si está activo, usa LLM)
+### 2. COSTS - ONLY GENERATION, MISSING OTHER COMPONENTS
+**Current problem:**
+- Only captures cost of GENERATION stage
+- Does NOT capture costs of:
+  - Query Understanding (uses LLM)
+  - Reasoning (uses LLM)
+  - Claim Verification (uses LLM)
+  - Multi-query (if active, uses LLM)
 
-**Tabla actual muestra:**
+**Current table shows:**
 ```
 Prompt tokens: X
 Completion tokens: Y
 Total: X+Y
 ```
 
-**Debería mostrar:**
+**Should show:**
 ```
-Understanding: $0.0001 (si activo)
-Reasoning: $0.0023 (si activo)
+Understanding: $0.0001 (if active)
+Reasoning: $0.0023 (if active)
 Generation: $0.0045
-Verification: $0.0008 (si activo)
+Verification: $0.0008 (if active)
 ---
 Total: $0.0077
 ```
 
 ---
 
-## PLAN DE IMPLEMENTACIÓN DETALLADO
+## DETAILED IMPLEMENTATION PLAN
 
-### FASE 1: INVESTIGAR Y DOCUMENTAR CONFIDENCE SCORE
+### PHASE 1: INVESTIGATE AND DOCUMENT CONFIDENCE SCORE
 
-#### Tarea 1.1: Analizar ClaimVerificationService
-- [ ] Leer `claim_verification_service.py`
-- [ ] Documentar cómo se calcula `groundedness_score`
-- [ ] Identificar factores que influyen (verified/unverified/contradicted claims)
-- [ ] Crear documentación clara del algoritmo
+#### Task 1.1: Analyze ClaimVerificationService
+- [ ] Read `claim_verification_service.py`
+- [ ] Document how `groundedness_score` is calculated
+- [ ] Identify influencing factors (verified/unverified/contradicted claims)
+- [ ] Create clear algorithm documentation
 
-#### Tarea 1.2: Eliminar valores hardcoded
-- [ ] En `_build_success_response`: NO usar 0.8 default
-- [ ] En `_build_no_results_response`: Calcular confidence real
-- [ ] Si NO hay verificación, usar otro método o indicar "N/A"
+#### Task 1.2: Remove hardcoded values
+- [ ] In `_build_success_response`: DO NOT use 0.8 default
+- [ ] In `_build_no_results_response`: Calculate real confidence
+- [ ] If there is NO verification, use another method or indicate "N/A"
 
-#### Tarea 1.3: Añadir metadata de confidence
-- [ ] Añadir `confidence_explanation` a `RAGResponseV5`
-- [ ] Estructura:
+#### Task 1.3: Add confidence metadata
+- [ ] Add `confidence_explanation` to `RAGResponseV5`
+- [ ] Structure:
   ```python
   confidence_explanation = {
       "score": 0.85,
-      "source": "claim_verification",  # o "default", "heuristic"
+      "source": "claim_verification",  # or "default", "heuristic"
       "details": {
           "verified_claims": 8,
           "unverified_claims": 1,

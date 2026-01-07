@@ -1,56 +1,56 @@
-# Plan de Implementación: Formato Unificado de Candidatos
+# Implementation Plan: Unified Candidate Format
 
-## Objetivo
-Crear UN ÚNICO formato para mostrar nombres de candidatos en TODAS las secciones (Direct Answer, Analysis, Table, Conclusion).
+## Objective
+Create ONE format to display candidate names in ALL sections (Direct Answer, Analysis, Table, Conclusion).
 
-## Formato Objetivo
+## Target Format
 ```
-[📄](cv:cv_xxx) **Nombre del Candidato**
+[📄](cv:cv_xxx) **Candidate Name**
 ```
-- **Icono 📄**: Clicable, abre el PDF del CV
-- **Nombre**: En negrita, SIN subrayado, SIN link
+- **Icon 📄**: Clickable, opens the CV PDF
+- **Name**: In bold, WITHOUT underline, WITHOUT link
 
 ---
 
-## PASO 1: Backend - Crear función de formateo
+## STEP 1: Backend - Create formatting function
 
-### Archivo
+### File
 `backend/app/services/output_processor/orchestrator.py`
 
-### Tarea 1.1: Crear método `_format_candidate_references()`
+### Task 1.1: Create method `_format_candidate_references()`
 ```python
 def _format_candidate_references(self, text: str) -> str:
     """
-    Formato ÚNICO para menciones de candidatos.
-    Convierte: [Nombre](cv:cv_xxx) -> [📄](cv:cv_xxx) **Nombre**
+    UNIFIED format for candidate mentions.
+    Converts: [Name](cv:cv_xxx) -> [📄](cv:cv_xxx) **Name**
     """
     if not text:
         return text
     
-    # Patrón: [Nombre](cv:cv_xxx) o [Nombre](cv_xxx)
+    # Pattern: [Name](cv:cv_xxx) or [Name](cv_xxx)
     pattern = r'\[([^\]]+)\]\((cv:)?(cv_[a-z0-9_-]+)\)'
     replacement = r'[📄](cv:\3) **\1**'
     return re.sub(pattern, replacement, text, flags=re.IGNORECASE)
 ```
 
-### Tarea 1.2: Ubicación del método
-- Añadir después del método `_fix_cv_links()`
-- Línea aproximada: ~200
+### Task 1.2: Method location
+- Add after the `_fix_cv_links()` method
+- Approximate line: ~200
 
-### Verificación
-- [ ] Método creado
-- [ ] Patrón regex correcto
-- [ ] Reemplazo genera formato correcto
+### Verification
+- [ ] Method created
+- [ ] Regex pattern correct
+- [ ] Replacement generates correct format
 
 ---
 
-## PASO 2: Backend - Aplicar función a secciones
+## STEP 2: Backend - Apply function to sections
 
-### Archivo
+### File
 `backend/app/services/output_processor/orchestrator.py`
 
-### Tarea 2.1: Modificar método `process()`
-En el método `process()`, después de STEP 1.6 (_fix_cv_links), añadir:
+### Task 2.1: Modify `process()` method
+In the `process()` method, after STEP 1.6 (_fix_cv_links), add:
 
 ```python
 # STEP 1.7: Format candidate references with icon + bold name
@@ -62,24 +62,24 @@ if structured.conclusion:
     structured.conclusion = self._format_candidate_references(structured.conclusion)
 ```
 
-### Tarea 2.2: Eliminar `_fix_cv_links()` redundante
-- `_fix_cv_links()` ya no es necesario si `_format_candidate_references()` hace todo
-- O mantener ambos en secuencia
+### Task 2.2: Remove redundant `_fix_cv_links()`
+- `_fix_cv_links()` is no longer needed if `_format_candidate_references()` does everything
+- Or keep both in sequence
 
-### Verificación
-- [ ] direct_answer formateado
-- [ ] analysis formateado
-- [ ] conclusion formateado
+### Verification
+- [ ] direct_answer formatted
+- [ ] analysis formatted
+- [ ] conclusion formatted
 
 ---
 
-## PASO 3: Frontend - Modificar cvLinkRenderer
+## STEP 3: Frontend - Modify cvLinkRenderer
 
-### Archivo
+### File
 `frontend/src/components/output/StructuredOutputRenderer.jsx`
 
-### Tarea 3.1: Modificar `cvLinkRenderer` para detectar icono
-El markdown `[📄](cv:cv_xxx)` se renderiza como un link con texto "📄".
+### Task 3.1: Modify `cvLinkRenderer` to detect icon
+The markdown `[📄](cv:cv_xxx)` renders as a link with text "📄".
 
 ```jsx
 const cvLinkRenderer = ({ href, children }) => {

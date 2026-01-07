@@ -157,7 +157,7 @@ class RAGConfigV5:
     default_k: int = 15  # Increased for multi-query fusion
     default_threshold: float = 0.25  # Slightly lower for broader recall
     max_context_tokens: int = 60000
-    multi_query_k: int = 10  # k per query variation
+    multi_query_k: int = 15  # k per query variation - increased for better coverage
     
     # Sub-configurations
     retry: RetryConfig = field(default_factory=RetryConfig)
@@ -1245,6 +1245,17 @@ class RAGServiceV5:
         base_threshold = ctx.threshold
         
         is_ranking = query_type in {"ranking", "comparison"}
+        is_talent_pool = query_type in {"summary", "search"} and num_cvs > 1
+        
+        # TALENT POOL: Analyze ALL CVs for comprehensive insights
+        if is_talent_pool and not is_ranking:
+            # For Talent Pool queries, we need ALL CVs to get complete picture
+            logger.info(f"[TALENT_POOL] ACTIVATED: Analyzing ALL {num_cvs} CVs for complete Talent Pool insights")
+            return (
+                num_cvs,  # Use ALL CVs
+                max(0.1, base_threshold - 0.05),  # Lower threshold for broader coverage
+                f"talent_pool: ALL {num_cvs} CVs for complete analysis"
+            )
         
         if is_ranking:
             optimal_k = min(
@@ -1632,10 +1643,18 @@ class RAGServiceV5:
                 embeddings_to_search.append(("hyde", ctx.hyde_embedding))
             
             for query_name, embedding in embeddings_to_search:
+                # Use adaptive k based on strategy - for Talent Pool we need more chunks
+                effective_k = min(ctx.k, self.config.multi_query_k)
+                if ctx.total_cvs_in_session and ctx.total_cvs_in_session > 1:
+                    # For Talent Pool, increase k to get better coverage
+                    effective_k = min(effective_k * 2, ctx.total_cvs_in_session)
+                
+                logger.info(f"[RETRIEVAL] Query '{query_name}': using k={effective_k} (ctx.k={ctx.k}, multi_query_k={self.config.multi_query_k})")
+                
                 results = await asyncio.wait_for(
                     self._vector_store.search(
                         embedding=embedding,
-                        k=self.config.multi_query_k,
+                        k=effective_k,
                         threshold=ctx.threshold,
                         cv_ids=ctx.cv_ids,
                         diversify_by_cv=True
@@ -1722,6 +1741,7 @@ class RAGServiceV5:
                 
                 # Build sorted chunks list from RRF results
                 sorted_chunks = []
+                logger.info(f"[RRF] Processing {len(fused_results)} fused results, will take top {ctx.k}")
                 for chunk_id, rrf_score, max_original_score in fused_results[:ctx.k]:
                     if chunk_id in all_chunks:
                         chunk_data = all_chunks[chunk_id]

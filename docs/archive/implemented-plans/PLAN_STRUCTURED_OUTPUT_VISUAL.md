@@ -1,60 +1,60 @@
-# Plan de Implementación: Structured Output Visual
+# Implementation Plan: Structured Output Visual
 
-## Objetivo
-Implementar un sistema de salida estructurada que renderice cada componente de forma visual, modular y consistente, tal como se muestra en el diseño de referencia.
+## Objective
+Implement a structured output system that renders each component visually, modularly and consistently, as shown in the reference design.
 
 ---
 
-## Diseño de Referencia
+## Reference Design
 
-### Componentes Visuales (en orden)
+### Visual Components (in order)
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ ⚙️ Thinking Process                                    [▼]  │  ← Colapsable, fondo púrpura
+│ ⚙️ Thinking Process                                    [▼]  │  ← Collapsible, purple background
 ├─────────────────────────────────────────────────────────────┤
-│ (Contenido del razonamiento interno - monospace)            │
+│ (Internal reasoning content - monospace)                    │
 └─────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────┐
-│ 📄 Direct Answer                                            │  ← Borde amarillo/dorado
+│ 📄 Direct Answer                                            │  ← Yellow/gold border
 ├─────────────────────────────────────────────────────────────┤
-│ Respuesta directa en 2-3 oraciones...                       │
+│ Direct answer in 2-3 sentences...                           │
 └─────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────┐
-│ 📊 Analysis                                                 │  ← Borde cyan/azul
+│ 📊 Analysis                                                 │  ← Cyan/blue border
 ├─────────────────────────────────────────────────────────────┤
-│ Análisis detallado explicando el razonamiento...            │
+│ Detailed analysis explaining the reasoning...               │
 └─────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────┐
-│ 📋 Candidate Comparison Table                               │  ← Tabla con scores coloreados
+│ 📋 Candidate Comparison Table                               │  ← Table with colored scores
 ├──────────┬────────────┬───────────────┬────────────────────┤
 │ Candidate│ Experience │ Specialization│ Match Score        │
 ├──────────┼────────────┼───────────────┼────────────────────┤
-│ María    │ 5 years    │ Django        │ [95%] ← Verde      │
-│ Carlos   │ 3 years    │ Data Science  │ [82%] ← Amarillo   │
-│ Ana      │ 2 years    │ ML            │ [75%] ← Gris       │
+│ María    │ 5 years    │ Django        │ [95%] ← Green      │
+│ Carlos   │ 3 years    │ Data Science  │ [82%] ← Yellow    │
+│ Ana      │ 2 years    │ ML            │ [75%] ← Gray       │
 └──────────┴────────────┴───────────────┴────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────┐
-│ ✓ Conclusion                                                │  ← Borde verde/cyan
+│ ✓ Conclusion                                                │  ← Green/cyan border
 ├─────────────────────────────────────────────────────────────┤
-│ **Recomendación:** María García es el mejor candidato...    │
+│ **Recommendation:** María García is the best candidate...   │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Colores de Match Score
-- **Verde** (#10B981): Score ≥ 90%
-- **Amarillo** (#F59E0B): Score 70-89%
-- **Gris** (#6B7280): Score < 70%
+### Match Score Colors
+- **Green** (#10B981): Score ≥ 90%
+- **Yellow** (#F59E0B): Score 70-89%
+- **Gray** (#6B7280): Score < 70%
 
 ---
 
-## Arquitectura
+## Architecture
 
-### 1. Backend: Modelo de Datos
+### 1. Backend: Data Model
 
 ```python
 # app/models/structured_output.py
@@ -74,33 +74,33 @@ class TableData:
 
 @dataclass
 class StructuredOutput:
-    thinking: str           # Razonamiento interno (colapsable)
-    direct_answer: str      # Respuesta directa (2-3 oraciones)
-    analysis: str           # Análisis detallado
-    table: TableData        # Tabla de candidatos con scores
-    conclusion: str         # Conclusión/recomendación
+    thinking: str           # Internal reasoning (collapsible)
+    direct_answer: str      # Direct answer (2-3 sentences)
+    analysis: str           # Detailed analysis
+    table: TableData        # Candidate table with scores
+    conclusion: str         # Conclusion/recommendation
     
     # Metadata
     processing_time_ms: int
     components_extracted: List[str]
 ```
 
-### 2. Backend: Módulos de Extracción
+### 2. Backend: Extraction Modules
 
 ```
 backend/app/services/output_processor/
-├── orchestrator.py          # Coordina todo el proceso
-├── processor.py             # Extrae componentes usando módulos
+├── orchestrator.py          # Coordinates entire process
+├── processor.py             # Extracts components using modules
 └── modules/
     ├── __init__.py
-    ├── thinking_module.py   # Extrae :::thinking ... :::
-    ├── direct_answer_module.py  # Extrae respuesta directa
-    ├── analysis_module.py   # Extrae análisis
-    ├── table_module.py      # Extrae tabla con scores
-    └── conclusion_module.py # Extrae :::conclusion ... :::
+    ├── thinking_module.py   # Extracts :::thinking ... :::
+    ├── direct_answer_module.py  # Extracts direct answer
+    ├── analysis_module.py   # Extracts analysis
+    ├── table_module.py      # Extracts table with scores
+    └── conclusion_module.py # Extracts :::conclusion ... :::
 ```
 
-#### Flujo de Procesamiento
+#### Processing Flow
 
 ```
 LLM Output
@@ -109,43 +109,43 @@ LLM Output
 ┌──────────────────────────────────────────────────────────┐
 │ ORCHESTRATOR.process(raw_llm_output, chunks)             │
 │                                                          │
-│  1. _pre_clean_llm_output()  ← Limpia código blocks      │
-│  2. processor.process()       ← Extrae con módulos       │
-│  3. _assemble_parts()         ← Ensambla componentes     │
-│  4. _post_clean_output()      ← Limpieza final           │
+│  1. _pre_clean_llm_output()  ← Cleans code blocks        │
+│  2. processor.process()       ← Extracts with modules    │
+│  3. _assemble_parts()         ← Assembles components     │
+│  4. _post_clean_output()      ← Final cleanup            │
 │                                                          │
 │  Return: (StructuredOutput, formatted_string)            │
 └──────────────────────────────────────────────────────────┘
     │
     ▼
-Frontend recibe StructuredOutput como JSON
+Frontend receives StructuredOutput as JSON
 ```
 
-### 3. Frontend: Componentes React
+### 3. Frontend: React Components
 
 ```
 frontend/src/components/structured-output/
-├── StructuredOutputRenderer.jsx  # Componente principal
-├── ThinkingSection.jsx           # Sección colapsable
-├── DirectAnswerSection.jsx       # Con borde amarillo
-├── AnalysisSection.jsx           # Con borde cyan
-├── CandidateTable.jsx            # Tabla con Match Scores
-├── ConclusionSection.jsx         # Con borde verde
-└── MatchScoreBadge.jsx           # Badge coloreado para scores
+├── StructuredOutputRenderer.jsx  # Main component
+├── ThinkingSection.jsx           # Collapsible section
+├── DirectAnswerSection.jsx       # With yellow border
+├── AnalysisSection.jsx           # With cyan border
+├── CandidateTable.jsx            # Table with Match Scores
+├── ConclusionSection.jsx         # With green border
+└── MatchScoreBadge.jsx           # Colored badge for scores
 ```
 
 ---
 
-## Plan de Implementación Detallado
+## Detailed Implementation Plan
 
-### FASE 1: Backend - Modelo de Datos (30 min)
+### PHASE 1: Backend - Data Model (30 min)
 
-**Archivo:** `backend/app/models/structured_output.py`
+**File:** `backend/app/models/structured_output.py`
 
-1. Actualizar `TableData` para incluir `match_score` por fila
-2. Añadir campo `title` a `TableData`
-3. Crear `TableRow` dataclass con estructura clara
-4. Asegurar que todos los campos son serializables a JSON
+1. Update `TableData` to include `match_score` per row
+2. Add `title` field to `TableData`
+3. Create `TableRow` dataclass with clear structure
+4. Ensure all fields are JSON serializable
 
 ```python
 @dataclass
