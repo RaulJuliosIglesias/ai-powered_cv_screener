@@ -82,7 +82,7 @@ IMPORTANT:
 Respond in this EXACT JSON format (no markdown, just raw JSON):
 {{
   "understood_query": "EXPANDED reinterpretation showing your understanding (NOT a copy of the original)",
-  "query_type": "ranking|comparison|search|filter|general",
+  "query_type": "ranking|comparison|search|red_flags|single_candidate|job_match|team_build|summary|general",
   "requirements": [
     "requirement 1",
     "requirement 2"
@@ -90,6 +90,17 @@ Respond in this EXACT JSON format (no markdown, just raw JSON):
   "is_cv_related": true,
   "reformulated_prompt": "A clear, structured prompt to send to the CV analysis model (with ALL names resolved)"
 }}
+
+QUERY_TYPE GUIDE:
+- "ranking": User wants candidates ordered/ranked by criteria (best, top N, sort by)
+- "comparison": User wants to compare specific candidates side-by-side
+- "search": User wants to find candidates with specific skills/experience
+- "red_flags": User asks for RISK ASSESSMENT, red flags, job hopping analysis, stability concerns
+- "single_candidate": User wants FULL PROFILE of ONE specific candidate (everything about, full profile, analyze X)
+- "job_match": User wants to match candidates against job requirements
+- "team_build": User wants to build a team from candidates
+- "summary": User wants a summary/overview of candidates
+- "general": Non-CV related queries
 
 EXAMPLES:
 
@@ -121,7 +132,7 @@ Query: "Rank all 33 candidates by experience and show if they worked at Google o
 }
 
 Query: "Who knows Python?"
-{
+{{
   "understood_query": "Find candidates who have Python programming experience",
   "query_type": "search",
   "requirements": [
@@ -130,6 +141,34 @@ Query: "Who knows Python?"
   ],
   "is_cv_related": true,
   "reformulated_prompt": "Find all candidates who have Python programming experience. Include their proficiency level if mentioned, and any Python-related frameworks or libraries they know (Django, Flask, FastAPI, etc.)."
+}}
+
+Query: "Make a risk assessment of Sofia Rodriguez"
+{{
+  "understood_query": "The user wants a risk assessment analyzing potential red flags, job stability, and hiring concerns for Sofia Rodriguez. This includes evaluating job hopping patterns, employment gaps, career progression, and any warning signs.",
+  "query_type": "red_flags",
+  "requirements": [
+    "Analyze job hopping score and employment stability",
+    "Identify any employment gaps",
+    "Evaluate career progression consistency",
+    "Flag any potential concerns for hiring"
+  ],
+  "is_cv_related": true,
+  "reformulated_prompt": "Perform a comprehensive risk assessment for Sofia Rodriguez. Analyze job stability (tenure at each position), employment gaps, career progression, and identify any red flags or concerns that a hiring manager should consider."
+}}
+
+Query: "Give me the full profile of John Smith" or "Tell me everything about John"
+{{
+  "understood_query": "The user wants a complete, detailed profile of John Smith including all their experience, skills, education, career trajectory, and any other relevant information from their CV.",
+  "query_type": "single_candidate",
+  "requirements": [
+    "Extract complete work history",
+    "List all skills and competencies",
+    "Include education and certifications",
+    "Summarize career progression"
+  ],
+  "is_cv_related": true,
+  "reformulated_prompt": "Provide a comprehensive profile of John Smith. Include their complete work history, all skills and technologies, education, certifications, and a summary of their career trajectory and key achievements."
 }}
 
 Query: "Give me a recipe for chocolate cake"
@@ -539,6 +578,28 @@ class QueryUnderstandingService:
         elif query_type == "search":
             return f"The user is searching for specific information about candidates or their qualifications.{candidates_str} This requires extracting relevant details from the CV data.{req_str}"
         
+        elif query_type == "red_flags":
+            # Extract candidate name from query if present
+            candidate_mention = ""
+            if candidates_from_context:
+                candidate_mention = f" for {candidates_from_context[0]}"
+            return f"The user wants a RISK ASSESSMENT{candidate_mention}. This requires analyzing job hopping patterns, employment gaps, career stability, and identifying any red flags or concerns that could impact hiring decisions.{req_str}"
+        
+        elif query_type == "single_candidate":
+            candidate_mention = ""
+            if candidates_from_context:
+                candidate_mention = f" of {candidates_from_context[0]}"
+            return f"The user wants a COMPLETE PROFILE{candidate_mention}. This requires extracting all available information including work history, skills, education, certifications, and career trajectory from the CV.{req_str}"
+        
+        elif query_type == "job_match":
+            return f"The user wants to evaluate how well candidates match specific job requirements.{candidates_str} This requires comparing candidate qualifications against the job criteria.{req_str}"
+        
+        elif query_type == "team_build":
+            return f"The user wants to build or recommend a team from the available candidates.{candidates_str} This requires analyzing complementary skills and team composition.{req_str}"
+        
+        elif query_type == "summary":
+            return f"The user wants a summary or overview of the candidates.{candidates_str} This requires providing a high-level view of the candidate pool.{req_str}"
+        
         elif query_type == "filter":
             return f"The user wants to filter candidates based on specific criteria.{candidates_str} This should identify which candidates meet the requirements and which don't.{req_str}"
         
@@ -609,16 +670,41 @@ class QueryUnderstandingService:
         query_lower = query.lower()
         
         # Detect query type from keywords - PRIORITY ORDER MATTERS
-        # Check comparison FIRST since "Compare #1 vs #2 in the ranking" should be comparison, not ranking
-        if any(kw in query_lower for kw in ['compare', 'versus', 'vs', 'vs.', 'difference', 'comparar', 'comparación']):
+        # Check specific types first before generic ones
+        
+        # 1. RED FLAGS / RISK ASSESSMENT (highest priority for risk queries)
+        if any(kw in query_lower for kw in ['risk', 'red flag', 'job hopping', 'stability', 'gap', 'concern', 'warning', 'riesgo', 'bandera roja']):
+            query_type = 'red_flags'
+        
+        # 2. SINGLE CANDIDATE / FULL PROFILE
+        elif any(kw in query_lower for kw in ['full profile', 'everything about', 'all about', 'todo sobre', 'perfil completo', 'dame todo', 'tell me about', 'analyze']):
+            query_type = 'single_candidate'
+        
+        # 3. COMPARISON
+        elif any(kw in query_lower for kw in ['compare', 'versus', 'vs', 'vs.', 'difference', 'comparar', 'comparación']):
             query_type = 'comparison'
+        
+        # 4. RANKING
         elif any(kw in query_lower for kw in ['rank', 'best', 'top', 'order', 'sort', 'mejor', 'ordenar']) and 'compare' not in query_lower:
-            # Only ranking if no comparison keywords present
             query_type = 'ranking'
-        elif any(kw in query_lower for kw in ['filter', 'only', 'just', 'exclude', 'filtrar', 'solo']):
-            query_type = 'filter'
+        
+        # 5. JOB MATCH
+        elif any(kw in query_lower for kw in ['match', 'fit for', 'suitable for', 'qualified for', 'encaja', 'apto para']):
+            query_type = 'job_match'
+        
+        # 6. TEAM BUILD
+        elif any(kw in query_lower for kw in ['team', 'build a team', 'equipo', 'formar equipo']):
+            query_type = 'team_build'
+        
+        # 7. SUMMARY
+        elif any(kw in query_lower for kw in ['summary', 'overview', 'resumen', 'vista general']):
+            query_type = 'summary'
+        
+        # 8. SEARCH (generic CV search)
         elif any(kw in query_lower for kw in ['who', 'which', 'find', 'search', 'has', 'know', 'quien', 'buscar']):
             query_type = 'search'
+        
+        # 9. GENERAL (non-CV)
         else:
             query_type = 'general'
         
@@ -631,7 +717,8 @@ class QueryUnderstandingService:
         is_cv_related = any(kw in query_lower for kw in cv_keywords)
         
         # If query type suggests CV analysis, force is_cv_related
-        if query_type in {'ranking', 'comparison', 'search', 'filter'}:
+        cv_related_types = {'ranking', 'comparison', 'search', 'red_flags', 'single_candidate', 'job_match', 'team_build', 'summary'}
+        if query_type in cv_related_types:
             is_cv_related = True
         
         logger.warning(
