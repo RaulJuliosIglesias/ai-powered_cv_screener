@@ -1,35 +1,35 @@
-# Test Suite: Orquestación, Estructuras y Módulos
+# Test Suite: Orchestration, Structures and Modules
 
-## Propósito
+## Purpose
 
-Este documento proporciona un conjunto completo de queries de prueba para verificar que el sistema de **Orchestrator → Structures → Modules** funciona correctamente.
+This document provides a complete set of test queries to verify that the **Orchestrator → Structures → Modules** system works correctly.
 
-Para cada query se especifica:
-- La **pregunta/query** a realizar
-- El **query_type** esperado
-- La **Structure** que debe procesar la query
-- Los **Modules** que debe utilizar
-- Los **campos de salida** esperados en el frontend
+For each query, the following is specified:
+- The **question/query** to execute
+- The expected **query_type**
+- The **Structure** that should process the query
+- The **Modules** it should use
+- The expected **output fields** in the frontend
 
 ---
 
-## Cómo Usar Este Documento
+## How to Use This Document
 
-1. **Ejecutar la query** en el chat del CV Screener
-2. **Verificar en logs del backend** que aparece:
+1. **Execute the query** in the CV Screener chat
+2. **Verify in backend logs** that it shows:
    ```
    [ORCHESTRATOR] ROUTING query_type=X to appropriate structure
    [ORCHESTRATOR] Using XStructure
    ```
-3. **Verificar en consola del frontend** que aparece:
+3. **Verify in frontend console** that it shows:
    ```
    [STRUCTURED_OUTPUT] ROUTING: structure_type=X
    ```
-4. **Verificar visualmente** que se muestran los componentes esperados
+4. **Visually verify** that expected components are displayed
 
 ---
 
-# TESTS POR ESTRUCTURA
+# TESTS BY STRUCTURE
 
 ---
 
@@ -37,14 +37,14 @@ Para cada query se especifica:
 
 ### Query Type: `single_candidate`
 
-| # | Query de Prueba | Idioma |
-|---|----------------|--------|
-| 1.1 | "Dame el perfil completo de Juan Pérez" | ES |
+| # | Test Query | Language |
+|---|------------|----------|
+| 1.1 | "Give me the full profile of Juan Pérez" | EN |
 | 1.2 | "Tell me everything about Maria Garcia" | EN |
 | 1.3 | "Full profile of the candidate with most experience" | EN |
-| 1.4 | "Cuéntame todo sobre el candidato senior" | ES |
+| 1.4 | "Tell me about the senior candidate" | EN |
 
-### Estructura Esperada
+### Expected Structure
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -61,19 +61,19 @@ Para cada query se especifica:
 └─────────────────────────────────────────────┘
 ```
 
-### Módulos Backend
+### Backend Modules
 
-| Módulo | Archivo | Propósito |
-|--------|---------|-----------|
-| ThinkingModule | `thinking_module.py` | Extrae sección :::thinking::: |
-| HighlightsModule | `highlights_module.py` | Tabla de información clave |
-| CareerModule | `career_module.py` | Trayectoria profesional |
-| SkillsModule | `skills_module.py` | Snapshot de habilidades |
-| CredentialsModule | `credentials_module.py` | Certificaciones/educación |
-| RiskTableModule | `risk_table_module.py` | Tabla de 5 factores de riesgo |
-| ConclusionModule | `conclusion_module.py` | Assessment final |
+| Module | File | Purpose |
+|--------|------|---------|
+| ThinkingModule | `thinking_module.py` | Extracts :::thinking::: section |
+| HighlightsModule | `highlights_module.py` | Key information table |
+| CareerModule | `career_module.py` | Professional trajectory |
+| SkillsModule | `skills_module.py` | Skills snapshot |
+| CredentialsModule | `credentials_module.py` | Certifications/education |
+| RiskTableModule | `risk_table_module.py` | 5 risk factors table |
+| ConclusionModule | `conclusion_module.py` | Final assessment |
 
-### Campos de Salida (structuredOutput)
+### Output Fields (structuredOutput)
 
 ```javascript
 {
@@ -93,7 +93,7 @@ Para cada query se especifica:
 }
 ```
 
-### Log Esperado (Backend)
+### Expected Log (Backend)
 
 ```
 [ORCHESTRATOR] ROUTING query_type=single_candidate to appropriate structure
@@ -107,15 +107,15 @@ Para cada query se especifica:
 
 ### Query Type: `red_flags` / `risk_assessment`
 
-| # | Query de Prueba | Idioma |
-|---|----------------|--------|
-| 2.1 | "Qué red flags tiene Juan Pérez?" | ES |
+| # | Test Query | Language |
+|---|------------|----------|
+| 2.1 | "What red flags does Juan Pérez have?" | EN |
 | 2.2 | "Give me risks about Maria Garcia" | EN |
 | 2.3 | "Concerns about the senior candidate" | EN |
-| 2.4 | "Análisis de riesgos de Juan" | ES |
+| 2.4 | "Risk analysis for Juan" | EN |
 | 2.5 | "What are the warning signs for this candidate?" | EN |
 
-### Estructura Esperada
+### Expected Structure
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -129,16 +129,16 @@ Para cada query se especifica:
 └─────────────────────────────────────────────┘
 ```
 
-### Módulos Backend
+### Backend Modules
 
-| Módulo | Archivo | Propósito |
-|--------|---------|-----------|
-| ThinkingModule | `thinking_module.py` | Extrae :::thinking::: |
-| AnalysisModule | `analysis_module.py` | Texto de análisis de riesgos |
-| RiskTableModule | `risk_table_module.py` | Tabla 5 factores (COMPARTIDO) |
-| ConclusionModule | `conclusion_module.py` | Assessment final |
+| Module | File | Purpose |
+|--------|------|---------|
+| ThinkingModule | `thinking_module.py` | Extracts :::thinking::: |
+| AnalysisModule | `analysis_module.py` | Risk analysis text |
+| RiskTableModule | `risk_table_module.py` | 5 factors table (SHARED) |
+| ConclusionModule | `conclusion_module.py` | Final assessment |
 
-### Campos de Salida (structuredOutput)
+### Output Fields (structuredOutput)
 
 ```javascript
 {
@@ -160,7 +160,7 @@ Para cada query se especifica:
 
 ### Query Type: `comparison`
 
-| # | Query de Prueba | Idioma |
+| # | Test Query | Language |
 |---|----------------|--------|
 | 3.1 | "Compara Juan y María" | ES |
 | 3.2 | "Compare years of experience" | EN |
@@ -169,7 +169,7 @@ Para cada query se especifica:
 | 3.5 | "Compare education levels of all candidates" | EN |
 | 3.6 | "Which candidate has more Python experience?" | EN |
 
-### Estructura Esperada
+### Expected Structure
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -184,16 +184,16 @@ Para cada query se especifica:
 └─────────────────────────────────────────────┘
 ```
 
-### Módulos Backend
+### Backend Modules
 
-| Módulo | Archivo | Propósito |
+| Module | File | Purpose |
 |--------|---------|-----------|
-| ThinkingModule | `thinking_module.py` | Extrae :::thinking::: |
-| AnalysisModule | `analysis_module.py` | Texto de análisis |
-| TableModule | `table_module.py` | **Tabla de comparación** |
-| ConclusionModule | `conclusion_module.py` | Conclusión/recomendación |
+| ThinkingModule | `thinking_module.py` | Extracts :::thinking::: |
+| AnalysisModule | `analysis_module.py` | Analysis text |
+| TableModule | `table_module.py` | **Comparison table** |
+| ConclusionModule | `conclusion_module.py` | Conclusion/recommendation |
 
-### Campos de Salida (structuredOutput)
+### Output Fields (structuredOutput)
 
 ```javascript
 {
@@ -213,7 +213,7 @@ Para cada query se especifica:
 }
 ```
 
-### ⚠️ Verificación Crítica
+### ⚠️ Critical Verification
 
 **La tabla de comparación DEBE aparecer.** Si no aparece:
 1. Verificar que `table_data` tiene `rows` con datos
@@ -226,7 +226,7 @@ Para cada query se especifica:
 
 ### Query Type: `search`
 
-| # | Query de Prueba | Idioma |
+| # | Test Query | Language |
 |---|----------------|--------|
 | 4.1 | "Busca desarrolladores con Python" | ES |
 | 4.2 | "Who has React experience?" | EN |
@@ -234,7 +234,7 @@ Para cada query se especifica:
 | 4.4 | "Candidatos con más de 5 años de experiencia" | ES |
 | 4.5 | "Show me frontend developers" | EN |
 
-### Estructura Esperada
+### Expected Structure
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -248,17 +248,17 @@ Para cada query se especifica:
 └─────────────────────────────────────────────┘
 ```
 
-### Módulos Backend
+### Backend Modules
 
-| Módulo | Archivo | Propósito |
+| Module | File | Purpose |
 |--------|---------|-----------|
-| ThinkingModule | `thinking_module.py` | Extrae :::thinking::: |
-| DirectAnswerModule | `direct_answer_module.py` | Respuesta directa |
-| ResultsTableModule | `results_table_module.py` | Tabla de resultados |
-| AnalysisModule | `analysis_module.py` | Análisis de resultados |
-| ConclusionModule | `conclusion_module.py` | Conclusión |
+| ThinkingModule | `thinking_module.py` | Extracts :::thinking::: |
+| DirectAnswerModule | `direct_answer_module.py` | Direct answer |
+| ResultsTableModule | `results_table_module.py` | Results table |
+| AnalysisModule | `analysis_module.py` | Results analysis |
+| ConclusionModule | `conclusion_module.py` | Conclusion |
 
-### Campos de Salida (structuredOutput)
+### Output Fields (structuredOutput)
 
 ```javascript
 {
@@ -283,7 +283,7 @@ Para cada query se especifica:
 
 ### Query Type: `ranking`
 
-| # | Query de Prueba | Idioma |
+| # | Test Query | Language |
 |---|----------------|--------|
 | 5.1 | "Top 5 candidatos para backend" | ES |
 | 5.2 | "Rank candidates for senior position" | EN |
@@ -291,7 +291,7 @@ Para cada query se especifica:
 | 5.4 | "Ordena los candidatos por experiencia" | ES |
 | 5.5 | "Who are the top 3 for frontend?" | EN |
 
-### Estructura Esperada
+### Expected Structure
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -305,18 +305,18 @@ Para cada query se especifica:
 └─────────────────────────────────────────────┘
 ```
 
-### Módulos Backend
+### Backend Modules
 
-| Módulo | Archivo | Propósito |
+| Module | File | Purpose |
 |--------|---------|-----------|
-| ThinkingModule | `thinking_module.py` | Extrae :::thinking::: |
-| RankingCriteriaModule | `ranking_criteria_module.py` | Criterios de ranking |
-| RankingTableModule | `ranking_table_module.py` | Tabla ordenada |
-| TopPickModule | `top_pick_module.py` | Destaca #1 |
-| AnalysisModule | `analysis_module.py` | Análisis |
-| ConclusionModule | `conclusion_module.py` | Conclusión |
+| ThinkingModule | `thinking_module.py` | Extracts :::thinking::: |
+| RankingCriteriaModule | `ranking_criteria_module.py` | Ranking criteria |
+| RankingTableModule | `ranking_table_module.py` | Ranked table |
+| TopPickModule | `top_pick_module.py` | Highlights #1 |
+| AnalysisModule | `analysis_module.py` | Analysis |
+| ConclusionModule | `conclusion_module.py` | Conclusion |
 
-### Campos de Salida (structuredOutput)
+### Output Fields (structuredOutput)
 
 ```javascript
 {
@@ -345,7 +345,7 @@ Para cada query se especifica:
 
 ### Query Type: `job_match`
 
-| # | Query de Prueba | Idioma |
+| # | Test Query | Language |
 |---|----------------|--------|
 | 6.1 | "Who would fit a senior position?" | EN |
 | 6.2 | "Match candidates to frontend role" | EN |
@@ -353,7 +353,7 @@ Para cada query se especifica:
 | 6.4 | "Evaluate candidates for Python developer role" | EN |
 | 6.5 | "Who fits a DevOps position?" | EN |
 
-### Estructura Esperada
+### Expected Structure
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -367,18 +367,18 @@ Para cada query se especifica:
 └─────────────────────────────────────────────┘
 ```
 
-### Módulos Backend
+### Backend Modules
 
-| Módulo | Archivo | Propósito |
+| Module | File | Purpose |
 |--------|---------|-----------|
-| ThinkingModule | `thinking_module.py` | Extrae :::thinking::: |
-| RequirementsModule | `requirements_module.py` | Extrae requisitos del JD/query |
-| MatchScoreModule | `match_score_module.py` | Calcula % de match |
-| GapAnalysisModule | `gap_analysis_module.py` | Qué falta a cada candidato |
-| AnalysisModule | `analysis_module.py` | Análisis |
-| ConclusionModule | `conclusion_module.py` | Conclusión |
+| ThinkingModule | `thinking_module.py` | Extracts :::thinking::: |
+| RequirementsModule | `requirements_module.py` | Extracts requirements from JD/query |
+| MatchScoreModule | `match_score_module.py` | Calculates match % |
+| GapAnalysisModule | `gap_analysis_module.py` | What each candidate is missing |
+| AnalysisModule | `analysis_module.py` | Analysis |
+| ConclusionModule | `conclusion_module.py` | Conclusion |
 
-### Campos de Salida (structuredOutput)
+### Output Fields (structuredOutput)
 
 ```javascript
 {
@@ -410,7 +410,7 @@ Para cada query se especifica:
 }
 ```
 
-### ⚠️ Verificación Crítica
+### ⚠️ Critical Verification
 
 1. **TopPickCard debe mostrar %**: Si muestra `undefined%` → falta `overall_score`
 2. **MatchScoreCard NO debe mostrar 0%**: Si todos son 0% → problema con RequirementsModule
@@ -422,14 +422,14 @@ Para cada query se especifica:
 
 ### Query Type: `team_build`
 
-| # | Query de Prueba | Idioma |
+| # | Test Query | Language |
 |---|----------------|--------|
 | 7.1 | "Build a team of 3 developers" | EN |
 | 7.2 | "Forma un equipo para proyecto web" | ES |
 | 7.3 | "Assemble a frontend and backend team" | EN |
 | 7.4 | "Create a balanced development team" | EN |
 
-### Estructura Esperada
+### Expected Structure
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -445,19 +445,19 @@ Para cada query se especifica:
 └─────────────────────────────────────────────┘
 ```
 
-### Módulos Backend
+### Backend Modules
 
-| Módulo | Archivo | Propósito |
+| Module | File | Purpose |
 |--------|---------|-----------|
-| ThinkingModule | `thinking_module.py` | Extrae :::thinking::: |
-| TeamRequirementsModule | `team_requirements_module.py` | Roles necesarios |
-| TeamCompositionModule | `team_composition_module.py` | Asignaciones |
-| SkillCoverageModule | `skill_coverage_module.py` | Cobertura de skills |
-| TeamRiskModule | `team_risk_module.py` | Riesgos del equipo |
-| AnalysisModule | `analysis_module.py` | Análisis |
-| ConclusionModule | `conclusion_module.py` | Conclusión |
+| ThinkingModule | `thinking_module.py` | Extracts :::thinking::: |
+| TeamRequirementsModule | `team_requirements_module.py` | Required roles |
+| TeamCompositionModule | `team_composition_module.py` | Assignments |
+| SkillCoverageModule | `skill_coverage_module.py` | Skills coverage |
+| TeamRiskModule | `team_risk_module.py` | Team risks |
+| AnalysisModule | `analysis_module.py` | Analysis |
+| ConclusionModule | `conclusion_module.py` | Conclusion |
 
-### Campos de Salida (structuredOutput)
+### Output Fields (structuredOutput)
 
 ```javascript
 {
@@ -488,14 +488,14 @@ Para cada query se especifica:
 
 ### Query Type: `verification`
 
-| # | Query de Prueba | Idioma |
+| # | Test Query | Language |
 |---|----------------|--------|
 | 8.1 | "Verify if Juan has AWS certification" | EN |
 | 8.2 | "Confirma que María trabajó en Google" | ES |
 | 8.3 | "Check if candidate has 5+ years experience" | EN |
 | 8.4 | "Does Juan have a Master's degree?" | EN |
 
-### Estructura Esperada
+### Expected Structure
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -510,17 +510,17 @@ Para cada query se especifica:
 └─────────────────────────────────────────────┘
 ```
 
-### Módulos Backend
+### Backend Modules
 
-| Módulo | Archivo | Propósito |
+| Module | File | Purpose |
 |--------|---------|-----------|
-| ThinkingModule | `thinking_module.py` | Extrae :::thinking::: |
-| ClaimModule | `claim_module.py` | Parsea la afirmación |
-| EvidenceModule | `evidence_module.py` | Busca evidencia en CV |
-| VerdictModule | `verdict_module.py` | Emite veredicto |
-| ConclusionModule | `conclusion_module.py` | Conclusión |
+| ThinkingModule | `thinking_module.py` | Extracts :::thinking::: |
+| ClaimModule | `claim_module.py` | Parses the claim |
+| EvidenceModule | `evidence_module.py` | Searches evidence in CV |
+| VerdictModule | `verdict_module.py` | Issues verdict |
+| ConclusionModule | `conclusion_module.py` | Conclusion |
 
-### Campos de Salida (structuredOutput)
+### Output Fields (structuredOutput)
 
 ```javascript
 {
@@ -552,14 +552,14 @@ Para cada query se especifica:
 
 ### Query Type: `summary`
 
-| # | Query de Prueba | Idioma |
+| # | Test Query | Language |
 |---|----------------|--------|
 | 9.1 | "Overview of all candidates" | EN |
 | 9.2 | "Resumen del pool de talento" | ES |
 | 9.3 | "Talent pool summary" | EN |
 | 9.4 | "Give me statistics about candidates" | EN |
 
-### Estructura Esperada
+### Expected Structure
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -574,17 +574,17 @@ Para cada query se especifica:
 └─────────────────────────────────────────────┘
 ```
 
-### Módulos Backend
+### Backend Modules
 
-| Módulo | Archivo | Propósito |
+| Module | File | Purpose |
 |--------|---------|-----------|
-| ThinkingModule | `thinking_module.py` | Extrae :::thinking::: |
-| TalentPoolModule | `talent_pool_module.py` | Estadísticas del pool |
-| SkillDistributionModule | `skill_distribution_module.py` | Distribución de skills |
-| ExperienceDistributionModule | `experience_distribution_module.py` | Distribución Jr/Mid/Sr |
-| ConclusionModule | `conclusion_module.py` | Conclusión |
+| ThinkingModule | `thinking_module.py` | Extracts :::thinking::: |
+| TalentPoolModule | `talent_pool_module.py` | Pool statistics |
+| SkillDistributionModule | `skill_distribution_module.py` | Skills distribution |
+| ExperienceDistributionModule | `experience_distribution_module.py` | Jr/Mid/Sr distribution |
+| ConclusionModule | `conclusion_module.py` | Conclusion |
 
-### Campos de Salida (structuredOutput)
+### Output Fields (structuredOutput)
 
 ```javascript
 {

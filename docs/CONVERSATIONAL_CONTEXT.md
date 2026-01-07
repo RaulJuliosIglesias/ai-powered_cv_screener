@@ -1,10 +1,10 @@
-# Sistema de Contexto Conversacional
+# Conversational Context System
 
-> **Estado: ✅ IMPLEMENTADO** | Versión 6.0 | Enero 2026
+> **Status: ✅ IMPLEMENTED** | Version 6.0 | January 2026
 
-## Resumen
+## Summary
 
-El sistema de **contexto conversacional** está completamente implementado y propagado a través de todo el pipeline:
+The **conversational context** system is fully implemented and propagated through the entire pipeline:
 
 ```
 Endpoint → RAG Service → Orchestrator → Structures → Modules
@@ -12,24 +12,24 @@ Endpoint → RAG Service → Orchestrator → Structures → Modules
             conversation_history: List[Dict[str, str]]
 ```
 
-### Capacidades Actuales
-- ✅ `conversation_history` fluye a través de todo el sistema
-- ✅ Todas las 9 Structures reciben contexto conversacional
-- ✅ Referencias pronominales ("este candidato", "él", "ella")
-- ✅ Follow-up queries mantienen contexto
+### Current Capabilities
+- ✅ `conversation_history` flows through the entire system
+- ✅ All 9 Structures receive conversational context
+- ✅ Pronominal references ("this candidate", "he", "she")
+- ✅ Follow-up queries maintain context
 
-### Limitaciones Conocidas
-- ⚠️ Contexto limitado a últimos N mensajes (por costos)
-- ⚠️ No hay resolución semántica avanzada de pronombres (roadmap)
+### Known Limitations
+- ⚠️ Context limited to last N messages (for cost control)
+- ⚠️ No advanced semantic pronoun resolution (roadmap)
 
 ---
 
-## Arquitectura de Implementación
+## Implementation Architecture
 
-### 1. Base de Datos
-**Estado:** ✅ Ya está lista
+### 1. Database
+**Status:** ✅ Already ready
 
-La tabla `session_messages` ya guarda todo lo necesario:
+The `session_messages` table already stores everything needed:
 ```sql
 CREATE TABLE session_messages (
     id UUID PRIMARY KEY,
@@ -44,54 +44,54 @@ CREATE TABLE session_messages (
 ```
 
 ### 2. SessionManager (Backend)
-**Archivos:** 
+**Files:** 
 - `backend/app/models/sessions.py` (Local)
 - `backend/app/providers/cloud/sessions.py` (Cloud/Supabase)
 
-**Nuevo método:**
+**New method:**
 ```python
 def get_conversation_history(
     self, 
     session_id: str, 
-    limit: int = 6  # 3 turnos (user + assistant)
+    limit: int = 6  # 3 turns (user + assistant)
 ) -> List[ChatMessage]:
     """
-    Recupera los últimos N mensajes para contexto conversacional.
+    Retrieves the last N messages for conversational context.
     
     Args:
-        session_id: ID de la sesión
-        limit: Número de mensajes a recuperar (por defecto 6 = 3 turnos)
+        session_id: Session ID
+        limit: Number of messages to retrieve (default 6 = 3 turns)
     
     Returns:
-        Lista de mensajes ordenados del más antiguo al más reciente
+        List of messages ordered from oldest to most recent
     """
 ```
 
 ### 3. RAGServiceV5
-**Archivo:** `backend/app/services/rag_service_v5.py`
+**File:** `backend/app/services/rag_service_v5.py`
 
-**Modificaciones:**
+**Modifications:**
 
 #### a) PipelineContextV5
-Añadir campo para historial:
+Add field for history:
 ```python
 @dataclass
 class PipelineContextV5:
     question: str
     conversation_history: List[Dict[str, str]] = field(default_factory=list)
-    # formato: [{"role": "user", "content": "..."}, {"role": "assistant", "content": "..."}]
-    # ...resto de campos
+    # format: [{"role": "user", "content": "..."}, {"role": "assistant", "content": "..."}]
+    # ...rest of fields
 ```
 
-#### b) Método query_stream
-Aceptar parámetro de historial:
+#### b) query_stream Method
+Accept history parameter:
 ```python
 async def query_stream(
     self,
     question: str,
     conversation_history: List[Dict[str, str]] | None = None,
     session_id: str | None = None,
-    # ...resto de parámetros
+    # ...rest of parameters
 ):
     ctx = PipelineContextV5(
         question=question,
@@ -101,9 +101,9 @@ async def query_stream(
 ```
 
 ### 4. Prompt Builder
-**Archivo:** `backend/app/prompts/templates.py`
+**File:** `backend/app/prompts/templates.py`
 
-**Modificación del prompt de generación:**
+**Generation prompt modification:**
 ```python
 def build_generation_prompt(
     self,
@@ -112,31 +112,31 @@ def build_generation_prompt(
     conversation_history: List[Dict[str, str]] = None,
     # ...
 ) -> str:
-    # Construir sección de historial si existe
+    # Build history section if it exists
     history_section = ""
     if conversation_history:
-        history_section = "\n## Conversación Previa\n"
+        history_section = "\n## Previous Conversation\n"
         for msg in conversation_history:
-            role_label = "Usuario" if msg["role"] == "user" else "Asistente"
+            role_label = "User" if msg["role"] == "user" else "Assistant"
             history_section += f"{role_label}: {msg['content']}\n"
         history_section += "\n"
     
     prompt = f"""
 {history_section}
-## Pregunta Actual
+## Current Question
 {question}
 
-## Contexto de CVs Relevantes
+## Relevant CV Context
 {context}
 
-Genera una respuesta basada en los CVs y considerando la conversación previa...
+Generate a response based on the CVs and considering the previous conversation...
 """
 ```
 
 ### 5. Endpoints
-**Archivo:** `backend/app/api/routes_sessions_stream.py`
+**File:** `backend/app/api/routes_sessions_stream.py`
 
-**Modificación en chat_stream:**
+**Modification in chat_stream:**
 ```python
 @router.post("/{session_id}/chat-stream")
 async def chat_stream(
@@ -147,19 +147,19 @@ async def chat_stream(
     mgr = get_session_manager(mode)
     session = mgr.get_session(session_id)
     
-    # NUEVO: Recuperar historial conversacional
+    # NEW: Retrieve conversational history
     history = mgr.get_conversation_history(session_id, limit=6)
     
-    # Convertir a formato simple para el RAG
+    # Convert to simple format for RAG
     conversation_history = [
         {"role": msg.role, "content": msg.content}
         for msg in history
     ]
     
-    # Guardar mensaje del usuario
+    # Save user message
     mgr.add_message(session_id, "user", request.message)
     
-    # Crear generador con historial
+    # Create generator with history
     return StreamingResponse(
         event_generator(
             rag_service, 
@@ -168,14 +168,14 @@ async def chat_stream(
             cv_ids, 
             total_cvs, 
             mgr,
-            conversation_history  # NUEVO parámetro
+            conversation_history  # NEW parameter
         ),
         media_type="text/event-stream",
         ...
     )
 ```
 
-**Modificación en event_generator:**
+**Modification in event_generator:**
 ```python
 async def event_generator(
     rag_service, 
@@ -184,11 +184,11 @@ async def event_generator(
     cv_ids: list, 
     total_cvs: int, 
     mgr,
-    conversation_history: list = None  # NUEVO
+    conversation_history: list = None  # NEW
 ):
     async for event in rag_service.query_stream(
         question=question,
-        conversation_history=conversation_history,  # NUEVO
+        conversation_history=conversation_history,  # NEW
         session_id=session_id,
         cv_ids=cv_ids,
         total_cvs_in_session=total_cvs
@@ -196,148 +196,148 @@ async def event_generator(
         # ...
 ```
 
-### 6. Frontend (Opcional)
-**Archivo:** `frontend/src/components/SessionChat.jsx` (o similar)
+### 6. Frontend (Optional)
+**File:** `frontend/src/components/SessionChat.jsx` (or similar)
 
-El frontend **no necesita cambios** porque:
-- Ya envía mensajes al endpoint
-- El endpoint maneja el historial automáticamente
-- El frontend solo muestra las respuestas
+The frontend **does not need changes** because:
+- It already sends messages to the endpoint
+- The endpoint handles history automatically
+- The frontend only displays responses
 
 ---
 
-## Configuración
+## Configuration
 
-### Número de Mensajes en Contexto
+### Number of Messages in Context
 
-**Recomendación:** 4-6 mensajes (2-3 turnos)
+**Recommendation:** 4-6 messages (2-3 turns)
 
 ```python
-# En config.py o como parámetro
-CONTEXT_HISTORY_LIMIT = 6  # 3 turnos (user + assistant)
+# In config.py or as parameter
+CONTEXT_HISTORY_LIMIT = 6  # 3 turns (user + assistant)
 ```
 
-**Razones:**
-- ✅ Suficiente para referencias inmediatas
-- ✅ Control de tokens enviados al LLM
-- ✅ Reduce costos de API
-- ✅ Evita confusión con contexto muy antiguo
+**Reasons:**
+- ✅ Sufficient for immediate references
+- ✅ Control of tokens sent to LLM
+- ✅ Reduces API costs
+- ✅ Avoids confusion with very old context
 
-### Optimización de Tokens
+### Token Optimization
 
-Para optimizar el uso de tokens:
+To optimize token usage:
 
-1. **Solo contenido, sin fuentes:**
+1. **Content only, no sources:**
 ```python
 conversation_history = [
     {"role": msg.role, "content": msg.content}
-    # No incluir sources, pipeline_steps, etc.
+    # Don't include sources, pipeline_steps, etc.
 ]
 ```
 
-2. **Truncar mensajes muy largos:**
+2. **Truncate very long messages:**
 ```python
-MAX_MESSAGE_LENGTH = 500  # caracteres
+MAX_MESSAGE_LENGTH = 500  # characters
 content = msg.content[:MAX_MESSAGE_LENGTH]
 ```
 
-3. **Incluir solo mensajes recientes:**
+3. **Include only recent messages:**
 ```python
-# Últimos 6 mensajes = 3 turnos
+# Last 6 messages = 3 turns
 history = mgr.get_conversation_history(session_id, limit=6)
 ```
 
 ---
 
-## Flujo Completo
+## Complete Flow
 
 ```
-1. Usuario envía mensaje
+1. User sends message
    ↓
-2. Backend recupera últimos 6 mensajes de la sesión
+2. Backend retrieves last 6 messages from session
    ↓
-3. Convierte a formato simple [{"role": "user", "content": "..."}]
+3. Converts to simple format [{"role": "user", "content": "..."}]
    ↓
-4. Guarda nuevo mensaje de usuario
+4. Saves new user message
    ↓
-5. Pasa historial + pregunta actual al RAG Service
+5. Passes history + current question to RAG Service
    ↓
-6. RAG Service incluye historial en el prompt de generación
+6. RAG Service includes history in generation prompt
    ↓
-7. LLM genera respuesta considerando contexto
+7. LLM generates response considering context
    ↓
-8. Backend guarda respuesta del assistant
+8. Backend saves assistant response
    ↓
-9. Frontend muestra respuesta
+9. Frontend displays response
 ```
 
 ---
 
-## Ejemplo de Prompt con Contexto
+## Prompt Example with Context
 
 ```
-## Conversación Previa
-Usuario: ¿Cuál es el mejor candidato para Frontend?
-Asistente: Juan Pérez es el mejor candidato para Frontend porque tiene 5 años de experiencia en React...
+## Previous Conversation
+User: Who is the best candidate for Frontend?
+Assistant: Juan Pérez is the best candidate for Frontend because he has 5 years of experience in React...
 
-## Pregunta Actual
-Dime los problemas con este candidato
+## Current Question
+Tell me the problems with this candidate
 
-## Contexto de CVs Relevantes
-[CV chunks de Juan Pérez...]
+## Relevant CV Context
+[CV chunks for Juan Pérez...]
 
-Genera una respuesta basada en los CVs y considerando la conversación previa.
-El usuario pregunta sobre "este candidato", refiriéndose a Juan Pérez mencionado anteriormente.
+Generate a response based on the CVs and considering the previous conversation.
+The user asks about "this candidate", referring to Juan Pérez mentioned earlier.
 ```
 
 ---
 
 ## Testing
 
-### Caso de Prueba 1: Referencia al Candidato
+### Test Case 1: Candidate Reference
 ```
-Usuario: "¿Quién es el mejor para Backend?"
-Sistema: "María García..."
-Usuario: "¿Cuántos años de experiencia tiene?"
-Sistema: ✅ "María García tiene 7 años de experiencia..."
-```
-
-### Caso de Prueba 2: Follow-up
-```
-Usuario: "Compara candidatos de Frontend"
-Sistema: "Juan: React, Ana: Vue..."
-Usuario: "¿Cuál es mejor para un proyecto enterprise?"
-Sistema: ✅ "Entre Juan y Ana, Juan es mejor porque..."
+User: "Who is the best for Backend?"
+System: "María García..."
+User: "How many years of experience does she have?"
+System: ✅ "María García has 7 years of experience..."
 ```
 
-### Caso de Prueba 3: Contexto Limitado
+### Test Case 2: Follow-up
 ```
-[8 mensajes previos]
-Usuario: "Nueva pregunta sobre Backend"
-Sistema: ✅ Solo considera últimos 6 mensajes
+User: "Compare Frontend candidates"
+System: "Juan: React, Ana: Vue..."
+User: "Which is better for an enterprise project?"
+System: ✅ "Between Juan and Ana, Juan is better because..."
+```
+
+### Test Case 3: Limited Context
+```
+[8 previous messages]
+User: "New question about Backend"
+System: ✅ Only considers last 6 messages
 ```
 
 ---
 
-## Mejoras Futuras (Opcional)
+## Future Improvements (Optional)
 
-### 1. Resumen de Conversación
-Para conversaciones muy largas, resumir el historial:
+### 1. Conversation Summary
+For very long conversations, summarize the history:
 ```python
 if len(all_messages) > 20:
     summary = llm.summarize(all_messages[:-6])
     context = summary + recent_messages
 ```
 
-### 2. Detección de Cambio de Tema
-Si el usuario cambia de tema, limpiar contexto:
+### 2. Topic Change Detection
+If user changes topic, clear context:
 ```python
 if topic_changed(new_question, conversation_history):
     conversation_history = []
 ```
 
-### 3. Embeddings de Mensajes
-Buscar mensajes relevantes por similitud semántica:
+### 3. Message Embeddings
+Search for relevant messages by semantic similarity:
 ```python
 relevant_messages = search_similar_messages(
     question, 
@@ -348,31 +348,31 @@ relevant_messages = search_similar_messages(
 
 ---
 
-## Estado de Implementación
+## Implementation Status
 
-| Componente | Estado | Archivo |
-|------------|--------|---------|
-| SessionManager.get_conversation_history() | ✅ Implementado | `sessions.py` |
-| RAGServiceV5 conversation_history param | ✅ Implementado | `rag_service_v5.py` |
-| Orchestrator conversation_history param | ✅ Implementado | `orchestrator.py` |
-| Todas las Structures con param | ✅ Implementado | `structures/*.py` |
-| Endpoints con historial | ✅ Implementado | `routes_sessions_stream.py` |
+| Component | Status | File |
+|-----------|--------|------|
+| SessionManager.get_conversation_history() | ✅ Implemented | `sessions.py` |
+| RAGServiceV5 conversation_history param | ✅ Implemented | `rag_service_v5.py` |
+| Orchestrator conversation_history param | ✅ Implemented | `orchestrator.py` |
+| All Structures with param | ✅ Implemented | `structures/*.py` |
+| Endpoints with history | ✅ Implemented | `routes_sessions_stream.py` |
 
 ---
 
-## Propagación en Structures (v6.0)
+## Propagation in Structures (v6.0)
 
-Todas las 9 Structures ahora reciben `conversation_history`:
+All 9 Structures now receive `conversation_history`:
 
 ```python
-# Ejemplo: JobMatchStructure.assemble()
+# Example: JobMatchStructure.assemble()
 def assemble(
     self,
     llm_output: str,
     chunks: List[Dict[str, Any]],
     query: str = "",
     job_description: str = "",
-    conversation_history: List[Dict[str, str]] = None  # ← IMPLEMENTADO
+    conversation_history: List[Dict[str, str]] = None  # ← IMPLEMENTED
 ) -> Dict[str, Any]:
 ```
 
@@ -390,17 +390,17 @@ def assemble(
 
 ---
 
-## Roadmap: Mejoras Futuras
+## Roadmap: Future Improvements
 
-### Fase 1: Context Resolution (Pendiente)
-- [ ] `ContextResolver` para resolver referencias pronominales automáticamente
-- [ ] Detectar "él", "ella", "este candidato" y resolver a nombre real
+### Phase 1: Context Resolution (Pending)
+- [ ] `ContextResolver` for automatic pronominal reference resolution
+- [ ] Detect "he", "she", "this candidate" and resolve to actual name
 
-### Fase 2: Context-Aware Structures (Pendiente)
-- [ ] Structures adaptan comportamiento según historial
-- [ ] Comparison mantiene criterios entre queries
-- [ ] RiskAssessment prioriza según preocupaciones previas
+### Phase 2: Context-Aware Structures (Pending)
+- [ ] Structures adapt behavior based on history
+- [ ] Comparison maintains criteria between queries
+- [ ] RiskAssessment prioritizes based on previous concerns
 
-### Fase 3: Smart Context Management (Pendiente)
-- [ ] Selección inteligente de mensajes relevantes
-- [ ] Scoring de relevancia por query
+### Phase 3: Smart Context Management (Pending)
+- [ ] Intelligent selection of relevant messages
+- [ ] Relevance scoring per query

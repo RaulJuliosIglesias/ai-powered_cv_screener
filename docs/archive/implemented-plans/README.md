@@ -1,19 +1,19 @@
-# 📋 Planes Implementados
+# 📋 Implemented Plans
 
-Documentos de planificación que ya fueron ejecutados y completados.
+Planning documents that were already executed and completed.
 
-| Documento | Descripción |
-|-----------|-------------|
-| PLAN_LOCAL.md | Plan de modo local con embeddings y ChromaDB |
-| PLAN_METRICAS_COMPLETO.md | Sistema de métricas |
-| PRODUCTION_READY_CHECKLIST.md | Checklist de producción |
-| IMPLEMENTATION_PLAN.md | Plan original del proyecto |
-| IMPLEMENTATION_PLAN_RAG_V5.md | Implementación RAG versión 5 |
-| IMPLEMENTATION_PLAN_RAG_IMPROVEMENTS.md | Mejoras al sistema RAG |
-| IMPLEMENTATION_PLAN_MODULAR_OUTPUT.md | Sistema modular de output |
-| IMPLEMENTATION_PLAN_OUTPUT_STRUCTURE.md | Estructura de output |
-| PLAN_STRUCTURED_OUTPUT_VISUAL.md | Componentes visuales |
-| PLAN_CANDIDATE_FORMAT.md | Formato de candidatos |
-| PLAN_OUTPUT_FIX_V2.md | Correcciones de output v2 |
-| SUPABASE_SETUP.md | Configuración de Supabase |
-| SUPABASE_FIXES_APPLIED.md | Correcciones aplicadas a Supabase |
+| Document | Description |
+|----------|-------------|
+| PLAN_LOCAL.md | Local mode plan with embeddings and ChromaDB |
+| PLAN_METRICAS_COMPLETO.md | Metrics system |
+| PRODUCTION_READY_CHECKLIST.md | Production checklist |
+| IMPLEMENTATION_PLAN.md | Original project plan |
+| IMPLEMENTATION_PLAN_RAG_V5.md | RAG version 5 implementation |
+| IMPLEMENTATION_PLAN_RAG_IMPROVEMENTS.md | RAG system improvements |
+| IMPLEMENTATION_PLAN_MODULAR_OUTPUT.md | Modular output system |
+| IMPLEMENTATION_PLAN_OUTPUT_STRUCTURE.md | Output structure |
+| PLAN_STRUCTURED_OUTPUT_VISUAL.md | Visual components |
+| PLAN_CANDIDATE_FORMAT.md | Candidate format |
+| PLAN_OUTPUT_FIX_V2.md | Output v2 fixes |
+| SUPABASE_SETUP.md | Supabase configuration |
+| SUPABASE_FIXES_APPLIED.md | Fixes applied to Supabase |

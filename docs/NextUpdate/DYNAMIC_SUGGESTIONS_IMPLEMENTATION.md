@@ -1,54 +1,54 @@
-# Plan de Implementación: Sistema de Sugerencias Dinámicas Contextuales
+# Implementation Plan: Dynamic Contextual Suggestions System
 
-## Propósito del Documento
+## Document Purpose
 
-Plan completo para implementar un sistema de sugerencias dinámicas que se adapte al contexto conversacional y al tipo de query anterior. Este plan **REUTILIZA** la infraestructura de contexto existente documentada en `CONVERSATIONAL_CONTEXT_INTEGRATION_PLAN.md`.
+Complete plan to implement a dynamic suggestions system that adapts to conversational context and previous query type. This plan **REUSES** the existing context infrastructure documented in `CONVERSATIONAL_CONTEXT_INTEGRATION_PLAN.md`.
 
-**Documentos de Referencia:**
-- `docs/NextUpdate/CONVERSATIONAL_CONTEXT_INTEGRATION_PLAN.md` - Infraestructura de contexto (REUSAR)
-- `docs/NextUpdate/ORCHESTRATION_STRUCTURES_MODULES.md` - 9 Structures implementadas
-- `docs/NextUpdate/IMPLEMENTATION_PLAN.md` - Plan general
+**Reference Documents:**
+- `docs/NextUpdate/CONVERSATIONAL_CONTEXT_INTEGRATION_PLAN.md` - Context infrastructure (REUSE)
+- `docs/NextUpdate/ORCHESTRATION_STRUCTURES_MODULES.md` - 9 Implemented structures
+- `docs/NextUpdate/IMPLEMENTATION_PLAN.md` - General plan
 
-**Versión:** 1.0  
-**Fecha:** Enero 2026  
-**Tiempo Estimado Total:** 12-15 horas
+**Version:** 1.0  
+**Date:** January 2026  
+**Total Estimated Time:** 12-15 hours
 
 ---
 
-# PARTE 1: ANÁLISIS DEL ESTADO ACTUAL
+# PART 1: CURRENT STATE ANALYSIS
 
-## 1.1 Sistema de Sugerencias Actual (A REEMPLAZAR)
+## 1.1 Current Suggestions System (TO REPLACE)
 
-### ❌ **Implementación Actual - BÁSICA**
+### ❌ **Current Implementation - BASIC**
 
-**Archivo:** `backend/app/api/routes_sessions.py:629-695`
+**File:** `backend/app/api/routes_sessions.py:629-695`
 
 ```python
 @router.get("/{session_id}/suggestions")
 async def get_suggested_questions(session_id: str, mode: Mode):
-    # Solo 10 preguntas genéricas hardcodeadas
+    # Only 10 hardcoded generic questions
     generic_questions = [
         f"Rank all {num_cvs} candidates by experience",
         "Who is best for a leadership role?",
         "Who has the strongest technical skills?",
-        # ... 7 más
+        # ... 7 more
     ]
     random.shuffle(generic_questions)
     suggestions = generic_questions[:4]  # Random 4
 ```
 
-**Problemas:**
-- ❌ Solo 10 preguntas estáticas
-- ❌ No considera el contexto de la conversación
-- ❌ No considera el query_type anterior
-- ❌ No personaliza con nombres de candidatos mencionados
-- ❌ Siempre las mismas preguntas con rotación random
+**Problems:**
+- ❌ Only 10 static questions
+- ❌ Does not consider conversation context
+- ❌ Does not consider previous query_type
+- ❌ Does not personalize with mentioned candidate names
+- ❌ Always the same questions with random rotation
 
 ---
 
-## 1.2 Infraestructura de Contexto EXISTENTE (REUSAR)
+## 1.2 EXISTING Context Infrastructure (REUSE)
 
-### ✅ **get_conversation_history() - IMPLEMENTADO**
+### ✅ **get_conversation_history() - IMPLEMENTED**
 
 ```python
 # SessionManager Local - sessions.py:201-218
@@ -58,25 +58,25 @@ def get_conversation_history(session_id: str, limit: int = 6) -> List[ChatMessag
 def get_conversation_history(session_id: str, limit: int = 6) -> List[Dict]
 ```
 
-**REUSAR:** Ya recupera los últimos N mensajes con formato `[{"role": "user|assistant", "content": "..."}]`
+**REUSE:** Already retrieves last N messages with format `[{"role": "user|assistant", "content": "..."}]`
 
-### ✅ **ChatMessage con Metadata - IMPLEMENTADO**
+### ✅ **ChatMessage with Metadata - IMPLEMENTED**
 
 ```python
-# ChatMessage almacena:
+# ChatMessage stores:
 - role: str           # "user" | "assistant"
-- content: str        # Mensaje completo
-- sources: List       # Fuentes usadas
-- pipeline_steps: List  # Pasos del pipeline
-- structured_output: Dict  # ← CONTIENE query_type!
+- content: str        # Complete message
+- sources: List       # Sources used
+- pipeline_steps: List  # Pipeline steps
+- structured_output: Dict  # ← CONTAINS query_type!
 ```
 
-**REUSAR:** El `structured_output` ya contiene `structure_type` que nos indica el query_type de cada respuesta.
+**REUSE:** The `structured_output` already contains `structure_type` which tells us the query_type of each response.
 
-### ✅ **9 Query Types en Orchestrator - IMPLEMENTADO**
+### ✅ **9 Query Types in Orchestrator - IMPLEMENTED**
 
 ```python
-# orchestrator.py - Query types soportados:
+# orchestrator.py - Supported query types:
 "single_candidate" → SingleCandidateStructure
 "red_flags"        → RiskAssessmentStructure
 "comparison"       → ComparisonStructure
@@ -88,20 +88,20 @@ def get_conversation_history(session_id: str, limit: int = 6) -> List[Dict]
 "summary"          → SummaryStructure
 ```
 
-**REUSAR:** Estos 9 tipos determinan qué banco de sugerencias usar.
+**REUSE:** These 9 types determine which suggestion bank to use.
 
 ---
 
-## 1.3 Matriz de Transiciones Query Type → Sugerencias
+## 1.3 Query Type → Suggestions Transition Matrix
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    TRANSITION MATRIX                                 │
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                     │
-│   DESPUÉS DE         →    SUGERIR PRINCIPALMENTE                    │
+│   AFTER              →    PRIMARILY SUGGEST                         │
 │   ─────────────────────────────────────────                         │
-│   (sin contexto)     →    search, summary, single_candidate         │
+│   (no context)       →    search, summary, single_candidate         │
 │   search             →    ranking, comparison, single_candidate     │
 │   ranking            →    single_candidate, comparison, risk        │
 │   comparison         →    single_candidate, risk, verification      │
@@ -117,9 +117,9 @@ def get_conversation_history(session_id: str, limit: int = 6) -> List[Dict]
 
 ---
 
-# PARTE 2: ARQUITECTURA DEL SISTEMA
+# PART 2: SYSTEM ARCHITECTURE
 
-## 2.1 Diagrama de Arquitectura
+## 2.1 Architecture Diagram
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -168,43 +168,43 @@ def get_conversation_history(session_id: str, limit: int = 6) -> List[Dict]
 
 ---
 
-## 2.2 Estructura de Archivos a Crear
+## 2.2 File Structure to Create
 
 ```
 backend/app/services/suggestion_engine/
 ├── __init__.py                    # Exports SuggestionEngine
-├── engine.py                      # Clase principal SuggestionEngine
-├── context_extractor.py           # Extrae info del contexto conversacional
-├── suggestion_selector.py         # Selecciona sugerencias apropiadas
-├── template_filler.py             # Rellena placeholders en sugerencias
+├── engine.py                      # Main SuggestionEngine class
+├── context_extractor.py           # Extracts info from conversational context
+├── suggestion_selector.py         # Selects appropriate suggestions
+├── template_filler.py             # Fills placeholders in suggestions
 └── banks/
-    ├── __init__.py                # Exports todos los bancos
+    ├── __init__.py                # Exports all banks
     ├── base.py                    # Dataclass Suggestion, SuggestionBank
-    ├── initial_bank.py            # Sugerencias sin contexto previo
-    ├── search_bank.py             # Sugerencias post-search
-    ├── ranking_bank.py            # Sugerencias post-ranking
-    ├── comparison_bank.py         # Sugerencias post-comparison
-    ├── job_match_bank.py          # Sugerencias post-job_match
-    ├── team_build_bank.py         # Sugerencias post-team_build
-    ├── single_candidate_bank.py   # Sugerencias post-single_candidate
-    ├── risk_assessment_bank.py    # Sugerencias post-red_flags
-    └── verification_bank.py       # Sugerencias post-verification
+    ├── initial_bank.py            # Suggestions without prior context
+    ├── search_bank.py             # Suggestions post-search
+    ├── ranking_bank.py            # Suggestions post-ranking
+    ├── comparison_bank.py         # Suggestions post-comparison
+    ├── job_match_bank.py          # Suggestions post-job_match
+    ├── team_build_bank.py         # Suggestions post-team_build
+    ├── single_candidate_bank.py   # Suggestions post-single_candidate
+    ├── risk_assessment_bank.py    # Suggestions post-red_flags
+    └── verification_bank.py       # Suggestions post-verification
 ```
 
-**Total:** 14 archivos nuevos
+**Total:** 14 new files
 
 ---
 
-# PARTE 3: PLAN DE IMPLEMENTACIÓN POR FASES
+# PART 3: PHASED IMPLEMENTATION PLAN
 
-## **FASE 1: Infraestructura Base (3-4 horas)**
+## **PHASE 1: Base Infrastructure (3-4 hours)**
 
-### Objetivo
-Crear la estructura del SuggestionEngine y las clases base.
+### Objective
+Create SuggestionEngine structure and base classes.
 
-### Tareas
+### Tasks
 
-#### ✅ **Tarea 1.1: Crear estructura de directorios**
+#### ✅ **Task 1.1: Create directory structure**
 
 ```bash
 mkdir -p backend/app/services/suggestion_engine/banks
@@ -212,9 +212,9 @@ mkdir -p backend/app/services/suggestion_engine/banks
 
 ---
 
-#### ✅ **Tarea 1.2: Crear banks/base.py**
+#### ✅ **Task 1.2: Create banks/base.py**
 
-**Archivo:** `backend/app/services/suggestion_engine/banks/base.py`
+**File:** `backend/app/services/suggestion_engine/banks/base.py`
 
 ```python
 """

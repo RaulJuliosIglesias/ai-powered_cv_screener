@@ -87,14 +87,14 @@ USER QUERY → ORCHESTRATOR → STRUCTURE → MODULES → OUTPUT
 
 ## Query Type → Structure Mapping
 
-| Query Type | Structure | Ejemplo de Query |
-|------------|-----------|------------------|
-| `single_candidate` | SingleCandidateStructure | "Dame el perfil completo de Juan" |
-| `red_flags` | RiskAssessmentStructure | "Qué red flags tiene María?" |
-| `comparison` | ComparisonStructure | "Compara Juan y María" |
-| `search` | SearchStructure | "Busca developers con Python" |
-| `ranking` | RankingStructure | "Top 5 candidatos para backend" |
-| `job_match` | JobMatchStructure | "Quién encaja mejor para senior position?" |
+| Query Type | Structure | Example Query |
+|------------|-----------|---------------|
+| `single_candidate` | SingleCandidateStructure | "Give me the full profile of Juan" |
+| `red_flags` | RiskAssessmentStructure | "What red flags does María have?" |
+| `comparison` | ComparisonStructure | "Compare Juan and María" |
+| `search` | SearchStructure | "Find developers with Python" |
+| `ranking` | RankingStructure | "Top 5 candidates for backend" |
+| `job_match` | JobMatchStructure | "Who fits best for senior position?" |
 | `team_build` | TeamBuildStructure | "Build a team of 3 developers" |
 | `verification` | VerificationStructure | "Verify if Juan has AWS certification" |
 | `summary` | SummaryStructure | "Overview of all candidates" |

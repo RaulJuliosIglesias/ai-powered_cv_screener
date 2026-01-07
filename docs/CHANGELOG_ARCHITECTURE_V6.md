@@ -1,22 +1,22 @@
-# Changelog: Arquitectura V6 - Orchestration/Structures/Modules
+# Changelog: Architecture V6 - Orchestration/Structures/Modules
 
-## Resumen Ejecutivo
+## Executive Summary
 
-Este documento detalla todos los cambios realizados para implementar la arquitectura completa de **Orchestrator → Structures → Modules** con soporte para **Conversational Context**.
+This document details all changes made to implement the complete **Orchestrator → Structures → Modules** architecture with **Conversational Context** support.
 
-**Fecha:** Enero 2026  
-**Versión:** 6.0
+**Date:** January 2026  
+**Version:** 6.0
 
 ---
 
-# CAMBIOS EN BACKEND
+# BACKEND CHANGES
 
 ## 1. Orchestrator (`orchestrator.py`)
 
-### 1.1 Nueva Firma del Método `process()`
+### 1.1 New Method Signature for `process()`
 
 ```python
-# ANTES
+# BEFORE
 def process(
     self,
     raw_llm_output: str,
@@ -26,36 +26,36 @@ def process(
     candidate_name: str = None
 ) -> tuple[StructuredOutput, str]:
 
-# DESPUÉS
+# AFTER
 def process(
     self,
     raw_llm_output: str,
     chunks: List[Dict[str, Any]] = None,
     query: str = "",
-    query_type: str = "search",  # Cambiado default
+    query_type: str = "search",  # Changed default
     candidate_name: str = None,
-    conversation_history: List[Dict[str, str]] = None  # NUEVO
+    conversation_history: List[Dict[str, str]] = None  # NEW
 ) -> tuple[StructuredOutput, str]:
 ```
 
-### 1.2 Nuevas Estructuras Soportadas
+### 1.2 New Supported Structures
 
-| Structure | Query Type | Estado |
+| Structure | Query Type | Status |
 |-----------|------------|--------|
-| SingleCandidateStructure | `single_candidate` | ✅ Implementada |
-| RiskAssessmentStructure | `red_flags` | ✅ Implementada |
-| ComparisonStructure | `comparison` | ✅ Implementada |
-| SearchStructure | `search` | ✅ Implementada |
-| RankingStructure | `ranking` | ✅ Implementada |
-| JobMatchStructure | `job_match` | ✅ Implementada |
-| TeamBuildStructure | `team_build` | ✅ Implementada |
-| VerificationStructure | `verification` | ✅ Implementada |
-| SummaryStructure | `summary` | ✅ Implementada |
+| SingleCandidateStructure | `single_candidate` | ✅ Implemented |
+| RiskAssessmentStructure | `red_flags` | ✅ Implemented |
+| ComparisonStructure | `comparison` | ✅ Implemented |
+| SearchStructure | `search` | ✅ Implemented |
+| RankingStructure | `ranking` | ✅ Implemented |
+| JobMatchStructure | `job_match` | ✅ Implemented |
+| TeamBuildStructure | `team_build` | ✅ Implemented |
+| VerificationStructure | `verification` | ✅ Implemented |
+| SummaryStructure | `summary` | ✅ Implemented |
 
-### 1.3 Routing Completo
+### 1.3 Complete Routing
 
 ```python
-# Líneas 133-237: Routing a todas las 9 estructuras
+# Lines 133-237: Routing to all 9 structures
 if query_type == "single_candidate":
     structure_data = self.single_candidate_structure.assemble(...)
 elif query_type == "red_flags":
@@ -76,58 +76,58 @@ elif query_type == "summary":
     structure_data = self.summary_structure.assemble(...)
 ```
 
-### 1.4 Propagación de `conversation_history`
+### 1.4 `conversation_history` Propagation
 
-Todas las llamadas a `structure.assemble()` ahora incluyen:
+All calls to `structure.assemble()` now include:
 ```python
 conversation_history=conversation_history or []
 ```
 
-### 1.5 Handler `_build_structured_output()` Actualizado
+### 1.5 Updated `_build_structured_output()` Handler
 
-Cada estructura tiene su handler para poblar `StructuredOutput`:
+Each structure has its handler to populate `StructuredOutput`:
 
 ```python
-# job_match (Líneas 301-308)
+# job_match (Lines 301-308)
 elif structure_data.get("structure_type") == "job_match":
     structured.match_scores = structure_data.get("match_scores")
     structured.requirements = structure_data.get("requirements")
     structured.best_match = structure_data.get("best_match")
-    structured.gap_analysis = structure_data.get("gap_analysis")  # NUEVO
-    structured.total_candidates = structure_data.get("total_candidates", 0)  # NUEVO
+    structured.gap_analysis = structure_data.get("gap_analysis")  # NEW
+    structured.total_candidates = structure_data.get("total_candidates", 0)  # NEW
     structured.analysis = structure_data.get("analysis")
 ```
 
-### 1.6 Bug Fix: `risk_assessment_module` Inicializado
+### 1.6 Bug Fix: `risk_assessment_module` Initialized
 
 ```python
-# Línea 91-92 - ANTES estaba sin inicializar (causaba CRASH)
+# Line 91-92 - BEFORE it was uninitialized (caused CRASH)
 from .modules import RiskTableModule
 self.risk_assessment_module = RiskTableModule()
 ```
 
 ---
 
-## 2. Structures (9 archivos)
+## 2. Structures (9 files)
 
-### 2.1 Cambio Común: Aceptar `conversation_history`
+### 2.1 Common Change: Accept `conversation_history`
 
-Todas las estructuras ahora aceptan `conversation_history` en su método `assemble()`:
+All structures now accept `conversation_history` in their `assemble()` method:
 
 ```python
 def assemble(
     self,
     llm_output: str,
     chunks: List[Dict[str, Any]],
-    # ... otros parámetros específicos ...
-    conversation_history: List[Dict[str, str]] = None  # NUEVO
+    # ... other specific parameters ...
+    conversation_history: List[Dict[str, str]] = None  # NEW
 ) -> Dict[str, Any]:
 ```
 
-### 2.2 Archivos Modificados
+### 2.2 Modified Files
 
-| Archivo | Cambio Principal |
-|---------|------------------|
+| File | Main Change |
+|------|-------------|
 | `single_candidate_structure.py` | + `conversation_history` param |
 | `risk_assessment_structure.py` | + `conversation_history` param |
 | `comparison_structure.py` | + `conversation_history` param |
@@ -138,11 +138,11 @@ def assemble(
 | `verification_structure.py` | + `conversation_history` param |
 | `summary_structure.py` | + `conversation_history` param |
 
-### 2.3 JobMatchStructure: Extracción Inteligente de Requisitos
+### 2.3 JobMatchStructure: Smart Requirements Extraction
 
 ```python
-# Líneas 127-226: Nuevo método _extract_requirements_from_query()
-# Extrae requisitos del query cuando no hay JD explícito
+# Lines 127-226: New method _extract_requirements_from_query()
+# Extracts requirements from query when there's no explicit JD
 
 # "senior position" → experience >= 5 years
 # "frontend role" → JavaScript, React skills
@@ -153,10 +153,10 @@ def assemble(
 
 ## 3. Modules
 
-### 3.1 Nuevos Módulos Implementados
+### 3.1 New Modules Implemented
 
-| Módulo | Archivo | Propósito |
-|--------|---------|-----------|
+| Module | File | Purpose |
+|--------|------|---------|
 | HighlightsModule | `highlights_module.py` | Key info table |
 | CareerModule | `career_module.py` | Career trajectory |
 | SkillsModule | `skills_module.py` | Skills snapshot |
@@ -178,16 +178,16 @@ def assemble(
 | SkillDistributionModule | `skill_distribution_module.py` | Skill distribution |
 | ExperienceDistributionModule | `experience_distribution_module.py` | Experience levels |
 
-### 3.2 `__init__.py` Actualizado
+### 3.2 Updated `__init__.py`
 
-Todos los módulos están exportados correctamente en `modules/__init__.py`.
+All modules are correctly exported in `modules/__init__.py`.
 
-### 3.3 MatchScoreModule: Fallback a Similarity Scoring
+### 3.3 MatchScoreModule: Fallback to Similarity Scoring
 
 ```python
-# Líneas 231-265: Nuevo método _calculate_similarity_match()
-# Cuando no hay requirements, usa similarity scores de chunks
-# Evita mostrar 0% cuando no hay requisitos explícitos
+# Lines 231-265: New method _calculate_similarity_match()
+# When there are no requirements, uses similarity scores from chunks
+# Avoids showing 0% when there are no explicit requirements
 ```
 
 ---
@@ -197,14 +197,14 @@ Todos los módulos están exportados correctamente en `modules/__init__.py`.
 ### 4.1 Bug Fix: `table_data.to_dict()` Safe
 
 ```python
-# Línea 155 - ANTES causaba crash si table_data era dict
+# Line 155 - BEFORE caused crash if table_data was dict
 "table_data": self.table_data.to_dict() if self.table_data else None,
 
-# DESPUÉS - Safe check
+# AFTER - Safe check
 "table_data": self.table_data.to_dict() if self.table_data and hasattr(self.table_data, 'to_dict') else self.table_data,
 ```
 
-### 4.2 Nuevos Campos en StructuredOutput
+### 4.2 New Fields in StructuredOutput
 
 ```python
 # Job Match
@@ -233,14 +233,14 @@ experience_distribution: Optional[Dict[str, Any]] = None
 
 ---
 
-# CAMBIOS EN FRONTEND
+# FRONTEND CHANGES
 
 ## 5. StructuredOutputRenderer.jsx
 
-### 5.1 Routing por `structure_type`
+### 5.1 Routing by `structure_type`
 
 ```javascript
-// Líneas 508-678: Routing explícito por structure_type
+// Lines 508-678: Explicit routing by structure_type
 if (structure_type === 'single_candidate') { ... }
 if (structure_type === 'risk_assessment') { ... }
 if (structure_type === 'comparison') { ... }
@@ -252,28 +252,28 @@ if (structure_type === 'verification') { ... }
 if (structure_type === 'summary') { ... }
 ```
 
-### 5.2 Comparison: CandidateTable Obligatoria
+### 5.2 Comparison: Mandatory CandidateTable
 
 ```javascript
-// Línea 571-572 - CRÍTICO: Muestra tabla de comparación
+// Line 571-572 - CRITICAL: Shows comparison table
 {table_data?.rows?.length > 0 && (
   <CandidateTable tableData={table_data} onOpenCV={onOpenCV} />
 )}
 ```
 
-### 5.3 WinnerCard para Comparisons
+### 5.3 WinnerCard for Comparisons
 
 ```javascript
-// Línea 575 - Nuevo componente
+// Line 575 - New component
 {winner && candidates.length >= 2 && (
   <WinnerCard winner={...} runnerUp={...} onOpenCV={onOpenCV} />
 )}
 ```
 
-## 6. Nuevos Componentes Frontend
+## 6. New Frontend Components
 
-| Componente | Archivo | Usado Por |
-|------------|---------|-----------|
+| Component | File | Used By |
+|-----------|------|---------|
 | WinnerCard | `modules/WinnerCard.jsx` | Comparison |
 | ComparisonMatrix | `modules/ComparisonMatrix.jsx` | Comparison |
 | ConfidenceIndicator | `modules/ConfidenceIndicator.jsx` | All |
@@ -289,49 +289,49 @@ if (structure_type === 'summary') { ... }
 
 ---
 
-# BUGS CORREGIDOS
+# BUGS FIXED
 
-| Bug | Archivo | Severidad | Estado |
-|-----|---------|-----------|--------|
-| `risk_assessment_module` no inicializado | orchestrator.py:91 | 🔴 CRASH | ✅ Fixed |
-| `table_data.to_dict()` en dict | structured_output.py:155 | 🔴 CRASH | ✅ Fixed |
-| `gap_analysis` no pasado a job_match | orchestrator.py:306 | 🟡 Medium | ✅ Fixed |
-| `total_candidates` no pasado | orchestrator.py:307 | 🟡 Medium | ✅ Fixed |
-| `justification` faltaba en best_match | job_match_structure.py:119 | 🟡 Medium | ✅ Fixed |
-| Query usado como requirement (0% bug) | job_match_structure.py:127-226 | 🔴 Critical | ✅ Fixed |
-| Default query_type incorrecto | orchestrator.py:101 | 🟡 Medium | ✅ Fixed |
-| Comparison sin tabla | orchestrator.py:284 | 🔴 Critical | ✅ Fixed |
-| TopPick sin overall_score | job_match_structure.py:107 | 🟡 Medium | ✅ Fixed |
-
----
-
-# DOCUMENTACIÓN ACTUALIZADA
-
-| Documento | Ubicación | Estado |
-|-----------|-----------|--------|
-| ORCHESTRATION_STRUCTURES_MODULES.md | docs/NextUpdate/ | ✅ Existente |
-| IMPLEMENTATION_PLAN.md | docs/NextUpdate/ | ✅ Existente |
-| CONVERSATIONAL_CONTEXT_INTEGRATION_PLAN.md | docs/NextUpdate/ | ✅ Existente |
-| TEST_ORCHESTRATION_STRUCTURES_MODULES.md | docs/testeo/ | ✅ **NUEVO** |
-| CHANGELOG_ARCHITECTURE_V6.md | docs/ | ✅ **NUEVO** |
+| Bug | File | Severity | Status |
+|-----|------|----------|--------|
+| `risk_assessment_module` not initialized | orchestrator.py:91 | 🔴 CRASH | ✅ Fixed |
+| `table_data.to_dict()` on dict | structured_output.py:155 | 🔴 CRASH | ✅ Fixed |
+| `gap_analysis` not passed to job_match | orchestrator.py:306 | 🟡 Medium | ✅ Fixed |
+| `total_candidates` not passed | orchestrator.py:307 | 🟡 Medium | ✅ Fixed |
+| `justification` missing in best_match | job_match_structure.py:119 | 🟡 Medium | ✅ Fixed |
+| Query used as requirement (0% bug) | job_match_structure.py:127-226 | 🔴 Critical | ✅ Fixed |
+| Incorrect default query_type | orchestrator.py:101 | 🟡 Medium | ✅ Fixed |
+| Comparison without table | orchestrator.py:284 | 🔴 Critical | ✅ Fixed |
+| TopPick without overall_score | job_match_structure.py:107 | 🟡 Medium | ✅ Fixed |
 
 ---
 
-# PRÓXIMOS PASOS
+# UPDATED DOCUMENTATION
 
-## Fase 1: Context Resolution (Pendiente)
-- [ ] Crear `ContextResolver` para resolver referencias pronominales
-- [ ] Integrar en RAG pipeline
-
-## Fase 2: Context-Aware Structures (Pendiente)
-- [ ] Structures usan `conversation_history` para adaptar comportamiento
-- [ ] RiskAssessment prioriza según preocupaciones previas
-- [ ] Comparison mantiene criterios entre queries
-
-## Fase 3: Smart Context Management (Pendiente)
-- [ ] `SmartContextManager` para selección inteligente de mensajes
-- [ ] Scoring de relevancia
+| Document | Location | Status |
+|----------|----------|--------|
+| ORCHESTRATION_STRUCTURES_MODULES.md | docs/NextUpdate/ | ✅ Existing |
+| IMPLEMENTATION_PLAN.md | docs/NextUpdate/ | ✅ Existing |
+| CONVERSATIONAL_CONTEXT_INTEGRATION_PLAN.md | docs/NextUpdate/ | ✅ Existing |
+| TEST_ORCHESTRATION_STRUCTURES_MODULES.md | docs/testeo/ | ✅ **NEW** |
+| CHANGELOG_ARCHITECTURE_V6.md | docs/ | ✅ **NEW** |
 
 ---
 
-*Última actualización: Enero 2026*
+# NEXT STEPS
+
+## Phase 1: Context Resolution (Pending)
+- [ ] Create `ContextResolver` for pronominal reference resolution
+- [ ] Integrate into RAG pipeline
+
+## Phase 2: Context-Aware Structures (Pending)
+- [ ] Structures use `conversation_history` to adapt behavior
+- [ ] RiskAssessment prioritizes based on previous concerns
+- [ ] Comparison maintains criteria between queries
+
+## Phase 3: Smart Context Management (Pending)
+- [ ] `SmartContextManager` for intelligent message selection
+- [ ] Relevance scoring
+
+---
+
+*Last updated: January 2026*

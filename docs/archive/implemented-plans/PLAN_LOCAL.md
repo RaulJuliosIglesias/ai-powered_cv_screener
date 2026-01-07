@@ -1,25 +1,25 @@
-# 🏠 PLAN DE IMPLEMENTACIÓN: MODO LOCAL
+# 🏠 IMPLEMENTATION PLAN: LOCAL MODE
 
-## Objetivo
-Sistema RAG completo funcionando 100% local (excepto LLM que usa OpenRouter), con embeddings reales, guardrails, anti-alucinación y evaluación.
+## Objective
+Complete RAG system running 100% locally (except LLM which uses OpenRouter), with real embeddings, guardrails, anti-hallucination and evaluation.
 
 ---
 
-## 📦 STACK TECNOLÓGICO
+## 📦 TECHNOLOGY STACK
 
-| Componente | Tecnología | Versión | Propósito |
-|------------|-----------|---------|-----------|
-| **Embeddings** | `sentence-transformers` | 2.2.2+ | Embeddings semánticos reales |
-| **Modelo Embedding** | `all-MiniLM-L6-v2` | - | 384 dims, rápido, preciso |
-| **Vector Store** | `ChromaDB` | 0.4.x | Base de datos vectorial local |
-| **Guardrails** | `guardrails-ai` | 0.4.x | Validación de I/O del LLM |
-| **Anti-alucinación** | Custom + `spaCy` | 3.7.x | Extracción de entidades |
+| Component | Technology | Version | Purpose |
+|-----------|-----------|---------|---------|
+| **Embeddings** | `sentence-transformers` | 2.2.2+ | Real semantic embeddings |
+| **Embedding Model** | `all-MiniLM-L6-v2` | - | 384 dims, fast, accurate |
+| **Vector Store** | `ChromaDB` | 0.4.x | Local vector database |
+| **Guardrails** | `guardrails-ai` | 0.4.x | LLM I/O validation |
+| **Anti-hallucination** | Custom + `spaCy` | 3.7.x | Entity extraction |
 | **LLM** | OpenRouter API | - | GPT-4o-mini / Claude |
-| **Evaluación** | `ragas` | 0.1.x | Métricas RAG automáticas |
+| **Evaluation** | `ragas` | 0.1.x | Automatic RAG metrics |
 
 ---
 
-## 🏗️ ARQUITECTURA PROPUESTA
+## 🏗️ PROPOSED ARCHITECTURE
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -36,8 +36,8 @@ Sistema RAG completo funcionando 100% local (excepto LLM que usa OpenRouter), co
 │                                ▼                                 │
 │  ┌─────────────────────────────────────────────────────────────┐│
 │  │              GUARDRAIL SERVICE (PRE-LLM)                    ││
-│  │  - Clasificador de intención (CV-related vs off-topic)      ││
-│  │  - Validación de input                                       ││
+│  │  - Intent classifier (CV-related vs off-topic)              ││
+│  │  - Input validation                                          ││
 │  └─────────────────────────────────────────────────────────────┘│
 │                                │                                 │
 │                                ▼                                 │
@@ -52,23 +52,23 @@ Sistema RAG completo funcionando 100% local (excepto LLM que usa OpenRouter), co
 │                                ▼                                 │
 │  ┌─────────────────────────────────────────────────────────────┐│
 │  │           ANTI-HALLUCINATION SERVICE (POST-LLM)             ││
-│  │  - Verificar nombres mencionados existen en CVs             ││
-│  │  - Verificar skills mencionadas están en CVs                ││
-│  │  - Score de confianza                                        ││
+│  │  - Verify mentioned names exist in CVs                      ││
+│  │  - Verify mentioned skills are in CVs                       ││
+│  │  - Confidence score                                          ││
 │  └─────────────────────────────────────────────────────────────┘│
 │                                │                                 │
 │                                ▼                                 │
 │  ┌─────────────────────────────────────────────────────────────┐│
 │  │                   EVALUATION SERVICE                         ││
-│  │  - Logging de queries/respuestas                            ││
-│  │  - Métricas RAGAS                                           ││
+│  │  - Query/response logging                                   ││
+│  │  - RAGAS metrics                                            ││
 │  └─────────────────────────────────────────────────────────────┘│
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 📁 ESTRUCTURA DE ARCHIVOS (REFACTORING)
+## 📁 FILE STRUCTURE (REFACTORING)
 
 ```
 backend/app/
@@ -89,12 +89,12 @@ backend/app/
 
 ---
 
-## 📋 FASES DE IMPLEMENTACIÓN
+## 📋 IMPLEMENTATION PHASES
 
-### FASE 1: Embeddings Reales (Día 1)
-**Archivos a modificar:** `providers/local/embeddings.py`, `requirements.txt`
+### PHASE 1: Real Embeddings (Day 1)
+**Files to modify:** `providers/local/embeddings.py`, `requirements.txt`
 
-#### 1.1 Instalar dependencias
+#### 1.1 Install dependencies
 ```bash
 pip install sentence-transformers==2.2.2
 pip install chromadb==0.4.22

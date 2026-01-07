@@ -1,13 +1,13 @@
-# 📦 Archivo de Documentación
+# 📦 Documentation Archive
 
-Esta carpeta contiene documentos históricos de planes ya implementados.
+This folder contains historical documents of already implemented plans.
 
-Se mantienen para:
-- **Referencia**: Entender decisiones pasadas
-- **Trazabilidad**: Historial de evolución del proyecto
-- **Auditoría**: Documentar el proceso de desarrollo
+They are maintained for:
+- **Reference**: Understanding past decisions
+- **Traceability**: Project evolution history
+- **Audit**: Documenting the development process
 
-## Contenido
+## Contents
 
 ### `/implemented-plans/`
-Planes de implementación que ya fueron completados y aplicados al código.
+Implementation plans that were already completed and applied to the code.

@@ -1,102 +1,102 @@
-# Plan de Implementación: Confidence Scoring Avanzado
+# Implementation Plan: Advanced Confidence Scoring
 
-## 🔴 ANÁLISIS HONESTO: Lo que tenemos vs. Lo que necesitamos
+## 🔴 HONEST ANALYSIS: What We Have vs. What We Need
 
-### Estado Actual (REALIDAD)
+### Current State (REALITY)
 
-| Técnica | ¿La tenemos? | Cómo está implementada | Calidad |
-|---------|--------------|------------------------|---------|
-| **Claim Extraction** | ✅ Sí | LLM via OpenRouter extrae claims del response | 🟡 Básica |
-| **Claim Verification** | ✅ Parcial | LLM verifica claim vs context (NO es NLI real) | 🟡 Básica |
-| **Source Relevance** | ✅ Sí | Promedio de similarity scores del vector search | 🟢 Correcta |
-| **Source Coverage** | ✅ Sí | Conteo de chunks + diversidad de CVs | 🟢 Correcta |
-| **Response Completeness** | ✅ Sí | Checkea componentes del structured output | 🟢 Correcta |
-| **Internal Consistency** | ✅ Parcial | Heurísticas básicas (tabla↔conclusión) | 🟡 Básica |
-| **LLM-as-Judge** | ❌ NO | No implementado | ❌ |
-| **NLI Models** | ❌ NO | Usamos LLM genérico, no modelo NLI especializado | ❌ |
-| **Self-Consistency** | ❌ NO | Solo generamos 1 respuesta | ❌ |
-| **Token Probabilities** | ❌ NO | OpenRouter no expone log_probs fácilmente | ❌ |
-| **Citation Verification** | ❌ NO | No generamos citas inline verificables | ❌ |
-| **Answer Relevance** | ❌ NO | No medimos similitud query↔response | ❌ |
-| **Confidence Calibration** | ❌ NO | No tenemos histórico de feedback | ❌ |
-| **RAGAS Metrics** | ❌ NO | No usamos el framework | ❌ |
+| Technique | Do We Have It? | How It's Implemented | Quality |
+|-----------|----------------|----------------------|---------|
+| **Claim Extraction** | ✅ Yes | LLM via OpenRouter extracts claims from response | 🟡 Basic |
+| **Claim Verification** | ✅ Partial | LLM verifies claim vs context (NOT real NLI) | 🟡 Basic |
+| **Source Relevance** | ✅ Yes | Average similarity scores from vector search | 🟢 Correct |
+| **Source Coverage** | ✅ Yes | Chunk count + CV diversity | 🟢 Correct |
+| **Response Completeness** | ✅ Yes | Checks structured output components | 🟢 Correct |
+| **Internal Consistency** | ✅ Partial | Basic heuristics (table↔conclusion) | 🟡 Basic |
+| **LLM-as-Judge** | ❌ NO | Not implemented | ❌ |
+| **NLI Models** | ❌ NO | We use generic LLM, not specialized NLI model | ❌ |
+| **Self-Consistency** | ❌ NO | We only generate 1 response | ❌ |
+| **Token Probabilities** | ❌ NO | OpenRouter doesn't easily expose log_probs | ❌ |
+| **Citation Verification** | ❌ NO | We don't generate verifiable inline citations | ❌ |
+| **Answer Relevance** | ❌ NO | We don't measure query↔response similarity | ❌ |
+| **Confidence Calibration** | ❌ NO | We don't have historical feedback | ❌ |
+| **RAGAS Metrics** | ❌ NO | We don't use the framework | ❌ |
 
-### Veredicto Brutal
+### Brutal Verdict
 
-**Lo que implementé antes es FUNCIONAL pero NO es nivel industria.**
+**What I implemented before is FUNCTIONAL but NOT industry-level.**
 
-- ✅ **Sí es real**: Los scores vienen de datos reales (similarity scores, claim counts, etc.)
-- ❌ **NO es avanzado**: Falta LLM-as-Judge, NLI, Self-Consistency, Answer Relevance
-- 🟡 **Es un 30%** de lo que hacen Sierra/Perplexity/Anthropic
+- ✅ **It is real**: Scores come from real data (similarity scores, claim counts, etc.)
+- ❌ **NOT advanced**: Missing LLM-as-Judge, NLI, Self-Consistency, Answer Relevance
+- 🟡 **It's about 30%** of what Sierra/Perplexity/Anthropic do
 
 ---
 
-## 📊 Gap Analysis Detallado
+## 📊 Detailed Gap Analysis
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                    NUESTRA IMPLEMENTACIÓN ACTUAL                            │
+│                    OUR CURRENT IMPLEMENTATION                                │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  Query → [Guardrail] → [Retrieval] → [Generation] → [Claim Verify] →       │
-│          básico        similarity    LLM             LLM básico            │
+│          basic         similarity    LLM             basic LLM             │
 │                        scores                                               │
 │                                                                             │
 │  Confidence = weighted_avg(                                                 │
-│      source_coverage,      ← conteo de chunks (REAL pero simplista)        │
+│      source_coverage,      ← chunk count (REAL but simplistic)             │
 │      source_relevance,     ← avg similarity scores (REAL ✓)                │
-│      claim_verification,   ← LLM verifica claims (REAL pero NO es NLI)     │
-│      response_completeness,← checkea componentes (REAL ✓)                  │
-│      internal_consistency  ← heurísticas básicas (WEAK)                    │
+│      claim_verification,   ← LLM verifies claims (REAL but NOT NLI)        │
+│      response_completeness,← checks components (REAL ✓)                    │
+│      internal_consistency  ← basic heuristics (WEAK)                       │
 │  )                                                                          │
 │                                                                             │
-│  ❌ FALTA:                                                                  │
-│  • LLM-as-Judge evaluando Faithfulness/Relevance/Completeness              │
-│  • NLI model para entailment real                                          │
+│  ❌ MISSING:                                                                │
+│  • LLM-as-Judge evaluating Faithfulness/Relevance/Completeness             │
+│  • NLI model for real entailment                                           │
 │  • Answer Relevance (query↔response similarity)                            │
-│  • Self-Consistency (múltiples samples)                                    │
+│  • Self-Consistency (multiple samples)                                     │
 │  • Token probability analysis                                              │
 │  • Citation verification                                                   │
-│  • Confidence calibration con feedback histórico                           │
+│  • Confidence calibration with historical feedback                         │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 
 
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                    LO QUE DEBERÍA SER (INDUSTRIA)                           │
+│                    WHAT IT SHOULD BE (INDUSTRY)                              │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  Query → [Pre-Retrieval Evals] → [Retrieval + Coverage Check] →            │
 │          safety, intent          RAGAS context precision/recall            │
 │                                                                             │
 │        → [Generation + Self-Assessment] → [Post-Gen Evals] →               │
-│          LLM genera + dice su confianza    LLM-as-Judge                    │
-│                                            NLI Faithfulness                │
-│                                            Answer Relevance                │
-│                                            Citation Verify                 │
+│          LLM generates + states confidence  LLM-as-Judge                   │
+│                                             NLI Faithfulness               │
+│                                             Answer Relevance               │
+│                                             Citation Verify                │
 │                                                                             │
 │        → [Decision Engine] → Response                                       │
-│          ≥0.8: enviar                                                      │
-│          ≥0.5: enviar con disclaimer                                       │
-│          ≥0.3: regenerar                                                   │
-│          <0.3: declinar                                                    │
+│          ≥0.8: send                                                        │
+│          ≥0.5: send with disclaimer                                        │
+│          ≥0.3: regenerate                                                  │
+│          <0.3: decline                                                     │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🏗️ Plan de Implementación por Fases
+## 🏗️ Phased Implementation Plan
 
-### FASE 1: LLM-as-Judge (ALTO IMPACTO, MEDIA DIFICULTAD)
-**Tiempo estimado: 2-3 días**
-**Cambio de arquitectura: NO**
-**APIs adicionales: NO (usa OpenRouter existente)**
+### PHASE 1: LLM-as-Judge (HIGH IMPACT, MEDIUM DIFFICULTY)
+**Estimated time: 2-3 days**
+**Architecture change: NO**
+**Additional APIs: NO (uses existing OpenRouter)**
 
 ```python
-# Nueva técnica: Un LLM evalúa la respuesta de otro LLM
+# New technique: One LLM evaluates another LLM's response
 
-# Archivo: backend/app/services/llm_judge_service.py
+# File: backend/app/services/llm_judge_service.py
 
 JUDGE_PROMPT = """You are an expert evaluator for a CV screening RAG system.
 
@@ -125,20 +125,20 @@ Respond in JSON:
 }"""
 ```
 
-**Impacto:**
-- Reemplaza nuestro claim_verification simplista
-- Un solo LLM call que evalúa TODO
-- Mucho más robusto que verificar claim por claim
+**Impact:**
+- Replaces our simplistic claim_verification
+- A single LLM call that evaluates EVERYTHING
+- Much more robust than verifying claim by claim
 
 ---
 
-### FASE 2: Answer Relevance (ALTO IMPACTO, BAJA DIFICULTAD)
-**Tiempo estimado: 1 día**
-**Cambio de arquitectura: NO**
-**APIs adicionales: NO**
+### PHASE 2: Answer Relevance (HIGH IMPACT, LOW DIFFICULTY)
+**Estimated time: 1 day**
+**Architecture change: NO**
+**Additional APIs: NO**
 
 ```python
-# Técnica: Medir similitud semántica entre query y response
+# Technique: Measure semantic similarity between query and response
 
 async def calculate_answer_relevance(
     query: str,
@@ -146,7 +146,7 @@ async def calculate_answer_relevance(
     embedder
 ) -> float:
     """
-    Usa embeddings para medir si la respuesta es relevante a la pregunta.
+    Uses embeddings to measure if the response is relevant to the question.
     """
     query_embedding = await embedder.embed_text(query)
     response_embedding = await embedder.embed_text(response[:1000])  # Truncate
@@ -157,21 +157,21 @@ async def calculate_answer_relevance(
     return similarity  # 0.0 - 1.0
 ```
 
-**Impacto:**
-- Detecta respuestas que divagan o no contestan
-- Reutiliza embedder existente
-- Muy rápido (solo 2 embeddings)
+**Impact:**
+- Detects responses that ramble or don't answer
+- Reuses existing embedder
+- Very fast (only 2 embeddings)
 
 ---
 
-### FASE 3: Self-Consistency Light (MEDIO IMPACTO, MEDIA DIFICULTAD)
-**Tiempo estimado: 2 días**
-**Cambio de arquitectura: MENOR (genera 2-3 responses)**
-**APIs adicionales: NO**
-**Costo: 2-3x más tokens**
+### PHASE 3: Self-Consistency Light (MEDIUM IMPACT, MEDIUM DIFFICULTY)
+**Estimated time: 2 days**
+**Architecture change: MINOR (generates 2-3 responses)**
+**Additional APIs: NO**
+**Cost: 2-3x more tokens**
 
 ```python
-# Técnica: Generar N respuestas y medir consistencia
+# Technique: Generate N responses and measure consistency
 
 async def generate_with_consistency(
     prompt: str,
@@ -180,42 +180,42 @@ async def generate_with_consistency(
     temperature: float = 0.7
 ) -> Tuple[str, float]:
     """
-    Genera múltiples respuestas y mide consistencia.
+    Generates multiple responses and measures consistency.
     """
     responses = []
     for _ in range(n_samples):
         resp = await llm.generate(prompt, temperature=temperature)
         responses.append(resp.text)
     
-    # Extraer "key answer" de cada respuesta
+    # Extract "key answer" from each response
     key_answers = [extract_key_answer(r) for r in responses]
     
-    # Medir consistencia
+    # Measure consistency
     consistency = calculate_agreement(key_answers)
     
-    # Usar respuesta con temperature=0 como final
+    # Use response with temperature=0 as final
     final_response = await llm.generate(prompt, temperature=0)
     
     return final_response.text, consistency
 ```
 
-**Impacto:**
-- Alta consistencia = alta confianza
-- Detecta cuando el modelo está "adivinando"
-- Trade-off: más latencia y costo
+**Impact:**
+- High consistency = high confidence
+- Detects when the model is "guessing"
+- Trade-off: more latency and cost
 
 ---
 
-### FASE 4: NLI Faithfulness (ALTO IMPACTO, ALTA DIFICULTAD)
-**Tiempo estimado: 3-5 días**
-**Cambio de arquitectura: SÍ (nuevo modelo)**
-**APIs adicionales: SÍ - Hugging Face Inference API o modelo local**
+### PHASE 4: NLI Faithfulness (HIGH IMPACT, HIGH DIFFICULTY)
+**Estimated time: 3-5 days**
+**Architecture change: YES (new model)**
+**Additional APIs: YES - Hugging Face Inference API or local model**
 
 ```python
-# Técnica: Modelo NLI especializado para verificar entailment
+# Technique: Specialized NLI model to verify entailment
 
-# Opción A: Hugging Face Inference API
-NLI_MODEL = "microsoft/deberta-v3-large-mnli"  # O cross-encoder/nli-deberta-v3-base
+# Option A: Hugging Face Inference API
+NLI_MODEL = "microsoft/deberta-v3-large-mnli"  # Or cross-encoder/nli-deberta-v3-base
 
 async def verify_claim_nli(
     claim: str,
@@ -223,7 +223,7 @@ async def verify_claim_nli(
     hf_api_key: str
 ) -> Tuple[str, float]:
     """
-    Verifica si el contexto implica (entails) el claim.
+    Verifies if the context entails the claim.
     
     Returns:
         ("entailment" | "neutral" | "contradiction", confidence)
@@ -245,7 +245,7 @@ async def verify_claim_nli(
     top_label = max(result, key=lambda x: x["score"])
     return top_label["label"].lower(), top_label["score"]
 
-# Opción B: Modelo local con transformers
+# Option B: Local model with transformers
 from transformers import pipeline
 
 nli_pipeline = pipeline("text-classification", model=NLI_MODEL)
@@ -255,24 +255,24 @@ def verify_claim_local(claim: str, context: str):
     return result[0]["label"], result[0]["score"]
 ```
 
-**Impacto:**
-- Verificación de claims mucho más precisa que LLM genérico
-- Modelos NLI están entrenados específicamente para esto
-- Más rápido y barato que llamadas LLM
+**Impact:**
+- Much more precise claim verification than generic LLM
+- NLI models are specifically trained for this
+- Faster and cheaper than LLM calls
 
-**Requisitos:**
-- API key de Hugging Face (gratis para uso moderado) O
-- GPU local para modelo (4GB+ VRAM)
+**Requirements:**
+- Hugging Face API key (free for moderate usage) OR
+- Local GPU for model (4GB+ VRAM)
 
 ---
 
-### FASE 5: Citation Verification (MEDIO IMPACTO, MEDIA DIFICULTAD)
-**Tiempo estimado: 2-3 días**
-**Cambio de arquitectura: SÍ (cambiar prompt de generación)**
-**APIs adicionales: NO**
+### PHASE 5: Citation Verification (MEDIUM IMPACT, MEDIUM DIFFICULTY)
+**Estimated time: 2-3 days**
+**Architecture change: YES (change generation prompt)**
+**Additional APIs: NO**
 
 ```python
-# Paso 1: Modificar prompt para que LLM genere con citas
+# Step 1: Modify prompt so LLM generates with citations
 
 GENERATION_PROMPT = """
 Answer the question using ONLY the provided context.
@@ -288,16 +288,16 @@ Question: {question}
 Answer with citations:
 """
 
-# Paso 2: Verificar cada cita
+# Step 2: Verify each citation
 
 async def verify_citations(
     response: str,
     chunks: List[str]
 ) -> Tuple[float, List[dict]]:
     """
-    Extrae citas del response y verifica cada una.
+    Extracts citations from response and verifies each one.
     """
-    # Extraer citas: "claim [1]" → claim, source_idx
+    # Extract citations: "claim [1]" → claim, source_idx
     citation_pattern = r'([^.]+)\[(\d+)\]'
     citations = re.findall(citation_pattern, response)
     
@@ -305,7 +305,7 @@ async def verify_citations(
     for claim, source_idx in citations:
         source = chunks[int(source_idx) - 1]
         
-        # Verificar con NLI o LLM
+        # Verify with NLI or LLM
         is_supported = await verify_claim_nli(claim, source)
         
         results.append({
@@ -323,13 +323,13 @@ async def verify_citations(
 
 ---
 
-### FASE 6: Decision Engine (MEDIO IMPACTO, BAJA DIFICULTAD)
-**Tiempo estimado: 1 día**
-**Cambio de arquitectura: NO**
-**APIs adicionales: NO**
+### PHASE 6: Decision Engine (MEDIUM IMPACT, LOW DIFFICULTY)
+**Estimated time: 1 day**
+**Architecture change: NO**
+**Additional APIs: NO**
 
 ```python
-# Lógica de decisión basada en confidence
+# Confidence-based decision logic
 
 class DecisionEngine:
     THRESHOLDS = {
@@ -346,7 +346,7 @@ class DecisionEngine:
         has_contradictions: bool
     ) -> Tuple[str, Optional[str]]:
         """
-        Decide qué hacer con la respuesta.
+        Decides what to do with the response.
         
         Returns:
             (action, disclaimer_text)
@@ -364,8 +364,8 @@ class DecisionEngine:
         
         elif confidence >= self.THRESHOLDS["send_with_disclaimer"]:
             return "send_with_disclaimer", (
-                "⚠️ Esta respuesta tiene confianza moderada. "
-                "Verifica la información con los CVs originales."
+                "⚠️ This response has moderate confidence. "
+                "Verify the information with the original CVs."
             )
         
         elif confidence >= self.THRESHOLDS["regenerate"]:
@@ -373,145 +373,145 @@ class DecisionEngine:
         
         else:
             return "decline", (
-                "No tengo suficiente información en los CVs para "
-                "responder esta pregunta con confianza."
+                "I don't have enough information in the CVs to "
+                "answer this question with confidence."
             )
 ```
 
 ---
 
-## 📋 Resumen de Cambios Necesarios
+## 📋 Summary of Required Changes
 
-### Cambios de Arquitectura
+### Architecture Changes
 
-| Cambio | Severidad | Descripción |
-|--------|-----------|-------------|
-| LLM-as-Judge | 🟢 Menor | Nuevo service, no cambia flujo |
-| Answer Relevance | 🟢 Menor | Reutiliza embedder existente |
-| Self-Consistency | 🟡 Moderado | Genera múltiples responses |
-| NLI Model | 🟡 Moderado | Nueva dependencia externa |
-| Citation Verification | 🟡 Moderado | Cambia prompt de generación |
-| Decision Engine | 🟢 Menor | Nueva lógica post-generación |
+| Change | Severity | Description |
+|--------|----------|-------------|
+| LLM-as-Judge | 🟢 Minor | New service, doesn't change flow |
+| Answer Relevance | 🟢 Minor | Reuses existing embedder |
+| Self-Consistency | 🟡 Moderate | Generates multiple responses |
+| NLI Model | 🟡 Moderate | New external dependency |
+| Citation Verification | 🟡 Moderate | Changes generation prompt |
+| Decision Engine | 🟢 Minor | New post-generation logic |
 
-### Nuevas APIs/Keys Necesarias
+### New APIs/Keys Required
 
-| Servicio | ¿Necesario? | Costo | Alternativa |
-|----------|-------------|-------|-------------|
-| Hugging Face API | Opcional | Gratis (rate limited) | Modelo local |
-| OpenRouter | Ya tenemos | Variable | - |
-| Modelo NLI local | Opcional | GPU 4GB+ | HF API |
+| Service | Required? | Cost | Alternative |
+|---------|-----------|------|-------------|
+| Hugging Face API | Optional | Free (rate limited) | Local model |
+| OpenRouter | Already have | Variable | - |
+| Local NLI Model | Optional | GPU 4GB+ | HF API |
 
-### Impacto en Stack Actual
+### Impact on Current Stack
 
 ```
-STACK ACTUAL:
-├── Backend: FastAPI + Python ✅ (no cambia)
-├── Frontend: React + Vite ✅ (no cambia)
-├── Vector DB: Supabase pgvector ✅ (no cambia)
-├── LLM: OpenRouter ✅ (no cambia)
-├── Embeddings: OpenRouter ✅ (no cambia)
-└── NUEVO: Hugging Face API (opcional) o modelo NLI local
+CURRENT STACK:
+├── Backend: FastAPI + Python ✅ (unchanged)
+├── Frontend: React + Vite ✅ (unchanged)
+├── Vector DB: Supabase pgvector ✅ (unchanged)
+├── LLM: OpenRouter ✅ (unchanged)
+├── Embeddings: OpenRouter ✅ (unchanged)
+└── NEW: Hugging Face API (optional) or local NLI model
 
-CAMBIOS EN CÓDIGO:
+CODE CHANGES:
 ├── backend/app/services/
-│   ├── confidence_calculator.py   → REESCRIBIR (integrar nuevos scores)
-│   ├── llm_judge_service.py       → NUEVO
-│   ├── answer_relevance_service.py → NUEVO
-│   ├── nli_verifier_service.py    → NUEVO (si usamos NLI)
-│   └── decision_engine.py         → NUEVO
-├── backend/app/services/rag_service_v5.py → MODIFICAR (integrar fases)
-└── frontend/src/components/MetricsPanel.jsx → MODIFICAR (mostrar nuevos scores)
+│   ├── confidence_calculator.py   → REWRITE (integrate new scores)
+│   ├── llm_judge_service.py       → NEW
+│   ├── answer_relevance_service.py → NEW
+│   ├── nli_verifier_service.py    → NEW (if using NLI)
+│   └── decision_engine.py         → NEW
+├── backend/app/services/rag_service_v5.py → MODIFY (integrate phases)
+└── frontend/src/components/MetricsPanel.jsx → MODIFY (show new scores)
 ```
 
 ---
 
-## 🎯 Recomendación de Implementación
+## 🎯 Implementation Recommendation
 
-### Orden por ROI (Return on Investment)
+### Order by ROI (Return on Investment)
 
-| Prioridad | Técnica | Esfuerzo | Impacto | ROI |
-|-----------|---------|----------|---------|-----|
-| 1️⃣ | LLM-as-Judge | 2-3 días | 🔴 Alto | ⭐⭐⭐⭐⭐ |
-| 2️⃣ | Answer Relevance | 1 día | 🔴 Alto | ⭐⭐⭐⭐⭐ |
-| 3️⃣ | Decision Engine | 1 día | 🟡 Medio | ⭐⭐⭐⭐ |
-| 4️⃣ | Citation Verification | 2-3 días | 🟡 Medio | ⭐⭐⭐ |
-| 5️⃣ | Self-Consistency | 2 días | 🟡 Medio | ⭐⭐⭐ |
-| 6️⃣ | NLI Faithfulness | 3-5 días | 🔴 Alto | ⭐⭐⭐ |
+| Priority | Technique | Effort | Impact | ROI |
+|----------|-----------|--------|--------|-----|
+| 1️⃣ | LLM-as-Judge | 2-3 days | 🔴 High | ⭐⭐⭐⭐⭐ |
+| 2️⃣ | Answer Relevance | 1 day | 🔴 High | ⭐⭐⭐⭐⭐ |
+| 3️⃣ | Decision Engine | 1 day | 🟡 Medium | ⭐⭐⭐⭐ |
+| 4️⃣ | Citation Verification | 2-3 days | 🟡 Medium | ⭐⭐⭐ |
+| 5️⃣ | Self-Consistency | 2 days | 🟡 Medium | ⭐⭐⭐ |
+| 6️⃣ | NLI Faithfulness | 3-5 days | 🔴 High | ⭐⭐⭐ |
 
-### MVP Recomendado (1 semana)
+### Recommended MVP (1 week)
 
-Implementar solo:
-1. **LLM-as-Judge** - Reemplaza nuestro claim verification actual
-2. **Answer Relevance** - Muy fácil, alto impacto
-3. **Decision Engine** - Comportamiento inteligente
+Implement only:
+1. **LLM-as-Judge** - Replaces our current claim verification
+2. **Answer Relevance** - Very easy, high impact
+3. **Decision Engine** - Intelligent behavior
 
-Esto nos llevaría del **30% al ~60%** de lo que hace la industria.
+This would take us from **30% to ~60%** of what industry does.
 
-### Versión Completa (3-4 semanas)
+### Complete Version (3-4 weeks)
 
-Añadir:
-4. **Citation Verification** - Requiere cambiar prompts
-5. **Self-Consistency** - Trade-off costo/precisión
-6. **NLI Model** - Requiere nueva integración
+Add:
+4. **Citation Verification** - Requires changing prompts
+5. **Self-Consistency** - Cost/precision trade-off
+6. **NLI Model** - Requires new integration
 
-Esto nos llevaría al **~85%** de lo que hace la industria.
-
----
-
-## ❓ Preguntas para Decidir
-
-1. **¿Priorizar velocidad o precisión?**
-   - Self-Consistency añade 2-3x latencia
-   - NLI es más preciso pero más lento que LLM-as-Judge
-
-2. **¿Presupuesto para APIs adicionales?**
-   - Hugging Face gratis tiene rate limits
-   - Modelo local requiere GPU
-
-3. **¿Aceptamos disclaimers en respuestas?**
-   - Decision Engine puede mostrar advertencias
-   - ¿O preferimos solo respuestas de alta confianza?
-
-4. **¿Queremos citas inline [1][2]?**
-   - Cambia significativamente el formato de respuesta
-   - Más transparente pero más verbose
+This would take us to **~85%** of what industry does.
 
 ---
 
-## 📁 Archivos a Crear/Modificar
+## ❓ Questions to Decide
+
+1. **Prioritize speed or precision?**
+   - Self-Consistency adds 2-3x latency
+   - NLI is more precise but slower than LLM-as-Judge
+
+2. **Budget for additional APIs?**
+   - Free Hugging Face has rate limits
+   - Local model requires GPU
+
+3. **Do we accept disclaimers in responses?**
+   - Decision Engine can show warnings
+   - Or do we prefer only high-confidence responses?
+
+4. **Do we want inline citations [1][2]?**
+   - Significantly changes response format
+   - More transparent but more verbose
+
+---
+
+## 📁 Files to Create/Modify
 
 ```
 backend/app/services/
-├── evaluation/                          # NUEVO DIRECTORIO
+├── evaluation/                          # NEW DIRECTORY
 │   ├── __init__.py
 │   ├── llm_judge.py                    # LLM-as-Judge service
 │   ├── answer_relevance.py             # Query↔Response similarity
-│   ├── nli_verifier.py                 # NLI-based verification (opcional)
+│   ├── nli_verifier.py                 # NLI-based verification (optional)
 │   ├── citation_verifier.py            # Citation checking
 │   ├── self_consistency.py             # Multiple samples
 │   └── decision_engine.py              # Final decision logic
-├── confidence_calculator.py            # MODIFICAR - integrar nuevos scores
-└── rag_service_v5.py                   # MODIFICAR - llamar a nuevos services
+├── confidence_calculator.py            # MODIFY - integrate new scores
+└── rag_service_v5.py                   # MODIFY - call new services
 
 frontend/src/components/
-└── MetricsPanel.jsx                    # MODIFICAR - mostrar breakdown detallado
+└── MetricsPanel.jsx                    # MODIFY - show detailed breakdown
 ```
 
 ---
 
-## Conclusión
+## Conclusion
 
-**¿El cambio es drástico?** 
-- Arquitectura: NO, es incremental
-- Stack: NO, mismo stack + 1 API opcional
-- Código: SÍ, varios servicios nuevos
+**Is the change drastic?** 
+- Architecture: NO, it's incremental
+- Stack: NO, same stack + 1 optional API
+- Code: YES, several new services
 
-**¿Necesitamos nuevas APIs?**
-- Mínimo: NO, todo puede hacerse con OpenRouter
-- Ideal: SÍ, Hugging Face para NLI (gratis)
+**Do we need new APIs?**
+- Minimum: NO, everything can be done with OpenRouter
+- Ideal: YES, Hugging Face for NLI (free)
 
-**¿Vale la pena?**
-- LLM-as-Judge + Answer Relevance = **80% del beneficio con 20% del esfuerzo**
-- NLI + Self-Consistency = **20% adicional con 80% del esfuerzo**
+**Is it worth it?**
+- LLM-as-Judge + Answer Relevance = **80% of the benefit with 20% of the effort**
+- NLI + Self-Consistency = **20% additional with 80% of the effort**
 
-**Recomendación:** Implementar Fases 1-3 primero (1 semana), evaluar resultados, luego decidir si vale la pena las fases 4-6.
+**Recommendation:** Implement Phases 1-3 first (1 week), evaluate results, then decide if phases 4-6 are worth it.

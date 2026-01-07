@@ -1,49 +1,49 @@
-# Diferencias entre LOCAL y CLOUD
+# Differences Between LOCAL and CLOUD
 
-> **Última actualización:** Enero 2026 - v6.0
+> **Last Updated:** January 2026 - v6.0
 
 ---
 
-## ✅ LO QUE ES IGUAL EN AMBOS MODOS
+## ✅ WHAT IS THE SAME IN BOTH MODES
 
-**Ambos modos usan OpenRouter para LLM**:
+**Both modes use OpenRouter for LLM**:
 - Query understanding → OpenRouter (free models with fallback chain)
 - Reranking → OpenRouter
 - Generation → OpenRouter (user-selected model)
 - Verification → OpenRouter
 
-**Ambos modos usan la misma arquitectura**:
+**Both modes use the same architecture**:
 - RAG Pipeline v5 (`rag_service_v5.py`)
-- Output Orchestrator con 9 Structures y 29+ Modules
+- Output Orchestrator with 9 Structures and 29+ Modules
 - Query Understanding Service
 - Suggestion Engine
 - Session-based CV management
 
 ---
 
-## 🔀 LO QUE CAMBIA ENTRE MODOS
+## 🔀 WHAT CHANGES BETWEEN MODES
 
-### Modo LOCAL (`mode=local`)
+### LOCAL Mode (`mode=local`)
 
-| Componente | Implementación | Detalles |
-|------------|----------------|----------|
+| Component | Implementation | Details |
+|-----------|----------------|---------|
 | **Embeddings** | `LocalEmbeddingProvider` | sentence-transformers all-MiniLM-L6-v2 (384 dims) |
 | **Vector Store** | `SimpleVectorStore` | ChromaDB local (`./chroma_db`) |
-| **PDF Storage** | Sistema de archivos | Directorio `./storage/` |
+| **PDF Storage** | File system | Directory `./storage/` |
 | **Sessions** | `SessionManager` | JSON file (`backend/data/sessions.json`) |
 
-### Modo CLOUD (`mode=cloud`)
+### CLOUD Mode (`mode=cloud`)
 
-| Componente | Implementación | Detalles |
-|------------|----------------|----------|
+| Component | Implementation | Details |
+|-----------|----------------|---------|
 | **Embeddings** | `OpenRouterEmbeddingProvider` | nomic-embed-text-v1.5 (768 dims) |
-| **Vector Store** | `SupabaseVectorStore` | pgvector con RPC `match_cv_embeddings` |
+| **Vector Store** | `SupabaseVectorStore` | pgvector with RPC `match_cv_embeddings` |
 | **PDF Storage** | Supabase Storage | Bucket `cv-pdfs` |
-| **Sessions** | `SupabaseSessionManager` | Tablas: sessions, session_cvs, session_messages |
+| **Sessions** | `SupabaseSessionManager` | Tables: sessions, session_cvs, session_messages |
 
 ---
 
-## 📁 Código que separa los modos
+## 📁 Code That Separates the Modes
 
 ### `backend/app/providers/factory.py`
 
@@ -100,12 +100,12 @@ Setup script: `scripts/setup_supabase_complete.sql`
 
 ---
 
-## ✅ Estado actual del código (v6.0)
+## ✅ Current Code Status (v6.0)
 
-Los modos están correctamente separados:
+The modes are correctly separated:
 
-| Componente | LOCAL | CLOUD |
-|------------|-------|-------|
+| Component | LOCAL | CLOUD |
+|-----------|-------|-------|
 | Embeddings | ✅ LocalEmbeddingProvider | ✅ OpenRouterEmbeddingProvider |
 | Vector Store | ✅ SimpleVectorStore (ChromaDB) | ✅ SupabaseVectorStore |
 | PDF Storage | ✅ Local filesystem | ✅ Supabase Storage |
@@ -114,9 +114,9 @@ Los modos están correctamente separados:
 
 ---
 
-## 🔧 Configuración
+## 🔧 Configuration
 
-### Variables de entorno
+### Environment Variables
 
 ```bash
 # Mode selection
@@ -130,9 +130,9 @@ SUPABASE_SERVICE_KEY=your-service-key
 OPENROUTER_API_KEY=your-openrouter-key
 ```
 
-### Cambiar modo en runtime
+### Change Mode at Runtime
 
-El modo se puede cambiar via query parameter en cualquier endpoint:
+The mode can be changed via query parameter on any endpoint:
 ```
 GET /api/sessions?mode=cloud
 POST /api/sessions/{id}/chat?mode=local
@@ -140,11 +140,11 @@ POST /api/sessions/{id}/chat?mode=local
 
 ---
 
-## 📊 Comparación de dimensiones
+## 📊 Dimension Comparison
 
-| Modo | Modelo de Embedding | Dimensiones |
-|------|---------------------|-------------|
+| Mode | Embedding Model | Dimensions |
+|------|-----------------|------------|
 | LOCAL | all-MiniLM-L6-v2 | 384 |
 | CLOUD | nomic-embed-text-v1.5 | 768 |
 
-**Importante**: Los embeddings de LOCAL y CLOUD no son compatibles entre sí debido a las diferentes dimensiones.
+**Important**: LOCAL and CLOUD embeddings are not compatible with each other due to different dimensions.

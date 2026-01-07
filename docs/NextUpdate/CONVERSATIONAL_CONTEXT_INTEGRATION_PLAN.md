@@ -1,25 +1,25 @@
-# Plan de Implementación: Integración de Contexto Conversacional
+# Implementation Plan: Conversational Context Integration
 
-## Propósito del Documento
+## Document Purpose
 
-Plan completo para integrar el sistema de contexto conversacional con la arquitectura STRUCTURES/MODULES/ORCHESTRATOR actual del CV Screener.
+Complete plan to integrate the conversational context system with the current CV Screener STRUCTURES/MODULES/ORCHESTRATOR architecture.
 
-**Documentos de Referencia:**
-- `docs/CONVERSATIONAL_CONTEXT.md` - Diseño original del contexto
-- `docs/NextUpdate/ORCHESTRATION_STRUCTURES_MODULES.md` - Nueva arquitectura
-- `docs/NextUpdate/IMPLEMENTATION_PLAN.md` - Plan de implementación general
+**Reference Documents:**
+- `docs/CONVERSATIONAL_CONTEXT.md` - Original context design
+- `docs/NextUpdate/ORCHESTRATION_STRUCTURES_MODULES.md` - New architecture
+- `docs/NextUpdate/IMPLEMENTATION_PLAN.md` - General implementation plan
 
-**Versión:** 1.0  
-**Fecha:** Enero 2026  
-**Tiempo Estimado Total:** 20-25 horas
+**Version:** 1.0  
+**Date:** January 2026  
+**Total Estimated Time:** 20-25 hours
 
 ---
 
-# PARTE 1: ANÁLISIS DEL ESTADO ACTUAL
+# PART 1: CURRENT STATE ANALYSIS
 
-## 1.1 Sistema de Contexto Conversacional (Implementado)
+## 1.1 Conversational Context System (Implemented)
 
-### ✅ **Infraestructura Base - COMPLETA**
+### ✅ **Base Infrastructure - COMPLETE**
 
 ```python
 # SessionManager - Local
@@ -31,10 +31,10 @@ backend/app/providers/cloud/sessions.py:299-336
 def get_conversation_history(session_id: str, limit: int = 6) -> List[Dict]
 ```
 
-**Estado:** ✅ Implementado y funcional
-- Recupera últimos N mensajes (default: 6 = 3 turnos)
-- Funciona en modo local y cloud
-- Retorna formato: `[{"role": "user|assistant", "content": "..."}]`
+**Status:** ✅ Implemented and functional
+- Retrieves last N messages (default: 6 = 3 turns)
+- Works in local and cloud mode
+- Returns format: `[{"role": "user|assistant", "content": "..."}]`
 
 ### ✅ **Pipeline Integration - COMPLETA**
 
@@ -43,7 +43,7 @@ def get_conversation_history(session_id: str, limit: int = 6) -> List[Dict]
 backend/app/services/rag_service_v5.py:554
 conversation_history: list[dict[str, str]] = field(default_factory=list)
 
-# query_stream() acepta conversation_history
+# query_stream() accepts conversation_history
 backend/app/services/rag_service_v5.py:899
 async def query_stream(
     self,
@@ -53,9 +53,9 @@ async def query_stream(
 )
 ```
 
-**Estado:** ✅ Implementado
-- Contexto fluye por todo el pipeline RAG
-- Se almacena en `PipelineContextV5`
+**Status:** ✅ Implemented
+- Context flows through entire RAG pipeline
+- Stored in `PipelineContextV5`
 
 ### ✅ **Endpoint Integration - COMPLETA**
 
@@ -68,9 +68,9 @@ conversation_history = [
 ]
 ```
 
-**Estado:** ✅ Implementado
-- Endpoint recupera automáticamente historial
-- Lo pasa a `query_stream()`
+**Status:** ✅ Implemented
+- Endpoint automatically retrieves history
+- Passes it to `query_stream()`
 
 ### ✅ **Prompt Builder Integration - COMPLETA**
 
@@ -80,15 +80,15 @@ def build_query_prompt(..., conversation_history: list = None)
 def build_single_candidate_prompt(..., conversation_history: list = None)
 ```
 
-**Estado:** ✅ Implementado
-- Ambos métodos aceptan `conversation_history`
-- Formatean como sección `## CONVERSATION HISTORY` en el prompt
+**Status:** ✅ Implemented
+- Both methods accept `conversation_history`
+- Format as `## CONVERSATION HISTORY` section in prompt
 
 ---
 
-## 1.2 Arquitectura STRUCTURES/MODULES (Nueva)
+## 1.2 STRUCTURES/MODULES Architecture (New)
 
-### ✅ **Orchestrator - PARCIALMENTE ACTUALIZADO**
+### ✅ **Orchestrator - PARTIALLY UPDATED**
 
 ```python
 # orchestrator.py:95-103
@@ -102,27 +102,27 @@ def process(
 ) -> tuple[StructuredOutput, str]:
 ```
 
-**Estado:** ⚠️ **NO acepta `conversation_history`**
+**Status:** ⚠️ **Does NOT accept `conversation_history`**
 
-### ✅ **Structures - 9 IMPLEMENTADAS**
+### ✅ **Structures - 9 IMPLEMENTED**
 
 ```
 backend/app/services/output_processor/structures/
-├── single_candidate_structure.py   ✅ IMPLEMENTADA
-├── risk_assessment_structure.py    ✅ IMPLEMENTADA  
-├── comparison_structure.py         ✅ IMPLEMENTADA
-├── search_structure.py             ✅ IMPLEMENTADA
-├── ranking_structure.py            ✅ IMPLEMENTADA
-├── job_match_structure.py          ✅ IMPLEMENTADA
-├── team_build_structure.py         ✅ IMPLEMENTADA
-├── verification_structure.py       ✅ IMPLEMENTADA
-└── summary_structure.py            ✅ IMPLEMENTADA
+├── single_candidate_structure.py   ✅ IMPLEMENTED
+├── risk_assessment_structure.py    ✅ IMPLEMENTED  
+├── comparison_structure.py         ✅ IMPLEMENTED
+├── search_structure.py             ✅ IMPLEMENTED
+├── ranking_structure.py            ✅ IMPLEMENTED
+├── job_match_structure.py          ✅ IMPLEMENTED
+├── team_build_structure.py         ✅ IMPLEMENTED
+├── verification_structure.py       ✅ IMPLEMENTED
+└── summary_structure.py            ✅ IMPLEMENTED
 ```
 
-**Estado:** ⚠️ **NINGUNA acepta `conversation_history`**
+**Status:** ⚠️ **NONE accept `conversation_history`**
 
 ```python
-# Firma actual (ejemplo SingleCandidateStructure)
+# Current signature (example SingleCandidateStructure)
 def assemble(
     self,
     llm_output: str,
@@ -134,60 +134,60 @@ def assemble(
 
 ---
 
-## 1.3 Problema Identificado: Desconexión del Contexto
+## 1.3 Identified Problem: Context Disconnection
 
-### 🔴 **Flujo Actual (INCOMPLETO)**
+### 🔴 **Current Flow (INCOMPLETE)**
 
 ```
-1. Endpoint recupera conversation_history        ✅
-2. RAG service recibe conversation_history       ✅
-3. PromptBuilder usa conversation_history        ✅
-4. LLM genera respuesta con contexto            ✅
-5. Orchestrator procesa respuesta               ❌ SIN contexto
-6. Structure ensambla output                     ❌ SIN contexto
+1. Endpoint retrieves conversation_history       ✅
+2. RAG service receives conversation_history     ✅
+3. PromptBuilder uses conversation_history       ✅
+4. LLM generates response with context           ✅
+5. Orchestrator processes response               ❌ WITHOUT context
+6. Structure assembles output                    ❌ WITHOUT context
 ```
 
-### 🔴 **Casos de Uso que FALLAN**
+### 🔴 **Use Cases that FAIL**
 
-#### **Caso 1: Seguimiento en Single Candidate**
+#### **Case 1: Single Candidate Follow-up**
 ```
-Usuario: "Dame el perfil completo de Juan Pérez"
+User: "Give me the complete profile of Juan Pérez"
 → Orchestrator → SingleCandidateStructure ✅
-→ Response: [Perfil completo]
+→ Response: [Complete profile]
 
-Usuario: "¿Qué red flags tiene?"
+User: "What red flags does he have?"
 → Orchestrator → RiskAssessmentStructure
-→ ❌ NO sabe que "¿Qué red flags tiene?" se refiere a Juan Pérez
-→ Necesita re-buscar candidato basándose solo en la query actual
+→ ❌ Does NOT know "What red flags does he have?" refers to Juan Pérez
+→ Needs to re-search candidate based only on current query
 ```
 
-#### **Caso 2: Referencias pronominales**
+#### **Case 2: Pronominal References**
 ```
-Usuario: "Compara Juan y María"
+User: "Compare Juan and María"
 → ComparisonStructure ✅
 
-Usuario: "¿Y para Backend estos dos?"
-→ ❌ "estos dos" no se resuelve a Juan y María
-→ Structure no tiene contexto de quiénes son
+User: "And for Backend these two?"
+→ ❌ "these two" doesn't resolve to Juan and María
+→ Structure has no context of who they are
 ```
 
-#### **Caso 3: Contexto de búsqueda**
+#### **Case 3: Search Context**
 ```
-Usuario: "Busca desarrolladores Frontend con React"
+User: "Find Frontend developers with React"
 → SearchStructure ✅
 
-Usuario: "¿Cuál tiene más experiencia?"
-→ ❌ NO sabe que se refiere a los resultados previos
-→ Structure no puede filtrar dentro de resultados anteriores
+User: "Which one has more experience?"
+→ ❌ Does NOT know it refers to previous results
+→ Structure cannot filter within previous results
 ```
 
 ---
 
-# PARTE 2: DISEÑO DE LA SOLUCIÓN
+# PART 2: SOLUTION DESIGN
 
-## 2.1 Arquitectura Objetivo
+## 2.1 Target Architecture
 
-### **Flujo Completo con Contexto Integrado**
+### **Complete Flow with Integrated Context**
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
