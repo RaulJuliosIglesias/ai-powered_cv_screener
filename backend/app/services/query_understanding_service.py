@@ -237,6 +237,47 @@ USER QUERY: "tell me more"
   "reformulated_prompt": "Provide additional comprehensive details about the previously discussed topic/candidate, including information not yet covered in prior responses."
 }}
 
+TALENT POOL EXAMPLES:
+
+Query: "How many candidates have senior experience?"
+{{
+  "understood_query": "The user wants to know how many candidates in the talent pool have senior-level experience. This requires analyzing all candidates to identify those with senior job titles, extensive experience, or senior-level responsibilities.",
+  "query_type": "summary",
+  "requirements": [
+    "Analyze ALL candidates in the talent pool",
+    "Identify senior experience indicators (job titles, years of experience, responsibilities)",
+    "Count and list all senior candidates"
+  ],
+  "is_cv_related": true,
+  "reformulated_prompt": "Analyze the entire talent pool and identify all candidates who have senior-level experience. Look for senior job titles (Senior, Lead, Principal, Director, Manager), extensive years of experience (typically 5+ years), and senior-level responsibilities. Provide the total count and list each senior candidate with their specific senior qualifications."
+}}
+
+Query: "cuáles son los talentos senior que hay"
+{{
+  "understood_query": "El usuario quiere conocer todos los candidatos con experiencia senior en el pool de talentos. Esto requiere analizar todos los CVs para identificar talentos senior y presentarlos como un overview completo.",
+  "query_type": "summary",
+  "requirements": [
+    "Analizar TODOS los candidatos del talent pool",
+    "Identificar indicadores de experiencia senior",
+    "Presentar overview completo del talento senior disponible"
+  ],
+  "is_cv_related": true,
+  "reformulated_prompt": "Analizar el pool completo de talentos e identificar todos los candidatos con experiencia senior. Buscar títulos senior, años de experiencia relevantes, y responsabilidades de nivel senior. Presentar un overview completo del talento senior disponible incluyendo nombres, roles senior, y experiencia clave."
+}}
+
+Query: "tell me about all the candidates"
+{{
+  "understood_query": "The user wants a comprehensive overview of all candidates in the talent pool, including their key skills, experience levels, and characteristics.",
+  "query_type": "summary",
+  "requirements": [
+    "Provide overview of ALL candidates",
+    "Summarize key characteristics of the talent pool",
+    "Include experience distribution and skills overview"
+  ],
+  "is_cv_related": true,
+  "reformulated_prompt": "Provide a comprehensive overview of the entire talent pool. Include all candidates with their key characteristics, experience levels, primary skills, and a summary of the overall talent composition and distribution."
+}}
+
 Now analyze the user's query and respond with JSON only:"""
 
 
@@ -696,8 +737,14 @@ class QueryUnderstandingService:
         elif any(kw in query_lower for kw in ['team', 'build a team', 'equipo', 'formar equipo']):
             query_type = 'team_build'
         
-        # 7. SUMMARY
-        elif any(kw in query_lower for kw in ['summary', 'overview', 'resumen', 'vista general']):
+        # 7. TALENT POOL / SUMMARY (Priority before search)
+        elif any(kw in query_lower for kw in [
+            'summary', 'overview', 'resumen', 'vista general',
+            'talent pool', 'talents', 'todos los', 'all candidates',
+            'how many candidates', 'cuantos candidatos', 'cuántos candidatos',
+            'tell me about all', 'what candidates', 'que candidatos',
+            'show me all', 'todos los candidatos'
+        ]):
             query_type = 'summary'
         
         # 8. SEARCH (generic CV search)

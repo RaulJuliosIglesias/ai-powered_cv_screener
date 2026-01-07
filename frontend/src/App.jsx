@@ -955,33 +955,16 @@ function App() {
                 const sessionMsgs = currentSession.messages || [];
                 const pending = pendingMessages[currentSessionId];
                 
-                // During loading (isChatLoading), ALWAYS show the pending message
-                // This prevents the user message from disappearing during streaming
-                if (isChatLoading && pending) {
-                  // Check if pending is already in session (to avoid duplicate)
-                  const alreadyInSession = sessionMsgs.some(
-                    m => m.role === 'user' && m.content === pending.userMsg
-                  );
-                  if (alreadyInSession) {
-                    // Already in session, just return session messages
-                    return sessionMsgs;
-                  }
-                  // Not in session yet, add pending message at the end
-                  return [
-                    ...sessionMsgs,
-                    { role: 'user', content: pending.userMsg, isPending: true }
-                  ];
-                }
-                
-                // Not loading: check for duplicates before adding pending
+                // SIMPLIFIED: Always show pending message if it exists and not already in session
                 const pendingAlreadySaved = pending && sessionMsgs.some(
                   m => m.role === 'user' && m.content === pending.userMsg
                 );
                 
-                return [
-                  ...sessionMsgs,
-                  ...(pending && !pendingAlreadySaved ? [{ role: 'user', content: pending.userMsg, isPending: true }] : [])
-                ];
+                const allMessages = pending && !pendingAlreadySaved 
+                  ? [...sessionMsgs, { role: 'user', content: pending.userMsg, isPending: true }]
+                  : sessionMsgs;
+                
+                return allMessages;
               })().map((msg, idx) => (
                 <div key={idx} className={msg.role === 'user' ? 'flex justify-end' : ''}>
                   <div className={`flex gap-4 ${msg.role === 'user' ? 'flex-row-reverse max-w-[70%]' : 'w-full'}`}>
