@@ -9,7 +9,7 @@
 [![React](https://img.shields.io/badge/React-18+-61DAFB.svg)](https://reactjs.org)
 [![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-red.svg)](LICENSE)
 
-**A production-ready RAG pipeline for CV/Resume screening with dual-mode architecture, hallucination detection, and source-cited responses.**
+**Version 6.0** - Production-ready RAG pipeline with 9 output structures, 29+ modules, conversational context, and intelligent query routing.
 
 [Features](#-features) · [Quick Start](#-quick-start) · [Architecture](#-architecture) · [Demo](#-demo) · [Documentation](#-documentation)
 
@@ -22,27 +22,38 @@
 ```
 ┌────────────────────────────────────────────────────────────────────────────┐
 │                                                                            │
-│  📄 Upload CVs    →    🔍 Ask Questions    →    ✅ Get Cited Answers      │
+│  📄 Upload CVs    →    🔍 Ask Questions    →    ✅ Get Structured Answers  │
 │                                                                            │
-│  "Who has Python experience?"                                              │
+│  "Rank all candidates by experience and show red flags"                    │
 │                                                                            │
-│  ✨ Response: Based on the CVs, John Doe [CV:cv_a1b2c3] has 5 years...     │
-│     📎 Sources: John_Doe.pdf (92%), Jane_Smith.pdf (87%)                    │
+│  ✨ Response:                                                               │
+│     🏆 Top Pick: Juan García [cv:cv_a1b2c3] - 8 years, no red flags        │
+│     📊 Risk Assessment Table with 5-factor analysis                        │
+│     📎 Sources: Juan_Garcia.pdf (95%), Maria_Lopez.pdf (89%)               │
 │                                                                            │
 └────────────────────────────────────────────────────────────────────────────┘
 ```
 
-**Core Principle**: Zero hallucinations. Every response is traceable to source documents.
+**Core Principle**: Zero hallucinations. Every response is traceable to source documents with structured visual output.
 
 ---
 
 ## ✨ Features
 
 ### 🔄 Dual-Mode Architecture
-Switch seamlessly between **Local** (free development) and **Cloud** (production-ready) backends with a single parameter.
+Switch seamlessly between **Local** (ChromaDB + sentence-transformers) and **Cloud** (Supabase pgvector) backends.
 
-### 🧠 11-Stage RAG Pipeline
-Advanced pipeline with query understanding, multi-query expansion, guardrails, reranking, and verification.
+### 🧠 Advanced RAG Pipeline (v6.0)
+Multi-stage pipeline: Query Understanding → Multi-Query Expansion → Guardrails → Embedding → Search → Reranking → Reasoning → Generation → Verification → Output Orchestration.
+
+### 🎯 9 Output Structures
+Intelligent routing to specialized output formats: SingleCandidate, RiskAssessment, Comparison, Search, Ranking, JobMatch, TeamBuild, Verification, Summary.
+
+### 🧩 29+ Reusable Modules
+Modular components: Thinking, DirectAnswer, Analysis, Tables, RiskTable, MatchScore, Timeline, GapAnalysis, RedFlags, and more.
+
+### 💬 Conversational Context
+Full conversation history propagation for follow-up queries with pronoun resolution ("compare those 3", "tell me more about her").
 
 ### 🛡️ Anti-Hallucination System
 Three-layer verification: Pre-LLM guardrails, claim verification, and entity validation.
@@ -50,11 +61,11 @@ Three-layer verification: Pre-LLM guardrails, claim verification, and entity val
 ### 📎 Source Citations
 Every answer includes clickable references to source CVs with relevance scores.
 
-### ⚡ Real-Time Streaming
-SSE-based streaming shows pipeline progress and token-by-token generation.
+### ⚡ Real-Time Pipeline Progress
+Visual pipeline steps panel showing current stage, duration, and details for each processing step.
 
 ### 🎨 Modern UI
-React 18 + Shadcn UI + TailwindCSS for a clean, accessible interface.
+React 18 + Shadcn UI + TailwindCSS with dark mode, structured output rendering, and interactive components.
 
 ---
 
@@ -112,10 +123,15 @@ python start_web.py   # Frontend → http://localhost:6001
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────┐
-│                        FRONTEND (React + Shadcn UI)                        │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐        │
-│  │   Upload    │  │    Chat     │  │   Sources   │  │   Metrics   │        │
-│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘        │
+│                        FRONTEND (React 18 + Shadcn UI)                     │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐          │
+│  │ Sessions │ │   Chat   │ │ Pipeline │ │ Sources  │ │ Metrics  │          │
+│  │  Panel   │ │ Window   │ │ Progress │ │ Badges   │ │  Panel   │          │
+│  └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘          │
+│  ┌──────────────────────────────────────────────────────────────┐          │
+│  │              STRUCTURED OUTPUT RENDERER                       │          │
+│  │  SingleCandidateProfile | RankingTable | RiskAssessment | ... │          │
+│  └──────────────────────────────────────────────────────────────┘          │
 └────────────────────────────────────────────────────────────────────────────┘
                                      │
                                      ▼
@@ -123,18 +139,28 @@ python start_web.py   # Frontend → http://localhost:6001
 │                        BACKEND (FastAPI + Python)                          │
 │                                                                            │
 │  ┌──────────────────────────────────────────────────────────────────────┐  │
-│  │                      11-STAGE RAG PIPELINE                           │  │
-│  │                                                                      │  │
-│  │  Query → Understand → MultiQuery → Guardrail → Embed → Search →      │  │
-│  │  Rerank → Reason → Generate → Verify Claims → Check Hallucinations   │  │
-│  │                                                                      │  │
+│  │                      RAG PIPELINE v6.0                                │  │
+│  │  Query → Understand → MultiQuery → Guardrail → Embed → Search →       │  │
+│  │  Rerank → Reason → Generate → Verify → OUTPUT ORCHESTRATOR            │  │
+│  └──────────────────────────────────────────────────────────────────────┘  │
+│                                     │                                      │
+│  ┌──────────────────────────────────┴───────────────────────────────────┐  │
+│  │                      OUTPUT ORCHESTRATOR                              │  │
+│  │  ┌─────────────────────────────────────────────────────────────────┐ │  │
+│  │  │  STRUCTURES (9): SingleCandidate | RiskAssessment | Comparison  │ │  │
+│  │  │  Search | Ranking | JobMatch | TeamBuild | Verify | Summary     │ │  │
+│  │  └─────────────────────────────────────────────────────────────────┘ │  │
+│  │  ┌─────────────────────────────────────────────────────────────────┐ │  │
+│  │  │  MODULES (29+): Thinking | DirectAnswer | Analysis | RiskTable  │ │  │
+│  │  │  MatchScore | Timeline | GapAnalysis | RedFlags | Skills | ...  │ │  │
+│  │  └─────────────────────────────────────────────────────────────────┘ │  │
 │  └──────────────────────────────────────────────────────────────────────┘  │
 │                                                                            │
 │  ┌─────────────────────────┐       ┌─────────────────────────┐             │
 │  │      LOCAL MODE         │       │      CLOUD MODE         │             │
-│  │  • JSON Vector Store    │  OR   │  • Supabase pgvector    │             │
+│  │  • ChromaDB             │  OR   │  • Supabase pgvector    │             │
 │  │  • sentence-transformers│       │  • nomic-embed-v1.5     │             │
-│  │  • Zero cost            │       │  • Production-ready     │             │
+│  │  • 384-dim vectors      │       │  • 768-dim vectors      │             │
 │  └─────────────────────────┘       └─────────────────────────┘             │
 │                                                                            │
 └────────────────────────────────────────────────────────────────────────────┘
@@ -144,32 +170,47 @@ python start_web.py   # Frontend → http://localhost:6001
 
 ## 🎬 Demo
 
-### Sample Questions
+### Sample Questions by Query Type
 
-| Question | What It Tests |
-|----------|---------------|
-| "Who has experience with Python?" | Skill search |
-| "Which candidate graduated from UPC?" | Education lookup |
-| "Summarize the profile of Jane Doe" | Single CV summary |
-| "Compare top 3 candidates for a senior role" | Ranking & comparison |
-| "What's a good recipe for pasta?" | Off-topic rejection ✓ |
+| Query Type | Example Question | Output Structure |
+|------------|------------------|------------------|
+| **Search** | "Who has experience with Python?" | Results table with match scores |
+| **Single Candidate** | "Give me the full profile of Juan García" | Complete profile with highlights, career, skills, risks |
+| **Ranking** | "Rank top 5 candidates for senior backend" | Ranking table + Top Pick card |
+| **Comparison** | "Compare María vs Juan for leadership" | Side-by-side comparison table |
+| **Red Flags** | "What are the red flags for this candidate?" | 5-factor risk assessment table |
+| **Job Match** | "Who best fits a senior React developer role?" | Match scores + requirements coverage |
+| **Team Build** | "Build a team of 3 developers" | Team composition + skill coverage |
+| **Summary** | "Give me an overview of all candidates" | Talent pool summary + distributions |
+| **Off-topic** | "What's a good recipe for pasta?" | Polite rejection ✓ |
 
-### Response Format
+### Response Format (v6.0)
 
 ```json
 {
   "response": "Based on the CVs, the following candidates have Python experience...",
   "sources": [
-    {"cv_id": "cv_a1b2c3", "filename": "John_Doe.pdf", "relevance": 0.92},
-    {"cv_id": "cv_d4e5f6", "filename": "Jane_Smith.pdf", "relevance": 0.87}
+    {"cv_id": "cv_a1b2c3", "filename": "John_Doe.pdf", "relevance": 0.92}
   ],
   "metrics": {
     "total_ms": 2340,
-    "embedding_ms": 45,
-    "search_ms": 120,
-    "generation_ms": 2100
+    "stages": {
+      "query_understanding": {"duration_ms": 150, "success": true},
+      "embedding": {"duration_ms": 45, "success": true},
+      "search": {"duration_ms": 120, "success": true},
+      "generation": {"duration_ms": 2000, "success": true}
+    }
   },
-  "confidence": 0.95
+  "confidence_score": 0.95,
+  "pipeline_steps": [
+    {"name": "Query Understanding", "status": "completed", "duration_ms": 150},
+    {"name": "Vector Search", "status": "completed", "duration_ms": 120}
+  ],
+  "structured_output": {
+    "structure_type": "search",
+    "direct_answer": "3 candidates match Python experience",
+    "results_table": { "headers": ["Candidate", "Experience", "Match"], "rows": [...] }
+  }
 }
 ```
 
@@ -287,25 +328,53 @@ Comprehensive documentation explaining how this project meets professional evalu
 ai-powered-cv-screener/
 ├── backend/
 │   ├── app/
-│   │   ├── api/              # FastAPI routes
-│   │   ├── providers/        # Embedding & storage providers
-│   │   │   ├── local/        # Local implementations
-│   │   │   └── cloud/        # Cloud implementations
-│   │   ├── services/         # Business logic & RAG pipeline
-│   │   ├── models/           # Pydantic schemas
-│   │   └── prompts/          # LLM prompt templates
-│   ├── tests/                # Backend tests
+│   │   ├── api/                    # FastAPI routes
+│   │   │   ├── routes.py           # Legacy routes
+│   │   │   ├── routes_v2.py        # Main API routes
+│   │   │   ├── routes_sessions.py  # Session management
+│   │   │   └── routes_sessions_stream.py  # SSE streaming
+│   │   ├── providers/              # Embedding & storage providers
+│   │   │   ├── local/              # ChromaDB + sentence-transformers
+│   │   │   └── cloud/              # Supabase + OpenRouter
+│   │   ├── services/               # Business logic
+│   │   │   ├── rag_service_v5.py   # Main RAG pipeline
+│   │   │   ├── query_understanding_service.py
+│   │   │   ├── output_processor/   # Output orchestration
+│   │   │   │   ├── orchestrator.py # Routes to structures
+│   │   │   │   ├── structures/     # 9 output structures
+│   │   │   │   └── modules/        # 29+ reusable modules
+│   │   │   └── suggestion_engine/  # Dynamic suggestions
+│   │   ├── models/                 # Pydantic schemas
+│   │   │   ├── schemas.py          # API schemas
+│   │   │   ├── sessions.py         # Session models
+│   │   │   └── structured_output.py # Output structures
+│   │   └── prompts/                # LLM prompt templates
+│   ├── tests/                      # Backend tests
 │   └── requirements.txt
 ├── frontend/
 │   ├── src/
-│   │   ├── components/       # React components
-│   │   ├── hooks/            # Custom hooks
-│   │   └── services/         # API client
+│   │   ├── components/             # React components
+│   │   │   ├── output/             # Structured output renderers
+│   │   │   ├── modals/             # Settings, About modals
+│   │   │   └── ui/                 # Shadcn UI components
+│   │   ├── contexts/               # React contexts
+│   │   │   ├── PipelineContext.jsx # Pipeline state
+│   │   │   ├── BackgroundTaskContext.jsx
+│   │   │   └── LanguageContext.jsx
+│   │   ├── hooks/                  # Custom hooks
+│   │   └── services/               # API client
 │   └── package.json
-├── docs/
-│   └── evaluation/           # Evaluation criteria docs
-├── .env.example              # Environment template
-└── README.md                 # You are here
+├── docs/                           # Complete documentation
+│   ├── ARCHITECTURE_MODULES.md     # Orchestrator/Structures/Modules
+│   ├── RAG_WORKFLOW.md             # Pipeline architecture
+│   ├── STRUCTURED_OUTPUT.md        # Output processing
+│   └── evaluation/                 # Evaluation criteria docs
+├── scripts/                        # Setup & utility scripts
+│   ├── setup_supabase_complete.sql # Supabase schema
+│   └── reindex_cvs.py              # Re-indexing utility
+├── supabase/migrations/            # Database migrations
+├── .env.example                    # Environment template
+└── README.md                       # You are here
 ```
 
 ---
@@ -333,14 +402,35 @@ CORS_ORIGINS=http://localhost:5173
 
 ### API Endpoints
 
+#### Session Management
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `POST` | `/api/upload?mode=local` | Upload PDF files |
-| `GET` | `/api/status/{job_id}` | Check processing status |
-| `GET` | `/api/cvs?mode=local` | List indexed CVs |
-| `DELETE` | `/api/cvs/{cv_id}?mode=local` | Remove a CV |
-| `POST` | `/api/chat?mode=local` | Send a query |
+| `GET` | `/api/sessions?mode=cloud` | List all sessions |
+| `POST` | `/api/sessions?mode=cloud` | Create new session |
+| `GET` | `/api/sessions/{id}?mode=cloud` | Get session details |
+| `DELETE` | `/api/sessions/{id}?mode=cloud` | Delete session |
+
+#### CV Management (within sessions)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/sessions/{id}/cvs?mode=cloud` | Upload CVs to session |
+| `GET` | `/api/sessions/{id}/cvs/status/{job_id}` | Check upload status |
+| `DELETE` | `/api/sessions/{id}/cvs/{cv_id}?mode=cloud` | Remove CV from session |
+
+#### Chat & Suggestions
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/sessions/{id}/chat?mode=cloud` | Send chat message |
+| `GET` | `/api/sessions/{id}/suggestions?mode=cloud` | Get contextual suggestions |
+| `DELETE` | `/api/sessions/{id}/chat?mode=cloud` | Clear chat history |
+| `POST` | `/api/sessions/{id}/generate-name?mode=cloud` | AI-generate session name |
+
+#### Global
+| Method | Endpoint | Description |
+|--------|----------|-------------|
 | `GET` | `/api/health` | Health check |
+| `GET` | `/api/models` | List available LLM models |
+| `GET` | `/api/cvs/{cv_id}/pdf?mode=cloud` | Get CV PDF file |
 
 ---
 

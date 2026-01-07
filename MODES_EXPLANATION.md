@@ -1,32 +1,45 @@
 # Diferencias entre LOCAL y CLOUD
 
+> **Última actualización:** Enero 2026 - v6.0
+
+---
+
 ## ✅ LO QUE ES IGUAL EN AMBOS MODOS
 
 **Ambos modos usan OpenRouter para LLM**:
-- Chat queries → OpenRouterLLMProvider
-- Query understanding → OpenRouter
+- Query understanding → OpenRouter (free models with fallback chain)
 - Reranking → OpenRouter
-- Generation → OpenRouter
+- Generation → OpenRouter (user-selected model)
 - Verification → OpenRouter
+
+**Ambos modos usan la misma arquitectura**:
+- RAG Pipeline v5 (`rag_service_v5.py`)
+- Output Orchestrator con 9 Structures y 29+ Modules
+- Query Understanding Service
+- Suggestion Engine
+- Session-based CV management
+
+---
 
 ## 🔀 LO QUE CAMBIA ENTRE MODOS
 
-### Modo LOCAL
-- **Embeddings**: `LocalEmbeddingProvider`
-  - Prioridad 1: sentence-transformers (all-MiniLM-L6-v2) - 384 dims
-  - Prioridad 2: OpenRouter API (nomic-embed) - 768 dims
-  - Prioridad 3: Hash fallback - 384 dims
-- **Storage**: ChromaDB (`SimpleVectorStore`)
-  - Archivo local: `./chroma_db`
-- **PDF Storage**: Sistema de archivos local
+### Modo LOCAL (`mode=local`)
 
-### Modo CLOUD
-- **Embeddings**: `OpenRouterEmbeddingProvider`
-  - OpenRouter API (nomic-embed-text-v1.5) - 768 dims
-- **Storage**: Supabase pgvector (`SupabaseVectorStore`)
-  - Tabla: `cv_embeddings`
-  - Vector dimension: 768
-- **PDF Storage**: Supabase Storage bucket `cv-pdfs`
+| Componente | Implementación | Detalles |
+|------------|----------------|----------|
+| **Embeddings** | `LocalEmbeddingProvider` | sentence-transformers all-MiniLM-L6-v2 (384 dims) |
+| **Vector Store** | `SimpleVectorStore` | ChromaDB local (`./chroma_db`) |
+| **PDF Storage** | Sistema de archivos | Directorio `./storage/` |
+| **Sessions** | `SessionManager` | JSON file (`backend/data/sessions.json`) |
+
+### Modo CLOUD (`mode=cloud`)
+
+| Componente | Implementación | Detalles |
+|------------|----------------|----------|
+| **Embeddings** | `OpenRouterEmbeddingProvider` | nomic-embed-text-v1.5 (768 dims) |
+| **Vector Store** | `SupabaseVectorStore` | pgvector con RPC `match_cv_embeddings` |
+| **PDF Storage** | Supabase Storage | Bucket `cv-pdfs` |
+| **Sessions** | `SupabaseSessionManager` | Tablas: sessions, session_cvs, session_messages |
 
 ---
 
@@ -35,57 +48,103 @@
 ### `backend/app/providers/factory.py`
 
 ```python
-# Embeddings - SEPARADOS
-def get_embedding_provider(mode):
-    if mode == Mode.CLOUD:
-        return OpenRouterEmbeddingProvider()  # nomic-embed vía API
-    else:
-        return LocalEmbeddingProvider()  # sentence-transformers o fallback
+class ProviderFactory:
+    @classmethod
+    def get_embedding_provider(cls, mode: Mode) -> EmbeddingProvider:
+        if mode == Mode.CLOUD:
+            return OpenRouterEmbeddingProvider()  # 768 dims
+        else:
+            return LocalEmbeddingProvider()  # 384 dims
 
-# Vector Store - SEPARADOS
-def get_vector_store(mode):
-    if mode == Mode.CLOUD:
-        return SupabaseVectorStore()  # Supabase pgvector
-    else:
-        return SimpleVectorStore()  # ChromaDB local
+    @classmethod
+    def get_vector_store(cls, mode: Mode) -> VectorStoreProvider:
+        if mode == Mode.CLOUD:
+            return SupabaseVectorStore()
+        else:
+            return SimpleVectorStore()  # ChromaDB
 
-# LLM - MISMO PARA AMBOS
-def get_llm_provider(mode, model):
-    return OpenRouterLLMProvider(model=model)  # Siempre OpenRouter
+    @classmethod
+    def get_llm_provider(cls, mode: Mode, model: str) -> LLMProvider:
+        return OpenRouterLLMProvider(model=model)  # Same for both
+```
+
+### `backend/app/api/routes_sessions.py`
+
+```python
+def get_session_manager(mode: Mode):
+    if mode == Mode.CLOUD:
+        return supabase_session_manager
+    return session_manager  # Local JSON-based
 ```
 
 ---
 
-## ✅ Estado actual del código
+## 🗄️ Supabase Schema (Cloud Mode)
 
-Los modos NO están mezclados:
+```sql
+-- Tables
+cvs (id, filename, upload_date, metadata)
+cv_embeddings (id, cv_id, content, embedding vector(768), metadata)
+sessions (id, name, description, created_at, updated_at)
+session_cvs (session_id, cv_id, added_at)
+session_messages (session_id, role, content, sources, pipeline_steps, structured_output)
 
-1. **LOCAL mode** usa:
-   - ✅ LocalEmbeddingProvider (línea 20-21 factory.py)
-   - ✅ SimpleVectorStore/ChromaDB (línea 34-35 factory.py)
-   - ✅ OpenRouterLLMProvider (línea 58-59 factory.py)
+-- RPC Function
+match_cv_embeddings(query_embedding, match_count, match_threshold)
 
-2. **CLOUD mode** usa:
-   - ✅ OpenRouterEmbeddingProvider (línea 17-18 factory.py)
-   - ✅ SupabaseVectorStore (línea 31-32 factory.py)
-   - ✅ OpenRouterLLMProvider (línea 58-59 factory.py)
+-- Storage
+Bucket: cv-pdfs (public read, authenticated upload)
+```
+
+Setup script: `scripts/setup_supabase_complete.sql`
 
 ---
 
-## 🔧 Lo que se arregló
+## ✅ Estado actual del código (v6.0)
 
-**Problema**: `index_documents()` fallaba con "Providers not initialized" en CLOUD mode
+Los modos están correctamente separados:
 
-**Solución**: `from_factory()` ahora inicializa embedder y vector_store inmediatamente:
-- Permite subir CVs y crear embeddings en AMBOS modos
-- LLM providers se inicializan lazy cuando se hace una query (necesitan el modelo del frontend)
+| Componente | LOCAL | CLOUD |
+|------------|-------|-------|
+| Embeddings | ✅ LocalEmbeddingProvider | ✅ OpenRouterEmbeddingProvider |
+| Vector Store | ✅ SimpleVectorStore (ChromaDB) | ✅ SupabaseVectorStore |
+| PDF Storage | ✅ Local filesystem | ✅ Supabase Storage |
+| Sessions | ✅ JSON file | ✅ Supabase tables |
+| LLM | ✅ OpenRouter | ✅ OpenRouter |
 
-**Archivos modificados**: 
-- `backend/app/services/rag_service_v5.py` líneas 737-750
+---
 
-**NO se tocó**:
-- ✅ factory.py - separación de modos intacta
-- ✅ local/embeddings.py - embeddings locales intactos
-- ✅ local/vector_store.py - ChromaDB intacto
-- ✅ cloud/embeddings.py - OpenRouter embeddings intacto
-- ✅ cloud/vector_store.py - Supabase intacto
+## 🔧 Configuración
+
+### Variables de entorno
+
+```bash
+# Mode selection
+DEFAULT_MODE=local  # or "cloud"
+
+# Required for CLOUD mode
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_KEY=your-service-key
+
+# Required for both modes (LLM)
+OPENROUTER_API_KEY=your-openrouter-key
+```
+
+### Cambiar modo en runtime
+
+El modo se puede cambiar via query parameter en cualquier endpoint:
+```
+GET /api/sessions?mode=cloud
+POST /api/sessions/{id}/chat?mode=local
+```
+
+---
+
+## 📊 Comparación de dimensiones
+
+| Modo | Modelo de Embedding | Dimensiones |
+|------|---------------------|-------------|
+| LOCAL | all-MiniLM-L6-v2 | 384 |
+| CLOUD | nomic-embed-text-v1.5 | 768 |
+
+**Importante**: Los embeddings de LOCAL y CLOUD no son compatibles entre sí debido a las diferentes dimensiones.

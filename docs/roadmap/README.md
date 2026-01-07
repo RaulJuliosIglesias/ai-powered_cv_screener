@@ -1,17 +1,33 @@
 # 🚀 Roadmap - Future Plans
 
 > Planning documents for future improvements to the **AI-Powered CV Screener** project.
+>
+> **Current Version:** 6.0 | January 2026
 
 ---
 
-## 📑 Table of Contents
+## ✅ Recently Implemented (v6.0)
+
+The following features from the roadmap have been **implemented**:
+
+| Feature | Status | Description |
+|---------|--------|-------------|
+| Output Orchestrator | ✅ Done | 9 Structures + 29 Modules architecture |
+| Conversational Context | ✅ Done | Full pipeline context propagation |
+| Dynamic Suggestions | ✅ Done | SuggestionEngine with 10 query banks |
+| Query Understanding | ✅ Done | Pronoun resolution, query classification |
+| Session-Based Architecture | ✅ Done | CVs and chats organized per session |
+
+---
+
+## 📑 Future Plans
 
 | Priority | Document | Description |
 |----------|----------|-------------|
-| 🔴 High | [RAG V6](./RAG_V6.md) | Next-generation RAG pipeline with advanced verification |
 | 🟡 Medium | [Confidence Improvements](./CONFIDENCE.md) | Answer confidence calibration system |
+| 🟡 Medium | [RAG V6 Enhancements](./RAG_V6.md) | HyDE, iterative refinement, NLI verification |
 | 🟢 Low | [Advanced Evaluation](./ADVANCED_EVAL.md) | Production-grade evaluation metrics |
-| 🟢 Low | [Security Improvements](./SECURITY_IMPROVEMENTS.md) | Security hardening and best practices |
+| 🔴 High | [Security Improvements](./SECURITY_IMPROVEMENTS.md) | Authentication and rate limiting |
 
 ---
 
@@ -20,21 +36,21 @@
 ```
 docs/roadmap/
 ├── README.md                    ← You are here
-├── RAG_V6.md                    ← HuggingFace NLI & RAGAS framework
+├── RAG_V6.md                    ← HyDE & iterative refinement (partial)
 ├── CONFIDENCE.md                ← LLM-as-Judge & calibration
 ├── ADVANCED_EVAL.md             ← Token analysis & citations
-└── SECURITY_IMPROVEMENTS.md     ← Auth & rate limiting
+└── SECURITY_IMPROVEMENTS.md     ← Auth & rate limiting (HIGH priority)
 ```
 
 ---
 
 ## 🔴 High Priority
 
-### [RAG V6](./RAG_V6.md)
-- HuggingFace NLI for semantic verification
-- Zero-shot classification integration
-- RAGAS evaluation framework
-- Precision and recall improvements
+### [Security Improvements](./SECURITY_IMPROVEMENTS.md)
+- Authentication hardening
+- Rate limiting and abuse protection
+- Input validation and sanitization
+- Infrastructure security best practices
 
 ---
 
@@ -46,6 +62,12 @@ docs/roadmap/
 - Self-Consistency checking
 - Score calibration system
 
+### [RAG V6 Enhancements](./RAG_V6.md)
+- HyDE (Hypothetical Document Embeddings) - partial
+- Iterative refinement loop
+- RAGAS evaluation framework
+- Precision and recall improvements
+
 ---
 
 ## 🟢 Low Priority
@@ -56,20 +78,15 @@ docs/roadmap/
 - Calibration framework
 - Production metrics dashboard
 
-### [Security Improvements](./SECURITY_IMPROVEMENTS.md)
-- Authentication hardening
-- Rate limiting and abuse protection
-- Input validation and sanitization
-- Infrastructure security best practices
-
 ---
 
 ## 🔗 Related Documentation
 
 | Document | Description |
 |----------|-------------|
-| [RAG Workflow](../RAG_WORKFLOW.md) | Current RAG pipeline architecture |
-| [Architecture](../../ARCHITECTURE.md) | System architecture overview |
+| [RAG Workflow](../RAG_WORKFLOW.md) | Current RAG pipeline v6.0 architecture |
+| [Architecture](../../ARCHITECTURE.md) | System architecture v6.0 overview |
+| [Structured Output](../STRUCTURED_OUTPUT.md) | 9 Structures + 29 Modules |
 | [Evaluation Criteria](../evaluation/) | Project evaluation documentation |
 
 ---

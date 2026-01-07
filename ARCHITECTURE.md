@@ -1,227 +1,232 @@
-# CV Screener - Arquitectura Actual y Plan de Mejoras
+# CV Screener - Architecture v6.0
 
-## 🏗️ ESTADO ACTUAL DEL SISTEMA
-
-### Modos de Operación
-El sistema tiene **2 modos**: `local` y `cloud` (Supabase)
+> **Last Updated:** January 2026 - Complete v6.0 implementation with 9 Structures, 29+ Modules, and Conversational Context
 
 ---
 
-## 📍 MODO LOCAL (`mode=local`)
+## 🏗️ SYSTEM OVERVIEW
 
-### Componentes Actuales:
+### Operating Modes
+The system supports **2 modes**: `local` and `cloud` (Supabase)
 
-| Componente | Archivo | Estado | Descripción |
-|------------|---------|--------|-------------|
-| **Embeddings** | `providers/local/embeddings.py` | ⚠️ BÁSICO | Intenta ONNX → SentenceTransformers → **Hash fallback** |
-| **Vector Store** | `providers/local/vector_store.py` | ⚠️ BÁSICO | JSON en disco + cosine similarity manual |
-| **LLM** | `providers/local/llm.py` | ✅ OK | Usa OpenRouter API |
-
-### Problemas del Modo Local:
-1. **Embeddings Hash**: Si ONNX/SentenceTransformers no están instalados, usa hash MD5 (muy impreciso)
-2. **Sin guardrails reales**: Solo prompt engineering, el LLM puede ignorarlo
-3. **Sin evals**: No hay forma de medir calidad de respuestas
-4. **Sin detección de alucinaciones**: El LLM puede inventar datos
+| Component | LOCAL Mode | CLOUD Mode |
+|-----------|------------|------------|
+| **Embeddings** | sentence-transformers (384 dims) | OpenRouter nomic-embed-v1.5 (768 dims) |
+| **Vector Store** | ChromaDB (local) | Supabase pgvector |
+| **PDF Storage** | Local filesystem | Supabase Storage |
+| **Sessions** | JSON file persistence | Supabase tables |
+| **LLM** | OpenRouter API | OpenRouter API |
 
 ---
 
-## ☁️ MODO CLOUD - SUPABASE (`mode=cloud`)
+## 📍 MODE: LOCAL (`mode=local`)
 
-### Componentes Actuales:
+### Components:
 
-| Componente | Archivo | Estado | Descripción |
-|------------|---------|--------|-------------|
-| **Embeddings** | `providers/cloud/embeddings.py` | ✅ OK | OpenRouter `nomic-embed-text-v1.5` (768 dims) |
-| **Vector Store** | `providers/cloud/vector_store.py` | ⚠️ INCOMPLETO | Supabase pgvector |
+| Component | File | Status | Description |
+|-----------|------|--------|-------------|
+| **Embeddings** | `providers/local/embeddings.py` | ✅ OK | sentence-transformers all-MiniLM-L6-v2 (384 dims) |
+| **Vector Store** | `providers/local/vector_store.py` | ✅ OK | ChromaDB with cosine similarity |
+| **LLM** | `providers/cloud/llm.py` | ✅ OK | OpenRouter API (shared) |
+| **Sessions** | `models/sessions.py` | ✅ OK | JSON file persistence |
+
+---
+
+## ☁️ MODE: CLOUD - SUPABASE (`mode=cloud`)
+
+### Components:
+
+| Component | File | Status | Description |
+|-----------|------|--------|-------------|
+| **Embeddings** | `providers/cloud/embeddings.py` | ✅ OK | OpenRouter nomic-embed-text-v1.5 (768 dims) |
+| **Vector Store** | `providers/cloud/vector_store.py` | ✅ OK | Supabase pgvector with RPC search |
+| **PDF Storage** | `providers/cloud/pdf_storage.py` | ✅ OK | Supabase Storage bucket `cv-pdfs` |
+| **Sessions** | `providers/cloud/sessions.py` | ✅ OK | Supabase tables (sessions, session_cvs, session_messages) |
 | **LLM** | `providers/cloud/llm.py` | ✅ OK | OpenRouter API |
 
-### Problemas del Modo Cloud:
-1. **Tablas Supabase vacías**: `cvs` y `cv_embeddings` no se populan correctamente
-2. **Función RPC faltante**: `match_cv_embeddings` puede no existir
-3. **Sin guardrails reales**: Mismo problema que local
-4. **Sin evals ni métricas**: No se mide nada
-
----
-
-## ❌ LO QUE FALTA (AMBOS MODOS)
-
-### 1. EMBEDDINGS REALES
-```
-LOCAL:
-- [ ] Instalar sentence-transformers correctamente
-- [ ] Usar modelo: all-MiniLM-L6-v2 (384 dims)
-- [ ] Verificar que NO usa hash fallback
-
-CLOUD:
-- [ ] Verificar que OpenRouter embeddings funcionan
-- [ ] Logging para confirmar embeddings generados
-```
-
-### 2. GUARDRAILS (Prevención de off-topic)
-```
-- [ ] Pre-filtro ANTES del LLM para detectar preguntas off-topic
-- [ ] Clasificador simple (keywords o embedding similarity)
-- [ ] Rechazar preguntas sobre recetas, clima, etc.
-```
-
-### 3. ANTI-ALUCINACIÓN
-```
-- [ ] Verificación post-LLM: ¿Los nombres mencionados existen en los CVs?
-- [ ] Verificación: ¿Las skills mencionadas están en los CVs?
-- [ ] Score de confianza basado en similarity de chunks
-```
-
-### 4. EVALS (Evaluación de Calidad)
-```
-- [ ] Logging de todas las queries y respuestas
-- [ ] Métricas: relevancia, precisión, recall
-- [ ] Dataset de prueba con preguntas/respuestas esperadas
-- [ ] Dashboard de métricas
-```
-
-### 5. SUPABASE SETUP CORRECTO
+### Supabase Schema:
 ```sql
--- Tabla cvs
-CREATE TABLE cvs (
-  id TEXT PRIMARY KEY,
-  filename TEXT NOT NULL,
-  chunk_count INTEGER DEFAULT 0,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- Tabla cv_embeddings con pgvector
-CREATE TABLE cv_embeddings (
-  id SERIAL PRIMARY KEY,
-  cv_id TEXT REFERENCES cvs(id) ON DELETE CASCADE,
-  filename TEXT NOT NULL,
-  chunk_index INTEGER NOT NULL,
-  content TEXT NOT NULL,
-  embedding VECTOR(768),  -- Para nomic-embed
-  metadata JSONB DEFAULT '{}',
-  UNIQUE(cv_id, chunk_index)
-);
-
--- Índice para búsqueda rápida
-CREATE INDEX ON cv_embeddings USING ivfflat (embedding vector_cosine_ops);
-
--- Función RPC para búsqueda
-CREATE OR REPLACE FUNCTION match_cv_embeddings(
-  query_embedding VECTOR(768),
-  match_count INT DEFAULT 5,
-  match_threshold FLOAT DEFAULT 0.3
-)
-RETURNS TABLE (
-  id INTEGER,
-  cv_id TEXT,
-  filename TEXT,
-  content TEXT,
-  similarity FLOAT,
-  metadata JSONB
-)
-LANGUAGE plpgsql
-AS $$
-BEGIN
-  RETURN QUERY
-  SELECT
-    cv_embeddings.id,
-    cv_embeddings.cv_id,
-    cv_embeddings.filename,
-    cv_embeddings.content,
-    1 - (cv_embeddings.embedding <=> query_embedding) AS similarity,
-    cv_embeddings.metadata
-  FROM cv_embeddings
-  WHERE 1 - (cv_embeddings.embedding <=> query_embedding) > match_threshold
-  ORDER BY cv_embeddings.embedding <=> query_embedding
-  LIMIT match_count;
-END;
-$$;
+-- Tables: cvs, cv_embeddings (768 dims), sessions, session_cvs, session_messages
+-- RPC Function: match_cv_embeddings(query_embedding, match_count, match_threshold)
+-- Storage Bucket: cv-pdfs
+-- Setup: scripts/setup_supabase_complete.sql
 ```
 
 ---
 
-## 🎯 PLAN DE MEJORAS PROPUESTO
+## 🔄 RAG PIPELINE v6.0
 
-### Fase 1: Embeddings Reales (LOCAL)
-1. Verificar instalación de sentence-transformers
-2. Forzar uso de modelo real, no hash fallback
-3. Añadir logging para confirmar qué modelo se usa
-
-### Fase 2: Supabase Funcionando (CLOUD)
-1. Ejecutar SQL de setup en Supabase
-2. Verificar que embeddings se insertan
-3. Probar búsqueda RPC
-
-### Fase 3: Guardrails Pre-LLM
-1. Crear clasificador de intención (CV-related vs off-topic)
-2. Rechazar preguntas off-topic ANTES de llamar al LLM
-3. Ahorrar tokens y tiempo
-
-### Fase 4: Anti-Alucinación Post-LLM
-1. Extraer nombres y skills de la respuesta del LLM
-2. Verificar contra los CVs reales
-3. Marcar o corregir información no verificable
-
-### Fase 5: Evals y Métricas
-1. Logging estructurado de queries
-2. Dataset de evaluación
-3. Métricas automáticas
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                              RAG PIPELINE v6.0                                   │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                 │
+│  USER QUERY                                                                     │
+│      │                                                                          │
+│      ▼                                                                          │
+│  ┌─────────────────────┐                                                       │
+│  │ QUERY UNDERSTANDING │ → Classify query_type, extract requirements           │
+│  │ (QueryUnderstandingService) │   Resolve pronouns using conversation history │
+│  └─────────────────────┘                                                       │
+│      │                                                                          │
+│      ▼                                                                          │
+│  ┌─────────────────────┐                                                       │
+│  │    GUARDRAILS       │ → Validate CV-related, reject off-topic               │
+│  └─────────────────────┘                                                       │
+│      │                                                                          │
+│      ▼                                                                          │
+│  ┌─────────────────────┐                                                       │
+│  │    EMBEDDING        │ → Generate query embedding (384 or 768 dims)          │
+│  └─────────────────────┘                                                       │
+│      │                                                                          │
+│      ▼                                                                          │
+│  ┌─────────────────────┐                                                       │
+│  │   VECTOR SEARCH     │ → Retrieve relevant CV chunks from session            │
+│  └─────────────────────┘                                                       │
+│      │                                                                          │
+│      ▼                                                                          │
+│  ┌─────────────────────┐                                                       │
+│  │    RERANKING        │ → LLM-based reranking for relevance                   │
+│  └─────────────────────┘                                                       │
+│      │                                                                          │
+│      ▼                                                                          │
+│  ┌─────────────────────┐                                                       │
+│  │   LLM GENERATION    │ → Generate response with context + prompt template    │
+│  └─────────────────────┘                                                       │
+│      │                                                                          │
+│      ▼                                                                          │
+│  ┌─────────────────────┐                                                       │
+│  │   VERIFICATION      │ → Claim verification, hallucination detection         │
+│  └─────────────────────┘                                                       │
+│      │                                                                          │
+│      ▼                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────────────┐  │
+│  │                      OUTPUT ORCHESTRATOR                                  │  │
+│  │  Routes query_type → STRUCTURE → MODULES → StructuredOutput              │  │
+│  └──────────────────────────────────────────────────────────────────────────┘  │
+│      │                                                                          │
+│      ▼                                                                          │
+│  STRUCTURED RESPONSE (with sources, metrics, pipeline_steps)                   │
+│                                                                                 │
+└─────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## 📊 FLUJO ACTUAL vs FLUJO IDEAL
+## 🎯 OUTPUT ORCHESTRATOR ARCHITECTURE
 
-### ACTUAL (v5.1.1):
-```
-Pregunta → [GUARDRAIL] → Embedding → Vector Search → [Reranking] → LLM
-                                                                    ↓
-                                                        [Chain-of-Thought Reasoning]
-                                                                    ↓
-                                                        [Claim Verification]
-                                                                    ↓
-                                                    [Output Orchestrator]
-                                                    ┌───────────────────────┐
-                                                    │ Core Modules (5):     │
-                                                    │ - Thinking            │
-                                                    │ - DirectAnswer        │
-                                                    │ - Analysis            │
-                                                    │ - Table               │
-                                                    │ - Conclusion          │
-                                                    ├───────────────────────┤
-                                                    │ Enhanced Modules (3): │ ← NEW v5.1.1
-                                                    │ - GapAnalysis         │
-                                                    │ - RedFlags            │
-                                                    │ - Timeline            │
-                                                    └───────────────────────┘
-                                                                    ↓
-                                                          Respuesta Estructurada
-```
+### Query Type → Structure Routing
 
-### METADATA ENRIQUECIDA (v5.1.1)
+| Query Type | Structure | Example Query |
+|------------|-----------|---------------|
+| `single_candidate` | SingleCandidateStructure | "Give me the full profile of Juan" |
+| `red_flags` | RiskAssessmentStructure | "What are the red flags for María?" |
+| `comparison` | ComparisonStructure | "Compare Juan and María" |
+| `search` | SearchStructure | "Find developers with Python" |
+| `ranking` | RankingStructure | "Top 5 candidates for backend" |
+| `job_match` | JobMatchStructure | "Who fits best for senior position?" |
+| `team_build` | TeamBuildStructure | "Build a team of 3 developers" |
+| `verification` | VerificationStructure | "Verify if Juan has AWS certification" |
+| `summary` | SummaryStructure | "Overview of all candidates" |
 
-Durante la indexación de CVs, se extrae automáticamente:
+### Modules (29+)
 
-| Campo | Descripción |
+| Category | Modules |
+|----------|---------|
+| **Core (4)** | ThinkingModule, DirectAnswerModule, AnalysisModule, ConclusionModule |
+| **Profile (4)** | HighlightsModule, CareerModule, SkillsModule, CredentialsModule |
+| **Tables (6)** | RiskTableModule, TableModule, ResultsTableModule, RankingTableModule, RankingCriteriaModule, TopPickModule |
+| **Risk (2)** | RedFlagsModule, TimelineModule |
+| **Match (3)** | RequirementsModule, MatchScoreModule, GapAnalysisModule |
+| **Team (4)** | TeamRequirementsModule, TeamCompositionModule, SkillCoverageModule, TeamRiskModule |
+| **Verify (3)** | ClaimModule, EvidenceModule, VerdictModule |
+| **Summary (3)** | TalentPoolModule, SkillDistributionModule, ExperienceDistributionModule |
+
+---
+
+## 💬 CONVERSATIONAL CONTEXT
+
+Conversation history is propagated through the entire pipeline:
+
+1. **QueryUnderstandingService** - Receives last 6 messages for pronoun resolution
+2. **LLM Generation** - Includes conversation context in prompt
+3. **OutputOrchestrator** - Structures receive context for follow-up queries
+4. **SuggestionEngine** - Generates contextual suggestions based on history
+
+### Context Resolution Examples:
+- "compare those 3" → Resolves to candidates mentioned in previous response
+- "tell me more about her" → Resolves to last mentioned female candidate
+- "what about the top one?" → Resolves to #1 ranked candidate
+
+---
+
+## 📊 ENRICHED METADATA
+
+During CV indexing, the following is automatically extracted:
+
+| Field | Description |
 |-------|-------------|
-| `total_experience_years` | Años totales de experiencia |
+| `total_experience_years` | Total years of experience |
 | `seniority_level` | junior/mid/senior/lead/executive |
-| `current_role` | Puesto actual |
-| `current_company` | Empresa actual |
-| `has_faang_experience` | Experiencia en Big Tech |
-| `job_hopping_score` | Índice de rotación (0-1) |
-| `avg_tenure_years` | Promedio de permanencia |
-| `employment_gaps` | Gaps de empleo detectados |
+| `current_role` | Current position |
+| `current_company` | Current company |
+| `has_faang_experience` | Experience at Big Tech |
+| `job_hopping_score` | Rotation index (0-1) |
+| `avg_tenure_years` | Average tenure |
+| `employment_gaps` | Detected employment gaps |
 
-### NUEVOS TIPOS DE PREGUNTAS (v5.1.1)
+---
 
-**Gap Analysis:**
-- "¿Qué candidatos tienen todas las skills: Maya, Houdini y Python?"
-- "¿Cuál es el candidato con mejor cobertura para mis requisitos?"
+## 🔧 KEY FILES
 
-**Red Flags:**
-- "¿Hay candidatos con job hopping?"
-- "¿Cuáles son los candidatos más estables?"
-- "Dame los candidatos sin red flags"
+### Backend Core
+| File | Purpose |
+|------|---------|
+| `app/main.py` | FastAPI application entry point |
+| `app/config.py` | Settings with Mode enum (LOCAL/CLOUD) |
+| `app/services/rag_service_v5.py` | Main RAG pipeline (2900+ lines) |
+| `app/services/query_understanding_service.py` | Query classification & reformulation |
+| `app/services/output_processor/orchestrator.py` | Routes to structures |
 
-**Timeline:**
-- "¿Quién tiene la mejor progresión de carrera?"
-- "Compara las trayectorias de los 3 mejores candidatos"
+### Providers
+| File | Purpose |
+|------|---------|
+| `providers/factory.py` | Provider factory with mode switching |
+| `providers/local/embeddings.py` | sentence-transformers |
+| `providers/local/vector_store.py` | ChromaDB |
+| `providers/cloud/embeddings.py` | OpenRouter nomic-embed |
+| `providers/cloud/vector_store.py` | Supabase pgvector |
+| `providers/cloud/sessions.py` | Supabase session management |
+
+### Output Processing
+| File | Purpose |
+|------|---------|
+| `services/output_processor/orchestrator.py` | Main orchestrator |
+| `services/output_processor/structures/` | 9 structure classes |
+| `services/output_processor/modules/` | 29+ module classes |
+
+### Frontend Core
+| File | Purpose |
+|------|---------|
+| `src/App.jsx` | Main application component |
+| `src/components/output/StructuredOutputRenderer.jsx` | Renders structured responses |
+| `src/contexts/PipelineContext.jsx` | Pipeline state management |
+| `src/services/api.ts` | API client |
+
+---
+
+## ✅ IMPLEMENTED FEATURES (v6.0)
+
+- [x] Dual-mode architecture (Local/Cloud)
+- [x] 9 Output Structures with intelligent routing
+- [x] 29+ Reusable Modules
+- [x] Conversational Context propagation
+- [x] Query Understanding with pronoun resolution
+- [x] Real-time pipeline progress tracking
+- [x] Structured output rendering in frontend
+- [x] Dynamic suggestion engine
+- [x] Session-based CV management
+- [x] PDF viewing and storage
+- [x] Duplicate CV detection (content hash)
+- [x] Background upload processing
+- [x] AI-powered session naming

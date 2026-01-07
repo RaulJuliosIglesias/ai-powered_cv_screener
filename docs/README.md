@@ -9,24 +9,24 @@
 ## 🆕 What's New in v6.0
 
 ### Complete Orchestration Architecture
-New **Orchestrator → Structures → Modules** system with:
+**Orchestrator → Structures → Modules** system:
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| **Structures** | 9 | Complete output assemblers (SingleCandidate, Comparison, JobMatch, etc.) |
-| **Modules** | 25+ | Reusable components (Thinking, Analysis, RiskTable, MatchScore, etc.) |
+| **Structures** | 9 | Complete output assemblers (SingleCandidate, RiskAssessment, Comparison, etc.) |
+| **Modules** | 29+ | Reusable components (Thinking, Analysis, RiskTable, MatchScore, Skills, etc.) |
 | **Query Types** | 9 | Intelligent routing based on query classification |
 
 ### 9 Structures Implemented
 
 | Structure | Query Type | Example |
 |-----------|------------|---------|
-| SingleCandidateStructure | `single_candidate` | "Dame el perfil de Juan" |
-| RiskAssessmentStructure | `red_flags` | "Qué red flags tiene María?" |
-| ComparisonStructure | `comparison` | "Compara Juan y María" |
-| SearchStructure | `search` | "Busca developers Python" |
-| RankingStructure | `ranking` | "Top 5 para backend" |
-| JobMatchStructure | `job_match` | "Quién encaja para senior?" |
+| SingleCandidateStructure | `single_candidate` | "Give me the full profile of Juan" |
+| RiskAssessmentStructure | `red_flags` | "What red flags does María have?" |
+| ComparisonStructure | `comparison` | "Compare Juan and María" |
+| SearchStructure | `search` | "Find Python developers" |
+| RankingStructure | `ranking` | "Top 5 for backend" |
+| JobMatchStructure | `job_match` | "Who fits for senior position?" |
 | TeamBuildStructure | `team_build` | "Build a team of 3" |
 | VerificationStructure | `verification` | "Verify AWS certification" |
 | SummaryStructure | `summary` | "Overview of candidates" |
@@ -34,7 +34,17 @@ New **Orchestrator → Structures → Modules** system with:
 ### Conversational Context
 - `conversation_history` propagated through entire pipeline
 - Structures receive context for follow-up queries
-- Pronoun resolution for "he/she/this candidate"
+- Pronoun resolution: "compare those 3", "tell me more about her"
+
+### Session-Based Architecture
+- CVs organized in sessions (not global)
+- Chat history per session with pipeline_steps and structured_output
+- Duplicate CV detection via content hash
+- AI-powered session naming
+
+### Dual-Mode Support
+- **LOCAL**: ChromaDB + sentence-transformers (384 dims) + JSON persistence
+- **CLOUD**: Supabase pgvector + nomic-embed (768 dims) + Supabase Storage
 
 ---
 
@@ -51,11 +61,11 @@ docs/
 ├── METADATA_FLOW.md               ← Metadata extraction pipeline
 ├── RED_FLAGS_ARCHITECTURE.md      ← Red flags detection system
 ├── CHANGELOG_ARCHITECTURE_V6.md   ← All v6.0 changes documented
+├── architecture-visualization.html ← Interactive D3.js architecture diagram
 ├── testeo/                        ← Testing documentation
-│   └── TEST_ORCHESTRATION_...md   ← Query tests per structure
-├── NextUpdate/                    ← Reference architecture docs
+├── NextUpdate/                    ← Future architecture plans
 ├── evaluation/                    ← Project evaluation criteria
-├── roadmap/                       ← Future plans
+├── roadmap/                       ← Future development plans
 └── archive/                       ← Historical documentation
 ```
 
@@ -66,9 +76,10 @@ docs/
 | Document | Description |
 |----------|-------------|
 | [INSTRUCTIONS.md](./INSTRUCTIONS.md) | Complete installation, configuration, and usage guide |
-| [RAG_WORKFLOW.md](./RAG_WORKFLOW.md) | RAG pipeline architecture with orchestration |
-| [STRUCTURED_OUTPUT.md](./STRUCTURED_OUTPUT.md) | 9 structures + 25 modules system |
+| [RAG_WORKFLOW.md](./RAG_WORKFLOW.md) | RAG pipeline architecture with all stages |
+| [STRUCTURED_OUTPUT.md](./STRUCTURED_OUTPUT.md) | 9 structures + 29 modules system |
 | [ARCHITECTURE_MODULES.md](./ARCHITECTURE_MODULES.md) | Complete Orchestrator → Structures → Modules reference |
+| [CONVERSATIONAL_CONTEXT.md](./CONVERSATIONAL_CONTEXT.md) | Context propagation and pronoun resolution |
 | [CHANGELOG_ARCHITECTURE_V6.md](./CHANGELOG_ARCHITECTURE_V6.md) | All v6.0 changes and bug fixes |
 
 ---
@@ -86,13 +97,36 @@ Documentation demonstrating how the project meets professional evaluation criter
 
 ### [🚀 roadmap/](./roadmap/)
 Future development plans:
-- **Context Resolution** - Smart pronoun resolution using context
-- **Context-Aware Structures** - Structures adapt based on conversation
-- **Smart Context Management** - Intelligent message selection
+- **Advanced Evaluation** - Automated response quality metrics
 - **Confidence Calibration** - Response confidence scoring
+- **RAG v6 Enhancements** - HyDE, iterative refinement
 
 ### [📦 archive/](./archive/)
 Historical documentation of already implemented plans. Useful for understanding project evolution.
+
+---
+
+## 🔧 Key Backend Components
+
+| Component | Location | Description |
+|-----------|----------|-------------|
+| RAG Service v5 | `backend/app/services/rag_service_v5.py` | Main pipeline (2900+ lines) |
+| Query Understanding | `backend/app/services/query_understanding_service.py` | Query classification |
+| Output Orchestrator | `backend/app/services/output_processor/orchestrator.py` | Routes to structures |
+| Structures (9) | `backend/app/services/output_processor/structures/` | Output assemblers |
+| Modules (29+) | `backend/app/services/output_processor/modules/` | Reusable components |
+| Suggestion Engine | `backend/app/services/suggestion_engine/` | Contextual suggestions |
+| Prompt Templates | `backend/app/prompts/templates.py` | LLM prompts |
+
+## 🎨 Key Frontend Components
+
+| Component | Location | Description |
+|-----------|----------|-------------|
+| App | `frontend/src/App.jsx` | Main application |
+| StructuredOutputRenderer | `frontend/src/components/output/` | Renders structured responses |
+| PipelineContext | `frontend/src/contexts/PipelineContext.jsx` | Pipeline state |
+| BackgroundTaskContext | `frontend/src/contexts/BackgroundTaskContext.jsx` | Upload tasks |
+| API Client | `frontend/src/services/api.ts` | Backend communication |
 
 ---
 
@@ -101,8 +135,8 @@ Historical documentation of already implemented plans. Useful for understanding 
 | Document | Location | Description |
 |----------|----------|-------------|
 | [Main README](../README.md) | Project root | Quick start and overview |
-| [ARCHITECTURE.md](../ARCHITECTURE.md) | Project root | Detailed technical architecture |
-| [MODES_EXPLANATION.md](../MODES_EXPLANATION.md) | Project root | Local vs Cloud mode explanation |
+| [ARCHITECTURE.md](../ARCHITECTURE.md) | Project root | Complete technical architecture v6.0 |
+| [MODES_EXPLANATION.md](../MODES_EXPLANATION.md) | Project root | Local vs Cloud mode details |
 | [SECURITY.md](../SECURITY.md) | Project root | Security considerations |
 
 ---
