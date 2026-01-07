@@ -62,19 +62,26 @@ QUERY_UNDERSTANDING_PROMPT = """You are a query understanding assistant for a CV
 
 {conversation_context}
 
-Analyze the user's question and extract:
-1. What they're actually asking for
-2. Resolve any references to previous messages (e.g., "el top candidate", "this person", "he", "she")
-3. Break down complex queries into clear requirements
-4. Identify if this is CV-related
+Your task is to REINTERPRET and EXPAND the user's query into a clear, detailed understanding.
+
+CRITICAL RULES:
+1. The "understood_query" MUST be an EXPANDED reinterpretation - NEVER just repeat the user's words
+2. Resolve ALL references ("them", "the 3", "those candidates", "he/she", "el top candidate")
+3. If the user says "compare the 3 of them", identify WHO "them" refers to from context
+4. Add explicit detail about WHAT is being compared/analyzed
+5. Break down vague queries into specific, actionable requirements
 
 USER QUERY: {query}
 
-IMPORTANT: If the query contains references like "el top candidate", "the best one", "this person", "he/she", look at the conversation history above to identify WHO is being referred to, and include their FULL NAME in your reformulated prompt.
+IMPORTANT: 
+- "understood_query" should read like a THOUGHT PROCESS explaining what the user really wants
+- It should be 2-3x longer than the original query with added specificity
+- Include candidate names if they can be resolved from conversation history
+- Explain the implicit intent behind short/vague queries
 
 Respond in this EXACT JSON format (no markdown, just raw JSON):
 {{
-  "understood_query": "Clear restatement of what user wants (with resolved names)",
+  "understood_query": "EXPANDED reinterpretation showing your understanding (NOT a copy of the original)",
   "query_type": "ranking|comparison|search|filter|general",
   "requirements": [
     "requirement 1",
@@ -152,6 +159,43 @@ USER QUERY: "dime mas sobre el top candidate"
   ],
   "is_cv_related": true,
   "reformulated_prompt": "Provide a comprehensive profile and detailed analysis of Isabel Mendoza, including all leadership experience, team management roles, strategic accomplishments, skills, and career trajectory."
+}}
+
+VAGUE REFERENCE EXAMPLE (CRITICAL - DO NOT JUST COPY THE QUERY):
+
+Conversation History:
+Usuario: Who has the most experience?
+Asistente: 1. John Smith (15 years), 2. Maria Garcia (12 years), 3. David Lee (10 years)...
+
+USER QUERY: "compare the 3 of them"
+
+{{
+  "understood_query": "The user wants to compare the top 3 candidates from the previous experience ranking: John Smith (15 years experience), Maria Garcia (12 years experience), and David Lee (10 years experience). This comparison should analyze their skills, career trajectories, strengths and weaknesses to help decide between them.",
+  "query_type": "comparison",
+  "requirements": [
+    "Compare John Smith, Maria Garcia, and David Lee side by side",
+    "Analyze their experience, skills, and qualifications",
+    "Identify strengths and weaknesses of each",
+    "Provide recommendation on which is best for different scenarios"
+  ],
+  "is_cv_related": true,
+  "reformulated_prompt": "Create a detailed comparison table of John Smith, Maria Garcia, and David Lee. For each candidate, analyze: years of experience, technical skills, leadership experience, career progression, education, and key achievements. Highlight what makes each unique and provide recommendations for different hiring needs."
+}}
+
+SHORT QUERY EXPANSION EXAMPLE:
+
+USER QUERY: "tell me more"
+
+{{
+  "understood_query": "The user wants additional details about the topic or candidate discussed in the previous message. Since this is a follow-up, I should expand on the last response with more comprehensive information, deeper analysis, or additional relevant details that weren't covered before.",
+  "query_type": "search",
+  "requirements": [
+    "Identify what was discussed previously",
+    "Provide additional details not yet covered",
+    "Go deeper into the analysis"
+  ],
+  "is_cv_related": true,
+  "reformulated_prompt": "Provide additional comprehensive details about the previously discussed topic/candidate, including information not yet covered in prior responses."
 }}
 
 Now analyze the user's query and respond with JSON only:"""
@@ -371,6 +415,13 @@ class QueryUnderstandingService:
         query_type = parsed.get("query_type", "general")
         is_cv_related = parsed.get("is_cv_related", True)
         
+        # Get understood_query from LLM response
+        understood_query = parsed.get("understood_query", query)
+        
+        # CRITICAL: Validate that understood_query is actually an expansion
+        # If the LLM just copied the query, we need to expand it ourselves
+        understood_query = self._ensure_query_expansion(query, understood_query, query_type, parsed.get("requirements", []))
+        
         # CRITICAL: Override query_type if strong comparison patterns detected
         # This fixes cases where LLM incorrectly classifies "Compare #1 vs #2" as "ranking"
         query_lower = query.lower()
@@ -393,7 +444,7 @@ class QueryUnderstandingService:
         
         return QueryUnderstanding(
             original_query=query,
-            understood_query=parsed.get("understood_query", query),
+            understood_query=understood_query,
             query_type=query_type,
             requirements=parsed.get("requirements", []),
             is_cv_related=is_cv_related,
@@ -401,6 +452,91 @@ class QueryUnderstandingService:
             reformulated_prompt=parsed.get("reformulated_prompt", query),
             metadata=metadata
         )
+    
+    def _ensure_query_expansion(self, original: str, understood: str, query_type: str, requirements: list) -> str:
+        """
+        Ensure the understood_query is actually an expansion, not a copy.
+        
+        If the LLM returned something too similar to the original,
+        we generate an expanded version ourselves.
+        """
+        original_normalized = original.lower().strip()
+        understood_normalized = understood.lower().strip()
+        
+        # Check if understood is too similar to original
+        is_too_similar = (
+            understood_normalized == original_normalized or
+            len(understood) < len(original) * 1.3 or  # Should be at least 30% longer
+            self._similarity_ratio(original_normalized, understood_normalized) > 0.85
+        )
+        
+        if not is_too_similar:
+            return understood  # LLM did its job correctly
+        
+        logger.warning(f"[QUERY_UNDERSTANDING] Detected lazy understood_query, expanding: '{original}' -> '{understood}'")
+        
+        # Generate expanded version based on query_type
+        expanded = self._generate_expanded_understanding(original, query_type, requirements)
+        
+        logger.info(f"[QUERY_UNDERSTANDING] Auto-expanded to: '{expanded}'")
+        return expanded
+    
+    def _similarity_ratio(self, s1: str, s2: str) -> float:
+        """Calculate simple similarity ratio between two strings."""
+        if not s1 or not s2:
+            return 0.0
+        
+        # Simple word overlap ratio
+        words1 = set(s1.split())
+        words2 = set(s2.split())
+        
+        if not words1 or not words2:
+            return 0.0
+        
+        intersection = words1 & words2
+        union = words1 | words2
+        
+        return len(intersection) / len(union)
+    
+    def _generate_expanded_understanding(self, query: str, query_type: str, requirements: list) -> str:
+        """
+        Generate an expanded understanding when LLM fails to do so.
+        
+        This provides meaningful context about what the user is asking.
+        """
+        query_lower = query.lower()
+        
+        # Build requirements string if available
+        req_str = ""
+        if requirements:
+            req_str = f" This involves: {', '.join(requirements[:3])}."
+        
+        # Type-specific expansions
+        if query_type == "comparison":
+            if "3" in query or "three" in query_lower:
+                return f"The user wants to compare 3 candidates from the current context. This comparison should analyze their relative strengths, weaknesses, experience levels, skills, and qualifications to help make a hiring decision.{req_str}"
+            elif "2" in query or "two" in query_lower:
+                return f"The user wants to compare 2 candidates head-to-head. This comparison should highlight differences in experience, skills, and fit for the role.{req_str}"
+            else:
+                return f"The user requests a detailed comparison between the referenced candidates. This should include side-by-side analysis of their qualifications, experience, and suitability.{req_str}"
+        
+        elif query_type == "ranking":
+            return f"The user wants candidates ranked according to specific criteria. This ranking should order all relevant candidates and provide justification for the ordering.{req_str}"
+        
+        elif query_type == "search":
+            return f"The user is searching for specific information about candidates or their qualifications. This requires extracting relevant details from the CV data.{req_str}"
+        
+        elif query_type == "filter":
+            return f"The user wants to filter candidates based on specific criteria. This should identify which candidates meet the requirements and which don't.{req_str}"
+        
+        else:
+            # General expansion for vague queries
+            if any(word in query_lower for word in ['more', 'detail', 'expand', 'tell', 'explain']):
+                return f"The user is requesting additional details or elaboration on the previously discussed topic or candidate. This follow-up requires deeper analysis.{req_str}"
+            elif any(word in query_lower for word in ['them', 'those', 'these', 'they']):
+                return f"The user is referencing candidates or topics from the previous context. The query involves analyzing the referenced subjects in more detail.{req_str}"
+            else:
+                return f"The user query requires understanding the context from the conversation and providing a relevant response about the candidates or analysis requested.{req_str}"
     
     def _create_heuristic_fallback(self, query: str, error_reason: str) -> QueryUnderstanding:
         """
@@ -441,14 +577,17 @@ class QueryUnderstandingService:
             f"type={query_type}, cv_related={is_cv_related}, reason={error_reason[:100]}"
         )
         
+        # Generate expanded understanding even in fallback mode
+        expanded_query = self._generate_expanded_understanding(query, query_type, [])
+        
         return QueryUnderstanding(
             original_query=query,
-            understood_query=query,  # Use original as-is
+            understood_query=expanded_query,  # Use expanded version, not original
             query_type=query_type,
             requirements=[],  # Can't extract requirements without LLM
             is_cv_related=is_cv_related,
             confidence=0.5,  # Lower confidence for heuristic fallback
-            reformulated_prompt=query,
+            reformulated_prompt=expanded_query,  # Also use expanded version
             metadata={
                 "fallback": True,
                 "fallback_type": "heuristic",

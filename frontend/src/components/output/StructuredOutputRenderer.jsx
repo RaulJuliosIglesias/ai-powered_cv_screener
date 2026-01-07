@@ -50,6 +50,28 @@ const getScoreColor = (score) => {
   return 'bg-gray-500 text-white';
 };
 
+// Helper function to detect if content contains markdown table
+const containsMarkdownTable = (content) => {
+  if (!content) return false;
+  const lines = content.split('\n');
+  let tableLineCount = 0;
+  
+  for (const line of lines) {
+    const trimmedLine = line.trim();
+    // Check for table row pattern: | cell1 | cell2 | cell3 |
+    if (trimmedLine.includes('|') && trimmedLine.split('|').length >= 3) {
+      tableLineCount++;
+    }
+    // Check for table separator pattern: |---|---|---|
+    else if (trimmedLine.includes('|') && trimmedLine.includes('---')) {
+      tableLineCount++;
+    }
+  }
+  
+  // Consider it a table if we have at least 2 lines with table syntax
+  return tableLineCount >= 2;
+};
+
 // CV Reference Renderer - FUNCIÓN ÚNICA para renderizar contenido con CVs
 // Detecta múltiples patrones de CV links y los renderiza como botón clickeable + nombre
 // cvMap: opcional, mapa de nombres normalizados a cv_ids para resolver "📄 Name" sin link explícito
@@ -57,6 +79,43 @@ const ContentWithCVLinks = ({ content, onOpenCV, cvMap = {} }) => {
   if (!content) return null;
   
   const contentStr = String(content);
+  
+  // Check if content contains markdown table - if so, render as full markdown
+  if (containsMarkdownTable(contentStr)) {
+    return (
+      <ReactMarkdown 
+        remarkPlugins={[remarkGfm]}
+        components={{
+          a: ({ href, children }) => {
+            // Handle CV links in tables
+            const cvMatch = href?.match(/^cv:(cv_[a-zA-Z0-9_-]+)$/);
+            if (cvMatch && onOpenCV) {
+              const cvId = cvMatch[1];
+              const name = typeof children === 'string' ? children : children?.props?.children || 'CV';
+              return (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onOpenCV(cvId, name);
+                  }}
+                  className="inline-flex items-center gap-1 text-blue-300 hover:text-blue-200 transition-colors"
+                  title={`View CV: ${name}`}
+                >
+                  <FileText className="w-3 h-3" />
+                  {name}
+                </button>
+              );
+            }
+            return <a href={href} className="text-blue-300 hover:text-blue-200">{children}</a>;
+          }
+        }}
+      >
+        {contentStr}
+      </ReactMarkdown>
+    );
+  }
   
   // DEBUG: Log cvMap to see what we have
   console.log('[CV_LINKS] cvMap received:', cvMap);
