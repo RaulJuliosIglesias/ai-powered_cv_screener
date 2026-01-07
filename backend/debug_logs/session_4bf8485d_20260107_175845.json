@@ -1,0 +1,44 @@
+{
+  "session_id": "4bf8485d-6f7b-41fa-ab02-8b8614164956",
+  "generated_at": "2026-01-07T17:58:45.142728",
+  "events": [
+    {
+      "timestamp": "2026-01-07T17:57:53.605287",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "4bf8485d-6f7b-41fa-ab02-8b8614164956"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T17:57:53.605287",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "make risk assesment of Sofia Rodriguez",
+        "cv_ids": [
+          "cv_ab89fef2",
+          "cv_46640a24",
+          "cv_271f9022",
+          "cv_080c9ee5",
+          "cv_66bad3dd",
+          "cv_7a5033c7",
+          "cv_adc89b4b",
+          "cv_f00d629a",
+          "cv_0912bbc9",
+          "cv_aa1ec396",
+          "cv_2e358204",
+          "cv_9a23ec79",
+          "cv_4550c540",
+          "cv_cf2fa5ec",
+          "cv_dfbb4d01",
+          "cv_6258c89b",
+          "cv_3cab9cc9",
+          "cv_04232075",
+          "cv_6b0602a8"
+        ],
+        "cv_count": 19
+      }
+    }
+  ]
+}

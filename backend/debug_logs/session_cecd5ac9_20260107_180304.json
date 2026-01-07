@@ -1,0 +1,89 @@
+{
+  "session_id": "cecd5ac9-ed25-4138-9281-2ef1dbce09f8",
+  "generated_at": "2026-01-07T18:03:04.273016",
+  "events": [
+    {
+      "timestamp": "2026-01-07T18:02:12.700239",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "cecd5ac9-ed25-4138-9281-2ef1dbce09f8"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:12.700239",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_53898aae",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Annelies de Vries  Junior Web",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Annelies de Vries  Junior Web =====\n\nCURRENT POSITION: Amsterdam\nCURRENT C"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Annelies de Vries  Junior Web",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2\n\nTITLE: E X P E R I E N C E\nCOMPANY: Development Intern\nPERIOD: 2023 - 2023\nDURA"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Annelies de Vries  Junior Web",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2 === CURRENT POSITION ===\n\nTITLE: Amsterdam\nCOMPANY: Netherlands\nPERIOD: 2022 - P"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Annelies de Vries  Junior Web",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Annelies de Vries  Junior Web\n\nCURRENT ROLE: Amsterdam\nCOMPANY: Netherlands\nTOTAL E"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:23.078220",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "cecd5ac9-ed25-4138-9281-2ef1dbce09f8"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:23.078220",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Who has experience with Python?",
+        "cv_ids": [
+          "cv_53898aae"
+        ],
+        "cv_count": 1
+      }
+    }
+  ]
+}

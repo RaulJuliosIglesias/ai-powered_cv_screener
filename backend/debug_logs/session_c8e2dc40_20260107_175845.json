@@ -1,0 +1,401 @@
+{
+  "session_id": "c8e2dc40-bb7f-4ff6-af6d-f0cee455f258",
+  "generated_at": "2026-01-07T17:58:45.141696",
+  "events": [
+    {
+      "timestamp": "2026-01-07T17:58:11.398240",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "c8e2dc40-bb7f-4ff6-af6d-f0cee455f258"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T17:58:11.398240",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Compare the two most experienced candidates",
+        "cv_ids": [
+          "cv_f333b1a3",
+          "cv_4cd8f7f7",
+          "cv_d761f72b",
+          "cv_4379cb94",
+          "cv_ea1ff2c0",
+          "cv_c5bd5b5d",
+          "cv_7bcd5fe9",
+          "cv_d1e7f0b9",
+          "cv_1ce92745",
+          "cv_1e3e62ab",
+          "cv_add18e3c",
+          "cv_c81e909b",
+          "cv_7a311638",
+          "cv_ee559421"
+        ],
+        "cv_count": 14
+      }
+    },
+    {
+      "timestamp": "2026-01-07T17:58:14.431483",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 21,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_080c9ee5",
+            "candidate_name": " Sofia Hernandez  Engine",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "score": 0.80383657907507,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_6258c89b",
+            "candidate_name": " Alejandro Morales  Junior Mobile",
+            "section_type": "skills",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "score": 0.7913625500988517,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_dfbb4d01",
+            "candidate_name": " Sofia Rodriguez  Junior",
+            "section_type": "skills",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "score": 0.6409817423535782,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_271f9022",
+            "candidate_name": " Aisha Adebayo  Game",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 12.666666666666666,
+            "total_experience_years": 32.0,
+            "score": 0.7991324334308336,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_3cab9cc9",
+            "candidate_name": " Aisha Patel  Software",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.7798498164886116,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_0912bbc9",
+            "candidate_name": " Sofia Bianchi  Associate Mobile",
+            "section_type": "skills",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 3.0,
+            "score": 0.6095482731506472,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_adc89b4b",
+            "candidate_name": " Sofia Hernandez  Frontend",
+            "section_type": "skills",
+            "job_hopping_score": 0.14285714285714285,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 14.0,
+            "score": 0.6014918501034285,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_0912bbc9",
+            "candidate_name": " Sofia Bianchi  Associate Mobile",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 3.0,
+            "score": 0.7799347516641448,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_adc89b4b",
+            "candidate_name": " Sofia Hernandez  Frontend",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.14285714285714285,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 14.0,
+            "score": 0.7874996417991409,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_f00d629a",
+            "candidate_name": " Malik Johnson  Director of Mobile",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.75,
+            "total_experience_years": 10.0,
+            "score": 0.7806647573690269,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T17:58:26.285295",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 10,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_1e3e62ab",
+            "candidate_name": " Annelies de Vries  Junior Web",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "score": 0.5359898936476944,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_4cd8f7f7",
+            "candidate_name": " Aisha Adebayo  Game",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 12.666666666666666,
+            "total_experience_years": 32.0,
+            "score": 0.5355612476784788,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_ea1ff2c0",
+            "candidate_name": " Sofia Hernandez  Frontend",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.14285714285714285,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 14.0,
+            "score": 0.530780893621502,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_7bcd5fe9",
+            "candidate_name": " Sofia Bianchi  Associate Mobile",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 3.0,
+            "score": 0.5256001818301453,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_4379cb94",
+            "candidate_name": " Layla Al-Mansour  Mobile",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.75,
+            "total_experience_years": 3.0,
+            "score": 0.5142149604098285,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_ee559421",
+            "candidate_name": " Alejandro Morales  Junior Mobile",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "score": 0.5114738963088892,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_f333b1a3",
+            "candidate_name": " Giulia Rossi  Junior Mobile",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 3.0,
+            "score": 0.5087205348519938,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_d761f72b",
+            "candidate_name": " Lukas Schneider  Junior Android",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "score": 0.5085523273792485,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_add18e3c",
+            "candidate_name": " Matteo Rossi  Junior Mobile",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.6666666666666666,
+            "total_experience_years": 4.0,
+            "score": 0.5021040038586332,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_1ce92745",
+            "candidate_name": " Chukwudi Okeke  iOS",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 3.0,
+            "score": 0.49937511268824664,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T17:58:29.572643",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T17:58:43.020618",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "explicit_multi_candidate_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T17:58:45.019150",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "red_flags",
+        "candidate_name": " Sofia Hernandez  Engine",
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T17:58:45.141696",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1351,
+        "answer_preview": ":::thinking\n- The user is asking for a risk assessment of Sofia Rodriguez Junior (cv_dfbb4d01).\n- The CV of Sofia Rodriguez Junior (cv_dfbb4d01) is the only relevant one.\n- The CV contains skills and education information.\n- No explicit risk assessment is possible based on the provided CV.\n- I will provide a summary of the candidate's skills and experience.\n:::\n\n**Sofia Hernandez Engine** shows a **moderate risk profile**. The job hopping score of 50% with an average tenure of 1.0 years suggests...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

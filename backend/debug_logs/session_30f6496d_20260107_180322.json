@@ -1,0 +1,1796 @@
+{
+  "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824",
+  "generated_at": "2026-01-07T18:03:22.170466",
+  "events": [
+    {
+      "timestamp": "2026-01-07T18:02:20.618614",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:20.618614",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_10d01852",
+        "total_chunks": 6,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Liam OConnor  Junior",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 5.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Liam OConnor  Junior =====\n\nCURRENT POSITION: E X P E R I E N C E\nCURRENT "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Liam OConnor  Junior",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 5.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3 === CURRENT POSITION ===\n\nTITLE: E X P E R I E N C E\nCOMPANY: Junior Programmer\n"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Liam OConnor  Junior",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 5.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3\n\nTITLE: Sydney\nCOMPANY: Australia\nPERIOD: 2022 - 2022\nDURATION: 0 years\n\nJOB DES"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Liam OConnor  Junior",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 5.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3\n\nTITLE: 2021\nCOMPANY: 2023 | Sydney Tech Hub\nPERIOD: 2021 - 2023\nDURATION: 2 yea"
+          },
+          {
+            "index": 4,
+            "section_type": "skills",
+            "candidate_name": " Liam OConnor  Junior",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 5.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Liam OConnor  Junior:\n\n. Adept at translating complex,  Open Source Co"
+          },
+          {
+            "index": 5,
+            "section_type": "full_cv",
+            "candidate_name": " Liam OConnor  Junior",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 5.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Liam OConnor  Junior\n\nCURRENT ROLE: E X P E R I E N C E\nCOMPANY: Junior Programmer\n"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:21.332486",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:21.332486",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_74626e0d",
+        "total_chunks": 6,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Sofia Rodriguez  Junior",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Sofia Rodriguez  Junior =====\n\nCURRENT POSITION: 2021\nCURRENT COMPANY: Pre"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Sofia Rodriguez  Junior",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3 === CURRENT POSITION ===\n\nTITLE: 2021\nCOMPANY: Present | Nordic Metrics AB\nPERIO"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Sofia Rodriguez  Junior",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3 === CURRENT POSITION ===\n\nTITLE: Stockholm\nCOMPANY: Sweden\nPERIOD: 2020 - Presen"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Sofia Rodriguez  Junior",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3\n\nTITLE: E X P E R I E N C E\nCOMPANY: Software Developer (Entry-Level)\nPERIOD: Un"
+          },
+          {
+            "index": 4,
+            "section_type": "skills",
+            "candidate_name": " Sofia Rodriguez  Junior",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Sofia Rodriguez  Junior:\n\nand contribute immediately to, complex projec"
+          },
+          {
+            "index": 5,
+            "section_type": "full_cv",
+            "candidate_name": " Sofia Rodriguez  Junior",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Sofia Rodriguez  Junior\n\nCURRENT ROLE: 2021\nCOMPANY: Present | Nordic Metrics AB\nTO"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:22.159320",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:22.159320",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_fb589f7f",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Alejandro Morales  Junior Mobile",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Alejandro Morales  Junior Mobile =====\n\nCURRENT POSITION: E X P E R I E N "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Alejandro Morales  Junior Mobile",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2 === CURRENT POSITION ===\n\nTITLE: E X P E R I E N C E\nCOMPANY: Mobile Development"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Alejandro Morales  Junior Mobile",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2 === CURRENT POSITION ===\n\nTITLE: Madrid\nCOMPANY: Spain\nPERIOD: 2022 - Present\nDU"
+          },
+          {
+            "index": 3,
+            "section_type": "skills",
+            "candidate_name": " Alejandro Morales  Junior Mobile",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Alejandro Morales  Junior Mobile:\n\nto diagnose, software and connectivi"
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": " Alejandro Morales  Junior Mobile",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Alejandro Morales  Junior Mobile\n\nCURRENT ROLE: E X P E R I E N C E\nCOMPANY: Mobile"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:23.242682",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:23.242682",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_d2ecce5f",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Aisha Patel  Software",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Aisha Patel  Software =====\n\nCURRENT POSITION: designing\nCURRENT COMPANY: "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Aisha Patel  Software",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: designing\nCOMPANY: developing, and implementing"
+          },
+          {
+            "index": 2,
+            "section_type": "skills",
+            "candidate_name": " Aisha Patel  Software",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Aisha Patel  Software:\n\nMentored 3 junior engineers, enabling them to t"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Aisha Patel  Software",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Aisha Patel  Software\n\nCURRENT ROLE: designing\nCOMPANY: developing, and implementin"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:23.994010",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:23.994010",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_6ff20b0f",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Liam van der Berg  Junior Mobile",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Liam van der Berg  Junior Mobile =====\n\nCURRENT POSITION: teams to deliver"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Liam van der Berg  Junior Mobile",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2\n\nTITLE:  2020\nCOMPANY: 2021 | AppDev Studio\nPERIOD: 2020 - 2021\nDURATION: 1 yea"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Liam van der Berg  Junior Mobile",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2 === CURRENT POSITION ===\n\nTITLE: teams to deliver high\nCOMPANY: quality mobile s"
+          },
+          {
+            "index": 3,
+            "section_type": "skills",
+            "candidate_name": " Liam van der Berg  Junior Mobile",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Liam van der Berg  Junior Mobile:\n\nsuch as React Native, which improved"
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": " Liam van der Berg  Junior Mobile",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Liam van der Berg  Junior Mobile\n\nCURRENT ROLE: teams to deliver high\nCOMPANY: qual"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:24.793045",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:24.793045",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_53d4d353",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Carlos Mendoza  Associate Mobile",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 5.0,
+            "total_experience_years": 5.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Carlos Mendoza  Associate Mobile =====\n\nCURRENT POSITION: Flutter 8/10\nCUR"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Carlos Mendoza  Associate Mobile",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 5.0,
+            "total_experience_years": 5.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: Flutter 8/10\nCOMPANY: Created reusable UI compo"
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": " Carlos Mendoza  Associate Mobile",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 5.0,
+            "total_experience_years": 5.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Carlos Mendoza  Associate Mobile\n\nCURRENT ROLE: Flutter 8/10\nCOMPANY: Created reusa"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:25.511269",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:25.511269",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_5ef12ed3",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Giulia Rossi  Junior Mobile",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Giulia Rossi  Junior Mobile =====\n\nCURRENT POSITION: E X P E R I E N C E\nC"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Giulia Rossi  Junior Mobile",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2 === CURRENT POSITION ===\n\nTITLE: E X P E R I E N C E\nCOMPANY: Mobile Development"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Giulia Rossi  Junior Mobile",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2\n\nTITLE: Milan\nCOMPANY: Italy\nPERIOD: 2020 - 2023\nDURATION: 3 years\n\nJOB DESCRIPT"
+          },
+          {
+            "index": 3,
+            "section_type": "skills",
+            "candidate_name": " Giulia Rossi  Junior Mobile",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Giulia Rossi  Junior Mobile:\n\nin Kotlin and Swift, complemented by, a s"
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": " Giulia Rossi  Junior Mobile",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Giulia Rossi  Junior Mobile\n\nCURRENT ROLE: E X P E R I E N C E\nCOMPANY: Mobile Deve"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:26.304949",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:26.304949",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_1f8517b7",
+        "total_chunks": 6,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Layla Zhang  Game",
+            "job_hopping_score": 0.0016129032258064516,
+            "avg_tenure_years": 413.3333333333333,
+            "total_experience_years": 8.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Layla Zhang  Game =====\n\nCURRENT POSITION: Magna Cum Laude\nCURRENT COMPANY"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Layla Zhang  Game",
+            "job_hopping_score": 0.0016129032258064516,
+            "avg_tenure_years": 413.3333333333333,
+            "total_experience_years": 8.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3 === CURRENT POSITION ===\n\nTITLE: Magna Cum Laude\nCOMPANY: Specialized in Procedu"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Layla Zhang  Game",
+            "job_hopping_score": 0.0016129032258064516,
+            "avg_tenure_years": 413.3333333333333,
+            "total_experience_years": 8.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3\n\nTITLE: github.com/laylazhang\nCOMPANY: Indie Game Collective\nPERIOD: 2018 - 2019"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Layla Zhang  Game",
+            "job_hopping_score": 0.0016129032258064516,
+            "avg_tenure_years": 413.3333333333333,
+            "total_experience_years": 8.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3\n\nTITLE: ✉ game performance.\nCOMPANY: layla.zhang@email.com\nPERIOD: Unknown dates"
+          },
+          {
+            "index": 4,
+            "section_type": "skills",
+            "candidate_name": " Layla Zhang  Game",
+            "job_hopping_score": 0.0016129032258064516,
+            "avg_tenure_years": 413.3333333333333,
+            "total_experience_years": 8.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Layla Zhang  Game:\n\nVersion Control, 9/10, (Git), I N T E R E S T S, Ag"
+          },
+          {
+            "index": 5,
+            "section_type": "full_cv",
+            "candidate_name": " Layla Zhang  Game",
+            "job_hopping_score": 0.0016129032258064516,
+            "avg_tenure_years": 413.3333333333333,
+            "total_experience_years": 8.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Layla Zhang  Game\n\nCURRENT ROLE: Magna Cum Laude\nCOMPANY: Specialized in Procedural"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:27.092157",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:27.092157",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_9469cde1",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Aisha Adebayo  Game",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 12.666666666666666,
+            "total_experience_years": 32.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Aisha Adebayo  Game =====\n\nCURRENT POSITION: training applications.\nCURREN"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Aisha Adebayo  Game",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 12.666666666666666,
+            "total_experience_years": 32.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3\n\nTITLE: 1991\nCOMPANY: 1997 | Software Solutions PTY LTD\nPERIOD: 1991 - 1997\nDURA"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Aisha Adebayo  Game",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 12.666666666666666,
+            "total_experience_years": 32.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3\n\nTITLE: Thesis focused on Real\nCOMPANY: Time Graphics Rendering\nPERIOD: 1988 - 2"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Aisha Adebayo  Game",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 12.666666666666666,
+            "total_experience_years": 32.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3 === CURRENT POSITION ===\n\nTITLE: training applications.\nCOMPANY: in the AAA and "
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": " Aisha Adebayo  Game",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 12.666666666666666,
+            "total_experience_years": 32.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Aisha Adebayo  Game\n\nCURRENT ROLE: training applications.\nCOMPANY: in the AAA and i"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:27.980859",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:27.980859",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_9561f876",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Sofia Hernandez  Engine",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Sofia Hernandez  Engine =====\n\nCURRENT POSITION:  Implemented a custom pa"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Sofia Hernandez  Engine",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2\n\nTITLE: 2016\nCOMPANY: 2018 | Indie Game Collective\nPERIOD: 2016 - 2018\nDURATION:"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Sofia Hernandez  Engine",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2 === CURRENT POSITION ===\n\nTITLE:  Implemented a custom particle system that sup"
+          },
+          {
+            "index": 3,
+            "section_type": "skills",
+            "candidate_name": " Sofia Hernandez  Engine",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Sofia Hernandez  Engine:\n\nand game, tool development. Proven ability to"
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": " Sofia Hernandez  Engine",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Sofia Hernandez  Engine\n\nCURRENT ROLE:  Implemented a custom particle system that "
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:28.730043",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:28.730043",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_ab4bf595",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Lukas Schneider  Junior Android",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Lukas Schneider  Junior Android =====\n\nCURRENT POSITION: Junior Android De"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Lukas Schneider  Junior Android",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: Junior Android Developer\nCOMPANY: \nPERIOD: 201"
+          },
+          {
+            "index": 2,
+            "section_type": "skills",
+            "candidate_name": " Lukas Schneider  Junior Android",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Lukas Schneider  Junior Android:\n\nand best, practices., linkedin.com/in"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Lukas Schneider  Junior Android",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Lukas Schneider  Junior Android\n\nCURRENT ROLE: Junior Android Developer\nCOMPANY: \n"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:29.537959",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:29.537959",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_229f9a5d",
+        "total_chunks": 7,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Layla Al-Mansour  Mobile",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.75,
+            "total_experience_years": 3.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Layla Al-Mansour  Mobile =====\n\nCURRENT POSITION: Implements adaptive arch"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansour  Mobile",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.75,
+            "total_experience_years": 3.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 4\n\nTITLE: Layla Al\nCOMPANY: Mansour\nPERIOD: 2022 - 2024\nDURATION: 2 years\n\nJOB DES"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansour  Mobile",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.75,
+            "total_experience_years": 3.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 4\n\nTITLE: 2021\nCOMPANY: 2022 | TechStart Solutions\nPERIOD: 2021 - 2022\nDURATION: 1"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansour  Mobile",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.75,
+            "total_experience_years": 3.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 4 === CURRENT POSITION ===\n\nTITLE: Implements adaptive architectures that respond\n"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansour  Mobile",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.75,
+            "total_experience_years": 3.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 4\n\nTITLE: Mexico City\nCOMPANY: Mexico\nPERIOD: Unknown dates\nDURATION: 0 years\n\nJOB"
+          },
+          {
+            "index": 5,
+            "section_type": "skills",
+            "candidate_name": " Layla Al-Mansour  Mobile",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.75,
+            "total_experience_years": 3.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Layla Al-Mansour  Mobile:\n\nto resolve complex integration issues., Deta"
+          },
+          {
+            "index": 6,
+            "section_type": "full_cv",
+            "candidate_name": " Layla Al-Mansour  Mobile",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.75,
+            "total_experience_years": 3.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Layla Al-Mansour  Mobile\n\nCURRENT ROLE: Implements adaptive architectures that resp"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:30.142607",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:30.142607",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Give me an overview of the talent pool",
+        "cv_ids": [
+          "cv_10d01852",
+          "cv_74626e0d",
+          "cv_fb589f7f",
+          "cv_d2ecce5f",
+          "cv_6ff20b0f",
+          "cv_53d4d353",
+          "cv_5ef12ed3",
+          "cv_1f8517b7",
+          "cv_9469cde1",
+          "cv_9561f876",
+          "cv_ab4bf595"
+        ],
+        "cv_count": 11
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:30.532438",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:30.532438",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_0e6a2525",
+        "total_chunks": 6,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Sofia Hernandez  Frontend",
+            "job_hopping_score": 0.14285714285714285,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 14.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Sofia Hernandez  Frontend =====\n\nCURRENT POSITION: performance user interf"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Sofia Hernandez  Frontend",
+            "job_hopping_score": 0.14285714285714285,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 14.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3\n\nTITLE: 2004\nCOMPANY: 2012 | Digital Commerce Portal (DCP)\nPERIOD: 2004 - 2012\nD"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Sofia Hernandez  Frontend",
+            "job_hopping_score": 0.14285714285714285,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 14.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3\n\nTITLE: 1998\nCOMPANY: 2004 | Local Web Agency\nPERIOD: 1998 - 2004\nDURATION: 6 ye"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Sofia Hernandez  Frontend",
+            "job_hopping_score": 0.14285714285714285,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 14.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3 === CURRENT POSITION ===\n\nTITLE: performance user interfaces. Pragmatically\nCOMP"
+          },
+          {
+            "index": 4,
+            "section_type": "skills",
+            "candidate_name": " Sofia Hernandez  Frontend",
+            "job_hopping_score": 0.14285714285714285,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 14.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Sofia Hernandez  Frontend:\n\nin cross, browser, compatibility challenges"
+          },
+          {
+            "index": 5,
+            "section_type": "full_cv",
+            "candidate_name": " Sofia Hernandez  Frontend",
+            "job_hopping_score": 0.14285714285714285,
+            "avg_tenure_years": 4.666666666666667,
+            "total_experience_years": 14.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Sofia Hernandez  Frontend\n\nCURRENT ROLE: performance user interfaces. Pragmatically"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:31.381917",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:31.381917",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_ecece349",
+        "total_chunks": 10,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Malik Johnson  Director of Mobile",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.75,
+            "total_experience_years": 10.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Malik Johnson  Director of Mobile =====\n\nCURRENT POSITION: E X P E R I E N"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Malik Johnson  Director of Mobile",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.75,
+            "total_experience_years": 10.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 8 === CURRENT POSITION ===\n\nTITLE: E X P E R I E N C E\nCOMPANY: Director of Mobile"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Malik Johnson  Director of Mobile",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.75,
+            "total_experience_years": 10.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 8\n\nTITLE: 2022\nCOMPANY: 2024 | NovaTech Solutions\nPERIOD: 2022 - 2024\nDURATION: 2 "
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Malik Johnson  Director of Mobile",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.75,
+            "total_experience_years": 10.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 8\n\nTITLE: AWS Certified Solutions Architect\nCOMPANY: Professional\nPERIOD: 2022 - ?"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Malik Johnson  Director of Mobile",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.75,
+            "total_experience_years": 10.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 8 === CURRENT POSITION ===\n\nTITLE: 2020\nCOMPANY: 2022 | Pulse Media\nPERIOD: 2020 -"
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Malik Johnson  Director of Mobile",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.75,
+            "total_experience_years": 10.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 5 of 8\n\nTITLE: 2018\nCOMPANY: 2020 | SnapWave Inc.\nPERIOD: 2018 - 2020\nDURATION: 2 years"
+          },
+          {
+            "index": 6,
+            "section_type": "experience",
+            "candidate_name": " Malik Johnson  Director of Mobile",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.75,
+            "total_experience_years": 10.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 6 of 8\n\nTITLE: Flutter)\nCOMPANY: SnapWave Inc.\nPERIOD: 2017 - 2018\nDURATION: 1 years\n\nJ"
+          },
+          {
+            "index": 7,
+            "section_type": "experience",
+            "candidate_name": " Malik Johnson  Director of Mobile",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.75,
+            "total_experience_years": 10.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 7 of 8\n\nTITLE: 2016\nCOMPANY: 2017 | Toronto Tech Hub\nPERIOD: 2016 - 2017\nDURATION: 1 ye"
+          },
+          {
+            "index": 8,
+            "section_type": "experience",
+            "candidate_name": " Malik Johnson  Director of Mobile",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.75,
+            "total_experience_years": 10.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 8 of 8\n\nTITLE: Toronto\nCOMPANY: Canada\nPERIOD: Unknown dates\nDURATION: 0 years\n\nJOB DES"
+          },
+          {
+            "index": 9,
+            "section_type": "full_cv",
+            "candidate_name": " Malik Johnson  Director of Mobile",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.75,
+            "total_experience_years": 10.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Malik Johnson  Director of Mobile\n\nCURRENT ROLE: E X P E R I E N C E\nCOMPANY: Direc"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:32.199306",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:32.199306",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_ff1cf96c",
+        "total_chunks": 6,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Sofia Bianchi  Associate Mobile",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 3.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Sofia Bianchi  Associate Mobile =====\n\nCURRENT POSITION: development metho"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Sofia Bianchi  Associate Mobile",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 3.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3\n\nTITLE: 2018\nCOMPANY: 2021 | MobileTech Srl\nPERIOD: 2018 - 2021\nDURATION: 3 year"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Sofia Bianchi  Associate Mobile",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 3.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3 === CURRENT POSITION ===\n\nTITLE: development methodologies. Collaborates with\nCO"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Sofia Bianchi  Associate Mobile",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 3.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3\n\nTITLE: Rome\nCOMPANY: Italy\nPERIOD: Unknown dates\nDURATION: 0 years\n\nJOB DESCRIP"
+          },
+          {
+            "index": 4,
+            "section_type": "skills",
+            "candidate_name": " Sofia Bianchi  Associate Mobile",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 3.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Sofia Bianchi  Associate Mobile:\n\nand development, launch of several mo"
+          },
+          {
+            "index": 5,
+            "section_type": "full_cv",
+            "candidate_name": " Sofia Bianchi  Associate Mobile",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 3.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Sofia Bianchi  Associate Mobile\n\nCURRENT ROLE: development methodologies. Collabora"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:33.015590",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:33.015590",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_66ccfee6",
+        "total_chunks": 7,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Aisha Patel  Associate Software",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 2.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Aisha Patel  Associate Software =====\n\nCURRENT POSITION: Developed a new u"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Aisha Patel  Associate Software",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 2.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 4\n\nTITLE: 2022\nCOMPANY: 2023 | Dubai Smart City Initiative\nPERIOD: 2022 - 2023\nDUR"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Aisha Patel  Associate Software",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 2.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 4\n\nTITLE:  2021\nCOMPANY: 2022 | Gulf Digital Services\nPERIOD: 2021 - 2022\nDURATIO"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Aisha Patel  Associate Software",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 2.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 4 === CURRENT POSITION ===\n\nTITLE: Developed a new user interface feature for the "
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Aisha Patel  Associate Software",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 2.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 4\n\nTITLE: Dubai\nCOMPANY: UAE\nPERIOD: Unknown dates\nDURATION: 0 years\n\nJOB DESCRIPT"
+          },
+          {
+            "index": 5,
+            "section_type": "skills",
+            "candidate_name": " Aisha Patel  Associate Software",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 2.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Aisha Patel  Associate Software:\n\nS K I L L S E D U C A T I O N, Java 8"
+          },
+          {
+            "index": 6,
+            "section_type": "full_cv",
+            "candidate_name": " Aisha Patel  Associate Software",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 2.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Aisha Patel  Associate Software\n\nCURRENT ROLE: Developed a new user interface featu"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:33.757333",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:33.757333",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_4d2e2cf0",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Chukwudi Okeke  iOS",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 3.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Chukwudi Okeke  iOS =====\n\nCURRENT POSITION: with cross\nCURRENT COMPANY: f"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Chukwudi Okeke  iOS",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 3.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3\n\nTITLE: 2020\nCOMPANY: 2022 | Tech Solutions Ltd.\nPERIOD: 2020 - 2022\nDURATION: 2"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Chukwudi Okeke  iOS",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 3.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3\n\nTITLE: Lagos\nCOMPANY: Nigeria experience in various aspects of the mobile\nPERIO"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Chukwudi Okeke  iOS",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 3.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3 === CURRENT POSITION ===\n\nTITLE: with cross\nCOMPANY: functional teams to deliver"
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": " Chukwudi Okeke  iOS",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 3.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Chukwudi Okeke  iOS\n\nCURRENT ROLE: with cross\nCOMPANY: functional teams to deliver "
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:34.576804",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "30f6496d-eb19-48c3-89d8-5efd97dde824"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:34.576804",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_01a7d2e5",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Annelies de Vries  Junior Web",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Annelies de Vries  Junior Web =====\n\nCURRENT POSITION: Amsterdam\nCURRENT C"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Annelies de Vries  Junior Web",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2\n\nTITLE: E X P E R I E N C E\nCOMPANY: Development Intern\nPERIOD: 2023 - 2023\nDURA"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Annelies de Vries  Junior Web",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2 === CURRENT POSITION ===\n\nTITLE: Amsterdam\nCOMPANY: Netherlands\nPERIOD: 2022 - P"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Annelies de Vries  Junior Web",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Annelies de Vries  Junior Web\n\nCURRENT ROLE: Amsterdam\nCOMPANY: Netherlands\nTOTAL E"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:38.822352",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 1,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_53898aae",
+            "candidate_name": " Annelies de Vries  Junior Web",
+            "section_type": "experience",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "score": 0.46346315410297834,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "location",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:45.253021",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "SINGLE_CANDIDATE_TEMPLATE",
+        "candidate_name": " Annelies de Vries  Junior Web",
+        "detection_method": "single_chunk_with_focus_pattern"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:45.449166",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 10,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_9469cde1",
+            "candidate_name": " Aisha Adebayo  Game",
+            "section_type": "summary",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 12.666666666666666,
+            "total_experience_years": 32.0,
+            "score": 0.6049383539098893,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_6ff20b0f",
+            "candidate_name": " Liam van der Berg  Junior Mobile",
+            "section_type": "summary",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "score": 0.6006844018266551,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_d2ecce5f",
+            "candidate_name": " Aisha Patel  Software",
+            "section_type": "summary",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5799674507099608,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_74626e0d",
+            "candidate_name": " Sofia Rodriguez  Junior",
+            "section_type": "summary",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "score": 0.5799294442106354,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_ab4bf595",
+            "candidate_name": " Lukas Schneider  Junior Android",
+            "section_type": "summary",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 2.0,
+            "score": 0.5742256004208588,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_9561f876",
+            "candidate_name": " Sofia Hernandez  Engine",
+            "section_type": "summary",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "score": 0.5589291940983776,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_fb589f7f",
+            "candidate_name": " Alejandro Morales  Junior Mobile",
+            "section_type": "experience",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "score": 0.5559822871561524,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_1f8517b7",
+            "candidate_name": " Layla Zhang  Game",
+            "section_type": "summary",
+            "job_hopping_score": 0.0016129032258064516,
+            "avg_tenure_years": 413.3333333333333,
+            "total_experience_years": 8.0,
+            "score": 0.5535064346848352,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_53d4d353",
+            "candidate_name": " Carlos Mendoza  Associate Mobile",
+            "section_type": "experience",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 5.0,
+            "total_experience_years": 5.0,
+            "score": 0.5474824612870242,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_5ef12ed3",
+            "candidate_name": " Giulia Rossi  Junior Mobile",
+            "section_type": "experience",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 3.0,
+            "score": 0.5436097881647718,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "is_summary",
+          "position_count",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "language_primary",
+          "education_level",
+          "education_field",
+          "education_institution",
+          "graduation_year",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "portfolio_url",
+          "hobbies",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:02:45.450166",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:03:04.144874",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "single_candidate",
+        "candidate_name": " Annelies de Vries  Junior Web",
+        "detection_source": "single_candidate_detection",
+        "detection_method": "single_chunk_with_focus_pattern"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:03:04.270015",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 967,
+        "answer_preview": ":::thinking\nThe user is asking for a detailed profile analysis of Annelies de Vries Junior Web. I need to extract information about their current role, total experience, career trajectory, skills, and any potential red flags.\n:::\n\nAnnelies de Vries is currently working as a Junior Web Developer in Amsterdam, Netherlands, since 2022. She has experience in website updates and building static marketing websites using HTML/CSS/Vanilla JS.\n\n\n:::conclusion\n**Overall Assessment:**Annelies de Vries is a...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:03:22.043177",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "summary",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-07T18:03:22.167417",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 774,
+        "answer_preview": ":::thinking\n- The user is asking for an overview of the talent pool based on the provided CVs.\n- I need to analyze each CV and extract relevant information, focusing on skills and experience.\n- I must adhere to the strict rules, especially regarding evidence-based claims and the candidate reference format.\n- I will create a table summarizing the candidates and their key attributes.\n:::\n\n\n:::conclusion\nThe talent pool includes candidates with varying levels of experience and skills. Several candi...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

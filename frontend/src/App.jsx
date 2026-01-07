@@ -567,6 +567,12 @@ function App() {
 
   const handleRemoveCV = async (cvId) => {
     await removeCVFromSession(currentSessionId, cvId, mode);
+    // Clear cached CVs for this session
+    setLoadedSessionCVs(prev => {
+      const newState = { ...prev };
+      delete newState[currentSessionId];
+      return newState;
+    });
     await loadSession(currentSessionId);
     await loadSessions();
     showToastMessage(language === 'es' ? 'CV eliminado' : 'CV removed', 'success');
@@ -619,6 +625,8 @@ function App() {
     // Refresh panel session data
     const data = await getSession(sessionId, mode);
     setCvPanelSession(data);
+    // Update the cached CVs for this session
+    setLoadedSessionCVs(prev => ({ ...prev, [sessionId]: data.cvs || [] }));
     await loadSessions();
     if (currentSessionId === sessionId) await loadSession(sessionId);
     showToastMessage(language === 'es' ? 'CV eliminado' : 'CV removed', 'success');
@@ -714,6 +722,8 @@ function App() {
         logs: [...prev.logs, language === 'es' ? '✓ ¡Eliminación completada!' : '✓ Deletion completed!']
       }));
       
+      // Clear all cached CVs
+      setLoadedSessionCVs({});
       await loadSessions();
       if (currentSessionId) await loadSession(currentSessionId);
       const data = await getCVList(mode);
@@ -733,6 +743,8 @@ function App() {
       await deleteCV(cvId, mode);
       const data = await getCVList(mode);
       setAllCVs(data.cvs || []);
+      // Clear the cached CVs to force refresh
+      setLoadedSessionCVs({});
       await loadSessions();
       if (currentSessionId) await loadSession(currentSessionId);
       // Also refresh cvPanelSession if viewing a specific session
@@ -1217,7 +1229,7 @@ function App() {
                 </p>
               </div>
               <div className="flex items-center gap-2">
-                <button onClick={async () => { const data = await getCVList(mode); setAllCVs(data.cvs || []); }} className="p-2 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg" title="Reload">
+                <button onClick={async () => { const data = await getCVList(mode); setAllCVs(data.cvs || []); setLoadedSessionCVs({}); await loadSessions(); }} className="p-2 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg" title="Reload">
                   <RotateCcw className="w-4 h-4" />
                 </button>
                 <button onClick={() => setShowCVPanel(false)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"><X className="w-5 h-5" /></button>
