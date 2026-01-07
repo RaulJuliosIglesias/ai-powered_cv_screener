@@ -1,10 +1,12 @@
 # 💡 Creativity & Ingenuity
 
 > **Criterion**: Clever solutions to tricky problems, or implementing specific features in an original way.
+> 
+> **Version**: 6.0 (January 2026) - 10 Creative Solutions including Output Orchestrator and Conversational Context
 
 ---
 
-## 🏆 Top 7 Creative Solutions
+## 🏆 Top 10 Creative Solutions
 
 ### 1. Three-Layer Verification System (Anti-Hallucination)
 
@@ -361,7 +363,146 @@ class ConfidenceCalculator:
 
 ---
 
-## 📊 Innovation Summary Matrix
+---
+
+### 8. Output Orchestrator: Query Type → Structure → Modules (NEW in v6.0)
+
+**The Tricky Problem**: Different query types need completely different output formats:
+- "Who has Python?" → Simple search results table
+- "Full profile of John" → Comprehensive profile with career, skills, risks
+- "Compare John and Maria" → Side-by-side comparison table + winner
+
+Basic RAG returns unstructured text that doesn't adapt to query type.
+
+**The Creative Solution**: **Orchestrator pattern with composable modules**:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              OUTPUT ORCHESTRATOR ARCHITECTURE                    │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  query_type: "ranking"                                          │
+│       │                                                          │
+│       ▼                                                          │
+│  ORCHESTRATOR → selects RankingStructure                        │
+│       │                                                          │
+│       ▼                                                          │
+│  RankingStructure.modules = [                                   │
+│    ThinkingModule,        ◄── Shared (used by ALL 9)            │
+│    AnalysisModule,        ◄── Shared (used by 6)                │
+│    RankingCriteriaModule, ◄── Ranking-specific                  │
+│    RankingTableModule,    ◄── Ranking-specific                  │
+│    TopPickModule,         ◄── Ranking-specific                  │
+│    ConclusionModule       ◄── Shared (used by ALL 9)            │
+│  ]                                                               │
+│       │                                                          │
+│       ▼                                                          │
+│  StructuredOutput (JSON) → Frontend renders visual components   │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Why It's Original**: Instead of forcing all queries through one format, we have **9 specialized structures** built from **29 reusable modules**. Adding a new query type = combine existing modules.
+
+---
+
+### 9. Conversational Context Resolution (NEW in v6.0)
+
+**The Tricky Problem**: Users naturally speak conversationally:
+- "Tell me more about **her**"
+- "Compare **the top 2**"
+- "What about **the second one**?"
+
+Basic RAG treats each query independently with no memory.
+
+**The Creative Solution**: **Context Resolver with multi-type reference resolution**:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              CONTEXT RESOLVER (18KB service)                     │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  RESOLUTION TYPES:                                              │
+│                                                                  │
+│  1. PRONOUN RESOLUTION                                          │
+│     "her", "him", "she", "he" → Last mentioned candidate        │
+│     Uses gender detection from names in conversation            │
+│                                                                  │
+│  2. ORDINAL RESOLUTION                                          │
+│     "the first one", "second candidate" → From last ranking     │
+│     Extracts position from last RankingStructure output         │
+│                                                                  │
+│  3. DEMONSTRATIVE RESOLUTION                                    │
+│     "those 3", "these candidates" → Last result set             │
+│     Extracts all candidates from last response                  │
+│                                                                  │
+│  4. SUPERLATIVE RESOLUTION                                      │
+│     "the top one", "the best" → #1 from last ranking           │
+│     "the worst", "lowest ranked" → Last place                   │
+│                                                                  │
+│  5. FOLLOW-UP DETECTION                                         │
+│     "what about X?", "and Y?" → Continue previous context       │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Real Example Flow**:
+```
+User: "Top 3 for backend"
+AI: 1. John Doe, 2. Maria López, 3. Carlos García (RankingStructure)
+
+User: "Tell me more about the second one"
+→ Context Resolver: "second one" → Maria López
+AI: Full profile of Maria (SingleCandidateStructure)
+
+User: "Compare her with the first"
+→ Context Resolver: "her" → Maria, "first" → John
+AI: John vs Maria comparison (ComparisonStructure)
+```
+
+**Why It's Original**: Maintains conversational flow without requiring users to repeat names. The system "remembers" what was discussed.
+
+---
+
+### 10. Smart Metadata Enrichment During Indexing (NEW in v6.0)
+
+**The Tricky Problem**: Raw CV text doesn't have structured data for:
+- Quick filtering ("show only senior candidates")
+- Risk assessment ("who has job-hopping tendencies?")
+- Ranking criteria ("sort by experience")
+
+**The Creative Solution**: **Automatic metadata extraction during PDF indexing**:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              METADATA ENRICHMENT PIPELINE                        │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  PDF → Text → Smart Chunking → METADATA EXTRACTION              │
+│                                                                  │
+│  EXTRACTED FIELDS:                                              │
+│  ├── total_experience_years: 5.5                                │
+│  ├── seniority_level: "senior"  (junior/mid/senior/lead/exec)   │
+│  ├── current_role: "Senior Backend Developer"                   │
+│  ├── current_company: "TechCorp"                                │
+│  ├── has_faang_experience: true                                 │
+│  ├── job_hopping_score: 0.3  (0-1, high = frequent changes)     │
+│  ├── avg_tenure_years: 2.1                                      │
+│  └── employment_gaps: ["2019-03 to 2019-08"]                    │
+│                                                                  │
+│  USAGE:                                                          │
+│  • RiskAssessmentStructure uses job_hopping_score               │
+│  • RankingStructure uses total_experience_years                 │
+│  • Filtering: "only senior candidates"                          │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Why It's Original**: Most RAG systems treat all chunks as equal text. We extract **queryable metadata** that enables structured operations on unstructured documents.
+
+---
+
+## 📊 Innovation Summary Matrix (v6.0)
 
 | Innovation | Problem Solved | Standard Approach | Our Approach |
 |------------|---------------|-------------------|--------------|
@@ -371,7 +512,10 @@ class ConfidenceCalculator:
 | **Streaming Progress** | User anxiety | Loading spinner | Real-time stages |
 | **Smart Patterns** | False positive blocks | Simple keyword block | Regex with exclusions |
 | **Dual-Mode** | Dev/prod differences | Separate configs | Runtime switching |
-| **Confidence Scoring** | Trust quantification | Binary pass/fail | Composite score |
+| **Confidence Scoring** | Trust quantification | Binary pass/fail | 5-factor composite |
+| **Output Orchestrator** | Unstructured output | One format fits all | 9 structures, 29 modules |
+| **Context Resolution** | No conversation memory | Independent queries | Pronoun/ordinal resolution |
+| **Metadata Enrichment** | No structured data | Raw text only | Auto-extracted fields |
 
 ---
 

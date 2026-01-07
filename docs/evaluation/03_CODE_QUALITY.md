@@ -1,10 +1,12 @@
 # 💎 Code Quality
 
 > **Criterion**: The clarity, structure, and readability of your code.
+> 
+> **Version**: 6.0 (January 2026) - 22+ Services, Output Orchestrator, 9 Structures, 29 Modules
 
 ---
 
-## 📁 Project Structure: Clean Organization
+## 📁 Project Structure: Clean Organization (v6.0)
 
 ```
 ai-powered_cv_screener/
@@ -24,14 +26,46 @@ ai-powered_cv_screener/
 │   │   ├── providers/              # External integrations
 │   │   │   ├── base.py             # Abstract interfaces
 │   │   │   ├── factory.py          # Dependency injection
-│   │   │   ├── local/              # Local implementations
-│   │   │   └── cloud/              # Cloud implementations
+│   │   │   ├── local/              # Local implementations (ChromaDB)
+│   │   │   └── cloud/              # Cloud implementations (Supabase)
 │   │   │
-│   │   ├── services/               # Business logic
-│   │   │   ├── rag_service_v5.py   # Core RAG orchestration
-│   │   │   ├── guardrail_service.py
-│   │   │   ├── hallucination_service.py
-│   │   │   └── ...
+│   │   ├── services/               # Business logic (22+ services)
+│   │   │   ├── rag_service_v5.py           # 128KB - Main orchestrator
+│   │   │   ├── query_understanding_service.py  # 40KB - 9 query_types
+│   │   │   ├── context_resolver.py         # 18KB - Pronoun resolution ◄── NEW
+│   │   │   ├── smart_chunking_service.py   # 41KB - Semantic chunking ◄── NEW
+│   │   │   ├── confidence_calculator.py    # 28KB - 5-factor scoring ◄── NEW
+│   │   │   ├── cost_tracker.py             # 7KB - Cost estimation ◄── NEW
+│   │   │   ├── reasoning_service.py        # 21KB - Chain-of-thought
+│   │   │   ├── claim_verifier_service.py   # 13KB - Fact verification
+│   │   │   ├── hallucination_service.py    # 12KB - Hallucination detection
+│   │   │   ├── reranking_service.py        # 12KB - LLM reranking
+│   │   │   ├── multi_query_service.py      # 11KB - Query expansion + HyDE
+│   │   │   ├── guardrail_service.py        # 11KB - Bilingual filtering
+│   │   │   ├── eval_service.py             # 12KB - Metrics & logging
+│   │   │   │
+│   │   │   ├── output_processor/           # 44 items ◄── NEW v6.0
+│   │   │   │   ├── orchestrator.py         # Routes query_type → structure
+│   │   │   │   ├── structures/             # 9 structure classes
+│   │   │   │   │   ├── single_candidate_structure.py
+│   │   │   │   │   ├── ranking_structure.py
+│   │   │   │   │   ├── comparison_structure.py
+│   │   │   │   │   ├── search_structure.py
+│   │   │   │   │   ├── risk_assessment_structure.py
+│   │   │   │   │   ├── job_match_structure.py
+│   │   │   │   │   ├── team_build_structure.py
+│   │   │   │   │   ├── verification_structure.py
+│   │   │   │   │   └── summary_structure.py
+│   │   │   │   └── modules/                # 29 reusable modules
+│   │   │   │       ├── thinking_module.py
+│   │   │   │       ├── conclusion_module.py
+│   │   │   │       ├── analysis_module.py
+│   │   │   │       ├── ranking_table_module.py
+│   │   │   │       ├── top_pick_module.py
+│   │   │   │       └── ... (24 more)
+│   │   │   │
+│   │   │   └── suggestion_engine/          # 17 items ◄── NEW v6.0
+│   │   │       └── Dynamic suggestion generation
 │   │   │
 │   │   ├── prompts/                # LLM prompt templates
 │   │   │   └── templates.py
@@ -45,6 +79,13 @@ ai-powered_cv_screener/
 └── frontend/
     └── src/
         ├── components/             # UI components
+        │   └── output/             # StructuredOutputRenderer ◄── NEW
+        │       ├── StructuredOutputRenderer.jsx
+        │       ├── RankingTable.jsx
+        │       ├── TopPickCard.jsx
+        │       └── ... (per-structure components)
+        ├── contexts/               # React contexts
+        │   └── PipelineContext.jsx # Pipeline state ◄── NEW
         ├── hooks/                  # Custom React hooks
         ├── services/               # API client
         └── utils/                  # Helpers
@@ -58,6 +99,8 @@ ai-powered_cv_screener/
 | `services/` | Business logic | HTTP, storage details |
 | `providers/` | External integrations | Business rules |
 | `models/` | Data validation | Logic |
+| `output_processor/` | Structured output assembly | RAG retrieval |
+| `suggestion_engine/` | Context-aware suggestions | Query processing |
 
 ---
 
@@ -586,12 +629,75 @@ function CVList({ cvs, onDelete, onSelect, selectedIds, isLoading }) {
 
 ---
 
-## 📊 Code Quality Summary
+## 🎯 Output Orchestrator Pattern (NEW in v6.0)
+
+### Structure-Module Architecture
+
+```python
+# backend/app/services/output_processor/orchestrator.py
+class OutputOrchestrator:
+    """Routes query_type to appropriate structure for output assembly."""
+    
+    STRUCTURE_MAP = {
+        "single_candidate": SingleCandidateStructure,
+        "ranking": RankingStructure,
+        "comparison": ComparisonStructure,
+        "search": SearchStructure,
+        "red_flags": RiskAssessmentStructure,
+        "job_match": JobMatchStructure,
+        "team_build": TeamBuildStructure,
+        "verification": VerificationStructure,
+        "summary": SummaryStructure,
+    }
+    
+    def process(self, raw_output: str, query_type: str, context: dict) -> StructuredOutput:
+        structure_class = self.STRUCTURE_MAP.get(query_type, FallbackStructure)
+        structure = structure_class()
+        return structure.assemble(raw_output, context)
+```
+
+### Module Reusability Example
+
+```python
+# backend/app/services/output_processor/structures/ranking_structure.py
+class RankingStructure(BaseStructure):
+    """Assembles ranking output using 6 modules."""
+    
+    def __init__(self):
+        self.modules = [
+            ThinkingModule(),      # Shared across ALL 9 structures
+            AnalysisModule(),      # Shared across 6 structures
+            RankingCriteriaModule(),  # Ranking-specific
+            RankingTableModule(),     # Ranking-specific
+            TopPickModule(),          # Ranking-specific
+            ConclusionModule(),    # Shared across ALL 9 structures
+        ]
+    
+    def assemble(self, raw_output: str, context: dict) -> StructuredOutput:
+        result = {}
+        for module in self.modules:
+            result[module.name] = module.extract(raw_output, context)
+        return StructuredOutput(structure_type="ranking", modules=result)
+```
+
+### Benefits of This Pattern
+
+| Benefit | How Achieved |
+|---------|--------------|
+| **DRY** | ThinkingModule used by ALL 9 structures |
+| **Single Responsibility** | Each module extracts ONE thing |
+| **Easy Testing** | Test modules independently |
+| **Extensibility** | Add new structure = combine existing modules |
+| **Consistency** | Same module = same output format everywhere |
+
+---
+
+## 📊 Code Quality Summary (v6.0)
 
 | Quality Aspect | Implementation |
 |----------------|----------------|
 | **Type Safety** | Full Python type hints + TypeScript frontend |
-| **Structure** | Clear separation: api / services / providers / models |
+| **Structure** | Clear separation: api / services / providers / models / output_processor |
 | **Readability** | Descriptive names, docstrings, consistent formatting |
 | **Error Handling** | Custom exception hierarchy, centralized handlers |
 | **Logging** | Structured logs with stage prefixes |
@@ -600,6 +706,18 @@ function CVList({ cvs, onDelete, onSelect, selectedIds, isLoading }) {
 | **Dependencies** | Factory pattern with lazy loading |
 | **Async** | Proper async/await, thread pools for CPU work |
 | **Documentation** | Docstrings with Args/Returns sections |
+| **Modularity** | 29 reusable modules across 9 structures |
+| **Scalability** | Output Orchestrator pattern for easy extension |
+
+### Code Metrics (v6.0)
+
+| Metric | Value |
+|--------|-------|
+| **Total Services** | 22+ files |
+| **Largest Service** | `rag_service_v5.py` (128KB) |
+| **Output Processor** | 44 items (orchestrator + 9 structures + 29 modules) |
+| **Suggestion Engine** | 17 items |
+| **Total Backend Code** | ~500KB Python |
 
 ---
 

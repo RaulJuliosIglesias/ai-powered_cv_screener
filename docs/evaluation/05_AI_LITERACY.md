@@ -1,6 +1,8 @@
 # 🤖 AI Literacy
 
 > **Criterion**: Your awareness of the relevant tools, models, and trends in the AI industry.
+> 
+> **Version**: 6.0 (January 2026) - ChromaDB, Conversational RAG, Output Orchestration patterns
 
 ---
 
@@ -141,7 +143,7 @@ def embed_query(self, query: str) -> List[float]:
 
 ---
 
-## 💾 Vector Database Knowledge
+## 💾 Vector Database Knowledge (Updated v6.0)
 
 ### Understanding Trade-offs
 
@@ -153,16 +155,54 @@ def embed_query(self, query: str) -> List[float]:
 │  Solution          │ Scale      │ Latency │ Setup    │ Cost     │
 │  ─────────────────────────────────────────────────────────────  │
 │  In-Memory/JSON    │ <10K docs  │ O(n)    │ Zero     │ Free     │
-│  ChromaDB          │ <100K docs │ Fast    │ Medium   │ Free     │
+│  ChromaDB          │ <100K docs │ Fast    │ Easy     │ Free     │
 │  pgvector          │ Millions   │ Fast    │ Medium   │ Varies   │
 │  Pinecone          │ Billions   │ Fast    │ Easy     │ $$       │
 │  Weaviate          │ Millions   │ Fast    │ Medium   │ $        │
 │                                                                  │
-│  OUR IMPLEMENTATION:                                            │
-│  • LOCAL:  SimpleVectorStore (JSON + cosine similarity)         │
+│  v6.0 IMPLEMENTATION:                                           │
+│  • LOCAL:  ChromaDB (persistent, indexed, fast)  ◄── UPGRADED   │
 │  • CLOUD:  Supabase pgvector (PostgreSQL + IVFFlat index)      │
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
+```
+
+### ChromaDB Implementation (NEW in v6.0)
+
+**Why ChromaDB over JSON?**
+
+| Aspect | JSON (v5) | ChromaDB (v6.0) |
+|--------|-----------|-----------------|
+| **Search** | O(n) linear scan | Indexed ANN search |
+| **Scale** | <1K docs | <100K docs |
+| **Persistence** | Manual save/load | Built-in persistence |
+| **Filtering** | Python loops | Native metadata filters |
+| **Memory** | Load all into RAM | Memory-mapped |
+
+```python
+# providers/local/vector_store.py (v6.0)
+import chromadb
+from chromadb.config import Settings
+
+class ChromaDBVectorStore:
+    def __init__(self, persist_directory: str = "./chroma_db"):
+        self.client = chromadb.Client(Settings(
+            chroma_db_impl="duckdb+parquet",
+            persist_directory=persist_directory,
+            anonymized_telemetry=False
+        ))
+        self.collection = self.client.get_or_create_collection(
+            name="cv_embeddings",
+            metadata={"hnsw:space": "cosine"}  # Cosine similarity
+        )
+    
+    async def search(self, embedding: List[float], k: int = 10) -> List[SearchResult]:
+        results = self.collection.query(
+            query_embeddings=[embedding],
+            n_results=k,
+            include=["documents", "metadatas", "distances"]
+        )
+        return self._format_results(results)
 ```
 
 ### pgvector Implementation Details
@@ -506,18 +546,112 @@ class CacheConfig:
 
 ---
 
-## 📋 AI Literacy Summary
+---
+
+## 💬 Conversational RAG Patterns (NEW in v6.0)
+
+### Context-Aware Query Processing
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              CONVERSATIONAL RAG ARCHITECTURE                     │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  Traditional RAG:                                               │
+│  Query → Embed → Search → Generate (no memory)                  │
+│                                                                  │
+│  v6.0 Conversational RAG:                                       │
+│  Query + History → Context Resolve → Embed → Search → Generate  │
+│                                                                  │
+│  KEY COMPONENTS:                                                │
+│                                                                  │
+│  1. CONVERSATION HISTORY PROPAGATION                            │
+│     └── Last 6 messages passed to QueryUnderstanding            │
+│                                                                  │
+│  2. CONTEXT RESOLVER SERVICE (18KB)                             │
+│     ├── Pronoun resolution: "her" → last female candidate       │
+│     ├── Ordinal resolution: "second one" → rank #2              │
+│     ├── Demonstrative: "those 3" → last result set              │
+│     └── Follow-up detection: "what about X?"                    │
+│                                                                  │
+│  3. STRUCTURED OUTPUT MEMORY                                    │
+│     └── Previous StructuredOutput available for reference       │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Implementation Pattern
+
+```python
+# context_resolver.py - Conversational context resolution
+class ContextResolver:
+    def resolve(self, query: str, history: List[Message]) -> ResolvedQuery:
+        # Extract entities from last AI response
+        last_response = history[-1] if history else None
+        last_candidates = self._extract_candidates(last_response)
+        
+        # Resolve different reference types
+        resolved = query
+        if self._has_pronoun(query):
+            resolved = self._resolve_pronoun(query, last_candidates)
+        elif self._has_ordinal(query):
+            resolved = self._resolve_ordinal(query, last_candidates)
+        
+        return ResolvedQuery(
+            original=query,
+            resolved=resolved,
+            referenced_candidates=self._get_referenced(resolved)
+        )
+```
+
+---
+
+## 🎯 Output Orchestration as RAG Pattern (NEW in v6.0)
+
+### Beyond Basic RAG Output
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              OUTPUT ORCHESTRATION PATTERN                        │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  Basic RAG Output: Unstructured text blob                       │
+│                                                                  │
+│  v6.0 Orchestrated Output:                                      │
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │ query_type → Structure → Modules → JSON → UI Components │    │
+│  └─────────────────────────────────────────────────────────┘    │
+│                                                                  │
+│  PATTERN BENEFITS:                                              │
+│  • Consistent output format per query type                      │
+│  • Reusable modules (DRY across structures)                     │
+│  • Frontend renders appropriate visual components               │
+│  • Easy to add new query types                                  │
+│                                                                  │
+│  INDUSTRY ALIGNMENT:                                            │
+│  • Structured Outputs (OpenAI, Anthropic trends)                │
+│  • Component-based RAG (emerging pattern)                       │
+│  • Typed responses for better UX                                │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📋 AI Literacy Summary (v6.0)
 
 | Area | Evidence |
 |------|----------|
 | **Embedding Models** | Correct selection of nomic-embed-v1.5 (cloud) and MiniLM (local) with proper task prefixes |
 | **LLM Landscape** | Model-agnostic design supporting all major providers via OpenRouter |
-| **Vector Databases** | Understanding of pgvector, indexing strategies, similarity operators |
+| **Vector Databases** | ChromaDB (local), pgvector (cloud) with proper indexing strategies |
 | **RAG Research** | Multi-query, HyDE, reranking, CoT — beyond basic tutorials |
+| **Conversational RAG** | Context resolution, pronoun handling, follow-up detection |
+| **Output Orchestration** | 9 structures, 29 modules, query-type-aware responses |
 | **Prompt Engineering** | Structured outputs, anti-hallucination, citation formats |
-| **Evaluation** | Per-stage metrics, cost tracking, observability hooks |
+| **Evaluation** | Per-stage metrics, cost tracking, 5-factor confidence scoring |
 | **Production Patterns** | Retries, circuit breakers, caching, timeouts |
-| **Industry Trends** | Aligned with 2024-2025 direction (agentic, structured, open models) |
+| **Industry Trends** | Aligned with 2024-2025 direction (conversational, structured, open models) |
 
 ---
 

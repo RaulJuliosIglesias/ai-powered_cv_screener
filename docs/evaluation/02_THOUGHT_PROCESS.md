@@ -1,6 +1,8 @@
 # 🧠 Thought Process
 
 > **Criterion**: Your explanation of the architecture and technology choices.
+> 
+> **Version**: 6.0 (January 2026) - Output Orchestrator, 9 Structures, 29 Modules, Conversational Context
 
 ---
 
@@ -325,7 +327,151 @@ CREATE FUNCTION match_cv_embeddings(
 
 ---
 
-## 🔄 RAG Pipeline: 11-Stage Architecture
+## 🎯 Output Orchestrator: Structured Response Architecture (NEW in v6.0)
+
+### The Problem
+
+Basic RAG returns unstructured text that's hard to:
+- Display consistently in UI
+- Parse for specific data points
+- Maintain quality across query types
+
+### The Solution: Query Type → Structure → Modules
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                        OUTPUT ORCHESTRATOR ARCHITECTURE                          │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  USER QUERY: "Top 5 candidates for backend"                                     │
+│       │                                                                          │
+│       ▼                                                                          │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐│
+│  │ QUERY UNDERSTANDING → query_type: "ranking"                                 ││
+│  └─────────────────────────────────────────────────────────────────────────────┘│
+│       │                                                                          │
+│       ▼                                                                          │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐│
+│  │ ORCHESTRATOR ROUTING                                                        ││
+│  │                                                                             ││
+│  │ query_type → STRUCTURE mapping:                                             ││
+│  │ ├── "single_candidate" → SingleCandidateStructure                           ││
+│  │ ├── "red_flags"        → RiskAssessmentStructure                            ││
+│  │ ├── "comparison"       → ComparisonStructure                                ││
+│  │ ├── "search"           → SearchStructure                                    ││
+│  │ ├── "ranking"          → RankingStructure          ◄── SELECTED             ││
+│  │ ├── "job_match"        → JobMatchStructure                                  ││
+│  │ ├── "team_build"       → TeamBuildStructure                                 ││
+│  │ ├── "verification"     → VerificationStructure                              ││
+│  │ └── "summary"          → SummaryStructure                                   ││
+│  └─────────────────────────────────────────────────────────────────────────────┘│
+│       │                                                                          │
+│       ▼                                                                          │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐│
+│  │ RANKINGSTRUCTURE assembles MODULES:                                         ││
+│  │                                                                             ││
+│  │ ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         ││
+│  │ │  Thinking   │  │  Analysis   │  │  Ranking    │  │  Ranking    │         ││
+│  │ │   Module    │  │   Module    │  │  Criteria   │  │   Table     │         ││
+│  │ └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘         ││
+│  │ ┌─────────────┐  ┌─────────────┐                                           ││
+│  │ │   TopPick   │  │ Conclusion  │                                           ││
+│  │ │   Module    │  │   Module    │                                           ││
+│  │ └─────────────┘  └─────────────┘                                           ││
+│  └─────────────────────────────────────────────────────────────────────────────┘│
+│       │                                                                          │
+│       ▼                                                                          │
+│  STRUCTURED OUTPUT (JSON) → Frontend renders visual components                  │
+│                                                                                  │
+└─────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Why This Approach?
+
+| Alternative | Problem | Our Solution |
+|-------------|---------|--------------|
+| Unstructured text | Hard to display, parse | Typed structures with modules |
+| Single response format | Doesn't fit all query types | 9 specialized structures |
+| Monolithic output | No reusability | 29 reusable modules |
+| Frontend parsing | Fragile, regex-based | Backend provides structured JSON |
+
+### Module Reusability Matrix
+
+| Module | Used By Structures | Purpose |
+|--------|-------------------|---------|
+| ThinkingModule | ALL 9 | Extract reasoning process |
+| ConclusionModule | ALL 9 | Final assessment |
+| AnalysisModule | 6 structures | Detailed analysis |
+| RiskTableModule | SingleCandidate, RiskAssessment | 5-factor risk table |
+
+---
+
+## 💬 Conversational Context: Pronoun Resolution (NEW in v6.0)
+
+### The Problem
+
+Users naturally use pronouns and references:
+- "Tell me more about **her**"
+- "Compare **those 3**"
+- "What about **the top one**?"
+
+Basic RAG has no memory of previous responses.
+
+### The Solution: Context Resolver Service
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                        CONTEXT RESOLVER ARCHITECTURE                             │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  CONVERSATION HISTORY (last 6 messages)                                         │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐│
+│  │ User: "Top 3 candidates for frontend"                                       ││
+│  │ AI: [RankingStructure] 1. Alex Chen, 2. Sarah Kim, 3. Mike Johnson         ││
+│  │ User: "Tell me more about the second one"  ◄── CURRENT QUERY               ││
+│  └─────────────────────────────────────────────────────────────────────────────┘│
+│       │                                                                          │
+│       ▼                                                                          │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐│
+│  │ CONTEXT RESOLVER                                                            ││
+│  │                                                                             ││
+│  │ Resolution Types:                                                           ││
+│  │ ├── Pronoun: "her", "him", "them" → Last mentioned candidate(s)            ││
+│  │ ├── Ordinal: "first one", "second one" → From last ranking                 ││
+│  │ ├── Demonstrative: "those 3", "these candidates" → Last result set         ││
+│  │ └── Follow-up: "what about X?" → Continue previous context                 ││
+│  │                                                                             ││
+│  │ Result: "the second one" → Sarah Kim                                       ││
+│  └─────────────────────────────────────────────────────────────────────────────┘│
+│       │                                                                          │
+│       ▼                                                                          │
+│  RESOLVED QUERY: "Tell me more about Sarah Kim"                                 │
+│  → Routes to SingleCandidateStructure                                           │
+│                                                                                  │
+└─────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Implementation Insight
+
+```python
+# context_resolver.py (18KB)
+class ContextResolver:
+    def resolve(self, query: str, conversation_history: List[Message]) -> ResolvedQuery:
+        # Extract candidates mentioned in last AI response
+        last_candidates = self._extract_candidates_from_response(history[-1])
+        
+        # Resolve ordinal references
+        if "second one" in query.lower():
+            return last_candidates[1] if len(last_candidates) > 1 else None
+        
+        # Resolve pronouns
+        if "her" in query.lower() or "she" in query.lower():
+            return self._find_female_candidate(last_candidates)
+```
+
+---
+
+## 🔄 RAG Pipeline: v6.0 Architecture (22+ Services)
 
 ### Evolution from Basic to Advanced
 
@@ -342,36 +488,48 @@ CREATE FUNCTION match_cv_embeddings(
 │  ✗ No protection against off-topic questions                      │
 │  ✗ Hallucinations pass through unchecked                          │
 │  ✗ No visibility into failures                                    │
+│  ✗ No conversational context                                      │
+│  ✗ Unstructured output hard to display                            │
 │                                                                   │
 │  ─────────────────────────────────────────────────────────────    │
 │                                                                   │
-│  OUR PIPELINE (Production Level):                                 │
+│  v6.0 PIPELINE (Production Level):                                │
 │                                                                   │
 │  ┌─────────────────────────────────────────────────────────────┐  │
 │  │ UNDERSTANDING LAYER                                         │  │
-│  │ ├── Query Understanding (intent, entities)                  │  │
-│  │ ├── Multi-Query Expansion (variations)                      │  │
-│  │ └── Guardrail Check (off-topic filter)                      │  │
+│  │ ├── Query Understanding (9 query_types, entities)           │  │
+│  │ ├── Context Resolver (pronouns, follow-ups) ◄── NEW         │  │
+│  │ ├── Multi-Query Expansion + HyDE                            │  │
+│  │ └── Guardrail Check (bilingual EN/ES)                       │  │
 │  └─────────────────────────────────────────────────────────────┘  │
 │                            ↓                                      │
 │  ┌─────────────────────────────────────────────────────────────┐  │
 │  │ RETRIEVAL LAYER                                             │  │
-│  │ ├── Embedding (vectorize queries)                           │  │
-│  │ ├── Vector Search (find chunks)                             │  │
+│  │ ├── Embedding (384d local / 768d cloud)                     │  │
+│  │ ├── Vector Search (ChromaDB / pgvector)                     │  │
 │  │ └── Reranking (LLM-based relevance)                         │  │
 │  └─────────────────────────────────────────────────────────────┘  │
 │                            ↓                                      │
 │  ┌─────────────────────────────────────────────────────────────┐  │
 │  │ GENERATION LAYER                                            │  │
 │  │ ├── Reasoning (Chain-of-Thought)                            │  │
-│  │ └── Response Generation (with citations)                    │  │
+│  │ └── Response Generation (structured prompts)                │  │
 │  └─────────────────────────────────────────────────────────────┘  │
 │                            ↓                                      │
 │  ┌─────────────────────────────────────────────────────────────┐  │
 │  │ VERIFICATION LAYER                                          │  │
 │  │ ├── Claim Verification (fact-check)                         │  │
 │  │ ├── Hallucination Check (verify names/IDs)                  │  │
-│  │ └── Eval Logging (metrics & debugging)                      │  │
+│  │ ├── Confidence Calculator (5-factor) ◄── NEW                │  │
+│  │ └── Cost Tracker + Eval Logging ◄── NEW                     │  │
+│  └─────────────────────────────────────────────────────────────┘  │
+│                            ↓                                      │
+│  ┌─────────────────────────────────────────────────────────────┐  │
+│  │ OUTPUT LAYER (NEW in v6.0)                                  │  │
+│  │ ├── Output Orchestrator (routes to structures)              │  │
+│  │ ├── 9 Structures (assemble modules)                         │  │
+│  │ ├── 29 Modules (extract/format data)                        │  │
+│  │ └── Suggestion Engine (context-aware suggestions)           │  │
 │  └─────────────────────────────────────────────────────────────┘  │
 │                                                                   │
 └───────────────────────────────────────────────────────────────────┘
@@ -381,19 +539,39 @@ CREATE FUNCTION match_cv_embeddings(
 
 Each stage is an isolated service:
 
-```
+```python
 backend/app/services/
-├── query_understanding_service.py   # Stage 1
-├── multi_query_service.py           # Stage 2
-├── guardrail_service.py             # Stage 3
-├── embedding_service.py             # Stage 4
-├── vector_store.py                  # Stage 5
-├── reranking_service.py             # Stage 6
-├── reasoning_service.py             # Stage 7
-├── rag_service_v5.py                # Stage 8 (orchestrator)
-├── claim_verifier_service.py        # Stage 9
-├── hallucination_service.py         # Stage 10
-└── eval_service.py                  # Stage 11
+├── rag_service_v5.py                # 128KB - Main orchestrator
+├── query_understanding_service.py   # 40KB - Query classification
+├── context_resolver.py              # 18KB - Conversational context ◄── NEW
+├── multi_query_service.py           # 11KB - Query expansion + HyDE
+├── guardrail_service.py             # 11KB - Off-topic filtering
+├── embedding_service.py             # 4KB - Embedding wrapper
+├── vector_store.py                  # 11KB - Vector operations
+├── reranking_service.py             # 12KB - LLM-based reranking
+├── reasoning_service.py             # 21KB - Chain-of-thought
+├── claim_verifier_service.py        # 13KB - Fact verification
+├── hallucination_service.py         # 12KB - Hallucination detection
+├── confidence_calculator.py         # 28KB - 5-factor scoring ◄── NEW
+├── cost_tracker.py                  # 7KB - Cost estimation ◄── NEW
+├── eval_service.py                  # 12KB - Metrics & logging
+├── smart_chunking_service.py        # 41KB - Semantic chunking ◄── NEW
+├── verification_service.py          # 11KB - Response verification
+│
+├── output_processor/                # 44 items ◄── NEW
+│   ├── orchestrator.py              # Routes query_type → structure
+│   ├── structures/                  # 9 structure classes
+│   │   ├── single_candidate_structure.py
+│   │   ├── ranking_structure.py
+│   │   ├── comparison_structure.py
+│   │   └── ... (6 more)
+│   └── modules/                     # 29 module classes
+│       ├── thinking_module.py
+│       ├── conclusion_module.py
+│       └── ... (27 more)
+│
+└── suggestion_engine/               # 17 items ◄── NEW
+    └── Dynamic suggestion generation
 ```
 
 **Benefits**:
@@ -401,6 +579,8 @@ backend/app/services/
 - Easy to disable stages via feature flags
 - Clear debugging: which stage failed?
 - Swap implementations without affecting others
+- **Modular output**: Add new structures without touching RAG core
+- **Reusable modules**: DRY principle across structures
 
 ---
 
