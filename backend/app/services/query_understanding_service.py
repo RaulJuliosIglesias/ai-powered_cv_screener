@@ -396,10 +396,10 @@ class QueryUnderstandingService:
                 )
                 logger.info(f"[QUERY_UNDERSTANDING] Success with {model}: {metadata['total_tokens']} tokens")
         
-        # Parse JSON response
-        return self._parse_llm_response(query, content, metadata)
+        # Parse JSON response (pass conversation_history for context resolution)
+        return self._parse_llm_response(query, content, metadata, conversation_history)
     
-    def _parse_llm_response(self, query: str, content: str, metadata: dict) -> QueryUnderstanding:
+    def _parse_llm_response(self, query: str, content: str, metadata: dict, conversation_history: List[Dict[str, str]] = None) -> QueryUnderstanding:
         """
         Parse LLM response into QueryUnderstanding.
         """
@@ -420,7 +420,7 @@ class QueryUnderstandingService:
         
         # CRITICAL: Validate that understood_query is actually an expansion
         # If the LLM just copied the query, we need to expand it ourselves
-        understood_query = self._ensure_query_expansion(query, understood_query, query_type, parsed.get("requirements", []))
+        understood_query = self._ensure_query_expansion(query, understood_query, query_type, parsed.get("requirements", []), conversation_history)
         
         # CRITICAL: Override query_type if strong comparison patterns detected
         # This fixes cases where LLM incorrectly classifies "Compare #1 vs #2" as "ranking"
@@ -453,12 +453,12 @@ class QueryUnderstandingService:
             metadata=metadata
         )
     
-    def _ensure_query_expansion(self, original: str, understood: str, query_type: str, requirements: list) -> str:
+    def _ensure_query_expansion(self, original: str, understood: str, query_type: str, requirements: list, conversation_history: List[Dict[str, str]] = None) -> str:
         """
         Ensure the understood_query is actually an expansion, not a copy.
         
         If the LLM returned something too similar to the original,
-        we generate an expanded version ourselves.
+        we generate an expanded version ourselves using conversation context.
         """
         original_normalized = original.lower().strip()
         understood_normalized = understood.lower().strip()
@@ -475,8 +475,8 @@ class QueryUnderstandingService:
         
         logger.warning(f"[QUERY_UNDERSTANDING] Detected lazy understood_query, expanding: '{original}' -> '{understood}'")
         
-        # Generate expanded version based on query_type
-        expanded = self._generate_expanded_understanding(original, query_type, requirements)
+        # Generate expanded version based on query_type AND conversation context
+        expanded = self._generate_expanded_understanding(original, query_type, requirements, conversation_history)
         
         logger.info(f"[QUERY_UNDERSTANDING] Auto-expanded to: '{expanded}'")
         return expanded
@@ -498,13 +498,20 @@ class QueryUnderstandingService:
         
         return len(intersection) / len(union)
     
-    def _generate_expanded_understanding(self, query: str, query_type: str, requirements: list) -> str:
+    def _generate_expanded_understanding(self, query: str, query_type: str, requirements: list, conversation_history: List[Dict[str, str]] = None) -> str:
         """
         Generate an expanded understanding when LLM fails to do so.
         
-        This provides meaningful context about what the user is asking.
+        This provides meaningful context about what the user is asking,
+        including candidate names extracted from conversation history.
         """
         query_lower = query.lower()
+        
+        # Extract candidate names from conversation history
+        candidates_from_context = self._extract_candidates_from_history(conversation_history)
+        candidates_str = ""
+        if candidates_from_context:
+            candidates_str = f" The candidates referenced are: {', '.join(candidates_from_context)}."
         
         # Build requirements string if available
         req_str = ""
@@ -514,29 +521,84 @@ class QueryUnderstandingService:
         # Type-specific expansions
         if query_type == "comparison":
             if "3" in query or "three" in query_lower:
-                return f"The user wants to compare 3 candidates from the current context. This comparison should analyze their relative strengths, weaknesses, experience levels, skills, and qualifications to help make a hiring decision.{req_str}"
+                if candidates_from_context and len(candidates_from_context) >= 3:
+                    top_3 = candidates_from_context[:3]
+                    return f"The user wants to compare these 3 specific candidates: {', '.join(top_3)}. This comparison should analyze their relative strengths, weaknesses, experience levels, skills, and qualifications to help make a hiring decision.{req_str}"
+                return f"The user wants to compare 3 candidates from the current context.{candidates_str} This comparison should analyze their relative strengths, weaknesses, experience levels, skills, and qualifications to help make a hiring decision.{req_str}"
             elif "2" in query or "two" in query_lower:
-                return f"The user wants to compare 2 candidates head-to-head. This comparison should highlight differences in experience, skills, and fit for the role.{req_str}"
+                if candidates_from_context and len(candidates_from_context) >= 2:
+                    top_2 = candidates_from_context[:2]
+                    return f"The user wants to compare these 2 candidates head-to-head: {', '.join(top_2)}. This comparison should highlight differences in experience, skills, and fit for the role.{req_str}"
+                return f"The user wants to compare 2 candidates head-to-head.{candidates_str} This comparison should highlight differences in experience, skills, and fit for the role.{req_str}"
             else:
-                return f"The user requests a detailed comparison between the referenced candidates. This should include side-by-side analysis of their qualifications, experience, and suitability.{req_str}"
+                return f"The user requests a detailed comparison between the referenced candidates.{candidates_str} This should include side-by-side analysis of their qualifications, experience, and suitability.{req_str}"
         
         elif query_type == "ranking":
-            return f"The user wants candidates ranked according to specific criteria. This ranking should order all relevant candidates and provide justification for the ordering.{req_str}"
+            return f"The user wants candidates ranked according to specific criteria.{candidates_str} This ranking should order all relevant candidates and provide justification for the ordering.{req_str}"
         
         elif query_type == "search":
-            return f"The user is searching for specific information about candidates or their qualifications. This requires extracting relevant details from the CV data.{req_str}"
+            return f"The user is searching for specific information about candidates or their qualifications.{candidates_str} This requires extracting relevant details from the CV data.{req_str}"
         
         elif query_type == "filter":
-            return f"The user wants to filter candidates based on specific criteria. This should identify which candidates meet the requirements and which don't.{req_str}"
+            return f"The user wants to filter candidates based on specific criteria.{candidates_str} This should identify which candidates meet the requirements and which don't.{req_str}"
         
         else:
             # General expansion for vague queries
             if any(word in query_lower for word in ['more', 'detail', 'expand', 'tell', 'explain']):
-                return f"The user is requesting additional details or elaboration on the previously discussed topic or candidate. This follow-up requires deeper analysis.{req_str}"
+                return f"The user is requesting additional details or elaboration on the previously discussed topic or candidate.{candidates_str} This follow-up requires deeper analysis.{req_str}"
             elif any(word in query_lower for word in ['them', 'those', 'these', 'they']):
-                return f"The user is referencing candidates or topics from the previous context. The query involves analyzing the referenced subjects in more detail.{req_str}"
+                return f"The user is referencing candidates or topics from the previous context.{candidates_str} The query involves analyzing the referenced subjects in more detail.{req_str}"
             else:
-                return f"The user query requires understanding the context from the conversation and providing a relevant response about the candidates or analysis requested.{req_str}"
+                return f"The user query requires understanding the context from the conversation and providing a relevant response about the candidates or analysis requested.{candidates_str}{req_str}"
+    
+    def _extract_candidates_from_history(self, conversation_history: List[Dict[str, str]] = None) -> List[str]:
+        """
+        Extract candidate names mentioned in conversation history.
+        
+        Looks for patterns like:
+        - "1. Name", "2. Name", "#1 Name"
+        - "Top candidate: Name"
+        - Names in ranking tables
+        """
+        if not conversation_history:
+            return []
+        
+        import re
+        candidates = []
+        
+        # Look through assistant messages (where rankings/names appear)
+        for msg in conversation_history:
+            if msg.get("role") != "assistant":
+                continue
+            
+            content = msg.get("content", "")
+            
+            # Pattern 1: Numbered lists like "1. John Smith" or "#1 John Smith"
+            numbered_pattern = r'(?:^|\n)\s*(?:#?\d+[.):]\s*|•\s*)([A-Z][a-záéíóúñ]+(?:\s+[A-Z][a-záéíóúñ]+)+)'
+            matches = re.findall(numbered_pattern, content, re.MULTILINE)
+            candidates.extend(matches)
+            
+            # Pattern 2: Table rows with names (| Name |)
+            table_pattern = r'\|\s*([A-Z][a-záéíóúñ]+(?:\s+[A-Z][a-záéíóúñ]+)+)\s*\|'
+            matches = re.findall(table_pattern, content)
+            candidates.extend(matches)
+            
+            # Pattern 3: "Top candidate: Name" or "Best match: Name"
+            top_pattern = r'(?:top|best|#1)\s*(?:candidate|match)?[:\s]+([A-Z][a-záéíóúñ]+(?:\s+[A-Z][a-záéíóúñ]+)+)'
+            matches = re.findall(top_pattern, content, re.IGNORECASE)
+            candidates.extend(matches)
+        
+        # Remove duplicates while preserving order
+        seen = set()
+        unique_candidates = []
+        for c in candidates:
+            c_normalized = c.strip()
+            if c_normalized and c_normalized.lower() not in seen:
+                seen.add(c_normalized.lower())
+                unique_candidates.append(c_normalized)
+        
+        logger.info(f"[QUERY_UNDERSTANDING] Extracted {len(unique_candidates)} candidates from history: {unique_candidates[:5]}")
+        return unique_candidates
     
     def _create_heuristic_fallback(self, query: str, error_reason: str) -> QueryUnderstanding:
         """
