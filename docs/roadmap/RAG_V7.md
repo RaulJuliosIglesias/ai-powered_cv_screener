@@ -1,17 +1,17 @@
-# CV Screener RAG v6 - Implementation Plan
+# CV Screener RAG v7 - Implementation Plan
 
-**Goal**: Upgrade the RAG pipeline from v5 to v6 by replacing hardcoded/inefficient components with specialized ML models while keeping costs near zero.
+**Goal**: Upgrade the RAG pipeline from v6 to v7 by implementing advanced ML models and sophisticated retrieval techniques while maintaining cost efficiency.
 
 ---
 
 ## Table of Contents
 
-- [Current Pipeline Analysis (v5)](#current-pipeline-analysis-v5)
+- [Current Pipeline Analysis (v6)](#current-pipeline-analysis-v6)
 - [Weak Points Identified](#weak-points-identified)
 - [Services and Models Map](#services-and-models-map)
 - [Pipeline Steps](#pipeline-steps)
 - [LangChain vs LangGraph](#langchain-vs-langgraph)
-- [Proposed Architecture v6](#proposed-architecture-v6)
+- [Proposed Architecture v7](#proposed-architecture-v7)
 - [New Services to Add](#new-services-to-add)
 - [Configuration](#configuration)
 - [Implementation Priority](#implementation-priority)
@@ -21,9 +21,9 @@
 
 ---
 
-## Current Pipeline Analysis (v5)
+## Current Pipeline Analysis (v6)
 
-### Phase 1: Query Processing
+### Phase 1: Query Processing (v6 Current)
 
 ```mermaid
 flowchart TB
@@ -37,7 +37,7 @@ flowchart TB
     style D fill:#7f1d1d,stroke:#ef4444,stroke-width:2px,color:#ffffff
 ```
 
-### Phase 2: Retrieval
+### Phase 2: Retrieval (v6 Current)
 
 ```mermaid
 flowchart TB
@@ -51,7 +51,7 @@ flowchart TB
     style D fill:#7f1d1d,stroke:#ef4444,stroke-width:2px,color:#ffffff
 ```
 
-### Phase 3: Generation
+### Phase 3: Generation (v6 Current)
 
 ```mermaid
 flowchart TB
@@ -63,7 +63,7 @@ flowchart TB
     style C fill:#065f46,stroke:#10b981,stroke-width:2px,color:#ffffff
 ```
 
-### Phase 4: Quality Assurance
+### Phase 4: Quality Assurance (v6 Current)
 
 ```mermaid
 flowchart TB
@@ -81,11 +81,13 @@ flowchart TB
 
 ## Weak Points Identified
 
-| Step | Current Implementation | Problem | Status |
-|:----:|:-----------------------|:--------|:------:|
+| Step | Current Implementation (v6) | Problem | Status |
+|:----:|:---------------------------|:--------|:------:|
 | 3 | Regex + Hardcoded Keywords | ~100 hardcoded words, fragile patterns, false positives/negatives | Needs Fix |
 | 6 | LLM Scoring | One LLM call per document (~500ms each), slow and expensive | Needs Fix |
 | 9 | LLM + Regex Heuristics | No real NLI for entailment verification, misses hallucinations | Needs Fix |
+| **NEW** | Output Orchestrator | 9 structures, 29 modules implemented | ✅ DONE |
+| **NEW** | Context Resolver | Pronoun resolution, follow-up detection | ✅ DONE |
 
 ---
 
@@ -565,11 +567,11 @@ flowchart TB
 
 ---
 
-## Proposed Architecture v6
+## Proposed Architecture v7
 
 ### Changes Summary
 
-| Step | Current | v6 Change | New Provider/Model |
+| Step | Current (v6) | v7 Change | New Provider/Model |
 |:----:|:--------|:----------|:-------------------|
 | 1 | OpenRouter LLM | No change | - |
 | 2 | OpenRouter LLM | No change | - |
@@ -584,7 +586,7 @@ flowchart TB
 
 ---
 
-## New Services to Add
+## New Services to Add (v7)
 
 ### Service 1: HuggingFace Inference Client
 
@@ -915,6 +917,7 @@ langsmith>=0.0.83
 - [ ] Add HuggingFace API client
 - [ ] Implement Cross-Encoder reranking
 - [ ] Add NLI verification service
+- [ ] **Note**: v6 features (Output Orchestrator, Context Resolver) already implemented
 
 ### Phase 2: Guardrails Upgrade (1-2 hours)
 
@@ -971,7 +974,7 @@ langsmith>=0.0.83
 
 | File | Changes |
 |:-----|:--------|
-| `backend/app/services/rag_service_v5.py` | Integrate new services (becomes v6) |
+| `backend/app/services/rag_service_v5.py` | Integrate new services (becomes v7) |
 | `backend/app/services/hallucination_service.py` | Add NLI verification |
 | `backend/app/services/confidence_calculator.py` | Add NLI signals |
 | `backend/app/config.py` | Add HuggingFace settings |

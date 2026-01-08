@@ -1296,7 +1296,8 @@ backend/
 
 | Version | Date | Commit | Changes |
 |---------|------|--------|---------|
-| **6.0.0** | **Upcoming** | - | HuggingFace NLI verification, Zero-shot classification, RAGAS evaluation framework ([Roadmap](./roadmap/RAG_V6.md)) |
+| **6.0.0** | **Current** | - | Output Orchestrator, 9 structures, 29 modules, Context Resolver, JSON vector store |
+| **7.0.0** | **Upcoming** | - | HuggingFace NLI verification, Zero-shot classification, Cross-Encoder reranking ([Roadmap](./roadmap/RAG_V7.md)) |
 | **5.1.1** | **2026-01-05** | - | **Current**: GapAnalysisModule, RedFlagsModule, TimelineModule, Deep Enriched Metadata (seniority, job-hopping, FAANG detection) |
 | 5.1.0 | 2026-01-04 | - | Smart CV Chunking, Enriched Metadata, Targeted Retrieval, Summary Chunks |
 | 5.0.0 | 2026-01-03 21:38 | `b63a069` | Multi-Query, HyDE, RRF, Chain-of-Thought Reasoning, Claim Verification, Iterative Refinement, Graceful Degradation |

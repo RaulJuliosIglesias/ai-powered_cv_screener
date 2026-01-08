@@ -25,7 +25,7 @@ The following features from the roadmap have been **implemented**:
 | Priority | Document | Description |
 |----------|----------|-------------|
 | 🟡 Medium | [Confidence Improvements](./CONFIDENCE.md) | Answer confidence calibration system |
-| 🟡 Medium | [RAG V6 Enhancements](./RAG_V6.md) | HyDE, iterative refinement, NLI verification |
+| 🟡 Medium | [RAG V7 Enhancements](./RAG_V7.md) | Advanced ML models, NLI verification, Cross-Encoder reranking |
 | 🟢 Low | [Advanced Evaluation](./ADVANCED_EVAL.md) | Production-grade evaluation metrics |
 | 🔴 High | [Security Improvements](./SECURITY_IMPROVEMENTS.md) | Authentication and rate limiting |
 
@@ -36,7 +36,7 @@ The following features from the roadmap have been **implemented**:
 ```
 docs/roadmap/
 ├── README.md                    ← You are here
-├── RAG_V6.md                    ← HyDE & iterative refinement (partial)
+├── RAG_V7.md                    ← Advanced ML models & NLI (future)
 ├── CONFIDENCE.md                ← LLM-as-Judge & calibration
 ├── ADVANCED_EVAL.md             ← Token analysis & citations
 └── SECURITY_IMPROVEMENTS.md     ← Auth & rate limiting (HIGH priority)
@@ -62,9 +62,9 @@ docs/roadmap/
 - Self-Consistency checking
 - Score calibration system
 
-### [RAG V6 Enhancements](./RAG_V6.md)
-- HyDE (Hypothetical Document Embeddings) - partial
-- Iterative refinement loop
+### [RAG V7 Enhancements](./RAG_V7.md)
+- Advanced ML models (Cross-Encoder reranking, NLI verification)
+- Zero-shot classification for guardrails
 - RAGAS evaluation framework
 - Precision and recall improvements
 
