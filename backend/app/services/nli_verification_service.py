@@ -88,6 +88,10 @@ class NLIVerificationService:
     THRESHOLD_UNCERTAIN_LOW = 0.3
     THRESHOLD_UNCERTAIN_HIGH = 0.7
     
+    # Limits to avoid too many API calls (claims × chunks = API calls)
+    MAX_CLAIMS = 5  # Max claims to verify
+    MAX_CHUNKS_PER_CLAIM = 3  # Max chunks to check per claim
+    
     def __init__(
         self,
         hf_client: Optional[HuggingFaceClient] = None,
@@ -158,9 +162,14 @@ class NLIVerificationService:
                 metadata={"note": "No claims extracted from response"}
             )
         
+        # Limit claims to verify (to avoid too many API calls)
+        claims_to_verify = claims[:self.MAX_CLAIMS]
+        if len(claims) > self.MAX_CLAIMS:
+            logger.info(f"[NLI] Limiting verification to {self.MAX_CLAIMS} of {len(claims)} claims")
+        
         # Verify each claim
         verified_claims = []
-        for claim in claims:
+        for claim in claims_to_verify:
             try:
                 verified = await self._verify_single_claim(claim, context_chunks)
                 verified_claims.append(verified)
@@ -218,14 +227,17 @@ class NLIVerificationService:
         claim: str,
         context_chunks: List[str]
     ) -> VerifiedClaim:
-        """Verify a single claim against all context chunks."""
+        """Verify a single claim against context chunks (limited for efficiency)."""
         
         best_entailment = 0.0
         best_contradiction = 0.0
         supporting_indices = []
         best_supporting_chunk = None
         
-        for i, chunk in enumerate(context_chunks):
+        # Limit chunks to check per claim
+        chunks_to_check = context_chunks[:self.MAX_CHUNKS_PER_CLAIM]
+        
+        for i, chunk in enumerate(chunks_to_check):
             # Skip very short chunks
             if len(chunk.strip()) < 20:
                 continue

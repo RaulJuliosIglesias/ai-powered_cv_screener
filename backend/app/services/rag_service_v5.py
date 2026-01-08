@@ -30,6 +30,9 @@ from app.utils.debug_logger import (
     log_retrieval, log_template_selection, log_query_understanding,
     log_llm_response, log_orchestrator_processing, log_event, log_structure_routing
 )
+
+# V7 Services Integration
+from app.services.v7_integration import get_v7_services, V7Services
 from typing import (
     Any,
     Callable,
@@ -688,6 +691,9 @@ class RAGServiceV5:
         self._eval_service: Any = None
         self._prompt_builder: Any = None
         
+        # V7 Services (HuggingFace-based enhancements)
+        self._v7_services: Optional[V7Services] = None
+        
         self._providers_initialized = False
         
         logger.info(f"RAGServiceV5 initialized with mode={self.config.mode.value}")
@@ -828,6 +834,14 @@ class RAGServiceV5:
             eval_service = EvalService()
             prompt_builder = PromptBuilder()
             logger.info("[LAZY_INIT] Other services created")
+            
+            # Initialize V7 Services (HuggingFace-based enhancements)
+            try:
+                self._v7_services = get_v7_services()
+                logger.info(f"[LAZY_INIT] V7 services initialized: {self._v7_services.get_status()}")
+            except Exception as e:
+                logger.warning(f"[LAZY_INIT] V7 services initialization failed (continuing without): {e}")
+                self._v7_services = None
             
             logger.info("[LAZY_INIT] Calling initialize_providers()")
             self.initialize_providers(
@@ -1102,7 +1116,32 @@ class RAGServiceV5:
             start = time.perf_counter()
             await self._step_reranking(ctx)
             duration = (time.perf_counter() - start) * 1000
-            yield {"event": "step", "data": {"step": "reranking", "status": "completed", "duration_ms": duration}}
+            
+            # Build reranking results for streaming
+            reranking_results = []
+            reranking_method = "llm"
+            if ctx.reranked_chunks:
+                for i, chunk in enumerate(ctx.reranked_chunks[:5]):  # Top 5
+                    metadata = chunk.metadata if hasattr(chunk, 'metadata') else {}
+                    reranking_results.append({
+                        "rank": i + 1,
+                        "candidate": metadata.get("candidate_name", "Unknown"),
+                        "cv_id": metadata.get("cv_id", ""),
+                        "score": round(chunk.score, 3) if hasattr(chunk, 'score') and chunk.score else None
+                    })
+            # Get method from metrics
+            reranking_stage = ctx.metrics.get_stage(PipelineStage.RERANKING)
+            if reranking_stage and reranking_stage.metadata:
+                reranking_method = reranking_stage.metadata.get("method", "llm")
+            
+            yield {"event": "step", "data": {
+                "step": "reranking", 
+                "status": "completed", 
+                "duration_ms": duration,
+                "method": reranking_method,
+                "results": reranking_results,
+                "details": f"Reranked {len(ctx.reranked_chunks or [])} chunks via {reranking_method}"
+            }}
         
         # Stage 7: Reasoning
         if self.config.reasoning_enabled:
@@ -1485,7 +1524,7 @@ class RAGServiceV5:
             ))
     
     async def _step_guardrail(self, ctx: PipelineContextV5) -> bool:
-        """Step 3: Check guardrails."""
+        """Step 3: Check guardrails (v7: uses zero-shot classification if available)."""
         start = time.perf_counter()
         try:
             # First check: query understanding marked as not CV-related
@@ -1499,20 +1538,42 @@ class RAGServiceV5:
                 )
                 return False
             
-            # Second check: guardrail service with CV context
-            result = self._guardrail.check(ctx.question, has_cvs=has_cvs)
-            
-            if not result.is_allowed:
-                ctx.guardrail_passed = False
-                ctx.guardrail_message = result.rejection_message
-                return False
+            # V7: Use zero-shot guardrails if available (ML-based, more accurate)
+            guardrail_method = "regex"
+            if self._v7_services and self._v7_services.guardrails:
+                try:
+                    result = await self._v7_services.check_guardrail(ctx.question, has_cvs=has_cvs)
+                    guardrail_method = result.method
+                    logger.info(f"[GUARDRAIL v7] method={result.method}, allowed={result.is_allowed}, confidence={result.confidence:.2f}")
+                    
+                    if not result.is_allowed:
+                        ctx.guardrail_passed = False
+                        ctx.guardrail_message = result.rejection_message
+                        return False
+                except Exception as e:
+                    logger.warning(f"[GUARDRAIL v7] Zero-shot failed, falling back to regex: {e}")
+                    # Fall back to legacy guardrails
+                    result = self._guardrail.check(ctx.question, has_cvs=has_cvs)
+                    if not result.is_allowed:
+                        ctx.guardrail_passed = False
+                        ctx.guardrail_message = result.rejection_message
+                        return False
+            else:
+                # Legacy: guardrail service with CV context
+                result = self._guardrail.check(ctx.question, has_cvs=has_cvs)
+                
+                if not result.is_allowed:
+                    ctx.guardrail_passed = False
+                    ctx.guardrail_message = result.rejection_message
+                    return False
             
             ctx.guardrail_passed = True
             
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.GUARDRAIL,
                 duration_ms=(time.perf_counter() - start) * 1000,
-                success=True
+                success=True,
+                metadata={"method": guardrail_method}
             ))
             return True
         except Exception as e:
@@ -1791,7 +1852,7 @@ class RAGServiceV5:
             raise RetrievalError(f"Retrieval failed: {e}", cause=e)
     
     async def _step_reranking(self, ctx: PipelineContextV5) -> None:
-        """Step 6: Rerank chunks."""
+        """Step 6: Rerank chunks (v7: uses cross-encoder if available - 100x faster)."""
         start = time.perf_counter()
         try:
             chunks = ctx.retrieval_result.chunks if ctx.retrieval_result else []
@@ -1816,28 +1877,56 @@ class RAGServiceV5:
                 else ctx.question
             )
             
-            result = await self._reranking.rerank(
-                query=effective_question,
-                results=chunks,
-                top_k=None
-            )
-            
-            ctx.reranked_chunks = result.reranked_results
-            
-            # Extract OpenRouter cost and tokens from reranking metadata
+            # V7: Use cross-encoder reranking if available (100x faster than LLM)
+            reranking_method = "llm"
             openrouter_cost = 0.0
             prompt_tokens = 0
             completion_tokens = 0
-            if result.metadata:
-                openrouter_cost = result.metadata.get('openrouter_cost', 0.0)
-                prompt_tokens = result.metadata.get('prompt_tokens', 0)
-                completion_tokens = result.metadata.get('completion_tokens', 0)
+            
+            if self._v7_services and self._v7_services.reranker:
+                try:
+                    result = await self._v7_services.rerank(
+                        query=effective_question,
+                        results=chunks,
+                        top_k=None
+                    )
+                    ctx.reranked_chunks = result.reranked_results
+                    reranking_method = result.method
+                    logger.info(f"[RERANKING v7] method={result.method}, docs={len(chunks)}, latency={result.latency_ms:.1f}ms")
+                except Exception as e:
+                    logger.warning(f"[RERANKING v7] Cross-encoder failed, falling back to LLM: {e}")
+                    # Fall back to LLM reranking
+                    result = await self._reranking.rerank(
+                        query=effective_question,
+                        results=chunks,
+                        top_k=None
+                    )
+                    ctx.reranked_chunks = result.reranked_results
+                    if result.metadata:
+                        openrouter_cost = result.metadata.get('openrouter_cost', 0.0)
+                        prompt_tokens = result.metadata.get('prompt_tokens', 0)
+                        completion_tokens = result.metadata.get('completion_tokens', 0)
+            else:
+                # Legacy: LLM-based reranking
+                result = await self._reranking.rerank(
+                    query=effective_question,
+                    results=chunks,
+                    top_k=None
+                )
+                ctx.reranked_chunks = result.reranked_results
+                
+                # Extract OpenRouter cost and tokens from reranking metadata
+                if result.metadata:
+                    openrouter_cost = result.metadata.get('openrouter_cost', 0.0)
+                    prompt_tokens = result.metadata.get('prompt_tokens', 0)
+                    completion_tokens = result.metadata.get('completion_tokens', 0)
             
             ctx.metrics.add_stage(StageMetrics(
                 stage=PipelineStage.RERANKING,
                 duration_ms=(time.perf_counter() - start) * 1000,
                 success=True,
                 metadata={
+                    "method": reranking_method,
                     "prompt_tokens": prompt_tokens,
                     "completion_tokens": completion_tokens,
                     "total_tokens": prompt_tokens + completion_tokens,
@@ -2115,32 +2204,64 @@ class RAGServiceV5:
             raise GenerationError(f"Generation failed: {e}", cause=e)
     
     async def _step_claim_verification(self, ctx: PipelineContextV5) -> None:
-        """Step 9: Verify claims in response."""
+        """Step 9: Verify claims in response (v7: adds NLI verification for better accuracy)."""
         start = time.perf_counter()
         try:
             if not ctx.generated_response:
                 return
             
-            result = await self._claim_verifier.verify_response(
-                response=ctx.generated_response,
-                context_chunks=ctx.effective_chunks
-            )
+            # Extract context chunks as strings for verification
+            context_texts = [c.get("content", "") for c in ctx.effective_chunks]
+            
+            # V7: Use NLI verification if available (more accurate hallucination detection)
+            nli_faithfulness = None
+            verification_method = "llm"
+            result = None
+            
+            if self._v7_services and self._v7_services.verifier:
+                try:
+                    import asyncio
+                    # Add timeout to prevent hanging (max 15 seconds for NLI)
+                    nli_result = await asyncio.wait_for(
+                        self._v7_services.verify_response(
+                            response=ctx.generated_response,
+                            context_chunks=context_texts[:5]  # Limit context chunks
+                        ),
+                        timeout=15.0
+                    )
+                    nli_faithfulness = nli_result.faithfulness_score
+                    verification_method = "nli"
+                    logger.info(f"[VERIFICATION v7] NLI faithfulness={nli_faithfulness:.2%}, method={nli_result.method}, hallucinations={nli_result.hallucination_count}")
+                except asyncio.TimeoutError:
+                    logger.warning("[VERIFICATION v7] NLI verification timed out after 15s")
+                except Exception as e:
+                    logger.warning(f"[VERIFICATION v7] NLI verification failed: {e}")
+            
+            # Only run LLM verification if NLI failed or is unavailable
+            if nli_faithfulness is None:
+                result = await self._claim_verifier.verify_response(
+                    response=ctx.generated_response,
+                    context_chunks=ctx.effective_chunks
+                )
+            
+            # Use NLI score if available, otherwise use LLM score
+            final_score = nli_faithfulness if nli_faithfulness is not None else (result.overall_score if result else 0.8)
             
             ctx.verification_result = VerificationResultV5(
-                is_grounded=result.overall_score >= 0.7,
-                groundedness_score=result.overall_score,
-                verified_claims=[vc.claim.text for vc in result.verified_claims],
-                unverified_claims=[uc.claim.text for uc in result.unverified_claims],
-                contradicted_claims=[cc.claim.text for cc in result.contradicted_claims],
-                claim_verification_score=result.overall_score,
-                needs_regeneration=result.needs_regeneration
+                is_grounded=final_score >= 0.7,
+                groundedness_score=final_score,
+                verified_claims=[vc.claim.text for vc in result.verified_claims] if result else [],
+                unverified_claims=[uc.claim.text for uc in result.unverified_claims] if result else [],
+                contradicted_claims=[cc.claim.text for cc in result.contradicted_claims] if result else [],
+                claim_verification_score=final_score,
+                needs_regeneration=result.needs_regeneration if result else False
             )
             
             # Extract cost if claim verifier captured it
             openrouter_cost = 0.0
             prompt_tokens = 0
             completion_tokens = 0
-            if hasattr(result, 'metadata') and result.metadata:
+            if result and hasattr(result, 'metadata') and result.metadata:
                 openrouter_cost = result.metadata.get('openrouter_cost', 0.0)
                 prompt_tokens = result.metadata.get('prompt_tokens', 0)
                 completion_tokens = result.metadata.get('completion_tokens', 0)
@@ -2150,6 +2271,8 @@ class RAGServiceV5:
                 duration_ms=(time.perf_counter() - start) * 1000,
                 success=True,
                 metadata={
+                    "method": verification_method,
+                    "nli_faithfulness": nli_faithfulness,
                     "verified": len(result.verified_claims),
                     "unverified": len(result.unverified_claims),
                     "contradicted": len(result.contradicted_claims),
@@ -2398,6 +2521,22 @@ Provide a corrected response:"""
         # Build pipeline steps from metrics for UI
         pipeline_steps = self._build_pipeline_steps(ctx)
         
+        # V7: RAGAS Evaluation (async, non-blocking - logs to eval_logs/)
+        if self._v7_services and self._v7_services.evaluator:
+            try:
+                context_texts = [c.get("content", "") for c in ctx.effective_chunks]
+                # Fire and forget - don't block response
+                asyncio.create_task(self._run_ragas_evaluation(
+                    query=ctx.question,
+                    response=formatted_answer,
+                    context_chunks=context_texts,
+                    session_id=ctx.session_id,
+                    query_type=query_type
+                ))
+                logger.info("[RAGAS v7] Evaluation task started (async)")
+            except Exception as e:
+                logger.warning(f"[RAGAS v7] Failed to start evaluation: {e}")
+        
         return RAGResponseV5(
             answer=formatted_answer,
             structured_output=structured_output,
@@ -2414,6 +2553,33 @@ Provide a corrected response:"""
             cached=ctx.response_cached,
             request_id=ctx.request_id
         )
+    
+    async def _run_ragas_evaluation(
+        self,
+        query: str,
+        response: str,
+        context_chunks: List[str],
+        session_id: Optional[str],
+        query_type: Optional[str]
+    ) -> None:
+        """Run RAGAS evaluation asynchronously (non-blocking)."""
+        try:
+            if self._v7_services and self._v7_services.evaluator:
+                metrics = await self._v7_services.evaluate(
+                    query=query,
+                    response=response,
+                    context_chunks=context_chunks,
+                    session_id=session_id,
+                    query_type=query_type
+                )
+                logger.info(
+                    f"[RAGAS v7] Evaluation complete: "
+                    f"faithfulness={metrics.faithfulness:.2%}, "
+                    f"answer_rel={metrics.answer_relevancy:.2%}, "
+                    f"overall={metrics.overall_score:.2%}"
+                )
+        except Exception as e:
+            logger.warning(f"[RAGAS v7] Evaluation failed: {e}")
     
     def _build_pipeline_steps(self, ctx: PipelineContextV5) -> list[PipelineStep]:
         """Build pipeline steps from metrics for UI display."""

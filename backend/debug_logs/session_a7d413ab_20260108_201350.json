@@ -1,0 +1,2032 @@
+{
+  "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd",
+  "generated_at": "2026-01-08T20:13:50.362954",
+  "events": [
+    {
+      "timestamp": "2026-01-08T20:06:15.017893",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:15.017893",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_677c268f",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Mateo Alvarez  Lab",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Mateo Alvarez  Lab =====\n\nCURRENT POSITION: 2007\nCURRENT COMPANY: 2012 | U"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Mateo Alvarez  Lab",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3 === CURRENT POSITION ===\n\nTITLE: 2007\nCOMPANY: 2012 | University of Buenos Aires"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Mateo Alvarez  Lab",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3\n\nTITLE: 2003\nCOMPANY: 2007 | National Institute of Health\nPERIOD: 2003 - 2007\nDU"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Mateo Alvarez  Lab",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3\n\nTITLE: detail‑oriented precision\nCOMPANY: patient methodology,\nPERIOD: Unknown "
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": " Mateo Alvarez  Lab",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Mateo Alvarez  Lab\n\nCURRENT ROLE: 2007\nCOMPANY: 2012 | University of Buenos Aires\nT"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:16.288912",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:16.288912",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_5ba122d3",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Erik Andersson  Research",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Erik Andersson  Research =====\n\nCURRENT POSITION: various research techniq"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Erik Andersson  Research",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: various research techniques.\nCOMPANY: \nPERIOD:"
+          },
+          {
+            "index": 2,
+            "section_type": "skills",
+            "candidate_name": " Erik Andersson  Research",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Erik Andersson  Research:\n\nin [Specific Field]., S K I L L S C E R T I "
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Erik Andersson  Research",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Erik Andersson  Research\n\nCURRENT ROLE: various research techniques.\nCOMPANY: \nTOT"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:17.123444",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:17.123444",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_c5b9e36e",
+        "total_chunks": 7,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Sofia Ramirez ",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 9.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Sofia Ramirez  =====\n\nCURRENT POSITION: E X P E R I E N C E\nCURRENT COMPAN"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Sofia Ramirez ",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 9.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 5 === CURRENT POSITION ===\n\nTITLE: E X P E R I E N C E\nCOMPANY: Postdoctoral Resea"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Sofia Ramirez ",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 9.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 5 === CURRENT POSITION ===\n\nTITLE: sofia.ramirez.research@edu.es\nCOMPANY: UAM - De"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Sofia Ramirez ",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 9.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 5\n\nTITLE: Computing screening by automating standard RNA\nCOMPANY: Seq\nPERIOD: 2017"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Sofia Ramirez ",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 9.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 5\n\nTITLE: Madrid\nCOMPANY: Spain\nPERIOD: Unknown dates\nDURATION: 0 years\n\nJOB DESCR"
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Sofia Ramirez ",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 9.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 5 of 5\n\nTITLE: Pandas\nCOMPANY: SciPy) Office)\nPERIOD: Unknown dates\nDURATION: 0 years\n\n"
+          },
+          {
+            "index": 6,
+            "section_type": "full_cv",
+            "candidate_name": " Sofia Ramirez ",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 9.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Sofia Ramirez \n\nCURRENT ROLE: E X P E R I E N C E\nCOMPANY: Postdoctoral Research Fe"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:17.937576",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:17.937576",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_d32840f8",
+        "total_chunks": 7,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Priya Naidoo  Research",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 8.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Priya Naidoo  Research =====\n\nCURRENT POSITION: E X P E R I E N C E\nCURREN"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Priya Naidoo  Research",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 8.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 5 === CURRENT POSITION ===\n\nTITLE: E X P E R I E N C E\nCOMPANY: Research Assistant"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Priya Naidoo  Research",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 8.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 5\n\nTITLE: 2020\nCOMPANY: 2022 | Biotech Solutions Ltd\nPERIOD: 2020 - 2022\nDURATION:"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Priya Naidoo  Research",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 8.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 5\n\nTITLE: 2018\nCOMPANY: 2020 | National Institute for Biotechnology\nPERIOD: 2018 -"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Priya Naidoo  Research",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 8.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 5\n\nTITLE: University of KwaZulu\nCOMPANY: Natal\nPERIOD: 2018 - 2023\nDURATION: 5 yea"
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Priya Naidoo  Research",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 8.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 5 of 5\n\nTITLE: Durban\nCOMPANY: South Africa\nPERIOD: Unknown dates\nDURATION: 0 years\n\nJO"
+          },
+          {
+            "index": 6,
+            "section_type": "full_cv",
+            "candidate_name": " Priya Naidoo  Research",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 8.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Priya Naidoo  Research\n\nCURRENT ROLE: E X P E R I E N C E\nCOMPANY: Research Assista"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:18.758117",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:18.758117",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_dc57a16b",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Gabriel Dubois  Research",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 4.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Gabriel Dubois  Research =====\n\nCURRENT POSITION: Rotational placement foc"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Gabriel Dubois  Research",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 4.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: Rotational placement focused on basic\nCOMPANY: "
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": " Gabriel Dubois  Research",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 4.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Gabriel Dubois  Research\n\nCURRENT ROLE: Rotational placement focused on basic\nCOMPA"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:19.639543",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:19.639543",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_e0919b10",
+        "total_chunks": 10,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Lena Schmidt ",
+            "job_hopping_score": 0.24,
+            "avg_tenure_years": 3.5714285714285716,
+            "total_experience_years": 11.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Lena Schmidt  =====\n\nCURRENT POSITION: E X P E R I E N C E\nCURRENT COMPANY"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Lena Schmidt ",
+            "job_hopping_score": 0.24,
+            "avg_tenure_years": 3.5714285714285716,
+            "total_experience_years": 11.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 7 === CURRENT POSITION ===\n\nTITLE: E X P E R I E N C E\nCOMPANY: Postdoctoral Resea"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Lena Schmidt ",
+            "job_hopping_score": 0.24,
+            "avg_tenure_years": 3.5714285714285716,
+            "total_experience_years": 11.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 7 === CURRENT POSITION ===\n\nTITLE: 2017\nCOMPANY: 2021 | Heidelberg University, Dep"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Lena Schmidt ",
+            "job_hopping_score": 0.24,
+            "avg_tenure_years": 3.5714285714285716,
+            "total_experience_years": 11.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 7\n\nTITLE: Single-Cell RNA- Summer 2016\nCOMPANY: Roche Diagnostics R&D\nPERIOD: 2016"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Lena Schmidt ",
+            "job_hopping_score": 0.24,
+            "avg_tenure_years": 3.5714285714285716,
+            "total_experience_years": 11.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 7\n\nTITLE: Next\nCOMPANY: Generation\nPERIOD: 2015 - 2021\nDURATION: 6 years\n\nJOB DESC"
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Lena Schmidt ",
+            "job_hopping_score": 0.24,
+            "avg_tenure_years": 3.5714285714285716,
+            "total_experience_years": 11.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 5 of 7\n\nTITLE: Institute for Molecular Genetics\nCOMPANY: Berlin\nPERIOD: Unknown dates\nD"
+          },
+          {
+            "index": 6,
+            "section_type": "experience",
+            "candidate_name": " Lena Schmidt ",
+            "job_hopping_score": 0.24,
+            "avg_tenure_years": 3.5714285714285716,
+            "total_experience_years": 11.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 6 of 7\n\nTITLE: Munich\nCOMPANY: Germany\nPERIOD: Unknown dates\nDURATION: 0 years\n\nJOB DES"
+          },
+          {
+            "index": 7,
+            "section_type": "experience",
+            "candidate_name": " Lena Schmidt ",
+            "job_hopping_score": 0.24,
+            "avg_tenure_years": 3.5714285714285716,
+            "total_experience_years": 11.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 7 of 7\n\nTITLE: NumPy\nCOMPANY: Scanpy) by automating preliminary data\nPERIOD: Unknown da"
+          },
+          {
+            "index": 8,
+            "section_type": "skills",
+            "candidate_name": " Lena Schmidt ",
+            "job_hopping_score": 0.24,
+            "avg_tenure_years": 3.5714285714285716,
+            "total_experience_years": 11.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Lena Schmidt :\n\nand technical proficiency in a new, multidisciplinary g"
+          },
+          {
+            "index": 9,
+            "section_type": "full_cv",
+            "candidate_name": " Lena Schmidt ",
+            "job_hopping_score": 0.24,
+            "avg_tenure_years": 3.5714285714285716,
+            "total_experience_years": 11.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Lena Schmidt \n\nCURRENT ROLE: E X P E R I E N C E\nCOMPANY: Postdoctoral Research Fel"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:20.437459",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:20.437459",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_d54be372",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Ji-Yeon Kim ",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Ji-Yeon Kim  =====\n\nCURRENT POSITION: driving data‑driven insights across "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Ji-Yeon Kim ",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: driving data‑driven insights across academia st"
+          },
+          {
+            "index": 2,
+            "section_type": "skills",
+            "candidate_name": " Ji-Yeon Kim ",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Ji-Yeon Kim :\n\nwith, innovative solution frameworks to advance, researc"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Ji-Yeon Kim ",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Ji-Yeon Kim \n\nCURRENT ROLE: driving data‑driven insights across academia statistica"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:21.278888",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:21.278888",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_0c7b5fd0",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Layla Al-Mansoor  Lab",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Layla Al-Mansoor  Lab =====\n\nCURRENT POSITION: 2010\nCURRENT COMPANY: 2013 "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansoor  Lab",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2 === CURRENT POSITION ===\n\nTITLE: 2010\nCOMPANY: 2013 | University Hospital Heidel"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansoor  Lab",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2\n\nTITLE: assay development and analytical maintaining high accuracy under tight\nC"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Layla Al-Mansoor  Lab",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Layla Al-Mansoor  Lab\n\nCURRENT ROLE: 2010\nCOMPANY: 2013 | University Hospital Heide"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:22.102968",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:22.102968",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_4189a45d",
+        "total_chunks": 6,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Priya Patel  Research Associate",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Priya Patel  Research Associate =====\n\nCURRENT POSITION: E X P E R I E N C"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Priya Patel  Research Associate",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 4 === CURRENT POSITION ===\n\nTITLE: E X P E R I E N C E\nCOMPANY: Research Associate"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Priya Patel  Research Associate",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 4\n\nTITLE: 2019\nCOMPANY: 2023 | MIT\nPERIOD: 2019 - 2023\nDURATION: 4 years\n\nJOB DESC"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Priya Patel  Research Associate",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 4 === CURRENT POSITION ===\n\nTITLE: 2017\nCOMPANY: 2019 | Lawrence Berkeley National"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Priya Patel  Research Associate",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 4\n\nTITLE: NumPy\nCOMPANY: Pandas)\nPERIOD: 2017 - 2024\nDURATION: 7 years\n\nJOB DESCRI"
+          },
+          {
+            "index": 5,
+            "section_type": "full_cv",
+            "candidate_name": " Priya Patel  Research Associate",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Priya Patel  Research Associate\n\nCURRENT ROLE: E X P E R I E N C E\nCOMPANY: Researc"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:23.013099",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:23.013099",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_a2a539a5",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Matteo Rossi  UX",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Matteo Rossi  UX =====\n\nCURRENT POSITION: research projects for diverse mi"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Matteo Rossi  UX",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: research projects for diverse mid\nCOMPANY: size"
+          },
+          {
+            "index": 2,
+            "section_type": "skills",
+            "candidate_name": " Matteo Rossi  UX",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Matteo Rossi  UX:\n\nin data collection and, impact, actionable design na"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Matteo Rossi  UX",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Matteo Rossi  UX\n\nCURRENT ROLE: research projects for diverse mid\nCOMPANY: sized cl"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:23.816338",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:23.816338",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_f00cf05a",
+        "total_chunks": 7,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Gabriela Martinez  Research",
+            "job_hopping_score": 0.4444444444444444,
+            "avg_tenure_years": 1.8,
+            "total_experience_years": 9.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Gabriela Martinez  Research =====\n\nCURRENT POSITION: E X P E R I E N C E\nC"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Gabriela Martinez  Research",
+            "job_hopping_score": 0.4444444444444444,
+            "avg_tenure_years": 1.8,
+            "total_experience_years": 9.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 5 === CURRENT POSITION ===\n\nTITLE: E X P E R I E N C E\nCOMPANY: Research Associate"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Gabriela Martinez  Research",
+            "job_hopping_score": 0.4444444444444444,
+            "avg_tenure_years": 1.8,
+            "total_experience_years": 9.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 5\n\nTITLE: 2021\nCOMPANY: 2023 | Canadian Public Health Agency\nPERIOD: 2021 - 2023\nD"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Gabriela Martinez  Research",
+            "job_hopping_score": 0.4444444444444444,
+            "avg_tenure_years": 1.8,
+            "total_experience_years": 9.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 5 === CURRENT POSITION ===\n\nTITLE: | University of Toronto\nCOMPANY: Department of\n"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Gabriela Martinez  Research",
+            "job_hopping_score": 0.4444444444444444,
+            "avg_tenure_years": 1.8,
+            "total_experience_years": 9.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 5\n\nTITLE: 2017\nCOMPANY: 2019 | World Health Organization (WHO) –\nPERIOD: 2017 - 20"
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Gabriela Martinez  Research",
+            "job_hopping_score": 0.4444444444444444,
+            "avg_tenure_years": 1.8,
+            "total_experience_years": 9.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 5 of 5\n\nTITLE: Toronto\nCOMPANY: Canada\nPERIOD: Unknown dates\nDURATION: 0 years\n\nJOB DES"
+          },
+          {
+            "index": 6,
+            "section_type": "full_cv",
+            "candidate_name": " Gabriela Martinez  Research",
+            "job_hopping_score": 0.4444444444444444,
+            "avg_tenure_years": 1.8,
+            "total_experience_years": 9.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Gabriela Martinez  Research\n\nCURRENT ROLE: E X P E R I E N C E\nCOMPANY: Research As"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:24.722629",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:24.722629",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_72c8d071",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Khalid Al-Mansoori  Research",
+            "job_hopping_score": 0.05555555555555555,
+            "avg_tenure_years": 12.0,
+            "total_experience_years": 31.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Khalid Al-Mansoori  Research =====\n\nCURRENT POSITION: enzyme kinetics and "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Khalid Al-Mansoori  Research",
+            "job_hopping_score": 0.05555555555555555,
+            "avg_tenure_years": 12.0,
+            "total_experience_years": 31.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3\n\nTITLE: 10/10\nCOMPANY: UAE Institute of Technology\nPERIOD: 2002 - 2007\nDURATION:"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Khalid Al-Mansoori  Research",
+            "job_hopping_score": 0.05555555555555555,
+            "avg_tenure_years": 12.0,
+            "total_experience_years": 31.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3\n\nTITLE: Doctoral Fellowship\nCOMPANY: Cum Laude\nPERIOD: 1990 - 2021\nDURATION: 31 "
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Khalid Al-Mansoori  Research",
+            "job_hopping_score": 0.05555555555555555,
+            "avg_tenure_years": 12.0,
+            "total_experience_years": 31.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3 === CURRENT POSITION ===\n\nTITLE: enzyme kinetics and metabolic pathways.\nCOMPANY"
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": " Khalid Al-Mansoori  Research",
+            "job_hopping_score": 0.05555555555555555,
+            "avg_tenure_years": 12.0,
+            "total_experience_years": 31.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Khalid Al-Mansoori  Research\n\nCURRENT ROLE: enzyme kinetics and metabolic pathways."
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:25.518520",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:25.518520",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_dd8cff83",
+        "total_chunks": 8,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Ji-Yeon Kim  Research Associate",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 8.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Ji-Yeon Kim  Research Associate =====\n\nCURRENT POSITION: E X P E R I E N C"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Ji-Yeon Kim  Research Associate",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 8.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 6\n\nTITLE: Python Magna Cum Laude\nCOMPANY: Thesis on Deep Learning in Genomics\nPERI"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Ji-Yeon Kim  Research Associate",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 8.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 6 === CURRENT POSITION ===\n\nTITLE: E X P E R I E N C E\nCOMPANY: Research Associate"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Ji-Yeon Kim  Research Associate",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 8.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 6\n\nTITLE: AWS Certified Data Analytics\nCOMPANY: Specialty\nPERIOD: 2022 - ?\nDURATIO"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Ji-Yeon Kim  Research Associate",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 8.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 6\n\nTITLE: Ji-Yeon Kim\nCOMPANY: Korea Institute of Science and\nPERIOD: 2020 - 2022\n"
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Ji-Yeon Kim  Research Associate",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 8.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 5 of 6 === CURRENT POSITION ===\n\nTITLE: 2018\nCOMPANY: 2020 | Biomedical Research Center"
+          },
+          {
+            "index": 6,
+            "section_type": "experience",
+            "candidate_name": " Ji-Yeon Kim  Research Associate",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 8.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 6 of 6 === CURRENT POSITION ===\n\nTITLE: Seoul\nCOMPANY: South Korea\nPERIOD: Unknown date"
+          },
+          {
+            "index": 7,
+            "section_type": "full_cv",
+            "candidate_name": " Ji-Yeon Kim  Research Associate",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 8.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Ji-Yeon Kim  Research Associate\n\nCURRENT ROLE: E X P E R I E N C E\nCOMPANY: Researc"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:37.809781",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:37.809781",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Rank candidates by experience",
+        "cv_ids": [
+          "cv_677c268f",
+          "cv_5ba122d3",
+          "cv_c5b9e36e",
+          "cv_d32840f8",
+          "cv_dc57a16b",
+          "cv_e0919b10",
+          "cv_d54be372",
+          "cv_0c7b5fd0",
+          "cv_4189a45d",
+          "cv_a2a539a5",
+          "cv_f00cf05a",
+          "cv_72c8d071",
+          "cv_dd8cff83"
+        ],
+        "cv_count": 13
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:06:51.057932",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 13,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_c5b9e36e",
+            "candidate_name": " Sofia Ramirez ",
+            "section_type": "experience",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 9.0,
+            "score": 0.5129904736602999,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_d54be372",
+            "candidate_name": " Ji-Yeon Kim ",
+            "section_type": "skills",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.4966132918598809,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_dd8cff83",
+            "candidate_name": " Ji-Yeon Kim  Research Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 8.0,
+            "score": 0.49329462180627087,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_72c8d071",
+            "candidate_name": " Khalid Al-Mansoori  Research",
+            "section_type": "experience",
+            "job_hopping_score": 0.05555555555555555,
+            "avg_tenure_years": 12.0,
+            "total_experience_years": 31.0,
+            "score": 0.4791677433403556,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_5ba122d3",
+            "candidate_name": " Erik Andersson  Research",
+            "section_type": "experience",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.4776155423424132,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_e0919b10",
+            "candidate_name": " Lena Schmidt ",
+            "section_type": "experience",
+            "job_hopping_score": 0.24,
+            "avg_tenure_years": 3.5714285714285716,
+            "total_experience_years": 11.0,
+            "score": 0.4650775046749086,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_dc57a16b",
+            "candidate_name": " Gabriel Dubois  Research",
+            "section_type": "experience",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 4.0,
+            "score": 0.46444608740910226,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_a2a539a5",
+            "candidate_name": " Matteo Rossi  UX",
+            "section_type": "skills",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.4588508730272376,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_0c7b5fd0",
+            "candidate_name": " Layla Al-Mansoor  Lab",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.44593374130231367,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_677c268f",
+            "candidate_name": " Mateo Alvarez  Lab",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "score": 0.4427742832737611,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "location",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:07:13.508795",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "explicit_multi_candidate_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:07:52.869040",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "ranking",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "explicit_multi_candidate_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:07:52.994877",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1286,
+        "answer_preview": ":::thinking\n- The user wants candidates ranked by experience.\n- Experience is indicated by the duration of the job positions.\n- I will extract the duration from the \"experience\" sections of each CV.\n- I will then rank the candidates based on the longest duration.\n- I will only include skills if they are explicitly mentioned in the CV.\n- I will use the exact candidate names and cv_ids.\n:::\n\nTop Recommendation: [📄](cv:cv_e0919b10) ** Lena Schmidt ** (94%)\n\n Lena Schmidt  emerges as the top choice ...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:08:16.374414",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:08:16.374414",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Give me the full profile of the #1 candidate",
+        "cv_ids": [
+          "cv_677c268f",
+          "cv_5ba122d3",
+          "cv_c5b9e36e",
+          "cv_d32840f8",
+          "cv_dc57a16b",
+          "cv_e0919b10",
+          "cv_d54be372",
+          "cv_0c7b5fd0",
+          "cv_4189a45d",
+          "cv_a2a539a5",
+          "cv_f00cf05a",
+          "cv_72c8d071",
+          "cv_dd8cff83"
+        ],
+        "cv_count": 13
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:08:31.424262",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 28,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_c5b9e36e",
+            "candidate_name": " Sofia Ramirez ",
+            "section_type": "experience",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 9.0,
+            "score": 0.5948524277905485,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_a2a539a5",
+            "candidate_name": " Matteo Rossi  UX",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.6022670760104808,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_72c8d071",
+            "candidate_name": " Khalid Al-Mansoori  Research",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.05555555555555555,
+            "avg_tenure_years": 12.0,
+            "total_experience_years": 31.0,
+            "score": 0.589281978438162,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_5ba122d3",
+            "candidate_name": " Erik Andersson  Research",
+            "section_type": "experience",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5539672283311471,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_f00cf05a",
+            "candidate_name": " Gabriela Martinez  Research",
+            "section_type": "experience",
+            "job_hopping_score": 0.4444444444444444,
+            "avg_tenure_years": 1.8,
+            "total_experience_years": 9.0,
+            "score": 0.5744083441793251,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_677c268f",
+            "candidate_name": " Mateo Alvarez  Lab",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "score": 0.5517047667171199,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_d32840f8",
+            "candidate_name": " Priya Naidoo  Research",
+            "section_type": "experience",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 8.0,
+            "score": 0.5645865062408365,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_dc57a16b",
+            "candidate_name": " Gabriel Dubois  Research",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 4.0,
+            "score": 0.5627119877667196,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_0c7b5fd0",
+            "candidate_name": " Layla Al-Mansoor  Lab",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.5625483624071236,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_4189a45d",
+            "candidate_name": " Priya Patel  Research Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 9.0,
+            "score": 0.5375957443930789,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "location",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:08:55.904142",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "SINGLE_CANDIDATE_TEMPLATE",
+        "candidate_name": "Lena Schmidt",
+        "detection_method": "context_resolver"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:09:21.843454",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "single_candidate",
+        "candidate_name": "Lena Schmidt",
+        "detection_source": "single_candidate_detection",
+        "detection_method": "context_resolver"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:09:21.962659",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 662,
+        "answer_preview": ":::thinking\n- The user wants the full profile of the #1 candidate.\n- I need to identify the top candidate based on the provided CVs.\n- The CVs are for: Matteo Rossi UX (cv_a2a539a5), Khalid Al-Mansoori Research (cv_72c8d071), and Erik Andersson Research (cv_5ba122d3).\n- The question does not specify the criteria for ranking. I will assume the order in which the CVs are provided is the order of preference.\n- Therefore, the #1 candidate is Matteo Rossi UX (cv_a2a539a5).\n- I will extract the full p...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:11:55.133052",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:11:55.133052",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Does this candidate have significant employment gaps?",
+        "cv_ids": [
+          "cv_677c268f",
+          "cv_5ba122d3",
+          "cv_c5b9e36e",
+          "cv_d32840f8",
+          "cv_dc57a16b",
+          "cv_e0919b10",
+          "cv_d54be372",
+          "cv_0c7b5fd0",
+          "cv_4189a45d",
+          "cv_a2a539a5",
+          "cv_f00cf05a",
+          "cv_72c8d071",
+          "cv_dd8cff83"
+        ],
+        "cv_count": 13
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:12:10.006745",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 13,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_e0919b10",
+            "candidate_name": " Lena Schmidt ",
+            "section_type": "experience",
+            "job_hopping_score": 0.24,
+            "avg_tenure_years": 3.5714285714285716,
+            "total_experience_years": 11.0,
+            "score": 0.536636337765262,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_c5b9e36e",
+            "candidate_name": " Sofia Ramirez ",
+            "section_type": "experience",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 9.0,
+            "score": 0.5325841963670866,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_4189a45d",
+            "candidate_name": " Priya Patel  Research Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 9.0,
+            "score": 0.520411702625668,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_d54be372",
+            "candidate_name": " Ji-Yeon Kim ",
+            "section_type": "skills",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5193624142119615,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_5ba122d3",
+            "candidate_name": " Erik Andersson  Research",
+            "section_type": "experience",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.506711136974531,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_f00cf05a",
+            "candidate_name": " Gabriela Martinez  Research",
+            "section_type": "experience",
+            "job_hopping_score": 0.4444444444444444,
+            "avg_tenure_years": 1.8,
+            "total_experience_years": 9.0,
+            "score": 0.5059535259589407,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_0c7b5fd0",
+            "candidate_name": " Layla Al-Mansoor  Lab",
+            "section_type": "experience",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.502626020757441,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_dd8cff83",
+            "candidate_name": " Ji-Yeon Kim  Research Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 8.0,
+            "score": 0.499424779356554,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_72c8d071",
+            "candidate_name": " Khalid Al-Mansoori  Research",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.05555555555555555,
+            "avg_tenure_years": 12.0,
+            "total_experience_years": 31.0,
+            "score": 0.49680962393027295,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_a2a539a5",
+            "candidate_name": " Matteo Rossi  UX",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.4939825914632074,
+            "has_enriched_metadata": false
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "location",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:12:27.734552",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "SINGLE_CANDIDATE_TEMPLATE",
+        "candidate_name": "Matteo Rossi  UX",
+        "detection_method": "context_resolver"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:12:34.895054",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "single_candidate",
+        "candidate_name": "Matteo Rossi  UX",
+        "detection_source": "single_candidate_detection",
+        "detection_method": "context_resolver"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:12:35.018074",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 455,
+        "answer_preview": ":::thinking\n- The user is asking about employment gaps.\n- I need to analyze the \"experience\" sections of each CV.\n- I will calculate the time between jobs to identify gaps.\n- I will present the findings in a table.\n:::\n\n\n:::conclusion\nThe candidates **[ Lena Schmidt ](cv:cv_e0919b10)** and **[ Sofia Ramirez ](cv:cv_c5b9e36e)** show potential employment gaps. The other candidates either have no gaps or the CV data is insufficient to determine gaps.\n:::",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:12:48.936472",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a7d413ab-ea93-4d54-bc35-b931948e59cd"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:12:48.936472",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Could Sofia Ramirez grow within the company?",
+        "cv_ids": [
+          "cv_677c268f",
+          "cv_5ba122d3",
+          "cv_c5b9e36e",
+          "cv_d32840f8",
+          "cv_dc57a16b",
+          "cv_e0919b10",
+          "cv_d54be372",
+          "cv_0c7b5fd0",
+          "cv_4189a45d",
+          "cv_a2a539a5",
+          "cv_f00cf05a",
+          "cv_72c8d071",
+          "cv_dd8cff83"
+        ],
+        "cv_count": 13
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:13:04.203102",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 13,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_e0919b10",
+            "candidate_name": " Lena Schmidt ",
+            "section_type": "skills",
+            "job_hopping_score": 0.24,
+            "avg_tenure_years": 3.5714285714285716,
+            "total_experience_years": 11.0,
+            "score": 0.5804355203241953,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_c5b9e36e",
+            "candidate_name": " Sofia Ramirez ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3076923076923077,
+            "avg_tenure_years": 2.6,
+            "total_experience_years": 9.0,
+            "score": 0.5732030845326697,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_a2a539a5",
+            "candidate_name": " Matteo Rossi  UX",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5658034987927104,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_5ba122d3",
+            "candidate_name": " Erik Andersson  Research",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5377207904453966,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_677c268f",
+            "candidate_name": " Mateo Alvarez  Lab",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "score": 0.5284324402612943,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_dc57a16b",
+            "candidate_name": " Gabriel Dubois  Research",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 4.0,
+            "score": 0.5281496793984488,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_72c8d071",
+            "candidate_name": " Khalid Al-Mansoori  Research",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.05555555555555555,
+            "avg_tenure_years": 12.0,
+            "total_experience_years": 31.0,
+            "score": 0.5236936956772014,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_0c7b5fd0",
+            "candidate_name": " Layla Al-Mansoor  Lab",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.5180298986032371,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_d54be372",
+            "candidate_name": " Ji-Yeon Kim ",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5167949408776134,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_f00cf05a",
+            "candidate_name": " Gabriela Martinez  Research",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.4444444444444444,
+            "avg_tenure_years": 1.8,
+            "total_experience_years": 9.0,
+            "score": 0.5123137159178767,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "skill_count",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:13:25.426717",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:13:50.234225",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "search",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:13:50.359954",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 576,
+        "answer_preview": ":::thinking\n- The user is asking if Sofia Ramirez can grow within the company.\n- The relevant section is the full CV of Sofia Ramirez.\n- I need to analyze her experience and skills to assess her potential for growth.\n- I will only use information explicitly stated in the CV.\n- I need to avoid making any unverified claims.\n- I need to provide a direct answer and a detailed analysis.\n:::\n\n\n:::conclusion\n**[ Sofia Ramirez ](cv:cv_c5b9e36e)** has a strong foundation for growth within a company due t...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

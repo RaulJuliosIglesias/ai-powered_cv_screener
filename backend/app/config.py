@@ -23,9 +23,9 @@ class Settings(BaseSettings):
     huggingface_api_key: Optional[str] = None
     
     # Model configuration
-    hf_nli_model: str = "microsoft/deberta-v3-base-mnli"
+    hf_nli_model: str = "facebook/bart-large-mnli"
     hf_reranker_model: str = "BAAI/bge-reranker-base"
-    hf_zeroshot_model: str = "MoritzLaurer/deberta-v3-base-zeroshot-v2.0"
+    hf_zeroshot_model: str = "facebook/bart-large-mnli"
     
     # Feature flags for v7 services
     use_hf_guardrails: bool = True  # Zero-shot guardrails

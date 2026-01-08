@@ -1,8 +1,10 @@
 # RAG v7 Implementation Plan
 
-> **Status**: ✅ IMPLEMENTED (Fase 1 + Fase 2)
+> **Status**: ✅ FULLY INTEGRATED (Fase 1 + Fase 2)
 > 
 > **Date**: January 2026
+> 
+> **Integration Status**: All v7 services are now integrated into the RAG pipeline
 
 ---
 
@@ -156,6 +158,8 @@ Result:     CONTRADICTION: 0.80 → HALLUCINATION ❌
 | `config.py` | Added HuggingFace settings and feature flags |
 | `.env.example` | Added HuggingFace configuration |
 | `requirements.txt` | Added huggingface-hub, ragas, datasets |
+| `rag_service_v5.py` | Integrated v7 services into pipeline |
+| `routes.py` | Added `/api/v7/status` and `/api/v7/metrics/ragas` endpoints |
 
 ---
 

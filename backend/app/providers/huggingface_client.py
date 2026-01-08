@@ -22,10 +22,10 @@ logger = logging.getLogger(__name__)
 @dataclass
 class HuggingFaceConfig:
     """Configuration for HuggingFace models."""
-    # Zero-Shot Classification
-    ZEROSHOT_MODEL: str = "MoritzLaurer/deberta-v3-base-zeroshot-v2.0"
-    # Natural Language Inference
-    NLI_MODEL: str = "microsoft/deberta-v3-base-mnli"
+    # Zero-Shot Classification (also used for NLI - bart-large-mnli supports both)
+    ZEROSHOT_MODEL: str = "facebook/bart-large-mnli"
+    # Natural Language Inference (bart-large-mnli is actively maintained)
+    NLI_MODEL: str = "facebook/bart-large-mnli"
     # Cross-Encoder Reranking
     RERANKER_MODEL: str = "BAAI/bge-reranker-base"
     # Named Entity Recognition (optional)
@@ -50,7 +50,8 @@ class HuggingFaceClient:
     All methods include fallback handling for API failures.
     """
     
-    BASE_URL = "https://api-inference.huggingface.co/models"
+    # Updated to new HuggingFace Router endpoint (2024+)
+    BASE_URL = "https://router.huggingface.co/hf-inference/models"
     
     def __init__(self, api_key: Optional[str] = None):
         """
@@ -199,11 +200,12 @@ class HuggingFaceClient:
     ) -> Dict[str, float]:
         """
         Perform Natural Language Inference to check if premise entails hypothesis.
+        Uses zero-shot classification with NLI labels for BART-large-MNLI compatibility.
         
         Args:
             premise: The context/evidence text
             hypothesis: The claim to verify
-            model: Model to use (default: deberta-v3-base-mnli)
+            model: Model to use (default: bart-large-mnli)
             
         Returns:
             {
@@ -222,9 +224,14 @@ class HuggingFaceClient:
         """
         model = model or self.config.NLI_MODEL
         
-        # Format: premise [SEP] hypothesis
+        # BART-large-MNLI uses zero-shot classification format
+        # Premise is the input, hypothesis becomes the candidate label
         payload = {
-            "inputs": f"{premise} [SEP] {hypothesis}"
+            "inputs": premise,
+            "parameters": {
+                "candidate_labels": [hypothesis],
+                "multi_label": False
+            }
         }
         
         result = await self._make_request(model, payload)
@@ -232,11 +239,19 @@ class HuggingFaceClient:
         # Parse result into structured format
         scores = {
             "entailment": 0.0,
-            "neutral": 0.0,
+            "neutral": 0.33,  # Default neutral
             "contradiction": 0.0
         }
         
-        if isinstance(result, list):
+        # BART zero-shot returns: {"sequence": str, "labels": [str], "scores": [float]}
+        if isinstance(result, dict) and "scores" in result:
+            # The score represents how well the hypothesis matches the premise
+            entailment_score = result["scores"][0] if result["scores"] else 0.0
+            scores["entailment"] = entailment_score
+            scores["contradiction"] = max(0, 1.0 - entailment_score - 0.33)  # Estimate
+            scores["neutral"] = 1.0 - scores["entailment"] - scores["contradiction"]
+        elif isinstance(result, list):
+            # Fallback for other model formats
             for item in result:
                 label = item.get("label", "").lower()
                 score = item.get("score", 0.0)

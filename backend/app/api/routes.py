@@ -360,6 +360,53 @@ async def health_check():
     return {"status": "healthy", "timestamp": datetime.now().isoformat()}
 
 
+@router.get("/v7/status")
+async def get_v7_status():
+    """Get status of v7 services (HuggingFace-based enhancements)."""
+    try:
+        from app.services.v7_integration import get_v7_services
+        v7 = get_v7_services()
+        return {
+            "status": "ok",
+            "v7_services": v7.get_status(),
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
+
+
+@router.get("/v7/metrics/ragas")
+async def get_ragas_metrics(days: int = 7):
+    """
+    Get aggregate RAGAS evaluation metrics.
+    
+    Args:
+        days: Number of days to aggregate (default: 7)
+        
+    Returns:
+        Aggregate statistics from RAGAS evaluations
+    """
+    try:
+        from app.services.ragas_evaluation_service import get_ragas_evaluation_service
+        evaluator = get_ragas_evaluation_service()
+        metrics = await evaluator.get_aggregate_metrics(days=days)
+        return {
+            "status": "ok",
+            "metrics": metrics,
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
+
+
 @router.get("/welcome")
 async def get_welcome_message():
     """Get the welcome message for new users."""

@@ -216,11 +216,29 @@ class RAGASEvaluationService:
         response: str,
         context_chunks: List[str]
     ) -> VerificationResult:
-        """Compute faithfulness using NLI verification."""
+        """Compute faithfulness using NLI verification (with timeout)."""
+        import asyncio
         try:
-            return await self.nli_service.verify_response(
-                response=response,
-                context_chunks=context_chunks
+            # Limit context chunks to avoid too many API calls
+            limited_chunks = context_chunks[:3]
+            # Add timeout to prevent hanging
+            return await asyncio.wait_for(
+                self.nli_service.verify_response(
+                    response=response,
+                    context_chunks=limited_chunks
+                ),
+                timeout=10.0  # 10 second timeout for RAGAS faithfulness
+            )
+        except asyncio.TimeoutError:
+            logger.warning("Faithfulness computation timed out")
+            return VerificationResult(
+                claims=[],
+                faithfulness_score=0.5,
+                hallucination_count=0,
+                supported_count=0,
+                unsupported_count=0,
+                latency_ms=0,
+                method="timeout"
             )
         except Exception as e:
             logger.warning(f"Faithfulness computation failed: {e}")

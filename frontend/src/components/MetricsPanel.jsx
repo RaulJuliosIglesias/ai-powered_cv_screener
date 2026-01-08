@@ -343,35 +343,57 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
               </div>
             </div>
             
-            {/* RAG COMPONENTS (VERTICAL) */}
+            {/* V7 ENHANCEMENTS */}
             <div>
-              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2 font-semibold">🔧 RAG Components</div>
+              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2 font-semibold">🚀 V7 Enhancements</div>
               <div className="bg-gray-900/50 rounded-lg p-2.5">
                 <div className="space-y-1.5 text-xs">
-                  {featuresEnabled.query_understanding !== undefined && (
-                    <div className="flex items-center justify-between">
-                      <span className={featuresEnabled.query_understanding ? 'text-gray-300' : 'text-gray-600'}>Understanding</span>
-                      {featuresEnabled.query_understanding ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
-                    </div>
-                  )}
-                  {featuresEnabled.reranking !== undefined && (
-                    <div className="flex items-center justify-between">
-                      <span className={featuresEnabled.reranking ? 'text-gray-300' : 'text-gray-600'}>Reranking</span>
-                      {featuresEnabled.reranking ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
-                    </div>
-                  )}
-                  {featuresEnabled.reasoning !== undefined && (
-                    <div className="flex items-center justify-between">
-                      <span className={featuresEnabled.reasoning ? 'text-gray-300' : 'text-gray-600'}>Reasoning</span>
-                      {featuresEnabled.reasoning ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
-                    </div>
-                  )}
-                  {featuresEnabled.claim_verification !== undefined && (
-                    <div className="flex items-center justify-between">
-                      <span className={featuresEnabled.claim_verification ? 'text-gray-300' : 'text-gray-600'}>Verification</span>
-                      {featuresEnabled.claim_verification ? <CheckCircle size={12} className="text-green-400" /> : <XCircle size={12} className="text-gray-600" />}
-                    </div>
-                  )}
+                  {/* Guardrail Method */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-400">Guardrail</span>
+                    <span className={`font-mono text-[10px] px-1.5 py-0.5 rounded ${
+                      stages.guardrail?.metadata?.method === 'zero_shot' 
+                        ? 'bg-purple-900/50 text-purple-300' 
+                        : 'bg-gray-700/50 text-gray-400'
+                    }`}>
+                      {stages.guardrail?.metadata?.method || 'regex'}
+                    </span>
+                  </div>
+                  {/* Reranking Method */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-400">Reranking</span>
+                    <span className={`font-mono text-[10px] px-1.5 py-0.5 rounded ${
+                      stages.reranking?.metadata?.method === 'cross_encoder' 
+                        ? 'bg-cyan-900/50 text-cyan-300' 
+                        : 'bg-gray-700/50 text-gray-400'
+                    }`}>
+                      {stages.reranking?.metadata?.method || 'llm'}
+                    </span>
+                  </div>
+                  {/* NLI Faithfulness */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-400">NLI Faithfulness</span>
+                    <span className={`font-mono text-[10px] ${
+                      stages.claim_verification?.metadata?.nli_faithfulness 
+                        ? (stages.claim_verification.metadata.nli_faithfulness >= 0.7 ? 'text-green-400' : 'text-yellow-400')
+                        : 'text-gray-500'
+                    }`}>
+                      {stages.claim_verification?.metadata?.nli_faithfulness 
+                        ? `${Math.round(stages.claim_verification.metadata.nli_faithfulness * 100)}%`
+                        : 'N/A'}
+                    </span>
+                  </div>
+                  {/* Verification Method */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-400">Verification</span>
+                    <span className={`font-mono text-[10px] px-1.5 py-0.5 rounded ${
+                      stages.claim_verification?.metadata?.method === 'nli' 
+                        ? 'bg-green-900/50 text-green-300' 
+                        : 'bg-gray-700/50 text-gray-400'
+                    }`}>
+                      {stages.claim_verification?.metadata?.method || 'llm'}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

@@ -65,7 +65,8 @@ const STEP_CONFIG = {
     icon: Shield,
     labelEn: 'Safety Check',
     labelEs: 'Seguridad',
-    color: 'green'
+    color: 'green',
+    v7Label: (method) => method === 'zero_shot' ? '🚀 ML' : '📝 Regex'
   },
   embedding: {
     icon: Sparkles,
@@ -83,7 +84,8 @@ const STEP_CONFIG = {
     icon: Zap,
     labelEn: 'Re-ranking',
     labelEs: 'Reordenando',
-    color: 'yellow'
+    color: 'yellow',
+    v7Label: (method) => method === 'cross_encoder' ? '⚡ Cross-Encoder' : '🤖 LLM'
   },
   reasoning: {
     icon: Brain,
@@ -101,7 +103,8 @@ const STEP_CONFIG = {
     icon: Eye,
     labelEn: 'Verifying',
     labelEs: 'Verificando',
-    color: 'orange'
+    color: 'orange',
+    v7Label: (method) => method === 'nli' ? '🧪 NLI' : '🤖 LLM'
   },
   refinement: {
     icon: Sparkles,
@@ -306,6 +309,11 @@ const PipelineProgressPanel = ({ isExpanded, onToggleExpand, autoExpand, onToggl
                 const isRunning = status === 'running';
                 const isCompleted = status === 'completed';
 
+                // Get v7 method from step metadata if available
+                const stepData = progress[stepName] || {};
+                const v7Method = stepData.metadata?.method;
+                const v7Label = config.v7Label && v7Method ? config.v7Label(v7Method) : null;
+
                 return (
                   <div
                     key={stepName}
@@ -340,15 +348,23 @@ const PipelineProgressPanel = ({ isExpanded, onToggleExpand, autoExpand, onToggl
                         'text-slate-400 dark:text-slate-600'}
                     `} />
 
-                    {/* Label */}
-                    <span className={`
-                      text-xs truncate flex-1
-                      ${isRunning ? 'text-slate-900 dark:text-white font-medium' :
-                        isCompleted ? 'text-slate-600 dark:text-slate-400' :
-                        'text-slate-500 dark:text-slate-600'}
-                    `}>
-                      {language === 'es' ? config.labelEs : config.labelEn}
-                    </span>
+                    {/* Label + V7 badge */}
+                    <div className="flex-1 flex items-center gap-1.5 min-w-0">
+                      <span className={`
+                        text-xs truncate
+                        ${isRunning ? 'text-slate-900 dark:text-white font-medium' :
+                          isCompleted ? 'text-slate-600 dark:text-slate-400' :
+                          'text-slate-500 dark:text-slate-600'}
+                      `}>
+                        {language === 'es' ? config.labelEs : config.labelEn}
+                      </span>
+                      {/* V7 Method Badge */}
+                      {v7Label && isCompleted && (
+                        <span className="text-[9px] px-1 py-0.5 rounded bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-300 font-medium whitespace-nowrap">
+                          {v7Label}
+                        </span>
+                      )}
+                    </div>
 
                     {/* Right status icon */}
                     {isCompleted && (
