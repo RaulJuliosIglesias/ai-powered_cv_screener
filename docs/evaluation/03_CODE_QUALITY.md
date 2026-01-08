@@ -26,7 +26,7 @@ ai-powered_cv_screener/
 │   │   ├── providers/              # External integrations
 │   │   │   ├── base.py             # Abstract interfaces
 │   │   │   ├── factory.py          # Dependency injection
-│   │   │   ├── local/              # Local implementations (ChromaDB)
+│   │   │   ├── local/              # Local implementations (JSON store)
 │   │   │   └── cloud/              # Cloud implementations (Supabase)
 │   │   │
 │   │   ├── services/               # Business logic (22+ services)
@@ -723,6 +723,6 @@ class RankingStructure(BaseStructure):
 
 <div align="center">
 
-**[← Previous: Thought Process](./02_THOUGHT_PROCESS.md)** · **[Back to Index](./INDEX.md)** · **[Next: Creativity & Ingenuity →](./04_CREATIVITY_AND_INGENUITY.md)**
+**[← Previous: Thought Process](./02_THOUGHT_PROCESS.md)** · **[Back to Index](./README.md)** · **[Next: Creativity & Ingenuity →](./04_CREATIVITY_AND_INGENUITY.md)**
 
 </div>

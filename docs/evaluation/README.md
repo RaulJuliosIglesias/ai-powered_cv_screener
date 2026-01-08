@@ -39,7 +39,7 @@ docs/evaluation/
 ├── 02_THOUGHT_PROCESS.md                 ← Architecture decisions v6.0
 ├── 03_CODE_QUALITY.md                    ← 9 structures, 29 modules
 ├── 04_CREATIVITY_AND_INGENUITY.md        ← 10 innovative solutions
-├── 05_AI_LITERACY.md                     ← ChromaDB, Conversational RAG
+├── 05_AI_LITERACY.md                     ← Vector stores, Conversational RAG
 └── 06_LEARN_AND_ADAPT.md                 ← v5 → v6.0 evolution
 ```
 
@@ -86,7 +86,7 @@ docs/evaluation/
 | **Confidence Calculator** | 5-factor weighted scoring (28KB service) |
 | **Metadata Enrichment** | Auto-extraction: experience, seniority, job-hopping score |
 | **Suggestion Engine** | Context-aware dynamic query suggestions |
-| **ChromaDB** | Upgraded local vector store (from JSON) |
+| **Vector Store** | JSON persistence with cosine similarity |
 
 ---
 

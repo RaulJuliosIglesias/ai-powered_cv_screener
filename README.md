@@ -337,7 +337,7 @@ ai-powered-cv-screener/
 │   │   │   ├── local/              # ChromaDB + sentence-transformers
 │   │   │   └── cloud/              # Supabase + OpenRouter
 │   │   ├── services/               # Business logic
-│   │   │   ├── rag_service_v5.py   # Main RAG pipeline
+│   │   │   ├── rag_service_v5.py   # Main RAG pipeline (2958 lines)
 │   │   │   ├── query_understanding_service.py
 │   │   │   ├── output_processor/   # Output orchestration
 │   │   │   │   ├── orchestrator.py # Routes to structures

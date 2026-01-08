@@ -53,7 +53,6 @@
 ```
 docs/
 ├── README.md                      ← You are here
-├── INSTRUCTIONS.md                ← Complete setup and usage guide
 ├── RAG_WORKFLOW.md                ← RAG pipeline architecture (v6.0)
 ├── STRUCTURED_OUTPUT.md           ← Structured output processing (v6.0)
 ├── ARCHITECTURE_MODULES.md        ← Orchestrator/Structures/Modules architecture
@@ -75,7 +74,6 @@ docs/
 
 | Document | Description |
 |----------|-------------|
-| [INSTRUCTIONS.md](./INSTRUCTIONS.md) | Complete installation, configuration, and usage guide |
 | [RAG_WORKFLOW.md](./RAG_WORKFLOW.md) | RAG pipeline architecture with all stages |
 | [STRUCTURED_OUTPUT.md](./STRUCTURED_OUTPUT.md) | 9 structures + 29 modules system |
 | [ARCHITECTURE_MODULES.md](./ARCHITECTURE_MODULES.md) | Complete Orchestrator → Structures → Modules reference |

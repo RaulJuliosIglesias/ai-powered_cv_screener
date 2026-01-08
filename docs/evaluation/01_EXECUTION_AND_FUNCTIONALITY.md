@@ -614,6 +614,6 @@ Try asking:
 
 <div align="center">
 
-**[← Back to Index](./INDEX.md)** · **[Next: Thought Process →](./02_THOUGHT_PROCESS.md)**
+**[← Back to Index](./README.md)** · **[Next: Thought Process →](./02_THOUGHT_PROCESS.md)**
 
 </div>

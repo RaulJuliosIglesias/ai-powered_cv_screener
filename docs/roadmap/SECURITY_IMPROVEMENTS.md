@@ -19,7 +19,7 @@ This document outlines critical and high-priority security vulnerabilities that 
 │         │                                                              │
 │         ▼                                                              │
 │   ┌────────────┐     ┌────────────┐     ┌────────────┐                │
-│   │  Frontend  │────▶│  Backend   │────▶│  ChromaDB  │                │
+│   │  Frontend  │────▶│  Backend   │────▶│  JSON Store │                │
 │   │  (React)   │     │  (FastAPI) │     │  (Local)   │                │
 │   └────────────┘     └────────────┘     └────────────┘                │
 │                             │                                          │
@@ -39,7 +39,7 @@ This document outlines critical and high-priority security vulnerabilities that 
 ```
 
 **Current Features**:
-- ✅ Local mode with ChromaDB (free, no cloud needed)
+- ✅ Local mode with JSON vector store (free, no cloud needed)
 - ✅ Cloud mode with Supabase pgvector (for embeddings only)
 - ✅ PDF upload and RAG pipeline
 - ✅ Session management (local JSON or Supabase)

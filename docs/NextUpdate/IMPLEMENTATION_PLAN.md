@@ -124,7 +124,7 @@ backend/app/services/output_processor/
 │  vector_store.add_chunks()                                         │
 │       │                                                             │
 │       ▼                                                             │
-│  ChromaDB / Supabase pgvector                                      │
+│  JSON Store / Supabase pgvector                                    │
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
@@ -448,7 +448,7 @@ CERT_PATTERNS = [
 ##### 2.3.1 Update add_chunks() Method
 - **File**: `backend/app/services/vector_store.py`
 - [ ] Add handling for new metadata fields
-- [ ] Ensure ChromaDB-compatible types (no lists, convert to comma-separated)
+- [ ] Ensure JSON-compatible types (no lists, convert to comma-separated)
 
 ##### 2.3.2 Add New Filter Options
 - [ ] Add `filter_by_language()` helper

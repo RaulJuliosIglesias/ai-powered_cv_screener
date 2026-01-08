@@ -521,6 +521,6 @@ AI: John vs Maria comparison (ComparisonStructure)
 
 <div align="center">
 
-**[← Previous: Code Quality](./03_CODE_QUALITY.md)** · **[Back to Index](./INDEX.md)** · **[Next: AI Literacy →](./05_AI_LITERACY.md)**
+**[← Previous: Code Quality](./03_CODE_QUALITY.md)** · **[Back to Index](./README.md)** · **[Next: AI Literacy →](./05_AI_LITERACY.md)**
 
 </div>

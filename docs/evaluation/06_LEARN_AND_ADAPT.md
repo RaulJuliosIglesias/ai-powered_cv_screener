@@ -218,7 +218,7 @@ VERSION 6.0 (Current - Full Production):
   │ Query → Context Resolve → MultiQuery → Guardrail            │
   ├─────────────────────────────────────────────────────────────┤
   │ RETRIEVAL LAYER                                             │
-  │ Embed → ChromaDB/pgvector Search → Rerank                   │
+  │ Embed → JSON/pgvector Search → Rerank                       │
   ├─────────────────────────────────────────────────────────────┤
   │ GENERATION LAYER                                            │
   │ Reason → Generate → Claim Verify → Hallucination Check      │
@@ -447,7 +447,7 @@ class RetryConfig:
 | **Conversational RAG** | Context resolver, pronoun resolution, follow-up detection |
 | **Confidence Scoring** | 5-factor weighted calculator with dynamic redistribution |
 | **Metadata Enrichment** | Auto-extraction of experience, seniority, job-hopping score |
-| **ChromaDB Integration** | Upgraded from JSON to indexed vector store |
+| **Vector Store Implementation** | JSON persistence with cosine similarity |
 | **Suggestion Engine** | Context-aware dynamic suggestions |
 
 ### Code Growth (v5 → v6.0)
@@ -463,6 +463,6 @@ class RetryConfig:
 
 <div align="center">
 
-**[← Previous: AI Literacy](./05_AI_LITERACY.md)** · **[Back to Index](./INDEX.md)** · **[Back to README](../../README.md)**
+**[← Previous: AI Literacy](./05_AI_LITERACY.md)** · **[Back to Index](./README.md)** · **[Back to README](../../README.md)**
 
 </div>

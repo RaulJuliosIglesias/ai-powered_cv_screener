@@ -2,7 +2,7 @@
 
 > **Criterion**: Your awareness of the relevant tools, models, and trends in the AI industry.
 > 
-> **Version**: 6.0 (January 2026) - ChromaDB, Conversational RAG, Output Orchestration patterns
+> **Version**: 6.0 (January 2026) - Vector stores, Conversational RAG, Output Orchestration patterns
 
 ---
 
@@ -161,40 +161,44 @@ def embed_query(self, query: str) -> List[float]:
 │  Weaviate          │ Millions   │ Fast    │ Medium   │ $        │
 │                                                                  │
 │  v6.0 IMPLEMENTATION:                                           │
-│  • LOCAL:  ChromaDB (persistent, indexed, fast)  ◄── UPGRADED   │
+│  • LOCAL:  JSON persistence (simple, zero deps)  ◄── CURRENT     │
 │  • CLOUD:  Supabase pgvector (PostgreSQL + IVFFlat index)      │
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### ChromaDB Implementation (NEW in v6.0)
+### JSON Persistence Implementation (NEW in v6.0)
 
-**Why ChromaDB over JSON?**
+**Why JSON persistence?**
 
-| Aspect | JSON (v5) | ChromaDB (v6.0) |
-|--------|-----------|-----------------|
+| Aspect | JSON (v6.0) | ChromaDB (alternative) |
+|--------|-------------|------------------------|
 | **Search** | O(n) linear scan | Indexed ANN search |
 | **Scale** | <1K docs | <100K docs |
-| **Persistence** | Manual save/load | Built-in persistence |
-| **Filtering** | Python loops | Native metadata filters |
-| **Memory** | Load all into RAM | Memory-mapped |
+| **Dependencies** | Zero | ChromaDB + SQLite |
+| **Setup** | None | Installation required |
 
 ```python
 # providers/local/vector_store.py (v6.0)
-import chromadb
-from chromadb.config import Settings
+import json
+import math
+from pathlib import Path
 
-class ChromaDBVectorStore:
-    def __init__(self, persist_directory: str = "./chroma_db"):
-        self.client = chromadb.Client(Settings(
-            chroma_db_impl="duckdb+parquet",
-            persist_directory=persist_directory,
-            anonymized_telemetry=False
-        ))
-        self.collection = self.client.get_or_create_collection(
-            name="cv_embeddings",
-            metadata={"hnsw:space": "cosine"}  # Cosine similarity
-        )
+class SimpleVectorStore:
+    def __init__(self, persist_directory: str = "./data"):
+        self.file_path = Path(persist_directory) / "vectors.json"
+        self.vectors = self._load_vectors()
+
+    def _load_vectors(self):
+        try:
+            with open(self.file_path, 'r') as file:
+                return json.load(file)
+        except FileNotFoundError:
+            return []
+
+    def save_vectors(self):
+        with open(self.file_path, 'w') as file:
+            json.dump(self.vectors, file)
     
     async def search(self, embedding: List[float], k: int = 10) -> List[SearchResult]:
         results = self.collection.query(
@@ -644,7 +648,7 @@ class ContextResolver:
 |------|----------|
 | **Embedding Models** | Correct selection of nomic-embed-v1.5 (cloud) and MiniLM (local) with proper task prefixes |
 | **LLM Landscape** | Model-agnostic design supporting all major providers via OpenRouter |
-| **Vector Databases** | ChromaDB (local), pgvector (cloud) with proper indexing strategies |
+| **Vector Databases** | JSON persistence (local), pgvector (cloud) with proper indexing strategies |
 | **RAG Research** | Multi-query, HyDE, reranking, CoT — beyond basic tutorials |
 | **Conversational RAG** | Context resolution, pronoun handling, follow-up detection |
 | **Output Orchestration** | 9 structures, 29 modules, query-type-aware responses |
@@ -657,6 +661,6 @@ class ContextResolver:
 
 <div align="center">
 
-**[← Previous: Creativity & Ingenuity](./04_CREATIVITY_AND_INGENUITY.md)** · **[Back to Index](./INDEX.md)** · **[Next: Learn & Adapt →](./06_LEARN_AND_ADAPT.md)**
+**[← Previous: Creativity & Ingenuity](./04_CREATIVITY_AND_INGENUITY.md)** · **[Back to Index](./README.md)** · **[Next: Learn & Adapt →](./06_LEARN_AND_ADAPT.md)**
 
 </div>

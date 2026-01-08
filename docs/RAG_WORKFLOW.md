@@ -1011,7 +1011,7 @@ class LLMProvider(ABC):
 
 | Provider | Mode | Implementation |
 |----------|------|----------------|
-| `OpenRouterEmbeddingProvider` | Cloud | OpenAI text-embedding-3-small via OpenRouter |
+| `OpenRouterEmbeddingProvider` | Cloud | nomic-embed-text-v1.5 via OpenRouter |
 | `LocalEmbeddingProvider` | Local | sentence-transformers (fallback) |
 | `SupabaseVectorStore` | Cloud | pgvector in Supabase |
 | `SimpleVectorStore` | Local | NumPy cosine similarity |

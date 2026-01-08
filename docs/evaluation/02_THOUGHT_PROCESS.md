@@ -506,7 +506,7 @@ class ContextResolver:
 │  ┌─────────────────────────────────────────────────────────────┐  │
 │  │ RETRIEVAL LAYER                                             │  │
 │  │ ├── Embedding (384d local / 768d cloud)                     │  │
-│  │ ├── Vector Search (ChromaDB / pgvector)                     │  │
+│  │ ├── Vector Search (JSON / pgvector)                        │  │
 │  │ └── Reranking (LLM-based relevance)                         │  │
 │  └─────────────────────────────────────────────────────────────┘  │
 │                            ↓                                      │
@@ -630,6 +630,6 @@ class RAGConfigV5:
 
 <div align="center">
 
-**[← Previous: Execution & Functionality](./01_EXECUTION_AND_FUNCTIONALITY.md)** · **[Back to Index](./INDEX.md)** · **[Next: Code Quality →](./03_CODE_QUALITY.md)**
+**[← Previous: Execution & Functionality](./01_EXECUTION_AND_FUNCTIONALITY.md)** · **[Back to Index](./README.md)** · **[Next: Code Quality →](./03_CODE_QUALITY.md)**
 
 </div>
