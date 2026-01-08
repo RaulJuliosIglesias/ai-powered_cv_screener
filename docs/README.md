@@ -97,7 +97,7 @@ Documentation demonstrating how the project meets professional evaluation criter
 Future development plans:
 - **Advanced Evaluation** - Automated response quality metrics
 - **Confidence Calibration** - Response confidence scoring
-- **RAG v6 Enhancements** - HyDE, iterative refinement
+- **RAG v7 Enhancements** - Advanced ML models, NLI verification, Cross-Encoder reranking
 
 ### [📦 archive/](./archive/)
 Historical documentation of already implemented plans. Useful for understanding project evolution.
