@@ -180,13 +180,15 @@ class RiskTableModule:
         data.factors = self._generate_factors(data, current_role, current_company)
         
         # Determine overall risk level
+        # NOTE: tenure=0 means NO DATA, not short tenure - only consider if tenure > 0
+        tenure_is_short = data.avg_tenure_years > 0 and data.avg_tenure_years < self.TENURE_CONCERN and data.position_count >= 2
         data.has_issues = data.job_hopping_score > self.JOB_HOPPING_MODERATE or \
-                         data.avg_tenure_years < self.TENURE_CONCERN or \
+                         tenure_is_short or \
                          data.employment_gaps_count > 0
         
         if data.job_hopping_score > self.JOB_HOPPING_MODERATE:
             data.overall_risk = "high"
-        elif data.job_hopping_score > self.JOB_HOPPING_LOW or data.avg_tenure_years < self.TENURE_CONCERN:
+        elif data.job_hopping_score > self.JOB_HOPPING_LOW or tenure_is_short:
             data.overall_risk = "moderate"
         else:
             data.overall_risk = "low"
@@ -479,18 +481,20 @@ class RiskTableModule:
         positions = data.position_count
         
         # 1. Red Flags summary with detailed explanation
-        has_flags = score > self.JOB_HOPPING_MODERATE or tenure < self.TENURE_CONCERN or gaps > 0
+        # NOTE: tenure=0 means NO DATA, not short tenure - only flag if tenure > 0 AND < threshold
+        tenure_is_short = tenure > 0 and tenure < self.TENURE_CONCERN and positions >= 2
+        has_flags = score > self.JOB_HOPPING_MODERATE or tenure_is_short or gaps > 0
         if has_flags:
             rf_icon, rf_status = "⚠️", "Issues Found"
             # Build detailed explanation of WHY there are flags
             flag_reasons = []
             if score > self.JOB_HOPPING_MODERATE:
                 flag_reasons.append(f"high job mobility ({score:.0%} score)")
-            if tenure < self.TENURE_CONCERN:
+            if tenure_is_short:
                 flag_reasons.append(f"short avg tenure ({tenure:.1f} yrs)")
             if gaps > 0:
                 flag_reasons.append(f"{gaps} employment gap(s)")
-            rf_details = "Issues: " + ", ".join(flag_reasons)
+            rf_details = "Issues: " + ", ".join(flag_reasons) if flag_reasons else "Minor concerns detected"
         else:
             rf_icon, rf_status = "✅", "None Detected"
             rf_details = f"Clean profile: {positions} positions, {tenure:.1f} yrs avg tenure, no gaps"

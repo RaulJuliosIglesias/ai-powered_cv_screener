@@ -382,7 +382,7 @@ const PipelineProgressPanel = ({ isExpanded, onToggleExpand, autoExpand, onToggl
                           {stepData.results.slice(0, 3).map((result, idx) => (
                             <div key={idx} className="flex items-center justify-between text-[10px]">
                               <span className="text-slate-600 dark:text-slate-300 truncate max-w-[100px]">
-                                #{result.rank} {result.candidate}
+                                #{result.rank} {result.candidate || 'Unknown'}
                               </span>
                               {result.score && (
                                 <span className="text-emerald-600 dark:text-emerald-400 font-mono">

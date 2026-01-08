@@ -465,6 +465,12 @@ function App() {
                   newState.candidates = data.candidates;
                 }
                 
+                // Capture reranking results
+                if (stepName === 'reranking' && data.results) {
+                  newState.rerankingResults = data.results;
+                  newState.rerankingMethod = data.method;
+                }
+                
                 // Capture partial answer from generation
                 if (stepName === 'generation' && data.partial_answer) {
                   newState.partialAnswer = data.partial_answer;

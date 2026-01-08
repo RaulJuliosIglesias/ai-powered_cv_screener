@@ -288,6 +288,58 @@ export const CandidatePreviewCards = memo(({ candidates, onViewCV }) => {
 CandidatePreviewCards.displayName = 'CandidatePreviewCards';
 
 /**
+ * Reranking results display - shows reordered candidates with scores
+ */
+export const RerankingResultsPanel = memo(({ results, method }) => {
+  const { language } = useLanguage();
+  
+  if (!results || results.length === 0) return null;
+  
+  return (
+    <div className="mt-3">
+      <p className="text-xs text-gray-500 dark:text-gray-400 mb-2 flex items-center gap-1">
+        <Zap className="w-3 h-3 text-yellow-500" />
+        {language === 'es' ? 'Reranking completado:' : 'Reranking complete:'}
+        <span className="ml-1 px-1.5 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 text-[10px] rounded-full font-medium">
+          {method === 'cross_encoder' ? '⚡ Cross-Encoder' : '🤖 LLM'}
+        </span>
+      </p>
+      <div className="flex gap-2 overflow-x-auto pb-2">
+        {results.slice(0, 5).map((result, idx) => (
+          <div 
+            key={idx}
+            className="flex-shrink-0 p-3 bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-xl border border-yellow-200 dark:border-yellow-800 shadow-sm"
+          >
+            <div className="flex items-center gap-2">
+              <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                idx === 0 ? 'bg-yellow-500 text-white' : 
+                idx === 1 ? 'bg-gray-400 text-white' :
+                idx === 2 ? 'bg-orange-600 text-white' :
+                'bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300'
+              }`}>
+                #{result.rank}
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-800 dark:text-white truncate max-w-[100px]">
+                  {result.candidate || 'Unknown'}
+                </p>
+                {result.score && (
+                  <p className="text-xs text-yellow-600 dark:text-yellow-400 font-mono">
+                    {(result.score * 100).toFixed(0)}% relevance
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+});
+
+RerankingResultsPanel.displayName = 'RerankingResultsPanel';
+
+/**
  * Query understanding display panel
  */
 export const QueryUnderstandingPanel = memo(({ content, isExpanded, onToggle }) => {
@@ -438,7 +490,7 @@ const StreamingMessage = ({
   
   if (!streamingState) return null;
   
-  const { currentStep, steps, queryUnderstanding, candidates, partialAnswer, currentProgress } = streamingState;
+  const { currentStep, steps, queryUnderstanding, candidates, rerankingResults, rerankingMethod, partialAnswer, currentProgress } = streamingState;
   
   // MINIMAL MODE: Only show TypingIndicator when preview is disabled
   if (!showPreview) {
@@ -493,6 +545,11 @@ const StreamingMessage = ({
         {/* Candidate Preview Cards */}
         {candidates && candidates.length > 0 && (
           <CandidatePreviewCards candidates={candidates} onViewCV={onViewCV} />
+        )}
+        
+        {/* Reranking Results - shown after candidates are reordered */}
+        {rerankingResults && rerankingResults.length > 0 && (
+          <RerankingResultsPanel results={rerankingResults} method={rerankingMethod} />
         )}
         
         {/* Partial Answer with Typewriter - shown in code block for raw markdown */}

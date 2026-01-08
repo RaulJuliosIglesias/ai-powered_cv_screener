@@ -1397,8 +1397,9 @@ Base your analysis on the actual CV content provided.""",
             # For junior candidates (Entry level with few positions), don't flag low tenure as issue
             is_junior = exp_level == "Entry" and positions <= 2
             
-            # Only flag tenure issues for non-juniors
-            tenure_issue = tenure < 1.5 and not is_junior and positions > 2
+            # Only flag tenure issues for non-juniors AND when we have real data (tenure > 0)
+            # tenure=0 means NO DATA, not that tenure is actually 0
+            tenure_issue = tenure > 0 and tenure < 1.5 and not is_junior and positions > 2
             has_flags = score > 0.5 or tenure_issue or gaps > 0
             
             rf_status = "Issues Found" if has_flags else "None Detected"
