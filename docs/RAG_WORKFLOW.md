@@ -32,14 +32,14 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
 
 | Mode | Description |
 |------|-------------|
-| **LOCAL** | In-memory vector store, local embeddings |
-| **CLOUD** | Supabase pgvector, OpenAI embeddings, OpenRouter LLMs |
+| **LOCAL** | JSON vector store, local embeddings (sentence-transformers) |
+| **CLOUD** | Supabase pgvector, nomic-embed-v1.5 embeddings, OpenRouter LLMs |
 
 ### Key Features (V6.0 - Current)
 
 - ✅ **Orchestrator → Structures → Modules**: Complete output processing architecture
 - ✅ **9 Structures**: SingleCandidate, RiskAssessment, Comparison, Search, Ranking, JobMatch, TeamBuild, Verification, Summary
-- ✅ **25+ Modules**: Reusable components (Thinking, Analysis, RiskTable, MatchScore, etc.)
+- ✅ **29 Modules**: Reusable components (Thinking, Analysis, RiskTable, MatchScore, etc.)
 - ✅ **Conversational Context**: `conversation_history` propagated through entire pipeline
 - ✅ **Query Type Routing**: Intelligent routing based on query classification
 
@@ -394,13 +394,13 @@ def get_all_chunks_by_candidate(
 ┌────────────────────────────────────────────────────────────────────────────┐
 │  STEP 4: MULTI-EMBEDDING (V5 NEW)                                          │
 │  ┌──────────────────────────────────────────────────────────────────────┐  │
-│  │ • Model: text-embedding-3-small (1536 dimensions)                    │  │
+│  │ • LOCAL: sentence-transformers (384 dims) / CLOUD: nomic-embed (768d) │  │
 │  │ • Embeds: original query + variations + HyDE document                │  │
 │  │ • Cache: LRU with TTL (5 min default)                                │  │
 │  │ • Parallel embedding generation                                      │  │
 │  └──────────────────────────────────────────────────────────────────────┘  │
 │  Script: embedding_service.py                                              │
-│  Provider: OpenAI / LocalEmbeddingProvider                                 │
+│  Provider: LocalEmbeddingProvider / OpenRouterEmbeddingProvider            │
 └────────────────────────────────────┬───────────────────────────────────────┘
                                      │
                                      ▼

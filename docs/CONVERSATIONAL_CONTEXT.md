@@ -392,9 +392,11 @@ def assemble(
 
 ## Roadmap: Future Improvements
 
-### Phase 1: Context Resolution (Pending)
-- [ ] `ContextResolver` for automatic pronominal reference resolution
-- [ ] Detect "he", "she", "this candidate" and resolve to actual name
+### Phase 1: Context Resolution ✅ IMPLEMENTED
+- [x] `ContextResolver` for automatic pronominal reference resolution (`context_resolver.py` - 18KB)
+- [x] Detect "he", "she", "this candidate" and resolve to actual name
+- [x] Top candidate references ("the best one", "#1", "el mejor")
+- [x] Ordinal references ("the second one", "compare those 3")
 
 ### Phase 2: Context-Aware Structures (Pending)
 - [ ] Structures adapt behavior based on history

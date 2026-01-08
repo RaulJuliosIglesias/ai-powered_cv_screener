@@ -241,7 +241,7 @@ python start_web.py   # Frontend → http://localhost:6001
 <tr>
 <td align="center" width="140">
 
-**📋 [INDEX](./docs/evaluation/INDEX.md)**
+**📋 [INDEX](./docs/evaluation/README.md)**
 
 *Start Here*
 

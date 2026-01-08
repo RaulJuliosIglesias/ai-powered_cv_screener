@@ -12,7 +12,7 @@ The system supports **2 modes**: `local` and `cloud` (Supabase)
 | Component | LOCAL Mode | CLOUD Mode |
 |-----------|------------|------------|
 | **Embeddings** | sentence-transformers (384 dims) | OpenRouter nomic-embed-v1.5 (768 dims) |
-| **Vector Store** | ChromaDB (local) | Supabase pgvector |
+| **Vector Store** | JSON + cosine similarity | Supabase pgvector |
 | **PDF Storage** | Local filesystem | Supabase Storage |
 | **Sessions** | JSON file persistence | Supabase tables |
 | **LLM** | OpenRouter API | OpenRouter API |
@@ -26,7 +26,7 @@ The system supports **2 modes**: `local` and `cloud` (Supabase)
 | Component | File | Status | Description |
 |-----------|------|--------|-------------|
 | **Embeddings** | `providers/local/embeddings.py` | ✅ OK | sentence-transformers all-MiniLM-L6-v2 (384 dims) |
-| **Vector Store** | `providers/local/vector_store.py` | ✅ OK | ChromaDB with cosine similarity |
+| **Vector Store** | `providers/local/vector_store.py` | ✅ OK | JSON persistence with cosine similarity |
 | **LLM** | `providers/cloud/llm.py` | ✅ OK | OpenRouter API (shared) |
 | **Sessions** | `models/sessions.py` | ✅ OK | JSON file persistence |
 

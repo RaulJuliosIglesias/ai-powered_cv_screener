@@ -20,7 +20,7 @@
 │  3. rag_service_v5.py:index_documents()                        │
 │     ↓                                                           │
 │  4. vector_store.add_documents()                                │
-│     ↓ Stores in ChromaDB/local store                           │
+│     ↓ Stores in JSON vector store                             │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 
@@ -93,7 +93,7 @@ def _extract_enriched_metadata(self, chunks):
 
 ### Step 3: Test
 
-1. Delete ChromaDB: `rm -rf backend/chroma_db`
+1. Delete vector store data: `rm -rf backend/data/vectors.json`
 2. Restart server
 3. Upload a CV
 4. Check logs for: `[ENRICHED_METADATA] First chunk metadata keys: [..., 'my_new_metric', ...]`
@@ -162,7 +162,7 @@ These files exist but are NOT used in the current pipeline:
 2. Metadata is being truncated somewhere in the pipeline
 
 **Solutions:**
-1. Delete ChromaDB and re-upload CVs
+1. Delete vector store data and re-upload CVs
 2. Check `rag_service_v5.py:_step_fusion_retrieval()` preserves ALL metadata
 
 ### Problem: New field not appearing

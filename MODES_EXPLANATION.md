@@ -28,7 +28,7 @@
 | Component | Implementation | Details |
 |-----------|----------------|---------|
 | **Embeddings** | `LocalEmbeddingProvider` | sentence-transformers all-MiniLM-L6-v2 (384 dims) |
-| **Vector Store** | `SimpleVectorStore` | ChromaDB local (`./chroma_db`) |
+| **Vector Store** | `SimpleVectorStore` | JSON persistence (`./data/vectors.json`) |
 | **PDF Storage** | File system | Directory `./storage/` |
 | **Sessions** | `SessionManager` | JSON file (`backend/data/sessions.json`) |
 
@@ -61,7 +61,7 @@ class ProviderFactory:
         if mode == Mode.CLOUD:
             return SupabaseVectorStore()
         else:
-            return SimpleVectorStore()  # ChromaDB
+            return SimpleVectorStore()  # JSON persistence
 
     @classmethod
     def get_llm_provider(cls, mode: Mode, model: str) -> LLMProvider:
@@ -107,7 +107,7 @@ The modes are correctly separated:
 | Component | LOCAL | CLOUD |
 |-----------|-------|-------|
 | Embeddings | ✅ LocalEmbeddingProvider | ✅ OpenRouterEmbeddingProvider |
-| Vector Store | ✅ SimpleVectorStore (ChromaDB) | ✅ SupabaseVectorStore |
+| Vector Store | ✅ SimpleVectorStore (JSON) | ✅ SupabaseVectorStore |
 | PDF Storage | ✅ Local filesystem | ✅ Supabase Storage |
 | Sessions | ✅ JSON file | ✅ Supabase tables |
 | LLM | ✅ OpenRouter | ✅ OpenRouter |

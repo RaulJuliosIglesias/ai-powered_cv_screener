@@ -43,7 +43,7 @@
 - AI-powered session naming
 
 ### Dual-Mode Support
-- **LOCAL**: ChromaDB + sentence-transformers (384 dims) + JSON persistence
+- **LOCAL**: JSON vector store + sentence-transformers (384 dims) + JSON persistence
 - **CLOUD**: Supabase pgvector + nomic-embed (768 dims) + Supabase Storage
 
 ---

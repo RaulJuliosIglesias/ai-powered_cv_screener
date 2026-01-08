@@ -12,7 +12,7 @@
 2. [Architecture (v6.0)](#architecture-v60)
 3. [Query Type â†’ Structure Routing](#query-type--structure-routing)
 4. [9 Structures Reference](#9-structures-reference)
-5. [25+ Modules Reference](#25-modules-reference)
+5. [29 Modules Reference](#29-modules-reference)
 6. [Data Models](#data-models)
 7. [Orchestration Flow](#orchestration-flow)
 8. [Conversational Context](#conversational-context)
@@ -36,7 +36,7 @@ The Structured Output system in **v6.0** implements a complete **Orchestrator â†
 |-----------|-------|---------|
 | **Orchestrator** | 1 | Routes queries and coordinates Structures |
 | **Structures** | 9 | Complete output assemblers for each query type |
-| **Modules** | 25+ | Reusable extraction/formatting components |
+| **Modules** | 29 | Reusable extraction/formatting components |
 | **StructuredOutput** | 1 | Main data model for all response types |
 
 ### Query Types Supported
