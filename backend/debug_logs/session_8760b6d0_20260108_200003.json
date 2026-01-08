@@ -1,0 +1,2192 @@
+{
+  "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2",
+  "generated_at": "2026-01-08T20:00:03.209464",
+  "events": [
+    {
+      "timestamp": "2026-01-08T19:58:14.303659",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:14.303659",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_fc480b3a",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Maximilian Bauer  Design",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Maximilian Bauer  Design =====\n\nCURRENT POSITION: 2017\nCURRENT COMPANY: 20"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Maximilian Bauer  Design",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3 === CURRENT POSITION ===\n\nTITLE: 2017\nCOMPANY: 2020 | Innovate Digital Agency\nPE"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Maximilian Bauer  Design",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3\n\nTITLE: 2014\nCOMPANY: 2017 | Medium Scale Tech GmbH\nPERIOD: 2014 - 2017\nDURATION"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Maximilian Bauer  Design",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3\n\nTITLE: cultural nuances across 8 countries to ensure 100%\nCOMPANY: localized de"
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": " Maximilian Bauer  Design",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Maximilian Bauer  Design\n\nCURRENT ROLE: 2017\nCOMPANY: 2020 | Innovate Digital Agenc"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:15.784774",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:15.784774",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_37022c05",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Javier Ramirez  Design",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 4.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Javier Ramirez  Design =====\n\nCURRENT POSITION: web\nCURRENT COMPANY: mobil"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Javier Ramirez  Design",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 4.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2\n\nTITLE: 1999\nCOMPANY: 2003 | eSolutions Spain\nPERIOD: 1999 - 2003\nDURATION: 4 ye"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Javier Ramirez  Design",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 4.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2 === CURRENT POSITION ===\n\nTITLE: web\nCOMPANY: mobile application interfaces, and"
+          },
+          {
+            "index": 3,
+            "section_type": "skills",
+            "candidate_name": " Javier Ramirez  Design",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 4.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Javier Ramirez  Design:\n\n(CPACC), IAAP, I N T E R E S T S,  Museum Arc"
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": " Javier Ramirez  Design",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 4.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Javier Ramirez  Design\n\nCURRENT ROLE: web\nCOMPANY: mobile application interfaces, a"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:16.628181",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:16.628181",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_1e0faaae",
+        "total_chunks": 8,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Layla Amiri  Director of Product",
+            "job_hopping_score": 0.4166666666666667,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 12.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Layla Amiri  Director of Product =====\n\nCURRENT POSITION: 2003\nCURRENT COM"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Layla Amiri  Director of Product",
+            "job_hopping_score": 0.4166666666666667,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 12.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 6\n\nTITLE: 2006\nCOMPANY: 2010 | Nova Dynamics\nPERIOD: 2006 - 2010\nDURATION: 4 years"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Layla Amiri  Director of Product",
+            "job_hopping_score": 0.4166666666666667,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 12.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 6 === CURRENT POSITION ===\n\nTITLE: 2003\nCOMPANY: 2006 | Innovatech Solutions\nPERIO"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Layla Amiri  Director of Product",
+            "job_hopping_score": 0.4166666666666667,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 12.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 6\n\nTITLE: 2000\nCOMPANY: 2003 | Diseño Global\nPERIOD: 2000 - 2003\nDURATION: 3 years"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Layla Amiri  Director of Product",
+            "job_hopping_score": 0.4166666666666667,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 12.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 6\n\nTITLE: 1998\nCOMPANY: 2000 | Studio Creativo\nPERIOD: 1998 - 2000\nDURATION: 2 yea"
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Layla Amiri  Director of Product",
+            "job_hopping_score": 0.4166666666666667,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 12.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 5 of 6\n\nTITLE: health‑tech products.\nCOMPANY: Defined and launched a unified design sys"
+          },
+          {
+            "index": 6,
+            "section_type": "experience",
+            "candidate_name": " Layla Amiri  Director of Product",
+            "job_hopping_score": 0.4166666666666667,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 12.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 6 of 6\n\nTITLE: Buenos Aires\nCOMPANY: Argentina\nPERIOD: Unknown dates\nDURATION: 0 years\n"
+          },
+          {
+            "index": 7,
+            "section_type": "full_cv",
+            "candidate_name": " Layla Amiri  Director of Product",
+            "job_hopping_score": 0.4166666666666667,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 12.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Layla Amiri  Director of Product\n\nCURRENT ROLE: 2003\nCOMPANY: 2006 | Innovatech Sol"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:17.447396",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:17.447396",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_568c5e60",
+        "total_chunks": 7,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Ji-Yeon Kim  Design System",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 22.0,
+            "position_count": 5,
+            "employment_gaps_count": 1,
+            "content_preview": "===== CANDIDATE PROFILE:  Ji-Yeon Kim  Design System =====\n\nCURRENT POSITION: 2000\nCURRENT COMPANY: "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Ji-Yeon Kim  Design System",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 22.0,
+            "position_count": 5,
+            "employment_gaps_count": 1,
+            "content_preview": "JOB POSITION 1 of 5\n\nTITLE: Magna Cum Laude\nCOMPANY: Specialized in Interaction Design\nPERIOD: 2021 "
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Ji-Yeon Kim  Design System",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 22.0,
+            "position_count": 5,
+            "employment_gaps_count": 1,
+            "content_preview": "JOB POSITION 2 of 5\n\nTITLE: aesthetic appeal and functional efficiency.\nCOMPANY: UrbanWave Tech\nPERI"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Ji-Yeon Kim  Design System",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 22.0,
+            "position_count": 5,
+            "employment_gaps_count": 1,
+            "content_preview": "JOB POSITION 3 of 5\n\nTITLE: 2002\nCOMPANY: 2005 | LaunchPad Studio\nPERIOD: 2002 - 2005\nDURATION: 3 ye"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Ji-Yeon Kim  Design System",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 22.0,
+            "position_count": 5,
+            "employment_gaps_count": 1,
+            "content_preview": "JOB POSITION 4 of 5 === CURRENT POSITION ===\n\nTITLE: 2000\nCOMPANY: 2002 | Creative Futures\nPERIOD: 2"
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Ji-Yeon Kim  Design System",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 22.0,
+            "position_count": 5,
+            "employment_gaps_count": 1,
+            "content_preview": "JOB POSITION 5 of 5 === CURRENT POSITION ===\n\nTITLE: guides for emerging mobile applications.\nCOMPAN"
+          },
+          {
+            "index": 6,
+            "section_type": "full_cv",
+            "candidate_name": " Ji-Yeon Kim  Design System",
+            "job_hopping_score": 0.36363636363636365,
+            "avg_tenure_years": 2.2,
+            "total_experience_years": 22.0,
+            "position_count": 5,
+            "employment_gaps_count": 1,
+            "content_preview": "COMPLETE CV for  Ji-Yeon Kim  Design System\n\nCURRENT ROLE: 2000\nCOMPANY: 2002 | Creative Futures\nTOT"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:18.296982",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:18.296982",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_5a64744b",
+        "total_chunks": 10,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Sofia Mendoza  Director of",
+            "job_hopping_score": 0.22580645161290322,
+            "avg_tenure_years": 3.875,
+            "total_experience_years": 16.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Sofia Mendoza  Director of =====\n\nCURRENT POSITION: 2009\nCURRENT COMPANY: "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Sofia Mendoza  Director of",
+            "job_hopping_score": 0.22580645161290322,
+            "avg_tenure_years": 3.875,
+            "total_experience_years": 16.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 8\n\nTITLE: 2017\nCOMPANY: 2022 | BrightWave Studios\nPERIOD: 2017 - 2022\nDURATION: 5 "
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Sofia Mendoza  Director of",
+            "job_hopping_score": 0.22580645161290322,
+            "avg_tenure_years": 3.875,
+            "total_experience_years": 16.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 8\n\nTITLE: 2013\nCOMPANY: 2017 | Crestline Apps\nPERIOD: 2013 - 2017\nDURATION: 4 year"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Sofia Mendoza  Director of",
+            "job_hopping_score": 0.22580645161290322,
+            "avg_tenure_years": 3.875,
+            "total_experience_years": 16.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 8 === CURRENT POSITION ===\n\nTITLE: 2009\nCOMPANY: 2013 | Nova Interactive\nPERIOD: 2"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Sofia Mendoza  Director of",
+            "job_hopping_score": 0.22580645161290322,
+            "avg_tenure_years": 3.875,
+            "total_experience_years": 16.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 8\n\nTITLE: User Research 10/10\nCOMPANY: StartUpX\nPERIOD: 2006 - 2009\nDURATION: 3 ye"
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Sofia Mendoza  Director of",
+            "job_hopping_score": 0.22580645161290322,
+            "avg_tenure_years": 3.875,
+            "total_experience_years": 16.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 5 of 8\n\nTITLE: Master of Design in Human\nCOMPANY: Computer\nPERIOD: 2006 - 2021\nDURATION"
+          },
+          {
+            "index": 6,
+            "section_type": "experience",
+            "candidate_name": " Sofia Mendoza  Director of",
+            "job_hopping_score": 0.22580645161290322,
+            "avg_tenure_years": 3.875,
+            "total_experience_years": 16.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 6 of 8\n\nTITLE: Increased Net Promoter Score by 35 points within nine\nCOMPANY: months th"
+          },
+          {
+            "index": 7,
+            "section_type": "experience",
+            "candidate_name": " Sofia Mendoza  Director of",
+            "job_hopping_score": 0.22580645161290322,
+            "avg_tenure_years": 3.875,
+            "total_experience_years": 16.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 7 of 8\n\nTITLE: Toronto\nCOMPANY: Canada championing an innovative culture that\nPERIOD: U"
+          },
+          {
+            "index": 8,
+            "section_type": "experience",
+            "candidate_name": " Sofia Mendoza  Director of",
+            "job_hopping_score": 0.22580645161290322,
+            "avg_tenure_years": 3.875,
+            "total_experience_years": 16.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 8 of 8\n\nTITLE: Data\nCOMPANY: Driven was accurately implemented.\nPERIOD: Unknown dates\nD"
+          },
+          {
+            "index": 9,
+            "section_type": "full_cv",
+            "candidate_name": " Sofia Mendoza  Director of",
+            "job_hopping_score": 0.22580645161290322,
+            "avg_tenure_years": 3.875,
+            "total_experience_years": 16.0,
+            "position_count": 8,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Sofia Mendoza  Director of\n\nCURRENT ROLE: 2009\nCOMPANY: 2013 | Nova Interactive\nTOT"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:19.089101",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:19.089101",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_c22d9813",
+        "total_chunks": 8,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Camilla Rodrigues  Product",
+            "job_hopping_score": 0.29411764705882354,
+            "avg_tenure_years": 2.8333333333333335,
+            "total_experience_years": 17.0,
+            "position_count": 6,
+            "employment_gaps_count": 2,
+            "content_preview": "===== CANDIDATE PROFILE:  Camilla Rodrigues  Product =====\n\nCURRENT POSITION: 2006\nCURRENT COMPANY: "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Camilla Rodrigues  Product",
+            "job_hopping_score": 0.29411764705882354,
+            "avg_tenure_years": 2.8333333333333335,
+            "total_experience_years": 17.0,
+            "position_count": 6,
+            "employment_gaps_count": 2,
+            "content_preview": "JOB POSITION 1 of 6\n\nTITLE: Launched a design system adopted company‑wide,\nCOMPANY: cutting UI produ"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Camilla Rodrigues  Product",
+            "job_hopping_score": 0.29411764705882354,
+            "avg_tenure_years": 2.8333333333333335,
+            "total_experience_years": 17.0,
+            "position_count": 6,
+            "employment_gaps_count": 2,
+            "content_preview": "JOB POSITION 2 of 6\n\nTITLE: S O C I A L\nCOMPANY: Skyline Corp\nPERIOD: 2014 - 2018\nDURATION: 4 years\n"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Camilla Rodrigues  Product",
+            "job_hopping_score": 0.29411764705882354,
+            "avg_tenure_years": 2.8333333333333335,
+            "total_experience_years": 17.0,
+            "position_count": 6,
+            "employment_gaps_count": 2,
+            "content_preview": "JOB POSITION 3 of 6 === CURRENT POSITION ===\n\nTITLE: 2006\nCOMPANY: 2014 | NovaTech\nPERIOD: 2006 - Pr"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Camilla Rodrigues  Product",
+            "job_hopping_score": 0.29411764705882354,
+            "avg_tenure_years": 2.8333333333333335,
+            "total_experience_years": 17.0,
+            "position_count": 6,
+            "employment_gaps_count": 2,
+            "content_preview": "JOB POSITION 4 of 6\n\nTITLE: 2003\nCOMPANY: 2006 | Inova Studios\nPERIOD: 2003 - 2006\nDURATION: 3 years"
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Camilla Rodrigues  Product",
+            "job_hopping_score": 0.29411764705882354,
+            "avg_tenure_years": 2.8333333333333335,
+            "total_experience_years": 17.0,
+            "position_count": 6,
+            "employment_gaps_count": 2,
+            "content_preview": "JOB POSITION 5 of 6 === CURRENT POSITION ===\n\nTITLE: 1998\nCOMPANY: 2000 | Studio Criativo\nPERIOD: 19"
+          },
+          {
+            "index": 6,
+            "section_type": "experience",
+            "candidate_name": " Camilla Rodrigues  Product",
+            "job_hopping_score": 0.29411764705882354,
+            "avg_tenure_years": 2.8333333333333335,
+            "total_experience_years": 17.0,
+            "position_count": 6,
+            "employment_gaps_count": 2,
+            "content_preview": "JOB POSITION 6 of 6\n\nTITLE: Paulo\nCOMPANY: Camilla blends a native Brazilian\nPERIOD: Unknown dates\nD"
+          },
+          {
+            "index": 7,
+            "section_type": "full_cv",
+            "candidate_name": " Camilla Rodrigues  Product",
+            "job_hopping_score": 0.29411764705882354,
+            "avg_tenure_years": 2.8333333333333335,
+            "total_experience_years": 17.0,
+            "position_count": 6,
+            "employment_gaps_count": 2,
+            "content_preview": "COMPLETE CV for  Camilla Rodrigues  Product\n\nCURRENT ROLE: 2006\nCOMPANY: 2014 | NovaTech\nTOTAL EXPER"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:19.954950",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:19.955952",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_92eaf890",
+        "total_chunks": 8,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Layla Al-Mansur  Interaction",
+            "job_hopping_score": 0.38461538461538464,
+            "avg_tenure_years": 2.1666666666666665,
+            "total_experience_years": 13.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Layla Al-Mansur  Interaction =====\n\nCURRENT POSITION: 2024\nCURRENT COMPANY"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansur  Interaction",
+            "job_hopping_score": 0.38461538461538464,
+            "avg_tenure_years": 2.1666666666666665,
+            "total_experience_years": 13.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 6 === CURRENT POSITION ===\n\nTITLE: 2024\nCOMPANY: Present | ZenCraft Studios\nPERIOD"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansur  Interaction",
+            "job_hopping_score": 0.38461538461538464,
+            "avg_tenure_years": 2.1666666666666665,
+            "total_experience_years": 13.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 6 === CURRENT POSITION ===\n\nTITLE: 2022\nCOMPANY: 2024 | Murex Innovations\nPERIOD: "
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansur  Interaction",
+            "job_hopping_score": 0.38461538461538464,
+            "avg_tenure_years": 2.1666666666666665,
+            "total_experience_years": 13.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 6\n\nTITLE: 2020\nCOMPANY: 2022 | Africlarity Group\nPERIOD: 2020 - 2022\nDURATION: 2 y"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansur  Interaction",
+            "job_hopping_score": 0.38461538461538464,
+            "avg_tenure_years": 2.1666666666666665,
+            "total_experience_years": 13.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 6\n\nTITLE: 2016\nCOMPANY: 2020 | Lagos Creative Group\nPERIOD: 2016 - 2020\nDURATION: "
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansur  Interaction",
+            "job_hopping_score": 0.38461538461538464,
+            "avg_tenure_years": 2.1666666666666665,
+            "total_experience_years": 13.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 5 of 6\n\nTITLE: Storytelling for UX 9/10\nCOMPANY: Naija Digital Agency\nPERIOD: 2013 - 20"
+          },
+          {
+            "index": 6,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansur  Interaction",
+            "job_hopping_score": 0.38461538461538464,
+            "avg_tenure_years": 2.1666666666666665,
+            "total_experience_years": 13.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 6 of 6\n\nTITLE: Layla Al\nCOMPANY: Mansur\nPERIOD: Unknown dates\nDURATION: 0 years\n\nJOB DE"
+          },
+          {
+            "index": 7,
+            "section_type": "full_cv",
+            "candidate_name": " Layla Al-Mansur  Interaction",
+            "job_hopping_score": 0.38461538461538464,
+            "avg_tenure_years": 2.1666666666666665,
+            "total_experience_years": 13.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Layla Al-Mansur  Interaction\n\nCURRENT ROLE: 2024\nCOMPANY: Present | ZenCraft Studio"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:20.791801",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:20.791801",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_46bd6a52",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Rajiv Patel  Brand",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Rajiv Patel  Brand =====\n\nCURRENT POSITION: diverse range of clients\nCURRE"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Rajiv Patel  Brand",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2\n\nTITLE: 2014\nCOMPANY: 2016 | PrintPro Design Studio\nPERIOD: 2014 - 2016\nDURATION"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Rajiv Patel  Brand",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2 === CURRENT POSITION ===\n\nTITLE: diverse range of clients\nCOMPANY: collaborating"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Rajiv Patel  Brand",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Rajiv Patel  Brand\n\nCURRENT ROLE: diverse range of clients\nCOMPANY: collaborating w"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:21.629589",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:21.629589",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_b003422a",
+        "total_chunks": 6,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Javier Morales  Junior UI",
+            "job_hopping_score": 0.375,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 8.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Javier Morales  Junior UI =====\n\nCURRENT POSITION: the senior design team "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Javier Morales  Junior UI",
+            "job_hopping_score": 0.375,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 8.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 4\n\nTITLE: ✉ 2017\nCOMPANY: 2022 | MediaPulse Agency (Barcelona)\nPERIOD: 2017 - 2022"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Javier Morales  Junior UI",
+            "job_hopping_score": 0.375,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 8.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 4\n\nTITLE: 2014\nCOMPANY: 2017 | Local Retail Group (Seville)\nPERIOD: 2014 - 2017\nDU"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Javier Morales  Junior UI",
+            "job_hopping_score": 0.375,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 8.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 4 === CURRENT POSITION ===\n\nTITLE: the senior design team in implementing high-\nCO"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Javier Morales  Junior UI",
+            "job_hopping_score": 0.375,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 8.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 4\n\nTITLE: Madrid\nCOMPANY: Spain Graphic Designer & Digital Asset Coordinator\nPERIO"
+          },
+          {
+            "index": 5,
+            "section_type": "full_cv",
+            "candidate_name": " Javier Morales  Junior UI",
+            "job_hopping_score": 0.375,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 8.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Javier Morales  Junior UI\n\nCURRENT ROLE: the senior design team in implementing hig"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:22.443769",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:22.443769",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_016a43d4",
+        "total_chunks": 8,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Aisha Johnson  UX",
+            "job_hopping_score": 0.12195121951219512,
+            "avg_tenure_years": 6.833333333333333,
+            "total_experience_years": 24.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Aisha Johnson  UX =====\n\nCURRENT POSITION: linkedin.com/in/aishajohnson\nCU"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Aisha Johnson  UX",
+            "job_hopping_score": 0.12195121951219512,
+            "avg_tenure_years": 6.833333333333333,
+            "total_experience_years": 24.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 6\n\nTITLE: Director\nCOMPANY: UX Writing\nPERIOD: 2010 - 2015\nDURATION: 5 years\n\nJOB "
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Aisha Johnson  UX",
+            "job_hopping_score": 0.12195121951219512,
+            "avg_tenure_years": 6.833333333333333,
+            "total_experience_years": 24.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 6\n\nTITLE: 2006\nCOMPANY: 2010 | TechPublish Inc.\nPERIOD: 2006 - 2010\nDURATION: 4 ye"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Aisha Johnson  UX",
+            "job_hopping_score": 0.12195121951219512,
+            "avg_tenure_years": 6.833333333333333,
+            "total_experience_years": 24.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 6\n\nTITLE: 2003\nCOMPANY: 2006 | ContentCraft Studios\nPERIOD: 2003 - 2006\nDURATION: "
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Aisha Johnson  UX",
+            "job_hopping_score": 0.12195121951219512,
+            "avg_tenure_years": 6.833333333333333,
+            "total_experience_years": 24.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 6\n\nTITLE: 1998\nCOMPANY: 2003 | StartLeaf Publishing\nPERIOD: 1998 - 2003\nDURATION: "
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Aisha Johnson  UX",
+            "job_hopping_score": 0.12195121951219512,
+            "avg_tenure_years": 6.833333333333333,
+            "total_experience_years": 24.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 5 of 6\n\nTITLE: University of California\nCOMPANY: Berkeley\nPERIOD: 1998 - 2022\nDURATION:"
+          },
+          {
+            "index": 6,
+            "section_type": "experience",
+            "candidate_name": " Aisha Johnson  UX",
+            "job_hopping_score": 0.12195121951219512,
+            "avg_tenure_years": 6.833333333333333,
+            "total_experience_years": 24.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 6 of 6 === CURRENT POSITION ===\n\nTITLE: linkedin.com/in/aishajohnson\nCOMPANY: Launched "
+          },
+          {
+            "index": 7,
+            "section_type": "full_cv",
+            "candidate_name": " Aisha Johnson  UX",
+            "job_hopping_score": 0.12195121951219512,
+            "avg_tenure_years": 6.833333333333333,
+            "total_experience_years": 24.0,
+            "position_count": 6,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Aisha Johnson  UX\n\nCURRENT ROLE: linkedin.com/in/aishajohnson\nCOMPANY: Launched a c"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:23.290073",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:23.290073",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_f4704ca9",
+        "total_chunks": 9,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Rajesh Kumar  Equity",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.2857142857142858,
+            "total_experience_years": 9.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Rajesh Kumar  Equity =====\n\nCURRENT POSITION: E X P E R I E N C E\nCURRENT "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Rajesh Kumar  Equity",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.2857142857142858,
+            "total_experience_years": 9.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 7 === CURRENT POSITION ===\n\nTITLE: E X P E R I E N C E\nCOMPANY: Equity Partner\nPER"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Rajesh Kumar  Equity",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.2857142857142858,
+            "total_experience_years": 9.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 7\n\nTITLE: 2022\nCOMPANY: 2023 | Vanguard Capital Partners\nPERIOD: 2022 - 2023\nDURAT"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Rajesh Kumar  Equity",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.2857142857142858,
+            "total_experience_years": 9.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 7\n\nTITLE:  +65 8123 4567\nCOMPANY: Horizon Investment Group\nPERIOD: 2021 - 2022\nDU"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Rajesh Kumar  Equity",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.2857142857142858,
+            "total_experience_years": 9.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 7 === CURRENT POSITION ===\n\nTITLE: ascended to Equity Partner by age 20, blending\n"
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Rajesh Kumar  Equity",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.2857142857142858,
+            "total_experience_years": 9.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 5 of 7 === CURRENT POSITION ===\n\nTITLE: 2019\nCOMPANY: 2020 | Alpha Capital Advisors\nPER"
+          },
+          {
+            "index": 6,
+            "section_type": "experience",
+            "candidate_name": " Rajesh Kumar  Equity",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.2857142857142858,
+            "total_experience_years": 9.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 6 of 7\n\nTITLE: 2018\nCOMPANY: 2019 | Beta Financial Services\nPERIOD: 2018 - 2019\nDURATIO"
+          },
+          {
+            "index": 7,
+            "section_type": "experience",
+            "candidate_name": " Rajesh Kumar  Equity",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.2857142857142858,
+            "total_experience_years": 9.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 7 of 7 === CURRENT POSITION ===\n\nTITLE: 2017\nCOMPANY: 2018 | Gamma Consulting\nPERIOD: 2"
+          },
+          {
+            "index": 8,
+            "section_type": "full_cv",
+            "candidate_name": " Rajesh Kumar  Equity",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.2857142857142858,
+            "total_experience_years": 9.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Rajesh Kumar  Equity\n\nCURRENT ROLE: E X P E R I E N C E\nCOMPANY: Equity Partner\nTOT"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:24.224101",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:24.224101",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_f3fadfb3",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Isabella Rodriguez  Design",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 4.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Isabella Rodriguez  Design =====\n\nCURRENT POSITION: enterprise software pr"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Isabella Rodriguez  Design",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 4.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2\n\nTITLE: ✉ 2016\nCOMPANY: 2020 | Global Creative Agency\nPERIOD: 2016 - 2020\nDURATI"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Isabella Rodriguez  Design",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 4.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2 === CURRENT POSITION ===\n\nTITLE: enterprise software products. Responsible for\nC"
+          },
+          {
+            "index": 3,
+            "section_type": "skills",
+            "candidate_name": " Isabella Rodriguez  Design",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 4.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Isabella Rodriguez  Design:\n\nattending workshops and online courses., E"
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": " Isabella Rodriguez  Design",
+            "job_hopping_score": 0.25,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 4.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Isabella Rodriguez  Design\n\nCURRENT ROLE: enterprise software products. Responsible"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:25.034094",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:25.034623",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_aff6a97d",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Li Wei Chen  Talent Acquisition",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Li Wei Chen  Talent Acquisition =====\n\nCURRENT POSITION: globally‑distribu"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Li Wei Chen  Talent Acquisition",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3\n\nTITLE: 2013\nCOMPANY: 2016 | EarlyStage Inc.\nPERIOD: 2013 - 2016\nDURATION: 3 yea"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Li Wei Chen  Talent Acquisition",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3\n\nTITLE: L A N G U A G E S\nCOMPANY: Initio HR\nPERIOD: 2010 - 2013\nDURATION: 3 yea"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Li Wei Chen  Talent Acquisition",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3 === CURRENT POSITION ===\n\nTITLE: globally‑distributed teams. Recognized for achi"
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": " Li Wei Chen  Talent Acquisition",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Li Wei Chen  Talent Acquisition\n\nCURRENT ROLE: globally‑distributed teams. Recogniz"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:25.894073",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:25.894073",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_d5714cef",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Layla Al-Mansoor  Design",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 3.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Layla Al-Mansoor  Design =====\n\nCURRENT POSITION: for a variety of clients"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansoor  Design",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 3.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3\n\nTITLE: 2018\nCOMPANY: 2020 | Creative Spark Studios\nPERIOD: 2018 - 2020\nDURATION"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansoor  Design",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 3.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3\n\nTITLE: Distinction, Focused on Human\nCOMPANY: Centered Design\nPERIOD: 2018 - 20"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansoor  Design",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 3.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3 === CURRENT POSITION ===\n\nTITLE: for a variety of clients across different indus"
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": " Layla Al-Mansoor  Design",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 3.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Layla Al-Mansoor  Design\n\nCURRENT ROLE: for a variety of clients across different i"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:26.661983",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:26.661983",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_ebe38662",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Isabel Moreno  Distinguished",
+            "job_hopping_score": 0.03333333333333333,
+            "avg_tenure_years": 15.0,
+            "total_experience_years": 18.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Isabel Moreno  Distinguished =====\n\nCURRENT POSITION: Statistical courses "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Isabel Moreno  Distinguished",
+            "job_hopping_score": 0.03333333333333333,
+            "avg_tenure_years": 15.0,
+            "total_experience_years": 18.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2 === CURRENT POSITION ===\n\nTITLE: Statistical courses in data structures and algo"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Isabel Moreno  Distinguished",
+            "job_hopping_score": 0.03333333333333333,
+            "avg_tenure_years": 15.0,
+            "total_experience_years": 18.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2\n\nTITLE: Summa Cum Laude\nCOMPANY: Research Excellence Award\nPERIOD: 2008 - 2023\nD"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Isabel Moreno  Distinguished",
+            "job_hopping_score": 0.03333333333333333,
+            "avg_tenure_years": 15.0,
+            "total_experience_years": 18.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Isabel Moreno  Distinguished\n\nCURRENT ROLE: Statistical courses in data structures "
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:27.454031",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:27.454031",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_82a774bf",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Carlos Mendoza  Graphic",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 1.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Carlos Mendoza  Graphic =====\n\nCURRENT POSITION: leveraging a relentless c"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Carlos Mendoza  Graphic",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 1.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: leveraging a relentless curiosity and a Dean's "
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": " Carlos Mendoza  Graphic",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 1.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Carlos Mendoza  Graphic\n\nCURRENT ROLE: leveraging a relentless curiosity and a Dean"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:28.277566",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:28.277566",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_1f9e298f",
+        "total_chunks": 9,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Derrick Okafor  Talent Acquisition",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5714285714285716,
+            "total_experience_years": 18.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Derrick Okafor  Talent Acquisition =====\n\nCURRENT POSITION: high‑performin"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Derrick Okafor  Talent Acquisition",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5714285714285716,
+            "total_experience_years": 18.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 7\n\nTITLE: 2008\nCOMPANY: 2012 | ScaleUp Co\nPERIOD: 2008 - 2012\nDURATION: 4 years\n\nJ"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Derrick Okafor  Talent Acquisition",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5714285714285716,
+            "total_experience_years": 18.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 7\n\nTITLE: 2004\nCOMPANY: 2008 | Innovatech\nPERIOD: 2004 - 2008\nDURATION: 4 years\n\nJ"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Derrick Okafor  Talent Acquisition",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5714285714285716,
+            "total_experience_years": 18.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 7\n\nTITLE: 2000\nCOMPANY: 2004 | Global Talent Ltd\nPERIOD: 2000 - 2004\nDURATION: 4 y"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Derrick Okafor  Talent Acquisition",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5714285714285716,
+            "total_experience_years": 18.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 7\n\nTITLE: 1996\nCOMPANY: 2000 | ABC Solutions\nPERIOD: 1996 - 2000\nDURATION: 4 years"
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Derrick Okafor  Talent Acquisition",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5714285714285716,
+            "total_experience_years": 18.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 5 of 7\n\nTITLE: 1994\nCOMPANY: 1996 | XYZ Staffing\nPERIOD: 1994 - 1996\nDURATION: 2 years\n"
+          },
+          {
+            "index": 6,
+            "section_type": "experience",
+            "candidate_name": " Derrick Okafor  Talent Acquisition",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5714285714285716,
+            "total_experience_years": 18.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 6 of 7 === CURRENT POSITION ===\n\nTITLE: high‑performing\nCOMPANY: diverse teams across N"
+          },
+          {
+            "index": 7,
+            "section_type": "experience",
+            "candidate_name": " Derrick Okafor  Talent Acquisition",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5714285714285716,
+            "total_experience_years": 18.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 7 of 7\n\nTITLE: Data\nCOMPANY: Driven\nPERIOD: Unknown dates\nDURATION: 0 years\n\nJOB DESCRI"
+          },
+          {
+            "index": 8,
+            "section_type": "full_cv",
+            "candidate_name": " Derrick Okafor  Talent Acquisition",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5714285714285716,
+            "total_experience_years": 18.0,
+            "position_count": 7,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Derrick Okafor  Talent Acquisition\n\nCURRENT ROLE: high‑performing\nCOMPANY: diverse "
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:29.170786",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:29.170786",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_cde7eebb",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Diego Morales  Graphic",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Diego Morales  Graphic =====\n\nCURRENT POSITION: balancing aesthetic appeal"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Diego Morales  Graphic",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: balancing aesthetic appeal with usability.\nCOMP"
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": " Diego Morales  Graphic",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Diego Morales  Graphic\n\nCURRENT ROLE: balancing aesthetic appeal with usability.\nCO"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:29.983475",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:29.983475",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_ef468ac4",
+        "total_chunks": 6,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Layla Al-Mansour  Visual",
+            "job_hopping_score": 0.23076923076923078,
+            "avg_tenure_years": 3.25,
+            "total_experience_years": 24.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Layla Al-Mansour  Visual =====\n\nCURRENT POSITION: collateral for diverse c"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansour  Visual",
+            "job_hopping_score": 0.23076923076923078,
+            "avg_tenure_years": 3.25,
+            "total_experience_years": 24.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 4\n\nTITLE: Summa Cum Laude\nCOMPANY: Thesis on Narrative Visual Storytelling\nPERIOD:"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansour  Visual",
+            "job_hopping_score": 0.23076923076923078,
+            "avg_tenure_years": 3.25,
+            "total_experience_years": 24.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 4\n\nTITLE: Adobe Certified Expert\nCOMPANY: Photoshop\nPERIOD: 2021 - ?\nDURATION: 5 y"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansour  Visual",
+            "job_hopping_score": 0.23076923076923078,
+            "avg_tenure_years": 3.25,
+            "total_experience_years": 24.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 4\n\nTITLE: 2002\nCOMPANY: 2006 | Design Studio X\nPERIOD: 2002 - 2006\nDURATION: 4 yea"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Layla Al-Mansour  Visual",
+            "job_hopping_score": 0.23076923076923078,
+            "avg_tenure_years": 3.25,
+            "total_experience_years": 24.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 4 === CURRENT POSITION ===\n\nTITLE: collateral for diverse clientele\nCOMPANY: empha"
+          },
+          {
+            "index": 5,
+            "section_type": "full_cv",
+            "candidate_name": " Layla Al-Mansour  Visual",
+            "job_hopping_score": 0.23076923076923078,
+            "avg_tenure_years": 3.25,
+            "total_experience_years": 24.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Layla Al-Mansour  Visual\n\nCURRENT ROLE: collateral for diverse clientele\nCOMPANY: e"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:30.834800",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:30.835801",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_e4718910",
+        "total_chunks": 6,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Axel Johansson  Junior Visual",
+            "job_hopping_score": 0.23076923076923078,
+            "avg_tenure_years": 3.25,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Axel Johansson  Junior Visual =====\n\nCURRENT POSITION: 2022\nCURRENT COMPAN"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Axel Johansson  Junior Visual",
+            "job_hopping_score": 0.23076923076923078,
+            "avg_tenure_years": 3.25,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 4 === CURRENT POSITION ===\n\nTITLE: 2022\nCOMPANY: Present | Nordic Digital Agency\nP"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Axel Johansson  Junior Visual",
+            "job_hopping_score": 0.23076923076923078,
+            "avg_tenure_years": 3.25,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 4 === CURRENT POSITION ===\n\nTITLE: Swedish ⭐⭐⭐⭐⭐⭐ C2 (Native)\nCOMPANY: Startup X ("
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Axel Johansson  Junior Visual",
+            "job_hopping_score": 0.23076923076923078,
+            "avg_tenure_years": 3.25,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 4\n\nTITLE: Konstfack University College of Arts\nCOMPANY: Crafts and Design\nPERIOD: "
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Axel Johansson  Junior Visual",
+            "job_hopping_score": 0.23076923076923078,
+            "avg_tenure_years": 3.25,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 4\n\nTITLE: continuous learning within fast\nCOMPANY: paced creative\nPERIOD: Unknown "
+          },
+          {
+            "index": 5,
+            "section_type": "full_cv",
+            "candidate_name": " Axel Johansson  Junior Visual",
+            "job_hopping_score": 0.23076923076923078,
+            "avg_tenure_years": 3.25,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Axel Johansson  Junior Visual\n\nCURRENT ROLE: 2022\nCOMPANY: Present | Nordic Digital"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:31.596337",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:31.596337",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_29b92bef",
+        "total_chunks": 6,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Lukas Schmidt  Junior Graphic",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Lukas Schmidt  Junior Graphic =====\n\nCURRENT POSITION: E X P E R I E N C E"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Lukas Schmidt  Junior Graphic",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3 === CURRENT POSITION ===\n\nTITLE: E X P E R I E N C E\nCOMPANY: Design Intern\nPERI"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Lukas Schmidt  Junior Graphic",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3\n\nTITLE: Berlin\nCOMPANY: Germany\nPERIOD: 2023 - ?\nDURATION: 3 years\n\nJOB DESCRIPT"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Lukas Schmidt  Junior Graphic",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3\n\nTITLE: Highly adaptable, Lukas excels\nCOMPANY: transforming\nPERIOD: 2020 - 2022"
+          },
+          {
+            "index": 4,
+            "section_type": "skills",
+            "candidate_name": " Lukas Schmidt  Junior Graphic",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for  Lukas Schmidt  Junior Graphic:\n\nlukas.schmidt.design@email.de, +49 170 "
+          },
+          {
+            "index": 5,
+            "section_type": "full_cv",
+            "candidate_name": " Lukas Schmidt  Junior Graphic",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 6.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Lukas Schmidt  Junior Graphic\n\nCURRENT ROLE: E X P E R I E N C E\nCOMPANY: Design In"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:32.506672",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:32.506672",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_1b154a2d",
+        "total_chunks": 2,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Luc Dubois  UX-UI",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 0,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Luc Dubois  UX-UI =====\n\nCURRENT POSITION: Not specified\nCURRENT COMPANY: "
+          },
+          {
+            "index": 1,
+            "section_type": "full_cv",
+            "candidate_name": " Luc Dubois  UX-UI",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 0,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Luc Dubois  UX-UI\n\nCURRENT ROLE: Not specified\nCOMPANY: Not specified\nTOTAL EXPERIE"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:33.355736",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:33.355736",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_ffe63cb6",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Pieter de Vries  Design",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Pieter de Vries  Design =====\n\nCURRENT POSITION: facing journeys (Checkout"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Pieter de Vries  Design",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2\n\nTITLE: Interaction Design\nCOMPANY: Digital Agency 'PixelCraft'\nPERIOD: 2016 - 2"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Pieter de Vries  Design",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2 === CURRENT POSITION ===\n\nTITLE: facing journeys (Checkout\nCOMPANY: Cart, Search"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Pieter de Vries  Design",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Pieter de Vries  Design\n\nCURRENT ROLE: facing journeys (Checkout\nCOMPANY: Cart, Sea"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:51.372717",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "8760b6d0-4444-4fc1-b881-7b90881f75a2"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:58:51.372717",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "What technologies do the candidates have?",
+        "cv_ids": [
+          "cv_fc480b3a",
+          "cv_37022c05",
+          "cv_1e0faaae",
+          "cv_568c5e60",
+          "cv_5a64744b",
+          "cv_c22d9813",
+          "cv_92eaf890",
+          "cv_46bd6a52",
+          "cv_b003422a",
+          "cv_016a43d4",
+          "cv_f4704ca9",
+          "cv_f3fadfb3",
+          "cv_aff6a97d",
+          "cv_d5714cef",
+          "cv_ebe38662",
+          "cv_82a774bf",
+          "cv_1f9e298f",
+          "cv_cde7eebb",
+          "cv_ef468ac4",
+          "cv_e4718910",
+          "cv_29b92bef",
+          "cv_1b154a2d",
+          "cv_ffe63cb6"
+        ],
+        "cv_count": 23
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:59:05.230579",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 23,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_016a43d4",
+            "candidate_name": " Aisha Johnson  UX",
+            "section_type": "experience",
+            "job_hopping_score": 0.12195121951219512,
+            "avg_tenure_years": 6.833333333333333,
+            "total_experience_years": 24.0,
+            "score": 0.5800612686489656,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_1f9e298f",
+            "candidate_name": " Derrick Okafor  Talent Acquisition",
+            "section_type": "experience",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5714285714285716,
+            "total_experience_years": 18.0,
+            "score": 0.5773733081949893,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_29b92bef",
+            "candidate_name": " Lukas Schmidt  Junior Graphic",
+            "section_type": "experience",
+            "job_hopping_score": 0.4,
+            "avg_tenure_years": 1.6666666666666667,
+            "total_experience_years": 6.0,
+            "score": 0.571527116046964,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_b003422a",
+            "candidate_name": " Javier Morales  Junior UI",
+            "section_type": "experience",
+            "job_hopping_score": 0.375,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 8.0,
+            "score": 0.5668113230667975,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_f4704ca9",
+            "candidate_name": " Rajesh Kumar  Equity",
+            "section_type": "experience",
+            "job_hopping_score": 0.6666666666666666,
+            "avg_tenure_years": 1.2857142857142858,
+            "total_experience_years": 9.0,
+            "score": 0.5603857782582018,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_fc480b3a",
+            "candidate_name": " Maximilian Bauer  Design",
+            "section_type": "experience",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 6.0,
+            "score": 0.5593543563253545,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_ebe38662",
+            "candidate_name": " Isabel Moreno  Distinguished",
+            "section_type": "experience",
+            "job_hopping_score": 0.03333333333333333,
+            "avg_tenure_years": 15.0,
+            "total_experience_years": 18.0,
+            "score": 0.5552228803133896,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_1e0faaae",
+            "candidate_name": " Layla Amiri  Director of Product",
+            "section_type": "experience",
+            "job_hopping_score": 0.4166666666666667,
+            "avg_tenure_years": 2.0,
+            "total_experience_years": 12.0,
+            "score": 0.5550738978906955,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_5a64744b",
+            "candidate_name": " Sofia Mendoza  Director of",
+            "section_type": "experience",
+            "job_hopping_score": 0.22580645161290322,
+            "avg_tenure_years": 3.875,
+            "total_experience_years": 16.0,
+            "score": 0.5550369507247643,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_ffe63cb6",
+            "candidate_name": " Pieter de Vries  Design",
+            "section_type": "experience",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.0,
+            "total_experience_years": 2.0,
+            "score": 0.5521875312109717,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "location",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T19:59:28.597153",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:00:03.086920",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "search",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:00:03.206491",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 364,
+        "answer_preview": ":::thinking\n- The user is asking about technologies used by the candidates.\n- I need to analyze each CV and extract explicit mentions of technologies.\n- I must adhere to the strict rules and avoid any unverified claims.\n- I will present the findings in a table format.\n:::\n\n\n:::conclusion\nThe candidates with explicit mentions of technologies are listed above.\n:::",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

@@ -18,6 +18,22 @@ class Settings(BaseSettings):
     default_mode: Mode = Mode.LOCAL
     
     # ============================================
+    # HUGGINGFACE CONFIGURATION (FREE - v7 Features)
+    # ============================================
+    huggingface_api_key: Optional[str] = None
+    
+    # Model configuration
+    hf_nli_model: str = "microsoft/deberta-v3-base-mnli"
+    hf_reranker_model: str = "BAAI/bge-reranker-base"
+    hf_zeroshot_model: str = "MoritzLaurer/deberta-v3-base-zeroshot-v2.0"
+    
+    # Feature flags for v7 services
+    use_hf_guardrails: bool = True  # Zero-shot guardrails
+    use_hf_reranker: bool = True    # Cross-encoder reranking
+    use_hf_nli: bool = True         # NLI verification
+    use_ragas_eval: bool = True     # RAGAS evaluation logging
+    
+    # ============================================
     # LOCAL MODE CONFIGURATION
     # ============================================
     # Google AI Studio (for Gemini LLM)
