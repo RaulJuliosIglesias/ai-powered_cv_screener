@@ -1,0 +1,390 @@
+{
+  "session_id": "b52559f5-63df-4233-b8b5-a4a2b24e5bfe",
+  "generated_at": "2026-01-08T20:42:57.841861",
+  "events": [
+    {
+      "timestamp": "2026-01-08T20:40:53.623742",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "b52559f5-63df-4233-b8b5-a4a2b24e5bfe"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:40:53.624252",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Who has the most total experience?",
+        "cv_ids": [
+          "cv_4fa786c9",
+          "cv_2d404e7a",
+          "cv_57454224",
+          "cv_1324cb1b",
+          "cv_eec7ef06",
+          "cv_36d44e9c"
+        ],
+        "cv_count": 6
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:41:13.926641",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 6,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_1324cb1b",
+            "candidate_name": " Gabriela Martinez  Research",
+            "section_type": "experience",
+            "job_hopping_score": 0.4444444444444444,
+            "avg_tenure_years": 1.8,
+            "total_experience_years": 9.0,
+            "score": 0.5615234441511823,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_36d44e9c",
+            "candidate_name": " Ji-Yeon Kim  Research Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 8.0,
+            "score": 0.5499470261938587,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_2d404e7a",
+            "candidate_name": " Priya Patel  Research Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 9.0,
+            "score": 0.5414060715558369,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_4fa786c9",
+            "candidate_name": " Layla Al-Mansoor  Lab",
+            "section_type": "experience",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.5413923403094728,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_57454224",
+            "candidate_name": " Matteo Rossi  UX",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5343936923832122,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_eec7ef06",
+            "candidate_name": " Khalid Al-Mansoori  Research",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.05555555555555555,
+            "avg_tenure_years": 12.0,
+            "total_experience_years": 31.0,
+            "score": 0.5310159999426772,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "location",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:41:31.975523",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:41:46.252732",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "search",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:41:46.434652",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 384,
+        "answer_preview": ":::thinking\nThe user has not provided a specific query. I will provide a general overview of the candidates and their skills based on the available CV data.\n:::\n\n\n:::conclusion\nThe candidates with the strongest profiles based on the provided information are **[Gabriela Martinez](cv:cv_1324cb1b)**, **[Matteo Rossi](cv:cv_57454224)**, and **[Khalid Al-Mansoori](cv:cv_eec7ef06)**.\n:::",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:42:09.941662",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "b52559f5-63df-4233-b8b5-a4a2b24e5bfe"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:42:09.941662",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "What other technologies do these candidates know?",
+        "cv_ids": [
+          "cv_4fa786c9",
+          "cv_2d404e7a",
+          "cv_57454224",
+          "cv_1324cb1b",
+          "cv_eec7ef06",
+          "cv_36d44e9c"
+        ],
+        "cv_count": 6
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:42:26.076457",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 6,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_1324cb1b",
+            "candidate_name": " Gabriela Martinez  Research",
+            "section_type": "experience",
+            "job_hopping_score": 0.4444444444444444,
+            "avg_tenure_years": 1.8,
+            "total_experience_years": 9.0,
+            "score": 0.5735807496830184,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_36d44e9c",
+            "candidate_name": " Ji-Yeon Kim  Research Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 8.0,
+            "score": 0.5598011434624506,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_2d404e7a",
+            "candidate_name": " Priya Patel  Research Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 9.0,
+            "score": 0.5589717949439795,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_4fa786c9",
+            "candidate_name": " Layla Al-Mansoor  Lab",
+            "section_type": "experience",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.5412641908772394,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_eec7ef06",
+            "candidate_name": " Khalid Al-Mansoori  Research",
+            "section_type": "experience",
+            "job_hopping_score": 0.05555555555555555,
+            "avg_tenure_years": 12.0,
+            "total_experience_years": 31.0,
+            "score": 0.5284548313584837,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_57454224",
+            "candidate_name": " Matteo Rossi  UX",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.5244045584402204,
+            "has_enriched_metadata": false
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "location",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:42:44.125514",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:42:57.718770",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "search",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T20:42:57.840860",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 823,
+        "answer_preview": ":::thinking\nThe user is asking who has the most total experience. I need to analyze the provided CVs and extract the total years of experience for each candidate. I will then identify the candidate(s) with the highest number of years.\n\nI will calculate the total experience based on the provided job durations. For Matteo Rossi, the CV explicitly states \"9 years of experience\". For Khalid Al-Mansoori, the CV mentions a Doctoral Fellowship from 1990-2021, which is 31 years. For Gabriela Martinez, t...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

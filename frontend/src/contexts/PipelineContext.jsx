@@ -58,7 +58,8 @@ export function PipelineProvider({ children }) {
   }, [triggerUpdate, triggerStreamingUpdate]);
 
   // Update a step during SSE streaming
-  const updateStep = useCallback((sessionId, stepName, status, details = null) => {
+  // Now accepts full metadata object to capture v7 data (method, results, etc.)
+  const updateStep = useCallback((sessionId, stepName, status, metadata = null) => {
     if (!pipelineBySessionRef.current[sessionId]) {
       // Initialize if not exists (edge case)
       pipelineBySessionRef.current[sessionId] = {
@@ -68,9 +69,17 @@ export function PipelineProvider({ children }) {
       };
     }
     
+    // Store ALL metadata from the event (method, results, details, duration_ms, etc.)
+    const stepData = { 
+      status, 
+      ...(metadata || {}),
+      // Keep metadata nested for v7 method access
+      metadata: metadata || {}
+    };
+    
     pipelineBySessionRef.current[sessionId] = {
       ...pipelineBySessionRef.current[sessionId],
-      [stepName]: { status, details }
+      [stepName]: stepData
     };
     triggerUpdate();
   }, [triggerUpdate]);

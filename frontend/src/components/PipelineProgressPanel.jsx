@@ -315,60 +315,84 @@ const PipelineProgressPanel = ({ isExpanded, onToggleExpand, autoExpand, onToggl
                 const v7Label = config.v7Label && v7Method ? config.v7Label(v7Method) : null;
 
                 return (
-                  <div
-                    key={stepName}
-                    className={`
-                      rounded-lg px-2 py-1.5 transition-all duration-200 flex items-center gap-2
-                      ${isRunning ? 'bg-emerald-50 dark:bg-emerald-900/30' : 
-                        isCompleted ? 'bg-slate-50 dark:bg-slate-800/50' : 
-                        'opacity-40'}
-                    `}
-                  >
-                    {/* Status indicator */}
-                    <div className={`
-                      flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center
-                      ${isCompleted ? 'bg-emerald-500 text-white' :
-                        isRunning ? 'bg-emerald-500 text-white' :
-                        'bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-500'}
-                    `}>
-                      {isCompleted ? (
-                        <CheckCircle className="w-3 h-3" />
-                      ) : isRunning ? (
-                        <Loader className="w-3 h-3 animate-spin" />
-                      ) : (
-                        <span className="text-[9px] font-bold">{index + 1}</span>
-                      )}
-                    </div>
-
-                    {/* Icon */}
-                    <Icon className={`
-                      w-3.5 h-3.5 flex-shrink-0
-                      ${isRunning ? 'text-emerald-600 dark:text-emerald-400' :
-                        isCompleted ? 'text-emerald-600 dark:text-emerald-400' :
-                        'text-slate-400 dark:text-slate-600'}
-                    `} />
-
-                    {/* Label + V7 badge */}
-                    <div className="flex-1 flex items-center gap-1.5 min-w-0">
-                      <span className={`
-                        text-xs truncate
-                        ${isRunning ? 'text-slate-900 dark:text-white font-medium' :
-                          isCompleted ? 'text-slate-600 dark:text-slate-400' :
-                          'text-slate-500 dark:text-slate-600'}
+                  <div key={stepName} className="space-y-1">
+                    <div
+                      className={`
+                        rounded-lg px-2 py-1.5 transition-all duration-200 flex items-center gap-2
+                        ${isRunning ? 'bg-emerald-50 dark:bg-emerald-900/30' : 
+                          isCompleted ? 'bg-slate-50 dark:bg-slate-800/50' : 
+                          'opacity-40'}
+                      `}
+                    >
+                      {/* Status indicator */}
+                      <div className={`
+                        flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center
+                        ${isCompleted ? 'bg-emerald-500 text-white' :
+                          isRunning ? 'bg-emerald-500 text-white' :
+                          'bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-500'}
                       `}>
-                        {language === 'es' ? config.labelEs : config.labelEn}
-                      </span>
-                      {/* V7 Method Badge */}
-                      {v7Label && isCompleted && (
-                        <span className="text-[9px] px-1 py-0.5 rounded bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-300 font-medium whitespace-nowrap">
-                          {v7Label}
+                        {isCompleted ? (
+                          <CheckCircle className="w-3 h-3" />
+                        ) : isRunning ? (
+                          <Loader className="w-3 h-3 animate-spin" />
+                        ) : (
+                          <span className="text-[9px] font-bold">{index + 1}</span>
+                        )}
+                      </div>
+
+                      {/* Icon */}
+                      <Icon className={`
+                        w-3.5 h-3.5 flex-shrink-0
+                        ${isRunning ? 'text-emerald-600 dark:text-emerald-400' :
+                          isCompleted ? 'text-emerald-600 dark:text-emerald-400' :
+                          'text-slate-400 dark:text-slate-600'}
+                      `} />
+
+                      {/* Label + V7 badge */}
+                      <div className="flex-1 flex items-center gap-1.5 min-w-0">
+                        <span className={`
+                          text-xs truncate
+                          ${isRunning ? 'text-slate-900 dark:text-white font-medium' :
+                            isCompleted ? 'text-slate-600 dark:text-slate-400' :
+                            'text-slate-500 dark:text-slate-600'}
+                        `}>
+                          {language === 'es' ? config.labelEs : config.labelEn}
                         </span>
+                        {/* V7 Method Badge */}
+                        {v7Label && isCompleted && (
+                          <span className="text-[9px] px-1 py-0.5 rounded bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-300 font-medium whitespace-nowrap">
+                            {v7Label}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Right status icon */}
+                      {isCompleted && (
+                        <CheckCircle className="w-3 h-3 text-emerald-500 flex-shrink-0" />
                       )}
                     </div>
-
-                    {/* Right status icon */}
-                    {isCompleted && (
-                      <CheckCircle className="w-3 h-3 text-emerald-500 flex-shrink-0" />
+                    
+                    {/* Reranking Results - Show top candidates with scores */}
+                    {stepName === 'reranking' && isCompleted && stepData.results && stepData.results.length > 0 && (
+                      <div className="ml-7 p-2 bg-slate-100 dark:bg-slate-800 rounded-md">
+                        <div className="text-[10px] font-medium text-slate-500 dark:text-slate-400 mb-1">
+                          {language === 'es' ? 'Top rerankeados:' : 'Top reranked:'}
+                        </div>
+                        <div className="space-y-0.5">
+                          {stepData.results.slice(0, 3).map((result, idx) => (
+                            <div key={idx} className="flex items-center justify-between text-[10px]">
+                              <span className="text-slate-600 dark:text-slate-300 truncate max-w-[100px]">
+                                #{result.rank} {result.candidate}
+                              </span>
+                              {result.score && (
+                                <span className="text-emerald-600 dark:text-emerald-400 font-mono">
+                                  {(result.score * 100).toFixed(0)}%
+                                </span>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     )}
                   </div>
                 );

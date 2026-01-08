@@ -1122,12 +1122,14 @@ class RAGServiceV5:
             reranking_method = "llm"
             if ctx.reranked_chunks:
                 for i, chunk in enumerate(ctx.reranked_chunks[:5]):  # Top 5
-                    metadata = chunk.metadata if hasattr(chunk, 'metadata') else {}
+                    # chunks are dicts, not objects - access via .get()
+                    metadata = chunk.get("metadata", {}) if isinstance(chunk, dict) else {}
+                    score = chunk.get("score") if isinstance(chunk, dict) else None
                     reranking_results.append({
                         "rank": i + 1,
                         "candidate": metadata.get("candidate_name", "Unknown"),
                         "cv_id": metadata.get("cv_id", ""),
-                        "score": round(chunk.score, 3) if hasattr(chunk, 'score') and chunk.score else None
+                        "score": round(score, 3) if score else None
                     })
             # Get method from metrics
             reranking_stage = ctx.metrics.get_stage(PipelineStage.RERANKING)

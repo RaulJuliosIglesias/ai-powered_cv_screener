@@ -1722,23 +1722,48 @@ def detect_single_candidate_query(
     
     # Also check names from chunks
     for name, cv_id in unique_candidates.items():
-        name_lower = name.lower()
-        if name_lower in q_lower:
+        # Clean name: remove extra spaces and common suffixes like "Research", "UX", etc.
+        clean_name = name.strip()
+        # Remove common job title suffixes that might be appended to names
+        for suffix in [" Research", " Associate", " UX", " Lab", " Manager", " Developer", " Engineer"]:
+            if clean_name.endswith(suffix):
+                clean_name = clean_name[:-len(suffix)].strip()
+        
+        clean_name_lower = clean_name.lower()
+        
+        # Check if clean name is in query
+        if clean_name_lower in q_lower:
             return SingleCandidateDetection(
                 is_single_candidate=True,
-                candidate_name=name,
+                candidate_name=clean_name,
                 cv_id=cv_id,
                 confidence=0.95,
                 detection_method="explicit_name_in_query"
             )
+        
+        # Check first + last name separately
+        name_parts = clean_name.split()
+        if len(name_parts) >= 2:
+            first_name = name_parts[0].lower()
+            last_name = name_parts[-1].lower()
+            # Check if both first and last name appear in query
+            if len(first_name) > 2 and len(last_name) > 2:
+                if first_name in q_lower and last_name in q_lower:
+                    return SingleCandidateDetection(
+                        is_single_candidate=True,
+                        candidate_name=clean_name,
+                        cv_id=cv_id,
+                        confidence=0.90,
+                        detection_method="first_last_name_in_query"
+                    )
+        
         # Check first name only (if multi-word name)
-        name_parts = name.split()
         if len(name_parts) > 1:
             first_name = name_parts[0].lower()
             if len(first_name) > 3 and first_name in q_lower:
                 return SingleCandidateDetection(
                     is_single_candidate=True,
-                    candidate_name=name,
+                    candidate_name=clean_name,
                     cv_id=cv_id,
                     confidence=0.85,
                     detection_method="first_name_in_query"

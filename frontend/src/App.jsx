@@ -440,7 +440,8 @@ function App() {
               console.log(`🔄 REAL Step: ${stepName} - ${stepStatus}`, data);
               
               // Update pipeline for this specific session (via context)
-              updateStep(targetSessionId, stepName, stepStatus, data.details);
+              // Pass ALL data (method, results, details, duration_ms) for v7 features
+              updateStep(targetSessionId, stepName, stepStatus, data);
               
               // Update streaming state with progressive content - FOR THIS SESSION
               setStreamingStateBySession(prev => {
