@@ -1805,11 +1805,15 @@ def detect_single_candidate_query(
         r"\b(?:el|the)\s+(?:candidato|candidate)\s+(?:anterior|previous|seleccionado|selected)\b",
         r"\b(?:profile|perfil)\s+(?:completo|complete|full)\b",
         r"\b(?:dame|give me)\s+(?:todo|everything)\s+(?:sobre|about)\s+(?:él|ella|him|her|this)\b",
-        # Ranking references - #1, #2, top candidate, first candidate, best candidate
+        # Ranking references - #1, #2, top candidate, first candidate, best candidate, winner
         r"#\d+\s*(?:candidato?|candidate)?",
-        r"\b(?:the|el|la)?\s*(?:top|best|first|number one|número uno|primero?|mejor)\s+(?:candidato?|candidate)\b",
-        r"\b(?:full\s+)?profile\s+(?:of|for|de)\s+(?:the\s+)?(?:#\d+|top|best|first)\b",
-        r"\bgive me\s+(?:the\s+)?(?:full\s+)?profile\s+(?:of|for)\s+(?:the\s+)?(?:#\d+|top|first)\b",
+        r"\b(?:the|el|la)?\s*(?:top|best|first|number one|número uno|primero?|mejor|winner|ganador)\s+(?:candidato?|candidate)?\b",
+        r"\b(?:full\s+)?profile\s+(?:of|for|de)\s+(?:the\s+)?(?:#\d+|top|best|first|winner|ganador)\b",
+        r"\bgive me\s+(?:the\s+)?(?:full\s+)?profile\s+(?:of|for)\s+(?:the\s+)?(?:#\d+|top|first|winner|ganador)\b",
+        # Winner/ganador specific patterns
+        r"\b(?:the|el|la)?\s*(?:comparison\s+)?(?:winner|ganador)\b",
+        r"\b(?:more|more\s+details|details)\s+(?:about|on)\s+(?:the\s+)?(?:winner|ganador)\b",
+        r"\b(?:tell\s+me|dime)\s+(?:more|details)\s+(?:about)\s+(?:the\s+)?(?:winner|ganador)\b",
     ]
     
     for pattern in single_candidate_intent_patterns:
