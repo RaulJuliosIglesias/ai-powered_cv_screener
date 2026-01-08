@@ -1800,20 +1800,59 @@ def detect_single_candidate_query(
     # Method 3: Query patterns that indicate single candidate intent (even without name)
     # These are queries like "analiza completamente este candidato" or "analyze this candidate"
     single_candidate_intent_patterns = [
+        # Basic analysis patterns
         r"\b(?:analiza|analyze|examina|examine)\s+(?:completamente|fully|en detalle|in detail)?\s*(?:a\s+)?(?:este|this|el)\s+(?:candidato|candidate)\b",
         r"\b(?:este|this)\s+(?:candidato|candidate)\b",
         r"\b(?:el|the)\s+(?:candidato|candidate)\s+(?:anterior|previous|seleccionado|selected)\b",
         r"\b(?:profile|perfil)\s+(?:completo|complete|full)\b",
         r"\b(?:dame|give me)\s+(?:todo|everything)\s+(?:sobre|about)\s+(?:él|ella|him|her|this)\b",
-        # Ranking references - #1, #2, top candidate, first candidate, best candidate, winner
+        
+        # Extended ranking references - #1, #2, top, best, first, winner + NEW
         r"#\d+\s*(?:candidato?|candidate)?",
         r"\b(?:the|el|la)?\s*(?:top|best|first|number one|número uno|primero?|mejor|winner|ganador)\s+(?:candidato?|candidate)?\b",
         r"\b(?:full\s+)?profile\s+(?:of|for|de)\s+(?:the\s+)?(?:#\d+|top|best|first|winner|ganador)\b",
         r"\bgive me\s+(?:the\s+)?(?:full\s+)?profile\s+(?:of|for)\s+(?:the\s+)?(?:#\d+|top|first|winner|ganador)\b",
-        # Winner/ganador specific patterns
+        
+        # NEW: Extended rankings (second, third, last, runner-up)
+        r"\b(?:second|third|fourth|fifth|last|runner-up|segundo|tercero|cuarto|quinto|último|subcampeón)\s+(?:candidato?|candidate)?\b",
+        r"\b(?:the\s+)?(?:second|third|fourth|fifth|last)\s+(?:best|worst|mejor|peor)\s+(?:candidato?|candidate)?\b",
+        
+        # NEW: Selection references (chosen, selected, recommended)
+        r"\b(?:the|el|la)?\s*(?:chosen|selected|picked|recommended|preferred|shortlisted|elegido|seleccionado|escogido|recomendado|preferido|preseleccionado)\s+(?:one|candidato?|candidate)?\b",
+        r"\b(?:give me|dame)\s+(?:more\s+details|details|info)\s+(?:about|on)\s+(?:the\s+)?(?:chosen|selected|recommended|elegido|seleccionado|recomendado)\b",
+        
+        # NEW: Superlatives (strongest, weakest, most qualified)
+        r"\b(?:the|el|la)?\s*(?:strongest|weakest|most|least|más|menos)\s+(?:qualified|experienced|suitable|talented|skilled|prepared|capable|fuerte|débil|cualificado|experimentado|apto|talentoso|capacitado)\s+(?:candidato?|candidate)?\b",
+        r"\b(?:the\s+)?(?:highest|lowest|mayor|menor)\s+(?:scoring|ranked|performing|puntuado|rankeado)\s+(?:candidato?|candidate)?\b",
+        
+        # NEW: Leader/loser references
+        r"\b(?:the|el|la)?\s*(?:leader|líder|front-runner|leading|winning|perdedor|loser|trailing)\s+(?:candidato?|candidate)?\b",
+        r"\b(?:who\s+)?(?:is\s+)?(?:leading|winning|trailing|ahead|behind)\b",
+        
+        # NEW: Contextual/demonstrative references (that one, that candidate)
+        r"\b(?:that|those|ese|esos|aquel|aquellos)\s+(?:one|candidato?|candidate|perfil|profile)\b",
+        r"\b(?:tell\s+me|dime)\s+(?:more|details|about)\s+(?:that|ese|aquel)\s+(?:one|candidato|candidate)\b",
+        
+        # Winner/ganador specific patterns (existing + enhanced)
         r"\b(?:the|el|la)?\s*(?:comparison\s+)?(?:winner|ganador)\b",
         r"\b(?:more|more\s+details|details)\s+(?:about|on)\s+(?:the\s+)?(?:winner|ganador)\b",
         r"\b(?:tell\s+me|dime)\s+(?:more|details)\s+(?:about)\s+(?:the\s+)?(?:winner|ganador)\b",
+        
+        # NEW: Previous/conversational references
+        r"\b(?:the|el|la)?\s*(?:mentioned|previous|earlier|above|mencionado|previo|anterior|arriba)\s+(?:one|candidato?|candidate)?\b",
+        r"\b(?:tell\s+me|dame)\s+(?:more\s+details|about)\s+(?:the\s+)?(?:mentioned|mencionado|previous|previo)\b",
+        
+        # NEW: Ordinal comparatives (next, other, another)
+        r"\b(?:the|el|la)?\s*(?:next|following|subsequent|siguiente|próximo)\s+(?:candidato?|candidate)?\b",
+        r"\b(?:the|el|la)?\s*(?:other|another|otro|otro\s+más)\s+(?:candidato?|candidate)?\b",
+        
+        # NEW: Personal references (my favorite, the preferred)
+        r"\b(?:my|tu|su)\s+(?:favorite|preferido|preferred|choice|elección)\s+(?:candidato?|candidate)?\b",
+        r"\b(?:the\s+)?(?:preferred|preferido)\s+(?:candidato?|candidate)?\b",
+        
+        # NEW: Anaphoric references (him, her, them, same)
+        r"\b(?:tell\s+me|dame)\s+(?:more|about)\s+(?:him|her|them|él|ella|ellos)\b",
+        r"\b(?:the\s+)?(?:same|mismo)\s+(?:candidato?|candidate)?\b",
     ]
     
     for pattern in single_candidate_intent_patterns:
@@ -1929,6 +1968,7 @@ def is_multi_candidate_query(question: str) -> bool:
     q_lower = question.lower()
     
     multi_candidate_patterns = [
+        # Existing basic patterns
         r"\ball\b.*\bcandidates?\b",
         r"\beveryone\b",
         r"\btodos\b.*\bcandidatos?\b",
@@ -1944,6 +1984,72 @@ def is_multi_candidate_query(question: str) -> bool:
         r"\bcuál\b.*\bcandidato\b",
         r"\border\b",
         r"\blist\b.*\bcandidates?\b",
+        
+        # NEW: Differential questions (differences, gaps)
+        r"\b(?:difference|differences|diferencia|diferencias)\s+(?:between|among|entre)\b",
+        r"\b(?:distinguish|distinguir|contrast|contrastar)\s+(?:between|among|entre)\b",
+        r"\b(?:gap|brecha|discrepancy)\s+(?:between|among|entre)\b",
+        r"\b(?:what\s+)?(?:how\s+)?(?:are|son)\s+(?:they|ellos)\s+(?:different|diferentes)\b",
+        
+        # NEW: Sorting/ordering patterns
+        r"\b(?:sort|ordenar|arrange|organizar|prioritize|priorizar)\b.*\b(?:candidates?|candidatos?)\b",
+        r"\b(?:sort|ordenar)\s+(?:by|por|according to|según)\b",
+        r"\b(?:order|orden)\s+(?:them|los)\s+(?:by|por)\b",
+        r"\b(?:rank|rankear|clasificar)\s+(?:all|todos)\s+(?:the|los)\s+(?:candidates|candidatos)\b",
+        
+        # NEW: Multiple with quantity indicators
+        r"\b(?:several|various|multiple|múltiples|some|algunos|few|pocos)\s+(?:candidates?|candidatos?)\b",
+        r"\b(?:a\s+)?(?:few|pocos)\s+(?:of|de)\s+(?:the|los)\s+(?:candidates|candidatos)\b",
+        r"\b(?:some|algunos)\s+(?:of|de)\s+(?:these|estos)\s+(?:candidates|candidatos)\b",
+        
+        # NEW: Group/pool references
+        r"\b(?:pool|grupo|batch|lote|set|conjunto|cohort|cohorte)\s+(?:of|de)?\s*(?:candidates|candidatos)?\b",
+        r"\b(?:the\s+)?(?:entire|complete|completo)\s+(?:pool|grupo|set|conjunto)\b",
+        r"\b(?:all\s+)?(?:candidates|candidatos)\s+(?:in\s+)?(?:the\s+)?(?:pool|grupo)\b",
+        
+        # NEW: Selection from many
+        r"\b(?:choose|elegir|select|seleccionar|pick|escoger|shortlist|preseleccionar)\s+(?:from|de|entre)\b",
+        r"\b(?:who\s+)?(?:should\s+)?(?:we|yo)\s+(?:choose|elegir|select|seleccionar)\b",
+        r"\b(?:help\s+)?(?:me\s+)?(?:choose|elegir|decide)\b",
+        r"\b(?:narrow\s+down|reducir|filter|filtrar)\s+(?:the|los)\s+(?:candidates|candidatos)\b",
+        
+        # NEW: Comparative verbs (enhanced)
+        r"\b(?:match|matchear|pair|parear|pit|enfrentar)\s+(?:against|contra)\b",
+        r"\b(?:evaluate|evaluar|assess|valorar)\s+(?:multiple|múltiples)\b",
+        r"\b(?:review|revisar|consider|considerar)\s+(?:all|todos)\s+(?:options|opciones)\b",
+        
+        # NEW: Decision-making patterns
+        r"\b(?:which\s+)?(?:one|uno)\s+(?:is\s+)?(?:better|mejor|best|mejor)\b",
+        r"\b(?:who\s+)?(?:wins|gana|comes\s+out\s+on\s+top)\b",
+        r"\b(?:make\s+)?(?:a\s+)?(?:decision|decisión|choice|elección)\b",
+        r"\b(?:help\s+)?(?:me\s+)?(?:decide|decidir)\b",
+        
+        # NEW: Exclusion patterns (negative focus)
+        r"\b(?:except|excepto|without|sin|excluding|excluyendo|but\s+not|menos)\b.*\b(?:candidates?|candidatos?)\b",
+        r"\b(?:all|todos)\s+(?:except|excepto|menos)\b",
+        r"\b(?:not|no|neither|ninguno|none)\s+(?:of|de)\s+(?:these|estos)\s+(?:candidates|candidatos)\b",
+        
+        # NEW: Comparative analysis patterns
+        r"\b(?:compare|comparar)\s+(?:and\s+)?(?:contrast|contrastar)\b",
+        r"\b(?:pros\s+and\s+cons|ventajas\s+y\s+desventajas)\s+(?:of|de)\b",
+        r"\b(?:strengths\s+and\s+weaknesses|fortalezas\s+y\s+debilidades)\b",
+        r"\b(?:advantages\s+and\s+disadvantages|ventajas\s+y\s+desventajas)\b",
+        
+        # NEW: Aggregate/statistical patterns
+        r"\b(?:overall|general|total|completo)\s+(?:comparison|comparación)\b",
+        r"\b(?:summary|resumen)\s+(?:of|de)\s+(?:all|todos)\s+(?:candidates|candidatos)\b",
+        r"\b(?:statistics|estadísticas|metrics|métricas)\s+(?:for|para)\s+(?:all|todos)\b",
+        
+        # NEW: Ranking with criteria
+        r"\b(?:rank|rankear|clasificar)\s+(?:by|por|according to|según)\s+(?:experience|experiencia|skills|habilidades|education|educación)\b",
+        r"\b(?:order|ordenar)\s+(?:by|por)\s+(?:performance|rendimiento|score|puntuación)\b",
+        r"\b(?:sort|ordenar)\s+(?:from|desde)\s+(?:best|mejor)\s+(?:to|a)\s+(?:worst|peor)\b",
+        
+        # NEW: Multiple specific references
+        r"\b(?:both|ambos)\s+(?:candidates|candidatos)\b",
+        r"\b(?:either|cualquiera)\s+(?:of|de)\s+(?:the|los)\s+(?:two|dos)\b",
+        r"\b(?:among|entre)\s+(?:the|los)\s+(?:candidates|candidatos)\b",
+        r"\b(?:across|a\s+través\s+de)\s+(?:all|todos)\s+(?:candidates|candidatos)\b",
     ]
     
     return any(re.search(pattern, q_lower) for pattern in multi_candidate_patterns)
