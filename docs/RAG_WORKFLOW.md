@@ -2,15 +2,16 @@
 
 > **CV Screener AI - Complete RAG Pipeline Reference**
 > 
-> Version: 6.0 | Last Updated: January 2026
+> Version: 7.0 | Last Updated: January 2026
 
 ---
 
 ## Table of Contents
 
 1. [System Overview](#system-overview)
-2. [V6 Architecture: Orchestration System](#v6-architecture-orchestration-system) ← **NEW in v6.0**
-3. [Smart CV Chunking](#smart-cv-chunking)
+2. [V7 Features: HuggingFace Integration](#v7-features-huggingface-integration) ← **NEW in v7.0**
+3. [V6 Architecture: Orchestration System](#v6-architecture-orchestration-system)
+4. [Smart CV Chunking](#smart-cv-chunking)
 4. [Architecture Diagram](#architecture-diagram)
 5. [Pipeline Stages](#pipeline-stages)
 6. [Targeted Retrieval](#targeted-retrieval)
@@ -35,15 +36,18 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
 | **LOCAL** | JSON vector store, local embeddings (sentence-transformers) |
 | **CLOUD** | Supabase pgvector, nomic-embed-v1.5 embeddings, OpenRouter LLMs |
 
-### Key Features (V6.0 - Current)
+### Key Features (V7.0 - Current)
 
+- ✅ **HuggingFace Integration (FREE)**: NLI Verification, Cross-Encoder Reranking, RAGAS Evaluation
+- ✅ **65+ Query Detection Patterns**: Enhanced single/multi candidate detection
+- ✅ **Risk Assessment Module**: 5-factor risk table for single candidates
 - ✅ **Orchestrator → Structures → Modules**: Complete output processing architecture
 - ✅ **9 Structures**: SingleCandidate, RiskAssessment, Comparison, Search, Ranking, JobMatch, TeamBuild, Verification, Summary
-- ✅ **29 Modules**: Reusable components (Thinking, Analysis, RiskTable, MatchScore, etc.)
+- ✅ **29+ Modules**: Reusable components (Thinking, Analysis, RiskTable, MatchScore, etc.)
 - ✅ **Conversational Context**: `conversation_history` propagated through entire pipeline
 - ✅ **Query Type Routing**: Intelligent routing based on query classification
 
-### Key Features (V5.x - Foundation)
+### Key Features (V5.x/V6.x - Foundation)
 
 - ✅ **Multi-Query Retrieval**: Generate query variations for better recall
 - ✅ **HyDE (Hypothetical Document Embeddings)**: Improved semantic matching
@@ -57,9 +61,77 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
 
 ---
 
+## V7 Features: HuggingFace Integration
+
+> **NEW in v7.0** - Free HuggingFace services for verification, reranking, and evaluation
+
+### Pipeline with HuggingFace
+
+```
+Query → Understand → MultiQuery → Guardrail → Embed → Search
+                                                         ↓
+                                            Cross-Encoder Reranking (HF)
+                                                         ↓
+                                                    Generation
+                                                         ↓
+                                              NLI Verification (HF)
+                                                         ↓
+                                              RAGAS Evaluation (HF)
+                                                         ↓
+                                                   ORCHESTRATOR
+```
+
+### HuggingFace Services
+
+| Service | Model | Purpose | Cost |
+|---------|-------|---------|------|
+| **NLI Verification** | `facebook/bart-large-mnli` | Verify claims are supported by context | FREE |
+| **Cross-Encoder Reranking** | `BAAI/bge-reranker-base` | Semantic reranking for precision | FREE |
+| **Zero-Shot Guardrails** | `facebook/bart-large-mnli` | Off-topic detection | FREE |
+| **RAGAS Evaluation** | Multiple | Quality metrics (faithfulness, relevance) | FREE |
+
+### NLI Verification Flow
+
+```python
+# For each claim in the generated response:
+claim = "Juan has 5 years of Python experience"
+context = "Juan García CV: Senior Python developer since 2019..."
+
+result = nli_model.predict(premise=context, hypothesis=claim)
+# Returns: "entailment" | "contradiction" | "neutral"
+```
+
+### RAGAS Metrics
+
+| Metric | Description | Range |
+|--------|-------------|-------|
+| **Faithfulness** | Is answer grounded in context? | 0-100% |
+| **Answer Relevancy** | Does answer address query? | 0-100% |
+| **Context Relevancy** | Are retrieved chunks relevant? | 0-100% |
+| **Overall Score** | Weighted combination | 0-100% |
+
+### Query Detection Patterns (65+)
+
+V7 includes enhanced query detection with 65+ regex patterns:
+
+**Single Candidate (35+ patterns):**
+- Rankings: `winner, ganador, second, runner-up, subcampeón`
+- Selection: `chosen, selected, recommended, elegido`
+- Superlatives: `strongest, weakest, most qualified`
+- Contextual: `that one, ese, mentioned, previous`
+
+**Multi-Candidate (30+ patterns):**
+- Differential: `difference, distinguish, gap between`
+- Sorting: `sort, arrange, prioritize, ordenar`
+- Groups: `pool, batch, cohort, grupo`
+
+See [QUERY_DETECTION.md](./QUERY_DETECTION.md) for full pattern list.
+
+---
+
 ## V6 Architecture: Orchestration System
 
-> **NEW in v6.0** - Complete Orchestrator → Structures → Modules architecture
+> **Introduced in v6.0** - Complete Orchestrator → Structures → Modules architecture
 
 ### High-Level Flow
 

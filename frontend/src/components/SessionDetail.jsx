@@ -404,7 +404,7 @@ const SessionDetail = ({
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white">AI CV Screener</h3>
                 <div className="flex items-center justify-center gap-2 mt-2">
                   <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm font-medium text-gray-600 dark:text-gray-300">v1.0.0</span>
-                  <span className="px-2 py-1 bg-gradient-to-r from-purple-500 to-emerald-500 text-white text-sm font-bold rounded">RAG V5</span>
+                  <span className="px-2 py-1 bg-gradient-to-r from-purple-500 to-emerald-500 text-white text-sm font-bold rounded">RAG V7</span>
                 </div>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
                   {language === 'es' 

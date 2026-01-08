@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { X, Settings, Search, Check, Brain, Sparkles, DollarSign, ArrowUpDown, Filter, Zap, MessageSquare, Save, RotateCcw, ShieldCheck, Shuffle, ToggleLeft, ToggleRight } from 'lucide-react';
+import { X, Settings, Search, Check, Brain, Sparkles, DollarSign, ArrowUpDown, Filter, Zap, MessageSquare, Save, RotateCcw, ShieldCheck, Shuffle, ToggleLeft, ToggleRight, ShieldAlert, BarChart3, GitCompare } from 'lucide-react';
 import { getModels } from '../services/api';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -70,6 +70,48 @@ const PIPELINE_STEPS = [
     defaultModel: 'google/gemini-2.0-flash-001',
     recommended: { es: 'Opcional: Detecta información no verificable', en: 'Optional: Detects unverifiable information' },
     optional: true
+  },
+  {
+    id: 'nli_verification',
+    icon: ShieldAlert,
+    color: 'orange',
+    title: { es: 'Paso 5: Verificación NLI', en: 'Step 5: NLI Verification' },
+    description: { 
+      es: 'Verifica claims usando Natural Language Inference (HuggingFace)', 
+      en: 'Verifies claims using Natural Language Inference (HuggingFace)' 
+    },
+    defaultModel: 'facebook/bart-large-mnli',
+    recommended: { es: 'Gratis: Usa HuggingFace Inference API', en: 'Free: Uses HuggingFace Inference API' },
+    optional: true,
+    provider: 'huggingface'
+  },
+  {
+    id: 'ragas_evaluation',
+    icon: BarChart3,
+    color: 'teal',
+    title: { es: 'Paso 6: Evaluación RAGAS', en: 'Step 6: RAGAS Evaluation' },
+    description: { 
+      es: 'Evalúa faithfulness, relevancia y calidad de respuesta', 
+      en: 'Evaluates faithfulness, relevance and answer quality' 
+    },
+    defaultModel: 'auto',
+    recommended: { es: 'Gratis: Métricas automáticas de calidad', en: 'Free: Automatic quality metrics' },
+    optional: true,
+    provider: 'huggingface'
+  },
+  {
+    id: 'cross_encoder_rerank',
+    icon: GitCompare,
+    color: 'indigo',
+    title: { es: 'Paso 7: Cross-Encoder Reranking', en: 'Step 7: Cross-Encoder Reranking' },
+    description: { 
+      es: 'Re-rankea resultados con Cross-Encoder semántico (HuggingFace)', 
+      en: 'Re-ranks results with semantic Cross-Encoder (HuggingFace)' 
+    },
+    defaultModel: 'BAAI/bge-reranker-base',
+    recommended: { es: 'Gratis: Mejora precisión de búsqueda', en: 'Free: Improves search precision' },
+    optional: true,
+    provider: 'huggingface'
   }
 ];
 
@@ -85,7 +127,14 @@ export const getRAGPipelineSettings = () => {
         reranking_enabled: parsed.reranking_enabled !== undefined ? parsed.reranking_enabled : true,
         generation: parsed.generation || PIPELINE_STEPS[2].defaultModel,
         verification: parsed.verification || PIPELINE_STEPS[3].defaultModel,
-        verification_enabled: parsed.verification_enabled !== undefined ? parsed.verification_enabled : true
+        verification_enabled: parsed.verification_enabled !== undefined ? parsed.verification_enabled : true,
+        // V7: HuggingFace steps
+        nli_verification: parsed.nli_verification || PIPELINE_STEPS[4].defaultModel,
+        nli_verification_enabled: parsed.nli_verification_enabled !== undefined ? parsed.nli_verification_enabled : true,
+        ragas_evaluation: parsed.ragas_evaluation || PIPELINE_STEPS[5].defaultModel,
+        ragas_evaluation_enabled: parsed.ragas_evaluation_enabled !== undefined ? parsed.ragas_evaluation_enabled : true,
+        cross_encoder_rerank: parsed.cross_encoder_rerank || PIPELINE_STEPS[6].defaultModel,
+        cross_encoder_rerank_enabled: parsed.cross_encoder_rerank_enabled !== undefined ? parsed.cross_encoder_rerank_enabled : true
       };
     }
   } catch (e) {
@@ -97,7 +146,14 @@ export const getRAGPipelineSettings = () => {
     reranking_enabled: true,
     generation: PIPELINE_STEPS[2].defaultModel,
     verification: PIPELINE_STEPS[3].defaultModel,
-    verification_enabled: true
+    verification_enabled: true,
+    // V7: HuggingFace steps
+    nli_verification: PIPELINE_STEPS[4].defaultModel,
+    nli_verification_enabled: true,
+    ragas_evaluation: PIPELINE_STEPS[5].defaultModel,
+    ragas_evaluation_enabled: true,
+    cross_encoder_rerank: PIPELINE_STEPS[6].defaultModel,
+    cross_encoder_rerank_enabled: true
   };
 };
 
@@ -187,7 +243,14 @@ const RAGPipelineSettings = ({ isOpen, onClose, onSave }) => {
       reranking_enabled: true,
       generation: PIPELINE_STEPS[2].defaultModel,
       verification: PIPELINE_STEPS[3].defaultModel,
-      verification_enabled: true
+      verification_enabled: true,
+      // V7: HuggingFace steps
+      nli_verification: PIPELINE_STEPS[4].defaultModel,
+      nli_verification_enabled: true,
+      ragas_evaluation: PIPELINE_STEPS[5].defaultModel,
+      ragas_evaluation_enabled: true,
+      cross_encoder_rerank: PIPELINE_STEPS[6].defaultModel,
+      cross_encoder_rerank_enabled: true
     };
     setSettings(defaults);
   };
@@ -232,6 +295,24 @@ const RAGPipelineSettings = ({ isOpen, onClose, onSave }) => {
       border: 'border-green-300 dark:border-green-600',
       text: 'text-green-700 dark:text-green-300',
       icon: 'text-green-500'
+    },
+    orange: {
+      bg: 'bg-orange-100 dark:bg-orange-900/30',
+      border: 'border-orange-300 dark:border-orange-600',
+      text: 'text-orange-700 dark:text-orange-300',
+      icon: 'text-orange-500'
+    },
+    teal: {
+      bg: 'bg-teal-100 dark:bg-teal-900/30',
+      border: 'border-teal-300 dark:border-teal-600',
+      text: 'text-teal-700 dark:text-teal-300',
+      icon: 'text-teal-500'
+    },
+    indigo: {
+      bg: 'bg-indigo-100 dark:bg-indigo-900/30',
+      border: 'border-indigo-300 dark:border-indigo-600',
+      text: 'text-indigo-700 dark:text-indigo-300',
+      icon: 'text-indigo-500'
     }
   };
 

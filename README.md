@@ -9,7 +9,7 @@
 [![React](https://img.shields.io/badge/React-18+-61DAFB.svg)](https://reactjs.org)
 [![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-red.svg)](LICENSE)
 
-**Version 6.0** - Production-ready RAG pipeline with 9 output structures, 29+ modules, conversational context, and intelligent query routing.
+**Version 7.0** - Production-ready RAG pipeline with HuggingFace NLI verification, RAGAS evaluation, 65+ query detection patterns, 9 output structures, 29+ modules, and intelligent query routing.
 
 [Features](#-features) · [Quick Start](#-quick-start) · [Architecture](#-architecture) · [Demo](#-demo) · [Documentation](#-documentation)
 
@@ -43,8 +43,14 @@
 ### 🔄 Dual-Mode Architecture
 Switch seamlessly between **Local** (ChromaDB + sentence-transformers) and **Cloud** (Supabase pgvector) backends.
 
-### 🧠 Advanced RAG Pipeline (v6.0)
-Multi-stage pipeline: Query Understanding → Multi-Query Expansion → Guardrails → Embedding → Search → Reranking → Reasoning → Generation → Verification → Output Orchestration.
+### 🧠 Advanced RAG Pipeline (v7.0)
+Multi-stage pipeline: Query Understanding → Multi-Query Expansion → Guardrails → Embedding → Search → Cross-Encoder Reranking → Reasoning → Generation → NLI Verification → RAGAS Evaluation → Output Orchestration.
+
+### 🔬 HuggingFace Integration (v7 - FREE)
+- **NLI Verification**: Natural Language Inference for claim verification using `facebook/bart-large-mnli`
+- **Cross-Encoder Reranking**: Semantic reranking with `BAAI/bge-reranker-base`
+- **Zero-Shot Guardrails**: Topic classification without training
+- **RAGAS Evaluation**: Automatic quality metrics (faithfulness, relevance, context)
 
 ### 🎯 9 Output Structures
 Intelligent routing to specialized output formats: SingleCandidate, RiskAssessment, Comparison, Search, Ranking, JobMatch, TeamBuild, Verification, Summary.
@@ -139,9 +145,9 @@ python start_web.py   # Frontend → http://localhost:6001
 │                        BACKEND (FastAPI + Python)                          │
 │                                                                            │
 │  ┌──────────────────────────────────────────────────────────────────────┐  │
-│  │                      RAG PIPELINE v6.0                                │  │
+│  │                      RAG PIPELINE v7.0                                │  │
 │  │  Query → Understand → MultiQuery → Guardrail → Embed → Search →       │  │
-│  │  Rerank → Reason → Generate → Verify → OUTPUT ORCHESTRATOR            │  │
+│  │  CrossEncoder → Generate → NLI Verify → RAGAS → ORCHESTRATOR          │  │
 │  └──────────────────────────────────────────────────────────────────────┘  │
 │                                     │                                      │
 │  ┌──────────────────────────────────┴───────────────────────────────────┐  │

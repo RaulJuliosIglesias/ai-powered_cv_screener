@@ -48,7 +48,7 @@ const AboutModal = memo(({ isOpen, onClose }) => {
                 v1.0.0
               </span>
               <span className="px-2 py-1 bg-gradient-to-r from-purple-500 to-emerald-500 text-white text-sm font-bold rounded">
-                RAG V5
+                RAG V7
               </span>
             </div>
             <p className="text-sm text-muted mt-3">

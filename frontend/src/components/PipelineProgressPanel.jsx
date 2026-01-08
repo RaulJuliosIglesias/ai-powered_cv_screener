@@ -187,7 +187,7 @@ const PipelineProgressPanel = ({ isExpanded, onToggleExpand, autoExpand, onToggl
           {isExpanded ? (
             <div className="flex items-center gap-1.5">
               <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">RAG Pipeline</span>
-              <span className="px-1.5 py-0.5 bg-gradient-to-r from-purple-500 to-emerald-500 text-white text-[9px] font-bold rounded">V5</span>
+              <span className="px-1.5 py-0.5 bg-gradient-to-r from-purple-500 to-emerald-500 text-white text-[9px] font-bold rounded">V7</span>
             </div>
           ) : (
             <Brain className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />

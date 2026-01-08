@@ -60,7 +60,7 @@ const ChatInput = ({ onSend, isLoading }) => {
             <span>AI CV Screener</span>
             <span className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-gray-500 dark:text-gray-400 font-medium">v1.0.0</span>
             <span className="text-gray-300 dark:text-gray-600">|</span>
-            <span className="px-1 py-0.5 bg-purple-100 dark:bg-purple-900/30 rounded text-purple-600 dark:text-purple-400 font-medium">RAG V5</span>
+            <span className="px-1 py-0.5 bg-purple-100 dark:bg-purple-900/30 rounded text-purple-600 dark:text-purple-400 font-medium">RAG V7</span>
           </div>
         </div>
       </form>

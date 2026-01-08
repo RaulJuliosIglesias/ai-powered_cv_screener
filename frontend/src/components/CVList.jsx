@@ -46,7 +46,7 @@ const CVList = ({ cvs = [], isLoading = false, onDeleteCV, onDeleteAll }) => {
             {language === 'es' ? 'CVs Indexados' : 'Indexed CVs'}
           </h2>
           <span className="px-1.5 py-0.5 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-[10px] font-bold rounded">
-            RAG V5
+            RAG V7
           </span>
           <span className="ml-auto px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium rounded-full">
             {cvs.length}
