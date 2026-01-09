@@ -110,13 +110,39 @@ class TopPickModule:
         criteria: List[Dict[str, Any]] = None,
         llm_output: str = ""
     ) -> str:
-        """Generate justification for top pick."""
+        """Generate justification for top pick with CONCRETE DATA."""
         parts = []
         
         name = candidate.get("candidate_name", "This candidate")
         score = candidate.get("overall_score", 0)
         
         parts.append(f"{name} emerges as the top choice with an overall score of {score:.0f}%.")
+        
+        # PRIORITY: Add concrete numeric justifications
+        numeric_justifications = []
+        
+        # Experience years (if present in metadata)
+        exp_years = candidate.get("experience_years", 0)
+        if exp_years > 0:
+            numeric_justifications.append(f"{exp_years:.0f} years of experience")
+        
+        # Tenure (if present)
+        tenure = candidate.get("avg_tenure", 0)
+        if tenure > 0:
+            numeric_justifications.append(f"{tenure:.1f} years average tenure")
+        
+        # Job stability (if present)
+        hop_score = candidate.get("job_hopping_score", -1)
+        if 0 <= hop_score < 0.2:
+            numeric_justifications.append("strong job stability")
+        
+        # Seniority (if present)
+        seniority = candidate.get("seniority", "")
+        if seniority:
+            numeric_justifications.append(f"{seniority} level")
+        
+        if numeric_justifications:
+            parts.append(f"Key metrics: {', '.join(numeric_justifications)}.")
         
         # Add criterion-specific justifications (only if valid criteria, not candidate names)
         criterion_scores = candidate.get("criterion_scores", {})

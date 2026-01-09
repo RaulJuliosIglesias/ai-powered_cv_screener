@@ -127,6 +127,8 @@ You EXCLUSIVELY handle CV analysis, candidate evaluation, and recruitment querie
 - NEVER infer, assume, or hallucinate skills/experience/names
 - Use the EXACT candidate name from CV metadata - do NOT modify or translate names
 - Use the EXACT cv_id provided in metadata - do NOT invent IDs
+- **CRITICAL: When CV chunks include enriched metadata (Total Experience, Avg Tenure, Job Hopping Score, Skills, Seniority), you MUST use these values in your analysis and responses**
+- For ranking/comparison queries: ALWAYS cite the numeric metadata values (e.g., "31 years of experience", "12 years average tenure")
 - Distinguish between explicit statements vs. reasonable inferences
 - When uncertain, state: "The CV does not explicitly mention..."
 
@@ -259,7 +261,12 @@ You MUST respond using this exact structure:
 | Candidate | Criterion 1 | Criterion 2 | Match |
 |-----------|-------------|-------------|-------|
 | **[Name](cv:cv_xxx)** | Details | Details | ⭐⭐⭐ |
-]
+
+**CRITICAL for ranking/experience queries:** In table cells, include ACTUAL VALUES from enriched metadata:
+- For "Experience" column: Write "31 years" NOT just "100%" or "High"
+- For "Tenure" column: Write "12 years avg" NOT just "Excellent"
+- For "Skills" column: List actual skills, not just a score
+Example row: | **[Khalid Al-Mansoori](cv:cv_eec7ef06)** | 31 years | 12 years avg tenure | ⭐⭐⭐⭐⭐ |
 
 :::conclusion
 [Actionable recommendation with specific candidate references using **[Name](cv:cv_xxx)** format]
@@ -1013,12 +1020,40 @@ def format_context(
         unique_cvs.add(metadata.filename)
         
         if include_metadata:
+            # Get full metadata from chunk
+            full_meta = chunk.get("metadata", {})
+            
             header = (
                 f"### CV #{chunk_counter+1}: {metadata.candidate_name}\n"
                 f"- **CV_ID:** `{metadata.cv_id}`\n"
                 f"- **File:** {metadata.filename}\n"
                 f"- **Section:** {metadata.section_type}"
             )
+            
+            # Add enriched metadata if available (CRITICAL for ranking queries)
+            if full_meta.get("total_experience_years") is not None:
+                years = full_meta.get("total_experience_years", 0)
+                header += f"\n- **Total Experience:** {years:.1f} years"
+            
+            if full_meta.get("job_hopping_score") is not None:
+                hop_score = full_meta.get("job_hopping_score", 0)
+                header += f"\n- **Job Hopping Score:** {hop_score:.2f} (lower is better)"
+            
+            if full_meta.get("avg_tenure_years") is not None:
+                tenure = full_meta.get("avg_tenure_years", 0)
+                header += f"\n- **Avg Tenure:** {tenure:.1f} years per position"
+            
+            if full_meta.get("seniority_level"):
+                seniority = full_meta.get("seniority_level", "")
+                header += f"\n- **Seniority:** {seniority}"
+            
+            if full_meta.get("skills"):
+                skills = full_meta.get("skills", "")
+                # Truncate if too long
+                if len(skills) > 150:
+                    skills = skills[:150] + "..."
+                header += f"\n- **Skills:** {skills}"
+            
             if metadata.page_number:
                 header += f"\n- **Page:** {metadata.page_number}"
             

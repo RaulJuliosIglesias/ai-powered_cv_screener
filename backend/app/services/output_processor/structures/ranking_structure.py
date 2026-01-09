@@ -158,15 +158,25 @@ class RankingStructure:
         total_candidates = len(ranked_candidates)
         parts.append(f"Analyzed {total_candidates} candidates based on the specified criteria.")
         
-        # 2. Top candidates
+        # 2. Top candidates with CONCRETE DATA (experience years)
         if len(ranked_candidates) >= 2:
             top_name = top_pick_data.candidate_name
             top_score = top_pick_data.overall_score
+            top_exp = ranked_candidates[0].get("experience_years", 0)
             runner_up = ranked_candidates[1].get("candidate_name", "Unknown")
             runner_up_score = ranked_candidates[1].get("overall_score", 0)
+            runner_up_exp = ranked_candidates[1].get("experience_years", 0)
             
-            parts.append(f"{top_name} emerges as the top choice with an overall score of {top_score:.0f}%.")
-            parts.append(f"Runner-up: {runner_up} with {runner_up_score:.0f}%.")
+            # Include experience years in the analysis
+            if top_exp > 0:
+                parts.append(f"{top_name} emerges as the top choice with {top_exp:.0f} years of experience and an overall score of {top_score:.0f}%.")
+            else:
+                parts.append(f"{top_name} emerges as the top choice with an overall score of {top_score:.0f}%.")
+            
+            if runner_up_exp > 0:
+                parts.append(f"Runner-up: {runner_up} with {runner_up_exp:.0f} years of experience ({runner_up_score:.0f}%).")
+            else:
+                parts.append(f"Runner-up: {runner_up} with {runner_up_score:.0f}%.")
         
         # 3. Score distribution
         scores = [c.get("overall_score", 0) for c in ranked_candidates]

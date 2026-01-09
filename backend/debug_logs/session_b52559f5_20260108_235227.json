@@ -1,0 +1,241 @@
+{
+  "session_id": "b52559f5-63df-4233-b8b5-a4a2b24e5bfe",
+  "generated_at": "2026-01-08T23:52:27.463850",
+  "events": [
+    {
+      "timestamp": "2026-01-08T23:51:22.832368",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "b52559f5-63df-4233-b8b5-a4a2b24e5bfe"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T23:51:22.832368",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Rank candidates by experience",
+        "cv_ids": [
+          "cv_4fa786c9",
+          "cv_2d404e7a",
+          "cv_57454224",
+          "cv_1324cb1b",
+          "cv_eec7ef06",
+          "cv_36d44e9c"
+        ],
+        "cv_count": 6
+      }
+    },
+    {
+      "timestamp": "2026-01-08T23:51:47.574898",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 15,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_4fa786c9",
+            "candidate_name": " Layla Al-Mansoor  Lab",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.8182582915956094,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_2d404e7a",
+            "candidate_name": " Priya Patel  Research Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 9.0,
+            "score": 0.7567856518398147,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_36d44e9c",
+            "candidate_name": " Ji-Yeon Kim  Research Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 8.0,
+            "score": 0.564259615365323,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_1324cb1b",
+            "candidate_name": " Gabriela Martinez  Research",
+            "section_type": "experience",
+            "job_hopping_score": 0.4444444444444444,
+            "avg_tenure_years": 1.8,
+            "total_experience_years": 9.0,
+            "score": 0.5976656573295506,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_57454224",
+            "candidate_name": " Matteo Rossi  UX",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.8127252561308901,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_1324cb1b",
+            "candidate_name": " Gabriela Martinez  Research",
+            "section_type": "experience",
+            "job_hopping_score": 0.4444444444444444,
+            "avg_tenure_years": 1.8,
+            "total_experience_years": 9.0,
+            "score": 0.7681063285416071,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_36d44e9c",
+            "candidate_name": " Ji-Yeon Kim  Research Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 8.0,
+            "score": 0.7718552606110725,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_4fa786c9",
+            "candidate_name": " Layla Al-Mansoor  Lab",
+            "section_type": "summary",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.5271904275261194,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_eec7ef06",
+            "candidate_name": " Khalid Al-Mansoori  Research",
+            "section_type": "experience",
+            "job_hopping_score": 0.05555555555555555,
+            "avg_tenure_years": 12.0,
+            "total_experience_years": 31.0,
+            "score": 0.4791677433403556,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_eec7ef06",
+            "candidate_name": " Khalid Al-Mansoori  Research",
+            "section_type": "experience",
+            "job_hopping_score": 0.05555555555555555,
+            "avg_tenure_years": 12.0,
+            "total_experience_years": 31.0,
+            "score": 0.5778296196611682,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-08T23:52:13.544844",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "explicit_multi_candidate_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T23:52:27.331343",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "ranking",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "explicit_multi_candidate_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-08T23:52:27.463338",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1231,
+        "answer_preview": ":::thinking\nThe user wants candidates ranked. The specific criteria are not mentioned. I will rank the candidates based on their total experience. I will create a table to compare the candidates. I will only include information explicitly stated in the CVs.\n:::\n\nTop Recommendation: [📄](cv:cv_eec7ef06) ** Khalid Al-Mansoori  Research** (60%)\n\n Khalid Al-Mansoori  Research emerges as the top choice with an overall score of 60%. Key strengths include: Experience (100%), Stability (94%).\n\nAnalyzed 6...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class RankedCandidate:
-    """Candidate with ranking scores."""
+    """Candidate with ranking scores and enriched metadata."""
     rank: int
     candidate_name: str
     cv_id: str
@@ -28,6 +28,11 @@ class RankedCandidate:
     criterion_scores: Dict[str, float] = field(default_factory=dict)
     strengths: List[str] = field(default_factory=list)
     weaknesses: List[str] = field(default_factory=list)
+    # Enriched metadata for concrete justifications
+    experience_years: float = 0.0
+    avg_tenure: float = 0.0
+    job_hopping_score: float = 0.5
+    seniority: str = ""
 
 
 @dataclass
@@ -46,7 +51,12 @@ class RankingTableData:
                     "overall_score": r.overall_score,
                     "criterion_scores": r.criterion_scores,
                     "strengths": r.strengths,
-                    "weaknesses": r.weaknesses
+                    "weaknesses": r.weaknesses,
+                    # Include enriched metadata for TopPickModule
+                    "experience_years": r.experience_years,
+                    "avg_tenure": r.avg_tenure,
+                    "job_hopping_score": r.job_hopping_score,
+                    "seniority": r.seniority
                 }
                 for r in self.ranked
             ],
@@ -119,7 +129,12 @@ class RankingTableModule:
                 overall_score=round(overall, 1),
                 criterion_scores={k: round(v, 1) for k, v in scores.items()},
                 strengths=self._identify_strengths(scores),
-                weaknesses=self._identify_weaknesses(scores)
+                weaknesses=self._identify_weaknesses(scores),
+                # Include enriched metadata for concrete justifications
+                experience_years=data.get("experience_years", 0),
+                avg_tenure=data.get("avg_tenure", 0),
+                job_hopping_score=data.get("job_hopping_score", 0.5),
+                seniority=data.get("seniority", "")
             ))
         
         # Sort by overall score and assign ranks
@@ -206,6 +221,8 @@ class RankingTableModule:
         
         if found_names:
             for i, (_, name, cv_id) in enumerate(found_names[:10]):  # Limit to top 10
+                # Get enriched metadata from candidates dict
+                cand_data = candidates.get(cv_id, {})
                 ranked.append(RankedCandidate(
                     rank=i + 1,
                     candidate_name=name,
@@ -213,7 +230,11 @@ class RankingTableModule:
                     overall_score=max(20, 100 - i * 10),  # 100, 90, 80, ...
                     criterion_scores={},
                     strengths=[],
-                    weaknesses=[]
+                    weaknesses=[],
+                    experience_years=cand_data.get("experience_years", 0),
+                    avg_tenure=cand_data.get("avg_tenure", 0),
+                    job_hopping_score=cand_data.get("job_hopping_score", 0.5),
+                    seniority=cand_data.get("seniority", "")
                 ))
             return ranked
         
@@ -246,6 +267,8 @@ class RankingTableModule:
         
         # Create ranked candidates from found names
         for i, (_, name, cv_id) in enumerate(found_names[:10]):
+            # Get enriched metadata from candidates dict
+            cand_data = candidates.get(cv_id, {})
             ranked.append(RankedCandidate(
                 rank=i + 1,
                 candidate_name=name,
@@ -253,7 +276,11 @@ class RankingTableModule:
                 overall_score=max(20, 100 - i * 10),
                 criterion_scores={},
                 strengths=[],
-                weaknesses=[]
+                weaknesses=[],
+                experience_years=cand_data.get("experience_years", 0),
+                avg_tenure=cand_data.get("avg_tenure", 0),
+                job_hopping_score=cand_data.get("job_hopping_score", 0.5),
+                seniority=cand_data.get("seniority", "")
             ))
         
         return ranked
@@ -262,7 +289,7 @@ class RankingTableModule:
         self,
         chunks: List[Dict[str, Any]]
     ) -> Dict[str, Dict]:
-        """Group chunks by candidate."""
+        """Group chunks by candidate and preserve ALL enriched metadata."""
         candidates = {}
         
         for chunk in chunks:
@@ -284,6 +311,20 @@ class RankingTableModule:
                     "position_count": meta.get("position_count", 0),
                     "seniority": meta.get("seniority_level", ""),
                 }
+            else:
+                # Update with max values if this chunk has better data
+                if meta.get("total_experience_years", 0) > candidates[cv_id]["experience_years"]:
+                    candidates[cv_id]["experience_years"] = meta.get("total_experience_years", 0)
+                if meta.get("avg_tenure_years", 0) > candidates[cv_id]["avg_tenure"]:
+                    candidates[cv_id]["avg_tenure"] = meta.get("avg_tenure_years", 0)
+                if meta.get("job_hopping_score") is not None:
+                    # Lower is better for job hopping, so take min
+                    candidates[cv_id]["job_hopping_score"] = min(
+                        candidates[cv_id]["job_hopping_score"],
+                        meta.get("job_hopping_score", 0.5)
+                    )
+                if not candidates[cv_id]["seniority"] and meta.get("seniority_level"):
+                    candidates[cv_id]["seniority"] = meta.get("seniority_level", "")
             
             # Collect skills
             skills_str = meta.get("skills", "")

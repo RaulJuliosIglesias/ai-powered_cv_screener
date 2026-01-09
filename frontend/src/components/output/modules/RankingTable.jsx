@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trophy, Medal, FileText, ChevronDown, ChevronUp, Crown, TrendingUp, Bookmark, Sparkles } from 'lucide-react';
+import { Trophy, Medal, FileText, ChevronDown, ChevronUp, Crown, TrendingUp, Bookmark, Sparkles, Clock } from 'lucide-react';
 
 /**
  * RankingTable - Enhanced ranked candidates with prominent #1 highlight
@@ -62,6 +62,15 @@ const RankingTable = ({ data, onOpenCV }) => {
                 <span className="font-bold text-lg truncate">{topCandidate.candidate_name}</span>
               </button>
             </div>
+            {/* Experience years - key metric */}
+            {topCandidate.experience_years > 0 && (
+              <div className="text-center px-3 border-r border-yellow-500/20">
+                <div className="text-xl font-bold text-cyan-400">
+                  {topCandidate.experience_years?.toFixed(0)}
+                </div>
+                <div className="text-xs text-gray-400">Years Exp</div>
+              </div>
+            )}
             <div className="text-right">
               <div className="text-2xl font-bold text-emerald-400">
                 {topCandidate.overall_score?.toFixed(0)}%
@@ -119,6 +128,13 @@ const RankingTable = ({ data, onOpenCV }) => {
                 <FileText className="w-3.5 h-3.5 flex-shrink-0" />
                 <span className="font-medium text-sm truncate">{candidate.candidate_name}</span>
               </button>
+
+              {/* Experience years */}
+              {candidate.experience_years > 0 && (
+                <span className="text-xs text-cyan-400 font-medium flex-shrink-0 px-1.5 py-0.5 bg-cyan-500/10 rounded">
+                  {candidate.experience_years?.toFixed(0)} yrs
+                </span>
+              )}
 
               {/* Score diff from #1 */}
               {topCandidate && (
