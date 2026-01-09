@@ -6,6 +6,18 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 from app.config import settings, Mode
+
+
+class SafeJSONEncoder(json.JSONEncoder):
+    """JSON encoder that handles sets and other non-serializable types."""
+    def default(self, obj):
+        if isinstance(obj, set):
+            return list(obj)
+        if isinstance(obj, frozenset):
+            return list(obj)
+        return super().default(obj)
+
+
 from app.models.sessions import session_manager
 from app.providers.cloud.sessions import supabase_session_manager
 from app.services.rag_service_v5 import RAGServiceV5
@@ -60,9 +72,9 @@ async def event_generator(rag_service, question: str, session_id: str, cv_ids: l
             if event_type == "complete":
                 final_response = event_data
             
-            # Format as SSE
+            # Format as SSE (use SafeJSONEncoder to handle sets)
             yield f"event: {event_type}\n"
-            yield f"data: {json.dumps(event_data)}\n\n"
+            yield f"data: {json.dumps(event_data, cls=SafeJSONEncoder)}\n\n"
         
         # Save assistant message to session with structured_output
         if final_response and final_response.get("answer"):

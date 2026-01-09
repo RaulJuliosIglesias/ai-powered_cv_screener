@@ -1,0 +1,567 @@
+{
+  "session_id": "57f2caab-d4f2-4a2c-a5e5-34e2fb6b22e8",
+  "generated_at": "2026-01-09T01:16:06.603454",
+  "events": [
+    {
+      "timestamp": "2026-01-09T01:14:54.958770",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "57f2caab-d4f2-4a2c-a5e5-34e2fb6b22e8"
+      }
+    },
+    {
+      "timestamp": "2026-01-09T01:14:54.958770",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_565ff7d2",
+        "total_chunks": 7,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Aisha Okafor  Business",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 27.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Aisha Okafor  Business =====\n\nCURRENT POSITION: across finance, healthcare"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Aisha Okafor  Business",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 27.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 5\n\nTITLE: CBAP\nCOMPANY: Certified Business Analysis Professional\nPERIOD: 2022 - ?\n"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Aisha Okafor  Business",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 27.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 5 === CURRENT POSITION ===\n\nTITLE: across finance, healthcare, and retail sectors."
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Aisha Okafor  Business",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 27.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 5\n\nTITLE: 2005\nCOMPANY: 2010 | Banking Innovations PLC\nPERIOD: 2005 - 2010\nDURATIO"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Aisha Okafor  Business",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 27.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 5\n\nTITLE: 2001\nCOMPANY: 2005 | FinTech Solutions Ltd.\nPERIOD: 2001 - 2005\nDURATION"
+          },
+          {
+            "index": 5,
+            "section_type": "experience",
+            "candidate_name": " Aisha Okafor  Business",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 27.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 5 of 5 === CURRENT POSITION ===\n\nTITLE: 1999\nCOMPANY: 2001 | Global Insights Ltd.\nPERIO"
+          },
+          {
+            "index": 6,
+            "section_type": "full_cv",
+            "candidate_name": " Aisha Okafor  Business",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 27.0,
+            "position_count": 5,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Aisha Okafor  Business\n\nCURRENT ROLE: across finance, healthcare, and retail sector"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-09T01:14:55.906235",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "57f2caab-d4f2-4a2c-a5e5-34e2fb6b22e8"
+      }
+    },
+    {
+      "timestamp": "2026-01-09T01:14:55.906235",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_0bfbe465",
+        "total_chunks": 6,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Matteo Rossi  Associate",
+            "job_hopping_score": 0.21428571428571427,
+            "avg_tenure_years": 3.5,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Matteo Rossi  Associate =====\n\nCURRENT POSITION: E X P E R I E N C E\nCURRE"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Matteo Rossi  Associate",
+            "job_hopping_score": 0.21428571428571427,
+            "avg_tenure_years": 3.5,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 4 === CURRENT POSITION ===\n\nTITLE: E X P E R I E N C E\nCOMPANY: Junior Analyst\nPER"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Matteo Rossi  Associate",
+            "job_hopping_score": 0.21428571428571427,
+            "avg_tenure_years": 3.5,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 4\n\nTITLE: Milan\nCOMPANY: Italy\nPERIOD: 2019 - 2021\nDURATION: 2 years\n\nJOB DESCRIPT"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Matteo Rossi  Associate",
+            "job_hopping_score": 0.21428571428571427,
+            "avg_tenure_years": 3.5,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 4\n\nTITLE: 2017\nCOMPANY: 2019 | Bocconi University - Finance Lab\nPERIOD: 2017 - 201"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Matteo Rossi  Associate",
+            "job_hopping_score": 0.21428571428571427,
+            "avg_tenure_years": 3.5,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 4\n\nTITLE: Bocconi University\nCOMPANY: Milan\nPERIOD: 2017 - 2022\nDURATION: 5 years\n"
+          },
+          {
+            "index": 5,
+            "section_type": "full_cv",
+            "candidate_name": " Matteo Rossi  Associate",
+            "job_hopping_score": 0.21428571428571427,
+            "avg_tenure_years": 3.5,
+            "total_experience_years": 9.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Matteo Rossi  Associate\n\nCURRENT ROLE: E X P E R I E N C E\nCOMPANY: Junior Analyst\n"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-09T01:14:56.816836",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "57f2caab-d4f2-4a2c-a5e5-34e2fb6b22e8"
+      }
+    },
+    {
+      "timestamp": "2026-01-09T01:14:56.816836",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_7d88913e",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Aisha Al-Mansoori  Junior",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Aisha Al-Mansoori  Junior =====\n\nCURRENT POSITION: to culinary excellence."
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Aisha Al-Mansoori  Junior",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: to culinary excellence.\nCOMPANY: S K I L L S I "
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": " Aisha Al-Mansoori  Junior",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Aisha Al-Mansoori  Junior\n\nCURRENT ROLE: to culinary excellence.\nCOMPANY: S K I L L"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-09T01:14:57.780373",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "57f2caab-d4f2-4a2c-a5e5-34e2fb6b22e8"
+      }
+    },
+    {
+      "timestamp": "2026-01-09T01:14:57.780373",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_05ee4d0f",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Lukas Schneider  Mix",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 9.5,
+            "total_experience_years": 14.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Lukas Schneider  Mix =====\n\nCURRENT POSITION: revisions for commercial adv"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Lukas Schneider  Mix",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 9.5,
+            "total_experience_years": 14.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2 === CURRENT POSITION ===\n\nTITLE: revisions for commercial advertising and featur"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Lukas Schneider  Mix",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 9.5,
+            "total_experience_years": 14.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2\n\nTITLE: Thesis on Low\nCOMPANY: Frequency Dynamics in Cinematic Mixes\nPERIOD: 201"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": " Lukas Schneider  Mix",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 9.5,
+            "total_experience_years": 14.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Lukas Schneider  Mix\n\nCURRENT ROLE: revisions for commercial advertising and featur"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-09T01:14:58.776053",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "57f2caab-d4f2-4a2c-a5e5-34e2fb6b22e8"
+      }
+    },
+    {
+      "timestamp": "2026-01-09T01:14:58.776053",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_eeeec605",
+        "total_chunks": 6,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": " Mei Lin Chen  Accessories",
+            "job_hopping_score": 0.3,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 10.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE:  Mei Lin Chen  Accessories =====\n\nCURRENT POSITION: English ⭐⭐⭐⭐⭐⭐\nCURRENT "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": " Mei Lin Chen  Accessories",
+            "job_hopping_score": 0.3,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 10.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 4\n\nTITLE: 1998\nCOMPANY: 2005 | StyleMakers GmbH\nPERIOD: 1998 - 2005\nDURATION: 7 ye"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": " Mei Lin Chen  Accessories",
+            "job_hopping_score": 0.3,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 10.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 4 === CURRENT POSITION ===\n\nTITLE: English ⭐⭐⭐⭐⭐⭐\nCOMPANY: TrendAtelier Berlin\nPER"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": " Mei Lin Chen  Accessories",
+            "job_hopping_score": 0.3,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 10.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 4\n\nTITLE: patient‑focused collections. Combines German Conceptualized a modular ba"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": " Mei Lin Chen  Accessories",
+            "job_hopping_score": 0.3,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 10.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 4\n\nTITLE: Adobe Certified Expert\nCOMPANY: Illustrator\nPERIOD: Unknown dates\nDURATI"
+          },
+          {
+            "index": 5,
+            "section_type": "full_cv",
+            "candidate_name": " Mei Lin Chen  Accessories",
+            "job_hopping_score": 0.3,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 10.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for  Mei Lin Chen  Accessories\n\nCURRENT ROLE: English ⭐⭐⭐⭐⭐⭐\nCOMPANY: TrendAtelier Berli"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-09T01:15:10.261787",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "57f2caab-d4f2-4a2c-a5e5-34e2fb6b22e8"
+      }
+    },
+    {
+      "timestamp": "2026-01-09T01:15:10.261787",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Who has the most diverse profile?",
+        "cv_ids": [
+          "cv_565ff7d2",
+          "cv_0bfbe465",
+          "cv_7d88913e",
+          "cv_05ee4d0f",
+          "cv_eeeec605"
+        ],
+        "cv_count": 5
+      }
+    },
+    {
+      "timestamp": "2026-01-09T01:15:27.431916",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 5,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_0bfbe465",
+            "candidate_name": " Matteo Rossi  Associate",
+            "section_type": "experience",
+            "job_hopping_score": 0.21428571428571427,
+            "avg_tenure_years": 3.5,
+            "total_experience_years": 9.0,
+            "score": 0.5528015303141676,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_05ee4d0f",
+            "candidate_name": " Lukas Schneider  Mix",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.05263157894736842,
+            "avg_tenure_years": 9.5,
+            "total_experience_years": 14.0,
+            "score": 0.5238862342971553,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_565ff7d2",
+            "candidate_name": " Aisha Okafor  Business",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 27.0,
+            "score": 0.5142652950472333,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_eeeec605",
+            "candidate_name": " Mei Lin Chen  Accessories",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 10.0,
+            "score": 0.4985405183768911,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_7d88913e",
+            "candidate_name": " Aisha Al-Mansoori  Junior",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.4887868802029003,
+            "has_enriched_metadata": false
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "job_title",
+          "company",
+          "start_year",
+          "end_year",
+          "is_current",
+          "duration_years",
+          "position_order",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "location",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-09T01:15:47.749753",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-09T01:16:06.466975",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "search",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-09T01:16:06.602452",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 427,
+        "answer_preview": ":::thinking\nThe user is asking for a comparison of candidates based on their skills and experience. I need to analyze the provided CVs to identify relevant skills and experience levels. I will then create a table to compare the candidates and rank them based on the criteria.\n:::\n\n\n:::conclusion\nBased on the analysis, the top candidate is **[Aisha Okafor](cv:cv_565ff7d2)**, followed by **[Matteo Rossi](cv:cv_0bfbe465)**.\n:::",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

@@ -13,6 +13,7 @@ export { default as RiskAssessmentTable } from './RiskAssessmentTable';
 export { default as RankingTable } from './RankingTable';
 export { default as MatchScoreCard } from './MatchScoreCard';
 export { default as TeamCompositionView } from './TeamCompositionView';
+export { default as TeamBuildView } from './TeamBuildView';
 export { default as VerificationResult } from './VerificationResult';
 export { default as PoolSummary } from './PoolSummary';
 export { default as SearchResultsTable } from './SearchResultsTable';

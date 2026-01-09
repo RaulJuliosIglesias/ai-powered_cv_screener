@@ -1,46 +1,56 @@
 """
-TEAM BUILD STRUCTURE
+TEAM BUILD STRUCTURE V2
 
-Structure for composing teams from available candidates.
-Combines MODULES:
-- ThinkingModule
-- TeamRequirementsModule
-- TeamCompositionModule
-- SkillCoverageModule
-- TeamRiskModule
-- ConclusionModule
+Enhanced structure for composing teams from available candidates.
+Now includes rich visual modules:
+
+MODULES:
+- ThinkingModule: AI reasoning process
+- TeamOverviewModule: Executive summary with metrics
+- TeamMemberCardsModule: Individual member profiles
+- TeamSynergyModule: How members complement each other
+- SkillMatrixModule: Visual skill coverage matrix
+- TeamRiskModule: Potential risks and gaps
+- ConclusionModule: Final recommendation
 
 This structure is used when user asks for team building:
-- "build a team of 3 developers"
+- "build a team with the top 3"
+- "make a team from these candidates"
 - "form a project team"
-- "assemble a team for this project"
 """
 
 import logging
+import re
 from typing import Dict, Any, List, Optional
 
 from ..modules import ThinkingModule, ConclusionModule, AnalysisModule
 from ..modules.team_requirements_module import TeamRequirementsModule
-from ..modules.team_composition_module import TeamCompositionModule
+from ..modules.team_composition_module import TeamCompositionModule, TeamCompositionData, TeamAssignment
 from ..modules.skill_coverage_module import SkillCoverageModule
 from ..modules.team_risk_module import TeamRiskModule
+from ..modules.team_overview_module import TeamOverviewModule
+from ..modules.team_member_cards_module import TeamMemberCardsModule
+from ..modules.team_synergy_module import TeamSynergyModule
+from ..modules.skill_matrix_module import SkillMatrixModule
 
 logger = logging.getLogger(__name__)
 
 
 class TeamBuildStructure:
     """
-    Assembles the Team Build Structure using modules.
+    Assembles the Team Build Structure V2 with rich visual modules.
     """
     
     def __init__(self):
         self.thinking_module = ThinkingModule()
         self.analysis_module = AnalysisModule()
-        self.team_requirements_module = TeamRequirementsModule()
-        self.team_composition_module = TeamCompositionModule()
-        self.skill_coverage_module = SkillCoverageModule()
-        self.team_risk_module = TeamRiskModule()
         self.conclusion_module = ConclusionModule()
+        # New enhanced modules
+        self.overview_module = TeamOverviewModule()
+        self.member_cards_module = TeamMemberCardsModule()
+        self.synergy_module = TeamSynergyModule()
+        self.skill_matrix_module = SkillMatrixModule()
+        self.risk_module = TeamRiskModule()
     
     def assemble(
         self,
@@ -49,74 +59,358 @@ class TeamBuildStructure:
         query: str = "",
         conversation_history: List[Dict[str, str]] = None
     ) -> Dict[str, Any]:
-        """Assemble all components of Team Build Structure."""
-        logger.info("[TEAM_BUILD_STRUCTURE] Assembling team composition")
+        """Assemble all components of Team Build Structure V2."""
+        logger.info("[TEAM_BUILD_STRUCTURE_V2] Assembling enhanced team composition")
         
         # Extract thinking
         thinking = self.thinking_module.extract(llm_output)
         
-        # Check if query mentions specific team size (e.g., "top 3", "these 3")
-        query_lower = query.lower()
-        is_simple_team_query = any(phrase in query_lower for phrase in [
-            'top 3', 'top three', 'these 3', 'best 3', 'top 5', 'top five'
-        ])
+        # Build team from chunks
+        team_members = self._build_team_from_chunks(chunks, query)
         
-        if is_simple_team_query:
-            # SIMPLE MODE: Analyze available candidates as a team without role assignment
-            logger.info("[TEAM_BUILD_STRUCTURE] Simple team query - analyzing available candidates")
-            composition_data = self._analyze_simple_team(chunks, query)
-            requirements_data = None
-            coverage_data = None
-            risk_data = None
-        else:
-            # ROLE-BASED MODE: Traditional team building with role assignment
-            logger.info("[TEAM_BUILD_STRUCTURE] Role-based team query")
-            requirements_data = self.team_requirements_module.extract(
-                query=query,
-                llm_output=llm_output
-            )
-            
-            roles = requirements_data.to_dict()["roles"] if requirements_data else []
-            composition_data = self.team_composition_module.compose(
-                roles=roles,
-                chunks=chunks
-            )
-            
-            assignments = composition_data.to_dict()["assignments"] if composition_data else []
-            all_required_skills = []
-            for role in roles:
-                all_required_skills.extend(role.get("required_skills", []))
-            
-            coverage_data = self.skill_coverage_module.analyze(
-                assignments=assignments,
-                required_skills=all_required_skills
-            )
-            
-            coverage_dict = coverage_data.to_dict() if coverage_data else {}
-            risk_data = self.team_risk_module.analyze(
-                assignments=assignments,
-                skill_coverage=coverage_dict
-            )
+        logger.info(f"[TEAM_BUILD_STRUCTURE_V2] Built team with {len(team_members)} members")
         
-        # Extract conclusion and analysis
-        conclusion = self.conclusion_module.extract(llm_output)
-        analysis = self.analysis_module.extract(llm_output, "", conclusion or "")
+        # Generate all module outputs
+        # 1. Team Overview - Executive summary
+        overview_data = self.overview_module.generate(team_members, query)
         
-        assignments = composition_data.to_dict()["assignments"] if composition_data else []
+        # 2. Member Cards - Individual profiles  
+        cards_data = self.member_cards_module.create_cards(team_members)
+        
+        # 3. Team Synergy - How they complement each other
+        synergy_data = self.synergy_module.analyze(team_members, chunks)
+        
+        # 4. Skill Matrix - Visual skill coverage
+        matrix_data = self.skill_matrix_module.build(team_members)
+        
+        # 5. Risk Analysis
+        risk_data = self._analyze_team_risks(team_members, synergy_data)
+        
+        # 6. Direct Answer - Clear summary
+        direct_answer = self._generate_direct_answer(team_members, overview_data, query)
+        
+        # 7. Conclusion
+        conclusion = self._generate_conclusion(team_members, overview_data, synergy_data)
+        
+        # Build formatted outputs for display
+        formatted_overview = self.overview_module.format(overview_data)
+        formatted_cards = self.member_cards_module.format(cards_data)
+        formatted_synergy = self.synergy_module.format(synergy_data)
+        formatted_matrix = self.skill_matrix_module.format(matrix_data)
+        
+        logger.info(f"[TEAM_BUILD_STRUCTURE_V2] Assembly complete")
         
         return {
             "structure_type": "team_build",
             "query": query,
             "thinking": thinking,
-            "analysis": analysis,
-            "team_requirements": requirements_data.to_dict() if requirements_data else None,
-            "team_composition": composition_data.to_dict() if composition_data else None,
-            "skill_coverage": coverage_data.to_dict() if coverage_data else None,
-            "team_risks": risk_data.to_dict() if risk_data else None,
-            "total_assigned": len(assignments),
+            "direct_answer": direct_answer,
+            
+            # Rich data for frontend
+            "team_overview": overview_data.to_dict() if overview_data else None,
+            "team_members": cards_data.to_dict() if cards_data else None,
+            "team_synergy": synergy_data.to_dict() if synergy_data else None,
+            "skill_matrix": matrix_data.to_dict() if matrix_data else None,
+            "team_risks": risk_data,
+            
+            # Formatted markdown for fallback display
+            "formatted_overview": formatted_overview,
+            "formatted_members": formatted_cards,
+            "formatted_synergy": formatted_synergy,
+            "formatted_matrix": formatted_matrix,
+            
+            # Legacy fields for compatibility
+            "team_composition": {
+                "assignments": [m for m in team_members],
+                "unassigned_roles": []
+            },
+            "total_assigned": len(team_members),
             "conclusion": conclusion,
+            "analysis": self._generate_analysis(team_members, synergy_data),
             "raw_content": llm_output
         }
+    
+    def _build_team_from_chunks(
+        self, 
+        chunks: List[Dict[str, Any]], 
+        query: str
+    ) -> List[Dict[str, Any]]:
+        """Build team member list from chunks."""
+        # Group chunks by candidate
+        candidates = {}
+        
+        for chunk in chunks:
+            meta = chunk.get("metadata", {})
+            cv_id = chunk.get("cv_id", "") or meta.get("cv_id", "")
+            
+            if not cv_id:
+                continue
+            
+            if cv_id not in candidates:
+                # Extract skills
+                skills = set()
+                skills_str = meta.get("skills", "")
+                if skills_str:
+                    for skill in skills_str.split(","):
+                        skill = skill.strip()
+                        if skill and len(skill) > 1:
+                            skills.add(skill)
+                
+                candidates[cv_id] = {
+                    "cv_id": cv_id,
+                    "candidate_name": meta.get("candidate_name", "Unknown"),
+                    "name": meta.get("candidate_name", "Unknown"),
+                    "experience": meta.get("total_experience_years", 0) or 0,
+                    "experience_years": meta.get("total_experience_years", 0) or 0,
+                    "avg_tenure": meta.get("avg_tenure_years", 0) or 0,
+                    "seniority": meta.get("seniority_level", "mid") or "mid",
+                    "current_role": meta.get("current_role", ""),
+                    "skills": list(skills),  # Convert set to list for JSON
+                    "matching_skills": list(skills)[:10],
+                    "job_hopping_score": meta.get("job_hopping_score", 0.3),
+                    "_skills_set": skills  # Keep set for internal use
+                }
+            else:
+                # Update with best values
+                exp = meta.get("total_experience_years", 0) or 0
+                if exp > candidates[cv_id]["experience"]:
+                    candidates[cv_id]["experience"] = exp
+                    candidates[cv_id]["experience_years"] = exp
+                
+                # Add more skills using internal set
+                skills_str = meta.get("skills", "")
+                if skills_str:
+                    for skill in skills_str.split(","):
+                        skill = skill.strip()
+                        if skill and len(skill) > 1:
+                            candidates[cv_id]["_skills_set"].add(skill)
+                            if len(candidates[cv_id]["matching_skills"]) < 10:
+                                if skill not in candidates[cv_id]["matching_skills"]:
+                                    candidates[cv_id]["matching_skills"].append(skill)
+        
+        # Convert internal sets to lists and remove _skills_set before returning
+        for cv_id, cand in candidates.items():
+            if "_skills_set" in cand:
+                cand["skills"] = list(cand["_skills_set"])
+                del cand["_skills_set"]
+        
+        # Sort by experience
+        sorted_candidates = sorted(
+            candidates.values(),
+            key=lambda x: x["experience"],
+            reverse=True
+        )
+        
+        # Determine team size from query
+        team_size = 3  # default
+        size_match = re.search(r'top\s*(\d+)|best\s*(\d+)|(\d+)\s*(member|candidate|person)', query.lower())
+        if size_match:
+            for g in size_match.groups():
+                if g and g.isdigit():
+                    team_size = int(g)
+                    break
+        
+        # Take top N
+        team = sorted_candidates[:team_size]
+        
+        # Assign roles based on experience
+        for idx, member in enumerate(team):
+            exp = member["experience"]
+            seniority = (member.get("seniority") or "mid").lower()
+            
+            if exp >= 15 or seniority in ["principal", "director", "executive"]:
+                role = "Team Lead"
+            elif exp >= 10 or seniority in ["senior", "lead"]:
+                role = "Senior Member"
+            elif exp >= 5:
+                role = "Core Member"
+            else:
+                role = "Team Member"
+            
+            member["role_name"] = role
+            member["fit_score"] = max(70, 100 - (idx * 5))
+            member["strengths"] = self._extract_strengths(member)
+        
+        return team
+    
+    def _extract_strengths(self, member: Dict) -> List[str]:
+        """Extract member strengths."""
+        strengths = []
+        
+        exp = member.get("experience", 0)
+        if exp >= 15:
+            strengths.append(f"{exp:.0f} years of executive experience")
+        elif exp >= 10:
+            strengths.append(f"{exp:.0f} years of senior experience")
+        elif exp > 0:
+            strengths.append(f"{exp:.0f} years experience")
+        
+        tenure = member.get("avg_tenure", 0)
+        if tenure >= 4:
+            strengths.append(f"Excellent stability ({tenure:.1f}y avg tenure)")
+        elif tenure >= 2.5:
+            strengths.append(f"Good stability ({tenure:.1f}y avg tenure)")
+        
+        hop_score = member.get("job_hopping_score", 0.5)
+        if hop_score < 0.2:
+            strengths.append("Strong job retention")
+        
+        seniority = member.get("seniority", "")
+        if seniority and seniority.lower() not in ["mid", "unknown", ""]:
+            strengths.append(f"{seniority.title()} level professional")
+        
+        return strengths[:3]
+    
+    def _analyze_team_risks(
+        self, 
+        team_members: List[Dict], 
+        synergy_data
+    ) -> Dict[str, Any]:
+        """Analyze potential team risks."""
+        risks = []
+        mitigations = []
+        
+        # Check experience distribution
+        experiences = [m.get("experience", 0) for m in team_members]
+        if all(exp < 5 for exp in experiences):
+            risks.append({
+                "type": "experience",
+                "severity": "medium",
+                "description": "All team members have less than 5 years experience",
+                "icon": "⚠️"
+            })
+            mitigations.append("Consider adding a senior mentor or advisor")
+        
+        # Check for single point of failure
+        if len(team_members) > 0:
+            max_exp = max(experiences) if experiences else 0
+            others_exp = sum(experiences) - max_exp
+            if max_exp > others_exp * 2 and len(team_members) > 1:
+                risks.append({
+                    "type": "dependency",
+                    "severity": "low",
+                    "description": "Heavy reliance on most experienced member",
+                    "icon": "⚡"
+                })
+                mitigations.append("Ensure knowledge transfer and documentation")
+        
+        # Check skill gaps from synergy
+        if synergy_data and synergy_data.potential_gaps:
+            for gap in synergy_data.potential_gaps[:2]:
+                risks.append({
+                    "type": "skill_gap",
+                    "severity": "low",
+                    "description": gap,
+                    "icon": "📋"
+                })
+        
+        # Overall risk level
+        if len(risks) >= 3:
+            overall = "medium"
+        elif len(risks) >= 1:
+            overall = "low"
+        else:
+            overall = "minimal"
+        
+        return {
+            "risks": risks,
+            "mitigations": mitigations,
+            "overall_risk_level": overall,
+            "risk_count": len(risks)
+        }
+    
+    def _generate_direct_answer(
+        self, 
+        team_members: List[Dict],
+        overview_data,
+        query: str
+    ) -> str:
+        """Generate clear direct answer."""
+        if not team_members:
+            return "Unable to form a team from the available candidates."
+        
+        names = [m.get("candidate_name", m.get("name", ""))[:25] for m in team_members]
+        total_exp = sum(m.get("experience", 0) for m in team_members)
+        
+        # Clean names
+        clean_names = []
+        for name in names:
+            for suffix in [" Research", " Associate", " UX", " Lab"]:
+                if name.endswith(suffix):
+                    name = name[:-len(suffix)].strip()
+            clean_names.append(name.split()[0] if name else "?")
+        
+        names_str = ", ".join(clean_names[:-1]) + f" and {clean_names[-1]}" if len(clean_names) > 1 else clean_names[0]
+        
+        score = overview_data.team_score if overview_data else 75
+        
+        answer = f"✅ **Proposed Team of {len(team_members)}:** {names_str}\n\n"
+        answer += f"**Combined Experience:** {total_exp:.0f} years | **Team Score:** {score:.0f}%\n\n"
+        
+        if overview_data and overview_data.recommendation:
+            answer += overview_data.recommendation
+        
+        return answer
+    
+    def _generate_conclusion(
+        self, 
+        team_members: List[Dict],
+        overview_data,
+        synergy_data
+    ) -> str:
+        """Generate conclusion text."""
+        if not team_members:
+            return "No team could be formed."
+        
+        parts = []
+        
+        # Team summary
+        total_exp = sum(m.get("experience", 0) for m in team_members)
+        parts.append(f"This {len(team_members)}-member team brings {total_exp:.0f} years of combined experience.")
+        
+        # Synergy highlight
+        if synergy_data and synergy_data.synergy_highlights:
+            parts.append(synergy_data.synergy_highlights[0].replace("🎯 ", "").replace("🤝 ", "").replace("🌟 ", ""))
+        
+        # Recommendation
+        if overview_data:
+            if overview_data.team_score >= 80:
+                parts.append("This is a well-balanced team ready for complex challenges.")
+            elif overview_data.team_score >= 65:
+                parts.append("This team has good potential with complementary skills.")
+            else:
+                parts.append("Consider augmenting this team for larger projects.")
+        
+        return " ".join(parts)
+    
+    def _generate_analysis(
+        self, 
+        team_members: List[Dict],
+        synergy_data
+    ) -> str:
+        """Generate analysis text."""
+        if not team_members:
+            return ""
+        
+        lines = []
+        
+        # Experience analysis
+        experiences = [m.get("experience", 0) for m in team_members]
+        avg_exp = sum(experiences) / len(experiences) if experiences else 0
+        lines.append(f"**Experience Distribution:** Average {avg_exp:.1f} years per member")
+        
+        # Skill coverage
+        all_skills = set()
+        for m in team_members:
+            all_skills.update(m.get("matching_skills", []) or m.get("skills", []))
+        if all_skills:
+            lines.append(f"**Skill Coverage:** {len(all_skills)} unique skills identified")
+        
+        # Synergy
+        if synergy_data and synergy_data.shared_skills:
+            lines.append(f"**Collaboration Areas:** {', '.join(synergy_data.shared_skills[:3])}")
+        
+        return "\n".join(lines)
     
     def _analyze_simple_team(self, chunks: List[Dict[str, Any]], query: str) -> Any:
         """

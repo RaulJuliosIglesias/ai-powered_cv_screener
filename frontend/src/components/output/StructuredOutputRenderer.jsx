@@ -16,6 +16,7 @@ import {
   RankingTable,
   MatchScoreCard,
   TeamCompositionView,
+  TeamBuildView,
   VerificationResult,
   PoolSummary,
   SearchResultsTable,
@@ -808,19 +809,11 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
   }
   
   if (structure_type === 'team_build') {
-    console.log('[STRUCTURED_OUTPUT] ROUTING: structure_type=team_build');
-    const teamCvMap = structuredOutput.team_composition?.assignments?.reduce((acc, a) => {
-      if (a.candidate_name && a.cv_id) {
-        acc[a.candidate_name.toLowerCase().trim()] = a.cv_id;
-      }
-      return acc;
-    }, {}) || {};
+    console.log('[STRUCTURED_OUTPUT] ROUTING: structure_type=team_build (V2)');
     return (
       <div className="space-y-3">
         <ThinkingSection content={thinking} />
-        <TeamCompositionView data={structuredOutput} onOpenCV={onOpenCV} />
-        {analysis && <AnalysisSection content={analysis} onOpenCV={onOpenCV} cvMap={teamCvMap} />}
-        {conclusion && <ConclusionSection content={conclusion} onOpenCV={onOpenCV} cvMap={teamCvMap} />}
+        <TeamBuildView data={structuredOutput} onOpenCV={onOpenCV} />
       </div>
     );
   }
