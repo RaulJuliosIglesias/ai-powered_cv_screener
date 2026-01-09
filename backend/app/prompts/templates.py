@@ -1584,7 +1584,25 @@ def classify_query_for_structure(question: str) -> str:
     if any(re.search(p, q) for p in single_candidate_patterns):
         return "single_candidate"
     
-    # 3. RANKING queries → RankingStructure
+    # 3. TEAM BUILD queries → TeamBuildStructure (MUST be before ranking!)
+    # CRITICAL: Check this FIRST because "build a team with the top 3" has both "team" and "top"
+    team_build_patterns = [
+        # Explicit team building verbs (build/create/form/make/assemble)
+        r'\b(build|create|form|make|assemble)\s+(a\s+)?team',
+        r'\b(formar|crear|hacer|armar)\s+(un\s+)?equipo',
+        # Team with/from candidates  
+        r'\bteam\s+(with|from|of|using|for)',
+        r'\bequipo\s+(con|de|usando|para)',
+        # ANY mention of "team" in query (simple catch-all)
+        r'\ba\s+team\b',
+        r'\bun\s+equipo\b',
+        # Group formation
+        r'\bcomplementary', r'\bcomplementar'
+    ]
+    if any(re.search(p, q) for p in team_build_patterns):
+        return "team_build"
+    
+    # 4. RANKING queries → RankingStructure (now checks it's NOT a team query)
     ranking_patterns = [
         r'\brank\b', r'\branking\b', r'\bbest\s+(for|candidate)',
         r'\btop\s+\d*', r'\bwho\s+is\s+best',
@@ -1592,10 +1610,11 @@ def classify_query_for_structure(question: str) -> str:
         r'\border\s+by', r'\bsort\s+by', r'\bordenar',
         r'\bleader', r'\bliderazgo', r'\bleadership'
     ]
-    if any(re.search(p, q) for p in ranking_patterns):
+    # Only classify as ranking if it doesn't contain "team" keywords
+    if any(re.search(p, q) for p in ranking_patterns) and not re.search(r'\b(team|equipo|group|grupo)\b', q):
         return "ranking"
     
-    # 4. COMPARISON queries → ComparisonStructure
+    # 5. COMPARISON queries → ComparisonStructure
     comparison_patterns = [
         r'\bcompara', r'\bcompare', r'\bvs\b', r'\bversus',
         r'\bdifference', r'\bdiferencia', r'\bmejor\s+entre'
@@ -1603,7 +1622,7 @@ def classify_query_for_structure(question: str) -> str:
     if any(re.search(p, q) for p in comparison_patterns):
         return "comparison"
     
-    # 5. JOB MATCH queries → JobMatchStructure
+    # 6. JOB MATCH queries → JobMatchStructure
     job_match_patterns = [
         r'\bmatch\b', r'\bfit\s+for', r'\bsuitable\s+for',
         r'\brequirements?\b', r'\bjob\s+(description|posting)',
@@ -1612,15 +1631,6 @@ def classify_query_for_structure(question: str) -> str:
     ]
     if any(re.search(p, q) for p in job_match_patterns):
         return "job_match"
-    
-    # 6. TEAM BUILD queries → TeamBuildStructure
-    team_build_patterns = [
-        r'\bteam\b', r'\bequipo\b', r'\bgroup\b', r'\bgrupo\b',
-        r'\bbuild\s+a\s+team', r'\bform\s+a\s+team',
-        r'\bcomplementary', r'\bcomplementar'
-    ]
-    if any(re.search(p, q) for p in team_build_patterns):
-        return "team_build"
     
     # 7. VERIFICATION queries → VerificationStructure
     verification_patterns = [

@@ -92,13 +92,13 @@ Respond in this EXACT JSON format (no markdown, just raw JSON):
 }}
 
 QUERY_TYPE GUIDE:
-- "ranking": User wants candidates ordered/ranked by criteria (best, top N, sort by)
+- "ranking": User wants candidates ONLY ranked/ordered by criteria WITHOUT building a team (e.g., "Rank by experience", "Who are the best 5?")
 - "comparison": User wants to compare specific candidates side-by-side
 - "search": User wants to find candidates with specific skills/experience
 - "red_flags": User asks for RISK ASSESSMENT, red flags, job hopping analysis, stability concerns
 - "single_candidate": User wants FULL PROFILE of ONE specific candidate (everything about, full profile, analyze X)
 - "job_match": User wants to match candidates against job requirements
-- "team_build": User wants to build a team from candidates
+- "team_build": User wants to BUILD/FORM/CREATE a TEAM from candidates (e.g., "Can I build a team with the top 3?", "Form a project team", "Create a team of developers") - CRITICAL: If query mentions "team" + "build/form/create/with", it's ALWAYS team_build NOT ranking
 - "summary": User wants a summary/overview of candidates
 - "general": Non-CV related queries
 
@@ -169,6 +169,21 @@ Query: "Give me the full profile of John Smith" or "Tell me everything about Joh
   ],
   "is_cv_related": true,
   "reformulated_prompt": "Provide a comprehensive profile of John Smith. Include their complete work history, all skills and technologies, education, certifications, and a summary of their career trajectory and key achievements."
+}}
+
+Query: "Can I build a team with the top 3?"
+{{
+  "understood_query": "The user wants to BUILD a TEAM using the top 3 ranked candidates from the pool. This requires team composition analysis, skill complementarity assessment, and team balance evaluation - NOT just a ranking list.",
+  "query_type": "team_build",
+  "requirements": [
+    "Identify the top 3 candidates based on overall qualifications",
+    "Analyze how these 3 candidates work together as a team",
+    "Assess skill complementarity and coverage",
+    "Identify team composition strengths and potential gaps",
+    "Evaluate team balance and roles"
+  ],
+  "is_cv_related": true,
+  "reformulated_prompt": "Analyze whether the top 3 candidates can form an effective team. Identify the top 3 candidates, then evaluate: 1) How their skills complement each other, 2) What roles each would fill, 3) Team skill coverage and gaps, 4) Team balance in seniority and experience, 5) Potential collaboration strengths and risks."
 }}
 
 Query: "Give me a recipe for chocolate cake"
@@ -725,17 +740,21 @@ class QueryUnderstandingService:
         elif any(kw in query_lower for kw in ['compare', 'versus', 'vs', 'vs.', 'difference', 'comparar', 'comparación']):
             query_type = 'comparison'
         
-        # 4. RANKING
-        elif any(kw in query_lower for kw in ['rank', 'best', 'top', 'order', 'sort', 'mejor', 'ordenar']) and 'compare' not in query_lower:
+        # 4. TEAM BUILD (MUST come BEFORE ranking - 'top 3 for team' should be team_build not ranking)
+        elif any(kw in query_lower for kw in [
+            'build a team', 'build team', 'create a team', 'create team',
+            'form a team', 'form team', 'team with', 'team from', 'team of',
+            'formar equipo', 'crear equipo', 'equipo con', 'equipo de'
+        ]):
+            query_type = 'team_build'
+        
+        # 5. RANKING (now checks that it's not a team_build query)
+        elif any(kw in query_lower for kw in ['rank', 'best', 'top', 'order', 'sort', 'mejor', 'ordenar']) and 'compare' not in query_lower and 'team' not in query_lower:
             query_type = 'ranking'
         
-        # 5. JOB MATCH
+        # 6. JOB MATCH
         elif any(kw in query_lower for kw in ['match', 'fit for', 'suitable for', 'qualified for', 'encaja', 'apto para']):
             query_type = 'job_match'
-        
-        # 6. TEAM BUILD
-        elif any(kw in query_lower for kw in ['team', 'build a team', 'equipo', 'formar equipo']):
-            query_type = 'team_build'
         
         # 7. TALENT POOL / SUMMARY (Priority before search)
         elif any(kw in query_lower for kw in [

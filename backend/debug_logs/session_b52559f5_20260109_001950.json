@@ -1,0 +1,197 @@
+{
+  "session_id": "b52559f5-63df-4233-b8b5-a4a2b24e5bfe",
+  "generated_at": "2026-01-09T00:19:50.715864",
+  "events": [
+    {
+      "timestamp": "2026-01-09T00:18:27.104430",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "b52559f5-63df-4233-b8b5-a4a2b24e5bfe"
+      }
+    },
+    {
+      "timestamp": "2026-01-09T00:18:27.104430",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Can I build a team with the top 3?",
+        "cv_ids": [
+          "cv_4fa786c9",
+          "cv_2d404e7a",
+          "cv_57454224",
+          "cv_1324cb1b",
+          "cv_eec7ef06",
+          "cv_36d44e9c"
+        ],
+        "cv_count": 6
+      }
+    },
+    {
+      "timestamp": "2026-01-09T00:18:46.701818",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 6,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_57454224",
+            "candidate_name": " Matteo Rossi  UX",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.6016089453693609,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_4fa786c9",
+            "candidate_name": " Layla Al-Mansoor  Lab",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.5715850871924317,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_eec7ef06",
+            "candidate_name": " Khalid Al-Mansoori  Research",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.05555555555555555,
+            "avg_tenure_years": 12.0,
+            "total_experience_years": 31.0,
+            "score": 0.5682857696251066,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_2d404e7a",
+            "candidate_name": " Priya Patel  Research Associate",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.1875,
+            "avg_tenure_years": 4.0,
+            "total_experience_years": 9.0,
+            "score": 0.5644637780801027,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_36d44e9c",
+            "candidate_name": " Ji-Yeon Kim  Research Associate",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 8.0,
+            "score": 0.5460696460562507,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_1324cb1b",
+            "candidate_name": " Gabriela Martinez  Research",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.4444444444444444,
+            "avg_tenure_years": 1.8,
+            "total_experience_years": 9.0,
+            "score": 0.5451541816494619,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-09T00:19:09.128839",
+      "event_type": "TEMPLATE_SELECTION",
+      "level": "INFO",
+      "data": {
+        "template": "QUERY_TEMPLATE",
+        "candidate_name": null,
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-09T00:19:50.580514",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "ranking",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-09T00:19:50.714865",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 1637,
+        "answer_preview": ":::thinking\n- The user is asking if they can build a team with the top 3 candidates.\n- The relevant information is the CVs of the three candidates.\n- I need to analyze the CVs and determine the best candidates based on the available information.\n- I must adhere to the constraints and use the provided metadata.\n- I will rank the candidates based on their experience.\n- I will provide the top 3 candidates.\n:::\n\nTop Recommendation: [📄](cv:cv_eec7ef06) ** Khalid Al-Mansoori  Research** (60%)\n\n Khalid...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}
