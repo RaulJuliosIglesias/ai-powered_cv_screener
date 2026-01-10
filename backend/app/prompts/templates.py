@@ -229,8 +229,6 @@ Ask ONE clarifying question, then proceed with best interpretation.
 Report them transparently: "2 candidates partially match (missing X but have Y)."
 """
 
-
-# =============================================================================
 # QUERY TEMPLATES
 # =============================================================================
 
@@ -245,48 +243,53 @@ Total CVs in session: {total_cvs}
 ## USER QUERY
 {question}
 
+## ⚠️ CRITICAL: ANSWER THE ACTUAL QUESTION
+**READ THE QUERY CAREFULLY.** Your response MUST directly answer what the user asked.
+
+**EXAMPLES OF CORRECT BEHAVIOR:**
+- Query: "who is best for front end?" → Evaluate candidates based on FRONT-END skills (React, Vue, CSS, JavaScript, HTML)
+- Query: "who has Python experience?" → Focus on PYTHON experience specifically
+- Query: "rank by leadership" → Evaluate LEADERSHIP skills and experience
+- Query: "best for data science?" → Look for DATA SCIENCE skills (ML, statistics, Python, R)
+
+**WRONG:** Ignoring the specific criteria and ranking by generic experience/tenure.
+**RIGHT:** Evaluating candidates based on the SPECIFIC SKILL or ROLE mentioned in the query.
+
 ## MANDATORY RESPONSE FORMAT
+
 You MUST respond using this exact structure:
 
 :::thinking
 [Your reasoning: What is being asked? Which candidates are relevant? What are the key criteria?]
 :::
 
-[Direct answer: 2-3 sentences directly answering the user's question. Start with a capital letter and provide context.]
+[Direct answer: 2-3 sentences directly answering the user's question. Be SPECIFIC about WHY these candidates are the best for what the user asked.]
 
 ### Analysis
-[MANDATORY: Explain your reasoning for the selection shown in the table below. Why did you choose these specific candidates? What criteria did you use to evaluate them? If no candidates match, explain why you are showing certain candidates anyway (e.g., "I'm showing the closest matches even though none fully meet the criteria").]
+[MANDATORY: Explain your reasoning. WHY did you choose these candidates? What evidence from their CVs supports your recommendation? If the user asked about a specific skill (e.g., frontend, Python, leadership), explain how each candidate matches THAT specific requirement.]
 
 [Table if comparing candidates - use EXACT format with NO spaces after **:
-| Candidate | Criterion 1 | Criterion 2 | Match |
-|-----------|-------------|-------------|-------|
-| **[Name](cv:cv_xxx)** | Details | Details | ⭐⭐⭐ |
-
-**CRITICAL for ranking/experience queries:** In table cells, include ACTUAL VALUES from enriched metadata:
-- For "Experience" column: Write "31 years" NOT just "100%" or "High"
-- For "Tenure" column: Write "12 years avg" NOT just "Excellent"
-- For "Skills" column: List actual skills, not just a score
-Example row: | **[Khalid Al-Mansoori](cv:cv_eec7ef06)** | 31 years | 12 years avg tenure | ⭐⭐⭐⭐⭐ |
+| Candidate | Relevant Skills/Experience | Why They Match | Score |
+|-----------|---------------------------|----------------|-------|
+| **[Name](cv:cv_xxx)** | Evidence from CV | Reason | ⭐⭐⭐ |
 
 :::conclusion
-[Actionable recommendation with specific candidate references using **[Name](cv:cv_xxx)** format]
+[Actionable recommendation with specific candidate references using **[Name](cv:cv_xxx)** format. Summarize WHY they are the best choice for what the user asked.]
 :::
 
 ## CRITICAL RULES
+- Your response must ANSWER the user's question with REASONING
+- Explain WHY each candidate is good for what the user asked
 - ALL sections (thinking, direct answer, analysis, table, conclusion) are MANDATORY
 - Use **[Candidate Name](cv:CV_ID)** format for EVERY candidate mention - NO spaces after **
-- The Analysis section MUST explain WHY you selected those candidates for the table
 - Base everything on CV data only—no assumptions
+- If NO candidates match, say so clearly and explain why
 
-## QUANTITY RULE (VERY IMPORTANT)
-**If the user asks for N candidates (e.g., "top 3", "best 5", "dame los 3 mejores"):**
+## QUANTITY RULE
+**If the user asks for N candidates (e.g., "top 3", "best 5"):**
 - The TABLE must contain EXACTLY N rows (or more for context)
 - The CONCLUSION must reference EXACTLY N candidates
-- NEVER return fewer candidates than requested
-- Rank candidates by relevance: best match first, then partial matches, then weak matches
 - Be honest about match quality but ALWAYS provide the requested quantity
-
-Example: "dame los 3 mejores para QA" → Table with 3+ candidates, Conclusion mentions 3 candidates
 
 Respond now:"""
 
@@ -1602,44 +1605,73 @@ def classify_query_for_structure(question: str) -> str:
     if any(re.search(p, q) for p in team_build_patterns):
         return "team_build"
     
-    # 4. RANKING queries → RankingStructure (now checks it's NOT a team query)
-    ranking_patterns = [
-        r'\brank\b', r'\branking\b', r'\bbest\s+(for|candidate)',
-        r'\btop\s+\d*', r'\bwho\s+is\s+best',
-        r'\bquién\s+es\s+(el\s+)?mejor', r'\bmejor\s+(para|candidato)',
-        r'\border\s+by', r'\bsort\s+by', r'\bordenar',
-        r'\bleader', r'\bliderazgo', r'\bleadership'
+    # 4. VERIFICATION queries → VerificationStructure
+    # IMPORTANT: Must be BEFORE ranking because "validate leadership claims" has "leadership"
+    verification_patterns = [
+        r'\bverif', r'\bconfirm', r'\bcheck\s+if', r'\bvalidate',
+        r'\btrue\s+that', r'\bcierto\s+que', r'\bverificar',
+        r'\bdid\s+\w+\s+work\s+at', r'\bworked?\s+at\b',
+        # NEW: Claim validation patterns
+        r'\bvalidate\s+(the\s+)?\w+\s+claims?', r'\bverify\s+(the\s+)?\w+\s+claims?',
+        r'\bvalidar\s+(las?\s+)?\w+\s+afirmacion', r'\bcomprobar\s+',
+        r'\bclaims?\s+(about|from|of)\b', r'\bafirmacion(es)?\s+(de|sobre)\b',
     ]
-    # Only classify as ranking if it doesn't contain "team" keywords
-    if any(re.search(p, q) for p in ranking_patterns) and not re.search(r'\b(team|equipo|group|grupo)\b', q):
-        return "ranking"
+    if any(re.search(p, q) for p in verification_patterns):
+        return "verification"
     
     # 5. COMPARISON queries → ComparisonStructure
+    # CRITICAL: Must be BEFORE ranking because "compare top 2" has both "compare" and "top"
     comparison_patterns = [
         r'\bcompara', r'\bcompare', r'\bvs\b', r'\bversus',
-        r'\bdifference', r'\bdiferencia', r'\bmejor\s+entre'
+        r'\bdifference', r'\bdiferencia', r'\bmejor\s+entre',
+        # NEW: Explicit comparison patterns
+        r'\bcompare\s+(the\s+)?(top|best|first)\s+\d+',
+        r'\bcomparar\s+(los\s+)?(top|mejores|primeros)\s+\d+',
     ]
     if any(re.search(p, q) for p in comparison_patterns):
         return "comparison"
     
     # 6. JOB MATCH queries → JobMatchStructure
+    # CRITICAL: Must be BEFORE ranking because "fits best for position" has both "best" and "position"
     job_match_patterns = [
         r'\bmatch\b', r'\bfit\s+for', r'\bsuitable\s+for',
         r'\brequirements?\b', r'\bjob\s+(description|posting)',
         r'\bposition\b', r'\brol\b', r'\bpuesto\b',
-        r'\bcumple\s+(con|los)\s+requisitos'
+        r'\bcumple\s+(con|los)\s+requisitos',
+        # NEW: "fits/fit best for [role]" patterns
+        r'\bfits?\s+(best\s+)?for\s+(a\s+)?(the\s+)?[\w\s]+(position|role|job)',
+        r'\bwho\s+fits?\s+(best\s+)?for',
+        r'\bquién\s+(encaja|sirve)\s+(mejor\s+)?para',
+        r'\bbest\s+fit\s+for\s+(a\s+)?(the\s+)?[\w\s]+(position|role|job)',
     ]
     if any(re.search(p, q) for p in job_match_patterns):
         return "job_match"
     
-    # 7. VERIFICATION queries → VerificationStructure
-    verification_patterns = [
-        r'\bverif', r'\bconfirm', r'\bcheck\s+if', r'\bvalidate',
-        r'\btrue\s+that', r'\bcierto\s+que', r'\bverificar',
-        r'\bdid\s+\w+\s+work\s+at', r'\bworked?\s+at\b'
+    # 7. RANKING queries → RankingStructure
+    # CRITICAL: Patterns for "who has the best X" must route to RANKING not single_candidate
+    ranking_patterns = [
+        r'\brank\b', r'\branking\b', r'\bbest\s+(for|candidate)',
+        r'\btop\s+\d*', r'\bwho\s+is\s+best',
+        r'\bquién\s+es\s+(el\s+)?mejor', r'\bmejor\s+(para|candidato)',
+        r'\border\s+by', r'\bsort\s+by', r'\bordenar',
+        # FIX: "order X by Y" patterns (e.g., "order candidates by skills")
+        r'\border\s+\w+\s+by', r'\bsort\s+\w+\s+by',
+        r'\bordenar\s+\w+\s+por', r'\blist\s+\w+\s+by',
+        # Leadership/potential patterns - these are RANKING queries, not single candidate
+        r'\bwho\s+(has|have)\s+(the\s+)?(best|most|highest|strongest)\b',
+        r'\bquién\s+tiene\s+(el\s+)?(mejor|más|mayor)\b',
+        r'\bbest\s+(leadership|potential|experience|skills|fit)\b',
+        r'\bstrongest\s+(candidate|profile|background)\b',
+        r'\bhighest\s+(potential|experience|score)\b',
+        r'\bmost\s+(experienced|qualified|suitable|skilled)\b',
+        # FIX: "who would be the best X" patterns
+        r'\bwho\s+would\s+be\s+(the\s+)?best',
+        r'\bquién\s+sería\s+(el\s+)?mejor',
+        r'\bbest\s+leader\b', r'\bmejor\s+líder\b',
     ]
-    if any(re.search(p, q) for p in verification_patterns):
-        return "verification"
+    # Only classify as ranking if it doesn't contain "team" keywords
+    if any(re.search(p, q) for p in ranking_patterns) and not re.search(r'\b(team|equipo|group|grupo)\b', q):
+        return "ranking"
     
     # 8. SUMMARY queries → SummaryStructure
     summary_patterns = [

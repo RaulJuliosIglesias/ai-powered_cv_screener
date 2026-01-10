@@ -325,32 +325,61 @@ class TeamBuildStructure:
         overview_data,
         query: str
     ) -> str:
-        """Generate clear direct answer."""
+        """Generate clear direct answer with FULL candidate names and details."""
         if not team_members:
             return "Unable to form a team from the available candidates."
         
-        names = [m.get("candidate_name", m.get("name", ""))[:25] for m in team_members]
         total_exp = sum(m.get("experience", 0) for m in team_members)
-        
-        # Clean names
-        clean_names = []
-        for name in names:
-            for suffix in [" Research", " Associate", " UX", " Lab"]:
-                if name.endswith(suffix):
-                    name = name[:-len(suffix)].strip()
-            clean_names.append(name.split()[0] if name else "?")
-        
-        names_str = ", ".join(clean_names[:-1]) + f" and {clean_names[-1]}" if len(clean_names) > 1 else clean_names[0]
-        
         score = overview_data.team_score if overview_data else 75
         
-        answer = f"✅ **Proposed Team of {len(team_members)}:** {names_str}\n\n"
-        answer += f"**Combined Experience:** {total_exp:.0f} years | **Team Score:** {score:.0f}%\n\n"
+        # Build header
+        lines = [
+            f"## ✅ Proposed Team of {len(team_members)}",
+            "",
+            f"**Combined Experience:** {total_exp:.0f} years | **Team Score:** {score:.0f}%",
+            "",
+            "### Team Members",
+            "",
+        ]
         
+        # Add each member with FULL details
+        for idx, member in enumerate(team_members, 1):
+            name = member.get("candidate_name", member.get("name", "Unknown"))
+            cv_id = member.get("cv_id", "")
+            role = member.get("role_name", "Team Member")
+            exp = member.get("experience", 0)
+            current_role = member.get("current_role", "")
+            fit_score = member.get("fit_score", 80)
+            
+            # Clean name (remove job title suffixes)
+            for suffix in [" Research", " Associate", " UX", " Lab", " Manager"]:
+                if name.endswith(suffix):
+                    name = name[:-len(suffix)].strip()
+            
+            # Create CV reference link
+            cv_link = f"[📄](cv:{cv_id})" if cv_id else "📄"
+            
+            lines.append(f"**{idx}. {cv_link} {name}** - {role}")
+            lines.append(f"   - Experience: {exp:.0f} years | Fit: {fit_score:.0f}%")
+            
+            if current_role:
+                lines.append(f"   - Current: {current_role}")
+            
+            # Add top skills if available
+            skills = member.get("matching_skills", member.get("skills", []))[:3]
+            if skills:
+                lines.append(f"   - Skills: {', '.join(skills)}")
+            
+            lines.append("")
+        
+        # Add recommendation if available
         if overview_data and overview_data.recommendation:
-            answer += overview_data.recommendation
+            lines.extend([
+                "### Recommendation",
+                overview_data.recommendation
+            ])
         
-        return answer
+        return "\n".join(lines)
     
     def _generate_conclusion(
         self, 

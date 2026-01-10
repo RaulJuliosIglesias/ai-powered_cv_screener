@@ -5,6 +5,7 @@ import remarkGfm from 'remark-gfm';
 import useMode from './hooks/useMode';
 import useTheme from './hooks/useTheme';
 import useToast from './hooks/useToast';
+import { useMessageQueue } from './hooks/useMessageQueue';
 import { useLanguage } from './contexts/LanguageContext';
 import { useBackgroundTask } from './contexts/BackgroundTaskContext';
 import { usePipeline } from './contexts/PipelineContext';
@@ -24,6 +25,7 @@ import { MemoizedTable, MemoizedCodeBlock } from './components/MemoizedTable';
 import StreamingMessage from './components/StreamingMessage';
 import SuggestionsPanel from './components/SuggestionsPanel';
 import EmptySessionDropzone from './components/EmptySessionDropzone';
+import ExportButton from './components/ExportButton';
 import { preprocessContent, parseCVFilename } from './utils/contentProcessor';
 import { getSessions, createSession, getSession, deleteSession, updateSession, uploadCVsToSession, getSessionUploadStatus, removeCVFromSession, sendSessionMessage, getSessionSuggestions, getCVList, clearSessionCVs, deleteAllCVsFromDatabase, deleteCV, deleteMessage, deleteMessagesFrom, generateSessionName } from './services/api';
 import { getSettings } from './components/modals/SettingsModal';
@@ -123,6 +125,7 @@ function App() {
   const { initPipeline, updateStep, completePipeline, clearPipeline, setActiveSession, activePipeline } = usePipeline();
   
   const messagesEndRef = useRef(null);
+  const handleSendRef = useRef(null);
   const fileInputRef = useRef(null);
   const { mode, setMode } = useMode();
   const { theme, toggleTheme } = useTheme();
@@ -480,6 +483,24 @@ function App() {
               });
             }
             
+            // Handle token streaming events (V8 feature)
+            if (data.token !== undefined) {
+              setStreamingStateBySession(prev => {
+                const sessionState = prev[targetSessionId];
+                if (!sessionState) return prev;
+                // Append token to streaming answer
+                const currentAnswer = sessionState.streamingAnswer || '';
+                return {
+                  ...prev,
+                  [targetSessionId]: {
+                    ...sessionState,
+                    streamingAnswer: currentAnswer + data.token,
+                    isStreaming: true
+                  }
+                };
+              });
+            }
+            
             // Handle complete event
             if (data.response || data.answer) {
               finalResult = data;
@@ -571,6 +592,21 @@ function App() {
     
     setChatLoadingStates(prev => ({ ...prev, [targetSessionId]: false }));
   };
+
+  // Keep ref updated for message queue
+  handleSendRef.current = handleSend;
+
+  // Message queue for sending multiple messages while processing
+  const {
+    queue: messageQueue,
+    queueLength: messageQueueLength,
+    addToQueue: addToMessageQueue,
+    removeFromQueue: removeFromMessageQueue,
+    clearQueue: clearMessageQueue,
+  } = useMessageQueue(
+    useCallback((msg) => handleSendRef.current?.(msg), []),
+    isChatLoading
+  );
 
   const handleRemoveCV = async (cvId) => {
     await removeCVFromSession(currentSessionId, cvId, mode);
@@ -908,6 +944,13 @@ function App() {
               <Sliders className="w-4 h-4 text-purple-600 dark:text-purple-400" />
               <span className="text-xs font-medium text-slate-600 dark:text-slate-400 group-hover:text-purple-700 dark:group-hover:text-purple-300 hidden sm:inline">{language === 'es' ? 'Pipeline' : 'Pipeline'}</span>
             </button>
+            {currentSession && currentSession.messages?.length > 0 && (
+              <ExportButton 
+                sessionId={currentSessionId} 
+                mode={mode} 
+                disabled={isChatLoading}
+              />
+            )}
             {currentSession && (<><input ref={fileInputRef} type="file" accept=".pdf" multiple onChange={handleUpload} className="hidden" /><button onClick={() => fileInputRef.current?.click()} disabled={isSessionProcessing(currentSessionId)} className="flex items-center gap-2 px-4 py-2 text-sm bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg disabled:opacity-50 font-medium transition-colors shadow-sm">{isSessionProcessing(currentSessionId) ? <Loader className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}<span>{language === 'es' ? 'Añadir CVs' : 'Add CVs'}</span></button></>)}
           </div>
         </div>
@@ -1200,6 +1243,11 @@ function App() {
             isLoading={isChatLoading}
             hasCV={currentSession.cvs?.length > 0}
             sessionName={currentSession.name}
+            queue={messageQueue}
+            queueLength={messageQueueLength}
+            onAddToQueue={addToMessageQueue}
+            onRemoveFromQueue={removeFromMessageQueue}
+            onClearQueue={clearMessageQueue}
           />
         )}
       </div>

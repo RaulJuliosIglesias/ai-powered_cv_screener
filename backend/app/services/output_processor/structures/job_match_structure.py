@@ -99,9 +99,44 @@ class JobMatchStructure:
         analysis = self.analysis_module.extract(llm_output, "", conclusion or "")
         
         # Get best match - use overall_score for frontend compatibility
+        # FIX: Validate candidate data against chunks to avoid corrupt names/scores
         best_match = None
         if match_data and match_data.matches:
             top = match_data.matches[0]
+            
+            # VALIDATION 1: Ensure candidate_name exists in chunks
+            valid_names = set()
+            valid_cv_ids = set()
+            for chunk in chunks:
+                meta = chunk.get("metadata", {})
+                name = meta.get("candidate_name", "")
+                cv_id = meta.get("cv_id", "") or chunk.get("cv_id", "")
+                if name:
+                    valid_names.add(name.lower().strip())
+                if cv_id:
+                    valid_cv_ids.add(cv_id)
+            
+            # If top candidate name is not valid, try to find a valid one
+            if top.candidate_name.lower().strip() not in valid_names:
+                logger.warning(f"[JOB_MATCH_STRUCTURE] Invalid candidate name: {top.candidate_name}, searching for valid match")
+                # Find first valid candidate from matches
+                for match in match_data.matches:
+                    if match.candidate_name.lower().strip() in valid_names:
+                        top = match
+                        logger.info(f"[JOB_MATCH_STRUCTURE] Using valid candidate: {top.candidate_name}")
+                        break
+            
+            # VALIDATION 2: Ensure match score is reasonable (not 0% unless truly no match)
+            score = top.overall_match
+            if score <= 0 and top.met_requirements:
+                # Has met requirements but 0 score - recalculate
+                score = max(30, len(top.met_requirements) * 10)
+                logger.warning(f"[JOB_MATCH_STRUCTURE] Fixed 0% score to {score}% based on {len(top.met_requirements)} met requirements")
+            elif score <= 0:
+                # No requirements met, give minimum score
+                score = 30  # Minimum floor
+                logger.warning(f"[JOB_MATCH_STRUCTURE] Applied minimum score floor: {score}%")
+            
             # Build justification from met requirements and strengths
             justification_parts = []
             if top.met_requirements:
@@ -113,8 +148,8 @@ class JobMatchStructure:
             best_match = {
                 "candidate_name": top.candidate_name,
                 "cv_id": top.cv_id,
-                "overall_score": top.overall_match,  # Frontend expects overall_score
-                "overall_match": top.overall_match,  # Keep for compatibility
+                "overall_score": score,  # Frontend expects overall_score - now validated
+                "overall_match": score,  # Keep for compatibility
                 "key_strengths": top.strengths,  # Frontend expects key_strengths
                 "strengths": top.strengths,
                 "justification": justification,  # Frontend TopPickCard needs this

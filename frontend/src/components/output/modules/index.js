@@ -26,3 +26,6 @@ export { default as ComparisonMatrix } from './ComparisonMatrix';
 // NEW: Utility modules
 export { default as ConfidenceIndicator } from './ConfidenceIndicator';
 export { default as QuickActions } from './QuickActions';
+
+// V8: Enhanced source attribution
+export { default as SourcesPanel } from '../SourcesPanel';

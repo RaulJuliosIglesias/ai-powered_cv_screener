@@ -64,16 +64,28 @@ class SmartChunkingService:
     enriched chunks for better RAG retrieval.
     """
     
-    # Patterns for extracting dates
+    # Patterns for extracting dates - EXTENDED to capture more formats
     YEAR_PATTERNS = [
-        # "2020 - Present", "2020 - Presente", "2020 - Actual"
-        r'(\d{4})\s*[-–—]\s*(Present|Presente|Actual|Current|Now|Oggi|Heute|Hoy)',
-        # "2018 - 2023", "2018-2023"
+        # "2020 - Present", "2020 - Presente", "2020 - Actual", "2020 - ongoing"
+        r'(\d{4})\s*[-–—]\s*(Present|Presente|Actual|Current|Now|Oggi|Heute|Hoy|Ongoing|Today|Heden|Nuvarande)',
+        # "2018 - 2023", "2018-2023", "2018 – 2023"
         r'(\d{4})\s*[-–—]\s*(\d{4})',
-        # "Jan 2020 - Dec 2023"
-        r'(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s*(\d{4})\s*[-–—]\s*(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s*(\d{4})',
-        # "01/2020 - 12/2023"
+        # "Jan 2020 - Dec 2023", "January 2020 - December 2023"
+        r'(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)[a-z]*\.?\s*(\d{4})\s*[-–—]\s*(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)[a-z]*\.?\s*(\d{4})',
+        # "01/2020 - 12/2023", "1/2020 - 12/2023"
         r'(?:\d{1,2}/)?(\d{4})\s*[-–—]\s*(?:\d{1,2}/)?(\d{4})',
+        # "(2020-2023)", "(2020 - Present)" - parenthesized dates
+        r'\((\d{4})\s*[-–—]\s*(\d{4}|Present|Presente|Actual|Current)\)',
+        # "Since 2020", "Desde 2020", "From 2020"
+        r'(?:Since|Desde|From|Ab)\s+(\d{4})',
+        # "2020 to 2023", "2020 until 2023"
+        r'(\d{4})\s+(?:to|until|till|a|bis|jusqu)\s+(\d{4})',
+        # "2020 to Present", "2020 to now"
+        r'(\d{4})\s+(?:to|until|till)\s+(Present|Now|Current|Actual|Presente)',
+        # European format: "2020/01 - 2023/12"
+        r'(\d{4})/\d{1,2}\s*[-–—]\s*(\d{4})/\d{1,2}',
+        # ISO-like: "2020.01 - 2023.12"
+        r'(\d{4})\.\d{1,2}\s*[-–—]\s*(\d{4})\.\d{1,2}',
     ]
     
     # Patterns for current position indicators
@@ -101,13 +113,61 @@ class SmartChunkingService:
         
         if len(parts) >= 3:
             file_id = parts[0]
-            role = parts[-1].replace('-', ' ').replace('_', ' ')
+            # Role is typically the last part
+            role_raw = parts[-1].replace('-', ' ').replace('_', ' ')
+            # Name parts are between file_id and role
             name_parts = parts[1:-1]
             candidate_name = ' '.join(name_parts)
-            return {"file_id": file_id, "candidate_name": candidate_name, "role": role}
+            # Clean the candidate name - remove any trailing role/title that got attached
+            candidate_name = self._clean_candidate_name(candidate_name)
+            return {"file_id": file_id, "candidate_name": candidate_name, "role": role_raw}
         elif len(parts) == 2:
-            return {"file_id": parts[0], "candidate_name": parts[1], "role": ""}
-        return {"file_id": "", "candidate_name": name, "role": ""}
+            candidate_name = self._clean_candidate_name(parts[1])
+            return {"file_id": parts[0], "candidate_name": candidate_name, "role": ""}
+        
+        candidate_name = self._clean_candidate_name(name)
+        return {"file_id": "", "candidate_name": candidate_name, "role": ""}
+    
+    def _clean_candidate_name(self, name: str) -> str:
+        """
+        Clean candidate name by removing common artifacts.
+        
+        Fixes issues like:
+        - " Aisha Okafor  Business" -> "Aisha Okafor"
+        - "Matteo Rossi  Associate" -> "Matteo Rossi"
+        """
+        # Remove extra whitespace
+        name = ' '.join(name.split())
+        
+        # Common job title words that shouldn't be in names
+        title_words = [
+            'Business', 'Associate', 'Junior', 'Senior', 'Manager', 'Director',
+            'Engineer', 'Developer', 'Analyst', 'Consultant', 'Specialist',
+            'Coordinator', 'Administrator', 'Executive', 'Lead', 'Principal',
+            'Architect', 'Designer', 'Pharmacy', 'Pharmacist', 'Chef', 'Sous',
+            'Mix', 'Camera', 'Digital', 'Protocol', 'Growth', 'Brand', 'Crypto',
+            'Creature', 'Celebrity', 'Restaurant', 'Graduate', 'Intern', 'Trainee',
+            'Systems', 'Technical', 'Instructional', 'Swift', 'Game', 'Law',
+            'Accessories', 'Group', 'Camera', 'Smart', 'Contract'
+        ]
+        
+        # Remove trailing title words
+        words = name.split()
+        clean_words = []
+        found_title = False
+        
+        for word in words:
+            # Once we hit a title word, stop adding words
+            if word in title_words:
+                found_title = True
+                break
+            clean_words.append(word)
+        
+        # If we removed everything, keep original (minus double spaces)
+        if not clean_words:
+            return name
+        
+        return ' '.join(clean_words)
     
     def _extract_years_from_text(self, text: str) -> Tuple[Optional[int], Optional[int], bool]:
         """
@@ -172,7 +232,11 @@ class SmartChunkingService:
             # Clean date patterns from extracted values
             title = re.sub(r'\s*\d{4}\s*[-–—].*$', '', title).strip()
             company = re.sub(r'\s*\d{4}\s*[-–—].*$', '', company).strip()
-            return title, company
+            # Validate extracted values
+            title = self._validate_job_title(title)
+            company = self._validate_company_name(company)
+            if title and company:
+                return title, company
         
         # Pattern: "Title | Company" or "Title - Company" or "Title, Company"
         for separator in ['|', '–', '—', '-', ',']:
@@ -182,6 +246,10 @@ class SmartChunkingService:
                     # Remove date patterns from parts
                     part1 = re.sub(r'\d{4}\s*[-–—]\s*(?:\d{4}|Present|Actual|Presente)', '', parts[0], flags=re.IGNORECASE).strip()
                     part2 = re.sub(r'\d{4}\s*[-–—]\s*(?:\d{4}|Present|Actual|Presente)', '', parts[1], flags=re.IGNORECASE).strip()
+                    
+                    part1 = self._validate_job_title(part1)
+                    part2 = self._validate_company_name(part2)
+                    
                     if part1 and part2 and len(part1) > 2 and len(part2) > 2:
                         title = part1
                         company = part2
@@ -189,16 +257,188 @@ class SmartChunkingService:
         
         # Fallback: first line is title
         title = re.sub(r'\d{4}\s*[-–—]\s*(?:\d{4}|Present|Actual|Presente)', '', first_line, flags=re.IGNORECASE).strip()
+        title = self._validate_job_title(title)
         
         # Look for company in subsequent lines
         for line in lines[1:4]:
             line = line.strip()
             if line and not re.match(r'^[\d\-/•\*]', line):
                 if len(line) < 80 and not line.startswith(('•', '-', '*', '–')):
-                    company = re.sub(r'\d{4}.*', '', line).strip()
-                    break
+                    potential_company = re.sub(r'\d{4}.*', '', line).strip()
+                    company = self._validate_company_name(potential_company)
+                    if company:
+                        break
         
-        return title, company
+        return title or "Unknown Role", company or "Unknown Company"
+    
+    def _validate_job_title(self, title: str) -> str:
+        """
+        Validate and clean job title.
+        Returns empty string if title is invalid.
+        
+        Fixes issues like:
+        - "2005" -> "" (just a year)
+        - "E X P E R I E N C E" -> "" (section header)
+        - "English ⭐⭐⭐⭐" -> "" (language rating)
+        - "Milan" -> "" (city name only)
+        """
+        if not title:
+            return ""
+        
+        title = title.strip()
+        
+        # Clean leading pipe or separator
+        title = re.sub(r'^[|\-–—]\s*', '', title).strip()
+        
+        # Reject if it's just a year
+        if re.match(r'^\d{4}$', title):
+            return ""
+        
+        # Reject if it's a date range
+        if re.match(r'^\d{4}\s*[-–—]', title):
+            return ""
+        
+        # Reject if it's just numbers/symbols
+        if re.match(r'^[\d\s\-–—/]+$', title):
+            return ""
+        
+        # Reject if it contains rating stars
+        if '⭐' in title or '★' in title:
+            return ""
+        
+        # Reject if it's a spaced-out header like "E X P E R I E N C E"
+        if re.match(r'^[A-Z](\s+[A-Z]){3,}$', title):
+            return ""
+        
+        # Reject common section headers
+        section_headers = [
+            'experience', 'education', 'skills', 'summary', 'profile',
+            'languages', 'certifications', 'references', 'hobbies',
+            'interests', 'projects', 'publications', 'awards'
+        ]
+        if title.lower().strip() in section_headers:
+            return ""
+        
+        # Reject common certifications that are not job titles
+        certifications = [
+            'cbap', 'pmp', 'cpa', 'cfa', 'mba', 'phd', 'md', 'jd',
+            'cissp', 'aws', 'azure', 'gcp', 'scrum', 'agile', 'itil'
+        ]
+        if title.lower().strip() in certifications:
+            return ""
+        
+        # Reject if it's just a language name
+        languages = ['english', 'spanish', 'french', 'german', 'italian', 
+                     'portuguese', 'chinese', 'japanese', 'korean', 'arabic']
+        if title.lower().strip() in languages:
+            return ""
+        
+        # Reject if it's a city/country or "City, Country" pattern
+        locations = ['milan', 'italy', 'london', 'berlin', 'paris', 'madrid',
+                    'barcelona', 'new york', 'los angeles', 'san francisco',
+                    'singapore', 'tokyo', 'sydney', 'dubai', 'stockholm',
+                    'rome', 'amsterdam', 'munich', 'frankfurt', 'zurich']
+        title_lower = title.lower().strip()
+        if title_lower in locations:
+            return ""
+        # Reject "City, Country" pattern
+        if re.match(r'^[A-Za-z]+,\s*[A-Za-z]+$', title):
+            parts = title.split(',')
+            if parts[0].strip().lower() in locations or parts[1].strip().lower() in locations:
+                return ""
+        
+        # Reject if it's a rating like "9/10"
+        if re.match(r'^\d+/\d+$', title):
+            return ""
+        
+        # Reject very short titles (likely fragments)
+        if len(title) < 3:
+            return ""
+        
+        # Reject if it starts with common description words (truncated descriptions)
+        description_starters = [
+            'to ', 'and ', 'with ', 'for ', 'the ', 'a ', 'an ',
+            'across ', 'in ', 'at ', 'by ', 'from ', 'of '
+        ]
+        for starter in description_starters:
+            if title.lower().startswith(starter):
+                return ""
+        
+        return title
+    
+    def _validate_company_name(self, company: str) -> str:
+        """
+        Validate and clean company name.
+        Returns empty string if company is invalid.
+        
+        Fixes issues like:
+        - "2010 | Banking Innovations PLC" -> "Banking Innovations PLC"
+        - "Italy" -> "" (just a country)
+        - "S K I L L S" -> "" (spaced header)
+        """
+        if not company:
+            return ""
+        
+        company = company.strip()
+        
+        # Remove leading pipe or separator
+        company = re.sub(r'^[|\-–—]\s*', '', company).strip()
+        
+        # Remove leading year and separator patterns
+        company = re.sub(r'^\d{4}\s*[|\-–—]\s*', '', company).strip()
+        
+        # Reject if it's just a year
+        if re.match(r'^\d{4}$', company):
+            return ""
+        
+        # Reject if it's a date range
+        if re.match(r'^\d{4}\s*[-–—]', company):
+            return ""
+        
+        # Reject if it's a spaced-out header
+        if re.match(r'^[A-Z](\s+[A-Z]){3,}$', company):
+            return ""
+        
+        # Reject common section headers
+        section_headers = [
+            'experience', 'education', 'skills', 'summary', 'profile',
+            'languages', 'certifications', 'references'
+        ]
+        if company.lower().strip() in section_headers:
+            return ""
+        
+        # Reject if it looks like a job title, not a company
+        job_title_words = [
+            'junior', 'senior', 'lead', 'manager', 'director', 'analyst',
+            'engineer', 'developer', 'consultant', 'specialist', 'coordinator',
+            'intern', 'trainee', 'associate', 'assistant', 'executive'
+        ]
+        company_lower = company.lower().strip()
+        for title_word in job_title_words:
+            if company_lower == title_word or company_lower.startswith(title_word + ' '):
+                return ""
+        
+        # Reject if it's just a country name (likely location, not company)
+        countries = ['italy', 'germany', 'france', 'spain', 'uk', 'usa',
+                    'united states', 'united kingdom', 'canada', 'australia',
+                    'japan', 'china', 'india', 'brazil', 'sweden', 'norway']
+        if company_lower in countries:
+            return ""
+        
+        # Reject very short names
+        if len(company) < 2:
+            return ""
+        
+        # Reject if it starts with description words
+        description_starters = [
+            'to ', 'and ', 'with ', 'for ', 'the ', 'a ', 'an ',
+            'ensuring ', 'delivering ', 'managing ', 'leading '
+        ]
+        for starter in description_starters:
+            if company_lower.startswith(starter):
+                return ""
+        
+        return company
     
     def _split_experience_into_jobs(self, experience_text: str) -> List[str]:
         """Split experience section into individual job entries."""
@@ -280,21 +520,31 @@ class SmartChunkingService:
         job_texts = self._split_experience_into_jobs(experience_text)
         
         for job_text in job_texts:
+            # Skip if this looks like education, not work experience
+            if self._is_education_entry(job_text):
+                logger.debug(f"Skipping education entry: {job_text[:50]}...")
+                continue
+            
             start_year, end_year, is_current = self._extract_years_from_text(job_text)
             title, company = self._extract_job_title_and_company(job_text)
             
+            # Skip entries with invalid titles/companies
+            if title == "Unknown Role" and company == "Unknown Company":
+                continue
+            
             # Only add if we found meaningful data
-            if (title or company) and len(job_text) > 30:
-                position = JobPosition(
-                    title=title or "Unknown Role",
-                    company=company or "Unknown Company",
-                    start_year=start_year,
-                    end_year=end_year,
-                    is_current=is_current,
-                    raw_text=job_text
-                )
-                position.duration_years = position.calculate_duration()
-                positions.append(position)
+            if (title and title != "Unknown Role") or (company and company != "Unknown Company"):
+                if len(job_text) > 30:
+                    position = JobPosition(
+                        title=title,
+                        company=company,
+                        start_year=start_year,
+                        end_year=end_year,
+                        is_current=is_current,
+                        raw_text=job_text
+                    )
+                    position.duration_years = position.calculate_duration()
+                    positions.append(position)
         
         # Sort by start year (most recent first)
         positions.sort(key=lambda p: (p.start_year or 0), reverse=True)
@@ -310,6 +560,59 @@ class SmartChunkingService:
                 positions[0].is_current = True
         
         return positions
+    
+    def _is_education_entry(self, text: str) -> bool:
+        """
+        Determine if a text block is an education entry rather than work experience.
+        
+        This helps prevent education being confused with job positions.
+        """
+        text_lower = text.lower()
+        
+        # Strong education indicators
+        education_keywords = [
+            'bachelor', 'master', 'phd', 'ph.d', 'doctorate', 'degree',
+            'university', 'college', 'institute', 'school of',
+            'bsc', 'msc', 'mba', 'b.s.', 'm.s.', 'b.a.', 'm.a.',
+            'licenciatura', 'grado', 'maestría', 'doctorado',
+            'thesis', 'dissertation', 'gpa', 'cum laude', 'magna cum laude',
+            'dean\'s list', 'honors', 'graduated', 'graduation',
+            'major in', 'minor in', 'studied', 'coursework'
+        ]
+        
+        # Count education keywords
+        education_score = sum(1 for kw in education_keywords if kw in text_lower)
+        
+        # Work experience indicators
+        work_keywords = [
+            'managed', 'developed', 'led', 'created', 'implemented',
+            'responsible for', 'collaborated', 'delivered', 'achieved',
+            'increased', 'decreased', 'improved', 'reduced', 'launched',
+            'team of', 'reported to', 'clients', 'stakeholders',
+            'revenue', 'budget', 'kpi', 'metrics'
+        ]
+        
+        # Count work keywords
+        work_score = sum(1 for kw in work_keywords if kw in text_lower)
+        
+        # Check for degree patterns
+        degree_pattern = re.search(
+            r'\b(bachelor|master|phd|doctorate|bsc|msc|mba|b\.?s\.?|m\.?s\.?)\b.*\b(of|in|degree)\b',
+            text_lower
+        )
+        if degree_pattern:
+            education_score += 3
+        
+        # Check for university patterns
+        university_pattern = re.search(
+            r'\b(university|college|institute|school)\s+(of\s+)?[a-z]+',
+            text_lower
+        )
+        if university_pattern:
+            education_score += 2
+        
+        # If education score significantly higher, it's education
+        return education_score > work_score and education_score >= 2
     
     def _extract_skills(self, text: str) -> List[str]:
         """Extract skills from CV text."""
@@ -373,19 +676,36 @@ class SmartChunkingService:
         
         positions = self._extract_positions(text)
         
-        # Determine current role
+        # Determine current role - validate it's not garbage
         current_role = None
         current_company = None
         for pos in positions:
             if pos.is_current:
-                current_role = pos.title
-                current_company = pos.company
+                # Validate title is not "Unknown Role" or garbage
+                if pos.title and pos.title != "Unknown Role":
+                    validated_title = self._validate_job_title(pos.title)
+                    if validated_title:
+                        current_role = validated_title
+                # Validate company is not "Unknown Company" or garbage
+                if pos.company and pos.company != "Unknown Company":
+                    validated_company = self._validate_company_name(pos.company)
+                    if validated_company:
+                        current_company = validated_company
                 break
         
-        # Fallback to first position
-        if not current_role and positions:
-            current_role = positions[0].title
-            current_company = positions[0].company
+        # Fallback to first position with valid data
+        if (not current_role or not current_company) and positions:
+            for pos in positions:
+                if not current_role and pos.title and pos.title != "Unknown Role":
+                    validated_title = self._validate_job_title(pos.title)
+                    if validated_title:
+                        current_role = validated_title
+                if not current_company and pos.company and pos.company != "Unknown Company":
+                    validated_company = self._validate_company_name(pos.company)
+                    if validated_company:
+                        current_company = validated_company
+                if current_role and current_company:
+                    break
         
         total_experience = self._calculate_total_experience(positions)
         skills = self._extract_skills(text)

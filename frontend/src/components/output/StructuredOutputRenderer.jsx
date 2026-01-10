@@ -333,6 +333,28 @@ const AnalysisSection = ({ content, onOpenCV, cvMap }) => {
   const contentLength = contentStr.length;
   const isLargeContent = contentLength > 500;
   
+  // FIX: If content contains markdown tables, render with ReactMarkdown directly
+  // This prevents tables from being broken apart by section parsing
+  const hasMarkdownTable = containsMarkdownTable(contentStr);
+  
+  if (hasMarkdownTable) {
+    return (
+      <div className="mb-4 rounded-xl border-l-4 border-cyan-500 bg-slate-800/50 p-4">
+        <div className="flex items-center gap-2 mb-3">
+          <BarChart3 className="w-5 h-5 text-cyan-400" />
+          <span className="font-semibold text-cyan-400">Analysis</span>
+        </div>
+        <div className="prose prose-sm max-w-none dark:prose-invert text-gray-300 
+          prose-table:border-collapse prose-table:w-full
+          prose-th:bg-slate-700/50 prose-th:px-3 prose-th:py-2 prose-th:text-left prose-th:text-cyan-300 prose-th:text-xs prose-th:font-semibold prose-th:border prose-th:border-slate-600
+          prose-td:px-3 prose-td:py-2 prose-td:border prose-td:border-slate-700 prose-td:text-sm
+          prose-tr:even:bg-slate-800/30">
+          <ContentWithCVLinks content={content} onOpenCV={onOpenCV} cvMap={cvMap} />
+        </div>
+      </div>
+    );
+  }
+  
   // Helper: Check if content is empty/placeholder
   const isEmptyContent = (text) => {
     if (!text) return true;

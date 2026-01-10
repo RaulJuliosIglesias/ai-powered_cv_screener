@@ -28,11 +28,17 @@ from app.config import settings
 from app.utils.error_handling import degradation
 from app.utils.debug_logger import (
     log_retrieval, log_template_selection, log_query_understanding,
-    log_llm_response, log_orchestrator_processing, log_event, log_structure_routing
+    log_llm_response, log_orchestrator_processing, log_event, log_structure_routing,
+    log_semantic_cache, log_hybrid_search, log_token_streaming
 )
 
 # V7 Services Integration
 from app.services.v7_integration import get_v7_services, V7Services
+
+# V8 Services Integration
+from app.services.hybrid_search_service import get_hybrid_search_service
+from app.services.semantic_cache_service import get_semantic_cache
+from app.services.fallback_chain_service import get_fallback_service
 from typing import (
     Any,
     Callable,
@@ -956,10 +962,46 @@ class RAGServiceV5:
             total_cvs_in_session=total_cvs_in_session
         )
         
+        # =================================================================
+        # V8 SEMANTIC CACHE: Check for cached response
+        # =================================================================
+        semantic_cache = get_semantic_cache()
+        cache_hit = None
+        query_embedding_for_cache = None
+        
+        try:
+            # Get embedding for cache lookup
+            if self._embedder and session_id:
+                query_embedding_for_cache = await self._embedder.embed(question)
+                cache_hit = semantic_cache.lookup(question, query_embedding_for_cache, session_id)
+                
+                if cache_hit.found and cache_hit.entry:
+                    logger.info(f"[SEMANTIC_CACHE] Cache HIT! similarity={cache_hit.similarity:.3f}")
+                    log_semantic_cache("hit", question, cache_hit.similarity, hit=True)
+                    # Return cached response
+                    yield {"event": "step", "data": {"step": "cache_hit", "status": "completed", "details": f"Cache hit (similarity: {cache_hit.similarity:.2%})"}}
+                    yield {"event": "complete", "data": cache_hit.entry.response}
+                    return
+                else:
+                    log_semantic_cache("miss", question, cache_hit.similarity if cache_hit else 0, hit=False)
+        except Exception as e:
+            logger.warning(f"[SEMANTIC_CACHE] Cache lookup failed: {e}")
+        
         try:
             # Execute pipeline with events
+            final_response = None
             async for event in self._execute_pipeline_stream(ctx):
                 yield event
+                # Capture final response for caching
+                if event.get("event") == "complete":
+                    final_response = event.get("data")
+            
+            # Store response in cache
+            if final_response and query_embedding_for_cache and session_id:
+                try:
+                    semantic_cache.store(question, query_embedding_for_cache, final_response, session_id)
+                except Exception as e:
+                    logger.warning(f"[SEMANTIC_CACHE] Failed to store response: {e}")
                 
         except asyncio.TimeoutError:
             logger.error(f"Pipeline timeout after {self.config.total_timeout}s")
@@ -1153,20 +1195,25 @@ class RAGServiceV5:
             duration = (time.perf_counter() - start) * 1000
             yield {"event": "step", "data": {"step": "reasoning", "status": "completed", "duration_ms": duration}}
         
-        # Stage 8: Generation
+        # Stage 8: Generation with token streaming
         yield {"event": "step", "data": {"step": "generation", "status": "running", "details": "Generating recommendation"}}
         start = time.perf_counter()
-        await self._step_generation(ctx)
-        duration = (time.perf_counter() - start) * 1000
         
-        # Emit full response for typewriter display (not truncated)
-        # This allows the frontend to show the complete response progressively
-        partial_answer = ctx.generated_response if ctx.generated_response else None
+        # Use streaming generation to emit tokens in real-time
+        async for gen_event in self._step_generation_stream(ctx):
+            if gen_event["event"] == "token":
+                # Emit each token as it arrives
+                yield {"event": "token", "data": gen_event["data"]}
+            elif gen_event["event"] == "generation_complete":
+                # Generation finished
+                duration = gen_event["data"].get("duration_ms", (time.perf_counter() - start) * 1000)
+        
+        # Emit generation complete step
         yield {"event": "step", "data": {
             "step": "generation", 
             "status": "completed", 
             "duration_ms": duration,
-            "partial_answer": partial_answer
+            "partial_answer": ctx.generated_response
         }}
         
         # Stage 9: Verification
@@ -1781,6 +1828,38 @@ class RAGServiceV5:
                 if query_results:
                     results_per_query.append(query_results)
             
+            # =================================================================
+            # V8 HYBRID SEARCH: Add BM25 lexical search results
+            # =================================================================
+            try:
+                hybrid_service = get_hybrid_search_service()
+                if hybrid_service._bm25_service.is_available and ctx.session_id:
+                    # Build BM25 index if not exists
+                    bm25_chunks = [
+                        {"id": cid, "content": cdata["content"], "metadata": cdata["metadata"]}
+                        for cid, cdata in all_chunks.items()
+                    ]
+                    if bm25_chunks:
+                        hybrid_service.build_bm25_index(ctx.session_id, bm25_chunks)
+                        
+                        # Run BM25 search
+                        bm25_results = hybrid_service._bm25_service.search(
+                            session_id=ctx.session_id,
+                            query=ctx.question,
+                            k=ctx.k * 2
+                        )
+                        
+                        if bm25_results:
+                            # Add BM25 results as another ranking for RRF
+                            bm25_ranking = [(r.chunk_id, r.score) for r in bm25_results]
+                            results_per_query.append(bm25_ranking)
+                            logger.info(f"[HYBRID] Added {len(bm25_results)} BM25 results to RRF fusion")
+                            # Log hybrid search
+                            vector_count = sum(len(r) for r in results_per_query[:-1])
+                            log_hybrid_search(len(bm25_results), vector_count, len(all_chunks))
+            except Exception as e:
+                logger.warning(f"[HYBRID] BM25 search failed, continuing with vector only: {e}")
+            
             # Apply Reciprocal Rank Fusion (RRF) to combine results
             if results_per_query:
                 # Calculate candidate name boost for single-candidate queries
@@ -2068,11 +2147,17 @@ class RAGServiceV5:
             # Log chunk summary for debugging
             logger.info(f"[GENERATION] Sending {len(chunks)} chunks to LLM")
             
-            effective_question = (
-                ctx.query_understanding.reformulated_prompt
-                if ctx.query_understanding and ctx.query_understanding.reformulated_prompt
-                else ctx.question
-            )
+            # =================================================================
+            # CRITICAL: Use ORIGINAL question for generation prompt
+            # The reformulated_prompt can lose specific criteria (e.g., "front end")
+            # The LLM needs to see the user's exact question to answer it properly
+            # =================================================================
+            effective_question = ctx.question  # ALWAYS use original question
+            
+            # Log what we're using
+            logger.info(f"[GENERATION] Using ORIGINAL question: {effective_question[:100]}...")
+            if ctx.query_understanding and ctx.query_understanding.reformulated_prompt:
+                logger.info(f"[GENERATION] (Reformulated was: {ctx.query_understanding.reformulated_prompt[:100]}...)")
             
             # =================================================================
             # TEMPLATE SELECTION: Single Candidate vs Multi-Candidate
@@ -2293,6 +2378,166 @@ class RAGServiceV5:
                 error=str(e)
             ))
     
+    async def _step_generation_stream(self, ctx: PipelineContextV5):
+        """Step 8: Generate response with token streaming.
+        
+        Yields events:
+            - {"event": "token", "data": {"token": "..."}}
+            - {"event": "generation_complete", "data": {...}} when done
+        """
+        start = time.perf_counter()
+        
+        # Skip if reasoning already produced response
+        if ctx.generated_response:
+            yield {
+                "event": "generation_complete",
+                "data": {
+                    "from_reasoning": True,
+                    "duration_ms": 0
+                }
+            }
+            ctx.metrics.add_stage(StageMetrics(
+                stage=PipelineStage.GENERATION,
+                duration_ms=0,
+                success=True,
+                metadata={"from_reasoning": True}
+            ))
+            return
+        
+        # Check circuit breaker before LLM call
+        if "llm" in self._circuit_breakers and not self._circuit_breakers["llm"].allow_request():
+            raise GenerationError("LLM circuit breaker open - too many recent failures")
+        
+        try:
+            chunks = ctx.effective_chunks
+            logger.info(f"[GENERATION_STREAM] Sending {len(chunks)} chunks to LLM with streaming")
+            
+            # =================================================================
+            # CRITICAL: Use ORIGINAL question for generation prompt
+            # The reformulated_prompt can lose specific criteria (e.g., "front end")
+            # =================================================================
+            effective_question = ctx.question  # ALWAYS use original question
+            logger.info(f"[GENERATION_STREAM] Using ORIGINAL question: {effective_question[:100]}...")
+            
+            # Template selection (same as non-streaming)
+            from app.prompts.templates import detect_single_candidate_query, SingleCandidateDetection
+            
+            if ctx.resolved_candidate_name:
+                single_candidate_detection = SingleCandidateDetection(
+                    is_single_candidate=True,
+                    candidate_name=ctx.resolved_candidate_name,
+                    cv_id=ctx.resolved_cv_id,
+                    confidence=0.95,
+                    detection_method="context_resolver"
+                )
+            else:
+                single_candidate_detection = detect_single_candidate_query(
+                    question=effective_question,
+                    chunks=chunks
+                )
+            
+            ctx.single_candidate_detection = single_candidate_detection
+            
+            if single_candidate_detection.is_single_candidate and single_candidate_detection.candidate_name:
+                prompt = self._prompt_builder.build_single_candidate_prompt(
+                    question=effective_question,
+                    candidate_name=single_candidate_detection.candidate_name,
+                    cv_id=single_candidate_detection.cv_id or "",
+                    chunks=chunks,
+                    conversation_history=ctx.conversation_history
+                )
+            else:
+                prompt = self._prompt_builder.build_query_prompt(
+                    question=effective_question,
+                    chunks=chunks,
+                    total_cvs=ctx.total_cvs_in_session,
+                    conversation_history=ctx.conversation_history
+                )
+            
+            if ctx.query_understanding and ctx.query_understanding.requirements:
+                requirements_text = "\n\nIMPORTANT REQUIREMENTS:\n" + "\n".join(
+                    f"- {req}" for req in ctx.query_understanding.requirements
+                )
+                prompt = prompt.replace("Respond now:", requirements_text + "\n\nRespond now:")
+            
+            from app.prompts.templates import SYSTEM_PROMPT
+            
+            # Check if LLM supports streaming
+            if hasattr(self._llm, 'generate_stream'):
+                full_response = ""
+                prompt_tokens = 0
+                completion_tokens = 0
+                openrouter_cost = 0.0
+                
+                async for chunk in self._llm.generate_stream(prompt, system_prompt=SYSTEM_PROMPT):
+                    if chunk.get("token"):
+                        yield {"event": "token", "data": {"token": chunk["token"]}}
+                    elif chunk.get("done"):
+                        full_response = chunk["text"]
+                        usage = chunk.get("usage", {})
+                        prompt_tokens = usage.get("prompt_tokens", 0)
+                        completion_tokens = usage.get("completion_tokens", 0)
+                        openrouter_cost = chunk.get("openrouter_cost", 0.0)
+                
+                ctx.generated_response = full_response
+                ctx.generation_tokens = {
+                    "prompt": prompt_tokens,
+                    "completion": completion_tokens
+                }
+            else:
+                # Fallback to non-streaming
+                result = await asyncio.wait_for(
+                    self._llm.generate(prompt, system_prompt=SYSTEM_PROMPT),
+                    timeout=self.config.llm_timeout
+                )
+                ctx.generated_response = result.text
+                ctx.generation_tokens = {
+                    "prompt": result.prompt_tokens,
+                    "completion": result.completion_tokens
+                }
+                prompt_tokens = result.prompt_tokens
+                completion_tokens = result.completion_tokens
+                openrouter_cost = result.metadata.get("openrouter_cost", 0.0) if result.metadata else 0.0
+            
+            # Record success with circuit breaker
+            if "llm" in self._circuit_breakers:
+                self._circuit_breakers["llm"].record_success()
+            
+            duration = (time.perf_counter() - start) * 1000
+            
+            ctx.metrics.add_stage(StageMetrics(
+                stage=PipelineStage.GENERATION,
+                duration_ms=duration,
+                success=True,
+                metadata={
+                    "prompt_tokens": prompt_tokens,
+                    "completion_tokens": completion_tokens,
+                    "total_tokens": prompt_tokens + completion_tokens,
+                    "openrouter_cost": openrouter_cost,
+                    "streaming": hasattr(self._llm, 'generate_stream')
+                }
+            ))
+            
+            yield {
+                "event": "generation_complete",
+                "data": {
+                    "duration_ms": duration,
+                    "tokens": prompt_tokens + completion_tokens
+                }
+            }
+            
+        except Exception as e:
+            if "llm" in self._circuit_breakers:
+                self._circuit_breakers["llm"].record_failure()
+            logger.error(f"Generation streaming failed: {e}")
+            ctx.metrics.add_stage(StageMetrics(
+                stage=PipelineStage.GENERATION,
+                duration_ms=(time.perf_counter() - start) * 1000,
+                success=False,
+                error=str(e)
+            ))
+            raise GenerationError(f"Generation failed: {e}", cause=e)
+    
     async def _step_refinement(self, ctx: PipelineContextV5) -> None:
         """Step 10: Refine response if verification failed."""
         if not ctx.verification_result or not ctx.verification_result.needs_regeneration:
@@ -2429,53 +2674,63 @@ Provide a corrected response:"""
         # =================================================================
         # STRUCTURE-BASED ROUTING: Determine which structure to use
         # 
-        # CRITICAL FIX: Use single_candidate_detection as PRIMARY source
-        # because it correctly detects single candidate queries using:
-        # - Original question (not reformulated)
-        # - Retrieved chunks (actual candidate data)
-        # - Name matching in query
+        # CRITICAL FIX (v2): classify_query_for_structure is now PRIMARY
+        # because queries like "Who has the best leadership?" should go to
+        # RANKING, not single_candidate, even if chunks only have 1 candidate.
         #
-        # classify_query_for_structure is SECONDARY - only used when
-        # single_candidate_detection is not available or not single candidate.
+        # single_candidate_detection is SECONDARY - only used when:
+        # 1. Query is explicitly about a single candidate (profile, analysis)
+        # 2. Context-resolved candidate references ("#1 candidate", "top candidate")
+        # 
+        # This prevents multi-candidate queries from being incorrectly routed
+        # to single_candidate just because retrieval returned few candidates.
         # =================================================================
         from app.prompts.templates import classify_query_for_structure
         
         candidate_name = None
         query_type = None
         
-        # HIGHEST PRIORITY: Use context-resolved candidate (from "#1 candidate", "top candidate" references)
+        # STEP 1: FIRST classify the query by its INTENT (not by chunk content)
+        effective_question_for_routing = ctx.question
+        query_type = classify_query_for_structure(effective_question_for_routing)
+        logger.info(f"[RAG] STRUCTURE ROUTING: classify_query_for_structure -> {query_type}")
+        
+        # STEP 2: For SPECIFIC query types, use single_candidate_detection to get candidate info
+        # These are query types that SHOULD focus on a single candidate
+        single_candidate_compatible_types = {"single_candidate", "red_flags", "search"}
+        
+        # HIGHEST PRIORITY: Context-resolved candidate (from "#1 candidate", "top candidate")
+        # Only override if query type is compatible with single candidate focus
         if ctx.resolved_candidate_name:
-            query_type = "single_candidate"
-            candidate_name = ctx.resolved_candidate_name
-            logger.info(
-                f"[RAG] STRUCTURE ROUTING: Using context-resolved candidate -> "
-                f"query_type={query_type}, candidate={candidate_name}"
-            )
+            if query_type in single_candidate_compatible_types or query_type == "search":
+                query_type = "single_candidate"
+                candidate_name = ctx.resolved_candidate_name
+                logger.info(
+                    f"[RAG] STRUCTURE ROUTING: Context-resolved candidate override -> "
+                    f"query_type={query_type}, candidate={candidate_name}"
+                )
         
-        # PRIMARY: Use single_candidate_detection from generation step
-        # This is more reliable because it uses original question + chunks
-        elif ctx.single_candidate_detection and ctx.single_candidate_detection.is_single_candidate:
-            query_type = "single_candidate"
-            candidate_name = ctx.single_candidate_detection.candidate_name
-            logger.info(
-                f"[RAG] STRUCTURE ROUTING: Using single_candidate_detection -> "
-                f"query_type={query_type}, candidate={candidate_name}, "
-                f"method={ctx.single_candidate_detection.detection_method}"
-            )
+        # For single_candidate or red_flags queries, get candidate name from detection
+        elif query_type in {"single_candidate", "red_flags"}:
+            if ctx.single_candidate_detection and ctx.single_candidate_detection.candidate_name:
+                candidate_name = ctx.single_candidate_detection.candidate_name
+                logger.info(
+                    f"[RAG] STRUCTURE ROUTING: Using single_candidate_detection for candidate name -> "
+                    f"candidate={candidate_name}, method={ctx.single_candidate_detection.detection_method}"
+                )
+            elif ctx.effective_chunks:
+                candidate_name = ctx.effective_chunks[0].get("metadata", {}).get("candidate_name")
         
-        # SECONDARY: Fall back to classify_query_for_structure for other types
-        if query_type is None:
-            # Use ORIGINAL question for classification, not reformulated prompt
-            # Reformulated prompts often lose patterns like "everything about"
-            effective_question_for_routing = ctx.question
-            query_type = classify_query_for_structure(effective_question_for_routing)
-            
-            # For red_flags detected by classifier, get candidate from detection or chunks
-            if query_type == "red_flags":
-                if ctx.single_candidate_detection and ctx.single_candidate_detection.candidate_name:
-                    candidate_name = ctx.single_candidate_detection.candidate_name
-                elif ctx.effective_chunks:
-                    candidate_name = ctx.effective_chunks[0].get("metadata", {}).get("candidate_name")
+        # For search queries that are actually about a specific candidate (name in query)
+        elif query_type == "search" and ctx.single_candidate_detection:
+            if ctx.single_candidate_detection.is_single_candidate and \
+               ctx.single_candidate_detection.detection_method == "explicit_name_in_query":
+                query_type = "single_candidate"
+                candidate_name = ctx.single_candidate_detection.candidate_name
+                logger.info(
+                    f"[RAG] STRUCTURE ROUTING: Search with explicit name -> single_candidate, "
+                    f"candidate={candidate_name}"
+                )
         
         logger.info(f"[RAG] STRUCTURE ROUTING: query_type={query_type}, candidate_name={candidate_name}")
         

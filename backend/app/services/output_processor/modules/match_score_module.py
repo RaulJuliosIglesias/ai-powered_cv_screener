@@ -234,12 +234,17 @@ class MatchScoreModule:
         chunks: List[Dict[str, Any]]
     ) -> CandidateMatch:
         """
-        Calculate match score based on chunk similarity scores when no requirements provided.
+        Calculate match score based on candidate profile when no explicit requirements provided.
         Used for generic queries like "who fits a senior position".
+        
+        Uses a COMPOSITE SCORE based on:
+        - Experience years (weighted 40%)
+        - Skill count (weighted 30%)
+        - Chunk relevance scores (weighted 30%)
         """
         cv_id = candidate_data.get("cv_id", "")
         
-        # Get similarity scores for this candidate's chunks
+        # Get chunk relevance scores for this candidate
         scores = []
         for chunk in chunks:
             chunk_cv_id = chunk.get("cv_id", "") or chunk.get("metadata", {}).get("cv_id", "")
@@ -247,18 +252,64 @@ class MatchScoreModule:
                 score = chunk.get("score", 0.5)
                 scores.append(score)
         
-        # Average similarity score, converted to percentage
-        avg_score = sum(scores) / len(scores) if scores else 0.5
-        overall_match = round(min(100, avg_score * 100), 1)
+        # Component 1: Experience score (0-100)
+        experience = candidate_data.get("experience_years", 0) or 0
+        if experience >= 15:
+            exp_score = 100
+        elif experience >= 10:
+            exp_score = 90
+        elif experience >= 7:
+            exp_score = 80
+        elif experience >= 5:
+            exp_score = 70
+        elif experience >= 3:
+            exp_score = 60
+        elif experience >= 1:
+            exp_score = 50
+        else:
+            exp_score = 40  # Entry level, not 0
         
-        # Identify strengths based on candidate data
-        strengths = self._identify_strengths(candidate_data, [])
+        # Component 2: Skill diversity score (0-100)
+        skill_count = len(candidate_data.get("skills", set()))
+        if skill_count >= 15:
+            skill_score = 100
+        elif skill_count >= 10:
+            skill_score = 85
+        elif skill_count >= 5:
+            skill_score = 70
+        elif skill_count >= 2:
+            skill_score = 55
+        else:
+            skill_score = 40
+        
+        # Component 3: Relevance score (0-100) from chunk scores
+        avg_relevance = sum(scores) / len(scores) if scores else 0.5
+        # Normalize: scores typically range 0.3-5.0, map to 30-90%
+        relevance_score = min(90, max(30, avg_relevance * 20))
+        
+        # Composite score with weights
+        overall_match = (
+            exp_score * 0.40 +
+            skill_score * 0.30 +
+            relevance_score * 0.30
+        )
+        overall_match = round(min(100, max(30, overall_match)), 1)  # Floor at 30% for any candidate
+        
+        # Generate inferred requirements based on profile
+        met_reqs = []
+        if experience >= 5:
+            met_reqs.append(f"{experience:.0f}+ years experience")
+        if skill_count >= 5:
+            met_reqs.append(f"Diverse skills ({skill_count})")
+        
+        # Identify strengths
+        strengths = self._identify_strengths(candidate_data, met_reqs)
         
         return CandidateMatch(
             candidate_name=candidate_data.get("name", "Unknown"),
             cv_id=cv_id,
             overall_match=overall_match,
-            met_requirements=[],
+            met_requirements=met_reqs,
             missing_requirements=[],
             partial_requirements=[],
             strengths=strengths

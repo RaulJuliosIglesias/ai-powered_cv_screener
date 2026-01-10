@@ -431,11 +431,20 @@ const StreamingMessage = ({
 }) => {
   const { language } = useLanguage();
   const [showUnderstanding, setShowUnderstanding] = useState(true);
+  
+  // V8: Use real-time streaming tokens if available, otherwise fall back to partialAnswer with typewriter
+  const hasStreamingTokens = streamingState?.isStreaming && streamingState?.streamingAnswer;
+  const displaySource = hasStreamingTokens ? streamingState.streamingAnswer : (streamingState?.partialAnswer || '');
+  
+  // Only use typewriter effect for non-streaming (partialAnswer) mode
   const { displayedText, isComplete } = useTypewriter(
-    streamingState?.partialAnswer || '',
+    hasStreamingTokens ? '' : displaySource,
     3,
-    !!streamingState?.partialAnswer
+    !hasStreamingTokens && !!displaySource
   );
+  
+  // For streaming mode, show tokens directly without typewriter delay
+  const textToShow = hasStreamingTokens ? streamingState.streamingAnswer : displayedText;
   
   // Auto-scroll state and refs
   const scrollContainerRef = useRef(null);
@@ -490,7 +499,7 @@ const StreamingMessage = ({
   
   if (!streamingState) return null;
   
-  const { currentStep, steps, queryUnderstanding, candidates, rerankingResults, rerankingMethod, partialAnswer, currentProgress } = streamingState;
+  const { currentStep, steps, queryUnderstanding, candidates, rerankingResults, rerankingMethod, partialAnswer, currentProgress, streamingAnswer, isStreaming } = streamingState;
   
   // MINIMAL MODE: Only show TypingIndicator when preview is disabled
   if (!showPreview) {
@@ -552,14 +561,16 @@ const StreamingMessage = ({
           <RerankingResultsPanel results={rerankingResults} method={rerankingMethod} />
         )}
         
-        {/* Partial Answer with Typewriter - shown in code block for raw markdown */}
-        {partialAnswer && (
+        {/* Partial Answer with Typewriter or Real-time Streaming - shown in code block for raw markdown */}
+        {(partialAnswer || streamingAnswer) && (
           <div className="mt-3 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
             <div className="flex items-center justify-between px-3 py-2 bg-gray-100 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
               <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
-                {language === 'es' ? 'Generando respuesta...' : 'Generating response...'}
+                {isStreaming 
+                  ? (language === 'es' ? '⚡ Streaming en vivo...' : '⚡ Live streaming...') 
+                  : (language === 'es' ? 'Generando respuesta...' : 'Generating response...')}
               </span>
-              <Sparkles className="w-3 h-3 text-emerald-500 animate-pulse" />
+              <Sparkles className={`w-3 h-3 text-emerald-500 ${isStreaming ? 'animate-spin' : 'animate-pulse'}`} />
             </div>
             <pre 
               ref={scrollContainerRef}
@@ -567,16 +578,16 @@ const StreamingMessage = ({
               className="p-4 bg-gray-50 dark:bg-gray-800 overflow-x-auto max-h-64 overflow-y-auto scroll-smooth"
             >
               <code className="text-xs text-gray-700 dark:text-gray-300 whitespace-pre-wrap break-words font-mono">
-                {displayedText}
-                {!isComplete && <span className="animate-pulse text-emerald-500">▊</span>}
+                {textToShow}
+                {(isStreaming || !isComplete) && <span className="animate-pulse text-emerald-500">▊</span>}
               </code>
             </pre>
           </div>
         )}
         
-        {/* Loading indicator - show when no partial answer yet
+        {/* Loading indicator - show when no partial answer or streaming yet
             Always show to indicate pipeline is still running */}
-        {!partialAnswer && (
+        {!partialAnswer && !streamingAnswer && (
           <TypingIndicator phase={currentStep} details={steps[currentStep]?.details} progress={currentProgress} />
         )}
       </div>

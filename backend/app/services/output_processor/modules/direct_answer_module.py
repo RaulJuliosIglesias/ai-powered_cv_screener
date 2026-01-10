@@ -24,10 +24,11 @@ class DirectAnswerModule:
         Extract direct answer from LLM output.
         
         Strategy:
-        1. Look for text between :::thinking::: and table/conclusion
-        2. Take first 1-3 sentences
-        3. Fallback to first paragraph if no structure found
-        4. Remove ALL prompt fragments and instructions
+        1. FIRST: Look for "### Direct Answer to:" section (new format)
+        2. Look for text between :::thinking::: and table/conclusion
+        3. Take first 1-3 sentences
+        4. Fallback to first paragraph if no structure found
+        5. Remove ALL prompt fragments and instructions
         
         Args:
             llm_output: Raw LLM response
@@ -37,6 +38,23 @@ class DirectAnswerModule:
         """
         if not llm_output:
             return "No response generated."
+        
+        # PRIORITY 1: Look for explicit "Direct Answer to:" section
+        direct_answer_match = re.search(
+            r'###\s*Direct Answer to[:\s]*["\']?[^"\']*["\']?\s*\n([\s\S]*?)(?=\n###|\n:::conclusion|$)',
+            llm_output,
+            flags=re.IGNORECASE
+        )
+        if direct_answer_match:
+            direct_text = direct_answer_match.group(1).strip()
+            # Clean and take first 2-3 sentences
+            direct_text = re.sub(r'\n+', ' ', direct_text)
+            sentences = re.split(r'(?<=[.!?])\s+', direct_text)
+            if sentences:
+                result = ' '.join(sentences[:3]).strip()
+                if result and len(result) > 20:
+                    logger.info(f"[DIRECT_ANSWER] Extracted from 'Direct Answer to:' section: {len(result)} chars")
+                    return self._clean_transition_phrases(result)
         
         # Remove thinking block first
         cleaned = re.sub(r':::thinking[\s\S]*?:::', '', llm_output, flags=re.IGNORECASE)

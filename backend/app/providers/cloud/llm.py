@@ -105,6 +105,104 @@ class OpenRouterLLMProvider(LLMProvider):
         self.base_url = settings.openrouter_base_url
         self.model = model
     
+    async def generate_stream(
+        self,
+        prompt: str,
+        system_prompt: Optional[str] = None,
+        temperature: float = 0.1,
+        max_tokens: int = 2048
+    ):
+        """Generate response with streaming tokens.
+        
+        Yields:
+            dict with either:
+                - {"token": "..."} for each token
+                - {"done": True, "text": "...", "usage": {...}} when complete
+        """
+        import asyncio
+        start = time.perf_counter()
+        
+        messages = []
+        if system_prompt:
+            messages.append({"role": "system", "content": system_prompt})
+        messages.append({"role": "user", "content": prompt})
+        
+        logger.info(f"[LLM STREAM] Starting stream with model: {self.model}")
+        
+        full_response = ""
+        prompt_tokens = 0
+        completion_tokens = 0
+        
+        async with httpx.AsyncClient(timeout=120.0) as client:
+            async with client.stream(
+                "POST",
+                f"{self.base_url}/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {self.api_key}",
+                    "HTTP-Referer": settings.http_referer,
+                    "X-Title": settings.app_title,
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "model": self.model,
+                    "messages": messages,
+                    "temperature": temperature,
+                    "max_tokens": max_tokens,
+                    "stream": True
+                }
+            ) as response:
+                response.raise_for_status()
+                
+                async for line in response.aiter_lines():
+                    if not line:
+                        continue
+                    if line.startswith("data: "):
+                        data_str = line[6:]
+                        if data_str == "[DONE]":
+                            break
+                        try:
+                            import json
+                            data = json.loads(data_str)
+                            
+                            # Extract token from delta
+                            choices = data.get("choices", [])
+                            if choices:
+                                delta = choices[0].get("delta", {})
+                                content = delta.get("content", "")
+                                if content:
+                                    full_response += content
+                                    yield {"token": content}
+                            
+                            # Extract usage if present (some providers send at end)
+                            usage = data.get("usage")
+                            if usage:
+                                prompt_tokens = usage.get("prompt_tokens", 0)
+                                completion_tokens = usage.get("completion_tokens", 0)
+                        except json.JSONDecodeError:
+                            continue
+        
+        latency = (time.perf_counter() - start) * 1000
+        
+        # Estimate tokens if not provided
+        if not completion_tokens:
+            completion_tokens = len(full_response.split()) * 1.3  # rough estimate
+        
+        total_cost = self._calculate_cost(int(prompt_tokens), int(completion_tokens))
+        
+        logger.info(f"[LLM STREAM] Completed: {prompt_tokens}+{completion_tokens} tokens, cost=${total_cost:.6f}, latency={latency:.0f}ms")
+        
+        yield {
+            "done": True,
+            "text": full_response,
+            "usage": {
+                "prompt_tokens": int(prompt_tokens),
+                "completion_tokens": int(completion_tokens),
+                "total_tokens": int(prompt_tokens + completion_tokens)
+            },
+            "latency_ms": latency,
+            "openrouter_cost": total_cost
+        }
+    
     async def generate(
         self,
         prompt: str,

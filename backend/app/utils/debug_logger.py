@@ -320,6 +320,67 @@ def log_error(stage: str, error: str, details: Dict[str, Any] = None) -> None:
 
 
 # ============================================================================
+# V8 FEATURE LOGGING FUNCTIONS
+# ============================================================================
+
+def log_semantic_cache(action: str, query: str, similarity: float = None, hit: bool = False) -> None:
+    """Log semantic cache lookup or store."""
+    log_event("SEMANTIC_CACHE", {
+        "action": action,  # "lookup", "hit", "miss", "store"
+        "query_preview": query[:100] if query else None,
+        "similarity": similarity,
+        "cache_hit": hit
+    })
+
+
+def log_hybrid_search(bm25_results: int, vector_results: int, fused_results: int) -> None:
+    """Log hybrid search (BM25 + Vector) results."""
+    log_event("HYBRID_SEARCH", {
+        "bm25_results": bm25_results,
+        "vector_results": vector_results,
+        "fused_results": fused_results,
+        "method": "reciprocal_rank_fusion"
+    })
+
+
+def log_token_streaming(token_count: int, duration_ms: float) -> None:
+    """Log token streaming completion."""
+    log_event("TOKEN_STREAMING", {
+        "tokens_streamed": token_count,
+        "duration_ms": duration_ms,
+        "tokens_per_second": (token_count / (duration_ms / 1000)) if duration_ms > 0 else 0
+    })
+
+
+def log_fallback_chain(primary_model: str, fallback_model: str = None, reason: str = None) -> None:
+    """Log fallback chain activation."""
+    log_event("FALLBACK_CHAIN", {
+        "primary_model": primary_model,
+        "fallback_model": fallback_model,
+        "reason": reason,
+        "fallback_used": fallback_model is not None
+    })
+
+
+def log_v8_metrics(
+    cache_hits: int = 0,
+    cache_misses: int = 0,
+    hybrid_searches: int = 0,
+    tokens_streamed: int = 0,
+    fallbacks_used: int = 0
+) -> None:
+    """Log aggregated V8 metrics."""
+    log_event("V8_METRICS", {
+        "cache_hits": cache_hits,
+        "cache_misses": cache_misses,
+        "cache_hit_rate": cache_hits / (cache_hits + cache_misses) if (cache_hits + cache_misses) > 0 else 0,
+        "hybrid_searches": hybrid_searches,
+        "tokens_streamed": tokens_streamed,
+        "fallbacks_used": fallbacks_used
+    })
+
+
+# ============================================================================
 # DECORATOR FOR AUTOMATIC FUNCTION LOGGING
 # ============================================================================
 

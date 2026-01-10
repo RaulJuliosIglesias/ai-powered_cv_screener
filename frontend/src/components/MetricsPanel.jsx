@@ -72,7 +72,7 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
     search_ms: stages.search?.duration_ms,
     rerank_ms: stages.reranking?.duration_ms,
     llm_ms: (stages.reasoning?.duration_ms || 0) + (stages.generation?.duration_ms || 0) || undefined,
-    verify_ms: stages.claim_verification?.duration_ms,
+    verify_ms: stages.verification?.duration_ms,
     total_ms: metrics.total_ms
   };
   
@@ -81,7 +81,7 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
     query_understanding: !!stages.query_understanding,
     reranking: !!stages.reranking,
     reasoning: !!stages.reasoning,
-    claim_verification: !!stages.claim_verification
+    claim_verification: !!stages.verification
   };
   
   // Extract tokens from generation stage metadata (REAL data from backend)
@@ -116,9 +116,9 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
     },
     {
       name: "Verification",
-      active: !!stages.claim_verification,
-      cost: stages.claim_verification?.metadata?.openrouter_cost || 0,
-      tokens: stages.claim_verification?.metadata?.total_tokens || 0
+      active: !!stages.verification,
+      cost: stages.verification?.metadata?.openrouter_cost || 0,
+      tokens: stages.verification?.metadata?.total_tokens || 0
     }
   ];
   
@@ -343,9 +343,9 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
               </div>
             </div>
             
-            {/* V7 ENHANCEMENTS */}
+            {/* V8 ENHANCEMENTS */}
             <div>
-              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2 font-semibold">🚀 V7 Enhancements</div>
+              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2 font-semibold">🚀 V8 Enhancements</div>
               <div className="bg-gray-900/50 rounded-lg p-2.5">
                 <div className="space-y-1.5 text-xs">
                   {/* Guardrail Method */}
@@ -374,12 +374,12 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
                   <div className="flex items-center justify-between">
                     <span className="text-gray-400">NLI Faithfulness</span>
                     <span className={`font-mono text-[10px] ${
-                      stages.claim_verification?.metadata?.nli_faithfulness 
-                        ? (stages.claim_verification.metadata.nli_faithfulness >= 0.7 ? 'text-green-400' : 'text-yellow-400')
+                      stages.verification?.metadata?.nli_faithfulness 
+                        ? (stages.verification.metadata.nli_faithfulness >= 0.7 ? 'text-green-400' : 'text-yellow-400')
                         : 'text-gray-500'
                     }`}>
-                      {stages.claim_verification?.metadata?.nli_faithfulness 
-                        ? `${Math.round(stages.claim_verification.metadata.nli_faithfulness * 100)}%`
+                      {stages.verification?.metadata?.nli_faithfulness 
+                        ? `${Math.round(stages.verification.metadata.nli_faithfulness * 100)}%`
                         : 'N/A'}
                     </span>
                   </div>
@@ -387,11 +387,11 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
                   <div className="flex items-center justify-between">
                     <span className="text-gray-400">Verification</span>
                     <span className={`font-mono text-[10px] px-1.5 py-0.5 rounded ${
-                      stages.claim_verification?.metadata?.method === 'nli' 
+                      stages.verification?.metadata?.method === 'nli' 
                         ? 'bg-green-900/50 text-green-300' 
                         : 'bg-gray-700/50 text-gray-400'
                     }`}>
-                      {stages.claim_verification?.metadata?.method || 'llm'}
+                      {stages.verification?.metadata?.method || 'llm'}
                     </span>
                   </div>
                 </div>

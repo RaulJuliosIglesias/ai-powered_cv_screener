@@ -285,7 +285,8 @@ class PDFService:
                             r"(?:^|\n)([A-Z][^|\n]{5,60})(?:\s*[|@at]\s*|\s+at\s+|\s+-\s+)?",
                             block
                         )
-                        job_title = title_match.group(1).strip() if title_match else "Unknown Role"
+                        raw_title = title_match.group(1).strip() if title_match else ""
+                        job_title = self._validate_job_title(raw_title) or "Unknown Role"
                         
                         # Extract company name
                         company = self._extract_company_from_block(block)
@@ -316,9 +317,101 @@ class PDFService:
         for pattern in patterns:
             match = re.search(pattern, block)
             if match:
-                return match.group(1).strip()[:80]
+                company = match.group(1).strip()[:80]
+                # Validate the extracted company
+                validated = self._validate_company_name(company)
+                if validated:
+                    return validated
         
         return "Unknown Company"
+    
+    def _validate_job_title(self, title: str) -> str:
+        """
+        Validate and clean job title.
+        Returns empty string if title is invalid.
+        """
+        if not title:
+            return ""
+        
+        title = title.strip()
+        
+        # Reject if it's just a year
+        if re.match(r'^\d{4}$', title):
+            return ""
+        
+        # Reject if it's a date range
+        if re.match(r'^\d{4}\s*[-–—]', title):
+            return ""
+        
+        # Reject if it contains rating stars
+        if '⭐' in title or '★' in title:
+            return ""
+        
+        # Reject if it's a spaced-out header like "E X P E R I E N C E"
+        if re.match(r'^[A-Z](\s+[A-Z]){3,}$', title):
+            return ""
+        
+        # Reject common section headers
+        section_headers = ['experience', 'education', 'skills', 'summary', 'profile', 'languages']
+        if title.lower().strip() in section_headers:
+            return ""
+        
+        # Reject if it's just a language or city
+        invalid_values = ['english', 'spanish', 'french', 'german', 'italian',
+                         'milan', 'london', 'berlin', 'paris', 'madrid', 'italy', 'germany']
+        if title.lower().strip() in invalid_values:
+            return ""
+        
+        # Reject very short titles
+        if len(title) < 3:
+            return ""
+        
+        # Reject if it starts with description words
+        description_starters = ['to ', 'and ', 'with ', 'for ', 'the ', 'across ', 'in ']
+        for starter in description_starters:
+            if title.lower().startswith(starter):
+                return ""
+        
+        return title
+    
+    def _validate_company_name(self, company: str) -> str:
+        """
+        Validate and clean company name.
+        Returns empty string if company is invalid.
+        """
+        if not company:
+            return ""
+        
+        company = company.strip()
+        
+        # Remove leading year and separator patterns
+        company = re.sub(r'^\d{4}\s*[|\-–—]\s*', '', company).strip()
+        
+        # Reject if it's just a year or date range
+        if re.match(r'^\d{4}$', company) or re.match(r'^\d{4}\s*[-–—]', company):
+            return ""
+        
+        # Reject if it's a spaced-out header
+        if re.match(r'^[A-Z](\s+[A-Z]){3,}$', company):
+            return ""
+        
+        # Reject section headers and countries
+        invalid_values = ['experience', 'education', 'skills', 'italy', 'germany', 
+                         'france', 'spain', 'uk', 'usa', 'united states']
+        if company.lower().strip() in invalid_values:
+            return ""
+        
+        # Reject very short names
+        if len(company) < 2:
+            return ""
+        
+        # Reject if starts with description words
+        description_starters = ['to ', 'and ', 'with ', 'for ', 'ensuring ', 'delivering ']
+        for starter in description_starters:
+            if company.lower().startswith(starter):
+                return ""
+        
+        return company
     
     def detect_seniority_level(self, text: str, experiences: List[ExperienceEntry]) -> str:
         """Detect seniority level from CV text and experience."""

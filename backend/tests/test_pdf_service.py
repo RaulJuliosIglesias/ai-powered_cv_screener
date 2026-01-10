@@ -70,18 +70,18 @@ class TestPDFService:
     
     def test_chunk_text_short_text(self):
         text = "Short text that doesn't need chunking"
-        result = self.service._chunk_text(text, "general")
+        result = self.service._chunk_text(text, "general", chunk_size=500, chunk_overlap=50)
         assert len(result) == 1
         assert result[0] == text
     
     def test_chunk_text_long_text(self):
         text = "A " * 300  # Create text longer than chunk_size
-        result = self.service._chunk_text(text, "general")
+        result = self.service._chunk_text(text, "general", chunk_size=100, chunk_overlap=20)
         assert len(result) > 1
     
     def test_chunk_text_empty_text(self):
         text = "   "
-        result = self.service._chunk_text(text, "general")
+        result = self.service._chunk_text(text, "general", chunk_size=500, chunk_overlap=50)
         assert len(result) == 0
     
     def test_split_into_sections(self):
@@ -143,3 +143,83 @@ class TestCVChunk:
         assert chunk.section_type == "experience"
         assert chunk.cv_id == "cv_001"
         assert chunk.candidate_name == "John Smith"
+
+
+class TestValidation:
+    """Tests for validation functions that filter garbage data."""
+    
+    def setup_method(self):
+        self.service = PDFService()
+    
+    def test_validate_job_title_rejects_year(self):
+        """Years should be rejected as job titles."""
+        assert self.service._validate_job_title("2005") == ""
+        assert self.service._validate_job_title("2020") == ""
+    
+    def test_validate_job_title_rejects_date_range(self):
+        """Date ranges should be rejected."""
+        assert self.service._validate_job_title("2005 - 2010") == ""
+        assert self.service._validate_job_title("2018–Present") == ""
+    
+    def test_validate_job_title_rejects_stars(self):
+        """Ratings with stars should be rejected."""
+        assert self.service._validate_job_title("English ⭐⭐⭐⭐") == ""
+    
+    def test_validate_job_title_rejects_spaced_headers(self):
+        """Spaced-out section headers should be rejected."""
+        assert self.service._validate_job_title("E X P E R I E N C E") == ""
+        assert self.service._validate_job_title("S K I L L S") == ""
+    
+    def test_validate_job_title_rejects_section_headers(self):
+        """Common section headers should be rejected."""
+        assert self.service._validate_job_title("Experience") == ""
+        assert self.service._validate_job_title("education") == ""
+        assert self.service._validate_job_title("SKILLS") == ""
+    
+    def test_validate_job_title_rejects_locations(self):
+        """City/country names should be rejected."""
+        assert self.service._validate_job_title("Milan") == ""
+        assert self.service._validate_job_title("Italy") == ""
+        assert self.service._validate_job_title("London") == ""
+    
+    def test_validate_job_title_rejects_languages(self):
+        """Language names should be rejected."""
+        assert self.service._validate_job_title("English") == ""
+        assert self.service._validate_job_title("Spanish") == ""
+    
+    def test_validate_job_title_rejects_description_fragments(self):
+        """Description fragments starting with prepositions should be rejected."""
+        assert self.service._validate_job_title("to culinary excellence") == ""
+        assert self.service._validate_job_title("across finance and healthcare") == ""
+    
+    def test_validate_job_title_accepts_valid_titles(self):
+        """Valid job titles should be accepted."""
+        assert self.service._validate_job_title("Software Engineer") == "Software Engineer"
+        assert self.service._validate_job_title("Senior Product Manager") == "Senior Product Manager"
+        assert self.service._validate_job_title("Data Scientist") == "Data Scientist"
+        assert self.service._validate_job_title("Business Analyst") == "Business Analyst"
+    
+    def test_validate_company_rejects_year(self):
+        """Years should be rejected as company names."""
+        assert self.service._validate_company_name("2010") == ""
+    
+    def test_validate_company_cleans_year_prefix(self):
+        """Leading year patterns should be removed from company names."""
+        result = self.service._validate_company_name("2010 | Banking Innovations PLC")
+        assert result == "Banking Innovations PLC"
+    
+    def test_validate_company_rejects_countries(self):
+        """Country names should be rejected."""
+        assert self.service._validate_company_name("Italy") == ""
+        assert self.service._validate_company_name("Germany") == ""
+        assert self.service._validate_company_name("United States") == ""
+    
+    def test_validate_company_rejects_spaced_headers(self):
+        """Spaced-out headers should be rejected."""
+        assert self.service._validate_company_name("S K I L L S") == ""
+    
+    def test_validate_company_accepts_valid_companies(self):
+        """Valid company names should be accepted."""
+        assert self.service._validate_company_name("Google") == "Google"
+        assert self.service._validate_company_name("Tech Innovations Ltd") == "Tech Innovations Ltd"
+        assert self.service._validate_company_name("Banking Corp") == "Banking Corp"

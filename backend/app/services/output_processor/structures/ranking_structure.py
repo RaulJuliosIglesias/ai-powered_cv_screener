@@ -89,32 +89,49 @@ class RankingStructure:
             criteria=criteria_list
         )
         
-        # Extract conclusion - ensure consistency with ranking data
+        # FIX: Validate top_pick candidate against chunks
+        if top_pick_data:
+            valid_names = set()
+            for chunk in chunks:
+                meta = chunk.get("metadata", {})
+                name = meta.get("candidate_name", "")
+                if name:
+                    valid_names.add(name.lower().strip())
+            
+            # If top_pick name is invalid, find valid one from ranked_list
+            if top_pick_data.candidate_name.lower().strip() not in valid_names:
+                logger.warning(f"[RANKING_STRUCTURE] Invalid top_pick name: {top_pick_data.candidate_name}")
+                for ranked in ranked_list:
+                    if ranked.get("candidate_name", "").lower().strip() in valid_names:
+                        top_pick_data.candidate_name = ranked["candidate_name"]
+                        top_pick_data.cv_id = ranked.get("cv_id", "")
+                        top_pick_data.overall_score = ranked.get("overall_score", 50)
+                        logger.info(f"[RANKING_STRUCTURE] Using valid candidate: {top_pick_data.candidate_name}")
+                        break
+            
+            # Ensure score is not 0%
+            if top_pick_data.overall_score <= 0:
+                top_pick_data.overall_score = 50  # Minimum floor
+                logger.warning(f"[RANKING_STRUCTURE] Applied score floor: 50%")
+        
+        # Extract conclusion from LLM - ALWAYS preserve the LLM's response
+        # The LLM answered the user's question, we must NOT replace that answer
         conclusion = self.conclusion_module.extract(llm_output)
         
-        # Check if conclusion mentions top candidate, if not generate consistent conclusion
-        if conclusion and top_pick_data:
-            top_candidate_name = top_pick_data.candidate_name.lower()
-            conclusion_lower = conclusion.lower()
-            if top_candidate_name not in conclusion_lower:
-                logger.info(f"[RANKING_STRUCTURE] Conclusion doesn't mention top candidate {top_pick_data.candidate_name}, generating consistent conclusion")
-                conclusion = self._generate_consistent_conclusion(top_pick_data, ranked_list)
-        elif not conclusion and top_pick_data:
-            conclusion = self._generate_consistent_conclusion(top_pick_data, ranked_list)
+        # ONLY generate fallback if LLM provided NO conclusion at all
+        if not conclusion and top_pick_data:
+            logger.info(f"[RANKING_STRUCTURE] No conclusion from LLM, generating minimal fallback")
+            conclusion = self._generate_minimal_fallback_conclusion(top_pick_data)
         
-        # Extract analysis - ensure consistency with ranking data
-        # First try to extract from LLM, but if it mentions different candidates, use ranking data
+        # Extract analysis from LLM - ALWAYS preserve the LLM's reasoning
+        # The LLM explained WHY it chose certain candidates - this is the answer to the user's question
         analysis = self.analysis_module.extract(llm_output, "", conclusion or "")
         
-        # Check if analysis mentions top candidate, if not generate fallback
-        if analysis and top_pick_data:
-            top_candidate_name = top_pick_data.candidate_name.lower()
-            analysis_lower = analysis.lower()
-            if top_candidate_name not in analysis_lower:
-                logger.info(f"[RANKING_STRUCTURE] Analysis doesn't mention top candidate {top_pick_data.candidate_name}, generating fallback")
-                analysis = self._generate_consistent_analysis(ranking_data, top_pick_data, criteria_list)
-        elif not analysis:
-            analysis = self._generate_consistent_analysis(ranking_data, top_pick_data, criteria_list)
+        # ONLY generate fallback if LLM provided NO analysis at all
+        if not analysis:
+            logger.info(f"[RANKING_STRUCTURE] No analysis from LLM, using raw content")
+            # Use the raw LLM output as analysis since it contains the actual answer
+            analysis = self._extract_analysis_from_raw(llm_output)
         
         return {
             "structure_type": "ranking",
@@ -231,47 +248,40 @@ class RankingStructure:
         
         return " ".join(parts)
     
-    def _generate_consistent_conclusion(self, top_pick_data, ranked_candidates):
+    def _generate_minimal_fallback_conclusion(self, top_pick_data):
         """
-        Generate conclusion that is consistent with the ranking data.
-        
-        This ensures the conclusion mentions the same top candidate as the ranking table.
+        Generate a MINIMAL fallback conclusion only when LLM provided nothing.
+        This should rarely be used - the LLM's response is preferred.
         """
         if not top_pick_data:
             return None
+        return f"Top recommendation: {top_pick_data.candidate_name}."
+    
+    def _extract_analysis_from_raw(self, llm_output: str) -> str:
+        """
+        Extract analysis content from raw LLM output when module extraction fails.
+        Preserves the LLM's actual reasoning about the user's question.
+        """
+        import re
         
-        parts = []
+        # Try to find the Analysis section
+        analysis_match = re.search(
+            r'###?\s*Analysis\s*\n([\s\S]*?)(?=\n###|\n:::conclusion|$)',
+            llm_output,
+            re.IGNORECASE
+        )
+        if analysis_match:
+            return analysis_match.group(1).strip()
         
-        # Top candidate recommendation
-        top_name = top_pick_data.candidate_name
-        top_score = top_pick_data.overall_score
+        # Try to find content after thinking block but before conclusion
+        post_thinking = re.sub(r':::thinking[\s\S]*?:::', '', llm_output, flags=re.IGNORECASE)
+        pre_conclusion = re.sub(r':::conclusion[\s\S]*?:::', '', post_thinking, flags=re.IGNORECASE)
         
-        parts.append(f"{top_name} is the recommended candidate with an overall score of {top_score:.0f}%.")
+        # Remove tables
+        content = re.sub(r'\|[^\n]*\|[\s\S]*?\|[^\n]*\|', '', pre_conclusion)
+        content = content.strip()
         
-        # Justification
-        if top_pick_data.justification:
-            parts.append(top_pick_data.justification)
+        if content and len(content) > 50:
+            return content[:1000]  # Limit length
         
-        # Key strengths - FILTER OUT CANDIDATE NAMES
-        if top_pick_data.key_strengths:
-            # Filter out items that look like person names (2+ capitalized words)
-            valid_strengths = []
-            for strength in top_pick_data.key_strengths[:5]:  # Check more items
-                words = strength.split()
-                # Skip if looks like a person name
-                if len(words) >= 2 and all(w[0].isupper() for w in words if len(w) > 1):
-                    logger.debug(f"[RANKING_STRUCTURE] Skipping likely person name in conclusion strengths: {strength}")
-                    continue
-                valid_strengths.append(strength)
-                if len(valid_strengths) >= 3:
-                    break
-            
-            if valid_strengths:
-                strengths_text = ", ".join(valid_strengths)
-                parts.append(f"Key strengths: {strengths_text}.")
-        
-        # Runner-up mention
-        if top_pick_data.runner_up and len(ranked_candidates) > 1:
-            parts.append(f"Runner-up: {top_pick_data.runner_up}.")
-        
-        return " ".join(parts)
+        return None
