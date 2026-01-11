@@ -1470,12 +1470,142 @@ Base your analysis on the actual CV content provided.""",
         
         return sections
 
+    def _extract_fase1_metadata(self, chunks: list[dict]) -> str:
+        """
+        FASE 1/2: Extract and format all enriched metadata for LLM context.
+        
+        This ensures the LLM has access to all structured data extracted from CVs:
+        - Languages (for "who speaks French" queries)
+        - Certifications (for "AWS certified" queries)
+        - Education (for "MBA candidates" queries)
+        - Skills with levels
+        """
+        import logging
+        logger = logging.getLogger(__name__)
+        
+        if not chunks:
+            return ""
+        
+        # Group chunks by candidate
+        candidates = {}
+        for chunk in chunks:
+            meta = chunk.get("metadata", {})
+            cv_id = meta.get("cv_id", "")
+            if cv_id not in candidates:
+                candidates[cv_id] = {
+                    "name": meta.get("candidate_name", "Unknown"),
+                    "metadata": meta
+                }
+        
+        lines = ["", "===== STRUCTURED CANDIDATE DATA =====", ""]
+        
+        for cv_id, data in candidates.items():
+            meta = data["metadata"]
+            name = data["name"]
+            
+            lines.append(f"📋 {name}")
+            lines.append("-" * 40)
+            
+            # Experience
+            exp = meta.get("total_experience_years", 0)
+            if exp:
+                lines.append(f"  Experience: {exp:.0f} years")
+            
+            # Current role
+            role = meta.get("current_role")
+            company = meta.get("current_company")
+            if role or company:
+                lines.append(f"  Current: {role or 'N/A'} @ {company or 'N/A'}")
+            
+            # Languages (FASE 1)
+            languages = meta.get("languages")
+            if languages:
+                lines.append(f"  Languages: {languages}")
+            
+            # Language boolean flags for direct queries
+            lang_flags = []
+            if meta.get("speaks_english"):
+                lang_flags.append("English")
+            if meta.get("speaks_french"):
+                lang_flags.append("French")
+            if meta.get("speaks_spanish"):
+                lang_flags.append("Spanish")
+            if meta.get("speaks_german"):
+                lang_flags.append("German")
+            if meta.get("speaks_chinese"):
+                lang_flags.append("Chinese")
+            if lang_flags and not languages:
+                lines.append(f"  Languages: {', '.join(lang_flags)}")
+            
+            # Education (FASE 1)
+            edu_level = meta.get("education_level")
+            edu_field = meta.get("education_field")
+            edu_inst = meta.get("education_institution")
+            if edu_level or edu_field:
+                edu_str = edu_level or ""
+                if edu_field:
+                    edu_str += f" in {edu_field}"
+                if edu_inst:
+                    edu_str += f" ({edu_inst})"
+                lines.append(f"  Education: {edu_str}")
+            
+            # Education flags
+            edu_flags = []
+            if meta.get("has_mba"):
+                edu_flags.append("MBA")
+            if meta.get("has_phd"):
+                edu_flags.append("PhD")
+            if edu_flags:
+                lines.append(f"  Degrees: {', '.join(edu_flags)}")
+            
+            # Certifications (FASE 1)
+            certs = meta.get("certifications")
+            if certs:
+                lines.append(f"  Certifications: {certs}")
+            
+            # Certification flags
+            cert_flags = []
+            if meta.get("has_aws_cert"):
+                cert_flags.append("AWS")
+            if meta.get("has_azure_cert"):
+                cert_flags.append("Azure")
+            if meta.get("has_gcp_cert"):
+                cert_flags.append("GCP")
+            if meta.get("has_pmp"):
+                cert_flags.append("PMP")
+            if meta.get("has_cbap"):
+                cert_flags.append("CBAP")
+            if meta.get("has_scrum"):
+                cert_flags.append("Scrum")
+            if cert_flags and not certs:
+                lines.append(f"  Certifications: {', '.join(cert_flags)}")
+            
+            # Skills
+            skills = meta.get("skills")
+            if skills:
+                lines.append(f"  Skills: {skills[:100]}...")
+            
+            # Seniority
+            seniority = meta.get("seniority_level")
+            if seniority:
+                lines.append(f"  Seniority: {seniority.upper()}")
+            
+            # Location
+            location = meta.get("location")
+            if location:
+                lines.append(f"  Location: {location}")
+            
+            lines.append("")
+        
+        logger.info(f"[FASE1_METADATA] Formatted metadata for {len(candidates)} candidates")
+        return "\n".join(lines)
+
 
 @lru_cache(maxsize=128)
 def classify_query(question: str) -> QueryType:
     """
     Classify a user query to determine the appropriate template.
-    
+        
     Args:
         question: The user's question
         
@@ -1682,7 +1812,31 @@ def classify_query_for_structure(question: str) -> str:
     if any(re.search(p, q) for p in summary_patterns):
         return "summary"
     
-    # 9. Default: search (SearchStructure)
+    # 9. ADAPTIVE queries → AdaptiveStructure
+    # Queries about attributes of ALL candidates (technologies, skills, languages, etc.)
+    # These need dynamic tables showing Candidate | [Attribute]
+    adaptive_patterns = [
+        # "What X do the candidates have?" patterns
+        r'\bwhat\s+(technolog|skill|language|experience|certification|education)',
+        r'\bqué\s+(tecnolog|habilidad|idioma|experiencia|certificaci|educaci)',
+        # "Show me all candidates' X" patterns
+        r'\b(show|list|display)\s+(me\s+)?(all\s+)?(the\s+)?(candidates?\'?\s*)?(technolog|skill|language)',
+        r'\b(muestra|lista)\s+(me\s+)?(todas?\s+)?(las?\s+)?(candidatos?\s*)?(tecnolog|habilidad|idioma)',
+        # "What do they know?" patterns
+        r'\bwhat\s+(do|does)\s+(they|the\s+candidates?)\s+(know|have|speak)',
+        r'\bqué\s+(saben|tienen|hablan)\s+(los\s+)?candidatos',
+        # Attribute listing for all candidates
+        r'\b(all|every|each)\s+(candidates?\'?\s*)?(technolog|skill|language|certif)',
+        r'\b(todos?\s+los?\s+)?candidatos?\s+(tienen|saben|conocen)',
+        # "technologies/skills of candidates" patterns  
+        r'\b(technolog|skill|language|certif)\w*\s+(of|de)\s+(the\s+)?(all\s+)?candidates?',
+        # Generic "what do candidates have" without specific attribute (will default to skills)
+        r'\bwhat\s+(do|does)\s+(the\s+)?candidates?\s+have\b',
+    ]
+    if any(re.search(p, q) for p in adaptive_patterns):
+        return "adaptive"
+    
+    # 10. Default: search (SearchStructure)
     return "search"
 
 

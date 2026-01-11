@@ -1385,6 +1385,69 @@ class RAGServiceV5:
                 f"search: top {effective_k}/{num_cvs}, threshold={adjusted_threshold:.2f}"
             )
     
+    def _detect_metadata_filters(self, question: str) -> dict:
+        """
+        FASE 3: Detect metadata filters from query for targeted retrieval.
+        
+        Analyzes queries like:
+        - "Who speaks French?" → {"speaks_french": True}
+        - "AWS certified candidates" → {"has_aws_cert": True}
+        - "MBA holders" → {"has_mba": True}
+        - "5+ years experience" → {"min_experience": 5}
+        
+        Returns:
+            Dict of metadata filters to apply during retrieval
+        """
+        import re
+        filters = {}
+        q = question.lower()
+        
+        # Language filters
+        language_patterns = {
+            "speaks_french": [r"speaks?\s+french", r"french\s+speak", r"habla\s+franc[eé]s"],
+            "speaks_spanish": [r"speaks?\s+spanish", r"spanish\s+speak", r"habla\s+espa[nñ]ol"],
+            "speaks_german": [r"speaks?\s+german", r"german\s+speak", r"habla\s+alem[aá]n"],
+            "speaks_chinese": [r"speaks?\s+chinese", r"chinese\s+speak", r"speaks?\s+mandarin"],
+            "speaks_english": [r"speaks?\s+english", r"english\s+speak"],
+        }
+        
+        for flag, patterns in language_patterns.items():
+            if any(re.search(p, q) for p in patterns):
+                filters[flag] = True
+                logger.info(f"[FASE3] Detected language filter: {flag}")
+        
+        # Certification filters
+        cert_patterns = {
+            "has_aws_cert": [r"aws\s+cert", r"aws\s+certified", r"certificaci[oó]n\s+aws"],
+            "has_azure_cert": [r"azure\s+cert", r"azure\s+certified"],
+            "has_gcp_cert": [r"gcp\s+cert", r"google\s+cloud\s+cert"],
+            "has_pmp": [r"\bpmp\b", r"project\s+management\s+professional"],
+            "has_cbap": [r"\bcbap\b", r"business\s+analysis\s+professional"],
+            "has_scrum": [r"scrum\s+master", r"\bcsm\b", r"\bpsm\b"],
+        }
+        
+        for flag, patterns in cert_patterns.items():
+            if any(re.search(p, q) for p in patterns):
+                filters[flag] = True
+                logger.info(f"[FASE3] Detected certification filter: {flag}")
+        
+        # Education filters
+        if re.search(r"\bmba\b|master\s+of\s+business", q):
+            filters["has_mba"] = True
+            logger.info("[FASE3] Detected education filter: has_mba")
+        
+        if re.search(r"\bph\.?d\b|doctorate|doctorado", q):
+            filters["has_phd"] = True
+            logger.info("[FASE3] Detected education filter: has_phd")
+        
+        # Experience filters
+        exp_match = re.search(r"(\d+)\+?\s*(?:years?|años?)\s*(?:of\s+)?(?:experience|experiencia)", q)
+        if exp_match:
+            filters["min_experience"] = int(exp_match.group(1))
+            logger.info(f"[FASE3] Detected experience filter: min {filters['min_experience']} years")
+        
+        return filters
+    
     async def _get_chunks_by_candidate_name(
         self, 
         candidate_name: str, 
@@ -1698,6 +1761,16 @@ class RAGServiceV5:
         
         start = time.perf_counter()
         try:
+            # =================================================================
+            # FASE 3: METADATA-BASED RETRIEVAL STRATEGY
+            # Detect queries that should filter by metadata (languages, certs, etc.)
+            # =================================================================
+            metadata_filters = self._detect_metadata_filters(ctx.question)
+            if metadata_filters:
+                logger.info(f"[RETRIEVAL] FASE3 Metadata filters detected: {metadata_filters}")
+                # Store filters for later use in retrieval
+                ctx.metadata_filters = metadata_filters
+            
             # =================================================================
             # TARGETED RETRIEVAL: If single candidate detected, get their chunks directly
             # =================================================================
@@ -2700,14 +2773,31 @@ Provide a corrected response:"""
         single_candidate_compatible_types = {"single_candidate", "red_flags", "search"}
         
         # HIGHEST PRIORITY: Context-resolved candidate (from "#1 candidate", "top candidate")
-        # Only override if query type is compatible with single candidate focus
+        # CRITICAL FIX: Only override to single_candidate if the QUERY itself references a candidate
+        # General queries like "What technologies do the candidates have?" should NOT become single_candidate
+        # even if context_resolver found a candidate from previous results
         if ctx.resolved_candidate_name:
-            if query_type in single_candidate_compatible_types or query_type == "search":
+            # Check if query actually references a specific candidate
+            q_lower = ctx.question.lower()
+            references_candidate = any(ref in q_lower for ref in [
+                '#1', '#2', '#3', 'top candidate', 'first candidate', 'best candidate',
+                'el top', 'el mejor', 'el primero', 'them', 'him', 'her', 'that candidate',
+                'this candidate', 'the candidate', 'ese candidato', 'este candidato',
+                'more about', 'tell me about', 'analyze', 'profile of'
+            ])
+            
+            if references_candidate and query_type in single_candidate_compatible_types:
                 query_type = "single_candidate"
                 candidate_name = ctx.resolved_candidate_name
                 logger.info(
                     f"[RAG] STRUCTURE ROUTING: Context-resolved candidate override -> "
                     f"query_type={query_type}, candidate={candidate_name}"
+                )
+            else:
+                # Query is about ALL candidates, don't override to single_candidate
+                logger.info(
+                    f"[RAG] STRUCTURE ROUTING: Ignoring resolved candidate '{ctx.resolved_candidate_name}' - "
+                    f"query does not reference specific candidate, keeping query_type={query_type}"
                 )
         
         # For single_candidate or red_flags queries, get candidate name from detection

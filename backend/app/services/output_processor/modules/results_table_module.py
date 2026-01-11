@@ -129,8 +129,18 @@ class ResultsTableModule:
                 query_terms
             )
             
-            # Normalize score to percentage
-            match_score = min(100, data["score"] * 100) if data["score"] <= 1 else data["score"]
+            # Normalize score to percentage (0-100)
+            # RRF scores can be >1 (sum of 1/(k+rank) across queries), so we need to normalize
+            raw_score = data["score"]
+            if raw_score > 1.5:
+                # Likely already a percentage or RRF sum - normalize to 0-100
+                match_score = min(100, raw_score / max(raw_score, 1) * 100)
+            elif raw_score > 1.0:
+                # RRF score slightly above 1 - scale down to percentage
+                match_score = min(100, (raw_score / 2.0) * 100)
+            else:
+                # Normal similarity score (0-1) - convert to percentage
+                match_score = min(100, raw_score * 100)
             
             results.append(SearchResult(
                 candidate_name=data["name"],

@@ -28,6 +28,7 @@ from .structures import (
     TeamBuildStructure,
     VerificationStructure,
     SummaryStructure,
+    AdaptiveStructure,
 )
 
 # Import modules for legacy/fallback processing
@@ -73,6 +74,7 @@ class OutputOrchestrator:
         self.team_build_structure = TeamBuildStructure()
         self.verification_structure = VerificationStructure()
         self.summary_structure = SummaryStructure()
+        self.adaptive_structure = AdaptiveStructure()
         
         # Legacy processor for standard responses
         self.processor = OutputProcessor()
@@ -238,6 +240,17 @@ class OutputOrchestrator:
             # SUMMARY STRUCTURE
             logger.info("[ORCHESTRATOR] Using SummaryStructure")
             structure_data = self.summary_structure.assemble(
+                llm_output=cleaned_llm_output,
+                chunks=chunks or [],
+                query=query,
+                conversation_history=conversation_history or []
+            )
+            return self._build_structured_output(structure_data, cleaned_llm_output)
+        
+        elif query_type == "adaptive":
+            # ADAPTIVE STRUCTURE - Dynamic table based on query attributes
+            logger.info("[ORCHESTRATOR] Using AdaptiveStructure for dynamic response")
+            structure_data = self.adaptive_structure.assemble(
                 llm_output=cleaned_llm_output,
                 chunks=chunks or [],
                 query=query,

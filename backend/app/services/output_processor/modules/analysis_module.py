@@ -143,6 +143,33 @@ class AnalysisModule:
         # PHASE 7.1 FIX: Aggressive detection of empty/incomplete tables
         stripped = cleaned.strip()
         
+        # Check 0: Remove empty tables (header + separator only, no data rows)
+        # Pattern: | Header1 | Header2 | ... | \n |---|---| ... | \n (nothing after)
+        empty_table_pattern = r'^\s*\|[^\n]+\|\s*\n\s*\|[-:\s|]+\|\s*$'
+        if re.match(empty_table_pattern, stripped, re.MULTILINE):
+            logger.warning(f"[ANALYSIS] Empty table (header+separator only) detected, discarding")
+            return None
+        
+        # Check 0b: Table header followed by only separator, nothing else
+        lines = stripped.split('\n')
+        if len(lines) >= 1 and lines[0].strip().startswith('|'):
+            # Count how many lines are actual data (not header or separator)
+            data_lines = 0
+            for i, line in enumerate(lines):
+                line = line.strip()
+                if not line:
+                    continue
+                if i == 0:  # header
+                    continue
+                if re.match(r'^\|[-:\s|]+\|$', line):  # separator
+                    continue
+                if '|' in line:  # potential data row
+                    data_lines += 1
+            
+            if data_lines == 0 and any('|' in line for line in lines):
+                logger.warning(f"[ANALYSIS] Table with no data rows detected, discarding")
+                return None
+        
         # Check 1: Single line that looks like a table header
         if stripped.startswith('|') and stripped.count('\n') <= 1:
             logger.warning(f"[ANALYSIS] Single line table header detected: '{stripped[:50]}...'")
@@ -158,12 +185,12 @@ class AnalysisModule:
                 return None
         
         # Check 3: Very short content that's just a pipe-delimited line
-        if '|' in stripped and len(stripped) < 100:
+        if '|' in stripped and len(stripped) < 150:
             # Count pipes vs actual content
             pipe_count = stripped.count('|')
-            non_pipe_content = stripped.replace('|', '').strip()
-            if pipe_count > 3 and len(non_pipe_content) < 50:
-                logger.warning(f"[ANALYSIS] Mostly pipes with little content, discarding")
+            non_pipe_content = re.sub(r'[\|\-:\s]', '', stripped).strip()
+            if pipe_count > 3 and len(non_pipe_content) < 60:
+                logger.warning(f"[ANALYSIS] Mostly pipes with little content ({len(non_pipe_content)} chars), discarding")
                 return None
         
         # Only return if substantial content (> 50 chars of non-whitespace)

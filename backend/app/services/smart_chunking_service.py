@@ -1006,10 +1006,40 @@ class SmartChunkingService:
         )
         skills_str = ",".join(structured.skills) if structured.skills else ""
         
+        # ================================================================
+        # FASE 1: Boolean flags for direct metadata queries
+        # These enable queries like "who speaks French", "has AWS cert"
+        # ================================================================
+        text_lower = text.lower()
+        languages_lower = languages.lower() if languages else ""
+        certs_lower = certifications.lower() if certifications else ""
+        
+        # Language flags
+        speaks_english = "english" in languages_lower
+        speaks_french = "french" in languages_lower
+        speaks_spanish = "spanish" in languages_lower
+        speaks_german = "german" in languages_lower
+        speaks_chinese = "chinese" in languages_lower or "mandarin" in languages_lower
+        
+        # Education flags
+        has_mba = "mba" in text_lower or "master of business" in text_lower
+        has_phd = "phd" in text_lower or "ph.d" in text_lower or "doctorate" in text_lower
+        
+        # Certification flags
+        has_aws_cert = "aws" in certs_lower or "amazon web services" in text_lower
+        has_azure_cert = "azure" in certs_lower or "az-" in text_lower
+        has_gcp_cert = "gcp" in certs_lower or "google cloud" in text_lower
+        has_pmp = "pmp" in certs_lower or "project management professional" in text_lower
+        has_cbap = "cbap" in certs_lower or "business analysis professional" in text_lower
+        has_scrum = "scrum" in certs_lower or "csm" in certs_lower or "psm" in certs_lower
+        
         # ============================================================
         # CHUNK 0: SUMMARY CHUNK (most important for quick lookups)
+        # FASE 2: Use enriched content for better semantic search
         # ============================================================
-        summary_content = self._build_summary_content(structured)
+        summary_content = self._build_enriched_summary_content(
+            structured, languages, education, certifications, location
+        )
         chunks.append({
             "id": f"{cv_id}_chunk_{chunk_index}",
             "cv_id": cv_id,
@@ -1043,6 +1073,20 @@ class SmartChunkingService:
                 "github_url": urls["github"],
                 "portfolio_url": urls["portfolio"],
                 "hobbies": hobbies,
+                # FASE 1: Boolean flags for direct queries
+                "speaks_english": speaks_english,
+                "speaks_french": speaks_french,
+                "speaks_spanish": speaks_spanish,
+                "speaks_german": speaks_german,
+                "speaks_chinese": speaks_chinese,
+                "has_mba": has_mba,
+                "has_phd": has_phd,
+                "has_aws_cert": has_aws_cert,
+                "has_azure_cert": has_azure_cert,
+                "has_gcp_cert": has_gcp_cert,
+                "has_pmp": has_pmp,
+                "has_cbap": has_cbap,
+                "has_scrum": has_scrum,
             }
         })
         chunk_index += 1
@@ -1163,7 +1207,13 @@ class SmartChunkingService:
         return chunks
     
     def _build_summary_content(self, data: CVStructuredData) -> str:
-        """Build summary chunk content with key facts."""
+        """
+        Build summary chunk content with key facts.
+        
+        FASE 2: Enhanced with structured metadata for better semantic search.
+        The content here gets embedded, so including structured info helps
+        queries like "who speaks French" or "has AWS certification" match better.
+        """
         lines = [
             f"===== CANDIDATE PROFILE: {data.candidate_name} =====",
             "",
@@ -1186,6 +1236,73 @@ class SmartChunkingService:
         if data.skills:
             lines.append("")
             lines.append(f"KEY SKILLS: {', '.join(data.skills[:15])}")
+        
+        return "\n".join(lines)
+    
+    def _build_enriched_summary_content(
+        self, 
+        data: CVStructuredData, 
+        languages: str,
+        education: dict,
+        certifications: str,
+        location: str
+    ) -> str:
+        """
+        FASE 2: Build enriched summary content for better semantic search.
+        
+        This content will be embedded and used for vector search.
+        Including structured metadata helps queries match correctly:
+        - "who speaks French" → matches "LANGUAGES: French (Intermediate)"
+        - "AWS certified" → matches "CERTIFICATIONS: AWS Solutions Architect"
+        - "MBA candidates" → matches "EDUCATION: MBA, Master of Business Administration"
+        """
+        lines = [
+            f"===== CANDIDATE PROFILE: {data.candidate_name} =====",
+            "",
+            "--- QUICK FACTS ---",
+            f"CURRENT ROLE: {data.current_role or 'Not specified'}",
+            f"CURRENT COMPANY: {data.current_company or 'Not specified'}",
+            f"TOTAL EXPERIENCE: {data.total_experience_years:.0f} years",
+            f"POSITIONS HELD: {len(data.positions)}",
+        ]
+        
+        # Location
+        if location:
+            lines.append(f"LOCATION: {location}")
+        
+        # Languages (critical for queries like "who speaks French")
+        if languages:
+            lines.append(f"LANGUAGES: {languages}")
+        
+        # Education (critical for queries like "MBA candidates", "PhD holders")
+        if education.get("level"):
+            edu_str = education["level"]
+            if education.get("field"):
+                edu_str += f" in {education['field']}"
+            if education.get("institution"):
+                edu_str += f" from {education['institution']}"
+            if education.get("graduation_year"):
+                edu_str += f" ({education['graduation_year']})"
+            lines.append(f"EDUCATION: {edu_str}")
+        
+        # Certifications (critical for queries like "AWS certified", "PMP holders")
+        if certifications:
+            lines.append(f"CERTIFICATIONS: {certifications}")
+        
+        # Skills
+        if data.skills:
+            lines.append(f"SKILLS: {', '.join(data.skills[:20])}")
+        
+        lines.append("")
+        lines.append("--- CAREER HISTORY ---")
+        
+        for i, pos in enumerate(data.positions, 1):
+            year_str = ""
+            if pos.start_year:
+                end = "Present" if pos.is_current else str(pos.end_year or "?")
+                year_str = f" ({pos.start_year}-{end}, {pos.duration_years:.0f}y)"
+            current_marker = " [CURRENT]" if pos.is_current else ""
+            lines.append(f"  {i}. {pos.title} at {pos.company}{year_str}{current_marker}")
         
         return "\n".join(lines)
     

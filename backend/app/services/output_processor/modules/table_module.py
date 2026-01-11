@@ -444,7 +444,11 @@ class TableModule:
         return result
     
     def _generate_fallback_table(self, chunks: List[dict]) -> Optional[TableData]:
-        """Generate fallback table from chunks using TableRow structure.
+        """
+        FASE 5: Generate fallback table from chunks using TableRow structure.
+        
+        Enhanced to include FASE 1 metadata fields:
+        - Languages, certifications, education, experience years
         
         ROBUST DEDUPLICATION:
         - Same name = same person (even with different cv_ids)
@@ -453,13 +457,12 @@ class TableModule:
         if not chunks:
             return None
         
-        logger.info("[TABLE] Generating fallback from chunks")
+        logger.info("[TABLE] FASE5: Generating fallback from chunks with enriched metadata")
         
         # Group chunks by candidate name, keeping the BEST one per candidate
-        # Best = most recent (indexed_at) or highest score
         candidates_by_name: Dict[str, dict] = {}
         
-        for chunk in chunks[:30]:  # Check more chunks for better coverage
+        for chunk in chunks[:30]:
             metadata = chunk.get('metadata', {})
             cv_id = metadata.get('cv_id')
             if not cv_id:
@@ -471,12 +474,30 @@ class TableModule:
             score = chunk.get('score', 0.5)
             indexed_at = metadata.get('indexed_at', '')
             
-            skills = self._extract_skills(content)
+            # FASE 1: Extract enriched metadata
+            skills = metadata.get('skills', '') or self._extract_skills(content)
+            if isinstance(skills, str):
+                skills = [s.strip() for s in skills.split(',') if s.strip()]
+            
+            experience = metadata.get('total_experience_years', 0)
+            current_role = metadata.get('current_role', '')
+            languages = metadata.get('languages', '')
+            certifications = metadata.get('certifications', '')
+            seniority = metadata.get('seniority_level', '')
+            
+            # Build experience string
+            exp_str = f"{experience:.0f} years" if experience else "N/A"
+            if seniority:
+                exp_str = f"{exp_str} ({seniority})"
             
             candidate_data = {
                 'name': name,
                 'cv_id': cv_id,
-                'skills': skills[:3] if skills else ['N/A'],
+                'skills': skills[:5] if skills else ['N/A'],
+                'experience': exp_str,
+                'current_role': current_role or 'N/A',
+                'languages': languages or 'N/A',
+                'certifications': certifications or 'N/A',
                 'score': score,
                 'indexed_at': indexed_at,
             }
@@ -485,13 +506,11 @@ class TableModule:
                 candidates_by_name[name_lower] = candidate_data
             else:
                 existing = candidates_by_name[name_lower]
-                # Priority 1: Most recent indexed_at wins
                 if indexed_at and existing['indexed_at'] and indexed_at > existing['indexed_at']:
-                    logger.info(f"[TABLE] Fallback dedup: keeping NEWER {name} ({cv_id}) over ({existing['cv_id']})")
+                    logger.info(f"[TABLE] Fallback dedup: keeping NEWER {name}")
                     candidates_by_name[name_lower] = candidate_data
-                # Priority 2: Higher similarity score wins
                 elif score > existing['score']:
-                    logger.info(f"[TABLE] Fallback dedup: keeping HIGHER SCORE {name} ({cv_id}, {score:.2f}) over ({existing['cv_id']}, {existing['score']:.2f})")
+                    logger.info(f"[TABLE] Fallback dedup: keeping HIGHER SCORE {name}")
                     candidates_by_name[name_lower] = candidate_data
         
         if not candidates_by_name:
@@ -500,27 +519,40 @@ class TableModule:
         # Limit to top 10 candidates by score
         sorted_candidates = sorted(candidates_by_name.values(), key=lambda x: x['score'], reverse=True)[:10]
         
-        # Build TableRow objects
+        # Build TableRow objects with enriched data
         table_rows: List[TableRow] = []
         
         for info in sorted_candidates:
-            # Convert similarity score (0-1) to match percentage (0-100)
-            match_score = int(min(100, max(0, info['score'] * 100)))
+            # Normalize RRF scores (can exceed 1.0) to 0-100 percentage
+            raw_score = info['score']
+            if raw_score > 1.5:
+                match_score = int(min(100, 100))  # Cap at 100
+            elif raw_score > 1.0:
+                match_score = int(min(100, max(0, (raw_score / 2.0) * 100)))
+            else:
+                match_score = int(min(100, max(0, raw_score * 100)))
+            
+            # Build skills string (limit to 3 for table width)
+            skills_str = ', '.join(info['skills'][:3])
+            if len(info['skills']) > 3:
+                skills_str += f" +{len(info['skills'])-3}"
             
             table_rows.append(TableRow(
                 candidate_name=info['name'],
                 cv_id=info['cv_id'],
                 columns={
-                    "Key Skills": ', '.join(info['skills']),
-                    "_indexed_at": info.get('indexed_at', ''),  # Hidden field for dedup
+                    "Experience": info['experience'],
+                    "Key Skills": skills_str,
+                    "Current Role": info['current_role'][:30] if len(info['current_role']) > 30 else info['current_role'],
+                    "_indexed_at": info.get('indexed_at', ''),
                 },
                 match_score=match_score
             ))
         
-        logger.info(f"[TABLE] Generated {len(table_rows)} rows (deduplicated by name)")
+        logger.info(f"[TABLE] FASE5: Generated {len(table_rows)} rows with enriched metadata")
         return TableData(
             title="Candidate Comparison Table",
-            headers=["Candidate", "Key Skills", "Match Score"],
+            headers=["Candidate", "Experience", "Key Skills", "Current Role", "Match Score"],
             rows=table_rows
         )
     

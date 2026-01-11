@@ -32,6 +32,7 @@ from .job_match_structure import JobMatchStructure
 from .team_build_structure import TeamBuildStructure
 from .verification_structure import VerificationStructure
 from .summary_structure import SummaryStructure
+from .adaptive_structure import AdaptiveStructure
 
 __all__ = [
     "SingleCandidateStructure",
@@ -43,4 +44,5 @@ __all__ = [
     "TeamBuildStructure",
     "VerificationStructure",
     "SummaryStructure",
+    "AdaptiveStructure",
 ]

@@ -1,0 +1,269 @@
+{
+  "session_id": "62ffe769-1df6-4b14-b465-a2bca76e67e2",
+  "generated_at": "2026-01-11T17:13:36.448707",
+  "events": [
+    {
+      "timestamp": "2026-01-11T17:12:30.292388",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "62ffe769-1df6-4b14-b465-a2bca76e67e2"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T17:12:30.292388",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "What technologies do the candidates have?",
+        "cv_ids": [
+          "cv_121454e3",
+          "cv_7a14dc4f",
+          "cv_4bc3e60f",
+          "cv_1bf540c9",
+          "cv_9c710074",
+          "cv_81a95565",
+          "cv_7b3df082",
+          "cv_eeaa332c",
+          "cv_7576027f",
+          "cv_799c461d",
+          "cv_bb75daef",
+          "cv_5e6fa573",
+          "cv_bcc287dc",
+          "cv_92500950",
+          "cv_a03428cb",
+          "cv_1e317fc0",
+          "cv_ddf50138",
+          "cv_5123b09a",
+          "cv_cc3a4b9f",
+          "cv_e675168a",
+          "cv_cbe17916",
+          "cv_d85e25dd",
+          "cv_5ddbf60d",
+          "cv_b12dc456",
+          "cv_b7b27e0e",
+          "cv_db20b559",
+          "cv_e0632d3c",
+          "cv_986fd453",
+          "cv_562deec0",
+          "cv_61c486f6",
+          "cv_ce03abd0",
+          "cv_c7efb318",
+          "cv_feded00b"
+        ],
+        "cv_count": 33
+      }
+    },
+    {
+      "timestamp": "2026-01-11T17:13:00.574606",
+      "event_type": "HYBRID_SEARCH",
+      "level": "INFO",
+      "data": {
+        "bm25_results": 57,
+        "vector_results": 90,
+        "fused_results": 57,
+        "method": "reciprocal_rank_fusion"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T17:13:00.574606",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 50,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_562deec0",
+            "candidate_name": "Aaliyah Hassan",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 6.716412031242965,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_5ddbf60d",
+            "candidate_name": "Sofia Rossi",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 0.835546587050617,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_d85e25dd",
+            "candidate_name": "Lucien Moreau",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 1.557676154913029,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_7576027f",
+            "candidate_name": "Ji-eun Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "score": 0.5905293678540264,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_e0632d3c",
+            "candidate_name": "Matteo Romano",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 1.5213512504546092,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_e675168a",
+            "candidate_name": "Aisha Al Mansoori",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 2.5,
+            "total_experience_years": 4.0,
+            "score": 1.0044977197437683,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_1bf540c9",
+            "candidate_name": "Lukas Schneider",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.807362903194395,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_92500950",
+            "candidate_name": "Rahul Patel",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.586980784971568,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_bb75daef",
+            "candidate_name": "Sofia Mendoza",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "score": 5.205041312611016,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_799c461d",
+            "candidate_name": "Sofia Rossi",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 2.0,
+            "score": 1.369562073373638,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T17:13:36.240754",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "search",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T17:13:36.447601",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 644,
+        "answer_preview": ":::thinking\nThe user is asking about the technologies the candidates possess. I need to review each CV and identify candidates with explicit technical skills, including programming languages, frameworks, tools, and relevant job titles. I will then present the findings in a table, highlighting the relevant skills and experience.\n:::\n\n\n:::conclusion\nThe candidates with the most relevant technical skills are **[Aaliyah Hassan](cv:cv_562deec0)**, **[Sofia Rossi](cv:cv_5ddbf60d)**, and **[Aisha Chen]...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

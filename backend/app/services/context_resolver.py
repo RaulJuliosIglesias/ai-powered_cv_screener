@@ -470,16 +470,33 @@ def resolve_reference(
     candidate = extract_candidate_from_history(conversation_history, ref_type)
     
     if candidate:
-        # Handle multiple candidates case
-        if ref_type == "top_candidates" and isinstance(candidate, list):
-            return ResolvedReference(
-                resolved=True,
-                candidate_name=f"Top 2: {', '.join([c['name'] for c in candidate])}",
-                cv_id=candidate[0].get("cv_id") if candidate else None,  # Primary candidate
-                reference_type=ref_type,
-                confidence=0.85
-            )
+        # Handle list of candidates case (can happen for top_candidates, previous_results, etc.)
+        if isinstance(candidate, list):
+            if len(candidate) == 0:
+                return ResolvedReference(resolved=False, reference_type=ref_type, confidence=0.0)
+            
+            if len(candidate) == 1:
+                # Single candidate in list - extract it
+                c = candidate[0]
+                return ResolvedReference(
+                    resolved=True,
+                    candidate_name=c.get("name") if isinstance(c, dict) else str(c),
+                    cv_id=c.get("cv_id") if isinstance(c, dict) else None,
+                    reference_type=ref_type,
+                    confidence=0.85
+                )
+            else:
+                # Multiple candidates
+                names = [c.get("name", "Unknown") if isinstance(c, dict) else str(c) for c in candidate]
+                return ResolvedReference(
+                    resolved=True,
+                    candidate_name=f"Top {len(candidate)}: {', '.join(names)}",
+                    cv_id=candidate[0].get("cv_id") if isinstance(candidate[0], dict) else None,
+                    reference_type=ref_type,
+                    confidence=0.85
+                )
         else:
+            # Single candidate dict
             return ResolvedReference(
                 resolved=True,
                 candidate_name=candidate.get("name"),

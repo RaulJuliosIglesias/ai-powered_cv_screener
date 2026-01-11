@@ -498,14 +498,39 @@ class QueryUnderstandingService:
         """
         Parse LLM response into QueryUnderstanding.
         """
-        # Clean up markdown if present
-        if content.startswith("```"):
-            content = content.split("```")[1]
-            if content.startswith("json"):
-                content = content[4:]
+        import re
+        
+        # Clean up markdown code blocks if present
+        if "```" in content:
+            # Extract content between code blocks
+            match = re.search(r'```(?:json)?\s*([\s\S]*?)\s*```', content)
+            if match:
+                content = match.group(1)
+            else:
+                # Fallback: split on ``` and take middle part
+                parts = content.split("```")
+                if len(parts) >= 2:
+                    content = parts[1]
+                    if content.startswith("json"):
+                        content = content[4:]
+        
         content = content.strip()
         
-        parsed = json.loads(content)
+        # Try to find JSON object in content (handles LLM adding extra text)
+        json_match = re.search(r'\{[\s\S]*\}', content)
+        if json_match:
+            content = json_match.group(0)
+        
+        # Handle common JSON formatting issues from LLMs
+        # Remove trailing commas before closing braces/brackets
+        content = re.sub(r',\s*([\]}])', r'\1', content)
+        
+        try:
+            parsed = json.loads(content)
+        except json.JSONDecodeError as e:
+            # If JSON parsing fails, try to extract key values manually
+            logger.warning(f"[QUERY_UNDERSTANDING] JSON parse error: {e}, attempting manual extraction")
+            parsed = self._extract_json_manually(content, query)
         
         query_type = parsed.get("query_type", "general")
         is_cv_related = parsed.get("is_cv_related", True)
@@ -731,6 +756,53 @@ class QueryUnderstandingService:
         
         logger.info(f"[QUERY_UNDERSTANDING] Extracted {len(unique_candidates)} candidates from history: {unique_candidates[:5]}")
         return unique_candidates
+    
+    def _extract_json_manually(self, content: str, query: str) -> dict:
+        """
+        Manually extract key values from malformed JSON-like content.
+        
+        This handles cases where the LLM returns something that looks like JSON
+        but has formatting issues that break standard parsing.
+        """
+        import re
+        
+        result = {
+            "understood_query": query,
+            "query_type": "general",
+            "requirements": [],
+            "is_cv_related": True,
+            "reformulated_prompt": query
+        }
+        
+        # Try to extract understood_query
+        match = re.search(r'"understood_query"\s*:\s*"([^"]*(?:\\.[^"]*)*)"', content, re.DOTALL)
+        if match:
+            result["understood_query"] = match.group(1).replace('\\"', '"').replace('\\n', ' ')
+        
+        # Try to extract query_type
+        match = re.search(r'"query_type"\s*:\s*"([^"]+)"', content)
+        if match:
+            result["query_type"] = match.group(1)
+        
+        # Try to extract is_cv_related
+        match = re.search(r'"is_cv_related"\s*:\s*(true|false)', content, re.IGNORECASE)
+        if match:
+            result["is_cv_related"] = match.group(1).lower() == "true"
+        
+        # Try to extract reformulated_prompt
+        match = re.search(r'"reformulated_prompt"\s*:\s*"([^"]*(?:\\.[^"]*)*)"', content, re.DOTALL)
+        if match:
+            result["reformulated_prompt"] = match.group(1).replace('\\"', '"').replace('\\n', ' ')
+        
+        # Try to extract requirements array
+        match = re.search(r'"requirements"\s*:\s*\[(.*?)\]', content, re.DOTALL)
+        if match:
+            req_content = match.group(1)
+            reqs = re.findall(r'"([^"]+)"', req_content)
+            result["requirements"] = reqs
+        
+        logger.info(f"[QUERY_UNDERSTANDING] Manual extraction result: type={result['query_type']}")
+        return result
     
     def _create_heuristic_fallback(self, query: str, error_reason: str) -> QueryUnderstanding:
         """

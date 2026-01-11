@@ -35,10 +35,77 @@ class ExperienceEntry:
 
 
 @dataclass
+class EducationEntry:
+    """FASE 1: Represents an education entry."""
+    degree: str  # "Master of Business Administration", "Bachelor of Science"
+    field: str  # "Business Analytics", "Computer Science"
+    institution: str  # "Seoul National University"
+    graduation_year: Optional[int] = None
+    is_highest: bool = False
+    
+    def to_dict(self) -> dict:
+        return {
+            "degree": self.degree,
+            "field": self.field,
+            "institution": self.institution,
+            "graduation_year": self.graduation_year,
+            "is_highest": self.is_highest
+        }
+
+
+@dataclass
+class LanguageEntry:
+    """FASE 1: Represents a language skill."""
+    language: str  # "English", "French"
+    level: str  # "Native", "C2", "B1", "Fluent", "Professional"
+    is_native: bool = False
+    
+    def to_dict(self) -> dict:
+        return {
+            "language": self.language,
+            "level": self.level,
+            "is_native": self.is_native
+        }
+
+
+@dataclass 
+class CertificationEntry:
+    """FASE 1: Represents a professional certification."""
+    name: str  # "AWS Solutions Architect", "CBAP"
+    issuer: str  # "Amazon", "IIBA"
+    year_obtained: Optional[int] = None
+    
+    def to_dict(self) -> dict:
+        return {
+            "name": self.name,
+            "issuer": self.issuer,
+            "year_obtained": self.year_obtained
+        }
+
+
+@dataclass
+class SkillWithLevel:
+    """FASE 1: Represents a skill with proficiency level."""
+    name: str  # "Python", "SQL"
+    level: Optional[int] = None  # 1-10 scale
+    level_raw: str = ""  # "9/10", "Advanced", "⭐⭐⭐⭐"
+    
+    def to_dict(self) -> dict:
+        return {
+            "name": self.name,
+            "level": self.level,
+            "level_raw": self.level_raw
+        }
+
+
+@dataclass
 class EnrichedMetadata:
     """Rich metadata extracted from CV for improved indexing and retrieval."""
     # Basic info
     skills: List[str] = field(default_factory=list)
+    
+    # FASE 1: Skills with proficiency levels
+    skills_with_levels: List[SkillWithLevel] = field(default_factory=list)
     
     # Experience analysis
     total_experience_years: float = 0.0
@@ -58,13 +125,34 @@ class EnrichedMetadata:
     job_hopping_score: float = 0.0  # 0-1, higher = more job changes
     avg_tenure_years: float = 0.0
     
-    # Education
+    # FASE 1: Education (enhanced)
     highest_education: Optional[str] = None
     education_institutions: List[str] = field(default_factory=list)
+    education_entries: List[EducationEntry] = field(default_factory=list)
+    education_field: Optional[str] = None
+    graduation_year: Optional[int] = None
+    has_mba: bool = False
+    has_phd: bool = False
+    
+    # FASE 1: Languages
+    languages: List[LanguageEntry] = field(default_factory=list)
+    primary_language: Optional[str] = None
+    speaks_english: bool = False
+    speaks_french: bool = False
+    speaks_spanish: bool = False
+    speaks_german: bool = False
+    
+    # FASE 1: Certifications
+    certifications: List[CertificationEntry] = field(default_factory=list)
+    has_aws_cert: bool = False
+    has_azure_cert: bool = False
+    has_gcp_cert: bool = False
+    has_pmp: bool = False
     
     def to_dict(self) -> dict:
         return {
             "skills": self.skills,
+            "skills_with_levels": [s.to_dict() for s in self.skills_with_levels],
             "total_experience_years": self.total_experience_years,
             "experiences": [e.to_dict() for e in self.experiences],
             "current_role": self.current_role,
@@ -76,7 +164,23 @@ class EnrichedMetadata:
             "job_hopping_score": self.job_hopping_score,
             "avg_tenure_years": self.avg_tenure_years,
             "highest_education": self.highest_education,
-            "education_institutions": self.education_institutions
+            "education_institutions": self.education_institutions,
+            "education_entries": [e.to_dict() for e in self.education_entries],
+            "education_field": self.education_field,
+            "graduation_year": self.graduation_year,
+            "has_mba": self.has_mba,
+            "has_phd": self.has_phd,
+            "languages": [l.to_dict() for l in self.languages],
+            "primary_language": self.primary_language,
+            "speaks_english": self.speaks_english,
+            "speaks_french": self.speaks_french,
+            "speaks_spanish": self.speaks_spanish,
+            "speaks_german": self.speaks_german,
+            "certifications": [c.to_dict() for c in self.certifications],
+            "has_aws_cert": self.has_aws_cert,
+            "has_azure_cert": self.has_azure_cert,
+            "has_gcp_cert": self.has_gcp_cert,
+            "has_pmp": self.has_pmp
         }
 
 
@@ -247,23 +351,64 @@ class PDFService:
             r"(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|enero|febrero|marzo|abril|mayo|junio|julio|agosto|sept|octubre|noviembre|diciembre)[a-z]*\.?\s*(?P<start2>\d{4})\s*[-–—to]+\s*(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|enero|febrero|marzo|abril|mayo|junio|julio|agosto|sept|octubre|noviembre|diciembre)?[a-z]*\.?\s*(?P<end2>(?:\d{4}|present|current|actual|now|actualidad))",
         ]
         
-        # Split text into potential experience blocks
+        # PHASE 3 FIX: Split text into experience blocks
+        # Each block should include: Job Title lines + Date line + Description lines
+        # We look for date patterns and include preceding non-empty lines as part of the block
         lines = text.split("\n")
-        current_block = []
         blocks = []
+        i = 0
         
-        for line in lines:
-            line_stripped = line.strip()
-            # New block starts with a date pattern or job title indicators
+        while i < len(lines):
+            line_stripped = lines[i].strip()
             has_date = any(re.search(p, line_stripped, re.IGNORECASE) for p in date_patterns)
-            if has_date and current_block:
-                blocks.append("\n".join(current_block))
-                current_block = [line_stripped]
+            
+            if has_date:
+                # Found a date line - look backwards for job title lines
+                block_lines = []
+                
+                # Include up to 3 preceding non-empty lines (job title + optional subtitle)
+                look_back = min(3, i)
+                start_idx = i - look_back
+                for j in range(start_idx, i):
+                    prev_line = lines[j].strip()
+                    # Skip section headers and empty lines
+                    if prev_line and not re.match(r'^[A-Z](\s+[A-Z]){3,}$', prev_line):
+                        block_lines.append(prev_line)
+                
+                # Add the date line
+                block_lines.append(line_stripped)
+                
+                # Add following description lines until next date or empty block
+                i += 1
+                while i < len(lines):
+                    next_line = lines[i].strip()
+                    next_has_date = any(re.search(p, next_line, re.IGNORECASE) for p in date_patterns)
+                    
+                    # Stop if we hit another date line (next job entry)
+                    if next_has_date:
+                        break
+                    
+                    # Stop if we hit what looks like a new job title (capitalized line after empty)
+                    if not next_line and i + 1 < len(lines):
+                        following = lines[i + 1].strip() if i + 1 < len(lines) else ""
+                        if following and following[0].isupper() and len(following) > 10:
+                            # Check if following line leads to a date
+                            for k in range(i + 1, min(i + 4, len(lines))):
+                                if any(re.search(p, lines[k].strip(), re.IGNORECASE) for p in date_patterns):
+                                    break
+                            else:
+                                block_lines.append(next_line)
+                                i += 1
+                                continue
+                            break
+                    
+                    block_lines.append(next_line)
+                    i += 1
+                
+                if block_lines:
+                    blocks.append("\n".join(block_lines))
             else:
-                current_block.append(line_stripped)
-        
-        if current_block:
-            blocks.append("\n".join(current_block))
+                i += 1
         
         # Parse each block
         for block in blocks:
@@ -280,13 +425,9 @@ class PDFService:
                     if start_year and start_year > 1970:
                         duration = (end_year or current_year) - start_year
                         
-                        # Extract job title (usually first meaningful line)
-                        title_match = re.search(
-                            r"(?:^|\n)([A-Z][^|\n]{5,60})(?:\s*[|@at]\s*|\s+at\s+|\s+-\s+)?",
-                            block
-                        )
-                        raw_title = title_match.group(1).strip() if title_match else ""
-                        job_title = self._validate_job_title(raw_title) or "Unknown Role"
+                        # PHASE 3 FIX: Extract job title - look for title BEFORE the date line
+                        # Format: "Job Title\n(Optional subtitle)\nYEAR - YEAR | Company"
+                        job_title = self._extract_job_title_from_block(block)
                         
                         # Extract company name
                         company = self._extract_company_from_block(block)
@@ -308,6 +449,16 @@ class PDFService:
     
     def _extract_company_from_block(self, block: str) -> str:
         """Extract company name from experience block."""
+        # PHASE 3 FIX: First try to extract from "YEAR - Present | Company Name" format
+        # This is a common CV format where company follows the date with a pipe separator
+        pipe_pattern = r'\d{4}\s*[-–—]\s*(?:Present|Presente|Actual|Current|\d{4})\s*\|\s*([A-Z][A-Za-z0-9\s&,\.\(\)]+?)(?:\n|$)'
+        pipe_match = re.search(pipe_pattern, block, re.IGNORECASE)
+        if pipe_match:
+            company = pipe_match.group(1).strip()[:80]
+            validated = self._validate_company_name(company)
+            if validated:
+                return validated
+        
         # Common patterns: "at Company", "@ Company", "Company Inc.", etc.
         patterns = [
             r"(?:at|@|en)\s+([A-Z][A-Za-z0-9\s&,\.]+?)(?:\s*[|\n]|$)",
@@ -325,10 +476,71 @@ class PDFService:
         
         return "Unknown Company"
     
+    def _extract_job_title_from_block(self, block: str) -> str:
+        """
+        PHASE 3 FIX: Extract job title from experience block.
+        
+        Handles formats like:
+        - "Lead Editorial & Visual Stylist\n(Contract/Freelance)\n2015 - Present | Company"
+        - "Director, Business Analytics\n2023 - Present | Hanriver Consulting"
+        
+        The title is typically the first meaningful line BEFORE the date.
+        """
+        lines = block.strip().split('\n')
+        
+        # Find the line with the date pattern
+        date_line_idx = -1
+        for i, line in enumerate(lines):
+            if re.search(r'\b(19|20)\d{2}\s*[-–—]\s*(?:(19|20)\d{2}|Present|Actual|Current)', line, re.IGNORECASE):
+                date_line_idx = i
+                break
+        
+        # Look at lines BEFORE the date line for the job title
+        candidate_titles = []
+        search_range = range(0, date_line_idx) if date_line_idx > 0 else range(0, min(3, len(lines)))
+        
+        for i in search_range:
+            line = lines[i].strip()
+            if not line:
+                continue
+            
+            # Skip lines that look like subtitles in parentheses
+            if line.startswith('(') and line.endswith(')'):
+                continue
+            
+            # Skip lines that are just section headers
+            if re.match(r'^[A-Z](\s+[A-Z]){3,}$', line):
+                continue
+            
+            # Validate as potential title
+            validated = self._validate_job_title(line)
+            if validated:
+                candidate_titles.append(validated)
+        
+        # Return the first valid title found, or "Unknown Role"
+        if candidate_titles:
+            return candidate_titles[0]
+        
+        # Fallback: try to extract from the date line itself (format: "Title | 2020 - Present")
+        if date_line_idx >= 0:
+            date_line = lines[date_line_idx]
+            # Check if title is before the year
+            before_year = re.split(r'\b(19|20)\d{2}', date_line)[0].strip()
+            if before_year:
+                # Remove trailing separators
+                before_year = re.sub(r'[\|–—\-,]\s*$', '', before_year).strip()
+                validated = self._validate_job_title(before_year)
+                if validated:
+                    return validated
+        
+        return "Unknown Role"
+    
     def _validate_job_title(self, title: str) -> str:
         """
         Validate and clean job title.
         Returns empty string if title is invalid.
+        
+        PHASE 3 FIX: Enhanced validation to reject description sentences.
         """
         if not title:
             return ""
@@ -351,15 +563,38 @@ class PDFService:
         if re.match(r'^[A-Z](\s+[A-Z]){3,}$', title):
             return ""
         
+        # PHASE 3 FIX: Reject if it ends with a period (descriptions end with periods, titles don't)
+        if title.endswith('.'):
+            return ""
+        
+        # PHASE 3 FIX: Reject if it's too long (job titles are typically < 60 chars)
+        if len(title) > 80:
+            return ""
+        
+        # PHASE 3 FIX: Reject if it starts with past-tense action verbs (description sentences)
+        description_verbs = [
+            'directed', 'managed', 'led', 'developed', 'created', 'implemented',
+            'achieved', 'increased', 'reduced', 'delivered', 'executed', 'built',
+            'designed', 'launched', 'established', 'coordinated', 'organized',
+            'spearheaded', 'drove', 'cultivated', 'trained', 'mentored',
+            'supported', 'assisted', 'prepared', 'conducted', 'performed',
+            'maintained', 'ensured', 'provided', 'collaborated', 'worked',
+            'responsible', 'entry-level', 'foundational', 'gained'
+        ]
+        title_lower = title.lower()
+        for verb in description_verbs:
+            if title_lower.startswith(verb + ' ') or title_lower.startswith(verb + ','):
+                return ""
+        
         # Reject common section headers
         section_headers = ['experience', 'education', 'skills', 'summary', 'profile', 'languages']
-        if title.lower().strip() in section_headers:
+        if title_lower.strip() in section_headers:
             return ""
         
         # Reject if it's just a language or city
         invalid_values = ['english', 'spanish', 'french', 'german', 'italian',
                          'milan', 'london', 'berlin', 'paris', 'madrid', 'italy', 'germany']
-        if title.lower().strip() in invalid_values:
+        if title_lower.strip() in invalid_values:
             return ""
         
         # Reject very short titles
@@ -387,6 +622,21 @@ class PDFService:
         # Remove leading year and separator patterns
         company = re.sub(r'^\d{4}\s*[|\-–—]\s*', '', company).strip()
         
+        # PHASE 3 FIX: Reject skill ratings like "10/10", "9/10", "SQL 10/10"
+        if re.search(r'\b\d{1,2}/\d{1,2}\b', company):
+            return ""
+        
+        # PHASE 3 FIX: Reject if it contains skill-like patterns
+        # e.g., "Data Visualization (Tableau)" is a skill, not a company
+        skill_indicators = [
+            r'\(Tableau\)', r'\(Python\)', r'\(Excel\)', r'\(SQL\)', 
+            r'\(Adobe', r'\(Advanced', r'\(High', r'Analysis \(',
+            r'Modeling\b', r'Visualization\b', r'Methodologies\b'
+        ]
+        for pattern in skill_indicators:
+            if re.search(pattern, company, re.IGNORECASE):
+                return ""
+        
         # Reject if it's just a year or date range
         if re.match(r'^\d{4}$', company) or re.match(r'^\d{4}\s*[-–—]', company):
             return ""
@@ -413,6 +663,50 @@ class PDFService:
         
         return company
     
+    def _calculate_total_experience_from_span(self, experiences: List[ExperienceEntry]) -> float:
+        """
+        PHASE 3 FIX: Calculate total experience from career span.
+        
+        Uses the range from earliest start year to latest end year,
+        which correctly handles overlapping positions and gives accurate
+        total career duration.
+        
+        Example: 4 positions from 1995-2026 = 31 years (not sum of durations)
+        """
+        if not experiences:
+            return 0.0
+        
+        current_year = datetime.now().year
+        
+        # Get all valid start and end years
+        start_years = [e.start_year for e in experiences if e.start_year and e.start_year > 1970]
+        end_years = []
+        for e in experiences:
+            if e.is_current or e.end_year is None:
+                end_years.append(current_year)
+            elif e.end_year and e.end_year > 1970:
+                end_years.append(e.end_year)
+        
+        if not start_years:
+            # Fallback: sum individual durations if no valid start years
+            return sum(e.duration_years for e in experiences)
+        
+        earliest_start = min(start_years)
+        latest_end = max(end_years) if end_years else current_year
+        
+        # Calculate span
+        total_span = latest_end - earliest_start
+        
+        # Sanity check: cap at 50 years, minimum 0
+        total_span = max(0, min(50, total_span))
+        
+        logger.debug(
+            f"[EXPERIENCE] Career span: {earliest_start} - {latest_end} = {total_span} years "
+            f"(from {len(experiences)} positions)"
+        )
+        
+        return float(total_span)
+    
     def detect_seniority_level(self, text: str, experiences: List[ExperienceEntry]) -> str:
         """Detect seniority level from CV text and experience."""
         # First check titles in text
@@ -420,8 +714,8 @@ class PDFService:
             if re.search(pattern, text):
                 return level
         
-        # Infer from total experience
-        total_years = sum(e.duration_years for e in experiences)
+        # PHASE 3 FIX: Use career span for seniority calculation
+        total_years = self._calculate_total_experience_from_span(experiences)
         if total_years >= 15:
             return "lead"
         elif total_years >= 8:
@@ -518,13 +812,337 @@ class PDFService:
         
         return highest, list(set(institutions))[:5]
     
+    # =========================================================================
+    # FASE 1: NEW EXTRACTION METHODS
+    # =========================================================================
+    
+    def extract_education_entries(self, text: str) -> List[EducationEntry]:
+        """
+        FASE 1: Extract structured education entries from CV text.
+        
+        Handles formats:
+        - "Master of Business Administration (MBA)\nSeoul National University\n2019"
+        - "Bachelor of Science in Economics, Korea University, 2012"
+        - "PhD in Computer Science from MIT (2018)"
+        """
+        entries = []
+        
+        # Institution pattern
+        institution_pattern = r"([A-Z][A-Za-z\s]+(?:University|Universidad|College|Institute|School|Academy|Universität))"
+        
+        # Year pattern  
+        year_pattern = r"\b(19[89]\d|20[0-2]\d)\b"
+        
+        # Split into education section if possible
+        edu_section = text
+        edu_match = re.search(r"(?i)(?:education|academic|qualification)s?\s*\n([\s\S]*?)(?:\n\s*(?:experience|skills|certification|language|professional)|$)", text)
+        if edu_match:
+            edu_section = edu_match.group(1)
+        
+        # Pattern 1: "Master of Business Administration (MBA)"
+        mba_pattern = r"(?i)(Master\s+of\s+Business\s+Administration|MBA|M\.?B\.?A\.?)"
+        if re.search(mba_pattern, edu_section):
+            context = edu_section
+            inst_match = re.search(institution_pattern, context)
+            year_match = re.search(year_pattern, context)
+            entries.append(EducationEntry(
+                degree="Master of Business Administration",
+                field="Business Administration",
+                institution=inst_match.group(1).strip()[:60] if inst_match else "",
+                graduation_year=int(year_match.group(1)) if year_match else None,
+                is_highest=True
+            ))
+        
+        # Pattern 2: "Bachelor of Science in X" or "B.S. in X"
+        bs_pattern = r"(?i)(Bachelor(?:'s)?\s+of\s+(?:Science|Arts)|B\.?S\.?|B\.?A\.?)\s+(?:in\s+)?([A-Za-z\s&]+?)(?:\n|,|$)"
+        for match in re.finditer(bs_pattern, edu_section):
+            field = match.group(2).strip() if match.group(2) else ""
+            field = re.sub(r"(?i)\s*(from|at)\s*$", "", field).strip()
+            
+            context = edu_section[max(0, match.start()-20):min(len(edu_section), match.end()+150)]
+            inst_match = re.search(institution_pattern, context)
+            year_match = re.search(year_pattern, context)
+            
+            # Avoid duplicate with MBA
+            if "business administration" not in field.lower():
+                entries.append(EducationEntry(
+                    degree="Bachelor's Degree",
+                    field=field[:50],
+                    institution=inst_match.group(1).strip()[:60] if inst_match else "",
+                    graduation_year=int(year_match.group(1)) if year_match else None,
+                    is_highest=False
+                ))
+        
+        # Pattern 3: PhD/Doctorate
+        phd_pattern = r"(?i)(Ph\.?D\.?|Doctor(?:ate)?|D\.?Phil\.?)\s+(?:in\s+)?([A-Za-z\s&]+?)(?:\n|,|from|at|$)"
+        for match in re.finditer(phd_pattern, edu_section):
+            field = match.group(2).strip() if match.group(2) else ""
+            field = re.sub(r"(?i)\s*(from|at)\s*$", "", field).strip()
+            
+            context = edu_section[max(0, match.start()-20):min(len(edu_section), match.end()+150)]
+            inst_match = re.search(institution_pattern, context)
+            year_match = re.search(year_pattern, context)
+            
+            entries.append(EducationEntry(
+                degree="PhD",
+                field=field[:50],
+                institution=inst_match.group(1).strip()[:60] if inst_match else "",
+                graduation_year=int(year_match.group(1)) if year_match else None,
+                is_highest=True
+            ))
+        
+        # Pattern 4: Master's (non-MBA)
+        masters_pattern = r"(?i)(Master(?:'s)?\s+of\s+(?:Science|Arts)|M\.?S\.?|M\.?A\.?)\s+(?:in\s+)?([A-Za-z\s&]+?)(?:\n|,|$)"
+        for match in re.finditer(masters_pattern, edu_section):
+            field = match.group(2).strip() if match.group(2) else ""
+            field = re.sub(r"(?i)\s*(from|at)\s*$", "", field).strip()
+            
+            # Skip if it's MBA (already captured)
+            if "business" in field.lower():
+                continue
+            
+            context = edu_section[max(0, match.start()-20):min(len(edu_section), match.end()+150)]
+            inst_match = re.search(institution_pattern, context)
+            year_match = re.search(year_pattern, context)
+            
+            entries.append(EducationEntry(
+                degree="Master's Degree",
+                field=field[:50],
+                institution=inst_match.group(1).strip()[:60] if inst_match else "",
+                graduation_year=int(year_match.group(1)) if year_match else None,
+                is_highest=True
+            ))
+        
+        # Pattern 5: Diploma
+        diploma_pattern = r"(?i)(Diploma|Certificate)\s+(?:in\s+)?([A-Za-z\s&]+?)(?:\n|,|$)"
+        for match in re.finditer(diploma_pattern, edu_section):
+            field = match.group(2).strip() if match.group(2) else ""
+            
+            context = edu_section[max(0, match.start()-20):min(len(edu_section), match.end()+150)]
+            inst_match = re.search(institution_pattern, context)
+            year_match = re.search(year_pattern, context)
+            
+            entries.append(EducationEntry(
+                degree=match.group(1).strip(),
+                field=field[:50],
+                institution=inst_match.group(1).strip()[:60] if inst_match else "",
+                graduation_year=int(year_match.group(1)) if year_match else None,
+                is_highest=False
+            ))
+        
+        return entries[:5]  # Max 5 entries
+    
+    def extract_languages(self, text: str) -> List[LanguageEntry]:
+        """
+        FASE 1: Extract languages with proficiency levels.
+        
+        Handles formats:
+        - "English (Native)", "French (Fluent)"
+        - "English: C2", "French: B1"
+        - "English - Native", "Spanish - Intermediate"
+        - "Languages: English, French, German"
+        """
+        entries = []
+        
+        # Common languages
+        languages = [
+            "english", "spanish", "french", "german", "italian", "portuguese",
+            "chinese", "mandarin", "japanese", "korean", "arabic", "russian",
+            "dutch", "swedish", "norwegian", "danish", "finnish", "polish",
+            "hindi", "bengali", "turkish", "vietnamese", "thai", "indonesian",
+            "hebrew", "greek", "czech", "hungarian", "romanian", "ukrainian"
+        ]
+        
+        # Level indicators
+        level_patterns = {
+            "native": ["native", "mother tongue", "first language", "nativo", "lengua materna"],
+            "C2": ["c2", "proficient", "bilingual", "fluent", "near-native", "advanced"],
+            "C1": ["c1", "advanced", "professional", "full professional"],
+            "B2": ["b2", "upper intermediate", "upper-intermediate", "working proficiency"],
+            "B1": ["b1", "intermediate", "conversational"],
+            "A2": ["a2", "elementary", "basic", "pre-intermediate"],
+            "A1": ["a1", "beginner", "limited"]
+        }
+        
+        text_lower = text.lower()
+        
+        for lang in languages:
+            # Check if language is mentioned
+            if lang not in text_lower:
+                continue
+            
+            # Find the context around the language mention
+            pattern = rf"(?i)\b{lang}\b[:\s\-–—\(]*([A-Za-z0-9\s\-]+?)(?:[,\)\n]|$)"
+            matches = re.finditer(pattern, text_lower)
+            
+            level = "Unknown"
+            is_native = False
+            
+            for match in matches:
+                level_context = match.group(1).lower() if match.group(1) else ""
+                
+                # Check for level indicators
+                for lvl, indicators in level_patterns.items():
+                    if any(ind in level_context for ind in indicators):
+                        level = lvl
+                        is_native = (lvl == "native")
+                        break
+            
+            # If language found but no level, default to "Professional"
+            if level == "Unknown":
+                level = "Professional"
+            
+            entries.append(LanguageEntry(
+                language=lang.capitalize(),
+                level=level,
+                is_native=is_native
+            ))
+        
+        return entries
+    
+    def extract_certifications(self, text: str) -> List[CertificationEntry]:
+        """
+        FASE 1: Extract professional certifications with dates.
+        
+        Handles formats:
+        - "AWS Solutions Architect - 2022"
+        - "Certified Business Analysis Professional (CBAP), IIBA, 2020"
+        - "PMP | Project Management Institute | 2019"
+        """
+        entries = []
+        
+        # Known certifications with their issuers
+        cert_patterns = [
+            # AWS
+            (r"(?i)(AWS\s+(?:Solutions?\s+Architect|Developer|SysOps|DevOps|Cloud\s+Practitioner|Certified)[A-Za-z\s\-]*)", "Amazon Web Services", "aws"),
+            # Azure
+            (r"(?i)(Azure\s+(?:Administrator|Developer|Architect|Data|AI|Security)[A-Za-z\s\-]*)", "Microsoft", "azure"),
+            (r"(?i)(AZ-\d{3}[A-Za-z\s\-]*)", "Microsoft", "azure"),
+            # GCP
+            (r"(?i)(Google\s+Cloud\s+(?:Professional|Associate)[A-Za-z\s\-]*)", "Google", "gcp"),
+            (r"(?i)(GCP\s+[A-Za-z\s\-]+(?:Engineer|Architect|Developer))", "Google", "gcp"),
+            # PMP
+            (r"(?i)(PMP|Project\s+Management\s+Professional)", "PMI", "pmp"),
+            # CBAP
+            (r"(?i)(CBAP|Certified\s+Business\s+Analysis\s+Professional)", "IIBA", "cbap"),
+            # Scrum/Agile
+            (r"(?i)(CSM|Certified\s+Scrum\s+Master)", "Scrum Alliance", "scrum"),
+            (r"(?i)(PSM\s*I{1,3}|Professional\s+Scrum\s+Master)", "Scrum.org", "scrum"),
+            # Data
+            (r"(?i)(Tableau\s+(?:Desktop|Server|Data|Certified)[A-Za-z\s\-]*)", "Tableau", "data"),
+            # Six Sigma
+            (r"(?i)(Six\s+Sigma\s+(?:Green|Black|Yellow)\s+Belt)", "Various", "sixsigma"),
+            # Generic cert pattern
+            (r"(?i)(Certified\s+[A-Z][A-Za-z\s]{5,40})", "Unknown", "other"),
+        ]
+        
+        year_pattern = r"\b(20[0-2]\d|19[89]\d)\b"
+        
+        for cert_pattern, default_issuer, cert_type in cert_patterns:
+            matches = re.finditer(cert_pattern, text)
+            for match in matches:
+                cert_name = match.group(1).strip()
+                
+                # Clean up
+                cert_name = re.sub(r"\s+", " ", cert_name)[:60]
+                
+                # Look for year near the match
+                context = text[max(0, match.start()-20):min(len(text), match.end()+50)]
+                year_match = re.search(year_pattern, context)
+                year_obtained = int(year_match.group(1)) if year_match else None
+                
+                # Avoid duplicates
+                if not any(e.name.lower() == cert_name.lower() for e in entries):
+                    entries.append(CertificationEntry(
+                        name=cert_name,
+                        issuer=default_issuer,
+                        year_obtained=year_obtained
+                    ))
+        
+        return entries[:10]  # Max 10 certs
+    
+    def extract_skills_with_levels(self, text: str) -> List[SkillWithLevel]:
+        """
+        FASE 1: Extract skills with proficiency levels.
+        
+        Handles formats:
+        - "Python 9/10", "SQL 10/10"
+        - "Python ⭐⭐⭐⭐⭐"
+        - "Python (Advanced)", "SQL (Expert)"
+        - "Python: 90%", "SQL: Expert"
+        """
+        entries = []
+        
+        # Pattern for "Skill X/10" format
+        rating_pattern = r"([A-Za-z][A-Za-z\s\+\#\.]{1,25}?)\s*[:\-]?\s*(\d{1,2})\s*/\s*10"
+        
+        matches = re.finditer(rating_pattern, text)
+        for match in matches:
+            skill_name = match.group(1).strip()
+            level = int(match.group(2))
+            
+            # Validate skill name
+            if len(skill_name) < 2 or len(skill_name) > 30:
+                continue
+            if skill_name.lower() in ["the", "and", "for", "with", "from"]:
+                continue
+            
+            entries.append(SkillWithLevel(
+                name=skill_name,
+                level=level,
+                level_raw=f"{level}/10"
+            ))
+        
+        # Pattern for star ratings
+        star_pattern = r"([A-Za-z][A-Za-z\s\+\#\.]{1,25}?)\s*[:\-]?\s*(⭐{1,5}|★{1,5}|☆{1,5})"
+        
+        matches = re.finditer(star_pattern, text)
+        for match in matches:
+            skill_name = match.group(1).strip()
+            stars = match.group(2)
+            level = len(stars) * 2  # Convert 5 stars to 10 scale
+            
+            if len(skill_name) >= 2 and len(skill_name) <= 30:
+                # Avoid duplicates
+                if not any(e.name.lower() == skill_name.lower() for e in entries):
+                    entries.append(SkillWithLevel(
+                        name=skill_name,
+                        level=level,
+                        level_raw=stars
+                    ))
+        
+        # Pattern for "Skill (Level)" format
+        level_words = {
+            "expert": 10, "advanced": 8, "proficient": 7,
+            "intermediate": 5, "basic": 3, "beginner": 2
+        }
+        
+        level_pattern = r"([A-Za-z][A-Za-z\s\+\#\.]{1,25}?)\s*\(\s*(expert|advanced|proficient|intermediate|basic|beginner)\s*\)"
+        
+        matches = re.finditer(level_pattern, text, re.IGNORECASE)
+        for match in matches:
+            skill_name = match.group(1).strip()
+            level_word = match.group(2).lower()
+            level = level_words.get(level_word, 5)
+            
+            if len(skill_name) >= 2 and len(skill_name) <= 30:
+                if not any(e.name.lower() == skill_name.lower() for e in entries):
+                    entries.append(SkillWithLevel(
+                        name=skill_name,
+                        level=level,
+                        level_raw=level_word.capitalize()
+                    ))
+        
+        return entries[:30]  # Max 30 skills with levels
+    
     def build_enriched_metadata(self, text: str, skills: List[str]) -> EnrichedMetadata:
         """Build complete enriched metadata from CV text."""
         # Extract experiences
         experiences = self.extract_experiences(text)
         
-        # Calculate totals
-        total_years = sum(e.duration_years for e in experiences)
+        # PHASE 3 FIX: Calculate total experience from career span (earliest to latest)
+        # instead of summing individual durations (which can be wrong for overlapping roles)
+        total_years = self._calculate_total_experience_from_span(experiences)
         
         # Get current role
         current_role = None
@@ -547,11 +1165,62 @@ class PDFService:
         # Extract companies
         companies, has_faang = self.extract_companies(experiences)
         
-        # Detect education
+        # Detect education (legacy)
         highest_edu, institutions = self.detect_highest_education(text)
+        
+        # =========================================================================
+        # FASE 1: Extract new structured data
+        # =========================================================================
+        
+        # Education entries
+        education_entries = self.extract_education_entries(text)
+        education_field = None
+        graduation_year = None
+        has_mba = False
+        has_phd = False
+        
+        if education_entries:
+            # Get field from highest degree
+            for entry in education_entries:
+                if entry.is_highest and entry.field:
+                    education_field = entry.field
+                    graduation_year = entry.graduation_year
+                    break
+            if not education_field and education_entries[0].field:
+                education_field = education_entries[0].field
+                graduation_year = education_entries[0].graduation_year
+            
+            # Check for MBA/PhD
+            text_lower = text.lower()
+            has_mba = "mba" in text_lower or "master of business" in text_lower
+            has_phd = "phd" in text_lower or "ph.d" in text_lower or "doctorate" in text_lower
+        
+        # Languages
+        languages = self.extract_languages(text)
+        primary_language = languages[0].language if languages else None
+        speaks_english = any(l.language.lower() == "english" for l in languages)
+        speaks_french = any(l.language.lower() == "french" for l in languages)
+        speaks_spanish = any(l.language.lower() == "spanish" for l in languages)
+        speaks_german = any(l.language.lower() == "german" for l in languages)
+        
+        # Certifications
+        certifications = self.extract_certifications(text)
+        has_aws_cert = any("aws" in c.name.lower() for c in certifications)
+        has_azure_cert = any("azure" in c.name.lower() or c.name.startswith("AZ-") for c in certifications)
+        has_gcp_cert = any("google cloud" in c.name.lower() or "gcp" in c.name.lower() for c in certifications)
+        has_pmp = any("pmp" in c.name.lower() or "project management professional" in c.name.lower() for c in certifications)
+        
+        # Skills with levels
+        skills_with_levels = self.extract_skills_with_levels(text)
+        
+        logger.info(
+            f"[FASE1] Extracted: {len(education_entries)} education, {len(languages)} languages, "
+            f"{len(certifications)} certs, {len(skills_with_levels)} skills with levels"
+        )
         
         return EnrichedMetadata(
             skills=skills,
+            skills_with_levels=skills_with_levels,
             total_experience_years=total_years,
             experiences=experiences,
             current_role=current_role,
@@ -563,7 +1232,23 @@ class PDFService:
             job_hopping_score=job_hopping_score,
             avg_tenure_years=avg_tenure,
             highest_education=highest_edu,
-            education_institutions=institutions
+            education_institutions=institutions,
+            education_entries=education_entries,
+            education_field=education_field,
+            graduation_year=graduation_year,
+            has_mba=has_mba,
+            has_phd=has_phd,
+            languages=languages,
+            primary_language=primary_language,
+            speaks_english=speaks_english,
+            speaks_french=speaks_french,
+            speaks_spanish=speaks_spanish,
+            speaks_german=speaks_german,
+            certifications=certifications,
+            has_aws_cert=has_aws_cert,
+            has_azure_cert=has_azure_cert,
+            has_gcp_cert=has_gcp_cert,
+            has_pmp=has_pmp
         )
     
     def create_summary_chunk(
