@@ -1,0 +1,42 @@
+{
+  "session_id": "a1b5cd33-91cf-4033-b459-be60774c5c73",
+  "generated_at": "2026-01-11T21:45:55.848069",
+  "events": [
+    {
+      "timestamp": "2026-01-11T21:44:50.777017",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a1b5cd33-91cf-4033-b459-be60774c5c73"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T21:44:50.778017",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Candidates with cloud computing skills",
+        "cv_ids": [
+          "cv_a7a09399",
+          "cv_068f17c1",
+          "cv_4647ee34",
+          "cv_cddc7ee8",
+          "cv_a781237d",
+          "cv_b539867c",
+          "cv_3f76ab39",
+          "cv_04d3373d",
+          "cv_17b0438d",
+          "cv_dcb0e85c",
+          "cv_60187135",
+          "cv_b2978076",
+          "cv_886d23d5",
+          "cv_f3b25d24",
+          "cv_3358b839",
+          "cv_a5698497",
+          "cv_c44b8032"
+        ],
+        "cv_count": 17
+      }
+    }
+  ]
+}

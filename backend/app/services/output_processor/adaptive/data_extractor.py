@@ -102,6 +102,9 @@ class SmartDataExtractor:
         for chunk in chunks:
             meta = chunk.get("metadata", {})
             cv_id = chunk.get("cv_id") or meta.get("cv_id", "")
+            # CRITICAL: Clean cv_id - remove any whitespace, newlines
+            if cv_id:
+                cv_id = str(cv_id).strip().replace('\n', '').replace('\r', '').replace(' ', '')
             name = chunk.get("candidate_name") or meta.get("candidate_name", "Unknown")
             
             if not cv_id:

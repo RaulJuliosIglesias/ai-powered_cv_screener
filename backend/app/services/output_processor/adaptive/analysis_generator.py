@@ -79,9 +79,9 @@ class AdaptiveAnalysis:
                 lines.append(f"- {finding}")
             lines.append("")
         
-        # Conclusion
-        if self.conclusion:
-            lines.append(f"**Conclusion:** {self.conclusion}")
+        # Conclusion - removed from here to avoid duplication (shown separately by frontend)
+        # if self.conclusion:
+        #     lines.append(f"**Conclusion:** {self.conclusion}")
         
         return "\n".join(lines)
 
@@ -325,13 +325,18 @@ class AdaptiveAnalysisGenerator:
                     break
             
             # Format candidate name with CV reference
-            candidate_ref = f"**[{name}](cv:{cv_id})**" if cv_id else f"**{name}**"
+            if cv_id:
+                # Clean cv_id - remove any whitespace, newlines, or special characters
+                clean_cv_id = str(cv_id).strip().replace('\n', '').replace('\r', '').replace(' ', '')
+                candidate_ref = f"**[{name}](cv:{clean_cv_id})**"
+            else:
+                candidate_ref = f"**{name}**"
             
             if attr_value:
                 # Truncate if too long
                 if isinstance(attr_value, str) and len(attr_value) > 60:
                     attr_value = attr_value[:60] + "..."
-                # Keep link and content on same line to preserve markdown parsing
+                # Single line format - no line breaks
                 lines.append(f"{i}. {candidate_ref}: {attr_value}")
             else:
                 lines.append(f"{i}. {candidate_ref}")
@@ -389,7 +394,7 @@ class AdaptiveAnalysisGenerator:
         extraction_result: ExtractionResult,
         table: DynamicTable
     ) -> List[str]:
-        """Generate key finding bullet points."""
+        """Generate key findings bullets."""
         findings = []
         rows = extraction_result.rows
         
@@ -444,7 +449,13 @@ class AdaptiveAnalysisGenerator:
             else:
                 top_candidates.append(f"**{name}**")
         
-        top_names_str = ", ".join(top_candidates)
+        # Use bullet points to avoid line breaks in markdown links
+        if len(top_candidates) == 1:
+            top_names_str = top_candidates[0]
+        elif len(top_candidates) == 2:
+            top_names_str = f"{top_candidates[0]} and {top_candidates[1]}"
+        else:
+            top_names_str = f"{top_candidates[0]}, {top_candidates[1]}, and {top_candidates[2]}"
         
         if analysis.intent == QueryIntent.LIST_ATTRIBUTE:
             return (

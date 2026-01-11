@@ -364,8 +364,13 @@ const AnalysisSection = ({ content, onOpenCV, cvMap }) => {
   
   // Parse content to detect sections for large content
   const parseContentSections = (text) => {
+    // PRE-PROCESS: Fix CV links broken by newlines before splitting
+    // Pattern: **[Name](cv:\nID)** -> **[Name](cv:ID)**
+    let cleanedText = text.replace(/\]\(cv:\s*\n\s*([a-zA-Z0-9_-]+)\)/g, '](cv:cv_$1)');
+    cleanedText = cleanedText.replace(/\]\(cv:cv_\s*\n\s*([a-zA-Z0-9_-]+)\)/g, '](cv:cv_$1)');
+    
     const sections = [];
-    const lines = text.split('\n');
+    const lines = cleanedText.split('\n');
     let currentSection = { title: null, content: [] };
     
     for (const line of lines) {

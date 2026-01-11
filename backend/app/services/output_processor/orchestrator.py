@@ -260,6 +260,7 @@ class OutputOrchestrator:
                 llm_output=cleaned_llm_output,
                 conversation_history=conversation_history or []
             )
+            logger.info(f"[ORCHESTRATOR] AdaptiveBuilder returned structure_type: {structure_data.get('structure_type')}")
             return self._build_structured_output(structure_data, cleaned_llm_output)
         
         else:
@@ -283,8 +284,11 @@ class OutputOrchestrator:
             Tuple of (StructuredOutput, formatted_answer_string)
         """
         # Create StructuredOutput with structure data
+        # For adaptive, use direct_answer from structure_data, fallback to summary/risk_analysis
+        direct_answer = structure_data.get("direct_answer") or structure_data.get("summary", "") or structure_data.get("risk_analysis", "")
+        
         structured = StructuredOutput(
-            direct_answer=structure_data.get("summary", "") or structure_data.get("risk_analysis", ""),
+            direct_answer=direct_answer,
             raw_content=raw_content,
             thinking=structure_data.get("thinking"),
             analysis=structure_data.get("analysis"),
