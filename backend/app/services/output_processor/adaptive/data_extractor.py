@@ -155,6 +155,49 @@ class SmartDataExtractor:
             row.values["candidate_name"] = data["name"]
             row.values["cv_id"] = cv_id
             
+            # Add commonly needed values from metadata
+            meta = data["metadata_merged"]
+            if "total_experience_years" in meta:
+                row.values["experience"] = meta["total_experience_years"]
+                row.values["total_experience_years"] = meta["total_experience_years"]
+            if "seniority_level" in meta:
+                row.values["seniority"] = meta["seniority_level"]
+            if "current_role" in meta:
+                row.values["current_role"] = meta["current_role"]
+            if "current_company" in meta:
+                row.values["current_company"] = meta["current_company"]
+            
+            # Extract skills from content if not in metadata
+            if "skills" not in row.values or not row.values["skills"]:
+                content_skills = self._extract_skills_from_content(data["content_merged"])
+                if content_skills:
+                    row.values["skills"] = content_skills
+                    row.values["technologies"] = content_skills
+            
+            # Always ensure we have some data for key columns
+            if "experience" not in row.values or row.values["experience"] is None:
+                # Try to extract experience from content
+                exp_match = re.search(r'(\d+(?:\.\d+)?)(?:\s*years?|\s*yrs?)', data["content_merged"], re.IGNORECASE)
+                if exp_match:
+                    row.values["experience"] = float(exp_match.group(1))
+                    row.values["total_experience_years"] = float(exp_match.group(1))
+            
+            # Ensure score has a reasonable value
+            if "score" not in row.values or row.values["score"] is None:
+                # Use a default score based on available data
+                score = 0.5  # Default middle score
+                if "experience" in row.values and row.values["experience"]:
+                    # Higher experience = higher score (capped at 1.0)
+                    exp_score = min(1.0, float(row.values["experience"]) / 10.0)
+                    score = max(score, exp_score)
+                if "skills" in row.values and row.values["skills"]:
+                    # More skills = higher score
+                    skill_count = len(row.values["skills"].split(", "))
+                    skill_score = min(1.0, skill_count / 5.0)
+                    score = max(score, skill_score)
+                
+                row.values["score"] = round(score, 3)
+            
             rows.append(row)
         
         return rows
@@ -268,15 +311,22 @@ class SmartDataExtractor:
         value = metadata.get(col.key)
         
         if value is None:
-            # Try alternative keys
+            # Try alternative keys - comprehensive mapping
             alt_keys = {
-                "skills": ["technologies", "tech_stack", "skills"],
-                "total_experience_years": ["experience_years", "years_experience"],
-                "candidate_name": ["name"],
-                "current_role": ["job_title", "position", "role"],
+                "skills": ["technologies", "tech_stack", "skills", "competencies"],
+                "technologies": ["skills", "tech_stack", "technologies"],
+                "total_experience_years": ["experience_years", "years_experience", "total_experience"],
+                "experience": ["total_experience_years", "experience_years"],
+                "candidate_name": ["name", "full_name"],
+                "current_role": ["job_title", "position", "role", "title"],
+                "current_company": ["company", "employer"],
+                "seniority_level": ["seniority", "level", "experience_level"],
+                "education": ["education_level", "degree", "education_field"],
+                "certifications": ["certs", "certificates"],
+                "languages": ["spoken_languages", "language_skills"],
             }
             for alt in alt_keys.get(col.key, []):
-                if alt in metadata:
+                if alt in metadata and metadata[alt]:
                     value = metadata[alt]
                     break
         
@@ -288,20 +338,31 @@ class SmartDataExtractor:
         content: str
     ) -> Any:
         """Extract value from content using patterns."""
-        if not col.extraction_patterns:
-            return None
+        # Use provided patterns if available
+        if col.extraction_patterns:
+            found = set()
+            for pattern in col.extraction_patterns:
+                matches = re.findall(pattern, content, re.IGNORECASE)
+                for match in matches:
+                    if isinstance(match, tuple):
+                        match = match[0]
+                    if match:
+                        found.add(match.strip())
+            if found:
+                return ", ".join(sorted(found))
         
-        found = set()
-        for pattern in col.extraction_patterns:
-            matches = re.findall(pattern, content, re.IGNORECASE)
-            for match in matches:
-                if isinstance(match, tuple):
-                    match = match[0]
-                if match:
-                    found.add(match.strip())
+        # Smart content extraction based on column key
+        skill_patterns = {
+            "skills": r'(?:Python|Java|JavaScript|React|Angular|Vue|Node\.?js|SQL|AWS|Azure|GCP|Docker|Kubernetes|TypeScript|Go|Rust|C\+\+|C#|\.NET|Ruby|PHP|Swift|Kotlin|Scala|R\b|MATLAB|TensorFlow|PyTorch|Pandas|NumPy|Scikit-learn|Machine Learning|AI|Deep Learning|NLP|Computer Vision|DevOps|CI/CD|Git|Linux|MongoDB|PostgreSQL|MySQL|Redis|Elasticsearch|Kafka|RabbitMQ|GraphQL|REST|API|Microservices|Agile|Scrum|Jira|Confluence|Figma|Photoshop|Illustrator)'
+        }
         
-        if found:
-            return ", ".join(sorted(found))
+        if col.key in ["skills", "technologies"]:
+            pattern = skill_patterns.get("skills", "")
+            if pattern:
+                matches = re.findall(pattern, content, re.IGNORECASE)
+                if matches:
+                    unique = list(dict.fromkeys([m.strip() for m in matches]))[:8]
+                    return ", ".join(unique)
         
         return None
     
@@ -342,6 +403,84 @@ class SmartDataExtractor:
             return value
         
         return sorted(rows, key=get_sort_key, reverse=descending)
+    
+    def _extract_skills_from_content(self, content: str) -> Optional[str]:
+        """Extract technology/skill keywords from content."""
+        if not content:
+            return None
+        
+        # Enhanced tech skills patterns with more comprehensive coverage
+        patterns = [
+            # Programming Languages & Frameworks
+            r'\b(Python|Java(?:Script)?|TypeScript|Go|Rust|C\+\+|C#|\.NET|Ruby|PHP|Swift|Kotlin|Scala|Dart|R|MATLAB)\b',
+            r'\b(React|Angular|Vue|Next\.?js|Nuxt\.?js|Svelte|Ember|Backbone)\b',
+            r'\b(Node\.?js|Express|Django|Flask|Spring|Laravel|Rails|Symfony|FastAPI)\b',
+            
+            # Cloud & DevOps
+            r'\b(AWS|Azure|GCP|Google Cloud|Oracle Cloud|Alibaba Cloud)\b',
+            r'\b(Docker|Kubernetes|K8s|Terraform|Ansible|Puppet|Chef|Jenkins|GitLab CI|GitHub Actions)\b',
+            r'\b(DevOps|CI/CD|Git|Linux|Ubuntu|CentOS|Debian|Red Hat|Windows Server)\b',
+            
+            # Databases & Storage
+            r'\b(MongoDB|PostgreSQL|MySQL|SQLite|Oracle|SQL Server|Cassandra|Redis|Elasticsearch|DynamoDB)\b',
+            r'\b(Firebase|Supabase|CockroachDB|Neo4j|InfluxDB|TimescaleDB)\b',
+            
+            # AI/ML/Data Science
+            r'\b(TensorFlow|PyTorch|Keras|Scikit-learn|Pandas|NumPy|SciPy|Matplotlib|Seaborn|Plotly)\b',
+            r'\b(Machine Learning|AI|Deep Learning|Neural Networks|NLP|Computer Vision|Data Science)\b',
+            r'\b(Jupyter|Anaconda|Google Colab|MLflow|Kubeflow|Airflow|Spark|Hadoop)\b',
+            
+            # Backend & APIs
+            r'\b(REST|RESTful|GraphQL|SOAP|gRPC|API|Microservices|Serverless|Lambda|Functions)\b',
+            r'\b(Kafka|RabbitMQ|Apache Kafka|ActiveMQ|SQS|SNS|Pub/Sub|Event Streaming)\b',
+            
+            # Frontend & Design
+            r'\b(HTML5|CSS3|SASS|SCSS|LESS|Tailwind|Bootstrap|Material|Foundation)\b',
+            r'\b(Figma|Sketch|Adobe XD|Photoshop|Illustrator|InDesign|After Effects)\b',
+            r'\b(UX|UI|User Experience|User Interface|Design Systems|Wireframing|Prototyping)\b',
+            
+            # Data & Analytics
+            r'\b(Excel|Tableau|Power BI|Looker|Google Data Studio|Domo|Qlik|Sisense)\b',
+            r'\b(Data Analysis|Business Intelligence|Analytics|Data Visualization|Dashboard|KPI)\b',
+            
+            # Marketing & Digital
+            r'\b(Marketing|SEO|SEM|PPC|Google Ads|Facebook Ads|LinkedIn Ads|Content Marketing)\b',
+            r'\b(Social Media|Instagram|Twitter|Facebook|LinkedIn|TikTok|YouTube|Branding)\b',
+            r'\b(Google Analytics|Adobe Analytics|Mixpanel|Amplitude|Segment|Hotjar)\b',
+            
+            # Business & Finance
+            r'\b(Finance|Accounting|Banking|Investment|Trading|Risk Management|Compliance)\b',
+            r'\b(QuickBooks|Xero|SAP|Oracle Financials|Salesforce|HubSpot|Pipedrive)\b',
+            
+            # Project Management
+            r'\b(Project Management|PMP|PRINCE2|Agile|Scrum|Kanban|Lean|Six Sigma)\b',
+            r'\b(Jira|Trello|Asana|Monday\.com|ClickUp|Notion|Confluence|Slack|Teams)\b',
+            r'\b(Scrum Master|Product Owner|Product Manager|Program Manager|Portfolio Manager)\b',
+            
+            # Testing & Quality
+            r'\b(Unit Testing|Integration Testing|E2E Testing|Selenium|Cypress|Jest|Mocha|Chai)\b',
+            r'\b(TDD|BDD|Code Coverage|SonarQube|Quality Assurance|QA|Manual Testing)\b',
+            
+            # Security
+            r'\b(Cybersecurity|Information Security|Penetration Testing|Vulnerability Assessment)\b',
+            r'\b(OWASP|SSL/TLS|Encryption|Authentication|Authorization|OAuth|JWT|SAML)\b',
+            
+            # General Tech Terms
+            r'\b(Software Development|Web Development|Mobile Development|Full Stack|Frontend|Backend)\b',
+            r'\b(Cloud Computing|Edge Computing|IoT|Blockchain|Web3|Cryptocurrency|NFT)\b'
+        ]
+        
+        found = set()
+        for pattern in patterns:
+            matches = re.findall(pattern, content, re.IGNORECASE)
+            for match in matches:
+                if match:
+                    found.add(match.strip())
+        
+        if found:
+            return ", ".join(sorted(found))
+        
+        return None
     
     def _calculate_stats(
         self,

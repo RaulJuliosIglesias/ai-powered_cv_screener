@@ -1646,16 +1646,23 @@ def classify_query_for_structure(question: str) -> str:
     """
     Classify query to determine which STRUCTURE to use.
     
-    ROUTING:
-    - "red_flags"        → RiskAssessmentStructure
-    - "single_candidate" → SingleCandidateStructure
-    - "comparison"       → ComparisonStructure
-    - "ranking"          → RankingStructure
-    - "job_match"        → JobMatchStructure
-    - "team_build"       → TeamBuildStructure
-    - "verification"     → VerificationStructure
-    - "summary"          → SummaryStructure
-    - "search"           → SearchStructure (default)
+    ROUTING (in order of priority):
+    1. "red_flags"        → RiskAssessmentStructure
+    2. "single_candidate" → SingleCandidateStructure
+    3. "team_build"       → TeamBuildStructure
+    4. "verification"     → VerificationStructure
+    5. "comparison"       → ComparisonStructure
+    6. "job_match"        → JobMatchStructure
+    7. "ranking"          → RankingStructure
+    8. "summary"          → SummaryStructure
+    9. "adaptive"         → AdaptiveStructure (DEFAULT - intelligent dynamic system)
+    
+    NOTE: "adaptive" is now the DEFAULT for any query that doesn't match
+    a specific structure. The adaptive system dynamically infers:
+    - Table schema (columns based on query)
+    - Data extraction strategy
+    - Analysis format
+    - Output structure
     
     Args:
         question: User's question
@@ -1807,37 +1814,26 @@ def classify_query_for_structure(question: str) -> str:
     summary_patterns = [
         r'\bsummar', r'\boverview', r'\bstats?\b', r'\bstatistics',
         r'\bresumen', r'\bgeneral\s+view', r'\bpool\s+overview',
-        r'\bhow\s+many\b', r'\bcuántos\b', r'\bdistribution'
+        r'\bhow\s+many\b', r'\bcuántos\b'
     ]
     if any(re.search(p, q) for p in summary_patterns):
         return "summary"
     
-    # 9. ADAPTIVE queries → AdaptiveStructure
-    # Queries about attributes of ALL candidates (technologies, skills, languages, etc.)
-    # These need dynamic tables showing Candidate | [Attribute]
-    adaptive_patterns = [
-        # "What X do the candidates have?" patterns
-        r'\bwhat\s+(technolog|skill|language|experience|certification|education)',
-        r'\bqué\s+(tecnolog|habilidad|idioma|experiencia|certificaci|educaci)',
-        # "Show me all candidates' X" patterns
-        r'\b(show|list|display)\s+(me\s+)?(all\s+)?(the\s+)?(candidates?\'?\s*)?(technolog|skill|language)',
-        r'\b(muestra|lista)\s+(me\s+)?(todas?\s+)?(las?\s+)?(candidatos?\s*)?(tecnolog|habilidad|idioma)',
-        # "What do they know?" patterns
-        r'\bwhat\s+(do|does)\s+(they|the\s+candidates?)\s+(know|have|speak)',
-        r'\bqué\s+(saben|tienen|hablan)\s+(los\s+)?candidatos',
-        # Attribute listing for all candidates
-        r'\b(all|every|each)\s+(candidates?\'?\s*)?(technolog|skill|language|certif)',
-        r'\b(todos?\s+los?\s+)?candidatos?\s+(tienen|saben|conocen)',
-        # "technologies/skills of candidates" patterns  
-        r'\b(technolog|skill|language|certif)\w*\s+(of|de)\s+(the\s+)?(all\s+)?candidates?',
-        # Generic "what do candidates have" without specific attribute (will default to skills)
-        r'\bwhat\s+(do|does)\s+(the\s+)?candidates?\s+have\b',
-    ]
-    if any(re.search(p, q) for p in adaptive_patterns):
-        return "adaptive"
-    
-    # 10. Default: search (SearchStructure)
-    return "search"
+    # =========================================================================
+    # 9. DEFAULT: ADAPTIVE (Smart Dynamic Structure)
+    # =========================================================================
+    # Any query that doesn't match the specific structures above goes to the
+    # intelligent adaptive system which:
+    # - Analyzes the query to understand intent
+    # - Infers the table schema dynamically
+    # - Extracts relevant attributes from data
+    # - Builds tables with variable columns
+    # - Generates contextual analysis
+    #
+    # This replaces the old rigid "search" structure as the default.
+    # The adaptive system can handle ANY query intelligently.
+    # =========================================================================
+    return "adaptive"
 
 
 def is_technical_query(question: str) -> bool:

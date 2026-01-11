@@ -277,20 +277,25 @@ class AdaptiveAnalysisGenerator:
         lines = []
         for i, row in enumerate(top_3, 1):
             name = row.identifier
+            cv_id = row.values.get("cv_id", row.identifier_key)
+            
             # Find the primary attribute value
             attr_value = None
-            for key in [attr_name, "skills", "technologies"]:
+            for key in [attr_name, "skills", "technologies", "certifications"]:
                 if key in row.values and row.values[key]:
                     attr_value = row.values[key]
                     break
+            
+            # Format candidate name with CV reference
+            candidate_ref = f"**[{name}](cv:{cv_id})**" if cv_id else f"**{name}**"
             
             if attr_value:
                 # Truncate if too long
                 if isinstance(attr_value, str) and len(attr_value) > 60:
                     attr_value = attr_value[:60] + "..."
-                lines.append(f"{i}. **{name}**: {attr_value}")
+                lines.append(f"{i}. {candidate_ref}:\n{attr_value}")
             else:
-                lines.append(f"{i}. **{name}**")
+                lines.append(f"{i}. {candidate_ref}")
         
         return AnalysisSection(
             title="Top Candidates",
@@ -358,10 +363,14 @@ class AdaptiveAnalysisGenerator:
         # Finding 1: Total count
         findings.append(f"{total} candidates analyzed for {attr_name}")
         
-        # Finding 2: Top candidate
+        # Finding 2: Top candidate with CV reference
         if rows:
             top = rows[0]
-            findings.append(f"Top candidate: {top.identifier}")
+            cv_id = top.values.get("cv_id", top.identifier_key)
+            if cv_id:
+                findings.append(f"Top candidate: **[{top.identifier}](cv:{cv_id})**")
+            else:
+                findings.append(f"Top candidate: {top.identifier}")
         
         # Finding 3: Most common value (if distribution available)
         if extraction_result.schema.row_entity == "attribute" and rows:
@@ -386,13 +395,22 @@ class AdaptiveAnalysisGenerator:
         total = len(rows)
         attr_name = analysis.detected_attributes[0].name if analysis.detected_attributes else "skills"
         
-        # Get top candidates
-        top_names = [row.identifier for row in rows[:3]]
+        # Get top candidates with CV references
+        top_candidates = []
+        for row in rows[:3]:
+            name = row.identifier
+            cv_id = row.values.get("cv_id", row.identifier_key)
+            if cv_id:
+                top_candidates.append(f"**[{name}](cv:{cv_id})**")
+            else:
+                top_candidates.append(f"**{name}**")
+        
+        top_names_str = ", ".join(top_candidates)
         
         if analysis.intent == QueryIntent.LIST_ATTRIBUTE:
             return (
                 f"Based on the {attr_name} analysis, the candidates with the most comprehensive "
-                f"profiles are **{', '.join(top_names)}**. The talent pool shows good diversity "
+                f"profiles are {top_names_str}. The talent pool shows good diversity "
                 f"across {total} candidates."
             )
         
@@ -407,10 +425,10 @@ class AdaptiveAnalysisGenerator:
         elif analysis.intent == QueryIntent.FIND_BY_ATTRIBUTE:
             return (
                 f"Found {total} candidates matching your criteria. "
-                f"Top matches are **{', '.join(top_names)}**."
+                f"Top matches are {top_names_str}."
             )
         
         # Default conclusion
         return (
-            f"Analysis complete. Top candidates for {attr_name}: **{', '.join(top_names)}**."
+            f"Analysis complete. Top candidates for {attr_name}: {top_names_str}."
         )

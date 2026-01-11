@@ -1138,10 +1138,12 @@ class RAGServiceV5:
             cv_id = metadata.get("cv_id", "") if isinstance(metadata, dict) else ""
             if cv_id and cv_id not in seen_cvs:
                 seen_cvs.add(cv_id)
+                # Normalize score to 0-1 range (clamp values > 1)
+                normalized_score = min(1.0, max(0.0, score)) if score else None
                 candidates_preview.append({
                     "cv_id": cv_id,
                     "filename": metadata.get("filename", "") if isinstance(metadata, dict) else "",
-                    "score": round(score, 3) if score else None
+                    "score": round(normalized_score, 3) if normalized_score is not None else None
                 })
         
         yield {"event": "step", "data": {
@@ -1167,11 +1169,13 @@ class RAGServiceV5:
                     # chunks are dicts, not objects - access via .get()
                     metadata = chunk.get("metadata", {}) if isinstance(chunk, dict) else {}
                     score = chunk.get("score") if isinstance(chunk, dict) else None
+                    # Normalize score to 0-1 range (clamp values > 1)
+                    normalized_score = min(1.0, max(0.0, score)) if score else None
                     reranking_results.append({
                         "rank": i + 1,
                         "candidate": metadata.get("candidate_name", "Unknown"),
                         "cv_id": metadata.get("cv_id", ""),
-                        "score": round(score, 3) if score else None
+                        "score": round(normalized_score, 3) if normalized_score is not None else None
                     })
             # Get method from metrics
             reranking_stage = ctx.metrics.get_stage(PipelineStage.RERANKING)

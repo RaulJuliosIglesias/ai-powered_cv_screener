@@ -3,94 +3,88 @@ import { Send, Loader, ListPlus, Clock, X, Plus, Trash, Trash2, GripHorizontal, 
 import { useLanguage } from '../contexts/LanguageContext';
 
 const TEST_QUERIES_BY_TYPE = {
-  search: [
-    "Who has experience in marketing?",
-    "Find candidates with Python skills",
-    "Show me everyone with more than 5 years of experience",
-    "List all candidates from Spain",
-    "Who speaks French?",
-    "Which candidates have worked in finance?",
-    "Find people with MBA degrees",
-    "Who has leadership experience?"
+  // ADAPTIVE queries - Dynamic tables with variable columns (NEW DEFAULT)
+  adaptive: [
+    "What technologies do the candidates have?",
+    "What skills do the candidates possess?",
+    "Show me all candidate certifications",
+    "What languages do the candidates speak?",
+    "Find Python developers",
+    "Who knows React?",
+    "Candidates with AWS experience",
+    "Show me backend engineers",
+    "Who has machine learning experience?",
+    "List all frontend developers",
+    "Candidates with cloud computing skills",
+    "Who has worked with databases?",
+    "Show me data scientists",
+    "Find DevOps engineers",
+    "Who has project management experience?"
   ],
   single_candidate: [
     "Give me the full profile of the top candidate",
     "Tell me everything about the best match",
     "Analyze the first candidate in detail",
-    "Full profile of the most experienced person",
-    "Give me complete information about the senior developer",
-    "Everything about the candidate with the highest score",
-    "All about the marketing specialist"
+    "Full profile of the most experienced person"
   ],
   red_flags: [
     "Show me the red flags in the candidate pool",
     "Analyze job hopping patterns",
-    "Are there any employment gaps?",
     "Do a risk assessment of the candidates",
-    "Show warning signs for hiring",
-    "Analyze career stability",
-    "Make a risk assessment of the top candidate",
-    "Check for job hopping behavior"
+    "Make a risk assessment of the top candidate"
   ],
   ranking: [
     "Rank all candidates by experience",
     "Who is the best for a senior role?",
     "Give me the top 5 candidates",
-    "Order candidates by skills",
-    "Who would be the best leader?",
-    "Sort by years of experience",
-    "Show me the ranking for technical skills",
     "Who has the best leadership potential?"
   ],
   comparison: [
     "Compare the top 2 candidates",
     "What are the differences between the senior candidates?",
-    "Senior vs Junior candidates analysis",
-    "Compare marketing and sales experience",
-    "Which is better between the two finalists?",
-    "Contrast technical vs business candidates"
+    "Senior vs Junior candidates analysis"
   ],
   job_match: [
     "Who fits best for a project manager position?",
     "Match candidates to the senior developer requirements",
-    "Who is suitable for a team lead role?",
-    "Find the best match for the job description",
-    "Who meets the requirements for a data analyst?",
-    "Which candidate fits the marketing director position?"
+    "Who is suitable for a team lead role?"
   ],
   team_build: [
     "Build a team with the top 3 candidates",
     "Create a development team from the pool",
-    "Form a complementary team for the project",
-    "Assemble a team with diverse skills",
-    "Make a team using the best matches",
-    "Build a balanced team for the startup"
+    "Form a complementary team for the project"
   ],
   verification: [
     "Verify if anyone has worked at Google",
-    "Confirm the education credentials",
     "Check if the candidate has AWS certification",
-    "Validate the leadership claims",
-    "Did anyone work at Microsoft?",
-    "Is it true that the top candidate has 10 years experience?"
+    "Did anyone work at Microsoft?"
   ],
   summary: [
     "Give me a summary of the candidate pool",
     "Overview of all candidates",
-    "Show me the statistics",
-    "How many candidates have technical skills?",
-    "What is the experience distribution?",
-    "General view of the talent pool",
-    "Pool overview and stats"
+    "How many candidates have technical skills?"
   ]
 };
 
 const getRandomTestQueries = () => {
-  const types = Object.keys(TEST_QUERIES_BY_TYPE);
-  return types.map(type => {
+  const result = [];
+  
+  // Add 6 adaptive queries (the new default system)
+  const adaptiveQueries = [...TEST_QUERIES_BY_TYPE.adaptive];
+  for (let i = 0; i < 6 && adaptiveQueries.length > 0; i++) {
+    const idx = Math.floor(Math.random() * adaptiveQueries.length);
+    result.push(adaptiveQueries.splice(idx, 1)[0]);
+  }
+  
+  // Add 1 query from each of 8 other categories (8 more queries)
+  const otherTypes = Object.keys(TEST_QUERIES_BY_TYPE).filter(t => t !== 'adaptive').slice(0, 8);
+  otherTypes.forEach(type => {
     const queries = TEST_QUERIES_BY_TYPE[type];
-    return queries[Math.floor(Math.random() * queries.length)];
+    result.push(queries[Math.floor(Math.random() * queries.length)]);
   });
+  
+  // Total: 6 adaptive + 8 other = 14, shuffle for variety
+  return result.sort(() => Math.random() - 0.5);
 };
 
 const ChatInputField = memo(({ 
@@ -300,7 +294,7 @@ const ChatInputField = memo(({
                 className="mt-3 w-full flex items-center justify-center gap-2 px-4 py-2 bg-purple-100 dark:bg-purple-900/30 hover:bg-purple-200 dark:hover:bg-purple-900/50 text-purple-700 dark:text-purple-300 rounded-xl transition-colors text-sm font-medium"
               >
                 <Beaker className="w-4 h-4" />
-                {language === 'es' ? '🧪 Añadir Test Queries (9 tipos)' : '🧪 Add Test Queries (9 types)'}
+                {language === 'es' ? '🧪 Añadir Test Queries (14 queries)' : '🧪 Add Test Queries (14 queries)'}
               </button>
             </div>
 

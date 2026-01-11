@@ -82,7 +82,7 @@ IMPORTANT:
 Respond in this EXACT JSON format (no markdown, just raw JSON):
 {{
   "understood_query": "EXPANDED reinterpretation showing your understanding (NOT a copy of the original)",
-  "query_type": "ranking|comparison|search|red_flags|single_candidate|job_match|team_build|summary|general",
+  "query_type": "ranking|comparison|adaptive|red_flags|single_candidate|job_match|team_build|summary|general",
   "requirements": [
     "requirement 1",
     "requirement 2"
@@ -94,13 +94,15 @@ Respond in this EXACT JSON format (no markdown, just raw JSON):
 QUERY_TYPE GUIDE:
 - "ranking": User wants candidates ONLY ranked/ordered by criteria WITHOUT building a team (e.g., "Rank by experience", "Who are the best 5?")
 - "comparison": User wants to compare specific candidates side-by-side
-- "search": User wants to find candidates with specific skills/experience
+- "adaptive": User wants to FIND/LIST/SHOW candidates with specific skills, technologies, or experience (e.g., "Candidates with Python", "Show me backend engineers", "Who knows React?", "Find developers with AWS", "Candidates with cloud computing skills") - THIS IS THE DEFAULT for skill/technology searches
 - "red_flags": User asks for RISK ASSESSMENT, red flags, job hopping analysis, stability concerns
 - "single_candidate": User wants FULL PROFILE of ONE specific candidate (everything about, full profile, analyze X)
 - "job_match": User wants to match candidates against job requirements
 - "team_build": User wants to BUILD/FORM/CREATE a TEAM from candidates (e.g., "Can I build a team with the top 3?", "Form a project team", "Create a team of developers") - CRITICAL: If query mentions "team" + "build/form/create/with", it's ALWAYS team_build NOT ranking
 - "summary": User wants a summary/overview of candidates
 - "general": Non-CV related queries
+
+CRITICAL: For ANY query asking about skills, technologies, or experience ("who knows X", "candidates with X", "show me X engineers", "find X developers"), ALWAYS use "adaptive" type.
 
 EXAMPLES:
 
@@ -131,16 +133,17 @@ Query: "Rank all 33 candidates by experience and show if they worked at Google o
   "reformulated_prompt": "Create a complete ranking of ALL candidates ordered by their total years of professional experience. For EACH candidate, include: 1) Their name, 2) Total years of experience, 3) Whether they have worked at major tech companies (Google, Microsoft, Amazon, Meta, Apple, etc.) and which ones. Do NOT filter out candidates - show ALL of them even if they haven't worked at major companies."
 }
 
-Query: "Who knows Python?"
+Query: "Who knows Python?" or "Candidates with cloud computing skills" or "Show me backend engineers"
 {{
-  "understood_query": "Find candidates who have Python programming experience",
-  "query_type": "search",
+  "understood_query": "Find candidates who have the specified technical skills or experience. This requires searching the talent pool for candidates matching the skill/technology criteria.",
+  "query_type": "adaptive",
   "requirements": [
-    "Search for Python skill in CVs",
-    "Include related Python frameworks if mentioned"
+    "Search for candidates with the specified skill/technology",
+    "Include related technologies and frameworks",
+    "Show candidate names with their relevant skills"
   ],
   "is_cv_related": true,
-  "reformulated_prompt": "Find all candidates who have Python programming experience. Include their proficiency level if mentioned, and any Python-related frameworks or libraries they know (Django, Flask, FastAPI, etc.)."
+  "reformulated_prompt": "Find all candidates who have the specified technical skills. Present them in a structured table showing their name, relevant skills, and experience level."
 }}
 
 Query: "Make a risk assessment of Sofia Rodriguez"
@@ -696,6 +699,9 @@ class QueryUnderstandingService:
         elif query_type == "summary":
             return f"The user wants a summary or overview of the candidates.{candidates_str} This requires providing a high-level view of the candidate pool.{req_str}"
         
+        elif query_type == "adaptive":
+            return f"The user is searching for candidates with specific skills, technologies, or experience.{candidates_str} This requires analyzing the candidate pool to identify those matching the specified criteria and presenting them in a structured format.{req_str}"
+        
         elif query_type == "filter":
             return f"The user wants to filter candidates based on specific criteria.{candidates_str} This should identify which candidates meet the requirements and which don't.{req_str}"
         
@@ -853,11 +859,24 @@ class QueryUnderstandingService:
         ]):
             query_type = 'summary'
         
-        # 8. SEARCH (generic CV search)
+        # 8. ADAPTIVE - Skill/technology searches (BEFORE generic search)
+        elif any(pattern in query_lower for pattern in [
+            'candidates with', 'who have', 'who knows', 'who has experience',
+            'find candidates', 'show me candidates', 'list candidates',
+            'candidates who', 'people with', 'talent with',
+            'what technologies', 'what skills', 'what experience',
+            'show me backend', 'show me frontend', 'show me engineers',
+            'candidates with skills', 'candidates with experience',
+            'cloud computing', 'machine learning', 'data science',
+            'developers with', 'engineers with', 'programmers with'
+        ]):
+            query_type = 'adaptive'
+        
+        # 9. SEARCH (generic CV search)
         elif any(kw in query_lower for kw in ['who', 'which', 'find', 'search', 'has', 'know', 'quien', 'buscar']):
             query_type = 'search'
         
-        # 9. GENERAL (non-CV)
+        # 10. GENERAL (non-CV)
         else:
             query_type = 'general'
         
@@ -865,12 +884,13 @@ class QueryUnderstandingService:
         cv_keywords = [
             'candidate', 'cv', 'resume', 'experience', 'skill', 'python', 
             'developer', 'engineer', 'work', 'job', 'year', 'company',
-            'candidato', 'experiencia', 'habilidad', 'trabajo', 'empresa'
+            'candidato', 'experiencia', 'habilidad', 'trabajo', 'empresa',
+            'cloud computing', 'aws', 'azure', 'gcp', 'backend', 'frontend'
         ]
         is_cv_related = any(kw in query_lower for kw in cv_keywords)
         
         # If query type suggests CV analysis, force is_cv_related
-        cv_related_types = {'ranking', 'comparison', 'search', 'red_flags', 'single_candidate', 'job_match', 'team_build', 'summary'}
+        cv_related_types = {'ranking', 'comparison', 'search', 'red_flags', 'single_candidate', 'job_match', 'team_build', 'summary', 'adaptive'}
         if query_type in cv_related_types:
             is_cv_related = True
         

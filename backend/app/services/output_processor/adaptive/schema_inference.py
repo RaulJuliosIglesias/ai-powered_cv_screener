@@ -252,24 +252,47 @@ class SchemaInferenceEngine:
     ) -> List[ColumnDefinition]:
         """Build columns with candidates as rows."""
         columns = []
+        added_keys = set()
         
         # Always start with candidate name
         columns.append(self._get_or_create_column("candidate_name"))
+        added_keys.add("candidate_name")
         
         # Add columns for each detected attribute
         for attr in analysis.detected_attributes:
             col = self._create_column_for_attribute(attr, available_keys)
-            if col:
+            if col and col.key not in added_keys:
                 columns.append(col)
+                added_keys.add(col.key)
+        
+        # SMART FALLBACK: For generic queries, always include skills/technologies
+        # This ensures we show relevant data even when attribute detection is vague
+        attr_names = [a.name for a in analysis.detected_attributes]
+        has_skill_col = any(k in added_keys for k in ["skills", "technologies"])
+        
+        if not has_skill_col:
+            # Add skills column - extracted from content if not in metadata
+            skills_col = ColumnDefinition(
+                name="Skills/Keywords",
+                key="skills",
+                column_type=ColumnType.LIST,
+                role=ColumnRole.PRIMARY_DATA,
+                width_hint="wide",
+                extract_from="content",  # Extract from content as fallback
+                aggregation_method="join"
+            )
+            columns.append(skills_col)
+            added_keys.add("skills")
         
         # Add score column if relevant
-        if analysis.sort_preference == "score" or "score" in available_keys:
+        if "score" not in added_keys:
             columns.append(self._get_or_create_column("score"))
+            added_keys.add("score")
         
-        # Add experience if asking about skills/technologies (useful context)
-        if any(a.name in ["skills", "technologies"] for a in analysis.detected_attributes):
-            if "total_experience_years" in available_keys:
-                columns.append(self._get_or_create_column("experience"))
+        # Add experience column for context
+        if "total_experience_years" in available_keys and "total_experience_years" not in added_keys:
+            columns.append(self._get_or_create_column("experience"))
+            added_keys.add("total_experience_years")
         
         return columns
     
