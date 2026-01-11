@@ -422,8 +422,7 @@ const AnalysisSection = ({ content, onOpenCV, cvMap }) => {
           {sections.map((section, idx) => (
             <div key={idx} className={section.title ? "bg-slate-700/30 rounded-lg p-3" : ""}>
               {section.title && (
-                <h4 className="text-sm font-semibold text-cyan-300 mb-2 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
+                <h4 className="text-sm font-semibold text-gray-300 mb-2">
                   {section.title}
                 </h4>
               )}
@@ -432,9 +431,8 @@ const AnalysisSection = ({ content, onOpenCV, cvMap }) => {
                   // Detect list items
                   if (line.trim().startsWith('-') || line.trim().startsWith('•') || /^\d+\.\s/.test(line.trim())) {
                     return (
-                      <div key={lineIdx} className="flex items-start gap-2 pl-2">
-                        <span className="text-cyan-400 mt-1">•</span>
-                        <span><ContentWithCVLinks content={line.replace(/^[-•\d.]\s*/, '')} onOpenCV={onOpenCV} cvMap={cvMap} /></span>
+                      <div key={lineIdx} className="pl-2">
+                        <ContentWithCVLinks content={line} onOpenCV={onOpenCV} cvMap={cvMap} />
                       </div>
                     );
                   }
