@@ -189,7 +189,7 @@ docs/roadmap/
 | Document | Description |
 |----------|-------------|
 | [RAG Workflow](../RAG_WORKFLOW.md) | Current RAG pipeline architecture |
-| [Architecture](../../ARCHITECTURE.md) | System architecture overview |
+| [Architecture](../ARCHITECTURE.md) | System architecture overview |
 | [Structured Output](../STRUCTURED_OUTPUT.md) | 9 Structures + 29 Modules |
 | [Evaluation Criteria](../evaluation/) | Project evaluation documentation |
 

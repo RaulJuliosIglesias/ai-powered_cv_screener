@@ -108,8 +108,8 @@ The **Thought Process** and **Code Quality** documents provide architectural ins
 | Document | Location | Description |
 |----------|----------|-------------|
 | [Main README](../../README.md) | Project root | Quick start and overview |
-| [Architecture](../../ARCHITECTURE.md) | Project root | Technical architecture details |
-| [Modes Explanation](../../MODES_EXPLANATION.md) | Project root | Local vs Cloud mode details |
+| [Architecture](../ARCHITECTURE.md) | docs/ | Technical architecture details |
+| [Modes Explanation](../MODES_EXPLANATION.md) | docs/ | Local vs Cloud mode details |
 | [API Documentation](http://localhost:8000/docs) | Running server | Interactive API docs |
 
 ---

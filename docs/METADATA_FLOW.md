@@ -177,4 +177,4 @@ These files exist but are NOT used in the current pipeline:
 
 - `STRUCTURED_OUTPUT.md` - Output modules (RedFlagsModule, GapAnalysisModule, etc.)
 - `RAG_WORKFLOW.md` - Complete RAG pipeline overview
-- `ARCHITECTURE.md` - System architecture
+- `./ARCHITECTURE.md` - System architecture

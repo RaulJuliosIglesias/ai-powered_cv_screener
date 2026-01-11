@@ -4,6 +4,27 @@ Utility scripts for development, testing, and setup.
 
 ## Scripts Disponibles
 
+### `start_api.py`
+Smart API starter that finds an available port automatically and starts the backend.
+
+```bash
+python scripts/start_api.py
+```
+
+### `start_web.py`
+Smart web starter that finds an available port automatically and starts the frontend.
+
+```bash
+python scripts/start_web.py
+```
+
+### `kill_conflicts.py`
+Utility script to clean up conflicting processes on ports 8000, 8001, and 6001.
+
+```bash
+python scripts/kill_conflicts.py
+```
+
 ### `demo_queries.py`
 Demo script that runs sample queries against the API to showcase RAG pipeline capabilities.
 

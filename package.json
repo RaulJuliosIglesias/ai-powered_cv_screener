@@ -4,8 +4,8 @@
   "description": "AI-powered CV screening application with dual mode (Local/Cloud)",
   "scripts": {
     "dev": "concurrently -k -s first -n \"API,WEB\" -c \"cyan,magenta\" \"npm run api\" \"npm run web\"",
-    "api": "python start_api.py",
-    "web": "python start_web.py",
+    "api": "python scripts/start_api.py",
+    "web": "python scripts/start_web.py",
     "install:all": "npm install && cd frontend && npm install",
     "build": "cd frontend && npm run build"
   },

@@ -133,8 +133,8 @@ Historical documentation of already implemented plans. Useful for understanding 
 | Document | Location | Description |
 |----------|----------|-------------|
 | [Main README](../README.md) | Project root | Quick start and overview |
-| [ARCHITECTURE.md](../ARCHITECTURE.md) | Project root | Complete technical architecture v6.0 |
-| [MODES_EXPLANATION.md](../MODES_EXPLANATION.md) | Project root | Local vs Cloud mode details |
+| [ARCHITECTURE.md](./ARCHITECTURE.md) | docs/ | Complete technical architecture v6.0 |
+| [MODES_EXPLANATION.md](./MODES_EXPLANATION.md) | docs/ | Local vs Cloud mode details |
 | [SECURITY.md](../SECURITY.md) | Project root | Security considerations |
 
 ---

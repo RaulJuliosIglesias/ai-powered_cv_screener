@@ -113,8 +113,8 @@ npm install
 npm run dev
 
 # Or separately:
-python start_api.py   # Backend → http://localhost:8000
-python start_web.py   # Frontend → http://localhost:6001
+python scripts/start_api.py   # Backend → http://localhost:8000
+python scripts/start_web.py   # Frontend → http://localhost:6001
 ```
 
 ### Usage
@@ -315,8 +315,8 @@ Comprehensive documentation explaining how this project meets professional evalu
 
 | Document | Description |
 |----------|-------------|
-| [ARCHITECTURE.md](./ARCHITECTURE.md) | Detailed architecture |
-| [MODES_EXPLANATION.md](./MODES_EXPLANATION.md) | Local vs Cloud modes |
+| [ARCHITECTURE.md](./docs/ARCHITECTURE.md) | Detailed architecture |
+| [MODES_EXPLANATION.md](./docs/MODES_EXPLANATION.md) | Local vs Cloud modes |
 | [API Docs](http://localhost:8000/docs) | Interactive API (when running) |
 
 ### 🔒 Security & Roadmap
