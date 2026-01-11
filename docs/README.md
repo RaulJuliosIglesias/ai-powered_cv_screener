@@ -32,11 +32,12 @@
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| **Structures** | 9 | Complete output assemblers (SingleCandidate, RiskAssessment, Comparison, etc.) |
+| **Structures** | 10 | 9 rigid + 1 Adaptive (dynamic schema-less output) |
 | **Modules** | 29+ | Reusable components (Thinking, Analysis, RiskTable, MatchScore, Skills, etc.) |
-| **Query Types** | 9 | Intelligent routing based on query classification |
+| **Adaptive Modules** | 6 | QueryAnalyzer, SchemaInference, DataExtractor, TableGenerator, AnalysisGenerator |
+| **Query Types** | 10 | Intelligent routing including `adaptive` for dynamic queries |
 
-### 9 Structures Implemented
+### 10 Structures Implemented
 
 | Structure | Query Type | Example |
 |-----------|------------|---------|
@@ -49,6 +50,7 @@
 | TeamBuildStructure | `team_build` | "Build a team of 3" |
 | VerificationStructure | `verification` | "Verify AWS certification" |
 | SummaryStructure | `summary` | "Overview of candidates" |
+| **AdaptiveStructureBuilder** | `adaptive` | "What technologies do they have?" |
 
 ### Conversational Context
 - `conversation_history` propagated through entire pipeline

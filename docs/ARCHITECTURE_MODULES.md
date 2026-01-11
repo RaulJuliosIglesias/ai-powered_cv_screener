@@ -1,6 +1,6 @@
 # CV Screener Architecture - Orchestration, Structures & Modules
 
-> **Last Updated:** January 2026 - Full implementation complete with **9 Structures** + **29 Modules** + Conversational Context (v6.0)
+> **Last Updated:** January 2026 - Full implementation complete with **10 Structures** (9 rigid + 1 Adaptive) + **29+ Modules** + **6 Adaptive Modules** + Conversational Context (v9.0)
 
 ---
 
@@ -18,9 +18,10 @@
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| **Structures** | 9 | Output assemblers that combine modules |
-| **Modules** | 29 | Reusable extraction/formatting components |
-| **Query Types** | 9 | Classification types for routing |
+| **Structures** | 10 | 9 rigid + 1 Adaptive (dynamic schema-less) |
+| **Modules** | 29+ | Reusable extraction/formatting components |
+| **Adaptive Modules** | 6 | Dynamic schema-less components |
+| **Query Types** | 10 | Including `adaptive` for dynamic queries |
 | **Reusable Modules** | 6 | Shared across multiple structures |
 
 ---
@@ -59,17 +60,18 @@ USER QUERY → ORCHESTRATOR → STRUCTURE → MODULES → OUTPUT
          │          │          │         │        │         │        │       │        │
          ▼          ▼          ▼         ▼        ▼         ▼        ▼       ▼        ▼
 ┌─────────────────────────────────────────────────────────────────────────────────────────┐
-│                                   STRUCTURES (9)                                         │
-├─────────────────────────────────────────────────────────────────────────────────────────┤
+│                              STRUCTURES (10)                                            │
+├─────────────────────────────────────────────────────────────────────────────────────┤
 │ 1. SingleCandidateStructure  │ 2. RiskAssessmentStructure  │ 3. ComparisonStructure     │
 │ 4. SearchStructure           │ 5. RankingStructure         │ 6. JobMatchStructure       │
 │ 7. TeamBuildStructure        │ 8. VerificationStructure    │ 9. SummaryStructure        │
-└─────────────────────────────────────────────────────────────────────────────────────────┘
+│ 10. ⭐ AdaptiveStructureBuilder (dynamic schema-less output)                              │
+└─────────────────────────────────────────────────────────────────────────────────────┘────┘
                                          │
                                          ▼
 ┌─────────────────────────────────────────────────────────────────────────────────────────┐
-│                                   MODULES (29)                                           │
-├─────────────────────────────────────────────────────────────────────────────────────────┤
+│                                   MODULES (29+)                                          │
+├─────────────────────────────────────────────────────────────────────────────────────┤
 │  CORE (4):     ThinkingModule, ConclusionModule, AnalysisModule, DirectAnswerModule     │
 │  PROFILE (4):  HighlightsModule, CareerModule, SkillsModule, CredentialsModule          │
 │  TABLES (6):   RiskTableModule, TableModule, ResultsTableModule, RankingTableModule,    │
@@ -80,7 +82,19 @@ USER QUERY → ORCHESTRATOR → STRUCTURE → MODULES → OUTPUT
 │                TeamRiskModule                                                           │
 │  VERIFY (3):   ClaimModule, EvidenceModule, VerdictModule                               │
 │  SUMMARY (3):  TalentPoolModule, SkillDistributionModule, ExperienceDistributionModule  │
-└─────────────────────────────────────────────────────────────────────────────────────────┘
+└─────────────────────────────────────────────────────────────────────────────────────┘
+                                         │
+                                         ▼
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                         ⭐ ADAPTIVE MODULES (6) - v9.0 NEW                               │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│  QueryAnalyzer          - Detect intent, attributes, filters from natural language      │
+│  SchemaInferenceEngine  - Infer table columns dynamically from query + data             │
+│  SmartDataExtractor     - Extract data from chunks (metadata, content, computed)        │
+│  DynamicTableGenerator  - Build tables with variable columns, adaptive formatting       │
+│  AdaptiveAnalysisGen    - Generate contextual analysis, distribution stats, findings    │
+│  AdaptiveStructureBuilder - Main orchestrator that coordinates all adaptive components  │
+└─────────────────────────────────────────────────────────────────────────────────────┘────┘
 ```
 
 ---
@@ -98,6 +112,7 @@ USER QUERY → ORCHESTRATOR → STRUCTURE → MODULES → OUTPUT
 | `team_build` | TeamBuildStructure | "Build a team of 3 developers" |
 | `verification` | VerificationStructure | "Verify if Juan has AWS certification" |
 | `summary` | SummaryStructure | "Overview of all candidates" |
+| `adaptive` | **AdaptiveStructureBuilder** | "What technologies do they have?" |
 
 ---
 

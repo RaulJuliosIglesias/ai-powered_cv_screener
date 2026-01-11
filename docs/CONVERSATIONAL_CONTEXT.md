@@ -14,9 +14,10 @@ Endpoint → RAG Service → Orchestrator → Structures → Modules
 
 ### Current Capabilities
 - ✅ `conversation_history` flows through the entire system
-- ✅ All 9 Structures receive conversational context
+- ✅ All 10 Structures receive conversational context (9 rigid + 1 Adaptive)
 - ✅ Pronominal references ("this candidate", "he", "she")
 - ✅ Follow-up queries maintain context
+- ✅ AdaptiveStructureBuilder receives context for dynamic queries
 
 ### Known Limitations
 - ⚠️ Context limited to last N messages (for cost control)
@@ -360,9 +361,9 @@ relevant_messages = search_similar_messages(
 
 ---
 
-## Propagation in Structures (v6.0)
+## Propagation in Structures (v9.0)
 
-All 9 Structures now receive `conversation_history`:
+All 10 Structures now receive `conversation_history`:
 
 ```python
 # Example: JobMatchStructure.assemble()
@@ -387,6 +388,7 @@ def assemble(
 | TeamBuildStructure | ✅ |
 | VerificationStructure | ✅ |
 | SummaryStructure | ✅ |
+| **AdaptiveStructureBuilder** | ✅ |
 
 ---
 

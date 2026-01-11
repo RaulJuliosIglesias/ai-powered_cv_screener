@@ -331,7 +331,8 @@ class AdaptiveAnalysisGenerator:
                 # Truncate if too long
                 if isinstance(attr_value, str) and len(attr_value) > 60:
                     attr_value = attr_value[:60] + "..."
-                lines.append(f"{i}. {candidate_ref}:\n{attr_value}")
+                # Keep link and content on same line to preserve markdown parsing
+                lines.append(f"{i}. {candidate_ref}: {attr_value}")
             else:
                 lines.append(f"{i}. {candidate_ref}")
         

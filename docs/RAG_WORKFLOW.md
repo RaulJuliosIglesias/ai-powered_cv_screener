@@ -19,6 +19,7 @@
 6. [Targeted Retrieval](#targeted-retrieval)
 7. [V5 Advanced Features](#v5-advanced-features)
 8. [Structured Output Processing](#structured-output-processing)
+8b. [Adaptive Structure System](#adaptive-structure-system) ← **NEW in v9.0**
 9. [Core Scripts Reference](#core-scripts-reference)
 10. [Data Flow](#data-flow)
 11. [Configuration](#configuration)
@@ -52,8 +53,9 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
 - ✅ **65+ Query Detection Patterns**: Enhanced single/multi candidate detection
 - ✅ **Risk Assessment Module**: 5-factor risk table for single candidates
 - ✅ **Orchestrator → Structures → Modules**: Complete output processing architecture
-- ✅ **9 Structures**: SingleCandidate, RiskAssessment, Comparison, Search, Ranking, JobMatch, TeamBuild, Verification, Summary
+- ✅ **10 Structures**: 9 rigid + 1 Adaptive (dynamic schema-less output)
 - ✅ **29+ Modules**: Reusable components (Thinking, Analysis, RiskTable, MatchScore, etc.)
+- ✅ **Adaptive Structure System**: 6 intelligent modules for dynamic queries
 - ✅ **Conversational Context**: `conversation_history` propagated through entire pipeline
 - ✅ **Query Type Routing**: Intelligent routing based on query classification
 
@@ -937,6 +939,92 @@ All candidate mentions are formatted uniformly:
  │      └── cv: prefix (required for frontend)
  └── 📄 icon (clickable → opens PDF)
 ```
+
+---
+
+## Adaptive Structure System
+
+> **NEW in v9.0** - Intelligent dynamic output structures for schema-less queries
+
+The **Adaptive Structure System** handles queries that don't fit rigid predefined structures. Unlike the 9 rigid structures, the adaptive system:
+
+- **Detects dynamically** what the user is asking about
+- **Infers schema** (columns, attributes) from query + data at runtime
+- **Builds tables** with variable columns based on context
+- **Generates analysis** adapted to the specific question
+
+### When is Adaptive Used?
+
+| Query Type | Example | Routing |
+|------------|---------|---------|
+| `adaptive` | "What technologies do candidates have?" | AdaptiveStructureBuilder |
+| `adaptive` | "Show me skills distribution" | AdaptiveStructureBuilder |
+| `adaptive` | "Who has cloud computing experience?" | AdaptiveStructureBuilder |
+
+### 6 Adaptive Modules
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    AdaptiveStructureBuilder                      │
+│  (Main orchestrator - assembles all components dynamically)      │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+         ┌────────────────────┼────────────────────┐
+         ▼                    ▼                    ▼
+┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
+│ QueryAnalyzer   │  │ SchemaInference │  │ DataExtractor   │
+│ - Detect intent │  │ - Infer columns │  │ - Extract from  │
+│ - Find attrs    │  │ - Determine fmt │  │   chunks        │
+└─────────────────┘  └─────────────────┘  └─────────────────┘
+         │                    │                    │
+         └────────────────────┼────────────────────┘
+                              ▼
+         ┌────────────────────┴────────────────────┐
+         ▼                                         ▼
+┌─────────────────────────┐          ┌─────────────────────────┐
+│  DynamicTableGenerator  │          │ AdaptiveAnalysisGen     │
+│  - Variable columns     │          │ - Contextual analysis   │
+│  - Format selection     │          │ - Distribution stats    │
+│  - Smart sorting        │          │ - Key findings          │
+└─────────────────────────┘          └─────────────────────────┘
+```
+
+| Module | Location | Purpose |
+|--------|----------|---------|
+| `QueryAnalyzer` | `adaptive/query_analyzer.py` | Detect intent, attributes, filters |
+| `SchemaInferenceEngine` | `adaptive/schema_inference.py` | Infer table columns dynamically |
+| `SmartDataExtractor` | `adaptive/data_extractor.py` | Extract data from chunks |
+| `DynamicTableGenerator` | `adaptive/table_generator.py` | Build variable-column tables |
+| `AdaptiveAnalysisGenerator` | `adaptive/analysis_generator.py` | Generate contextual analysis |
+| `AdaptiveStructureBuilder` | `adaptive/structure_builder.py` | Main orchestrator |
+
+### Query Intents
+
+| Intent | Example | Output |
+|--------|---------|--------|
+| `list_attribute` | "What skills do they have?" | Candidate rows |
+| `count_attribute` | "How many know Python?" | Count table |
+| `distribution` | "Skills distribution?" | Frequency table |
+| `find_by_attribute` | "Who knows React?" | Filtered candidates |
+
+### Auto-Detected Attributes
+
+- **technologies**: Python, Java, React, AWS, Docker
+- **skills**: Technical and soft skills
+- **languages**: English, Spanish, French
+- **experience**: Years of experience
+- **education**: Degrees, universities
+- **certifications**: AWS Certified, PMP
+- **location**: City, country
+- **role**: Developer, Manager
+- **seniority**: Junior, Mid, Senior, Lead
+
+### Key Principles
+
+- **NO HARDCODED COLUMNS**: Table schema inferred at runtime
+- **NO FIXED FORMATS**: Output adapts to data characteristics
+- **SCHEMA-LESS**: Works with any attribute combination
+- **SELF-DESCRIBING**: Output includes metadata about its structure
 
 ---
 

@@ -35,8 +35,9 @@ The Structured Output system in **v9.0** implements a complete **Orchestrator �
 | Component | Count | Purpose |
 |-----------|-------|---------|
 | **Orchestrator** | 1 | Routes queries and coordinates Structures |
-| **Structures** | 9 | Complete output assemblers for each query type |
-| **Modules** | 29 | Reusable extraction/formatting components |
+| **Structures** | 10 | Complete output assemblers (9 rigid + 1 adaptive) |
+| **Modules** | 29+ | Reusable extraction/formatting components |
+| **Adaptive Modules** | 6 | Dynamic schema-less components |
 | **StructuredOutput** | 1 | Main data model for all response types |
 
 ### Query Types Supported
@@ -52,6 +53,117 @@ The Structured Output system in **v9.0** implements a complete **Orchestrator �
 | `team_build` | TeamBuildStructure | "Build a team of 3" |
 | `verification` | VerificationStructure | "Verify AWS certification" |
 | `summary` | SummaryStructure | "Overview of candidates" |
+| `adaptive` | **AdaptiveStructureBuilder** | "What technologies do they have?" |
+
+---
+
+## 🧠 Adaptive Structure System (v9.0)
+
+> **NEW in v9.0** - Intelligent dynamic structures that adapt to ANY query
+
+The **Adaptive Structure System** is a schema-less, intelligent output generator that:
+- **Detects dynamically** what the user is asking about
+- **Infers schema** (columns, attributes) from query + data at runtime
+- **Builds tables** with variable columns based on context
+- **Generates analysis** adapted to the specific question
+
+### Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    AdaptiveStructureBuilder                      │
+│  (Main orchestrator - assembles all components dynamically)      │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+         ┌────────────────────┼────────────────────┐
+         ▼                    ▼                    ▼
+┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
+│ QueryAnalyzer   │  │ SchemaInference │  │ DataExtractor   │
+│ - Detect intent │  │ - Infer columns │  │ - Extract from  │
+│ - Find attrs    │  │ - Determine fmt │  │   chunks        │
+└─────────────────┘  └─────────────────┘  └─────────────────┘
+         │                    │                    │
+         └────────────────────┼────────────────────┘
+                              ▼
+         ┌────────────────────┴────────────────────┐
+         ▼                                         ▼
+┌─────────────────────────┐          ┌─────────────────────────┐
+│  DynamicTableGenerator  │          │ AdaptiveAnalysisGen     │
+│  - Variable columns     │          │ - Contextual analysis   │
+│  - Format selection     │          │ - Distribution stats    │
+│  - Smart sorting        │          │ - Key findings          │
+└─────────────────────────┘          └─────────────────────────┘
+```
+
+### 6 Adaptive Modules
+
+| Module | Purpose | Key Features |
+|--------|---------|---------------|
+| **QueryAnalyzer** | Understand user intent | 7 intents, 10+ attribute types, filter detection |
+| **SchemaInferenceEngine** | Determine table structure | Dynamic columns, format hints, aggregation |
+| **SmartDataExtractor** | Extract data from chunks | Multi-source extraction, deduplication |
+| **DynamicTableGenerator** | Build variable-column tables | Adaptive formatting, highlighting |
+| **AdaptiveAnalysisGenerator** | Generate contextual analysis | Distribution stats, key findings |
+| **AdaptiveStructureBuilder** | Main orchestrator | Coordinates all components |
+
+### Query Intents Detected
+
+| Intent | Example | Output Format |
+|--------|---------|---------------|
+| `list_attribute` | "What skills do candidates have?" | Candidate rows |
+| `count_attribute` | "How many candidates know Python?" | Attribute rows |
+| `distribution` | "What's the distribution of skills?" | Frequency table |
+| `find_by_attribute` | "Who knows React?" | Filtered candidates |
+| `compare_attribute` | "Compare experience levels" | Matrix |
+| `aggregate` | "Average years of experience" | Summary |
+
+### Attributes Auto-Detected
+
+- **technologies**: Python, Java, React, AWS, Docker, etc.
+- **skills**: Technical and soft skills
+- **languages**: English, Spanish, French, etc.
+- **experience**: Years of experience
+- **education**: Degrees, universities
+- **certifications**: AWS Certified, PMP, etc.
+- **location**: City, country
+- **role**: Developer, Manager, etc.
+- **seniority**: Junior, Mid, Senior, Lead
+- **company**: Previous employers
+
+### Example Output
+
+```json
+{
+  "structure_type": "adaptive",
+  "query_analysis": {
+    "intent": "list_attribute",
+    "detected_attributes": ["skills", "technologies"],
+    "suggested_format": "candidate_rows",
+    "confidence": 0.85
+  },
+  "direct_answer": "Found 17 candidates with skills information.",
+  "dynamic_table": {
+    "title": "Skills Analysis",
+    "columns": ["Candidate", "Skills", "Experience"],
+    "rows": [...],
+    "row_entity": "candidate"
+  },
+  "analysis_sections": [
+    { "title": "Distribution", "content": "..." },
+    { "title": "Top Candidates", "content": "..." }
+  ],
+  "key_findings": ["17 candidates analyzed", "Top: Sofia Grijalva"],
+  "conclusion": "Based on the skills analysis..."
+}
+```
+
+### Key Principles
+
+- **NO HARDCODED COLUMNS**: Table schema is inferred at runtime
+- **NO FIXED FORMATS**: Output format adapts to data characteristics
+- **NO PREDEFINED TEMPLATES**: Analysis text is generated from data
+- **SCHEMA-LESS**: Works with any attribute combination
+- **SELF-DESCRIBING**: Output includes metadata about its own structure
 
 ---
 

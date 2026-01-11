@@ -1,6 +1,6 @@
 # CV Screener - Architecture v9.0
 
-> **Last Updated:** January 2026 - Complete v9.0 implementation with TypeScript, CI/CD, Cloud Parity, Streaming, Hybrid Search, 9 Structures, 29+ Modules, and Conversational Context
+> **Last Updated:** January 2026 - Complete v9.0 implementation with TypeScript, CI/CD, Cloud Parity, Streaming, Hybrid Search, 10 Structures (9 rigid + 1 Adaptive), 29+ Modules, 6 Adaptive Modules, and Conversational Context
 
 ---
 
@@ -128,8 +128,9 @@ The system supports **2 modes**: `local` and `cloud` (Supabase)
 | `team_build` | TeamBuildStructure | "Build a team of 3 developers" |
 | `verification` | VerificationStructure | "Verify if Juan has AWS certification" |
 | `summary` | SummaryStructure | "Overview of all candidates" |
+| `adaptive` | **AdaptiveStructureBuilder** | "What technologies do they have?" |
 
-### Modules (29+)
+### Modules (29+) + Adaptive Modules (6)
 
 | Category | Modules |
 |----------|---------|
@@ -141,6 +142,7 @@ The system supports **2 modes**: `local` and `cloud` (Supabase)
 | **Team (4)** | TeamRequirementsModule, TeamCompositionModule, SkillCoverageModule, TeamRiskModule |
 | **Verify (3)** | ClaimModule, EvidenceModule, VerdictModule |
 | **Summary (3)** | TalentPoolModule, SkillDistributionModule, ExperienceDistributionModule |
+| **Adaptive (6)** | QueryAnalyzer, SchemaInferenceEngine, SmartDataExtractor, DynamicTableGenerator, AdaptiveAnalysisGenerator, AdaptiveStructureBuilder |
 
 ---
 
@@ -202,7 +204,8 @@ During CV indexing, the following is automatically extracted:
 | File | Purpose |
 |------|---------|
 | `services/output_processor/orchestrator.py` | Main orchestrator |
-| `services/output_processor/structures/` | 9 structure classes |
+| `services/output_processor/structures/` | 9 rigid structure classes |
+| `services/output_processor/adaptive/` | 6 adaptive modules (dynamic schema-less) |
 | `services/output_processor/modules/` | 29+ module classes |
 
 ### Frontend Core
@@ -218,8 +221,8 @@ During CV indexing, the following is automatically extracted:
 ## ✅ IMPLEMENTED FEATURES (v9.0)
 
 - [x] Dual-mode architecture (Local/Cloud)
-- [x] 9 Output Structures with intelligent routing
-- [x] 29+ Reusable Modules
+- [x] 10 Output Structures (9 rigid + 1 Adaptive) with intelligent routing
+- [x] 29+ Reusable Modules + 6 Adaptive Modules
 - [x] Conversational Context propagation
 - [x] Query Understanding with pronoun resolution
 - [x] Real-time pipeline progress tracking
@@ -238,3 +241,4 @@ During CV indexing, the following is automatically extracted:
 - [x] **v9:** TypeScript migration (90%+ coverage)
 - [x] **v9:** GitHub Actions CI/CD
 - [x] **v9:** Full Cloud Parity (Supabase)
+- [x] **v9:** Adaptive Structure System (dynamic schema-less output)
