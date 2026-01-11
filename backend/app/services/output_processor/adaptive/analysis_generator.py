@@ -189,6 +189,17 @@ class AdaptiveAnalysisGenerator:
         # Default
         return f"Analysis of {attr_str} across {total} candidates."
     
+    # Cloud computing related skills for filtering
+    CLOUD_SKILLS = {
+        'aws', 'azure', 'gcp', 'google cloud', 'cloud', 'cloud computing',
+        'docker', 'kubernetes', 'k8s', 'terraform', 'ansible', 'jenkins',
+        'ci/cd', 'devops', 'serverless', 'lambda', 'ec2', 's3', 'cloudformation',
+        'eks', 'ecs', 'fargate', 'cloudwatch', 'iam', 'vpc', 'route53',
+        'azure devops', 'azure functions', 'blob storage', 'cosmos db',
+        'google cloud platform', 'bigquery', 'cloud run', 'cloud functions',
+        'microservices', 'containers', 'orchestration', 'infrastructure'
+    }
+    
     def _generate_distribution_section(
         self,
         analysis: QueryAnalysis,
@@ -223,20 +234,46 @@ class AdaptiveAnalysisGenerator:
         # Candidate-centric: need to aggregate
         attr_name = analysis.detected_attributes[0].name if analysis.detected_attributes else "skills"
         
-        # Count attribute values across all candidates
+        # Check if we need to filter by specific skills (e.g., "cloud computing")
+        must_have_filter = analysis.filter_conditions.get("must_have", "").lower()
+        filter_cloud = "cloud" in must_have_filter or "computing" in must_have_filter
+        
+        # Count attribute values across all candidates (using sets to avoid duplicates per candidate)
         value_counts: Counter = Counter()
+        candidates_with_skill: Dict[str, set] = {}  # skill -> set of candidate ids
+        
         for row in extraction_result.rows:
+            candidate_id = row.identifier_key or row.identifier
+            candidate_skills = set()  # Track unique skills per candidate
+            
             for col_key, col_value in row.values.items():
                 if col_key in ["skills", "technologies", "languages", attr_name]:
                     if isinstance(col_value, str):
                         for item in col_value.split(","):
                             item = item.strip()
                             if item:
-                                value_counts[item] += 1
+                                # Filter by cloud skills if requested
+                                if filter_cloud:
+                                    if item.lower() in self.CLOUD_SKILLS or any(cs in item.lower() for cs in self.CLOUD_SKILLS):
+                                        candidate_skills.add(item)
+                                else:
+                                    candidate_skills.add(item)
                     elif isinstance(col_value, list):
                         for item in col_value:
                             if item:
-                                value_counts[str(item).strip()] += 1
+                                item_str = str(item).strip()
+                                if filter_cloud:
+                                    if item_str.lower() in self.CLOUD_SKILLS or any(cs in item_str.lower() for cs in self.CLOUD_SKILLS):
+                                        candidate_skills.add(item_str)
+                                else:
+                                    candidate_skills.add(item_str)
+            
+            # Count each skill only once per candidate
+            for skill in candidate_skills:
+                value_counts[skill] += 1
+                if skill not in candidates_with_skill:
+                    candidates_with_skill[skill] = set()
+                candidates_with_skill[skill].add(candidate_id)
         
         if not value_counts:
             return None
@@ -246,7 +283,8 @@ class AdaptiveAnalysisGenerator:
         
         lines = []
         for val, count in top_5:
-            pct = round(count / total_candidates * 100, 0)
+            # Calculate percentage correctly (candidates with skill / total candidates)
+            pct = min(100, round(count / total_candidates * 100, 0))
             lines.append(f"- **{val}**: {count} candidates ({pct:.0f}%)")
         
         if len(value_counts) > 5:

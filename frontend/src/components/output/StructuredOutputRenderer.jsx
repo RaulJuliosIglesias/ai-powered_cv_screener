@@ -553,6 +553,105 @@ const CandidateTable = ({ tableData, onOpenCV }) => {
   );
 };
 
+// Section: Adaptive Table (Dynamic columns from backend)
+const AdaptiveTable = ({ tableData, onOpenCV }) => {
+  if (!tableData || !tableData.rows || tableData.rows.length === 0) {
+    return null;
+  }
+  
+  const { title, columns, rows, row_entity } = tableData;
+  
+  // Get column headers from columns array
+  const headers = columns?.map(col => col.name || col.key) || [];
+  
+  return (
+    <div className="mb-4 rounded-xl bg-slate-800/50 p-4">
+      <div className="flex items-center gap-2 mb-4">
+        <Table2 className="w-5 h-5 text-blue-400" />
+        <span className="font-semibold text-blue-300">{title || 'Results'}</span>
+        <span className="text-xs text-slate-500 ml-2">({rows.length} {row_entity || 'items'})</span>
+      </div>
+      
+      <div className="overflow-x-auto rounded-lg border border-slate-700">
+        <table className="w-full">
+          <thead>
+            <tr className="bg-slate-700/50 border-b border-slate-600">
+              {headers.map((header, idx) => (
+                <th 
+                  key={idx} 
+                  className="px-4 py-3 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider"
+                >
+                  {header}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-700/50">
+            {rows.map((row, rowIdx) => {
+              // Extract cv_id from row for linking
+              const cvId = row.cv_id || row.cells?.find(c => c.column === 'cv_id')?.value;
+              const candidateName = row.cells?.find(c => 
+                c.column === 'candidate_name' || c.column === 'Candidate'
+              )?.value || `Row ${rowIdx + 1}`;
+              
+              return (
+                <tr 
+                  key={rowIdx} 
+                  className="hover:bg-slate-700/30 transition-colors"
+                >
+                  {row.cells?.map((cell, cellIdx) => {
+                    // Check if this is the candidate name column - add CV link button
+                    const isNameCol = cell.column === 'candidate_name' || cell.column === 'Candidate';
+                    
+                    if (isNameCol && cvId && onOpenCV) {
+                      return (
+                        <td key={cellIdx} className="px-4 py-3 text-sm text-slate-200">
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={() => onOpenCV(cvId, cell.value)}
+                              className="inline-flex items-center justify-center w-6 h-6 bg-blue-600/30 text-blue-400 hover:bg-blue-600/50 rounded transition-colors flex-shrink-0"
+                              title={`View CV: ${cell.value}`}
+                            >
+                              <FileText className="w-3.5 h-3.5" />
+                            </button>
+                            <span className="font-semibold">{cell.value}</span>
+                          </div>
+                        </td>
+                      );
+                    }
+                    
+                    // Check if this is a score column
+                    const isScoreCol = cell.column === 'score' || cell.column === 'Score' || cell.column === 'match_score';
+                    if (isScoreCol) {
+                      const scoreValue = parseFloat(cell.value) || 0;
+                      // Normalize score to percentage (0-100)
+                      const displayScore = scoreValue > 1 ? Math.min(100, Math.round(scoreValue)) : Math.round(scoreValue * 100);
+                      return (
+                        <td key={cellIdx} className="px-4 py-3">
+                          <span className={`inline-flex px-3 py-1 rounded-full text-sm font-semibold ${getScoreColor(displayScore)}`}>
+                            {displayScore}%
+                          </span>
+                        </td>
+                      );
+                    }
+                    
+                    // Regular cell
+                    return (
+                      <td key={cellIdx} className="px-4 py-3 text-sm text-slate-300">
+                        {cell.display || cell.value || '-'}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
 // Section: Conclusion (Green border)
 const ConclusionSection = ({ content, onOpenCV, cvMap }) => {
   if (!content) return null;
@@ -863,12 +962,68 @@ const StructuredOutputRenderer = ({ structuredOutput, onOpenCV }) => {
   }
   
   // ==========================================================================
+  // ADAPTIVE STRUCTURE - Dynamic tables and analysis
+  // ==========================================================================
+  if (structure_type === 'adaptive') {
+    console.log('[STRUCTURED_OUTPUT] ROUTING: structure_type=adaptive');
+    console.log('[STRUCTURED_OUTPUT] adaptive data:', structuredOutput);
+    
+    // Build cvMap from dynamic_table for CV link resolution
+    const adaptiveCvMap = structuredOutput.dynamic_table?.rows?.reduce((acc, r) => {
+      const name = r.cells?.find(c => c.column === 'candidate_name' || c.column === 'Candidate')?.value;
+      const cvId = r.cv_id || r.cells?.find(c => c.column === 'cv_id')?.value;
+      if (name && cvId) {
+        acc[name.toLowerCase().trim()] = cvId;
+      }
+      return acc;
+    }, {}) || {};
+    
+    // Extract key findings as bullet points
+    const keyFindings = structuredOutput.key_findings || [];
+    
+    return (
+      <div className="space-y-3">
+        <ThinkingSection content={thinking} />
+        
+        {/* Direct Answer - Primary response */}
+        {direct_answer && <DirectAnswerSection content={direct_answer} onOpenCV={onOpenCV} cvMap={adaptiveCvMap} />}
+        
+        {/* Dynamic Table - Core output */}
+        {structuredOutput.dynamic_table?.rows?.length > 0 && (
+          <AdaptiveTable tableData={structuredOutput.dynamic_table} onOpenCV={onOpenCV} />
+        )}
+        
+        {/* Analysis sections */}
+        {analysis && <AnalysisSection content={analysis} onOpenCV={onOpenCV} cvMap={adaptiveCvMap} />}
+        
+        {/* Key Findings */}
+        {keyFindings.length > 0 && (
+          <div className="border-l-2 border-blue-500/50 pl-3 py-2">
+            <h4 className="text-sm font-medium text-blue-300 mb-2">Key Findings</h4>
+            <ul className="space-y-1">
+              {keyFindings.map((finding, idx) => (
+                <li key={idx} className="text-sm text-gray-300 flex items-start gap-2">
+                  <span className="text-blue-400">•</span>
+                  <ContentWithCVLinks content={finding} onOpenCV={onOpenCV} cvMap={adaptiveCvMap} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        
+        {/* Conclusion */}
+        {conclusion && <ConclusionSection content={conclusion} onOpenCV={onOpenCV} cvMap={adaptiveCvMap} />}
+      </div>
+    );
+  }
+  
+  // ==========================================================================
   // FALLBACK: Legacy detection for backwards compatibility
   // IMPORTANT: Only use fallback if backend didn't provide a known structure_type
   // ==========================================================================
   
   // Known structure types from backend - if we have one of these, DON'T use fallback
-  const knownStructureTypes = ['single_candidate', 'risk_assessment', 'comparison', 'search', 'ranking', 'job_match', 'team_build', 'verification', 'summary'];
+  const knownStructureTypes = ['single_candidate', 'risk_assessment', 'comparison', 'search', 'ranking', 'job_match', 'team_build', 'verification', 'summary', 'adaptive'];
   const hasKnownStructureType = structure_type && knownStructureTypes.includes(structure_type);
   
   // PRIORITY 1: Use Risk Assessment data from backend MODULE (reusable component)
