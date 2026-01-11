@@ -2,32 +2,128 @@
 
 > Planning documents for future improvements to the **AI-Powered CV Screener** project.
 >
-> **Current Version:** 6.0 | January 2026
+> **Current Version:** 8.0 | January 2026
+>
+> **💰 Cost Philosophy:** $0 en servicios fijos hasta tener usuarios. Solo pagar por uso (OpenRouter LLM).
 
 ---
 
-## ✅ Recently Implemented (v6.0)
+## 🗺️ Version Roadmap Overview
 
-The following features from the roadmap have been **implemented**:
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           ROADMAP OVERVIEW                                   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  V6 ✅       V7 ✅         V8 ✅           V9              V10        V11   │
+│  ─────────   ─────────     ─────────       ───             ───        ───   │
+│  Output      ML Models     UX Features     TypeScript      Auth       PG FTS│
+│  Orchestr.   NLI/RAGAS     Streaming       + CI/CD         + RLS      + Lang│
+│                                            (FREE)          (FREE)     Graph │
+│                                                                              │
+│  ✅ Done     ✅ Done       ✅ Done         📋 Next         📋 Plan    📋 Plan│
+│                                                                              │
+│  9 Struct.   Cross-Enc.    • Streaming     • TypeScript    • Login    • PG  │
+│  29 Modules  Zero-Shot     • Export PDF    • GitHub Act.   • OAuth      FTS │
+│  Suggestions RAGAS Eval    • Hybrid BM25   • Cloud Parity  • RLS      • Lang│
+│                            • Sem. Cache    • $0/month      • $0/month   Graph│
+│                            • Screening                                       │
+│                                                                              │
+│  V12: Simple Deploy (Vercel FREE + Render FREE + Supabase FREE) = $0/month  │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
 
+---
+
+## ✅ Completed Versions
+
+### V8.0 (Current) - UX Features
 | Feature | Status | Description |
 |---------|--------|-------------|
-| Output Orchestrator | ✅ Done | 9 Structures + 29 Modules architecture |
-| Conversational Context | ✅ Done | Full pipeline context propagation |
-| Dynamic Suggestions | ✅ Done | SuggestionEngine with 10 query banks |
-| Query Understanding | ✅ Done | Pronoun resolution, query classification |
-| Session-Based Architecture | ✅ Done | CVs and chats organized per session |
+| Streaming Tokens | ✅ Done | Token-by-token SSE streaming |
+| Export PDF/CSV | ✅ Done | Download candidate reports |
+| Fallback Chain | ✅ Done | Auto-failover between models |
+| Hybrid Search | ✅ Done | BM25 + Vector fusion |
+| Semantic Cache | ✅ Done | Query similarity caching |
+| Auto-Screening | ✅ Done | Rule-based candidate filtering |
+| Candidate Scoring | ✅ Done | Configurable scoring model |
+
+### V7.0 - ML Enhancements
+| Feature | Status | Description |
+|---------|--------|-------------|
+| Cross-Encoder Reranking | ✅ Done | HuggingFace BGE reranker |
+| NLI Verification | ✅ Done | Hallucination detection |
+| Zero-Shot Guardrails | ✅ Done | ML-based query filtering |
+| RAGAS Evaluation | ✅ Done | Quality metrics logging |
+
+### V6.0 - Core Architecture
+| Feature | Status | Description |
+|---------|--------|-------------|
+| Output Orchestrator | ✅ Done | 9 Structures + 29 Modules |
+| Conversational Context | ✅ Done | Full pipeline context |
+| Dynamic Suggestions | ✅ Done | SuggestionEngine |
+| Query Understanding | ✅ Done | Pronoun resolution |
 
 ---
 
-## 📑 Future Plans
+## 📋 Upcoming Versions
 
-| Priority | Document | Description |
-|----------|----------|-------------|
-| 🟡 Medium | [Confidence Improvements](./CONFIDENCE.md) | Answer confidence calibration system |
-| 🟡 Medium | [RAG V7 Enhancements](./RAG_V7.md) | Advanced ML models, NLI verification, Cross-Encoder reranking |
-| 🟢 Low | [Advanced Evaluation](./ADVANCED_EVAL.md) | Production-grade evaluation metrics |
-| 🔴 High | [Security Improvements](./SECURITY_IMPROVEMENTS.md) | Authentication and rate limiting |
+### 🔴 V9 - TypeScript + CI/CD (Next)
+**Duration**: ~15 days | **Status**: 📋 PLANNED
+
+| Feature | Priority | Description |
+|---------|----------|-------------|
+| **TypeScript Migration** | 🔴 Critical | Type-safe frontend |
+| **GitHub Actions CI/CD** | 🔴 Critical | Automated testing & quality gates |
+| **Cloud Parity** | 🔴 High | Supabase = Local functionality |
+| Dependabot | 🟡 Medium | Automated dependency updates |
+| Pre-commit Hooks | 🟡 Medium | Local quality checks |
+
+📄 **[V9 Implementation Plan](./V9_IMPLEMENTATION_PLAN.md)**
+
+---
+
+### 🟡 V10 - Authentication & Multi-Tenant
+**Duration**: ~13 days | **Status**: 📋 PLANNED
+
+| Feature | Priority | Description |
+|---------|----------|-------------|
+| **Supabase Auth** | 🔴 Critical | Login, Signup, OAuth |
+| **Row Level Security** | 🔴 Critical | Data isolation per user |
+| **User Quotas** | 🔴 High | Tier-based limits |
+| **CI/CD Professional** | 🔴 High | Staging + auto-deploy |
+| E2E Tests (Playwright) | 🟡 Medium | End-to-end testing |
+
+📄 **[V10 Implementation Plan](./V10_IMPLEMENTATION_PLAN.md)**
+
+---
+
+### 🟢 V11 - PostgreSQL FTS + LangGraph
+**Duration**: ~10 days | **Status**: 📋 PLANNED | **Cost**: $0/month
+
+| Feature | Priority | Description |
+|---------|----------|-------------|
+| **PostgreSQL FTS** | 🔴 Critical | BM25 en cloud (gratis en Supabase) |
+| **LangGraph Pipeline** | 🔴 High | Stateful RAG con memoria |
+| Analytics Básico | 🟡 Medium | Tablas en Supabase (gratis) |
+| Mejorar Hybrid Search | � Medium | Fuzzy, sinónimos |
+
+📄 **[V11 Implementation Plan](./V11_IMPLEMENTATION_PLAN.md)**
+
+---
+
+### 🌐 V12 - Simple Deploy (FREE)
+**Duration**: ~3 days | **Status**: 📋 PLANNED | **Cost**: $0/month
+
+| Feature | Priority | Description |
+|---------|----------|-------------|
+| **Vercel (Frontend)** | 🔴 Critical | FREE tier, CDN global |
+| **Render (Backend)** | 🔴 Critical | FREE tier, 750h/mes |
+| **Supabase** | 🔴 Critical | Ya configurado, FREE |
+| Monitoring Básico | 🟡 Medium | UptimeRobot (gratis) |
+
+📄 **[V12 Implementation Plan](./V12_IMPLEMENTATION_PLAN.md)**
 
 ---
 
@@ -35,48 +131,56 @@ The following features from the roadmap have been **implemented**:
 
 ```
 docs/roadmap/
-├── README.md                    ← You are here
-├── RAG_V7.md                    ← Advanced ML models & NLI (future)
-├── CONFIDENCE.md                ← LLM-as-Judge & calibration
-├── ADVANCED_EVAL.md             ← Token analysis & citations
-└── SECURITY_IMPROVEMENTS.md     ← Auth & rate limiting (HIGH priority)
+├── README.md                       ← You are here
+├── V8_IMPLEMENTATION_PLAN.md       ← ✅ UX Features (COMPLETED)
+├── V9_IMPLEMENTATION_PLAN.md       ← 📋 TypeScript + CI/CD (NEXT)
+├── V10_IMPLEMENTATION_PLAN.md      ← 📋 Auth + Multi-Tenant
+├── V11_IMPLEMENTATION_PLAN.md      ← 📋 PG FTS + LangGraph
+├── V12_IMPLEMENTATION_PLAN.md      ← 📋 Simple Deploy (FREE)
+├── RAG_V7.md                       ← ✅ ML models (COMPLETED)
+├── CONFIDENCE.md                   ← LLM-as-Judge & calibration
+├── ADVANCED_EVAL.md                ← Token analysis & citations
+└── SECURITY_IMPROVEMENTS.md        ← Covered in V10 (Auth)
 ```
 
 ---
 
-## 🔴 High Priority
+## 🛠️ New Technologies by Version
 
-### [Security Improvements](./SECURITY_IMPROVEMENTS.md)
-- Authentication hardening
-- Rate limiting and abuse protection
-- Input validation and sanitization
-- Infrastructure security best practices
+| Version | Technologies Added | Monthly Cost |
+|---------|-------------------|--------------|
+| **V9** | TypeScript, GitHub Actions | $0 |
+| **V10** | Supabase Auth, Playwright E2E | $0 |
+| **V11** | PostgreSQL FTS, LangGraph | $0 |
+| **V12** | Vercel, Render (FREE tiers) | $0 |
 
----
-
-## 🟡 Medium Priority
-
-### [Confidence Improvements](./CONFIDENCE.md)
-- LLM-as-Judge evaluation patterns
-- NLI models for answer verification
-- Self-Consistency checking
-- Score calibration system
-
-### [RAG V7 Enhancements](./RAG_V7.md)
-- Advanced ML models (Cross-Encoder reranking, NLI verification)
-- Zero-shot classification for guardrails
-- RAGAS evaluation framework
-- Precision and recall improvements
+### ❌ Tecnologías Descartadas (innecesarias para prototipo)
+- ~~Elasticsearch~~ → PostgreSQL FTS (gratis en Supabase)
+- ~~Kubernetes~~ → Vercel + Render (gratis)
+- ~~AWS/GCP managed~~ → Free tiers suficientes
 
 ---
 
-## 🟢 Low Priority
+## 📊 Estimated Timeline & Costs
 
-### [Advanced Evaluation](./ADVANCED_EVAL.md)
-- Advanced token analysis
-- Citation verification system
-- Calibration framework
-- Production metrics dashboard
+| Version | Duration | Key Deliverables | Monthly Cost |
+|---------|----------|------------------|--------------|
+| V9 | ~15 días | TypeScript, CI/CD | $0 |
+| V10 | ~13 días | Auth, RLS | $0 |
+| V11 | ~10 días | PG FTS, LangGraph | $0 |
+| V12 | ~3 días | Production deploy | $0 |
+| **Total** | **~41 días** | **Production-ready** | **$0/month** |
+
+*Solo pagas por uso de LLM (OpenRouter): ~$1-5/mes con uso moderado*
+
+---
+
+## 📑 Legacy Planning Documents
+
+| Priority | Document | Description |
+|----------|----------|-------------|
+| 🟡 Medium | [Confidence Improvements](./CONFIDENCE.md) | Answer confidence calibration |
+| 🟢 Low | [Advanced Evaluation](./ADVANCED_EVAL.md) | Production metrics dashboard |
 
 ---
 
@@ -84,8 +188,8 @@ docs/roadmap/
 
 | Document | Description |
 |----------|-------------|
-| [RAG Workflow](../RAG_WORKFLOW.md) | Current RAG pipeline v6.0 architecture |
-| [Architecture](../../ARCHITECTURE.md) | System architecture v6.0 overview |
+| [RAG Workflow](../RAG_WORKFLOW.md) | Current RAG pipeline architecture |
+| [Architecture](../../ARCHITECTURE.md) | System architecture overview |
 | [Structured Output](../STRUCTURED_OUTPUT.md) | 9 Structures + 29 Modules |
 | [Evaluation Criteria](../evaluation/) | Project evaluation documentation |
 
