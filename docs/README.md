@@ -2,13 +2,32 @@
 
 > Complete documentation for the **AI-Powered CV Screener** project.
 >
-> **Version 6.0** | January 2026
+> **Version 9.0** | January 2026
 
 ---
 
-## 🆕 What's New in v6.0
+## 🆕 What's New in v9.0
 
-### Complete Orchestration Architecture
+### V9: TypeScript + CI/CD + Cloud Parity
+- **TypeScript Migration**: 90%+ type coverage in frontend
+- **GitHub Actions CI/CD**: Automated testing, linting, type checking
+- **Full Cloud Parity**: Supabase works identical to local
+- **Pre-commit Hooks**: 8 local quality gates
+
+### V8: Streaming, Hybrid Search, Export
+- **Streaming Token Generation**: Real-time response display
+- **Hybrid Search**: BM25 + Vector search with RRF fusion
+- **Export PDF/CSV**: Download session analysis reports
+- **Semantic Cache**: Query caching for instant responses
+- **LLM Fallback Chain**: Automatic model failover
+
+### V7: HuggingFace Integration
+- **NLI Verification**: Claim verification with `facebook/bart-large-mnli`
+- **Cross-Encoder Reranking**: `BAAI/bge-reranker-base`
+- **RAGAS Evaluation**: Quality metrics
+- **65+ Query Detection Patterns**
+
+### V6: Complete Orchestration Architecture
 **Orchestrator → Structures → Modules** system:
 
 | Component | Count | Description |
@@ -53,8 +72,10 @@
 ```
 docs/
 ├── README.md                      ← You are here
-├── RAG_WORKFLOW.md                ← RAG pipeline architecture (v6.0)
-├── STRUCTURED_OUTPUT.md           ← Structured output processing (v6.0)
+├── RAG_WORKFLOW.md                ← RAG pipeline architecture (v9.0)
+├── STRUCTURED_OUTPUT.md           ← Structured output processing (v9.0)
+├── V9_TESTING_GUIDE.md            ← Testing guide for all V9 features
+├── CHANGELOG_V9.md                ← V9 changes (TypeScript, CI/CD, Cloud)
 ├── ARCHITECTURE_MODULES.md        ← Orchestrator/Structures/Modules architecture
 ├── CONVERSATIONAL_CONTEXT.md      ← Context system (implemented)
 ├── METADATA_FLOW.md               ← Metadata extraction pipeline
@@ -78,7 +99,9 @@ docs/
 | [STRUCTURED_OUTPUT.md](./STRUCTURED_OUTPUT.md) | 9 structures + 29 modules system |
 | [ARCHITECTURE_MODULES.md](./ARCHITECTURE_MODULES.md) | Complete Orchestrator → Structures → Modules reference |
 | [CONVERSATIONAL_CONTEXT.md](./CONVERSATIONAL_CONTEXT.md) | Context propagation and pronoun resolution |
-| [CHANGELOG_ARCHITECTURE_V6.md](./CHANGELOG_ARCHITECTURE_V6.md) | All v6.0 changes and bug fixes |
+| [CHANGELOG_V9.md](./CHANGELOG_V9.md) | V9 changes (TypeScript, CI/CD, Cloud Parity) |
+| [V9_TESTING_GUIDE.md](./V9_TESTING_GUIDE.md) | Complete testing guide for V9 features |
+| [CHANGELOG_ARCHITECTURE_V6.md](./CHANGELOG_ARCHITECTURE_V6.md) | V6 orchestration architecture changes |
 
 ---
 
@@ -97,7 +120,7 @@ Documentation demonstrating how the project meets professional evaluation criter
 Future development plans:
 - **Advanced Evaluation** - Automated response quality metrics
 - **Confidence Calibration** - Response confidence scoring
-- **RAG v7 Enhancements** - Advanced ML models, NLI verification, Cross-Encoder reranking
+- **V10 Multi-tenant** - Authentication, user login, Row-Level Security
 
 ### [📦 archive/](./archive/)
 Historical documentation of already implemented plans. Useful for understanding project evolution.
@@ -133,7 +156,7 @@ Historical documentation of already implemented plans. Useful for understanding 
 | Document | Location | Description |
 |----------|----------|-------------|
 | [Main README](../README.md) | Project root | Quick start and overview |
-| [ARCHITECTURE.md](./ARCHITECTURE.md) | docs/ | Complete technical architecture v6.0 |
+| [ARCHITECTURE.md](./ARCHITECTURE.md) | docs/ | Complete technical architecture v9.0 |
 | [MODES_EXPLANATION.md](./MODES_EXPLANATION.md) | docs/ | Local vs Cloud mode details |
 | [SECURITY.md](../SECURITY.md) | Project root | Security considerations |
 

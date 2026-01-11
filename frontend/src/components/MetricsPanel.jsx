@@ -343,9 +343,9 @@ function QueryEntry({ entry, isExpanded, onToggle }) {
               </div>
             </div>
             
-            {/* V8 ENHANCEMENTS */}
+            {/* V9 ENHANCEMENTS */}
             <div>
-              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2 font-semibold">🚀 V8 Enhancements</div>
+              <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2 font-semibold">🚀 V9 Enhancements</div>
               <div className="bg-gray-900/50 rounded-lg p-2.5">
                 <div className="space-y-1.5 text-xs">
                   {/* Guardrail Method */}

@@ -1,6 +1,6 @@
-# CV Screener - Architecture v6.0
+# CV Screener - Architecture v9.0
 
-> **Last Updated:** January 2026 - Complete v6.0 implementation with 9 Structures, 29+ Modules, and Conversational Context
+> **Last Updated:** January 2026 - Complete v9.0 implementation with TypeScript, CI/CD, Cloud Parity, Streaming, Hybrid Search, 9 Structures, 29+ Modules, and Conversational Context
 
 ---
 
@@ -54,11 +54,11 @@ The system supports **2 modes**: `local` and `cloud` (Supabase)
 
 ---
 
-## 🔄 RAG PIPELINE v6.0
+## 🔄 RAG PIPELINE v9.0
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│                              RAG PIPELINE v6.0                                   │
+│                              RAG PIPELINE v9.0                                   │
 ├─────────────────────────────────────────────────────────────────────────────────┤
 │                                                                                 │
 │  USER QUERY                                                                     │
@@ -81,7 +81,7 @@ The system supports **2 modes**: `local` and `cloud` (Supabase)
 │      │                                                                          │
 │      ▼                                                                          │
 │  ┌─────────────────────┐                                                       │
-│  │   VECTOR SEARCH     │ → Retrieve relevant CV chunks from session            │
+│  │   HYBRID SEARCH     │ → BM25 + Vector search for relevant CV chunks         │
 │  └─────────────────────┘                                                       │
 │      │                                                                          │
 │      ▼                                                                          │
@@ -215,7 +215,7 @@ During CV indexing, the following is automatically extracted:
 
 ---
 
-## ✅ IMPLEMENTED FEATURES (v6.0)
+## ✅ IMPLEMENTED FEATURES (v9.0)
 
 - [x] Dual-mode architecture (Local/Cloud)
 - [x] 9 Output Structures with intelligent routing
@@ -230,3 +230,11 @@ During CV indexing, the following is automatically extracted:
 - [x] Duplicate CV detection (content hash)
 - [x] Background upload processing
 - [x] AI-powered session naming
+- [x] **v8:** Streaming token generation
+- [x] **v8:** Export PDF/CSV
+- [x] **v8:** Hybrid Search (BM25 + Vector)
+- [x] **v8:** Semantic Cache
+- [x] **v8:** LLM Fallback Chain
+- [x] **v9:** TypeScript migration (90%+ coverage)
+- [x] **v9:** GitHub Actions CI/CD
+- [x] **v9:** Full Cloud Parity (Supabase)

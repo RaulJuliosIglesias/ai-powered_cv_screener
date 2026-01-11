@@ -2,14 +2,16 @@
 
 > **CV Screener AI - Complete RAG Pipeline Reference**
 > 
-> Version: 7.0 | Last Updated: January 2026
+> Version: 9.0 | Last Updated: January 2026
 
 ---
 
 ## Table of Contents
 
 1. [System Overview](#system-overview)
-2. [V7 Features: HuggingFace Integration](#v7-features-huggingface-integration) ← **NEW in v7.0**
+2. [V9 Features: TypeScript + CI/CD + Cloud Parity](#v9-features-typescript-cicd-cloud-parity) ← **NEW in v9.0**
+2b. [V8 Features: Streaming, Hybrid Search, Export](#v8-features-streaming-hybrid-search-export)
+2c. [V7 Features: HuggingFace Integration](#v7-features-huggingface-integration)
 3. [V6 Architecture: Orchestration System](#v6-architecture-orchestration-system)
 4. [Smart CV Chunking](#smart-cv-chunking)
 4. [Architecture Diagram](#architecture-diagram)
@@ -36,8 +38,16 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
 | **LOCAL** | JSON vector store, local embeddings (sentence-transformers) |
 | **CLOUD** | Supabase pgvector, nomic-embed-v1.5 embeddings, OpenRouter LLMs |
 
-### Key Features (V7.0 - Current)
+### Key Features (V9.0 - Current)
 
+- ✅ **TypeScript Migration**: 90%+ type coverage in frontend
+- ✅ **GitHub Actions CI/CD**: Automated testing, linting, type checking
+- ✅ **Full Cloud Parity**: Supabase works identical to local
+- ✅ **Streaming Token Generation**: Real-time response streaming
+- ✅ **Hybrid Search**: BM25 + Vector search with RRF fusion
+- ✅ **Export PDF/CSV**: Download session analysis reports
+- ✅ **Semantic Cache**: Query caching for instant repeat responses
+- ✅ **LLM Fallback Chain**: Automatic model failover
 - ✅ **HuggingFace Integration (FREE)**: NLI Verification, Cross-Encoder Reranking, RAGAS Evaluation
 - ✅ **65+ Query Detection Patterns**: Enhanced single/multi candidate detection
 - ✅ **Risk Assessment Module**: 5-factor risk table for single candidates
@@ -61,9 +71,63 @@ The CV Screener uses a **multi-step RAG (Retrieval-Augmented Generation) pipelin
 
 ---
 
+## V9 Features: TypeScript + CI/CD + Cloud Parity
+
+> **NEW in v9.0** - Production-ready infrastructure with type safety and automation
+
+### TypeScript Migration
+- **90%+ Type Coverage**: All hooks, services, and core components typed
+- **Type Definitions**: `frontend/src/types/index.ts` with CV, Message, Pipeline types
+- **Strict Mode**: Enabled for better error detection
+
+### GitHub Actions CI/CD
+- **Backend Pipeline**: Python 3.10-3.12 matrix, Ruff, Mypy, Bandit, Pytest
+- **Frontend Pipeline**: TypeScript check, ESLint, Build verification
+- **Dependabot**: Automated dependency updates
+- **Pre-commit Hooks**: Local quality gates
+
+### Cloud Parity (Supabase)
+- **Full Feature Parity**: All local features work in cloud mode
+- **New Tables**: `sessions`, `session_cvs`, `session_messages`, `query_cache`, `screening_rules`
+- **Hybrid Search Function**: `hybrid_search()` combines vector + FTS
+- **Session-filtered Search**: `match_cv_embeddings_by_session()`
+
+---
+
+## V8 Features: Streaming, Hybrid Search, Export
+
+> **v8.0** - Enhanced UX with streaming and advanced search
+
+### Streaming Token Generation
+- Real-time token-by-token response display
+- SSE (Server-Sent Events) for live updates
+- Cursor animation during generation
+
+### Hybrid Search (BM25 + Vector)
+- Combines semantic similarity with keyword matching
+- Reciprocal Rank Fusion for result merging
+- Better recall for technical terms
+
+### Export PDF/CSV
+- Download session analysis as PDF or CSV
+- Professional formatting with candidate rankings
+- API endpoints: `/api/export/{session_id}/pdf|csv`
+
+### Semantic Cache
+- Query similarity matching for instant responses
+- Configurable similarity threshold
+- Cache hit tracking and cleanup
+
+### LLM Fallback Chain
+- Automatic failover to backup models
+- Circuit breaker pattern for resilience
+- Status endpoint: `/api/v8/fallback/status`
+
+---
+
 ## V7 Features: HuggingFace Integration
 
-> **NEW in v7.0** - Free HuggingFace services for verification, reranking, and evaluation
+> **v7.0** - Free HuggingFace services for verification, reranking, and evaluation
 
 ### Pipeline with HuggingFace
 

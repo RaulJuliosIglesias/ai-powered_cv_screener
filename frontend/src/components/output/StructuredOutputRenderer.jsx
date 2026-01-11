@@ -127,9 +127,9 @@ const ContentWithCVLinks = ({ content, onOpenCV, cvMap = {} }) => {
   const patterns = [
     // Patrón principal: [📄](cv:xxx) **Name** - emoji en link, nombre fuera
     { regex: /\[📄\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\s*\*\*([^*]+)\*\*/g, hasId: true, nameGroup: 2, idGroup: 1 },
-    // Alternativas
-    { regex: /\*\*\[([^\]]+)\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\*\*/g, hasId: true },   // **[Name](cv:xxx)**
-    { regex: /\[([^\]]+)\]\(cv:(cv_[a-zA-Z0-9_-]+)\)/g, hasId: true },            // [Name](cv:xxx) donde nombre no es emoji
+    // Alternativas - orden importa, más específicos primero
+    { regex: /\*\*\[([^\]]+)\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\*\*:?/g, hasId: true },   // **[Name](cv:xxx)**: con : opcional
+    { regex: /\[([^\]]+)\]\(cv:(cv_[a-zA-Z0-9_-]+)\):?/g, hasId: true },            // [Name](cv:xxx): donde nombre no es emoji
     { regex: /📄\s*\*\*([^*]+)\*\*/g, hasId: false },                              // 📄 **Name**
     { regex: /📄\s*([A-Z][a-zA-Z'-]+(?:\s+[A-Z][a-zA-Z'-]+)+)/g, hasId: false },  // 📄 Name Surname (con guiones)
   ];

@@ -140,6 +140,15 @@ class StructuredOutput:
     skill_distribution: Optional[Dict[str, Any]] = None
     experience_distribution: Optional[Dict[str, Any]] = None
     
+    # Adaptive structure data (dynamic tables)
+    dynamic_table: Optional[Dict[str, Any]] = None
+    table_markdown: Optional[str] = None
+    analysis_sections: Optional[List[Dict[str, Any]]] = None
+    key_findings: Optional[List[str]] = None
+    query_analysis: Optional[Dict[str, Any]] = None
+    schema_info: Optional[Dict[str, Any]] = None
+    total_candidates: Optional[int] = None
+    
     # Metadata
     cv_references: List[CVReference] = field(default_factory=list)
     parsing_warnings: List[str] = field(default_factory=list)
@@ -188,6 +197,14 @@ class StructuredOutput:
             "talent_pool": self.talent_pool,
             "skill_distribution": self.skill_distribution,
             "experience_distribution": self.experience_distribution,
+            # Adaptive structure data
+            "dynamic_table": self.dynamic_table,
+            "table_markdown": self.table_markdown,
+            "analysis_sections": self.analysis_sections,
+            "key_findings": self.key_findings,
+            "query_analysis": self.query_analysis,
+            "schema_info": self.schema_info,
+            "total_candidates": self.total_candidates,
             # Metadata
             "cv_references": [
                 {"cv_id": ref.cv_id, "name": ref.name, "context": ref.context}

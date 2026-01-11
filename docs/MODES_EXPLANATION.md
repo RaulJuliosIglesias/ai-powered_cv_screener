@@ -1,6 +1,6 @@
 # Differences Between LOCAL and CLOUD
 
-> **Last Updated:** January 2026 - v6.0
+> **Last Updated:** January 2026 - v9.0
 
 ---
 

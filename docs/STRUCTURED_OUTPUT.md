@@ -2,14 +2,14 @@
 
 > **CV Screener AI - Complete Structured Output Documentation**
 > 
-> Version: 6.0 | Last Updated: January 2026
+> Version: 9.0 | Last Updated: January 2026
 
 ---
 
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [Architecture (v6.0)](#architecture-v60)
+2. [Architecture (v9.0)](#architecture-v90)
 3. [Query Type → Structure Routing](#query-type--structure-routing)
 4. [9 Structures Reference](#9-structures-reference)
 5. [29 Modules Reference](#29-modules-reference)
@@ -23,14 +23,14 @@
 
 ## Overview
 
-The Structured Output system in **v6.0** implements a complete **Orchestrator → Structures → Modules** architecture that:
+The Structured Output system in **v9.0** implements a complete **Orchestrator → Structures → Modules** architecture that:
 
 - **Routes queries** to the appropriate Structure based on `query_type`
 - **Assembles outputs** using reusable Modules
 - **Supports context** via `conversation_history` parameter
 - **Ensures consistency** through type-safe dataclasses
 
-### Key Components (v6.0)
+### Key Components (v9.0)
 
 | Component | Count | Purpose |
 |-----------|-------|---------|

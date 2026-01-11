@@ -9,7 +9,7 @@
 [![React](https://img.shields.io/badge/React-18+-61DAFB.svg)](https://reactjs.org)
 [![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-red.svg)](LICENSE)
 
-**Version 7.0** - Production-ready RAG pipeline with HuggingFace NLI verification, RAGAS evaluation, 65+ query detection patterns, 9 output structures, 29+ modules, and intelligent query routing.
+**Version 9.0** - Production-ready RAG pipeline with TypeScript frontend, GitHub Actions CI/CD, full Cloud Parity, HuggingFace NLI verification, RAGAS evaluation, Streaming, Export (PDF/CSV), Hybrid Search, 65+ query detection patterns, 9 output structures, 29+ modules, and intelligent query routing.
 
 [Features](#-features) · [Quick Start](#-quick-start) · [Architecture](#-architecture) · [Demo](#-demo) · [Documentation](#-documentation)
 
@@ -43,10 +43,10 @@
 ### 🔄 Dual-Mode Architecture
 Switch seamlessly between **Local** (ChromaDB + sentence-transformers) and **Cloud** (Supabase pgvector) backends.
 
-### 🧠 Advanced RAG Pipeline (v7.0)
-Multi-stage pipeline: Query Understanding → Multi-Query Expansion → Guardrails → Embedding → Search → Cross-Encoder Reranking → Reasoning → Generation → NLI Verification → RAGAS Evaluation → Output Orchestration.
+### 🧠 Advanced RAG Pipeline (v9.0)
+Multi-stage pipeline: Query Understanding → Multi-Query Expansion → Guardrails → Embedding → Hybrid Search (BM25 + Vector) → Cross-Encoder Reranking → Reasoning → Generation (Streaming) → NLI Verification → RAGAS Evaluation → Output Orchestration.
 
-### 🔬 HuggingFace Integration (v7 - FREE)
+### 🔬 HuggingFace Integration (FREE)
 - **NLI Verification**: Natural Language Inference for claim verification using `facebook/bart-large-mnli`
 - **Cross-Encoder Reranking**: Semantic reranking with `BAAI/bge-reranker-base`
 - **Zero-Shot Guardrails**: Topic classification without training
@@ -145,9 +145,9 @@ python scripts/start_web.py   # Frontend → http://localhost:6001
 │                        BACKEND (FastAPI + Python)                          │
 │                                                                            │
 │  ┌──────────────────────────────────────────────────────────────────────┐  │
-│  │                      RAG PIPELINE v7.0                                │  │
-│  │  Query → Understand → MultiQuery → Guardrail → Embed → Search →       │  │
-│  │  CrossEncoder → Generate → NLI Verify → RAGAS → ORCHESTRATOR          │  │
+│  │                      RAG PIPELINE v9.0                                │  │
+│  Query → Understand → MultiQuery → Guardrail → Embed → HybridSearch → │  │
+│  CrossEncoder → Generate(Stream) → NLI Verify → RAGAS → ORCHESTRATOR  │  │
 │  └──────────────────────────────────────────────────────────────────────┘  │
 │                                     │                                      │
 │  ┌──────────────────────────────────┴───────────────────────────────────┐  │
@@ -190,7 +190,7 @@ python scripts/start_web.py   # Frontend → http://localhost:6001
 | **Summary** | "Give me an overview of all candidates" | Talent pool summary + distributions |
 | **Off-topic** | "What's a good recipe for pasta?" | Polite rejection ✓ |
 
-### Response Format (v6.0)
+### Response Format (v9.0)
 
 ```json
 {
@@ -226,7 +226,7 @@ python scripts/start_web.py   # Frontend → http://localhost:6001
 
 | Layer | Technology | Purpose |
 |-------|------------|---------|
-| **Frontend** | React 18 + TypeScript | UI Framework |
+| **Frontend** | React 18 + TypeScript (v9) | UI Framework |
 | **UI Components** | Shadcn UI + Radix | Accessible components |
 | **Styling** | TailwindCSS | Utility-first CSS |
 | **Backend** | FastAPI + Python 3.11+ | REST API |

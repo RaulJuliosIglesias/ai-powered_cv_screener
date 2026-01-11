@@ -368,6 +368,18 @@ class OutputOrchestrator:
             structured.skill_distribution = structure_data.get("skill_distribution")
             structured.experience_distribution = structure_data.get("experience_distribution")
         
+        # For adaptive, add dynamic table and all adaptive components
+        elif structure_data.get("structure_type") == "adaptive":
+            structured.direct_answer = structure_data.get("direct_answer", "")
+            structured.dynamic_table = structure_data.get("dynamic_table")
+            structured.table_markdown = structure_data.get("table_markdown")
+            structured.analysis = structure_data.get("analysis")
+            structured.analysis_sections = structure_data.get("analysis_sections")
+            structured.key_findings = structure_data.get("key_findings")
+            structured.query_analysis = structure_data.get("query_analysis")
+            structured.total_candidates = structure_data.get("total_candidates")
+            structured.schema_info = structure_data.get("schema_info")
+        
         # Build formatted answer (for legacy compatibility)
         formatted_answer = self._format_structure_output(structure_data)
         

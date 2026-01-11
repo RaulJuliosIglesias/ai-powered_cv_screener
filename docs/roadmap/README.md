@@ -2,7 +2,7 @@
 
 > Planning documents for future improvements to the **AI-Powered CV Screener** project.
 >
-> **Current Version:** 8.0 | January 2026
+> **Current Version:** 9.0 | January 2026
 >
 > **💰 Cost Philosophy:** $0 en servicios fijos hasta tener usuarios. Solo pagar por uso (OpenRouter LLM).
 
@@ -15,13 +15,13 @@
 │                           ROADMAP OVERVIEW                                   │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
-│  V6 ✅       V7 ✅         V8 ✅           V9              V10        V11   │
-│  ─────────   ─────────     ─────────       ───             ───        ───   │
+│  V6 ✅       V7 ✅         V8 ✅           V9 ✅           V10        V11   │
+│  ─────────   ─────────     ─────────       ─────────       ───        ───   │
 │  Output      ML Models     UX Features     TypeScript      Auth       PG FTS│
 │  Orchestr.   NLI/RAGAS     Streaming       + CI/CD         + RLS      + Lang│
 │                                            (FREE)          (FREE)     Graph │
 │                                                                              │
-│  ✅ Done     ✅ Done       ✅ Done         📋 Next         📋 Plan    📋 Plan│
+│  ✅ Done     ✅ Done       ✅ Done         ✅ Done         📋 Next    📋 Plan│
 │                                                                              │
 │  9 Struct.   Cross-Enc.    • Streaming     • TypeScript    • Login    • PG  │
 │  29 Modules  Zero-Shot     • Export PDF    • GitHub Act.   • OAuth      FTS │
@@ -38,7 +38,16 @@
 
 ## ✅ Completed Versions
 
-### V8.0 (Current) - UX Features
+### V9.0 (Current) - TypeScript + CI/CD + Cloud Parity
+| Feature | Status | Description |
+|---------|--------|--------------|
+| TypeScript Migration | ✅ Done | 90%+ type coverage frontend |
+| GitHub Actions CI/CD | ✅ Done | Backend + Frontend pipelines |
+| Cloud Parity | ✅ Done | Supabase = Local functionality |
+| Pre-commit Hooks | ✅ Done | 8 quality gate hooks |
+| Dependabot | ✅ Done | Automated dependency updates |
+
+### V8.0 - UX Features
 | Feature | Status | Description |
 |---------|--------|-------------|
 | Streaming Tokens | ✅ Done | Token-by-token SSE streaming |
@@ -69,22 +78,7 @@
 
 ## 📋 Upcoming Versions
 
-### 🔴 V9 - TypeScript + CI/CD (Next)
-**Duration**: ~15 days | **Status**: 📋 PLANNED
-
-| Feature | Priority | Description |
-|---------|----------|-------------|
-| **TypeScript Migration** | 🔴 Critical | Type-safe frontend |
-| **GitHub Actions CI/CD** | 🔴 Critical | Automated testing & quality gates |
-| **Cloud Parity** | 🔴 High | Supabase = Local functionality |
-| Dependabot | 🟡 Medium | Automated dependency updates |
-| Pre-commit Hooks | 🟡 Medium | Local quality checks |
-
-📄 **[V9 Implementation Plan](./V9_IMPLEMENTATION_PLAN.md)**
-
----
-
-### 🟡 V10 - Authentication & Multi-Tenant
+### 🔴 V10 - Authentication & Multi-Tenant (Next)
 **Duration**: ~13 days | **Status**: 📋 PLANNED
 
 | Feature | Priority | Description |
@@ -133,8 +127,8 @@
 docs/roadmap/
 ├── README.md                       ← You are here
 ├── V8_IMPLEMENTATION_PLAN.md       ← ✅ UX Features (COMPLETED)
-├── V9_IMPLEMENTATION_PLAN.md       ← 📋 TypeScript + CI/CD (NEXT)
-├── V10_IMPLEMENTATION_PLAN.md      ← 📋 Auth + Multi-Tenant
+├── V9_IMPLEMENTATION_PLAN.md       ← ✅ TypeScript + CI/CD (COMPLETED)
+├── V10_IMPLEMENTATION_PLAN.md      ← 📋 Auth + Multi-Tenant (NEXT)
 ├── V11_IMPLEMENTATION_PLAN.md      ← 📋 PG FTS + LangGraph
 ├── V12_IMPLEMENTATION_PLAN.md      ← 📋 Simple Deploy (FREE)
 ├── RAG_V7.md                       ← ✅ ML models (COMPLETED)

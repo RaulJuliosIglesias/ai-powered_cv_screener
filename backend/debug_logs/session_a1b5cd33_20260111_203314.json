@@ -1,0 +1,494 @@
+{
+  "session_id": "a1b5cd33-91cf-4033-b459-be60774c5c73",
+  "generated_at": "2026-01-11T20:33:14.766659",
+  "events": [
+    {
+      "timestamp": "2026-01-11T20:30:30.907948",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a1b5cd33-91cf-4033-b459-be60774c5c73"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T20:30:30.907948",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Candidates with cloud computing skills",
+        "cv_ids": [
+          "cv_a7a09399",
+          "cv_068f17c1",
+          "cv_4647ee34",
+          "cv_cddc7ee8",
+          "cv_a781237d",
+          "cv_b539867c",
+          "cv_3f76ab39",
+          "cv_04d3373d",
+          "cv_17b0438d",
+          "cv_dcb0e85c",
+          "cv_60187135",
+          "cv_b2978076",
+          "cv_886d23d5",
+          "cv_f3b25d24",
+          "cv_3358b839",
+          "cv_a5698497",
+          "cv_c44b8032"
+        ],
+        "cv_count": 17
+      }
+    },
+    {
+      "timestamp": "2026-01-11T20:30:53.723132",
+      "event_type": "HYBRID_SEARCH",
+      "level": "INFO",
+      "data": {
+        "bm25_results": 17,
+        "vector_results": 17,
+        "fused_results": 17,
+        "method": "reciprocal_rank_fusion"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T20:30:53.724134",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 17,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_b539867c",
+            "candidate_name": "Amir Hassan",
+            "section_type": "skills",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 2.689575455711477,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_a5698497",
+            "candidate_name": "Lena Schmidt",
+            "section_type": "skills",
+            "job_hopping_score": 0.2,
+            "avg_tenure_years": 3.3333333333333335,
+            "total_experience_years": 15.0,
+            "score": 2.518532908451472,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_17b0438d",
+            "candidate_name": "Ji-eun Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "score": 2.589252208302274,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_04d3373d",
+            "candidate_name": "Priya Kim",
+            "section_type": "skills",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 1.8490305186326652,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_60187135",
+            "candidate_name": "Sofia Mendoza",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "score": 0.7745675048160287,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_a7a09399",
+            "candidate_name": "Aisha Okafor",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 4.5,
+            "total_experience_years": 25.0,
+            "score": 0.9057361662301966,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_3358b839",
+            "candidate_name": "Diego Mendoza",
+            "section_type": "skills",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 1.5157798338499824,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_f3b25d24",
+            "candidate_name": "Rahul Patel",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 1.0124201294509467,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_cddc7ee8",
+            "candidate_name": "Lukas Schneider",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.6781269564887866,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_b2978076",
+            "candidate_name": "Lotte van der Berg",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 0.8845451329214159,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "skill_count",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "certifications",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T20:31:25.643858",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "adaptive",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T20:31:25.889514",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 604,
+        "answer_preview": ":::thinking\nThe user is asking for candidates with cloud computing skills. I need to identify candidates whose CVs explicitly mention cloud computing technologies or related experience. I will review the skills sections and experience descriptions for relevant keywords like \"AWS,\" \"Azure,\" \"Google Cloud,\" \"cloud computing,\" etc.\n:::\n\n\n:::conclusion\nBased on the skills analysis, the candidates with the most comprehensive profiles are **[Amir Hassan](cv:cv_b539867c)**, **[Lena Schmidt](cv:cv_a5698...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T20:32:22.853222",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "a1b5cd33-91cf-4033-b459-be60774c5c73"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T20:32:22.853222",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Candidates with cloud computing skills",
+        "cv_ids": [
+          "cv_a7a09399",
+          "cv_068f17c1",
+          "cv_4647ee34",
+          "cv_cddc7ee8",
+          "cv_a781237d",
+          "cv_b539867c",
+          "cv_3f76ab39",
+          "cv_04d3373d",
+          "cv_17b0438d",
+          "cv_dcb0e85c",
+          "cv_60187135",
+          "cv_b2978076",
+          "cv_886d23d5",
+          "cv_f3b25d24",
+          "cv_3358b839",
+          "cv_a5698497",
+          "cv_c44b8032"
+        ],
+        "cv_count": 17
+      }
+    },
+    {
+      "timestamp": "2026-01-11T20:32:50.041832",
+      "event_type": "HYBRID_SEARCH",
+      "level": "INFO",
+      "data": {
+        "bm25_results": 34,
+        "vector_results": 68,
+        "fused_results": 34,
+        "method": "reciprocal_rank_fusion"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T20:32:50.041832",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 34,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_cddc7ee8",
+            "candidate_name": "Lukas Schneider",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.8243686547702375,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_f3b25d24",
+            "candidate_name": "Rahul Patel",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 1.2522072126249315,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_4647ee34",
+            "candidate_name": "Aisha Al-Mansoori",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 1.061798000489747,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_17b0438d",
+            "candidate_name": "Ji-eun Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "score": 2.832572292535472,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_dcb0e85c",
+            "candidate_name": "Sofia Rossi",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 2.0,
+            "score": 0.8015716047132884,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_a781237d",
+            "candidate_name": "Mei Lin Chen",
+            "section_type": "experience",
+            "job_hopping_score": 0.2857142857142857,
+            "avg_tenure_years": 2.3333333333333335,
+            "total_experience_years": 7.0,
+            "score": 0.8373741881608419,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_60187135",
+            "candidate_name": "Sofia Mendoza",
+            "section_type": "full_cv",
+            "job_hopping_score": 1.0,
+            "avg_tenure_years": 0.5,
+            "total_experience_years": 1.0,
+            "score": 0.9474044602759326,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_b2978076",
+            "candidate_name": "Lotte van der Berg",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.3333333333333333,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 3.0,
+            "score": 1.0868254740191088,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_04d3373d",
+            "candidate_name": "Priya Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 2.1658854128332754,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_068f17c1",
+            "candidate_name": "Matteo Rossi",
+            "section_type": "experience",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "score": 0.5673809602946449,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T20:33:14.512973",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "adaptive",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T20:33:14.765586",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 602,
+        "answer_preview": ":::thinking\nThe user is asking for candidates with cloud computing skills. I need to identify candidates whose CVs explicitly mention cloud computing technologies or related experience. I will review the skills sections and experience descriptions for relevant keywords like \"AWS,\" \"Azure,\" \"Google Cloud,\" \"cloud computing,\" etc.\n:::\n\n\n:::conclusion\nBased on the skills analysis, the candidates with the most comprehensive profiles are **[Ji-eun Kim](cv:cv_17b0438d)**, **[Priya Kim](cv:cv_04d3373d)...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}
