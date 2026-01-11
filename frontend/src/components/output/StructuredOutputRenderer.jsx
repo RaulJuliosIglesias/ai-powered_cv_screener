@@ -430,11 +430,11 @@ const AnalysisSection = ({ content, onOpenCV, cvMap }) => {
               <div className="text-sm text-gray-300 space-y-1">
                 {section.content.map((line, lineIdx) => {
                   // Detect list items
-                  if (line.trim().startsWith('-') || line.trim().startsWith('•')) {
+                  if (line.trim().startsWith('-') || line.trim().startsWith('•') || /^\d+\.\s/.test(line.trim())) {
                     return (
                       <div key={lineIdx} className="flex items-start gap-2 pl-2">
                         <span className="text-cyan-400 mt-1">•</span>
-                        <span><ContentWithCVLinks content={line.replace(/^[-•]\s*/, '')} onOpenCV={onOpenCV} cvMap={cvMap} /></span>
+                        <span><ContentWithCVLinks content={line.replace(/^[-•\d.]\s*/, '')} onOpenCV={onOpenCV} cvMap={cvMap} /></span>
                       </div>
                     );
                   }
