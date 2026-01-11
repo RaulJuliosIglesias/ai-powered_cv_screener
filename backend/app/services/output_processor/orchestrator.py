@@ -28,8 +28,10 @@ from .structures import (
     TeamBuildStructure,
     VerificationStructure,
     SummaryStructure,
-    AdaptiveStructure,
 )
+
+# Import SMART ADAPTIVE system (new generation - dynamic structures)
+from .adaptive import AdaptiveStructureBuilder
 
 # Import modules for legacy/fallback processing
 from .modules import (
@@ -74,7 +76,9 @@ class OutputOrchestrator:
         self.team_build_structure = TeamBuildStructure()
         self.verification_structure = VerificationStructure()
         self.summary_structure = SummaryStructure()
-        self.adaptive_structure = AdaptiveStructure()
+        
+        # SMART ADAPTIVE SYSTEM - New generation dynamic structures
+        self.adaptive_builder = AdaptiveStructureBuilder()
         
         # Legacy processor for standard responses
         self.processor = OutputProcessor()
@@ -248,12 +252,12 @@ class OutputOrchestrator:
             return self._build_structured_output(structure_data, cleaned_llm_output)
         
         elif query_type == "adaptive":
-            # ADAPTIVE STRUCTURE - Dynamic table based on query attributes
-            logger.info("[ORCHESTRATOR] Using AdaptiveStructure for dynamic response")
-            structure_data = self.adaptive_structure.assemble(
-                llm_output=cleaned_llm_output,
-                chunks=chunks or [],
+            # SMART ADAPTIVE SYSTEM - Dynamic structures with variable columns/rows
+            logger.info("[ORCHESTRATOR] Using SMART AdaptiveStructureBuilder for dynamic response")
+            structure_data = self.adaptive_builder.build(
                 query=query,
+                chunks=chunks or [],
+                llm_output=cleaned_llm_output,
                 conversation_history=conversation_history or []
             )
             return self._build_structured_output(structure_data, cleaned_llm_output)
