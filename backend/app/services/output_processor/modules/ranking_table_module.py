@@ -439,12 +439,13 @@ class RankingTableModule:
         sorted_scores = sorted(scores.items(), key=lambda x: x[1])
         return [name for name, score in sorted_scores[:2] if score < 50]
     
-    def format(self, data: RankingTableData) -> str:
+    def format(self, data: RankingTableData, show_experience_instead_of_score: bool = False) -> str:
         """
         Format ranking data into markdown table.
         
         Args:
             data: RankingTableData to format
+            show_experience_instead_of_score: If True, show experience years instead of overall score
             
         Returns:
             Formatted markdown string
@@ -458,8 +459,12 @@ class RankingTableModule:
         # Determine which criteria to show (max 4)
         criteria_to_show = data.criteria_names[:4]
         
-        header = "| Rank | Candidate | Overall |"
-        separator = "|:----:|:----------|:-------:|"
+        if show_experience_instead_of_score:
+            header = "| Rank | Candidate | Experience |"
+            separator = "|:----:|:----------|:----------:|"
+        else:
+            header = "| Rank | Candidate | Overall |"
+            separator = "|:----:|:----------|:-------:|"
         
         for crit in criteria_to_show:
             short_name = crit[:8] if len(crit) > 8 else crit
@@ -474,10 +479,24 @@ class RankingTableModule:
         
         for r in data.ranked:
             emoji = rank_emoji.get(r.rank, "")
-            row = f"| {emoji} {r.rank} | [📄](cv:{r.cv_id}) **{r.candidate_name}** | {r.overall_score:.0f}% |"
+            
+            if show_experience_instead_of_score:
+                # Show actual experience years instead of score
+                exp_years = r.experience_years
+                if exp_years > 0:
+                    exp_display = f"{exp_years:.1f} yrs"
+                else:
+                    exp_display = "N/A"
+                row = f"| {emoji} {r.rank} | [📄](cv:{r.cv_id}) **{r.candidate_name}** | {exp_display} |"
+            else:
+                # Show overall score
+                overall = max(0, min(100, r.overall_score))
+                row = f"| {emoji} {r.rank} | [📄](cv:{r.cv_id}) **{r.candidate_name}** | {overall:.0f}% |"
             
             for crit in criteria_to_show:
                 score = r.criterion_scores.get(crit, 0)
+                # PHASE 3.1 FIX: Ensure criterion score is never negative
+                score = max(0, min(100, score))
                 row += f" {score:.0f}% |"
             
             lines.append(row)

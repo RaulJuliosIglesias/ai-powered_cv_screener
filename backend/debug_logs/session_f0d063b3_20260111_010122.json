@@ -1,0 +1,2246 @@
+{
+  "session_id": "f0d063b3-e59f-4c1c-800a-4cf68ce110fb",
+  "generated_at": "2026-01-11T01:01:22.718536",
+  "events": [
+    {
+      "timestamp": "2026-01-11T00:53:39.447449",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f0d063b3-e59f-4c1c-800a-4cf68ce110fb"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:39.447449",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_69c420f7",
+        "total_chunks": 6,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": "Aisha Okafor",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 4.5,
+            "total_experience_years": 25.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE: Aisha Okafor =====\n\nCURRENT POSITION: CBAP - Certified Business Analysis Pr"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": "Aisha Okafor",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 4.5,
+            "total_experience_years": 25.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 4\n\nTITLE: CBAP - Certified Business Analysis Professional\nCOMPANY: IIBA\nPERIOD: 20"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": "Aisha Okafor",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 4.5,
+            "total_experience_years": 25.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 4 === CURRENT POSITION ===\n\nTITLE: Unknown Role\nCOMPANY: Empathetic collaborator k"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": "Aisha Okafor",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 4.5,
+            "total_experience_years": 25.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 4\n\nTITLE: Banking Innovations PLC\nCOMPANY: Data Modeling 10/10\nPERIOD: 2005 - 2010"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": "Aisha Okafor",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 4.5,
+            "total_experience_years": 25.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 4\n\nTITLE: FinTech Solutions Ltd.\nCOMPANY: Supported financial modelling and market"
+          },
+          {
+            "index": 5,
+            "section_type": "full_cv",
+            "candidate_name": "Aisha Okafor",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 4.5,
+            "total_experience_years": 25.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for Aisha Okafor\n\nCURRENT ROLE: CBAP - Certified Business Analysis Professional\nCOMPANY:"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:40.570887",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f0d063b3-e59f-4c1c-800a-4cf68ce110fb"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:40.570887",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_578d4200",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": "Matteo Rossi",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE: Matteo Rossi =====\n\nCURRENT POSITION: Bocconi University - Finance Lab\nCURR"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": "Matteo Rossi",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3 === CURRENT POSITION ===\n\nTITLE: Unknown Role\nCOMPANY: Executed complex analytic"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": "Matteo Rossi",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3\n\nTITLE: Unknown Role\nCOMPANY: Data Intern\nPERIOD: 2019 - 2021\nDURATION: 2 years\n"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": "Matteo Rossi",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3\n\nTITLE: Bocconi University - Finance Lab\nCOMPANY: SQL (Advanced\nPERIOD: 2017 - 2"
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": "Matteo Rossi",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for Matteo Rossi\n\nCURRENT ROLE: Bocconi University - Finance Lab\nCOMPANY: Executed compl"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:41.071284",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f0d063b3-e59f-4c1c-800a-4cf68ce110fb"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:41.071284",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_9f60149d",
+        "total_chunks": 3,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": "Aisha Al-Mansoori",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE: Aisha Al-Mansoori =====\n\nCURRENT POSITION: Not specified\nCURRENT COMPANY: C"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": "Aisha Al-Mansoori",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: Unknown Role\nCOMPANY: Culinary\nPERIOD: Unknown "
+          },
+          {
+            "index": 2,
+            "section_type": "full_cv",
+            "candidate_name": "Aisha Al-Mansoori",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for Aisha Al-Mansoori\n\nCURRENT ROLE: Not specified\nCOMPANY: Culinary\nTOTAL EXPERIENCE: 2"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:41.750964",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f0d063b3-e59f-4c1c-800a-4cf68ce110fb"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:41.750964",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_aa2f28f3",
+        "total_chunks": 2,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": "Lukas Schneider",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 0,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE: Lukas Schneider =====\n\nCURRENT POSITION: Not specified\nCURRENT COMPANY: Not"
+          },
+          {
+            "index": 1,
+            "section_type": "full_cv",
+            "candidate_name": "Lukas Schneider",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "position_count": 0,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for Lukas Schneider\n\nCURRENT ROLE: Not specified\nCOMPANY: Not specified\nTOTAL EXPERIENCE"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:42.331939",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f0d063b3-e59f-4c1c-800a-4cf68ce110fb"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:42.331939",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_75060475",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": "Mei Lin Chen",
+            "job_hopping_score": 0.2857142857142857,
+            "avg_tenure_years": 2.3333333333333335,
+            "total_experience_years": 7.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE: Mei Lin Chen =====\n\nCURRENT POSITION: patient‑focused collections. Combines"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": "Mei Lin Chen",
+            "job_hopping_score": 0.2857142857142857,
+            "avg_tenure_years": 2.3333333333333335,
+            "total_experience_years": 7.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3\n\nTITLE: StyleMakers GmbH\nCOMPANY: Adobe Illustrator 10/10\nPERIOD: 1998 - 2005\nDU"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": "Mei Lin Chen",
+            "job_hopping_score": 0.2857142857142857,
+            "avg_tenure_years": 2.3333333333333335,
+            "total_experience_years": 7.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3 === CURRENT POSITION ===\n\nTITLE: patient‑focused collections. Combines German Co"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": "Mei Lin Chen",
+            "job_hopping_score": 0.2857142857142857,
+            "avg_tenure_years": 2.3333333333333335,
+            "total_experience_years": 7.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3\n\nTITLE: Adobe Certified Expert\nCOMPANY: Illustrator\nPERIOD: Unknown dates\nDURATI"
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": "Mei Lin Chen",
+            "job_hopping_score": 0.2857142857142857,
+            "avg_tenure_years": 2.3333333333333335,
+            "total_experience_years": 7.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for Mei Lin Chen\n\nCURRENT ROLE: patient‑focused collections. Combines German Conceptuali"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:43.019836",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f0d063b3-e59f-4c1c-800a-4cf68ce110fb"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:43.019836",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_1cf761b9",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": "Amir Hassan",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE: Amir Hassan =====\n\nCURRENT POSITION: Boutique Étoile (Independent Luxury\nCU"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": "Amir Hassan",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 2 === CURRENT POSITION ===\n\nTITLE: Boutique Étoile (Independent Luxury\nCOMPANY: Ed"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": "Amir Hassan",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 2 === CURRENT POSITION ===\n\nTITLE: impact visual narratives for luxury and\nCOMPANY"
+          },
+          {
+            "index": 3,
+            "section_type": "skills",
+            "candidate_name": "Amir Hassan",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for Amir Hassan:\n\nspecialized stock., Production 9/10 quarterly floor set ch"
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": "Amir Hassan",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "position_count": 2,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for Amir Hassan\n\nCURRENT ROLE: Boutique Étoile (Independent Luxury\nCOMPANY: Editorial St"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:43.694634",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f0d063b3-e59f-4c1c-800a-4cf68ce110fb"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:43.694634",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_dce03476",
+        "total_chunks": 5,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": "Matteo Rossi",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE: Matteo Rossi =====\n\nCURRENT POSITION: cycle.\nCURRENT COMPANY: complex, cros"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": "Matteo Rossi",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 3\n\nTITLE: Beta Systems\nCOMPANY: Product Strategy\nPERIOD: 2016 - 2018\nDURATION: 2 y"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": "Matteo Rossi",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 3\n\nTITLE: TechStart Hub\nCOMPANY: L A N G U A G E S Initial business analysis role "
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": "Matteo Rossi",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 3 === CURRENT POSITION ===\n\nTITLE: cycle.\nCOMPANY: complex, cross-functional produ"
+          },
+          {
+            "index": 4,
+            "section_type": "full_cv",
+            "candidate_name": "Matteo Rossi",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "position_count": 3,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for Matteo Rossi\n\nCURRENT ROLE: cycle.\nCOMPANY: complex, cross-functional product portfo"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:44.220586",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f0d063b3-e59f-4c1c-800a-4cf68ce110fb"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:44.220586",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_e7e11c42",
+        "total_chunks": 4,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": "Priya Kim",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE: Priya Kim =====\n\nCURRENT POSITION: passion for innovative menu development "
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": "Priya Kim",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 1 === CURRENT POSITION ===\n\nTITLE: passion for innovative menu development and res"
+          },
+          {
+            "index": 2,
+            "section_type": "skills",
+            "candidate_name": "Priya Kim",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "SKILLS AND COMPETENCIES for Priya Kim:\n\nand mise en place, paced teams while maintaining high, proce"
+          },
+          {
+            "index": 3,
+            "section_type": "full_cv",
+            "candidate_name": "Priya Kim",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "position_count": 1,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for Priya Kim\n\nCURRENT ROLE: passion for innovative menu development and restaurant envi"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:44.901151",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f0d063b3-e59f-4c1c-800a-4cf68ce110fb"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:44.901151",
+      "event_type": "CHUNKS_CREATED",
+      "level": "INFO",
+      "data": {
+        "cv_id": "cv_e30445d1",
+        "total_chunks": 6,
+        "chunks": [
+          {
+            "index": 0,
+            "section_type": "summary",
+            "candidate_name": "Ji-eun Kim",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "===== CANDIDATE PROFILE: Ji-eun Kim =====\n\nCURRENT POSITION: business units, ensuring clear, diploma"
+          },
+          {
+            "index": 1,
+            "section_type": "experience",
+            "candidate_name": "Ji-eun Kim",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 1 of 4\n\nTITLE: Lotte Business Services\nCOMPANY: SQL 10/10\nPERIOD: 2018 - 2020\nDURATION:"
+          },
+          {
+            "index": 2,
+            "section_type": "experience",
+            "candidate_name": "Ji-eun Kim",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 2 of 4\n\nTITLE: 9/10  | Hyundai Consumer Finance\nCOMPANY: Analysis (Python)\nPERIOD: 2016"
+          },
+          {
+            "index": 3,
+            "section_type": "experience",
+            "candidate_name": "Ji-eun Kim",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 3 of 4\n\nTITLE: K-Tech Solutions\nCOMPANY: Assisted senior analysts in data collection an"
+          },
+          {
+            "index": 4,
+            "section_type": "experience",
+            "candidate_name": "Ji-eun Kim",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "JOB POSITION 4 of 4 === CURRENT POSITION ===\n\nTITLE: business units, ensuring clear, diplomatic\nCOMP"
+          },
+          {
+            "index": 5,
+            "section_type": "full_cv",
+            "candidate_name": "Ji-eun Kim",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "position_count": 4,
+            "employment_gaps_count": 0,
+            "content_preview": "COMPLETE CV for Ji-eun Kim\n\nCURRENT ROLE: business units, ensuring clear, diplomatic\nCOMPANY: into a"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:50.970898",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f0d063b3-e59f-4c1c-800a-4cf68ce110fb"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:53:50.970898",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Who has the most total experience?",
+        "cv_ids": [
+          "cv_69c420f7",
+          "cv_578d4200",
+          "cv_9f60149d",
+          "cv_aa2f28f3",
+          "cv_75060475",
+          "cv_1cf761b9",
+          "cv_dce03476",
+          "cv_e7e11c42",
+          "cv_e30445d1"
+        ],
+        "cv_count": 9
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:54:11.057942",
+      "event_type": "HYBRID_SEARCH",
+      "level": "INFO",
+      "data": {
+        "bm25_results": 9,
+        "vector_results": 9,
+        "fused_results": 9,
+        "method": "reciprocal_rank_fusion"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:54:11.057942",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 9,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_1cf761b9",
+            "candidate_name": "Amir Hassan",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 1.4546778300821457,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_dce03476",
+            "candidate_name": "Matteo Rossi",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 1.4312365334997241,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_9f60149d",
+            "candidate_name": "Aisha Al-Mansoori",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 1.4685345261622353,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_aa2f28f3",
+            "candidate_name": "Lukas Schneider",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 1.120251550921822,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_578d4200",
+            "candidate_name": "Matteo Rossi",
+            "section_type": "experience",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "score": 0.6371266728093802,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_e30445d1",
+            "candidate_name": "Ji-eun Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "score": 0.7085714472415039,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_69c420f7",
+            "candidate_name": "Aisha Okafor",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 4.5,
+            "total_experience_years": 25.0,
+            "score": 0.7347062421749441,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_e7e11c42",
+            "candidate_name": "Priya Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 0.8605653873055259,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_75060475",
+            "candidate_name": "Mei Lin Chen",
+            "section_type": "experience",
+            "job_hopping_score": 0.2857142857142857,
+            "avg_tenure_years": 2.3333333333333335,
+            "total_experience_years": 7.0,
+            "score": 0.5163609283365981,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:54:38.580835",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "ranking",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:54:38.765079",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 763,
+        "answer_preview": ":::thinking\nThe user is asking which candidate has the most total experience. I need to examine the \"Total Experience\" metadata for each candidate and identify the one with the highest value.\n:::\n\nTop Recommendation: [📄](cv:cv_69c420f7) **Aisha Okafor** (100%)\n\nAisha Okafor emerges as the top choice with an overall score of 100%. Key metrics: 25 years of experience, 4.5 years average tenure, strong job stability, principal level. Key strengths include: Experience (100%), Stability (83%).\n\nI revi...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:54:39.550006",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f0d063b3-e59f-4c1c-800a-4cf68ce110fb"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:54:39.550006",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Who has experience in marketing?",
+        "cv_ids": [
+          "cv_69c420f7",
+          "cv_578d4200",
+          "cv_9f60149d",
+          "cv_aa2f28f3",
+          "cv_75060475",
+          "cv_1cf761b9",
+          "cv_dce03476",
+          "cv_e7e11c42",
+          "cv_e30445d1"
+        ],
+        "cv_count": 9
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:55:02.110739",
+      "event_type": "HYBRID_SEARCH",
+      "level": "INFO",
+      "data": {
+        "bm25_results": 9,
+        "vector_results": 9,
+        "fused_results": 9,
+        "method": "reciprocal_rank_fusion"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:55:02.110739",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 9,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_dce03476",
+            "candidate_name": "Matteo Rossi",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 1.8216007986761342,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_9f60149d",
+            "candidate_name": "Aisha Al-Mansoori",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 0.5363419755753887,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_e30445d1",
+            "candidate_name": "Ji-eun Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "score": 1.3640406259177102,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_1cf761b9",
+            "candidate_name": "Amir Hassan",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 0.5040721066001923,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_578d4200",
+            "candidate_name": "Matteo Rossi",
+            "section_type": "experience",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "score": 0.4760982465894242,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_aa2f28f3",
+            "candidate_name": "Lukas Schneider",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.46474046438062844,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_e7e11c42",
+            "candidate_name": "Priya Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 0.5015171516035507,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_69c420f7",
+            "candidate_name": "Aisha Okafor",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 4.5,
+            "total_experience_years": 25.0,
+            "score": 0.44419890650382793,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_75060475",
+            "candidate_name": "Mei Lin Chen",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.2857142857142857,
+            "avg_tenure_years": 2.3333333333333335,
+            "total_experience_years": 7.0,
+            "score": 0.491601137707576,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:55:35.189198",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "search",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:55:35.430159",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 397,
+        "answer_preview": ":::thinking\nThe user is asking which candidates have experience in marketing. I need to review each CV and identify those with explicit marketing-related experience or skills.\n:::\n\n\n:::conclusion\n**[Ji-eun Kim](cv:cv_e30445d1)** is the best candidate for marketing experience, with a proven track record of scaling revenue. **[Matteo Rossi](cv:cv_dce03476)** also has some relevant experience.\n:::",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:55:36.211583",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f0d063b3-e59f-4c1c-800a-4cf68ce110fb"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:55:36.212103",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "All about the marketing specialist",
+        "cv_ids": [
+          "cv_69c420f7",
+          "cv_578d4200",
+          "cv_9f60149d",
+          "cv_aa2f28f3",
+          "cv_75060475",
+          "cv_1cf761b9",
+          "cv_dce03476",
+          "cv_e7e11c42",
+          "cv_e30445d1"
+        ],
+        "cv_count": 9
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:56:03.138223",
+      "event_type": "HYBRID_SEARCH",
+      "level": "INFO",
+      "data": {
+        "bm25_results": 11,
+        "vector_results": 36,
+        "fused_results": 11,
+        "method": "reciprocal_rank_fusion"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:56:03.139224",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 11,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_dce03476",
+            "candidate_name": "Matteo Rossi",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 3.608720855498336,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_578d4200",
+            "candidate_name": "Matteo Rossi",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "score": 1.8086474772057377,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_69c420f7",
+            "candidate_name": "Aisha Okafor",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 4.5,
+            "total_experience_years": 25.0,
+            "score": 0.7930751816971715,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_e30445d1",
+            "candidate_name": "Ji-eun Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "score": 0.7598349003245901,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_aa2f28f3",
+            "candidate_name": "Lukas Schneider",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 1.2229863524442701,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_e7e11c42",
+            "candidate_name": "Priya Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 0.636212748989064,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_9f60149d",
+            "candidate_name": "Aisha Al-Mansoori",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 0.6154120339036853,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_75060475",
+            "candidate_name": "Mei Lin Chen",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.2857142857142857,
+            "avg_tenure_years": 2.3333333333333335,
+            "total_experience_years": 7.0,
+            "score": 1.1724314128316096,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_1cf761b9",
+            "candidate_name": "Amir Hassan",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 0.7536800547996257,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_1cf761b9",
+            "candidate_name": "Amir Hassan",
+            "section_type": "skills",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 0.462063964065685,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:56:37.229142",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "single_candidate",
+        "candidate_name": "Matteo Rossi",
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:56:37.410141",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 501,
+        "answer_preview": ":::thinking\nThe user is asking about marketing specialists. I need to identify candidates with explicit marketing experience or skills mentioned in their CVs. I will analyze each CV for relevant keywords and responsibilities.\n:::\n\n\n:::conclusion\n**[Matteo Rossi](cv:cv_dce03476)** and **[Ji-eun Kim](cv:cv_e30445d1)** are the best candidates for a marketing specialist role. has experience driving alignment between marketing teams, has experience leading data-driven initiatives across marketing.\n::...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:56:38.277782",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f0d063b3-e59f-4c1c-800a-4cf68ce110fb"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:56:38.277782",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Make a risk assessment of the top candidate",
+        "cv_ids": [
+          "cv_69c420f7",
+          "cv_578d4200",
+          "cv_9f60149d",
+          "cv_aa2f28f3",
+          "cv_75060475",
+          "cv_1cf761b9",
+          "cv_dce03476",
+          "cv_e7e11c42",
+          "cv_e30445d1"
+        ],
+        "cv_count": 9
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:56:58.323022",
+      "event_type": "HYBRID_SEARCH",
+      "level": "INFO",
+      "data": {
+        "bm25_results": 9,
+        "vector_results": 9,
+        "fused_results": 9,
+        "method": "reciprocal_rank_fusion"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:56:58.323022",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 9,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_578d4200",
+            "candidate_name": "Matteo Rossi",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "score": 2.680212888473101,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_dce03476",
+            "candidate_name": "Matteo Rossi",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 0.7047391971699086,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_1cf761b9",
+            "candidate_name": "Amir Hassan",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 1.49158982285996,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_69c420f7",
+            "candidate_name": "Aisha Okafor",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 4.5,
+            "total_experience_years": 25.0,
+            "score": 3.215524438373998,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_aa2f28f3",
+            "candidate_name": "Lukas Schneider",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 0.9980712701121917,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_75060475",
+            "candidate_name": "Mei Lin Chen",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.2857142857142857,
+            "avg_tenure_years": 2.3333333333333335,
+            "total_experience_years": 7.0,
+            "score": 0.56293203301295,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_e7e11c42",
+            "candidate_name": "Priya Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 0.5422727798177828,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_9f60149d",
+            "candidate_name": "Aisha Al-Mansoori",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 0.5328993165967015,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_e30445d1",
+            "candidate_name": "Ji-eun Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "score": 0.5369072951216054,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:57:29.590662",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "single_candidate",
+        "candidate_name": "Matteo Rossi",
+        "detection_source": "single_candidate_detection",
+        "detection_method": "context_resolver"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:57:29.776019",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 254,
+        "answer_preview": ":::thinking\nThe pre-calculated risk assessment data shows no red flags. The candidate has a low job-hopping score and a stable work history.\n:::\n\n\n:::conclusion\n**Assessment:** No significant red flags detected for **[Matteo Rossi](cv:cv_578d4200)**.\n:::",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:57:30.792329",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f0d063b3-e59f-4c1c-800a-4cf68ce110fb"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:57:30.792329",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Show me the ranking for technical skills",
+        "cv_ids": [
+          "cv_69c420f7",
+          "cv_578d4200",
+          "cv_9f60149d",
+          "cv_aa2f28f3",
+          "cv_75060475",
+          "cv_1cf761b9",
+          "cv_dce03476",
+          "cv_e7e11c42",
+          "cv_e30445d1"
+        ],
+        "cv_count": 9
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:57:59.093744",
+      "event_type": "HYBRID_SEARCH",
+      "level": "INFO",
+      "data": {
+        "bm25_results": 15,
+        "vector_results": 27,
+        "fused_results": 15,
+        "method": "reciprocal_rank_fusion"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:57:59.093744",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 15,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_e7e11c42",
+            "candidate_name": "Priya Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 2.1036743721327666,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_69c420f7",
+            "candidate_name": "Aisha Okafor",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 4.5,
+            "total_experience_years": 25.0,
+            "score": 0.8140005135142261,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_aa2f28f3",
+            "candidate_name": "Lukas Schneider",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 2.1038089419798647,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_9f60149d",
+            "candidate_name": "Aisha Al-Mansoori",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 0.8669367357455724,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_1cf761b9",
+            "candidate_name": "Amir Hassan",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 2.143146981749773,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_75060475",
+            "candidate_name": "Mei Lin Chen",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.2857142857142857,
+            "avg_tenure_years": 2.3333333333333335,
+            "total_experience_years": 7.0,
+            "score": 0.9624332232458064,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_dce03476",
+            "candidate_name": "Matteo Rossi",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 1.9840064095149348,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_e30445d1",
+            "candidate_name": "Ji-eun Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "score": 1.5568446259876942,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_1cf761b9",
+            "candidate_name": "Amir Hassan",
+            "section_type": "skills",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 2.9016200131208425,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 9,
+            "cv_id": "cv_578d4200",
+            "candidate_name": "Matteo Rossi",
+            "section_type": "experience",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "score": 1.672914530349348,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:59:03.687967",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "ranking",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:59:03.920011",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 833,
+        "answer_preview": ":::thinking\nThe user is asking for a ranking based on technical skills.\nI need to analyze the provided CVs and identify any explicit mentions of technical skills.\nI will then rank the candidates based on the presence and relevance of these skills.\nI will use the provided metadata for experience.\nI will only include information explicitly stated in the CVs.\n:::\n\nTop Recommendation: [📄](cv:cv_1cf761b9) **Amir Hassan** (78%)\n\nAmir Hassan emerges as the top choice with an overall score of 78%. Key m...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:59:05.693067",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f0d063b3-e59f-4c1c-800a-4cf68ce110fb"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:59:05.693067",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "What are the differences between the senior candidates?",
+        "cv_ids": [
+          "cv_69c420f7",
+          "cv_578d4200",
+          "cv_9f60149d",
+          "cv_aa2f28f3",
+          "cv_75060475",
+          "cv_1cf761b9",
+          "cv_dce03476",
+          "cv_e7e11c42",
+          "cv_e30445d1"
+        ],
+        "cv_count": 9
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:59:28.908415",
+      "event_type": "HYBRID_SEARCH",
+      "level": "INFO",
+      "data": {
+        "bm25_results": 9,
+        "vector_results": 9,
+        "fused_results": 9,
+        "method": "reciprocal_rank_fusion"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T00:59:28.908925",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 9,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_dce03476",
+            "candidate_name": "Matteo Rossi",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 1.6193640835885224,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_1cf761b9",
+            "candidate_name": "Amir Hassan",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 1.337197671034292,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_75060475",
+            "candidate_name": "Mei Lin Chen",
+            "section_type": "experience",
+            "job_hopping_score": 0.2857142857142857,
+            "avg_tenure_years": 2.3333333333333335,
+            "total_experience_years": 7.0,
+            "score": 1.5490827850097948,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_9f60149d",
+            "candidate_name": "Aisha Al-Mansoori",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 1.4685345261622362,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_aa2f28f3",
+            "candidate_name": "Lukas Schneider",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 1.289652129727168,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_e30445d1",
+            "candidate_name": "Ji-eun Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "score": 0.5957120647649088,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_578d4200",
+            "candidate_name": "Matteo Rossi",
+            "section_type": "experience",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "score": 1.274253345618761,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_e7e11c42",
+            "candidate_name": "Priya Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 0.515967321577189,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_69c420f7",
+            "candidate_name": "Aisha Okafor",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 4.5,
+            "total_experience_years": 25.0,
+            "score": 0.6989486055455931,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T01:00:18.121158",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "comparison",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "explicit_multi_candidate_query"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T01:00:18.309547",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 653,
+        "answer_preview": ":::thinking\nThe user is asking for a comparison of the senior candidates.\nI need to identify the candidates with a \"Seniority\" level explicitly mentioned in their CVs.\nI will then analyze their skills and experience to highlight the differences.\nI will use the provided metadata for experience and tenure.\nI will create a comparison table to show the differences.\n:::\n\nI identified two candidates with a \"Seniority\" level explicitly mentioned in their CVs: Aisha Okafor and Matteo Rossi.\n\n\n:::conclus...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T01:00:19.762130",
+      "event_type": "SESSION_START",
+      "level": "INFO",
+      "data": {
+        "session_id": "f0d063b3-e59f-4c1c-800a-4cf68ce110fb"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T01:00:19.762130",
+      "event_type": "QUERY_START",
+      "level": "INFO",
+      "data": {
+        "question": "Who is suitable for a team lead role?",
+        "cv_ids": [
+          "cv_69c420f7",
+          "cv_578d4200",
+          "cv_9f60149d",
+          "cv_aa2f28f3",
+          "cv_75060475",
+          "cv_1cf761b9",
+          "cv_dce03476",
+          "cv_e7e11c42",
+          "cv_e30445d1"
+        ],
+        "cv_count": 9
+      }
+    },
+    {
+      "timestamp": "2026-01-11T01:00:41.076467",
+      "event_type": "HYBRID_SEARCH",
+      "level": "INFO",
+      "data": {
+        "bm25_results": 9,
+        "vector_results": 9,
+        "fused_results": 9,
+        "method": "reciprocal_rank_fusion"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T01:00:41.076467",
+      "event_type": "RETRIEVAL",
+      "level": "INFO",
+      "data": {
+        "total_chunks": 9,
+        "strategy": "rrf_fusion",
+        "sample_chunks": [
+          {
+            "index": 0,
+            "cv_id": "cv_1cf761b9",
+            "candidate_name": "Amir Hassan",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 6.0,
+            "score": 2.165406365547375,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 1,
+            "cv_id": "cv_e7e11c42",
+            "candidate_name": "Priya Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 2.4523086926403783,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 2,
+            "cv_id": "cv_aa2f28f3",
+            "candidate_name": "Lukas Schneider",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 0.0,
+            "score": 2.1495308565022846,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 3,
+            "cv_id": "cv_dce03476",
+            "candidate_name": "Matteo Rossi",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.3333333333333333,
+            "total_experience_years": 4.0,
+            "score": 1.5585978175645976,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 4,
+            "cv_id": "cv_69c420f7",
+            "candidate_name": "Aisha Okafor",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.16666666666666666,
+            "avg_tenure_years": 4.5,
+            "total_experience_years": 25.0,
+            "score": 1.3743281499129891,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 5,
+            "cv_id": "cv_e30445d1",
+            "candidate_name": "Ji-eun Kim",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.5,
+            "avg_tenure_years": 1.5,
+            "total_experience_years": 6.0,
+            "score": 1.198855859356015,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 6,
+            "cv_id": "cv_9f60149d",
+            "candidate_name": "Aisha Al-Mansoori",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.0,
+            "avg_tenure_years": 0.0,
+            "total_experience_years": 2.5,
+            "score": 1.072683951150778,
+            "has_enriched_metadata": false
+          },
+          {
+            "index": 7,
+            "cv_id": "cv_75060475",
+            "candidate_name": "Mei Lin Chen",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.2857142857142857,
+            "avg_tenure_years": 2.3333333333333335,
+            "total_experience_years": 7.0,
+            "score": 0.6283514995672645,
+            "has_enriched_metadata": true
+          },
+          {
+            "index": 8,
+            "cv_id": "cv_578d4200",
+            "candidate_name": "Matteo Rossi",
+            "section_type": "full_cv",
+            "job_hopping_score": 0.2222222222222222,
+            "avg_tenure_years": 3.0,
+            "total_experience_years": 9.0,
+            "score": 0.6261545948950479,
+            "has_enriched_metadata": true
+          }
+        ],
+        "all_metadata_keys": [
+          "section_type",
+          "candidate_name",
+          "current_role",
+          "current_company",
+          "total_experience_years",
+          "job_hopping_score",
+          "avg_tenure_years",
+          "employment_gaps_count",
+          "position_count",
+          "skills",
+          "seniority_level",
+          "languages",
+          "education_level",
+          "certifications",
+          "location",
+          "linkedin_url",
+          "github_url",
+          "filename",
+          "cv_id"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-01-11T01:01:22.530357",
+      "event_type": "STRUCTURE_ROUTING",
+      "level": "INFO",
+      "data": {
+        "query_type": "team_build",
+        "candidate_name": null,
+        "detection_source": "classify_query_for_structure",
+        "detection_method": "multiple_candidates"
+      }
+    },
+    {
+      "timestamp": "2026-01-11T01:01:22.715536",
+      "event_type": "FINAL_RESPONSE",
+      "level": "INFO",
+      "data": {
+        "answer_length": 525,
+        "answer_preview": ":::thinking\nThe user is asking for candidates suitable for a team lead role.\nI need to identify candidates with explicit leadership experience, such as managing teams, leading projects, or mentoring.\nI will analyze the provided CVs for relevant keywords and responsibilities.\nI will create a comparison table to highlight the most suitable candidates.\n:::\n\n\n:::conclusion\nThis 3-member team brings 41 years of combined experience. Combined 41 years of experience This is a well-balanced team ready fo...",
+        "has_structured_output": true,
+        "structured_output_keys": [
+          "direct_answer",
+          "raw_content",
+          "thinking",
+          "analysis",
+          "table_data",
+          "conclusion",
+          "gap_analysis",
+          "red_flags",
+          "timeline",
+          "risk_assessment",
+          "structure_type",
+          "single_candidate_data",
+          "risk_assessment_data",
+          "results_table",
+          "total_results",
+          "query",
+          "ranking_table",
+          "top_pick",
+          "ranking_criteria",
+          "match_scores",
+          "requirements",
+          "best_match",
+          "team_composition",
+          "skill_coverage",
+          "team_risks",
+          "team_requirements",
+          "claim",
+          "evidence",
+          "verdict",
+          "talent_pool",
+          "skill_distribution",
+          "experience_distribution",
+          "cv_references",
+          "parsing_warnings",
+          "fallback_used"
+        ]
+      }
+    }
+  ]
+}

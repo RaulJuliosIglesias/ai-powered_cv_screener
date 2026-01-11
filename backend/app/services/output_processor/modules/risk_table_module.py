@@ -182,13 +182,27 @@ class RiskTableModule:
         # Determine overall risk level
         # NOTE: tenure=0 means NO DATA, not short tenure - only consider if tenure > 0
         tenure_is_short = data.avg_tenure_years > 0 and data.avg_tenure_years < self.TENURE_CONCERN and data.position_count >= 2
+        
+        # PHASE 1.3 FIX: Zero/missing experience is a risk factor
+        # Candidates with 0 years experience should NOT be "low risk"
+        has_no_experience = data.total_experience_years == 0 and data.position_count == 0
+        has_minimal_experience = data.total_experience_years == 0 and data.position_count > 0  # Has positions but no years calculated
+        
         data.has_issues = data.job_hopping_score > self.JOB_HOPPING_MODERATE or \
                          tenure_is_short or \
-                         data.employment_gaps_count > 0
+                         data.employment_gaps_count > 0 or \
+                         has_no_experience  # NEW: Zero experience is an issue
         
         if data.job_hopping_score > self.JOB_HOPPING_MODERATE:
             data.overall_risk = "high"
+        elif has_no_experience:
+            # PHASE 1.3: Zero experience = at least moderate risk (data quality concern)
+            data.overall_risk = "moderate"
+            logger.info(f"[RISK_ASSESSMENT] Zero experience detected for {candidate_name} - marking as moderate risk")
         elif data.job_hopping_score > self.JOB_HOPPING_LOW or tenure_is_short:
+            data.overall_risk = "moderate"
+        elif has_minimal_experience:
+            # Has positions but couldn't calculate years - caution
             data.overall_risk = "moderate"
         else:
             data.overall_risk = "low"
@@ -199,12 +213,45 @@ class RiskTableModule:
         return data
     
     def _find_enriched_metadata(self, chunks: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
-        """Find chunk with actual enriched metadata."""
+        """
+        Find chunk with actual enriched metadata.
+        
+        PHASE 6.3 FIX: Search ALL chunks thoroughly, prioritizing those with
+        actual data (total_experience_years > 0, position_count > 0).
+        """
+        best_meta = None
+        best_score = -1
+        
         for chunk in chunks:
             meta = chunk.get("metadata", {})
-            # Require has_enriched_metadata flag OR actual job_hopping_score
-            if meta.get("has_enriched_metadata") or meta.get("job_hopping_score") is not None:
-                return meta
+            
+            # Skip if no metadata at all
+            if not meta:
+                continue
+            
+            # Calculate a "quality score" for this metadata
+            score = 0
+            if meta.get("has_enriched_metadata"):
+                score += 10
+            if meta.get("total_experience_years", 0) > 0:
+                score += 5
+            if meta.get("position_count", 0) > 0:
+                score += 3
+            if meta.get("avg_tenure_years", 0) > 0:
+                score += 2
+            if meta.get("job_hopping_score") is not None:
+                score += 1
+            
+            # Keep the best metadata found
+            if score > best_score:
+                best_score = score
+                best_meta = meta
+        
+        # Only return if we found meaningful metadata
+        if best_score > 0:
+            logger.info(f"[RISK_ASSESSMENT] Found enriched metadata with quality score {best_score}")
+            return best_meta
+        
         return None
     
     def _extract_from_llm_output(
@@ -484,7 +531,14 @@ class RiskTableModule:
         # NOTE: tenure=0 means NO DATA, not short tenure - only flag if tenure > 0 AND < threshold
         tenure_is_short = tenure > 0 and tenure < self.TENURE_CONCERN and positions >= 2
         has_flags = score > self.JOB_HOPPING_MODERATE or tenure_is_short or gaps > 0
-        if has_flags:
+        
+        # PHASE 4.1 FIX: Also flag when data is insufficient for proper assessment
+        has_insufficient_data = (exp == 0 and positions == 0) or (positions > 0 and tenure == 0 and exp == 0)
+        
+        if has_insufficient_data:
+            rf_icon, rf_status = "⚡", "Insufficient Data"
+            rf_details = "Unable to fully assess - CV data incomplete or missing dates"
+        elif has_flags:
             rf_icon, rf_status = "⚠️", "Issues Found"
             # Build detailed explanation of WHY there are flags
             flag_reasons = []
@@ -562,27 +616,45 @@ class RiskTableModule:
         ))
         
         # 5. Experience Level with WHY explanation
-        if exp < 3:
+        # PHASE 1.3 FIX: Zero experience should show as a concern, not just "Entry"
+        if exp == 0 and positions == 0:
+            # No experience data at all - this is a data quality concern
+            exp_level = "⚠️ Unverified"
+            exp_icon = "⚠️"
+            exp_reason = "No verifiable experience data"
+            role_details = "Experience could not be determined from CV"
+        elif exp == 0 and positions > 0:
+            # Has positions but no years calculated
+            exp_level = "⚡ Incomplete"
+            exp_icon = "⚡"
+            exp_reason = f"{positions} positions but years not calculated"
+            role_details = "Dates may be missing from CV"
+        elif exp < 3:
             exp_level = "Entry"
+            exp_icon = ""
             exp_reason = f"<3 years experience"
+            role_details = f"{current_role} @ {current_company}" if current_role != "N/A" else f"{exp:.0f} yrs total"
         elif exp < 7:
             exp_level = "Mid"
+            exp_icon = ""
             exp_reason = f"3-7 years experience"
+            role_details = f"{current_role} @ {current_company}" if current_role != "N/A" else f"{exp:.0f} yrs total"
         elif exp < 15:
             exp_level = "Senior"
+            exp_icon = ""
             exp_reason = f"7-15 years experience"
+            role_details = f"{current_role} @ {current_company}" if current_role != "N/A" else f"{exp:.0f} yrs total"
         else:
             exp_level = "Executive"
+            exp_icon = ""
             exp_reason = f"15+ years experience"
-        
-        # Format current role details
-        role_details = f"{current_role} @ {current_company}" if current_role != "N/A" else f"{exp:.0f} yrs total experience"
+            role_details = f"{current_role} @ {current_company}" if current_role != "N/A" else f"{exp:.0f} yrs total"
         
         factors.append(RiskFactor(
             factor="🎯 Experience",
-            status=exp_level,
+            status=f"{exp_icon} {exp_level}".strip(),
             details=f"{exp_reason}: {role_details}",
-            status_icon="",
+            status_icon=exp_icon,
             status_text=exp_level
         ))
         
@@ -616,7 +688,27 @@ class RiskTableModule:
         tenure = data.avg_tenure_years
         exp = data.total_experience_years
         gaps = data.employment_gaps_count
-        positions = data.position_count or "multiple"
+        positions = data.position_count or 0
+        
+        # PHASE 1.3 FIX: Handle zero experience case explicitly
+        if exp == 0 and positions == 0:
+            # No experience data - this is a data quality concern
+            analysis = (
+                f"**{name}** presents an **incomplete profile**. "
+                f"No verifiable work experience data was found in the CV. "
+                f"This could indicate a fresh graduate, career changer, or incomplete CV data. "
+                f"**Recommend verifying experience details directly with the candidate.**"
+            )
+            return analysis
+        
+        if exp == 0 and positions > 0:
+            # Has positions but no years calculated
+            analysis = (
+                f"**{name}** shows **{positions} position(s)** but experience years could not be calculated. "
+                f"This may indicate missing date information in the CV. "
+                f"**Recommend requesting updated CV with employment dates.**"
+            )
+            return analysis
         
         # Build analysis based on actual data
         if data.overall_risk == "low":

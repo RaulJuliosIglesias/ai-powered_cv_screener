@@ -132,9 +132,12 @@ class SmartChunkingService:
         """
         Clean candidate name by removing common artifacts.
         
+        PHASE 2.1 FIX: Also removes non-name words like food, objects, etc.
+        
         Fixes issues like:
         - " Aisha Okafor  Business" -> "Aisha Okafor"
         - "Matteo Rossi  Associate" -> "Matteo Rossi"
+        - "Aisha Tan Pizza" -> "Aisha Tan" (removes food words)
         """
         # Remove extra whitespace
         name = ' '.join(name.split())
@@ -151,15 +154,31 @@ class SmartChunkingService:
             'Accessories', 'Group', 'Camera', 'Smart', 'Contract'
         ]
         
-        # Remove trailing title words
+        # PHASE 2.1: Non-name words (food, objects, places that aren't surnames)
+        non_name_words = [
+            # Food words
+            'Pizza', 'Burger', 'Sushi', 'Taco', 'Coffee', 'Pasta', 'Salad',
+            'Sandwich', 'Cookie', 'Cake', 'Bread', 'Rice', 'Soup', 'Steak',
+            # Objects
+            'Table', 'Chair', 'Desk', 'Computer', 'Phone', 'Book', 'Car',
+            'House', 'Building', 'Office', 'Room', 'Door', 'Window',
+            # Common non-surname words that might get attached
+            'Resume', 'CV', 'Profile', 'Career', 'Experience', 'Skills',
+            'Education', 'Contact', 'Summary', 'Objective', 'Reference',
+            # Numbers and codes
+            'One', 'Two', 'Three', 'Four', 'Five', 'First', 'Second', 'Third',
+        ]
+        
+        all_invalid_words = set(title_words + non_name_words)
+        
+        # Remove trailing invalid words
         words = name.split()
         clean_words = []
-        found_title = False
         
         for word in words:
-            # Once we hit a title word, stop adding words
-            if word in title_words:
-                found_title = True
+            # Once we hit an invalid word, stop adding words
+            if word in all_invalid_words:
+                logger.debug(f"[SMART_CHUNKING] Removing invalid word from name: '{word}'")
                 break
             clean_words.append(word)
         
@@ -167,7 +186,47 @@ class SmartChunkingService:
         if not clean_words:
             return name
         
-        return ' '.join(clean_words)
+        # PHASE 2.1: Validate final name has at least 2 words (first + last name)
+        # and doesn't contain obviously invalid patterns
+        result = ' '.join(clean_words)
+        
+        # Final validation: reject if result looks invalid
+        if self._is_invalid_name(result):
+            logger.warning(f"[SMART_CHUNKING] Name validation failed for: '{result}', keeping original")
+            return name
+        
+        return result
+    
+    def _is_invalid_name(self, name: str) -> bool:
+        """
+        PHASE 2.1: Check if a name looks invalid.
+        
+        Returns True if the name should be rejected.
+        """
+        if not name:
+            return True
+        
+        # Too short (less than 3 chars)
+        if len(name) < 3:
+            return True
+        
+        # Contains numbers
+        if re.search(r'\d', name):
+            return True
+        
+        # Contains special characters (except hyphen, apostrophe, space)
+        if re.search(r'[^\w\s\'\-]', name):
+            return True
+        
+        # All uppercase or all lowercase (likely not a proper name)
+        if name.isupper() or name.islower():
+            return True
+        
+        # Starts with lowercase
+        if name[0].islower():
+            return True
+        
+        return False
     
     def _extract_years_from_text(self, text: str) -> Tuple[Optional[int], Optional[int], bool]:
         """
@@ -615,7 +674,15 @@ class SmartChunkingService:
         return education_score > work_score and education_score >= 2
     
     def _extract_skills(self, text: str) -> List[str]:
-        """Extract skills from CV text."""
+        """
+        Extract skills from CV text.
+        
+        PHASE 2.2 FIX: Validates skills to exclude:
+        - Spaced-letter strings like "E D U C A T I O N"
+        - Education items (degrees, universities)
+        - Company names
+        - Job titles
+        """
         skills = []
         
         # Find skills section
@@ -643,29 +710,167 @@ class SmartChunkingService:
         
         for skill in skill_candidates:
             skill = skill.strip()
-            if 2 < len(skill) < 50 and not re.match(self.SECTION_PATTERNS['skills'], skill, re.IGNORECASE):
+            # Basic length check
+            if len(skill) < 2 or len(skill) > 50:
+                continue
+            # Skip section headers
+            if re.match(self.SECTION_PATTERNS['skills'], skill, re.IGNORECASE):
+                continue
+            # PHASE 2.2: Validate skill
+            if self._is_valid_skill(skill):
                 skills.append(skill)
         
         return skills[:30]
     
+    def _is_valid_skill(self, skill: str) -> bool:
+        """
+        PHASE 2.2 FIX: Validate that a string is actually a skill.
+        
+        Rejects:
+        - Spaced-letter strings: "E D U C A T I O N"
+        - Education items: "Master of Arts in", "University of"
+        - Company names: "Local Fashion House"
+        - Job titles: "Analysis Styling Intern"
+        - Section headers: "SKILLS", "EXPERIENCE"
+        """
+        if not skill:
+            return False
+        
+        # 1. Reject spaced-letter strings (e.g., "E D U C A T I O N")
+        if re.match(r'^[A-Z](\s+[A-Z])+$', skill):
+            logger.debug(f"[SKILLS] Rejecting spaced-letters: '{skill}'")
+            return False
+        
+        # Also reject if more than 30% of chars are spaces (indicator of spaced text)
+        if skill.count(' ') > len(skill) * 0.3 and len(skill) > 10:
+            words = skill.split()
+            if all(len(w) <= 2 for w in words):
+                logger.debug(f"[SKILLS] Rejecting high-space ratio: '{skill}'")
+                return False
+        
+        # 2. Reject education items
+        education_patterns = [
+            r'\b(master|bachelor|phd|doctorate|degree|university|college)\b',
+            r'\b(mba|msc|bsc|ba|ma|bs|ms)\b',
+            r'\b(graduated|graduation|diploma|certificate of)\b',
+            r'^master of', r'^bachelor of', r'^doctor of',
+        ]
+        skill_lower = skill.lower()
+        for pattern in education_patterns:
+            if re.search(pattern, skill_lower):
+                logger.debug(f"[SKILLS] Rejecting education item: '{skill}'")
+                return False
+        
+        # 3. Reject company name patterns
+        company_patterns = [
+            r'\b(inc|llc|ltd|corp|gmbh|plc|company|group|holdings)\b',
+            r'\b(fashion house|consulting|solutions|services|agency)\b',
+            r'^\w+\s+(early|late|\d{4})',  # "Company Name (Early 2020)"
+        ]
+        for pattern in company_patterns:
+            if re.search(pattern, skill_lower):
+                logger.debug(f"[SKILLS] Rejecting company pattern: '{skill}'")
+                return False
+        
+        # 4. Reject job title patterns
+        job_title_patterns = [
+            r'\b(intern|trainee|assistant|coordinator|manager|director)\b',
+            r'\b(analyst|specialist|consultant|engineer|developer)\b',
+            r'^(senior|junior|lead|chief|head)\s+',
+            r'&\s*analysis',  # "& Analysis Styling Intern"
+        ]
+        for pattern in job_title_patterns:
+            if re.search(pattern, skill_lower):
+                # Exception: keep if it's a technical skill with these words
+                technical_exceptions = ['data analyst', 'business analyst', 'systems analyst']
+                if skill_lower not in technical_exceptions:
+                    logger.debug(f"[SKILLS] Rejecting job title pattern: '{skill}'")
+                    return False
+        
+        # 5. Reject section headers
+        section_headers = [
+            'skills', 'experience', 'education', 'summary', 'profile',
+            'languages', 'certifications', 'references', 'hobbies',
+            'interests', 'projects', 'contact', 'objective'
+        ]
+        if skill_lower.strip() in section_headers:
+            return False
+        
+        # 6. Reject if starts with common non-skill words
+        non_skill_starters = [
+            'local ', 'the ', 'a ', 'an ', 'my ', 'our ', 'their ',
+            'responsible for', 'worked on', 'managed', 'developed',
+        ]
+        for starter in non_skill_starters:
+            if skill_lower.startswith(starter):
+                logger.debug(f"[SKILLS] Rejecting non-skill starter: '{skill}'")
+                return False
+        
+        # 7. Reject if it's just numbers or very short
+        if re.match(r'^[\d\s\-/\.]+$', skill):
+            return False
+        if len(skill.replace(' ', '')) < 2:
+            return False
+        
+        return True
+    
     def _calculate_total_experience(self, positions: List[JobPosition]) -> float:
-        """Calculate total years of experience from all positions."""
+        """
+        Calculate total years of experience from all positions.
+        
+        PHASE 2.5 FIX: Better handling when dates are missing.
+        Uses multiple strategies to estimate experience.
+        """
         if not positions:
             return 0.0
         
-        # From earliest start to latest end (accounts for career span)
+        # Strategy 1: From earliest start to latest end (accounts for career span)
         start_years = [p.start_year for p in positions if p.start_year]
         end_years = [p.end_year or self.current_year for p in positions if p.start_year]
         
         if start_years and end_years:
             total_from_range = max(end_years) - min(start_years)
             if 0 < total_from_range <= 50:
+                logger.debug(f"[EXPERIENCE] Calculated from date range: {total_from_range} years")
                 return float(total_from_range)
         
-        # Fallback: sum individual durations
+        # Strategy 2: Sum individual durations
         total_from_sum = sum(p.duration_years for p in positions)
         if 0 < total_from_sum <= 50:
+            logger.debug(f"[EXPERIENCE] Calculated from sum: {total_from_sum} years")
             return total_from_sum
+        
+        # PHASE 2.5 FIX: Strategy 3 - Estimate from position count when dates unavailable
+        # If we have positions but couldn't calculate years, estimate based on typical tenure
+        positions_without_dates = [p for p in positions if not p.start_year]
+        positions_with_dates = [p for p in positions if p.start_year]
+        
+        if positions_without_dates:
+            # Average tenure assumption: 2.5 years per position
+            estimated_years = len(positions_without_dates) * 2.5
+            
+            # Add any calculated years from positions with dates
+            calculated_years = sum(p.duration_years for p in positions_with_dates)
+            
+            total_estimated = estimated_years + calculated_years
+            
+            if total_estimated > 0:
+                logger.info(
+                    f"[EXPERIENCE] Estimated {total_estimated:.1f} years from "
+                    f"{len(positions_without_dates)} undated + {len(positions_with_dates)} dated positions"
+                )
+                return min(total_estimated, 40.0)  # Cap at 40 years
+        
+        # PHASE 2.5 FIX: Strategy 4 - If we have positions, don't return 0
+        # Having positions means SOME experience
+        if len(positions) > 0:
+            # Minimum estimate: 1 year per position, capped reasonably
+            minimum_estimate = min(len(positions) * 1.5, 20.0)
+            logger.warning(
+                f"[EXPERIENCE] No dates available, using minimum estimate: "
+                f"{minimum_estimate:.1f} years for {len(positions)} positions"
+            )
+            return minimum_estimate
         
         return 0.0
     

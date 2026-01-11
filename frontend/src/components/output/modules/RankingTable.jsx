@@ -136,10 +136,10 @@ const RankingTable = ({ data, onOpenCV }) => {
                 </span>
               )}
 
-              {/* Score diff from #1 */}
-              {topCandidate && (
-                <span className="text-xs text-gray-500 flex-shrink-0">
-                  -{(topCandidate.overall_score - candidate.overall_score).toFixed(0)}%
+              {/* Score diff from #1 - only show if meaningful difference */}
+              {topCandidate && topCandidate.overall_score > candidate.overall_score && (
+                <span className="text-xs text-gray-500 flex-shrink-0" title="Difference from #1">
+                  ↓{(topCandidate.overall_score - candidate.overall_score).toFixed(0)}
                 </span>
               )}
 

@@ -127,8 +127,31 @@ class SkillDistributionModule:
         )
     
     def _is_valid_skill(self, skill: str) -> bool:
-        """Check if a skill is valid and not garbage text."""
+        """
+        Check if a skill is valid and not garbage text.
+        
+        PHASE 7.2 FIX: Ultra-aggressive filtering to reject:
+        - Sentence fragments (ending in period, starting with articles)
+        - Person names (First Last pattern)
+        - Location names
+        - Generic/filler words
+        """
         if not skill or len(skill) < 2:
+            return False
+        
+        skill_lower = skill.lower().strip()
+        skill_stripped = skill.strip()
+        
+        # PHASE 7.2: Reject strings ending with period (sentence fragments)
+        if skill_stripped.endswith('.'):
+            logger.debug(f"[SKILL_FILTER] Rejected (ends with period): {skill}")
+            return False
+        
+        # PHASE 7.2: Reject if starts with article or preposition (sentence fragment)
+        sentence_starters = ['the ', 'a ', 'an ', 'and ', 'or ', 'but ', 'while ', 
+                            'new ', 'existing ', 'chain ', 'cross ', 'into ']
+        if any(skill_lower.startswith(s) for s in sentence_starters):
+            logger.debug(f"[SKILL_FILTER] Rejected (sentence starter): {skill}")
             return False
         
         # Too long - probably garbage
@@ -136,30 +159,72 @@ class SkillDistributionModule:
             return False
         
         # Contains URLs or emails
-        if any(x in skill for x in ['http', 'www', '.com', '.org', '@', '/']):
+        if any(x in skill_lower for x in ['http', 'www', '.com', '.org', '@', '/']):
             return False
         
-        # Contains numbers that look like stats (e.g., "500+ skus")
-        if any(x in skill for x in ['%', '+', '500', '100', 'award', 'received']):
+        # Contains numbers that look like stats
+        if any(x in skill_lower for x in ['%', '+', '500', '100', 'award', 'received']):
             return False
         
         # Too many words - probably a sentence
-        if len(skill.split()) > 4:
+        if len(skill.split()) > 3:
+            logger.debug(f"[SKILL_FILTER] Rejected (too many words): {skill}")
             return False
         
-        # Check against valid skills list (fuzzy match)
-        skill_lower = skill.lower()
+        # PHASE 7.2: Reject sentence fragments with common verbs/gerunds
+        fragment_words = {'implementing', 'ensuring', 'maintaining', 'designing', 
+                         'enabling', 'delivering', 'managing', 'developing',
+                         'creating', 'building', 'secure', 'security', 'protocol',
+                         'communication', 'networks', 'procedures', 'existing'}
+        words_set = set(skill_lower.split())
+        if words_set & fragment_words and skill_lower not in VALID_SKILLS:
+            logger.debug(f"[SKILL_FILTER] Rejected (fragment word): {skill}")
+            return False
+        
+        # PHASE 7.2: Reject person names (two words, both capitalized properly)
+        words = skill_stripped.split()
+        if len(words) == 2:
+            # Check if looks like "First Last" name pattern
+            if (len(words[0]) >= 2 and len(words[1]) >= 2 and
+                words[0][0].isupper() and words[1][0].isupper() and
+                words[0][1:].islower() and words[1][1:].islower()):
+                # It's a person name unless it's in VALID_SKILLS
+                if skill_lower not in VALID_SKILLS:
+                    logger.debug(f"[SKILL_FILTER] Rejected (person name): {skill}")
+                    return False
+        
+        # Reject location names
+        location_names = {
+            'sydney', 'melbourne', 'brisbane', 'perth', 'berlin', 'munich',
+            'london', 'paris', 'tokyo', 'singapore', 'dubai', 'mumbai',
+            'new york', 'los angeles', 'chicago', 'san francisco', 'seattle',
+            'toronto', 'vancouver', 'amsterdam', 'madrid', 'barcelona', 'rome', 'milan',
+            'italy', 'germany', 'france', 'spain', 'australia', 'canada', 'usa', 'uk'
+        }
+        if skill_lower in location_names:
+            return False
+        
+        # Reject generic/filler words
+        garbage_words = {
+            'based', 'technology', 'and', 'the', 'for', 'with', 'from', 'into',
+            'profile', 'incidents', 'counseling', 'reliability', 'oriented', 'patient',
+            'innovation', 'labs', 'solutions', 'services', 'consulting',
+            'senior', 'junior', 'lead', 'manager', 'director', 'associate',
+            'summary', 'objective', 'career', 'background', 'overview',
+            'contact', 'email', 'phone', 'address', 'linkedin', 'github'
+        }
+        if skill_lower in garbage_words:
+            return False
+        
+        # MUST match against valid skills list - no fuzzy acceptance
         for valid in VALID_SKILLS:
-            if valid in skill_lower or skill_lower in valid:
+            if valid == skill_lower or skill_lower == valid:
+                return True
+            # Allow partial match only if skill is a known prefix/suffix
+            if len(skill_lower) >= 3 and (valid.startswith(skill_lower) or skill_lower.startswith(valid)):
                 return True
         
-        # Also accept if it's a short technical-looking term
-        if len(skill.split()) <= 2 and len(skill) <= 20:
-            # Check it's not garbage patterns
-            garbage_patterns = ['profile', 'incidents', 'counseling', 'reliability', 'oriented', 'patient']
-            if not any(g in skill_lower for g in garbage_patterns):
-                return True
-        
+        logger.debug(f"[SKILL_FILTER] Rejected (not in valid list): {skill}")
         return False
     
     def format(self, data: SkillDistributionData) -> str:

@@ -41,6 +41,9 @@ class ClaimModule:
         "experience": [
             r'(?:verify|confirm|check)\s+(?:if\s+)?(\w+(?:\s+\w+)?)\s+(?:worked|has\s+experience)\s+(?:at|with|in)\s+([^,.\n]+)',
             r'(?:did|does)\s+(\w+(?:\s+\w+)?)\s+(?:work|have\s+experience)\s+(?:at|with|in)\s+([^,.\n]+)',
+            # PHASE 4.3 FIX: Handle "X has Y years experience" patterns
+            r'(?:verify|confirm|check|is\s+it\s+true)\s+(?:that\s+)?(?:the\s+)?(\w+(?:\s+\w+)?(?:\s+candidate)?)\s+has\s+(\d+\s*(?:\+\s*)?years?\s*(?:of\s+)?experience)',
+            r'(?:does|did)\s+(?:the\s+)?(\w+(?:\s+\w+)?)\s+(?:have|has)\s+(\d+\s*(?:\+\s*)?years)',
         ],
         "education": [
             r'(?:verify|confirm|check)\s+(?:if\s+)?(\w+(?:\s+\w+)?)\s+(?:studied|graduated|has\s+degree)\s+(?:at|from|in)\s+([^,.\n]+)',

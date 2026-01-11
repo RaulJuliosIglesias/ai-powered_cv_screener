@@ -517,9 +517,24 @@ class QueryUnderstandingService:
         # If the LLM just copied the query, we need to expand it ourselves
         understood_query = self._ensure_query_expansion(query, understood_query, query_type, parsed.get("requirements", []), conversation_history)
         
-        # CRITICAL: Override query_type if strong comparison patterns detected
-        # This fixes cases where LLM incorrectly classifies "Compare #1 vs #2" as "ranking"
+        # CRITICAL: Override query_type if strong quantitative comparison patterns detected
+        # This fixes cases where LLM incorrectly classifies "Who has the most experience" as "search"
         query_lower = query.lower()
+        
+        # Quantitative comparison patterns - these should be RANKING, not search
+        quantitative_patterns = [
+            'who has the most', 'who has the least', 'who has more', 'who has less',
+            'most total experience', 'least total experience', 'highest experience', 'lowest experience',
+            'most years', 'least years', 'most experience', 'least experience',
+            'quién tiene más', 'quién tiene menos', 'más experiencia', 'menos experiencia'
+        ]
+        
+        if any(pattern in query_lower for pattern in quantitative_patterns):
+            if query_type != "ranking":
+                logger.warning(f"[QUERY_UNDERSTANDING] Overriding query_type from '{query_type}' to 'ranking' due to quantitative comparison pattern")
+                query_type = "ranking"
+        
+        # Comparison keywords - these should be COMPARISON
         comparison_keywords = ['compare', 'versus', 'vs', 'vs.', 'comparar', 'comparación', 'difference between']
         if any(kw in query_lower for kw in comparison_keywords):
             if query_type != "comparison":

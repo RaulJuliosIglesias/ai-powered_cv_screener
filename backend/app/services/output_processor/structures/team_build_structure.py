@@ -135,16 +135,35 @@ class TeamBuildStructure:
         chunks: List[Dict[str, Any]], 
         query: str
     ) -> List[Dict[str, Any]]:
-        """Build team member list from chunks."""
+        """
+        Build team member list from chunks.
+        
+        PHASE 6.4 FIX: Ensure we extract candidates even when cv_id is in different locations.
+        """
         # Group chunks by candidate
         candidates = {}
         
+        logger.info(f"[TEAM_BUILD] Processing {len(chunks)} chunks for team building")
+        
         for chunk in chunks:
             meta = chunk.get("metadata", {})
-            cv_id = chunk.get("cv_id", "") or meta.get("cv_id", "")
+            # PHASE 6.4: Try multiple locations for cv_id
+            cv_id = (
+                chunk.get("cv_id") or 
+                meta.get("cv_id") or 
+                chunk.get("id") or 
+                meta.get("id") or
+                ""
+            )
             
             if not cv_id:
-                continue
+                # Try to generate from candidate name if available
+                candidate_name = meta.get("candidate_name", "")
+                if candidate_name:
+                    cv_id = f"cv_{hash(candidate_name) % 100000:05d}"
+                    logger.debug(f"[TEAM_BUILD] Generated cv_id for {candidate_name}: {cv_id}")
+                else:
+                    continue
             
             if cv_id not in candidates:
                 # Extract skills
@@ -349,7 +368,8 @@ class TeamBuildStructure:
             role = member.get("role_name", "Team Member")
             exp = member.get("experience", 0)
             current_role = member.get("current_role", "")
-            fit_score = member.get("fit_score", 80)
+            # PHASE 3.3 FIX: Ensure fit_score is clamped 0-100
+            fit_score = max(0, min(100, member.get("fit_score", 80)))
             
             # Clean name (remove job title suffixes)
             for suffix in [" Research", " Associate", " UX", " Lab", " Manager"]:

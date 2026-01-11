@@ -51,6 +51,13 @@ REFERENCE_PATTERNS = [
     
     # Generic references
     (r'\b(the\s+)?same\s+(candidate|person|candidato)\b', "same_candidate"),
+    
+    # PHASE 5.4: Follow-up question patterns (references to previous results)
+    (r'\b(those|these|the)\s+(candidates|results|people)\b', "previous_results"),
+    (r'\b(esos|estos|las?)\s+(candidatos?|resultados|personas)\b', "previous_results"),
+    (r'\bmore\s+(info|information|details)\s+(about|on)\s+(them|those)\b', "previous_results"),
+    (r'\b(the\s+)?senior\s+(developer|engineer|candidate)\b', "senior_candidate"),
+    (r'\b(the\s+)?warning\s+signs\b', "risk_context"),
 ]
 
 
@@ -104,6 +111,14 @@ def extract_candidate_from_history(
     if reference_type == "top_candidates":
         return _extract_top_candidates_from_history(conversation_history)
     
+    # PHASE 5.4: Handle previous_results - return all candidates from last response
+    if reference_type == "previous_results":
+        return _extract_previous_results(conversation_history)
+    
+    # PHASE 5.4: Handle senior_candidate - find senior level candidate
+    if reference_type == "senior_candidate":
+        return _extract_senior_candidate(conversation_history)
+    
     # Look through history from most recent to oldest
     for idx, msg in enumerate(reversed(conversation_history)):
         if msg.get("role") != "assistant":
@@ -111,6 +126,19 @@ def extract_candidate_from_history(
         
         content = msg.get("content", "")
         logger.info(f"[CONTEXT_RESOLVER] Checking assistant message {idx}, length={len(content)}")
+        
+        # PHASE 7.4 FIX: Pattern 0 - Look for "Top Recommendation:" with CV link first (most reliable)
+        # Format: "Top Recommendation: [📄](cv:cv_xxx) **Name** (95%)"
+        top_rec_cv_match = re.search(
+            r'Top\s+Recommendation:?\s*\[📄\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\s*\*\*([^*]+)\*\*',
+            content,
+            re.IGNORECASE
+        )
+        if top_rec_cv_match:
+            cv_id = top_rec_cv_match.group(1).strip()
+            name = top_rec_cv_match.group(2).strip()
+            logger.info(f"[CONTEXT_RESOLVER] PHASE 7.4: Found top recommendation with CV link: {name} ({cv_id})")
+            return {"name": name, "cv_id": cv_id}
         
         # Pattern 1: Top Recommendation section (from ranking/job_match responses)
         # "Top Recommendation\n\nCarmen Rodriguez 3D\n96%"
@@ -242,6 +270,87 @@ def extract_candidate_from_history(
             return {"name": name, "cv_id": cv_id}
     
     logger.warning("[CONTEXT_RESOLVER] Could not find candidate in history")
+    return None
+
+
+def _extract_previous_results(
+    conversation_history: List[Dict[str, str]]
+) -> Optional[List[Dict[str, str]]]:
+    """
+    PHASE 5.4: Extract all candidates mentioned in the previous response.
+    
+    Used for follow-up questions like "tell me more about those candidates".
+    """
+    logger.info("[CONTEXT_RESOLVER] Extracting candidates from previous results")
+    
+    for msg in reversed(conversation_history):
+        if msg.get("role") != "assistant":
+            continue
+        
+        content = msg.get("content", "")
+        
+        # Find all CV links in the response
+        all_matches = re.findall(
+            r'\[📄\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\s*\*\*([^*]+)\*\*',
+            content
+        )
+        
+        if all_matches:
+            candidates = []
+            seen_ids = set()
+            for cv_id, name in all_matches:
+                if cv_id not in seen_ids:
+                    candidates.append({"name": name.strip(), "cv_id": cv_id.strip()})
+                    seen_ids.add(cv_id)
+            
+            if candidates:
+                logger.info(f"[CONTEXT_RESOLVER] Found {len(candidates)} candidates from previous results")
+                return candidates
+    
+    return None
+
+
+def _extract_senior_candidate(
+    conversation_history: List[Dict[str, str]]
+) -> Optional[Dict[str, str]]:
+    """
+    PHASE 5.4: Extract senior-level candidate from history.
+    
+    Looks for candidates marked as "Senior" or with high experience.
+    """
+    logger.info("[CONTEXT_RESOLVER] Looking for senior candidate")
+    
+    for msg in reversed(conversation_history):
+        if msg.get("role") != "assistant":
+            continue
+        
+        content = msg.get("content", "")
+        
+        # Look for "Senior" badge near a candidate
+        senior_match = re.search(
+            r'\[📄\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\s*\*\*([^*]+)\*\*[^<\n]*(?:Senior|Principal|Lead)',
+            content,
+            re.IGNORECASE
+        )
+        if senior_match:
+            cv_id = senior_match.group(1).strip()
+            name = senior_match.group(2).strip()
+            logger.info(f"[CONTEXT_RESOLVER] Found senior candidate: {name}")
+            return {"name": name, "cv_id": cv_id}
+        
+        # Fallback: Look for highest experience candidate
+        exp_matches = re.findall(
+            r'\[📄\]\(cv:(cv_[a-zA-Z0-9_-]+)\)\s*\*\*([^*]+)\*\*[^0-9]*(\d+)\s*(?:years?|yrs)',
+            content,
+            re.IGNORECASE
+        )
+        if exp_matches:
+            best = max(exp_matches, key=lambda x: int(x[2]))
+            cv_id = best[0].strip()
+            name = best[1].strip()
+            logger.info(f"[CONTEXT_RESOLVER] Found most experienced candidate: {name} ({best[2]} yrs)")
+            return {"name": name, "cv_id": cv_id}
+    
     return None
 
 

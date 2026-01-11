@@ -135,14 +135,12 @@ class CareerModule:
                     re.IGNORECASE
                 ))
                 
+                # PHASE 2.4 FIX: Validate entry before adding
                 if title and company and len(title) > 2:
-                    entries.append(CareerEntry(
-                        title=title,
-                        company=company,
-                        dates=dates,
-                        achievement=achievement,
-                        is_current=is_current
-                    ))
+                    # Clean and validate the entry
+                    cleaned_entry = self._validate_career_entry(title, company, dates, achievement, is_current)
+                    if cleaned_entry:
+                        entries.append(cleaned_entry)
             
             if entries:
                 break
@@ -151,8 +149,115 @@ class CareerModule:
             logger.debug("[CAREER_MODULE] No career entries extracted")
             return None
         
+        # PHASE 2.4: Remove duplicates and clean entries
+        entries = self._deduplicate_entries(entries)
+        
         logger.info(f"[CAREER_MODULE] Extracted {len(entries)} career entries")
         return CareerData(entries=entries)
+    
+    def _validate_career_entry(
+        self, 
+        title: str, 
+        company: str, 
+        dates: str, 
+        achievement: str,
+        is_current: bool
+    ) -> Optional[CareerEntry]:
+        """
+        PHASE 2.4 FIX: Validate and clean a career entry.
+        
+        Rejects entries with:
+        - "Not specified" values
+        - URLs in wrong fields
+        - Duplicate title and company
+        - Invalid patterns
+        """
+        # Clean title
+        title = self._clean_career_field(title)
+        if not title or title.lower() in ('not specified', 'unknown', 'n/a', 'none'):
+            return None
+        
+        # Clean company
+        company = self._clean_career_field(company)
+        if not company or company.lower() in ('not specified', 'unknown', 'n/a', 'none'):
+            return None
+        
+        # Remove URLs from title/company (they belong elsewhere)
+        url_pattern = r'https?://[^\s]+|www\.[^\s]+|\w+\.(com|org|net|io)[^\s]*'
+        if re.search(url_pattern, title, re.IGNORECASE):
+            title = re.sub(url_pattern, '', title).strip()
+        if re.search(url_pattern, company, re.IGNORECASE):
+            company = re.sub(url_pattern, '', company).strip()
+        
+        # Check for candidate name accidentally in title (common parsing error)
+        # Pattern: "Title CandidateName" where CandidateName is 2+ capitalized words at end
+        name_at_end = re.search(r'\s+([A-Z][a-z]+\s+[A-Z][a-z]+)$', title)
+        if name_at_end:
+            # Check if this looks like a person's name (not part of title)
+            potential_name = name_at_end.group(1)
+            if not any(kw in potential_name.lower() for kw in ['manager', 'director', 'lead', 'engineer']):
+                title = title[:name_at_end.start()].strip()
+                logger.debug(f"[CAREER_MODULE] Removed name from title: '{potential_name}'")
+        
+        # Reject if title equals company (parsing error)
+        if title.lower() == company.lower():
+            return None
+        
+        # Validate we still have meaningful content
+        if len(title) < 3 or len(company) < 2:
+            return None
+        
+        # Clean dates
+        dates = dates.strip() if dates else ""
+        
+        # Clean achievement
+        achievement = achievement.strip() if achievement else ""
+        if achievement.lower() in ('not specified', 'unknown', 'n/a'):
+            achievement = ""
+        
+        return CareerEntry(
+            title=title,
+            company=company,
+            dates=dates,
+            achievement=achievement,
+            is_current=is_current
+        )
+    
+    def _clean_career_field(self, field: str) -> str:
+        """Clean a career field (title or company)."""
+        if not field:
+            return ""
+        
+        # Remove markdown
+        field = re.sub(r'\*+', '', field).strip()
+        
+        # Remove leading/trailing special chars
+        field = re.sub(r'^[—–\-\|\s]+', '', field)
+        field = re.sub(r'[—–\-\|\s]+$', '', field)
+        
+        # Remove parenthetical content at end (often dates that got mixed in)
+        field = re.sub(r'\s*\([^)]*\)\s*$', '', field)
+        
+        return field.strip()
+    
+    def _deduplicate_entries(self, entries: List[CareerEntry]) -> List[CareerEntry]:
+        """
+        PHASE 2.4: Remove duplicate career entries.
+        
+        Keeps first occurrence of each unique (title, company) pair.
+        """
+        seen = set()
+        unique_entries = []
+        
+        for entry in entries:
+            key = (entry.title.lower(), entry.company.lower())
+            if key not in seen:
+                seen.add(key)
+                unique_entries.append(entry)
+            else:
+                logger.debug(f"[CAREER_MODULE] Removing duplicate: {entry.title} at {entry.company}")
+        
+        return unique_entries
     
     def format(self, data: CareerData) -> str:
         """

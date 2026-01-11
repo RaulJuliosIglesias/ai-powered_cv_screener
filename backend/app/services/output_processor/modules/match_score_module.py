@@ -356,9 +356,12 @@ class MatchScoreModule:
             if len(m.missing_requirements) > 3:
                 missing_str += f" (+{len(m.missing_requirements) - 3})"
             
+            # PHASE 3.2 FIX: Ensure match score is clamped 0-100
+            match_score = max(0, min(100, m.overall_match))
+            
             lines.append(
                 f"| [📄](cv:{m.cv_id}) **{m.candidate_name}** | "
-                f"{m.overall_match:.0f}% | {met_str} | {missing_str} |"
+                f"{match_score:.0f}% | {met_str} | {missing_str} |"
             )
         
         return "\n".join(lines)

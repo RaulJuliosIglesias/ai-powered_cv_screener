@@ -95,6 +95,15 @@ class JobMatchStructure:
         # Extract conclusion
         conclusion = self.conclusion_module.extract(llm_output)
         
+        # PHASE 1.5 FIX: Validate conclusion aligns with best match
+        # If conclusion mentions different candidate than best_match, fix it
+        if conclusion and match_data and match_data.matches:
+            conclusion = self._validate_and_fix_conclusion(
+                conclusion=conclusion,
+                match_data=match_data,
+                query=query
+            )
+        
         # Extract analysis
         analysis = self.analysis_module.extract(llm_output, "", conclusion or "")
         
@@ -286,3 +295,115 @@ class JobMatchStructure:
                 return match.group(1).strip().title()
         
         return "Position"
+    
+    def _validate_and_fix_conclusion(
+        self,
+        conclusion: str,
+        match_data,
+        query: str
+    ) -> str:
+        """
+        PHASE 1.5 FIX: Validate that conclusion mentions the correct best match.
+        
+        If conclusion mentions a different candidate as best fit, replace with
+        a conclusion that aligns with the actual match scores.
+        
+        Args:
+            conclusion: LLM-generated conclusion text
+            match_data: MatchScoreData with ranked matches
+            query: Original user query
+            
+        Returns:
+            Validated/fixed conclusion text
+        """
+        import re
+        
+        if not conclusion or not match_data or not match_data.matches:
+            return conclusion
+        
+        best_match = match_data.matches[0]
+        best_name = best_match.candidate_name.lower().strip()
+        best_cv_id = best_match.cv_id
+        
+        # Extract candidate names mentioned in conclusion
+        # Pattern: **[Name](cv:id)** or just **Name** or [Name](cv:id)
+        mentioned_pattern = r'\*\*\[?([^\]|\*]+)\]?\*\*|\[([^\]]+)\]\(cv:'
+        matches = re.findall(mentioned_pattern, conclusion, re.IGNORECASE)
+        
+        # Also look for "X is the best fit" patterns
+        best_fit_pattern = r'([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,2})\s+is\s+(?:the\s+)?(?:best|most\s+suitable|top|ideal)\s+(?:fit|match|candidate)'
+        best_fit_matches = re.findall(best_fit_pattern, conclusion, re.IGNORECASE)
+        
+        # Flatten matches and get first mentioned candidate
+        mentioned_names = []
+        for match in matches:
+            name = match[0] or match[1]
+            if name:
+                mentioned_names.append(name.lower().strip())
+        
+        for name in best_fit_matches:
+            if name.lower().strip() not in mentioned_names:
+                mentioned_names.insert(0, name.lower().strip())  # Insert at beginning (strongest signal)
+        
+        # Check if any mentioned candidate as "best fit" matches our actual best match
+        first_mentioned = mentioned_names[0] if mentioned_names else None
+        
+        if first_mentioned:
+            # Check if first mention is our best match
+            best_name_parts = best_name.split()
+            first_parts = first_mentioned.split()
+            
+            # Match if any significant name part matches
+            is_match = (
+                best_name in first_mentioned or 
+                first_mentioned in best_name or
+                any(p in first_mentioned for p in best_name_parts if len(p) > 3) or
+                any(p in best_name for p in first_parts if len(p) > 3)
+            )
+            
+            if not is_match:
+                # MISMATCH DETECTED - conclusion mentions wrong candidate
+                logger.warning(
+                    f"[JOB_MATCH_STRUCTURE] Conclusion mismatch: mentions '{first_mentioned}' "
+                    f"but best match is '{best_name}'. Generating aligned conclusion."
+                )
+                
+                # Generate a conclusion that aligns with the match scores
+                return self._generate_aligned_conclusion(best_match, match_data, query)
+        
+        return conclusion
+    
+    def _generate_aligned_conclusion(self, best_match, match_data, query: str) -> str:
+        """
+        Generate a conclusion that is aligned with the match score results.
+        
+        This is used when the LLM's conclusion contradicts our match scores.
+        """
+        name = best_match.candidate_name
+        cv_id = best_match.cv_id
+        score = best_match.overall_match
+        
+        # Build justification from met requirements
+        justification_parts = []
+        if best_match.met_requirements:
+            justification_parts.append(f"meets {len(best_match.met_requirements)} key requirements")
+        if best_match.strengths:
+            justification_parts.append("; ".join(best_match.strengths[:2]))
+        
+        justification = " and ".join(justification_parts) if justification_parts else "best overall match"
+        
+        conclusion = (
+            f"**[{name}](cv:{cv_id})** is the best fit for this position with a {score:.0f}% match score. "
+            f"Key factors: {justification}."
+        )
+        
+        # Add runner-up if available
+        if len(match_data.matches) >= 2:
+            runner = match_data.matches[1]
+            runner_name = runner.candidate_name
+            runner_cv = runner.cv_id
+            runner_score = runner.overall_match
+            conclusion += f" Runner-up: **[{runner_name}](cv:{runner_cv})** ({runner_score:.0f}%)."
+        
+        logger.info(f"[JOB_MATCH_STRUCTURE] Generated aligned conclusion for '{name}'")
+        return conclusion

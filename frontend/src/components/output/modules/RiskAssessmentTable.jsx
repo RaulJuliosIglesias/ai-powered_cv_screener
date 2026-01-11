@@ -122,11 +122,19 @@ const RiskAssessmentTable = ({ data, className = '' }) => {
                 onClick={() => setExpandedRow(isExpanded ? null : idx)}
                 className="w-full px-4 py-3 flex items-center justify-between hover:bg-slate-700/20 transition-colors rounded-lg"
               >
-                <div className="flex items-center gap-3">
-                  <span className="text-lg">{getFactorIcon(row.factor)}</span>
-                  <span className="font-medium text-slate-200">{row.factor}</span>
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <span className="text-lg flex-shrink-0">{getFactorIcon(row.factor)}</span>
+                  <div className="flex flex-col items-start min-w-0">
+                    <span className="font-medium text-slate-200">{row.factor}</span>
+                    {/* Show status text inline for better visibility */}
+                    {row.status_text && (
+                      <span className={`text-xs ${style.color} truncate max-w-[200px]`}>
+                        {row.status_text}
+                      </span>
+                    )}
+                  </div>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 flex-shrink-0">
                   <div className="flex items-center gap-1.5">
                     <Icon className={`w-4 h-4 ${style.color}`} />
                     <span className={`text-sm font-medium ${style.color}`}>{style.label}</span>
@@ -139,14 +147,17 @@ const RiskAssessmentTable = ({ data, className = '' }) => {
                 </div>
               </button>
               
-              {isExpanded && (
-                <div className="px-4 pb-3 pt-1 border-t border-slate-700/50">
-                  <div className="text-sm text-slate-300 mb-2">
-                    <span className="text-slate-500">Status:</span> {row.status}
-                  </div>
+              {/* Always show details if available, expandable for more */}
+              {(row.details || isExpanded) && (
+                <div className={`px-4 pb-3 pt-1 ${isExpanded ? 'border-t border-slate-700/50' : ''}`}>
                   {row.details && (
                     <div className="text-sm text-slate-400">
                       {row.details}
+                    </div>
+                  )}
+                  {isExpanded && row.status && (
+                    <div className="text-xs text-slate-500 mt-2">
+                      <span className="text-slate-600">Full status:</span> {row.status}
                     </div>
                   )}
                 </div>

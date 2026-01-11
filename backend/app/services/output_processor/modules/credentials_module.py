@@ -101,20 +101,26 @@ class CredentialsModule:
                 item = re.sub(r'\*([^*]+)\*', r'\1', item)
                 
                 if item and len(item) > 3:
-                    items.append(item)
+                    # PHASE 4.2 FIX: Clean truncated education entries
+                    item = self._clean_credential_item(item)
                     
-                    # Categorize
-                    item_lower = item.lower()
-                    if any(kw in item_lower for kw in [
-                        'degree', 'bachelor', 'master', 'phd', 'mba', 
-                        'university', 'college', 'institute', 'school'
-                    ]):
-                        education.append(item)
-                    elif any(kw in item_lower for kw in [
-                        'certified', 'certification', 'certificate', 
-                        'aws', 'azure', 'gcp', 'pmp', 'cissp', 'ccna'
-                    ]):
-                        certifications.append(item)
+                    if item and len(item) > 3:
+                        items.append(item)
+                        
+                        # Categorize
+                        item_lower = item.lower()
+                        if any(kw in item_lower for kw in [
+                            'degree', 'bachelor', 'master', 'phd', 'mba', 
+                            'university', 'college', 'institute', 'school',
+                            'b.s.', 'm.s.', 'b.a.', 'm.a.', 'bsc', 'msc'
+                        ]):
+                            education.append(item)
+                        elif any(kw in item_lower for kw in [
+                            'certified', 'certification', 'certificate', 
+                            'aws', 'azure', 'gcp', 'pmp', 'cissp', 'ccna',
+                            'scrum', 'agile', 'itil', 'cfa', 'cpa'
+                        ]):
+                            certifications.append(item)
             
             if items:
                 break
@@ -129,6 +135,42 @@ class CredentialsModule:
             education=education,
             certifications=certifications
         )
+    
+    def _clean_credential_item(self, item: str) -> str:
+        """
+        PHASE 4.2 FIX: Clean credential item to fix truncation issues.
+        
+        Fixes issues like:
+        - "Master of Science in Computer Sc..." -> preserves as is (incomplete but valid)
+        - "2019 - Master of Science" -> "Master of Science (2019)"
+        - "Master of..." -> rejects as too truncated
+        """
+        if not item:
+            return ""
+        
+        item = item.strip()
+        
+        # Remove leading years and reformat
+        year_prefix = re.match(r'^(\d{4})\s*[-–—]\s*(.+)$', item)
+        if year_prefix:
+            year = year_prefix.group(1)
+            rest = year_prefix.group(2).strip()
+            if rest:
+                item = f"{rest} ({year})"
+        
+        # Reject items that are just years
+        if re.match(r'^\d{4}$', item):
+            return ""
+        
+        # Reject items ending with "..." and less than 20 chars (too truncated)
+        if item.endswith('...') and len(item) < 20:
+            return ""
+        
+        # Reject items that are just "of" or other prepositions
+        if item.lower() in ('of', 'in', 'at', 'the', 'and', 'or'):
+            return ""
+        
+        return item
     
     def format(self, data: CredentialsData) -> str:
         """

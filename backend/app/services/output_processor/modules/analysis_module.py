@@ -140,21 +140,36 @@ class AnalysisModule:
             logger.warning("[ANALYSIS] Contaminated content detected, discarding")
             return None
         
-        # Detect incomplete markdown tables (just header row with no data)
-        # Pattern: | Header1 | Header2 | ... | with no subsequent data rows
-        incomplete_table_pattern = r'^\s*\|[^|]+\|[^|]*\|[^|]*\|?\s*$'
-        if re.match(incomplete_table_pattern, cleaned.strip()):
-            logger.warning("[ANALYSIS] Detected incomplete table header only, discarding")
+        # PHASE 7.1 FIX: Aggressive detection of empty/incomplete tables
+        stripped = cleaned.strip()
+        
+        # Check 1: Single line that looks like a table header
+        if stripped.startswith('|') and stripped.count('\n') <= 1:
+            logger.warning(f"[ANALYSIS] Single line table header detected: '{stripped[:50]}...'")
             return None
         
-        # Also reject if it's just a table header line
-        if cleaned.strip().startswith('|') and cleaned.strip().count('\n') == 0:
-            logger.warning("[ANALYSIS] Single table header line detected, discarding")
-            return None
+        # Check 2: Table with only header keywords and no real content
+        table_header_keywords = ['candidate', 'skills', 'experience', 'match', 'score', 'name', 'years']
+        words = stripped.lower().split()
+        if stripped.startswith('|'):
+            keyword_ratio = sum(1 for w in words if any(k in w for k in table_header_keywords)) / max(len(words), 1)
+            if keyword_ratio > 0.5 and len(words) < 15:
+                logger.warning(f"[ANALYSIS] Table is mostly headers (ratio={keyword_ratio:.2f}), discarding")
+                return None
         
-        # Only return if substantial content (> 50 chars)
-        if len(cleaned) > 50:
-            logger.debug(f"[ANALYSIS] Extracted: {len(cleaned)} chars")
+        # Check 3: Very short content that's just a pipe-delimited line
+        if '|' in stripped and len(stripped) < 100:
+            # Count pipes vs actual content
+            pipe_count = stripped.count('|')
+            non_pipe_content = stripped.replace('|', '').strip()
+            if pipe_count > 3 and len(non_pipe_content) < 50:
+                logger.warning(f"[ANALYSIS] Mostly pipes with little content, discarding")
+                return None
+        
+        # Only return if substantial content (> 50 chars of non-whitespace)
+        non_whitespace = ''.join(stripped.split())
+        if len(non_whitespace) > 50:
+            logger.debug(f"[ANALYSIS] Extracted: {len(stripped)} chars")
             return cleaned
         
         logger.debug("[ANALYSIS] No additional content found")
