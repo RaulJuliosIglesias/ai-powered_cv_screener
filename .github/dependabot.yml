@@ -6,31 +6,48 @@ updates:
     schedule:
       interval: "weekly"
       day: "monday"
-    open-pull-requests-limit: 5
+      time: "09:00"
+    open-pull-requests-limit: 3
     labels:
       - "dependencies"
       - "python"
     commit-message:
       prefix: "deps(py):"
+    # Agrupar actualizaciones menores
+    groups:
+      python-minor:
+        dependency-type: "production"
+        update-types: ["minor", "patch"]
+        apply-groups:
+          - "python-minor"
 
   # Node.js dependencies
-  - package-ecosystem: "npm"
+  - package-ecosystem "npm"
     directory: "/frontend"
     schedule:
       interval: "weekly"
       day: "monday"
-    open-pull-requests-limit: 5
+      time: "09:00"
+    open-pull-requests-limit: 3
     labels:
       - "dependencies"
       - "javascript"
     commit-message:
       prefix: "deps(npm):"
+    # Agrupar actualizaciones menores
+    groups:
+      npm-minor:
+        dependency-type: "production"
+        update-types: ["minor", "patch"]
 
   # GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "monthly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 2
     labels:
       - "dependencies"
       - "ci"
