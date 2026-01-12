@@ -22,7 +22,7 @@ updates:
           - "python-minor"
 
   # Node.js dependencies
-  - package-ecosystem "npm"
+  - package-ecosystem: "npm"
     directory: "/frontend"
     schedule:
       interval: "weekly"
