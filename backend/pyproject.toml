@@ -1,0 +1,39 @@
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "*.pyc",
+    "migrations",
+    "chroma_db",
+    "data",
+    "debug_logs",
+    "eval_logs",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+]
+ignore = [
+    "E501",  # line too long (handled by formatter)
+    "B008",  # do not perform function calls in argument defaults
+    "B904",  # raise from
+    "W293",  # blank line contains whitespace
+    "W291",  # trailing whitespace
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+strict = false
