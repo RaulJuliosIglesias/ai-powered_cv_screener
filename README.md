@@ -176,6 +176,8 @@ python scripts/start_web.py   # Frontend → http://localhost:6001
 
 ## 🎬 Demo
 
+https://cap.so/s/9jnex9fx01ddcxp
+
 ### Sample Questions by Query Type
 
 | Query Type | Example Question | Output Structure |
