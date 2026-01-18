@@ -77,21 +77,56 @@ app.include_router(v8_router)
 # Serve static files for Railway deployment
 import os
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
+from pathlib import Path
 
-STATIC_DIR = "/app/static"
-RAILWAY_MODE = os.path.exists(STATIC_DIR) and os.path.exists(f"{STATIC_DIR}/index.html")
+STATIC_DIR = Path("/app/static")
 
-# Simple root endpoint for Railway
-@app.get("/", response_class=HTMLResponse)
-async def serve_root():
-    """Serve index.html if available, otherwise simple response."""
-    index_path = "/app/static/index.html"
-    try:
-        with open(index_path, 'r', encoding='utf-8') as f:
-            return HTMLResponse(content=f.read())
-    except:
-        return HTMLResponse(content="<h1>CV Screener API is running</h1><p><a href='/docs'>API Documentation</a></p>")
+# Check if we're running in Railway (static files exist)
+if STATIC_DIR.exists() and (STATIC_DIR / "index.html").exists():
+    logger.info(f"Railway mode: Mounting static files from {STATIC_DIR}")
+    
+    # Mount assets directory for JS/CSS
+    assets_dir = STATIC_DIR / "assets"
+    if assets_dir.exists():
+        app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="assets")
+    
+    # Serve index.html at root
+    @app.get("/", response_class=HTMLResponse, include_in_schema=False)
+    async def serve_index():
+        return FileResponse(STATIC_DIR / "index.html", media_type="text/html")
+    
+    # Serve other static files (favicon, etc.)
+    @app.get("/vite.svg", include_in_schema=False)
+    async def serve_vite_svg():
+        return FileResponse(STATIC_DIR / "vite.svg")
+    
+    # Catch-all for SPA routing - MUST be after all other routes
+    @app.get("/{path:path}", response_class=HTMLResponse, include_in_schema=False)
+    async def serve_spa(path: str):
+        # Skip API and docs routes
+        if path.startswith(("api", "docs", "redoc", "openapi")):
+            return JSONResponse({"detail": "Not Found"}, status_code=404)
+        
+        # Try to serve static file first
+        file_path = STATIC_DIR / path
+        if file_path.exists() and file_path.is_file():
+            return FileResponse(file_path)
+        
+        # Otherwise serve index.html for SPA routing
+        return FileResponse(STATIC_DIR / "index.html", media_type="text/html")
+
+else:
+    # Local development mode - just show API info
+    @app.get("/")
+    async def root():
+        """Root endpoint with API information."""
+        return {
+            "name": "CV Screener RAG API",
+            "version": "1.0.0",
+            "docs": "/docs",
+            "health": "/api/health",
+        }
 
 
 # Startup event
