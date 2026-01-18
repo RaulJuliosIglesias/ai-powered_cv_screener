@@ -4,6 +4,8 @@ dockerfilePath = "Dockerfile.railway"
 
 [deploy]
 healthcheckPath = "/api/health"
-healthcheckTimeout = 30
+healthcheckTimeout = 60
+startCommand = "/app/start.sh"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
+numReplicas = 1

@@ -74,49 +74,11 @@ app.include_router(sessions_stream_router)
 app.include_router(export_router)
 app.include_router(v8_router)
 
-# Serve static files for Railway deployment
-import os
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-
-# Check if running in Railway (static dir exists)
-STATIC_DIR = "/app/static"
-RAILWAY_MODE = os.path.exists(STATIC_DIR) and os.path.exists(f"{STATIC_DIR}/index.html")
-
-if RAILWAY_MODE:
-    logger.info(f"Railway mode: Serving static files from {STATIC_DIR}")
-    
-    # Serve static assets (js, css, etc.)
-    if os.path.exists(f"{STATIC_DIR}/assets"):
-        app.mount("/assets", StaticFiles(directory=f"{STATIC_DIR}/assets"), name="assets")
-    
-    # Serve vite.svg and other root static files
-    @app.get("/vite.svg")
-    async def serve_vite_svg():
-        return FileResponse(f"{STATIC_DIR}/vite.svg")
-    
-    # Serve root index.html for SPA
-    @app.get("/")
-    async def serve_spa_root():
-        logger.info("Serving index.html for root request")
-        index_path = f"{STATIC_DIR}/index.html"
-        if os.path.exists(index_path):
-            return FileResponse(index_path, media_type="text/html")
-        else:
-            logger.error(f"index.html not found at {index_path}")
-            return {"error": "Frontend not found", "path": index_path}
-
-else:
-    # Local development - just API info
-    @app.get("/")
-    async def root():
-        """Root endpoint with API information."""
-        return {
-            "name": "CV Screener RAG API",
-            "version": "1.0.0",
-            "docs": "/docs",
-            "health": "/api/health",
-        }
+# Root endpoint - simple response for Railway deployment verification
+@app.get("/")
+async def root():
+    """Root endpoint."""
+    return {"status": "ok", "message": "CV Screener API is running"}
 
 
 # Startup event
