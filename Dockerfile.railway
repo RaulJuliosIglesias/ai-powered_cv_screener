@@ -18,12 +18,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 COPY backend/requirements.railway.txt ./requirements.txt
-RUN pip install --no-cache-dir --user -r requirements.txt \
+RUN pip install --no-cache-dir --user --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.txt \
     && find /root/.local -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true \
     && find /root/.local -type d -name "tests" -exec rm -rf {} + 2>/dev/null || true \
     && find /root/.local -type d -name "test" -exec rm -rf {} + 2>/dev/null || true \
     && find /root/.local -name "*.pyc" -delete 2>/dev/null || true \
-    && find /root/.local -name "*.pyo" -delete 2>/dev/null || true
+    && find /root/.local -name "*.pyo" -delete 2>/dev/null || true \
+    && rm -rf /root/.local/lib/python*/site-packages/torch/test \
+    && rm -rf /root/.local/lib/python*/site-packages/torch/lib/*.a
 
 # Stage 3: Final minimal image
 FROM python:3.11-slim

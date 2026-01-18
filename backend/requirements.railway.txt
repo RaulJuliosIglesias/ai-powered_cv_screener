@@ -21,6 +21,10 @@ supabase==2.3.4
 chromadb==0.4.22
 numpy<2.0
 
+# PyTorch CPU-only (MUST be before sentence-transformers)
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.1.2+cpu
+
 # Embeddings (REQUIRED)
 sentence-transformers==2.2.2
 
