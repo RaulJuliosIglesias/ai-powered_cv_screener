@@ -2541,11 +2541,13 @@ class RAGServiceV5:
             
             # Check if LLM supports streaming
             if hasattr(self._llm, 'generate_stream'):
+                logger.info(f"[GENERATION_STREAM] Using streaming generation with LLM: {type(self._llm).__name__}")
                 full_response = ""
                 prompt_tokens = 0
                 completion_tokens = 0
                 openrouter_cost = 0.0
                 
+                logger.info(f"[GENERATION_STREAM] Starting LLM call...")
                 async for chunk in self._llm.generate_stream(prompt, system_prompt=SYSTEM_PROMPT):
                     if chunk.get("token"):
                         yield {"event": "token", "data": {"token": chunk["token"]}}
@@ -2563,6 +2565,8 @@ class RAGServiceV5:
                 }
             else:
                 # Fallback to non-streaming
+                logger.info(f"[GENERATION_STREAM] Using non-streaming generation with LLM: {type(self._llm).__name__}")
+                logger.info(f"[GENERATION_STREAM] Starting LLM call (non-streaming)...")
                 result = await asyncio.wait_for(
                     self._llm.generate(prompt, system_prompt=SYSTEM_PROMPT),
                     timeout=self.config.llm_timeout

@@ -59,6 +59,7 @@ async def event_generator(rag_service, question: str, session_id: str, cv_ids: l
     log_query_start(session_id, question, cv_ids)
     
     try:
+        logger.info(f"[STREAM] Starting query_stream for: {question[:50]}...")
         async for event in rag_service.query_stream(
             question=question,
             conversation_history=conversation_history,
@@ -70,13 +71,18 @@ async def event_generator(rag_service, question: str, session_id: str, cv_ids: l
             event_type = event.get("event", "message")
             event_data = event.get("data", {})
             
+            logger.debug(f"[STREAM] Event: {event_type}")
+            
             # Capture final response to save
             if event_type == "complete":
                 final_response = event_data
+                logger.info(f"[STREAM] Query completed successfully")
             
             # Format as SSE (use SafeJSONEncoder to handle sets)
             yield f"event: {event_type}\n"
             yield f"data: {json.dumps(event_data, cls=SafeJSONEncoder)}\n\n"
+        
+        logger.info(f"[STREAM] Stream finished for session {session_id}")
         
         # Save assistant message to session with structured_output
         if final_response and final_response.get("answer"):
