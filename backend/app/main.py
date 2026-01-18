@@ -133,9 +133,11 @@ else:
 @app.on_event("startup")
 async def startup_event():
     """Initialize services on startup."""
-    logger.info("Starting CV Screener API...")
+    import os
+    port = os.environ.get("PORT", "not set")
+    logger.info(f"Starting CV Screener API on PORT={port}")
     logger.info(f"Default mode: {settings.default_mode}")
-    logger.info(f"CORS origins: {settings.cors_origins_list}")
+    logger.info(f"Static dir exists: {STATIC_DIR.exists()}")
     logger.info("API ready to receive requests")
 
 
