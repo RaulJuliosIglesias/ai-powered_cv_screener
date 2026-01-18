@@ -56,8 +56,8 @@ COPY --from=frontend-builder /frontend/dist /app/static
 # Create directories
 RUN mkdir -p /app/storage /app/chroma_db /app/data
 
-# Railway sets PORT dynamically - do NOT override
-EXPOSE 8080
+# Railway expects port 8000
+EXPOSE 8000
 
-# Run uvicorn with Railway's PORT
-CMD ["sh", "-c", "echo Starting on port $PORT && uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080} --workers 1"]
+# Run uvicorn on port 8000 (Railway's default)
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]
