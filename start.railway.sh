@@ -27,6 +27,12 @@ server {
         index index.html;
         try_files \$uri \$uri/ /index.html;
     }
+    
+    # Railway deployment check endpoint
+    location /railway {
+        return 200 "OK";
+        add_header Content-Type text/plain;
+    }
 
     location /api/ {
         proxy_pass http://127.0.0.1:8000/api/;
