@@ -22,7 +22,7 @@ numpy<2.0  # Required for ChromaDB compatibility
 google-generativeai>=0.5.2,<0.6.0
 
 # Cloud Mode - API Client & Supabase
-httpx>=0.24,<0.28
+httpx>=0.24,<0.29
 supabase==2.3.4
 
 # LangChain Integration
