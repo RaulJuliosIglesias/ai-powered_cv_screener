@@ -79,19 +79,20 @@ class RerankingService:
     then reorders results by this score.
     """
     
-    def __init__(self, model: str, enabled: bool = True):
+    def __init__(self, model: str, enabled: bool = True, api_key: Optional[str] = None):
         """
         Initialize the re-ranking service.
         
         Args:
             model: LLM model to use for scoring (required)
             enabled: Whether re-ranking is enabled
+            api_key: Optional API key for OpenRouter (defaults to settings.openrouter_api_key)
         """
         if not model:
             raise ValueError("model parameter is required and cannot be empty")
         self.model = model
         self.enabled = enabled
-        self.api_key = settings.openrouter_api_key or ""
+        self.api_key = api_key or settings.openrouter_api_key or ""
         # Don't create persistent client - use context manager per request
         logger.info(f"RerankingService initialized with model: {self.model}, enabled: {enabled}")
     

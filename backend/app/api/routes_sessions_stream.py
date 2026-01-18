@@ -1,11 +1,13 @@
 """SSE streaming endpoint for real-time chat progress."""
 import json
 import logging
-from fastapi import APIRouter, HTTPException, Query
+from typing import Optional
+from fastapi import APIRouter, HTTPException, Query, Depends
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 from app.config import settings, Mode
+from app.api.dependencies import get_openrouter_api_key
 
 
 class SafeJSONEncoder(json.JSONEncoder):
@@ -109,7 +111,8 @@ async def event_generator(rag_service, question: str, session_id: str, cv_ids: l
 async def chat_stream(
     session_id: str,
     request: ChatStreamRequest,
-    mode: Mode = Query(default=settings.default_mode)
+    mode: Mode = Query(default=settings.default_mode),
+    api_key: Optional[str] = Depends(get_openrouter_api_key)
 ):
     """
     Stream chat response with real-time progress updates via SSE.
@@ -176,7 +179,7 @@ async def chat_stream(
         
         # Now initialize providers with configured models
         logger.info("[STREAM] Calling lazy_initialize_providers()")
-        rag_service.lazy_initialize_providers()
+        rag_service.lazy_initialize_providers(api_key=api_key)
         logger.info(f"[STREAM] Providers initialized: {rag_service._providers_initialized}")
         
     except Exception as e:

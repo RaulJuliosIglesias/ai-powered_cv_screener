@@ -776,7 +776,7 @@ class RAGServiceV5:
         logger.info(f"RAGServiceV5 created with embedder and vector_store for mode={mode}")
         return service
     
-    def lazy_initialize_providers(self):
+    def lazy_initialize_providers(self, api_key: Optional[str] = None):
         """Initialize providers after models have been configured."""
         logger.info(f"[LAZY_INIT] Starting lazy_initialize_providers")
         logger.info(f"[LAZY_INIT] Config models: understanding={self.config.understanding_model}, generation={self.config.generation_model}, reranking={self.config.reranking_model}, verification={self.config.verification_model}")
@@ -817,22 +817,22 @@ class RAGServiceV5:
             vector_store = ProviderFactory.get_vector_store(self.config.mode)
             logger.info("[LAZY_INIT] Vector store created")
             
-            llm = ProviderFactory.get_llm_provider(self.config.mode, self.config.generation_model)
+            llm = ProviderFactory.get_llm_provider(self.config.mode, self.config.generation_model, api_key)
             logger.info(f"[LAZY_INIT] LLM provider created with model: {self.config.generation_model}")
             
-            query_understanding = QueryUnderstandingService(model=self.config.understanding_model)
+            query_understanding = QueryUnderstandingService(model=self.config.understanding_model, api_key=api_key)
             logger.info(f"[LAZY_INIT] Query understanding service created with model: {self.config.understanding_model}")
             
-            multi_query = MultiQueryService(model=self.config.understanding_model, hyde_enabled=self.config.hyde_enabled)
+            multi_query = MultiQueryService(model=self.config.understanding_model, hyde_enabled=self.config.hyde_enabled, api_key=api_key)
             logger.info("[LAZY_INIT] Multi-query service created")
             
-            reranking = RerankingService(model=self.config.reranking_model or self.config.generation_model, enabled=self.config.reranking_enabled)
+            reranking = RerankingService(model=self.config.reranking_model or self.config.generation_model, enabled=self.config.reranking_enabled, api_key=api_key)
             logger.info("[LAZY_INIT] Reranking service created")
             
-            reasoning = ReasoningService(model=self.config.generation_model, reflection_enabled=self.config.reflection_enabled)
+            reasoning = ReasoningService(model=self.config.generation_model, reflection_enabled=self.config.reflection_enabled, api_key=api_key)
             logger.info("[LAZY_INIT] Reasoning service created")
             
-            claim_verifier = ClaimVerifierService(model=self.config.verification_model or self.config.generation_model)
+            claim_verifier = ClaimVerifierService(model=self.config.verification_model or self.config.generation_model, api_key=api_key)
             logger.info("[LAZY_INIT] Claim verifier created")
             
             guardrail = GuardrailService()

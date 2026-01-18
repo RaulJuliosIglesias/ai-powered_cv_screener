@@ -188,12 +188,12 @@ class MultiQueryService:
     3. Entity Extraction: Enable hybrid keyword search
     """
     
-    def __init__(self, model: str, hyde_enabled: bool = True):
+    def __init__(self, model: str, hyde_enabled: bool = True, api_key: Optional[str] = None):
         if not model:
             raise ValueError("model parameter is required and cannot be empty")
         self.model = model
         self.hyde_enabled = hyde_enabled
-        self.api_key = settings.openrouter_api_key or ""
+        self.api_key = api_key or settings.openrouter_api_key or ""
         logger.info(f"MultiQueryService initialized with model: {self.model}")
     
     async def generate(self, query: str) -> MultiQueryResult:

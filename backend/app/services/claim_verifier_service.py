@@ -119,13 +119,14 @@ class ClaimVerifierService:
     def __init__(
         self,
         model: str,
-        min_verified_ratio: float = DEFAULT_MIN_VERIFIED_RATIO
+        min_verified_ratio: float = 0.5,
+        api_key: Optional[str] = None
     ):
         if not model:
             raise ValueError("model parameter is required and cannot be empty")
         self.model = model
         self.min_verified_ratio = min_verified_ratio
-        self.api_key = settings.openrouter_api_key or ""
+        self.api_key = api_key or settings.openrouter_api_key or ""
         logger.info(f"ClaimVerifierService initialized")
     
     async def verify_response(

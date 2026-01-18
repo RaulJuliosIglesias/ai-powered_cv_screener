@@ -98,10 +98,10 @@ def calculate_openrouter_cost(model: str, prompt_tokens: int, completion_tokens:
 class OpenRouterLLMProvider(LLMProvider):
     """LLM provider using OpenRouter API."""
     
-    def __init__(self, model: str):
+    def __init__(self, model: str, api_key: Optional[str] = None):
         if not model:
             raise ValueError("model parameter is required and cannot be empty")
-        self.api_key = settings.openrouter_api_key
+        self.api_key = api_key or settings.openrouter_api_key
         self.base_url = settings.openrouter_base_url
         self.model = model
     

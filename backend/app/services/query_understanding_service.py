@@ -312,11 +312,11 @@ class QueryUnderstandingService:
     - Level 3: Heuristic fallback (NEVER fails)
     """
     
-    def __init__(self, model: str):
+    def __init__(self, model: str, api_key: Optional[str] = None):
         if not model:
             raise ValueError("model parameter is required and cannot be empty")
         self.model = model
-        self.api_key = settings.openrouter_api_key or ""
+        self.api_key = api_key or settings.openrouter_api_key or ""
         logger.info(f"QueryUnderstandingService initialized with model: {self.model}")
         logger.info(f"  API key available: {bool(self.api_key)}")
         logger.info(f"  Fallback models: {len(FREE_MODEL_FALLBACK_CHAIN)} free models available")

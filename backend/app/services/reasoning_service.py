@@ -337,13 +337,14 @@ class ReasoningService:
     def __init__(
         self,
         model: str,
-        reflection_enabled: bool = True
+        reflection_enabled: bool = True,
+        api_key: Optional[str] = None
     ):
         if not model:
             raise ValueError("model parameter is required and cannot be empty")
         self.model = model
         self.reflection_enabled = reflection_enabled
-        self.api_key = settings.openrouter_api_key or ""
+        self.api_key = api_key or settings.openrouter_api_key or ""
         logger.info(f"ReasoningService initialized with model: {self.model}")
     
     async def reason(
