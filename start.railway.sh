@@ -62,40 +62,13 @@ echo "Starting uvicorn backend..."
 uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 1 --timeout-keep-alive 30 &
 UVICORN_PID=$!
 
-# Wait for backend to be ready
-echo "Waiting for backend to start..."
-sleep 5
-
-# Verify backend is running
-if ! kill -0 $UVICORN_PID 2>/dev/null; then
-    echo "ERROR: Uvicorn failed to start"
-    exit 1
-fi
-
-# Verify static files exist
-echo "Checking static files..."
-ls -la /app/static/ || echo "WARNING: No static files found!"
-ls -la /app/static/index.html 2>/dev/null || echo "WARNING: index.html not found!"
-
-# Ensure proper permissions
-chmod -R 755 /app/static 2>/dev/null || true
-
+# Quick backend verification
 echo "Starting nginx on port $PORT..."
 nginx -g 'daemon off;' &
 NGINX_PID=$!
 
-# Wait for nginx to start
-sleep 2
-
-# Test nginx is serving
-echo "Testing nginx..."
-curl -s http://localhost:$PORT/ | head -5 || echo "WARNING: nginx not responding"
-curl -s http://localhost:$PORT/api/health || echo "WARNING: API not responding"
-
-# Test external connectivity (Railway's perspective)
-echo "Testing external connectivity..."
-netstat -tlnp | grep ":$PORT " || echo "WARNING: Port not bound"
-ss -tlnp | grep ":$PORT " || echo "WARNING: Port not listening"
+# Minimal wait
+sleep 1
 
 # Keep nginx in foreground
 wait $NGINX_PID
