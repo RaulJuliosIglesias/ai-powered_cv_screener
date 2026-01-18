@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: cv-screener-backend-dev
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DEFAULT_MODE=local
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - CORS_ORIGINS=http://localhost:5173,http://localhost:5174,http://localhost:3000
+      - LOG_LEVEL=DEBUG
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
+      - OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
+      - SUPABASE_URL=${SUPABASE_URL:-}
+      - SUPABASE_SERVICE_KEY=${SUPABASE_SERVICE_KEY:-}
+      - HUGGINGFACE_API_KEY=${HUGGINGFACE_API_KEY:-}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY:-}
+    volumes:
+      - ./backend:/app
+      - ./storage:/app/storage
+      - chroma_data:/app/chroma_db
+    networks:
+      - cv-screener-network
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: cv-screener-frontend-dev
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8000/api
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - cv-screener-network
+    command: npm run dev -- --host
+
+volumes:
+  chroma_data:
+    driver: local
+
+networks:
+  cv-screener-network:
+    driver: bridge

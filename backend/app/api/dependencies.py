@@ -1,5 +1,6 @@
 from functools import lru_cache
-from typing import Generator
+from typing import Generator, Optional
+from fastapi import Header, Request
 
 from app.config import get_settings, Settings
 from app.services.pdf_service import PDFService
@@ -88,3 +89,46 @@ def get_rate_limiter() -> RateLimiter:
             max_tokens_per_minute=settings.rate_limit_tpm,
         )
     return _rate_limiter
+
+
+def get_openrouter_api_key(
+    x_openrouter_key: Optional[str] = Header(None, alias="X-OpenRouter-Key")
+) -> Optional[str]:
+    """Extract OpenRouter API key from request header.
+    
+    Priority:
+    1. Header X-OpenRouter-Key from client (user-provided)
+    2. Environment variable OPENROUTER_API_KEY (server default)
+    """
+    if x_openrouter_key:
+        return x_openrouter_key
+    
+    # Fall back to environment variable
+    settings = get_settings()
+    return settings.openrouter_api_key
+
+
+def get_huggingface_api_key(
+    x_huggingface_key: Optional[str] = Header(None, alias="X-HuggingFace-Key")
+) -> Optional[str]:
+    """Extract HuggingFace API key from request header.
+    
+    Priority:
+    1. Header X-HuggingFace-Key from client (user-provided)
+    2. Environment variable HUGGINGFACE_API_KEY (server default)
+    """
+    if x_huggingface_key:
+        return x_huggingface_key
+    
+    # Fall back to environment variable
+    settings = get_settings()
+    return settings.huggingface_api_key
+
+
+def get_request_context(request: Request) -> dict:
+    """Get request context including client-provided API keys."""
+    return {
+        "openrouter_api_key": request.headers.get("X-OpenRouter-Key"),
+        "huggingface_api_key": request.headers.get("X-HuggingFace-Key"),
+        "client_ip": request.client.host if request.client else None,
+    }

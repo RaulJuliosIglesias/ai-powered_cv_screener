@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
-import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, CheckCircle, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy, Eye, ExternalLink, Sliders, BarChart3, RotateCcw, Info, Github, Linkedin } from 'lucide-react';
+import { Plus, MessageSquare, Trash2, Send, Loader, Upload, FileText, X, Check, CheckCircle, Edit2, Moon, Sun, Sparkles, User, Database, Cloud, Globe, Settings, ChevronRight, Copy, Eye, ExternalLink, Sliders, BarChart3, RotateCcw, Info, Github, Linkedin, Key } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import useMode from './hooks/useMode';
@@ -19,7 +19,7 @@ import { StructuredOutputRenderer } from './components/output';
 import Sidebar from './components/Sidebar';
 import Toast from './components/Toast';
 import BackgroundUploadWidget from './components/BackgroundUploadWidget';
-import { AboutModal, SettingsModal } from './components/modals';
+import { AboutModal, SettingsModal, APIKeysModal, hasRequiredAPIKeys, getAPIKeys } from './components/modals';
 import { SessionSkeleton, MessageSkeleton } from './components/SkeletonLoader';
 import { MemoizedTable, MemoizedCodeBlock } from './components/MemoizedTable';
 import StreamingMessage from './components/StreamingMessage';
@@ -65,6 +65,8 @@ function App() {
   const [ragPipelineSettings, setRagPipelineSettings] = useState(getRAGPipelineSettings());
   const [showMetricsPanel, setShowMetricsPanel] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
+  const [showAPIKeysModal, setShowAPIKeysModal] = useState(false);
+  const [apiKeysRequired, setApiKeysRequired] = useState(false);
   const [showPipelinePanel, setShowPipelinePanel] = useState(true);
   const [isPipelineExpanded, setIsPipelineExpanded] = useState(false);
   const [autoExpandPipeline, setAutoExpandPipeline] = useState(() => {
@@ -349,6 +351,13 @@ function App() {
 
   const handleSend = async (text) => {
     if (!text.trim() || !currentSessionId || isChatLoading || !currentSession?.cvs?.length) return;
+    
+    // Check if API keys are configured
+    if (!hasRequiredAPIKeys()) {
+      setApiKeysRequired(true);
+      setShowAPIKeysModal(true);
+      return;
+    }
     const userMessage = text.trim();
     const targetSessionId = currentSessionId;
     
@@ -403,9 +412,21 @@ function App() {
       
       console.log('🚀 Sending query with settings:', payload);
       
+      // Get API keys for request headers
+      const apiKeys = getAPIKeys();
+      const requestHeaders = {
+        'Content-Type': 'application/json',
+      };
+      if (apiKeys.openRouterApiKey) {
+        requestHeaders['X-OpenRouter-Key'] = apiKeys.openRouterApiKey;
+      }
+      if (apiKeys.huggingFaceApiKey) {
+        requestHeaders['X-HuggingFace-Key'] = apiKeys.huggingFaceApiKey;
+      }
+      
       const response = await fetch(`/api/sessions/${targetSessionId}/chat-stream?mode=${mode}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: requestHeaders,
         body: JSON.stringify(payload)
       });
       
@@ -914,6 +935,23 @@ function App() {
             <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{currentSession ? `${currentSession.name} · ${currentSession.cvs?.length || 0} CVs` : 'CV Screener'}</span>
           </div>
           <div className="flex items-center gap-3">
+            <button 
+              onClick={() => {
+                setApiKeysRequired(false);
+                setShowAPIKeysModal(true);
+              }}
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors group ${
+                hasRequiredAPIKeys() 
+                  ? 'bg-emerald-100 dark:bg-emerald-900/30 hover:bg-emerald-200 dark:hover:bg-emerald-900/50' 
+                  : 'bg-amber-100 dark:bg-amber-900/30 hover:bg-amber-200 dark:hover:bg-amber-900/50 animate-pulse'
+              }`}
+              title={language === 'es' ? 'Configurar API Keys' : 'Configure API Keys'}
+            >
+              <Key className={`w-4 h-4 ${hasRequiredAPIKeys() ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`} />
+              <span className={`text-xs font-medium hidden sm:inline ${hasRequiredAPIKeys() ? 'text-emerald-700 dark:text-emerald-300' : 'text-amber-700 dark:text-amber-300'}`}>
+                {hasRequiredAPIKeys() ? (language === 'es' ? 'API Keys' : 'API Keys') : (language === 'es' ? 'Configurar' : 'Setup')}
+              </span>
+            </button>
             <button 
               onClick={() => setShowSettings(true)}
               className="flex items-center gap-2 px-3 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors group"
@@ -1547,6 +1585,19 @@ function App() {
         onSave={() => {
           showToastMessage(language === 'es' ? 'Configuración guardada' : 'Settings saved', 'success');
         }}
+      />
+
+      {/* API Keys Modal */}
+      <APIKeysModal 
+        isOpen={showAPIKeysModal} 
+        onClose={() => {
+          setShowAPIKeysModal(false);
+          setApiKeysRequired(false);
+        }}
+        onSave={() => {
+          showToastMessage(language === 'es' ? 'API Keys guardadas correctamente' : 'API Keys saved successfully', 'success');
+        }}
+        isRequired={apiKeysRequired}
       />
 
       {/* Background Upload Widget - floating minimizable panel */}

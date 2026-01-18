@@ -1,0 +1,327 @@
+# CV Screener - Deployment Guide
+
+This guide covers deployment options for the CV Screener application using Docker, Kubernetes, and Railway.
+
+## Table of Contents
+
+- [Architecture Overview](#architecture-overview)
+- [Quick Start with Docker Compose](#quick-start-with-docker-compose)
+- [Railway Deployment](#railway-deployment)
+- [Kubernetes Deployment](#kubernetes-deployment)
+- [Environment Variables](#environment-variables)
+- [User API Key Configuration](#user-api-key-configuration)
+
+---
+
+## Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                         Frontend                             │
+│                    (React + Vite + Nginx)                   │
+│                         Port: 80                             │
+└─────────────────────────┬───────────────────────────────────┘
+                          │
+                          │ /api/* proxy
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│                         Backend                              │
+│                   (FastAPI + Uvicorn)                       │
+│                        Port: 8000                            │
+│                                                              │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
+│  │   RAG       │  │  OpenRouter │  │   ChromaDB/Supabase │  │
+│  │  Pipeline   │  │   API       │  │     Vector Store    │  │
+│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Key Feature**: Users provide their own OpenRouter API key through the frontend Settings panel - no server-side API key required for basic operation.
+
+---
+
+## Quick Start with Docker Compose
+
+### Development Mode
+
+```bash
+# Start development environment with hot reload
+docker-compose -f docker-compose.dev.yml up --build
+
+# Access:
+# - Frontend: http://localhost:5173
+# - Backend API: http://localhost:8000
+# - API Docs: http://localhost:8000/docs
+```
+
+### Production Mode
+
+```bash
+# Build and start production containers
+docker-compose up --build -d
+
+# Access:
+# - Application: http://localhost (port 80)
+# - Backend proxied through /api
+```
+
+### Build Individual Images
+
+```bash
+# Backend
+cd backend
+docker build -t cv-screener-backend:latest .
+
+# Frontend
+cd frontend
+docker build -t cv-screener-frontend:latest .
+```
+
+---
+
+## Railway Deployment
+
+Railway supports single-container deployments. We provide a monolith Dockerfile that combines frontend and backend.
+
+### Option 1: One-Click Deploy (Recommended)
+
+1. Fork this repository to your GitHub account
+2. Go to [Railway](https://railway.app)
+3. Click "New Project" → "Deploy from GitHub repo"
+4. Select your forked repository
+5. Railway will auto-detect the `Dockerfile.railway`
+
+### Option 2: Railway CLI
+
+```bash
+# Install Railway CLI
+npm install -g @railway/cli
+
+# Login
+railway login
+
+# Initialize project
+railway init
+
+# Deploy
+railway up
+```
+
+### Railway Environment Variables
+
+Set these in Railway Dashboard → Variables:
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `DEFAULT_MODE` | No | `local` or `cloud` (default: `cloud`) |
+| `CORS_ORIGINS` | No | Comma-separated allowed origins |
+| `SUPABASE_URL` | For cloud mode | Your Supabase project URL |
+| `SUPABASE_SERVICE_KEY` | For cloud mode | Supabase service role key |
+| `LOG_LEVEL` | No | `DEBUG`, `INFO`, `WARNING`, `ERROR` |
+
+**Note**: `OPENROUTER_API_KEY` is optional on the server - users provide their own keys!
+
+### Railway File Structure
+
+```
+├── Dockerfile.railway      # Monolith build (frontend + backend)
+├── nginx.railway.conf      # Nginx config for Railway
+├── start.railway.sh        # Startup script
+├── railway.json            # Railway configuration
+└── railway.toml            # Alternative Railway config
+```
+
+---
+
+## Kubernetes Deployment
+
+For production-grade deployments with scaling and high availability.
+
+### Prerequisites
+
+- Kubernetes cluster (GKE, EKS, AKS, or local minikube)
+- kubectl configured
+- Container registry (Docker Hub, GCR, ECR)
+
+### Build and Push Images
+
+```bash
+# Set your registry
+export REGISTRY=your-registry.com/cv-screener
+
+# Build and push backend
+docker build -t $REGISTRY/backend:latest ./backend
+docker push $REGISTRY/backend:latest
+
+# Build and push frontend
+docker build -t $REGISTRY/frontend:latest ./frontend
+docker push $REGISTRY/frontend:latest
+```
+
+### Deploy to Kubernetes
+
+```bash
+# Create namespace
+kubectl apply -f k8s/namespace.yaml
+
+# Create secrets (edit secrets.yaml first!)
+kubectl apply -f k8s/secrets.yaml
+
+# Create ConfigMap
+kubectl apply -f k8s/configmap.yaml
+
+# Create Persistent Volumes
+kubectl apply -f k8s/persistent-volumes.yaml
+
+# Deploy backend
+kubectl apply -f k8s/backend-deployment.yaml
+
+# Deploy frontend
+kubectl apply -f k8s/frontend-deployment.yaml
+
+# Create Ingress (edit domain first!)
+kubectl apply -f k8s/ingress.yaml
+
+# Optional: Enable autoscaling
+kubectl apply -f k8s/hpa.yaml
+```
+
+### Kubernetes Files
+
+```
+k8s/
+├── namespace.yaml           # cv-screener namespace
+├── secrets.yaml             # API keys and credentials
+├── configmap.yaml           # Non-sensitive configuration
+├── persistent-volumes.yaml  # Storage for CVs and ChromaDB
+├── backend-deployment.yaml  # Backend Deployment + Service
+├── frontend-deployment.yaml # Frontend Deployment + Service
+├── ingress.yaml             # Ingress with TLS
+└── hpa.yaml                 # Horizontal Pod Autoscaler
+```
+
+### Verify Deployment
+
+```bash
+# Check pods
+kubectl get pods -n cv-screener
+
+# Check services
+kubectl get svc -n cv-screener
+
+# View logs
+kubectl logs -f deployment/cv-screener-backend -n cv-screener
+
+# Port forward for testing
+kubectl port-forward svc/cv-screener-frontend 8080:80 -n cv-screener
+```
+
+---
+
+## Environment Variables
+
+### Backend Configuration
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `DEFAULT_MODE` | `local` | `local` or `cloud` |
+| `API_HOST` | `0.0.0.0` | API bind address |
+| `API_PORT` | `8000` | API port |
+| `CORS_ORIGINS` | `http://localhost:5173` | Allowed CORS origins |
+| `LOG_LEVEL` | `INFO` | Logging level |
+| `MAX_FILE_SIZE_MB` | `10` | Max upload size |
+| `MAX_FILES_PER_UPLOAD` | `50` | Max files per upload |
+
+### API Keys (Optional Server-Side)
+
+| Variable | Description |
+|----------|-------------|
+| `OPENROUTER_API_KEY` | Default OpenRouter key (users can override) |
+| `SUPABASE_URL` | Supabase project URL |
+| `SUPABASE_SERVICE_KEY` | Supabase service role key |
+| `HUGGINGFACE_API_KEY` | HuggingFace API for advanced features |
+| `GOOGLE_API_KEY` | Google AI Studio key |
+
+---
+
+## User API Key Configuration
+
+### How It Works
+
+1. **Users open Settings** in the frontend (gear icon)
+2. **Enter their OpenRouter API key** in the designated field
+3. **Key is stored in browser localStorage** (secure, client-side only)
+4. **Every API request includes the key** via `X-OpenRouter-Key` header
+5. **Backend uses client key** if provided, falls back to server key
+
+### Security Considerations
+
+- ✅ API keys never leave the user's browser (stored in localStorage)
+- ✅ Keys are sent via HTTPS headers, not in URL
+- ✅ Server can operate without any API keys configured
+- ✅ Each user controls their own usage and billing
+
+### Getting an OpenRouter API Key
+
+1. Go to [OpenRouter](https://openrouter.ai/keys)
+2. Create a free account
+3. Generate an API key
+4. Paste it in CV Screener Settings
+
+---
+
+## Troubleshooting
+
+### Common Issues
+
+**Container won't start**
+```bash
+# Check logs
+docker-compose logs backend
+docker-compose logs frontend
+```
+
+**API requests failing**
+- Verify CORS_ORIGINS includes your frontend URL
+- Check API key is valid at https://openrouter.ai/keys
+- Ensure backend is healthy: `curl http://localhost:8000/api/health`
+
+**Railway deployment stuck**
+- Check build logs in Railway dashboard
+- Verify Dockerfile.railway exists at root
+- Ensure PORT environment variable is used
+
+**Kubernetes pods not ready**
+```bash
+kubectl describe pod <pod-name> -n cv-screener
+kubectl logs <pod-name> -n cv-screener
+```
+
+### Health Checks
+
+```bash
+# Backend health
+curl http://localhost:8000/api/health
+
+# Frontend health (nginx)
+curl http://localhost/health
+
+# API key status
+curl http://localhost:8000/api/api-key-status
+```
+
+---
+
+## Future Enhancements
+
+- [ ] User authentication and login system
+- [ ] Per-user API key storage in database
+- [ ] Usage tracking and billing integration
+- [ ] Multi-tenant support
+- [ ] Redis for session management
+
+---
+
+## Support
+
+For issues and feature requests, please open a GitHub issue.

@@ -16,6 +16,7 @@ sentence-transformers==2.2.2
 
 # Local Mode - Vector Store
 chromadb==0.4.22
+numpy<2.0  # Required for ChromaDB compatibility
 
 # Local Mode - LLM (Google Gemini)
 google-generativeai>=0.5.2,<0.6.0

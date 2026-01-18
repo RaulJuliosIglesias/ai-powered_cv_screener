@@ -1,13 +1,15 @@
 import uuid
 import io
+import httpx
 from pathlib import Path
 from typing import List, Optional
-from fastapi import APIRouter, UploadFile, File, Query, HTTPException, BackgroundTasks
+from fastapi import APIRouter, UploadFile, File, Query, HTTPException, BackgroundTasks, Depends
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import pdfplumber
 
 from app.config import Mode, settings
+from app.api.dependencies import get_openrouter_api_key
 
 # Directory to store uploaded PDFs - in project root /storage/
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
@@ -29,6 +31,57 @@ def get_session_manager(mode: Mode):
 
 
 router = APIRouter(prefix="/api", tags=["CV Screener"])
+
+
+# ============================================
+# API KEY VALIDATION
+# ============================================
+
+@router.post("/validate-api-key")
+async def validate_api_key(
+    api_key: Optional[str] = Depends(get_openrouter_api_key)
+):
+    """Validate OpenRouter API key by making a test request."""
+    if not api_key:
+        raise HTTPException(status_code=400, detail="No API key provided")
+    
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.get(
+                "https://openrouter.ai/api/v1/models",
+                headers={
+                    "Authorization": f"Bearer {api_key}",
+                    "HTTP-Referer": settings.http_referer,
+                    "X-Title": settings.app_title,
+                }
+            )
+            
+            if response.status_code == 200:
+                return {"valid": True, "message": "API key is valid"}
+            elif response.status_code == 401:
+                raise HTTPException(status_code=401, detail="Invalid API key")
+            else:
+                raise HTTPException(
+                    status_code=response.status_code, 
+                    detail=f"API validation failed: {response.text}"
+                )
+    except httpx.TimeoutException:
+        raise HTTPException(status_code=504, detail="Timeout validating API key")
+    except httpx.RequestError as e:
+        raise HTTPException(status_code=500, detail=f"Error validating API key: {str(e)}")
+
+
+@router.get("/api-key-status")
+async def get_api_key_status(
+    api_key: Optional[str] = Depends(get_openrouter_api_key)
+):
+    """Check if an API key is configured (either from header or environment)."""
+    has_key = bool(api_key)
+    source = "header" if api_key and api_key != settings.openrouter_api_key else "environment" if has_key else "none"
+    return {
+        "has_api_key": has_key,
+        "source": source,
+    }
 
 
 # ============================================

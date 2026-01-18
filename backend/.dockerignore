@@ -1,0 +1,46 @@
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+.Python
+*.so
+.pytest_cache
+.mypy_cache
+.ruff_cache
+*.egg-info
+dist/
+build/
+venv/
+.venv/
+env/
+
+# Test and coverage
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+tests/
+
+# Environment
+.env
+.env.local
+*.env
+
+# Logs
+*.log
+debug_logs/
+eval_logs/
+
+# Storage (local data - will be mounted)
+storage/
+chroma_db/
+data/
+
+# Documentation
+*.md
+
+# IDE
+.vscode
+.idea

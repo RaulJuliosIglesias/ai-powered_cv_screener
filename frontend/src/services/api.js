@@ -1,12 +1,56 @@
 import axios from 'axios';
 
 const API_BASE_URL = '/api';
+const STORAGE_KEY = 'cv_screener_settings';
+
+const getOpenRouterApiKey = () => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const settings = JSON.parse(saved);
+      return settings.openRouterApiKey || '';
+    }
+  } catch (e) {
+    console.error('Failed to get API key from settings:', e);
+  }
+  return '';
+};
+
+const getHuggingFaceApiKey = () => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const settings = JSON.parse(saved);
+      return settings.huggingFaceApiKey || '';
+    }
+  } catch (e) {
+    console.error('Failed to get HuggingFace API key from settings:', e);
+  }
+  return '';
+};
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+});
+
+// Add interceptor to include API keys in all requests
+api.interceptors.request.use((config) => {
+  const openRouterKey = getOpenRouterApiKey();
+  if (openRouterKey) {
+    config.headers['X-OpenRouter-Key'] = openRouterKey;
+  }
+  
+  const huggingFaceKey = getHuggingFaceApiKey();
+  if (huggingFaceKey) {
+    config.headers['X-HuggingFace-Key'] = huggingFaceKey;
+  }
+  
+  return config;
+}, (error) => {
+  return Promise.reject(error);
 });
 
 export const uploadFiles = async (files, mode = 'local', onProgress) => {
@@ -135,9 +179,20 @@ export const uploadCVsToSession = async (sessionId, files, mode = 'local', onPro
   // Note: fetch doesn't support upload progress natively, so we simulate it
   if (onProgress) onProgress(0);
   
+  const headers = {};
+  const openRouterKey = getOpenRouterApiKey();
+  if (openRouterKey) {
+    headers['X-OpenRouter-Key'] = openRouterKey;
+  }
+  const huggingFaceKey = getHuggingFaceApiKey();
+  if (huggingFaceKey) {
+    headers['X-HuggingFace-Key'] = huggingFaceKey;
+  }
+  
   const response = await fetch(`/api/sessions/${sessionId}/cvs?mode=${mode}`, {
     method: 'POST',
     body: formData,
+    headers,
     // Don't set Content-Type - browser will set it automatically with boundary
   });
   

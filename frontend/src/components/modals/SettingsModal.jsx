@@ -93,7 +93,7 @@ const SettingsModal = memo(({ isOpen, onClose, onSave }) => {
         </div>
         
         {/* Content */}
-        <div className="p-6 space-y-6">
+        <div className="p-6 space-y-6 max-h-[60vh] overflow-y-auto">
           {/* Auto-Naming Section */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">

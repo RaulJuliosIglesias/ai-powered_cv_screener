@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: cv-screener-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DEFAULT_MODE=cloud
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:80,http://frontend:80
+      - LOG_LEVEL=INFO
+      # These can be overridden by user-provided API keys from frontend
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
+      - OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
+      - SUPABASE_URL=${SUPABASE_URL:-}
+      - SUPABASE_SERVICE_KEY=${SUPABASE_SERVICE_KEY:-}
+      - HUGGINGFACE_API_KEY=${HUGGINGFACE_API_KEY:-}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY:-}
+    volumes:
+      - cv_storage:/app/storage
+      - chroma_data:/app/chroma_db
+    networks:
+      - cv-screener-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=/api
+    container_name: cv-screener-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - cv-screener-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+volumes:
+  cv_storage:
+    driver: local
+  chroma_data:
+    driver: local
+
+networks:
+  cv-screener-network:
+    driver: bridge

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cv-screener-config
+  namespace: cv-screener
+data:
+  DEFAULT_MODE: "cloud"
+  API_HOST: "0.0.0.0"
+  API_PORT: "8000"
+  LOG_LEVEL: "INFO"
+  OPENROUTER_BASE_URL: "https://openrouter.ai/api/v1"
+  MAX_FILE_SIZE_MB: "10"
+  MAX_FILES_PER_UPLOAD: "50"
+  RETRIEVAL_K: "20"
+  RETRIEVAL_SCORE_THRESHOLD: "0.2"
+  LLM_TEMPERATURE: "0.1"
+  LLM_MAX_TOKENS: "4096"

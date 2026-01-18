@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cv-screener-ingress
+  namespace: cv-screener
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+    - hosts:
+        - cv-screener.your-domain.com
+      secretName: cv-screener-tls
+  rules:
+    - host: cv-screener.your-domain.com
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: cv-screener-backend
+                port:
+                  number: 8000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: cv-screener-frontend
+                port:
+                  number: 80
