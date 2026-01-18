@@ -72,5 +72,13 @@ if ! kill -0 $UVICORN_PID 2>/dev/null; then
     exit 1
 fi
 
+# Verify static files exist
+echo "Checking static files..."
+ls -la /app/static/ || echo "WARNING: No static files found!"
+ls -la /app/static/index.html 2>/dev/null || echo "WARNING: index.html not found!"
+
+# Ensure proper permissions
+chmod -R 755 /app/static 2>/dev/null || true
+
 echo "Starting nginx on port $PORT..."
 exec nginx -g 'daemon off;'
