@@ -23,12 +23,25 @@ server {
     gzip_types text/plain text/css text/xml text/javascript application/javascript application/json;
 
     location / {
-        root /app/static;
-        index index.html;
-        try_files \$uri \$uri/ /index.html;
+        # Railway deployment check - immediate response
+        return 200 "CV Screener is running";
+        add_header Content-Type text/plain;
     }
     
-    # Railway deployment check endpoint
+    # Serve static files for specific routes
+    location /static/ {
+        root /app;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+    
+    # Fallback for SPA routing
+    location /index.html {
+        root /app/static;
+        try_files /index.html =404;
+    }
+    
+    # Railway health endpoint
     location /railway {
         return 200 "OK";
         add_header Content-Type text/plain;
