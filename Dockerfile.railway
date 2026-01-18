@@ -59,8 +59,8 @@ RUN mkdir -p /app/storage /app/chroma_db /app/data
 # Test that the app can import
 RUN python -c "from app.main import app; print('App imported successfully')"
 
-# Railway injects PORT at runtime
+# Always use port 8000 (configured in Railway settings)
 EXPOSE 8000
 
-# Use shell form to read PORT environment variable at runtime
-CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --log-level info
+# Hardcode port 8000 to match Railway target port setting
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
