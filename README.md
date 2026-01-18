@@ -4,14 +4,17 @@
 
 ### Intelligent Resume Analysis with RAG Technology
 
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Railway-blueviolet.svg)](https://ai-poweredcvscreener-production.up.railway.app/)
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)](https://fastapi.tiangolo.com)
 [![React](https://img.shields.io/badge/React-18+-61DAFB.svg)](https://reactjs.org)
 [![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-red.svg)](LICENSE)
 
-**Version 9.0** - Production-ready RAG pipeline with TypeScript frontend, GitHub Actions CI/CD, full Cloud Parity, HuggingFace NLI verification, RAGAS evaluation, Streaming, Export (PDF/CSV), Hybrid Search, 65+ query detection patterns, 9 output structures, 29+ modules, and intelligent query routing.
+**Version 9.0** - Production-ready RAG pipeline deployed on Railway with TypeScript frontend, GitHub Actions CI/CD, full Cloud Parity (Supabase), HuggingFace NLI verification, RAGAS evaluation, Streaming, Export (PDF/CSV), Hybrid Search, 65+ query detection patterns, 9 output structures, 29+ modules, and intelligent query routing.
 
-[Features](#-features) · [Quick Start](#-quick-start) · [Architecture](#-architecture) · [Demo](#-demo) · [Documentation](#-documentation)
+### 🌐 **[Try it Live →](https://ai-poweredcvscreener-production.up.railway.app/)**
+
+[Features](#-features) · [Quick Start](#-quick-start) · [Architecture](#-architecture) · [Demo](#-demo) · [Deployment](#-deployment) · [Documentation](#-documentation)
 
 </div>
 
@@ -175,6 +178,14 @@ python scripts/start_web.py   # Frontend → http://localhost:6001
 ---
 
 ## 🎬 Demo
+
+### 🌐 Live Production
+
+**[https://ai-poweredcvscreener-production.up.railway.app/](https://ai-poweredcvscreener-production.up.railway.app/)**
+
+> **Note**: You'll need an [OpenRouter API Key](https://openrouter.ai/keys) (free tier available) to use the app. Enter it in Settings (⚙️) after loading.
+
+### 📹 Video Demo
 
 https://cap.so/s/9jnex9fx01ddcxp
 
@@ -439,6 +450,51 @@ CORS_ORIGINS=http://localhost:5173
 | `GET` | `/api/health` | Health check |
 | `GET` | `/api/models` | List available LLM models |
 | `GET` | `/api/cvs/{cv_id}/pdf?mode=cloud` | Get CV PDF file |
+
+---
+
+## 🚀 Deployment
+
+### Production Environment
+
+The application is deployed on **Railway** with the following architecture:
+
+| Component | Service | Details |
+|-----------|---------|---------|
+| **Frontend + Backend** | Railway (Monolith) | Single container with Nginx + FastAPI |
+| **Database** | Supabase | PostgreSQL with pgvector for embeddings |
+| **File Storage** | Supabase Storage | CV PDFs stored in `cv-pdfs` bucket |
+| **LLM API** | OpenRouter | User-provided API keys (client-side) |
+
+### Live URLs
+
+| Environment | URL |
+|-------------|-----|
+| **Production** | [https://ai-poweredcvscreener-production.up.railway.app/](https://ai-poweredcvscreener-production.up.railway.app/) |
+| **API Docs** | [https://ai-poweredcvscreener-production.up.railway.app/docs](https://ai-poweredcvscreener-production.up.railway.app/docs) |
+
+### Why This Architecture?
+
+1. **Zero Fixed Costs**: Supabase free tier + Railway pay-per-use = $0/month base cost
+2. **User-Provided API Keys**: Each user brings their own OpenRouter key, no server-side LLM costs
+3. **Monolith for Simplicity**: Single container deployment reduces complexity and cold start times
+4. **Supabase pgvector**: Production-grade vector search without managing infrastructure
+
+### Deploy Your Own
+
+```bash
+# Fork this repo, then:
+railway login
+railway init
+railway up
+
+# Set environment variables in Railway dashboard:
+# - SUPABASE_URL
+# - SUPABASE_SERVICE_KEY
+# - DEFAULT_MODE=cloud
+```
+
+📄 **[Full Deployment Guide →](./DEPLOYMENT.md)**
 
 ---
 

@@ -2,11 +2,23 @@
 
 This guide covers deployment options for the CV Screener application using Docker, Kubernetes, and Railway.
 
+## 🌐 Live Production
+
+| Environment | URL | Status |
+|-------------|-----|--------|
+| **Production** | [https://ai-poweredcvscreener-production.up.railway.app/](https://ai-poweredcvscreener-production.up.railway.app/) | ✅ Live |
+| **API Docs** | [https://ai-poweredcvscreener-production.up.railway.app/docs](https://ai-poweredcvscreener-production.up.railway.app/docs) | ✅ Live |
+
+> **Current Deployment**: Railway (Monolith) + Supabase (Database + Storage)
+
+---
+
 ## Table of Contents
 
+- [Production Architecture](#production-architecture)
 - [Architecture Overview](#architecture-overview)
 - [Quick Start with Docker Compose](#quick-start-with-docker-compose)
-- [Railway Deployment](#railway-deployment)
+- [Railway Deployment](#railway-deployment) ← **Recommended**
 - [Kubernetes Deployment](#kubernetes-deployment)
 - [Environment Variables](#environment-variables)
 - [User API Key Configuration](#user-api-key-configuration)
@@ -81,7 +93,48 @@ docker build -t cv-screener-frontend:latest .
 
 ## Railway Deployment
 
+> **This is the recommended deployment method** - it's what powers the production instance.
+
 Railway supports single-container deployments. We provide a monolith Dockerfile that combines frontend and backend.
+
+### Production Instance
+
+The live production is deployed using this exact configuration:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    RAILWAY (Production)                          │
+│                                                                  │
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │              Dockerfile.railway (Monolith)               │    │
+│  │                                                          │    │
+│  │   Stage 1: Build Frontend (React + Vite)                │    │
+│  │      ↓                                                   │    │
+│  │   Stage 2: Install Python Dependencies                  │    │
+│  │      ↓                                                   │    │
+│  │   Stage 3: Final Image (~2GB)                           │    │
+│  │      • FastAPI serves /api/*                            │    │
+│  │      • Static files served from /app/static             │    │
+│  │                                                          │    │
+│  └─────────────────────────────────────────────────────────┘    │
+│                           │                                      │
+│                           ▼                                      │
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │                    SUPABASE (Free Tier)                  │    │
+│  │   • PostgreSQL + pgvector (768-dim embeddings)          │    │
+│  │   • Storage bucket: cv-pdfs                             │    │
+│  │   • Tables: cvs, cv_embeddings, sessions, messages      │    │
+│  └─────────────────────────────────────────────────────────┘    │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Why Railway + Monolith?
+
+1. **Simplicity**: Single container = single deployment = no networking issues
+2. **Cost Effective**: ~$5/month with moderate usage (pay-per-use)
+3. **Fast Deploys**: Git push → auto-deploy in ~3 minutes
+4. **Zero Config SSL**: HTTPS provided automatically
+5. **No Cold Starts**: Unlike serverless, the container stays warm
 
 ### Option 1: One-Click Deploy (Recommended)
 
@@ -90,6 +143,7 @@ Railway supports single-container deployments. We provide a monolith Dockerfile 
 3. Click "New Project" → "Deploy from GitHub repo"
 4. Select your forked repository
 5. Railway will auto-detect the `Dockerfile.railway`
+6. **Set environment variables** (see below)
 
 ### Option 2: Railway CLI
 
@@ -113,13 +167,16 @@ Set these in Railway Dashboard → Variables:
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `DEFAULT_MODE` | No | `local` or `cloud` (default: `cloud`) |
-| `CORS_ORIGINS` | No | Comma-separated allowed origins |
-| `SUPABASE_URL` | For cloud mode | Your Supabase project URL |
-| `SUPABASE_SERVICE_KEY` | For cloud mode | Supabase service role key |
-| `LOG_LEVEL` | No | `DEBUG`, `INFO`, `WARNING`, `ERROR` |
+| `DEFAULT_MODE` | **Yes** | Set to `cloud` for production |
+| `SUPABASE_URL` | **Yes** | Your Supabase project URL |
+| `SUPABASE_SERVICE_KEY` | **Yes** | Supabase service role key |
+| `CORS_ORIGINS` | No | Comma-separated allowed origins (auto-configured) |
+| `LOG_LEVEL` | No | `DEBUG`, `INFO`, `WARNING`, `ERROR` (default: `INFO`) |
 
-**Note**: `OPENROUTER_API_KEY` is optional on the server - users provide their own keys!
+> **Important**: `OPENROUTER_API_KEY` is **NOT required** on the server. Users provide their own keys through the Settings panel in the UI. This design:
+> - Eliminates server-side LLM costs
+> - Gives users full control over their API usage
+> - Allows users to choose their preferred OpenRouter models
 
 ### Railway File Structure
 
@@ -312,16 +369,47 @@ curl http://localhost:8000/api/api-key-status
 
 ---
 
-## Future Enhancements
+## Production Deployment Checklist
 
-- [ ] User authentication and login system
-- [ ] Per-user API key storage in database
-- [ ] Usage tracking and billing integration
-- [ ] Multi-tenant support
-- [ ] Redis for session management
+### Pre-Deployment
+- [ ] Supabase project created with pgvector extension enabled
+- [ ] Run `scripts/setup_supabase_complete.sql` to create tables and RPC functions
+- [ ] Create storage bucket `cv-pdfs` with public read access
+- [ ] Verify Supabase service role key has correct permissions
+
+### Railway Setup
+- [ ] Connect GitHub repository to Railway
+- [ ] Set all required environment variables
+- [ ] Verify health check passes: `https://your-app.railway.app/api/health`
+- [ ] Test CV upload and chat functionality
+
+### Post-Deployment
+- [ ] Monitor Railway logs for errors
+- [ ] Check Supabase dashboard for database activity
+- [ ] Verify embeddings are being stored correctly (768 dimensions)
+
+---
+
+## Next Steps (Roadmap)
+
+| Version | Feature | Status | Cost Impact |
+|---------|---------|--------|-------------|
+| **V10** | Supabase Auth + RLS | 📋 Planned | $0/month |
+| **V11** | PostgreSQL FTS + LangGraph | 📋 Planned | $0/month |
+| **V12** | Multi-provider deploy (Vercel + Render) | 📋 Planned | $0/month |
+
+See [Roadmap Documentation](./docs/roadmap/README.md) for full details.
 
 ---
 
 ## Support
 
 For issues and feature requests, please open a GitHub issue.
+
+---
+
+<div align="center">
+
+**[← Back to README](./README.md)** · **[Live Demo →](https://ai-poweredcvscreener-production.up.railway.app/)**
+
+</div>
