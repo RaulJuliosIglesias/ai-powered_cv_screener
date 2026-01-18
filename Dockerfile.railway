@@ -47,7 +47,6 @@ ENV PATH=/root/.local/bin:$PATH
 
 # Copy backend code
 COPY backend/app ./app
-COPY backend/scripts ./scripts
 
 # Copy frontend build
 COPY --from=frontend-builder /frontend/dist /app/static
