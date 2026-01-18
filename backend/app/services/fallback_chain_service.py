@@ -88,24 +88,24 @@ class FallbackResult(Generic[T]):
 # Default fallback chains for different use cases
 FALLBACK_CHAINS = {
     'generation': [
-        "google/gemini-2.0-flash-001",      # Primary (fast, free)
-        "google/gemini-2.0-flash-lite-001", # Fallback 1 (faster, free)
-        "openai/gpt-4o-mini",               # Fallback 2 (paid, reliable)
-        "anthropic/claude-3-haiku",         # Fallback 3 (paid, fast)
+        "google/gemini-2.0-flash-exp:free",      # Primary (fast, free)
+        "meta-llama/llama-3.1-8b-instruct:free", # Fallback 1 (free)
+        "google/gemma-2-9b-it:free",             # Fallback 2 (free)
+        "microsoft/phi-3-medium-128k-instruct:free", # Fallback 3 (free)
     ],
     'understanding': [
-        "google/gemini-2.0-flash-001",
-        "google/gemini-2.0-flash-lite-001",
-        "openai/gpt-4o-mini",
+        "google/gemini-2.0-flash-exp:free",
+        "meta-llama/llama-3.1-8b-instruct:free",
+        "google/gemma-2-9b-it:free",
     ],
     'reranking': [
-        "google/gemini-2.0-flash-001",
-        "google/gemini-2.0-flash-lite-001",
-        "openai/gpt-4o-mini",
+        "google/gemini-2.0-flash-exp:free",
+        "meta-llama/llama-3.1-8b-instruct:free",
+        "google/gemma-2-9b-it:free",
     ],
     'verification': [
-        "google/gemini-2.0-flash-001",
-        "openai/gpt-4o-mini",
+        "google/gemini-2.0-flash-exp:free",
+        "meta-llama/llama-3.1-8b-instruct:free",
     ],
 }
 
