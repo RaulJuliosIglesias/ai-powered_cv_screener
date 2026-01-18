@@ -11,7 +11,7 @@ echo "Environment: CLOUD_ONLY_MODE=${CLOUD_ONLY_MODE:-false}"
 mkdir -p /etc/nginx/conf.d
 cat > /etc/nginx/conf.d/default.conf << EOF
 server {
-    listen $PORT default_server;
+    listen 0.0.0.0:$PORT default_server;
     server_name _;
 
     access_log /dev/stdout;
