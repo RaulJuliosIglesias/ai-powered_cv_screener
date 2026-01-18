@@ -62,13 +62,22 @@ echo "Starting uvicorn backend..."
 uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 1 --timeout-keep-alive 30 &
 UVICORN_PID=$!
 
-# Quick backend verification
+# Wait for uvicorn to be ready
+echo "Waiting for backend to be ready..."
+for i in {1..10}; do
+    if curl -s http://127.0.0.1:8000/api/health > /dev/null 2>&1; then
+        echo "Backend is ready!"
+        break
+    fi
+    if [ $i -eq 10 ]; then
+        echo "WARNING: Backend not ready after 10 seconds"
+    fi
+    sleep 1
+done
+
 echo "Starting nginx on port $PORT..."
 nginx -g 'daemon off;' &
 NGINX_PID=$!
-
-# Minimal wait
-sleep 1
 
 # Keep nginx in foreground
 wait $NGINX_PID
