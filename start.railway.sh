@@ -76,8 +76,4 @@ for i in {1..10}; do
 done
 
 echo "Starting nginx on port $PORT..."
-nginx -g 'daemon off;' &
-NGINX_PID=$!
-
-# Keep nginx in foreground
-wait $NGINX_PID
+exec nginx -g 'daemon off;'
