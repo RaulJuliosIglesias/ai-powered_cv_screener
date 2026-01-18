@@ -2485,6 +2485,12 @@ class RAGServiceV5:
         if "llm" in self._circuit_breakers and not self._circuit_breakers["llm"].allow_request():
             raise GenerationError("LLM circuit breaker open - too many recent failures")
         
+        # DEBUG: Check if LLM has API key
+        if hasattr(self._llm, 'api_key'):
+            logger.info(f"[GENERATION_STREAM] LLM API key present: {'Yes' if self._llm.api_key else 'No'}")
+        else:
+            logger.warning("[GENERATION_STREAM] LLM has no api_key attribute")
+        
         try:
             chunks = ctx.effective_chunks
             logger.info(f"[GENERATION_STREAM] Sending {len(chunks)} chunks to LLM with streaming")
