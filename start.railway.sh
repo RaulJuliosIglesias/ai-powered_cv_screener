@@ -7,11 +7,15 @@ PORT="${PORT:-8080}"
 echo "Starting CV Screener on port $PORT..."
 echo "Environment: CLOUD_ONLY_MODE=${CLOUD_ONLY_MODE:-false}"
 
-# Create nginx config with correct port
-cat > /etc/nginx/sites-available/default << EOF
+# Create nginx config in conf.d (Debian/slim pattern)
+mkdir -p /etc/nginx/conf.d
+cat > /etc/nginx/conf.d/default.conf << EOF
 server {
-    listen $PORT;
+    listen $PORT default_server;
     server_name _;
+
+    access_log /dev/stdout;
+    error_log /dev/stderr;
 
     gzip on;
     gzip_vary on;
@@ -38,7 +42,7 @@ server {
         client_max_body_size 50M;
     }
 
-    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)\$ {
         root /app/static;
         expires 1y;
         add_header Cache-Control "public, immutable";
@@ -46,17 +50,27 @@ server {
 }
 EOF
 
-# Link config if needed
-ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default 2>/dev/null || true
+# Remove default site if exists
+rm -f /etc/nginx/sites-enabled/default 2>/dev/null || true
 
 # Test nginx config
+echo "Testing nginx configuration..."
 nginx -t
 
 # Start uvicorn in background
+echo "Starting uvicorn backend..."
 uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 1 --timeout-keep-alive 30 &
+UVICORN_PID=$!
 
-# Wait for backend to start
-sleep 3
+# Wait for backend to be ready
+echo "Waiting for backend to start..."
+sleep 5
 
-# Start nginx in foreground
+# Verify backend is running
+if ! kill -0 $UVICORN_PID 2>/dev/null; then
+    echo "ERROR: Uvicorn failed to start"
+    exit 1
+fi
+
+echo "Starting nginx on port $PORT..."
 exec nginx -g 'daemon off;'
