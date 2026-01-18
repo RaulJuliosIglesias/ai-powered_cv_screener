@@ -42,7 +42,7 @@ server {
         client_max_body_size 50M;
     }
 
-    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)\$ {
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {
         root /app/static;
         expires 1y;
         add_header Cache-Control "public, immutable";
@@ -81,4 +81,16 @@ ls -la /app/static/index.html 2>/dev/null || echo "WARNING: index.html not found
 chmod -R 755 /app/static 2>/dev/null || true
 
 echo "Starting nginx on port $PORT..."
-exec nginx -g 'daemon off;'
+nginx -g 'daemon off;' &
+NGINX_PID=$!
+
+# Wait for nginx to start
+sleep 2
+
+# Test nginx is serving
+echo "Testing nginx..."
+curl -s http://localhost:$PORT/ | head -5 || echo "WARNING: nginx not responding"
+curl -s http://localhost:$PORT/api/health || echo "WARNING: API not responding"
+
+# Keep nginx in foreground
+wait $NGINX_PID
