@@ -134,11 +134,28 @@ else:
 async def startup_event():
     """Initialize services on startup."""
     import os
-    port = os.environ.get("PORT", "not set")
-    logger.info(f"Starting CV Screener API on PORT={port}")
-    logger.info(f"Default mode: {settings.default_mode}")
-    logger.info(f"Static dir exists: {STATIC_DIR.exists()}")
-    logger.info("API ready to receive requests")
+    try:
+        port = os.environ.get("PORT", "not set")
+        logger.info(f"Starting CV Screener API on PORT={port}")
+        logger.info(f"Default mode: {settings.default_mode}")
+        logger.info(f"Static dir exists: {STATIC_DIR.exists()}")
+        
+        # Test basic imports
+        from app.api.routes_v2 import router as v2_router
+        logger.info("✓ v2 router imported")
+        
+        from app.api.routes_sessions_stream import router as stream_router
+        logger.info("✓ stream router imported")
+        
+        from app.api.routes_sessions import router as sessions_router
+        logger.info("✓ sessions router imported")
+        
+        logger.info("API ready to receive requests")
+    except Exception as e:
+        logger.error(f"Startup failed: {e}")
+        import traceback
+        logger.error(traceback.format_exc())
+        raise
 
 
 # Shutdown event
