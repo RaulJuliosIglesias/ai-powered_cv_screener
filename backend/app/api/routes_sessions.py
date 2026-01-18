@@ -799,6 +799,10 @@ async def generate_session_name(
     import random
     
     # Validate API key is configured (from header or env)
+    logger.info(f"[AUTO-NAME] API key received: {'Yes' if api_key else 'No'}")
+    if api_key:
+        logger.info(f"[AUTO-NAME] API key preview: {api_key[:10]}...{api_key[-4:] if len(api_key) > 14 else '***'}")
+    
     if not api_key:
         logger.warning("[AUTO-NAME] No OpenRouter API key provided")
         raise HTTPException(
