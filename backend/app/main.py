@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import logging
 import sys
+import os
 
 from app.config import get_settings
 from app.api.routes_v2 import router
