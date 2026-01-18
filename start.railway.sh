@@ -92,5 +92,10 @@ echo "Testing nginx..."
 curl -s http://localhost:$PORT/ | head -5 || echo "WARNING: nginx not responding"
 curl -s http://localhost:$PORT/api/health || echo "WARNING: API not responding"
 
+# Test external connectivity (Railway's perspective)
+echo "Testing external connectivity..."
+netstat -tlnp | grep ":$PORT " || echo "WARNING: Port not bound"
+ss -tlnp | grep ":$PORT " || echo "WARNING: Port not listening"
+
 # Keep nginx in foreground
 wait $NGINX_PID
