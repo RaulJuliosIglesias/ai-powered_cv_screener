@@ -3,6 +3,8 @@
 > Complete documentation for the **AI-Powered CV Screener** project.
 >
 > **Version 9.0** | January 2026
+>
+> **🌐 Live Demo:** [https://ai-poweredcvscreener-production.up.railway.app/](https://ai-poweredcvscreener-production.up.railway.app/)
 
 ---
 
@@ -166,6 +168,6 @@ Historical documentation of already implemented plans. Useful for understanding 
 
 <div align="center">
 
-**[← Back to Main README](../README.md)**
+**[← Back to Main README](../README.md)** · **[🌐 Live Demo](https://ai-poweredcvscreener-production.up.railway.app/)**
 
 </div>

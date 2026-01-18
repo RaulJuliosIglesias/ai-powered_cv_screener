@@ -4,6 +4,8 @@
 >
 > **Current Version:** 9.0 | January 2026
 >
+> **🌐 Live Production:** [https://ai-poweredcvscreener-production.up.railway.app/](https://ai-poweredcvscreener-production.up.railway.app/)
+>
 > **💰 Cost Philosophy:** $0 en servicios fijos hasta tener usuarios. Solo pagar por uso (OpenRouter LLM).
 
 ---
@@ -11,34 +13,36 @@
 ## 🗺️ Version Roadmap Overview
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
+┌───────────────────────────────────────────────────────────────────────────┐
 │                           ROADMAP OVERVIEW                                   │
-├─────────────────────────────────────────────────────────────────────────────┤
+├───────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  🌐 PRODUCTION LIVE: ai-poweredcvscreener-production.up.railway.app        │
 │                                                                              │
 │  V6 ✅       V7 ✅         V8 ✅           V9 ✅           V10        V11   │
 │  ─────────   ─────────     ─────────       ─────────       ───        ───   │
 │  Output      ML Models     UX Features     TypeScript      Auth       PG FTS│
 │  Orchestr.   NLI/RAGAS     Streaming       + CI/CD         + RLS      + Lang│
-│                                            (FREE)          (FREE)     Graph │
+│                                            + DEPLOYED      (FREE)     Graph │
 │                                                                              │
-│  ✅ Done     ✅ Done       ✅ Done         ✅ Done         📋 Next    📋 Plan│
+│  ✅ Done     ✅ Done       ✅ Done         ✅ LIVE         📋 Next    📋 Plan│
 │                                                                              │
 │  9 Struct.   Cross-Enc.    • Streaming     • TypeScript    • Login    • PG  │
 │  29 Modules  Zero-Shot     • Export PDF    • GitHub Act.   • OAuth      FTS │
 │  Suggestions RAGAS Eval    • Hybrid BM25   • Cloud Parity  • RLS      • Lang│
-│                            • Sem. Cache    • $0/month      • $0/month   Graph│
-│                            • Screening                                       │
+│                            • Sem. Cache    • Railway       • $0/month   Graph│
+│                            • Screening     • Supabase                        │
 │                                                                              │
 │  V12: Simple Deploy (Vercel FREE + Render FREE + Supabase FREE) = $0/month  │
 │                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
 ## ✅ Completed Versions
 
-### V9.0 (Current) - TypeScript + CI/CD + Cloud Parity
+### V9.0 (Current) - TypeScript + CI/CD + Cloud Parity + **DEPLOYED**
 | Feature | Status | Description |
 |---------|--------|--------------|
 | TypeScript Migration | ✅ Done | 90%+ type coverage frontend |
@@ -46,6 +50,9 @@
 | Cloud Parity | ✅ Done | Supabase = Local functionality |
 | Pre-commit Hooks | ✅ Done | 8 quality gate hooks |
 | Dependabot | ✅ Done | Automated dependency updates |
+| **Production Deploy** | ✅ **LIVE** | Railway + Supabase |
+
+**🌐 Live at:** [https://ai-poweredcvscreener-production.up.railway.app/](https://ai-poweredcvscreener-production.up.railway.app/)
 
 ### V8.0 - UX Features
 | Feature | Status | Description |
@@ -191,6 +198,6 @@ docs/roadmap/
 
 <div align="center">
 
-**[← Back to Docs](../README.md)** · **[← Back to Main README](../../README.md)**
+**[← Back to Docs](../README.md)** · **[← Back to Main README](../../README.md)** · **[🌐 Live Demo](https://ai-poweredcvscreener-production.up.railway.app/)**
 
 </div>

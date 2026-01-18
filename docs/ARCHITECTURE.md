@@ -2,6 +2,15 @@
 
 > **Last Updated:** January 2026 - Complete v9.0 implementation with TypeScript, CI/CD, Cloud Parity, Streaming, Hybrid Search, 10 Structures (9 rigid + 1 Adaptive), 29+ Modules, 6 Adaptive Modules, and Conversational Context
 
+## 🌐 Production Instance
+
+| Environment | URL |
+|-------------|-----|
+| **Live Demo** | [https://ai-poweredcvscreener-production.up.railway.app/](https://ai-poweredcvscreener-production.up.railway.app/) |
+| **API Docs** | [https://ai-poweredcvscreener-production.up.railway.app/docs](https://ai-poweredcvscreener-production.up.railway.app/docs) |
+
+**Deployment Stack**: Railway (Monolith Container) + Supabase (PostgreSQL + pgvector + Storage)
+
 ---
 
 ## 🏗️ SYSTEM OVERVIEW
@@ -242,3 +251,70 @@ During CV indexing, the following is automatically extracted:
 - [x] **v9:** GitHub Actions CI/CD
 - [x] **v9:** Full Cloud Parity (Supabase)
 - [x] **v9:** Adaptive Structure System (dynamic schema-less output)
+- [x] **v9:** Production deployment on Railway
+
+---
+
+## 🚀 DEPLOYMENT ARCHITECTURE
+
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│                         PRODUCTION ARCHITECTURE                            │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                            │
+│   ┌────────────────────────────────────────────────────────────────┐     │
+│   │                   RAILWAY (Monolith Container)                    │     │
+│   │   ┌─────────────────────────────────────────────────────────┐  │     │
+│   │   │                    FastAPI Backend                          │  │     │
+│   │   │   • /api/* routes                                          │  │     │
+│   │   │   • RAG Pipeline v9.0                                      │  │     │
+│   │   │   • Output Orchestrator (9 structures + 29 modules)        │  │     │
+│   │   │   • SSE Streaming                                          │  │     │
+│   │   └─────────────────────────────────────────────────────────┘  │     │
+│   │   ┌─────────────────────────────────────────────────────────┐  │     │
+│   │   │               Static Frontend (React 18)                   │  │     │
+│   │   │   • Served from /app/static                                │  │     │
+│   │   │   • Vite-built SPA                                         │  │     │
+│   │   └─────────────────────────────────────────────────────────┘  │     │
+│   └────────────────────────────────────────────────────────────────┘     │
+│                                     │                                      │
+│                                     ▼                                      │
+│   ┌────────────────────────────────────────────────────────────────┐     │
+│   │                     SUPABASE (Free Tier)                        │     │
+│   │   • PostgreSQL + pgvector extension                             │     │
+│   │   • cv_embeddings table (768-dim vectors)                       │     │
+│   │   • match_cv_embeddings RPC function                            │     │
+│   │   • Storage bucket: cv-pdfs                                     │     │
+│   └────────────────────────────────────────────────────────────────┘     │
+│                                     │                                      │
+│                                     ▼                                      │
+│   ┌────────────────────────────────────────────────────────────────┐     │
+│   │                 OPENROUTER (User-Provided Keys)                  │     │
+│   │   • LLM generation (GPT-4o, Claude 3.5, etc.)                   │     │
+│   │   • Embeddings (nomic-embed-text-v1.5)                          │     │
+│   │   • No server-side API key required                             │     │
+│   └────────────────────────────────────────────────────────────────┘     │
+│                                                                            │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
+### Why This Architecture?
+
+| Decision | Rationale |
+|----------|----------|
+| **Railway Monolith** | Single container deployment reduces complexity, no inter-service networking |
+| **Supabase Free Tier** | Production-grade PostgreSQL with pgvector at $0/month |
+| **User-Provided API Keys** | Zero LLM costs for the server, users control their usage |
+| **FastAPI Static Files** | No need for separate Nginx, simplifies deployment |
+
+---
+
+## 📋 NEXT STEPS (Roadmap)
+
+| Version | Features | Status |
+|---------|----------|--------|
+| **V10** | Supabase Auth, Row Level Security, User Quotas | 📋 Planned |
+| **V11** | PostgreSQL FTS, LangGraph Pipeline | 📋 Planned |
+| **V12** | Multi-provider deploy (Vercel + Render) | 📋 Planned |
+
+See [Roadmap Documentation](./roadmap/README.md) for full details.
