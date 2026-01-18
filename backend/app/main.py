@@ -16,7 +16,7 @@ from app.utils.exceptions import CVScreenerException
 
 # Configure logging
 logging.basicConfig(
-    level=logging.DEBUG,  # Changed to DEBUG for more verbose logging
+    level=logging.INFO,  # Back to INFO to avoid rate limit
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
         logging.StreamHandler(sys.stdout),
