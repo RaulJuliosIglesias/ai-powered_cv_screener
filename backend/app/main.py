@@ -35,10 +35,11 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
-# Configure CORS
+# Configure CORS - allow all origins for Railway
+# Frontend and backend are on same domain in Railway
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins_list,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -66,7 +67,7 @@ async def general_exception_handler(request: Request, exc: Exception):
     )
 
 
-# Include routers
+# Include routers FIRST (before catch-all)
 app.include_router(router)
 app.include_router(sessions_router)
 app.include_router(sessions_stream_router)
@@ -80,31 +81,27 @@ from fastapi.responses import FileResponse
 
 # Check if running in Railway (static dir exists)
 STATIC_DIR = "/app/static"
-if os.path.exists(STATIC_DIR):
+RAILWAY_MODE = os.path.exists(STATIC_DIR) and os.path.exists(f"{STATIC_DIR}/index.html")
+
+if RAILWAY_MODE:
+    logger.info(f"Railway mode: Serving static files from {STATIC_DIR}")
+    
     # Serve static assets (js, css, etc.)
-    app.mount("/assets", StaticFiles(directory=f"{STATIC_DIR}/assets"), name="assets")
+    if os.path.exists(f"{STATIC_DIR}/assets"):
+        app.mount("/assets", StaticFiles(directory=f"{STATIC_DIR}/assets"), name="assets")
+    
+    # Serve vite.svg and other root static files
+    @app.get("/vite.svg")
+    async def serve_vite_svg():
+        return FileResponse(f"{STATIC_DIR}/vite.svg")
     
     # Serve root index.html for SPA
-    @app.get("/")
+    @app.get("/", response_class=FileResponse)
     async def serve_spa_root():
-        return FileResponse(f"{STATIC_DIR}/index.html")
-    
-    # Catch-all for SPA routing (must be last)
-    @app.get("/{full_path:path}")
-    async def serve_spa(full_path: str):
-        # If it's an API route, skip
-        if full_path.startswith("api/") or full_path.startswith("docs") or full_path.startswith("redoc"):
-            return {"detail": "Not Found"}
-        
-        # Try to serve static file first
-        file_path = f"{STATIC_DIR}/{full_path}"
-        if os.path.exists(file_path) and os.path.isfile(file_path):
-            return FileResponse(file_path)
-        
-        # Default to index.html for SPA routing
-        return FileResponse(f"{STATIC_DIR}/index.html")
+        return FileResponse(f"{STATIC_DIR}/index.html", media_type="text/html")
+
 else:
-    # Local development - just API
+    # Local development - just API info
     @app.get("/")
     async def root():
         """Root endpoint with API information."""
