@@ -3,8 +3,8 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile.railway"
 
 [deploy]
-healthcheckPath = "/api/health"
-healthcheckTimeout = 60
+healthcheckPath = "/"
+healthcheckTimeout = 30
 startCommand = "/app/start.sh"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
