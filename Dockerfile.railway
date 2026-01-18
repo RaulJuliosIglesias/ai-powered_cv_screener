@@ -1,65 +1,70 @@
-# CV Screener - Railway Monolith Dockerfile
-# This combines frontend and backend for Railway's single-container deployment
+# CV Screener - Railway Optimized Dockerfile
+# Target: < 4GB image
 
 # Stage 1: Build Frontend
 FROM node:20-alpine AS frontend-builder
-
 WORKDIR /frontend
-
 COPY frontend/package*.json ./
-RUN npm ci
-
+RUN npm ci --production --silent
 COPY frontend/ ./
-
 ARG VITE_API_URL=/api
 ENV VITE_API_URL=$VITE_API_URL
+RUN npm run build && rm -rf node_modules
 
-RUN npm run build
+# Stage 2: Python dependencies builder
+FROM python:3.11-slim AS python-builder
+WORKDIR /build
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+COPY backend/requirements.railway.txt ./requirements.txt
+RUN pip install --no-cache-dir --user -r requirements.txt \
+    && find /root/.local -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true \
+    && find /root/.local -type d -name "tests" -exec rm -rf {} + 2>/dev/null || true \
+    && find /root/.local -type d -name "test" -exec rm -rf {} + 2>/dev/null || true \
+    && find /root/.local -name "*.pyc" -delete 2>/dev/null || true \
+    && find /root/.local -name "*.pyo" -delete 2>/dev/null || true
 
-# Stage 2: Backend with Frontend static files
+# Stage 3: Final minimal image
 FROM python:3.11-slim
 
-# Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONPATH=/app
 
 WORKDIR /app
 
-# Install system dependencies including nginx
-RUN apt-get update && apt-get install -y \
-    build-essential \
+# Install only runtime dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     nginx \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
 
-# Copy backend requirements and install
-COPY backend/requirements.txt .
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+# Copy Python packages from builder
+COPY --from=python-builder /root/.local /root/.local
+ENV PATH=/root/.local/bin:$PATH
 
 # Copy backend code
-COPY backend/ .
+COPY backend/app ./app
+COPY backend/scripts ./scripts
 
-# Copy frontend build from builder stage
+# Copy frontend build
 COPY --from=frontend-builder /frontend/dist /app/static
 
-# Create necessary directories
-RUN mkdir -p /app/storage /app/chroma_db /app/data /app/eval_logs /app/debug_logs
+# Create directories
+RUN mkdir -p /app/storage /app/chroma_db /app/data
 
-# Copy nginx config for Railway
+# Copy nginx config
 COPY nginx.railway.conf /etc/nginx/sites-available/default
 
 # Copy startup script
 COPY start.railway.sh /app/start.sh
 RUN chmod +x /app/start.sh
 
-# Expose port (Railway uses PORT env variable)
 EXPOSE 8000
 
-# Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
     CMD curl -f http://localhost:8000/api/health || exit 1
 
-# Start application
 CMD ["/app/start.sh"]

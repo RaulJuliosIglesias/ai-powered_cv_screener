@@ -78,3 +78,29 @@ railway.toml
 
 # CI/CD
 .github/
+
+# Additional exclusions for Railway
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.cache/
+*.tmp
+*.cache
+
+# Heavy/unused files
+backend/tests/
+backend/pytest.ini
+backend/.pytest_cache/
+backend/.mypy_cache/
+backend/.ruff_cache/
+backend/htmlcov/
+backend/.coverage
+*.md
+!README.md
+DEPLOYMENT.md
+CHANGELOG.md
+
+# Model caches (will be downloaded at runtime)
+*.onnx
+*.bin
+*.safetensors

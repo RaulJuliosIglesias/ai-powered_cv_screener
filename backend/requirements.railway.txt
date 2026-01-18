@@ -1,0 +1,44 @@
+# CV Screener - Railway Optimized (Local Mode)
+# Target: < 4GB image size
+# Eliminado: testing, RAGAS, datasets, langchain-community
+
+# Core FastAPI
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+python-multipart==0.0.6
+pydantic==2.5.3
+pydantic-settings==2.1.0
+python-dotenv==1.0.0
+
+# PDF Processing
+pdfplumber==0.10.3
+
+# Cloud Mode - Supabase + HTTP
+httpx==0.25.2
+supabase==2.3.4
+
+# Vector Store - ChromaDB (REQUIRED for local mode)
+chromadb==0.4.22
+numpy<2.0
+
+# Embeddings (REQUIRED)
+sentence-transformers==2.2.2
+
+# LLM - Google Gemini
+google-generativeai>=0.5.2,<0.6.0
+
+# LangChain (minimal - solo lo necesario)
+langchain-core>=0.1.52,<0.2.0
+langchain-openai>=0.1.3,<0.2.0
+
+# Utilities
+tenacity==8.2.3
+
+# PDF Export
+fpdf2>=2.7.0
+
+# BM25 Search
+rank-bm25>=0.2.2
+
+# HuggingFace Hub (lightweight)
+huggingface-hub>=0.20.0
