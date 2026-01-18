@@ -56,8 +56,11 @@ COPY --from=frontend-builder /frontend/dist /app/static
 # Create directories
 RUN mkdir -p /app/storage /app/chroma_db /app/data
 
+# Test that the app can import
+RUN python -c "from app.main import app; print('App imported successfully')"
+
 # Railway expects port 8000
 EXPOSE 8000
 
-# Run uvicorn on port 8000 (Railway's default)
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Run uvicorn on port 8000 (Railway's default) with more logging
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "debug"]
