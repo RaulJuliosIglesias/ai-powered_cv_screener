@@ -36,11 +36,11 @@ app = FastAPI(
 )
 
 # Configure CORS - allow all origins for Railway
-# Frontend and backend are on same domain in Railway
+# Note: credentials=False when using wildcard origin
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -96,9 +96,15 @@ if RAILWAY_MODE:
         return FileResponse(f"{STATIC_DIR}/vite.svg")
     
     # Serve root index.html for SPA
-    @app.get("/", response_class=FileResponse)
+    @app.get("/")
     async def serve_spa_root():
-        return FileResponse(f"{STATIC_DIR}/index.html", media_type="text/html")
+        logger.info("Serving index.html for root request")
+        index_path = f"{STATIC_DIR}/index.html"
+        if os.path.exists(index_path):
+            return FileResponse(index_path, media_type="text/html")
+        else:
+            logger.error(f"index.html not found at {index_path}")
+            return {"error": "Frontend not found", "path": index_path}
 
 else:
     # Local development - just API info
