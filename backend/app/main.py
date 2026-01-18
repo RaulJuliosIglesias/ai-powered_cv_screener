@@ -73,17 +73,47 @@ app.include_router(sessions_stream_router)
 app.include_router(export_router)
 app.include_router(v8_router)
 
+# Serve static files for Railway deployment
+import os
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
-# Root endpoint
-@app.get("/")
-async def root():
-    """Root endpoint with API information."""
-    return {
-        "name": "CV Screener RAG API",
-        "version": "1.0.0",
-        "docs": "/docs",
-        "health": "/api/health",
-    }
+# Check if running in Railway (static dir exists)
+STATIC_DIR = "/app/static"
+if os.path.exists(STATIC_DIR):
+    # Serve static assets (js, css, etc.)
+    app.mount("/assets", StaticFiles(directory=f"{STATIC_DIR}/assets"), name="assets")
+    
+    # Serve root index.html for SPA
+    @app.get("/")
+    async def serve_spa_root():
+        return FileResponse(f"{STATIC_DIR}/index.html")
+    
+    # Catch-all for SPA routing (must be last)
+    @app.get("/{full_path:path}")
+    async def serve_spa(full_path: str):
+        # If it's an API route, skip
+        if full_path.startswith("api/") or full_path.startswith("docs") or full_path.startswith("redoc"):
+            return {"detail": "Not Found"}
+        
+        # Try to serve static file first
+        file_path = f"{STATIC_DIR}/{full_path}"
+        if os.path.exists(file_path) and os.path.isfile(file_path):
+            return FileResponse(file_path)
+        
+        # Default to index.html for SPA routing
+        return FileResponse(f"{STATIC_DIR}/index.html")
+else:
+    # Local development - just API
+    @app.get("/")
+    async def root():
+        """Root endpoint with API information."""
+        return {
+            "name": "CV Screener RAG API",
+            "version": "1.0.0",
+            "docs": "/docs",
+            "health": "/api/health",
+        }
 
 
 # Startup event
