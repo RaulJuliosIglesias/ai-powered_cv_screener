@@ -6,13 +6,14 @@ import asyncio
 import hashlib
 from pathlib import Path
 from typing import List, Optional
-from fastapi import APIRouter, HTTPException, Query, File, UploadFile, BackgroundTasks
+from fastapi import APIRouter, HTTPException, Query, File, UploadFile, BackgroundTasks, Depends
 from fastapi.responses import FileResponse, StreamingResponse
 from pydantic import BaseModel, Field
 import pdfplumber
 import json
 
 from app.config import settings, Mode
+from app.api.dependencies import get_openrouter_api_key
 
 # Directory to store uploaded PDFs - in project root /storage/
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
@@ -790,18 +791,19 @@ def extract_role_from_filename(filename: str) -> str:
 async def generate_session_name(
     session_id: str,
     request: GenerateNameRequest,
-    mode: Mode = Query(default=settings.default_mode)
+    mode: Mode = Query(default=settings.default_mode),
+    api_key: Optional[str] = Depends(get_openrouter_api_key)
 ):
     """Generate a descriptive name for a session based on its CVs using a cheap AI model."""
     import httpx
     import random
     
-    # Validate API key is configured before attempting any API calls
-    if not settings.openrouter_api_key:
-        logger.warning("[AUTO-NAME] OpenRouter API key not configured, skipping auto-naming")
+    # Validate API key is configured (from header or env)
+    if not api_key:
+        logger.warning("[AUTO-NAME] No OpenRouter API key provided")
         raise HTTPException(
             status_code=503, 
-            detail="OpenRouter API key not configured. Set OPENROUTER_API_KEY in environment."
+            detail="OpenRouter API key not configured. Please add your API key in the API Keys panel."
         )
     
     mgr = get_session_manager(mode)
@@ -867,7 +869,7 @@ Category:"""
                 response = await client.post(
                     "https://openrouter.ai/api/v1/chat/completions",
                     headers={
-                        "Authorization": f"Bearer {settings.openrouter_api_key}",
+                        "Authorization": f"Bearer {api_key}",
                         "HTTP-Referer": settings.http_referer,
                         "X-Title": settings.app_title,
                         "Content-Type": "application/json"
