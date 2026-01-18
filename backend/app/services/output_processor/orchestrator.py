@@ -11,38 +11,38 @@ This is the MAIN ENTRY POINT that RAG service calls.
 
 import logging
 import re
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 from app.models.structured_output import StructuredOutput
-from app.utils.debug_logger import log_orchestrator_processing, log_red_flags_module, log_event
-from .processor import OutputProcessor
-
-# Import STRUCTURES (which internally use MODULES)
-from .structures import (
-    SingleCandidateStructure,
-    RiskAssessmentStructure,
-    ComparisonStructure,
-    SearchStructure,
-    RankingStructure,
-    JobMatchStructure,
-    TeamBuildStructure,
-    VerificationStructure,
-    SummaryStructure,
-)
+from app.utils.debug_logger import log_event
 
 # Import SMART ADAPTIVE system (new generation - dynamic structures)
 from .adaptive import AdaptiveStructureBuilder
 
 # Import modules for legacy/fallback processing
 from .modules import (
-    ThinkingModule,
-    DirectAnswerModule,
     AnalysisModule,
-    TableModule,
     ConclusionModule,
+    DirectAnswerModule,
     GapAnalysisModule,
     RedFlagsModule,
+    TableModule,
+    ThinkingModule,
     TimelineModule,
+)
+from .processor import OutputProcessor
+
+# Import STRUCTURES (which internally use MODULES)
+from .structures import (
+    ComparisonStructure,
+    JobMatchStructure,
+    RankingStructure,
+    RiskAssessmentStructure,
+    SearchStructure,
+    SingleCandidateStructure,
+    SummaryStructure,
+    TeamBuildStructure,
+    VerificationStructure,
 )
 
 logger = logging.getLogger(__name__)
@@ -533,7 +533,6 @@ class OutputOrchestrator:
         # 6. Enhanced modules (v5.1) - Optional sections after main content
         # These are included in structured output but also formatted for display
         if structured.gap_analysis and structured.gap_analysis.get("skill_gaps"):
-            from .modules import GapAnalysisData, SkillGap
             # Reconstruct data object for formatting
             gap_data = self._reconstruct_gap_analysis(structured.gap_analysis)
             if gap_data:
@@ -549,7 +548,6 @@ class OutputOrchestrator:
             logger.info(f"[ORCHESTRATOR] Red Flags Analysis section ADDED ({len(red_flags_formatted)} chars)")
         
         if structured.timeline and structured.timeline.get("timelines"):
-            from .modules import TimelineData, CandidateTimeline
             timeline_data = self._reconstruct_timeline(structured.timeline)
             if timeline_data:
                 formatted_timeline = self.timeline_module.format(timeline_data)
@@ -601,7 +599,7 @@ class OutputOrchestrator:
         
         if code_block_wrapper:
             text = code_block_wrapper.group(1)
-            logger.info(f"[ORCHESTRATOR] Unwrapped content from code block wrapper")
+            logger.info("[ORCHESTRATOR] Unwrapped content from code block wrapper")
         
         # Also handle partial code blocks at the start
         text = re.sub(r'^```(?:code|markdown|text|)?\s*\n', '', text, flags=re.IGNORECASE)
@@ -739,7 +737,7 @@ class OutputOrchestrator:
         text = re.sub(r'\n{3,}', '\n\n', text)
         
         if text != original:
-            logger.info(f"[ORCHESTRATOR] Post-cleaned formatting issues")
+            logger.info("[ORCHESTRATOR] Post-cleaned formatting issues")
         
         return text.strip()
     
@@ -885,7 +883,6 @@ class OutputOrchestrator:
         
         # Fallback: reconstruct from structured.red_flags dict
         elif structured.red_flags:
-            from .modules.red_flags_module import RedFlagsData, RedFlag
             flag_count = len(structured.red_flags.get('flags', []))
             clean_count = len(structured.red_flags.get('clean_candidates', []))
             logger.info(f"[ORCHESTRATOR] Red flags from dict: {flag_count} flags, {clean_count} clean")
@@ -937,7 +934,7 @@ class OutputOrchestrator:
     
     def _reconstruct_red_flags(self, data: Dict[str, Any]):
         """Reconstruct RedFlagsData from dict for formatting."""
-        from .modules import RedFlagsData, RedFlag
+        from .modules import RedFlag, RedFlagsData
         
         try:
             flags = [
@@ -964,7 +961,7 @@ class OutputOrchestrator:
     
     def _reconstruct_timeline(self, data: Dict[str, Any]):
         """Reconstruct TimelineData from dict for formatting."""
-        from .modules import TimelineData, CandidateTimeline
+        from .modules import CandidateTimeline, TimelineData
         from .modules.timeline_module import TimelineEntry
         
         try:

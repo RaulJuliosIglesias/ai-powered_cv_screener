@@ -6,9 +6,9 @@ Used by: SummaryStructure
 """
 
 import logging
-from typing import List, Dict, Optional, Any
-from dataclasses import dataclass, field
 from collections import Counter
+from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 

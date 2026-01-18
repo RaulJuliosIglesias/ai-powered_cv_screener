@@ -6,9 +6,9 @@ Questions are tailored to explore specific skills, experience gaps, and verify c
 """
 
 import logging
-from typing import List, Dict, Any, Optional
 from dataclasses import dataclass, field
 from enum import Enum
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -260,9 +260,9 @@ class InterviewQuestionsService:
         
         # Determine categories to cover
         if categories:
-            target_categories = [QuestionCategory(c) for c in categories]
+            [QuestionCategory(c) for c in categories]
         else:
-            target_categories = self._select_categories(candidate_data, job_requirements, gaps)
+            self._select_categories(candidate_data, job_requirements, gaps)
         
         # Set difficulty distribution
         if not difficulty_mix:
@@ -303,7 +303,7 @@ class InterviewQuestionsService:
             candidate_name=candidate_name,
             questions=questions,
             total_time_minutes=total_time,
-            focus_areas=list(set(q.related_skill for q in questions if q.related_skill)),
+            focus_areas=list({q.related_skill for q in questions if q.related_skill}),
             areas_to_probe=gaps[:3],
             strengths_to_confirm=strengths[:3]
         )
@@ -342,7 +342,7 @@ class InterviewQuestionsService:
         if not requirements:
             return gaps
         
-        candidate_skills = set(s.lower() for s in self._extract_skills(candidate))
+        candidate_skills = {s.lower() for s in self._extract_skills(candidate)}
         required_skills = requirements.get("required_skills", [])
         
         for skill in required_skills:

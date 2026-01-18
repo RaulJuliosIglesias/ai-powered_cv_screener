@@ -1,10 +1,11 @@
-import pdfplumber
-import re
 import logging
-from typing import Optional, List, Tuple
-from pathlib import Path
+import re
 from dataclasses import dataclass, field
 from datetime import datetime
+from pathlib import Path
+from typing import List, Optional, Tuple
+
+import pdfplumber
 
 from app.utils.exceptions import PDFExtractionError
 
@@ -170,7 +171,7 @@ class EnrichedMetadata:
             "graduation_year": self.graduation_year,
             "has_mba": self.has_mba,
             "has_phd": self.has_phd,
-            "languages": [l.to_dict() for l in self.languages],
+            "languages": [lang.to_dict() for lang in self.languages],
             "primary_language": self.primary_language,
             "speaks_english": self.speaks_english,
             "speaks_french": self.speaks_french,
@@ -780,7 +781,7 @@ class PDFService:
     
     def extract_companies(self, experiences: List[ExperienceEntry]) -> Tuple[List[str], bool]:
         """Extract company list and check for FAANG experience."""
-        companies = list(set(e.company for e in experiences if e.company != "Unknown Company"))
+        companies = list({e.company for e in experiences if e.company != "Unknown Company"})
         
         has_faang = any(
             any(faang in company.lower() for faang in self.FAANG_COMPANIES)
@@ -1038,7 +1039,7 @@ class PDFService:
         
         year_pattern = r"\b(20[0-2]\d|19[89]\d)\b"
         
-        for cert_pattern, default_issuer, cert_type in cert_patterns:
+        for cert_pattern, default_issuer, _cert_type in cert_patterns:
             matches = re.finditer(cert_pattern, text)
             for match in matches:
                 cert_name = match.group(1).strip()
@@ -1198,10 +1199,10 @@ class PDFService:
         # Languages
         languages = self.extract_languages(text)
         primary_language = languages[0].language if languages else None
-        speaks_english = any(l.language.lower() == "english" for l in languages)
-        speaks_french = any(l.language.lower() == "french" for l in languages)
-        speaks_spanish = any(l.language.lower() == "spanish" for l in languages)
-        speaks_german = any(l.language.lower() == "german" for l in languages)
+        speaks_english = any(lang.language.lower() == "english" for lang in languages)
+        speaks_french = any(lang.language.lower() == "french" for lang in languages)
+        speaks_spanish = any(lang.language.lower() == "spanish" for lang in languages)
+        speaks_german = any(lang.language.lower() == "german" for lang in languages)
         
         # Certifications
         certifications = self.extract_certifications(text)
@@ -1520,7 +1521,7 @@ class PDFService:
             metadata={
                 "skills": skills,
                 "chunk_count": len(chunks),
-                "sections": list(set(s[0] for s in sections)),
+                "sections": list({s[0] for s in sections}),
                 "total_experience_years": enriched_metadata.total_experience_years,
                 "seniority_level": enriched_metadata.seniority_level,
                 "current_role": enriched_metadata.current_role,

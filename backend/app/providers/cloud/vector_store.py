@@ -1,7 +1,8 @@
-from typing import List, Dict, Any, Optional
 import logging
-from app.providers.base import VectorStoreProvider, SearchResult
+from typing import Any, Dict, List, Optional
+
 from app.config import settings
+from app.providers.base import SearchResult, VectorStoreProvider
 
 logger = logging.getLogger(__name__)
 
@@ -56,7 +57,7 @@ class SupabaseVectorStore(VectorStoreProvider):
                 logger.error(f"Failed to upsert CV {cv_data['id']}: {e}")
         
         # Now add embeddings
-        for i, (doc, embedding) in enumerate(zip(documents, embeddings)):
+        for i, (doc, embedding) in enumerate(zip(documents, embeddings, strict=False)):
             try:
                 record = {
                     "cv_id": doc["cv_id"],

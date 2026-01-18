@@ -14,13 +14,13 @@ Model: microsoft/deberta-v3-base-mnli
 Rate Limit: 30K requests/hour
 """
 import logging
-import time
 import re
-from typing import List, Dict, Any, Optional
+import time
 from dataclasses import dataclass, field
 from enum import Enum
+from typing import Any, Dict, List, Optional
 
-from app.providers.huggingface_client import get_huggingface_client, HuggingFaceClient
+from app.providers.huggingface_client import HuggingFaceClient, get_huggingface_client
 
 logger = logging.getLogger(__name__)
 

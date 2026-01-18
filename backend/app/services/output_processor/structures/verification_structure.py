@@ -18,13 +18,13 @@ This structure is used when user asks to verify claims:
 
 import logging
 import re
-from typing import Dict, Any, List, Optional
+from typing import Any, Dict, List
 
-from ..modules import ThinkingModule, ConclusionModule
+from ...context_resolver import has_reference_pattern, resolve_reference
+from ..modules import ConclusionModule, ThinkingModule
 from ..modules.claim_module import ClaimModule
 from ..modules.evidence_module import EvidenceModule
 from ..modules.verdict_module import VerdictModule
-from ...context_resolver import resolve_reference, has_reference_pattern
 
 logger = logging.getLogger(__name__)
 
@@ -375,7 +375,6 @@ class VerificationStructure:
             return conclusion
         
         status = verdict.status
-        confidence = verdict.confidence
         claim_value = claim.get("claim_value", query) if claim else query
         
         conclusion_lower = conclusion.lower()
@@ -397,19 +396,19 @@ class VerificationStructure:
             # Verdict says NOT_FOUND but conclusion is affirmative
             contradiction_detected = True
             logger.warning(
-                f"[VERIFICATION_STRUCTURE] Contradiction: verdict=NOT_FOUND but conclusion is affirmative. Fixing."
+                "[VERIFICATION_STRUCTURE] Contradiction: verdict=NOT_FOUND but conclusion is affirmative. Fixing."
             )
         elif status == "CONFIRMED" and is_negative and not is_affirmative:
             # Verdict says CONFIRMED but conclusion is negative
             contradiction_detected = True
             logger.warning(
-                f"[VERIFICATION_STRUCTURE] Contradiction: verdict=CONFIRMED but conclusion is negative. Fixing."
+                "[VERIFICATION_STRUCTURE] Contradiction: verdict=CONFIRMED but conclusion is negative. Fixing."
             )
         elif status == "CONTRADICTED" and is_affirmative and not is_negative:
             # Verdict says CONTRADICTED but conclusion is affirmative
             contradiction_detected = True
             logger.warning(
-                f"[VERIFICATION_STRUCTURE] Contradiction: verdict=CONTRADICTED but conclusion is affirmative. Fixing."
+                "[VERIFICATION_STRUCTURE] Contradiction: verdict=CONTRADICTED but conclusion is affirmative. Fixing."
             )
         
         if contradiction_detected:

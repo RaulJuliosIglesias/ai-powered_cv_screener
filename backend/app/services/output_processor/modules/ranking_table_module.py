@@ -12,8 +12,8 @@ Output format:
 
 import logging
 import re
-from typing import List, Dict, Optional, Any
 from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -110,7 +110,7 @@ class RankingTableModule:
                 )
         
         # FALLBACK: Calculate scores from metadata
-        logger.info(f"[RANKING_TABLE_MODULE] Using metadata-based ranking (LLM extraction failed)")
+        logger.info("[RANKING_TABLE_MODULE] Using metadata-based ranking (LLM extraction failed)")
         ranked_candidates = []
         
         for cv_id, data in candidates.items():
@@ -184,16 +184,6 @@ class RankingTableModule:
         
         # Patterns to extract ranked candidates from LLM output
         # Look for: "1. **Name**", "**Name** is the most suitable", etc.
-        patterns = [
-            # Numbered list: "1. **Isabel Mendoza**" or "1. Isabel Mendoza"
-            r'(?:^|\n)\s*(\d+)[.)\]]\s*\*?\*?\[?([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,3})',
-            # "**Name** is the most/best/top"
-            r'\*\*([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,3})\*\*\s+(?:is\s+the\s+(?:most|best|top)|emerges|stands\s+out)',
-            # "Name is the most suitable"
-            r'([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,3})\s+is\s+the\s+most\s+suitable',
-            # Conclusion pattern: "Name is highly suitable"
-            r'([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){0,3})\s+is\s+(?:also\s+)?highly\s+suitable',
-        ]
         
         found_names = []
         found_set = set()

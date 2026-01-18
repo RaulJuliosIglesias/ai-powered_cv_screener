@@ -6,8 +6,8 @@ Used by: VerificationStructure
 """
 
 import logging
-from typing import Dict, Optional, List, Any
 from dataclasses import dataclass
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +41,7 @@ class VerdictModule:
             return None
         
         claim_value = claim.get("claim_value", "")
-        claim_type = claim.get("claim_type", "")
+        claim.get("claim_type", "")
         
         if not evidence:
             return Verdict(

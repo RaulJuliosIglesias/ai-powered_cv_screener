@@ -6,10 +6,10 @@ All queries, responses, and metrics are logged for analysis and improvement.
 """
 import json
 import logging
+from dataclasses import asdict, dataclass
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Dict, Any, List, Optional
-from dataclasses import dataclass, asdict
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -203,7 +203,7 @@ class EvalService:
             avg_search_ms=sum(search_ms) / len(search_ms) if search_ms else 0,
             avg_llm_ms=sum(llm_ms) / len(llm_ms) if llm_ms else 0,
             low_confidence_count=sum(1 for c in confidences if c < self.LOW_CONFIDENCE_THRESHOLD),
-            unique_sessions=len(set(e.get("session_id") for e in entries if e.get("session_id")))
+            unique_sessions=len({e.get("session_id") for e in entries if e.get("session_id")})
         )
     
     def get_weekly_stats(self) -> Dict[str, DailyStats]:

@@ -4,15 +4,15 @@ Local Vector Store with JSON persistence.
 This module provides persistent vector storage using JSON files with
 cosine similarity search. Works without external dependencies.
 """
-import json
-import os
-import math
-import logging
 import asyncio
+import json
+import logging
+import math
 from pathlib import Path
-from typing import List, Dict, Any, Optional
-from app.providers.base import VectorStoreProvider, SearchResult
+from typing import Any, Dict, List, Optional
+
 from app.config import settings
+from app.providers.base import SearchResult, VectorStoreProvider
 
 logger = logging.getLogger(__name__)
 
@@ -78,7 +78,7 @@ class SimpleVectorStore(VectorStoreProvider):
             b = b[:min_len]
         
         try:
-            dot = sum(float(x) * float(y) for x, y in zip(a, b))
+            dot = sum(float(x) * float(y) for x, y in zip(a, b, strict=False))
             norm_a = math.sqrt(sum(float(x) * float(x) for x in a))
             norm_b = math.sqrt(sum(float(x) * float(x) for x in b))
             
@@ -104,7 +104,7 @@ class SimpleVectorStore(VectorStoreProvider):
         # Build index of existing docs by ID for upsert
         existing_ids = {doc["id"]: i for i, doc in enumerate(self._documents)}
         
-        for doc, emb in zip(documents, embeddings):
+        for doc, emb in zip(documents, embeddings, strict=False):
             doc_data = {
                 "id": doc["id"],
                 "cv_id": doc["cv_id"],
@@ -187,7 +187,7 @@ class SimpleVectorStore(VectorStoreProvider):
                         break
         else:
             # Traditional top-k (may have multiple chunks from same CV)
-            for idx, sim, cv_id in similarities[:k]:
+            for idx, sim, _cv_id in similarities[:k]:
                 doc = self._documents[idx]
                 results.append(SearchResult(
                     id=doc["id"],

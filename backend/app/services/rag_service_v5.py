@@ -13,46 +13,45 @@ Author: CV Screener RAG System
 Version: 5.0.0
 """
 
-import logging
 import asyncio
-import time
 import hashlib
-import json
-from enum import Enum, auto
+import logging
+import time
 from dataclasses import dataclass, field
-from typing import Any, Optional, List, Dict, AsyncGenerator
 from datetime import datetime
+from enum import Enum, auto
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    Dict,
+    Generic,
+    List,
+    Optional,
+    TypeVar,
+)
+
 import httpx
 
 from app.config import settings
-from app.utils.error_handling import degradation
-from app.utils.debug_logger import (
-    log_retrieval, log_template_selection, log_query_understanding,
-    log_llm_response, log_orchestrator_processing, log_event, log_structure_routing,
-    log_semantic_cache, log_hybrid_search, log_token_streaming
-)
-
-# V7 Services Integration
-from app.services.v7_integration import get_v7_services, V7Services
 
 # V8 Services Integration
 from app.services.hybrid_search_service import get_hybrid_search_service
 from app.services.semantic_cache_service import get_semantic_cache
-from app.services.fallback_chain_service import get_fallback_service
-from typing import (
-    Any,
-    Callable,
-    Generic,
-    Optional,
-    Protocol,
-    TypeVar,
-    TYPE_CHECKING,
-    List,
-    Dict,
+
+# V7 Services Integration
+from app.services.v7_integration import V7Services, get_v7_services
+from app.utils.debug_logger import (
+    log_hybrid_search,
+    log_query_understanding,
+    log_retrieval,
+    log_semantic_cache,
+    log_structure_routing,
+    log_template_selection,
 )
+from app.utils.error_handling import degradation
 
 if TYPE_CHECKING:
-    from app.providers.base import SearchResult
+    pass
 
 logger = logging.getLogger(__name__)
 
@@ -739,17 +738,7 @@ class RAGServiceV5:
     @classmethod
     def from_factory(cls, mode: Mode | str = Mode.LOCAL) -> "RAGServiceV5":
         """Create service with default providers."""
-        from app.config import settings
         from app.providers.factory import ProviderFactory
-        from app.services.guardrail_service import GuardrailService
-        from app.services.hallucination_service import HallucinationService
-        from app.services.eval_service import EvalService
-        from app.services.query_understanding_service import QueryUnderstandingService
-        from app.services.reranking_service import RerankingService
-        from app.services.multi_query_service import MultiQueryService
-        from app.services.reasoning_service import ReasoningService
-        from app.services.claim_verifier_service import ClaimVerifierService
-        from app.prompts.templates import PromptBuilder
         
         # Convert string to Mode enum if needed
         if isinstance(mode, str):
@@ -778,20 +767,19 @@ class RAGServiceV5:
     
     def lazy_initialize_providers(self, api_key: Optional[str] = None):
         """Initialize providers after models have been configured."""
-        logger.info(f"[LAZY_INIT] Starting lazy_initialize_providers")
+        logger.info("[LAZY_INIT] Starting lazy_initialize_providers")
         logger.info(f"[LAZY_INIT] Config models: understanding={self.config.understanding_model}, generation={self.config.generation_model}, reranking={self.config.reranking_model}, verification={self.config.verification_model}")
         
-        from app.config import settings
+        from app.prompts.templates import PromptBuilder
         from app.providers.factory import ProviderFactory
+        from app.services.claim_verifier_service import ClaimVerifierService
+        from app.services.eval_service import EvalService
         from app.services.guardrail_service import GuardrailService
         from app.services.hallucination_service import HallucinationService
-        from app.services.eval_service import EvalService
-        from app.services.query_understanding_service import QueryUnderstandingService
-        from app.services.reranking_service import RerankingService
         from app.services.multi_query_service import MultiQueryService
+        from app.services.query_understanding_service import QueryUnderstandingService
         from app.services.reasoning_service import ReasoningService
-        from app.services.claim_verifier_service import ClaimVerifierService
-        from app.prompts.templates import PromptBuilder
+        from app.services.reranking_service import RerankingService
         
         logger.info("[LAZY_INIT] Imports completed")
         
@@ -1013,6 +1001,7 @@ class RAGServiceV5:
     async def _execute_pipeline_stream(self, ctx: PipelineContextV5):
         """Execute pipeline with streaming progress events."""
         import time
+
         from app.services.context_resolver import resolve_query_with_context
         
         # STEP 0: Resolve references like "#1 candidate", "top candidate" from context history
@@ -1482,7 +1471,7 @@ class RAGServiceV5:
                 return matching_chunks
             else:
                 # Fallback for other vector store implementations (e.g., ChromaDB)
-                logger.warning(f"[TARGETED_RETRIEVAL] Vector store doesn't support get_all_chunks_by_candidate")
+                logger.warning("[TARGETED_RETRIEVAL] Vector store doesn't support get_all_chunks_by_candidate")
                 return []
             
         except Exception as e:
@@ -1761,7 +1750,7 @@ class RAGServiceV5:
     
     async def _step_fusion_retrieval(self, ctx: PipelineContextV5) -> None:
         """Step 5: Search with all embeddings and fuse results using RRF."""
-        from app.services.multi_query_service import reciprocal_rank_fusion_with_scores, RRF_K
+        from app.services.multi_query_service import RRF_K, reciprocal_rank_fusion_with_scores
         
         start = time.perf_counter()
         try:
@@ -2239,7 +2228,7 @@ class RAGServiceV5:
             # =================================================================
             # TEMPLATE SELECTION: Single Candidate vs Multi-Candidate
             # =================================================================
-            from app.prompts.templates import detect_single_candidate_query, SingleCandidateDetection
+            from app.prompts.templates import SingleCandidateDetection, detect_single_candidate_query
             
             # HIGHEST PRIORITY: Use context-resolved candidate (from "#1 candidate", "top candidate")
             if ctx.resolved_candidate_name:
@@ -2503,7 +2492,7 @@ class RAGServiceV5:
             logger.info(f"[GENERATION_STREAM] Using ORIGINAL question: {effective_question[:100]}...")
             
             # Template selection (same as non-streaming)
-            from app.prompts.templates import detect_single_candidate_query, SingleCandidateDetection
+            from app.prompts.templates import SingleCandidateDetection, detect_single_candidate_query
             
             if ctx.resolved_candidate_name:
                 single_candidate_detection = SingleCandidateDetection(
@@ -2553,7 +2542,7 @@ class RAGServiceV5:
                 completion_tokens = 0
                 openrouter_cost = 0.0
                 
-                logger.info(f"[GENERATION_STREAM] Starting LLM call...")
+                logger.info("[GENERATION_STREAM] Starting LLM call...")
                 async for chunk in self._llm.generate_stream(prompt, system_prompt=SYSTEM_PROMPT):
                     if chunk.get("token"):
                         yield {"event": "token", "data": {"token": chunk["token"]}}
@@ -2572,7 +2561,7 @@ class RAGServiceV5:
             else:
                 # Fallback to non-streaming
                 logger.info(f"[GENERATION_STREAM] Using non-streaming generation with LLM: {type(self._llm).__name__}")
-                logger.info(f"[GENERATION_STREAM] Starting LLM call (non-streaming)...")
+                logger.info("[GENERATION_STREAM] Starting LLM call (non-streaming)...")
                 result = await asyncio.wait_for(
                     self._llm.generate(prompt, system_prompt=SYSTEM_PROMPT),
                     timeout=self.config.llm_timeout
@@ -2734,7 +2723,6 @@ Provide a corrected response:"""
     
     def _build_success_response(self, ctx: PipelineContextV5) -> RAGResponseV5:
         """Build successful response with structured output processing."""
-        from app.services.output_processor import OutputProcessor
         
         sources = []
         seen_ids = set()
@@ -2959,7 +2947,7 @@ Provide a corrected response:"""
                 duration_ms=qu_stage.duration_ms if qu_stage else 0,
                 details=qu_details
             ))
-            logger.info(f"[BUILD_STEPS] Added query_understanding step")
+            logger.info("[BUILD_STEPS] Added query_understanding step")
             
             # Step 2: Retrieval
             ret_stage = ctx.metrics.get_stage(PipelineStage.SEARCH)
@@ -2970,7 +2958,7 @@ Provide a corrected response:"""
                 duration_ms=ret_stage.duration_ms if ret_stage else 0,
                 details=ret_details
             ))
-            logger.info(f"[BUILD_STEPS] Added retrieval step")
+            logger.info("[BUILD_STEPS] Added retrieval step")
             
             # Step 3: Analysis/Reasoning
             reason_stage = ctx.metrics.get_stage(PipelineStage.REASONING)
@@ -2980,7 +2968,7 @@ Provide a corrected response:"""
                 duration_ms=reason_stage.duration_ms if reason_stage else 0,
                 details="Analyzed candidates and generated ranking"
             ))
-            logger.info(f"[BUILD_STEPS] Added analysis step")
+            logger.info("[BUILD_STEPS] Added analysis step")
             
             # Step 4: Response Generation
             gen_stage = ctx.metrics.get_stage(PipelineStage.GENERATION)
@@ -2990,7 +2978,7 @@ Provide a corrected response:"""
                 duration_ms=gen_stage.duration_ms if gen_stage else 0,
                 details="Generated structured response"
             ))
-            logger.info(f"[BUILD_STEPS] Added generation step")
+            logger.info("[BUILD_STEPS] Added generation step")
             
             logger.info(f"[BUILD_STEPS] Successfully built {len(steps)} steps")
             return steps
@@ -3002,7 +2990,6 @@ Provide a corrected response:"""
     
     def _format_answer_with_blocks(self, ctx: PipelineContextV5) -> str:
         """Post-process answer to add CV links and proper formatting."""
-        import re
         
         answer = ctx.generated_response or ""
         
@@ -3428,7 +3415,7 @@ class RAGServiceV3:
         reranking_enabled: bool = True,
         verification_enabled: bool = True
     ):
-        config = RAGConfigV5(
+        RAGConfigV5(
             mode=mode,
             reranking_enabled=reranking_enabled,
             verification_enabled=verification_enabled

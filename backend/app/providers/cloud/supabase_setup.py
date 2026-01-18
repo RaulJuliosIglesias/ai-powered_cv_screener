@@ -3,6 +3,7 @@ Direct Supabase setup via SQL execution.
 Run this once to initialize Supabase for cloud mode.
 """
 import logging
+
 from supabase import create_client
 
 logger = logging.getLogger(__name__)
@@ -129,7 +130,7 @@ $$;
     
     try:
         # Execute setup SQL
-        result = client.postgrest.schema("public").rpc("exec_sql", {"query": setup_sql}).execute()
+        client.postgrest.schema("public").rpc("exec_sql", {"query": setup_sql}).execute()
         logger.info("✅ Supabase setup completed successfully")
         return True
     except Exception as e:
@@ -169,8 +170,8 @@ async def auto_setup_on_init():
 
 if __name__ == "__main__":
     # Run setup manually
-    import sys
     import os
+    import sys
     sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
     
     from app.config import settings

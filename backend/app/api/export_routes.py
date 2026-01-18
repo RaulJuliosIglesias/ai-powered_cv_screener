@@ -4,13 +4,14 @@ Export Routes - API endpoints for PDF/CSV export functionality.
 V8 Feature: Download candidate analysis reports in various formats.
 """
 
+import io
 import logging
+from typing import Optional
+
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import StreamingResponse
-from typing import Optional
-import io
 
-from app.config import settings, Mode
+from app.config import Mode, settings
 from app.models.sessions import session_manager
 from app.providers.cloud.sessions import supabase_session_manager
 from app.services.export_service import get_export_service

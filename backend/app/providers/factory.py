@@ -1,6 +1,7 @@
 from typing import Optional
-from app.config import settings, Mode
-from app.providers.base import EmbeddingProvider, VectorStoreProvider, LLMProvider
+
+from app.config import Mode
+from app.providers.base import EmbeddingProvider, LLMProvider, VectorStoreProvider
 
 
 class ProviderFactory:
@@ -83,7 +84,6 @@ class ProviderFactory:
         Returns:
             RAGServiceV3 or LangChainRAGService
         """
-        should_use_langchain = use_langchain if use_langchain is not None else settings.use_langchain
         
         # V5 is the new default - LangChain version is deprecated
         from app.services.rag_service_v5 import RAGServiceV5

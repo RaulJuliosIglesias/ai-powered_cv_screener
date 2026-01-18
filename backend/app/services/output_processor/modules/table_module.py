@@ -10,9 +10,10 @@ MATCH SCORE COLORS:
 - Gray (<70%): Weak match
 """
 
-import re
 import logging
-from typing import Optional, List, Dict
+import re
+from typing import Dict, List, Optional
+
 from app.models.structured_output import TableData, TableRow
 
 logger = logging.getLogger(__name__)
@@ -192,7 +193,7 @@ class TableModule:
         
         # CRITICAL FIX: If all rows have the same default score (50),
         # try to calculate relative scores from numeric columns
-        all_same_score = len(set(row.match_score for row in table_rows)) == 1
+        all_same_score = len({row.match_score for row in table_rows}) == 1
         logger.info(f"[TABLE] Score distribution: {[row.match_score for row in table_rows[:3]]}, all_same={all_same_score}")
         if all_same_score and table_rows[0].match_score == 50:
             logger.info(f"[TABLE] All rows have default 50% score, calculating relative scores from headers: {raw_headers}")
@@ -354,7 +355,7 @@ class TableModule:
         # Calculate scores: highest = 100%, scale others proportionally
         # Use a minimum of 20% for candidates with data
         updated_rows = []
-        for row, val in zip(rows, values):
+        for row, val in zip(rows, values, strict=False):
             if val == 0:
                 # No data = low score
                 new_score = 20

@@ -1,9 +1,9 @@
 """
 Selects and prioritizes suggestions based on context.
 """
-import random
 import logging
-from typing import List, Set, Dict
+import random
+from typing import Dict, List, Set
 
 from .banks.base import Suggestion, SuggestionCategory
 from .context_extractor import ExtractedContext

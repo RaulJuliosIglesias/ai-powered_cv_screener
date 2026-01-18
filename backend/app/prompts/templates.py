@@ -12,14 +12,10 @@ Version: 2.0.0
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from enum import Enum
-from typing import Protocol, TypedDict, Callable
 import re
+from dataclasses import dataclass
+from enum import Enum
 from functools import lru_cache
-
-from app.utils.debug_logger import log_enriched_metadata_extraction, log_event
-
 
 # =============================================================================
 # CONFIGURATION & CONSTANTS
@@ -999,7 +995,7 @@ def format_context(
                     # Same name - check if content is similar (>70% overlap in signature)
                     if stored_cv_id != metadata.cv_id:
                         # Different cv_id - check content similarity
-                        overlap = sum(1 for a, b in zip(content_signature, stored_sig) if a == b)
+                        overlap = sum(1 for a, b in zip(content_signature, stored_sig, strict=False) if a == b)
                         similarity = overlap / max(len(content_signature), len(stored_sig), 1)
                         if similarity > 0.7:
                             # Same person, duplicate CV - skip
@@ -1499,7 +1495,7 @@ Base your analysis on the actual CV content provided.""",
         
         lines = ["", "===== STRUCTURED CANDIDATE DATA =====", ""]
         
-        for cv_id, data in candidates.items():
+        for _cv_id, data in candidates.items():
             meta = data["metadata"]
             name = data["name"]
             
@@ -2110,7 +2106,7 @@ def detect_single_candidate_query(
                     )
             
             # Intent detected but couldn't determine candidate
-            logger.info(f"[DETECT] Single candidate intent detected but no candidate resolved")
+            logger.info("[DETECT] Single candidate intent detected but no candidate resolved")
             break
     
     # Multiple candidates, no explicit single focus

@@ -9,10 +9,10 @@ Used by:
 - Query Understanding Service
 """
 
-import re
 import logging
-from typing import Optional, List, Dict, Any
+import re
 from dataclasses import dataclass
+from typing import Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -371,7 +371,7 @@ def _extract_top_candidates_from_history(
     logger.info("[CONTEXT_RESOLVER] Extracting top 2 candidates for comparison")
     
     # Look through history from most recent to oldest
-    for idx, msg in enumerate(reversed(conversation_history)):
+    for _idx, msg in enumerate(reversed(conversation_history)):
         if msg.get("role") != "assistant":
             continue
         

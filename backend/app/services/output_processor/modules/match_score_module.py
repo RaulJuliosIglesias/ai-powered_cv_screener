@@ -11,9 +11,8 @@ Output format:
 """
 
 import logging
-import re
-from typing import List, Dict, Optional, Any, Set
 from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -84,7 +83,7 @@ class MatchScoreModule:
         
         # Calculate match for each candidate
         matches = []
-        for cv_id, data in candidates.items():
+        for _cv_id, data in candidates.items():
             if requirements:
                 # Requirements-based matching
                 match = self._calculate_candidate_match(data, requirements)

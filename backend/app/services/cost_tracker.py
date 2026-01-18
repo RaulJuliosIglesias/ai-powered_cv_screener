@@ -2,9 +2,9 @@
 Cost tracking for OpenRouter API calls.
 Based on actual OpenRouter pricing: https://openrouter.ai/docs/pricing
 """
-from dataclasses import dataclass, field
-from typing import Dict, Any
 import logging
+from dataclasses import dataclass, field
+from typing import Any, Dict
 
 logger = logging.getLogger(__name__)
 

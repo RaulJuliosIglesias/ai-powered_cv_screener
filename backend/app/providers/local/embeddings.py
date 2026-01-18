@@ -6,14 +6,16 @@ This module provides semantic embeddings with fallback options:
 2. OpenRouter API (nomic-embed-text) - 768 dims  
 3. Hash-based fallback (for development only)
 """
-import time
-import logging
+import asyncio
 import hashlib
+import logging
 import math
 import os
-import asyncio
-from typing import List, Optional
+import time
+from typing import List
+
 import httpx
+
 from app.providers.base import EmbeddingProvider, EmbeddingResult
 
 logger = logging.getLogger(__name__)

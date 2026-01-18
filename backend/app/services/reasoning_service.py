@@ -5,14 +5,14 @@ Implements structured Chain-of-Thought reasoning and Self-Ask patterns
 for more intelligent response generation.
 """
 import logging
-import json
-from typing import List, Optional, Dict, Any
 from dataclasses import dataclass, field
+from typing import List, Optional
+
 import httpx
 
 from app.config import settings, timeouts
-from app.utils.text_utils import smart_truncate
 from app.providers.cloud.llm import calculate_openrouter_cost
+from app.utils.text_utils import smart_truncate
 
 logger = logging.getLogger(__name__)
 
@@ -352,7 +352,7 @@ class ReasoningService:
         question: str,
         context: str,
         total_cvs: int = 0
-    ) -> 'LLMResult':
+    ) -> ReasoningResult:
         """
         Apply structured reasoning to question with context.
         

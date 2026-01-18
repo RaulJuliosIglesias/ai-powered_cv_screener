@@ -1,18 +1,20 @@
+import logging
+import os
+import sys
+from pathlib import Path
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
-import logging
-import sys
-import os
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 
-from app.config import get_settings
-from app.api.routes_v2 import router
+from app.api.export_routes import router as export_router
 from app.api.routes_sessions import router as sessions_router
 from app.api.routes_sessions_stream import router as sessions_stream_router
-from app.api.export_routes import router as export_router
+from app.api.routes_v2 import router
 from app.api.v8_routes import router as v8_router
+from app.config import get_settings
 from app.utils.exceptions import CVScreenerException
-
 
 # Configure logging
 logging.basicConfig(
@@ -92,11 +94,6 @@ app.include_router(v8_router)
 logger.info("All routers included successfully")
 
 # Serve static files for Railway deployment
-import os
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse, FileResponse
-from pathlib import Path
-
 STATIC_DIR = Path("/app/static")
 
 # Check if we're running in Railway (static files exist)

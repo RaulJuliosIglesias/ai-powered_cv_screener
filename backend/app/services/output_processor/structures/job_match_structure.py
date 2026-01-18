@@ -16,11 +16,11 @@ This structure is used when user asks for job matching:
 """
 
 import logging
-from typing import Dict, Any, List, Optional
+from typing import Any, Dict, List, Optional
 
-from ..modules import ThinkingModule, ConclusionModule, GapAnalysisModule, AnalysisModule
-from ..modules.requirements_module import RequirementsModule
+from ..modules import AnalysisModule, ConclusionModule, GapAnalysisModule, ThinkingModule
 from ..modules.match_score_module import MatchScoreModule
+from ..modules.requirements_module import RequirementsModule
 
 logger = logging.getLogger(__name__)
 
@@ -195,7 +195,8 @@ class JobMatchStructure:
         - "Match for Python developer" → Python skill
         """
         import re
-        from ..modules.requirements_module import RequirementsData, Requirement
+
+        from ..modules.requirements_module import Requirement, RequirementsData
         
         query_lower = query.lower()
         requirements = []
@@ -323,7 +324,6 @@ class JobMatchStructure:
         
         best_match = match_data.matches[0]
         best_name = best_match.candidate_name.lower().strip()
-        best_cv_id = best_match.cv_id
         
         # Extract candidate names mentioned in conclusion
         # Pattern: **[Name](cv:id)** or just **Name** or [Name](cv:id)

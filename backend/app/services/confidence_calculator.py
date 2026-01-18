@@ -7,8 +7,8 @@ NO hardcoded values - every score is derived from actual data.
 Confidence measures: "How confident are we that this response is correct?"
 """
 import logging
-from typing import Optional, Dict, Any, List
-from dataclasses import dataclass, field
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -254,7 +254,7 @@ class ConfidenceCalculator:
             )
         
         num_chunks = len(chunks)
-        unique_cvs = len(set(c.get('metadata', {}).get('cv_id', f'unknown_{i}') for i, c in enumerate(chunks)))
+        unique_cvs = len({c.get('metadata', {}).get('cv_id', f'unknown_{i}') for i, c in enumerate(chunks)})
         
         # Score based on actual coverage (using configurable constants)
         # Use both chunk count and CV diversity

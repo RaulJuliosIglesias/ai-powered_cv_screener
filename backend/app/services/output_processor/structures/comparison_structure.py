@@ -15,9 +15,9 @@ This structure is used for comparison queries:
 """
 
 import logging
-from typing import Dict, Any, List
+from typing import Any, Dict, List
 
-from ..modules import ThinkingModule, AnalysisModule, TableModule, ConclusionModule
+from ..modules import AnalysisModule, ConclusionModule, TableModule, ThinkingModule
 
 logger = logging.getLogger(__name__)
 

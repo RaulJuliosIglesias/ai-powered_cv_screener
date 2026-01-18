@@ -3,10 +3,11 @@ Multi-Query Generation Service for RAG v5.
 
 Generates multiple semantic variations of a query to improve retrieval coverage.
 """
-import logging
 import json
-from typing import List, Optional
+import logging
 from dataclasses import dataclass
+from typing import List, Optional
+
 import httpx
 
 from app.config import settings, timeouts

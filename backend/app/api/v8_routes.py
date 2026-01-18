@@ -9,18 +9,19 @@ Includes:
 """
 
 import logging
+from typing import Any, List, Optional
+
 from fastapi import APIRouter, HTTPException, Query
-from typing import Optional, List, Any
 from pydantic import BaseModel
 
-from app.config import settings, Mode
+from app.config import Mode, settings
 from app.models.sessions import session_manager
 from app.providers.cloud.sessions import supabase_session_manager
 from app.services.candidate_scoring_service import get_scoring_service
-from app.services.screening_rules_service import get_screening_service
-from app.services.interview_questions_service import get_interview_service
-from app.services.semantic_cache_service import get_semantic_cache
 from app.services.hybrid_search_service import get_hybrid_search_service
+from app.services.interview_questions_service import get_interview_service
+from app.services.screening_rules_service import get_screening_service
+from app.services.semantic_cache_service import get_semantic_cache
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/v8", tags=["v8-premium"])

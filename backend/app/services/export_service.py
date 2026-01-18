@@ -9,13 +9,13 @@ FIXED: Now extracts data from actual structured_output keys:
 - table_data, direct_answer, thinking, conclusion, analysis
 """
 
-import io
 import csv
-import re
+import io
 import logging
-from datetime import datetime
-from typing import List, Dict, Any, Optional
+import re
 from dataclasses import dataclass, field
+from datetime import datetime
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -77,7 +77,7 @@ class ExportService:
     def __init__(self):
         self._pdf_available = False
         try:
-            from fpdf import FPDF
+            from fpdf import FPDF  # noqa: F401
             self._pdf_available = True
         except ImportError:
             logger.warning("fpdf2 not installed. PDF export will be unavailable.")
@@ -298,7 +298,7 @@ class ExportService:
             col_widths = [12, 45, 18, 45, 25, 45]
             headers = ['#', 'Name', 'Score', 'Role', 'Exp', 'Skills']
             
-            for header, width in zip(headers, col_widths):
+            for header, width in zip(headers, col_widths, strict=False):
                 pdf.cell(width, 7, header, border=1, fill=True, align='C')
             pdf.ln()
             
@@ -448,7 +448,7 @@ class ExportService:
         # Process ALL messages to build conversation history
         current_question = None
         
-        for i, msg in enumerate(messages):
+        for _i, msg in enumerate(messages):
             role = msg.get('role', '')
             content = msg.get('content', '')
             

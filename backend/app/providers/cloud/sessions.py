@@ -1,8 +1,8 @@
 """Supabase session manager for cloud mode."""
-import uuid
 import logging
+import uuid
 from datetime import datetime
-from typing import List, Dict, Optional, Any
+from typing import Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -15,6 +15,7 @@ def get_supabase_client():
     global _supabase_client
     if _supabase_client is None:
         from supabase import create_client
+
         from app.config import settings
         
         if not settings.supabase_url or not settings.supabase_service_key:

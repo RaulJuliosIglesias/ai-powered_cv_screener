@@ -4,14 +4,14 @@ LLM Verification Service for CV Screener.
 Uses an LLM to verify that generated responses are grounded in the provided context.
 This complements the heuristic-based hallucination service with semantic verification.
 """
-import logging
 import json
-from typing import List, Optional, Dict, Any
-from dataclasses import dataclass, field
+import logging
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional
+
 import httpx
 
 from app.config import settings, timeouts
-from app.providers.base import SearchResult
 from app.utils.text_utils import smart_truncate
 
 logger = logging.getLogger(__name__)

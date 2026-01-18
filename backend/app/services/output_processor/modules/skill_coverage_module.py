@@ -6,8 +6,8 @@ Used by: TeamBuildStructure
 """
 
 import logging
-from typing import List, Dict, Optional, Any
 from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -63,7 +63,7 @@ class SkillCoverageModule:
             matching_skills = assignment.get("matching_skills", [])
             
             for skill in matching_skills:
-                skill_lower = skill.lower()
+                skill.lower()
                 all_skills.add(skill)
                 if skill not in skill_to_candidates:
                     skill_to_candidates[skill] = []

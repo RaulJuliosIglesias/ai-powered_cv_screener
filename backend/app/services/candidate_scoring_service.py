@@ -6,9 +6,9 @@ Allows customizing weights for different criteria.
 """
 
 import logging
-from typing import List, Dict, Any, Optional
 from dataclasses import dataclass, field
 from enum import Enum
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -473,7 +473,7 @@ class CandidateScoringService:
         """Score language skills."""
         langs = candidate.get("languages", [])
         if isinstance(langs, str):
-            langs = [l.strip() for l in langs.split(",") if l.strip()]
+            langs = [lang.strip() for lang in langs.split(",") if lang.strip()]
         
         if not langs:
             return 50, "Languages not specified", []

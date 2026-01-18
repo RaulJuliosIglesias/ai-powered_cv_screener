@@ -1,11 +1,12 @@
 """Session models for managing CV groups and chat history."""
 import json
+import logging
 import os
 import uuid
 from datetime import datetime
-from typing import List, Dict, Optional, Any
+from typing import Dict, List, Optional
+
 from pydantic import BaseModel, Field
-import logging
 
 logger = logging.getLogger(__name__)
 

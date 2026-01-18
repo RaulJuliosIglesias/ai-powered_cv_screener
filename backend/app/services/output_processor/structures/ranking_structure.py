@@ -16,11 +16,11 @@ This structure is used when user asks for ranking:
 """
 
 import logging
-from typing import Dict, Any, List, Optional
+from typing import Any, Dict, List
 
-from ..modules import ThinkingModule, ConclusionModule, AnalysisModule
+from ..modules import AnalysisModule, ConclusionModule, ThinkingModule
 from ..modules.ranking_criteria_module import RankingCriteriaModule
-from ..modules.ranking_table_module import RankingTableModule
+from ..modules.ranking_table_module import RankedCandidate, RankingTableModule
 from ..modules.top_pick_module import TopPickModule
 
 logger = logging.getLogger(__name__)
@@ -140,7 +140,7 @@ class RankingStructure:
             # Ensure score is not 0%
             if top_pick_data.overall_score <= 0:
                 top_pick_data.overall_score = 50  # Minimum floor
-                logger.warning(f"[RANKING_STRUCTURE] Applied score floor: 50%")
+                logger.warning("[RANKING_STRUCTURE] Applied score floor: 50%")
         
         # Extract conclusion from LLM
         conclusion = self.conclusion_module.extract(llm_output)
@@ -157,7 +157,7 @@ class RankingStructure:
         
         # ONLY generate fallback if LLM provided NO conclusion at all
         if not conclusion and top_pick_data:
-            logger.info(f"[RANKING_STRUCTURE] No conclusion from LLM, generating minimal fallback")
+            logger.info("[RANKING_STRUCTURE] No conclusion from LLM, generating minimal fallback")
             conclusion = self._generate_minimal_fallback_conclusion(top_pick_data, ranked_list)
         
         # Extract analysis from LLM - ALWAYS preserve the LLM's reasoning
@@ -171,9 +171,9 @@ class RankingStructure:
             
             # Check 1: Empty or near-empty table
             if stripped.startswith('|'):
-                lines = [l for l in stripped.split('\n') if l.strip()]
+                lines = [line for line in stripped.split('\n') if line.strip()]
                 # Count actual data rows (not headers or separators)
-                data_rows = [l for l in lines if l.strip().startswith('|') and '---' not in l]
+                data_rows = [line for line in lines if line.strip().startswith('|') and '---' not in line]
                 if len(data_rows) <= 1:
                     logger.warning(f"[RANKING_STRUCTURE] Analysis is empty table (only {len(data_rows)} data rows)")
                     should_regenerate = True
@@ -190,7 +190,7 @@ class RankingStructure:
                 keyword_count = sum(1 for w in words if any(k in w for k in header_only_keywords))
                 non_keyword_count = len(words) - keyword_count
                 if keyword_count > 0 and non_keyword_count < 10:
-                    logger.warning(f"[RANKING_STRUCTURE] Analysis is mostly table headers")
+                    logger.warning("[RANKING_STRUCTURE] Analysis is mostly table headers")
                     should_regenerate = True
             
             if should_regenerate:
@@ -198,7 +198,7 @@ class RankingStructure:
         
         # ONLY generate fallback if LLM provided NO analysis at all
         if not analysis:
-            logger.info(f"[RANKING_STRUCTURE] No analysis from LLM, generating from ranking data")
+            logger.info("[RANKING_STRUCTURE] No analysis from LLM, generating from ranking data")
             # Generate analysis from actual ranking data
             if ranking_data and top_pick_data:
                 analysis = self._generate_consistent_analysis(ranking_data, top_pick_data, criteria_data.criteria if criteria_data else [])
@@ -269,7 +269,7 @@ class RankingStructure:
                 parts.append(f"Runner-up: {runner_up} with {runner_up_score:.0f}%.")
         
         # 3. Score distribution
-        scores = [c.get("overall_score", 0) for c in ranked_candidates]
+        [c.get("overall_score", 0) for c in ranked_candidates]
         high_scores = [c for c in ranked_candidates if c.get("overall_score", 0) >= 70]
         medium_scores = [c for c in ranked_candidates if 40 <= c.get("overall_score", 0) < 70]
         low_scores = [c for c in ranked_candidates if c.get("overall_score", 0) < 40]
@@ -349,7 +349,6 @@ class RankingStructure:
             return conclusion
         
         top_name = top_pick.candidate_name.lower().strip()
-        top_cv_id = top_pick.cv_id
         
         # Extract candidate names mentioned in conclusion
         # Pattern: **[Name](cv:id)** or just **Name** or [Name](cv:id)

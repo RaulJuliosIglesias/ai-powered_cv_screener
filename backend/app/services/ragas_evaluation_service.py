@@ -13,19 +13,19 @@ for expensive LLM calls for every evaluation.
 
 Reference: https://docs.ragas.io/
 """
+import json
 import logging
 import time
-import json
-from typing import List, Dict, Any, Optional
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
+from typing import Any, Dict, List, Optional
 
-from app.providers.huggingface_client import get_huggingface_client, HuggingFaceClient
+from app.providers.huggingface_client import HuggingFaceClient, get_huggingface_client
 from app.services.nli_verification_service import (
-    NLIVerificationService, 
+    NLIVerificationService,
+    VerificationResult,
     get_nli_verification_service,
-    VerificationResult
 )
 
 logger = logging.getLogger(__name__)
@@ -273,7 +273,7 @@ class RAGASEvaluationService:
             # Parse scores
             labels = result.get("labels", [])
             scores = result.get("scores", [])
-            score_dict = dict(zip(labels, scores))
+            score_dict = dict(zip(labels, scores, strict=False))
             
             # High relevancy = high score for first label
             high_relevancy = score_dict.get(self.RELEVANCY_LABELS[0], 0.0)
@@ -325,7 +325,7 @@ class RAGASEvaluationService:
                 
                 labels = result.get("labels", [])
                 scores = result.get("scores", [])
-                score_dict = dict(zip(labels, scores))
+                score_dict = dict(zip(labels, scores, strict=False))
                 
                 relevancy = score_dict.get("relevant context for answering the question", 0.0)
                 total_relevancy_score += relevancy
@@ -420,7 +420,7 @@ class RAGASEvaluationService:
                         try:
                             record = json.loads(line)
                             metrics_list.append(record.get("metrics", {}))
-                        except:
+                        except (json.JSONDecodeError, KeyError):
                             continue
         
         if not metrics_list:

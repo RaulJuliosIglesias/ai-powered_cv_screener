@@ -12,16 +12,11 @@ DO NOT create parallel functions - use modules parametrically.
 """
 
 import logging
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 from app.models.structured_output import StructuredOutput
-from .modules import (
-    ThinkingModule,
-    DirectAnswerModule,
-    AnalysisModule,
-    TableModule,
-    ConclusionModule
-)
+
+from .modules import AnalysisModule, ConclusionModule, DirectAnswerModule, TableModule, ThinkingModule
 
 logger = logging.getLogger(__name__)
 

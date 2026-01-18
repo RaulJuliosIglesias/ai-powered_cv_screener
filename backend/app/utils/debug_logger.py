@@ -5,13 +5,12 @@ Creates detailed logs for each chat session, from upload to response.
 Saves logs to backend/debug_logs/ folder with session IDs.
 """
 
-import os
 import json
 import logging
 from datetime import datetime
+from functools import wraps
 from pathlib import Path
 from typing import Any, Dict, List, Optional
-from functools import wraps
 
 # Create debug logs directory
 DEBUG_LOGS_DIR = Path(__file__).parent.parent.parent / "debug_logs"

@@ -8,13 +8,14 @@ Provides access to FREE HuggingFace models for:
 
 All models have 30K req/hour rate limit on free tier.
 """
-import logging
 import asyncio
-from typing import List, Dict, Any, Optional
+import logging
 from dataclasses import dataclass
+from typing import Any, Dict, List, Optional
+
 import httpx
 
-from app.config import settings, timeouts
+from app.config import settings
 
 logger = logging.getLogger(__name__)
 

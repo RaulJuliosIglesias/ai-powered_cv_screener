@@ -1,42 +1,39 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException, BackgroundTasks, Depends
-from fastapi.responses import JSONResponse
-from typing import List
-import uuid
 import os
-import asyncio
+import time
+import uuid
 from datetime import datetime
 from pathlib import Path
-import time
+from typing import List
 
+from fastapi import APIRouter, BackgroundTasks, File, HTTPException, UploadFile
+
+from app.api.dependencies import (
+    get_embedding_service,
+    get_guardrails_service,
+    get_pdf_service,
+    get_query_logger,
+    get_rag_service,
+    get_rate_limiter,
+    get_usage_tracker,
+    get_vector_store,
+)
 from app.config import get_settings
 from app.models.schemas import (
-    UploadResponse,
-    ProcessingStatusResponse,
-    FileStatus,
-    CVListResponse,
-    CVInfo,
-    CVMetadata,
-    DeleteCVResponse,
     ChatRequest,
     ChatResponse,
-    SourceInfo,
-    UsageInfo,
-    StatsResponse,
+    CVInfo,
+    CVListResponse,
+    CVMetadata,
+    DeleteCVResponse,
+    FileStatus,
     JobStatus,
-    ErrorResponse,
+    ProcessingStatusResponse,
+    SourceInfo,
+    StatsResponse,
+    UploadResponse,
+    UsageInfo,
 )
-from app.api.dependencies import (
-    get_pdf_service,
-    get_embedding_service,
-    get_vector_store,
-    get_rag_service,
-    get_guardrails_service,
-    get_usage_tracker,
-    get_query_logger,
-    get_rate_limiter,
-)
-from app.utils.exceptions import CVScreenerException, RateLimitError
-
+from app.utils.exceptions import CVScreenerException
 
 router = APIRouter(prefix="/api", tags=["CV Screener"])
 
@@ -156,7 +153,7 @@ async def process_files(job_id: str, files: List[tuple]):
             # Clean up uploaded file
             try:
                 os.remove(file_path)
-            except:
+            except OSError:
                 pass
     
     # Update job status

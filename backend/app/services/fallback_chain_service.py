@@ -4,12 +4,12 @@ Fallback Chain Service - Automatic model failover for reliability.
 V8 Feature: Auto-switch to backup models when primary fails or is rate-limited.
 """
 
-import logging
 import asyncio
+import logging
 from dataclasses import dataclass, field
-from typing import List, Dict, Any, Optional, Callable, TypeVar, Generic
 from datetime import datetime, timedelta
 from enum import Enum
+from typing import Any, Callable, Dict, Generic, List, Optional, TypeVar
 
 logger = logging.getLogger(__name__)
 

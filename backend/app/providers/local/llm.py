@@ -1,8 +1,10 @@
 import time
 from typing import Optional
+
 import google.generativeai as genai
-from app.providers.base import LLMProvider, LLMResult
+
 from app.config import settings
+from app.providers.base import LLMProvider, LLMResult
 
 
 class GeminiLLMProvider(LLMProvider):

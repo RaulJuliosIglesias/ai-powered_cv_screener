@@ -4,10 +4,11 @@ Re-ranking Service for CV Screener.
 Uses an LLM to re-rank search results by semantic relevance to the query.
 This improves upon pure vector similarity by considering contextual relevance.
 """
-import logging
 import json
-from typing import List, Optional, Dict, Any
+import logging
 from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
+
 import httpx
 
 from app.config import settings, timeouts
@@ -268,7 +269,7 @@ class RerankingService:
                 try:
                     s = float(score)
                     validated.append(max(0, min(10, s)))
-                except:
+                except (ValueError, TypeError):
                     validated.append(DEFAULT_RELEVANCE_SCORE)
             
             # Pad if needed

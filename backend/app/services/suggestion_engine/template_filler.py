@@ -1,8 +1,8 @@
 """
 Fills placeholders in suggestion templates with actual values.
 """
-import random
 import logging
+import random
 from typing import List
 
 from .banks.base import Suggestion

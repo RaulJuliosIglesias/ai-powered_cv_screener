@@ -1,5 +1,5 @@
 import re
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 
 class ChunkingService:
@@ -128,7 +128,7 @@ class ChunkingService:
             sections.append(("header", text[:first_pos]))
         
         # Extract each section's content
-        for i, (pos, section_type, header) in enumerate(section_positions):
+        for i, (pos, section_type, _header) in enumerate(section_positions):
             # Find end of this section (start of next, or end of text)
             if i + 1 < len(section_positions):
                 end_pos = section_positions[i + 1][0]

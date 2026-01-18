@@ -15,11 +15,11 @@ Rate Limit: 30K requests/hour
 """
 import logging
 import time
-from typing import Optional, Dict, Any, List
 from dataclasses import dataclass
+from typing import Dict, Optional
 
-from app.providers.huggingface_client import get_huggingface_client, HuggingFaceClient
-from app.services.guardrail_service import GuardrailService, GuardrailResult
+from app.providers.huggingface_client import HuggingFaceClient, get_huggingface_client
+from app.services.guardrail_service import GuardrailResult, GuardrailService
 
 logger = logging.getLogger(__name__)
 
@@ -180,7 +180,7 @@ class GuardrailServiceV2:
         labels = result.get("labels", [])
         scores = result.get("scores", [])
         
-        score_dict = dict(zip(labels, scores))
+        score_dict = dict(zip(labels, scores, strict=False))
         
         # Calculate aggregate scores
         cv_related_score = max(

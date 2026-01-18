@@ -11,11 +11,11 @@ all adapt to the specific query and available data.
 """
 
 import logging
-from typing import List, Dict, Any, Optional
 from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
-from .schema_inference import TableSchema, ColumnDefinition, ColumnType, ColumnRole
-from .data_extractor import ExtractionResult, ExtractedRow
+from .data_extractor import ExtractedRow, ExtractionResult
+from .schema_inference import ColumnDefinition, ColumnType
 
 logger = logging.getLogger(__name__)
 
@@ -241,7 +241,7 @@ class DynamicTableGenerator:
         if col.format_template:
             try:
                 return col.format_template.format(value=value)
-            except:
+            except (KeyError, ValueError, IndexError):
                 pass
         
         # Format by type
@@ -303,8 +303,6 @@ class DynamicTableGenerator:
                     display = f"[{display}]({cell.link_target})"
                 cells.append(display)
             
-            prefix = "**" if row.highlight else ""
-            suffix = "**" if row.highlight else ""
             
             if row.highlight:
                 cells[0] = f"**{cells[0]}**"

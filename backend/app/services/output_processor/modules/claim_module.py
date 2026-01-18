@@ -7,8 +7,8 @@ Used by: VerificationStructure
 
 import logging
 import re
-from typing import Dict, Optional
 from dataclasses import dataclass
+from typing import Dict, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -64,7 +64,7 @@ class ClaimModule:
         if not query:
             return None
         
-        query_lower = query.lower()
+        query.lower()
         
         # Try each claim type pattern
         for claim_type, patterns in self.CLAIM_PATTERNS.items():

@@ -10,11 +10,11 @@ Analyzes queries to understand:
 This is the FIRST step in the adaptive pipeline - understanding intent.
 """
 
-import re
 import logging
-from typing import List, Dict, Any, Optional, Set
+import re
 from dataclasses import dataclass, field
 from enum import Enum
+from typing import Any, Dict, List, Optional, Set
 
 logger = logging.getLogger(__name__)
 

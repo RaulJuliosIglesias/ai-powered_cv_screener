@@ -7,8 +7,8 @@ BM25 excels at exact term matching (names, technologies, companies).
 
 import logging
 import re
-from typing import List, Dict, Any, Optional, Tuple
 from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -42,7 +42,7 @@ class BM25Service:
         self._bm25_available = False
         
         try:
-            from rank_bm25 import BM25Okapi
+            from rank_bm25 import BM25Okapi  # noqa: F401
             self._bm25_available = True
             logger.info("[BM25] rank-bm25 library available")
         except ImportError:
@@ -180,7 +180,7 @@ class BM25Service:
         
         # Get top-k results
         results = []
-        scored_docs = list(zip(range(len(scores)), scores))
+        scored_docs = list(zip(range(len(scores)), scores, strict=False))
         scored_docs.sort(key=lambda x: x[1], reverse=True)
         
         for doc_idx, score in scored_docs[:k]:

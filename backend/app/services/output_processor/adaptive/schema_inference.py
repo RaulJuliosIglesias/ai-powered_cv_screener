@@ -11,12 +11,11 @@ to show and HOW to organize them.
 """
 
 import logging
-import re
-from typing import List, Dict, Any, Optional, Set, Tuple
 from dataclasses import dataclass, field
 from enum import Enum
+from typing import Any, Dict, List, Optional, Set
 
-from .query_analyzer import QueryAnalysis, DataFormat, DetectedAttribute
+from .query_analyzer import DataFormat, DetectedAttribute, QueryAnalysis
 
 logger = logging.getLogger(__name__)
 
@@ -267,7 +266,7 @@ class SchemaInferenceEngine:
         
         # SMART FALLBACK: For generic queries, always include skills/technologies
         # This ensures we show relevant data even when attribute detection is vague
-        attr_names = [a.name for a in analysis.detected_attributes]
+        [a.name for a in analysis.detected_attributes]
         has_skill_col = any(k in added_keys for k in ["skills", "technologies"])
         
         if not has_skill_col:

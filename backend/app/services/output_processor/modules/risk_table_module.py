@@ -15,8 +15,8 @@ DO NOT duplicate this functionality. Import and use this module.
 
 import logging
 import re
-from typing import Optional, List, Dict, Any
 from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -157,7 +157,7 @@ class RiskTableModule:
             logger.warning(f"[RISK_ASSESSMENT] No enriched metadata found for {candidate_name}")
             # FALLBACK: Try to parse from LLM output
             if llm_output:
-                logger.info(f"[RISK_ASSESSMENT] Attempting fallback: parsing from LLM output")
+                logger.info("[RISK_ASSESSMENT] Attempting fallback: parsing from LLM output")
                 return self._extract_from_llm_output(llm_output, candidate_name, cv_id)
             data.analysis_text = f"Risk metrics have not been calculated for {candidate_name}. Please re-index the CV to generate risk assessment data."
             return data
@@ -280,7 +280,7 @@ class RiskTableModule:
         if not llm_output:
             return data
         
-        logger.info(f"[RISK_TABLE] Parsing LLM output for risk assessment table")
+        logger.info("[RISK_TABLE] Parsing LLM output for risk assessment table")
         
         # Find Risk Assessment section
         risk_section_patterns = [
@@ -358,7 +358,7 @@ class RiskTableModule:
                 data.analysis_text = f"Risk assessment for {candidate_name} based on available data."
         else:
             # FALLBACK: No table found - try to extract from text analysis
-            logger.info(f"[RISK_TABLE] No table found, attempting text extraction")
+            logger.info("[RISK_TABLE] No table found, attempting text extraction")
             data = self._extract_from_text_analysis(llm_output, candidate_name, cv_id)
         
         return data
@@ -507,7 +507,7 @@ class RiskTableModule:
                 else:
                     data.analysis_text = f"Risk assessment for {candidate_name} extracted from analysis."
         else:
-            logger.warning(f"[RISK_TABLE] Could not extract risk factors from text")
+            logger.warning("[RISK_TABLE] Could not extract risk factors from text")
             data.analysis_text = f"Risk assessment for {candidate_name} - see details above."
         
         return data
@@ -632,22 +632,22 @@ class RiskTableModule:
         elif exp < 3:
             exp_level = "Entry"
             exp_icon = ""
-            exp_reason = f"<3 years experience"
+            exp_reason = "<3 years experience"
             role_details = f"{current_role} @ {current_company}" if current_role != "N/A" else f"{exp:.0f} yrs total"
         elif exp < 7:
             exp_level = "Mid"
             exp_icon = ""
-            exp_reason = f"3-7 years experience"
+            exp_reason = "3-7 years experience"
             role_details = f"{current_role} @ {current_company}" if current_role != "N/A" else f"{exp:.0f} yrs total"
         elif exp < 15:
             exp_level = "Senior"
             exp_icon = ""
-            exp_reason = f"7-15 years experience"
+            exp_reason = "7-15 years experience"
             role_details = f"{current_role} @ {current_company}" if current_role != "N/A" else f"{exp:.0f} yrs total"
         else:
             exp_level = "Executive"
             exp_icon = ""
-            exp_reason = f"15+ years experience"
+            exp_reason = "15+ years experience"
             role_details = f"{current_role} @ {current_company}" if current_role != "N/A" else f"{exp:.0f} yrs total"
         
         factors.append(RiskFactor(

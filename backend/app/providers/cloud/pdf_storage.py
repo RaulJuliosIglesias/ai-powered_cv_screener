@@ -14,6 +14,7 @@ def get_supabase_client():
     global _supabase_client
     if _supabase_client is None:
         from supabase import create_client
+
         from app.config import settings
         
         if not settings.supabase_url or not settings.supabase_service_key:

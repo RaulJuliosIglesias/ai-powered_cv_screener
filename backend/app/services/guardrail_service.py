@@ -4,10 +4,10 @@ Guardrail Service for CV Screener.
 This module provides pre-LLM filtering to detect and reject off-topic questions
 that are not related to CV screening or candidate analysis.
 """
-import re
 import logging
-from typing import Tuple, Optional, Set
+import re
 from dataclasses import dataclass
+from typing import Optional, Set, Tuple
 
 logger = logging.getLogger(__name__)
 
@@ -53,13 +53,11 @@ class GuardrailService:
         "frontend", "front-end", "backend", "back-end", "fullstack", "full-stack",
         "stack", "framework", "library", "code", "coding", "software",
         # Conversation continuations
-        "sentido", "sense", "coherente", "coherent", "porque", "why", "porque",
-        "analizar", "analyze", "criterio", "criteria", "mejor", "best",
-        # Spanish
+        "sentido", "sense", "coherente", "coherent", "porque", "why", "analizar", "analyze", "criterio", "criteria", "mejor", # Spanish
         "candidato", "candidatos", "currículum", "experiencia",
         "habilidad", "habilidades", "educación", "trabajo",
         "contratar", "reclutamiento", "calificado", "perfil",
-        "comparar", "ranking", "mejor", "adecuado",
+        "comparar", "adecuado",
         "entrevista", "recomendación", "seleccionar", "elegir",
         "lista", "crear", "mostrar"
     }
@@ -159,7 +157,7 @@ class GuardrailService:
             # Let LLM handle ambiguous queries like "best artist" 
             for pattern in self._compiled_patterns:
                 if pattern.search(question_lower):
-                    logger.info(f"Guardrail: Rejected off-topic (CVs loaded but clear off-topic pattern)")
+                    logger.info("Guardrail: Rejected off-topic (CVs loaded but clear off-topic pattern)")
                     return GuardrailResult(
                         is_allowed=False,
                         rejection_message="I can only help with CV screening and candidate analysis. Please ask a question about the uploaded CVs.",
@@ -168,7 +166,7 @@ class GuardrailService:
                     )
             
             # Allow everything else when CVs are present
-            logger.debug(f"Guardrail: Allowed (CVs loaded, permissive mode)")
+            logger.debug("Guardrail: Allowed (CVs loaded, permissive mode)")
             return GuardrailResult(
                 is_allowed=True,
                 confidence=0.9,
@@ -208,7 +206,7 @@ class GuardrailService:
         # Check 5: Off-topic patterns - ONLY if no CV-related content found
         for pattern in self._compiled_patterns:
             if pattern.search(question_lower):
-                logger.info(f"Guardrail: Rejected off-topic question (pattern match)")
+                logger.info("Guardrail: Rejected off-topic question (pattern match)")
                 return GuardrailResult(
                     is_allowed=False,
                     rejection_message="I can only help with CV screening and candidate analysis. Please ask a question about the uploaded CVs.",
@@ -218,7 +216,7 @@ class GuardrailService:
         
         # Default: Allow but with lower confidence
         # The LLM will handle truly off-topic questions that slip through
-        logger.debug(f"Guardrail: Allowed (default, no clear off-topic signal)")
+        logger.debug("Guardrail: Allowed (default, no clear off-topic signal)")
         return GuardrailResult(
             is_allowed=True,
             confidence=0.6,

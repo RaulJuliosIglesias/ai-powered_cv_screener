@@ -63,12 +63,12 @@ USAGE:
     # - conclusion: Data-driven conclusion
 """
 
+from .analysis_generator import AdaptiveAnalysisGenerator
+from .data_extractor import SmartDataExtractor
 from .query_analyzer import QueryAnalyzer
 from .schema_inference import SchemaInferenceEngine
-from .data_extractor import SmartDataExtractor
-from .table_generator import DynamicTableGenerator
-from .analysis_generator import AdaptiveAnalysisGenerator
 from .structure_builder import AdaptiveStructureBuilder
+from .table_generator import DynamicTableGenerator
 
 __all__ = [
     "QueryAnalyzer",

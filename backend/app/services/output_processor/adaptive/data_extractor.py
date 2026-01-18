@@ -10,13 +10,13 @@ Handles multiple extraction strategies:
 Adapts to whatever data structure is available.
 """
 
-import re
 import logging
-from typing import List, Dict, Any, Optional, Set
-from dataclasses import dataclass, field
+import re
 from collections import defaultdict
+from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
-from .schema_inference import TableSchema, ColumnDefinition, ColumnType
+from .schema_inference import ColumnDefinition, ColumnType, TableSchema
 
 logger = logging.getLogger(__name__)
 
@@ -401,7 +401,7 @@ class SmartDataExtractor:
             if isinstance(value, str):
                 try:
                     return float(value.replace("%", "").replace(",", ""))
-                except:
+                except (ValueError, AttributeError):
                     return 0
             return value
         

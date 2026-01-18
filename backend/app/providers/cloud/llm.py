@@ -1,9 +1,11 @@
-import time
 import logging
-from typing import Optional, List, Dict
+import time
+from typing import Dict, List, Optional
+
 import httpx
-from app.providers.base import LLMProvider, LLMResult
+
 from app.config import settings
+from app.providers.base import LLMProvider, LLMResult
 
 logger = logging.getLogger(__name__)
 
@@ -119,7 +121,6 @@ class OpenRouterLLMProvider(LLMProvider):
                 - {"token": "..."} for each token
                 - {"done": True, "text": "...", "usage": {...}} when complete
         """
-        import asyncio
         start = time.perf_counter()
         
         messages = []

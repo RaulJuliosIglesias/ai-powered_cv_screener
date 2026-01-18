@@ -21,17 +21,15 @@ This structure is used when user asks for team building:
 
 import logging
 import re
-from typing import Dict, Any, List, Optional
+from typing import Any, Dict, List
 
-from ..modules import ThinkingModule, ConclusionModule, AnalysisModule
-from ..modules.team_requirements_module import TeamRequirementsModule
-from ..modules.team_composition_module import TeamCompositionModule, TeamCompositionData, TeamAssignment
-from ..modules.skill_coverage_module import SkillCoverageModule
-from ..modules.team_risk_module import TeamRiskModule
-from ..modules.team_overview_module import TeamOverviewModule
-from ..modules.team_member_cards_module import TeamMemberCardsModule
-from ..modules.team_synergy_module import TeamSynergyModule
+from ..modules import AnalysisModule, ConclusionModule, ThinkingModule
 from ..modules.skill_matrix_module import SkillMatrixModule
+from ..modules.team_composition_module import TeamAssignment, TeamCompositionData
+from ..modules.team_member_cards_module import TeamMemberCardsModule
+from ..modules.team_overview_module import TeamOverviewModule
+from ..modules.team_risk_module import TeamRiskModule
+from ..modules.team_synergy_module import TeamSynergyModule
 
 logger = logging.getLogger(__name__)
 
@@ -98,7 +96,7 @@ class TeamBuildStructure:
         formatted_synergy = self.synergy_module.format(synergy_data)
         formatted_matrix = self.skill_matrix_module.format(matrix_data)
         
-        logger.info(f"[TEAM_BUILD_STRUCTURE_V2] Assembly complete")
+        logger.info("[TEAM_BUILD_STRUCTURE_V2] Assembly complete")
         
         return {
             "structure_type": "team_build",
@@ -121,7 +119,7 @@ class TeamBuildStructure:
             
             # Legacy fields for compatibility
             "team_composition": {
-                "assignments": [m for m in team_members],
+                "assignments": list(team_members),
                 "unassigned_roles": []
             },
             "total_assigned": len(team_members),
@@ -208,7 +206,7 @@ class TeamBuildStructure:
                                     candidates[cv_id]["matching_skills"].append(skill)
         
         # Convert internal sets to lists and remove _skills_set before returning
-        for cv_id, cand in candidates.items():
+        for _cv_id, cand in candidates.items():
             if "_skills_set" in cand:
                 cand["skills"] = list(cand["_skills_set"])
                 del cand["_skills_set"]
@@ -466,7 +464,6 @@ class TeamBuildStructure:
         Analyze available candidates as a team without role assignment.
         For queries like 'Can I build a team with the top 3?'
         """
-        from ..modules.team_composition_module import TeamCompositionData, TeamAssignment
         
         # Group and rank candidates by experience
         candidates = self._group_and_rank_candidates(chunks)

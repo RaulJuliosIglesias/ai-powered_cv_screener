@@ -10,12 +10,12 @@ Unlike static templates, this generates analysis from DATA.
 """
 
 import logging
-from typing import List, Dict, Any, Optional
-from dataclasses import dataclass, field
 from collections import Counter
+from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
-from .query_analyzer import QueryAnalysis, QueryIntent, DataFormat
-from .data_extractor import ExtractionResult, ExtractedRow
+from .data_extractor import ExtractionResult
+from .query_analyzer import QueryAnalysis, QueryIntent
 from .table_generator import DynamicTable
 
 logger = logging.getLogger(__name__)

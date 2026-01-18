@@ -20,15 +20,15 @@ This structure is used when user asks for full profile:
 
 import logging
 import re
-from typing import Dict, Any, List, Optional
+from typing import Any, Dict, List
 
 from ..modules import (
-    ThinkingModule,
-    ConclusionModule,
-    HighlightsModule,
     CareerModule,
-    SkillsModule,
+    ConclusionModule,
     CredentialsModule,
+    HighlightsModule,
+    SkillsModule,
+    ThinkingModule,
 )
 from ..modules.risk_table_module import RiskTableModule
 
@@ -130,7 +130,7 @@ class SingleCandidateStructure:
         # Look for content after ## 👤 **[Name]** header
         patterns = [
             rf'## 👤 \*\*\[?{re.escape(candidate_name)}[^\n]*\n+([^#\n][^\n]+(?:\n[^#\n][^\n]+)*)',
-            rf'## 👤[^\n]*\n+([^#\n][^\n]+(?:\n[^#\n][^\n]+)*)',
+            r'## 👤[^\n]*\n+([^#\n][^\n]+(?:\n[^#\n][^\n]+)*)',
             rf'\*\*{re.escape(candidate_name)}\*\*[^\n]*\n+([^#\n][^\n]+(?:\n[^#\n][^\n]+)*)',
         ]
         

@@ -9,8 +9,8 @@ Analyzes how team members complement each other:
 """
 
 import logging
-from typing import Dict, Any, List, Set
 from dataclasses import dataclass, field
+from typing import Any, Dict, List, Set
 
 logger = logging.getLogger(__name__)
 
@@ -118,7 +118,7 @@ class TeamSynergyModule:
         # Analyze experience balance
         experiences = list(member_experience.values())
         if experiences:
-            avg_exp = sum(experiences) / len(experiences)
+            sum(experiences) / len(experiences)
             exp_range = max(experiences) - min(experiences) if len(experiences) > 1 else 0
             
             if exp_range > 15:
@@ -236,7 +236,7 @@ class TeamSynergyModule:
         
         # Check for missing common skills
         common_skills = {"python", "javascript", "sql", "communication", "leadership", "project management"}
-        missing_common = common_skills - {s.lower() for s in all_skills}
+        common_skills - {s.lower() for s in all_skills}
         
         # Only flag as gap if it seems relevant
         if len(all_skills) < 5:

@@ -19,10 +19,10 @@ Components:
 
 import logging
 import re
-from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
-from ..modules import ThinkingModule, DirectAnswerModule, ConclusionModule
+from ..modules import ConclusionModule, DirectAnswerModule, ThinkingModule
 
 logger = logging.getLogger(__name__)
 

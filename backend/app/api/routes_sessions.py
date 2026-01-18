@@ -1,30 +1,28 @@
 """Session management API routes."""
-import uuid
-import io
-import logging
 import asyncio
 import hashlib
+import io
+import logging
+import uuid
 from pathlib import Path
 from typing import List, Optional
-from fastapi import APIRouter, HTTPException, Query, File, UploadFile, BackgroundTasks, Depends
-from fastapi.responses import FileResponse, StreamingResponse
-from pydantic import BaseModel, Field
-import pdfplumber
-import json
 
-from app.config import settings, Mode
+import pdfplumber
+from fastapi import APIRouter, BackgroundTasks, Depends, File, HTTPException, Query, UploadFile
+from pydantic import BaseModel, Field
+
 from app.api.dependencies import get_openrouter_api_key
+from app.config import Mode, settings
+from app.models.sessions import ChatMessage, CVInfo, session_manager
+from app.providers.cloud.sessions import supabase_session_manager
+from app.providers.factory import ProviderFactory
+from app.services.smart_chunking_service import SmartChunkingService
+from app.utils.debug_logger import log_chunks_created, set_current_session
 
 # Directory to store uploaded PDFs - in project root /storage/
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 PDF_STORAGE_DIR = _PROJECT_ROOT / "storage"
 PDF_STORAGE_DIR.mkdir(exist_ok=True)
-from app.models.sessions import session_manager, Session, ChatMessage, CVInfo
-from app.providers.cloud.sessions import supabase_session_manager
-from app.providers.factory import ProviderFactory
-from app.services.chunking_service import ChunkingService
-from app.services.smart_chunking_service import SmartChunkingService
-from app.utils.debug_logger import log_cv_upload, log_chunks_created, set_current_session
 
 
 def get_session_manager(mode: Mode):
@@ -795,8 +793,9 @@ async def generate_session_name(
     api_key: Optional[str] = Depends(get_openrouter_api_key)
 ):
     """Generate a descriptive name for a session based on its CVs using a cheap AI model."""
-    import httpx
     import random
+
+    import httpx
     
     # Validate API key is configured (from header or env)
     logger.info(f"[AUTO-NAME] API key received: {'Yes' if api_key else 'No'}")

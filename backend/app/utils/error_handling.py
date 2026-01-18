@@ -1,7 +1,8 @@
 """Error handling utilities for RAG services."""
 import logging
-from typing import TypeVar, Callable, Any
 from functools import wraps
+from typing import Any, Callable, TypeVar
+
 import httpx
 
 logger = logging.getLogger(__name__)

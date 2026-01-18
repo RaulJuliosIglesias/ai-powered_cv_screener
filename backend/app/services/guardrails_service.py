@@ -1,6 +1,6 @@
 import re
-from typing import List, Tuple, Dict, Any
 from dataclasses import dataclass
+from typing import Any, Dict, List, Tuple
 
 
 @dataclass

@@ -15,9 +15,9 @@ This structure is used when user searches for candidates:
 """
 
 import logging
-from typing import Dict, Any, List, Optional
+from typing import Any, Dict, List
 
-from ..modules import ThinkingModule, DirectAnswerModule, ConclusionModule, AnalysisModule
+from ..modules import AnalysisModule, ConclusionModule, DirectAnswerModule, ThinkingModule
 from ..modules.results_table_module import ResultsTableModule
 
 logger = logging.getLogger(__name__)

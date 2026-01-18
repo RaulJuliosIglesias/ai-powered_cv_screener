@@ -16,12 +16,12 @@ This structure is used when user asks for summaries:
 """
 
 import logging
-from typing import Dict, Any, List, Optional
+from typing import Any, Dict, List
 
-from ..modules import ThinkingModule, ConclusionModule
-from ..modules.talent_pool_module import TalentPoolModule
-from ..modules.skill_distribution_module import SkillDistributionModule
+from ..modules import ConclusionModule, ThinkingModule
 from ..modules.experience_distribution_module import ExperienceDistributionModule
+from ..modules.skill_distribution_module import SkillDistributionModule
+from ..modules.talent_pool_module import TalentPoolModule
 
 logger = logging.getLogger(__name__)
 
@@ -117,13 +117,13 @@ class SummaryStructure:
         
         # Build rich summary
         lines = [
-            f"## 📊 Talent Pool Summary",
+            "## 📊 Talent Pool Summary",
             "",
             f"**Total Candidates:** {total}",
             "",
             "### Experience Distribution",
-            f"| Level | Count | % |",
-            f"|-------|-------|---|",
+            "| Level | Count | % |",
+            "|-------|-------|---|",
         ]
         
         for level, count in [("Junior (0-2 yrs)", junior_count), 

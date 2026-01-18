@@ -3,10 +3,10 @@ Extracts contextual information from conversation history.
 
 REUTILIZA la infraestructura existente de get_conversation_history().
 """
-import re
 import logging
+import re
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional, Set
+from typing import Dict, List, Set
 
 logger = logging.getLogger(__name__)
 

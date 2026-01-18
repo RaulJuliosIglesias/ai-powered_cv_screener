@@ -5,10 +5,10 @@ Analyzes what skills/requirements are missing from candidates
 relative to job requirements specified in the query.
 """
 
-import re
 import logging
-from typing import Optional, List, Dict, Any
+import re
 from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -204,7 +204,7 @@ class GapAnalysisModule:
                 skills.extend([p.strip() for p in parts if len(p.strip()) > 1])
         
         # Also check for known skills mentioned
-        for category, category_skills in self.SKILL_CATEGORIES.items():
+        for _category, category_skills in self.SKILL_CATEGORIES.items():
             for skill in category_skills:
                 if skill in combined_text and skill not in [s.lower() for s in skills]:
                     skills.append(skill.title())
@@ -248,7 +248,7 @@ class GapAnalysisModule:
             
             # Also scan chunk content for skills
             content = chunk.get("content", "").lower()
-            for category, category_skills in self.SKILL_CATEGORIES.items():
+            for _category, category_skills in self.SKILL_CATEGORIES.items():
                 for skill in category_skills:
                     if skill in content and skill.title() not in profiles[candidate]:
                         profiles[candidate].append(skill.title())

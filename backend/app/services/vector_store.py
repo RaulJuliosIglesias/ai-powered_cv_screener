@@ -1,12 +1,13 @@
+import os
+from datetime import datetime
+from typing import Any, Dict, List, Optional
+
 import chromadb
 from chromadb.config import Settings as ChromaSettings
-from typing import List, Optional, Dict, Any
-from datetime import datetime
-import os
 
 from app.config import get_settings
-from app.utils.exceptions import VectorStoreError
 from app.services.pdf_service import CVChunk
+from app.utils.exceptions import VectorStoreError
 
 
 class VectorStoreService:
@@ -212,7 +213,7 @@ class VectorStoreService:
             
             # Group by cv_id
             cvs = {}
-            for i, metadata in enumerate(results["metadatas"]):
+            for _i, metadata in enumerate(results["metadatas"]):
                 cv_id = metadata["cv_id"]
                 if cv_id not in cvs:
                     cvs[cv_id] = {

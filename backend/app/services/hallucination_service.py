@@ -5,10 +5,10 @@ This module provides post-LLM verification to detect potential hallucinations
 by checking if the LLM's response contains information that can be verified
 against the actual CV data.
 """
-import re
 import logging
-from typing import Dict, List, Any, Set, Optional
+import re
 from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional, Set
 
 logger = logging.getLogger(__name__)
 
@@ -282,7 +282,7 @@ class HallucinationService:
             return 0.5
         
         total_weight = sum(weights)
-        confidence = sum(s * w for s, w in zip(scores, weights)) / total_weight
+        confidence = sum(s * w for s, w in zip(scores, weights, strict=False)) / total_weight
         
         return round(confidence, 3)
 

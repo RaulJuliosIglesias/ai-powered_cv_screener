@@ -1,8 +1,9 @@
-from typing import List
 import asyncio
-from tenacity import retry, stop_after_attempt, wait_exponential
+from typing import List
 
 from openai import OpenAI
+from tenacity import retry, stop_after_attempt, wait_exponential
+
 from app.config import get_settings
 from app.utils.exceptions import EmbeddingError
 

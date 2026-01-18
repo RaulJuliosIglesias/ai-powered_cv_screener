@@ -2,8 +2,8 @@
 Base classes for suggestion banks.
 """
 from dataclasses import dataclass, field
-from typing import List, Optional
 from enum import Enum
+from typing import List
 
 
 class SuggestionCategory(str, Enum):

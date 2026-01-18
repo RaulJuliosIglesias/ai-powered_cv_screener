@@ -7,8 +7,8 @@ This module validates LLM output AFTER generation to catch:
 - Duplicated sections
 """
 
-import re
 import logging
+import re
 from typing import List, Tuple
 
 logger = logging.getLogger(__name__)

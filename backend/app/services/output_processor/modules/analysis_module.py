@@ -5,8 +5,8 @@ Extracts and formats additional analysis content.
 DO NOT MODIFY without explicit user request.
 """
 
-import re
 import logging
+import re
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -147,7 +147,7 @@ class AnalysisModule:
         # Pattern: | Header1 | Header2 | ... | \n |---|---| ... | \n (nothing after)
         empty_table_pattern = r'^\s*\|[^\n]+\|\s*\n\s*\|[-:\s|]+\|\s*$'
         if re.match(empty_table_pattern, stripped, re.MULTILINE):
-            logger.warning(f"[ANALYSIS] Empty table (header+separator only) detected, discarding")
+            logger.warning("[ANALYSIS] Empty table (header+separator only) detected, discarding")
             return None
         
         # Check 0b: Table header followed by only separator, nothing else
@@ -167,7 +167,7 @@ class AnalysisModule:
                     data_lines += 1
             
             if data_lines == 0 and any('|' in line for line in lines):
-                logger.warning(f"[ANALYSIS] Table with no data rows detected, discarding")
+                logger.warning("[ANALYSIS] Table with no data rows detected, discarding")
                 return None
         
         # Check 1: Single line that looks like a table header
@@ -223,7 +223,7 @@ class AnalysisModule:
             
             # 2. Análisis de match scores
             if hasattr(table_data.rows[0], 'match_score'):
-                scores = [r.match_score for r in table_data.rows]
+                [r.match_score for r in table_data.rows]
                 high_matches = [r for r in table_data.rows if r.match_score >= 70]
                 medium_matches = [r for r in table_data.rows if 40 <= r.match_score < 70]
                 low_matches = [r for r in table_data.rows if r.match_score < 40]

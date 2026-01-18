@@ -6,11 +6,10 @@ Uses embedding similarity to match queries, not exact string matching.
 """
 
 import logging
-import time
-import hashlib
-from typing import List, Dict, Any, Optional, Tuple
-from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from dataclasses import dataclass
+from datetime import datetime
+from typing import Any, Dict, List, Optional, Tuple
+
 import numpy as np
 
 logger = logging.getLogger(__name__)

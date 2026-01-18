@@ -2,12 +2,12 @@
 Main SuggestionEngine - Entry point for suggestion generation.
 """
 import logging
-from typing import List, Dict, Optional
+from typing import Dict, List, Optional
 
-from .context_extractor import ContextExtractor, ExtractedContext
+from .banks import ALL_BANKS
+from .context_extractor import ContextExtractor
 from .suggestion_selector import SuggestionSelector
 from .template_filler import TemplateFiller
-from .banks import ALL_BANKS, SuggestionCategory
 
 logger = logging.getLogger(__name__)
 

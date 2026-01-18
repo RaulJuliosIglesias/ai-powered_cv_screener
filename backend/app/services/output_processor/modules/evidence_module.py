@@ -7,8 +7,8 @@ Used by: VerificationStructure
 
 import logging
 import re
-from typing import List, Dict, Optional, Any
 from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 

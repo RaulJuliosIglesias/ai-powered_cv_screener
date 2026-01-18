@@ -16,13 +16,13 @@ The output structure is NEVER fixed - it adapts completely to the query.
 """
 
 import logging
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional
 
-from .query_analyzer import QueryAnalyzer, QueryAnalysis
+from .analysis_generator import AdaptiveAnalysis, AdaptiveAnalysisGenerator
+from .data_extractor import SmartDataExtractor
+from .query_analyzer import QueryAnalysis, QueryAnalyzer
 from .schema_inference import SchemaInferenceEngine, TableSchema
-from .data_extractor import SmartDataExtractor, ExtractionResult
-from .table_generator import DynamicTableGenerator, DynamicTable
-from .analysis_generator import AdaptiveAnalysisGenerator, AdaptiveAnalysis
+from .table_generator import DynamicTable, DynamicTableGenerator
 
 logger = logging.getLogger(__name__)
 

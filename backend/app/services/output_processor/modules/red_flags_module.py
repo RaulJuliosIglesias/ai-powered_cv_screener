@@ -8,11 +8,9 @@ Detects potential red flags in candidate profiles:
 - Missing critical information
 """
 
-import re
 import logging
-from typing import Optional, List, Dict, Any
 from dataclasses import dataclass, field
-from datetime import datetime
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -205,7 +203,7 @@ class RedFlagsModule:
         job_hopping_score = metadata.get("job_hopping_score", 0)
         avg_tenure = metadata.get("avg_tenure_years", 0)
         position_count = metadata.get("position_count", 0)
-        total_exp = metadata.get("total_experience_years", 0)
+        metadata.get("total_experience_years", 0)
         
         # Job hopping based on score
         if job_hopping_score and position_count >= 3:

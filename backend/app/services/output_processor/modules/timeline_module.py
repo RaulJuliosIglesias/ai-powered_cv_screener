@@ -5,10 +5,10 @@ Generates chronological career timelines for candidates,
 showing career progression and transitions.
 """
 
-import re
 import logging
-from typing import Optional, List, Dict, Any
+import re
 from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -241,7 +241,7 @@ class TimelineModule:
         
         for chunk in chunks:
             content = chunk.get("content", "")
-            meta = chunk.get("metadata", {})
+            chunk.get("metadata", {})
             
             # Look for "Career Path:" line in summary
             career_match = re.search(r"Career Path:\s*(.+)", content)
@@ -391,6 +391,6 @@ class TimelineModule:
                     parts.append(f"  {icon} {entry.year_start}-{end_str}: {entry.title}{company_str}")
             
             if timeline.progression_score >= 70:
-                parts.append(f"  ⭐ Strong career progression")
+                parts.append("  ⭐ Strong career progression")
         
         return "\n".join(parts)

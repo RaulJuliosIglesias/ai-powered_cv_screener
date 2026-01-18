@@ -3,11 +3,11 @@ Claim-Level Verification Service for RAG v5.
 
 Extracts individual claims from responses and verifies each against source context.
 """
-import logging
 import json
-import re
-from typing import List, Optional, Dict, Any
-from dataclasses import dataclass, field
+import logging
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional
+
 import httpx
 
 from app.config import settings, timeouts
@@ -127,7 +127,7 @@ class ClaimVerifierService:
         self.model = model
         self.min_verified_ratio = min_verified_ratio
         self.api_key = api_key or settings.openrouter_api_key or ""
-        logger.info(f"ClaimVerifierService initialized")
+        logger.info("ClaimVerifierService initialized")
     
     async def verify_response(
         self,

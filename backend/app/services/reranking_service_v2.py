@@ -13,12 +13,11 @@ Uses HuggingFace Inference API (FREE):
 """
 import logging
 import time
-from typing import List, Optional, Dict, Any
 from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
-from app.config import settings
 from app.providers.base import SearchResult
-from app.providers.huggingface_client import get_huggingface_client, HuggingFaceClient
+from app.providers.huggingface_client import HuggingFaceClient, get_huggingface_client
 from app.services.reranking_service import RerankingService, RerankResult, _get_attr
 
 logger = logging.getLogger(__name__)

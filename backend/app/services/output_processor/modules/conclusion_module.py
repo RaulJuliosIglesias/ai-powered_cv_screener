@@ -5,8 +5,8 @@ Extracts and formats :::conclusion::: blocks.
 DO NOT MODIFY without explicit user request.
 """
 
-import re
 import logging
+import re
 from typing import Optional
 
 logger = logging.getLogger(__name__)

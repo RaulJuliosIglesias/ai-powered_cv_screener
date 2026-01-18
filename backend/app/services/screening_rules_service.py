@@ -7,10 +7,10 @@ Rules can filter by skills, experience, education, location, etc.
 
 import logging
 import re
-from typing import List, Dict, Any, Optional, Callable
 from dataclasses import dataclass, field
-from enum import Enum
 from datetime import datetime
+from enum import Enum
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -294,7 +294,7 @@ class ScreeningRulesService:
         elif field == RuleField.LANGUAGES:
             langs = candidate.get("languages", [])
             if isinstance(langs, str):
-                langs = [l.strip() for l in langs.split(",")]
+                langs = [lang.strip() for lang in langs.split(",")]
             return langs
         
         elif field == RuleField.CERTIFICATIONS:
@@ -344,7 +344,7 @@ class ScreeningRulesService:
             elif operator == RuleOperator.REGEX:
                 try:
                     return bool(re.search(str(rule_value), field_value, re.IGNORECASE))
-                except:
+                except Exception:
                     return False
         
         # Handle numeric fields
@@ -363,7 +363,7 @@ class ScreeningRulesService:
                     return field_value >= rule_num
                 elif operator == RuleOperator.LESS_OR_EQUAL:
                     return field_value <= rule_num
-            except:
+            except Exception:
                 return False
         
         return False

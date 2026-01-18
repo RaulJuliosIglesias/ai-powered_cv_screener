@@ -2,12 +2,17 @@
 import json
 import logging
 from typing import Optional
-from fastapi import APIRouter, HTTPException, Query, Depends
+
+from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
-from app.config import settings, Mode
 from app.api.dependencies import get_openrouter_api_key
+from app.config import Mode, settings
+from app.models.sessions import session_manager
+from app.providers.cloud.sessions import supabase_session_manager
+from app.services.rag_service_v5 import RAGServiceV5
+from app.utils.debug_logger import log_final_response, log_query_start, save_session_log
 
 
 class SafeJSONEncoder(json.JSONEncoder):
@@ -18,12 +23,6 @@ class SafeJSONEncoder(json.JSONEncoder):
         if isinstance(obj, frozenset):
             return list(obj)
         return super().default(obj)
-
-
-from app.models.sessions import session_manager
-from app.providers.cloud.sessions import supabase_session_manager
-from app.services.rag_service_v5 import RAGServiceV5
-from app.utils.debug_logger import log_query_start, log_final_response, save_session_log
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/sessions", tags=["sessions-stream"])
@@ -76,7 +75,7 @@ async def event_generator(rag_service, question: str, session_id: str, cv_ids: l
             # Capture final response to save
             if event_type == "complete":
                 final_response = event_data
-                logger.info(f"[STREAM] Query completed successfully")
+                logger.info("[STREAM] Query completed successfully")
             
             # Format as SSE (use SafeJSONEncoder to handle sets)
             yield f"event: {event_type}\n"
@@ -109,7 +108,7 @@ async def event_generator(rag_service, question: str, session_id: str, cv_ids: l
             
     except Exception as e:
         logger.exception(f"Stream error: {e}")
-        yield f"event: error\n"
+        yield "event: error\n"
         yield f"data: {json.dumps({'message': str(e)})}\n\n"
 
 

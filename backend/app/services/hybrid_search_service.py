@@ -10,10 +10,10 @@ How it works:
 """
 
 import logging
-from typing import List, Dict, Any, Optional, Tuple
-from dataclasses import dataclass, field
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Tuple
 
-from app.services.bm25_service import get_bm25_service, BM25Result
+from app.services.bm25_service import BM25Result, get_bm25_service
 
 logger = logging.getLogger(__name__)
 
@@ -303,7 +303,7 @@ class HybridSearchService:
         bm25_ranks = {doc_id: rank for rank, (doc_id, _) in enumerate(bm25_ranking, start=1)}
         
         results = []
-        for doc_id, final_score, v_score, b_score in weighted_results[:k]:
+        for doc_id, final_score, _v_score, _b_score in weighted_results[:k]:
             if doc_id in vector_docs:
                 doc = vector_docs[doc_id]
                 content = doc.get('content', '')

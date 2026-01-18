@@ -1,17 +1,17 @@
 """
 Suggestion Banks - Collections of suggestions by category.
 """
-from .base import Suggestion, SuggestionCategory, SuggestionBank
-from .initial_bank import INITIAL_SUGGESTIONS
-from .search_bank import SEARCH_SUGGESTIONS
-from .ranking_bank import RANKING_SUGGESTIONS
+from .base import Suggestion, SuggestionBank, SuggestionCategory
 from .comparison_bank import COMPARISON_SUGGESTIONS
+from .initial_bank import INITIAL_SUGGESTIONS
 from .job_match_bank import JOB_MATCH_SUGGESTIONS
-from .team_build_bank import TEAM_BUILD_SUGGESTIONS
-from .single_candidate_bank import SINGLE_CANDIDATE_SUGGESTIONS
+from .ranking_bank import RANKING_SUGGESTIONS
 from .risk_assessment_bank import RISK_ASSESSMENT_SUGGESTIONS
-from .verification_bank import VERIFICATION_SUGGESTIONS
+from .search_bank import SEARCH_SUGGESTIONS
+from .single_candidate_bank import SINGLE_CANDIDATE_SUGGESTIONS
 from .summary_bank import SUMMARY_SUGGESTIONS
+from .team_build_bank import TEAM_BUILD_SUGGESTIONS
+from .verification_bank import VERIFICATION_SUGGESTIONS
 
 # All banks mapping
 ALL_BANKS = {

@@ -11,10 +11,10 @@ Features:
 - Automatic metadata extraction and storage
 """
 
-import logging
 import json
-from typing import List, Dict, Any, Optional
+import logging
 from dataclasses import dataclass
+from typing import Any, Dict, List, Optional
 
 from app.config import settings
 
@@ -128,7 +128,7 @@ class SupabaseVectorStore:
             
             # 3. Insert chunks with embeddings
             chunk_records = []
-            for i, (chunk, embedding) in enumerate(zip(chunks, embeddings)):
+            for i, (chunk, embedding) in enumerate(zip(chunks, embeddings, strict=False)):
                 chunk_meta = chunk.get("metadata", {})
                 chunk_records.append({
                     "cv_id": cv_id,
@@ -181,7 +181,7 @@ class SupabaseVectorStore:
             return False
         
         try:
-            result = client.rpc("delete_cv_by_id", {"target_cv_id": cv_id}).execute()
+            client.rpc("delete_cv_by_id", {"target_cv_id": cv_id}).execute()
             logger.info(f"[SUPABASE] Deleted CV: {cv_id}")
             return True
         except Exception as e:

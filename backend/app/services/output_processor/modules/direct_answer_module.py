@@ -5,9 +5,8 @@ Extracts and formats the direct answer (1-3 sentences).
 DO NOT MODIFY without explicit user request.
 """
 
-import re
 import logging
-from typing import Optional
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -232,7 +231,7 @@ class DirectAnswerModule:
             conclusion_text = conclusion_match.group(1).strip()
             first_sentence = re.split(r'[.!?]', conclusion_text)[0]
             if first_sentence and len(first_sentence) > 10:
-                logger.info(f"[DIRECT_ANSWER] Using conclusion as fallback")
+                logger.info("[DIRECT_ANSWER] Using conclusion as fallback")
                 return first_sentence.strip() + '.'
         
         logger.warning("[DIRECT_ANSWER] Could not extract direct answer")

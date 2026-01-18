@@ -5,8 +5,8 @@ Extracts and formats :::thinking::: blocks (collapsible reasoning).
 DO NOT MODIFY without explicit user request.
 """
 
-import re
 import logging
+import re
 from typing import Optional
 
 logger = logging.getLogger(__name__)

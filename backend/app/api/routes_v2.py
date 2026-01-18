@@ -1,15 +1,21 @@
-import uuid
 import io
-import httpx
+import logging
+import uuid
 from pathlib import Path
 from typing import List, Optional
-from fastapi import APIRouter, UploadFile, File, Query, HTTPException, BackgroundTasks, Depends
+
+import httpx
+import pdfplumber
+from fastapi import APIRouter, BackgroundTasks, Depends, File, HTTPException, Query, UploadFile
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
-import pdfplumber
 
-from app.config import Mode, settings
 from app.api.dependencies import get_openrouter_api_key
+from app.config import Mode, settings
+from app.models.sessions import session_manager
+from app.providers.cloud.sessions import supabase_session_manager
+from app.services.chunking_service import ChunkingService
+from app.services.rag_service_v5 import RAGServiceV5
 
 # Directory to store uploaded PDFs - in project root /storage/
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
@@ -18,10 +24,7 @@ PDF_STORAGE_DIR.mkdir(exist_ok=True)
 
 # Mapping of cv_id to PDF file path (in production, use database)
 cv_pdf_mapping = {}
-from app.services.rag_service_v5 import RAGServiceV5
-from app.services.chunking_service import ChunkingService
-from app.models.sessions import session_manager
-from app.providers.cloud.sessions import supabase_session_manager
+
 
 def get_session_manager(mode: Mode):
     """Get session manager based on mode."""
@@ -177,7 +180,6 @@ def extract_text_from_pdf(content: bytes, filename: str) -> str:
 # BACKGROUND TASK
 # ============================================
 
-import logging
 logger = logging.getLogger(__name__)
 
 async def process_cvs(job_id: str, file_data: List[tuple], mode: Mode):
@@ -434,6 +436,7 @@ async def delete_all_cvs(mode: Mode = Query(default=settings.default_mode)):
 async def get_cv_pdf(cv_id: str, mode: Mode = Query(default=settings.default_mode)):
     """Get the PDF file for a CV."""
     import logging
+
     from fastapi.responses import RedirectResponse
     logger = logging.getLogger(__name__)
     

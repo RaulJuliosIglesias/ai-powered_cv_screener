@@ -9,11 +9,12 @@ Features:
 - Model fallback chain (only FREE models)
 - Heuristic fallback as last resort (never fails)
 """
-import logging
 import asyncio
 import json
-from typing import Optional, Dict, Any, List
+import logging
 from dataclasses import dataclass, field
+from typing import Dict, List, Optional
+
 import httpx
 
 from app.config import settings, timeouts

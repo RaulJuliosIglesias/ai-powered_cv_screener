@@ -1,15 +1,14 @@
-from functools import lru_cache
-from typing import Generator, Optional
+from typing import Optional
+
 from fastapi import Header, Request
 
-from app.config import get_settings, Settings
-from app.services.pdf_service import PDFService
+from app.config import get_settings
 from app.services.embedding_service import EmbeddingService
-from app.services.vector_store import VectorStoreService
-from app.services.rag_service_v5 import RAGServiceV5
 from app.services.guardrails_service import GuardrailsService
-from app.utils.monitoring import UsageTracker, QueryLogger, RateLimiter
-
+from app.services.pdf_service import PDFService
+from app.services.rag_service_v5 import RAGServiceV5
+from app.services.vector_store import VectorStoreService
+from app.utils.monitoring import QueryLogger, RateLimiter, UsageTracker
 
 # Singleton instances
 _pdf_service = None

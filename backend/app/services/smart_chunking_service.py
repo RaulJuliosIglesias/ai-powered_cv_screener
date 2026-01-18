@@ -14,11 +14,11 @@ Key improvements over basic chunking:
 3. Creates a "summary chunk" with pre-calculated totals
 4. Creates individual chunks per job with rich metadata
 """
-import re
 import logging
-from typing import List, Dict, Any, Optional, Tuple
+import re
 from dataclasses import dataclass, field
 from datetime import datetime
+from typing import Any, Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
 

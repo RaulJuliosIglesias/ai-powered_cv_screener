@@ -1,8 +1,10 @@
 import time
 from typing import List
+
 import httpx
-from app.providers.base import EmbeddingProvider, EmbeddingResult
+
 from app.config import settings
+from app.providers.base import EmbeddingProvider, EmbeddingResult
 
 
 class OpenRouterEmbeddingProvider(EmbeddingProvider):

@@ -15,9 +15,9 @@ This structure is used when user asks specifically about risks:
 """
 
 import logging
-from typing import Dict, Any, List
+from typing import Any, Dict, List
 
-from ..modules import ThinkingModule, ConclusionModule
+from ..modules import ConclusionModule, ThinkingModule
 from ..modules.risk_table_module import RiskTableModule
 
 logger = logging.getLogger(__name__)

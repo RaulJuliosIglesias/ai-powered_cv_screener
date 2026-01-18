@@ -9,8 +9,8 @@ Provides executive summary of the proposed team:
 """
 
 import logging
-from typing import Dict, Any, List
 from dataclasses import dataclass, field
+from typing import Any, Dict, List
 
 logger = logging.getLogger(__name__)
 
