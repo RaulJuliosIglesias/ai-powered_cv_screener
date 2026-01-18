@@ -74,11 +74,55 @@ app.include_router(sessions_stream_router)
 app.include_router(export_router)
 app.include_router(v8_router)
 
-# Root endpoint - simple response for Railway deployment verification
-@app.get("/")
-async def root():
-    """Root endpoint."""
-    return {"status": "ok", "message": "CV Screener API is running"}
+# Serve static files for Railway deployment
+import os
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse
+
+STATIC_DIR = "/app/static"
+RAILWAY_MODE = os.path.exists(STATIC_DIR) and os.path.exists(f"{STATIC_DIR}/index.html")
+
+if RAILWAY_MODE:
+    logger.info(f"Railway mode: Serving static files from {STATIC_DIR}")
+    
+    # Serve static assets
+    if os.path.exists(f"{STATIC_DIR}/assets"):
+        app.mount("/assets", StaticFiles(directory=f"{STATIC_DIR}/assets"), name="assets")
+    
+    # Serve root with SPA routing
+    @app.get("/", response_class=HTMLResponse)
+    async def serve_spa_root():
+        try:
+            with open(f"{STATIC_DIR}/index.html", 'r', encoding='utf-8') as f:
+                return HTMLResponse(content=f.read())
+        except Exception as e:
+            logger.error(f"Error serving index.html: {e}")
+            return HTMLResponse(content=f"<h1>Error loading app</h1>", status_code=500)
+    
+    # SPA fallback for all non-API routes
+    @app.get("/{full_path:path}", response_class=HTMLResponse)
+    async def serve_spa_fallback(full_path: str):
+        # Skip API routes
+        if full_path.startswith("api/") or full_path.startswith("docs") or full_path.startswith("redoc"):
+            return {"detail": "Not Found"}
+        
+        # Try static file first
+        file_path = f"{STATIC_DIR}/{full_path}"
+        if os.path.exists(file_path) and os.path.isfile(file_path):
+            return FileResponse(file_path)
+        
+        # Fallback to index.html for SPA routing
+        try:
+            with open(f"{STATIC_DIR}/index.html", 'r', encoding='utf-8') as f:
+                return HTMLResponse(content=f.read())
+        except Exception as e:
+            logger.error(f"Error serving SPA fallback: {e}")
+            return HTMLResponse(content=f"<h1>Error loading app</h1>", status_code=500)
+else:
+    # Local development - API info
+    @app.get("/")
+    async def root():
+        return {"status": "ok", "message": "CV Screener API is running"}
 
 
 # Startup event
