@@ -211,7 +211,19 @@ export function BackgroundTaskProvider({ children }) {
                     }, true);
                   }
                 } catch (nameError) {
-                  console.error('Auto-naming failed:', nameError);
+                  // Log with more detail about the failure reason
+                  const errorDetail = nameError?.response?.data?.detail || nameError?.message || 'Unknown error';
+                  console.error('Auto-naming failed:', errorDetail);
+                  
+                  // Show user-friendly message based on error type
+                  const is503 = nameError?.response?.status === 503;
+                  const failMsg = is503 
+                    ? (language === 'es' ? '⚠️ API key no configurada' : '⚠️ API key not configured')
+                    : (language === 'es' ? '⚠️ Auto-nombre omitido' : '⚠️ Auto-naming skipped');
+                  
+                  updateTaskInternal(taskId, {
+                    logs: [failMsg]
+                  }, true);
                   // Don't fail the whole upload if naming fails
                 }
               }

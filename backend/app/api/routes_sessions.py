@@ -796,6 +796,14 @@ async def generate_session_name(
     import httpx
     import random
     
+    # Validate API key is configured before attempting any API calls
+    if not settings.openrouter_api_key:
+        logger.warning("[AUTO-NAME] OpenRouter API key not configured, skipping auto-naming")
+        raise HTTPException(
+            status_code=503, 
+            detail="OpenRouter API key not configured. Set OPENROUTER_API_KEY in environment."
+        )
+    
     mgr = get_session_manager(mode)
     session = mgr.get_session(session_id)
     if not session:
