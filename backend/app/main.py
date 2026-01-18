@@ -15,7 +15,7 @@ from app.utils.exceptions import CVScreenerException
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,  # Changed to DEBUG for more verbose logging
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
         logging.StreamHandler(sys.stdout),
@@ -25,6 +25,13 @@ logger = logging.getLogger("cv_screener")
 
 # Get settings
 settings = get_settings()
+
+# Print to stdout (visible in Railway logs)
+print("=" * 50)
+print("CV Screener API starting...")
+print(f"Python version: {sys.version}")
+print(f"PORT: {os.environ.get('PORT', 'not set')}")
+print("=" * 50)
 
 # Create FastAPI app
 app = FastAPI(
@@ -73,6 +80,9 @@ app.include_router(sessions_router)
 app.include_router(sessions_stream_router)
 app.include_router(export_router)
 app.include_router(v8_router)
+
+# Log that all routers are included
+logger.info("All routers included successfully")
 
 # Serve static files for Railway deployment
 import os
@@ -168,9 +178,12 @@ async def shutdown_event():
 if __name__ == "__main__":
     import uvicorn
     
+    print("Starting uvicorn directly...")
     uvicorn.run(
         "app.main:app",
         host=settings.api_host,
         port=settings.api_port,
         reload=True,
     )
+else:
+    print("main.py imported successfully")
