@@ -75,6 +75,12 @@ async def general_exception_handler(request: Request, exc: Exception):
     )
 
 
+# Simple health endpoint before routers (for debugging)
+@app.get("/api/health")
+async def health_check():
+    """Simple health check."""
+    return {"status": "healthy", "service": "cv-screener"}
+
 # Include routers FIRST (before catch-all)
 app.include_router(router)
 app.include_router(sessions_router)
@@ -144,28 +150,18 @@ else:
 @app.on_event("startup")
 async def startup_event():
     """Initialize services on startup."""
-    import os
+    print("=== STARTUP EVENT BEGIN ===")
     try:
+        import os
         port = os.environ.get("PORT", "not set")
-        logger.info(f"Starting CV Screener API on PORT={port}")
-        logger.info(f"Default mode: {settings.default_mode}")
-        logger.info(f"Static dir exists: {STATIC_DIR.exists()}")
-        
-        # Test basic imports
-        from app.api.routes_v2 import router as v2_router
-        logger.info("✓ v2 router imported")
-        
-        from app.api.routes_sessions_stream import router as stream_router
-        logger.info("✓ stream router imported")
-        
-        from app.api.routes_sessions import router as sessions_router
-        logger.info("✓ sessions router imported")
-        
-        logger.info("API ready to receive requests")
+        print(f"PORT={port}")
+        print(f"Default mode: {settings.default_mode}")
+        print(f"Static dir exists: {STATIC_DIR.exists()}")
+        print("=== STARTUP EVENT SUCCESS ===")
     except Exception as e:
-        logger.error(f"Startup failed: {e}")
+        print(f"=== STARTUP EVENT FAILED: {e} ===")
         import traceback
-        logger.error(traceback.format_exc())
+        traceback.print_exc()
         raise
 
 
